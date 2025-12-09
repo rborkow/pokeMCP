@@ -14,7 +14,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "prepare": "npm run build",
+    "prepare": "node -e \"if (process.env.VERCEL !== '1') require('child_process').execSync('npm run build', {stdio: 'inherit'})\"",
     "prepublishOnly": "npm run build",
     "start": "node build/server.js",
     "start:remote": "node build/remote-mcp.js",
