@@ -42,7 +42,19 @@ Access real competitive data from thousands of battles:
 
 ## Installation
 
-### Option 1: From Source (Development)
+### Option 1: Claude.ai Custom Connector ⭐ (Recommended for most users)
+
+**Use directly in Claude.ai without installing anything!**
+
+1. Deploy to Vercel (free): `npm run build && vercel --prod`
+2. Add as Custom Connector in Claude.ai Settings
+3. Start using all tools in Claude.ai web interface
+
+📖 **[Full setup guide →](CLAUDE_AI_SETUP.md)**
+
+*Requires: Claude Pro, Max, Team, or Enterprise*
+
+### Option 2: From Source (Development)
 
 1. Clone this repository
 2. Install dependencies:
@@ -54,13 +66,13 @@ Access real competitive data from thousands of battles:
    npm run build
    ```
 
-### Option 2: NPM Package (Coming Soon)
+### Option 3: NPM Package (Coming Soon)
 
 ```bash
 npm install -g pokemon-mcp-server
 ```
 
-### Option 3: Docker
+### Option 4: Docker
 
 ```bash
 docker pull rborkow/pokemon-mcp-server

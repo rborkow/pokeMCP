@@ -17,7 +17,9 @@
     "prepare": "npm run build",
     "prepublishOnly": "npm run build",
     "start": "node build/server.js",
-    "dev:server": "tsc && node build/server.js"
+    "start:remote": "node build/remote-mcp.js",
+    "dev:server": "tsc && node build/server.js",
+    "dev:remote": "tsc && node build/remote-mcp.js"
   },
   "keywords": [
     "mcp",
