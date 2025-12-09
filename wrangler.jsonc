@@ -75,6 +75,17 @@
 					"index_name": "pokemon-strategy-index-staging"
 				}
 			],
+			"durable_objects": {
+				"bindings": [
+					{
+						"class_name": "PokemonMCP",
+						"name": "MCP_OBJECT"
+					}
+				]
+			},
+			"ai": {
+				"binding": "AI"
+			},
 			"triggers": {
 				"crons": ["0 4 * * SAT"]
 			}
@@ -100,6 +111,17 @@
 					"index_name": "pokemon-strategy-index"
 				}
 			],
+			"durable_objects": {
+				"bindings": [
+					{
+						"class_name": "PokemonMCP",
+						"name": "MCP_OBJECT"
+					}
+				]
+			},
+			"ai": {
+				"binding": "AI"
+			},
 			"triggers": {
 				"crons": ["0 3 * * SUN"]
 			}
