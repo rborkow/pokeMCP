@@ -1,6 +1,6 @@
 # Pokémon MCP Server
 
-An MCP (Model Context Protocol) server for Pokémon team building and validation, powered by Pokémon Showdown data and Smogon usage statistics.
+An MCP (Model Context Protocol) server for Pokémon team building and validation, powered by Pokémon Showdown data and Smogon usage statistics. Deployed on Cloudflare Workers for fast, reliable access.
 
 ## Features
 
@@ -32,90 +32,89 @@ Analyze your team's type coverage and weaknesses:
 - Type distribution analysis
 - Suggestions for filling gaps
 
-### 📊 Smogon Usage Statistics (NEW!)
-Access real competitive data from thousands of battles:
+### 📊 Smogon Usage Statistics
+Access real competitive data from thousands of battles with cached data for instant responses:
 - **Popular Sets**: Most used moves, items, abilities, and EV spreads
 - **Meta Threats**: Top Pokémon by usage percentage
 - **Teammates**: Common team partners based on actual teams
 - **Checks & Counters**: What beats your Pokémon (with KO rates)
 - **Metagame Stats**: Overall format statistics and trends
 
-## Installation
+**Supported Formats:**
+- Gen 9 Singles: OU, Ubers, UU, RU, NU, PU, LC
+- Gen 9 VGC: Regulation F, Regulation H
 
-### Option 1: Claude.ai Custom Connector ⭐ (Recommended for most users)
+## Deployment
 
-**Use directly in Claude.ai without installing anything!**
+This server is deployed on Cloudflare Workers at: `https://pokemon-mcp-cloudflare.rborkows.workers.dev`
 
-1. Deploy to Vercel (free): `npm run build && vercel --prod`
-2. Add as Custom Connector in Claude.ai Settings
-3. Start using all tools in Claude.ai web interface
+### Deploy Your Own
 
-📖 **[Full setup guide →](CLAUDE_AI_SETUP.md)**
-
-*Requires: Claude Pro, Max, Team, or Enterprise*
-
-### Option 2: From Source (Development)
-
-1. Clone this repository
-2. Install dependencies:
+1. Install Wrangler CLI:
    ```bash
+   npm install -g wrangler
+   ```
+
+2. Clone and setup:
+   ```bash
+   git clone https://github.com/rborkow/pokeMCP.git
+   cd pokeMCP
    npm install
    ```
-3. Build the project:
+
+3. Login to Cloudflare:
    ```bash
-   npm run build
+   wrangler login
    ```
 
-### Option 3: NPM Package (Coming Soon)
+4. (Optional) Fetch latest stats:
+   ```bash
+   npm run fetch-stats
+   ```
 
-```bash
-npm install -g pokemon-mcp-server
-```
+5. Deploy:
+   ```bash
+   npm run deploy
+   ```
 
-### Option 4: Docker
+### Updating Cached Stats
 
-```bash
-docker pull rborkow/pokemon-mcp-server
-```
+Stats are cached in Cloudflare KV for instant access. To update:
 
-## Configuration
+1. Run the fetch script:
+   ```bash
+   npm run fetch-stats
+   ```
 
-Add this server to your MCP client configuration. For Claude Desktop, add to your `claude_desktop_config.json`:
+2. Upload to KV (the namespace ID is in `wrangler.jsonc`):
+   ```bash
+   npx wrangler kv key put --remote --namespace-id=YOUR_NAMESPACE_ID "gen9ou" --path="src/cached-stats/gen9ou.json"
+   # Repeat for other formats: gen9ubers, gen9uu, gen9ru, gen9nu, gen9pu, gen9lc, gen9vgc2024regf, gen9vgc2024regh
+   ```
 
-**From Source:**
-```json
-{
-  "mcpServers": {
-    "pokemon": {
-      "command": "node",
-      "args": ["/path/to/pokeMCP/build/index.js"]
-    }
-  }
-}
-```
+## Usage in Claude
 
-**From NPM:**
-```json
-{
-  "mcpServers": {
-    "pokemon": {
-      "command": "pokemon-mcp"
-    }
-  }
-}
-```
+### Claude.ai (Recommended)
 
-**From Docker:**
-```json
-{
-  "mcpServers": {
-    "pokemon": {
-      "command": "docker",
-      "args": ["run", "-i", "--rm", "rborkow/pokemon-mcp-server"]
-    }
-  }
-}
-```
+Add as a Custom Connector in Claude.ai Settings:
+
+1. Go to Settings → Integrations → Custom Connectors
+2. Add new connector:
+   - URL: `https://pokemon-mcp-cloudflare.rborkows.workers.dev/mcp` (or your deployed URL)
+   - No authentication required
+3. Start using all tools in conversations
+
+*Requires: Claude Pro, Team, or Enterprise*
+
+### Example Prompts
+
+Once connected, try:
+- "What are the base stats for Garchomp?"
+- "Is this moveset legal for Garchomp: Earthquake, Dragon Claw, Swords Dance, Fire Fang?"
+- "What are the most popular moves and items for Garchomp in Gen 9 OU?"
+- "Show me the top threats in Gen 9 OU"
+- "What are common teammates for Garchomp?"
+- "What Pokémon counter Garchomp effectively?"
 
 ## Usage Examples
 
@@ -255,25 +254,30 @@ Overall format statistics including total battles and top Pokémon.
 ## Data Sources
 
 - **Pokémon Data**: [Pokémon Showdown](https://github.com/smogon/pokemon-showdown) - Complete Pokédex, moves, abilities, and learnsets
-- **Usage Statistics**: [Smogon University](https://www.smogon.com/stats/) - Real competitive battle data updated monthly
+- **Usage Statistics**: [Smogon University](https://www.smogon.com/stats/) - Real competitive battle data updated monthly, cached in Cloudflare KV
 
-## Deployment
+## Development
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions on:
-- Publishing to NPM
-- Building Docker containers
-- Creating GitHub releases
-- Distributing binaries
+```bash
+# Install dependencies
+npm install
 
-## Roadmap
+# Run type checking
+npm run type-check
 
-- [ ] Publish to NPM registry
-- [ ] Add caching for Smogon stats
-- [ ] Support for VGC formats
-- [ ] Battle simulator integration
-- [ ] Team import/export (Showdown format)
-- [ ] Damage calculator
-- [ ] Speed tier checker
+# Start local development server
+npm run dev
+
+# Deploy to Cloudflare
+npm run deploy
+```
+
+## Architecture
+
+- **Cloudflare Workers**: Serverless compute for handling MCP requests
+- **Cloudflare KV**: Distributed key-value storage for cached Smogon statistics
+- **Durable Objects**: Stateful coordination for MCP sessions
+- **Direct Imports**: Pokémon Showdown data bundled at build time for instant access
 
 ## License
 
@@ -287,4 +291,4 @@ Contributions welcome! Please feel free to submit a Pull Request. For major chan
 
 - [Pokémon Showdown](https://github.com/smogon/pokemon-showdown) for comprehensive Pokémon data
 - [Smogon University](https://www.smogon.com/) for competitive battle statistics
-- [@pkmn](https://github.com/pkmn) for excellent Pokémon tooling and APIs
+- [Cloudflare Workers](https://workers.cloudflare.com/) for serverless deployment platform

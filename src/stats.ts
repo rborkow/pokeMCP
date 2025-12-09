@@ -1,32 +1,18 @@
-import { Statistics, UsageStatistics, MovesetStatistics } from 'smogon';
 import { toID } from './data-loader.js';
+import type { UsageStatistics } from 'smogon';
 
 /**
- * Fetch usage statistics for a format
+ * Get cached stats for a format from KV
  */
-async function fetchStats(format: string): Promise<UsageStatistics | null> {
+async function getCachedStats(format: string, env: Env): Promise<UsageStatistics | null> {
   try {
-    // Get the latest date for this format
-    const latest = await Statistics.latestDate(format);
-    if (!latest) {
+    const cached = await env.POKEMON_STATS.get(format, 'json');
+    if (!cached || typeof cached !== 'object' || !cached.data) {
       return null;
     }
-
-    // Get the URL for chaos.json (most detailed stats)
-    const url = Statistics.url(latest.date, format, true, 'chaos');
-
-    // Fetch the raw data
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-
-    const raw = await response.text();
-
-    // Process into UsageStatistics
-    return Statistics.process(raw);
+    return cached.data;
   } catch (error) {
-    console.error(`Error fetching stats for ${format}:`, error);
+    console.error(`Error fetching stats from KV for ${format}:`, error);
     return null;
   }
 }
@@ -37,131 +23,101 @@ async function fetchStats(format: string): Promise<UsageStatistics | null> {
 export async function getPopularSets(args: {
   pokemon: string;
   format?: string;
-}): Promise<string> {
+}, env: Env): Promise<string> {
   const format = args.format || 'gen9ou';
   const pokemonId = toID(args.pokemon);
 
-  const stats = await fetchStats(format);
+  const stats = await getCachedStats(format, env);
 
   if (!stats) {
     return `No usage statistics found for format "${format}".`;
   }
 
   const pokemonStats = stats.data[pokemonId];
+
   if (!pokemonStats) {
-    return `No usage statistics found for ${args.pokemon} in ${format}.`;
+    return `${args.pokemon} not found in ${format} usage statistics.`;
   }
 
-  const results: string[] = [];
-  results.push(`**Popular Sets for ${args.pokemon} in ${format.toUpperCase()}**\n`);
+  let output = `**${args.pokemon} in ${format.toUpperCase()}**\n\n`;
+  output += `**Usage:** ${(pokemonStats.usage * 100).toFixed(2)}%\n\n`;
 
-  // Usage percentage
-  const usagePercent = (pokemonStats.usage * 100).toFixed(2);
-  results.push(`**Usage:** ${usagePercent}% (${pokemonStats['Raw count']} uses)\n`);
-
-  // Most used abilities
+  // Abilities
   if (pokemonStats.Abilities) {
-    results.push('**Most Used Abilities:**');
+    output += `**Popular Abilities:**\n`;
     const abilities = Object.entries(pokemonStats.Abilities)
       .sort(([, a], [, b]) => b - a)
       .slice(0, 3);
-
-    for (const [ability, weight] of abilities) {
-      const percentage = (weight * 100).toFixed(1);
-      results.push(`- ${ability}: ${percentage}%`);
+    for (const [ability, percentage] of abilities) {
+      output += `- ${ability}: ${(percentage * 100).toFixed(1)}%\n`;
     }
-    results.push('');
+    output += '\n';
   }
 
-  // Most used items
+  // Items
   if (pokemonStats.Items) {
-    results.push('**Most Used Items:**');
+    output += `**Popular Items:**\n`;
     const items = Object.entries(pokemonStats.Items)
       .sort(([, a], [, b]) => b - a)
       .slice(0, 5);
-
-    for (const [item, weight] of items) {
-      const percentage = (weight * 100).toFixed(1);
-      results.push(`- ${item}: ${percentage}%`);
+    for (const [item, percentage] of items) {
+      output += `- ${item}: ${(percentage * 100).toFixed(1)}%\n`;
     }
-    results.push('');
+    output += '\n';
   }
 
-  // Most used moves
+  // Moves
   if (pokemonStats.Moves) {
-    results.push('**Most Used Moves:**');
+    output += `**Popular Moves:**\n`;
     const moves = Object.entries(pokemonStats.Moves)
       .sort(([, a], [, b]) => b - a)
       .slice(0, 8);
-
-    for (const [move, weight] of moves) {
-      const percentage = (weight * 100).toFixed(1);
-      results.push(`- ${move}: ${percentage}%`);
+    for (const [move, percentage] of moves) {
+      output += `- ${move}: ${(percentage * 100).toFixed(1)}%\n`;
     }
-    results.push('');
+    output += '\n';
   }
 
-  // Most common spreads
+  // Spreads
   if (pokemonStats.Spreads) {
-    results.push('**Most Common EV Spreads:**');
+    output += `**Common EV Spreads:**\n`;
     const spreads = Object.entries(pokemonStats.Spreads)
       .sort(([, a], [, b]) => b - a)
       .slice(0, 3);
-
-    for (const [spread, weight] of spreads) {
-      const percentage = (weight * 100).toFixed(1);
-      results.push(`- ${spread}: ${percentage}%`);
-    }
-    results.push('');
-  }
-
-  // Tera Types
-  if (pokemonStats['Tera Types']) {
-    results.push('**Most Common Tera Types:**');
-    const teraTypes = Object.entries(pokemonStats['Tera Types'])
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 5);
-
-    for (const [type, weight] of teraTypes) {
-      const percentage = (weight * 100).toFixed(1);
-      results.push(`- ${type}: ${percentage}%`);
+    for (const [spread, percentage] of spreads) {
+      output += `- ${spread}: ${(percentage * 100).toFixed(1)}%\n`;
     }
   }
 
-  return results.join('\n');
+  return output;
 }
 
 /**
- * Get top threats in the metagame by usage
+ * Get the top threats in the metagame by usage
  */
-export async function getMetaThreats(args: { format?: string; limit?: number }): Promise<string> {
+export async function getMetaThreats(args: { format?: string; limit?: number }, env: Env): Promise<string> {
   const format = args.format || 'gen9ou';
   const limit = args.limit || 20;
 
-  const stats = await fetchStats(format);
+  const stats = await getCachedStats(format, env);
 
   if (!stats) {
     return `No usage statistics found for format "${format}".`;
   }
 
-  const results: string[] = [];
-  results.push(`**Top ${limit} Threats in ${format.toUpperCase()}**\n`);
-  results.push(`Based on ${stats.info['number of battles'].toLocaleString()} battles\n`);
-
-  // Sort Pokémon by usage
-  const sorted = Object.entries(stats.data)
-    .sort(([, a], [, b]) => b.usage - a.usage)
+  const threats = Object.entries(stats.data)
+    .map(([id, data]) => ({ name: id, usage: data.usage }))
+    .sort((a, b) => b.usage - a.usage)
     .slice(0, limit);
 
-  results.push('| Rank | Pokémon | Usage % | Raw Count |');
-  results.push('|------|---------|---------|-----------|');
+  let output = `**Top ${limit} Threats in ${format.toUpperCase()}:**\n\n`;
 
-  sorted.forEach(([name, data], index) => {
-    const usage = (data.usage * 100).toFixed(2);
-    results.push(`| ${index + 1} | ${name} | ${usage}% | ${data['Raw count']} |`);
-  });
+  for (let i = 0; i < threats.length; i++) {
+    const threat = threats[i];
+    output += `${i + 1}. **${threat.name}** - ${(threat.usage * 100).toFixed(2)}% usage\n`;
+  }
 
-  return results.join('\n');
+  return output;
 }
 
 /**
@@ -171,45 +127,38 @@ export async function getTeammates(args: {
   pokemon: string;
   format?: string;
   limit?: number;
-}): Promise<string> {
+}, env: Env): Promise<string> {
   const format = args.format || 'gen9ou';
   const limit = args.limit || 10;
   const pokemonId = toID(args.pokemon);
 
-  const stats = await fetchStats(format);
+  const stats = await getCachedStats(format, env);
 
   if (!stats) {
     return `No usage statistics found for format "${format}".`;
   }
 
   const pokemonStats = stats.data[pokemonId];
+
   if (!pokemonStats) {
-    return `No usage statistics found for ${args.pokemon} in ${format}.`;
+    return `${args.pokemon} not found in ${format} usage statistics.`;
   }
 
   if (!pokemonStats.Teammates) {
-    return `No teammate data available for ${args.pokemon}.`;
+    return `No teammate data available for ${args.pokemon} in ${format}.`;
   }
 
-  const results: string[] = [];
-  results.push(`**Common Teammates for ${args.pokemon} in ${format.toUpperCase()}**\n`);
-
-  // Sort teammates by correlation
   const teammates = Object.entries(pokemonStats.Teammates)
     .sort(([, a], [, b]) => b - a)
     .slice(0, limit);
 
-  results.push('**Note:** Values show P(X|Y) - P(X), meaning how much more likely this Pokémon appears on teams with your Pokémon.\n');
-  results.push('| Pokémon | Correlation |');
-  results.push('|---------|-------------|');
+  let output = `**Common Teammates for ${args.pokemon} in ${format.toUpperCase()}:**\n\n`;
 
-  for (const [teammate, correlation] of teammates) {
-    const percent = (correlation * 100).toFixed(2);
-    const sign = correlation >= 0 ? '+' : '';
-    results.push(`| ${teammate} | ${sign}${percent}% |`);
+  for (const [teammate, percentage] of teammates) {
+    output += `- **${teammate}**: ${(percentage * 100).toFixed(1)}%\n`;
   }
 
-  return results.join('\n');
+  return output;
 }
 
 /**
@@ -219,91 +168,89 @@ export async function getChecksCounters(args: {
   pokemon: string;
   format?: string;
   limit?: number;
-}): Promise<string> {
+}, env: Env): Promise<string> {
   const format = args.format || 'gen9ou';
   const limit = args.limit || 15;
   const pokemonId = toID(args.pokemon);
 
-  const stats = await fetchStats(format);
+  const stats = await getCachedStats(format, env);
 
   if (!stats) {
     return `No usage statistics found for format "${format}".`;
   }
 
   const pokemonStats = stats.data[pokemonId];
+
   if (!pokemonStats) {
-    return `No usage statistics found for ${args.pokemon} in ${format}.`;
+    return `${args.pokemon} not found in ${format} usage statistics.`;
   }
 
   if (!pokemonStats['Checks and Counters']) {
-    return `No counter data available for ${args.pokemon}.`;
+    return `No checks and counters data available for ${args.pokemon} in ${format}.`;
   }
 
-  const results: string[] = [];
-  results.push(`**Checks & Counters for ${args.pokemon} in ${format.toUpperCase()}**\n`);
-
-  // Sort by number of encounters (first value in array)
-  const counters = Object.entries(pokemonStats['Checks and Counters'])
-    .sort(([, a], [, b]) => b[0] - a[0])
+  const checksCounters = Object.entries(pokemonStats['Checks and Counters'])
+    .map(([name, data]: [string, any]) => ({
+      name,
+      score: data[0],
+      koed: data[1],
+      switched: data[2],
+    }))
+    .sort((a, b) => b.score - a.score)
     .slice(0, limit);
 
-  results.push('| Pokémon | Encounters | KO Rate | Switch Rate |');
-  results.push('|---------|------------|---------|-------------|');
+  let output = `**Checks and Counters for ${args.pokemon} in ${format.toUpperCase()}:**\n\n`;
+  output += `(Score: higher = more effective. KOed % = KO rate, Switched % = switch out rate)\n\n`;
 
-  for (const [counter, data] of counters) {
-    const [encounters, koRate, switchRate] = data;
-    results.push(
-      `| ${counter} | ${encounters.toFixed(0)} | ${(koRate * 100).toFixed(1)}% | ${(switchRate * 100).toFixed(1)}% |`
-    );
+  for (const check of checksCounters) {
+    output += `- **${check.name}**: Score ${check.score.toFixed(2)} (${check.koed.toFixed(1)}% KOed, ${check.switched.toFixed(1)}% switched)\n`;
   }
 
-  results.push('\n**Legend:**');
-  results.push('- **Encounters**: Number of times faced in battle');
-  results.push('- **KO Rate**: % of encounters where counter KO\'d your Pokémon');
-  results.push('- **Switch Rate**: % of encounters where you switched out');
-
-  return results.join('\n');
+  return output;
 }
 
 /**
- * Get metagame overview statistics
+ * Get overall metagame statistics
  */
-export async function getMetagameStats(args: { format?: string }): Promise<string> {
+export async function getMetagameStats(args: { format?: string }, env: Env): Promise<string> {
   const format = args.format || 'gen9ou';
 
-  const stats = await fetchStats(format);
+  const stats = await getCachedStats(format, env);
 
   if (!stats) {
-    return `No statistics found for format "${format}".`;
+    return `No usage statistics found for format "${format}".`;
   }
 
-  const results: string[] = [];
-  results.push(`**Metagame Statistics for ${format.toUpperCase()}**\n`);
+  const info = stats.info;
+  const totalPokemon = Object.keys(stats.data).length;
 
-  // Battle info
-  results.push(`**Total Battles:** ${stats.info['number of battles'].toLocaleString()}`);
-  results.push(`**Cutoff Rating:** ${stats.info.cutoff}\n`);
+  let output = `**Metagame Statistics for ${format.toUpperCase()}:**\n\n`;
+  output += `- **Total Pokémon:** ${totalPokemon}\n`;
+  output += `- **Total Battles:** ${info['number of battles'].toLocaleString()}\n`;
+  output += `- **Average Weight/Team:** ${info['avg weight/team']}\n\n`;
 
-  // Count unique Pokémon and total usage
-  const pokemonCount = Object.keys(stats.data).length;
-  const totalUsage = Object.values(stats.data).reduce(
-    (sum, p) => sum + p['Raw count'],
-    0
-  );
+  // Get usage tiers
+  const usageTiers = {
+    'S Tier (>10%)': 0,
+    'A Tier (5-10%)': 0,
+    'B Tier (2-5%)': 0,
+    'C Tier (1-2%)': 0,
+    'D Tier (<1%)': 0,
+  };
 
-  results.push(`**Unique Pokémon Used:** ${pokemonCount}`);
-  results.push(`**Total Pokémon Counted:** ${totalUsage.toLocaleString()}\n`);
-
-  // Top 10 most used
-  results.push('**Top 10 Most Used:**');
-  const top10 = Object.entries(stats.data)
-    .sort(([, a], [, b]) => b.usage - a.usage)
-    .slice(0, 10);
-
-  for (const [name, data] of top10) {
-    const usage = (data.usage * 100).toFixed(2);
-    results.push(`${name}: ${usage}%`);
+  for (const [, data] of Object.entries(stats.data)) {
+    const usage = data.usage * 100;
+    if (usage > 10) usageTiers['S Tier (>10%)']++;
+    else if (usage > 5) usageTiers['A Tier (5-10%)']++;
+    else if (usage > 2) usageTiers['B Tier (2-5%)']++;
+    else if (usage > 1) usageTiers['C Tier (1-2%)']++;
+    else usageTiers['D Tier (<1%)']++;
   }
 
-  return results.join('\n');
+  output += `**Usage Tiers:**\n`;
+  for (const [tier, count] of Object.entries(usageTiers)) {
+    output += `- ${tier}: ${count} Pokémon\n`;
+  }
+
+  return output;
 }

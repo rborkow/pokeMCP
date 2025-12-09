@@ -1,6 +1,12 @@
-import { readFileSync } from 'fs';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+// Direct imports for Cloudflare Workers (no filesystem access)
+import { Pokedex } from './data/pokedex.js';
+import { Moves } from './data/moves.js';
+import { Learnsets } from './data/learnsets.js';
+import { FormatsData } from './data/formats-data.js';
+import { Abilities } from './data/abilities.js';
+import { Items } from './data/items.js';
+import { TypeChart } from './data/typechart.js';
+
 import type {
   PokedexTable,
   MovesTable,
@@ -9,156 +15,85 @@ import type {
   AbilitiesTable,
   ItemsTable,
   TypeChartTable,
+  PokemonSpecies,
+  Move,
+  TypeChart as TypeChartType,
 } from './types.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Cache for loaded data
-let pokedexCache: PokedexTable | null = null;
-let movesCache: MovesTable | null = null;
-let learnsetsCache: LearnsetsTable | null = null;
-let formatsCache: FormatsDataTable | null = null;
-let abilitiesCache: AbilitiesTable | null = null;
-let itemsCache: ItemsTable | null = null;
-let typeChartCache: TypeChartTable | null = null;
+// Use the imported data directly
+const pokedexData = Pokedex as PokedexTable;
+const movesData = Moves as MovesTable;
+const learnsetsData = Learnsets as LearnsetsTable;
+const formatsData = FormatsData as FormatsDataTable;
+const abilitiesData = Abilities as AbilitiesTable;
+const itemsData = Items as ItemsTable;
+const typeChartData = TypeChart as TypeChartTable;
 
 /**
- * Parse a Pokémon Showdown data file by extracting and evaluating the exported object
+ * Convert a string to a Pokémon Showdown ID format
  */
-function parseDataFile<T>(filename: string): T {
-  const filepath = join(__dirname, 'data', filename);
-  const content = readFileSync(filepath, 'utf-8');
-
-  // Extract the object definition
-  // Format: export const Name: Type = { ... };
-  const match = content.match(/=\s*(\{[\s\S]*\});?\s*$/);
-
-  if (!match) {
-    throw new Error(`Could not parse data file: ${filename}`);
-  }
-
-  const objectStr = match[1];
-
-  // Use Function constructor to safely evaluate the object
-  // This is safer than eval() but still requires trusted input
-  try {
-    const fn = new Function(`return ${objectStr}`);
-    return fn() as T;
-  } catch (error) {
-    throw new Error(`Error parsing ${filename}: ${error}`);
-  }
+export function toID(text: string): string {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, '');
 }
 
 /**
- * Get Pokédex data
+ * Get the entire Pokedex table
  */
 export function getPokedex(): PokedexTable {
-  if (!pokedexCache) {
-    pokedexCache = parseDataFile<PokedexTable>('pokedex.ts');
-  }
-  return pokedexCache;
+  return pokedexData;
 }
 
 /**
- * Get moves data
+ * Get a Pokémon's data by name
  */
-export function getMoves(): MovesTable {
-  if (!movesCache) {
-    movesCache = parseDataFile<MovesTable>('moves.ts');
-  }
-  return movesCache;
-}
-
-/**
- * Get learnsets data
- */
-export function getLearnsets(): LearnsetsTable {
-  if (!learnsetsCache) {
-    learnsetsCache = parseDataFile<LearnsetsTable>('learnsets.ts');
-  }
-  return learnsetsCache;
-}
-
-/**
- * Get formats data (tiers)
- */
-export function getFormatsData(): FormatsDataTable {
-  if (!formatsCache) {
-    formatsCache = parseDataFile<FormatsDataTable>('formats-data.ts');
-  }
-  return formatsCache;
-}
-
-/**
- * Get abilities data
- */
-export function getAbilities(): AbilitiesTable {
-  if (!abilitiesCache) {
-    abilitiesCache = parseDataFile<AbilitiesTable>('abilities.ts');
-  }
-  return abilitiesCache;
-}
-
-/**
- * Get items data
- */
-export function getItems(): ItemsTable {
-  if (!itemsCache) {
-    itemsCache = parseDataFile<ItemsTable>('items.ts');
-  }
-  return itemsCache;
-}
-
-/**
- * Get type chart data
- */
-export function getTypeChart(): TypeChartTable {
-  if (!typeChartCache) {
-    typeChartCache = parseDataFile<TypeChartTable>('typechart.ts');
-  }
-  return typeChartCache;
-}
-
-/**
- * Normalize a name to the format used in data files (lowercase, no spaces/special chars)
- */
-export function toID(name: string): string {
-  return name.toLowerCase().replace(/[^a-z0-9]/g, '');
-}
-
-/**
- * Get a Pokémon by name
- */
-export function getPokemon(name: string) {
-  const dex = getPokedex();
+export function getPokemon(name: string): PokemonSpecies | undefined {
   const id = toID(name);
-  return dex[id] || null;
+  return pokedexData[id];
 }
 
 /**
- * Get a move by name
+ * Get a move's data by name
  */
-export function getMove(name: string) {
-  const moves = getMoves();
+export function getMove(name: string): Move | undefined {
   const id = toID(name);
-  return moves[id] || null;
+  return movesData[id];
 }
 
 /**
  * Get a Pokémon's learnset
  */
 export function getPokemonLearnset(name: string) {
-  const learnsets = getLearnsets();
   const id = toID(name);
-  return learnsets[id] || null;
+  return learnsetsData[id];
 }
 
 /**
- * Get format data for a Pokémon
+ * Get a Pokémon's format data (tier info, etc.)
  */
 export function getPokemonFormatData(name: string) {
-  const formats = getFormatsData();
   const id = toID(name);
-  return formats[id] || null;
+  return formatsData[id];
+}
+
+/**
+ * Get an ability's data by name
+ */
+export function getAbility(name: string) {
+  const id = toID(name);
+  return abilitiesData[id];
+}
+
+/**
+ * Get an item's data by name
+ */
+export function getItem(name: string) {
+  const id = toID(name);
+  return itemsData[id];
+}
+
+/**
+ * Get the type chart
+ */
+export function getTypeChart(): TypeChartType {
+  return typeChartData;
 }
