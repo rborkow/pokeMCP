@@ -42,6 +42,8 @@ Access real competitive data from thousands of battles:
 
 ## Installation
 
+### Option 1: From Source (Development)
+
 1. Clone this repository
 2. Install dependencies:
    ```bash
@@ -52,16 +54,52 @@ Access real competitive data from thousands of battles:
    npm run build
    ```
 
+### Option 2: NPM Package (Coming Soon)
+
+```bash
+npm install -g pokemon-mcp-server
+```
+
+### Option 3: Docker
+
+```bash
+docker pull rborkow/pokemon-mcp-server
+```
+
 ## Configuration
 
 Add this server to your MCP client configuration. For Claude Desktop, add to your `claude_desktop_config.json`:
 
+**From Source:**
 ```json
 {
   "mcpServers": {
     "pokemon": {
       "command": "node",
       "args": ["/path/to/pokeMCP/build/index.js"]
+    }
+  }
+}
+```
+
+**From NPM:**
+```json
+{
+  "mcpServers": {
+    "pokemon": {
+      "command": "pokemon-mcp"
+    }
+  }
+}
+```
+
+**From Docker:**
+```json
+{
+  "mcpServers": {
+    "pokemon": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "rborkow/pokemon-mcp-server"]
     }
   }
 }
@@ -207,10 +245,34 @@ Overall format statistics including total battles and top Pokémon.
 - **Pokémon Data**: [Pokémon Showdown](https://github.com/smogon/pokemon-showdown) - Complete Pokédex, moves, abilities, and learnsets
 - **Usage Statistics**: [Smogon University](https://www.smogon.com/stats/) - Real competitive battle data updated monthly
 
+## Deployment
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions on:
+- Publishing to NPM
+- Building Docker containers
+- Creating GitHub releases
+- Distributing binaries
+
+## Roadmap
+
+- [ ] Publish to NPM registry
+- [ ] Add caching for Smogon stats
+- [ ] Support for VGC formats
+- [ ] Battle simulator integration
+- [ ] Team import/export (Showdown format)
+- [ ] Damage calculator
+- [ ] Speed tier checker
+
 ## License
 
 MIT
 
 ## Contributing
 
-This is a learning project for building MCP servers. Feel free to fork and experiment!
+Contributions welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+## Acknowledgments
+
+- [Pokémon Showdown](https://github.com/smogon/pokemon-showdown) for comprehensive Pokémon data
+- [Smogon University](https://www.smogon.com/) for competitive battle statistics
+- [@pkmn](https://github.com/pkmn) for excellent Pokémon tooling and APIs
