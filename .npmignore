@@ -1,0 +1,16 @@
+# Source files (we ship the built version)
+src/
+tsconfig.json
+test-examples.md
+
+# Development files
+.git/
+.gitignore
+*.md
+!README.md
+
+# Node modules
+node_modules/
+
+# TypeScript build cache
+*.tsbuildinfo

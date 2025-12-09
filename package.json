@@ -1,0 +1,60 @@
+{
+  "name": "pokemon-mcp-server",
+  "version": "0.2.0",
+  "description": "MCP server for Pokémon team building and validation",
+  "type": "module",
+  "main": "build/index.js",
+  "bin": {
+    "pokemon-mcp": "build/index.js"
+  },
+  "files": [
+    "build",
+    "src/data"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
+    "start": "node build/server.js",
+    "start:remote": "node build/remote-mcp.js",
+    "dev:server": "tsc && node build/server.js",
+    "dev:remote": "tsc && node build/remote-mcp.js"
+  },
+  "keywords": [
+    "mcp",
+    "pokemon",
+    "showdown",
+    "team-builder",
+    "model-context-protocol",
+    "smogon",
+    "competitive-pokemon"
+  ],
+  "author": "rborkow",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rborkow/pokeMCP.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rborkow/pokeMCP/issues"
+  },
+  "homepage": "https://github.com/rborkow/pokeMCP#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "smogon": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@types/express": "^4.17.21",
+    "@types/cors": "^2.8.17",
+    "typescript": "^5.7.2"
+  }
+}
