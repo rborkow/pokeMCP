@@ -13,6 +13,13 @@ import {
   validateTeam as validateTeamImpl,
   suggestTeamCoverage as suggestTeamCoverageImpl,
 } from './tools.js';
+import {
+  getPopularSets,
+  getMetaThreats,
+  getTeammates,
+  getChecksCounters,
+  getMetagameStats,
+} from './stats.js';
 
 // Tool definitions
 const TOOLS: Tool[] = [
@@ -107,13 +114,105 @@ const TOOLS: Tool[] = [
       required: ['current_team'],
     },
   },
+  {
+    name: 'get_popular_sets',
+    description: 'Get the most popular competitive sets for a Pokémon from Smogon usage statistics (moves, items, abilities, spreads)',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        pokemon: {
+          type: 'string',
+          description: 'The Pokémon name',
+        },
+        format: {
+          type: 'string',
+          description: 'Format to check (e.g., "gen9ou", "gen9vgc2024"). Defaults to "gen9ou".',
+        },
+      },
+      required: ['pokemon'],
+    },
+  },
+  {
+    name: 'get_meta_threats',
+    description: 'Get the top threats in the metagame by usage percentage',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        format: {
+          type: 'string',
+          description: 'Format to check (e.g., "gen9ou", "gen9ubers"). Defaults to "gen9ou".',
+        },
+        limit: {
+          type: 'number',
+          description: 'Number of top Pokémon to show. Defaults to 20.',
+        },
+      },
+    },
+  },
+  {
+    name: 'get_teammates',
+    description: 'Get common teammates for a Pokémon based on actual team compositions from competitive play',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        pokemon: {
+          type: 'string',
+          description: 'The Pokémon name',
+        },
+        format: {
+          type: 'string',
+          description: 'Format to check (e.g., "gen9ou"). Defaults to "gen9ou".',
+        },
+        limit: {
+          type: 'number',
+          description: 'Number of teammates to show. Defaults to 10.',
+        },
+      },
+      required: ['pokemon'],
+    },
+  },
+  {
+    name: 'get_checks_counters',
+    description: 'Get the most effective checks and counters for a Pokémon based on battle statistics',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        pokemon: {
+          type: 'string',
+          description: 'The Pokémon name',
+        },
+        format: {
+          type: 'string',
+          description: 'Format to check (e.g., "gen9ou"). Defaults to "gen9ou".',
+        },
+        limit: {
+          type: 'number',
+          description: 'Number of checks/counters to show. Defaults to 15.',
+        },
+      },
+      required: ['pokemon'],
+    },
+  },
+  {
+    name: 'get_metagame_stats',
+    description: 'Get overall metagame statistics including playstyle distribution and unique Pokémon count',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        format: {
+          type: 'string',
+          description: 'Format to check (e.g., "gen9ou"). Defaults to "gen9ou".',
+        },
+      },
+    },
+  },
 ];
 
 // Server implementation
 const server = new Server(
   {
     name: 'pokemon-mcp-server',
-    version: '0.1.0',
+    version: '0.2.0',
   },
   {
     capabilities: {
@@ -144,6 +243,21 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       case 'suggest_team_coverage':
         return await suggestTeamCoverage(args as { current_team: string[]; format?: string });
+
+      case 'get_popular_sets':
+        return await getPopularSetsHandler(args as { pokemon: string; format?: string });
+
+      case 'get_meta_threats':
+        return await getMetaThreatsHandler(args as { format?: string; limit?: number });
+
+      case 'get_teammates':
+        return await getTeammatesHandler(args as { pokemon: string; format?: string; limit?: number });
+
+      case 'get_checks_counters':
+        return await getChecksCountersHandler(args as { pokemon: string; format?: string; limit?: number });
+
+      case 'get_metagame_stats':
+        return await getMetagameStatsHandler(args as { format?: string });
 
       default:
         throw new Error(`Unknown tool: ${name}`);
@@ -181,6 +295,41 @@ async function validateTeam(args: { team: any[]; format?: string }) {
 
 async function suggestTeamCoverage(args: { current_team: string[]; format?: string }) {
   const result = suggestTeamCoverageImpl(args);
+  return {
+    content: [{ type: 'text' as const, text: result }],
+  };
+}
+
+async function getPopularSetsHandler(args: { pokemon: string; format?: string }) {
+  const result = await getPopularSets(args);
+  return {
+    content: [{ type: 'text' as const, text: result }],
+  };
+}
+
+async function getMetaThreatsHandler(args: { format?: string; limit?: number }) {
+  const result = await getMetaThreats(args);
+  return {
+    content: [{ type: 'text' as const, text: result }],
+  };
+}
+
+async function getTeammatesHandler(args: { pokemon: string; format?: string; limit?: number }) {
+  const result = await getTeammates(args);
+  return {
+    content: [{ type: 'text' as const, text: result }],
+  };
+}
+
+async function getChecksCountersHandler(args: { pokemon: string; format?: string; limit?: number }) {
+  const result = await getChecksCounters(args);
+  return {
+    content: [{ type: 'text' as const, text: result }],
+  };
+}
+
+async function getMetagameStatsHandler(args: { format?: string }) {
+  const result = await getMetagameStats(args);
   return {
     content: [{ type: 'text' as const, text: result }],
   };

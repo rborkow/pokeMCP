@@ -1,6 +1,6 @@
 {
   "name": "pokemon-mcp-server",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "MCP server for Pokémon team building and validation",
   "type": "module",
   "main": "build/index.js",
@@ -9,11 +9,17 @@
     "watch": "tsc --watch",
     "prepare": "npm run build"
   },
-  "keywords": ["mcp", "pokemon", "showdown", "team-builder"],
+  "keywords": [
+    "mcp",
+    "pokemon",
+    "showdown",
+    "team-builder"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.4"
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "smogon": "^4.0.2"
   },
   "devDependencies": {
     "@types/node": "^22.10.1",

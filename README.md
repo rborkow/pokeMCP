@@ -1,6 +1,6 @@
 # Pokémon MCP Server
 
-An MCP (Model Context Protocol) server for Pokémon team building and validation, powered by Pokémon Showdown data.
+An MCP (Model Context Protocol) server for Pokémon team building and validation, powered by Pokémon Showdown data and Smogon usage statistics.
 
 ## Features
 
@@ -31,6 +31,14 @@ Analyze your team's type coverage and weaknesses:
 - Shows resistances
 - Type distribution analysis
 - Suggestions for filling gaps
+
+### 📊 Smogon Usage Statistics (NEW!)
+Access real competitive data from thousands of battles:
+- **Popular Sets**: Most used moves, items, abilities, and EV spreads
+- **Meta Threats**: Top Pokémon by usage percentage
+- **Teammates**: Common team partners based on actual teams
+- **Checks & Counters**: What beats your Pokémon (with KO rates)
+- **Metagame Stats**: Overall format statistics and trends
 
 ## Installation
 
@@ -119,18 +127,85 @@ Arguments: {
 
 Shows team weaknesses, resistances, and suggests types to add.
 
+### Get Popular Sets
+
+```
+Tool: get_popular_sets
+Arguments: {
+  "pokemon": "Garchomp",
+  "format": "gen9ou"
+}
+```
+
+Returns the most popular moves, items, abilities, and EV spreads from real competitive play.
+
+### Check Meta Threats
+
+```
+Tool: get_meta_threats
+Arguments: {
+  "format": "gen9ou",
+  "limit": 20
+}
+```
+
+Shows the top 20 most used Pokémon in the format with usage percentages.
+
+### Find Teammates
+
+```
+Tool: get_teammates
+Arguments: {
+  "pokemon": "Garchomp",
+  "format": "gen9ou"
+}
+```
+
+Discovers which Pokémon are commonly paired with Garchomp on teams.
+
+### Identify Checks & Counters
+
+```
+Tool: get_checks_counters
+Arguments: {
+  "pokemon": "Garchomp",
+  "format": "gen9ou"
+}
+```
+
+Shows which Pokémon are most effective against Garchomp with battle statistics.
+
+### View Metagame Stats
+
+```
+Tool: get_metagame_stats
+Arguments: {
+  "format": "gen9ou"
+}
+```
+
+Overall format statistics including total battles and top Pokémon.
+
 ## Available Tools
 
 | Tool | Description |
 |------|-------------|
+| **Basic Tools** | |
 | `lookup_pokemon` | Get detailed Pokémon information |
 | `validate_moveset` | Check if a moveset is legal |
 | `validate_team` | Validate team against format rules |
 | `suggest_team_coverage` | Analyze team coverage and suggest improvements |
+| **Usage Stats Tools** | |
+| `get_popular_sets` | Get most used moves/items/abilities from competitive play |
+| `get_meta_threats` | See top Pokémon by usage percentage |
+| `get_teammates` | Find common team partners |
+| `get_checks_counters` | Identify effective counters with battle stats |
+| `get_metagame_stats` | View overall format statistics |
 
-## Data Source
+## Data Sources
 
-All Pokémon data comes from [Pokémon Showdown](https://github.com/smogon/pokemon-showdown), the most popular competitive Pokémon battle simulator.
+- **Pokémon Data**: [Pokémon Showdown](https://github.com/smogon/pokemon-showdown) - Complete Pokédex, moves, abilities, and learnsets
+- **Usage Statistics**: [Smogon University](https://www.smogon.com/stats/) - Real competitive battle data updated monthly
 
 ## License
 
