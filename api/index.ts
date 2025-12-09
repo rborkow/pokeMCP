@@ -232,6 +232,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
+  // OAuth discovery endpoints - return 404 to signal authless server
+  if (req.url?.includes('/.well-known/oauth') || req.url?.includes('/register')) {
+    res.status(404).json({ error: 'OAuth not supported - this is an authless server' });
+    return;
+  }
+
   // Protocol discovery endpoint
   if (req.method === 'HEAD' && req.url === '/') {
     res.setHeader('X-MCP-Version', '2024-11-05');
@@ -254,6 +260,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         sse: '/sse',
         message: '/message',
       },
+    });
+    return;
+  }
+
+  // Handle POST to root - redirect to message endpoint
+  if (req.method === 'POST' && req.url === '/') {
+    res.status(200).json({
+      error: 'Please use the /sse endpoint for connections',
+      endpoints: {
+        sse: '/sse',
+        message: '/message',
+      }
     });
     return;
   }
