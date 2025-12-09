@@ -7,6 +7,7 @@ import { toID } from '../data-loader.js';
  */
 function mapToSmogonFormat(format: string): string {
   const mapping: Record<string, string> = {
+    // Gen 9
     'gen9ou': 'OU',
     'gen9ubers': 'Uber',
     'gen9uu': 'UU',
@@ -17,6 +18,22 @@ function mapToSmogonFormat(format: string): string {
     'gen9vgc2024regf': 'VGC24 Regulation F',
     'gen9vgc2024regh': 'VGC24 Regulation H',
     'gen9vgc2024regg': 'VGC24 Regulation G',
+    // Gen 8
+    'gen8ou': 'OU',
+    'gen8ubers': 'Uber',
+    'gen8uu': 'UU',
+    'gen8ru': 'RU',
+    'gen8nu': 'NU',
+    'gen8pu': 'PU',
+    'gen8lc': 'LC',
+    // Gen 7
+    'gen7ou': 'OU',
+    'gen7ubers': 'Uber',
+    'gen7uu': 'UU',
+    'gen7ru': 'RU',
+    'gen7nu': 'NU',
+    'gen7pu': 'PU',
+    'gen7lc': 'LC',
   };
 
   return mapping[format] || format;

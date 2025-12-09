@@ -36,13 +36,19 @@
 		{
 			"binding": "VECTOR_INDEX",
 			"index_name": "pokemon-strategy-index"
+		},
+		{
+			"binding": "VECTORIZE",
+			"index_name": "pokemon-strategy-index-staging"
 		}
 	],
 	"ai": {
 		"binding": "AI"
 	},
 	"triggers": {
-		"crons": ["0 3 * * SUN"]
+		"crons": [
+			"0 3 * * SUN"
+		]
 	},
 	"observability": {
 		"enabled": true
@@ -87,7 +93,9 @@
 				"binding": "AI"
 			},
 			"triggers": {
-				"crons": ["0 4 * * SAT"]
+				"crons": [
+					"0 4 * * SAT"
+				]
 			}
 		},
 		"production": {
@@ -123,7 +131,9 @@
 				"binding": "AI"
 			},
 			"triggers": {
-				"crons": ["0 3 * * SUN"]
+				"crons": [
+					"0 3 * * SUN"
+				]
 			}
 		}
 	}

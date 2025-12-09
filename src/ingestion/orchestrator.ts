@@ -4,7 +4,16 @@ import { generateEmbeddings } from './embedder.js';
 import { indexChunks } from './indexer.js';
 import type { IngestionStats } from './types.js';
 
-const FORMATS = ['gen9ou', 'gen9ubers', 'gen9uu', 'gen9ru', 'gen9vgc2024regf', 'gen9vgc2024regh'];
+const FORMATS = [
+  // Gen 9 Singles
+  'gen9ou', 'gen9ubers', 'gen9uu', 'gen9ru', 'gen9nu', 'gen9pu', 'gen9lc',
+  // Gen 9 VGC
+  'gen9vgc2024regg', 'gen9vgc2024regf', 'gen9vgc2024regh',
+  // Gen 8 Singles
+  'gen8ou', 'gen8ubers', 'gen8uu', 'gen8ru', 'gen8nu', 'gen8pu', 'gen8lc',
+  // Gen 7 Singles
+  'gen7ou', 'gen7ubers', 'gen7uu', 'gen7ru', 'gen7nu', 'gen7pu', 'gen7lc'
+];
 
 /**
  * Main ingestion pipeline - scrapes, chunks, embeds, and indexes content

@@ -7,8 +7,14 @@ import { writeFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
 
 const FORMATS = [
+  // Gen 9 Singles
   'gen9ou', 'gen9ubers', 'gen9uu', 'gen9ru', 'gen9nu', 'gen9pu', 'gen9lc',
-  'gen9vgc2024regg', 'gen9vgc2024regf', 'gen9vgc2024regh'
+  // Gen 9 VGC
+  'gen9vgc2024regg', 'gen9vgc2024regf', 'gen9vgc2024regh',
+  // Gen 8 Singles
+  'gen8ou', 'gen8ubers', 'gen8uu', 'gen8ru', 'gen8nu', 'gen8pu', 'gen8lc',
+  // Gen 7 Singles
+  'gen7ou', 'gen7ubers', 'gen7uu', 'gen7ru', 'gen7nu', 'gen7pu', 'gen7lc'
 ];
 const CACHE_DIR = join(process.cwd(), 'src', 'cached-stats');
 
