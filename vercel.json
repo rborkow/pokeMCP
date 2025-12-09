@@ -1,7 +1,9 @@
 {
   "version": 2,
+  "buildCommand": "",
+  "installCommand": "npm install",
   "functions": {
-    "api/index.ts": {
+    "api/**/*.ts": {
       "includeFiles": "src/**"
     }
   },
