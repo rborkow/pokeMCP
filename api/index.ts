@@ -264,20 +264,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  // Handle POST to root - redirect to message endpoint
-  if (req.method === 'POST' && req.url === '/') {
-    res.status(200).json({
-      error: 'Please use the /sse endpoint for connections',
-      endpoints: {
-        sse: '/sse',
-        message: '/message',
-      }
-    });
-    return;
-  }
+  // SSE endpoint - handle both GET /sse and POST / (for MCP protocol)
+  const isSSE = (req.method === 'GET' && (req.url?.includes('/sse') || req.url === '/sse')) ||
+                (req.method === 'POST' && req.url === '/');
 
-  // SSE endpoint - handle both /sse and /api/sse paths
-  const isSSE = req.method === 'GET' && (req.url?.includes('/sse') || req.url === '/sse');
   if (isSSE) {
     const sessionId = req.query.sessionId as string || 'default';
 
