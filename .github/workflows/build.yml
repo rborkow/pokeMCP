@@ -35,9 +35,11 @@ jobs:
       - name: Verify MCP server builds
         run: |
           ls -lh build/
-          test -f build/index.js
-          test -f build/remote-mcp.js
-          test -f build/server.js
+          ls -lh build/src/
+          ls -lh build/api/
+          test -f build/src/index.js
+          test -f build/src/remote-mcp.js
+          test -f build/api/index.js
           echo "✅ All server variants built successfully"
 
       - name: Verify data files
