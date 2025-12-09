@@ -1,15 +1,13 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "build/remote-mcp.js",
-      "use": "@vercel/node"
+  "buildCommand": "",
+  "installCommand": "npm install",
+  "functions": {
+    "api/**/*.ts": {
+      "includeFiles": "src/**"
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "build/remote-mcp.js"
-    }
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api" }
   ]
 }
