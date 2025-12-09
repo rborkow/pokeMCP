@@ -210,6 +210,12 @@ function createServer() {
 const servers = new Map<string, Server>();
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // Debug logging
+  console.log(`[MCP] ${req.method} ${req.url}`, {
+    headers: req.headers,
+    query: req.query
+  });
+
   // Set CORS headers - allow all Claude domains
   const origin = req.headers.origin || req.headers.referer;
   if (origin && (origin.includes('claude.ai') || origin.includes('claude.com'))) {
