@@ -1,0 +1,48 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - main
+      - 'claude/**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Check TypeScript compilation
+        run: npx tsc --noEmit
+
+      - name: Verify MCP server builds
+        run: |
+          ls -lh build/
+          test -f build/index.js
+          test -f build/remote-mcp.js
+          test -f build/server.js
+          echo "✅ All server variants built successfully"
+
+      - name: Verify data files
+        run: |
+          test -f src/data/pokedex.ts
+          test -f src/data/moves.ts
+          test -f src/data/learnsets.ts
+          echo "✅ Data files present"
