@@ -210,8 +210,13 @@ function createServer() {
 const servers = new Map<string, Server>();
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // Set CORS headers
-  res.setHeader('Access-Control-Allow-Origin', 'https://claude.ai');
+  // Set CORS headers - allow all Claude domains
+  const origin = req.headers.origin || req.headers.referer;
+  if (origin && (origin.includes('claude.ai') || origin.includes('claude.com'))) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', 'https://claude.ai');
+  }
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, HEAD, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -240,15 +245,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         tools: true,
       },
       endpoints: {
-        sse: '/api/sse',
-        message: '/api/message',
+        sse: '/sse',
+        message: '/message',
       },
     });
     return;
   }
 
-  // SSE endpoint
-  if (req.method === 'GET' && req.url?.startsWith('/api/sse')) {
+  // SSE endpoint - handle both /sse and /api/sse paths
+  const isSSE = req.method === 'GET' && (req.url?.includes('/sse') || req.url === '/sse');
+  if (isSSE) {
     const sessionId = req.query.sessionId as string || 'default';
 
     let server = servers.get(sessionId);
@@ -261,7 +267,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Connection', 'keep-alive');
 
-    const transport = new SSEServerTransport('/api/message', res);
+    const transport = new SSEServerTransport('/message', res);
     await server.connect(transport);
 
     req.on('close', () => {
@@ -271,8 +277,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  // Message endpoint
-  if (req.method === 'POST' && req.url?.startsWith('/api/message')) {
+  // Message endpoint - handle both /message and /api/message paths
+  const isMessage = req.method === 'POST' && (req.url?.includes('/message') || req.url === '/message');
+  if (isMessage) {
     res.status(200).json({ received: true });
     return;
   }
