@@ -277,17 +277,32 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       servers.set(sessionId, server);
     }
 
-    res.setHeader('Content-Type', 'text/event-stream');
-    res.setHeader('Cache-Control', 'no-cache');
-    res.setHeader('Connection', 'keep-alive');
+    // Set SSE headers
+    res.writeHead(200, {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache, no-transform',
+      'Connection': 'keep-alive',
+      'X-Accel-Buffering': 'no', // Disable nginx buffering
+    });
+
+    // Send initial comment to establish connection
+    res.write(':ok\n\n');
+    res.flush?.();
 
     const transport = new SSEServerTransport('/message', res);
-    await server.connect(transport);
+
+    try {
+      await server.connect(transport);
+    } catch (error) {
+      console.error('[MCP] Connection error:', error);
+    }
 
     req.on('close', () => {
+      console.log('[MCP] Client disconnected');
       servers.delete(sessionId);
     });
 
+    // Don't call res.end() - keep connection open
     return;
   }
 
