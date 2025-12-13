@@ -1,17 +1,14 @@
 name: Build and Test
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
 
 jobs:
-  build:
+  build-worker:
+    name: Build MCP Worker
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -25,16 +22,64 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build documentation
-        run: |
-          cd apps/docs
-          npm ci
-          npm run build
-          echo "✅ Documentation built successfully"
-
       - name: Verify data files
         run: |
           test -f src/data/pokedex.ts
           test -f src/data/items.ts
           test -f src/data/formats-data.ts
           echo "✅ Data files present"
+
+      - name: Build check (dry run)
+        run: npx wrangler deploy --dry-run --outdir=dist
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  build-teambuilder:
+    name: Build Teambuilder
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: ./apps/teambuilder
+        run: npm ci
+
+      - name: Lint
+        working-directory: ./apps/teambuilder
+        run: npm run lint
+
+      - name: Build
+        working-directory: ./apps/teambuilder
+        run: npm run build
+        env:
+          NEXT_PUBLIC_MCP_URL: https://api.pokemcp.com
+
+  build-docs:
+    name: Build Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: ./apps/docs
+        run: npm ci
+
+      - name: Build documentation
+        working-directory: ./apps/docs
+        run: npm run build
+
+      - name: Success
+        run: echo "✅ All builds passed"

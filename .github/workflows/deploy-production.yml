@@ -1,16 +1,35 @@
 name: Deploy to Production
 
 on:
+  # Auto-deploy on merge to main
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.github/WORKFLOWS.md'
+
+  # Manual trigger for emergency deploys or re-runs
   workflow_dispatch:
     inputs:
-      version:
-        description: 'Version tag (e.g., v0.3.0)'
-        required: false
-        type: string
+      deploy_worker:
+        description: 'Deploy MCP Worker'
+        type: boolean
+        default: true
+      deploy_teambuilder:
+        description: 'Deploy Teambuilder'
+        type: boolean
+        default: true
+      deploy_docs:
+        description: 'Deploy Documentation'
+        type: boolean
+        default: true
 
 jobs:
   deploy-worker:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' || inputs.deploy_worker }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -32,11 +51,44 @@ jobs:
 
       - name: Notify deployment
         run: |
-          echo "✅ Deployed to https://api.pokemcp.com"
+          echo "✅ Deployed MCP Worker to https://api.pokemcp.com"
           echo "MCP Endpoint: https://api.pokemcp.com/mcp"
+
+  deploy-teambuilder:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' || inputs.deploy_teambuilder }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: ./apps/teambuilder
+        run: npm ci
+
+      - name: Build Teambuilder
+        working-directory: ./apps/teambuilder
+        run: npm run pages:build
+        env:
+          NEXT_PUBLIC_MCP_URL: https://api.pokemcp.com
+
+      - name: Deploy to Cloudflare Pages
+        working-directory: ./apps/teambuilder
+        run: npx wrangler pages deploy .open-next --project-name=pokemcp-teambuilder --branch=main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Notify deployment
+        run: echo "✅ Deployed Teambuilder to https://www.pokemcp.com"
 
   deploy-docs:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' || inputs.deploy_docs }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -62,4 +114,4 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Notify deployment
-        run: echo "✅ Deployed documentation to https://pokemcp.com"
+        run: echo "✅ Deployed documentation to https://docs.pokemcp.com"

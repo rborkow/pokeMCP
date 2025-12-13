@@ -1,0 +1,77 @@
+name: Update Smogon Stats
+
+on:
+  # Run monthly on the 5th at 6 AM UTC (Smogon publishes stats around 1st-5th)
+  schedule:
+    - cron: '0 6 5 * *'
+
+  # Manual trigger for immediate updates
+  workflow_dispatch:
+    inputs:
+      skip_deploy:
+        description: 'Skip deployment after stats update'
+        type: boolean
+        default: false
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Need write access to push stats changes
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch latest stats from Smogon
+        run: npm run fetch-stats
+
+      - name: Upload stats to KV
+        run: npm run upload-stats
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Commit updated stats
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add src/cached-stats/
+
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No stats changes to commit"
+          else
+            git commit -m "chore: update Smogon usage stats ($(date +%Y-%m))"
+            git push
+          fi
+
+      - name: Verify stats update
+        run: |
+          echo "Testing stats availability..."
+          curl -s -X POST "https://api.pokemcp.com/api/tools" \
+            -H "Content-Type: application/json" \
+            -d '{"tool":"get_meta_threats","args":{"format":"gen9ou","limit":5}}' \
+            | head -c 500
+          echo ""
+          echo "✅ Stats update complete!"
+
+  # Trigger production deploy if stats updated (and not skipped)
+  trigger-deploy:
+    needs: update-stats
+    if: ${{ !inputs.skip_deploy }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger production deployment
+        run: |
+          echo "Stats updated and pushed. Production will auto-deploy on push to main."
+          echo "If auto-deploy is disabled, manually run the Deploy to Production workflow."

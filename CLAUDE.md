@@ -23,11 +23,7 @@ npm run format
 # Local development server
 npm run dev
 
-# Deploy to production
-npm run deploy
-
-# Deploy to staging/production environments
-npm run deploy:staging
+# Deploy to production (prefer CI/CD - merging to main auto-deploys)
 npm run deploy:production
 ```
 
@@ -208,13 +204,35 @@ Strategy docs stored with chunk IDs: `{pokemon}-{format}-{section}-{index}`
 - Log errors with `console.error` for Cloudflare dashboard
 - Use `ctx.waitUntil()` for background tasks (ingestion)
 
+## CI/CD Pipeline
+
+**GitHub Actions Workflows:**
+
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| `build.yml` | Pull requests | Build verification for PRs |
+| `deploy-production.yml` | Merge to main | Auto-deploy all services |
+| `update-stats.yml` | Monthly (5th) or manual | Update Smogon statistics |
+
+**Deployment Flow:**
+1. Push changes to a feature branch
+2. Create PR → triggers `build.yml` checks
+3. Merge to main → triggers `deploy-production.yml`
+4. All three services deploy automatically:
+   - MCP Worker → https://api.pokemcp.com
+   - Teambuilder → https://www.pokemcp.com
+   - Documentation → https://docs.pokemcp.com
+
+**Required GitHub Secrets:**
+- `CLOUDFLARE_API_TOKEN` - Cloudflare API token with Workers/Pages permissions
+- `CLOUDFLARE_ACCOUNT_ID` - Your Cloudflare account ID
+
 ## Testing Changes
 
 1. Run `npm run dev` to start local Wrangler server
 2. Test MCP tools via `/test-rag?q=...` or `/test-kv` endpoints
-3. Always run `npm run type-check` before deploying
-4. Deploy to staging first: `npm run deploy:staging`
-5. Verify in production after merge
+3. Create a PR - CI will verify builds pass
+4. After merge, deployment is automatic
 
 ## Common Tasks
 
@@ -229,7 +247,12 @@ Strategy docs stored with chunk IDs: `{pokemon}-{format}-{section}-{index}`
 3. Update README.md supported formats list
 
 **Updating usage stats (monthly):**
-1. `npm run fetch-stats` (downloads latest from Smogon, ~45 seconds)
-2. `npm run upload-stats` (uploads all formats to KV, skips empty ones)
-3. `npm run deploy:production` (deploy if stats.ts was updated)
-4. Verify with: `curl -X POST https://api.pokemcp.com/api/tools -H "Content-Type: application/json" -d '{"tool":"get_meta_threats","args":{"format":"gen9ou","limit":5}}'`
+
+Option 1 - GitHub Action (recommended):
+- Runs automatically on the 5th of each month
+- Or trigger manually: Actions → "Update Smogon Stats" → Run workflow
+
+Option 2 - Manual:
+1. `npm run fetch-stats` (downloads from Smogon, ~45 seconds)
+2. `npm run upload-stats` (uploads to KV, requires Cloudflare auth)
+3. Commit and push changes to trigger deploy
