@@ -33,12 +33,26 @@ npm run deploy:production
 
 ### Stats Management
 ```bash
-# Fetch latest Smogon usage statistics
+# Fetch latest Smogon usage statistics (rate-limited, ~45 seconds)
 npm run fetch-stats
 
-# After fetching stats, upload to KV (see wrangler.jsonc for namespace IDs)
-npx wrangler kv key put --remote --namespace-id=<ID> "gen9ou" --path="src/cached-stats/gen9ou.json"
+# Upload all fetched stats to KV (skips empty formats)
+npm run upload-stats
+
+# Or upload individual format manually
+npx wrangler kv key put --remote --namespace-id=58525ad4ec5c454eb3e1ae7586414483 "gen9ou" --path="src/cached-stats/gen9ou.json"
 ```
+
+**Update Schedule:**
+- Smogon publishes new stats monthly (around the 1st-5th of each month)
+- Run `npm run fetch-stats && npm run upload-stats` monthly to update
+- The fetch script has 2-second delays between requests to be polite to Smogon
+- Stats files are cached locally in `src/cached-stats/` for reference
+
+**Supported Formats for Stats:**
+- Gen 9: OU, Ubers, UU, RU, NU, PU, LC, VGC 2024 Reg F/H, Doubles OU
+- Gen 8: OU, UU, RU (Ubers, NU, LC have limited data)
+- Gen 7: OU, UU, RU, NU (Ubers, LC have limited data)
 
 ### Debugging & Monitoring
 ```bash
@@ -214,7 +228,8 @@ Strategy docs stored with chunk IDs: `{pokemon}-{format}-{section}-{index}`
 2. Ensure stats exist in KV for that format
 3. Update README.md supported formats list
 
-**Updating usage stats:**
-1. `npm run fetch-stats` (downloads latest from Smogon)
-2. Upload each format JSON to KV via wrangler
-3. Verify with `/test-kv` endpoint
+**Updating usage stats (monthly):**
+1. `npm run fetch-stats` (downloads latest from Smogon, ~45 seconds)
+2. `npm run upload-stats` (uploads all formats to KV, skips empty ones)
+3. `npm run deploy:production` (deploy if stats.ts was updated)
+4. Verify with: `curl -X POST https://api.pokemcp.com/api/tools -H "Content-Type: application/json" -d '{"tool":"get_meta_threats","args":{"format":"gen9ou","limit":5}}'`

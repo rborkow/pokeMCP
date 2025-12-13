@@ -19,6 +19,7 @@
 		"cf-typegen": "wrangler types",
 		"type-check": "tsc --noEmit",
 		"fetch-stats": "tsx scripts/fetch-stats.ts",
+		"upload-stats": "bash scripts/upload-stats.sh",
 		"tail": "wrangler tail",
 		"tail:staging": "wrangler tail --env staging",
 		"tail:production": "wrangler tail --env production",

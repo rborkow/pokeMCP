@@ -6,15 +6,16 @@ import { Statistics } from 'smogon';
 import { writeFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
 
+// Formats matching the teambuilder picker (apps/teambuilder/src/types/pokemon.ts)
 const FORMATS = [
   // Gen 9 Singles
   'gen9ou', 'gen9ubers', 'gen9uu', 'gen9ru', 'gen9nu', 'gen9pu', 'gen9lc',
-  // Gen 9 VGC
-  'gen9vgc2024regg', 'gen9vgc2024regf', 'gen9vgc2024regh',
+  // Gen 9 Doubles/VGC
+  'gen9vgc2024regh', 'gen9vgc2024regf', 'gen9doublesou',
   // Gen 8 Singles
-  'gen8ou', 'gen8ubers', 'gen8uu', 'gen8ru', 'gen8nu', 'gen8pu', 'gen8lc',
+  'gen8ou', 'gen8ubers', 'gen8uu', 'gen8ru', 'gen8nu', 'gen8lc',
   // Gen 7 Singles
-  'gen7ou', 'gen7ubers', 'gen7uu', 'gen7ru', 'gen7nu', 'gen7pu', 'gen7lc'
+  'gen7ou', 'gen7ubers', 'gen7uu', 'gen7ru', 'gen7nu', 'gen7lc',
 ];
 const CACHE_DIR = join(process.cwd(), 'src', 'cached-stats');
 
@@ -46,16 +47,26 @@ async function fetchFormatStats(format: string) {
   }
 }
 
+// Delay helper to be polite to Smogon's servers
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 async function main() {
   console.log('Fetching Smogon usage statistics...\n');
+  console.log('(Rate limited: 2 second delay between requests)\n');
 
   // Create cache directory
   mkdirSync(CACHE_DIR, { recursive: true });
 
-  // Fetch all formats
-  const results = await Promise.all(
-    FORMATS.map(format => fetchFormatStats(format))
-  );
+  // Fetch formats sequentially with delay to avoid hammering Smogon
+  const results = [];
+  for (const format of FORMATS) {
+    const result = await fetchFormatStats(format);
+    results.push(result);
+    // Wait 2 seconds between requests to be polite
+    if (FORMATS.indexOf(format) < FORMATS.length - 1) {
+      await delay(2000);
+    }
+  }
 
   // Save each format's data
   for (const result of results) {

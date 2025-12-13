@@ -18,6 +18,31 @@ async function getCachedStats(format: string, env: Env): Promise<UsageStatistics
 }
 
 /**
+ * Find a Pokemon in stats data by trying different name formats.
+ * Stats keys use display names like "Great Tusk" while we receive IDs like "greattusk".
+ */
+function findPokemonInStats(
+  stats: UsageStatistics,
+  pokemonName: string
+): { key: string; data: any } | null {
+  const pokemonId = toID(pokemonName);
+
+  // First try direct ID match
+  if (stats.data[pokemonId]) {
+    return { key: pokemonId, data: stats.data[pokemonId] };
+  }
+
+  // Search through all keys and compare their IDs
+  for (const key of Object.keys(stats.data)) {
+    if (toID(key) === pokemonId) {
+      return { key, data: stats.data[key] };
+    }
+  }
+
+  return null;
+}
+
+/**
  * Get the most popular sets for a Pokémon from usage stats
  */
 export async function getPopularSets(args: {
@@ -25,7 +50,6 @@ export async function getPopularSets(args: {
   format?: string;
 }, env: Env): Promise<string> {
   const format = args.format || 'gen9ou';
-  const pokemonId = toID(args.pokemon);
 
   const stats = await getCachedStats(format, env);
 
@@ -33,23 +57,33 @@ export async function getPopularSets(args: {
     return `No usage statistics found for format "${format}".`;
   }
 
-  const pokemonStats = stats.data[pokemonId];
+  const found = findPokemonInStats(stats, args.pokemon);
 
-  if (!pokemonStats) {
+  if (!found) {
     return `${args.pokemon} not found in ${format} usage statistics.`;
   }
+
+  const pokemonStats = found.data;
+  const displayName = found.key;
 
   let output = `**${args.pokemon} in ${format.toUpperCase()}**\n\n`;
   output += `**Usage:** ${(pokemonStats.usage * 100).toFixed(2)}%\n\n`;
 
+  // Helper to normalize values (chaos format uses weighted counts, not percentages)
+  const normalize = (data: Record<string, number>) => {
+    const total = Object.values(data).reduce((sum, v) => sum + v, 0);
+    if (total === 0) return [];
+    return Object.entries(data)
+      .map(([key, value]) => [key, (value / total) * 100] as [string, number])
+      .sort(([, a], [, b]) => b - a);
+  };
+
   // Abilities
   if (pokemonStats.Abilities) {
     output += `**Popular Abilities:**\n`;
-    const abilities = Object.entries(pokemonStats.Abilities)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 3);
-    for (const [ability, percentage] of abilities) {
-      output += `- ${ability}: ${(percentage * 100).toFixed(1)}%\n`;
+    const abilities = normalize(pokemonStats.Abilities).slice(0, 3);
+    for (const [ability, pct] of abilities) {
+      output += `- ${ability}: ${pct.toFixed(1)}%\n`;
     }
     output += '\n';
   }
@@ -57,11 +91,9 @@ export async function getPopularSets(args: {
   // Items
   if (pokemonStats.Items) {
     output += `**Popular Items:**\n`;
-    const items = Object.entries(pokemonStats.Items)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 5);
-    for (const [item, percentage] of items) {
-      output += `- ${item}: ${(percentage * 100).toFixed(1)}%\n`;
+    const items = normalize(pokemonStats.Items).slice(0, 5);
+    for (const [item, pct] of items) {
+      output += `- ${item}: ${pct.toFixed(1)}%\n`;
     }
     output += '\n';
   }
@@ -69,11 +101,9 @@ export async function getPopularSets(args: {
   // Moves
   if (pokemonStats.Moves) {
     output += `**Popular Moves:**\n`;
-    const moves = Object.entries(pokemonStats.Moves)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 8);
-    for (const [move, percentage] of moves) {
-      output += `- ${move}: ${(percentage * 100).toFixed(1)}%\n`;
+    const moves = normalize(pokemonStats.Moves).slice(0, 8);
+    for (const [move, pct] of moves) {
+      output += `- ${move}: ${pct.toFixed(1)}%\n`;
     }
     output += '\n';
   }
@@ -81,11 +111,9 @@ export async function getPopularSets(args: {
   // Spreads
   if (pokemonStats.Spreads) {
     output += `**Common EV Spreads:**\n`;
-    const spreads = Object.entries(pokemonStats.Spreads)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 3);
-    for (const [spread, percentage] of spreads) {
-      output += `- ${spread}: ${(percentage * 100).toFixed(1)}%\n`;
+    const spreads = normalize(pokemonStats.Spreads).slice(0, 3);
+    for (const [spread, pct] of spreads) {
+      output += `- ${spread}: ${pct.toFixed(1)}%\n`;
     }
   }
 
@@ -130,7 +158,6 @@ export async function getTeammates(args: {
 }, env: Env): Promise<string> {
   const format = args.format || 'gen9ou';
   const limit = args.limit || 10;
-  const pokemonId = toID(args.pokemon);
 
   const stats = await getCachedStats(format, env);
 
@@ -138,24 +165,29 @@ export async function getTeammates(args: {
     return `No usage statistics found for format "${format}".`;
   }
 
-  const pokemonStats = stats.data[pokemonId];
+  const found = findPokemonInStats(stats, args.pokemon);
 
-  if (!pokemonStats) {
+  if (!found) {
     return `${args.pokemon} not found in ${format} usage statistics.`;
   }
+
+  const pokemonStats = found.data;
 
   if (!pokemonStats.Teammates) {
     return `No teammate data available for ${args.pokemon} in ${format}.`;
   }
 
+  // Normalize teammate values (chaos format uses weighted counts)
+  const total = Object.values(pokemonStats.Teammates).reduce((sum: number, v: number) => sum + v, 0);
   const teammates = Object.entries(pokemonStats.Teammates)
+    .map(([key, value]) => [key, total > 0 ? ((value as number) / total) * 100 : 0] as [string, number])
     .sort(([, a], [, b]) => b - a)
     .slice(0, limit);
 
   let output = `**Common Teammates for ${args.pokemon} in ${format.toUpperCase()}:**\n\n`;
 
-  for (const [teammate, percentage] of teammates) {
-    output += `- **${teammate}**: ${(percentage * 100).toFixed(1)}%\n`;
+  for (const [teammate, pct] of teammates) {
+    output += `- **${teammate}**: ${pct.toFixed(1)}%\n`;
   }
 
   return output;
@@ -171,7 +203,6 @@ export async function getChecksCounters(args: {
 }, env: Env): Promise<string> {
   const format = args.format || 'gen9ou';
   const limit = args.limit || 15;
-  const pokemonId = toID(args.pokemon);
 
   const stats = await getCachedStats(format, env);
 
@@ -179,11 +210,13 @@ export async function getChecksCounters(args: {
     return `No usage statistics found for format "${format}".`;
   }
 
-  const pokemonStats = stats.data[pokemonId];
+  const found = findPokemonInStats(stats, args.pokemon);
 
-  if (!pokemonStats) {
+  if (!found) {
     return `${args.pokemon} not found in ${format} usage statistics.`;
   }
+
+  const pokemonStats = found.data;
 
   if (!pokemonStats['Checks and Counters']) {
     return `No checks and counters data available for ${args.pokemon} in ${format}.`;
