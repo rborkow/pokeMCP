@@ -1,0 +1,52 @@
+# Supported Formats
+
+PokéMCP supports **24 competitive formats** across three generations.
+
+## Generation 9 (Current)
+
+### Singles
+- `gen9ou` - OverUsed
+- `gen9ubers` - Ubers (Legendaries)
+- `gen9uu` - UnderUsed
+- `gen9ru` - RarelyUsed
+- `gen9nu` - NeverUsed
+- `gen9pu` - PartiallyUsed
+- `gen9lc` - Little Cup (NFE only)
+
+### VGC (Doubles)
+- `gen9vgc2024regf` - VGC Regulation F
+- `gen9vgc2024regg` - VGC Regulation G
+- `gen9vgc2024regh` - VGC Regulation H (Current)
+
+## Generation 8
+
+### Singles
+- `gen8ou`, `gen8ubers`, `gen8uu`, `gen8ru`, `gen8nu`, `gen8pu`, `gen8lc`
+
+## Generation 7
+
+### Singles
+- `gen7ou`, `gen7ubers`, `gen7uu`, `gen7ru`, `gen7nu`, `gen7pu`, `gen7lc`
+
+## Usage
+
+Pass format IDs in tool calls:
+
+```json
+{
+  "pokemon": "Garchomp",
+  "format": "gen9ou"
+}
+```
+
+Format IDs are **case-insensitive**.
+
+## Data Availability
+
+- ✅ **Full support** (stats + strategy): All Gen 9 formats
+- ⚠️ **Partial support** (stats only): Gen 8/7 formats
+
+## External Resources
+
+- [Smogon Strategy Dex](https://www.smogon.com/dex/sv/)
+- [Pokémon Showdown](https://play.pokemonshowdown.com/)

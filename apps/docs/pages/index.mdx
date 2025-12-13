@@ -1,0 +1,43 @@
+# PokéMCP
+
+An **Model Context Protocol (MCP)** server for Pokémon competitive team building, validation, and strategic analysis.
+
+## Features
+
+- 🔍 **Pokémon Lookup** - Base stats, abilities, tiers, evolution chains
+- ✅ **Team Validation** - Species clause, move legality, ability validation
+- 💡 **Coverage Analysis** - Type effectiveness, weaknesses, resistances
+- 📊 **Usage Statistics** - Real Smogon data from thousands of battles
+- 🧠 **Strategic Advice** - RAG-powered queries over strategy articles
+
+## Quick Start
+
+Add PokéMCP to Claude.ai:
+
+1. Settings → Integrations → Custom Connectors
+2. Add URL: `https://api.pokemcp.com/mcp`
+3. Start using in conversations!
+
+## Supported Formats
+
+**24 formats** across Gen 7, 8, and 9:
+- Singles: OU, Ubers, UU, RU, NU, PU, LC
+- VGC: Regulation F, G, H
+
+## Example Usage
+
+```
+What are the base stats for Garchomp?
+Is this moveset legal: Earthquake, Dragon Claw, Swords Dance, Fire Fang?
+What are the most popular sets for Landorus-Therian in Gen 9 OU?
+How do I counter Kingambit?
+```
+
+## Architecture
+
+- **Cloudflare Workers** - Serverless MCP endpoints
+- **Cloudflare KV** - Cached usage statistics
+- **Cloudflare Vectorize** - Semantic search over strategy content
+- **Pokémon Showdown** - Complete Pokédex data
+
+[Get Started →](/getting-started)

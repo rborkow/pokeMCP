@@ -1,0 +1,60 @@
+# Getting Started
+
+## Adding PokéMCP to Claude.ai
+
+### Prerequisites
+- Claude Pro, Team, or Enterprise subscription
+
+### Setup Steps
+
+1. **Open Claude Settings**
+   - Go to claude.ai
+   - Click your profile → Settings
+
+2. **Add Custom Connector**
+   - Navigate to Integrations → Custom Connectors
+   - Click "Add Connector"
+   - Enter:
+     - **Name**: PokéMCP
+     - **URL**: `https://api.pokemcp.com/mcp`
+   - Save
+
+3. **Verify**
+   - Start a new conversation
+   - Ask: "What tools do you have access to?"
+   - You should see all 11 PokéMCP tools
+
+## First Commands
+
+### Look up a Pokémon
+```
+What are the base stats for Garchomp?
+```
+
+### Validate a moveset
+```
+Can Garchomp learn Earthquake, Dragon Claw, Swords Dance, and Fire Fang?
+```
+
+### Get usage statistics
+```
+What are the most popular sets for Landorus-Therian in Gen 9 OU?
+```
+
+### Team coverage analysis
+```
+I have Garchomp, Ferrothorn, and Rotom-Wash. What types should I add?
+```
+
+### Strategic advice
+```
+How do I counter Kingambit in Gen 9 OU?
+```
+
+## Available Tools
+
+- **Basic**: `lookup_pokemon`, `validate_moveset`, `validate_team`, `suggest_team_coverage`
+- **Stats**: `get_popular_sets`, `get_meta_threats`, `get_teammates`, `get_checks_counters`, `get_metagame_stats`
+- **Strategy**: `query_strategy`, `search_strategic_content`
+
+[View all tools →](/tools)

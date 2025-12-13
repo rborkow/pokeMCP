@@ -1,0 +1,146 @@
+# Tools Reference
+
+PokéMCP provides 11 tools across three categories.
+
+## Basic Tools
+
+### lookup_pokemon
+
+Get detailed Pokémon information.
+
+**Parameters:**
+- `pokemon` (string, required) - Pokémon name
+- `generation` (string, optional) - Generation number
+
+**Example:**
+```json
+{
+  "pokemon": "Garchomp"
+}
+```
+
+### validate_moveset
+
+Check if a moveset is legal.
+
+**Parameters:**
+- `pokemon` (string, required)
+- `moves` (array, required) - Move names
+- `generation` (string, optional)
+
+**Example:**
+```json
+{
+  "pokemon": "Garchomp",
+  "moves": ["Earthquake", "Dragon Claw", "Swords Dance", "Fire Fang"]
+}
+```
+
+### validate_team
+
+Validate a team against format rules.
+
+**Parameters:**
+- `team` (array, required) - Team members
+- `format` (string, optional) - Format (e.g., "OU")
+
+**Example:**
+```json
+{
+  "team": [
+    {
+      "pokemon": "Garchomp",
+      "moves": ["Earthquake", "Dragon Claw", "Swords Dance", "Fire Fang"],
+      "ability": "Rough Skin"
+    }
+  ]
+}
+```
+
+### suggest_team_coverage
+
+Analyze type coverage.
+
+**Parameters:**
+- `current_team` (array, required) - Pokémon names
+- `format` (string, optional)
+
+**Example:**
+```json
+{
+  "current_team": ["Garchomp", "Ferrothorn", "Rotom-Wash"]
+}
+```
+
+## Usage Statistics Tools
+
+### get_popular_sets
+
+Most used moves/items/abilities.
+
+**Parameters:**
+- `pokemon` (string, required)
+- `format` (string, optional) - Default: "gen9ou"
+
+### get_meta_threats
+
+Top Pokémon by usage.
+
+**Parameters:**
+- `format` (string, optional)
+- `limit` (number, optional) - Default: 20
+
+### get_teammates
+
+Common team partners.
+
+**Parameters:**
+- `pokemon` (string, required)
+- `format` (string, optional)
+- `limit` (number, optional)
+
+### get_checks_counters
+
+Effective counters with battle stats.
+
+**Parameters:**
+- `pokemon` (string, required)
+- `format` (string, optional)
+- `limit` (number, optional)
+
+### get_metagame_stats
+
+Overall format statistics.
+
+**Parameters:**
+- `format` (string, optional)
+
+## Strategic Advice Tools
+
+### query_strategy
+
+Natural language strategy questions.
+
+**Parameters:**
+- `query` (string, required)
+- `format` (string, optional)
+- `limit` (number, optional)
+
+**Example:**
+```json
+{
+  "query": "How do I counter Garchomp?",
+  "format": "gen9ou"
+}
+```
+
+### search_strategic_content
+
+Filtered strategic search.
+
+**Parameters:**
+- `query` (string, required)
+- `pokemon` (string, optional)
+- `format` (string, optional)
+- `sectionType` (string, optional) - "overview", "moveset", "counters", "teammates"
+- `limit` (number, optional)

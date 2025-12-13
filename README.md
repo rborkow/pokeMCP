@@ -46,7 +46,10 @@ Access real competitive data from thousands of battles with cached data for inst
 
 ## Deployment
 
-This server is deployed on Cloudflare Workers at: `https://pokemon-mcp-cloudflare.rborkows.workers.dev`
+This server is deployed on Cloudflare Workers at: **https://api.pokemcp.com**
+
+- **MCP Endpoint**: https://api.pokemcp.com/mcp
+- **Documentation**: https://pokemcp.com
 
 ### Deploy Your Own
 
@@ -100,9 +103,11 @@ Add as a Custom Connector in Claude.ai Settings:
 
 1. Go to Settings → Integrations → Custom Connectors
 2. Add new connector:
-   - URL: `https://pokemon-mcp-cloudflare.rborkows.workers.dev/mcp` (or your deployed URL)
+   - URL: `https://api.pokemcp.com/mcp`
    - No authentication required
 3. Start using all tools in conversations
+
+*Learn more at: https://pokemcp.com*
 
 *Requires: Claude Pro, Team, or Enterprise*
 
