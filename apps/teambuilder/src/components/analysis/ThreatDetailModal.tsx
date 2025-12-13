@@ -144,7 +144,21 @@ export function ThreatDetailModal({
         }
 
         const data = await response.json();
-        const parsed = parsePopularSets(data.result || "");
+        // Handle nested MCP response structure: result.content[0].text
+        let resultText = "";
+        if (data.result?.content?.[0]?.text) {
+          resultText = data.result.content[0].text;
+        } else if (typeof data.result === "string") {
+          resultText = data.result;
+        }
+
+        // Check if it's a "not found" message
+        if (resultText.includes("not found") || resultText.includes("No usage")) {
+          setError("No usage data available for this Pokemon");
+          return;
+        }
+
+        const parsed = parsePopularSets(resultText);
         setSetData(parsed);
       } catch (e) {
         console.error("Failed to fetch popular sets:", e);

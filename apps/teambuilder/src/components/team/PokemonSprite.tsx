@@ -22,28 +22,48 @@ const HYPHENATED_BASE_NAMES = new Set([
   "type-null", "tapu-koko", "tapu-lele", "tapu-bulu", "tapu-fini",
 ]);
 
-// Pokemon with spaces that need special sprite IDs
+// Pokemon with spaces that need special sprite IDs (lowercase keys)
 const SPECIAL_SPRITE_IDS: Record<string, string> = {
   "raging bolt": "ragingbolt",
+  "ragingbolt": "ragingbolt",
   "iron hands": "ironhands",
+  "ironhands": "ironhands",
   "iron valiant": "ironvaliant",
+  "ironvaliant": "ironvaliant",
   "iron moth": "ironmoth",
+  "ironmoth": "ironmoth",
   "iron treads": "irontreads",
+  "irontreads": "irontreads",
   "iron boulder": "ironboulder",
+  "ironboulder": "ironboulder",
   "iron crown": "ironcrown",
+  "ironcrown": "ironcrown",
   "iron leaves": "ironleaves",
+  "ironleaves": "ironleaves",
   "great tusk": "greattusk",
+  "greattusk": "greattusk",
   "slither wing": "slitherwing",
+  "slitherwing": "slitherwing",
   "sandy shocks": "sandyshocks",
+  "sandyshocks": "sandyshocks",
   "scream tail": "screamtail",
+  "screamtail": "screamtail",
   "brute bonnet": "brutebonnet",
+  "brutebonnet": "brutebonnet",
   "flutter mane": "fluttermane",
+  "fluttermane": "fluttermane",
   "roaring moon": "roaringmoon",
+  "roaringmoon": "roaringmoon",
   "walking wake": "walkingwake",
+  "walkingwake": "walkingwake",
   "gouging fire": "gougingfire",
+  "gougingfire": "gougingfire",
   "iron bundle": "ironbundle",
+  "ironbundle": "ironbundle",
   "iron jugulis": "ironjugulis",
+  "ironjugulis": "ironjugulis",
   "iron thorns": "ironthorns",
+  "ironthorns": "ironthorns",
 };
 
 /**
@@ -64,6 +84,11 @@ function toSpriteId(pokemon: string): string {
   }
 
   const cleaned = lower.replace(/[^a-z0-9-]/g, "");
+
+  // Also check cleaned version for special IDs (handles "RagingBolt" -> "ragingbolt")
+  if (SPECIAL_SPRITE_IDS[cleaned]) {
+    return SPECIAL_SPRITE_IDS[cleaned];
+  }
 
   // Check if this is a hyphenated base name (not a form)
   if (HYPHENATED_BASE_NAMES.has(cleaned)) {
