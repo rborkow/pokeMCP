@@ -15,16 +15,60 @@ const SIZES = {
   lg: 96,
 };
 
+// Pokemon with hyphens in their base name (not forms)
+const HYPHENATED_BASE_NAMES = new Set([
+  "chien-pao", "chi-yu", "ting-lu", "wo-chien", // Treasures of Ruin
+  "ho-oh", "porygon-z", "jangmo-o", "hakamo-o", "kommo-o",
+  "type-null", "tapu-koko", "tapu-lele", "tapu-bulu", "tapu-fini",
+]);
+
+// Pokemon with spaces that need special sprite IDs
+const SPECIAL_SPRITE_IDS: Record<string, string> = {
+  "raging bolt": "ragingbolt",
+  "iron hands": "ironhands",
+  "iron valiant": "ironvaliant",
+  "iron moth": "ironmoth",
+  "iron treads": "irontreads",
+  "iron boulder": "ironboulder",
+  "iron crown": "ironcrown",
+  "iron leaves": "ironleaves",
+  "great tusk": "greattusk",
+  "slither wing": "slitherwing",
+  "sandy shocks": "sandyshocks",
+  "scream tail": "screamtail",
+  "brute bonnet": "brutebonnet",
+  "flutter mane": "fluttermane",
+  "roaring moon": "roaringmoon",
+  "walking wake": "walkingwake",
+  "gouging fire": "gougingfire",
+  "iron bundle": "ironbundle",
+  "iron jugulis": "ironjugulis",
+  "iron thorns": "ironthorns",
+};
+
 /**
  * Convert Pokemon name to Showdown sprite ID format
  * Examples:
  *   "Urshifu-Rapid-Strike" -> "urshifu-rapidstrike"
  *   "Landorus-Therian" -> "landorus-therian"
  *   "Iron Hands" -> "ironhands"
+ *   "Chien-Pao" -> "chienpao"
  *   "Ogerpon-Wellspring" -> "ogerpon-wellspring"
  */
 function toSpriteId(pokemon: string): string {
-  const cleaned = pokemon.toLowerCase().replace(/[^a-z0-9-]/g, "");
+  const lower = pokemon.toLowerCase();
+
+  // Check for special sprite IDs first (Paradox Pokemon with spaces)
+  if (SPECIAL_SPRITE_IDS[lower]) {
+    return SPECIAL_SPRITE_IDS[lower];
+  }
+
+  const cleaned = lower.replace(/[^a-z0-9-]/g, "");
+
+  // Check if this is a hyphenated base name (not a form)
+  if (HYPHENATED_BASE_NAMES.has(cleaned)) {
+    return cleaned.replace(/-/g, ""); // Remove hyphens for sprite ID
+  }
 
   // Split by hyphen to handle form names
   const parts = cleaned.split("-").filter(Boolean);
