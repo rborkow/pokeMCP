@@ -36,23 +36,26 @@ function parsePokemonBlock(block: string): TeamPokemon | null {
   const firstLineMatch = firstLine.match(/^(.+?)(?:\s*@\s*(.+))?$/);
 
   if (firstLineMatch) {
-    const nameOrNickname = firstLineMatch[1].trim();
+    let nameOrNickname = firstLineMatch[1].trim();
     pokemon.item = firstLineMatch[2]?.trim();
 
-    // Check for gender suffix first (single M or F in parentheses)
-    const genderMatch = nameOrNickname.match(/^(.+?)\s*\(([MF])\)$/);
-    if (genderMatch) {
-      pokemon.pokemon = genderMatch[1].trim();
-      pokemon.gender = genderMatch[2] as "M" | "F";
+    // First, strip gender suffix if present at the end: (M) or (F)
+    // This handles cases like "Tinker (Ogerpon-Hearthflame) (F)"
+    const genderSuffixMatch = nameOrNickname.match(/^(.+)\s+\(([MF])\)$/);
+    if (genderSuffixMatch) {
+      nameOrNickname = genderSuffixMatch[1].trim();
+      pokemon.gender = genderSuffixMatch[2] as "M" | "F";
+    }
+
+    // Now check for nickname (Species) pattern
+    // e.g., "Tinker (Ogerpon-Hearthflame)" -> nickname: Tinker, species: Ogerpon-Hearthflame
+    const speciesMatch = nameOrNickname.match(/^(.+?)\s*\(([^)]+)\)$/);
+    if (speciesMatch) {
+      pokemon.nickname = speciesMatch[1].trim();
+      pokemon.pokemon = speciesMatch[2].trim();
     } else {
-      // Check for (Species) pattern indicating nickname
-      const speciesMatch = nameOrNickname.match(/^(.+?)\s*\(([^)]+)\)$/);
-      if (speciesMatch) {
-        pokemon.nickname = speciesMatch[1].trim();
-        pokemon.pokemon = speciesMatch[2].trim();
-      } else {
-        pokemon.pokemon = nameOrNickname;
-      }
+      // No nickname, just the species name (possibly with gender already stripped)
+      pokemon.pokemon = nameOrNickname;
     }
   }
 

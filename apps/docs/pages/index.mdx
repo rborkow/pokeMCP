@@ -1,6 +1,6 @@
 # PokéMCP
 
-An **Model Context Protocol (MCP)** server for Pokémon competitive team building, validation, and strategic analysis.
+A **Model Context Protocol (MCP)** server for Pokémon competitive team building, validation, and strategic analysis.
 
 ## Features
 
@@ -9,14 +9,36 @@ An **Model Context Protocol (MCP)** server for Pokémon competitive team buildin
 - 💡 **Coverage Analysis** - Type effectiveness, weaknesses, resistances
 - 📊 **Usage Statistics** - Real Smogon data from thousands of battles
 - 🧠 **Strategic Advice** - RAG-powered queries over strategy articles
+- 🎮 **[Team Builder](https://www.pokemcp.com)** - Interactive web app with AI chat assistant
 
 ## Quick Start
+
+### Option 1: Team Builder Web App
+
+Visit **[www.pokemcp.com](https://www.pokemcp.com)** for the interactive team builder with:
+- Import/export Showdown teams
+- Click-to-edit Pokemon sets
+- AI chat assistant for team advice
+- Threat matrix analysis
+- Team history with diff view
+
+### Option 2: Claude.ai Integration
 
 Add PokéMCP to Claude.ai:
 
 1. Settings → Integrations → Custom Connectors
 2. Add URL: `https://api.pokemcp.com/mcp`
 3. Start using in conversations!
+
+### Option 3: REST API
+
+For programmatic access, use the [REST API](/api):
+
+```bash
+curl -X POST https://api.pokemcp.com/api/tools \
+  -H "Content-Type: application/json" \
+  -d '{"tool": "get_meta_threats", "args": {"format": "gen9ou"}}'
+```
 
 ## Supported Formats
 

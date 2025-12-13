@@ -112,22 +112,51 @@ export const NATURES: Record<string, { plus?: keyof BaseStats; minus?: keyof Bas
   Quirky: {},
 };
 
-// Format definitions
-export const FORMATS = [
-  { id: "gen9ou", name: "Gen 9 OU", gen: 9 },
-  { id: "gen9ubers", name: "Gen 9 Ubers", gen: 9 },
-  { id: "gen9uu", name: "Gen 9 UU", gen: 9 },
-  { id: "gen9ru", name: "Gen 9 RU", gen: 9 },
-  { id: "gen9nu", name: "Gen 9 NU", gen: 9 },
-  { id: "gen9pu", name: "Gen 9 PU", gen: 9 },
-  { id: "gen9lc", name: "Gen 9 LC", gen: 9 },
-  { id: "gen9vgc2024regh", name: "Gen 9 VGC Reg H", gen: 9 },
-  { id: "gen9vgc2024regf", name: "Gen 9 VGC Reg F", gen: 9 },
-  { id: "gen8ou", name: "Gen 8 OU", gen: 8 },
-  { id: "gen8ubers", name: "Gen 8 Ubers", gen: 8 },
-  { id: "gen8uu", name: "Gen 8 UU", gen: 8 },
-  { id: "gen7ou", name: "Gen 7 OU", gen: 7 },
-  { id: "gen7ubers", name: "Gen 7 Ubers", gen: 7 },
-] as const;
+// Format category definitions
+export type FormatCategory = "singles" | "doubles" | "gen8" | "gen7" | "other";
+
+export interface FormatDefinition {
+  id: string;
+  name: string;
+  gen: number;
+  category: FormatCategory;
+}
+
+// Format definitions with categories
+export const FORMATS: FormatDefinition[] = [
+  // Current Gen Singles
+  { id: "gen9ou", name: "Gen 9 OU", gen: 9, category: "singles" },
+  { id: "gen9ubers", name: "Gen 9 Ubers", gen: 9, category: "singles" },
+  { id: "gen9uu", name: "Gen 9 UU", gen: 9, category: "singles" },
+  { id: "gen9ru", name: "Gen 9 RU", gen: 9, category: "singles" },
+  { id: "gen9nu", name: "Gen 9 NU", gen: 9, category: "singles" },
+  { id: "gen9pu", name: "Gen 9 PU", gen: 9, category: "singles" },
+  { id: "gen9lc", name: "Gen 9 LC", gen: 9, category: "singles" },
+  // Current Gen Doubles/VGC
+  { id: "gen9vgc2024regh", name: "VGC 2024 Reg H", gen: 9, category: "doubles" },
+  { id: "gen9vgc2024regf", name: "VGC 2024 Reg F", gen: 9, category: "doubles" },
+  { id: "gen9doublesou", name: "Gen 9 Doubles OU", gen: 9, category: "doubles" },
+  // Gen 8
+  { id: "gen8ou", name: "Gen 8 OU", gen: 8, category: "gen8" },
+  { id: "gen8ubers", name: "Gen 8 Ubers", gen: 8, category: "gen8" },
+  { id: "gen8uu", name: "Gen 8 UU", gen: 8, category: "gen8" },
+  { id: "gen8ru", name: "Gen 8 RU", gen: 8, category: "gen8" },
+  { id: "gen8nu", name: "Gen 8 NU", gen: 8, category: "gen8" },
+  { id: "gen8lc", name: "Gen 8 LC", gen: 8, category: "gen8" },
+  // Gen 7
+  { id: "gen7ou", name: "Gen 7 OU", gen: 7, category: "gen7" },
+  { id: "gen7ubers", name: "Gen 7 Ubers", gen: 7, category: "gen7" },
+  { id: "gen7uu", name: "Gen 7 UU", gen: 7, category: "gen7" },
+  { id: "gen7ru", name: "Gen 7 RU", gen: 7, category: "gen7" },
+  { id: "gen7nu", name: "Gen 7 NU", gen: 7, category: "gen7" },
+  { id: "gen7lc", name: "Gen 7 LC", gen: 7, category: "gen7" },
+];
+
+export const FORMAT_CATEGORIES: { id: FormatCategory; label: string }[] = [
+  { id: "singles", label: "Gen 9 Singles" },
+  { id: "doubles", label: "Gen 9 Doubles/VGC" },
+  { id: "gen8", label: "Gen 8 (Sword/Shield)" },
+  { id: "gen7", label: "Gen 7 (Sun/Moon)" },
+];
 
 export type FormatId = (typeof FORMATS)[number]["id"];

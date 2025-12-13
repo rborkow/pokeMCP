@@ -1,6 +1,5 @@
 import type { TeamPokemon } from "@/types/pokemon";
 import type { AIProvider, AIResponse, TeamAction } from "@/types/chat";
-import { buildSystemPrompt } from "./prompts";
 
 interface SendChatMessageOptions {
   message: string;
@@ -81,17 +80,15 @@ export async function sendChatMessage({
   format,
   provider,
 }: SendChatMessageOptions): Promise<AIResponse> {
-  const systemPrompt = buildSystemPrompt(format);
-
   // Call the appropriate API route
+  // Note: We don't send a system prompt - the server builds one with meta context
   const endpoint = provider === "claude" ? "/api/ai/claude" : "/api/ai/cloudflare";
 
   const response = await fetch(endpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      system: systemPrompt,
-      message: message, // Send original message, not the formatted one - server adds context
+      message: message,
       team: team,
       format: format,
     }),

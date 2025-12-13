@@ -2,5 +2,11 @@ export default {
     index: "Home",
     "getting-started": "Getting Started",
     tools: "Tools",
-    formats: "Formats"
+    api: "REST API",
+    formats: "Formats",
+    teambuilder: {
+        title: "Team Builder",
+        href: "https://www.pokemcp.com",
+        newWindow: true
+    }
 }

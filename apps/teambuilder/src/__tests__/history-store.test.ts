@@ -170,8 +170,8 @@ describe("history-store", () => {
     it("should clear all entries", () => {
       useHistoryStore.getState().pushState(
         [{ pokemon: "Garchomp", moves: [] }],
-        "user",
-        "Test"
+        "Test action",
+        "user"
       );
 
       useHistoryStore.getState().clearHistory();

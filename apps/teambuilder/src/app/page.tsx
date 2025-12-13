@@ -5,9 +5,9 @@ import { TeamGrid } from "@/components/team/TeamGrid";
 import { TeamImportExport } from "@/components/team/TeamImportExport";
 import { ChatPanel } from "@/components/chat/ChatPanel";
 import { TypeCoverage } from "@/components/analysis/TypeCoverage";
+import { ThreatMatrix } from "@/components/analysis/ThreatMatrix";
 import { TeamHistory } from "@/components/history/TeamHistory";
 import { useTeamStore } from "@/stores/team-store";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Home() {
@@ -47,18 +47,7 @@ export default function Home() {
             </TabsContent>
 
             <TabsContent value="threats" className="mt-4">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Threat Matrix</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground text-sm">
-                    {team.length === 0
-                      ? "Add Pokemon to see matchups vs meta threats"
-                      : "Threat matrix analysis - showing your team's matchups against the top meta threats. Coming soon with MCP integration!"}
-                  </p>
-                </CardContent>
-              </Card>
+              <ThreatMatrix />
             </TabsContent>
 
             <TabsContent value="history" className="mt-4">

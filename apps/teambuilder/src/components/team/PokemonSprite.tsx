@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 
 interface PokemonSpriteProps {
   pokemon: string;
@@ -83,19 +82,20 @@ export function PokemonSprite({
     );
   }
 
+  // Use regular img tag to avoid Next.js Image optimization CORS issues
   return (
     <div
       className={`relative flex items-center justify-center overflow-hidden ${className}`}
       style={{ width: dimension, height: dimension }}
     >
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src={spriteUrl}
         alt={pokemon}
         width={dimension}
         height={dimension}
         className="object-contain max-w-full max-h-full"
         style={{ imageRendering: "pixelated" }}
-        unoptimized // GIFs need this
         onError={() => {
           if (!useStatic && showFallback) {
             // Try static sprite as fallback

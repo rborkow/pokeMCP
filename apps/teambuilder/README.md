@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PokeMCP Team Builder
 
-## Getting Started
+Interactive web application for Pokemon competitive team building with AI-powered assistance.
 
-First, run the development server:
+**Live:** [www.pokemcp.com](https://www.pokemcp.com)
+
+## Features
+
+- **Team Building** - Import/export Showdown format, click-to-edit Pokemon sets
+- **AI Chat Assistant** - Get team advice, coverage analysis, and suggestions
+- **Threat Matrix** - Visual matchup analysis vs top meta threats
+- **Team History** - Track changes with diff view
+- **Format Support** - Gen 7-9 Singles and VGC formats
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router) with React 19
+- **UI:** shadcn/ui + Tailwind CSS 4
+- **State:** Zustand
+- **Data Fetching:** TanStack Query
+- **Deployment:** Cloudflare Pages via OpenNext
+- **API:** Connects to PokeMCP server at api.pokemcp.com
+
+## Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Run tests
+npm run test:run
+
+# Type checking
+npx tsc --noEmit
+
+# Build for production
+npm run pages:build
+
+# Deploy to Cloudflare Pages
+npm run deploy
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── page.tsx           # Main team builder page
+│   ├── layout.tsx         # Root layout with providers
+│   └── api/
+│       ├── mcp/           # MCP proxy endpoint
+│       └── ai/            # AI chat endpoints
+├── components/
+│   ├── ui/                # shadcn/ui components
+│   ├── layout/            # Header, FormatSelector
+│   ├── team/              # TeamGrid, PokemonEditDialog, PokemonSprite
+│   ├── chat/              # ChatPanel, ChatMessages, ActionCard
+│   ├── analysis/          # ThreatMatrix, AnalysisTabs
+│   └── history/           # TeamHistory, TeamDiff
+├── stores/
+│   ├── team-store.ts      # Team state (format, pokemon)
+│   ├── chat-store.ts      # Chat messages and actions
+│   └── history-store.ts   # Undo/redo history
+├── lib/
+│   ├── mcp-client.ts      # MCP server client + React Query hooks
+│   ├── showdown-parser.ts # Parse/export Showdown format
+│   └── data/              # Pokemon types, formats
+└── types/
+    ├── pokemon.ts         # TeamPokemon, BaseStats, etc.
+    └── chat.ts            # ChatMessage, TeamAction
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Variables
 
-## Learn More
+```bash
+# MCP server URL (defaults to api.pokemcp.com)
+NEXT_PUBLIC_MCP_URL=https://api.pokemcp.com
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Related
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [PokeMCP Docs](https://docs.pokemcp.com) - Full documentation
+- [MCP Server](../../) - Root directory contains the MCP server

@@ -1,6 +1,7 @@
 import type { TeamPokemon } from "@/types/pokemon";
 
-const MCP_URL = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
+// Use local proxy to avoid CORS issues with MCP server
+const MCP_PROXY_URL = "/api/mcp";
 
 interface MCPResponse {
   jsonrpc: string;
@@ -15,14 +16,14 @@ interface MCPResponse {
 }
 
 class MCPClient {
-  private baseUrl: string;
+  private proxyUrl: string;
 
-  constructor(baseUrl: string = MCP_URL) {
-    this.baseUrl = baseUrl;
+  constructor(proxyUrl: string = MCP_PROXY_URL) {
+    this.proxyUrl = proxyUrl;
   }
 
   private async callTool<T = string>(tool: string, args: Record<string, unknown>): Promise<T> {
-    const response = await fetch(`${this.baseUrl}/mcp`, {
+    const response = await fetch(this.proxyUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

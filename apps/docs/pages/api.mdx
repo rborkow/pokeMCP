@@ -1,0 +1,157 @@
+# REST API
+
+For programmatic access without MCP, use the stateless REST API.
+
+## Endpoint
+
+```
+POST https://api.pokemcp.com/api/tools
+```
+
+## Request Format
+
+```json
+{
+  "tool": "tool_name",
+  "args": {
+    "param1": "value1",
+    "param2": "value2"
+  }
+}
+```
+
+## Response Format
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": null,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Tool response text..."
+      }
+    ]
+  }
+}
+```
+
+## Examples
+
+### Get Meta Threats
+
+```bash
+curl -X POST https://api.pokemcp.com/api/tools \
+  -H "Content-Type: application/json" \
+  -d '{
+    "tool": "get_meta_threats",
+    "args": {
+      "format": "gen9ou",
+      "limit": 5
+    }
+  }'
+```
+
+### Lookup Pokemon
+
+```bash
+curl -X POST https://api.pokemcp.com/api/tools \
+  -H "Content-Type: application/json" \
+  -d '{
+    "tool": "lookup_pokemon",
+    "args": {
+      "pokemon": "Garchomp"
+    }
+  }'
+```
+
+### Validate Team
+
+```bash
+curl -X POST https://api.pokemcp.com/api/tools \
+  -H "Content-Type: application/json" \
+  -d '{
+    "tool": "validate_team",
+    "args": {
+      "team": [
+        {"pokemon": "Garchomp", "moves": ["Earthquake", "Dragon Claw"]},
+        {"pokemon": "Landorus-Therian", "moves": ["U-turn", "Earthquake"]}
+      ],
+      "format": "gen9ou"
+    }
+  }'
+```
+
+### Get Popular Sets
+
+```bash
+curl -X POST https://api.pokemcp.com/api/tools \
+  -H "Content-Type: application/json" \
+  -d '{
+    "tool": "get_popular_sets",
+    "args": {
+      "pokemon": "Kingambit",
+      "format": "gen9ou"
+    }
+  }'
+```
+
+### Query Strategy (RAG)
+
+```bash
+curl -X POST https://api.pokemcp.com/api/tools \
+  -H "Content-Type: application/json" \
+  -d '{
+    "tool": "query_strategy",
+    "args": {
+      "query": "How do I counter Kingambit?",
+      "format": "gen9ou"
+    }
+  }'
+```
+
+## Available Tools
+
+All 11 MCP tools are available via the REST API:
+
+| Tool | Required Args | Optional Args |
+|------|---------------|---------------|
+| `lookup_pokemon` | `pokemon` | `generation` |
+| `validate_moveset` | `pokemon`, `moves` | `generation` |
+| `validate_team` | `team` | `format` |
+| `suggest_team_coverage` | `current_team` | `format` |
+| `get_popular_sets` | `pokemon` | `format` |
+| `get_meta_threats` | - | `format`, `limit` |
+| `get_teammates` | `pokemon` | `format`, `limit` |
+| `get_checks_counters` | `pokemon` | `format`, `limit` |
+| `get_metagame_stats` | - | `format` |
+| `query_strategy` | `query` | `format`, `pokemon`, `limit` |
+| `search_strategic_content` | `query` | `pokemon`, `format`, `sectionType`, `limit` |
+
+## Error Handling
+
+Errors return a JSON response with an `error` field:
+
+```json
+{
+  "error": "Tool name is required"
+}
+```
+
+Or for tool execution errors:
+
+```json
+{
+  "error": "Tool execution failed",
+  "details": "Error message..."
+}
+```
+
+## CORS
+
+The API supports CORS for browser-based applications. All origins are allowed.
+
+## Rate Limits
+
+Currently no rate limits are enforced. Please be respectful with usage.

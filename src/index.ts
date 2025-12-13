@@ -202,6 +202,100 @@ export default {
 			return PokemonMCP.serve("/mcp").fetch(request, env, ctx);
 		}
 
+		// Stateless tool call endpoint - bypasses session requirement
+		// Use this for direct API access from web apps
+		if (url.pathname === "/api/tools" && request.method === "POST") {
+			const corsHeaders = {
+				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Methods": "POST, OPTIONS",
+				"Access-Control-Allow-Headers": "Content-Type",
+				"Content-Type": "application/json",
+			};
+
+			try {
+				const body = await request.json();
+				const { tool, args } = body as { tool: string; args: Record<string, unknown> };
+
+				if (!tool) {
+					return new Response(
+						JSON.stringify({ error: "Tool name is required" }),
+						{ status: 400, headers: corsHeaders }
+					);
+				}
+
+				let result: string;
+				switch (tool) {
+					case "lookup_pokemon":
+						result = lookupPokemon(args as { pokemon: string; generation?: string });
+						break;
+					case "validate_moveset":
+						result = validateMoveset(args as { pokemon: string; moves: string[]; generation?: string });
+						break;
+					case "validate_team":
+						result = validateTeam(args as { team: any[]; format?: string });
+						break;
+					case "suggest_team_coverage":
+						result = suggestTeamCoverage(args as { current_team: string[]; format?: string });
+						break;
+					case "get_popular_sets":
+						result = await getPopularSets(args as { pokemon: string; format?: string }, env);
+						break;
+					case "get_meta_threats":
+						result = await getMetaThreats(args as { format?: string; limit?: number }, env);
+						break;
+					case "get_teammates":
+						result = await getTeammates(args as { pokemon: string; format?: string; limit?: number }, env);
+						break;
+					case "get_checks_counters":
+						result = await getChecksCounters(args as { pokemon: string; format?: string; limit?: number }, env);
+						break;
+					case "get_metagame_stats":
+						result = await getMetagameStats(args as { format?: string }, env);
+						break;
+					case "query_strategy":
+						const strategyResult = await queryStrategy(args as { query: string; format?: string; pokemon?: string; limit?: number }, env);
+						result = typeof strategyResult === 'string' ? strategyResult : JSON.stringify(strategyResult);
+						break;
+					default:
+						return new Response(
+							JSON.stringify({ error: `Unknown tool: ${tool}` }),
+							{ status: 400, headers: corsHeaders }
+						);
+				}
+
+				return new Response(
+					JSON.stringify({
+						jsonrpc: "2.0",
+						id: body.id || null,
+						result: {
+							content: [{ type: "text", text: result }]
+						}
+					}),
+					{ headers: corsHeaders }
+				);
+			} catch (error) {
+				console.error("API tools error:", error);
+				return new Response(
+					JSON.stringify({
+						error: "Tool execution failed",
+						details: error instanceof Error ? error.message : String(error)
+					}),
+					{ status: 500, headers: { ...corsHeaders } }
+				);
+			}
+		}
+
+		// CORS preflight for /api/tools
+		if (url.pathname === "/api/tools" && request.method === "OPTIONS") {
+			return new Response(null, {
+				headers: {
+					"Access-Control-Allow-Origin": "*",
+					"Access-Control-Allow-Methods": "POST, OPTIONS",
+					"Access-Control-Allow-Headers": "Content-Type",
+				},
+			});
+		}
+
 		// Test ingestion endpoint
 		if (url.pathname === "/test-ingestion") {
 			console.log("Test ingestion triggered manually");
@@ -418,38 +512,29 @@ export default {
 					: "No Pokemon in team yet.";
 
 				// Build the full prompt for the AI
-				const systemPrompt = system || `You are a Pokemon competitive team building assistant specializing in ${format.toUpperCase()} format.
+				const systemPrompt = system || `You are a Pokemon competitive team building assistant for ${format.toUpperCase()}.
 
-Your role is to help users build and improve their competitive Pokemon teams. You have access to:
-- Deep knowledge of the ${format.toUpperCase()} metagame
-- Type matchups and coverage analysis
-- Common sets, EVs, and item choices
-- Team synergy and threat assessment
+IMPORTANT RULES:
+1. ONLY suggest Pokemon that are legal in ${format.toUpperCase()}. The meta threats list below shows which Pokemon are available.
+2. Use REAL abilities, moves, and items that actually exist. Never make up abilities.
+3. When suggesting team changes, you MUST use the [ACTION] block format shown below.
 
-When suggesting specific changes to the team, include an ACTION block in this format:
+When suggesting a specific team change, wrap it in [ACTION] tags like this:
 
 [ACTION]
-{
-  "type": "add_pokemon" | "replace_pokemon" | "update_moveset",
-  "slot": 0-5,
-  "payload": {
-    "pokemon": "Pokemon Name",
-    "moves": ["Move1", "Move2", "Move3", "Move4"],
-    "ability": "Ability Name",
-    "item": "Item Name",
-    "nature": "Nature",
-    "teraType": "Type"
-  },
-  "reason": "Brief reason for the change"
-}
+{"type":"add_pokemon","slot":5,"payload":{"pokemon":"Great Tusk","moves":["Headlong Rush","Close Combat","Ice Spinner","Rapid Spin"],"ability":"Protosynthesis","item":"Booster Energy","nature":"Jolly","teraType":"Ground"},"reason":"Adds Ground coverage and hazard removal"}
 [/ACTION]
 
+Action types:
+- "add_pokemon": Add to an empty slot (slot 0-5)
+- "replace_pokemon": Replace existing Pokemon at slot
+- "update_moveset": Change moves/item/ability of existing Pokemon
+
 Guidelines:
-- Be specific and actionable in your advice
-- Consider the current metagame trends from the context provided
-- Explain type synergies and coverage gaps
-- Suggest Pokemon that complement the existing team
-- Keep responses concise but informative`;
+- Be concise and actionable
+- Reference the meta threats when suggesting counters
+- Explain type synergies briefly
+- Only suggest changes when the user asks for them`;
 
 				// Build context section
 				let contextSection = "";
