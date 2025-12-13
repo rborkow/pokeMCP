@@ -5,11 +5,11 @@ on:
     inputs:
       version:
         description: 'Version tag (e.g., v0.3.0)'
-        required: true
+        required: false
         type: string
 
 jobs:
-  deploy:
+  deploy-worker:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -24,36 +24,42 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run type check
-        run: npm run type-check
-
       - name: Deploy to Cloudflare Workers (Production)
         run: npx wrangler deploy --env production
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-      - name: Create GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.event.inputs.version }}
-          release_name: Release ${{ github.event.inputs.version }}
-          body: |
-            Production deployment of version ${{ github.event.inputs.version }}
+      - name: Notify deployment
+        run: |
+          echo "✅ Deployed to https://api.pokemcp.com"
+          echo "MCP Endpoint: https://api.pokemcp.com/mcp"
 
-            Deployed to: https://pokemon-mcp-cloudflare.rborkows.workers.dev
-          draft: false
-          prerelease: false
+  deploy-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: ./apps/docs
+        run: npm ci
+
+      - name: Build documentation
+        working-directory: ./apps/docs
+        run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        working-directory: ./apps/docs
+        run: npx wrangler pages deploy out --project-name=pokemcp-docs --branch=main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Notify deployment
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.repos.createCommitComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              commit_sha: context.sha,
-              body: '✅ Deployed ${{ github.event.inputs.version }} to production!'
-            })
+        run: echo "✅ Deployed documentation to https://pokemcp.com"

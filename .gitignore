@@ -214,3 +214,9 @@ yarn-error.log*
 
 # TypeScript
 *.tsbuildinfo
+
+# Wrangler
+.wrangler/
+
+# Claude Code
+.claude/
