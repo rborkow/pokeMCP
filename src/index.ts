@@ -16,6 +16,24 @@ import {
 } from "./stats.js";
 import { runIngestionPipeline, runTestIngestion } from "./ingestion/orchestrator.js";
 import { queryStrategy, queryStrategyText } from "./rag/query.js";
+import type { TeamPokemon } from "./types.js";
+
+// AI Chat types
+interface AIChatRequest {
+	system?: string;
+	message: string;
+	team?: TeamPokemon[];
+	format?: string;
+}
+
+interface AIChatResponse {
+	content: string;
+	context?: {
+		metaThreats?: string;
+		coverage?: string;
+		strategy?: string;
+	};
+}
 
 // Define our Pokemon MCP agent with tools
 export class PokemonMCP extends McpAgent {
@@ -328,6 +346,176 @@ export default {
 			}
 		}
 
+		// AI Chat endpoint - handles team builder AI assistant requests
+		if (url.pathname === "/ai/chat" && request.method === "POST") {
+			// Add CORS headers for cross-origin requests
+			const corsHeaders = {
+				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Methods": "POST, OPTIONS",
+				"Access-Control-Allow-Headers": "Content-Type",
+				"Content-Type": "application/json",
+			};
+
+			try {
+				const body: AIChatRequest = await request.json();
+				const { system, message, team = [], format = "gen9ou" } = body;
+
+				if (!message) {
+					return new Response(
+						JSON.stringify({ error: "Message is required" }),
+						{ status: 400, headers: corsHeaders }
+					);
+				}
+
+				console.log(`AI Chat request: "${message.substring(0, 100)}..." format=${format} team_size=${team.length}`);
+
+				// Gather relevant context based on the message
+				const context: AIChatResponse["context"] = {};
+
+				// Get meta threats for context
+				try {
+					const metaThreats = await getMetaThreats({ format, limit: 10 }, env);
+					context.metaThreats = metaThreats;
+				} catch (e) {
+					console.error("Failed to get meta threats:", e);
+				}
+
+				// Get coverage analysis if team exists
+				if (team.length > 0) {
+					try {
+						const teamNames = team.map(p => p.pokemon);
+						const coverage = suggestTeamCoverage({ current_team: teamNames, format });
+						context.coverage = coverage;
+					} catch (e) {
+						console.error("Failed to get coverage:", e);
+					}
+				}
+
+				// Get strategic content via RAG if the message seems strategic
+				const strategicKeywords = ["counter", "check", "threat", "weakness", "coverage", "improve", "suggest", "rate", "fix"];
+				const isStrategicQuery = strategicKeywords.some(kw => message.toLowerCase().includes(kw));
+
+				if (isStrategicQuery) {
+					try {
+						const strategyResponse = await queryStrategy({ query: message, format, limit: 3 }, env);
+						if (strategyResponse.results && strategyResponse.results.length > 0) {
+							context.strategy = strategyResponse.results.map((r: { content: string }) => r.content).join("\n\n");
+						}
+					} catch (e) {
+						console.error("Failed to get strategy:", e);
+					}
+				}
+
+				// Format team for context
+				const teamContext = team.length > 0
+					? team.map((p, i) => {
+						const parts = [`${i + 1}. ${p.pokemon}`];
+						if (p.item) parts.push(`@ ${p.item}`);
+						if (p.ability) parts.push(`(${p.ability})`);
+						if (p.moves && p.moves.length > 0) parts.push(`- Moves: ${p.moves.join(", ")}`);
+						return parts.join(" ");
+					}).join("\n")
+					: "No Pokemon in team yet.";
+
+				// Build the full prompt for the AI
+				const systemPrompt = system || `You are a Pokemon competitive team building assistant specializing in ${format.toUpperCase()} format.
+
+Your role is to help users build and improve their competitive Pokemon teams. You have access to:
+- Deep knowledge of the ${format.toUpperCase()} metagame
+- Type matchups and coverage analysis
+- Common sets, EVs, and item choices
+- Team synergy and threat assessment
+
+When suggesting specific changes to the team, include an ACTION block in this format:
+
+[ACTION]
+{
+  "type": "add_pokemon" | "replace_pokemon" | "update_moveset",
+  "slot": 0-5,
+  "payload": {
+    "pokemon": "Pokemon Name",
+    "moves": ["Move1", "Move2", "Move3", "Move4"],
+    "ability": "Ability Name",
+    "item": "Item Name",
+    "nature": "Nature",
+    "teraType": "Type"
+  },
+  "reason": "Brief reason for the change"
+}
+[/ACTION]
+
+Guidelines:
+- Be specific and actionable in your advice
+- Consider the current metagame trends from the context provided
+- Explain type synergies and coverage gaps
+- Suggest Pokemon that complement the existing team
+- Keep responses concise but informative`;
+
+				// Build context section
+				let contextSection = "";
+				if (context.metaThreats) {
+					contextSection += `\n\n## Current Meta Threats (${format}):\n${context.metaThreats}`;
+				}
+				if (context.coverage) {
+					contextSection += `\n\n## Team Coverage Analysis:\n${context.coverage}`;
+				}
+				if (context.strategy) {
+					contextSection += `\n\n## Relevant Strategic Information:\n${context.strategy}`;
+				}
+
+				const fullUserMessage = `Current Team:
+${teamContext}
+${contextSection}
+
+User's Question: ${message}`;
+
+				// Call Cloudflare AI
+				const aiResponse = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+					messages: [
+						{ role: "system", content: systemPrompt },
+						{ role: "user", content: fullUserMessage }
+					],
+					max_tokens: 1024,
+				});
+
+				const content = aiResponse.response || "I apologize, but I couldn't generate a response. Please try again.";
+
+				console.log(`AI Chat response generated, length=${content.length}`);
+
+				return new Response(
+					JSON.stringify({ content, context }),
+					{ headers: corsHeaders }
+				);
+
+			} catch (error) {
+				console.error("AI Chat error:", error);
+				return new Response(
+					JSON.stringify({
+						error: "Failed to process AI request",
+						details: error instanceof Error ? error.message : String(error)
+					}),
+					{
+						status: 500,
+						headers: {
+							"Access-Control-Allow-Origin": "*",
+							"Content-Type": "application/json",
+						},
+					}
+				);
+			}
+		}
+
+		// Handle CORS preflight for /ai/chat
+		if (url.pathname === "/ai/chat" && request.method === "OPTIONS") {
+			return new Response(null, {
+				headers: {
+					"Access-Control-Allow-Origin": "*",
+					"Access-Control-Allow-Methods": "POST, OPTIONS",
+					"Access-Control-Allow-Headers": "Content-Type",
+				},
+			});
+		}
+
 		// Root endpoint - return server info
 		if (url.pathname === "/") {
 			return new Response(
@@ -351,6 +539,7 @@ export default {
 					endpoints: {
 						sse: "/sse",
 						mcp: "/mcp",
+						"ai/chat": "/ai/chat (POST) - AI assistant for team builder",
 						"test-ingestion": "/test-ingestion",
 						"test-kv": "/test-kv",
 						"test-rag": "/test-rag?q=your+query",
