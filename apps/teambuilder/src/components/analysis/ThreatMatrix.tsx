@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Tooltip,
@@ -15,6 +15,7 @@ import {
   calculateMatchupScore,
   type PokemonType,
 } from "@/lib/data/pokemon-types";
+import { ThreatDetailModal } from "./ThreatDetailModal";
 
 interface MetaThreat {
   pokemon: string;
@@ -198,6 +199,7 @@ function TeamSummaryColumn({
 export function ThreatMatrix() {
   const { team, format } = useTeamStore();
   const { data: metaThreatsData, isLoading, error } = useMetaThreats(format, 10);
+  const [selectedThreat, setSelectedThreat] = useState<MetaThreat | null>(null);
 
   // Parse meta threats
   const metaThreats = useMemo(() => {
@@ -305,12 +307,15 @@ export function ThreatMatrix() {
             <div className="flex gap-1">
               {metaThreats.map((threat, threatIndex) => (
                 <div key={threatIndex} className="flex flex-col gap-1">
-                  {/* Column header (threat) */}
+                  {/* Column header (threat) - clickable for details */}
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <div className="h-10 flex flex-col items-center justify-center cursor-help">
+                      <button
+                        className="h-10 flex flex-col items-center justify-center cursor-pointer hover:bg-muted/50 rounded transition-colors"
+                        onClick={() => setSelectedThreat(threat)}
+                      >
                         <PokemonSprite pokemon={threat.pokemon} size="sm" />
-                      </div>
+                      </button>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p className="font-semibold">{threat.pokemon}</p>
@@ -318,6 +323,7 @@ export function ThreatMatrix() {
                       <p className="text-xs text-muted-foreground">
                         {threat.usage.toFixed(1)}% usage
                       </p>
+                      <p className="text-xs text-primary mt-1">Click for details</p>
                     </TooltipContent>
                   </Tooltip>
 
@@ -366,6 +372,16 @@ export function ThreatMatrix() {
           </div>
         </div>
       </CardContent>
+
+      {/* Threat Detail Modal */}
+      <ThreatDetailModal
+        pokemon={selectedThreat?.pokemon ?? null}
+        types={selectedThreat?.types ?? []}
+        usage={selectedThreat?.usage ?? 0}
+        format={format}
+        open={!!selectedThreat}
+        onOpenChange={(open) => !open && setSelectedThreat(null)}
+      />
     </Card>
   );
 }
