@@ -46,20 +46,30 @@ function parsePopularSets(response: string): Partial<PopularSet> {
 
   for (const line of lines) {
     const trimmed = line.trim();
+    const lowerTrimmed = trimmed.toLowerCase();
 
-    if (trimmed.startsWith("## Moves") || trimmed.startsWith("**Moves")) {
+    // Detect section headers - handle various formats
+    if (lowerTrimmed.includes("move")) {
       currentSection = "moves";
-    } else if (trimmed.startsWith("## Abilities") || trimmed.startsWith("**Abilities")) {
+      continue;
+    } else if (lowerTrimmed.includes("abilit")) {
       currentSection = "abilities";
-    } else if (trimmed.startsWith("## Items") || trimmed.startsWith("**Items")) {
+      continue;
+    } else if (lowerTrimmed.includes("item")) {
       currentSection = "items";
-    } else if (trimmed.startsWith("## Spreads") || trimmed.startsWith("**Spreads")) {
+      continue;
+    } else if (lowerTrimmed.includes("spread") || lowerTrimmed.includes("ev spread")) {
       currentSection = "spreads";
-    } else if (trimmed.startsWith("## Tera") || trimmed.startsWith("**Tera")) {
+      continue;
+    } else if (lowerTrimmed.includes("tera")) {
       currentSection = "tera";
-    } else if (trimmed.startsWith("-") || trimmed.match(/^\d+\./)) {
-      // Parse list items like "- Close Combat: 85.2%" or "1. Close Combat - 85.2%"
-      const match = trimmed.match(/[-\d.]\s*\*?\*?([^:*]+)\*?\*?[:\s-]+(\d+\.?\d*)%/);
+      continue;
+    }
+
+    // Parse list items like "- fakeout: 24.5%"
+    if (trimmed.startsWith("-")) {
+      // General pattern: "- name: XX.X%"
+      const match = trimmed.match(/^-\s*([^:]+):\s*(\d+\.?\d*)%/);
       if (match) {
         const name = match[1].trim();
         const usage = parseFloat(match[2]);
@@ -75,9 +85,9 @@ function parsePopularSets(response: string): Partial<PopularSet> {
         }
       }
 
-      // Parse spreads like "- Adamant 252 Atk / 4 Def / 252 Spe: 45.2%"
+      // Parse spreads like "- Careful:252/0/164/0/92/0: 3.4%"
       if (currentSection === "spreads") {
-        const spreadMatch = trimmed.match(/[-\d.]\s*(\w+)\s+([^:]+):\s*(\d+\.?\d*)%/);
+        const spreadMatch = trimmed.match(/^-\s*(\w+):([^:]+):\s*(\d+\.?\d*)%/);
         if (spreadMatch && result.spreads) {
           result.spreads.push({
             nature: spreadMatch[1],
@@ -147,21 +157,31 @@ export function ThreatDetailModal({
         }
 
         const data = await response.json();
+        console.log("[ThreatDetailModal] Raw API response:", data);
+
         // Handle nested MCP response structure: result.content[0].text
         let resultText = "";
         if (data.result?.content?.[0]?.text) {
           resultText = data.result.content[0].text;
         } else if (typeof data.result === "string") {
           resultText = data.result;
+        } else if (data.content?.[0]?.text) {
+          // Direct MCP response format
+          resultText = data.content[0].text;
+        } else if (typeof data === "string") {
+          resultText = data;
         }
 
+        console.log("[ThreatDetailModal] Parsed result text:", resultText);
+
         // Check if it's a "not found" message
-        if (resultText.includes("not found") || resultText.includes("No usage")) {
+        if (!resultText || resultText.includes("not found") || resultText.includes("No usage")) {
           setError("No usage data available for this Pokemon");
           return;
         }
 
         const parsed = parsePopularSets(resultText);
+        console.log("[ThreatDetailModal] Parsed sets:", parsed);
         setSetData(parsed);
       } catch (e) {
         console.error("Failed to fetch popular sets:", e);
