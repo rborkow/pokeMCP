@@ -112,21 +112,18 @@ function toSpriteId(pokemon: string): string {
 
 /**
  * Get the animated Showdown sprite URL for a Pokemon
- * Uses PokeAPI GitHub which allows CORS
  */
 function getAnimatedSpriteUrl(pokemon: string): string {
   const id = toSpriteId(pokemon);
-  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${id}.gif`;
+  return `https://play.pokemonshowdown.com/sprites/ani/${id}.gif`;
 }
 
 /**
  * Get the static sprite URL (fallback)
- * Uses PokeAPI official artwork
  */
 function getStaticSpriteUrl(pokemon: string): string {
   const id = toSpriteId(pokemon);
-  // Fallback to home sprites which have better coverage
-  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`;
+  return `https://play.pokemonshowdown.com/sprites/dex/${id}.png`;
 }
 
 export function PokemonSprite({
