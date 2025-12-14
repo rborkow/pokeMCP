@@ -221,3 +221,6 @@ yarn-error.log*
 
 # Claude Code
 .claude/
+
+# Exported interaction logs (for fine-tuning)
+exported-logs/

@@ -12,7 +12,7 @@ import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
 import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
-  Tool,
+  type Tool,
 } from '@modelcontextprotocol/sdk/types.js';
 import express from 'express';
 import cors from 'cors';
@@ -256,59 +256,68 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
   try {
     switch (name) {
-      case 'lookup_pokemon':
+      case 'lookup_pokemon': {
         const lookupResult = lookupPokemonImpl(args as { pokemon: string; generation?: string });
         return {
           content: [{ type: 'text' as const, text: lookupResult }],
         };
+      }
 
-      case 'validate_moveset':
+      case 'validate_moveset': {
         const movesetResult = validateMovesetImpl(args as { pokemon: string; moves: string[]; generation?: string });
         return {
           content: [{ type: 'text' as const, text: movesetResult }],
         };
+      }
 
-      case 'validate_team':
+      case 'validate_team': {
         const teamResult = validateTeamImpl(args as { team: any[]; format?: string });
         return {
           content: [{ type: 'text' as const, text: teamResult }],
         };
+      }
 
-      case 'suggest_team_coverage':
+      case 'suggest_team_coverage': {
         const coverageResult = suggestTeamCoverageImpl(args as { current_team: string[]; format?: string });
         return {
           content: [{ type: 'text' as const, text: coverageResult }],
         };
+      }
 
-      case 'get_popular_sets':
+      case 'get_popular_sets': {
         const setsResult = await getPopularSets(args as { pokemon: string; format?: string });
         return {
           content: [{ type: 'text' as const, text: setsResult }],
         };
+      }
 
-      case 'get_meta_threats':
+      case 'get_meta_threats': {
         const threatsResult = await getMetaThreats(args as { format?: string; limit?: number });
         return {
           content: [{ type: 'text' as const, text: threatsResult }],
         };
+      }
 
-      case 'get_teammates':
+      case 'get_teammates': {
         const teammatesResult = await getTeammates(args as { pokemon: string; format?: string; limit?: number });
         return {
           content: [{ type: 'text' as const, text: teammatesResult }],
         };
+      }
 
-      case 'get_checks_counters':
+      case 'get_checks_counters': {
         const countersResult = await getChecksCounters(args as { pokemon: string; format?: string; limit?: number });
         return {
           content: [{ type: 'text' as const, text: countersResult }],
         };
+      }
 
-      case 'get_metagame_stats':
+      case 'get_metagame_stats': {
         const metaResult = await getMetagameStats(args as { format?: string });
         return {
           content: [{ type: 'text' as const, text: metaResult }],
         };
+      }
 
       default:
         throw new Error(`Unknown tool: ${name}`);

@@ -16,6 +16,7 @@ import {
 } from "./stats.js";
 import { runIngestionPipeline, runTestIngestion } from "./ingestion/orchestrator.js";
 import { queryStrategy, queryStrategyText } from "./rag/query.js";
+import { withLogging } from "./logging.js";
 import type { TeamPokemon } from "./types.js";
 
 // AI Chat types
@@ -50,9 +51,15 @@ export class PokemonMCP extends McpAgent {
 				pokemon: z.string().describe("The name of the Pokémon to look up (e.g., 'Pikachu', 'Charizard')"),
 				generation: z.string().optional().describe("Optional: Game generation to check (e.g., '9' for Gen 9)"),
 			},
-			async ({ pokemon, generation }) => ({
-				content: [{ type: "text", text: lookupPokemon({ pokemon, generation }) }],
-			}),
+			async ({ pokemon, generation }) => {
+				const text = await withLogging(
+					this.env as Env,
+					"lookup_pokemon",
+					{ pokemon, generation },
+					() => lookupPokemon({ pokemon, generation })
+				);
+				return { content: [{ type: "text", text }] };
+			},
 		);
 
 		// Validate moveset tool
@@ -63,9 +70,15 @@ export class PokemonMCP extends McpAgent {
 				moves: z.array(z.string()).describe("Array of move names to validate"),
 				generation: z.string().optional().describe("Game generation (e.g., '9')"),
 			},
-			async ({ pokemon, moves, generation }) => ({
-				content: [{ type: "text", text: validateMoveset({ pokemon, moves, generation }) }],
-			}),
+			async ({ pokemon, moves, generation }) => {
+				const text = await withLogging(
+					this.env as Env,
+					"validate_moveset",
+					{ pokemon, moves, generation },
+					() => validateMoveset({ pokemon, moves, generation })
+				);
+				return { content: [{ type: "text", text }] };
+			},
 		);
 
 		// Validate team tool
@@ -82,9 +95,15 @@ export class PokemonMCP extends McpAgent {
 				).describe("Array of team members with their movesets"),
 				format: z.string().optional().describe("Format to validate against (e.g., 'OU', 'Ubers')"),
 			},
-			async ({ team, format }) => ({
-				content: [{ type: "text", text: validateTeam({ team, format }) }],
-			}),
+			async ({ team, format }) => {
+				const text = await withLogging(
+					this.env as Env,
+					"validate_team",
+					{ team, format },
+					() => validateTeam({ team, format })
+				);
+				return { content: [{ type: "text", text }] };
+			},
 		);
 
 		// Suggest team coverage tool
@@ -94,9 +113,15 @@ export class PokemonMCP extends McpAgent {
 				current_team: z.array(z.string()).describe("Array of Pokémon names currently on the team"),
 				format: z.string().optional().describe("Format for suggestions (e.g., 'OU')"),
 			},
-			async ({ current_team, format }) => ({
-				content: [{ type: "text", text: suggestTeamCoverage({ current_team, format }) }],
-			}),
+			async ({ current_team, format }) => {
+				const text = await withLogging(
+					this.env as Env,
+					"suggest_team_coverage",
+					{ current_team, format },
+					() => suggestTeamCoverage({ current_team, format })
+				);
+				return { content: [{ type: "text", text }] };
+			},
 		);
 
 		// Get popular sets tool
@@ -106,9 +131,16 @@ export class PokemonMCP extends McpAgent {
 				pokemon: z.string().describe("The Pokémon name"),
 				format: z.string().optional().describe("Format to check (e.g., 'gen9ou', 'gen9vgc2024')"),
 			},
-			async ({ pokemon, format }) => ({
-				content: [{ type: "text", text: await getPopularSets({ pokemon, format }, this.env) }],
-			}),
+			async ({ pokemon, format }) => {
+				const env = this.env as Env;
+				const text = await withLogging(
+					env,
+					"get_popular_sets",
+					{ pokemon, format },
+					() => getPopularSets({ pokemon, format }, env)
+				);
+				return { content: [{ type: "text", text }] };
+			},
 		);
 
 		// Get meta threats tool
@@ -118,9 +150,16 @@ export class PokemonMCP extends McpAgent {
 				format: z.string().optional().describe("Format to check (e.g., 'gen9ou', 'gen9ubers')"),
 				limit: z.number().optional().describe("Number of top Pokémon to show"),
 			},
-			async ({ format, limit }) => ({
-				content: [{ type: "text", text: await getMetaThreats({ format, limit }, this.env) }],
-			}),
+			async ({ format, limit }) => {
+				const env = this.env as Env;
+				const text = await withLogging(
+					env,
+					"get_meta_threats",
+					{ format, limit },
+					() => getMetaThreats({ format, limit }, env)
+				);
+				return { content: [{ type: "text", text }] };
+			},
 		);
 
 		// Get teammates tool
@@ -131,9 +170,16 @@ export class PokemonMCP extends McpAgent {
 				format: z.string().optional().describe("Format to check (e.g., 'gen9ou')"),
 				limit: z.number().optional().describe("Number of teammates to show"),
 			},
-			async ({ pokemon, format, limit }) => ({
-				content: [{ type: "text", text: await getTeammates({ pokemon, format, limit }, this.env) }],
-			}),
+			async ({ pokemon, format, limit }) => {
+				const env = this.env as Env;
+				const text = await withLogging(
+					env,
+					"get_teammates",
+					{ pokemon, format, limit },
+					() => getTeammates({ pokemon, format, limit }, env)
+				);
+				return { content: [{ type: "text", text }] };
+			},
 		);
 
 		// Get checks and counters tool
@@ -144,9 +190,16 @@ export class PokemonMCP extends McpAgent {
 				format: z.string().optional().describe("Format to check (e.g., 'gen9ou')"),
 				limit: z.number().optional().describe("Number of checks/counters to show"),
 			},
-			async ({ pokemon, format, limit }) => ({
-				content: [{ type: "text", text: await getChecksCounters({ pokemon, format, limit }, this.env) }],
-			}),
+			async ({ pokemon, format, limit }) => {
+				const env = this.env as Env;
+				const text = await withLogging(
+					env,
+					"get_checks_counters",
+					{ pokemon, format, limit },
+					() => getChecksCounters({ pokemon, format, limit }, env)
+				);
+				return { content: [{ type: "text", text }] };
+			},
 		);
 
 		// Get metagame stats tool
@@ -155,9 +208,16 @@ export class PokemonMCP extends McpAgent {
 			{
 				format: z.string().optional().describe("Format to check (e.g., 'gen9ou')"),
 			},
-			async ({ format }) => ({
-				content: [{ type: "text", text: await getMetagameStats({ format }, this.env) }],
-			}),
+			async ({ format }) => {
+				const env = this.env as Env;
+				const text = await withLogging(
+					env,
+					"get_metagame_stats",
+					{ format },
+					() => getMetagameStats({ format }, env)
+				);
+				return { content: [{ type: "text", text }] };
+			},
 		);
 
 		// Query strategy - Natural language search over Smogon strategic content
@@ -168,9 +228,16 @@ export class PokemonMCP extends McpAgent {
 				format: z.string().optional().describe("Optional: Filter by format (e.g., 'gen9ou', 'gen9vgc2024regf')"),
 				limit: z.number().optional().describe("Optional: Number of results to return (default: 5)"),
 			},
-			async ({ query, format, limit }) => ({
-				content: [{ type: "text", text: await queryStrategyText({ query, format, limit }, this.env) }],
-			}),
+			async ({ query, format, limit }) => {
+				const env = this.env as Env;
+				const text = await withLogging(
+					env,
+					"query_strategy",
+					{ query, format, limit },
+					() => queryStrategyText({ query, format, limit }, env)
+				);
+				return { content: [{ type: "text", text }] };
+			},
 		);
 
 		// Search strategic content - More specific search with detailed filters
@@ -183,9 +250,16 @@ export class PokemonMCP extends McpAgent {
 				sectionType: z.enum(["overview", "moveset", "counters", "teammates"]).optional().describe("Optional: Filter by section type"),
 				limit: z.number().optional().describe("Optional: Number of results to return (default: 5)"),
 			},
-			async ({ query, pokemon, format, sectionType, limit }) => ({
-				content: [{ type: "text", text: await queryStrategyText({ query, pokemon, format, sectionType, limit }, this.env) }],
-			}),
+			async ({ query, pokemon, format, sectionType, limit }) => {
+				const env = this.env as Env;
+				const text = await withLogging(
+					env,
+					"search_strategic_content",
+					{ query, pokemon, format, sectionType, limit },
+					() => queryStrategyText({ query, pokemon, format, sectionType, limit }, env)
+				);
+				return { content: [{ type: "text", text }] };
+			},
 		);
 	}
 }
@@ -226,35 +300,55 @@ export default {
 				let result: string;
 				switch (tool) {
 					case "lookup_pokemon":
-						result = lookupPokemon(args as { pokemon: string; generation?: string });
+						result = await withLogging(env, tool, args, () =>
+							lookupPokemon(args as { pokemon: string; generation?: string })
+						);
 						break;
 					case "validate_moveset":
-						result = validateMoveset(args as { pokemon: string; moves: string[]; generation?: string });
+						result = await withLogging(env, tool, args, () =>
+							validateMoveset(args as { pokemon: string; moves: string[]; generation?: string })
+						);
 						break;
 					case "validate_team":
-						result = validateTeam(args as { team: any[]; format?: string });
+						result = await withLogging(env, tool, args, () =>
+							validateTeam(args as { team: any[]; format?: string })
+						);
 						break;
 					case "suggest_team_coverage":
-						result = suggestTeamCoverage(args as { current_team: string[]; format?: string });
+						result = await withLogging(env, tool, args, () =>
+							suggestTeamCoverage(args as { current_team: string[]; format?: string })
+						);
 						break;
 					case "get_popular_sets":
-						result = await getPopularSets(args as { pokemon: string; format?: string }, env);
+						result = await withLogging(env, tool, args, () =>
+							getPopularSets(args as { pokemon: string; format?: string }, env)
+						);
 						break;
 					case "get_meta_threats":
-						result = await getMetaThreats(args as { format?: string; limit?: number }, env);
+						result = await withLogging(env, tool, args, () =>
+							getMetaThreats(args as { format?: string; limit?: number }, env)
+						);
 						break;
 					case "get_teammates":
-						result = await getTeammates(args as { pokemon: string; format?: string; limit?: number }, env);
+						result = await withLogging(env, tool, args, () =>
+							getTeammates(args as { pokemon: string; format?: string; limit?: number }, env)
+						);
 						break;
 					case "get_checks_counters":
-						result = await getChecksCounters(args as { pokemon: string; format?: string; limit?: number }, env);
+						result = await withLogging(env, tool, args, () =>
+							getChecksCounters(args as { pokemon: string; format?: string; limit?: number }, env)
+						);
 						break;
 					case "get_metagame_stats":
-						result = await getMetagameStats(args as { format?: string }, env);
+						result = await withLogging(env, tool, args, () =>
+							getMetagameStats(args as { format?: string }, env)
+						);
 						break;
 					case "query_strategy":
-						const strategyResult = await queryStrategy(args as { query: string; format?: string; pokemon?: string; limit?: number }, env);
-						result = typeof strategyResult === 'string' ? strategyResult : JSON.stringify(strategyResult);
+						result = await withLogging(env, tool, args, async () => {
+							const strategyResult = await queryStrategy(args as { query: string; format?: string; pokemon?: string; limit?: number }, env);
+							return typeof strategyResult === 'string' ? strategyResult : JSON.stringify(strategyResult);
+						});
 						break;
 					default:
 						return new Response(

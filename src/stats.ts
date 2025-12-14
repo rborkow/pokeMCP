@@ -115,6 +115,23 @@ export async function getPopularSets(args: {
     for (const [spread, pct] of spreads) {
       output += `- ${spread}: ${pct.toFixed(1)}%\n`;
     }
+    output += '\n';
+  }
+
+  // Tera Types (Gen 9 only)
+  if (pokemonStats['Tera Types'] && format.startsWith('gen9')) {
+    const teraTypes = normalize(pokemonStats['Tera Types'])
+      .filter(([type]) => type.toLowerCase() !== 'nothing')  // Filter out "nothing" entries
+      .slice(0, 5);
+
+    if (teraTypes.length > 0) {
+      output += `**Popular Tera Types:**\n`;
+      for (const [type, pct] of teraTypes) {
+        // Capitalize first letter
+        const displayType = type.charAt(0).toUpperCase() + type.slice(1);
+        output += `- ${displayType}: ${pct.toFixed(1)}%\n`;
+      }
+    }
   }
 
   return output;

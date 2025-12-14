@@ -50,6 +50,14 @@
 	"ai": {
 		"binding": "AI"
 	},
+	// R2 bucket for anonymized interaction logging (fine-tuning data)
+	// Created with: npx wrangler r2 bucket create pokemcp-interaction-logs
+	"r2_buckets": [
+		{
+			"binding": "INTERACTION_LOGS",
+			"bucket_name": "pokemcp-interaction-logs"
+		}
+	],
 	// No cron triggers in default environment (only production)
 	"observability": {
 		"enabled": true
@@ -114,6 +122,12 @@
 				{
 					"binding": "STRATEGY_DOCS",
 					"id": "3be55e1e98144776a62ee00f5bced815"
+				}
+			],
+			"r2_buckets": [
+				{
+					"binding": "INTERACTION_LOGS",
+					"bucket_name": "pokemcp-interaction-logs"
 				}
 			],
 			"vectorize": [

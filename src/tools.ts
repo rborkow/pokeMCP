@@ -9,6 +9,13 @@ import {
 } from './data-loader.js';
 import type { TeamPokemon } from './types.js';
 
+// Valid Tera Types (Gen 9)
+const VALID_TERA_TYPES = [
+  'Normal', 'Fire', 'Water', 'Electric', 'Grass', 'Ice',
+  'Fighting', 'Poison', 'Ground', 'Flying', 'Psychic', 'Bug',
+  'Rock', 'Ghost', 'Dragon', 'Dark', 'Steel', 'Fairy', 'Stellar'
+];
+
 /**
  * Look up detailed information about a Pokémon
  */
@@ -66,6 +73,34 @@ export function lookupPokemon(args: { pokemon: string; generation?: string }): s
   }
   if (species.evos && species.evos.length > 0) {
     output += `**Evolves into:** ${species.evos.join(', ')}\n`;
+  }
+
+  // Gen-specific mechanics
+  const mechanics: string[] = [];
+
+  // Gen 9: Tera Type
+  if (species.requiredTeraType) {
+    mechanics.push(`**Required Tera Type:** ${species.requiredTeraType}`);
+  }
+
+  // Gen 8: Gigantamax
+  if (species.canGigantamax) {
+    mechanics.push(`**Can Gigantamax:** Yes (G-Max ${species.canGigantamax})`);
+  }
+
+  // Required Item (for forme changes like Mega Evolution, Ogerpon masks)
+  if (species.requiredItem) {
+    mechanics.push(`**Required Item:** ${species.requiredItem}`);
+  }
+
+  // Alternative formes
+  if (species.otherFormes && species.otherFormes.length > 0) {
+    mechanics.push(`**Other Forms:** ${species.otherFormes.join(', ')}`);
+  }
+
+  if (mechanics.length > 0) {
+    output += '\n**Special Mechanics:**\n';
+    output += mechanics.join('\n') + '\n';
   }
 
   return output;
@@ -253,6 +288,38 @@ export function validateTeam(args: { team: TeamPokemon[]; format?: string }): st
           `${species.name} cannot have ability "${member.ability}" (legal: ${abilityList.join(', ')})`
         );
       }
+    }
+
+    // Check Tera Type legality (Gen 9 only)
+    const normalizedFormat = format.toLowerCase();
+    const isGen9 = normalizedFormat.startsWith('gen9') || normalizedFormat.includes('sv') || normalizedFormat.includes('vgc202');
+
+    if (member.teraType) {
+      if (!isGen9) {
+        errors.push(`${species.name}: Tera Type is only available in Gen 9 formats`);
+      } else {
+        const normalizedTera = member.teraType.charAt(0).toUpperCase() + member.teraType.slice(1).toLowerCase();
+        if (!VALID_TERA_TYPES.includes(normalizedTera)) {
+          errors.push(
+            `${species.name}: Invalid Tera Type "${member.teraType}" (valid: ${VALID_TERA_TYPES.join(', ')})`
+          );
+        }
+
+        // Check for required Tera Type (e.g., Ogerpon forms)
+        if (species.requiredTeraType) {
+          const requiredTera = species.requiredTeraType.charAt(0).toUpperCase() + species.requiredTeraType.slice(1).toLowerCase();
+          if (normalizedTera !== requiredTera) {
+            errors.push(
+              `${species.name} must have Tera Type ${species.requiredTeraType} (received: ${member.teraType})`
+            );
+          }
+        }
+      }
+    }
+
+    // Check if Pokemon requires a specific Tera Type but none was provided (Gen 9)
+    if (isGen9 && species.requiredTeraType && !member.teraType) {
+      results.push(`⚠️ ${species.name} has a required Tera Type: ${species.requiredTeraType}`);
     }
   }
 

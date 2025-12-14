@@ -42,7 +42,11 @@ export interface PokemonSpecies {
   forme?: string;
   otherFormes?: string[];
   formeOrder?: string[];
-  canGigantamax?: string;
+  // Gen-specific mechanics
+  canGigantamax?: string;      // Gen 8: G-Max move name
+  requiredTeraType?: string;   // Gen 9: Required Tera Type (e.g., Ogerpon forms)
+  battleOnly?: string;         // Indicates in-battle forme change
+  requiredItem?: string;       // Required held item for forme
   isNonstandard?: string;
   tier?: string;
 }
@@ -115,6 +119,12 @@ export interface TeamPokemon {
   ivs?: Partial<BaseStats>;
   nature?: string;
   level?: number;
+  // Gen 9 specific
+  teraType?: string;
+  // Gen 8 specific (forms are handled via pokemon name, e.g., "Urshifu-Gmax")
+  gigantamax?: boolean;
+  // Gen 6-7 specific (Mega Stones are items, forms are separate entries)
+  // Z-Moves are handled via items (Z crystals)
 }
 
 // Data table types
