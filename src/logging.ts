@@ -122,16 +122,20 @@ export async function logInteraction(
     const cfg = { ...DEFAULT_CONFIG, ...config };
 
     // Check if logging is enabled
-    if (!cfg.enabled) return;
+    if (!cfg.enabled) {
+        console.log(`[R2 Logging] Skipped: logging disabled for tool: ${tool}`);
+        return;
+    }
 
     // Check if R2 bucket is configured
     if (!env.INTERACTION_LOGS) {
-        // R2 not configured, silently skip
+        console.log(`[R2 Logging] Skipped: R2 bucket not configured for tool: ${tool}`);
         return;
     }
 
     // Sampling - only log a percentage of requests
     if (!shouldSample(cfg.sampleRate)) {
+        console.log(`[R2 Logging] Skipped: not sampled (rate: ${cfg.sampleRate}) for tool: ${tool}`);
         return;
     }
 
@@ -160,26 +164,32 @@ export async function logInteraction(
             `${log.id}.json`
         ].join('/');
 
+        console.log(`[R2 Logging] Writing to path: ${path} for tool: ${tool}`);
+
         await env.INTERACTION_LOGS.put(path, JSON.stringify(log), {
             httpMetadata: {
                 contentType: 'application/json',
             },
         });
+
+        console.log(`[R2 Logging] Successfully wrote log for tool: ${tool}`);
     } catch (error) {
         // Don't let logging errors affect the main request
-        console.error('Failed to log interaction:', error);
+        console.error('[R2 Logging] Failed to log interaction:', error);
     }
 }
 
 /**
  * Wrapper to time and log a tool execution
+ * @param ctx - Optional ExecutionContext for waitUntil (required for R2 logging to complete)
  */
 export async function withLogging<T extends string>(
     env: Env,
     tool: string,
     args: Record<string, unknown>,
     executor: () => Promise<T> | T,
-    config?: Partial<LoggerConfig>
+    config?: Partial<LoggerConfig>,
+    ctx?: ExecutionContext
 ): Promise<T> {
     const startTime = performance.now();
     let success = true;
@@ -194,9 +204,11 @@ export async function withLogging<T extends string>(
     } finally {
         const responseTimeMs = Math.round(performance.now() - startTime);
 
-        // Log asynchronously - don't block the response
-        // Use waitUntil if available in the context
-        logInteraction(env, tool, args, response!, responseTimeMs, success, config);
+        // Log asynchronously - use waitUntil to ensure R2 write completes
+        const logPromise = logInteraction(env, tool, args, response!, responseTimeMs, success, config);
+        if (ctx) {
+            ctx.waitUntil(logPromise);
+        }
     }
 
     return response;

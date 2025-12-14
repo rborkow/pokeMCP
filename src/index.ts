@@ -301,54 +301,63 @@ export default {
 				switch (tool) {
 					case "lookup_pokemon":
 						result = await withLogging(env, tool, args, () =>
-							lookupPokemon(args as { pokemon: string; generation?: string })
+							lookupPokemon(args as { pokemon: string; generation?: string }),
+							undefined, ctx
 						);
 						break;
 					case "validate_moveset":
 						result = await withLogging(env, tool, args, () =>
-							validateMoveset(args as { pokemon: string; moves: string[]; generation?: string })
+							validateMoveset(args as { pokemon: string; moves: string[]; generation?: string }),
+							undefined, ctx
 						);
 						break;
 					case "validate_team":
 						result = await withLogging(env, tool, args, () =>
-							validateTeam(args as { team: any[]; format?: string })
+							validateTeam(args as { team: any[]; format?: string }),
+							undefined, ctx
 						);
 						break;
 					case "suggest_team_coverage":
 						result = await withLogging(env, tool, args, () =>
-							suggestTeamCoverage(args as { current_team: string[]; format?: string })
+							suggestTeamCoverage(args as { current_team: string[]; format?: string }),
+							undefined, ctx
 						);
 						break;
 					case "get_popular_sets":
 						result = await withLogging(env, tool, args, () =>
-							getPopularSets(args as { pokemon: string; format?: string }, env)
+							getPopularSets(args as { pokemon: string; format?: string }, env),
+							undefined, ctx
 						);
 						break;
 					case "get_meta_threats":
 						result = await withLogging(env, tool, args, () =>
-							getMetaThreats(args as { format?: string; limit?: number }, env)
+							getMetaThreats(args as { format?: string; limit?: number }, env),
+							undefined, ctx
 						);
 						break;
 					case "get_teammates":
 						result = await withLogging(env, tool, args, () =>
-							getTeammates(args as { pokemon: string; format?: string; limit?: number }, env)
+							getTeammates(args as { pokemon: string; format?: string; limit?: number }, env),
+							undefined, ctx
 						);
 						break;
 					case "get_checks_counters":
 						result = await withLogging(env, tool, args, () =>
-							getChecksCounters(args as { pokemon: string; format?: string; limit?: number }, env)
+							getChecksCounters(args as { pokemon: string; format?: string; limit?: number }, env),
+							undefined, ctx
 						);
 						break;
 					case "get_metagame_stats":
 						result = await withLogging(env, tool, args, () =>
-							getMetagameStats(args as { format?: string }, env)
+							getMetagameStats(args as { format?: string }, env),
+							undefined, ctx
 						);
 						break;
 					case "query_strategy":
 						result = await withLogging(env, tool, args, async () => {
 							const strategyResult = await queryStrategy(args as { query: string; format?: string; pokemon?: string; limit?: number }, env);
 							return typeof strategyResult === 'string' ? strategyResult : JSON.stringify(strategyResult);
-						});
+						}, undefined, ctx);
 						break;
 					default:
 						return new Response(
