@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   Dialog,
   DialogContent,
@@ -20,6 +20,10 @@ import {
 import { PokemonSprite } from "./PokemonSprite";
 import type { TeamPokemon, BaseStats } from "@/types/pokemon";
 import { TYPES, NATURES } from "@/types/pokemon";
+import { usePokemonLookup, usePopularSets } from "@/lib/mcp-client";
+import { useTeamStore } from "@/stores/team-store";
+import { parseAbilities, parseMoves, parseItems, parseTeraTypes } from "@/lib/pokemon-parser";
+import { COMMON_ITEMS } from "@/lib/data/items";
 
 interface PokemonEditDialogProps {
   pokemon: TeamPokemon | null;
@@ -59,6 +63,44 @@ export function PokemonEditDialog({
     pokemon || DEFAULT_POKEMON
   );
   const [evTotal, setEvTotal] = useState(0);
+  const { format } = useTeamStore();
+
+  // Fetch Pokemon data for abilities
+  const { data: lookupData } = usePokemonLookup(
+    editedPokemon.pokemon,
+    open && editedPokemon.pokemon.length > 2
+  );
+
+  // Fetch popular sets for moves, items, tera types
+  const { data: setsData } = usePopularSets(
+    editedPokemon.pokemon,
+    format,
+    open && editedPokemon.pokemon.length > 2
+  );
+
+  // Parse abilities from lookup response
+  const validAbilities = useMemo(() => {
+    if (!lookupData || typeof lookupData !== "string") return [];
+    return parseAbilities(lookupData);
+  }, [lookupData]);
+
+  // Parse moves and items from popular sets
+  const { popularMoves, popularItems, popularTeraTypes } = useMemo(() => {
+    if (!setsData || typeof setsData !== "string") {
+      return { popularMoves: [], popularItems: [], popularTeraTypes: [] };
+    }
+    return {
+      popularMoves: parseMoves(setsData),
+      popularItems: parseItems(setsData),
+      popularTeraTypes: parseTeraTypes(setsData),
+    };
+  }, [setsData]);
+
+  // Combine popular items with common items list
+  const allItems = useMemo(() => {
+    const itemSet = new Set([...popularItems, ...COMMON_ITEMS]);
+    return Array.from(itemSet);
+  }, [popularItems]);
 
   // Reset when pokemon changes
   useEffect(() => {
@@ -180,19 +222,64 @@ export function PokemonEditDialog({
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
               <label className="text-sm font-medium">Item</label>
-              <Input
-                value={editedPokemon.item || ""}
-                onChange={(e) => updateField("item", e.target.value)}
-                placeholder="e.g. Life Orb"
-              />
+              <Select
+                value={editedPokemon.item || "none"}
+                onValueChange={(value) => updateField("item", value === "none" ? "" : value)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select item" />
+                </SelectTrigger>
+                <SelectContent className="max-h-60">
+                  <SelectItem value="none">None</SelectItem>
+                  {popularItems.length > 0 && (
+                    <>
+                      <SelectItem value="__popular_header__" disabled className="text-xs font-semibold text-muted-foreground">
+                        Popular for {editedPokemon.pokemon}
+                      </SelectItem>
+                      {popularItems.map((item) => (
+                        <SelectItem key={`popular-${item}`} value={item}>
+                          ⭐ {item}
+                        </SelectItem>
+                      ))}
+                      <SelectItem value="__all_header__" disabled className="text-xs font-semibold text-muted-foreground border-t mt-1 pt-1">
+                        All Items
+                      </SelectItem>
+                    </>
+                  )}
+                  {COMMON_ITEMS.filter(i => !popularItems.includes(i)).map((item) => (
+                    <SelectItem key={item} value={item}>
+                      {item}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium">Ability</label>
-              <Input
-                value={editedPokemon.ability || ""}
-                onChange={(e) => updateField("ability", e.target.value)}
-                placeholder="e.g. Rough Skin"
-              />
+              {validAbilities.length > 0 ? (
+                <Select
+                  value={editedPokemon.ability || "none"}
+                  onValueChange={(value) => updateField("ability", value === "none" ? "" : value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select ability" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="none">None</SelectItem>
+                    {validAbilities.map((ability) => (
+                      <SelectItem key={ability} value={ability}>
+                        {ability}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              ) : (
+                <Input
+                  value={editedPokemon.ability || ""}
+                  onChange={(e) => updateField("ability", e.target.value)}
+                  placeholder="Enter Pokemon first"
+                />
+              )}
             </div>
           </div>
 
@@ -239,15 +326,42 @@ export function PokemonEditDialog({
 
           {/* Moves */}
           <div className="space-y-2">
-            <label className="text-sm font-medium">Moves</label>
+            <label className="text-sm font-medium">
+              Moves
+              {popularMoves.length > 0 && (
+                <span className="text-xs text-muted-foreground ml-2">
+                  (showing popular moves for {editedPokemon.pokemon})
+                </span>
+              )}
+            </label>
             <div className="grid grid-cols-2 gap-2">
               {[0, 1, 2, 3].map((i) => (
-                <Input
-                  key={i}
-                  value={getMoveValue(i)}
-                  onChange={(e) => updateMove(i, e.target.value)}
-                  placeholder={`Move ${i + 1}`}
-                />
+                popularMoves.length > 0 ? (
+                  <Select
+                    key={i}
+                    value={getMoveValue(i) || "none"}
+                    onValueChange={(value) => updateMove(i, value === "none" ? "" : value)}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder={`Move ${i + 1}`} />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-60">
+                      <SelectItem value="none">None</SelectItem>
+                      {popularMoves.map((move) => (
+                        <SelectItem key={move} value={move}>
+                          {move}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                ) : (
+                  <Input
+                    key={i}
+                    value={getMoveValue(i)}
+                    onChange={(e) => updateMove(i, e.target.value)}
+                    placeholder={`Move ${i + 1}`}
+                  />
+                )
               ))}
             </div>
           </div>
