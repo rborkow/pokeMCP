@@ -286,10 +286,10 @@ export function ThreatMatrix() {
               {team.map((pokemon, i) => (
                 <Tooltip key={i}>
                   <TooltipTrigger asChild>
-                    <div className="w-16 h-10 flex items-center gap-1">
+                    <div className="w-32 h-10 flex items-center gap-2">
                       <PokemonSprite pokemon={pokemon.pokemon} size="sm" />
-                      <span className="text-xs truncate max-w-[40px]">
-                        {pokemon.pokemon.split("-")[0]}
+                      <span className="text-xs truncate flex-1">
+                        {pokemon.pokemon}
                       </span>
                     </div>
                   </TooltipTrigger>

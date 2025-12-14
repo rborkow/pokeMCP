@@ -47,11 +47,11 @@ export function TeamSlot({
           <PokemonSprite pokemon={pokemon.pokemon} size="md" />
         </div>
         <div className="text-center min-w-0 w-full">
-          <p className="font-medium text-sm truncate max-w-[100px]">
+          <p className="font-medium text-sm truncate">
             {pokemon.nickname || pokemon.pokemon}
           </p>
           {pokemon.item && (
-            <p className="text-xs text-muted-foreground truncate max-w-[100px]">
+            <p className="text-xs text-muted-foreground truncate">
               @ {pokemon.item}
             </p>
           )}

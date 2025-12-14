@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { FormatSelector } from "./FormatSelector";
-import { AIToggle } from "../chat/AIToggle";
 
 export function Header() {
   return (
@@ -17,7 +16,6 @@ export function Header() {
 
         <div className="flex items-center gap-4">
           <FormatSelector />
-          <AIToggle />
         </div>
       </div>
     </header>

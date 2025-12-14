@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useTeamStore } from "@/stores/team-store";
 import { TYPES, type PokemonType } from "@/types/pokemon";
+import { getPokemonTypes } from "@/lib/data/pokemon-types";
 
 // Type colors for badges
 const TYPE_COLORS: Record<PokemonType, string> = {
@@ -104,34 +105,6 @@ function analyzeTeamCoverage(teamTypes: string[][]): TypeAnalysis {
   };
 }
 
-// Mock function to get Pokemon types - in real implementation, this would use the MCP lookup
-function getPokemonTypes(pokemon: string): string[] {
-  // Common Pokemon types for demo
-  const typeMap: Record<string, string[]> = {
-    garchomp: ["Dragon", "Ground"],
-    "landorus-therian": ["Ground", "Flying"],
-    landorustherian: ["Ground", "Flying"],
-    kingambit: ["Dark", "Steel"],
-    gholdengo: ["Steel", "Ghost"],
-    dragonite: ["Dragon", "Flying"],
-    tyranitar: ["Rock", "Dark"],
-    ferrothorn: ["Grass", "Steel"],
-    toxapex: ["Poison", "Water"],
-    corviknight: ["Flying", "Steel"],
-    heatran: ["Fire", "Steel"],
-    rotom: ["Electric", "Ghost"],
-    "rotom-wash": ["Electric", "Water"],
-    clefable: ["Fairy"],
-    dragapult: ["Dragon", "Ghost"],
-    rillaboom: ["Grass"],
-    cinderace: ["Fire"],
-    urshifu: ["Fighting", "Dark"],
-    "urshifu-rapid-strike": ["Fighting", "Water"],
-  };
-
-  const key = pokemon.toLowerCase().replace(/[^a-z]/g, "");
-  return typeMap[key] || ["Normal"];
-}
 
 export function TypeCoverage() {
   const { team } = useTeamStore();
