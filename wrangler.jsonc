@@ -91,6 +91,12 @@
 					"id": "3be55e1e98144776a62ee00f5bced815"
 				}
 			],
+			"r2_buckets": [
+				{
+					"binding": "INTERACTION_LOGS",
+					"bucket_name": "pokemcp-interaction-logs"
+				}
+			],
 			"vectorize": [
 				{
 					"binding": "VECTOR_INDEX",
