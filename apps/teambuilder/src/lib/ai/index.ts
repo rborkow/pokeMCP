@@ -113,6 +113,7 @@ export async function sendChatMessage({
 
 interface StreamChatMessageOptions extends SendChatMessageOptions {
   onChunk: (text: string) => void;
+  onThinking?: (isThinking: boolean, thinkingText?: string) => void;
   onComplete: (response: AIResponse) => void;
   onError: (error: Error) => void;
 }
@@ -125,6 +126,7 @@ export async function streamChatMessage({
   team,
   format,
   onChunk,
+  onThinking,
   onComplete,
   onError,
 }: StreamChatMessageOptions): Promise<void> {
@@ -151,6 +153,8 @@ export async function streamChatMessage({
 
     const decoder = new TextDecoder();
     let fullContent = "";
+    let thinkingContent = "";
+    let isCurrentlyThinking = false;
 
     while (true) {
       const { done, value } = await reader.read();
@@ -172,7 +176,29 @@ export async function streamChatMessage({
 
           try {
             const parsed = JSON.parse(data);
-            if (parsed.text) {
+
+            // Handle thinking state changes
+            if (parsed.thinking !== undefined) {
+              if (parsed.thinking === true && !isCurrentlyThinking) {
+                // Starting thinking
+                isCurrentlyThinking = true;
+                thinkingContent = "";
+                onThinking?.(true, "");
+              } else if (parsed.thinking === false && isCurrentlyThinking) {
+                // Finished thinking
+                isCurrentlyThinking = false;
+                onThinking?.(false, thinkingContent);
+              }
+
+              // Accumulate thinking text
+              if (parsed.thinking === true && parsed.text) {
+                thinkingContent += parsed.text;
+                onThinking?.(true, thinkingContent);
+              }
+            }
+
+            // Handle regular text (non-thinking)
+            if (parsed.text && !parsed.thinking) {
               fullContent += parsed.text;
               // Send cleaned content for display
               onChunk(cleanResponseContent(fullContent));

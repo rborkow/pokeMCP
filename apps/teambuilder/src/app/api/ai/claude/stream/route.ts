@@ -11,9 +11,22 @@ const MCP_URL = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
 
 export const runtime = "edge";
 
+// Keywords that trigger extended thinking for deeper analysis
+const ANALYSIS_KEYWORDS = [
+  "rate", "analyze", "review", "evaluate", "assess",
+  "weakness", "threat", "counter", "check",
+  "improve", "optimize", "better", "fix",
+  "why", "explain", "strategy", "synergy"
+];
+
+function shouldUseThinking(message: string): boolean {
+  const lowerMessage = message.toLowerCase();
+  return ANALYSIS_KEYWORDS.some(keyword => lowerMessage.includes(keyword));
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const { message, team = [], format = "gen9ou" } = await request.json();
+    const { message, team = [], format = "gen9ou", enableThinking } = await request.json();
 
     if (!message) {
       return new Response(JSON.stringify({ error: "Message is required" }), {
@@ -149,6 +162,31 @@ ${contextSection}
 
 User's Question: ${message}`;
 
+    // Determine if we should use extended thinking
+    const useThinking = enableThinking ?? shouldUseThinking(message);
+
+    // Build request body
+    const requestBody: Record<string, unknown> = {
+      model: "claude-sonnet-4-5-20250929",
+      max_tokens: useThinking ? 16000 : 1024, // More tokens when thinking
+      stream: true,
+      system: systemPrompt,
+      messages: [
+        {
+          role: "user",
+          content: fullUserMessage,
+        },
+      ],
+    };
+
+    // Add thinking configuration if enabled
+    if (useThinking) {
+      requestBody.thinking = {
+        type: "enabled",
+        budget_tokens: 8000, // Allow up to 8k tokens for thinking
+      };
+    }
+
     // Make streaming request to Claude
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -157,18 +195,7 @@ User's Question: ${message}`;
         "x-api-key": apiKey,
         "anthropic-version": "2023-06-01",
       },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-5-20250929",
-        max_tokens: 1024,
-        stream: true,
-        system: systemPrompt,
-        messages: [
-          {
-            role: "user",
-            content: fullUserMessage,
-          },
-        ],
-      }),
+      body: JSON.stringify(requestBody),
     });
 
     if (!response.ok) {
@@ -183,6 +210,7 @@ User's Question: ${message}`;
     // Transform the Claude stream to a simpler format
     const encoder = new TextEncoder();
     const decoder = new TextDecoder();
+    let isThinking = false;
 
     const transformStream = new TransformStream({
       async transform(chunk, controller) {
@@ -200,10 +228,37 @@ User's Question: ${message}`;
             try {
               const parsed = JSON.parse(data);
 
-              // Handle content_block_delta events (the actual text)
-              if (parsed.type === "content_block_delta" && parsed.delta?.text) {
+              // Handle content_block_start to track if we're in thinking mode
+              if (parsed.type === "content_block_start") {
+                isThinking = parsed.content_block?.type === "thinking";
+                if (isThinking) {
+                  // Signal start of thinking to client
+                  controller.enqueue(
+                    encoder.encode(`data: ${JSON.stringify({ thinking: true, text: "" })}\n\n`)
+                  );
+                }
+              }
+
+              // Handle content_block_delta events
+              if (parsed.type === "content_block_delta") {
+                if (parsed.delta?.thinking) {
+                  // Thinking content - send as thinking update
+                  controller.enqueue(
+                    encoder.encode(`data: ${JSON.stringify({ thinking: true, text: parsed.delta.thinking })}\n\n`)
+                  );
+                } else if (parsed.delta?.text) {
+                  // Regular text content
+                  controller.enqueue(
+                    encoder.encode(`data: ${JSON.stringify({ text: parsed.delta.text })}\n\n`)
+                  );
+                }
+              }
+
+              // Handle content_block_stop
+              if (parsed.type === "content_block_stop" && isThinking) {
+                isThinking = false;
                 controller.enqueue(
-                  encoder.encode(`data: ${JSON.stringify({ text: parsed.delta.text })}\n\n`)
+                  encoder.encode(`data: ${JSON.stringify({ thinking: false })}\n\n`)
                 );
               }
 
