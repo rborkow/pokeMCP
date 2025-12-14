@@ -28,12 +28,12 @@ describe("personalities", () => {
         "accentColor",
         "thinkingMessage",
         "systemPromptPrefix",
-      ];
+      ] as const;
 
       for (const personality of Object.values(PERSONALITIES)) {
         for (const field of requiredFields) {
           expect(personality).toHaveProperty(field);
-          expect((personality as Record<string, unknown>)[field]).toBeTruthy();
+          expect(personality[field]).toBeTruthy();
         }
       }
     });
