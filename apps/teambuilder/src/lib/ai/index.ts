@@ -155,56 +155,82 @@ export async function streamChatMessage({
     let fullContent = "";
     let thinkingContent = "";
     let isCurrentlyThinking = false;
+    let buffer = ""; // Buffer for incomplete SSE events
 
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
 
-      const chunk = decoder.decode(value, { stream: true });
-      const lines = chunk.split("\n");
+      // Append new data to buffer
+      buffer += decoder.decode(value, { stream: true });
 
-      for (const line of lines) {
-        if (line.startsWith("data: ")) {
-          const data = line.slice(6);
-          if (data === "[DONE]") {
-            // Stream complete - process final response
-            const action = parseActionFromResponse(fullContent, team);
-            const cleanedContent = cleanResponseContent(fullContent);
-            onComplete({ content: cleanedContent, action });
-            return;
-          }
+      // Process complete SSE events (they end with \n\n)
+      const events = buffer.split("\n\n");
+      // Keep the last potentially incomplete event in buffer
+      buffer = events.pop() || "";
 
-          try {
-            const parsed = JSON.parse(data);
-
-            // Handle thinking state changes
-            if (parsed.thinking !== undefined) {
-              if (parsed.thinking === true && !isCurrentlyThinking) {
-                // Starting thinking
-                isCurrentlyThinking = true;
-                thinkingContent = "";
-                onThinking?.(true, "");
-              } else if (parsed.thinking === false && isCurrentlyThinking) {
-                // Finished thinking
-                isCurrentlyThinking = false;
-                onThinking?.(false, thinkingContent);
-              }
-
-              // Accumulate thinking text
-              if (parsed.thinking === true && parsed.text) {
-                thinkingContent += parsed.text;
-                onThinking?.(true, thinkingContent);
-              }
+      for (const event of events) {
+        const lines = event.split("\n");
+        for (const line of lines) {
+          if (line.startsWith("data: ")) {
+            const data = line.slice(6);
+            if (data === "[DONE]") {
+              // Stream complete - process final response
+              const action = parseActionFromResponse(fullContent, team);
+              const cleanedContent = cleanResponseContent(fullContent);
+              onComplete({ content: cleanedContent, action });
+              return;
             }
 
-            // Handle regular text (non-thinking)
+            try {
+              const parsed = JSON.parse(data);
+
+              // Handle thinking state changes
+              if (parsed.thinking !== undefined) {
+                if (parsed.thinking === true && !isCurrentlyThinking) {
+                  // Starting thinking
+                  isCurrentlyThinking = true;
+                  thinkingContent = "";
+                  onThinking?.(true, "");
+                } else if (parsed.thinking === false && isCurrentlyThinking) {
+                  // Finished thinking
+                  isCurrentlyThinking = false;
+                  onThinking?.(false, thinkingContent);
+                }
+
+                // Accumulate thinking text
+                if (parsed.thinking === true && parsed.text) {
+                  thinkingContent += parsed.text;
+                  onThinking?.(true, thinkingContent);
+                }
+              }
+
+              // Handle regular text (non-thinking)
+              if (parsed.text && !parsed.thinking) {
+                fullContent += parsed.text;
+                // Send cleaned content for display
+                onChunk(cleanResponseContent(fullContent));
+              }
+            } catch {
+              // Skip invalid JSON lines
+            }
+          }
+        }
+      }
+    }
+
+    // Process any remaining buffer content
+    if (buffer.trim()) {
+      const lines = buffer.split("\n");
+      for (const line of lines) {
+        if (line.startsWith("data: ") && line.slice(6) !== "[DONE]") {
+          try {
+            const parsed = JSON.parse(line.slice(6));
             if (parsed.text && !parsed.thinking) {
               fullContent += parsed.text;
-              // Send cleaned content for display
-              onChunk(cleanResponseContent(fullContent));
             }
           } catch {
-            // Skip invalid JSON lines
+            // Skip
           }
         }
       }
