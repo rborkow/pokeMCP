@@ -77,9 +77,9 @@ export function PokemonEditDialog({
 
   // Sync pokemon prop to state when dialog opens
   // This is a legitimate use case for syncing props to state on open
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     if (open) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setEditedPokemon(getInitialPokemon(pokemon));
     }
   }, [pokemon, open]);
