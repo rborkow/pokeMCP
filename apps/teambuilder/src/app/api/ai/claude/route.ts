@@ -148,7 +148,7 @@ User's Question: ${message}`;
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-5-20250514",
+        model: "claude-sonnet-4-5-20250929",
         max_tokens: 1024,
         system: systemPrompt,
         messages: [
@@ -161,10 +161,18 @@ User's Question: ${message}`;
     });
 
     if (!response.ok) {
-      const error = await response.text();
-      console.error("Claude API error:", error);
+      const errorText = await response.text();
+      console.error("Claude API error:", response.status, errorText);
+      let errorMessage = "Claude API request failed";
+      try {
+        const errorJson = JSON.parse(errorText);
+        errorMessage = errorJson.error?.message || errorMessage;
+      } catch {
+        // Use raw text if not JSON
+        if (errorText) errorMessage = errorText;
+      }
       return NextResponse.json(
-        { error: "Claude API request failed" },
+        { error: errorMessage },
         { status: response.status }
       );
     }
