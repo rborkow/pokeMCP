@@ -1,8 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { SUGGESTED_PROMPTS } from "@/types/chat";
+import { SUGGESTED_PROMPTS, QUICKSTART_PROMPT } from "@/types/chat";
 import { useTeamStore } from "@/stores/team-store";
+import { Sparkles } from "lucide-react";
 
 interface SuggestedPromptsProps {
   onSelect: (prompt: string) => void;
@@ -11,14 +12,12 @@ interface SuggestedPromptsProps {
 
 export function SuggestedPrompts({ onSelect, disabled }: SuggestedPromptsProps) {
   const { team } = useTeamStore();
+  const hasTeam = team.length > 0;
 
   // Filter prompts based on team state
   const availablePrompts = SUGGESTED_PROMPTS.filter((p) => {
-    // "Rate my team" and "Optimize sets" only make sense with a team
-    if (
-      (p.label === "Rate my team" || p.label === "Optimize sets") &&
-      team.length === 0
-    ) {
+    // Skip prompts that require a team when there's no team
+    if (p.requiresTeam && !hasTeam) {
       return false;
     }
     return true;
@@ -26,6 +25,19 @@ export function SuggestedPrompts({ onSelect, disabled }: SuggestedPromptsProps) 
 
   return (
     <div className="flex flex-wrap gap-2 px-4 py-2 border-b">
+      {/* Show Quickstart button prominently when no team */}
+      {!hasTeam && (
+        <Button
+          variant="default"
+          size="sm"
+          className="text-xs h-7 bg-primary hover:bg-primary/90"
+          onClick={() => onSelect(QUICKSTART_PROMPT.prompt)}
+          disabled={disabled}
+        >
+          <Sparkles className="h-3 w-3 mr-1" />
+          {QUICKSTART_PROMPT.label}
+        </Button>
+      )}
       {availablePrompts.map(({ label, prompt }) => (
         <Button
           key={label}

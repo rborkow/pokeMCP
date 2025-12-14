@@ -36,6 +36,7 @@ export interface AIContext {
 export interface AIResponse {
   content: string;
   action?: TeamAction;
+  actions?: TeamAction[]; // Multiple actions for team generation
 }
 
 // Suggested prompts for the chat UI
@@ -43,21 +44,32 @@ export const SUGGESTED_PROMPTS = [
   {
     label: "Rate my team",
     prompt: "Can you rate my current team and identify its strengths and weaknesses?",
+    requiresTeam: true,
   },
   {
     label: "Improve coverage",
     prompt: "How can I improve my team's type coverage?",
+    requiresTeam: false,
   },
   {
     label: "Counter threats",
     prompt: "What counters the top meta threats that my team struggles against?",
+    requiresTeam: false,
   },
   {
     label: "Suggest teammate",
     prompt: "Who would be a good addition to my team?",
+    requiresTeam: false,
   },
   {
     label: "Optimize sets",
     prompt: "Are there better movesets or EV spreads for my current Pokemon?",
+    requiresTeam: true,
   },
 ] as const;
+
+// Quickstart prompt shown when team is empty
+export const QUICKSTART_PROMPT = {
+  label: "✨ Generate Team",
+  prompt: "Build me a competitive 6 Pokemon team for the current format. Include a good balance of offensive and defensive Pokemon with strong type synergy. For each Pokemon, use an ACTION block with full competitive sets including EVs, nature, and tera type.",
+};

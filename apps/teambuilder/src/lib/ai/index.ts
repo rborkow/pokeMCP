@@ -9,34 +9,31 @@ interface SendChatMessageOptions {
 }
 
 /**
- * Parse an ACTION block from AI response
+ * Parse a single action data object into a TeamAction
  */
-function parseActionFromResponse(
-  content: string,
-  team: TeamPokemon[]
+function parseActionData(
+  actionData: Record<string, unknown>,
+  team: TeamPokemon[],
+  slotOffset: number = 0
 ): TeamAction | undefined {
-  const actionMatch = content.match(/\[ACTION\]([\s\S]*?)\[\/ACTION\]/);
-  if (!actionMatch) return undefined;
-
   try {
-    const actionData = JSON.parse(actionMatch[1].trim());
-
     // Build the preview team
     const preview = [...team];
-    const slot = actionData.slot ?? team.length;
+    const slot = (actionData.slot as number) ?? team.length + slotOffset;
 
     if (actionData.type === "remove_pokemon") {
       preview.splice(slot, 1);
     } else if (actionData.payload) {
+      const payload = actionData.payload as Record<string, unknown>;
       const newPokemon: TeamPokemon = {
-        pokemon: actionData.payload.pokemon || "",
-        moves: actionData.payload.moves || [],
-        ability: actionData.payload.ability,
-        item: actionData.payload.item,
-        nature: actionData.payload.nature,
-        teraType: actionData.payload.teraType,
-        evs: actionData.payload.evs,
-        ivs: actionData.payload.ivs,
+        pokemon: (payload.pokemon as string) || "",
+        moves: (payload.moves as string[]) || [],
+        ability: payload.ability as string | undefined,
+        item: payload.item as string | undefined,
+        nature: payload.nature as string | undefined,
+        teraType: payload.teraType as string | undefined,
+        evs: payload.evs as TeamPokemon["evs"],
+        ivs: payload.ivs as TeamPokemon["ivs"],
       };
 
       if (actionData.type === "add_pokemon") {
@@ -52,16 +49,56 @@ function parseActionFromResponse(
     }
 
     return {
-      type: actionData.type,
+      type: actionData.type as TeamAction["type"],
       slot: slot,
-      payload: actionData.payload || {},
+      payload: (actionData.payload as Partial<TeamPokemon>) || {},
       preview: preview.filter(Boolean),
-      reason: actionData.reason || "AI suggestion",
+      reason: (actionData.reason as string) || "AI suggestion",
     };
   } catch (e) {
     console.error("Failed to parse action:", e);
     return undefined;
   }
+}
+
+/**
+ * Parse ACTION blocks from AI response (supports multiple)
+ */
+function parseActionsFromResponse(
+  content: string,
+  team: TeamPokemon[]
+): TeamAction[] {
+  const actionRegex = /\[ACTION\]([\s\S]*?)\[\/ACTION\]/g;
+  const actions: TeamAction[] = [];
+  let match;
+  let currentTeam = [...team];
+
+  while ((match = actionRegex.exec(content)) !== null) {
+    try {
+      const actionData = JSON.parse(match[1].trim());
+      const action = parseActionData(actionData, currentTeam, actions.length);
+      if (action) {
+        actions.push(action);
+        // Update current team for next action's preview
+        currentTeam = action.preview;
+      }
+    } catch (e) {
+      console.error("Failed to parse action:", e);
+    }
+  }
+
+  return actions;
+}
+
+/**
+ * Parse an ACTION block from AI response (returns first action for backwards compatibility)
+ */
+function parseActionFromResponse(
+  content: string,
+  team: TeamPokemon[]
+): TeamAction | undefined {
+  const actions = parseActionsFromResponse(content, team);
+  return actions[0];
 }
 
 /**
@@ -176,9 +213,13 @@ export async function streamChatMessage({
             const data = line.slice(6);
             if (data === "[DONE]") {
               // Stream complete - process final response
-              const action = parseActionFromResponse(fullContent, team);
+              const actions = parseActionsFromResponse(fullContent, team);
               const cleanedContent = cleanResponseContent(fullContent);
-              onComplete({ content: cleanedContent, action });
+              onComplete({
+                content: cleanedContent,
+                action: actions[0],
+                actions: actions.length > 1 ? actions : undefined
+              });
               return;
             }
 
@@ -237,9 +278,13 @@ export async function streamChatMessage({
     }
 
     // If we get here without [DONE], still complete
-    const action = parseActionFromResponse(fullContent, team);
+    const actions = parseActionsFromResponse(fullContent, team);
     const cleanedContent = cleanResponseContent(fullContent);
-    onComplete({ content: cleanedContent, action });
+    onComplete({
+      content: cleanedContent,
+      action: actions[0],
+      actions: actions.length > 1 ? actions : undefined
+    });
   } catch (error) {
     onError(error instanceof Error ? error : new Error(String(error)));
   }
