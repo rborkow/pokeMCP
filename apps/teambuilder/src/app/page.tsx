@@ -45,34 +45,36 @@ export default function Home() {
           <TeamGrid />
         </section>
 
-        {/* Analysis Section */}
-        <section className="mt-8 space-y-4">
-          <Tabs defaultValue="coverage" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 max-w-md">
-              <TabsTrigger value="coverage">Coverage</TabsTrigger>
-              <TabsTrigger value="threats">Threats</TabsTrigger>
-              <TabsTrigger value="history">History</TabsTrigger>
-            </TabsList>
+        {/* Two-column layout: Analysis + Chat side by side on desktop */}
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Analysis Section */}
+          <section className="space-y-4">
+            <Tabs defaultValue="coverage" className="w-full">
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="coverage">Coverage</TabsTrigger>
+                <TabsTrigger value="threats">Threats</TabsTrigger>
+                <TabsTrigger value="history">History</TabsTrigger>
+              </TabsList>
 
-            <TabsContent value="coverage" className="mt-4">
-              <TypeCoverage />
-            </TabsContent>
+              <TabsContent value="coverage" className="mt-4">
+                <TypeCoverage />
+              </TabsContent>
 
-            <TabsContent value="threats" className="mt-4">
-              <ThreatMatrix />
-            </TabsContent>
+              <TabsContent value="threats" className="mt-4">
+                <ThreatMatrix />
+              </TabsContent>
 
-            <TabsContent value="history" className="mt-4">
-              <TeamHistory />
-            </TabsContent>
-          </Tabs>
-        </section>
+              <TabsContent value="history" className="mt-4">
+                <TeamHistory />
+              </TabsContent>
+            </Tabs>
+          </section>
 
-        {/* Chat Section */}
-        <section className="mt-8 space-y-4">
-          <h2 className="text-xl font-bold">AI Assistant</h2>
-          <ChatPanel />
-        </section>
+          {/* Chat Section */}
+          <section className="space-y-4">
+            <ChatPanel />
+          </section>
+        </div>
       </main>
 
       {/* Footer */}
