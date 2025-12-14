@@ -378,16 +378,24 @@ function calculateTypeCoverage(team: string[]): {
         const typeData = typeChart[defenderType.toLowerCase()];
         if (!typeData) continue;
 
-        const effectiveness = typeData.damageTaken?.[attackingType];
-        // 0 = no effect, 1 = not very effective, 2 = neutral, 3 = super effective
-        if (effectiveness === 0) totalEffectiveness = 0;
-        else if (effectiveness === 1) totalEffectiveness *= 0.5;
-        else if (effectiveness === 3) totalEffectiveness *= 2;
+        // Get effectiveness - need to capitalize attacking type to match typechart keys
+        const capitalizedAttacking = attackingType.charAt(0).toUpperCase() + attackingType.slice(1);
+        const effectiveness = typeData.damageTaken?.[capitalizedAttacking];
+
+        // Showdown typechart damageTaken values:
+        // 0 = neutral (1x), 1 = weak (2x), 2 = resists (0.5x), 3 = immune (0x)
+        if (effectiveness === 3) totalEffectiveness = 0;        // immune
+        else if (effectiveness === 2) totalEffectiveness *= 0.5; // resists
+        else if (effectiveness === 1) totalEffectiveness *= 2;   // weak
+        // effectiveness === 0 means neutral, no change
       }
 
       if (totalEffectiveness >= 2) {
         weaknesses.set(attackingType, (weaknesses.get(attackingType) || 0) + 1);
       } else if (totalEffectiveness <= 0.5) {
+        resistances.set(attackingType, (resistances.get(attackingType) || 0) + 1);
+      } else if (totalEffectiveness === 0) {
+        // Track immunities in resistances with a special marker
         resistances.set(attackingType, (resistances.get(attackingType) || 0) + 1);
       }
     }
@@ -479,8 +487,10 @@ export function suggestTeamCoverage(args: {
       // Types that resist this weakness
       const typeChart = getTypeChart();
       for (const [resistType, data] of Object.entries(typeChart)) {
-        const effectiveness = data.damageTaken?.[weakType];
-        if (effectiveness === 1 || effectiveness === 0) {
+        const typeData = data as { damageTaken?: { [type: string]: number } };
+        const effectiveness = typeData.damageTaken?.[weakType];
+        // Showdown typechart: 2 = resists (0.5x), 3 = immune (0x)
+        if (effectiveness === 2 || effectiveness === 3) {
           coveringTypes.add(resistType.charAt(0).toUpperCase() + resistType.slice(1));
         }
       }
