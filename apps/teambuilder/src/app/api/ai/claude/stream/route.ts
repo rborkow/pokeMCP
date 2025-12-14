@@ -1,4 +1,5 @@
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
+import { getPersonality, type PersonalityId, DEFAULT_PERSONALITY } from "@/lib/ai/personalities";
 
 interface TeamPokemon {
   pokemon: string;
@@ -24,7 +25,8 @@ function shouldUseThinking(message: string): boolean {
 
 export async function POST(request: NextRequest) {
   try {
-    const { message, team = [], format = "gen9ou", enableThinking } = await request.json();
+    const { message, team = [], format = "gen9ou", enableThinking, personality: personalityId = DEFAULT_PERSONALITY } = await request.json();
+    const personality = getPersonality(personalityId as PersonalityId);
 
     if (!message) {
       return new Response(JSON.stringify({ error: "Message is required" }), {
@@ -109,9 +111,11 @@ export async function POST(request: NextRequest) {
         }).join("\n")
       : "No Pokemon in team yet.";
 
-    // Build system prompt
+    // Build system prompt with personality
     const teamSize = team.length;
-    const systemPrompt = `You are a Pokemon competitive team building assistant for ${format.toUpperCase()}.
+    const systemPrompt = `${personality.systemPromptPrefix}
+
+You are helping with Pokemon competitive team building for ${format.toUpperCase()}.
 
 CRITICAL RULES:
 1. ONLY suggest Pokemon that are legal in ${format.toUpperCase()}. Reference the meta threats list.

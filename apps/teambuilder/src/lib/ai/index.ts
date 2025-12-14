@@ -1,11 +1,13 @@
 import type { TeamPokemon } from "@/types/pokemon";
 import type { AIProvider, AIResponse, TeamAction } from "@/types/chat";
+import type { PersonalityId } from "./personalities";
 
 interface SendChatMessageOptions {
   message: string;
   team: TeamPokemon[];
   format: string;
   provider: AIProvider;
+  personality?: PersonalityId;
 }
 
 /**
@@ -116,6 +118,7 @@ export async function sendChatMessage({
   team,
   format,
   provider,
+  personality,
 }: SendChatMessageOptions): Promise<AIResponse> {
   // Call the appropriate API route
   // Note: We don't send a system prompt - the server builds one with meta context
@@ -128,6 +131,7 @@ export async function sendChatMessage({
       message: message,
       team: team,
       format: format,
+      personality: personality,
     }),
   });
 
@@ -162,6 +166,7 @@ export async function streamChatMessage({
   message,
   team,
   format,
+  personality,
   onChunk,
   onThinking,
   onComplete,
@@ -175,6 +180,7 @@ export async function streamChatMessage({
         message,
         team,
         format,
+        personality,
       }),
     });
 
