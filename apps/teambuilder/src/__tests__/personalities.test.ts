@@ -4,7 +4,6 @@ import {
   DEFAULT_PERSONALITY,
   getPersonality,
   getAllPersonalities,
-  type PersonalityId,
 } from "@/lib/ai/personalities";
 
 describe("personalities", () => {

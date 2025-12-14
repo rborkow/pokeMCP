@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   Dialog,
   DialogContent,
@@ -73,16 +73,16 @@ export function PokemonEditDialog({
   const [editedPokemon, setEditedPokemon] = useState<TeamPokemon>(() =>
     getInitialPokemon(pokemon)
   );
-  const prevOpenRef = useRef(open);
   const { format } = useTeamStore();
 
-  // Sync pokemon prop to state when dialog opens (not on every render)
-  // This avoids setState in useEffect by using a ref to track previous open state
-  if (open && !prevOpenRef.current) {
-    // Dialog just opened - sync the pokemon prop to state
-    setEditedPokemon(getInitialPokemon(pokemon));
-  }
-  prevOpenRef.current = open;
+  // Sync pokemon prop to state when dialog opens
+  // This is a legitimate use case for syncing props to state on open
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => {
+    if (open) {
+      setEditedPokemon(getInitialPokemon(pokemon));
+    }
+  }, [pokemon, open]);
 
   // Calculate EV total as derived state (useMemo instead of useState + useEffect)
   const evTotal = useMemo(() => {
