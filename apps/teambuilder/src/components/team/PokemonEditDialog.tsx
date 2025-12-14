@@ -53,17 +53,44 @@ const STAT_LABELS: Record<keyof BaseStats, string> = {
   spe: "Spe",
 };
 
+function getInitialPokemon(pokemon: TeamPokemon | null): TeamPokemon {
+  if (!pokemon) return DEFAULT_POKEMON;
+  return {
+    ...DEFAULT_POKEMON,
+    ...pokemon,
+    moves: [...(pokemon.moves || []), "", "", "", ""].slice(0, 4),
+    evs: { ...DEFAULT_POKEMON.evs, ...pokemon.evs },
+    ivs: { ...DEFAULT_POKEMON.ivs, ...pokemon.ivs },
+  };
+}
+
 export function PokemonEditDialog({
   pokemon,
   open,
   onOpenChange,
   onSave,
 }: PokemonEditDialogProps) {
-  const [editedPokemon, setEditedPokemon] = useState<TeamPokemon>(
-    pokemon || DEFAULT_POKEMON
+  const [editedPokemon, setEditedPokemon] = useState<TeamPokemon>(() =>
+    getInitialPokemon(pokemon)
   );
-  const [evTotal, setEvTotal] = useState(0);
   const { format } = useTeamStore();
+
+  // Sync pokemon prop to state when dialog opens
+  // This is a legitimate use case for syncing props to state on open
+  useEffect(() => {
+    if (open) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setEditedPokemon(getInitialPokemon(pokemon));
+    }
+  }, [pokemon, open]);
+
+  // Calculate EV total as derived state (useMemo instead of useState + useEffect)
+  const evTotal = useMemo(() => {
+    return Object.values(editedPokemon.evs || {}).reduce(
+      (sum, val) => sum + (val || 0),
+      0
+    );
+  }, [editedPokemon.evs]);
 
   // Fetch Pokemon data for abilities
   const { data: lookupData } = usePokemonLookup(
@@ -101,30 +128,6 @@ export function PokemonEditDialog({
     const itemSet = new Set([...popularItems, ...COMMON_ITEMS]);
     return Array.from(itemSet);
   }, [popularItems]);
-
-  // Reset when pokemon changes
-  useEffect(() => {
-    if (pokemon) {
-      setEditedPokemon({
-        ...DEFAULT_POKEMON,
-        ...pokemon,
-        moves: [...(pokemon.moves || []), "", "", "", ""].slice(0, 4),
-        evs: { ...DEFAULT_POKEMON.evs, ...pokemon.evs },
-        ivs: { ...DEFAULT_POKEMON.ivs, ...pokemon.ivs },
-      });
-    } else {
-      setEditedPokemon(DEFAULT_POKEMON);
-    }
-  }, [pokemon, open]);
-
-  // Calculate EV total
-  useEffect(() => {
-    const total = Object.values(editedPokemon.evs || {}).reduce(
-      (sum, val) => sum + (val || 0),
-      0
-    );
-    setEvTotal(total);
-  }, [editedPokemon.evs]);
 
   const updateField = <K extends keyof TeamPokemon>(
     field: K,

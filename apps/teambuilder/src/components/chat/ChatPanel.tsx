@@ -6,19 +6,22 @@ import { Button } from "@/components/ui/button";
 import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
 import { SuggestedPrompts } from "./SuggestedPrompts";
+import { PersonalitySelector } from "./PersonalitySelector";
 import { useChatStore } from "@/stores/chat-store";
 import { useTeamStore } from "@/stores/team-store";
 import { useHistoryStore } from "@/stores/history-store";
 import { streamChatMessage } from "@/lib/ai";
+import { getPersonality } from "@/lib/ai/personalities";
 import { Brain, Trash2 } from "lucide-react";
 import type { TeamAction } from "@/types/chat";
 
 export function ChatPanel() {
-  const { messages, isLoading, addMessage, setLoading, setPendingAction, clearChat } =
+  const { messages, isLoading, addMessage, setLoading, setPendingAction, clearChat, personality: personalityId } =
     useChatStore();
-  const { team, format, setPokemon, clearTeam } = useTeamStore();
+  const { team, format, setPokemon } = useTeamStore();
   const { pushState } = useHistoryStore();
   const [isThinking, setIsThinking] = useState(false);
+  const personality = getPersonality(personalityId);
 
   // Apply multiple actions (for team generation)
   const applyActions = (actions: TeamAction[]) => {
@@ -70,6 +73,7 @@ export function ChatPanel() {
       team,
       format,
       provider: "claude",
+      personality: personalityId,
       onChunk: (text) => {
         // Update message content as chunks arrive
         useChatStore.getState().updateMessage(streamingId, {
@@ -118,9 +122,9 @@ export function ChatPanel() {
 
   return (
     <Card className="flex flex-col h-[600px] lg:h-[650px]">
-      {/* Header with clear button */}
+      {/* Header with personality selector and clear button */}
       <div className="flex items-center justify-between px-4 py-2 border-b bg-muted/30">
-        <span className="text-sm font-medium text-muted-foreground">AI Assistant</span>
+        <PersonalitySelector />
         {messages.length > 0 && (
           <Button
             variant="ghost"
@@ -137,11 +141,11 @@ export function ChatPanel() {
 
       <SuggestedPrompts onSelect={handleSend} disabled={isLoading} />
 
-      {/* Thinking indicator */}
+      {/* Thinking indicator with personality message */}
       {isThinking && (
         <div className="flex items-center gap-2 px-4 py-2 bg-muted/50 border-b text-sm text-muted-foreground">
           <Brain className="h-4 w-4 animate-pulse text-primary" />
-          <span>Analyzing your team...</span>
+          <span>{personality.thinkingMessage}</span>
         </div>
       )}
 
