@@ -6,10 +6,10 @@ import { ChatInput } from "./ChatInput";
 import { SuggestedPrompts } from "./SuggestedPrompts";
 import { useChatStore } from "@/stores/chat-store";
 import { useTeamStore } from "@/stores/team-store";
-import { sendChatMessage } from "@/lib/ai";
+import { streamChatMessage } from "@/lib/ai";
 
 export function ChatPanel() {
-  const { isLoading, addMessage, setLoading, setPendingAction, aiProvider } =
+  const { isLoading, addMessage, setLoading, setPendingAction } =
     useChatStore();
   const { team, format } = useTeamStore();
 
@@ -17,8 +17,8 @@ export function ChatPanel() {
     // Add user message
     addMessage({ role: "user", content });
 
-    // Add loading message
-    const loadingId = addMessage({
+    // Add streaming message placeholder
+    const streamingId = addMessage({
       role: "assistant",
       content: "",
       isLoading: true,
@@ -26,36 +26,41 @@ export function ChatPanel() {
 
     setLoading(true);
 
-    try {
-      const response = await sendChatMessage({
-        message: content,
-        team,
-        format,
-        provider: aiProvider,
-      });
+    // Use streaming for Claude
+    await streamChatMessage({
+      message: content,
+      team,
+      format,
+      provider: "claude",
+      onChunk: (text) => {
+        // Update message content as chunks arrive
+        useChatStore.getState().updateMessage(streamingId, {
+          content: text,
+          isLoading: true,
+        });
+      },
+      onComplete: (response) => {
+        // Finalize the message
+        useChatStore.getState().updateMessage(streamingId, {
+          content: response.content,
+          isLoading: false,
+        });
 
-      // Update the loading message with the response
-      useChatStore.getState().updateMessage(loadingId, {
-        content: response.content,
-        isLoading: false,
-      });
+        // If there's an action, set it as pending
+        if (response.action) {
+          setPendingAction(response.action);
+        }
 
-      // If there's an action, set it as pending
-      if (response.action) {
-        setPendingAction(response.action);
-      }
-    } catch (error) {
-      // Update with error message
-      useChatStore.getState().updateMessage(loadingId, {
-        content:
-          error instanceof Error
-            ? `Error: ${error.message}`
-            : "Sorry, something went wrong. Please try again.",
-        isLoading: false,
-      });
-    } finally {
-      setLoading(false);
-    }
+        setLoading(false);
+      },
+      onError: (error) => {
+        useChatStore.getState().updateMessage(streamingId, {
+          content: `Error: ${error.message}`,
+          isLoading: false,
+        });
+        setLoading(false);
+      },
+    });
   };
 
   return (

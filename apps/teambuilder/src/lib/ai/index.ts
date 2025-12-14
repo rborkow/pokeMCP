@@ -72,7 +72,7 @@ function cleanResponseContent(content: string): string {
 }
 
 /**
- * Send a chat message to the AI
+ * Send a chat message to the AI (non-streaming)
  */
 export async function sendChatMessage({
   message,
@@ -109,4 +109,86 @@ export async function sendChatMessage({
   const content = cleanResponseContent(rawContent);
 
   return { content, action };
+}
+
+interface StreamChatMessageOptions extends SendChatMessageOptions {
+  onChunk: (text: string) => void;
+  onComplete: (response: AIResponse) => void;
+  onError: (error: Error) => void;
+}
+
+/**
+ * Send a chat message to Claude with streaming response
+ */
+export async function streamChatMessage({
+  message,
+  team,
+  format,
+  onChunk,
+  onComplete,
+  onError,
+}: StreamChatMessageOptions): Promise<void> {
+  try {
+    const response = await fetch("/api/ai/claude/stream", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message,
+        team,
+        format,
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(error || `AI request failed: ${response.status}`);
+    }
+
+    const reader = response.body?.getReader();
+    if (!reader) {
+      throw new Error("No response body");
+    }
+
+    const decoder = new TextDecoder();
+    let fullContent = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      const chunk = decoder.decode(value, { stream: true });
+      const lines = chunk.split("\n");
+
+      for (const line of lines) {
+        if (line.startsWith("data: ")) {
+          const data = line.slice(6);
+          if (data === "[DONE]") {
+            // Stream complete - process final response
+            const action = parseActionFromResponse(fullContent, team);
+            const cleanedContent = cleanResponseContent(fullContent);
+            onComplete({ content: cleanedContent, action });
+            return;
+          }
+
+          try {
+            const parsed = JSON.parse(data);
+            if (parsed.text) {
+              fullContent += parsed.text;
+              // Send cleaned content for display
+              onChunk(cleanResponseContent(fullContent));
+            }
+          } catch {
+            // Skip invalid JSON lines
+          }
+        }
+      }
+    }
+
+    // If we get here without [DONE], still complete
+    const action = parseActionFromResponse(fullContent, team);
+    const cleanedContent = cleanResponseContent(fullContent);
+    onComplete({ content: cleanedContent, action });
+  } catch (error) {
+    onError(error instanceof Error ? error : new Error(String(error)));
+  }
 }
