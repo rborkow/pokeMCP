@@ -9,8 +9,6 @@ interface TeamPokemon {
 
 const MCP_URL = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
 
-export const runtime = "edge";
-
 // Keywords that trigger extended thinking for deeper analysis
 const ANALYSIS_KEYWORDS = [
   "rate", "analyze", "review", "evaluate", "assess",
@@ -211,67 +209,94 @@ User's Question: ${message}`;
     const encoder = new TextEncoder();
     const decoder = new TextDecoder();
     let isThinking = false;
+    let buffer = ""; // Buffer for incomplete lines
 
     const transformStream = new TransformStream({
       async transform(chunk, controller) {
-        const text = decoder.decode(chunk);
-        const lines = text.split("\n");
+        // Append new chunk to buffer
+        buffer += decoder.decode(chunk, { stream: true });
 
-        for (const line of lines) {
-          if (line.startsWith("data: ")) {
-            const data = line.slice(6);
-            if (data === "[DONE]") {
-              controller.enqueue(encoder.encode("data: [DONE]\n\n"));
-              continue;
-            }
+        // Process complete lines (SSE events end with \n\n)
+        const events = buffer.split("\n\n");
+        // Keep the last potentially incomplete event in buffer
+        buffer = events.pop() || "";
 
-            try {
-              const parsed = JSON.parse(data);
-
-              // Handle content_block_start to track if we're in thinking mode
-              if (parsed.type === "content_block_start") {
-                isThinking = parsed.content_block?.type === "thinking";
-                if (isThinking) {
-                  // Signal start of thinking to client
-                  controller.enqueue(
-                    encoder.encode(`data: ${JSON.stringify({ thinking: true, text: "" })}\n\n`)
-                  );
-                }
-              }
-
-              // Handle content_block_delta events
-              if (parsed.type === "content_block_delta") {
-                if (parsed.delta?.thinking) {
-                  // Thinking content - send as thinking update
-                  controller.enqueue(
-                    encoder.encode(`data: ${JSON.stringify({ thinking: true, text: parsed.delta.thinking })}\n\n`)
-                  );
-                } else if (parsed.delta?.text) {
-                  // Regular text content
-                  controller.enqueue(
-                    encoder.encode(`data: ${JSON.stringify({ text: parsed.delta.text })}\n\n`)
-                  );
-                }
-              }
-
-              // Handle content_block_stop
-              if (parsed.type === "content_block_stop" && isThinking) {
-                isThinking = false;
-                controller.enqueue(
-                  encoder.encode(`data: ${JSON.stringify({ thinking: false })}\n\n`)
-                );
-              }
-
-              // Handle message_stop to signal end
-              if (parsed.type === "message_stop") {
+        for (const event of events) {
+          const lines = event.split("\n");
+          for (const line of lines) {
+            if (line.startsWith("data: ")) {
+              const data = line.slice(6);
+              if (data === "[DONE]") {
                 controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+                continue;
               }
-            } catch {
-              // Skip invalid JSON
+
+              try {
+                const parsed = JSON.parse(data);
+
+                // Handle content_block_start to track if we're in thinking mode
+                if (parsed.type === "content_block_start") {
+                  isThinking = parsed.content_block?.type === "thinking";
+                  if (isThinking) {
+                    controller.enqueue(
+                      encoder.encode(`data: ${JSON.stringify({ thinking: true, text: "" })}\n\n`)
+                    );
+                  }
+                }
+
+                // Handle content_block_delta events
+                if (parsed.type === "content_block_delta") {
+                  if (parsed.delta?.thinking) {
+                    controller.enqueue(
+                      encoder.encode(`data: ${JSON.stringify({ thinking: true, text: parsed.delta.thinking })}\n\n`)
+                    );
+                  } else if (parsed.delta?.text) {
+                    controller.enqueue(
+                      encoder.encode(`data: ${JSON.stringify({ text: parsed.delta.text })}\n\n`)
+                    );
+                  }
+                }
+
+                // Handle content_block_stop
+                if (parsed.type === "content_block_stop" && isThinking) {
+                  isThinking = false;
+                  controller.enqueue(
+                    encoder.encode(`data: ${JSON.stringify({ thinking: false })}\n\n`)
+                  );
+                }
+
+                // Handle message_stop to signal end
+                if (parsed.type === "message_stop") {
+                  controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+                }
+              } catch {
+                // Skip invalid JSON (incomplete data)
+              }
             }
           }
         }
       },
+      flush(controller) {
+        // Process any remaining data in buffer
+        if (buffer.trim()) {
+          const lines = buffer.split("\n");
+          for (const line of lines) {
+            if (line.startsWith("data: ") && line.slice(6) !== "[DONE]") {
+              try {
+                const parsed = JSON.parse(line.slice(6));
+                if (parsed.delta?.text) {
+                  controller.enqueue(
+                    encoder.encode(`data: ${JSON.stringify({ text: parsed.delta.text })}\n\n`)
+                  );
+                }
+              } catch {
+                // Skip
+              }
+            }
+          }
+        }
+        controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+      }
     });
 
     return new Response(response.body?.pipeThrough(transformStream), {

@@ -1,4 +1,4 @@
-# Cloudflare Pages configuration for PokeMCP Team Builder
+# Cloudflare Workers configuration for PokeMCP Team Builder
 name = "pokemcp-teambuilder"
 compatibility_date = "2024-12-01"
 compatibility_flags = ["nodejs_compat"]
@@ -7,3 +7,11 @@ assets = { directory = ".open-next/assets", binding = "ASSETS" }
 
 [vars]
 NEXT_PUBLIC_MCP_URL = "https://api.pokemcp.com"
+
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
