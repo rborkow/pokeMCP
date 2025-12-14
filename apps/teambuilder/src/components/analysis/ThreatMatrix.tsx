@@ -198,14 +198,21 @@ function TeamSummaryColumn({
 
 export function ThreatMatrix() {
   const { team, format } = useTeamStore();
-  const { data: metaThreatsData, isLoading, error } = useMetaThreats(format, 10);
+  // Ensure format is lowercase for API calls
+  const normalizedFormat = format.toLowerCase();
+  const { data: metaThreatsData, isLoading, error } = useMetaThreats(normalizedFormat, 10);
   const [selectedThreat, setSelectedThreat] = useState<MetaThreat | null>(null);
 
   // Parse meta threats
   const metaThreats = useMemo(() => {
-    if (!metaThreatsData || typeof metaThreatsData !== "string") return [];
-    return parseMetaThreats(metaThreatsData);
-  }, [metaThreatsData]);
+    if (!metaThreatsData || typeof metaThreatsData !== "string") {
+      console.log("[ThreatMatrix] No meta threats data for format:", normalizedFormat, "data:", metaThreatsData);
+      return [];
+    }
+    const parsed = parseMetaThreats(metaThreatsData);
+    console.log("[ThreatMatrix] Parsed", parsed.length, "threats for format:", normalizedFormat);
+    return parsed;
+  }, [metaThreatsData, normalizedFormat]);
 
   // Calculate matchups
   const matchups = useMemo(() => {
@@ -262,7 +269,8 @@ export function ThreatMatrix() {
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground text-sm">
-            Could not load meta threats. Try refreshing.
+            Could not load meta threats for {format.toUpperCase()}.
+            {error && <span className="block text-xs text-destructive mt-1">Error: {String(error)}</span>}
           </p>
         </CardContent>
       </Card>

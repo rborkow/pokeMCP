@@ -3,6 +3,11 @@
 import { useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useTeamStore } from "@/stores/team-store";
 import { TYPES, type PokemonType } from "@/types/pokemon";
 import { getPokemonTypes } from "@/lib/data/pokemon-types";
@@ -51,19 +56,25 @@ const TYPE_CHART: Record<string, Record<string, number>> = {
   Fairy: { Poison: 1, Steel: 1, Dragon: -1, Fighting: 0, Bug: 0, Dark: 0 },
 };
 
-interface TypeAnalysis {
-  weaknesses: { type: PokemonType; count: number }[];
-  resistances: { type: PokemonType; count: number }[];
-  immunities: { type: PokemonType; count: number }[];
+interface TypeEntry {
+  type: PokemonType;
+  count: number;
+  pokemon: string[]; // Names of Pokemon with this weakness/resistance
 }
 
-function analyzeTeamCoverage(teamTypes: string[][]): TypeAnalysis {
-  const weaknessCount: Record<string, number> = {};
-  const resistCount: Record<string, number> = {};
-  const immuneCount: Record<string, number> = {};
+interface TypeAnalysis {
+  weaknesses: TypeEntry[];
+  resistances: TypeEntry[];
+  immunities: TypeEntry[];
+}
 
-  // For each Pokemon's types
-  for (const types of teamTypes) {
+function analyzeTeamCoverage(teamData: { name: string; types: string[] }[]): TypeAnalysis {
+  const weaknessMap: Record<string, string[]> = {};
+  const resistMap: Record<string, string[]> = {};
+  const immuneMap: Record<string, string[]> = {};
+
+  // For each Pokemon
+  for (const { name, types } of teamData) {
     // Check each attacking type
     for (const attackType of TYPES) {
       let effectiveness = 1;
@@ -83,25 +94,31 @@ function analyzeTeamCoverage(teamTypes: string[][]): TypeAnalysis {
       }
 
       if (effectiveness === 0) {
-        immuneCount[attackType] = (immuneCount[attackType] || 0) + 1;
+        if (!immuneMap[attackType]) immuneMap[attackType] = [];
+        immuneMap[attackType].push(name);
       } else if (effectiveness >= 2) {
-        weaknessCount[attackType] = (weaknessCount[attackType] || 0) + 1;
+        if (!weaknessMap[attackType]) weaknessMap[attackType] = [];
+        weaknessMap[attackType].push(name);
       } else if (effectiveness <= 0.5) {
-        resistCount[attackType] = (resistCount[attackType] || 0) + 1;
+        if (!resistMap[attackType]) resistMap[attackType] = [];
+        resistMap[attackType].push(name);
       }
     }
   }
 
+  const toEntries = (map: Record<string, string[]>): TypeEntry[] =>
+    Object.entries(map)
+      .map(([type, pokemon]) => ({
+        type: type as PokemonType,
+        count: pokemon.length,
+        pokemon,
+      }))
+      .sort((a, b) => b.count - a.count);
+
   return {
-    weaknesses: Object.entries(weaknessCount)
-      .map(([type, count]) => ({ type: type as PokemonType, count }))
-      .sort((a, b) => b.count - a.count),
-    resistances: Object.entries(resistCount)
-      .map(([type, count]) => ({ type: type as PokemonType, count }))
-      .sort((a, b) => b.count - a.count),
-    immunities: Object.entries(immuneCount)
-      .map(([type, count]) => ({ type: type as PokemonType, count }))
-      .sort((a, b) => b.count - a.count),
+    weaknesses: toEntries(weaknessMap),
+    resistances: toEntries(resistMap),
+    immunities: toEntries(immuneMap),
   };
 }
 
@@ -112,8 +129,11 @@ export function TypeCoverage() {
   const analysis = useMemo(() => {
     if (team.length === 0) return null;
 
-    const teamTypes = team.map((p) => getPokemonTypes(p.pokemon));
-    return analyzeTeamCoverage(teamTypes);
+    const teamData = team.map((p) => ({
+      name: p.pokemon,
+      types: getPokemonTypes(p.pokemon),
+    }));
+    return analyzeTeamCoverage(teamData);
   }, [team]);
 
   if (team.length === 0) {
@@ -146,13 +166,20 @@ export function TypeCoverage() {
             {analysis?.weaknesses.length === 0 ? (
               <span className="text-sm text-muted-foreground">No shared weaknesses!</span>
             ) : (
-              analysis?.weaknesses.map(({ type, count }) => (
-                <Badge
-                  key={type}
-                  className={`${TYPE_COLORS[type]} text-white`}
-                >
-                  {type} ({count})
-                </Badge>
+              analysis?.weaknesses.map(({ type, count, pokemon }) => (
+                <Tooltip key={type}>
+                  <TooltipTrigger asChild>
+                    <Badge
+                      className={`${TYPE_COLORS[type]} text-white cursor-help`}
+                    >
+                      {type} ({count})
+                    </Badge>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p className="font-semibold text-destructive">Weak to {type}:</p>
+                    <p className="text-sm">{pokemon.join(", ")}</p>
+                  </TooltipContent>
+                </Tooltip>
               ))
             )}
           </div>
@@ -167,15 +194,22 @@ export function TypeCoverage() {
             {analysis?.resistances.length === 0 ? (
               <span className="text-sm text-muted-foreground">No resistances</span>
             ) : (
-              analysis?.resistances.slice(0, 8).map(({ type, count }) => (
-                <Badge
-                  key={type}
-                  variant="outline"
-                  className={`border-2`}
-                  style={{ borderColor: TYPE_COLORS[type].replace("bg-", "") }}
-                >
-                  {type} ({count})
-                </Badge>
+              analysis?.resistances.slice(0, 8).map(({ type, count, pokemon }) => (
+                <Tooltip key={type}>
+                  <TooltipTrigger asChild>
+                    <Badge
+                      variant="outline"
+                      className={`border-2 cursor-help`}
+                      style={{ borderColor: TYPE_COLORS[type].replace("bg-", "") }}
+                    >
+                      {type} ({count})
+                    </Badge>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p className="font-semibold text-green-500">Resists {type}:</p>
+                    <p className="text-sm">{pokemon.join(", ")}</p>
+                  </TooltipContent>
+                </Tooltip>
               ))
             )}
           </div>
@@ -188,10 +222,18 @@ export function TypeCoverage() {
               Team Immunities
             </h4>
             <div className="flex flex-wrap gap-2">
-              {analysis.immunities.map(({ type, count }) => (
-                <Badge key={type} variant="secondary">
-                  {type} ({count})
-                </Badge>
+              {analysis.immunities.map(({ type, count, pokemon }) => (
+                <Tooltip key={type}>
+                  <TooltipTrigger asChild>
+                    <Badge variant="secondary" className="cursor-help">
+                      {type} ({count})
+                    </Badge>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p className="font-semibold text-blue-500">Immune to {type}:</p>
+                    <p className="text-sm">{pokemon.join(", ")}</p>
+                  </TooltipContent>
+                </Tooltip>
               ))}
             </div>
           </div>
