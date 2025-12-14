@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { Header } from "@/components/layout/Header";
 import { TeamGrid } from "@/components/team/TeamGrid";
 import { TeamImportExport } from "@/components/team/TeamImportExport";
@@ -9,12 +10,23 @@ import { ThreatMatrix } from "@/components/analysis/ThreatMatrix";
 import { TeamHistory } from "@/components/history/TeamHistory";
 import { useTeamStore } from "@/stores/team-store";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useUrlTeam } from "@/hooks/useUrlTeam";
+
+function UrlTeamLoader() {
+  useUrlTeam();
+  return null;
+}
 
 export default function Home() {
   const { team, format } = useTeamStore();
 
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Load team from URL if present */}
+      <Suspense fallback={null}>
+        <UrlTeamLoader />
+      </Suspense>
+
       <Header />
 
       <main className="flex-1 container max-w-screen-2xl px-4 py-6">

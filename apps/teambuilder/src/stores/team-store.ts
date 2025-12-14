@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { TeamPokemon, FormatId } from "@/types/pokemon";
 import { parseShowdownTeam, exportShowdownTeam } from "@/lib/showdown-parser";
+import { decodeTeamFromUrl } from "@/lib/share";
 
 interface TeamState {
   format: FormatId;
@@ -17,6 +18,7 @@ interface TeamState {
   exportTeam: () => string;
   clearTeam: () => void;
   setSelectedSlot: (slot: number | null) => void;
+  loadFromUrlParam: (encoded: string) => boolean;
 }
 
 export const useTeamStore = create<TeamState>()(
@@ -86,6 +88,19 @@ export const useTeamStore = create<TeamState>()(
       clearTeam: () => set({ team: [], selectedSlot: null }),
 
       setSelectedSlot: (slot) => set({ selectedSlot: slot }),
+
+      loadFromUrlParam: (encoded) => {
+        const result = decodeTeamFromUrl(encoded);
+        if (result && result.team.length > 0) {
+          set({
+            team: result.team,
+            format: result.format as FormatId,
+            selectedSlot: null,
+          });
+          return true;
+        }
+        return false;
+      },
     }),
     {
       name: "pokemcp-team",
