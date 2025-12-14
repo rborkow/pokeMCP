@@ -39,10 +39,43 @@ export async function POST(request: Request) {
       });
       if (threatsResponse.ok) {
         const threatsData = await threatsResponse.json();
-        metaThreats = threatsData.result || "";
+        metaThreats = threatsData.result?.content?.[0]?.text || "";
       }
     } catch (e) {
       console.error("Failed to fetch meta threats:", e);
+    }
+
+    // Extract Pokemon names from message for targeted set lookups
+    const pokemonMentioned: string[] = [];
+    const commonPokemon = ["Garchomp", "Landorus", "Great Tusk", "Kingambit", "Gholdengo", "Dragapult", "Iron Valiant", "Roaring Moon", "Skeledirge", "Arcanine", "Heatran", "Toxapex"];
+    for (const mon of commonPokemon) {
+      if (message.toLowerCase().includes(mon.toLowerCase())) {
+        pokemonMentioned.push(mon);
+      }
+    }
+
+    // Fetch popular sets for mentioned Pokemon (to help AI suggest valid movesets)
+    let popularSetsContext = "";
+    for (const pokemon of pokemonMentioned.slice(0, 3)) { // Limit to 3 to avoid context bloat
+      try {
+        const setsResponse = await fetch(`${MCP_URL}/api/tools`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            tool: "get_popular_sets",
+            args: { pokemon, format },
+          }),
+        });
+        if (setsResponse.ok) {
+          const setsData = await setsResponse.json();
+          const setsText = setsData.result?.content?.[0]?.text || "";
+          if (setsText) {
+            popularSetsContext += `\n\n${setsText}`;
+          }
+        }
+      } catch (e) {
+        console.error(`Failed to fetch sets for ${pokemon}:`, e);
+      }
     }
 
     // Format team for context
@@ -56,15 +89,18 @@ export async function POST(request: Request) {
         }).join("\n")
       : "No Pokemon in team yet.";
 
-    // Build system prompt (same as MCP server)
+    // Build system prompt
     const teamSize = team.length;
     const systemPrompt = `You are a Pokemon competitive team building assistant for ${format.toUpperCase()}.
 
-IMPORTANT RULES:
-1. ONLY suggest Pokemon that are legal in ${format.toUpperCase()}. The meta threats list below shows which Pokemon are available.
-2. Use REAL abilities, moves, and items that actually exist. Never make up abilities.
-3. When suggesting team changes, you MUST use the [ACTION] block format shown below.
-4. ALWAYS include competitive EV spreads (totaling 508-510 EVs). Common spreads:
+CRITICAL RULES:
+1. ONLY suggest Pokemon that are legal in ${format.toUpperCase()}. Reference the meta threats list.
+2. ONLY use moves from the "Popular Moves" section when provided. These are VERIFIED learnable moves.
+3. If no popular sets are provided for a Pokemon, use ONLY standard competitive moves you are certain it can learn.
+4. NEVER suggest moves like Trick Room, Wish, or other specialized moves unless you see them in the Popular Moves list.
+5. Use REAL abilities from the "Popular Abilities" section when provided.
+6. When suggesting team changes, you MUST use the [ACTION] block format shown below.
+7. ALWAYS include competitive EV spreads (totaling 508-510 EVs). Common spreads:
    - Offensive: 252 Atk or SpA / 4 Def or SpD / 252 Spe
    - Bulky: 252 HP / 252 Def or SpD / 4 Atk or SpA
    - Mixed bulk: 252 HP / 128 Def / 128 SpD
@@ -86,12 +122,16 @@ Guidelines:
 - Reference the meta threats when suggesting counters
 - Explain type synergies briefly
 - Only suggest changes when the user asks for them
-- If suggesting to replace a Pokemon, reference which one by name and slot number`;
+- If suggesting to replace a Pokemon, reference which one by name and slot number
+- When in doubt about a move, check the Popular Moves list or suggest a safe STAB move`;
 
     // Build user message with context
     let contextSection = "";
     if (metaThreats) {
       contextSection += `\n\n## Current Meta Threats (${format}):\n${metaThreats}`;
+    }
+    if (popularSetsContext) {
+      contextSection += `\n\n## Popular Sets (USE THESE MOVES - they are verified legal):\n${popularSetsContext}`;
     }
 
     const fullUserMessage = `Current Team:
@@ -108,7 +148,7 @@ User's Question: ${message}`;
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
+        model: "claude-sonnet-4-5-20250514",
         max_tokens: 1024,
         system: systemPrompt,
         messages: [

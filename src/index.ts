@@ -594,6 +594,28 @@ export default {
 					}
 				}
 
+				// Extract Pokemon mentioned in the message to fetch their popular sets
+				const commonPokemon = ["Garchomp", "Landorus", "Great Tusk", "Kingambit", "Gholdengo", "Dragapult", "Iron Valiant", "Roaring Moon", "Skeledirge", "Arcanine", "Heatran", "Toxapex", "Clefable", "Corviknight", "Ferrothorn", "Dragonite", "Volcarona", "Tyranitar", "Excadrill", "Gliscor"];
+				const pokemonMentioned: string[] = [];
+				for (const mon of commonPokemon) {
+					if (message.toLowerCase().includes(mon.toLowerCase())) {
+						pokemonMentioned.push(mon);
+					}
+				}
+
+				// Fetch popular sets for mentioned Pokemon (verified legal movesets)
+				let popularSetsContext = "";
+				for (const pokemon of pokemonMentioned.slice(0, 3)) {
+					try {
+						const setsText = await getPopularSets({ pokemon, format }, env);
+						if (setsText && !setsText.includes("not found")) {
+							popularSetsContext += `\n\n${setsText}`;
+						}
+					} catch (e) {
+						console.error(`Failed to fetch sets for ${pokemon}:`, e);
+					}
+				}
+
 				// Format team for context
 				const teamContext = team.length > 0
 					? team.map((p, i) => {
@@ -609,11 +631,14 @@ export default {
 				const teamSize = team.length;
 				const systemPrompt = system || `You are a Pokemon competitive team building assistant for ${format.toUpperCase()}.
 
-IMPORTANT RULES:
-1. ONLY suggest Pokemon that are legal in ${format.toUpperCase()}. The meta threats list below shows which Pokemon are available.
-2. Use REAL abilities, moves, and items that actually exist. Never make up abilities.
-3. When suggesting team changes, you MUST use the [ACTION] block format shown below.
-4. ALWAYS include competitive EV spreads (totaling 508-510 EVs). Common spreads:
+CRITICAL RULES:
+1. ONLY suggest Pokemon that are legal in ${format.toUpperCase()}. Reference the meta threats list.
+2. ONLY use moves from the "Popular Moves" section when provided. These are VERIFIED learnable moves.
+3. If no popular sets are provided for a Pokemon, use ONLY standard competitive moves you are certain it can learn.
+4. NEVER suggest moves like Trick Room, Wish, or other specialized moves unless you see them in the Popular Moves list.
+5. Use REAL abilities from the "Popular Abilities" section when provided.
+6. When suggesting team changes, you MUST use the [ACTION] block format shown below.
+7. ALWAYS include competitive EV spreads (totaling 508-510 EVs). Common spreads:
    - Offensive: 252 Atk or SpA / 4 Def or SpD / 252 Spe
    - Bulky: 252 HP / 252 Def or SpD / 4 Atk or SpA
    - Mixed bulk: 252 HP / 128 Def / 128 SpD
@@ -635,12 +660,16 @@ Guidelines:
 - Reference the meta threats when suggesting counters
 - Explain type synergies briefly
 - Only suggest changes when the user asks for them
-- If suggesting to replace a Pokemon, reference which one by name and slot number`;
+- If suggesting to replace a Pokemon, reference which one by name and slot number
+- When in doubt about a move, check the Popular Moves list or suggest a safe STAB move`;
 
 				// Build context section
 				let contextSection = "";
 				if (context.metaThreats) {
 					contextSection += `\n\n## Current Meta Threats (${format}):\n${context.metaThreats}`;
+				}
+				if (popularSetsContext) {
+					contextSection += `\n\n## Popular Sets (USE THESE MOVES - they are verified legal):${popularSetsContext}`;
 				}
 				if (context.coverage) {
 					contextSection += `\n\n## Team Coverage Analysis:\n${context.coverage}`;
@@ -655,18 +684,89 @@ ${contextSection}
 
 User's Question: ${message}`;
 
-				// Call Cloudflare AI
-				const aiResponse = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
-					messages: [
-						{ role: "system", content: systemPrompt },
-						{ role: "user", content: fullUserMessage }
-					],
-					max_tokens: 1024,
+				// Helper function to validate ACTION blocks using our MCP tools
+				const validateActionBlock = (actionJson: string): { valid: boolean; warnings: string[] } => {
+					const warnings: string[] = [];
+					try {
+						const action = JSON.parse(actionJson);
+						if (action.payload?.pokemon && action.payload?.moves) {
+							const validation = validateMoveset({
+								pokemon: action.payload.pokemon,
+								moves: action.payload.moves,
+								generation: format.startsWith('gen9') ? '9' : format.startsWith('gen8') ? '8' : '9'
+							});
+							// Check for illegal moves in the validation result
+							if (validation.includes('❌')) {
+								const illegalMatches = validation.match(/❌ \*\*([^*]+)\*\*: ([^\n]+)/g);
+								if (illegalMatches) {
+									for (const match of illegalMatches) {
+										warnings.push(match.replace(/\*\*/g, ''));
+									}
+								}
+							}
+						}
+					} catch (e) {
+						// JSON parse error - let it through
+					}
+					return { valid: warnings.length === 0, warnings };
+				};
+
+				// Require Anthropic API key
+				if (!env.ANTHROPIC_API_KEY) {
+					return new Response(
+						JSON.stringify({ error: "ANTHROPIC_API_KEY not configured" }),
+						{ status: 503, headers: corsHeaders }
+					);
+				}
+
+				// Call Claude Sonnet 4.5
+				console.log("Using Claude Sonnet 4.5 for AI chat");
+				const claudeResponse = await fetch("https://api.anthropic.com/v1/messages", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						"x-api-key": env.ANTHROPIC_API_KEY,
+						"anthropic-version": "2023-06-01",
+					},
+					body: JSON.stringify({
+						model: "claude-sonnet-4-5-20250514",
+						max_tokens: 1024,
+						system: systemPrompt,
+						messages: [{ role: "user", content: fullUserMessage }],
+					}),
 				});
 
-				const content = aiResponse.response || "I apologize, but I couldn't generate a response. Please try again.";
+				if (!claudeResponse.ok) {
+					const errorText = await claudeResponse.text();
+					console.error("Claude API error:", errorText);
+					return new Response(
+						JSON.stringify({ error: "Claude API request failed", details: errorText }),
+						{ status: 502, headers: corsHeaders }
+					);
+				}
 
-				console.log(`AI Chat response generated, length=${content.length}`);
+				const claudeData = await claudeResponse.json() as { content?: Array<{ text?: string }> };
+				let content = claudeData.content?.[0]?.text || "";
+				console.log(`Claude response generated, length=${content.length}`);
+
+				// Validate any ACTION blocks in the response using our MCP tools
+				const actionBlockRegex = /\[ACTION\]([\s\S]*?)\[\/ACTION\]/g;
+				const actionMatches = content.matchAll(actionBlockRegex);
+				const allWarnings: string[] = [];
+
+				for (const match of actionMatches) {
+					const actionJson = match[1].trim();
+					const { valid, warnings } = validateActionBlock(actionJson);
+					if (!valid) {
+						allWarnings.push(...warnings);
+						console.log(`Move validation warnings: ${warnings.join(', ')}`);
+					}
+				}
+
+				// Append warnings to content if there are invalid moves
+				if (allWarnings.length > 0) {
+					content += `\n\n⚠️ **Move Legality Warning:** The following moves may not be learnable:\n${allWarnings.map(w => `- ${w}`).join('\n')}\n\nPlease verify these moves before applying.`;
+				}
 
 				return new Response(
 					JSON.stringify({ content, context }),
