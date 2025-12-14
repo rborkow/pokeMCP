@@ -7,6 +7,7 @@ import { PokemonSprite } from "./PokemonSprite";
 import type { TeamPokemon, PokemonType } from "@/types/pokemon";
 import { X } from "lucide-react";
 import { getPokemonTypes } from "@/lib/data/pokemon-types";
+import { toDisplayName } from "@/lib/showdown-parser";
 
 // Type colors for badges
 const TYPE_COLORS: Record<PokemonType, string> = {
@@ -97,7 +98,7 @@ export function TeamSlot({
 
         {/* Name */}
         <p className="font-medium text-sm truncate w-full text-center">
-          {pokemon.nickname || pokemon.pokemon}
+          {pokemon.nickname || toDisplayName(pokemon.pokemon)}
         </p>
 
         {/* Types */}

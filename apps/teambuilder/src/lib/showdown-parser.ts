@@ -216,3 +216,112 @@ export function toID(text: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]/g, "");
 }
+
+/**
+ * Common Pokemon name mappings from ID to display name
+ * These are Pokemon with non-obvious formatting
+ */
+const POKEMON_DISPLAY_NAMES: Record<string, string> = {
+  // Paradox Pokemon (space in name)
+  "greattusk": "Great Tusk",
+  "ironvaliant": "Iron Valiant",
+  "ragingbolt": "Raging Bolt",
+  "ironmoth": "Iron Moth",
+  "irontreads": "Iron Treads",
+  "walkingwake": "Walking Wake",
+  "roaringmoon": "Roaring Moon",
+  "ironboulder": "Iron Boulder",
+  "gougingfire": "Gouging Fire",
+  "fluttermane": "Flutter Mane",
+  "ironhands": "Iron Hands",
+  "screamtail": "Scream Tail",
+  "brutebonnet": "Brute Bonnet",
+  "sandyshocks": "Sandy Shocks",
+  "ironbundle": "Iron Bundle",
+  "ironjugulis": "Iron Jugulis",
+  "ironthorns": "Iron Thorns",
+  "slitherwing": "Slither Wing",
+  "ironcrown": "Iron Crown",
+  "ironleaves": "Iron Leaves",
+  // Forme Pokemon (hyphen in name)
+  "landorustherian": "Landorus-Therian",
+  "tornadustherian": "Tornadus-Therian",
+  "thundurustherian": "Thundurus-Therian",
+  "enamorustherian": "Enamorus-Therian",
+  "ogerponwellspring": "Ogerpon-Wellspring",
+  "ogerponhearthflame": "Ogerpon-Hearthflame",
+  "ogerponcornerstone": "Ogerpon-Cornerstone",
+  "urshifurapidstrike": "Urshifu-Rapid-Strike",
+  "calyrexice": "Calyrex-Ice",
+  "calyrexshadow": "Calyrex-Shadow",
+  "zamazentacrowned": "Zamazenta-Crowned",
+  "zaciancrowned": "Zacian-Crowned",
+  "palafinhero": "Palafin-Hero",
+  "rotomwash": "Rotom-Wash",
+  "rotomheat": "Rotom-Heat",
+  "rotommow": "Rotom-Mow",
+  "rotomfrost": "Rotom-Frost",
+  "rotomfan": "Rotom-Fan",
+  "slowkinggalar": "Slowking-Galar",
+  "slowbrogalar": "Slowbro-Galar",
+  "maborossgalar": "Moltres-Galar",
+  "moltresgalar": "Moltres-Galar",
+  "zapdosgalar": "Zapdos-Galar",
+  "articunogalar": "Articuno-Galar",
+  "ursalunabloodmoon": "Ursaluna-Bloodmoon",
+  // Regional forms
+  "ninetalesalola": "Ninetales-Alola",
+  "raichualola": "Raichu-Alola",
+  "sandslashalola": "Sandslash-Alola",
+  "marowakalola": "Marowak-Alola",
+  "exeggutoralola": "Exeggutor-Alola",
+  "samurotthisui": "Samurott-Hisui",
+  "lilliganthisui": "Lilligant-Hisui",
+  "arcaninehisui": "Arcanine-Hisui",
+  "typhlosionhisui": "Typhlosion-Hisui",
+  "decidueyehisui": "Decidueye-Hisui",
+  "zoroarkhisui": "Zoroark-Hisui",
+  "goodrahisui": "Goodra-Hisui",
+  // Treasures of Ruin
+  "chiyu": "Chi-Yu",
+  "tinglu": "Ting-Lu",
+  "wochien": "Wo-Chien",
+  "chienpao": "Chien-Pao",
+  // Other special cases
+  "porygonz": "Porygon-Z",
+  "porygon2": "Porygon2",
+  "mimejr": "Mime Jr.",
+  "mrmime": "Mr. Mime",
+  "mrrime": "Mr. Rime",
+  "tapukoko": "Tapu Koko",
+  "tapulele": "Tapu Lele",
+  "tapubulu": "Tapu Bulu",
+  "tapufini": "Tapu Fini",
+  "typenull": "Type: Null",
+  "hooh": "Ho-Oh",
+  "jangmoo": "Jangmo-o",
+  "hakamoo": "Hakamo-o",
+  "kommoo": "Kommo-o",
+};
+
+/**
+ * Convert a Pokemon ID or name to a friendly display name
+ * "greattusk" -> "Great Tusk"
+ * "landorustherian" -> "Landorus-Therian"
+ * "Garchomp" -> "Garchomp" (unchanged if already good)
+ */
+export function toDisplayName(pokemon: string): string {
+  // First check if it's already in a good format (has spaces or proper casing)
+  if (pokemon.includes(" ") || pokemon.includes("-") || pokemon !== pokemon.toLowerCase()) {
+    return pokemon;
+  }
+
+  // Check our mapping
+  const id = toID(pokemon);
+  if (POKEMON_DISPLAY_NAMES[id]) {
+    return POKEMON_DISPLAY_NAMES[id];
+  }
+
+  // Default: capitalize first letter
+  return pokemon.charAt(0).toUpperCase() + pokemon.slice(1);
+}

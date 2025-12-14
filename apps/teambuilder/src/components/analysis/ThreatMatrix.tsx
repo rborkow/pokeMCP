@@ -15,6 +15,7 @@ import {
   calculateMatchupScore,
   type PokemonType,
 } from "@/lib/data/pokemon-types";
+import { toDisplayName } from "@/lib/showdown-parser";
 import { ThreatDetailModal } from "./ThreatDetailModal";
 
 interface MetaThreat {
@@ -140,7 +141,7 @@ function ThreatMatrixCell({
       <TooltipContent side="top" className="max-w-xs">
         <div className="space-y-1">
           <p className="font-semibold">
-            {teamPokemon} vs {threat.pokemon}
+            {toDisplayName(teamPokemon)} vs {toDisplayName(threat.pokemon)}
           </p>
           <p className="text-xs">
             Your types: {matchup.defenderTypes.length > 0 ? matchup.defenderTypes.join("/") : "Unknown"}
@@ -188,7 +189,7 @@ function TeamSummaryColumn({
             </div>
           </TooltipTrigger>
           <TooltipContent>
-            <p>{team[i].pokemon} {avg !== null ? "average vs all threats" : "(unknown types)"}</p>
+            <p>{toDisplayName(team[i].pokemon)} {avg !== null ? "average vs all threats" : "(unknown types)"}</p>
           </TooltipContent>
         </Tooltip>
       ))}
@@ -297,12 +298,12 @@ export function ThreatMatrix() {
                     <div className="w-32 h-10 flex items-center gap-2">
                       <PokemonSprite pokemon={pokemon.pokemon} size="sm" />
                       <span className="text-xs truncate flex-1">
-                        {pokemon.pokemon}
+                        {toDisplayName(pokemon.pokemon)}
                       </span>
                     </div>
                   </TooltipTrigger>
                   <TooltipContent side="left">
-                    <p>{pokemon.pokemon}</p>
+                    <p>{toDisplayName(pokemon.pokemon)}</p>
                     <p className="text-xs text-muted-foreground">
                       {getPokemonTypes(pokemon.pokemon).join("/") || "Unknown types"}
                     </p>
@@ -326,7 +327,7 @@ export function ThreatMatrix() {
                       </button>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p className="font-semibold">{threat.pokemon}</p>
+                      <p className="font-semibold">{toDisplayName(threat.pokemon)}</p>
                       <p className="text-xs">{threat.types.join("/")}</p>
                       <p className="text-xs text-muted-foreground">
                         {threat.usage.toFixed(1)}% usage

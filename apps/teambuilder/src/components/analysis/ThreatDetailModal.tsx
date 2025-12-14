@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { PokemonSprite } from "@/components/team/PokemonSprite";
+import { toDisplayName } from "@/lib/showdown-parser";
 import type { PokemonType } from "@/lib/data/pokemon-types";
 
 interface PopularSet {
@@ -130,12 +131,14 @@ export function ThreatDetailModal({
       setLoading(true);
       setError(null);
       try {
+        // Normalize format to lowercase for API call
+        const normalizedFormat = format.toLowerCase();
         const response = await fetch(`${MCP_URL}/api/tools`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             tool: "get_popular_sets",
-            args: { pokemon, format },
+            args: { pokemon, format: normalizedFormat },
           }),
         });
 
@@ -180,7 +183,7 @@ export function ThreatDetailModal({
           <DialogTitle className="flex items-center gap-3">
             <PokemonSprite pokemon={pokemon} size="lg" />
             <div>
-              <div className="text-xl">{pokemon}</div>
+              <div className="text-xl">{toDisplayName(pokemon)}</div>
               <div className="flex gap-1 mt-1">
                 {types.map((type) => (
                   <Badge key={type} variant="secondary" className="text-xs">
