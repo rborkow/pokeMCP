@@ -1,0 +1,113 @@
+# Team Builder Quick Start
+
+The PokeMCP Team Builder is an interactive web app for building competitive Pokemon teams with AI assistance.
+
+**Visit: [www.pokemcp.com](https://www.pokemcp.com)**
+
+## Features
+
+### Team Management
+
+- **Import/Export** - Paste teams in Pokemon Showdown format
+- **Share** - Generate shareable URLs for your teams
+- **Click to Edit** - Modify any Pokemon's moveset, item, ability, EVs, nature, and Tera type
+- **Drag to Reorder** - Reorganize your team slots
+
+### AI Chat Assistant
+
+Get team building advice from an AI assistant powered by Claude. The AI has access to:
+
+- Real Smogon usage statistics
+- Type coverage analysis
+- Strategic content from Smogon articles
+- Move legality validation
+
+**Choose Your Advisor:**
+
+| Personality | Style |
+|-------------|-------|
+| Professor Kukui | Enthusiastic move expert from Alola |
+| Professor Oak | Wise, educational approach |
+| Blue | Competitive champion with direct advice |
+
+### Analysis Tools
+
+- **Type Coverage** - See offensive and defensive type matchups
+- **Threat Matrix** - Analyze matchups against top meta threats
+- **Team History** - Undo/redo with diff view of changes
+
+## Quick Start
+
+### 1. Import an Existing Team
+
+Click **Import** and paste a Showdown-format team:
+
+```
+Garchomp @ Life Orb
+Ability: Rough Skin
+EVs: 252 Atk / 4 SpD / 252 Spe
+Jolly Nature
+- Earthquake
+- Dragon Claw
+- Swords Dance
+- Fire Fang
+```
+
+### 2. Build from Scratch
+
+Click an empty slot and use the AI chat:
+
+```
+Add a bulky Ground-type that can set Stealth Rock
+```
+
+The AI will suggest Pokemon with proper movesets, and you can apply suggestions with one click.
+
+### 3. Get Advice
+
+Ask the AI for help:
+
+```
+What are weaknesses in my team?
+How do I counter Kingambit?
+Rate my team and suggest improvements
+```
+
+### 4. Share Your Team
+
+Click **Share** to generate a URL. Anyone with the link can view and import your team.
+
+## Keyboard Shortcuts
+
+| Key | Action |
+|-----|--------|
+| `Ctrl+Z` | Undo last change |
+| `Ctrl+Shift+Z` | Redo |
+| `Enter` | Send chat message |
+
+## Format Selection
+
+Select your competitive format from the dropdown in the header:
+
+- **Gen 9 OU** - Standard singles (default)
+- **Gen 9 Ubers** - Legendary-inclusive
+- **Gen 9 VGC** - Official doubles format
+- And 20+ more formats
+
+The AI tailors suggestions to your selected format using real usage data.
+
+## Tips
+
+1. **Use suggested prompts** - Click the example questions below the chat for quick starts
+2. **Check move legality** - The AI validates all moves before suggesting them
+3. **Review threat matrix** - Identify problematic matchups before testing on ladder
+4. **Save teams via URL** - Bookmark your share links to save team variations
+
+## Technical Details
+
+- Built with Next.js 15 and React
+- Uses PokeMCP API for data and AI chat
+- AI powered by Claude Sonnet 4.5
+- Teams stored locally in browser (no account needed)
+
+[Back to Documentation](/)
