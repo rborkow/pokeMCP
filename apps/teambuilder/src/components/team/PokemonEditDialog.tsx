@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import {
   Dialog,
   DialogContent,
@@ -22,7 +22,7 @@ import type { TeamPokemon, BaseStats } from "@/types/pokemon";
 import { TYPES, NATURES } from "@/types/pokemon";
 import { usePokemonLookup, usePopularSets } from "@/lib/mcp-client";
 import { useTeamStore } from "@/stores/team-store";
-import { parseAbilities, parseMoves, parseItems, parseTeraTypes } from "@/lib/pokemon-parser";
+import { parseAbilities, parseMoves, parseItems } from "@/lib/pokemon-parser";
 import { COMMON_ITEMS } from "@/lib/data/items";
 
 interface PokemonEditDialogProps {
@@ -62,8 +62,16 @@ export function PokemonEditDialog({
   const [editedPokemon, setEditedPokemon] = useState<TeamPokemon>(
     pokemon || DEFAULT_POKEMON
   );
-  const [evTotal, setEvTotal] = useState(0);
+  const prevOpenRef = useRef(open);
   const { format } = useTeamStore();
+
+  // Compute EV total as derived state
+  const evTotal = useMemo(() => {
+    return Object.values(editedPokemon.evs || {}).reduce(
+      (sum, val) => sum + (val || 0),
+      0
+    );
+  }, [editedPokemon.evs]);
 
   // Fetch Pokemon data for abilities
   const { data: lookupData } = usePokemonLookup(
@@ -85,46 +93,44 @@ export function PokemonEditDialog({
   }, [lookupData]);
 
   // Parse moves and items from popular sets
-  const { popularMoves, popularItems, popularTeraTypes } = useMemo(() => {
+  const { popularMoves, popularItems } = useMemo(() => {
     if (!setsData || typeof setsData !== "string") {
-      return { popularMoves: [], popularItems: [], popularTeraTypes: [] };
+      return { popularMoves: [], popularItems: [] };
     }
     return {
       popularMoves: parseMoves(setsData),
       popularItems: parseItems(setsData),
-      popularTeraTypes: parseTeraTypes(setsData),
     };
   }, [setsData]);
 
-  // Combine popular items with common items list
-  const allItems = useMemo(() => {
+  // Combine popular items with common items list (not currently used in UI but kept for future)
+  useMemo(() => {
     const itemSet = new Set([...popularItems, ...COMMON_ITEMS]);
     return Array.from(itemSet);
   }, [popularItems]);
 
-  // Reset when pokemon changes
+  // Sync pokemon prop to state when dialog opens (transition from closed to open)
+  // This is a valid pattern for resetting controlled component state when a dialog opens
   useEffect(() => {
-    if (pokemon) {
-      setEditedPokemon({
-        ...DEFAULT_POKEMON,
-        ...pokemon,
-        moves: [...(pokemon.moves || []), "", "", "", ""].slice(0, 4),
-        evs: { ...DEFAULT_POKEMON.evs, ...pokemon.evs },
-        ivs: { ...DEFAULT_POKEMON.ivs, ...pokemon.ivs },
-      });
-    } else {
-      setEditedPokemon(DEFAULT_POKEMON);
+    const wasOpen = prevOpenRef.current;
+    prevOpenRef.current = open;
+
+    // Only sync when dialog is opening (was closed, now open)
+    if (open && !wasOpen) {
+      if (pokemon) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- Valid pattern: sync props to state on dialog open
+        setEditedPokemon({
+          ...DEFAULT_POKEMON,
+          ...pokemon,
+          moves: [...(pokemon.moves || []), "", "", "", ""].slice(0, 4),
+          evs: { ...DEFAULT_POKEMON.evs, ...pokemon.evs },
+          ivs: { ...DEFAULT_POKEMON.ivs, ...pokemon.ivs },
+        });
+      } else {
+        setEditedPokemon(DEFAULT_POKEMON);
+      }
     }
   }, [pokemon, open]);
-
-  // Calculate EV total
-  useEffect(() => {
-    const total = Object.values(editedPokemon.evs || {}).reduce(
-      (sum, val) => sum + (val || 0),
-      0
-    );
-    setEvTotal(total);
-  }, [editedPokemon.evs]);
 
   const updateField = <K extends keyof TeamPokemon>(
     field: K,

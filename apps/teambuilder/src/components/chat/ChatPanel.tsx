@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
@@ -10,13 +9,13 @@ import { useChatStore } from "@/stores/chat-store";
 import { useTeamStore } from "@/stores/team-store";
 import { useHistoryStore } from "@/stores/history-store";
 import { streamChatMessage } from "@/lib/ai";
-import { Brain, Trash2 } from "lucide-react";
+import { Brain, Trash2, Bot } from "lucide-react";
 import type { TeamAction } from "@/types/chat";
 
 export function ChatPanel() {
   const { messages, isLoading, addMessage, setLoading, setPendingAction, clearChat } =
     useChatStore();
-  const { team, format, setPokemon, clearTeam } = useTeamStore();
+  const { team, format, setPokemon } = useTeamStore();
   const { pushState } = useHistoryStore();
   const [isThinking, setIsThinking] = useState(false);
 
@@ -117,10 +116,18 @@ export function ChatPanel() {
   };
 
   return (
-    <Card className="flex flex-col h-[600px] lg:h-[650px]">
-      {/* Header with clear button */}
-      <div className="flex items-center justify-between px-4 py-2 border-b bg-muted/30">
-        <span className="text-sm font-medium text-muted-foreground">AI Assistant</span>
+    <div className="glass-panel flex flex-col h-[600px] lg:h-[650px]">
+      {/* Header with Professor Kukui branding */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border/50">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+            <Bot className="h-5 w-5 text-primary-foreground" />
+          </div>
+          <div>
+            <h3 className="font-display font-semibold text-sm">Professor Kukui</h3>
+            <p className="text-xs text-muted-foreground">Your AI team advisor</p>
+          </div>
+        </div>
         {messages.length > 0 && (
           <Button
             variant="ghost"
@@ -139,9 +146,9 @@ export function ChatPanel() {
 
       {/* Thinking indicator */}
       {isThinking && (
-        <div className="flex items-center gap-2 px-4 py-2 bg-muted/50 border-b text-sm text-muted-foreground">
-          <Brain className="h-4 w-4 animate-pulse text-primary" />
-          <span>Analyzing your team...</span>
+        <div className="flex items-center gap-2 px-4 py-2 bg-muted/30 border-b border-border/50 text-sm text-muted-foreground">
+          <Brain className="h-4 w-4 animate-pulse-slow text-primary" />
+          <span className="font-display">Analyzing your team...</span>
         </div>
       )}
 
@@ -155,6 +162,6 @@ export function ChatPanel() {
             : "Ask about your team..."
         }
       />
-    </Card>
+    </div>
   );
 }
