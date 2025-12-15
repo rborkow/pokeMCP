@@ -64,12 +64,13 @@ export function TeamGrid({ onSlotClick }: TeamGridProps) {
   return (
     <>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-        {slots.map(({ pokemon, slot }) =>
+        {slots.map(({ pokemon, slot }, index) =>
           pokemon ? (
             <TeamSlot
               key={`slot-${slot}`}
               pokemon={pokemon}
               slot={slot}
+              index={index}
               isSelected={selectedSlot === slot}
               onSelect={() => handleSlotClick(slot)}
               onRemove={() => handleRemove(slot)}
@@ -78,6 +79,7 @@ export function TeamGrid({ onSlotClick }: TeamGridProps) {
             <TeamSlotEmpty
               key={`empty-${slot}`}
               slot={slot}
+              index={index}
               onClick={() => handleSlotClick(slot)}
             />
           )

@@ -22,7 +22,7 @@ import type { TeamPokemon, BaseStats } from "@/types/pokemon";
 import { TYPES, NATURES } from "@/types/pokemon";
 import { usePokemonLookup, usePopularSets } from "@/lib/mcp-client";
 import { useTeamStore } from "@/stores/team-store";
-import { parseAbilities, parseMoves, parseItems, parseTeraTypes } from "@/lib/pokemon-parser";
+import { parseAbilities, parseMoves, parseItems } from "@/lib/pokemon-parser";
 import { COMMON_ITEMS } from "@/lib/data/items";
 
 interface PokemonEditDialogProps {
@@ -112,19 +112,18 @@ export function PokemonEditDialog({
   }, [lookupData]);
 
   // Parse moves and items from popular sets
-  const { popularMoves, popularItems, popularTeraTypes } = useMemo(() => {
+  const { popularMoves, popularItems } = useMemo(() => {
     if (!setsData || typeof setsData !== "string") {
-      return { popularMoves: [], popularItems: [], popularTeraTypes: [] };
+      return { popularMoves: [], popularItems: [] };
     }
     return {
       popularMoves: parseMoves(setsData),
       popularItems: parseItems(setsData),
-      popularTeraTypes: parseTeraTypes(setsData),
     };
   }, [setsData]);
 
-  // Combine popular items with common items list
-  const allItems = useMemo(() => {
+  // Combine popular items with common items list (not currently used in UI but kept for future)
+  useMemo(() => {
     const itemSet = new Set([...popularItems, ...COMMON_ITEMS]);
     return Array.from(itemSet);
   }, [popularItems]);

@@ -1,25 +1,24 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { Plus } from "lucide-react";
 
 interface TeamSlotEmptyProps {
   slot: number;
+  index?: number;
   onClick?: () => void;
 }
 
-export function TeamSlotEmpty({ slot: _slot, onClick }: TeamSlotEmptyProps) {
+export function TeamSlotEmpty({ index = 0, onClick }: TeamSlotEmptyProps) {
   return (
-    <Card
-      className="cursor-pointer border-dashed hover:border-primary/50 transition-all"
+    <div
+      className="pokemon-card-empty glow-effect group animate-in fade-in slide-in-from-bottom-2 h-[152px] flex flex-col items-center justify-center gap-2"
+      style={{ animationDelay: `${index * 100}ms`, animationFillMode: "both" }}
       onClick={onClick}
     >
-      <CardContent className="p-3 flex flex-col items-center justify-center gap-2 h-[152px]">
-        <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center">
-          <Plus className="h-8 w-8 text-muted-foreground" />
-        </div>
-        <p className="text-sm text-muted-foreground">Add Pokemon</p>
-      </CardContent>
-    </Card>
+      <div className="w-16 h-16 rounded-full bg-muted/50 flex items-center justify-center group-hover:bg-muted/70 transition-colors">
+        <Plus className="h-8 w-8 text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all duration-300" />
+      </div>
+      <p className="text-sm text-muted-foreground font-display group-hover:text-foreground transition-colors">Add Pokemon</p>
+    </div>
   );
 }

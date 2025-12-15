@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   Tooltip,
@@ -138,25 +137,19 @@ export function TypeCoverage() {
 
   if (team.length === 0) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Type Coverage</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground text-sm">
-            Add Pokemon to see type coverage analysis
-          </p>
-        </CardContent>
-      </Card>
+      <div className="glass-panel">
+        <h3 className="font-display text-lg font-semibold mb-4">Type Coverage</h3>
+        <p className="text-muted-foreground text-sm">
+          Add Pokemon to see type coverage analysis
+        </p>
+      </div>
     );
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-lg">Type Coverage Analysis</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    <div className="glass-panel">
+      <h3 className="font-display text-lg font-semibold mb-4">Type Coverage Analysis</h3>
+      <div className="space-y-4">
         {/* Weaknesses */}
         <div>
           <h4 className="text-sm font-medium mb-2 text-destructive">
@@ -238,7 +231,7 @@ export function TypeCoverage() {
             </div>
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

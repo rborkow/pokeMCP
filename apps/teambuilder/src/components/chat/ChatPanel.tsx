@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
@@ -121,9 +120,9 @@ export function ChatPanel() {
   };
 
   return (
-    <Card className="flex flex-col h-[600px] lg:h-[650px]">
+    <div className="glass-panel flex flex-col h-[600px] lg:h-[650px]">
       {/* Header with personality selector and clear button */}
-      <div className="flex items-center justify-between px-4 py-2 border-b bg-muted/30">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-border/50 bg-muted/30">
         <PersonalitySelector />
         {messages.length > 0 && (
           <Button
@@ -143,9 +142,9 @@ export function ChatPanel() {
 
       {/* Thinking indicator with personality message */}
       {isThinking && (
-        <div className="flex items-center gap-2 px-4 py-2 bg-muted/50 border-b text-sm text-muted-foreground">
-          <Brain className="h-4 w-4 animate-pulse text-primary" />
-          <span>{personality.thinkingMessage}</span>
+        <div className="flex items-center gap-2 px-4 py-2 bg-muted/30 border-b border-border/50 text-sm text-muted-foreground">
+          <Brain className="h-4 w-4 animate-pulse-slow text-primary" />
+          <span className="font-display">{personality.thinkingMessage}</span>
         </div>
       )}
 
@@ -159,6 +158,6 @@ export function ChatPanel() {
             : "Ask about your team..."
         }
       />
-    </Card>
+    </div>
   );
 }

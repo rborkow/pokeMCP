@@ -1,6 +1,5 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { PokemonSprite } from "./PokemonSprite";
@@ -57,6 +56,7 @@ const TERA_COLORS: Record<string, string> = {
 interface TeamSlotProps {
   pokemon: TeamPokemon;
   slot: number;
+  index?: number;
   isSelected?: boolean;
   onSelect?: () => void;
   onRemove?: () => void;
@@ -64,7 +64,7 @@ interface TeamSlotProps {
 
 export function TeamSlot({
   pokemon,
-  slot: _slot,
+  index = 0,
   isSelected = false,
   onSelect,
   onRemove,
@@ -72,17 +72,18 @@ export function TeamSlot({
   const types = getPokemonTypes(pokemon.pokemon);
 
   return (
-    <Card
-      className={`relative cursor-pointer transition-all hover:border-primary/50 ${
+    <div
+      className={`pokemon-card glow-effect group animate-in fade-in slide-in-from-bottom-2 ${
         isSelected ? "border-primary ring-2 ring-primary/20" : ""
       }`}
+      style={{ animationDelay: `${index * 100}ms`, animationFillMode: "both" }}
       onClick={onSelect}
     >
       {onRemove && (
         <Button
           variant="ghost"
           size="icon"
-          className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-destructive text-destructive-foreground hover:bg-destructive/90 z-10"
+          className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-destructive text-destructive-foreground hover:bg-destructive/90 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
           onClick={(e) => {
             e.stopPropagation();
             onRemove();
@@ -91,9 +92,11 @@ export function TeamSlot({
           <X className="h-3 w-3" />
         </Button>
       )}
-      <CardContent className="p-2 flex flex-col items-center gap-0.5">
-        <div className="w-14 h-14 flex items-center justify-center">
-          <PokemonSprite pokemon={pokemon.pokemon} size="md" />
+      <div className="flex flex-col items-center gap-0.5">
+        <div className="w-14 h-14 flex items-center justify-center rounded-full bg-muted/30 group-hover:bg-muted/50 transition-colors">
+          <div className="group-hover:scale-110 transition-transform duration-300">
+            <PokemonSprite pokemon={pokemon.pokemon} size="md" />
+          </div>
         </div>
 
         {/* Name */}
@@ -142,7 +145,7 @@ export function TeamSlot({
             ✦ Tera: {pokemon.teraType}
           </Badge>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
