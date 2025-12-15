@@ -196,11 +196,16 @@
   }
 
   .pokemon-card-empty {
-    @apply pokemon-card border-dashed border-border/50;
+    @apply relative overflow-hidden rounded-2xl border border-dashed border-border/50 p-4 cursor-pointer;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .pokemon-card-empty:hover {
     @apply border-primary/40 bg-muted/30;
+    box-shadow: var(--shadow-hover), var(--shadow-glow);
+    transform: translateY(-4px);
   }
 
   .type-badge {
