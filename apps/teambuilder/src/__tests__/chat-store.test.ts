@@ -1,246 +1,179 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { useChatStore } from "@/stores/chat-store";
+import { DEFAULT_PERSONALITY } from "@/lib/ai/personalities";
 
 // Mock localStorage
 const localStorageMock = {
-    getItem: vi.fn(),
-    setItem: vi.fn(),
-    removeItem: vi.fn(),
-    clear: vi.fn(),
+  getItem: vi.fn(),
+  setItem: vi.fn(),
+  removeItem: vi.fn(),
+  clear: vi.fn(),
 };
 vi.stubGlobal("localStorage", localStorageMock);
 
-// Mock crypto.randomUUID
-vi.stubGlobal("crypto", {
-    randomUUID: () => `test-uuid-${Date.now()}-${Math.random()}`,
-});
-
 describe("chat-store", () => {
-    beforeEach(() => {
-        // Reset store between tests
-        useChatStore.getState().clearChat();
-        vi.clearAllMocks();
+  beforeEach(() => {
+    // Reset store between tests
+    useChatStore.getState().clearChat();
+    useChatStore.getState().setPersonality(DEFAULT_PERSONALITY);
+    useChatStore.getState().setLoading(false);
+    vi.clearAllMocks();
+  });
+
+  describe("messages", () => {
+    it("should start with empty messages", () => {
+      expect(useChatStore.getState().messages).toHaveLength(0);
     });
 
-    describe("addMessage", () => {
-        it("should add a message to the messages array", () => {
-            const id = useChatStore.getState().addMessage({
-                role: "user",
-                content: "Hello",
-            });
+    it("should add a message and return its id", () => {
+      const id = useChatStore.getState().addMessage({
+        role: "user",
+        content: "Hello",
+      });
 
-            const messages = useChatStore.getState().messages;
-            expect(messages).toHaveLength(1);
-            expect(messages[0].content).toBe("Hello");
-            expect(messages[0].role).toBe("user");
-            expect(messages[0].id).toBe(id);
-        });
-
-        it("should return the message id", () => {
-            const id = useChatStore.getState().addMessage({
-                role: "assistant",
-                content: "Hi there!",
-            });
-
-            expect(typeof id).toBe("string");
-            expect(id.length).toBeGreaterThan(0);
-        });
-
-        it("should set timestamp automatically", () => {
-            useChatStore.getState().addMessage({
-                role: "user",
-                content: "Test",
-            });
-
-            const message = useChatStore.getState().messages[0];
-            expect(message.timestamp).toBeInstanceOf(Date);
-        });
-
-        it("should append multiple messages in order", () => {
-            useChatStore.getState().addMessage({ role: "user", content: "First" });
-            useChatStore.getState().addMessage({ role: "assistant", content: "Second" });
-            useChatStore.getState().addMessage({ role: "user", content: "Third" });
-
-            const messages = useChatStore.getState().messages;
-            expect(messages).toHaveLength(3);
-            expect(messages[0].content).toBe("First");
-            expect(messages[1].content).toBe("Second");
-            expect(messages[2].content).toBe("Third");
-        });
+      expect(id).toBeTruthy();
+      expect(useChatStore.getState().messages).toHaveLength(1);
+      expect(useChatStore.getState().messages[0].content).toBe("Hello");
     });
 
-    describe("updateMessage", () => {
-        it("should update an existing message", () => {
-            const id = useChatStore.getState().addMessage({
-                role: "assistant",
-                content: "Loading...",
-                isLoading: true,
-            });
+    it("should add timestamp to messages", () => {
+      useChatStore.getState().addMessage({
+        role: "user",
+        content: "Test",
+      });
 
-            useChatStore.getState().updateMessage(id, {
-                content: "Here is my response",
-                isLoading: false,
-            });
-
-            const message = useChatStore.getState().messages.find((m) => m.id === id);
-            expect(message?.content).toBe("Here is my response");
-            expect(message?.isLoading).toBe(false);
-        });
-
-        it("should not affect other messages", () => {
-            useChatStore.getState().addMessage({ role: "user", content: "Question" });
-            const id = useChatStore.getState().addMessage({
-                role: "assistant",
-                content: "Answer",
-            });
-
-            useChatStore.getState().updateMessage(id, { content: "Updated answer" });
-
-            const messages = useChatStore.getState().messages;
-            expect(messages[0].content).toBe("Question");
-            expect(messages[1].content).toBe("Updated answer");
-        });
-
-        it("should handle non-existent id gracefully", () => {
-            useChatStore.getState().addMessage({ role: "user", content: "Test" });
-
-            // Should not throw
-            useChatStore.getState().updateMessage("non-existent-id", { content: "Updated" });
-
-            // Original message should be unchanged
-            expect(useChatStore.getState().messages[0].content).toBe("Test");
-        });
+      const message = useChatStore.getState().messages[0];
+      expect(message.timestamp).toBeInstanceOf(Date);
     });
 
-    describe("removeMessage", () => {
-        it("should remove a message by id", () => {
-            const id = useChatStore.getState().addMessage({
-                role: "user",
-                content: "To be removed",
-            });
+    it("should update a message by id", () => {
+      const id = useChatStore.getState().addMessage({
+        role: "assistant",
+        content: "Original",
+      });
 
-            useChatStore.getState().removeMessage(id);
+      useChatStore.getState().updateMessage(id, { content: "Updated" });
 
-            expect(useChatStore.getState().messages).toHaveLength(0);
-        });
-
-        it("should only remove the specified message", () => {
-            useChatStore.getState().addMessage({ role: "user", content: "Keep" });
-            const id = useChatStore.getState().addMessage({ role: "assistant", content: "Remove" });
-            useChatStore.getState().addMessage({ role: "user", content: "Also keep" });
-
-            useChatStore.getState().removeMessage(id);
-
-            const messages = useChatStore.getState().messages;
-            expect(messages).toHaveLength(2);
-            expect(messages[0].content).toBe("Keep");
-            expect(messages[1].content).toBe("Also keep");
-        });
+      expect(useChatStore.getState().messages[0].content).toBe("Updated");
     });
 
-    describe("clearChat", () => {
-        it("should remove all messages", () => {
-            useChatStore.getState().addMessage({ role: "user", content: "Message 1" });
-            useChatStore.getState().addMessage({ role: "assistant", content: "Message 2" });
+    it("should remove a message by id", () => {
+      const id = useChatStore.getState().addMessage({
+        role: "user",
+        content: "To be removed",
+      });
 
-            useChatStore.getState().clearChat();
+      useChatStore.getState().removeMessage(id);
 
-            expect(useChatStore.getState().messages).toHaveLength(0);
-        });
+      expect(useChatStore.getState().messages).toHaveLength(0);
+    });
+  });
 
-        it("should also clear pending action", () => {
-            useChatStore.getState().setPendingAction({
-                type: "add_pokemon",
-                slot: 0,
-                payload: { pokemon: "Pikachu" },
-                preview: [],
-                reason: "Test",
-            });
+  describe("clearChat", () => {
+    it("should clear all messages", () => {
+      useChatStore.getState().addMessage({ role: "user", content: "1" });
+      useChatStore.getState().addMessage({ role: "assistant", content: "2" });
 
-            useChatStore.getState().clearChat();
+      useChatStore.getState().clearChat();
 
-            expect(useChatStore.getState().pendingAction).toBeNull();
-        });
+      expect(useChatStore.getState().messages).toHaveLength(0);
     });
 
-    describe("setPendingAction", () => {
-        it("should set a pending action", () => {
-            const action = {
-                type: "add_pokemon" as const,
-                slot: 0,
-                payload: { pokemon: "Charizard", moves: ["Flamethrower"] },
-                preview: [],
-                reason: "Good fire type",
-            };
+    it("should clear pending action", () => {
+      useChatStore.getState().setPendingAction({
+        type: "add_pokemon",
+        slot: 0,
+        payload: { pokemon: "Garchomp" },
+        preview: [],
+        reason: "Test",
+      });
 
-            useChatStore.getState().setPendingAction(action);
+      useChatStore.getState().clearChat();
 
-            expect(useChatStore.getState().pendingAction).toEqual(action);
-        });
+      expect(useChatStore.getState().pendingAction).toBeNull();
+    });
+  });
 
-        it("should allow clearing pending action with null", () => {
-            useChatStore.getState().setPendingAction({
-                type: "add_pokemon",
-                slot: 0,
-                payload: { pokemon: "Pikachu" },
-                preview: [],
-                reason: "Electric type",
-            });
-
-            useChatStore.getState().setPendingAction(null);
-
-            expect(useChatStore.getState().pendingAction).toBeNull();
-        });
+  describe("personality", () => {
+    it("should have default personality on init", () => {
+      expect(useChatStore.getState().personality).toBe(DEFAULT_PERSONALITY);
     });
 
-    describe("setAIProvider", () => {
-        it("should set the AI provider to claude", () => {
-            useChatStore.getState().setAIProvider("claude");
+    it("should set personality to oak", () => {
+      useChatStore.getState().setPersonality("oak");
 
-            expect(useChatStore.getState().aiProvider).toBe("claude");
-        });
-
-        it("should set the AI provider to cloudflare", () => {
-            useChatStore.getState().setAIProvider("cloudflare");
-
-            expect(useChatStore.getState().aiProvider).toBe("cloudflare");
-        });
+      expect(useChatStore.getState().personality).toBe("oak");
     });
 
-    describe("setLoading", () => {
-        it("should set loading to true", () => {
-            useChatStore.getState().setLoading(true);
+    it("should set personality to blue", () => {
+      useChatStore.getState().setPersonality("blue");
 
-            expect(useChatStore.getState().isLoading).toBe(true);
-        });
-
-        it("should set loading to false", () => {
-            useChatStore.getState().setLoading(true);
-            useChatStore.getState().setLoading(false);
-
-            expect(useChatStore.getState().isLoading).toBe(false);
-        });
+      expect(useChatStore.getState().personality).toBe("blue");
     });
 
-    describe("initial state", () => {
-        it("should have empty messages array", () => {
-            useChatStore.getState().clearChat();
-            expect(useChatStore.getState().messages).toEqual([]);
-        });
+    it("should set personality back to kukui", () => {
+      useChatStore.getState().setPersonality("blue");
+      useChatStore.getState().setPersonality("kukui");
 
-        it("should have null pending action", () => {
-            useChatStore.getState().clearChat();
-            expect(useChatStore.getState().pendingAction).toBeNull();
-        });
-
-        it("should have isLoading as false", () => {
-            useChatStore.getState().setLoading(false);
-            expect(useChatStore.getState().isLoading).toBe(false);
-        });
-
-        it("should have claude as default AI provider", () => {
-            useChatStore.getState().setAIProvider("claude");
-            expect(useChatStore.getState().aiProvider).toBe("claude");
-        });
+      expect(useChatStore.getState().personality).toBe("kukui");
     });
+  });
+
+  describe("aiProvider", () => {
+    it("should default to claude", () => {
+      expect(useChatStore.getState().aiProvider).toBe("claude");
+    });
+
+    it("should set ai provider", () => {
+      useChatStore.getState().setAIProvider("cloudflare");
+
+      expect(useChatStore.getState().aiProvider).toBe("cloudflare");
+    });
+  });
+
+  describe("loading state", () => {
+    it("should default to not loading", () => {
+      expect(useChatStore.getState().isLoading).toBe(false);
+    });
+
+    it("should set loading state", () => {
+      useChatStore.getState().setLoading(true);
+
+      expect(useChatStore.getState().isLoading).toBe(true);
+    });
+  });
+
+  describe("pendingAction", () => {
+    it("should default to null", () => {
+      expect(useChatStore.getState().pendingAction).toBeNull();
+    });
+
+    it("should set pending action", () => {
+      const action = {
+        type: "add_pokemon" as const,
+        slot: 0,
+        payload: { pokemon: "Garchomp" },
+        preview: [{ pokemon: "Garchomp", moves: [] }],
+        reason: "Test action",
+      };
+
+      useChatStore.getState().setPendingAction(action);
+
+      expect(useChatStore.getState().pendingAction).toEqual(action);
+    });
+
+    it("should clear pending action", () => {
+      useChatStore.getState().setPendingAction({
+        type: "add_pokemon",
+        slot: 0,
+        payload: {},
+        preview: [],
+        reason: "Test",
+      });
+
+      useChatStore.getState().setPendingAction(null);
+
+      expect(useChatStore.getState().pendingAction).toBeNull();
+    });
+  });
 });

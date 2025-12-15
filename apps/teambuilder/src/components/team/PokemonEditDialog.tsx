@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   Dialog,
   DialogContent,
@@ -53,19 +53,38 @@ const STAT_LABELS: Record<keyof BaseStats, string> = {
   spe: "Spe",
 };
 
+function getInitialPokemon(pokemon: TeamPokemon | null): TeamPokemon {
+  if (!pokemon) return DEFAULT_POKEMON;
+  return {
+    ...DEFAULT_POKEMON,
+    ...pokemon,
+    moves: [...(pokemon.moves || []), "", "", "", ""].slice(0, 4),
+    evs: { ...DEFAULT_POKEMON.evs, ...pokemon.evs },
+    ivs: { ...DEFAULT_POKEMON.ivs, ...pokemon.ivs },
+  };
+}
+
 export function PokemonEditDialog({
   pokemon,
   open,
   onOpenChange,
   onSave,
 }: PokemonEditDialogProps) {
-  const [editedPokemon, setEditedPokemon] = useState<TeamPokemon>(
-    pokemon || DEFAULT_POKEMON
+  const [editedPokemon, setEditedPokemon] = useState<TeamPokemon>(() =>
+    getInitialPokemon(pokemon)
   );
-  const prevOpenRef = useRef(open);
   const { format } = useTeamStore();
 
-  // Compute EV total as derived state
+  // Sync pokemon prop to state when dialog opens
+  // This is a legitimate use case for syncing props to state on open
+  useEffect(() => {
+    if (open) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setEditedPokemon(getInitialPokemon(pokemon));
+    }
+  }, [pokemon, open]);
+
+  // Calculate EV total as derived state (useMemo instead of useState + useEffect)
   const evTotal = useMemo(() => {
     return Object.values(editedPokemon.evs || {}).reduce(
       (sum, val) => sum + (val || 0),
@@ -108,29 +127,6 @@ export function PokemonEditDialog({
     const itemSet = new Set([...popularItems, ...COMMON_ITEMS]);
     return Array.from(itemSet);
   }, [popularItems]);
-
-  // Sync pokemon prop to state when dialog opens (transition from closed to open)
-  // This is a valid pattern for resetting controlled component state when a dialog opens
-  useEffect(() => {
-    const wasOpen = prevOpenRef.current;
-    prevOpenRef.current = open;
-
-    // Only sync when dialog is opening (was closed, now open)
-    if (open && !wasOpen) {
-      if (pokemon) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect -- Valid pattern: sync props to state on dialog open
-        setEditedPokemon({
-          ...DEFAULT_POKEMON,
-          ...pokemon,
-          moves: [...(pokemon.moves || []), "", "", "", ""].slice(0, 4),
-          evs: { ...DEFAULT_POKEMON.evs, ...pokemon.evs },
-          ivs: { ...DEFAULT_POKEMON.ivs, ...pokemon.ivs },
-        });
-      } else {
-        setEditedPokemon(DEFAULT_POKEMON);
-      }
-    }
-  }, [pokemon, open]);
 
   const updateField = <K extends keyof TeamPokemon>(
     field: K,

@@ -36,6 +36,11 @@ vi.mock("@/lib/showdown-parser", () => ({
     exportShowdownTeam: () => "",
 }));
 
+// Mock PersonalitySelector as a simple component
+vi.mock("@/components/chat/PersonalitySelector", () => ({
+    PersonalitySelector: () => <div data-testid="personality-selector">Prof. Kukui</div>,
+}));
+
 describe("ChatPanel", () => {
     beforeEach(() => {
         useChatStore.getState().clearChat();
@@ -44,10 +49,9 @@ describe("ChatPanel", () => {
         vi.clearAllMocks();
     });
 
-    it("renders Professor Kukui header", () => {
+    it("renders personality selector", () => {
         render(<ChatPanel />);
-        expect(screen.getByText("Professor Kukui")).toBeInTheDocument();
-        expect(screen.getByText("Your AI team advisor")).toBeInTheDocument();
+        expect(screen.getByTestId("personality-selector")).toBeInTheDocument();
     });
 
     it("renders chat input field", () => {
@@ -106,10 +110,10 @@ describe("ChatPanel", () => {
         expect(screen.getByText("Improve coverage")).toBeInTheDocument();
     });
 
-    it("renders within a Card component with fixed height", () => {
+    it("renders with glass-panel styling and fixed height", () => {
         const { container } = render(<ChatPanel />);
-        const card = container.querySelector(".h-\\[600px\\]");
-        expect(card).toBeInTheDocument();
+        const panel = container.querySelector(".glass-panel.h-\\[600px\\]");
+        expect(panel).toBeInTheDocument();
     });
 
     it("disables input when loading", () => {
