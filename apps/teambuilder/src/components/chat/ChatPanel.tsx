@@ -10,7 +10,7 @@ import { useChatStore } from "@/stores/chat-store";
 import { useTeamStore } from "@/stores/team-store";
 import { useHistoryStore } from "@/stores/history-store";
 import { streamChatMessage } from "@/lib/ai";
-import { getPersonality } from "@/lib/ai/personalities";
+import { getRandomThinkingMessage } from "@/lib/ai/personalities";
 import { Brain, Trash2 } from "lucide-react";
 import type { TeamAction } from "@/types/chat";
 
@@ -20,7 +20,7 @@ export function ChatPanel() {
   const { team, format, setPokemon } = useTeamStore();
   const { pushState } = useHistoryStore();
   const [isThinking, setIsThinking] = useState(false);
-  const personality = getPersonality(personalityId);
+  const [thinkingMessage, setThinkingMessage] = useState("");
 
   // Apply multiple actions (for team generation)
   const applyActions = (actions: TeamAction[]) => {
@@ -83,6 +83,8 @@ export function ChatPanel() {
       onThinking: (thinking) => {
         setIsThinking(thinking);
         if (thinking) {
+          // Set a random thinking message for this session
+          setThinkingMessage(getRandomThinkingMessage(personalityId));
           // Show thinking indicator in the message
           useChatStore.getState().updateMessage(streamingId, {
             content: "",
@@ -144,7 +146,7 @@ export function ChatPanel() {
       {isThinking && (
         <div className="flex items-center gap-2 px-4 py-2 bg-muted/30 border-b border-border/50 text-sm text-muted-foreground">
           <Brain className="h-4 w-4 animate-pulse-slow text-primary" />
-          <span className="font-display">{personality.thinkingMessage}</span>
+          <span className="font-display">{thinkingMessage}</span>
         </div>
       )}
 
