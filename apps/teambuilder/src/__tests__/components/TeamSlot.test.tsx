@@ -41,7 +41,10 @@ describe("TeamSlot", () => {
 
     it("renders Pokemon nickname when provided", () => {
         render(<TeamSlot {...defaultProps} />);
-        expect(screen.getByText("Chompy")).toBeInTheDocument();
+        // Nickname is displayed in curly quotes above the Pokemon name
+        expect(screen.getByText(/Chompy/)).toBeInTheDocument();
+        // Pokemon name is always shown
+        expect(screen.getByText("Garchomp")).toBeInTheDocument();
     });
 
     it("renders Pokemon name when no nickname", () => {
@@ -122,8 +125,8 @@ describe("TeamSlot", () => {
     it("handles Pokemon with no moves", () => {
         const pokemonNoMoves = { ...mockPokemon, moves: [] };
         render(<TeamSlot {...defaultProps} pokemon={pokemonNoMoves} />);
-        // Should not throw and should still render the Pokemon
-        expect(screen.getByText("Chompy")).toBeInTheDocument();
+        // Should not throw and should still render the Pokemon name
+        expect(screen.getByText("Garchomp")).toBeInTheDocument();
     });
 
     it("handles Pokemon with no item", () => {

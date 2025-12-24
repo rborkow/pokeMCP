@@ -1,33 +1,32 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { PokemonSprite } from "./PokemonSprite";
 import type { TeamPokemon, PokemonType } from "@/types/pokemon";
-import { X } from "lucide-react";
+import { X, Sparkles, Package } from "lucide-react";
 import { getPokemonTypes } from "@/lib/data/pokemon-types";
 import { toDisplayName } from "@/lib/showdown-parser";
 
-// Type colors for badges
+// Type colors for badges - using Pokemon type colors from CSS variables
 const TYPE_COLORS: Record<PokemonType, string> = {
-  Normal: "bg-gray-400",
-  Fire: "bg-orange-500",
-  Water: "bg-blue-500",
-  Electric: "bg-yellow-400 text-black",
-  Grass: "bg-green-500",
-  Ice: "bg-cyan-300 text-black",
-  Fighting: "bg-red-700",
-  Poison: "bg-purple-500",
-  Ground: "bg-amber-600",
-  Flying: "bg-indigo-300 text-black",
-  Psychic: "bg-pink-500",
-  Bug: "bg-lime-500 text-black",
-  Rock: "bg-stone-500",
-  Ghost: "bg-purple-700",
-  Dragon: "bg-violet-600",
-  Dark: "bg-stone-700",
-  Steel: "bg-slate-400",
-  Fairy: "bg-pink-300 text-black",
+  Normal: "bg-pokemon-normal",
+  Fire: "bg-pokemon-fire",
+  Water: "bg-pokemon-water",
+  Electric: "bg-pokemon-electric text-black",
+  Grass: "bg-pokemon-grass",
+  Ice: "bg-pokemon-ice text-black",
+  Fighting: "bg-pokemon-fighting",
+  Poison: "bg-pokemon-poison",
+  Ground: "bg-pokemon-ground",
+  Flying: "bg-pokemon-flying text-black",
+  Psychic: "bg-pokemon-psychic",
+  Bug: "bg-pokemon-bug",
+  Rock: "bg-pokemon-rock",
+  Ghost: "bg-pokemon-ghost",
+  Dragon: "bg-pokemon-dragon",
+  Dark: "bg-pokemon-dark",
+  Steel: "bg-pokemon-steel",
+  Fairy: "bg-pokemon-fairy text-black",
 };
 
 // Crystalline Tera type colors - lighter, more gem-like appearance
@@ -79,73 +78,96 @@ export function TeamSlot({
       style={{ animationDelay: `${index * 100}ms`, animationFillMode: "both" }}
       onClick={onSelect}
     >
+      {/* Remove button - positioned inside card with proper spacing */}
       {onRemove && (
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-destructive text-destructive-foreground hover:bg-destructive/90 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+        <button
           onClick={(e) => {
             e.stopPropagation();
             onRemove();
           }}
+          className="absolute top-3 right-3 p-1.5 rounded-full bg-muted/50 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive/20 hover:text-destructive z-10"
         >
-          <X className="h-3 w-3" />
-        </Button>
+          <X className="w-4 h-4" />
+        </button>
       )}
-      <div className="flex flex-col items-center gap-0.5">
-        <div className="w-14 h-14 flex items-center justify-center rounded-full bg-muted/30 group-hover:bg-muted/50 transition-colors">
-          <div className="group-hover:scale-110 transition-transform duration-300">
-            <PokemonSprite pokemon={pokemon.pokemon} size="md" />
+
+      {/* Header: Sprite + Name/Types - horizontal layout like reference */}
+      <div className="flex items-start gap-3 mb-3">
+        {/* Pokemon sprite */}
+        <div className="relative flex-shrink-0">
+          <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-muted/50 to-muted/20 flex items-center justify-center overflow-hidden">
+            <div className="group-hover:scale-110 transition-transform duration-300">
+              <PokemonSprite pokemon={pokemon.pokemon} size="lg" />
+            </div>
           </div>
         </div>
 
-        {/* Name */}
-        <p className="font-medium text-sm truncate w-full text-center">
-          {pokemon.nickname || toDisplayName(pokemon.pokemon)}
-        </p>
-
-        {/* Types */}
-        {types.length > 0 && (
-          <div className="flex gap-1">
+        {/* Name, Nickname, Types */}
+        <div className="flex-1 min-w-0">
+          {pokemon.nickname && (
+            <p className="text-xs text-primary font-medium truncate">
+              &ldquo;{pokemon.nickname}&rdquo;
+            </p>
+          )}
+          <h3 className="font-display font-bold text-base text-foreground capitalize truncate">
+            {toDisplayName(pokemon.pokemon)}
+          </h3>
+          <div className="flex gap-1 mt-1.5 flex-wrap">
             {types.map((type) => (
-              <Badge
+              <span
                 key={type}
-                className={`${TYPE_COLORS[type]} text-[10px] px-1.5 py-0`}
+                className={`type-badge ${TYPE_COLORS[type]} text-foreground shadow-sm px-2 py-0.5 text-[10px]`}
               >
                 {type}
-              </Badge>
-            ))}
-          </div>
-        )}
-
-        {/* Item & Ability on same line */}
-        <p className="text-[10px] text-muted-foreground truncate w-full text-center">
-          {pokemon.item && `@ ${pokemon.item}`}
-          {pokemon.item && pokemon.ability && " · "}
-          {pokemon.ability}
-        </p>
-
-        {/* All moves */}
-        {pokemon.moves && pokemon.moves.length > 0 && (
-          <div className="text-[10px] text-muted-foreground text-center w-full">
-            {pokemon.moves.map((move, i) => (
-              <span key={i}>
-                {move}
-                {i < pokemon.moves.length - 1 && " / "}
               </span>
             ))}
           </div>
-        )}
+        </div>
+      </div>
 
-        {/* Tera Type with crystalline styling */}
-        {pokemon.teraType && (
+      {/* Item & Ability */}
+      <div className="flex gap-2 mb-3">
+        {pokemon.item && (
+          <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-muted/50 flex-1 min-w-0">
+            <Package className="w-3 h-3 text-primary flex-shrink-0" />
+            <span className="text-[11px] text-foreground truncate">{pokemon.item}</span>
+          </div>
+        )}
+        {pokemon.ability && (
+          <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-muted/50 flex-1 min-w-0">
+            <Sparkles className="w-3 h-3 text-secondary flex-shrink-0" />
+            <span className="text-[11px] text-foreground truncate">{pokemon.ability}</span>
+          </div>
+        )}
+      </div>
+
+      {/* Moves */}
+      {pokemon.moves && pokemon.moves.length > 0 && (
+        <div className="space-y-1">
+          <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-semibold">Moves</p>
+          <div className="grid grid-cols-2 gap-1">
+            {pokemon.moves.map((move, idx) => (
+              <div
+                key={idx}
+                className="px-2 py-1.5 rounded-md bg-muted/30 border border-border/30 text-[11px] text-foreground truncate text-center hover:bg-muted/50 transition-colors cursor-default"
+              >
+                {move}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Tera Type with crystalline styling */}
+      {pokemon.teraType && (
+        <div className="mt-2">
           <Badge
             className={`text-[10px] px-1.5 py-0 ${TERA_COLORS[pokemon.teraType] || "bg-gradient-to-r from-gray-200 to-gray-300 text-gray-800 border border-gray-400"}`}
           >
-            ✦ Tera: {pokemon.teraType}
+            Tera: {pokemon.teraType}
           </Badge>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
