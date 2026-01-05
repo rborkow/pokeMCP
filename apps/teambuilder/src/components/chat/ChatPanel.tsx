@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
@@ -10,25 +10,30 @@ import { useChatStore } from "@/stores/chat-store";
 import { useTeamStore } from "@/stores/team-store";
 import { useHistoryStore } from "@/stores/history-store";
 import { streamChatMessage } from "@/lib/ai";
-import { getRandomThinkingMessage } from "@/lib/ai/personalities";
-import { Brain, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import type { TeamAction } from "@/types/chat";
 
+// Streaming message ID reference (to update thinking content)
+let currentStreamingId: string | null = null;
+
 export function ChatPanel() {
-  const { messages, isLoading, addMessage, setLoading, setPendingAction, clearChat, personality: personalityId } =
-    useChatStore();
+  const {
+    messages,
+    isLoading,
+    addMessage,
+    setLoading,
+    setPendingAction,
+    clearChat,
+    personality: personalityId,
+    queuedPrompt,
+    clearQueuedPrompt,
+    setLastUserPrompt,
+  } = useChatStore();
   const { team, format, setPokemon } = useTeamStore();
   const { pushState } = useHistoryStore();
-  const [isThinking, setIsThinking] = useState(false);
-  const [thinkingMessage, setThinkingMessage] = useState("");
 
   // Apply multiple actions (for team generation)
-  const applyActions = (actions: TeamAction[]) => {
-    // Clear the team first if we're generating a full new team
-    if (actions.length >= 3 && team.length === 0) {
-      // Building from scratch
-    }
-
+  const applyActions = useCallback((actions: TeamAction[]) => {
     // Apply each action
     actions.forEach((action, index) => {
       if (action.payload && action.payload.pokemon) {
@@ -50,9 +55,12 @@ export function ChatPanel() {
     if (lastAction?.preview) {
       pushState(lastAction.preview, `Generated ${actions.length} Pokemon team`);
     }
-  };
+  }, [setPokemon, pushState]);
 
-  const handleSend = async (content: string) => {
+  const handleSend = useCallback(async (content: string) => {
+    // Save the user prompt for retry functionality
+    setLastUserPrompt(content);
+
     // Add user message
     addMessage({ role: "user", content });
 
@@ -62,9 +70,9 @@ export function ChatPanel() {
       content: "",
       isLoading: true,
     });
+    currentStreamingId = streamingId;
 
     setLoading(true);
-    setIsThinking(false);
 
     // Use streaming for Claude
     await streamChatMessage({
@@ -80,20 +88,16 @@ export function ChatPanel() {
           isLoading: true,
         });
       },
-      onThinking: (thinking) => {
-        setIsThinking(thinking);
-        if (thinking) {
-          // Set a random thinking message for this session
-          setThinkingMessage(getRandomThinkingMessage(personalityId));
-          // Show thinking indicator in the message
+      onThinking: (_isThinking, thinkingText) => {
+        // Store thinking content in the message for inline display
+        if (thinkingText) {
           useChatStore.getState().updateMessage(streamingId, {
-            content: "",
-            isLoading: true,
+            thinkingContent: thinkingText,
           });
         }
       },
       onComplete: (response) => {
-        setIsThinking(false);
+        currentStreamingId = null;
         // Finalize the message
         useChatStore.getState().updateMessage(streamingId, {
           content: response.content,
@@ -111,7 +115,7 @@ export function ChatPanel() {
         setLoading(false);
       },
       onError: (error) => {
-        setIsThinking(false);
+        currentStreamingId = null;
         useChatStore.getState().updateMessage(streamingId, {
           content: `Error: ${error.message}`,
           isLoading: false,
@@ -119,7 +123,15 @@ export function ChatPanel() {
         setLoading(false);
       },
     });
-  };
+  }, [addMessage, setLoading, setLastUserPrompt, team, format, personalityId, setPendingAction, applyActions]);
+
+  // Watch for queued prompts from WelcomeOverlay
+  useEffect(() => {
+    if (queuedPrompt && !isLoading) {
+      handleSend(queuedPrompt);
+      clearQueuedPrompt();
+    }
+  }, [queuedPrompt, isLoading, handleSend, clearQueuedPrompt]);
 
   return (
     <div className="glass-panel flex flex-col h-[600px] lg:h-[650px]">
@@ -141,14 +153,6 @@ export function ChatPanel() {
       </div>
 
       <SuggestedPrompts onSelect={handleSend} disabled={isLoading} />
-
-      {/* Thinking indicator with personality message */}
-      {isThinking && (
-        <div className="flex items-center gap-2 px-4 py-2 bg-muted/30 border-b border-border/50 text-sm text-muted-foreground">
-          <Brain className="h-4 w-4 animate-pulse-slow text-primary" />
-          <span className="font-display">{thinkingMessage}</span>
-        </div>
-      )}
 
       <ChatMessages />
       <ChatInput

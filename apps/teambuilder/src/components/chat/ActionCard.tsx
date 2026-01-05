@@ -7,7 +7,7 @@ import { useTeamStore } from "@/stores/team-store";
 import { useChatStore } from "@/stores/chat-store";
 import { useHistoryStore } from "@/stores/history-store";
 import type { TeamAction } from "@/types/chat";
-import { Check, X, Sparkles } from "lucide-react";
+import { Check, X, Sparkles, AlertTriangle, RefreshCw } from "lucide-react";
 import { PokemonSprite } from "@/components/team/PokemonSprite";
 
 interface ActionCardProps {
@@ -26,8 +26,10 @@ const ACTION_LABELS: Record<TeamAction["type"], string> = {
 
 export function ActionCard({ action, isApplied = false }: ActionCardProps) {
   const { team, setPokemon, removePokemon } = useTeamStore();
-  const { setPendingAction, addMessage } = useChatStore();
+  const { setPendingAction, addMessage, lastUserPrompt, queuePrompt } = useChatStore();
   const { pushState } = useHistoryStore();
+
+  const hasValidationErrors = action.validationErrors && action.validationErrors.length > 0;
 
   const handleApply = () => {
     // Apply the change based on action type
@@ -74,6 +76,17 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
     });
   };
 
+  const handleRetry = () => {
+    if (lastUserPrompt) {
+      setPendingAction(null);
+      addMessage({
+        role: "system",
+        content: "Retrying request...",
+      });
+      queuePrompt(lastUserPrompt);
+    }
+  };
+
   // Get the Pokemon being affected
   const targetPokemon = action.payload.pokemon;
   const currentPokemon = team[action.slot]?.pokemon;
@@ -96,6 +109,21 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
 
       <CardContent className="pb-2">
         <p className="text-sm text-muted-foreground mb-3">{action.reason}</p>
+
+        {/* Validation errors */}
+        {hasValidationErrors && (
+          <div className="bg-destructive/10 border border-destructive/30 rounded-lg p-3 mb-3">
+            <p className="text-sm font-medium text-destructive flex items-center gap-2 mb-2">
+              <AlertTriangle className="h-4 w-4" />
+              Validation Issues
+            </p>
+            <ul className="text-xs text-destructive/80 space-y-1 list-disc list-inside">
+              {action.validationErrors?.map((err, i) => (
+                <li key={i}>{err.message}</li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {/* Visual preview of the change */}
         <div className="flex items-center gap-4">
@@ -140,7 +168,12 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
 
       {!isApplied && (
         <CardFooter className="pt-2 gap-2">
-          <Button onClick={handleApply} size="sm" className="gap-1">
+          <Button
+            onClick={handleApply}
+            size="sm"
+            className="gap-1"
+            disabled={hasValidationErrors}
+          >
             <Check className="h-3 w-3" />
             Apply
           </Button>
@@ -153,6 +186,17 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
             <X className="h-3 w-3" />
             Dismiss
           </Button>
+          {hasValidationErrors && lastUserPrompt && (
+            <Button
+              onClick={handleRetry}
+              variant="outline"
+              size="sm"
+              className="gap-1 text-destructive hover:text-destructive hover:bg-destructive/10"
+            >
+              <RefreshCw className="h-3 w-3" />
+              Retry
+            </Button>
+          )}
         </CardFooter>
       )}
     </Card>

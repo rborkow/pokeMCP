@@ -244,6 +244,42 @@
   .glow-effect:hover::before {
     @apply opacity-100;
   }
+
+  .welcome-option-card {
+    @apply relative overflow-hidden rounded-2xl border border-border/50 cursor-pointer;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .welcome-option-card:hover {
+    @apply border-border;
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px);
+  }
+
+  .welcome-option-primary {
+    @apply border-primary/30;
+  }
+
+  .welcome-option-primary:hover {
+    @apply border-primary/60;
+    box-shadow: var(--shadow-hover), var(--shadow-glow);
+  }
+
+  .thinking-collapsible {
+    @apply rounded-lg bg-muted/50 border border-border/50 mb-3 overflow-hidden;
+  }
+
+  .thinking-toggle {
+    @apply flex items-center gap-2 w-full px-3 py-2 text-xs text-muted-foreground;
+    @apply hover:bg-muted/70 transition-colors cursor-pointer;
+  }
+
+  .thinking-content {
+    @apply px-3 pb-3 text-xs text-muted-foreground/80 font-mono;
+    @apply max-h-[200px] overflow-y-auto whitespace-pre-wrap;
+  }
 }
 
 @layer utilities {
@@ -263,6 +299,10 @@
 
   .animate-pulse-slow {
     animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-thinking-pulse {
+    animation: thinking-pulse 1.5s ease-in-out infinite;
   }
 
   .animate-pulse-glow {
@@ -304,6 +344,11 @@
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 20px oklch(from var(--primary) l c h / 0.3); }
   50% { box-shadow: 0 0 40px oklch(from var(--primary) l c h / 0.5); }
+}
+
+@keyframes thinking-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }
 
 @keyframes fade-in {

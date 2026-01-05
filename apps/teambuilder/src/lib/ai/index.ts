@@ -1,6 +1,7 @@
 import type { TeamPokemon } from "@/types/pokemon";
 import type { AIProvider, AIResponse, TeamAction } from "@/types/chat";
 import type { PersonalityId } from "./personalities";
+import { validatePokemonData } from "@/lib/validation/pokemon";
 
 interface SendChatMessageOptions {
   message: string;
@@ -50,12 +51,24 @@ function parseActionData(
       }
     }
 
+    // Validate the payload for add/update operations
+    const payload = (actionData.payload as Partial<TeamPokemon>) || {};
+    let validationErrors = undefined;
+
+    if (actionData.type !== "remove_pokemon" && payload) {
+      const validation = validatePokemonData(payload);
+      if (!validation.valid) {
+        validationErrors = validation.errors;
+      }
+    }
+
     return {
       type: actionData.type as TeamAction["type"],
       slot: slot,
-      payload: (actionData.payload as Partial<TeamPokemon>) || {},
+      payload: payload,
       preview: preview.filter(Boolean),
       reason: (actionData.reason as string) || "AI suggestion",
+      validationErrors,
     };
   } catch (e) {
     console.error("Failed to parse action:", e);
@@ -224,7 +237,8 @@ export async function streamChatMessage({
               onComplete({
                 content: cleanedContent,
                 action: actions[0],
-                actions: actions.length > 1 ? actions : undefined
+                actions: actions.length > 1 ? actions : undefined,
+                rawContent: fullContent,
               });
               return;
             }
@@ -289,7 +303,8 @@ export async function streamChatMessage({
     onComplete({
       content: cleanedContent,
       action: actions[0],
-      actions: actions.length > 1 ? actions : undefined
+      actions: actions.length > 1 ? actions : undefined,
+      rawContent: fullContent,
     });
   } catch (error) {
     onError(error instanceof Error ? error : new Error(String(error)));

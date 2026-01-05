@@ -4,9 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A Model Context Protocol (MCP) server for Pokémon competitive team building, deployed on Cloudflare Workers. Provides tools for Pokémon lookup, moveset/team validation, type coverage analysis, and usage statistics from Smogon. Includes RAG (Retrieval-Augmented Generation) capabilities for strategic advice using Cloudflare Vectorize and AI Workers.
+A monorepo containing an MCP (Model Context Protocol) server for Pokémon competitive team building, plus a team builder web UI and documentation site. The MCP server is deployed on Cloudflare Workers and provides tools for Pokémon lookup, moveset/team validation, type coverage analysis, and usage statistics from Smogon. Includes RAG (Retrieval-Augmented Generation) capabilities for strategic advice using Cloudflare Vectorize and AI Workers.
 
-**Deployed URL:** https://pokemon-mcp-cloudflare.rborkows.workers.dev
+**Monorepo Structure:**
+- `src/` - MCP Worker (Cloudflare Workers)
+- `apps/teambuilder/` - Next.js team building UI (Cloudflare Pages)
+- `apps/docs/` - Nextra documentation site (Cloudflare Pages)
+
+**Deployed URLs:**
+- MCP Worker: https://api.pokemcp.com
+- Teambuilder UI: https://www.pokemcp.com
+- Documentation: https://docs.pokemcp.com
 
 ## Development Commands
 
@@ -25,6 +33,17 @@ npm run dev
 
 # Deploy to production (prefer CI/CD - merging to main auto-deploys)
 npm run deploy:production
+```
+
+### Monorepo Apps
+```bash
+# Teambuilder (Next.js UI)
+npm run dev:teambuilder        # Start dev server (port 3000)
+cd apps/teambuilder && npm run test:run      # Run Vitest tests
+cd apps/teambuilder && npm run test:coverage # Coverage report
+
+# Documentation (Nextra)
+npm run dev:docs               # Start dev server (port 3001)
 ```
 
 ### Stats Management
@@ -76,6 +95,7 @@ npm run tail:production
   - `STRATEGY_DOCS`: Raw strategy documents (chunks) for RAG
 - **Vectorize**: Vector database for semantic search (pokemon-strategy-index)
 - **AI Workers**: Text embeddings for RAG (@cf/baai/bge-base-en-v1.5)
+- **R2 Bucket**: pokemcp-interaction-logs for anonymized fine-tuning data
 - **Scheduled Triggers**: Weekly cron job (Sunday 3 AM) for content ingestion
 
 ### Environment Configuration

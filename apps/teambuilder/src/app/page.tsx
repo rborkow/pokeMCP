@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useCallback } from "react";
 import { Header } from "@/components/layout/Header";
 import { TeamGrid } from "@/components/team/TeamGrid";
 import { TeamImportExport } from "@/components/team/TeamImportExport";
@@ -8,10 +8,13 @@ import { ChatPanel } from "@/components/chat/ChatPanel";
 import { TypeCoverage } from "@/components/analysis/TypeCoverage";
 import { ThreatMatrix } from "@/components/analysis/ThreatMatrix";
 import { TeamHistory } from "@/components/history/TeamHistory";
+import { WelcomeOverlay } from "@/components/welcome/WelcomeOverlay";
 import { useTeamStore } from "@/stores/team-store";
+import { useChatStore } from "@/stores/chat-store";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Shield, AlertTriangle, History } from "lucide-react";
 import { useUrlTeam } from "@/hooks/useUrlTeam";
+import { QUICKSTART_PROMPT } from "@/types/chat";
 
 function UrlTeamLoader() {
   useUrlTeam();
@@ -20,6 +23,15 @@ function UrlTeamLoader() {
 
 export default function Home() {
   const { team, format } = useTeamStore();
+  const { queuePrompt } = useChatStore();
+
+  const handleGenerate = useCallback(() => {
+    queuePrompt(QUICKSTART_PROMPT.prompt);
+  }, [queuePrompt]);
+
+  const handleBuildOwn = useCallback(() => {
+    // Just dismiss the overlay - user can click on any empty slot
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -27,6 +39,12 @@ export default function Home() {
       <Suspense fallback={null}>
         <UrlTeamLoader />
       </Suspense>
+
+      {/* Welcome overlay for empty team */}
+      <WelcomeOverlay
+        onGenerate={handleGenerate}
+        onBuildOwn={handleBuildOwn}
+      />
 
       {/* Background decoration */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">

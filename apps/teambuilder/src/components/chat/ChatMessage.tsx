@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import type { ChatMessage as ChatMessageType } from "@/types/chat";
 import { Bot, User } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import { ThinkingCollapsible } from "./ThinkingCollapsible";
 
 interface ChatMessageProps {
   message: ChatMessageType;
@@ -51,6 +52,14 @@ export function ChatMessage({ message }: ChatMessageProps) {
           isUser ? "text-right" : "text-left"
         )}
       >
+        {/* Thinking collapsible for assistant messages */}
+        {!isUser && (message.thinkingContent || (message.isLoading && !message.content)) && (
+          <ThinkingCollapsible
+            content={message.thinkingContent || ""}
+            isActive={message.isLoading === true && !message.content}
+          />
+        )}
+
         <div
           className={cn(
             "inline-block px-4 py-2 rounded-2xl",
@@ -59,17 +68,17 @@ export function ChatMessage({ message }: ChatMessageProps) {
               : "bg-muted rounded-tl-sm"
           )}
         >
-          {message.isLoading ? (
+          {message.isLoading && !message.content ? (
             <div className="flex items-center gap-1">
               <span className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
               <span className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
               <span className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
             </div>
-          ) : (
+          ) : message.content ? (
             <div className="text-sm [&_p]:my-1 [&_ul]:my-1 [&_ul]:ml-4 [&_ul]:list-disc [&_ol]:my-1 [&_ol]:ml-4 [&_ol]:list-decimal [&_li]:my-0.5 [&_strong]:font-semibold [&_code]:bg-black/10 [&_code]:dark:bg-white/10 [&_code]:px-1 [&_code]:rounded [&_code]:text-xs">
               <ReactMarkdown>{message.content}</ReactMarkdown>
             </div>
-          )}
+          ) : null}
         </div>
         <p className="text-xs text-muted-foreground">
           {message.timestamp.toLocaleTimeString([], {

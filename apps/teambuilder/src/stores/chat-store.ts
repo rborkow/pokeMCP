@@ -9,6 +9,8 @@ interface ChatState {
   isLoading: boolean;
   aiProvider: AIProvider;
   personality: PersonalityId;
+  queuedPrompt: string | null;
+  lastUserPrompt: string | null;
 
   // Actions
   addMessage: (message: Omit<ChatMessage, "id" | "timestamp">) => string;
@@ -19,6 +21,9 @@ interface ChatState {
   setLoading: (loading: boolean) => void;
   clearChat: () => void;
   removeMessage: (id: string) => void;
+  queuePrompt: (prompt: string) => void;
+  clearQueuedPrompt: () => void;
+  setLastUserPrompt: (prompt: string) => void;
 }
 
 export const useChatStore = create<ChatState>()(
@@ -29,6 +34,8 @@ export const useChatStore = create<ChatState>()(
       isLoading: false,
       aiProvider: "claude",
       personality: DEFAULT_PERSONALITY,
+      queuedPrompt: null,
+      lastUserPrompt: null,
 
       addMessage: (message) => {
         const id = crypto.randomUUID();
@@ -64,6 +71,12 @@ export const useChatStore = create<ChatState>()(
           messages: state.messages.filter((msg) => msg.id !== id),
         }));
       },
+
+      queuePrompt: (prompt) => set({ queuedPrompt: prompt }),
+
+      clearQueuedPrompt: () => set({ queuedPrompt: null }),
+
+      setLastUserPrompt: (prompt) => set({ lastUserPrompt: prompt }),
     }),
     {
       name: "pokemcp-chat",

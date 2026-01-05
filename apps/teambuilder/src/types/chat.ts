@@ -1,4 +1,5 @@
 import type { TeamPokemon } from "./pokemon";
+import type { ValidationError } from "@/lib/validation/pokemon";
 
 export type TeamActionType =
   | "add_pokemon"
@@ -14,6 +15,7 @@ export interface TeamAction {
   payload: Partial<TeamPokemon>;
   preview: TeamPokemon[];
   reason: string;
+  validationErrors?: ValidationError[];
 }
 
 export interface ChatMessage {
@@ -23,6 +25,7 @@ export interface ChatMessage {
   timestamp: Date;
   action?: TeamAction;
   isLoading?: boolean;
+  thinkingContent?: string;
 }
 
 export type AIProvider = "cloudflare" | "claude";
@@ -37,6 +40,7 @@ export interface AIResponse {
   content: string;
   action?: TeamAction;
   actions?: TeamAction[]; // Multiple actions for team generation
+  rawContent?: string; // Original response for retry
 }
 
 // Suggested prompts for the chat UI
