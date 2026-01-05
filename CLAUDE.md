@@ -46,6 +46,15 @@ cd apps/teambuilder && npm run test:coverage # Coverage report
 npm run dev:docs               # Start dev server (port 3001)
 ```
 
+### Team Builder Features
+The team builder UI (`apps/teambuilder/`) includes:
+- **AI Coach**: Claude-powered assistant with personality themes (Professor Kukui, Oak, Blue)
+- **Format Selector**: Quick Singles/Doubles toggle with advanced format dropdown
+- **Welcome Overlay**: Onboarding flow for new users (Generate Team, Import, Build Own)
+- **Type Coverage**: Visual analysis of team weaknesses and resistances
+- **Threat Matrix**: Matchup analysis against meta threats
+- **Import/Export/Share**: Showdown format with shareable URLs
+
 ### Stats Management
 ```bash
 # Fetch latest Smogon usage statistics (rate-limited, ~45 seconds)

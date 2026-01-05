@@ -12,8 +12,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useTeamStore } from "@/stores/team-store";
 import { useHistoryStore } from "@/stores/history-store";
-import { useChatStore } from "@/stores/chat-store";
-import { QUICKSTART_PROMPT } from "@/types/chat";
 import { Sparkles, Upload, PlusCircle } from "lucide-react";
 
 interface WelcomeOverlayProps {

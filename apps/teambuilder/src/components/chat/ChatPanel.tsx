@@ -13,9 +13,6 @@ import { streamChatMessage } from "@/lib/ai";
 import { Trash2 } from "lucide-react";
 import type { TeamAction } from "@/types/chat";
 
-// Streaming message ID reference (to update thinking content)
-let currentStreamingId: string | null = null;
-
 export function ChatPanel() {
   const {
     messages,
@@ -70,7 +67,6 @@ export function ChatPanel() {
       content: "",
       isLoading: true,
     });
-    currentStreamingId = streamingId;
 
     setLoading(true);
 
@@ -97,7 +93,6 @@ export function ChatPanel() {
         }
       },
       onComplete: (response) => {
-        currentStreamingId = null;
         // Finalize the message
         useChatStore.getState().updateMessage(streamingId, {
           content: response.content,
@@ -115,7 +110,6 @@ export function ChatPanel() {
         setLoading(false);
       },
       onError: (error) => {
-        currentStreamingId = null;
         useChatStore.getState().updateMessage(streamingId, {
           content: `Error: ${error.message}`,
           isLoading: false,

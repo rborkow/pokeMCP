@@ -176,4 +176,49 @@ describe("chat-store", () => {
       expect(useChatStore.getState().pendingAction).toBeNull();
     });
   });
+
+  describe("queuedPrompt", () => {
+    it("should default to null", () => {
+      expect(useChatStore.getState().queuedPrompt).toBeNull();
+    });
+
+    it("should queue a prompt", () => {
+      useChatStore.getState().queuePrompt("Build me a rain team");
+
+      expect(useChatStore.getState().queuedPrompt).toBe("Build me a rain team");
+    });
+
+    it("should clear queued prompt", () => {
+      useChatStore.getState().queuePrompt("Build me a rain team");
+      useChatStore.getState().clearQueuedPrompt();
+
+      expect(useChatStore.getState().queuedPrompt).toBeNull();
+    });
+
+    it("should overwrite existing queued prompt", () => {
+      useChatStore.getState().queuePrompt("First prompt");
+      useChatStore.getState().queuePrompt("Second prompt");
+
+      expect(useChatStore.getState().queuedPrompt).toBe("Second prompt");
+    });
+  });
+
+  describe("lastUserPrompt", () => {
+    it("should default to null", () => {
+      expect(useChatStore.getState().lastUserPrompt).toBeNull();
+    });
+
+    it("should set last user prompt", () => {
+      useChatStore.getState().setLastUserPrompt("Suggest a move for Garchomp");
+
+      expect(useChatStore.getState().lastUserPrompt).toBe("Suggest a move for Garchomp");
+    });
+
+    it("should overwrite previous last user prompt", () => {
+      useChatStore.getState().setLastUserPrompt("First prompt");
+      useChatStore.getState().setLastUserPrompt("Second prompt");
+
+      expect(useChatStore.getState().lastUserPrompt).toBe("Second prompt");
+    });
+  });
 });

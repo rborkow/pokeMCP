@@ -2,6 +2,19 @@
 
 An MCP (Model Context Protocol) server for Pokémon team building and validation, powered by Pokémon Showdown data and Smogon usage statistics. Deployed on Cloudflare Workers for fast, reliable access.
 
+**Try it now:** [Team Builder UI](https://www.pokemcp.com) | [API Documentation](https://docs.pokemcp.com) | [MCP Endpoint](https://api.pokemcp.com/mcp)
+
+## Team Builder UI
+
+A full-featured web application for building competitive Pokemon teams:
+
+- **AI Coach**: Claude-powered assistant with personality themes (Professor Kukui, Professor Oak, Rival Blue)
+- **Format Selection**: Quick Singles/Doubles toggle with support for OU, VGC, and tier formats
+- **Type Coverage Analysis**: Visual breakdown of team weaknesses and resistances
+- **Threat Matrix**: Matchup analysis against top meta threats
+- **Import/Export**: Full Showdown format support with shareable URLs
+- **Welcome Flow**: Easy onboarding - generate a team, import, or build from scratch
+
 ## Features
 
 ### 🔍 Pokémon Lookup
@@ -46,10 +59,11 @@ Access real competitive data from thousands of battles with cached data for inst
 
 ## Deployment
 
-This server is deployed on Cloudflare Workers at: **https://api.pokemcp.com**
+Deployed on Cloudflare Workers and Pages:
 
-- **MCP Endpoint**: https://api.pokemcp.com/mcp
-- **Documentation**: https://pokemcp.com
+- **Team Builder**: https://www.pokemcp.com
+- **MCP API**: https://api.pokemcp.com/mcp
+- **Documentation**: https://docs.pokemcp.com
 
 ### Deploy Your Own
 
