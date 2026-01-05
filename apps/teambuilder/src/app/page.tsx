@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Shield, AlertTriangle, History } from "lucide-react";
 import { useUrlTeam } from "@/hooks/useUrlTeam";
 import { QUICKSTART_PROMPT } from "@/types/chat";
+import { getFormatDisplayName } from "@/types/pokemon";
 
 function UrlTeamLoader() {
   useUrlTeam();
@@ -65,8 +66,8 @@ export default function Home() {
               <p className="text-muted-foreground mt-1 flex items-center gap-2">
                 <span className="font-semibold text-foreground">{team.length}/6</span> Pokemon
                 <span className="text-muted-foreground/50">-</span>
-                <span className="px-2 py-0.5 rounded bg-muted text-xs font-medium uppercase tracking-wider">
-                  {format.toUpperCase()}
+                <span className="px-2 py-0.5 rounded bg-muted text-xs font-medium tracking-wider">
+                  {getFormatDisplayName(format)}
                 </span>
               </p>
             </div>

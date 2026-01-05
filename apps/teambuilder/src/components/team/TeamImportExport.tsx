@@ -15,6 +15,7 @@ import { useTeamStore } from "@/stores/team-store";
 import { useHistoryStore } from "@/stores/history-store";
 import { Upload, Download, Copy, Check, Share2, Link } from "lucide-react";
 import { generateShareUrl, copyToClipboard } from "@/lib/share";
+import { getFormatDisplayName } from "@/types/pokemon";
 
 export function TeamImportExport() {
   const { team, format, importTeam, exportTeam, clearTeam } = useTeamStore();
@@ -168,7 +169,7 @@ Landorus-Therian @ Choice Scarf
           <DialogHeader>
             <DialogTitle>Share Team</DialogTitle>
             <DialogDescription>
-              Copy this link to share your {format.toUpperCase()} team with others.
+              Copy this link to share your {getFormatDisplayName(format)} team with others.
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">

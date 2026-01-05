@@ -128,15 +128,21 @@ export function TeamSlot({
       {/* Item & Ability */}
       <div className="flex gap-2 mb-3">
         {pokemon.item && (
-          <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-muted/50 flex-1 min-w-0">
-            <Package className="w-3 h-3 text-primary flex-shrink-0" />
-            <span className="text-[11px] text-foreground truncate">{pokemon.item}</span>
+          <div className="flex flex-col px-2 py-1.5 rounded-md bg-muted/50 flex-1 min-w-0">
+            <span className="text-[9px] text-muted-foreground uppercase tracking-wider flex items-center gap-1">
+              <Package className="w-2.5 h-2.5" />
+              Item
+            </span>
+            <span className="text-[11px] text-foreground truncate font-medium">{pokemon.item}</span>
           </div>
         )}
         {pokemon.ability && (
-          <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-muted/50 flex-1 min-w-0">
-            <Sparkles className="w-3 h-3 text-secondary flex-shrink-0" />
-            <span className="text-[11px] text-foreground truncate">{pokemon.ability}</span>
+          <div className="flex flex-col px-2 py-1.5 rounded-md bg-muted/50 flex-1 min-w-0">
+            <span className="text-[9px] text-muted-foreground uppercase tracking-wider flex items-center gap-1">
+              <Sparkles className="w-2.5 h-2.5" />
+              Ability
+            </span>
+            <span className="text-[11px] text-foreground truncate font-medium">{pokemon.ability}</span>
           </div>
         )}
       </div>

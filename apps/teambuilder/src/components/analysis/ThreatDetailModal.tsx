@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { PokemonSprite } from "@/components/team/PokemonSprite";
 import { toDisplayName } from "@/lib/showdown-parser";
 import type { PokemonType } from "@/lib/data/pokemon-types";
+import { getFormatDisplayName } from "@/types/pokemon";
 
 interface PopularSet {
   pokemon: string;
@@ -219,7 +220,7 @@ export function ThreatDetailModal({
           {/* Usage */}
           <div className="p-3 bg-muted rounded-lg">
             <div className="text-sm text-muted-foreground mb-1">
-              Usage in {format.toUpperCase()}
+              Usage in {getFormatDisplayName(format)}
             </div>
             <div className="text-2xl font-bold">{usage.toFixed(1)}%</div>
           </div>

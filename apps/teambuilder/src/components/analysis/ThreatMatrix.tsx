@@ -17,6 +17,7 @@ import {
 } from "@/lib/data/pokemon-types";
 import { toDisplayName } from "@/lib/showdown-parser";
 import { ThreatDetailModal } from "./ThreatDetailModal";
+import { getFormatDisplayName } from "@/types/pokemon";
 
 interface MetaThreat {
   pokemon: string;
@@ -270,7 +271,7 @@ export function ThreatMatrix() {
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground text-sm">
-            Could not load meta threats for {format.toUpperCase()}.
+            Could not load meta threats for {getFormatDisplayName(format)}.
             {error && <span className="block text-xs text-destructive mt-1">Error: {String(error)}</span>}
           </p>
         </CardContent>
@@ -283,7 +284,7 @@ export function ThreatMatrix() {
       <CardHeader className="pb-2">
         <CardTitle className="text-lg">Threat Matrix</CardTitle>
         <p className="text-xs text-muted-foreground">
-          Your team vs top {format.toUpperCase()} threats (type-based defensive matchups)
+          Your team vs top {getFormatDisplayName(format)} threats (type-based defensive matchups)
         </p>
       </CardHeader>
       <CardContent>

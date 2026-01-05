@@ -160,3 +160,12 @@ export const FORMAT_CATEGORIES: { id: FormatCategory; label: string }[] = [
 ];
 
 export type FormatId = (typeof FORMATS)[number]["id"];
+
+/**
+ * Get the display-friendly name for a format ID
+ * e.g., "gen9ou" → "Gen 9 OU", "gen9vgc2024regh" → "VGC 2024 Reg H"
+ */
+export function getFormatDisplayName(formatId: string): string {
+  const format = FORMATS.find((f) => f.id === formatId);
+  return format?.name ?? formatId.toUpperCase();
+}
