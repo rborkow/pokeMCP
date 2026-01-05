@@ -34,11 +34,28 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
   const handleApply = () => {
     // Apply the change based on action type
     switch (action.type) {
-      case "add_pokemon":
-      case "replace_pokemon":
+      // Update actions: merge with existing Pokemon data
       case "update_moveset":
       case "update_item":
-      case "update_ability":
+      case "update_ability": {
+        const existing = team[action.slot];
+        if (!existing) {
+          console.error("Cannot update: no Pokemon in slot", action.slot);
+          break;
+        }
+        // Merge existing data with payload updates
+        setPokemon(action.slot, {
+          ...existing,
+          ...action.payload,
+          // Explicit fallbacks for critical fields
+          pokemon: action.payload.pokemon ?? existing.pokemon,
+          moves: action.payload.moves ?? existing.moves,
+        });
+        break;
+      }
+      // Add/replace actions: require full Pokemon data
+      case "add_pokemon":
+      case "replace_pokemon":
         if (action.payload.pokemon) {
           setPokemon(action.slot, {
             pokemon: action.payload.pokemon,

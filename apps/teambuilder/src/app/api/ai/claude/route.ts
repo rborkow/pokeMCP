@@ -91,9 +91,21 @@ export async function POST(request: Request) {
         }).join("\n")
       : "No Pokemon in team yet.";
 
-    // Build system prompt with personality
+    // Build system prompt with enriched personality
     const teamSize = team.length;
-    const systemPrompt = `${personality.systemPromptPrefix}
+
+    // Build personality enrichment sections
+    const loreSection = personality.loreReferences.length > 0
+      ? `\n\nCHARACTER BACKGROUND (use these naturally in conversation):\n${personality.loreReferences.map(l => `- ${l.topic}: "${l.reference}"`).join('\n')}`
+      : "";
+
+    const preferredPokemonSection = personality.preferredPokemon.length > 0
+      ? `\n\nYOUR FAVORITE POKEMON (show extra enthusiasm for these):\n${personality.preferredPokemon.join(', ')}`
+      : "";
+
+    const feedbackSection = `\n\nFEEDBACK STYLE:\n- When praising: ${personality.praiseStyle[0]}\n- When critiquing: ${personality.criticismStyle[0]}`;
+
+    const systemPrompt = `${personality.systemPromptPrefix}${loreSection}${preferredPokemonSection}${feedbackSection}
 
 You are helping with Pokemon competitive team building for ${format.toUpperCase()}.
 
