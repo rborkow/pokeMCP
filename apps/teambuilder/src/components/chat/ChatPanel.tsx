@@ -78,7 +78,6 @@ export function ChatPanel() {
       message: content,
       team,
       format,
-      provider: "claude",
       personality: personalityId,
       chatHistory: currentMessages,
       onChunk: (text) => {
