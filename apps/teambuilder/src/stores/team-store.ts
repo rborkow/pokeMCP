@@ -41,7 +41,11 @@ export const useTeamStore = create<TeamState>()(
         set({ mode, format: newFormat });
       },
 
-      setFormat: (format) => set({ format }),
+      setFormat: (format) => {
+        // Derive mode from format to keep them in sync
+        const mode: Mode = isFormatValidForMode(format, "vgc") ? "vgc" : "singles";
+        set({ format, mode });
+      },
 
       setPokemon: (slot, pokemon) => {
         set((state) => {

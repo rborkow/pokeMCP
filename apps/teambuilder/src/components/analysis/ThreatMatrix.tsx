@@ -19,6 +19,10 @@ import {
 import { toDisplayName } from "@/lib/showdown-parser";
 import { ThreatDetailModal } from "./ThreatDetailModal";
 import { getFormatDisplayName, type Mode } from "@/types/pokemon";
+import {
+  VGC_THREAT_MATRIX_TIPS,
+  SINGLES_THREAT_MATRIX_TIPS,
+} from "@/lib/constants/vgc";
 
 interface MetaThreat {
   pokemon: string;
@@ -233,19 +237,8 @@ function TeamSummaryColumn({
   );
 }
 
-function getModeTips(mode: Mode): string[] {
-  if (mode === "vgc") {
-    return [
-      "In VGC, consider which 4 of your 6 Pokemon you'd bring vs these threats",
-      "Lead matchups matter - can your leads handle common opposing leads?",
-      "Speed control (Tailwind/Trick Room) can flip unfavorable matchups",
-    ];
-  }
-  return [
-    "Consider if your team can pivot around these threats with U-turn/Volt Switch",
-    "Entry hazards can chip threats into KO range over multiple switches",
-    "Having a dedicated check vs top usage threats is valuable",
-  ];
+function getModeTips(mode: Mode): readonly string[] {
+  return mode === "vgc" ? VGC_THREAT_MATRIX_TIPS : SINGLES_THREAT_MATRIX_TIPS;
 }
 
 export function ThreatMatrix() {
