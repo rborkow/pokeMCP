@@ -20,18 +20,20 @@ const QUICK_FORMATS = [
   { id: "gen9vgc2024regh" as FormatId, label: "Doubles", sublabel: "VGC", icon: Users },
 ];
 
+// IDs to exclude from grouped list (already in quick select)
+const QUICK_FORMAT_IDS = new Set(QUICK_FORMATS.map((q) => q.id));
+
 export function FormatSelector() {
   const { format, setFormat } = useTeamStore();
 
-  // Group formats by category
+  // Group formats by category, excluding quick formats to avoid duplicates
   const groupedFormats = FORMAT_CATEGORIES.map((category) => ({
     ...category,
-    formats: FORMATS.filter((f) => f.category === category.id),
-  }));
+    formats: FORMATS.filter((f) => f.category === category.id && !QUICK_FORMAT_IDS.has(f.id)),
+  })).filter((group) => group.formats.length > 0); // Remove empty groups
 
   // Get current format display info
   const currentFormatName = getFormatDisplayName(format);
-  const isQuickFormat = QUICK_FORMATS.some((q) => q.id === format);
   const quickFormat = QUICK_FORMATS.find((q) => q.id === format);
 
   return (
