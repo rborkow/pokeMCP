@@ -84,6 +84,7 @@ export const useChatStore = create<ChatState>()(
         messages: state.messages,
         aiProvider: state.aiProvider,
         personality: state.personality,
+        pendingAction: state.pendingAction,
       }),
       // Handle Date serialization
       storage: {

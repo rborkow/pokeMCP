@@ -93,10 +93,11 @@ export function ChatPanel() {
         }
       },
       onComplete: (response) => {
-        // Finalize the message
+        // Finalize the message - include action so it persists
         useChatStore.getState().updateMessage(streamingId, {
           content: response.content,
           isLoading: false,
+          action: response.action,
         });
 
         // If there are multiple actions (team generation), apply them all
