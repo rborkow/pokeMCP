@@ -82,7 +82,7 @@ export default function Home() {
           {/* Team Grid + Analysis */}
           <div className="lg:col-span-2">
             {/* Analysis Tabs */}
-            <Tabs defaultValue="coverage" className="w-full">
+            <Tabs defaultValue="threats" className="w-full">
               <TabsList className="bg-muted/50 border border-border w-full justify-start">
                 <TabsTrigger value="coverage" className="gap-2 data-[state=active]:bg-card data-[state=active]:text-primary">
                   <Shield className="w-4 h-4" />

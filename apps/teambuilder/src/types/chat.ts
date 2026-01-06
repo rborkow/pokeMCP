@@ -7,7 +7,11 @@ export type TeamActionType =
   | "update_moveset"
   | "remove_pokemon"
   | "update_item"
-  | "update_ability";
+  | "update_ability"
+  | "update_nature"
+  | "update_evs"
+  | "update_tera_type"
+  | "update_move"; // Single move change (requires moveSlot in payload)
 
 export interface TeamAction {
   type: TeamActionType;

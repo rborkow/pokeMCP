@@ -500,3 +500,29 @@ export function calculateMatchupScore(
   if (worstMatchup <= 2) return -1;   // Weak
   return -2;                          // 4x weak
 }
+
+/**
+ * Calculate offensive score for a Pokemon's STAB types against a target
+ * Returns a score from -2 (ineffective) to +2 (super effective)
+ */
+export function calculateOffensiveScore(
+  attackerTypes: PokemonType[],
+  defenderTypes: PokemonType[]
+): number {
+  // Find best STAB effectiveness against target
+  let bestMatchup = 0;
+
+  for (const attackType of attackerTypes) {
+    const effectiveness = getTypeEffectiveness(attackType, defenderTypes);
+    if (effectiveness > bestMatchup) {
+      bestMatchup = effectiveness;
+    }
+  }
+
+  // Convert to score: 4x = +2, 2x = +1, 1x = 0, 0.5x = -1, 0.25x or 0x = -2
+  if (bestMatchup >= 4) return 2;   // 4x super effective
+  if (bestMatchup >= 2) return 1;   // Super effective
+  if (bestMatchup >= 1) return 0;   // Neutral
+  if (bestMatchup >= 0.5) return -1; // Resisted
+  return -2;                         // Immune or double resisted
+}

@@ -127,12 +127,31 @@ CURRENT TEAM STATUS:
 - Team has ${teamSize} Pokemon (slots 0-${teamSize - 1} are filled, slots ${teamSize}-5 are empty)
 - Use "add_pokemon" ONLY for empty slots (${teamSize > 5 ? "team is full!" : `slot ${teamSize} is the next empty slot`})
 - Use "replace_pokemon" to swap out an existing Pokemon at their slot
-- Use "update_moveset" to modify moves/item/ability of an existing Pokemon without replacing it
+
+GRANULAR UPDATE ACTIONS (for existing Pokemon - prefer these over full rebuilds):
+- "update_moveset" - Change moves and/or full build (use for multiple changes at once)
+- "update_nature" - Change ONLY the nature: {"nature":"Modest"}
+- "update_evs" - Adjust ONLY the EV spread: {"evs":{"hp":252,"atk":0,"def":4,"spa":252,"spd":0,"spe":0}}
+- "update_tera_type" - Change ONLY tera type: {"teraType":"Water"}
+- "update_item" - Change ONLY the held item: {"item":"Choice Specs"}
+- "update_ability" - Change ONLY the ability: {"ability":"Adaptability"}
+- "update_move" - Change a SINGLE move slot: {"moves":["Ice Beam"],"moveSlot":2} (moveSlot 0-3)
 
 When suggesting a specific team change, wrap it in [ACTION] tags like this:
 
+Example - Adding a new Pokemon:
 [ACTION]
 {"type":"add_pokemon","slot":${teamSize},"payload":{"pokemon":"Great Tusk","moves":["Headlong Rush","Close Combat","Ice Spinner","Rapid Spin"],"ability":"Protosynthesis","item":"Booster Energy","nature":"Jolly","teraType":"Ground","evs":{"hp":0,"atk":252,"def":4,"spa":0,"spd":0,"spe":252}},"reason":"Adds Ground coverage and hazard removal"}
+[/ACTION]
+
+Example - Changing just a nature:
+[ACTION]
+{"type":"update_nature","slot":0,"payload":{"nature":"Modest"},"reason":"Modest boosts Special Attack for stronger STAB"}
+[/ACTION]
+
+Example - Changing one move:
+[ACTION]
+{"type":"update_move","slot":1,"payload":{"moves":["Ice Beam"],"moveSlot":2},"reason":"Ice Beam provides better coverage against Ground/Flying types"}
 [/ACTION]
 
 Guidelines:
