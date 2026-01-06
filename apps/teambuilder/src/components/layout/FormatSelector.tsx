@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,6 +10,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { FORMATS, FORMAT_CATEGORIES, type FormatId, getFormatDisplayName } from "@/types/pokemon";
 import { useTeamStore } from "@/stores/team-store";
@@ -24,7 +35,8 @@ const QUICK_FORMATS = [
 const QUICK_FORMAT_IDS = new Set(QUICK_FORMATS.map((q) => q.id));
 
 export function FormatSelector() {
-  const { format, setFormat } = useTeamStore();
+  const { format, setFormat, team } = useTeamStore();
+  const [pendingFormat, setPendingFormat] = useState<FormatId | null>(null);
 
   // Group formats by category, excluding quick formats to avoid duplicates
   const groupedFormats = FORMAT_CATEGORIES.map((category) => ({
@@ -36,7 +48,26 @@ export function FormatSelector() {
   const currentFormatName = getFormatDisplayName(format);
   const quickFormat = QUICK_FORMATS.find((q) => q.id === format);
 
+  const handleFormatChange = (newFormat: FormatId) => {
+    if (newFormat === format) return; // No change
+
+    // If team has Pokemon, show confirmation
+    if (team.length > 0) {
+      setPendingFormat(newFormat);
+    } else {
+      setFormat(newFormat);
+    }
+  };
+
+  const confirmFormatChange = () => {
+    if (pendingFormat) {
+      setFormat(pendingFormat);
+      setPendingFormat(null);
+    }
+  };
+
   return (
+    <>
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
@@ -66,7 +97,7 @@ export function FormatSelector() {
           return (
             <DropdownMenuItem
               key={quickFmt.id}
-              onClick={() => setFormat(quickFmt.id)}
+              onClick={() => handleFormatChange(quickFmt.id)}
               className="gap-2"
             >
               <Icon className="h-4 w-4" />
@@ -88,7 +119,7 @@ export function FormatSelector() {
             {group.formats.map((f) => (
               <DropdownMenuItem
                 key={f.id}
-                onClick={() => setFormat(f.id as FormatId)}
+                onClick={() => handleFormatChange(f.id as FormatId)}
                 className="gap-2"
               >
                 <span>{f.name}</span>
@@ -100,5 +131,25 @@ export function FormatSelector() {
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
+
+    <AlertDialog open={pendingFormat !== null} onOpenChange={(open) => !open && setPendingFormat(null)}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Change format?</AlertDialogTitle>
+          <AlertDialogDescription>
+            You have {team.length} Pokémon in your team. Changing to{" "}
+            <span className="font-medium text-foreground">
+              {pendingFormat ? getFormatDisplayName(pendingFormat) : ""}
+            </span>{" "}
+            may affect team legality — some Pokémon, moves, or items might not be allowed.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={confirmFormatChange}>Change format</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+    </>
   );
 }
