@@ -132,7 +132,10 @@ export const FORMATS: FormatDefinition[] = [
   { id: "gen9nu", name: "Gen 9 NU", gen: 9, category: "singles" },
   { id: "gen9pu", name: "Gen 9 PU", gen: 9, category: "singles" },
   { id: "gen9lc", name: "Gen 9 LC", gen: 9, category: "singles" },
-  // Current Gen Doubles/VGC
+  // Current Gen Doubles/VGC - 2025 regulations
+  { id: "gen9vgc2025regi", name: "VGC 2025 Reg I", gen: 9, category: "doubles" },
+  { id: "gen9vgc2025regj", name: "VGC 2025 Reg J", gen: 9, category: "doubles" },
+  // Legacy VGC formats
   { id: "gen9vgc2024regh", name: "VGC 2024 Reg H", gen: 9, category: "doubles" },
   { id: "gen9vgc2024regf", name: "VGC 2024 Reg F", gen: 9, category: "doubles" },
   { id: "gen9doublesou", name: "Gen 9 Doubles OU", gen: 9, category: "doubles" },
@@ -173,7 +176,7 @@ export const MODE_INFO: Record<Mode, { label: string; description: string; defau
   vgc: {
     label: "VGC",
     description: "Official doubles formats",
-    defaultFormat: "gen9vgc2024regh",
+    defaultFormat: "gen9vgc2025regi",
   },
 };
 

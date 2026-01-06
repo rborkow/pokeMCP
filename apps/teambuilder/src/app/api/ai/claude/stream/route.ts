@@ -8,6 +8,7 @@ import {
   buildSystemPrompt,
   buildUserMessage,
 } from "@/lib/ai/context";
+import type { Mode } from "@/types/pokemon";
 import { TEAM_TOOLS } from "@/lib/ai/tools";
 
 // Keywords that trigger extended thinking for deeper analysis
@@ -55,7 +56,7 @@ export async function POST(request: NextRequest) {
     // Build prompts
     const teamContext = formatTeamContext(team as TeamPokemon[]);
     const systemPrompt = buildSystemPrompt(personalityId as PersonalityId, format, team.length, mode);
-    const fullUserMessage = buildUserMessage(teamContext, metaThreats, popularSetsContext, message, format);
+    const fullUserMessage = buildUserMessage(teamContext, metaThreats, popularSetsContext, message, format, team as TeamPokemon[], mode as Mode);
 
     // Determine if we should use extended thinking
     const useThinking = enableThinking ?? shouldUseThinking(message);

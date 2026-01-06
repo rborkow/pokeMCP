@@ -1,5 +1,6 @@
 import { getPersonality, type PersonalityId } from "./personalities";
 import type { Mode, TeamPokemon } from "@/types/pokemon";
+import { getVGCAnalysisSummary } from "@/lib/vgc-analysis";
 
 export type { TeamPokemon };
 
@@ -300,7 +301,9 @@ export function buildUserMessage(
   metaThreats: string,
   popularSetsContext: string,
   message: string,
-  format: string
+  format: string,
+  team?: TeamPokemon[],
+  mode?: Mode
 ): string {
   let contextSection = "";
   if (metaThreats) {
@@ -308,6 +311,14 @@ export function buildUserMessage(
   }
   if (popularSetsContext) {
     contextSection += `\n\n## Popular Sets (USE THESE MOVES - they are verified legal):\n${popularSetsContext}`;
+  }
+
+  // Add VGC-specific team analysis if in VGC mode
+  if (mode === "vgc" && team && team.length > 0) {
+    const vgcAnalysis = getVGCAnalysisSummary(team);
+    if (vgcAnalysis) {
+      contextSection += `\n\n## ${vgcAnalysis}`;
+    }
   }
 
   return `Current Team:
