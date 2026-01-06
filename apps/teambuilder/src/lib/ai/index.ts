@@ -19,7 +19,8 @@ function parseToolToAction(
 
     if (toolInput.action_type === "remove_pokemon") {
       preview.splice(slot, 1);
-    } else {
+    } else if (toolInput.action_type === "add_pokemon" || toolInput.action_type === "replace_pokemon") {
+      // For add/replace, create a new Pokemon with all provided fields
       const newPokemon: TeamPokemon = {
         pokemon: toolInput.pokemon || "",
         moves: toolInput.moves || [],
@@ -34,12 +35,35 @@ function parseToolToAction(
       if (toolInput.action_type === "add_pokemon") {
         preview.push(newPokemon);
       } else {
-        // Merge with existing for updates
-        if (preview[slot]) {
-          preview[slot] = { ...preview[slot], ...newPokemon };
-        } else {
-          preview[slot] = newPokemon;
-        }
+        // Full replacement at slot
+        preview[slot] = newPokemon;
+      }
+    } else if (toolInput.action_type === "update_pokemon") {
+      // For updates, only merge provided fields (preserve existing data)
+      const updates: Partial<TeamPokemon> = {};
+      if (toolInput.pokemon !== undefined) updates.pokemon = toolInput.pokemon;
+      if (toolInput.moves !== undefined && toolInput.moves.length > 0) updates.moves = toolInput.moves;
+      if (toolInput.ability !== undefined) updates.ability = toolInput.ability;
+      if (toolInput.item !== undefined) updates.item = toolInput.item;
+      if (toolInput.nature !== undefined) updates.nature = toolInput.nature;
+      if (toolInput.tera_type !== undefined) updates.teraType = toolInput.tera_type;
+      if (toolInput.evs !== undefined) updates.evs = toolInput.evs;
+      if (toolInput.ivs !== undefined) updates.ivs = toolInput.ivs;
+
+      if (preview[slot]) {
+        preview[slot] = { ...preview[slot], ...updates };
+      } else {
+        // No existing Pokemon at slot - treat as add
+        preview[slot] = {
+          pokemon: toolInput.pokemon || "",
+          moves: toolInput.moves || [],
+          ability: toolInput.ability,
+          item: toolInput.item,
+          nature: toolInput.nature,
+          teraType: toolInput.tera_type,
+          evs: toolInput.evs,
+          ivs: toolInput.ivs,
+        };
       }
     }
 
