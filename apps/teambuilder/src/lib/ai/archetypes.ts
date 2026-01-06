@@ -260,6 +260,41 @@ The win condition is maintaining Sand for chip damage + Sand Rush speed while ta
   },
 ];
 
+// Goblin Mode - Wolfe Glick-inspired creative/unorthodox teams
+const GOBLIN_MODE: TeamArchetype = {
+  id: "goblin-mode",
+  name: "Goblin Mode",
+  description: "Unorthodox, creative teams that catch opponents off-guard with unexpected tech",
+  icon: "🎨", // Smeargle energy - anything goes
+  formats: "both",
+  prompt: `Build a GOBLIN MODE team - an unorthodox, creative team inspired by Wolfe Glick's World Championship-winning teams that use unexpected strategies and tech choices.
+
+Goblin Mode principles:
+- USE POKEMON THAT AREN'T COMMON IN THE META but have untapped potential
+- UNEXPECTED MOVE CHOICES - moves people won't see coming (Ally Switch, Instruct, After You, Role Play, Skill Swap)
+- SURPRISE ITEM CHOICES - Eject Button, Room Service, Eject Pack, Adrenaline Orb
+- ABILITY MIND GAMES - Intimidate switches, Defiant/Competitive punishes, Prankster nonsense
+- UNORTHODOX EV SPREADS - Speed creep, survival benchmarks, weird offensive investments
+- ANTI-META PICKS - specifically counter what's popular with uncommon answers
+
+Creative tech to consider:
+- Smeargle (can learn ANY move - Transform, Spore, Fake Out, Dark Void, etc.)
+- Ditto (transforms into opponent's biggest threat)
+- Zoroark (Illusion mindgames)
+- Indeedee or Oranguru (Psychic Terrain + Instruct/Expanding Force)
+- Shedinja (Wonder Guard vs unprepared teams)
+- Assist/Copycat shenanigans
+- Beat Up + Justified combos
+- Rage Powder + redirection bait
+- Perish Song trap teams
+- Self-Swagger with Own Tempo/Contrary
+
+The goal is to make your opponent think "WHAT?!" every turn. Win by confusion and superior preparation for your own weird strategy.
+
+DO NOT just pick standard meta Pokemon with standard sets. The whole point is catching people off-guard with creativity and deep game knowledge.`,
+  keyFeatures: ["Surprise tech", "Anti-meta", "Mind games", "Uncommon picks"],
+};
+
 // Weather archetype for Singles (different considerations)
 const WEATHER_SINGLES: TeamArchetype = {
   id: "weather-singles",
@@ -295,6 +330,7 @@ export const TEAM_ARCHETYPES: TeamArchetype[] = [
   ...DOUBLES_ARCHETYPES.slice(0, 2), // Goodstuffs, Trick Room
   WEATHER_SINGLES,
   DOUBLES_ARCHETYPES[2], // Tailwind
+  GOBLIN_MODE, // Wolfe-style creative teams
   ...SINGLES_ARCHETYPES.slice(2), // Balance, Stall
   ...DOUBLES_ARCHETYPES.slice(3), // Sun, Rain, Sand
 ];

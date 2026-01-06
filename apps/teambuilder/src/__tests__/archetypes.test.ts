@@ -78,6 +78,15 @@ describe("archetypes", () => {
       expect(getArchetypesForFormat("gen9ou").length).toBeGreaterThan(0);
       expect(getArchetypesForFormat("gen9vgc2024regh").length).toBeGreaterThan(0);
     });
+
+    it("includes goblin-mode in both singles and doubles", () => {
+      const singlesArchetypes = getArchetypesForFormat("gen9ou");
+      const doublesArchetypes = getArchetypesForFormat("gen9vgc2024regh");
+
+      // Goblin Mode has formats: "both" so should appear in both
+      expect(singlesArchetypes.some(a => a.id === "goblin-mode")).toBe(true);
+      expect(doublesArchetypes.some(a => a.id === "goblin-mode")).toBe(true);
+    });
   });
 
   describe("getArchetype", () => {
