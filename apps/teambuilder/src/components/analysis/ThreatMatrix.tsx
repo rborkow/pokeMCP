@@ -245,7 +245,13 @@ export function ThreatMatrix() {
   const { team, format, mode } = useTeamStore();
   // Ensure format is lowercase for API calls
   const normalizedFormat = format.toLowerCase();
-  const { data: metaThreatsData, isLoading, error } = useMetaThreats(normalizedFormat, 10);
+  const {
+    data: metaThreatsData,
+    isLoading,
+    error,
+    effectiveFormat,
+    isFallback,
+  } = useMetaThreats(normalizedFormat, 10);
   const [selectedThreat, setSelectedThreat] = useState<MetaThreat | null>(null);
 
   // Parse meta threats
@@ -328,8 +334,13 @@ export function ThreatMatrix() {
       <CardHeader className="pb-2">
         <CardTitle className="text-lg">Threat Matrix</CardTitle>
         <p className="text-xs text-muted-foreground">
-          Your team vs top {getFormatDisplayName(format)} threats (🛡=Defense, ⚔=Offense)
+          Your team vs top {getFormatDisplayName(effectiveFormat)} threats (🛡=Defense, ⚔=Offense)
         </p>
+        {isFallback && (
+          <p className="text-xs text-amber-500">
+            Note: Using {getFormatDisplayName(effectiveFormat)} data (stats for {getFormatDisplayName(format)} not yet available)
+          </p>
+        )}
       </CardHeader>
       <CardContent>
         <div className="overflow-x-auto">
