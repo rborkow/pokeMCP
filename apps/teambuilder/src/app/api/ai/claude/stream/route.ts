@@ -28,7 +28,7 @@ const MAX_HISTORY_MESSAGES = 10;
 
 export async function POST(request: NextRequest) {
   try {
-    const { message, team = [], format = "gen9ou", enableThinking, personality: personalityId = DEFAULT_PERSONALITY, chatHistory = [] } = await request.json();
+    const { message, team = [], format = "gen9ou", mode = "singles", enableThinking, personality: personalityId = DEFAULT_PERSONALITY, chatHistory = [] } = await request.json();
 
     if (!message) {
       return new Response(JSON.stringify({ error: "Message is required" }), {
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
 
     // Build prompts
     const teamContext = formatTeamContext(team as TeamPokemon[]);
-    const systemPrompt = buildSystemPrompt(personalityId as PersonalityId, format, team.length);
+    const systemPrompt = buildSystemPrompt(personalityId as PersonalityId, format, team.length, mode);
     const fullUserMessage = buildUserMessage(teamContext, metaThreats, popularSetsContext, message, format);
 
     // Determine if we should use extended thinking

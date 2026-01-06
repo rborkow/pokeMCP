@@ -18,7 +18,7 @@ import {
 } from "@/lib/data/pokemon-types";
 import { toDisplayName } from "@/lib/showdown-parser";
 import { ThreatDetailModal } from "./ThreatDetailModal";
-import { getFormatDisplayName } from "@/types/pokemon";
+import { getFormatDisplayName, type Mode } from "@/types/pokemon";
 
 interface MetaThreat {
   pokemon: string;
@@ -233,8 +233,23 @@ function TeamSummaryColumn({
   );
 }
 
+function getModeTips(mode: Mode): string[] {
+  if (mode === "vgc") {
+    return [
+      "In VGC, consider which 4 of your 6 Pokemon you'd bring vs these threats",
+      "Lead matchups matter - can your leads handle common opposing leads?",
+      "Speed control (Tailwind/Trick Room) can flip unfavorable matchups",
+    ];
+  }
+  return [
+    "Consider if your team can pivot around these threats with U-turn/Volt Switch",
+    "Entry hazards can chip threats into KO range over multiple switches",
+    "Having a dedicated check vs top usage threats is valuable",
+  ];
+}
+
 export function ThreatMatrix() {
-  const { team, format } = useTeamStore();
+  const { team, format, mode } = useTeamStore();
   // Ensure format is lowercase for API calls
   const normalizedFormat = format.toLowerCase();
   const { data: metaThreatsData, isLoading, error } = useMetaThreats(normalizedFormat, 10);
@@ -423,6 +438,17 @@ export function ThreatMatrix() {
           </div>
           <div className="text-muted-foreground">
             <span className="font-medium">Weighted</span> column: Average score weighted by threat usage % (higher usage = more impact)
+          </div>
+          {/* Mode-specific tips */}
+          <div className="mt-3 pt-3 border-t border-border/50">
+            <p className="font-medium text-foreground mb-1">
+              {mode === "vgc" ? "VGC Tips:" : "Singles Tips:"}
+            </p>
+            <ul className="list-disc list-inside text-muted-foreground space-y-0.5">
+              {getModeTips(mode).map((tip, i) => (
+                <li key={i}>{tip}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </CardContent>

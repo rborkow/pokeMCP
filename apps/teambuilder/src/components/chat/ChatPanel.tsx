@@ -26,7 +26,7 @@ export function ChatPanel() {
     clearQueuedPrompt,
     setLastUserPrompt,
   } = useChatStore();
-  const { team, format, setPokemon } = useTeamStore();
+  const { team, format, mode, setPokemon } = useTeamStore();
   const { pushState } = useHistoryStore();
 
   // Apply multiple actions (for team generation)
@@ -78,6 +78,7 @@ export function ChatPanel() {
       message: content,
       team,
       format,
+      mode,
       personality: personalityId,
       chatHistory: currentMessages,
       onChunk: (text) => {
@@ -129,7 +130,7 @@ export function ChatPanel() {
         setLoading(false);
       },
     });
-  }, [addMessage, setLoading, setLastUserPrompt, team, format, personalityId, setPendingAction, applyActions]);
+  }, [addMessage, setLoading, setLastUserPrompt, team, format, mode, personalityId, setPendingAction, applyActions]);
 
   // Watch for queued prompts from WelcomeOverlay
   useEffect(() => {

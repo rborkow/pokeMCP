@@ -1,4 +1,4 @@
-import type { TeamPokemon } from "@/types/pokemon";
+import type { TeamPokemon, Mode } from "@/types/pokemon";
 import type { AIResponse, TeamAction, ChatMessage } from "@/types/chat";
 import type { PersonalityId } from "./personalities";
 import { validatePokemonData } from "@/lib/validation/pokemon";
@@ -102,6 +102,7 @@ interface StreamChatMessageOptions {
   message: string;
   team: TeamPokemon[];
   format: string;
+  mode?: Mode;
   personality?: PersonalityId;
   chatHistory?: ChatMessage[];
   onChunk: (text: string) => void;
@@ -118,6 +119,7 @@ export async function streamChatMessage({
   message,
   team,
   format,
+  mode = "singles",
   personality,
   chatHistory = [],
   onChunk,
@@ -134,6 +136,7 @@ export async function streamChatMessage({
         message,
         team,
         format,
+        mode,
         personality,
         chatHistory: formatChatHistory(chatHistory),
       }),

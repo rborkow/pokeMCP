@@ -1,10 +1,39 @@
 import { getPersonality, type PersonalityId } from "./personalities";
+import type { Mode } from "@/types/pokemon";
 
 export interface TeamPokemon {
   pokemon: string;
   moves?: string[];
   ability?: string;
   item?: string;
+}
+
+/**
+ * Get mode-specific guidance for the AI
+ */
+function getModeGuidance(mode: Mode): string {
+  if (mode === "vgc") {
+    return `
+VGC-SPECIFIC GUIDANCE (This is a DOUBLES format):
+- Protect is ESSENTIAL on most Pokemon - suggest it unless there's a good reason not to
+- Spread moves (Earthquake, Rock Slide, Heat Wave, Dazzling Gleam) hit both opponents
+- Speed control is critical: Tailwind, Trick Room, Icy Wind, Electroweb
+- Consider Fake Out for disruption and enabling setup
+- Redirection (Follow Me, Rage Powder) protects teammates
+- Teams bring 6, pick 4 at team preview - consider flexible cores
+- Partner synergy matters: don't suggest Earthquake if partner is weak to Ground
+- Common VGC Pokemon often have different sets than Singles (more Protect, less recovery)`;
+  }
+
+  return `
+SINGLES-SPECIFIC GUIDANCE (This is a 6v6 format):
+- Entry hazards (Stealth Rock, Spikes, Toxic Spikes) are crucial for chip damage
+- Hazard removal (Defog, Rapid Spin) or Magic Bounce is valuable
+- Pivot moves (U-turn, Volt Switch, Flip Turn) maintain momentum
+- Recovery moves (Roost, Recover, Wish) provide longevity
+- Status moves (Toxic, Will-O-Wisp, Thunder Wave) wear down opponents
+- Consider dedicated walls, wallbreakers, and sweepers
+- Setup moves (Swords Dance, Dragon Dance, Nasty Plot) enable sweeps`;
 }
 
 const MCP_URL = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
@@ -92,9 +121,14 @@ export function formatTeamContext(team: TeamPokemon[]): string {
 }
 
 /**
- * Build the system prompt with personality enrichment
+ * Build the system prompt with personality enrichment and mode-specific guidance
  */
-export function buildSystemPrompt(personalityId: PersonalityId, format: string, teamSize: number): string {
+export function buildSystemPrompt(
+  personalityId: PersonalityId,
+  format: string,
+  teamSize: number,
+  mode: Mode = "singles"
+): string {
   const personality = getPersonality(personalityId);
 
   const loreSection = personality.loreReferences.length > 0
@@ -107,9 +141,12 @@ export function buildSystemPrompt(personalityId: PersonalityId, format: string, 
 
   const feedbackSection = `\n\nFEEDBACK STYLE:\n- When praising: ${personality.praiseStyle[0]}\n- When critiquing: ${personality.criticismStyle[0]}`;
 
+  const modeGuidance = getModeGuidance(mode);
+
   return `${personality.systemPromptPrefix}${loreSection}${preferredPokemonSection}${feedbackSection}
 
 You are helping with Pokemon competitive team building for ${format.toUpperCase()}.
+${modeGuidance}
 
 CRITICAL RULES:
 1. ONLY suggest Pokemon that are legal in ${format.toUpperCase()}. Reference the meta threats list.
