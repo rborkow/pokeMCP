@@ -122,39 +122,3 @@ export interface ModifyTeamInput {
   move_slot?: number;
 }
 
-/**
- * Convert tool input to the existing TeamAction format for compatibility
- */
-export function toolInputToTeamAction(input: ModifyTeamInput, currentTeam: unknown[]): {
-  type: string;
-  slot: number;
-  payload: Record<string, unknown>;
-  reason: string;
-} {
-  // Map action_type to existing types
-  const typeMap: Record<string, string> = {
-    add_pokemon: "add_pokemon",
-    replace_pokemon: "replace_pokemon",
-    update_pokemon: "update_moveset", // Generic update
-    remove_pokemon: "remove_pokemon",
-  };
-
-  const payload: Record<string, unknown> = {};
-
-  if (input.pokemon) payload.pokemon = input.pokemon;
-  if (input.moves) payload.moves = input.moves;
-  if (input.ability) payload.ability = input.ability;
-  if (input.item) payload.item = input.item;
-  if (input.nature) payload.nature = input.nature;
-  if (input.tera_type) payload.teraType = input.tera_type;
-  if (input.evs) payload.evs = input.evs;
-  if (input.ivs) payload.ivs = input.ivs;
-  if (input.move_slot !== undefined) payload.moveSlot = input.move_slot;
-
-  return {
-    type: typeMap[input.action_type] || input.action_type,
-    slot: input.slot,
-    payload,
-    reason: input.reason,
-  };
-}
