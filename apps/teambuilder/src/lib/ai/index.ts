@@ -67,10 +67,10 @@ function parseToolToAction(
       }
     }
 
-    // Build payload from tool input
+    // Build payload from tool input (only include non-empty fields)
     const payload: Partial<TeamPokemon> = {};
     if (toolInput.pokemon) payload.pokemon = toolInput.pokemon;
-    if (toolInput.moves) payload.moves = toolInput.moves;
+    if (toolInput.moves && toolInput.moves.length > 0) payload.moves = toolInput.moves;
     if (toolInput.ability) payload.ability = toolInput.ability;
     if (toolInput.item) payload.item = toolInput.item;
     if (toolInput.nature) payload.nature = toolInput.nature;

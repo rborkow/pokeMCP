@@ -352,10 +352,20 @@ CURRENT TEAM STATUS:
 - Team has ${teamSize} Pokemon (slots 0-${teamSize - 1} are filled, slots ${teamSize}-5 are empty)
 - Use "add_pokemon" ONLY for empty slots (${teamSize > 5 ? "team is full!" : `slot ${teamSize} is the next empty slot`})
 - Use "replace_pokemon" to swap out an existing Pokemon at their slot
-- Use "update_pokemon" for partial updates to existing Pokemon
+- Use "update_pokemon" to change an existing Pokemon (e.g., change item, swap a move)
 
 USING THE modify_team TOOL:
 When the user asks you to add, replace, or modify Pokemon, use the modify_team tool. You can call it multiple times to build a full team.
+
+IMPORTANT: Always provide COMPLETE Pokemon data for every tool call, including:
+- pokemon name
+- ALL 4 moves (even if only changing one move, include all 4)
+- ability
+- item
+- nature
+- evs (full spread)
+- tera_type (for Gen 9)
+Do NOT send partial data - always send the full build.
 
 For each Pokemon, include:
 ${toolFields}
