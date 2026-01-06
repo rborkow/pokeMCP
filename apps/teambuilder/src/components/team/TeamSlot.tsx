@@ -2,6 +2,8 @@
 
 import { Badge } from "@/components/ui/badge";
 import { PokemonSprite } from "./PokemonSprite";
+import { MoveBadge } from "./MoveBadge";
+import { EVBar } from "./EVBar";
 import type { TeamPokemon, PokemonType } from "@/types/pokemon";
 import { X, Sparkles, Package } from "lucide-react";
 import { getPokemonTypes } from "@/lib/data/pokemon-types";
@@ -153,16 +155,14 @@ export function TeamSlot({
           <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-semibold">Moves</p>
           <div className="grid grid-cols-2 gap-1">
             {pokemon.moves.map((move, idx) => (
-              <div
-                key={idx}
-                className="px-2 py-1.5 rounded-md bg-muted/30 border border-border/30 text-[11px] text-foreground truncate text-center hover:bg-muted/50 transition-colors cursor-default"
-              >
-                {move}
-              </div>
+              <MoveBadge key={idx} move={move} />
             ))}
           </div>
         </div>
       )}
+
+      {/* EV Distribution */}
+      {pokemon.evs && <EVBar evs={pokemon.evs} nature={pokemon.nature} />}
 
       {/* Tera Type with crystalline styling */}
       {pokemon.teraType && (

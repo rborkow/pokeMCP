@@ -213,6 +213,15 @@
     font-family: var(--font-display, var(--font-sans));
   }
 
+  .move-badge {
+    @apply inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-[11px] text-white truncate;
+    @apply border border-white/20 transition-colors cursor-default;
+  }
+
+  .move-badge:hover {
+    @apply border-white/40;
+  }
+
   .glass-panel {
     @apply rounded-2xl border border-border/50 p-4;
     background: oklch(from var(--card) l c h / 0.8);
