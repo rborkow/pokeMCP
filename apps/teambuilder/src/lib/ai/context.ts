@@ -1,7 +1,36 @@
 import { getPersonality, type PersonalityId } from "./personalities";
-import type { TeamPokemon } from "@/types/pokemon";
+import type { Mode, TeamPokemon } from "@/types/pokemon";
+import { getVGCAnalysisSummary } from "@/lib/vgc-analysis";
 
 export type { TeamPokemon };
+
+/**
+ * Get mode-specific guidance for the AI
+ */
+function getModeGuidance(mode: Mode): string {
+  if (mode === "vgc") {
+    return `
+VGC-SPECIFIC GUIDANCE (This is a DOUBLES format):
+- Protect is ESSENTIAL on most Pokemon - suggest it unless there's a good reason not to
+- Spread moves (Earthquake, Rock Slide, Heat Wave, Dazzling Gleam) hit both opponents
+- Speed control is critical: Tailwind, Trick Room, Icy Wind, Electroweb
+- Consider Fake Out for disruption and enabling setup
+- Redirection (Follow Me, Rage Powder) protects teammates
+- Teams bring 6, pick 4 at team preview - consider flexible cores
+- Partner synergy matters: don't suggest Earthquake if partner is weak to Ground
+- Common VGC Pokemon often have different sets than Singles (more Protect, less recovery)`;
+  }
+
+  return `
+SINGLES-SPECIFIC GUIDANCE (This is a 6v6 format):
+- Entry hazards (Stealth Rock, Spikes, Toxic Spikes) are crucial for chip damage
+- Hazard removal (Defog, Rapid Spin) or Magic Bounce is valuable
+- Pivot moves (U-turn, Volt Switch, Flip Turn) maintain momentum
+- Recovery moves (Roost, Recover, Wish) provide longevity
+- Status moves (Toxic, Will-O-Wisp, Thunder Wave) wear down opponents
+- Consider dedicated walls, wallbreakers, and sweepers
+- Setup moves (Swords Dance, Dragon Dance, Nasty Plot) enable sweeps`;
+}
 
 const MCP_URL = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
 
@@ -183,9 +212,14 @@ MEGA EVOLUTION (Gen 6 Mechanic):
 }
 
 /**
- * Build the system prompt with personality enrichment
+ * Build the system prompt with personality enrichment and mode-specific guidance
  */
-export function buildSystemPrompt(personalityId: PersonalityId, format: string, teamSize: number): string {
+export function buildSystemPrompt(
+  personalityId: PersonalityId,
+  format: string,
+  teamSize: number,
+  mode: Mode = "singles"
+): string {
   const personality = getPersonality(personalityId);
   const gen = getGeneration(format);
   const gimmickGuidance = getGimmickGuidance(format);
@@ -199,6 +233,8 @@ export function buildSystemPrompt(personalityId: PersonalityId, format: string, 
     : "";
 
   const feedbackSection = `\n\nFEEDBACK STYLE:\n- When praising: ${personality.praiseStyle[0]}\n- When critiquing: ${personality.criticismStyle[0]}`;
+
+  const modeGuidance = getModeGuidance(mode);
 
   // Build tool fields list based on generation
   const toolFields = gen >= 9
@@ -221,6 +257,7 @@ export function buildSystemPrompt(personalityId: PersonalityId, format: string, 
   return `${personality.systemPromptPrefix}${loreSection}${preferredPokemonSection}${feedbackSection}
 
 You are helping with Pokemon competitive team building for ${format.toUpperCase()}.
+${modeGuidance}
 ${gimmickGuidance}
 
 CRITICAL RULES:
@@ -264,7 +301,9 @@ export function buildUserMessage(
   metaThreats: string,
   popularSetsContext: string,
   message: string,
-  format: string
+  format: string,
+  team?: TeamPokemon[],
+  mode?: Mode
 ): string {
   let contextSection = "";
   if (metaThreats) {
@@ -272,6 +311,14 @@ export function buildUserMessage(
   }
   if (popularSetsContext) {
     contextSection += `\n\n## Popular Sets (USE THESE MOVES - they are verified legal):\n${popularSetsContext}`;
+  }
+
+  // Add VGC-specific team analysis if in VGC mode
+  if (mode === "vgc" && team && team.length > 0) {
+    const vgcAnalysis = getVGCAnalysisSummary(team);
+    if (vgcAnalysis) {
+      contextSection += `\n\n## ${vgcAnalysis}`;
+    }
   }
 
   return `Current Team:

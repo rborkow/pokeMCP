@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ModeToggle } from "./ModeToggle";
 import { FormatSelector } from "./FormatSelector";
 
 export function Header() {
@@ -17,7 +18,8 @@ export function Header() {
           <span className="hidden sm:inline text-sm text-muted-foreground ml-2">Team Builder</span>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <ModeToggle />
           <FormatSelector />
         </div>
       </div>

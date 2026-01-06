@@ -8,6 +8,7 @@ import {
   buildSystemPrompt,
   buildUserMessage,
 } from "@/lib/ai/context";
+import type { Mode } from "@/types/pokemon";
 import { TEAM_TOOLS } from "@/lib/ai/tools";
 
 // Keywords that trigger extended thinking for deeper analysis
@@ -28,7 +29,7 @@ const MAX_HISTORY_MESSAGES = 10;
 
 export async function POST(request: NextRequest) {
   try {
-    const { message, team = [], format = "gen9ou", enableThinking, personality: personalityId = DEFAULT_PERSONALITY, chatHistory = [] } = await request.json();
+    const { message, team = [], format = "gen9ou", mode = "singles", enableThinking, personality: personalityId = DEFAULT_PERSONALITY, chatHistory = [] } = await request.json();
 
     if (!message) {
       return new Response(JSON.stringify({ error: "Message is required" }), {
@@ -54,8 +55,8 @@ export async function POST(request: NextRequest) {
 
     // Build prompts
     const teamContext = formatTeamContext(team as TeamPokemon[]);
-    const systemPrompt = buildSystemPrompt(personalityId as PersonalityId, format, team.length);
-    const fullUserMessage = buildUserMessage(teamContext, metaThreats, popularSetsContext, message, format);
+    const systemPrompt = buildSystemPrompt(personalityId as PersonalityId, format, team.length, mode);
+    const fullUserMessage = buildUserMessage(teamContext, metaThreats, popularSetsContext, message, format, team as TeamPokemon[], mode as Mode);
 
     // Determine if we should use extended thinking
     const useThinking = enableThinking ?? shouldUseThinking(message);

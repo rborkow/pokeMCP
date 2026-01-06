@@ -6,6 +6,7 @@ import { useHistoryStore } from "@/stores/history-store";
 import { TeamSlot } from "./TeamSlot";
 import { TeamSlotEmpty } from "./TeamSlotEmpty";
 import { PokemonEditDialog } from "./PokemonEditDialog";
+import { BringFourSelector } from "./BringFourSelector";
 import type { TeamPokemon } from "@/types/pokemon";
 
 interface TeamGridProps {
@@ -13,7 +14,7 @@ interface TeamGridProps {
 }
 
 export function TeamGrid({ onSlotClick }: TeamGridProps) {
-  const { team, selectedSlot, setSelectedSlot, removePokemon, setPokemon } = useTeamStore();
+  const { team, selectedSlot, setSelectedSlot, removePokemon, setPokemon, mode } = useTeamStore();
   const { pushState } = useHistoryStore();
   const [editSlot, setEditSlot] = useState<number | null>(null);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
@@ -85,6 +86,9 @@ export function TeamGrid({ onSlotClick }: TeamGridProps) {
           )
         )}
       </div>
+
+      {/* VGC: Bring 4 Selector */}
+      {mode === "vgc" && <BringFourSelector team={team} />}
 
       <PokemonEditDialog
         pokemon={editingPokemon}

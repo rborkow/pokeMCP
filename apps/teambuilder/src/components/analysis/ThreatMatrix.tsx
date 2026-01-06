@@ -18,7 +18,11 @@ import {
 } from "@/lib/data/pokemon-types";
 import { toDisplayName } from "@/lib/showdown-parser";
 import { ThreatDetailModal } from "./ThreatDetailModal";
-import { getFormatDisplayName } from "@/types/pokemon";
+import { getFormatDisplayName, type Mode } from "@/types/pokemon";
+import {
+  VGC_THREAT_MATRIX_TIPS,
+  SINGLES_THREAT_MATRIX_TIPS,
+} from "@/lib/constants/vgc";
 
 interface MetaThreat {
   pokemon: string;
@@ -233,8 +237,12 @@ function TeamSummaryColumn({
   );
 }
 
+function getModeTips(mode: Mode): readonly string[] {
+  return mode === "vgc" ? VGC_THREAT_MATRIX_TIPS : SINGLES_THREAT_MATRIX_TIPS;
+}
+
 export function ThreatMatrix() {
-  const { team, format } = useTeamStore();
+  const { team, format, mode } = useTeamStore();
   // Ensure format is lowercase for API calls
   const normalizedFormat = format.toLowerCase();
   const { data: metaThreatsData, isLoading, error } = useMetaThreats(normalizedFormat, 10);
@@ -423,6 +431,17 @@ export function ThreatMatrix() {
           </div>
           <div className="text-muted-foreground">
             <span className="font-medium">Weighted</span> column: Average score weighted by threat usage % (higher usage = more impact)
+          </div>
+          {/* Mode-specific tips */}
+          <div className="mt-3 pt-3 border-t border-border/50">
+            <p className="font-medium text-foreground mb-1">
+              {mode === "vgc" ? "VGC Tips:" : "Singles Tips:"}
+            </p>
+            <ul className="list-disc list-inside text-muted-foreground space-y-0.5">
+              {getModeTips(mode).map((tip, i) => (
+                <li key={i}>{tip}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </CardContent>

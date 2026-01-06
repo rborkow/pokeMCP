@@ -7,6 +7,7 @@ import { TeamImportExport } from "@/components/team/TeamImportExport";
 import { ChatPanel } from "@/components/chat/ChatPanel";
 import { TypeCoverage } from "@/components/analysis/TypeCoverage";
 import { ThreatMatrix } from "@/components/analysis/ThreatMatrix";
+import { VGCTeamWarnings } from "@/components/analysis/VGCTeamWarnings";
 import { TeamHistory } from "@/components/history/TeamHistory";
 import { WelcomeOverlay } from "@/components/welcome/WelcomeOverlay";
 import { useTeamStore } from "@/stores/team-store";
@@ -78,6 +79,9 @@ export default function Home() {
           </div>
 
           <TeamGrid />
+
+          {/* VGC-specific warnings */}
+          <VGCTeamWarnings />
         </section>
 
         {/* Two-column layout: Analysis + Chat side by side on desktop */}

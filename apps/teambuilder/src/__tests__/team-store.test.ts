@@ -93,6 +93,66 @@ describe("team-store", () => {
 
       expect(useTeamStore.getState().format).toBe("gen9ubers");
     });
+
+    it("should update mode to vgc when setting a VGC format", () => {
+      useTeamStore.getState().setMode("singles");
+      useTeamStore.getState().setFormat("gen9vgc2024regh");
+
+      expect(useTeamStore.getState().format).toBe("gen9vgc2024regh");
+      expect(useTeamStore.getState().mode).toBe("vgc");
+    });
+
+    it("should update mode to singles when setting a singles format", () => {
+      useTeamStore.getState().setMode("vgc");
+      useTeamStore.getState().setFormat("gen9ou");
+
+      expect(useTeamStore.getState().format).toBe("gen9ou");
+      expect(useTeamStore.getState().mode).toBe("singles");
+    });
+
+    it("should keep mode as singles for older gen formats", () => {
+      useTeamStore.getState().setMode("vgc");
+      useTeamStore.getState().setFormat("gen8ou");
+
+      expect(useTeamStore.getState().format).toBe("gen8ou");
+      expect(useTeamStore.getState().mode).toBe("singles");
+    });
+  });
+
+  describe("setMode", () => {
+    it("should update the mode", () => {
+      useTeamStore.getState().setMode("vgc");
+
+      expect(useTeamStore.getState().mode).toBe("vgc");
+    });
+
+    it("should update format to VGC default when switching to VGC mode", () => {
+      useTeamStore.getState().setFormat("gen9ou");
+      useTeamStore.getState().setMode("vgc");
+
+      expect(useTeamStore.getState().mode).toBe("vgc");
+      expect(useTeamStore.getState().format).toBe("gen9vgc2026regf");
+    });
+
+    it("should update format to singles default when switching to singles mode", () => {
+      useTeamStore.getState().setFormat("gen9vgc2024regh");
+      useTeamStore.getState().setMode("singles");
+
+      expect(useTeamStore.getState().mode).toBe("singles");
+      expect(useTeamStore.getState().format).toBe("gen9ou");
+    });
+
+    it("should keep format if already valid for new mode", () => {
+      useTeamStore.getState().setFormat("gen9doublesou");
+      useTeamStore.getState().setMode("singles"); // gen9doublesou is doubles, so invalid
+
+      // Should switch to default singles format
+      expect(useTeamStore.getState().format).toBe("gen9ou");
+
+      // Now switch back to VGC
+      useTeamStore.getState().setFormat("gen9doublesou");
+      expect(useTeamStore.getState().mode).toBe("vgc");
+    });
   });
 
   describe("setSelectedSlot", () => {

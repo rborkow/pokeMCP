@@ -10,8 +10,10 @@ import { join } from 'path';
 const FORMATS = [
   // Gen 9 Singles
   'gen9ou', 'gen9ubers', 'gen9uu', 'gen9ru', 'gen9nu', 'gen9pu', 'gen9lc',
-  // Gen 9 Doubles/VGC
-  'gen9vgc2024regh', 'gen9vgc2024regf', 'gen9doublesou',
+  // Gen 9 Doubles/VGC - 2026 regulations (current)
+  'gen9vgc2026regf', 'gen9vgc2026regfbo3',
+  // Gen 9 Doubles/VGC - legacy regulations
+  'gen9vgc2025regi', 'gen9vgc2024regh', 'gen9doublesou',
   // Gen 8 Singles
   'gen8ou', 'gen8ubers', 'gen8uu', 'gen8ru', 'gen8nu', 'gen8lc',
   // Gen 7 Singles

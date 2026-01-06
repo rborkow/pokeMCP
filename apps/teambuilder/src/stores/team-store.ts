@@ -1,15 +1,18 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { TeamPokemon, FormatId } from "@/types/pokemon";
+import type { TeamPokemon, FormatId, Mode } from "@/types/pokemon";
+import { MODE_INFO, isFormatValidForMode } from "@/types/pokemon";
 import { parseShowdownTeam, exportShowdownTeam } from "@/lib/showdown-parser";
 import { decodeTeamFromUrl } from "@/lib/share";
 
 interface TeamState {
+  mode: Mode;
   format: FormatId;
   team: TeamPokemon[];
   selectedSlot: number | null;
 
   // Actions
+  setMode: (mode: Mode) => void;
   setFormat: (format: FormatId) => void;
   setPokemon: (slot: number, pokemon: TeamPokemon) => void;
   removePokemon: (slot: number) => void;
@@ -24,11 +27,25 @@ interface TeamState {
 export const useTeamStore = create<TeamState>()(
   persist(
     (set, get) => ({
+      mode: "singles",
       format: "gen9ou",
       team: [],
       selectedSlot: null,
 
-      setFormat: (format) => set({ format }),
+      setMode: (mode) => {
+        const currentFormat = get().format;
+        // If current format is valid for new mode, keep it; otherwise use default
+        const newFormat = isFormatValidForMode(currentFormat, mode)
+          ? currentFormat
+          : MODE_INFO[mode].defaultFormat;
+        set({ mode, format: newFormat });
+      },
+
+      setFormat: (format) => {
+        // Derive mode from format to keep them in sync
+        const mode: Mode = isFormatValidForMode(format, "vgc") ? "vgc" : "singles";
+        set({ format, mode });
+      },
 
       setPokemon: (slot, pokemon) => {
         set((state) => {
@@ -92,9 +109,13 @@ export const useTeamStore = create<TeamState>()(
       loadFromUrlParam: (encoded) => {
         const result = decodeTeamFromUrl(encoded);
         if (result && result.team.length > 0) {
+          const format = result.format as FormatId;
+          // Detect mode from format
+          const mode: Mode = isFormatValidForMode(format, "vgc") ? "vgc" : "singles";
           set({
             team: result.team,
-            format: result.format as FormatId,
+            format,
+            mode,
             selectedSlot: null,
           });
           return true;
@@ -104,7 +125,7 @@ export const useTeamStore = create<TeamState>()(
     }),
     {
       name: "pokemcp-team",
-      partialize: (state) => ({ format: state.format, team: state.team }),
+      partialize: (state) => ({ mode: state.mode, format: state.format, team: state.team }),
     }
   )
 );

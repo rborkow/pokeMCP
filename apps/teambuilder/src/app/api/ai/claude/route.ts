@@ -11,7 +11,7 @@ import {
 
 export async function POST(request: Request) {
   try {
-    const { message, team = [], format = "gen9ou", personality: personalityId = DEFAULT_PERSONALITY } = await request.json();
+    const { message, team = [], format = "gen9ou", mode = "singles", personality: personalityId = DEFAULT_PERSONALITY } = await request.json();
 
     if (!message) {
       return NextResponse.json({ error: "Message is required" }, { status: 400 });
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
 
     // Build prompts
     const teamContext = formatTeamContext(team as TeamPokemon[]);
-    const systemPrompt = buildSystemPrompt(personalityId as PersonalityId, format, team.length);
+    const systemPrompt = buildSystemPrompt(personalityId as PersonalityId, format, team.length, mode);
     const fullUserMessage = buildUserMessage(teamContext, metaThreats, popularSetsContext, message, format);
 
     const response = await fetch("https://api.anthropic.com/v1/messages", {

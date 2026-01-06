@@ -132,9 +132,12 @@ export const FORMATS: FormatDefinition[] = [
   { id: "gen9nu", name: "Gen 9 NU", gen: 9, category: "singles" },
   { id: "gen9pu", name: "Gen 9 PU", gen: 9, category: "singles" },
   { id: "gen9lc", name: "Gen 9 LC", gen: 9, category: "singles" },
-  // Current Gen Doubles/VGC
+  // Current Gen Doubles/VGC - 2026 regulations
+  { id: "gen9vgc2026regf", name: "VGC 2026 Reg F", gen: 9, category: "doubles" },
+  { id: "gen9vgc2026regfbo3", name: "VGC 2026 Reg F (Bo3)", gen: 9, category: "doubles" },
+  // Legacy VGC formats
+  { id: "gen9vgc2025regi", name: "VGC 2025 Reg I", gen: 9, category: "doubles" },
   { id: "gen9vgc2024regh", name: "VGC 2024 Reg H", gen: 9, category: "doubles" },
-  { id: "gen9vgc2024regf", name: "VGC 2024 Reg F", gen: 9, category: "doubles" },
   { id: "gen9doublesou", name: "Gen 9 Doubles OU", gen: 9, category: "doubles" },
   // Gen 8
   { id: "gen8ou", name: "Gen 8 OU", gen: 8, category: "gen8" },
@@ -160,6 +163,46 @@ export const FORMAT_CATEGORIES: { id: FormatCategory; label: string }[] = [
 ];
 
 export type FormatId = (typeof FORMATS)[number]["id"];
+
+// Game mode - determines which formats are shown and UI behavior
+export type Mode = "singles" | "vgc";
+
+export const MODE_INFO: Record<Mode, { label: string; description: string; defaultFormat: FormatId }> = {
+  singles: {
+    label: "Singles",
+    description: "Smogon 6v6 formats",
+    defaultFormat: "gen9ou",
+  },
+  vgc: {
+    label: "VGC",
+    description: "Official doubles formats",
+    defaultFormat: "gen9vgc2026regf",
+  },
+};
+
+/**
+ * Get formats available for a given mode
+ */
+export function getFormatsForMode(mode: Mode): FormatDefinition[] {
+  if (mode === "vgc") {
+    return FORMATS.filter((f) => f.category === "doubles");
+  }
+  // Singles includes gen9 singles + older gens (which are all singles-focused)
+  return FORMATS.filter((f) => f.category !== "doubles");
+}
+
+/**
+ * Check if a format belongs to a mode
+ */
+export function isFormatValidForMode(formatId: string, mode: Mode): boolean {
+  const format = FORMATS.find((f) => f.id === formatId);
+  if (!format) return false;
+
+  if (mode === "vgc") {
+    return format.category === "doubles";
+  }
+  return format.category !== "doubles";
+}
 
 /**
  * Get the display-friendly name for a format ID
