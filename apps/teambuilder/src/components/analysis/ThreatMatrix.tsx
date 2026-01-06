@@ -74,16 +74,16 @@ function getCombinedColor(defScore: number | null, offScore: number | null): str
 }
 
 /**
- * Get score label (short form)
+ * Get score label as multiplier format (more intuitive for Pokemon players)
  */
 function getScoreLabel(score: number | null): string {
   if (score === null) return "?";
   switch (score) {
-    case 2: return "++";
-    case 1: return "+";
-    case 0: return "0";
-    case -1: return "-";
-    case -2: return "--";
+    case 2: return "×4";
+    case 1: return "×2";
+    case 0: return "×1";
+    case -1: return "×½";
+    case -2: return "×0";
     default: return "?";
   }
 }
@@ -147,10 +147,10 @@ function ThreatMatrixCell({
     <Tooltip>
       <TooltipTrigger asChild>
         <div
-          className={`w-10 h-10 flex flex-col items-center justify-center text-[10px] font-bold cursor-help rounded ${getCombinedColor(matchup.defScore, matchup.offScore)} text-white`}
+          className={`w-10 h-10 flex flex-col items-center justify-center text-[9px] font-bold cursor-help rounded ${getCombinedColor(matchup.defScore, matchup.offScore)} text-white`}
         >
-          <span className="leading-tight">D{defLabel}</span>
-          <span className="leading-tight opacity-80">O{offLabel}</span>
+          <span className="leading-tight opacity-90">🛡{defLabel}</span>
+          <span className="leading-tight opacity-70">⚔{offLabel}</span>
         </div>
       </TooltipTrigger>
       <TooltipContent side="top" className="max-w-xs">
@@ -178,22 +178,34 @@ function ThreatMatrixCell({
 function TeamSummaryColumn({
   matchups,
   team,
+  threats,
 }: {
   matchups: MatchupCell[][];
   team: { pokemon: string }[];
+  threats: MetaThreat[];
 }) {
-  // Calculate average combined score (def + off) for each team member
+  // Calculate usage-weighted average combined score (def + off) for each team member
+  // Higher usage threats have more impact on the score
   const teamMemberAverages = matchups.map((row) => {
-    const validCells = row.filter((cell) => cell.defScore !== null && cell.offScore !== null);
-    if (validCells.length === 0) return null;
-    const sum = validCells.reduce((acc, cell) => acc + ((cell.defScore ?? 0) + (cell.offScore ?? 0)) / 2, 0);
-    return sum / validCells.length;
+    let weightedSum = 0;
+    let totalWeight = 0;
+
+    row.forEach((cell, threatIndex) => {
+      if (cell.defScore !== null && cell.offScore !== null) {
+        const combined = (cell.defScore + cell.offScore) / 2;
+        const weight = threats[threatIndex]?.usage ?? 1;
+        weightedSum += combined * weight;
+        totalWeight += weight;
+      }
+    });
+
+    return totalWeight > 0 ? weightedSum / totalWeight : null;
   });
 
   return (
     <div className="flex flex-col gap-1">
-      <div className="h-10 flex items-center justify-center text-xs font-medium text-muted-foreground">
-        Avg
+      <div className="h-10 flex items-center justify-center text-[9px] font-medium text-muted-foreground">
+        Weighted
       </div>
       {teamMemberAverages.map((avg, i) => (
         <Tooltip key={i}>
@@ -205,7 +217,15 @@ function TeamSummaryColumn({
             </div>
           </TooltipTrigger>
           <TooltipContent>
-            <p>{toDisplayName(team[i].pokemon)} {avg !== null ? "average matchup vs all threats" : "(unknown types)"}</p>
+            <p className="font-medium">{toDisplayName(team[i].pokemon)}</p>
+            <p className="text-xs text-muted-foreground">
+              {avg !== null ? "Usage-weighted matchup score" : "(unknown types)"}
+            </p>
+            {avg !== null && (
+              <p className="text-xs mt-1">
+                {avg >= 1 ? "Strong vs meta" : avg >= 0 ? "Neutral vs meta" : "Weak vs meta"}
+              </p>
+            )}
           </TooltipContent>
         </Tooltip>
       ))}
@@ -300,7 +320,7 @@ export function ThreatMatrix() {
       <CardHeader className="pb-2">
         <CardTitle className="text-lg">Threat Matrix</CardTitle>
         <p className="text-xs text-muted-foreground">
-          Your team vs top {getFormatDisplayName(format)} threats (D=Defense, O=Offense)
+          Your team vs top {getFormatDisplayName(format)} threats (🛡=Defense, ⚔=Offense)
         </p>
       </CardHeader>
       <CardContent>
@@ -367,7 +387,7 @@ export function ThreatMatrix() {
 
               {/* Summary column */}
               <div className="border-l pl-1 ml-1">
-                <TeamSummaryColumn matchups={matchups} team={team} />
+                <TeamSummaryColumn matchups={matchups} team={team} threats={metaThreats} />
               </div>
             </div>
           </div>
@@ -399,7 +419,10 @@ export function ThreatMatrix() {
             </div>
           </div>
           <div className="text-muted-foreground">
-            <span className="font-medium">D</span>=Defense (damage taken) • <span className="font-medium">O</span>=Offense (damage dealt) • <span className="font-medium">++</span>=4x/<span className="font-medium">+</span>=2x/<span className="font-medium">0</span>=1x/<span className="font-medium">-</span>=0.5x/<span className="font-medium">--</span>=immune
+            🛡=Defense (damage taken) • ⚔=Offense (damage dealt) • ×4=super effective • ×2=effective • ×1=neutral • ×½=resisted • ×0=immune
+          </div>
+          <div className="text-muted-foreground">
+            <span className="font-medium">Weighted</span> column: Average score weighted by threat usage % (higher usage = more impact)
           </div>
         </div>
       </CardContent>
