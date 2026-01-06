@@ -1,11 +1,7 @@
 import { getPersonality, type PersonalityId } from "./personalities";
+import type { TeamPokemon } from "@/types/pokemon";
 
-export interface TeamPokemon {
-  pokemon: string;
-  moves?: string[];
-  ability?: string;
-  item?: string;
-}
+export type { TeamPokemon };
 
 const MCP_URL = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
 
@@ -76,6 +72,21 @@ export async function fetchPopularSetsContext(message: string, format: string): 
 }
 
 /**
+ * Format EV spread into readable string
+ */
+function formatEVs(evs: TeamPokemon["evs"]): string {
+  if (!evs) return "";
+  const parts: string[] = [];
+  if (evs.hp) parts.push(`${evs.hp} HP`);
+  if (evs.atk) parts.push(`${evs.atk} Atk`);
+  if (evs.def) parts.push(`${evs.def} Def`);
+  if (evs.spa) parts.push(`${evs.spa} SpA`);
+  if (evs.spd) parts.push(`${evs.spd} SpD`);
+  if (evs.spe) parts.push(`${evs.spe} Spe`);
+  return parts.join(" / ");
+}
+
+/**
  * Format team array into readable context string
  */
 export function formatTeamContext(team: TeamPokemon[]): string {
@@ -83,12 +94,92 @@ export function formatTeamContext(team: TeamPokemon[]): string {
     return "No Pokemon in team yet.";
   }
   return team.map((p, i) => {
-    const parts = [`${i + 1}. ${p.pokemon}`];
-    if (p.item) parts.push(`@ ${p.item}`);
-    if (p.ability) parts.push(`(${p.ability})`);
-    if (p.moves && p.moves.length > 0) parts.push(`- Moves: ${p.moves.join(", ")}`);
-    return parts.join(" ");
-  }).join("\n");
+    const lines: string[] = [];
+    // Header line: name @ item (ability)
+    let header = `${i + 1}. ${p.pokemon}`;
+    if (p.item) header += ` @ ${p.item}`;
+    if (p.ability) header += ` (${p.ability})`;
+    lines.push(header);
+    // Tera type if present
+    if (p.teraType) lines.push(`   Tera Type: ${p.teraType}`);
+    // Nature if present
+    if (p.nature) lines.push(`   Nature: ${p.nature}`);
+    // EVs if present
+    const evStr = formatEVs(p.evs);
+    if (evStr) lines.push(`   EVs: ${evStr}`);
+    // Moves
+    if (p.moves && p.moves.length > 0) lines.push(`   Moves: ${p.moves.join(", ")}`);
+    return lines.join("\n");
+  }).join("\n\n");
+}
+
+/**
+ * Get generation number from format string
+ */
+function getGeneration(format: string): number {
+  const match = format.match(/gen(\d+)/i);
+  return match ? parseInt(match[1], 10) : 9; // Default to gen 9
+}
+
+/**
+ * Get format-specific battle gimmick guidance
+ */
+function getGimmickGuidance(format: string): string {
+  const gen = getGeneration(format);
+  const lowerFormat = format.toLowerCase();
+
+  if (gen >= 9) {
+    return `
+TERASTALLIZATION (Gen 9 Mechanic):
+- EVERY Pokemon should have a tera_type specified
+- Choose Tera types strategically:
+  - Offensive: Boost STAB moves (e.g., Tera Fire on a Fire-type for 2x boost)
+  - Defensive: Remove weaknesses (e.g., Tera Ghost on a Fighting-weak Pokemon)
+  - Coverage: Enable unexpected coverage (e.g., Tera Electric for Tera Blast)
+- Common Tera choices: Fairy (great defensive type), Steel (many resistances), Ghost (immunities)
+- Consider the team's Tera type diversity - don't stack the same type`;
+  }
+
+  if (gen === 8) {
+    // Dynamax is typically banned in Smogon singles but used in VGC
+    if (lowerFormat.includes("vgc") || lowerFormat.includes("doubles")) {
+      return `
+DYNAMAX (Gen 8 Mechanic):
+- Any Pokemon can Dynamax once per battle (doubles HP, boosts moves)
+- Max Moves have secondary effects (Max Airstream boosts Speed, Max Steelspike sets Spikes, etc.)
+- Plan which Pokemon will Dynamax - typically sweepers or setup Pokemon
+- Note: tera_type field is NOT used in Gen 8 - leave it empty or omit`;
+    }
+    return `
+GEN 8 NOTES:
+- Dynamax is banned in Smogon singles formats
+- No Terastallization in this generation
+- Note: tera_type field is NOT used in Gen 8 - leave it empty or omit`;
+  }
+
+  if (gen === 7) {
+    return `
+Z-MOVES & MEGA EVOLUTION (Gen 7 Mechanics):
+- Z-Crystals: One Pokemon can hold a Z-Crystal for a powerful one-time Z-Move
+  - Type Z-Crystals (e.g., Groundium Z) boost any move of that type
+  - Signature Z-Crystals for specific Pokemon (e.g., Pikashunium Z)
+- Mega Evolution: Pokemon holding Mega Stones can Mega Evolve (once per battle)
+  - Include "-Mega" suffix for Mega forms (e.g., "Charizard-Mega-X")
+  - Mega Pokemon get boosted stats and sometimes new abilities/types
+- Only ONE Mega OR Z-Move user per team typically
+- Note: tera_type field is NOT used in Gen 7 - leave it empty or omit`;
+  }
+
+  if (gen <= 6) {
+    return `
+MEGA EVOLUTION (Gen 6 Mechanic):
+- Pokemon holding Mega Stones can Mega Evolve once per battle
+- Include "-Mega" suffix for Mega forms (e.g., "Kangaskhan-Mega")
+- Plan your Mega Evolution user carefully - only one per team
+- Note: tera_type field is NOT used in Gen 6 - leave it empty or omit`;
+  }
+
+  return "";
 }
 
 /**
@@ -96,6 +187,8 @@ export function formatTeamContext(team: TeamPokemon[]): string {
  */
 export function buildSystemPrompt(personalityId: PersonalityId, format: string, teamSize: number): string {
   const personality = getPersonality(personalityId);
+  const gen = getGeneration(format);
+  const gimmickGuidance = getGimmickGuidance(format);
 
   const loreSection = personality.loreReferences.length > 0
     ? `\n\nCHARACTER BACKGROUND (use these naturally in conversation):\n${personality.loreReferences.map(l => `- ${l.topic}: "${l.reference}"`).join('\n')}`
@@ -107,9 +200,28 @@ export function buildSystemPrompt(personalityId: PersonalityId, format: string, 
 
   const feedbackSection = `\n\nFEEDBACK STYLE:\n- When praising: ${personality.praiseStyle[0]}\n- When critiquing: ${personality.criticismStyle[0]}`;
 
+  // Build tool fields list based on generation
+  const toolFields = gen >= 9
+    ? `- pokemon: Species name (e.g., "Great Tusk")
+- moves: Array of 4 move names
+- ability: The Pokemon's ability
+- item: Held item
+- nature: Nature name (e.g., "Jolly", "Modest")
+- tera_type: Tera type for terastallization (REQUIRED for Gen 9)
+- evs: Object with hp, atk, def, spa, spd, spe values
+- reason: Brief explanation of the choice`
+    : `- pokemon: Species name (e.g., "Landorus-Therian")
+- moves: Array of 4 move names
+- ability: The Pokemon's ability
+- item: Held item (include Mega Stone or Z-Crystal if applicable)
+- nature: Nature name (e.g., "Jolly", "Modest")
+- evs: Object with hp, atk, def, spa, spd, spe values
+- reason: Brief explanation of the choice`;
+
   return `${personality.systemPromptPrefix}${loreSection}${preferredPokemonSection}${feedbackSection}
 
 You are helping with Pokemon competitive team building for ${format.toUpperCase()}.
+${gimmickGuidance}
 
 CRITICAL RULES:
 1. ONLY suggest Pokemon that are legal in ${format.toUpperCase()}. Reference the meta threats list.
@@ -133,14 +245,7 @@ USING THE modify_team TOOL:
 When the user asks you to add, replace, or modify Pokemon, use the modify_team tool. You can call it multiple times to build a full team.
 
 For each Pokemon, include:
-- pokemon: Species name (e.g., "Great Tusk")
-- moves: Array of 4 move names
-- ability: The Pokemon's ability
-- item: Held item
-- nature: Nature name (e.g., "Jolly", "Modest")
-- tera_type: Tera type for terastallization
-- evs: Object with hp, atk, def, spa, spd, spe values
-- reason: Brief explanation of the choice
+${toolFields}
 
 Guidelines:
 - Be concise and actionable in your explanations
