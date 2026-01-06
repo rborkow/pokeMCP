@@ -161,6 +161,46 @@ export const FORMAT_CATEGORIES: { id: FormatCategory; label: string }[] = [
 
 export type FormatId = (typeof FORMATS)[number]["id"];
 
+// Game mode - determines which formats are shown and UI behavior
+export type Mode = "singles" | "vgc";
+
+export const MODE_INFO: Record<Mode, { label: string; description: string; defaultFormat: FormatId }> = {
+  singles: {
+    label: "Singles",
+    description: "Smogon 6v6 formats",
+    defaultFormat: "gen9ou",
+  },
+  vgc: {
+    label: "VGC",
+    description: "Official doubles formats",
+    defaultFormat: "gen9vgc2024regh",
+  },
+};
+
+/**
+ * Get formats available for a given mode
+ */
+export function getFormatsForMode(mode: Mode): FormatDefinition[] {
+  if (mode === "vgc") {
+    return FORMATS.filter((f) => f.category === "doubles");
+  }
+  // Singles includes gen9 singles + older gens (which are all singles-focused)
+  return FORMATS.filter((f) => f.category !== "doubles");
+}
+
+/**
+ * Check if a format belongs to a mode
+ */
+export function isFormatValidForMode(formatId: string, mode: Mode): boolean {
+  const format = FORMATS.find((f) => f.id === formatId);
+  if (!format) return false;
+
+  if (mode === "vgc") {
+    return format.category === "doubles";
+  }
+  return format.category !== "doubles";
+}
+
 /**
  * Get the display-friendly name for a format ID
  * e.g., "gen9ou" → "Gen 9 OU", "gen9vgc2024regh" → "VGC 2024 Reg H"
