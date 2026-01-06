@@ -30,6 +30,7 @@ export interface ChatMessage {
   action?: TeamAction;
   isLoading?: boolean;
   thinkingContent?: string;
+  buildingStatus?: string; // Status message when building team via tools
 }
 
 export type AIProvider = "cloudflare" | "claude";
