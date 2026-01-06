@@ -78,7 +78,6 @@ export function ChatPanel() {
       message: content,
       team,
       format,
-      provider: "claude",
       personality: personalityId,
       chatHistory: currentMessages,
       onChunk: (text) => {
@@ -86,6 +85,7 @@ export function ChatPanel() {
         useChatStore.getState().updateMessage(streamingId, {
           content: text,
           isLoading: true,
+          buildingStatus: undefined, // Clear building status when text arrives
         });
       },
       onThinking: (_isThinking, thinkingText) => {
@@ -95,6 +95,13 @@ export function ChatPanel() {
             thinkingContent: thinkingText,
           });
         }
+      },
+      onToolUse: (pokemonName, count) => {
+        // Show building progress
+        useChatStore.getState().updateMessage(streamingId, {
+          buildingStatus: `Adding ${pokemonName}... (${count}/6)`,
+          isLoading: true,
+        });
       },
       onComplete: (response) => {
         // Finalize the message - include action so it persists

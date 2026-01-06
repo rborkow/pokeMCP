@@ -69,10 +69,19 @@ export function ChatMessage({ message }: ChatMessageProps) {
           )}
         >
           {message.isLoading && !message.content ? (
-            <div className="flex items-center gap-1">
-              <span className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-              <span className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-              <span className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+            <div className="flex items-center gap-2">
+              {message.buildingStatus ? (
+                <>
+                  <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                  <span className="text-sm text-muted-foreground">{message.buildingStatus}</span>
+                </>
+              ) : (
+                <>
+                  <span className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                  <span className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <span className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                </>
+              )}
             </div>
           ) : message.content ? (
             <div className="text-sm [&_p]:my-1 [&_ul]:my-1 [&_ul]:ml-4 [&_ul]:list-disc [&_ol]:my-1 [&_ol]:ml-4 [&_ol]:list-decimal [&_li]:my-0.5 [&_strong]:font-semibold [&_code]:bg-black/10 [&_code]:dark:bg-white/10 [&_code]:px-1 [&_code]:rounded [&_code]:text-xs">
