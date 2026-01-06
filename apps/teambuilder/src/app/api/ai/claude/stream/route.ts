@@ -4,6 +4,7 @@ import {
   type TeamPokemon,
   fetchMetaThreats,
   fetchPopularSetsContext,
+  fetchTeammateAnalysis,
   formatTeamContext,
   buildSystemPrompt,
   buildUserMessage,
@@ -48,15 +49,19 @@ export async function POST(request: NextRequest) {
     }
 
     // Fetch context in parallel
-    const [metaThreats, popularSetsContext] = await Promise.all([
+    // Only fetch teammate analysis if team has Pokemon (helps with suggestions)
+    const [metaThreats, popularSetsContext, teammateAnalysis] = await Promise.all([
       fetchMetaThreats(format),
       fetchPopularSetsContext(message, format),
+      team.length > 0 && team.length < 6
+        ? fetchTeammateAnalysis(team as TeamPokemon[], format)
+        : Promise.resolve(""),
     ]);
 
     // Build prompts
     const teamContext = formatTeamContext(team as TeamPokemon[]);
     const systemPrompt = buildSystemPrompt(personalityId as PersonalityId, format, team.length, mode);
-    const fullUserMessage = buildUserMessage(teamContext, metaThreats, popularSetsContext, message, format, team as TeamPokemon[], mode as Mode);
+    const fullUserMessage = buildUserMessage(teamContext, metaThreats, popularSetsContext, message, format, team as TeamPokemon[], mode as Mode, teammateAnalysis);
 
     // Determine if we should use extended thinking
     const useThinking = enableThinking ?? shouldUseThinking(message);
