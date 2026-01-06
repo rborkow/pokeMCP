@@ -34,6 +34,82 @@ SINGLES-SPECIFIC GUIDANCE (This is a 6v6 format):
 
 const MCP_URL = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
 
+/**
+ * Fetch teammate suggestions for Pokemon on the team
+ * Returns analysis of common partners that aren't already on the team
+ */
+export async function fetchTeammateAnalysis(team: TeamPokemon[], format: string): Promise<string> {
+  if (team.length === 0) return "";
+
+  // Only fetch for up to 3 Pokemon to avoid too many requests
+  const pokemonToCheck = team.slice(0, 3);
+  const currentTeamNames = new Set(team.map(p => p.pokemon.toLowerCase()));
+
+  const allSuggestions: Map<string, { count: number; from: string[] }> = new Map();
+
+  for (const mon of pokemonToCheck) {
+    try {
+      const response = await fetch(`${MCP_URL}/api/tools`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          tool: "get_teammates",
+          args: { pokemon: mon.pokemon, format, limit: 8 },
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const text = data.result?.content?.[0]?.text || "";
+
+        // Parse teammate names from the response (format: "- **Name**: X.X%")
+        const teammateRegex = /\*\*([^*]+)\*\*:\s*(\d+(?:\.\d+)?)/g;
+        let match;
+        while ((match = teammateRegex.exec(text)) !== null) {
+          const teammateName = match[0].split("**")[1];
+          const usage = parseFloat(match[2]);
+
+          // Skip if already on team
+          if (currentTeamNames.has(teammateName.toLowerCase())) continue;
+
+          // Only track teammates with >5% usage
+          if (usage < 5) continue;
+
+          const existing = allSuggestions.get(teammateName);
+          if (existing) {
+            existing.count++;
+            existing.from.push(mon.pokemon);
+          } else {
+            allSuggestions.set(teammateName, { count: 1, from: [mon.pokemon] });
+          }
+        }
+      }
+    } catch (e) {
+      console.error(`Failed to fetch teammates for ${mon.pokemon}:`, e);
+    }
+  }
+
+  if (allSuggestions.size === 0) return "";
+
+  // Sort by how many team members share the teammate
+  const sortedSuggestions = Array.from(allSuggestions.entries())
+    .sort((a, b) => b[1].count - a[1].count)
+    .slice(0, 6);
+
+  let output = "TEAMMATE SYNERGY SUGGESTIONS:\n";
+  output += "These Pokemon commonly pair well with your current team:\n";
+
+  for (const [name, data] of sortedSuggestions) {
+    if (data.count > 1) {
+      output += `- ${name} (pairs with ${data.from.join(", ")})\n`;
+    } else {
+      output += `- ${name} (pairs with ${data.from[0]})\n`;
+    }
+  }
+
+  return output;
+}
+
 // Common Pokemon names to look for in messages
 const COMMON_POKEMON = [
   "Garchomp", "Landorus", "Great Tusk", "Kingambit", "Gholdengo",
@@ -303,7 +379,8 @@ export function buildUserMessage(
   message: string,
   format: string,
   team?: TeamPokemon[],
-  mode?: Mode
+  mode?: Mode,
+  teammateAnalysis?: string
 ): string {
   let contextSection = "";
   if (metaThreats) {
@@ -319,6 +396,11 @@ export function buildUserMessage(
     if (vgcAnalysis) {
       contextSection += `\n\n## ${vgcAnalysis}`;
     }
+  }
+
+  // Add teammate synergy suggestions (useful for both modes but especially VGC)
+  if (teammateAnalysis) {
+    contextSection += `\n\n## ${teammateAnalysis}`;
   }
 
   return `Current Team:
