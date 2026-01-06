@@ -1,5 +1,5 @@
 import type { TeamPokemon } from "@/types/pokemon";
-import type { AIProvider, AIResponse, TeamAction } from "@/types/chat";
+import type { AIProvider, AIResponse, TeamAction, ChatMessage } from "@/types/chat";
 import type { PersonalityId } from "./personalities";
 import { validatePokemonData } from "@/lib/validation/pokemon";
 
@@ -9,6 +9,7 @@ interface SendChatMessageOptions {
   format: string;
   provider: AIProvider;
   personality?: PersonalityId;
+  chatHistory?: ChatMessage[];
 }
 
 /**
@@ -124,6 +125,18 @@ function cleanResponseContent(content: string): string {
 }
 
 /**
+ * Convert ChatMessage array to simplified format for API
+ */
+function formatChatHistory(messages: ChatMessage[]): { role: "user" | "assistant"; content: string }[] {
+  return messages
+    .filter(msg => msg.role !== "system" && !msg.isLoading && msg.content.trim())
+    .map(msg => ({
+      role: msg.role as "user" | "assistant",
+      content: msg.content,
+    }));
+}
+
+/**
  * Send a chat message to the AI (non-streaming)
  */
 export async function sendChatMessage({
@@ -132,6 +145,7 @@ export async function sendChatMessage({
   format,
   provider,
   personality,
+  chatHistory = [],
 }: SendChatMessageOptions): Promise<AIResponse> {
   // Call the appropriate API route
   // Note: We don't send a system prompt - the server builds one with meta context
@@ -145,6 +159,7 @@ export async function sendChatMessage({
       team: team,
       format: format,
       personality: personality,
+      chatHistory: formatChatHistory(chatHistory),
     }),
   });
 
@@ -180,6 +195,7 @@ export async function streamChatMessage({
   team,
   format,
   personality,
+  chatHistory = [],
   onChunk,
   onThinking,
   onComplete,
@@ -194,6 +210,7 @@ export async function streamChatMessage({
         team,
         format,
         personality,
+        chatHistory: formatChatHistory(chatHistory),
       }),
     });
 

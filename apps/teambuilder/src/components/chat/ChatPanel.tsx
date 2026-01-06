@@ -58,6 +58,9 @@ export function ChatPanel() {
     // Save the user prompt for retry functionality
     setLastUserPrompt(content);
 
+    // Get current messages before adding new ones (for chat history context)
+    const currentMessages = useChatStore.getState().messages;
+
     // Add user message
     addMessage({ role: "user", content });
 
@@ -77,6 +80,7 @@ export function ChatPanel() {
       format,
       provider: "claude",
       personality: personalityId,
+      chatHistory: currentMessages,
       onChunk: (text) => {
         // Update message content as chunks arrive
         useChatStore.getState().updateMessage(streamingId, {
