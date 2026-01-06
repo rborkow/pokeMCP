@@ -12,26 +12,36 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useTeamStore } from "@/stores/team-store";
 import { useHistoryStore } from "@/stores/history-store";
-import { Sparkles, Upload, PlusCircle } from "lucide-react";
+import { Sparkles, Upload, PlusCircle, ChevronLeft } from "lucide-react";
+import { getArchetypesForFormat, isDoublesFormat, type TeamArchetype } from "@/lib/ai/archetypes";
+import { getFormatDisplayName } from "@/types/pokemon";
 
 interface WelcomeOverlayProps {
-  onGenerate: () => void;
+  onGenerate: (archetype?: TeamArchetype) => void;
   onBuildOwn: () => void;
 }
 
 export function WelcomeOverlay({ onGenerate, onBuildOwn }: WelcomeOverlayProps) {
-  const { team, importTeam } = useTeamStore();
+  const { team, format, importTeam } = useTeamStore();
   const { pushState } = useHistoryStore();
+  const archetypes = getArchetypesForFormat(format);
+  const isDoubles = isDoublesFormat(format);
   const [dismissed, setDismissed] = useState(false);
   const [showImport, setShowImport] = useState(false);
+  const [showArchetypes, setShowArchetypes] = useState(false);
   const [importText, setImportText] = useState("");
   const [importError, setImportError] = useState<string | null>(null);
 
   const isOpen = team.length === 0 && !dismissed;
 
-  const handleGenerate = () => {
+  const handleGenerateWithArchetype = (archetype: TeamArchetype) => {
     setDismissed(true);
-    onGenerate();
+    onGenerate(archetype);
+  };
+
+  const handleGenerateRandom = () => {
+    setDismissed(true);
+    onGenerate(); // No archetype = surprise me
   };
 
   const handleBuildOwn = () => {
@@ -52,6 +62,7 @@ export function WelcomeOverlay({ onGenerate, onBuildOwn }: WelcomeOverlayProps) 
     }
   };
 
+  // Import view
   if (showImport) {
     return (
       <Dialog open={isOpen} onOpenChange={() => setShowImport(false)}>
@@ -96,6 +107,78 @@ Jolly Nature
     );
   }
 
+  // Archetype selection view
+  if (showArchetypes) {
+    return (
+      <Dialog open={isOpen} onOpenChange={() => {}}>
+        <DialogContent
+          className="max-w-[95vw] sm:max-w-[800px] p-6 sm:p-8 max-h-[90vh] overflow-y-auto"
+          showCloseButton={false}
+        >
+          <DialogHeader className="text-center space-y-2">
+            <DialogTitle className="text-2xl font-display">
+              Choose a Team Style
+            </DialogTitle>
+            <DialogDescription>
+              {isDoubles ? "Doubles/VGC" : "Singles"} archetypes for{" "}
+              <span className="font-semibold text-foreground">{getFormatDisplayName(format)}</span>
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-4">
+            {archetypes.map((archetype) => (
+              <button
+                key={archetype.id}
+                onClick={() => handleGenerateWithArchetype(archetype)}
+                className="welcome-option-card group text-left"
+              >
+                <div className="p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-2xl">{archetype.icon}</span>
+                    <h3 className="font-display font-bold">{archetype.name}</h3>
+                  </div>
+                  <p className="text-xs text-muted-foreground mb-3">
+                    {archetype.description}
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    {archetype.keyFeatures.slice(0, 3).map((feature) => (
+                      <span
+                        key={feature}
+                        className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground"
+                      >
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          <div className="flex justify-between items-center mt-6 pt-4 border-t border-border">
+            <Button
+              variant="ghost"
+              onClick={() => setShowArchetypes(false)}
+              className="gap-2"
+            >
+              <ChevronLeft className="h-4 w-4" />
+              Back
+            </Button>
+            <Button
+              variant="outline"
+              onClick={handleGenerateRandom}
+              className="gap-2"
+            >
+              <Sparkles className="h-4 w-4" />
+              Surprise Me
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  }
+
+  // Main welcome view
   return (
     <Dialog open={isOpen} onOpenChange={() => {}}>
       <DialogContent
@@ -117,7 +200,7 @@ Jolly Nature
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
           {/* Generate Team Card */}
           <button
-            onClick={handleGenerate}
+            onClick={() => setShowArchetypes(true)}
             className="welcome-option-card welcome-option-primary group"
           >
             <div className="flex flex-col items-center gap-3 p-6">

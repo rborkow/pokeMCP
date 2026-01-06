@@ -14,8 +14,8 @@ import { useChatStore } from "@/stores/chat-store";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Shield, AlertTriangle, History } from "lucide-react";
 import { useUrlTeam } from "@/hooks/useUrlTeam";
-import { QUICKSTART_PROMPT } from "@/types/chat";
 import { getFormatDisplayName } from "@/types/pokemon";
+import { type TeamArchetype, getArchetypePrompt } from "@/lib/ai/archetypes";
 
 function UrlTeamLoader() {
   useUrlTeam();
@@ -26,9 +26,12 @@ export default function Home() {
   const { team, format } = useTeamStore();
   const { queuePrompt } = useChatStore();
 
-  const handleGenerate = useCallback(() => {
-    queuePrompt(QUICKSTART_PROMPT.prompt);
-  }, [queuePrompt]);
+  const handleGenerate = useCallback((archetype?: TeamArchetype) => {
+    const prompt = archetype
+      ? getArchetypePrompt(archetype.id, format)
+      : `Build me a competitive 6 Pokemon team for ${format.toUpperCase()}. Pick an archetype that's strong in the current meta (hyper offense, bulky offense, balance, weather, etc.) and explain your strategy. For each Pokemon, use the modify_team tool with full competitive sets including EVs, nature, and tera type.`;
+    queuePrompt(prompt);
+  }, [queuePrompt, format]);
 
   const handleBuildOwn = useCallback(() => {
     // Just dismiss the overlay - user can click on any empty slot
