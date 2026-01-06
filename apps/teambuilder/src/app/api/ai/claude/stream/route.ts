@@ -8,6 +8,7 @@ import {
   buildSystemPrompt,
   buildUserMessage,
 } from "@/lib/ai/context";
+import { TEAM_TOOLS } from "@/lib/ai/tools";
 
 // Keywords that trigger extended thinking for deeper analysis
 const ANALYSIS_KEYWORDS = [
@@ -22,9 +23,12 @@ function shouldUseThinking(message: string): boolean {
   return ANALYSIS_KEYWORDS.some(keyword => lowerMessage.includes(keyword));
 }
 
+// Max number of previous messages to include for context (to manage token usage)
+const MAX_HISTORY_MESSAGES = 10;
+
 export async function POST(request: NextRequest) {
   try {
-    const { message, team = [], format = "gen9ou", enableThinking, personality: personalityId = DEFAULT_PERSONALITY } = await request.json();
+    const { message, team = [], format = "gen9ou", enableThinking, personality: personalityId = DEFAULT_PERSONALITY, chatHistory = [] } = await request.json();
 
     if (!message) {
       return new Response(JSON.stringify({ error: "Message is required" }), {
@@ -56,13 +60,29 @@ export async function POST(request: NextRequest) {
     // Determine if we should use extended thinking
     const useThinking = enableThinking ?? shouldUseThinking(message);
 
-    // Build request body
+    // Build conversation messages with history
+    // Take only the most recent messages to avoid token limits
+    const recentHistory = (chatHistory as { role: string; content: string }[])
+      .slice(-MAX_HISTORY_MESSAGES)
+      .map(msg => ({
+        role: msg.role as "user" | "assistant",
+        content: msg.content,
+      }));
+
+    // Build the messages array: history + current message with full context
+    const messages = [
+      ...recentHistory,
+      { role: "user" as const, content: fullUserMessage },
+    ];
+
+    // Build request body with tools
     const requestBody: Record<string, unknown> = {
       model: "claude-sonnet-4-5-20250929",
-      max_tokens: useThinking ? 16000 : 1024,
+      max_tokens: useThinking ? 16000 : 4096,
       stream: true,
       system: systemPrompt,
-      messages: [{ role: "user", content: fullUserMessage }],
+      messages,
+      tools: TEAM_TOOLS,
     };
 
     // Add thinking configuration if enabled
@@ -97,6 +117,10 @@ export async function POST(request: NextRequest) {
     const encoder = new TextEncoder();
     const decoder = new TextDecoder();
     let isThinking = false;
+    let isToolUse = false;
+    let currentToolName = "";
+    let currentToolId = "";
+    let toolInputBuffer = "";
     let buffer = "";
 
     const transformStream = new TransformStream({
@@ -120,11 +144,18 @@ export async function POST(request: NextRequest) {
                 const parsed = JSON.parse(data);
 
                 if (parsed.type === "content_block_start") {
-                  isThinking = parsed.content_block?.type === "thinking";
-                  if (isThinking) {
+                  const blockType = parsed.content_block?.type;
+
+                  if (blockType === "thinking") {
+                    isThinking = true;
                     controller.enqueue(
                       encoder.encode(`data: ${JSON.stringify({ thinking: true, text: "" })}\n\n`)
                     );
+                  } else if (blockType === "tool_use") {
+                    isToolUse = true;
+                    currentToolName = parsed.content_block?.name || "";
+                    currentToolId = parsed.content_block?.id || "";
+                    toolInputBuffer = "";
                   }
                 }
 
@@ -137,14 +168,39 @@ export async function POST(request: NextRequest) {
                     controller.enqueue(
                       encoder.encode(`data: ${JSON.stringify({ text: parsed.delta.text })}\n\n`)
                     );
+                  } else if (parsed.delta?.partial_json && isToolUse) {
+                    // Accumulate tool input JSON
+                    toolInputBuffer += parsed.delta.partial_json;
                   }
                 }
 
-                if (parsed.type === "content_block_stop" && isThinking) {
-                  isThinking = false;
-                  controller.enqueue(
-                    encoder.encode(`data: ${JSON.stringify({ thinking: false })}\n\n`)
-                  );
+                if (parsed.type === "content_block_stop") {
+                  if (isThinking) {
+                    isThinking = false;
+                    controller.enqueue(
+                      encoder.encode(`data: ${JSON.stringify({ thinking: false })}\n\n`)
+                    );
+                  } else if (isToolUse) {
+                    // Parse the complete tool input and emit as tool_use event
+                    try {
+                      const toolInput = JSON.parse(toolInputBuffer);
+                      controller.enqueue(
+                        encoder.encode(`data: ${JSON.stringify({
+                          tool_use: {
+                            id: currentToolId,
+                            name: currentToolName,
+                            input: toolInput
+                          }
+                        })}\n\n`)
+                      );
+                    } catch (e) {
+                      console.error("Failed to parse tool input:", e, toolInputBuffer);
+                    }
+                    isToolUse = false;
+                    currentToolName = "";
+                    currentToolId = "";
+                    toolInputBuffer = "";
+                  }
                 }
 
                 if (parsed.type === "message_stop") {

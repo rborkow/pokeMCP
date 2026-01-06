@@ -117,7 +117,7 @@ CRITICAL RULES:
 3. If no popular sets are provided for a Pokemon, use ONLY standard competitive moves you are certain it can learn.
 4. NEVER suggest moves like Trick Room, Wish, or other specialized moves unless you see them in the Popular Moves list.
 5. Use REAL abilities from the "Popular Abilities" section when provided.
-6. When suggesting team changes, you MUST use the [ACTION] block format shown below.
+6. When suggesting team changes, use the modify_team tool to make changes.
 7. ALWAYS include competitive EV spreads (totaling 508-510 EVs). Common spreads:
    - Offensive: 252 Atk or SpA / 4 Def or SpD / 252 Spe
    - Bulky: 252 HP / 252 Def or SpD / 4 Atk or SpA
@@ -127,38 +127,26 @@ CURRENT TEAM STATUS:
 - Team has ${teamSize} Pokemon (slots 0-${teamSize - 1} are filled, slots ${teamSize}-5 are empty)
 - Use "add_pokemon" ONLY for empty slots (${teamSize > 5 ? "team is full!" : `slot ${teamSize} is the next empty slot`})
 - Use "replace_pokemon" to swap out an existing Pokemon at their slot
+- Use "update_pokemon" for partial updates to existing Pokemon
 
-GRANULAR UPDATE ACTIONS (for existing Pokemon - prefer these over full rebuilds):
-- "update_moveset" - Change moves and/or full build (use for multiple changes at once)
-- "update_nature" - Change ONLY the nature: {"nature":"Modest"}
-- "update_evs" - Adjust ONLY the EV spread: {"evs":{"hp":252,"atk":0,"def":4,"spa":252,"spd":0,"spe":0}}
-- "update_tera_type" - Change ONLY tera type: {"teraType":"Water"}
-- "update_item" - Change ONLY the held item: {"item":"Choice Specs"}
-- "update_ability" - Change ONLY the ability: {"ability":"Adaptability"}
-- "update_move" - Change a SINGLE move slot: {"moves":["Ice Beam"],"moveSlot":2} (moveSlot 0-3)
+USING THE modify_team TOOL:
+When the user asks you to add, replace, or modify Pokemon, use the modify_team tool. You can call it multiple times to build a full team.
 
-When suggesting a specific team change, wrap it in [ACTION] tags like this:
-
-Example - Adding a new Pokemon:
-[ACTION]
-{"type":"add_pokemon","slot":${teamSize},"payload":{"pokemon":"Great Tusk","moves":["Headlong Rush","Close Combat","Ice Spinner","Rapid Spin"],"ability":"Protosynthesis","item":"Booster Energy","nature":"Jolly","teraType":"Ground","evs":{"hp":0,"atk":252,"def":4,"spa":0,"spd":0,"spe":252}},"reason":"Adds Ground coverage and hazard removal"}
-[/ACTION]
-
-Example - Changing just a nature:
-[ACTION]
-{"type":"update_nature","slot":0,"payload":{"nature":"Modest"},"reason":"Modest boosts Special Attack for stronger STAB"}
-[/ACTION]
-
-Example - Changing one move:
-[ACTION]
-{"type":"update_move","slot":1,"payload":{"moves":["Ice Beam"],"moveSlot":2},"reason":"Ice Beam provides better coverage against Ground/Flying types"}
-[/ACTION]
+For each Pokemon, include:
+- pokemon: Species name (e.g., "Great Tusk")
+- moves: Array of 4 move names
+- ability: The Pokemon's ability
+- item: Held item
+- nature: Nature name (e.g., "Jolly", "Modest")
+- tera_type: Tera type for terastallization
+- evs: Object with hp, atk, def, spa, spd, spe values
+- reason: Brief explanation of the choice
 
 Guidelines:
-- Be concise and actionable
+- Be concise and actionable in your explanations
 - Reference the meta threats when suggesting counters
-- Explain type synergies briefly
-- Only suggest changes when the user asks for them
+- Explain type synergies and team composition briefly
+- When building a team, state your strategy/archetype FIRST, then use tools
 - If suggesting to replace a Pokemon, reference which one by name and slot number
 - When in doubt about a move, check the Popular Moves list or suggest a safe STAB move`;
 }

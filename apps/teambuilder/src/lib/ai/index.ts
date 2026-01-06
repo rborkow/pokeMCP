@@ -1,7 +1,8 @@
 import type { TeamPokemon } from "@/types/pokemon";
-import type { AIProvider, AIResponse, TeamAction } from "@/types/chat";
+import type { AIProvider, AIResponse, TeamAction, ChatMessage } from "@/types/chat";
 import type { PersonalityId } from "./personalities";
 import { validatePokemonData } from "@/lib/validation/pokemon";
+import { type ModifyTeamInput, toolInputToTeamAction } from "./tools";
 
 interface SendChatMessageOptions {
   message: string;
@@ -9,10 +10,92 @@ interface SendChatMessageOptions {
   format: string;
   provider: AIProvider;
   personality?: PersonalityId;
+  chatHistory?: ChatMessage[];
 }
 
 /**
- * Parse a single action data object into a TeamAction
+ * Parse a tool input into a TeamAction
+ */
+function parseToolToAction(
+  toolInput: ModifyTeamInput,
+  team: TeamPokemon[],
+  slotOffset: number = 0
+): TeamAction | undefined {
+  try {
+    // Build the preview team
+    const preview = [...team];
+    const slot = toolInput.slot ?? team.length + slotOffset;
+
+    if (toolInput.action_type === "remove_pokemon") {
+      preview.splice(slot, 1);
+    } else {
+      const newPokemon: TeamPokemon = {
+        pokemon: toolInput.pokemon || "",
+        moves: toolInput.moves || [],
+        ability: toolInput.ability,
+        item: toolInput.item,
+        nature: toolInput.nature,
+        teraType: toolInput.tera_type,
+        evs: toolInput.evs,
+        ivs: toolInput.ivs,
+      };
+
+      if (toolInput.action_type === "add_pokemon") {
+        preview.push(newPokemon);
+      } else {
+        // Merge with existing for updates
+        if (preview[slot]) {
+          preview[slot] = { ...preview[slot], ...newPokemon };
+        } else {
+          preview[slot] = newPokemon;
+        }
+      }
+    }
+
+    // Build payload from tool input
+    const payload: Partial<TeamPokemon> = {};
+    if (toolInput.pokemon) payload.pokemon = toolInput.pokemon;
+    if (toolInput.moves) payload.moves = toolInput.moves;
+    if (toolInput.ability) payload.ability = toolInput.ability;
+    if (toolInput.item) payload.item = toolInput.item;
+    if (toolInput.nature) payload.nature = toolInput.nature;
+    if (toolInput.tera_type) payload.teraType = toolInput.tera_type;
+    if (toolInput.evs) payload.evs = toolInput.evs;
+    if (toolInput.ivs) payload.ivs = toolInput.ivs;
+
+    // Validate the payload for add/update operations
+    let validationErrors = undefined;
+    if (toolInput.action_type !== "remove_pokemon") {
+      const validation = validatePokemonData(payload);
+      if (!validation.valid) {
+        validationErrors = validation.errors;
+      }
+    }
+
+    // Map action type
+    const typeMap: Record<string, TeamAction["type"]> = {
+      add_pokemon: "add_pokemon",
+      replace_pokemon: "replace_pokemon",
+      update_pokemon: "update_moveset",
+      remove_pokemon: "remove_pokemon",
+    };
+
+    return {
+      type: typeMap[toolInput.action_type] || "add_pokemon",
+      slot: slot,
+      payload: payload,
+      preview: preview.filter(Boolean),
+      reason: toolInput.reason || "AI suggestion",
+      validationErrors,
+    };
+  } catch (e) {
+    console.error("Failed to parse tool to action:", e);
+    return undefined;
+  }
+}
+
+/**
+ * Parse a single action data object into a TeamAction (legacy format)
  */
 function parseActionData(
   actionData: Record<string, unknown>,
@@ -77,7 +160,7 @@ function parseActionData(
 }
 
 /**
- * Parse ACTION blocks from AI response (supports multiple)
+ * Parse ACTION blocks from AI response (supports multiple) - legacy format
  */
 function parseActionsFromResponse(
   content: string,
@@ -106,21 +189,22 @@ function parseActionsFromResponse(
 }
 
 /**
- * Parse an ACTION block from AI response (returns first action for backwards compatibility)
- */
-function parseActionFromResponse(
-  content: string,
-  team: TeamPokemon[]
-): TeamAction | undefined {
-  const actions = parseActionsFromResponse(content, team);
-  return actions[0];
-}
-
-/**
  * Clean the AI response by removing the ACTION block for display
  */
 function cleanResponseContent(content: string): string {
   return content.replace(/\[ACTION\][\s\S]*?\[\/ACTION\]/g, "").trim();
+}
+
+/**
+ * Convert ChatMessage array to simplified format for API
+ */
+function formatChatHistory(messages: ChatMessage[]): { role: "user" | "assistant"; content: string }[] {
+  return messages
+    .filter(msg => msg.role !== "system" && !msg.isLoading && msg.content.trim())
+    .map(msg => ({
+      role: msg.role as "user" | "assistant",
+      content: msg.content,
+    }));
 }
 
 /**
@@ -132,6 +216,7 @@ export async function sendChatMessage({
   format,
   provider,
   personality,
+  chatHistory = [],
 }: SendChatMessageOptions): Promise<AIResponse> {
   // Call the appropriate API route
   // Note: We don't send a system prompt - the server builds one with meta context
@@ -145,6 +230,7 @@ export async function sendChatMessage({
       team: team,
       format: format,
       personality: personality,
+      chatHistory: formatChatHistory(chatHistory),
     }),
   });
 
@@ -157,12 +243,12 @@ export async function sendChatMessage({
   const rawContent = data.content || data.message || "";
 
   // Parse any action from the response
-  const action = parseActionFromResponse(rawContent, team);
+  const actions = parseActionsFromResponse(rawContent, team);
 
   // Clean the content for display
   const content = cleanResponseContent(rawContent);
 
-  return { content, action };
+  return { content, action: actions[0], actions: actions.length > 1 ? actions : undefined };
 }
 
 interface StreamChatMessageOptions extends SendChatMessageOptions {
@@ -180,6 +266,7 @@ export async function streamChatMessage({
   team,
   format,
   personality,
+  chatHistory = [],
   onChunk,
   onThinking,
   onComplete,
@@ -194,6 +281,7 @@ export async function streamChatMessage({
         team,
         format,
         personality,
+        chatHistory: formatChatHistory(chatHistory),
       }),
     });
 
@@ -212,6 +300,7 @@ export async function streamChatMessage({
     let thinkingContent = "";
     let isCurrentlyThinking = false;
     let buffer = ""; // Buffer for incomplete SSE events
+    const toolCalls: ModifyTeamInput[] = []; // Accumulate tool calls
 
     while (true) {
       const { done, value } = await reader.read();
@@ -232,7 +321,24 @@ export async function streamChatMessage({
             const data = line.slice(6);
             if (data === "[DONE]") {
               // Stream complete - process final response
-              const actions = parseActionsFromResponse(fullContent, team);
+              // First check for tool calls, then fall back to legacy ACTION blocks
+              let actions: TeamAction[] = [];
+
+              if (toolCalls.length > 0) {
+                // Convert tool calls to TeamActions
+                let currentTeam = [...team];
+                for (const toolInput of toolCalls) {
+                  const action = parseToolToAction(toolInput, currentTeam, actions.length);
+                  if (action) {
+                    actions.push(action);
+                    currentTeam = action.preview;
+                  }
+                }
+              } else {
+                // Fall back to parsing ACTION blocks from content
+                actions = parseActionsFromResponse(fullContent, team);
+              }
+
               const cleanedContent = cleanResponseContent(fullContent);
               onComplete({
                 content: cleanedContent,
@@ -272,6 +378,14 @@ export async function streamChatMessage({
                 // Send cleaned content for display
                 onChunk(cleanResponseContent(fullContent));
               }
+
+              // Handle tool use
+              if (parsed.tool_use) {
+                const toolUse = parsed.tool_use;
+                if (toolUse.name === "modify_team" && toolUse.input) {
+                  toolCalls.push(toolUse.input as ModifyTeamInput);
+                }
+              }
             } catch {
               // Skip invalid JSON lines
             }
@@ -290,6 +404,9 @@ export async function streamChatMessage({
             if (parsed.text && !parsed.thinking) {
               fullContent += parsed.text;
             }
+            if (parsed.tool_use?.name === "modify_team" && parsed.tool_use?.input) {
+              toolCalls.push(parsed.tool_use.input as ModifyTeamInput);
+            }
           } catch {
             // Skip
           }
@@ -298,7 +415,21 @@ export async function streamChatMessage({
     }
 
     // If we get here without [DONE], still complete
-    const actions = parseActionsFromResponse(fullContent, team);
+    let actions: TeamAction[] = [];
+
+    if (toolCalls.length > 0) {
+      let currentTeam = [...team];
+      for (const toolInput of toolCalls) {
+        const action = parseToolToAction(toolInput, currentTeam, actions.length);
+        if (action) {
+          actions.push(action);
+          currentTeam = action.preview;
+        }
+      }
+    } else {
+      actions = parseActionsFromResponse(fullContent, team);
+    }
+
     const cleanedContent = cleanResponseContent(fullContent);
     onComplete({
       content: cleanedContent,
