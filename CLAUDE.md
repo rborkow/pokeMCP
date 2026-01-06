@@ -49,11 +49,57 @@ npm run dev:docs               # Start dev server (port 3001)
 ### Team Builder Features
 The team builder UI (`apps/teambuilder/`) includes:
 - **AI Coach**: Claude-powered assistant with personality themes (Professor Kukui, Oak, Blue)
+- **Team Archetypes**: Guided team generation with strategic presets (Hyper Offense, Balance, Trick Room, Weather, etc.)
 - **Format Selector**: Quick Singles/Doubles toggle with advanced format dropdown
 - **Welcome Overlay**: Onboarding flow for new users (Generate Team, Import, Build Own)
 - **Type Coverage**: Visual analysis of team weaknesses and resistances
 - **Threat Matrix**: Matchup analysis against meta threats
 - **Import/Export/Share**: Showdown format with shareable URLs
+- **Reset Button**: Clears team, chat, and undo history
+
+### Team Builder AI Architecture
+
+The AI coach uses Claude with structured tool calling for team modifications.
+
+**Key Files:**
+- `src/lib/ai/context.ts` - System prompts, team formatting, gimmick guidance
+- `src/lib/ai/tools.ts` - Claude tool schema for `modify_team`
+- `src/lib/ai/archetypes.ts` - Team archetype definitions and prompts
+- `src/lib/ai/index.ts` - Streaming client with tool parsing
+- `src/lib/ai/personalities.ts` - AI personality configurations
+- `src/app/api/ai/claude/stream/route.ts` - SSE streaming endpoint
+
+**Tool Calling Flow:**
+1. User sends message → ChatPanel calls `streamChatMessage()`
+2. Server builds system prompt with personality, format, gimmick guidance
+3. Claude responds with text + `modify_team` tool calls
+4. Client parses tool calls into `TeamAction` objects
+5. Actions displayed as cards for user approval or auto-applied (team gen)
+
+**Team Archetypes (`archetypes.ts`):**
+- Format-aware: Singles archetypes (Hyper Offense, Stall) vs Doubles (Goodstuffs, Trick Room)
+- Each archetype has a detailed prompt with strategy and key Pokemon traits
+- `getArchetypesForFormat()` filters by Singles/Doubles
+- `getArchetypePrompt()` adds format-specific requirements
+
+**Battle Gimmicks by Generation:**
+| Gen | Gimmick | Handling |
+|-----|---------|----------|
+| 9 | Terastallization | `tera_type` required in tool calls, strategic guidance in prompt |
+| 8 | Dynamax | Notes about Smogon ban vs VGC usage |
+| 7 | Z-Moves + Megas | Item field for Z-Crystals/Mega Stones, form naming |
+| 6 | Mega Evolution | Mega Stone items, `-Mega` suffix forms |
+
+**Chat Context:**
+- Last 10 messages sent to Claude for conversation continuity
+- Team context includes: Pokemon, item, ability, Tera type, nature, EVs, moves
+- `formatTeamContext()` builds readable team summary for Claude
+
+**Streaming UI:**
+- `onChunk` - Text content updates
+- `onThinking` - Extended thinking display (collapsible)
+- `onToolUse` - Building progress ("Adding Great Tusk... (1/6)")
+- `buildingStatus` field on ChatMessage for progress indicator
 
 ### Stats Management
 ```bash
@@ -258,10 +304,35 @@ Strategy docs stored with chunk IDs: `{pokemon}-{format}-{section}-{index}`
 
 ## Testing Changes
 
+### MCP Worker Testing
 1. Run `npm run dev` to start local Wrangler server
 2. Test MCP tools via `/test-rag?q=...` or `/test-kv` endpoints
 3. Create a PR - CI will verify builds pass
 4. After merge, deployment is automatic
+
+### Team Builder Testing
+```bash
+cd apps/teambuilder
+npm run test:run        # Run all tests
+npm run test:coverage   # Run with coverage report
+```
+
+**Test Structure:**
+- `src/__tests__/*.test.ts` - Unit tests for stores, parsers, utilities
+- `src/__tests__/components/*.test.tsx` - Component tests with React Testing Library
+
+**Key Test Files:**
+- `archetypes.test.ts` - Team archetype filtering and prompt generation
+- `personalities.test.ts` - AI personality configuration
+- `showdown-parser.test.ts` - Pokemon Showdown format parsing
+- `team-store.test.ts` - Team state management
+- `chat-store.test.ts` - Chat message handling
+
+**Coverage Targets:**
+- `lib/ai/archetypes.ts` - 100% (archetype filtering, format detection)
+- `lib/ai/personalities.ts` - 100% (personality lookup)
+- `stores/` - 80%+ (state management)
+- `lib/showdown-parser.ts` - 90%+ (critical parsing logic)
 
 ## Common Tasks
 
@@ -285,3 +356,29 @@ Option 2 - Manual:
 1. `npm run fetch-stats` (downloads from Smogon, ~45 seconds)
 2. `npm run upload-stats` (uploads to KV, requires Cloudflare auth)
 3. Commit and push changes to trigger deploy
+
+### Team Builder AI Tasks
+
+**Adding a new team archetype:**
+1. Add archetype to `apps/teambuilder/src/lib/ai/archetypes.ts`
+2. Include: `id`, `name`, `description`, `icon`, `prompt`, `keyFeatures`, `formats`
+3. Set `formats` to "singles", "doubles", or "both"
+4. Add tests in `src/__tests__/archetypes.test.ts`
+
+**Modifying Claude's system prompt:**
+1. Edit `apps/teambuilder/src/lib/ai/context.ts`
+2. `buildSystemPrompt()` - Main prompt with rules and tool instructions
+3. `getGimmickGuidance()` - Generation-specific battle mechanics
+4. `formatTeamContext()` - How team data is shown to Claude
+
+**Adding a new AI personality:**
+1. Add to `apps/teambuilder/src/lib/ai/personalities.ts`
+2. Include: `id`, `name`, `systemPromptPrefix`, `praiseStyle`, `criticismStyle`
+3. Optional: `loreReferences`, `preferredPokemon`
+4. Add tests in `src/__tests__/personalities.test.ts`
+
+**Modifying the modify_team tool schema:**
+1. Edit `apps/teambuilder/src/lib/ai/tools.ts` - `TEAM_TOOLS` array
+2. Update `ModifyTeamInput` interface to match
+3. Update `parseToolToAction()` in `src/lib/ai/index.ts` if needed
+4. Update system prompt in `context.ts` to document new fields
