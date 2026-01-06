@@ -13,7 +13,6 @@ import { toDisplayName } from "@/lib/showdown-parser";
 import {
   analyzeTeamSpeed,
   hasTeamSpeedControl,
-  getSpeedTier,
   getSpeedTierColor,
   getSpeedTierBgColor,
   SPEED_BENCHMARKS,
