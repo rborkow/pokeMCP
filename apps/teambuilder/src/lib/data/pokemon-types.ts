@@ -526,3 +526,170 @@ export function calculateOffensiveScore(
   if (bestMatchup >= 0.5) return -1; // Resisted
   return -2;                         // Immune or double resisted
 }
+
+/**
+ * Base stats interface
+ */
+export interface BaseStats {
+  hp: number;
+  atk: number;
+  def: number;
+  spa: number;
+  spd: number;
+  spe: number;
+}
+
+/**
+ * Pokemon base stats for speed calculations
+ * Format: [HP, Atk, Def, SpA, SpD, Spe]
+ */
+const POKEMON_BASE_STATS: Record<string, BaseStats> = {
+  // Gen 9 Meta Pokemon
+  "great tusk": { hp: 115, atk: 131, def: 131, spa: 53, spd: 53, spe: 87 },
+  "greattusk": { hp: 115, atk: 131, def: 131, spa: 53, spd: 53, spe: 87 },
+  "kingambit": { hp: 100, atk: 135, def: 120, spa: 60, spd: 85, spe: 50 },
+  "gholdengo": { hp: 87, atk: 60, def: 95, spa: 133, spd: 91, spe: 84 },
+  "dragapult": { hp: 88, atk: 120, def: 75, spa: 100, spd: 75, spe: 142 },
+  "iron valiant": { hp: 74, atk: 130, def: 90, spa: 120, spd: 60, spe: 116 },
+  "ironvaliant": { hp: 74, atk: 130, def: 90, spa: 120, spd: 60, spe: 116 },
+  "flutter mane": { hp: 55, atk: 55, def: 55, spa: 135, spd: 135, spe: 135 },
+  "fluttermane": { hp: 55, atk: 55, def: 55, spa: 135, spd: 135, spe: 135 },
+  "iron bundle": { hp: 56, atk: 80, def: 114, spa: 124, spd: 60, spe: 136 },
+  "ironbundle": { hp: 56, atk: 80, def: 114, spa: 124, spd: 60, spe: 136 },
+  "raging bolt": { hp: 125, atk: 73, def: 91, spa: 137, spd: 89, spe: 75 },
+  "ragingbolt": { hp: 125, atk: 73, def: 91, spa: 137, spd: 89, spe: 75 },
+  "ogerpon": { hp: 80, atk: 120, def: 84, spa: 60, spd: 96, spe: 110 },
+  "ogerpontealmask": { hp: 80, atk: 120, def: 84, spa: 60, spd: 96, spe: 110 },
+  "ogerponwellspring": { hp: 80, atk: 120, def: 84, spa: 60, spd: 96, spe: 110 },
+  "ogerponhearthflame": { hp: 80, atk: 120, def: 84, spa: 60, spd: 96, spe: 110 },
+  "ogerponcornerstone": { hp: 80, atk: 120, def: 84, spa: 60, spd: 96, spe: 110 },
+  "garchomp": { hp: 108, atk: 130, def: 95, spa: 80, spd: 85, spe: 102 },
+  "landorus": { hp: 89, atk: 125, def: 90, spa: 115, spd: 80, spe: 101 },
+  "landorustherian": { hp: 89, atk: 145, def: 90, spa: 105, spd: 80, spe: 91 },
+  "urshifu": { hp: 100, atk: 130, def: 100, spa: 63, spd: 60, spe: 97 },
+  "urshifurapidstrike": { hp: 100, atk: 130, def: 100, spa: 63, spd: 60, spe: 97 },
+  "dragonite": { hp: 91, atk: 134, def: 95, spa: 100, spd: 100, spe: 80 },
+  "roaring moon": { hp: 105, atk: 139, def: 71, spa: 55, spd: 101, spe: 119 },
+  "roaringmoon": { hp: 105, atk: 139, def: 71, spa: 55, spd: 101, spe: 119 },
+  "walking wake": { hp: 99, atk: 83, def: 91, spa: 125, spd: 83, spe: 109 },
+  "walkingwake": { hp: 99, atk: 83, def: 91, spa: 125, spd: 83, spe: 109 },
+  "gouging fire": { hp: 105, atk: 115, def: 121, spa: 65, spd: 93, spe: 91 },
+  "gougingfire": { hp: 105, atk: 115, def: 121, spa: 65, spd: 93, spe: 91 },
+  "iron hands": { hp: 154, atk: 140, def: 108, spa: 50, spd: 68, spe: 50 },
+  "ironhands": { hp: 154, atk: 140, def: 108, spa: 50, spd: 68, spe: 50 },
+  "iron treads": { hp: 90, atk: 112, def: 120, spa: 72, spd: 70, spe: 106 },
+  "irontreads": { hp: 90, atk: 112, def: 120, spa: 72, spd: 70, spe: 106 },
+  "annihilape": { hp: 110, atk: 115, def: 80, spa: 50, spd: 90, spe: 90 },
+  "skeledirge": { hp: 104, atk: 75, def: 100, spa: 110, spd: 75, spe: 66 },
+  "meowscarada": { hp: 76, atk: 110, def: 70, spa: 81, spd: 70, spe: 123 },
+  "quaquaval": { hp: 85, atk: 120, def: 80, spa: 85, spd: 75, spe: 85 },
+  "archaludon": { hp: 90, atk: 105, def: 130, spa: 125, spd: 65, spe: 85 },
+  "chi-yu": { hp: 55, atk: 80, def: 80, spa: 135, spd: 120, spe: 100 },
+  "chiyu": { hp: 55, atk: 80, def: 80, spa: 135, spd: 120, spe: 100 },
+  "ting-lu": { hp: 155, atk: 110, def: 125, spa: 55, spd: 80, spe: 45 },
+  "tinglu": { hp: 155, atk: 110, def: 125, spa: 55, spd: 80, spe: 45 },
+  "chien-pao": { hp: 80, atk: 120, def: 80, spa: 90, spd: 65, spe: 135 },
+  "chienpao": { hp: 80, atk: 120, def: 80, spa: 90, spd: 65, spe: 135 },
+  "wo-chien": { hp: 85, atk: 85, def: 100, spa: 95, spd: 135, spe: 70 },
+  "wochien": { hp: 85, atk: 85, def: 100, spa: 95, spd: 135, spe: 70 },
+  // VGC Support Pokemon
+  "incineroar": { hp: 95, atk: 115, def: 90, spa: 80, spd: 90, spe: 60 },
+  "rillaboom": { hp: 100, atk: 125, def: 90, spa: 60, spd: 70, spe: 85 },
+  "amoonguss": { hp: 114, atk: 85, def: 70, spa: 85, spd: 80, spe: 30 },
+  "indeedee": { hp: 60, atk: 65, def: 55, spa: 105, spd: 95, spe: 95 },
+  "indeedeef": { hp: 70, atk: 55, def: 65, spa: 95, spd: 105, spe: 85 },
+  "tornadus": { hp: 79, atk: 115, def: 70, spa: 125, spd: 80, spe: 111 },
+  "tornadustherian": { hp: 79, atk: 100, def: 80, spa: 110, spd: 90, spe: 121 },
+  "whimsicott": { hp: 60, atk: 67, def: 85, spa: 77, spd: 75, spe: 116 },
+  "grimmsnarl": { hp: 95, atk: 120, def: 65, spa: 95, spd: 75, spe: 60 },
+  "hatterene": { hp: 57, atk: 90, def: 95, spa: 136, spd: 103, spe: 29 },
+  "torkoal": { hp: 70, atk: 85, def: 140, spa: 85, spd: 70, spe: 20 },
+  "pelipper": { hp: 60, atk: 50, def: 100, spa: 95, spd: 70, spe: 65 },
+  "dondozo": { hp: 150, atk: 100, def: 115, spa: 65, spd: 65, spe: 35 },
+  "tatsugiri": { hp: 68, atk: 50, def: 60, spa: 120, spd: 95, spe: 82 },
+  "farigiraf": { hp: 120, atk: 90, def: 70, spa: 110, spd: 70, spe: 60 },
+  "armarouge": { hp: 85, atk: 60, def: 100, spa: 125, spd: 80, spe: 75 },
+  "ceruledge": { hp: 75, atk: 125, def: 80, spa: 60, spd: 100, spe: 85 },
+  // Gen 9 Box Legends
+  "koraidon": { hp: 100, atk: 135, def: 115, spa: 85, spd: 100, spe: 135 },
+  "miraidon": { hp: 100, atk: 85, def: 100, spa: 135, spd: 115, spe: 135 },
+  "terapagos": { hp: 90, atk: 65, def: 85, spa: 65, spd: 85, spe: 60 },
+  // Fast Electric types
+  "regieleki": { hp: 80, atk: 100, def: 50, spa: 100, spd: 50, spe: 200 },
+  "zeraora": { hp: 88, atk: 112, def: 75, spa: 102, spd: 80, spe: 143 },
+  "electrode": { hp: 60, atk: 50, def: 70, spa: 80, spd: 80, spe: 150 },
+  // Gen 8 Meta Pokemon
+  "zacian": { hp: 92, atk: 130, def: 115, spa: 80, spd: 115, spe: 138 },
+  "zaciancrowned": { hp: 92, atk: 170, def: 115, spa: 80, spd: 115, spe: 148 },
+  "zamazenta": { hp: 92, atk: 130, def: 115, spa: 80, spd: 115, spe: 138 },
+  "zamazentacrowned": { hp: 92, atk: 130, def: 145, spa: 80, spd: 145, spe: 128 },
+  "calyrex": { hp: 100, atk: 80, def: 80, spa: 80, spd: 80, spe: 80 },
+  "calyrexshadow": { hp: 100, atk: 85, def: 80, spa: 165, spd: 100, spe: 150 },
+  "calyrexice": { hp: 100, atk: 165, def: 150, spa: 85, spd: 130, spe: 50 },
+  "spectrier": { hp: 100, atk: 65, def: 60, spa: 145, spd: 80, spe: 130 },
+  "glastrier": { hp: 100, atk: 145, def: 130, spa: 65, spd: 110, spe: 30 },
+  // Classic Pokemon
+  "heatran": { hp: 91, atk: 90, def: 106, spa: 130, spd: 106, spe: 77 },
+  "toxapex": { hp: 50, atk: 63, def: 152, spa: 53, spd: 142, spe: 35 },
+  "ferrothorn": { hp: 74, atk: 94, def: 131, spa: 54, spd: 116, spe: 20 },
+  "clefable": { hp: 95, atk: 70, def: 73, spa: 95, spd: 90, spe: 60 },
+  "corviknight": { hp: 98, atk: 87, def: 105, spa: 53, spd: 85, spe: 67 },
+  "tyranitar": { hp: 100, atk: 134, def: 110, spa: 95, spd: 100, spe: 61 },
+  "excadrill": { hp: 110, atk: 135, def: 60, spa: 50, spd: 65, spe: 88 },
+  "weavile": { hp: 70, atk: 120, def: 65, spa: 45, spd: 85, spe: 125 },
+  "volcarona": { hp: 85, atk: 60, def: 65, spa: 135, spd: 105, spe: 100 },
+  "hydreigon": { hp: 92, atk: 105, def: 90, spa: 125, spd: 90, spe: 98 },
+  "kyurem": { hp: 125, atk: 130, def: 90, spa: 130, spd: 90, spe: 95 },
+  "gliscor": { hp: 75, atk: 95, def: 125, spa: 45, spd: 75, spe: 95 },
+  "rotomwash": { hp: 50, atk: 65, def: 107, spa: 105, spd: 107, spe: 86 },
+  "hippowdon": { hp: 108, atk: 112, def: 118, spa: 68, spd: 72, spe: 47 },
+  "azumarill": { hp: 100, atk: 50, def: 80, spa: 60, spd: 80, spe: 50 },
+  "scizor": { hp: 70, atk: 130, def: 100, spa: 55, spd: 80, spe: 65 },
+  "magnezone": { hp: 70, atk: 70, def: 115, spa: 130, spd: 90, spe: 60 },
+  "gengar": { hp: 60, atk: 65, def: 60, spa: 130, spd: 75, spe: 110 },
+  "alakazam": { hp: 55, atk: 50, def: 45, spa: 135, spd: 95, spe: 120 },
+  "gyarados": { hp: 95, atk: 125, def: 79, spa: 60, spd: 100, spe: 81 },
+  "garganacl": { hp: 100, atk: 100, def: 130, spa: 45, spd: 90, spe: 35 },
+  "togekiss": { hp: 85, atk: 50, def: 95, spa: 120, spd: 115, spe: 80 },
+  "sylveon": { hp: 95, atk: 65, def: 65, spa: 110, spd: 130, spe: 60 },
+  "mimikyu": { hp: 55, atk: 90, def: 80, spa: 50, spd: 105, spe: 96 },
+  "palafin": { hp: 100, atk: 70, def: 72, spa: 53, spd: 62, spe: 100 },
+  "palafinhero": { hp: 100, atk: 160, def: 97, spa: 106, spd: 87, spe: 100 },
+  "baxcalibur": { hp: 115, atk: 145, def: 92, spa: 75, spd: 86, spe: 87 },
+  "ursaluna": { hp: 130, atk: 140, def: 105, spa: 45, spd: 80, spe: 50 },
+  "ursalunabloodmoon": { hp: 113, atk: 70, def: 120, spa: 135, spd: 65, spe: 52 },
+  "tinkaton": { hp: 85, atk: 75, def: 77, spa: 70, spd: 105, spe: 94 },
+  "glimmora": { hp: 83, atk: 55, def: 90, spa: 130, spd: 81, spe: 86 },
+  "espathra": { hp: 95, atk: 60, def: 60, spa: 101, spd: 60, spe: 105 },
+  // Starters
+  "charizard": { hp: 78, atk: 84, def: 78, spa: 109, spd: 85, spe: 100 },
+  "venusaur": { hp: 80, atk: 82, def: 83, spa: 100, spd: 100, spe: 80 },
+  "blastoise": { hp: 79, atk: 83, def: 100, spa: 85, spd: 105, spe: 78 },
+  "cinderace": { hp: 80, atk: 116, def: 75, spa: 65, spd: 75, spe: 119 },
+  "greninja": { hp: 72, atk: 95, def: 67, spa: 103, spd: 71, spe: 122 },
+  "blaziken": { hp: 80, atk: 120, def: 70, spa: 110, spd: 70, spe: 80 },
+  "lucario": { hp: 70, atk: 110, def: 70, spa: 115, spd: 70, spe: 90 },
+};
+
+/**
+ * Get base stats for a Pokemon by name
+ */
+export function getPokemonBaseStats(pokemon: string): BaseStats | null {
+  const lower = pokemon.toLowerCase();
+
+  // Try several name formats
+  const namesToTry = [
+    lower.replace(/[^a-z0-9-]/g, ""),
+    lower.replace(/[^a-z0-9]/g, ""),
+    lower.replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, ""),
+    lower.replace(/\s+/g, "").replace(/[^a-z0-9]/g, ""),
+  ];
+
+  for (const name of namesToTry) {
+    if (POKEMON_BASE_STATS[name]) {
+      return POKEMON_BASE_STATS[name];
+    }
+  }
+
+  return null;
+}

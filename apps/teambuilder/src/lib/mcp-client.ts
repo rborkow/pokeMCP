@@ -3,6 +3,30 @@ import type { TeamPokemon } from "@/types/pokemon";
 // Use local proxy to avoid CORS issues with MCP server
 const MCP_PROXY_URL = "/api/mcp";
 
+/**
+ * Format fallback map for VGC formats that may not have stats yet.
+ * Maps newer formats to the most recent format with available data.
+ */
+const FORMAT_FALLBACKS: Record<string, string> = {
+  // VGC 2026 formats fall back to VGC 2024 Reg H (most recent with data)
+  "gen9vgc2026regf": "gen9vgc2024regh",
+  "gen9vgc2026regfbo3": "gen9vgc2024regh",
+  // VGC 2025 formats also fall back
+  "gen9vgc2025regi": "gen9vgc2024regh",
+};
+
+/**
+ * Get the effective format to use for stats queries.
+ * Returns the original format if it has stats, or a fallback format.
+ */
+export function getEffectiveStatsFormat(format: string): { format: string; isFallback: boolean } {
+  const fallback = FORMAT_FALLBACKS[format.toLowerCase()];
+  if (fallback) {
+    return { format: fallback, isFallback: true };
+  }
+  return { format, isFallback: false };
+}
+
 interface MCPResponse {
   jsonrpc: string;
   id: string | number;
@@ -128,12 +152,21 @@ export function usePopularSets(pokemon: string, format: string, enabled = true) 
 }
 
 export function useMetaThreats(format: string, limit = 20) {
-  return useQuery({
-    queryKey: ["meta-threats", format, limit],
-    queryFn: () => mcpClient.getMetaThreats(format, limit),
+  const { format: effectiveFormat, isFallback } = getEffectiveStatsFormat(format);
+
+  const query = useQuery({
+    queryKey: ["meta-threats", effectiveFormat, limit],
+    queryFn: () => mcpClient.getMetaThreats(effectiveFormat, limit),
     enabled: !!format,
     staleTime: 1000 * 60 * 60, // 1 hour
   });
+
+  return {
+    ...query,
+    effectiveFormat,
+    isFallback,
+    fallbackFrom: isFallback ? format : undefined,
+  };
 }
 
 export function useTeammates(pokemon: string, format: string, limit = 10, enabled = true) {

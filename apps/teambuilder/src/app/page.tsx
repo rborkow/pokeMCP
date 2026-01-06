@@ -7,13 +7,14 @@ import { TeamImportExport } from "@/components/team/TeamImportExport";
 import { ChatPanel } from "@/components/chat/ChatPanel";
 import { TypeCoverage } from "@/components/analysis/TypeCoverage";
 import { ThreatMatrix } from "@/components/analysis/ThreatMatrix";
+import { SpeedTiers } from "@/components/analysis/SpeedTiers";
 import { VGCTeamWarnings } from "@/components/analysis/VGCTeamWarnings";
 import { TeamHistory } from "@/components/history/TeamHistory";
 import { WelcomeOverlay } from "@/components/welcome/WelcomeOverlay";
 import { useTeamStore } from "@/stores/team-store";
 import { useChatStore } from "@/stores/chat-store";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Shield, AlertTriangle, History } from "lucide-react";
+import { Shield, AlertTriangle, History, Zap } from "lucide-react";
 import { useUrlTeam } from "@/hooks/useUrlTeam";
 import { getFormatDisplayName } from "@/types/pokemon";
 import { type TeamArchetype, getArchetypePrompt } from "@/lib/ai/archetypes";
@@ -99,6 +100,10 @@ export default function Home() {
                   <AlertTriangle className="w-4 h-4" />
                   Threats
                 </TabsTrigger>
+                <TabsTrigger value="speed" className="gap-2 data-[state=active]:bg-card data-[state=active]:text-primary">
+                  <Zap className="w-4 h-4" />
+                  Speed
+                </TabsTrigger>
                 <TabsTrigger value="history" className="gap-2 data-[state=active]:bg-card data-[state=active]:text-primary">
                   <History className="w-4 h-4" />
                   History
@@ -111,6 +116,10 @@ export default function Home() {
 
               <TabsContent value="threats" className="mt-4">
                 <ThreatMatrix />
+              </TabsContent>
+
+              <TabsContent value="speed" className="mt-4">
+                <SpeedTiers />
               </TabsContent>
 
               <TabsContent value="history" className="mt-4">
