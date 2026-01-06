@@ -94,10 +94,10 @@ export function TeamSlot({
       )}
 
       {/* Header: Sprite + Name/Types - horizontal layout like reference */}
-      <div className="flex items-start gap-3 mb-3">
+      <div className="flex items-start gap-2 sm:gap-3 mb-3">
         {/* Pokemon sprite */}
         <div className="relative flex-shrink-0">
-          <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-muted/50 to-muted/20 flex items-center justify-center overflow-hidden">
+          <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl bg-gradient-to-br from-muted/50 to-muted/20 flex items-center justify-center overflow-hidden">
             <div className="group-hover:scale-110 transition-transform duration-300">
               <PokemonSprite pokemon={pokemon.pokemon} size="lg" />
             </div>
@@ -107,18 +107,18 @@ export function TeamSlot({
         {/* Name, Nickname, Types */}
         <div className="flex-1 min-w-0">
           {pokemon.nickname && (
-            <p className="text-xs text-primary font-medium truncate">
+            <p className="text-[10px] sm:text-xs text-primary font-medium truncate">
               &ldquo;{pokemon.nickname}&rdquo;
             </p>
           )}
-          <h3 className="font-display font-bold text-base text-foreground capitalize truncate">
+          <h3 className="font-display font-bold text-sm sm:text-base text-foreground capitalize leading-tight">
             {toDisplayName(pokemon.pokemon)}
           </h3>
-          <div className="flex gap-1 mt-1.5 flex-wrap">
+          <div className="flex gap-1 mt-1 sm:mt-1.5 flex-wrap">
             {types.map((type) => (
               <span
                 key={type}
-                className={`type-badge ${TYPE_COLORS[type]} text-foreground shadow-sm px-2 py-0.5 text-[10px]`}
+                className={`type-badge ${TYPE_COLORS[type]} text-foreground shadow-sm px-1.5 sm:px-2 py-0.5 text-[9px] sm:text-[10px]`}
               >
                 {type}
               </span>
@@ -128,23 +128,23 @@ export function TeamSlot({
       </div>
 
       {/* Item & Ability */}
-      <div className="flex gap-2 mb-3">
+      <div className="flex flex-col sm:flex-row gap-1.5 sm:gap-2 mb-2 sm:mb-3">
         {pokemon.item && (
-          <div className="flex flex-col px-2 py-1.5 rounded-md bg-muted/50 flex-1 min-w-0">
-            <span className="text-[9px] text-muted-foreground uppercase tracking-wider flex items-center gap-1">
+          <div className="flex flex-row sm:flex-col items-center sm:items-start gap-1 px-2 py-1 sm:py-1.5 rounded-md bg-muted/50 sm:flex-1 min-w-0">
+            <span className="text-[8px] sm:text-[9px] text-muted-foreground uppercase tracking-wider flex items-center gap-1 shrink-0">
               <Package className="w-2.5 h-2.5" />
-              Item
+              <span className="hidden sm:inline">Item</span>
             </span>
-            <span className="text-[11px] text-foreground truncate font-medium">{pokemon.item}</span>
+            <span className="text-[10px] sm:text-[11px] text-foreground truncate font-medium">{pokemon.item}</span>
           </div>
         )}
         {pokemon.ability && (
-          <div className="flex flex-col px-2 py-1.5 rounded-md bg-muted/50 flex-1 min-w-0">
-            <span className="text-[9px] text-muted-foreground uppercase tracking-wider flex items-center gap-1">
+          <div className="flex flex-row sm:flex-col items-center sm:items-start gap-1 px-2 py-1 sm:py-1.5 rounded-md bg-muted/50 sm:flex-1 min-w-0">
+            <span className="text-[8px] sm:text-[9px] text-muted-foreground uppercase tracking-wider flex items-center gap-1 shrink-0">
               <Sparkles className="w-2.5 h-2.5" />
-              Ability
+              <span className="hidden sm:inline">Ability</span>
             </span>
-            <span className="text-[11px] text-foreground truncate font-medium">{pokemon.ability}</span>
+            <span className="text-[10px] sm:text-[11px] text-foreground truncate font-medium">{pokemon.ability}</span>
           </div>
         )}
       </div>
@@ -152,7 +152,7 @@ export function TeamSlot({
       {/* Moves */}
       {pokemon.moves && pokemon.moves.length > 0 && (
         <div className="space-y-1">
-          <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-semibold">Moves</p>
+          <p className="text-[9px] sm:text-[10px] text-muted-foreground uppercase tracking-wider font-semibold">Moves</p>
           <div className="grid grid-cols-2 gap-1">
             {pokemon.moves.map((move, idx) => (
               <MoveBadge key={idx} move={move} />

@@ -2,7 +2,6 @@
 
 import { Swords, Sparkles, Shield } from "lucide-react";
 import { getMoveData } from "@/lib/data/moves";
-import type { PokemonType } from "@/types/pokemon";
 import type { LucideIcon } from "lucide-react";
 
 // Reuse Pokemon type colors for move types
@@ -44,7 +43,7 @@ export function MoveBadge({ move }: MoveBadgeProps) {
   // Fallback for unknown moves
   if (!moveData) {
     return (
-      <div className="move-badge bg-muted/30 border-border/30">
+      <div className="move-badge bg-muted/30 border-border/30 text-[10px] sm:text-[11px]">
         <span className="truncate">{move}</span>
       </div>
     );
@@ -54,8 +53,8 @@ export function MoveBadge({ move }: MoveBadgeProps) {
   const Icon = CATEGORY_ICONS[moveData.category];
 
   return (
-    <div className={`move-badge ${typeClass}`}>
-      {Icon && <Icon className="w-3 h-3 shrink-0 opacity-80" />}
+    <div className={`move-badge ${typeClass} text-[10px] sm:text-[11px] py-1 sm:py-1.5`}>
+      {Icon && <Icon className="w-2.5 h-2.5 sm:w-3 sm:h-3 shrink-0 opacity-80" />}
       <span className="truncate">{move}</span>
     </div>
   );
