@@ -11,15 +11,28 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { useTeamStore } from "@/stores/team-store";
+import { useChatStore } from "@/stores/chat-store";
 import { useHistoryStore } from "@/stores/history-store";
-import { Upload, Download, Copy, Check, Share2, Link } from "lucide-react";
+import { Upload, Download, Copy, Check, Share2, Link, RotateCcw } from "lucide-react";
 import { generateShareUrl, copyToClipboard } from "@/lib/share";
 import { getFormatDisplayName } from "@/types/pokemon";
 
 export function TeamImportExport() {
   const { team, format, importTeam, exportTeam, clearTeam } = useTeamStore();
-  const { pushState } = useHistoryStore();
+  const { clearChat } = useChatStore();
+  const { pushState, clearHistory } = useHistoryStore();
   const [importText, setImportText] = useState("");
   const [importError, setImportError] = useState<string | null>(null);
   const [importOpen, setImportOpen] = useState(false);
@@ -27,6 +40,12 @@ export function TeamImportExport() {
   const [shareOpen, setShareOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
+
+  const handleReset = () => {
+    clearTeam();
+    clearChat();
+    clearHistory();
+  };
 
   const handleImport = () => {
     const result = importTeam(importText);
@@ -56,7 +75,7 @@ export function TeamImportExport() {
         <DialogTrigger asChild>
           <Button variant="outline" size="sm" className="gap-2">
             <Upload className="h-4 w-4" />
-            Import
+            <span className="hidden sm:inline">Import</span>
           </Button>
         </DialogTrigger>
         <DialogContent className="max-w-[95vw] sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
@@ -117,7 +136,7 @@ Landorus-Therian @ Choice Scarf
             disabled={team.length === 0}
           >
             <Download className="h-4 w-4" />
-            Export
+            <span className="hidden sm:inline">Export</span>
           </Button>
         </DialogTrigger>
         <DialogContent className="max-w-[95vw] sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
@@ -162,7 +181,7 @@ Landorus-Therian @ Choice Scarf
             disabled={team.length === 0}
           >
             <Share2 className="h-4 w-4" />
-            Share
+            <span className="hidden sm:inline">Share</span>
           </Button>
         </DialogTrigger>
         <DialogContent className="max-w-[95vw] sm:max-w-[500px]">
@@ -210,6 +229,37 @@ Landorus-Therian @ Choice Scarf
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Reset Confirmation */}
+      <AlertDialog>
+        <AlertDialogTrigger asChild>
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-2 text-destructive hover:text-destructive hover:bg-destructive/10"
+          >
+            <RotateCcw className="h-4 w-4" />
+            <span className="hidden sm:inline">Reset</span>
+          </Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent className="max-w-[95vw] sm:max-w-[400px]">
+          <AlertDialogHeader>
+            <AlertDialogTitle>Reset Everything?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will clear your current team, chat history, and team history. This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleReset}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Reset
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
