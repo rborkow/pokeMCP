@@ -97,13 +97,45 @@ interface PikalyticsData {
 }
 ```
 
+## Research Findings (January 2026)
+
+### Pikalytics Access Status
+
+**No public API available.** Investigation found:
+- No documented API endpoints
+- Website uses JavaScript-rendered content (not easily scrapeable)
+- SSL/TLS issues when attempting programmatic access
+- Contact email available (pikalytics@gmail.com) for partnership inquiries
+
+### Current Data Availability
+Pikalytics covers:
+- VGC 2026 Regulation F (current) - both base and Best-of-3 variants
+- VGC 2025 Regulations G-J (legacy)
+- Historical VGC formats back to Gen 4
+- Battle Stadium formats
+
+**URL Structure:**
+- Base: `https://pikalytics.com/pokedex/gen9vgc2026regf`
+- Bo3: `https://pikalytics.com/pokedex/gen9vgc2026regfbo3`
+
+### Recommendation
+**Use enhanced Smogon VGC data** as primary source:
+- Already have VGC format data (gen9vgc2024regh, gen9vgc2025regi, etc.)
+- Includes abilities, items, moves, spreads, teammates
+- Updates monthly via existing pipeline
+
+Consider reaching out to Pikalytics team if:
+- User demand is high for tournament-specific data
+- We want to add win rate analysis
+- Partnership/attribution deal possible
+
 ## Implementation Roadmap
 
-### Phase 1: Research (Before coding)
-- [ ] Check Pikalytics ToS
-- [ ] Look for official API documentation
-- [ ] Explore alternative VGC data sources
-- [ ] Consider reaching out to Pikalytics team
+### Phase 1: Research ✅ COMPLETE
+- [x] Check Pikalytics ToS - No public API
+- [x] Look for official API documentation - None found
+- [x] Explore alternative VGC data sources - Smogon VGC is viable
+- [ ] Consider reaching out to Pikalytics team - Deferred
 
 ### Phase 2: Data Schema
 - [ ] Design unified stats interface that works for both sources

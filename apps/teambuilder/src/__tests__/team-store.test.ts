@@ -131,7 +131,7 @@ describe("team-store", () => {
       useTeamStore.getState().setMode("vgc");
 
       expect(useTeamStore.getState().mode).toBe("vgc");
-      expect(useTeamStore.getState().format).toBe("gen9vgc2025regi");
+      expect(useTeamStore.getState().format).toBe("gen9vgc2026regf");
     });
 
     it("should update format to singles default when switching to singles mode", () => {
