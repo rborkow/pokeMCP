@@ -6,13 +6,16 @@ import { ChatMessage } from "./ChatMessage";
 import { ActionCard } from "./ActionCard";
 
 export function ChatMessages() {
-  const { messages, pendingAction } = useChatStore();
+  const { messages, pendingAction, isLoading } = useChatStore();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom when new messages arrive
+  // Use instant scroll during streaming to avoid jank, smooth otherwise
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, pendingAction]);
+    messagesEndRef.current?.scrollIntoView({
+      behavior: isLoading ? "instant" : "smooth",
+    });
+  }, [messages, pendingAction, isLoading]);
 
   if (messages.length === 0) {
     return (

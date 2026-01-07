@@ -6,11 +6,39 @@ Interactive web application for Pokemon competitive team building with AI-powere
 
 ## Features
 
-- **Team Building** - Import/export Showdown format, click-to-edit Pokemon sets
-- **AI Chat Assistant** - Get team advice, coverage analysis, and suggestions
-- **Threat Matrix** - Visual matchup analysis vs top meta threats
-- **Team History** - Track changes with diff view
-- **Format Support** - Gen 7-9 Singles and VGC formats
+### Team Building
+- Import/export Showdown format with shareable URLs
+- Click-to-edit Pokemon sets with full EV/IV/nature support
+- Drag-and-drop team reordering
+- Quick format toggle (Singles/VGC) with advanced format dropdown
+
+### AI Coach
+- Claude-powered assistant with personality themes (Professor Kukui, Oak, Blue)
+- Team Archetypes for guided generation:
+  - **Singles**: Hyper Offense, Bulky Offense, Balance, Stall, Weather
+  - **Doubles/VGC**: Goodstuffs, Trick Room, Tailwind, Sun, Rain, Sand
+  - **Goblin Mode**: Wolfe Glick-inspired creative/unorthodox teams
+- Context-aware suggestions using teammate analysis
+- Streaming responses with tool call visualization
+
+### Analysis Tools
+- **Type Coverage**: Visual breakdown of weaknesses and resistances
+- **Threat Matrix**: Matchup analysis vs top meta threats with usage weighting
+- **Speed Tiers**: Calculated speed stats at Level 50 with:
+  - Speed tier classification (very fast → very slow)
+  - Benchmark comparisons (outspeeds X, outsped by Y)
+  - Speed control detection (Tailwind, Trick Room, Icy Wind)
+  - Modifier badges (Choice Scarf, Tailwind access)
+
+### VGC Features
+- Bring Four selector for team preview practice
+- VGC-specific tips and warnings
+- Format fallback for newer regulations without stats data
+
+### Team History
+- Track changes with diff view
+- Undo/redo support
+- Reset button to clear team, chat, and history
 
 ## Tech Stack
 
@@ -52,33 +80,47 @@ src/
 │   ├── layout.tsx         # Root layout with providers
 │   └── api/
 │       ├── mcp/           # MCP proxy endpoint
-│       └── ai/            # AI chat endpoints
+│       └── ai/claude/     # AI chat streaming endpoint
 ├── components/
 │   ├── ui/                # shadcn/ui components
-│   ├── layout/            # Header, FormatSelector
-│   ├── team/              # TeamGrid, PokemonEditDialog, PokemonSprite
-│   ├── chat/              # ChatPanel, ChatMessages, ActionCard
-│   ├── analysis/          # ThreatMatrix, AnalysisTabs
-│   └── history/           # TeamHistory, TeamDiff
+│   ├── layout/            # Header, FormatSelector, ModeToggle
+│   ├── team/              # TeamGrid, TeamSlot, PokemonEditDialog, BringFourSelector
+│   ├── chat/              # ChatPanel, ChatMessages, ActionCard, ThinkingCollapsible
+│   ├── analysis/          # TypeCoverage, ThreatMatrix, SpeedTiers, VGCTeamWarnings
+│   ├── history/           # TeamHistory, TeamDiff
+│   └── welcome/           # WelcomeOverlay, ArchetypeSelector
 ├── stores/
-│   ├── team-store.ts      # Team state (format, pokemon)
-│   ├── chat-store.ts      # Chat messages and actions
+│   ├── team-store.ts      # Team state (format, mode, pokemon)
+│   ├── chat-store.ts      # Chat messages, actions, personality
 │   └── history-store.ts   # Undo/redo history
 ├── lib/
+│   ├── ai/                # AI integration
+│   │   ├── index.ts       # Streaming client with tool parsing
+│   │   ├── context.ts     # System prompts, team formatting
+│   │   ├── tools.ts       # Claude tool schema (modify_team)
+│   │   ├── archetypes.ts  # Team archetype definitions
+│   │   └── personalities.ts # AI personality configs
 │   ├── mcp-client.ts      # MCP server client + React Query hooks
 │   ├── showdown-parser.ts # Parse/export Showdown format
-│   └── data/              # Pokemon types, formats
+│   ├── speed-calc.ts      # Speed calculation and tier classification
+│   └── data/              # Pokemon types, base stats, formats
 └── types/
-    ├── pokemon.ts         # TeamPokemon, BaseStats, etc.
+    ├── pokemon.ts         # TeamPokemon, Mode, Format types
     └── chat.ts            # ChatMessage, TeamAction
 ```
 
 ## Environment Variables
 
+Copy `.env.example` to `.env.local` and configure:
+
 ```bash
-# MCP server URL (defaults to api.pokemcp.com)
-NEXT_PUBLIC_MCP_URL=https://api.pokemcp.com
+cp .env.example .env.local
 ```
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `ANTHROPIC_API_KEY` | Yes | Anthropic API key for AI coach ([get one](https://console.anthropic.com/)) |
+| `NEXT_PUBLIC_MCP_URL` | No | MCP API URL (defaults to `https://api.pokemcp.com`) |
 
 ## Related
 

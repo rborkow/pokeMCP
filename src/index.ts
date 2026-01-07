@@ -19,6 +19,39 @@ import { queryStrategy, queryStrategyText } from "./rag/query.js";
 import { withLogging } from "./logging.js";
 import type { TeamPokemon } from "./types.js";
 
+// CORS Configuration - restrict to known origins
+const ALLOWED_ORIGINS = [
+	"https://www.pokemcp.com",
+	"https://pokemcp.com",
+	"https://docs.pokemcp.com",
+	"http://localhost:3000",
+	"http://localhost:3001",
+	"http://127.0.0.1:3000",
+	"http://127.0.0.1:3001",
+];
+
+// Helper to get CORS headers with origin validation
+function getCorsHeaders(request: Request): Record<string, string> {
+	const origin = request.headers.get("Origin") || "";
+	const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+
+	return {
+		"Access-Control-Allow-Origin": allowedOrigin,
+		"Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+		"Access-Control-Allow-Headers": "Content-Type",
+		"Access-Control-Max-Age": "86400", // Cache preflight for 24 hours
+		"Vary": "Origin", // Important for caching
+	};
+}
+
+// Validate request origin (returns false for disallowed origins)
+function isOriginAllowed(request: Request): boolean {
+	const origin = request.headers.get("Origin");
+	// Allow requests without Origin header (direct API calls, curl, etc.)
+	if (!origin) return true;
+	return ALLOWED_ORIGINS.includes(origin);
+}
+
 // AI Chat types
 interface AIChatRequest {
 	system?: string;
@@ -280,11 +313,17 @@ export default {
 		// Use this for direct API access from web apps
 		if (url.pathname === "/api/tools" && request.method === "POST") {
 			const corsHeaders = {
-				"Access-Control-Allow-Origin": "*",
-				"Access-Control-Allow-Methods": "POST, OPTIONS",
-				"Access-Control-Allow-Headers": "Content-Type",
+				...getCorsHeaders(request),
 				"Content-Type": "application/json",
 			};
+
+			// Validate origin
+			if (!isOriginAllowed(request)) {
+				return new Response(
+					JSON.stringify({ error: "Origin not allowed" }),
+					{ status: 403, headers: corsHeaders }
+				);
+			}
 
 			try {
 				const body = await request.json();
@@ -391,11 +430,7 @@ export default {
 		// CORS preflight for /api/tools
 		if (url.pathname === "/api/tools" && request.method === "OPTIONS") {
 			return new Response(null, {
-				headers: {
-					"Access-Control-Allow-Origin": "*",
-					"Access-Control-Allow-Methods": "POST, OPTIONS",
-					"Access-Control-Allow-Headers": "Content-Type",
-				},
+				headers: getCorsHeaders(request),
 			});
 		}
 
@@ -547,11 +582,17 @@ export default {
 		if (url.pathname === "/ai/chat" && request.method === "POST") {
 			// Add CORS headers for cross-origin requests
 			const corsHeaders = {
-				"Access-Control-Allow-Origin": "*",
-				"Access-Control-Allow-Methods": "POST, OPTIONS",
-				"Access-Control-Allow-Headers": "Content-Type",
+				...getCorsHeaders(request),
 				"Content-Type": "application/json",
 			};
+
+			// Validate origin
+			if (!isOriginAllowed(request)) {
+				return new Response(
+					JSON.stringify({ error: "Origin not allowed" }),
+					{ status: 403, headers: corsHeaders }
+				);
+			}
 
 			try {
 				const body: AIChatRequest = await request.json();
@@ -792,7 +833,7 @@ User's Question: ${message}`;
 					{
 						status: 500,
 						headers: {
-							"Access-Control-Allow-Origin": "*",
+							...getCorsHeaders(request),
 							"Content-Type": "application/json",
 						},
 					}
@@ -803,11 +844,7 @@ User's Question: ${message}`;
 		// Handle CORS preflight for /ai/chat
 		if (url.pathname === "/ai/chat" && request.method === "OPTIONS") {
 			return new Response(null, {
-				headers: {
-					"Access-Control-Allow-Origin": "*",
-					"Access-Control-Allow-Methods": "POST, OPTIONS",
-					"Access-Control-Allow-Headers": "Content-Type",
-				},
+				headers: getCorsHeaders(request),
 			});
 		}
 

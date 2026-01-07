@@ -9,11 +9,18 @@ An MCP (Model Context Protocol) server for Pokémon team building and validation
 A full-featured web application for building competitive Pokemon teams:
 
 - **AI Coach**: Claude-powered assistant with personality themes (Professor Kukui, Professor Oak, Rival Blue)
-- **Format Selection**: Quick Singles/Doubles toggle with support for OU, VGC, and tier formats
-- **Type Coverage Analysis**: Visual breakdown of team weaknesses and resistances
-- **Threat Matrix**: Matchup analysis against top meta threats
+- **Team Archetypes**: Guided team generation with strategic presets:
+  - Singles: Hyper Offense, Bulky Offense, Balance, Stall, Weather
+  - Doubles/VGC: Goodstuffs, Trick Room, Tailwind, Sun, Rain, Sand
+  - Goblin Mode: Wolfe Glick-inspired creative/unorthodox teams
+- **Format Selection**: Quick Singles/VGC toggle with support for Gen 7-9 formats
+- **Analysis Tools**:
+  - Type Coverage: Visual breakdown of team weaknesses and resistances
+  - Threat Matrix: Matchup analysis against top meta threats with usage weighting
+  - Speed Tiers: Calculated speed stats at Level 50 with benchmarks and speed control detection
+- **VGC Features**: Bring Four selector for team preview practice
 - **Import/Export**: Full Showdown format support with shareable URLs
-- **Welcome Flow**: Easy onboarding - generate a team, import, or build from scratch
+- **Welcome Flow**: Easy onboarding - generate a team with archetype, import, or build from scratch
 
 ## Features
 
@@ -54,8 +61,11 @@ Access real competitive data from thousands of battles with cached data for inst
 - **Metagame Stats**: Overall format statistics and trends
 
 **Supported Formats:**
-- Gen 9 Singles: OU, Ubers, UU, RU, NU, PU, LC
-- Gen 9 VGC: Regulation F, Regulation H
+- Gen 9: OU, Ubers, UU, RU, NU, PU, LC, VGC 2024 Reg F/H, Doubles OU
+- Gen 8: OU, Ubers, UU, RU, NU, PU, LC
+- Gen 7: OU, Ubers, UU, RU, NU, LC
+
+*Note: VGC 2025/2026 formats automatically fall back to the most recent available data*
 
 ## Deployment
 
@@ -84,15 +94,39 @@ Deployed on Cloudflare Workers and Pages:
    wrangler login
    ```
 
-4. (Optional) Fetch latest stats:
+4. Configure environment variables (for AI Chat):
+   ```bash
+   # Team Builder requires Anthropic API key for AI coach
+   cp apps/teambuilder/.env.example apps/teambuilder/.env.local
+   # Edit .env.local and add your ANTHROPIC_API_KEY
+   ```
+
+   Get your API key from [Anthropic Console](https://console.anthropic.com/).
+
+5. (Optional) Fetch latest stats:
    ```bash
    npm run fetch-stats
    ```
 
-5. Deploy:
+6. Deploy:
    ```bash
    npm run deploy
    ```
+
+### Environment Variables
+
+| Variable | Location | Required | Description |
+|----------|----------|----------|-------------|
+| `ANTHROPIC_API_KEY` | Team Builder | Yes* | Anthropic API key for AI coach chat |
+| `NEXT_PUBLIC_MCP_URL` | Team Builder | No | MCP API URL (defaults to api.pokemcp.com) |
+
+*Required only if running the Team Builder locally with AI chat enabled.
+
+**Cloudflare Bindings** (configured in `wrangler.jsonc`):
+- `POKEMON_STATS` - KV namespace for cached Smogon statistics
+- `STRATEGY_DOCS` - KV namespace for RAG documents
+- `VECTORIZE` - Vector database for semantic search
+- `AI` - Cloudflare AI binding for embeddings
 
 ### Updating Cached Stats
 
@@ -297,6 +331,43 @@ npm run deploy
 - **Cloudflare KV**: Distributed key-value storage for cached Smogon statistics
 - **Durable Objects**: Stateful coordination for MCP sessions
 - **Direct Imports**: Pokémon Showdown data bundled at build time for instant access
+
+## Security
+
+### CORS Policy
+
+The API restricts cross-origin requests to known domains:
+- `www.pokemcp.com`, `pokemcp.com` (Team Builder)
+- `docs.pokemcp.com` (Documentation)
+- `localhost:3000/3001` (Local development)
+
+Requests from other origins will receive a 403 error.
+
+### Rate Limiting
+
+Configure rate limiting in the Cloudflare dashboard:
+
+1. Go to **Security → WAF → Rate limiting rules**
+2. Create a rule for your Worker domain:
+   - **Expression**: `(http.host eq "api.pokemcp.com")`
+   - **Requests per minute**: 60 (adjust as needed)
+   - **Action**: Block for 1 minute
+
+For advanced rate limiting, consider [Cloudflare Rate Limiting](https://developers.cloudflare.com/waf/rate-limiting-rules/).
+
+### Known Issues
+
+The MCP server depends on `@modelcontextprotocol/sdk` which has known vulnerabilities (DNS rebinding, ReDoS). These are upstream issues that cannot be fixed locally. The vulnerabilities are low-risk for this use case:
+- **DNS rebinding**: Only affects local development servers, not production Cloudflare Workers
+- **ReDoS**: Requires malicious input to MCP protocol, mitigated by Cloudflare's request limits
+
+Track upstream fixes: [MCP SDK Security Advisories](https://github.com/modelcontextprotocol/typescript-sdk/security)
+
+### Best Practices
+
+- Never commit `.env` or `.env.local` files (already in `.gitignore`)
+- Rotate API keys if exposed
+- Use Cloudflare's built-in DDoS protection for production
 
 ## License
 

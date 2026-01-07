@@ -11,8 +11,14 @@ const FORMAT_FALLBACKS: Record<string, string> = {
   // VGC 2026 formats fall back to VGC 2024 Reg H (most recent with data)
   "gen9vgc2026regf": "gen9vgc2024regh",
   "gen9vgc2026regfbo3": "gen9vgc2024regh",
+  "gen9vgc2026regg": "gen9vgc2024regh",
   // VGC 2025 formats also fall back
   "gen9vgc2025regi": "gen9vgc2024regh",
+  "gen9vgc2025regh": "gen9vgc2024regh",
+  "gen9vgc2025regg": "gen9vgc2024regh",
+  // Battle Stadium formats
+  "gen9battlestadiumdoubles": "gen9vgc2024regh",
+  "gen9bsd": "gen9vgc2024regh",
 };
 
 /**
