@@ -334,6 +334,27 @@ npm run deploy
 
 ## Security
 
+### CORS Policy
+
+The API restricts cross-origin requests to known domains:
+- `www.pokemcp.com`, `pokemcp.com` (Team Builder)
+- `docs.pokemcp.com` (Documentation)
+- `localhost:3000/3001` (Local development)
+
+Requests from other origins will receive a 403 error.
+
+### Rate Limiting
+
+Configure rate limiting in the Cloudflare dashboard:
+
+1. Go to **Security → WAF → Rate limiting rules**
+2. Create a rule for your Worker domain:
+   - **Expression**: `(http.host eq "api.pokemcp.com")`
+   - **Requests per minute**: 60 (adjust as needed)
+   - **Action**: Block for 1 minute
+
+For advanced rate limiting, consider [Cloudflare Rate Limiting](https://developers.cloudflare.com/waf/rate-limiting-rules/).
+
 ### Known Issues
 
 The MCP server depends on `@modelcontextprotocol/sdk` which has known vulnerabilities (DNS rebinding, ReDoS). These are upstream issues that cannot be fixed locally. The vulnerabilities are low-risk for this use case:
