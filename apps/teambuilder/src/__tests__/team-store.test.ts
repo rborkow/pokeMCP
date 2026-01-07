@@ -222,4 +222,174 @@ Ability: Intimidate
       expect(exported).toBe("");
     });
   });
+
+  describe("Species Clause", () => {
+    describe("importTeam", () => {
+      it("should reject team with exact duplicate Pokemon", () => {
+        const paste = `Garchomp @ Life Orb
+- Earthquake
+
+Garchomp @ Choice Scarf
+- Outrage`;
+
+        const result = useTeamStore.getState().importTeam(paste);
+
+        expect(result.success).toBe(false);
+        expect(result.error).toContain("Species Clause");
+        expect(result.error).toContain("Garchomp");
+      });
+
+      it("should reject team with duplicate base species (different forms)", () => {
+        const paste = `Landorus-Therian @ Choice Scarf
+- U-turn
+
+Landorus-Incarnate @ Life Orb
+- Earth Power`;
+
+        const result = useTeamStore.getState().importTeam(paste);
+
+        expect(result.success).toBe(false);
+        expect(result.error).toContain("Species Clause");
+      });
+
+      it("should reject team with duplicate regional forms", () => {
+        const paste = `Ninetales @ Heavy-Duty Boots
+- Flamethrower
+
+Ninetales-Alola @ Light Clay
+- Aurora Veil`;
+
+        const result = useTeamStore.getState().importTeam(paste);
+
+        expect(result.success).toBe(false);
+        expect(result.error).toContain("Species Clause");
+      });
+
+      it("should reject team with duplicate Rotom forms", () => {
+        const paste = `Rotom-Wash @ Leftovers
+- Hydro Pump
+
+Rotom-Heat @ Choice Scarf
+- Overheat`;
+
+        const result = useTeamStore.getState().importTeam(paste);
+
+        expect(result.success).toBe(false);
+        expect(result.error).toContain("Species Clause");
+      });
+
+      it("should reject team with duplicate Urshifu forms", () => {
+        const paste = `Urshifu @ Choice Band
+- Wicked Blow
+
+Urshifu-Rapid-Strike @ Choice Scarf
+- Surging Strikes`;
+
+        const result = useTeamStore.getState().importTeam(paste);
+
+        expect(result.success).toBe(false);
+        expect(result.error).toContain("Species Clause");
+      });
+
+      it("should accept team with different species", () => {
+        const paste = `Garchomp @ Life Orb
+- Earthquake
+
+Landorus-Therian @ Choice Scarf
+- U-turn
+
+Kingambit @ Leftovers
+- Sucker Punch`;
+
+        const result = useTeamStore.getState().importTeam(paste);
+
+        expect(result.success).toBe(true);
+        expect(useTeamStore.getState().team).toHaveLength(3);
+      });
+
+      it("should list all duplicate Pokemon in error message", () => {
+        const paste = `Garchomp @ Life Orb
+- Earthquake
+
+Garchomp @ Choice Scarf
+- Outrage
+
+Landorus @ Life Orb
+- Earth Power
+
+Landorus @ Choice Scarf
+- U-turn`;
+
+        const result = useTeamStore.getState().importTeam(paste);
+
+        expect(result.success).toBe(false);
+        expect(result.error).toContain("Garchomp");
+        expect(result.error).toContain("Landorus");
+      });
+    });
+
+    describe("setPokemon", () => {
+      it("should warn when adding duplicate Pokemon", () => {
+        const consoleSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+        useTeamStore.getState().setPokemon(0, { pokemon: "Garchomp", moves: [] });
+        useTeamStore.getState().setPokemon(1, { pokemon: "Garchomp", moves: [] });
+
+        expect(consoleSpy).toHaveBeenCalledWith(
+          expect.stringContaining("Species Clause violation")
+        );
+
+        consoleSpy.mockRestore();
+      });
+
+      it("should warn when adding same base species with different form", () => {
+        const consoleSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+        useTeamStore.getState().setPokemon(0, { pokemon: "Landorus-Therian", moves: [] });
+        useTeamStore.getState().setPokemon(1, { pokemon: "Landorus-Incarnate", moves: [] });
+
+        expect(consoleSpy).toHaveBeenCalledWith(
+          expect.stringContaining("Species Clause violation")
+        );
+
+        consoleSpy.mockRestore();
+      });
+
+      it("should not warn when replacing Pokemon in same slot", () => {
+        const consoleSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+        useTeamStore.getState().setPokemon(0, { pokemon: "Garchomp", moves: ["Earthquake"] });
+        useTeamStore.getState().setPokemon(0, { pokemon: "Garchomp", moves: ["Outrage"] });
+
+        expect(consoleSpy).not.toHaveBeenCalled();
+
+        consoleSpy.mockRestore();
+      });
+
+      it("should not warn when adding different species", () => {
+        const consoleSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+        useTeamStore.getState().setPokemon(0, { pokemon: "Garchomp", moves: [] });
+        useTeamStore.getState().setPokemon(1, { pokemon: "Landorus-Therian", moves: [] });
+        useTeamStore.getState().setPokemon(2, { pokemon: "Kingambit", moves: [] });
+
+        expect(consoleSpy).not.toHaveBeenCalled();
+
+        consoleSpy.mockRestore();
+      });
+
+      it("should still add Pokemon even with warning (for flexibility)", () => {
+        const consoleSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+        useTeamStore.getState().setPokemon(0, { pokemon: "Garchomp", moves: [] });
+        useTeamStore.getState().setPokemon(1, { pokemon: "Garchomp", moves: [] });
+
+        // Pokemon should still be added despite warning
+        expect(useTeamStore.getState().team).toHaveLength(2);
+        expect(useTeamStore.getState().team[1].pokemon).toBe("Garchomp");
+
+        consoleSpy.mockRestore();
+      });
+    });
+  });
 });
