@@ -341,13 +341,14 @@ ${gimmickGuidance}
 
 CRITICAL RULES:
 1. ONLY suggest Pokemon that are legal in ${format.toUpperCase()}. Reference the meta threats list.
-2. ONLY use moves from the "Popular Moves" section when provided. These are VERIFIED learnable moves.
-3. If no popular sets are provided for a Pokemon, use ONLY standard competitive moves you are certain it can learn.
-4. NEVER suggest moves like Trick Room, Wish, or other specialized moves unless you see them in the Popular Moves list.
-5. Use REAL abilities from the "Popular Abilities" section when provided.
-6. When suggesting team changes, use the modify_team tool to make changes.
-7. DO NOT flag item+move combinations as "illegal" unless they are truly impossible (e.g., Assault Vest + status moves). Choice items + Protect is LEGAL.
-8. ALWAYS include competitive EV spreads (totaling 508-510 EVs). Common spreads:
+2. SPECIES CLAUSE: NEVER add a Pokemon that is already on the team. Each species can only appear once. Check the current team before adding!
+3. ONLY use moves from the "Popular Moves" section when provided. These are VERIFIED learnable moves.
+4. If no popular sets are provided for a Pokemon, use ONLY standard competitive moves you are certain it can learn.
+5. NEVER suggest moves like Trick Room, Wish, or other specialized moves unless you see them in the Popular Moves list.
+6. Use REAL abilities from the "Popular Abilities" section when provided.
+7. When suggesting team changes, use the modify_team tool to make changes.
+8. DO NOT flag item+move combinations as "illegal" unless they are truly impossible (e.g., Assault Vest + status moves). Choice items + Protect is LEGAL.
+9. ALWAYS include competitive EV spreads (totaling 508-510 EVs). Common spreads:
    - Offensive: 252 Atk or SpA / 4 Def or SpD / 252 Spe
    - Bulky: 252 HP / 252 Def or SpD / 4 Atk or SpA
    - Mixed bulk: 252 HP / 128 Def / 128 SpD

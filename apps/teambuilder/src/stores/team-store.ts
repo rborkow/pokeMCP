@@ -5,6 +5,50 @@ import { MODE_INFO, isFormatValidForMode } from "@/types/pokemon";
 import { parseShowdownTeam, exportShowdownTeam } from "@/lib/showdown-parser";
 import { decodeTeamFromUrl } from "@/lib/share";
 
+/**
+ * Normalize Pokemon name for Species Clause comparison
+ * Handles forms like "Landorus-Therian" -> "landorus" (base species)
+ * But keeps distinct species like "Urshifu-Rapid-Strike" separate from "Urshifu"
+ */
+function normalizeSpeciesName(name: string): string {
+  const lower = name.toLowerCase().trim();
+  // Forms that count as the same species for Species Clause
+  // (most regional forms, megas, etc. share the base species)
+  const formSuffixes = [
+    "-therian", "-incarnate", "-mega", "-mega-x", "-mega-y",
+    "-alola", "-galar", "-hisui", "-paldea",
+    "-origin", "-altered", "-sky", "-land",
+    "-heat", "-wash", "-frost", "-fan", "-mow",
+    "-black", "-white", "-resolute", "-pirouette", "-aria",
+    "-dusk", "-midnight", "-dusk-mane", "-dawn-wings", "-ultra",
+    "-crowned", "-ice", "-shadow", "-hero",
+    "-single-strike", "-rapid-strike",
+    "-bloodmoon", "-cornerstone", "-hearthflame", "-wellspring",
+  ];
+
+  for (const suffix of formSuffixes) {
+    if (lower.endsWith(suffix)) {
+      return lower.slice(0, -suffix.length);
+    }
+  }
+  return lower;
+}
+
+/**
+ * Check if adding a Pokemon would violate Species Clause
+ */
+function wouldViolateSpeciesClause(
+  team: TeamPokemon[],
+  newPokemon: string,
+  excludeSlot?: number
+): boolean {
+  const newSpecies = normalizeSpeciesName(newPokemon);
+  return team.some((p, i) => {
+    if (excludeSlot !== undefined && i === excludeSlot) return false;
+    return p && normalizeSpeciesName(p.pokemon) === newSpecies;
+  });
+}
+
 interface TeamState {
   mode: Mode;
   format: FormatId;
@@ -49,6 +93,14 @@ export const useTeamStore = create<TeamState>()(
 
       setPokemon: (slot, pokemon) => {
         set((state) => {
+          // Check Species Clause - warn but still allow (AI should prevent this)
+          if (wouldViolateSpeciesClause(state.team, pokemon.pokemon, slot)) {
+            console.warn(
+              `Species Clause violation: ${pokemon.pokemon} is already on the team. ` +
+              `This should not happen - check AI prompt rules.`
+            );
+          }
+
           const newTeam = [...state.team];
           // Extend array if needed
           while (newTeam.length <= slot) {
@@ -87,6 +139,25 @@ export const useTeamStore = create<TeamState>()(
           if (team.length > 6) {
             return { success: false, error: "Team cannot have more than 6 Pokemon" };
           }
+
+          // Check for Species Clause violations
+          const seenSpecies = new Set<string>();
+          const duplicates: string[] = [];
+          for (const pokemon of team) {
+            const species = normalizeSpeciesName(pokemon.pokemon);
+            if (seenSpecies.has(species)) {
+              duplicates.push(pokemon.pokemon);
+            }
+            seenSpecies.add(species);
+          }
+
+          if (duplicates.length > 0) {
+            return {
+              success: false,
+              error: `Species Clause violation: duplicate Pokemon (${duplicates.join(", ")})`,
+            };
+          }
+
           set({ team });
           return { success: true };
         } catch (error) {
