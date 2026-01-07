@@ -111,10 +111,16 @@ src/
 
 ## Environment Variables
 
+Copy `.env.example` to `.env.local` and configure:
+
 ```bash
-# MCP server URL (defaults to api.pokemcp.com)
-NEXT_PUBLIC_MCP_URL=https://api.pokemcp.com
+cp .env.example .env.local
 ```
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `ANTHROPIC_API_KEY` | Yes | Anthropic API key for AI coach ([get one](https://console.anthropic.com/)) |
+| `NEXT_PUBLIC_MCP_URL` | No | MCP API URL (defaults to `https://api.pokemcp.com`) |
 
 ## Related
 

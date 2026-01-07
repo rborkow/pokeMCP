@@ -94,15 +94,39 @@ Deployed on Cloudflare Workers and Pages:
    wrangler login
    ```
 
-4. (Optional) Fetch latest stats:
+4. Configure environment variables (for AI Chat):
+   ```bash
+   # Team Builder requires Anthropic API key for AI coach
+   cp apps/teambuilder/.env.example apps/teambuilder/.env.local
+   # Edit .env.local and add your ANTHROPIC_API_KEY
+   ```
+
+   Get your API key from [Anthropic Console](https://console.anthropic.com/).
+
+5. (Optional) Fetch latest stats:
    ```bash
    npm run fetch-stats
    ```
 
-5. Deploy:
+6. Deploy:
    ```bash
    npm run deploy
    ```
+
+### Environment Variables
+
+| Variable | Location | Required | Description |
+|----------|----------|----------|-------------|
+| `ANTHROPIC_API_KEY` | Team Builder | Yes* | Anthropic API key for AI coach chat |
+| `NEXT_PUBLIC_MCP_URL` | Team Builder | No | MCP API URL (defaults to api.pokemcp.com) |
+
+*Required only if running the Team Builder locally with AI chat enabled.
+
+**Cloudflare Bindings** (configured in `wrangler.jsonc`):
+- `POKEMON_STATS` - KV namespace for cached Smogon statistics
+- `STRATEGY_DOCS` - KV namespace for RAG documents
+- `VECTORIZE` - Vector database for semantic search
+- `AI` - Cloudflare AI binding for embeddings
 
 ### Updating Cached Stats
 
@@ -307,6 +331,22 @@ npm run deploy
 - **Cloudflare KV**: Distributed key-value storage for cached Smogon statistics
 - **Durable Objects**: Stateful coordination for MCP sessions
 - **Direct Imports**: Pokémon Showdown data bundled at build time for instant access
+
+## Security
+
+### Known Issues
+
+The MCP server depends on `@modelcontextprotocol/sdk` which has known vulnerabilities (DNS rebinding, ReDoS). These are upstream issues that cannot be fixed locally. The vulnerabilities are low-risk for this use case:
+- **DNS rebinding**: Only affects local development servers, not production Cloudflare Workers
+- **ReDoS**: Requires malicious input to MCP protocol, mitigated by Cloudflare's request limits
+
+Track upstream fixes: [MCP SDK Security Advisories](https://github.com/modelcontextprotocol/typescript-sdk/security)
+
+### Best Practices
+
+- Never commit `.env` or `.env.local` files (already in `.gitignore`)
+- Rotate API keys if exposed
+- Use Cloudflare's built-in DDoS protection for production
 
 ## License
 
