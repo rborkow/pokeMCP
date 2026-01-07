@@ -9,11 +9,18 @@ An MCP (Model Context Protocol) server for Pokémon team building and validation
 A full-featured web application for building competitive Pokemon teams:
 
 - **AI Coach**: Claude-powered assistant with personality themes (Professor Kukui, Professor Oak, Rival Blue)
-- **Format Selection**: Quick Singles/Doubles toggle with support for OU, VGC, and tier formats
-- **Type Coverage Analysis**: Visual breakdown of team weaknesses and resistances
-- **Threat Matrix**: Matchup analysis against top meta threats
+- **Team Archetypes**: Guided team generation with strategic presets:
+  - Singles: Hyper Offense, Bulky Offense, Balance, Stall, Weather
+  - Doubles/VGC: Goodstuffs, Trick Room, Tailwind, Sun, Rain, Sand
+  - Goblin Mode: Wolfe Glick-inspired creative/unorthodox teams
+- **Format Selection**: Quick Singles/VGC toggle with support for Gen 7-9 formats
+- **Analysis Tools**:
+  - Type Coverage: Visual breakdown of team weaknesses and resistances
+  - Threat Matrix: Matchup analysis against top meta threats with usage weighting
+  - Speed Tiers: Calculated speed stats at Level 50 with benchmarks and speed control detection
+- **VGC Features**: Bring Four selector for team preview practice
 - **Import/Export**: Full Showdown format support with shareable URLs
-- **Welcome Flow**: Easy onboarding - generate a team, import, or build from scratch
+- **Welcome Flow**: Easy onboarding - generate a team with archetype, import, or build from scratch
 
 ## Features
 
@@ -54,8 +61,11 @@ Access real competitive data from thousands of battles with cached data for inst
 - **Metagame Stats**: Overall format statistics and trends
 
 **Supported Formats:**
-- Gen 9 Singles: OU, Ubers, UU, RU, NU, PU, LC
-- Gen 9 VGC: Regulation F, Regulation H
+- Gen 9: OU, Ubers, UU, RU, NU, PU, LC, VGC 2024 Reg F/H, Doubles OU
+- Gen 8: OU, Ubers, UU, RU, NU, PU, LC
+- Gen 7: OU, Ubers, UU, RU, NU, LC
+
+*Note: VGC 2025/2026 formats automatically fall back to the most recent available data*
 
 ## Deployment
 
