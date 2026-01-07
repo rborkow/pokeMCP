@@ -12,6 +12,9 @@ function getModeGuidance(mode: Mode): string {
     return `
 VGC-SPECIFIC GUIDANCE (This is a DOUBLES format):
 - Protect is ESSENTIAL on most Pokemon - suggest it unless there's a good reason not to
+- IMPORTANT: Choice items (Choice Band, Specs, Scarf) + Protect is LEGAL and sometimes strategic
+  - Players use Protect on Choice users for turn 1 scouting or to stall out Trick Room/Tailwind
+  - Don't flag this as illegal - it's a valid VGC strategy
 - Spread moves (Earthquake, Rock Slide, Heat Wave, Dazzling Gleam) hit both opponents
 - Speed control is critical: Tailwind, Trick Room, Icy Wind, Electroweb
 - Consider Fake Out for disruption and enabling setup
@@ -343,7 +346,8 @@ CRITICAL RULES:
 4. NEVER suggest moves like Trick Room, Wish, or other specialized moves unless you see them in the Popular Moves list.
 5. Use REAL abilities from the "Popular Abilities" section when provided.
 6. When suggesting team changes, use the modify_team tool to make changes.
-7. ALWAYS include competitive EV spreads (totaling 508-510 EVs). Common spreads:
+7. DO NOT flag item+move combinations as "illegal" unless they are truly impossible (e.g., Assault Vest + status moves). Choice items + Protect is LEGAL.
+8. ALWAYS include competitive EV spreads (totaling 508-510 EVs). Common spreads:
    - Offensive: 252 Atk or SpA / 4 Def or SpD / 252 Spe
    - Bulky: 252 HP / 252 Def or SpD / 4 Atk or SpA
    - Mixed bulk: 252 HP / 128 Def / 128 SpD
