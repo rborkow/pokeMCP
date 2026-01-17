@@ -29,6 +29,7 @@ on:
 jobs:
   deploy-worker:
     runs-on: ubuntu-latest
+    environment: production
     if: ${{ github.event_name == 'push' || inputs.deploy_worker }}
     steps:
       - name: Checkout code
@@ -56,6 +57,7 @@ jobs:
 
   deploy-teambuilder:
     runs-on: ubuntu-latest
+    environment: production
     if: ${{ github.event_name == 'push' || inputs.deploy_teambuilder }}
     steps:
       - name: Checkout code
@@ -83,6 +85,7 @@ jobs:
 
   deploy-docs:
     runs-on: ubuntu-latest
+    environment: production
     if: ${{ github.event_name == 'push' || inputs.deploy_docs }}
     steps:
       - name: Checkout code
