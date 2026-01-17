@@ -1,6 +1,6 @@
 # Pokémon MCP Server
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Deploy](https://github.com/rborkow/pokeMCP/actions/workflows/deploy-production.yml/badge.svg)](https://github.com/rborkow/pokeMCP/actions/workflows/deploy-production.yml)
 [![Build](https://github.com/rborkow/pokeMCP/actions/workflows/build.yml/badge.svg)](https://github.com/rborkow/pokeMCP/actions/workflows/build.yml)
 

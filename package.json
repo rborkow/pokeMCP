@@ -9,7 +9,7 @@
 	},
 	"homepage": "https://www.pokemcp.com",
 	"author": "Robert Borkowski",
-	"license": "MIT",
+	"license": "AGPL-3.0",
 	"scripts": {
 		"deploy": "wrangler deploy",
 		"deploy:staging": "wrangler deploy --env staging",
