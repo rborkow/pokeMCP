@@ -1,7 +1,15 @@
 {
-	"name": "remote-mcp-server-authless",
-	"version": "0.0.0",
+	"name": "pokemcp",
+	"version": "1.0.0",
+	"description": "MCP server for Pokémon competitive team building with Smogon data",
 	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/rborkow/pokeMCP.git"
+	},
+	"homepage": "https://www.pokemcp.com",
+	"author": "Robert Borkowski",
+	"license": "AGPL-3.0",
 	"scripts": {
 		"deploy": "wrangler deploy",
 		"deploy:staging": "wrangler deploy --env staging",
