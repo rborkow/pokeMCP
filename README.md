@@ -1,5 +1,9 @@
 # Pokémon MCP Server
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Deploy](https://github.com/rborkow/pokeMCP/actions/workflows/deploy-production.yml/badge.svg)](https://github.com/rborkow/pokeMCP/actions/workflows/deploy-production.yml)
+[![Build](https://github.com/rborkow/pokeMCP/actions/workflows/build.yml/badge.svg)](https://github.com/rborkow/pokeMCP/actions/workflows/build.yml)
+
 An MCP (Model Context Protocol) server for Pokémon team building and validation, powered by Pokémon Showdown data and Smogon usage statistics. Deployed on Cloudflare Workers for fast, reliable access.
 
 **Try it now:** [Team Builder UI](https://www.pokemcp.com) | [API Documentation](https://docs.pokemcp.com) | [MCP Endpoint](https://api.pokemcp.com/mcp)

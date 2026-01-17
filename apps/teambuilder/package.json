@@ -1,7 +1,15 @@
 {
-  "name": "teambuilder",
-  "version": "0.1.0",
+  "name": "@pokemcp/teambuilder",
+  "version": "1.0.0",
+  "description": "Interactive Pokémon team builder with AI coach",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rborkow/pokeMCP.git",
+    "directory": "apps/teambuilder"
+  },
+  "homepage": "https://www.pokemcp.com",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
