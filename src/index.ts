@@ -1,22 +1,15 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { McpAgent } from "agents/mcp";
-import { z } from "zod";
+import { detectPokemonMentions } from "./data-loader.js";
 import {
-	lookupPokemon,
-	validateMoveset,
-	validateTeam,
-	suggestTeamCoverage,
-} from "./tools.js";
-import {
-	getPopularSets,
-	getMetaThreats,
-	getTeammates,
-	getChecksCounters,
-	getMetagameStats,
-} from "./stats.js";
-import { runIngestionPipeline, runTestIngestion } from "./ingestion/orchestrator.js";
-import { queryStrategy, queryStrategyText } from "./rag/query.js";
+	runIngestionPipeline,
+	runTestIngestion,
+} from "./ingestion/orchestrator.js";
 import { withLogging } from "./logging.js";
+import { queryStrategy } from "./rag/query.js";
+import { getMetaThreats, getPopularSets } from "./stats.js";
+import { TOOL_REGISTRY } from "./tool-registry.js";
+import { suggestTeamCoverage, validateMoveset } from "./tools.js";
 import type { TeamPokemon } from "./types.js";
 
 // CORS Configuration - restrict to known origins
@@ -33,14 +26,16 @@ const ALLOWED_ORIGINS = [
 // Helper to get CORS headers with origin validation
 function getCorsHeaders(request: Request): Record<string, string> {
 	const origin = request.headers.get("Origin") || "";
-	const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+	const allowedOrigin = ALLOWED_ORIGINS.includes(origin)
+		? origin
+		: ALLOWED_ORIGINS[0];
 
 	return {
 		"Access-Control-Allow-Origin": allowedOrigin,
 		"Access-Control-Allow-Methods": "GET, POST, OPTIONS",
 		"Access-Control-Allow-Headers": "Content-Type",
 		"Access-Control-Max-Age": "86400", // Cache preflight for 24 hours
-		"Vary": "Origin", // Important for caching
+		Vary: "Origin", // Important for caching
 	};
 }
 
@@ -77,223 +72,15 @@ export class PokemonMCP extends McpAgent {
 	});
 
 	async init() {
-		// Lookup Pokemon tool
-		this.server.tool(
-			"lookup_pokemon",
-			{
-				pokemon: z.string().describe("The name of the Pokémon to look up (e.g., 'Pikachu', 'Charizard')"),
-				generation: z.string().optional().describe("Optional: Game generation to check (e.g., '9' for Gen 9)"),
-			},
-			async ({ pokemon, generation }) => {
-				const text = await withLogging(
-					this.env as Env,
-					"lookup_pokemon",
-					{ pokemon, generation },
-					() => lookupPokemon({ pokemon, generation })
+		const env = this.env as Env;
+		for (const tool of TOOL_REGISTRY) {
+			this.server.tool(tool.name, tool.schema, async (args) => {
+				const text = await withLogging(env, tool.name, args, () =>
+					tool.execute(args, env),
 				);
 				return { content: [{ type: "text", text }] };
-			},
-		);
-
-		// Validate moveset tool
-		this.server.tool(
-			"validate_moveset",
-			{
-				pokemon: z.string().describe("The Pokémon name"),
-				moves: z.array(z.string()).describe("Array of move names to validate"),
-				generation: z.string().optional().describe("Game generation (e.g., '9')"),
-			},
-			async ({ pokemon, moves, generation }) => {
-				const text = await withLogging(
-					this.env as Env,
-					"validate_moveset",
-					{ pokemon, moves, generation },
-					() => validateMoveset({ pokemon, moves, generation })
-				);
-				return { content: [{ type: "text", text }] };
-			},
-		);
-
-		// Validate team tool
-		this.server.tool(
-			"validate_team",
-			{
-				team: z.array(
-					z.object({
-						pokemon: z.string(),
-						moves: z.array(z.string()),
-						ability: z.string().optional(),
-						item: z.string().optional(),
-					}),
-				).describe("Array of team members with their movesets"),
-				format: z.string().optional().describe("Format to validate against (e.g., 'OU', 'Ubers')"),
-			},
-			async ({ team, format }) => {
-				const text = await withLogging(
-					this.env as Env,
-					"validate_team",
-					{ team, format },
-					() => validateTeam({ team, format })
-				);
-				return { content: [{ type: "text", text }] };
-			},
-		);
-
-		// Suggest team coverage tool
-		this.server.tool(
-			"suggest_team_coverage",
-			{
-				current_team: z.array(z.string()).describe("Array of Pokémon names currently on the team"),
-				format: z.string().optional().describe("Format for suggestions (e.g., 'OU')"),
-			},
-			async ({ current_team, format }) => {
-				const text = await withLogging(
-					this.env as Env,
-					"suggest_team_coverage",
-					{ current_team, format },
-					() => suggestTeamCoverage({ current_team, format })
-				);
-				return { content: [{ type: "text", text }] };
-			},
-		);
-
-		// Get popular sets tool
-		this.server.tool(
-			"get_popular_sets",
-			{
-				pokemon: z.string().describe("The Pokémon name"),
-				format: z.string().optional().describe("Format to check (e.g., 'gen9ou', 'gen9vgc2024')"),
-			},
-			async ({ pokemon, format }) => {
-				const env = this.env as Env;
-				const text = await withLogging(
-					env,
-					"get_popular_sets",
-					{ pokemon, format },
-					() => getPopularSets({ pokemon, format }, env)
-				);
-				return { content: [{ type: "text", text }] };
-			},
-		);
-
-		// Get meta threats tool
-		this.server.tool(
-			"get_meta_threats",
-			{
-				format: z.string().optional().describe("Format to check (e.g., 'gen9ou', 'gen9ubers')"),
-				limit: z.number().optional().describe("Number of top Pokémon to show"),
-			},
-			async ({ format, limit }) => {
-				const env = this.env as Env;
-				const text = await withLogging(
-					env,
-					"get_meta_threats",
-					{ format, limit },
-					() => getMetaThreats({ format, limit }, env)
-				);
-				return { content: [{ type: "text", text }] };
-			},
-		);
-
-		// Get teammates tool
-		this.server.tool(
-			"get_teammates",
-			{
-				pokemon: z.string().describe("The Pokémon name"),
-				format: z.string().optional().describe("Format to check (e.g., 'gen9ou')"),
-				limit: z.number().optional().describe("Number of teammates to show"),
-			},
-			async ({ pokemon, format, limit }) => {
-				const env = this.env as Env;
-				const text = await withLogging(
-					env,
-					"get_teammates",
-					{ pokemon, format, limit },
-					() => getTeammates({ pokemon, format, limit }, env)
-				);
-				return { content: [{ type: "text", text }] };
-			},
-		);
-
-		// Get checks and counters tool
-		this.server.tool(
-			"get_checks_counters",
-			{
-				pokemon: z.string().describe("The Pokémon name"),
-				format: z.string().optional().describe("Format to check (e.g., 'gen9ou')"),
-				limit: z.number().optional().describe("Number of checks/counters to show"),
-			},
-			async ({ pokemon, format, limit }) => {
-				const env = this.env as Env;
-				const text = await withLogging(
-					env,
-					"get_checks_counters",
-					{ pokemon, format, limit },
-					() => getChecksCounters({ pokemon, format, limit }, env)
-				);
-				return { content: [{ type: "text", text }] };
-			},
-		);
-
-		// Get metagame stats tool
-		this.server.tool(
-			"get_metagame_stats",
-			{
-				format: z.string().optional().describe("Format to check (e.g., 'gen9ou')"),
-			},
-			async ({ format }) => {
-				const env = this.env as Env;
-				const text = await withLogging(
-					env,
-					"get_metagame_stats",
-					{ format },
-					() => getMetagameStats({ format }, env)
-				);
-				return { content: [{ type: "text", text }] };
-			},
-		);
-
-		// Query strategy - Natural language search over Smogon strategic content
-		this.server.tool(
-			"query_strategy",
-			{
-				query: z.string().describe("Natural language question about competitive strategy (e.g., 'How do I counter Garchomp?', 'What are Landorus-T's best sets?')"),
-				format: z.string().optional().describe("Optional: Filter by format (e.g., 'gen9ou', 'gen9vgc2024regf')"),
-				limit: z.number().optional().describe("Optional: Number of results to return (default: 5)"),
-			},
-			async ({ query, format, limit }) => {
-				const env = this.env as Env;
-				const text = await withLogging(
-					env,
-					"query_strategy",
-					{ query, format, limit },
-					() => queryStrategyText({ query, format, limit }, env)
-				);
-				return { content: [{ type: "text", text }] };
-			},
-		);
-
-		// Search strategic content - More specific search with detailed filters
-		this.server.tool(
-			"search_strategic_content",
-			{
-				query: z.string().describe("Search query for strategic content"),
-				pokemon: z.string().optional().describe("Optional: Filter by specific Pokémon (e.g., 'garchomp', 'landorus-therian')"),
-				format: z.string().optional().describe("Optional: Filter by format (e.g., 'gen9ou', 'gen9ubers')"),
-				sectionType: z.enum(["overview", "moveset", "counters", "teammates"]).optional().describe("Optional: Filter by section type"),
-				limit: z.number().optional().describe("Optional: Number of results to return (default: 5)"),
-			},
-			async ({ query, pokemon, format, sectionType, limit }) => {
-				const env = this.env as Env;
-				const text = await withLogging(
-					env,
-					"search_strategic_content",
-					{ query, pokemon, format, sectionType, limit },
-					() => queryStrategyText({ query, pokemon, format, sectionType, limit }, env)
-				);
-				return { content: [{ type: "text", text }] };
-			},
-		);
+			});
+		}
 	}
 }
 
@@ -319,110 +106,62 @@ export default {
 
 			// Validate origin
 			if (!isOriginAllowed(request)) {
-				return new Response(
-					JSON.stringify({ error: "Origin not allowed" }),
-					{ status: 403, headers: corsHeaders }
-				);
+				return new Response(JSON.stringify({ error: "Origin not allowed" }), {
+					status: 403,
+					headers: corsHeaders,
+				});
 			}
 
 			try {
-				const body = await request.json();
-				const { tool, args } = body as { tool: string; args: Record<string, unknown> };
+				const body = (await request.json()) as {
+					tool: string;
+					args: Record<string, unknown>;
+					id?: unknown;
+				};
+				const { tool, args } = body;
 
 				if (!tool) {
 					return new Response(
 						JSON.stringify({ error: "Tool name is required" }),
-						{ status: 400, headers: corsHeaders }
+						{ status: 400, headers: corsHeaders },
 					);
 				}
 
-				let result: string;
-				switch (tool) {
-					case "lookup_pokemon":
-						result = await withLogging(env, tool, args, () =>
-							lookupPokemon(args as { pokemon: string; generation?: string }),
-							undefined, ctx
-						);
-						break;
-					case "validate_moveset":
-						result = await withLogging(env, tool, args, () =>
-							validateMoveset(args as { pokemon: string; moves: string[]; generation?: string }),
-							undefined, ctx
-						);
-						break;
-					case "validate_team":
-						result = await withLogging(env, tool, args, () =>
-							validateTeam(args as { team: any[]; format?: string }),
-							undefined, ctx
-						);
-						break;
-					case "suggest_team_coverage":
-						result = await withLogging(env, tool, args, () =>
-							suggestTeamCoverage(args as { current_team: string[]; format?: string }),
-							undefined, ctx
-						);
-						break;
-					case "get_popular_sets":
-						result = await withLogging(env, tool, args, () =>
-							getPopularSets(args as { pokemon: string; format?: string }, env),
-							undefined, ctx
-						);
-						break;
-					case "get_meta_threats":
-						result = await withLogging(env, tool, args, () =>
-							getMetaThreats(args as { format?: string; limit?: number }, env),
-							undefined, ctx
-						);
-						break;
-					case "get_teammates":
-						result = await withLogging(env, tool, args, () =>
-							getTeammates(args as { pokemon: string; format?: string; limit?: number }, env),
-							undefined, ctx
-						);
-						break;
-					case "get_checks_counters":
-						result = await withLogging(env, tool, args, () =>
-							getChecksCounters(args as { pokemon: string; format?: string; limit?: number }, env),
-							undefined, ctx
-						);
-						break;
-					case "get_metagame_stats":
-						result = await withLogging(env, tool, args, () =>
-							getMetagameStats(args as { format?: string }, env),
-							undefined, ctx
-						);
-						break;
-					case "query_strategy":
-						result = await withLogging(env, tool, args, async () => {
-							const strategyResult = await queryStrategy(args as { query: string; format?: string; pokemon?: string; limit?: number }, env);
-							return typeof strategyResult === 'string' ? strategyResult : JSON.stringify(strategyResult);
-						}, undefined, ctx);
-						break;
-					default:
-						return new Response(
-							JSON.stringify({ error: `Unknown tool: ${tool}` }),
-							{ status: 400, headers: corsHeaders }
-						);
+				const toolDef = TOOL_REGISTRY.find((t) => t.name === tool);
+				if (!toolDef) {
+					return new Response(
+						JSON.stringify({ error: `Unknown tool: ${tool}` }),
+						{ status: 400, headers: corsHeaders },
+					);
 				}
+
+				const result = await withLogging(
+					env,
+					tool,
+					args,
+					() => toolDef.execute(args, env),
+					undefined,
+					ctx,
+				);
 
 				return new Response(
 					JSON.stringify({
 						jsonrpc: "2.0",
 						id: body.id || null,
 						result: {
-							content: [{ type: "text", text: result }]
-						}
+							content: [{ type: "text", text: result }],
+						},
 					}),
-					{ headers: corsHeaders }
+					{ headers: corsHeaders },
 				);
 			} catch (error) {
 				console.error("API tools error:", error);
 				return new Response(
 					JSON.stringify({
 						error: "Tool execution failed",
-						details: error instanceof Error ? error.message : String(error)
+						details: error instanceof Error ? error.message : String(error),
 					}),
-					{ status: 500, headers: { ...corsHeaders } }
+					{ status: 500, headers: { ...corsHeaders } },
 				);
 			}
 		}
@@ -448,7 +187,7 @@ export default {
 					} catch (error) {
 						console.error("Test ingestion failed:", error);
 					}
-				})()
+				})(),
 			);
 
 			return new Response(
@@ -456,7 +195,7 @@ export default {
 					message: "Test ingestion started",
 					pokemon: ["garchomp", "landorus-therian", "great-tusk"],
 					format: "gen9ou",
-					note: "Check logs for progress"
+					note: "Check logs for progress",
 				}),
 				{
 					headers: { "Content-Type": "application/json" },
@@ -475,20 +214,26 @@ export default {
 					"landorus-therian-gen9ou-moveset-0",
 					"landorus-therian-gen9ou-moveset-10",
 					"great-tusk-gen9ou-moveset-3",
-					"great-tusk-gen9ou-moveset-6"
+					"great-tusk-gen9ou-moveset-6",
 				];
 
 				const results: Record<string, any> = {};
 				for (const key of testKeys) {
-					const value = await env.STRATEGY_DOCS.get(key, 'json');
-					results[key] = value ? { found: true, hasContent: !!value.content } : { found: false };
+					const value = await env.STRATEGY_DOCS.get(key, "json");
+					results[key] = value
+						? { found: true, hasContent: !!(value as any).content }
+						: { found: false };
 				}
 
 				return new Response(
-					JSON.stringify({
-						message: "KV test completed",
-						results
-					}, null, 2),
+					JSON.stringify(
+						{
+							message: "KV test completed",
+							results,
+						},
+						null,
+						2,
+					),
 					{
 						headers: { "Content-Type": "application/json" },
 					},
@@ -497,7 +242,7 @@ export default {
 				return new Response(
 					JSON.stringify({
 						error: "KV test failed",
-						details: error instanceof Error ? error.message : String(error)
+						details: error instanceof Error ? error.message : String(error),
 					}),
 					{
 						status: 500,
@@ -513,26 +258,23 @@ export default {
 				// Get a sample of vectors to inspect metadata
 				const sampleQuery = await env.VECTOR_INDEX.query(
 					new Array(768).fill(0), // dummy vector
-					{ topK: 5, returnMetadata: 'all' }
+					{ topK: 5, returnMetadata: "all" },
 				);
 
-				const vectors = sampleQuery.matches.map(m => ({
+				const vectors = sampleQuery.matches.map((m) => ({
 					id: m.id,
 					score: m.score,
-					metadata: m.metadata
+					metadata: m.metadata,
 				}));
 
-				return new Response(
-					JSON.stringify({ vectors }, null, 2),
-					{
-						headers: { "Content-Type": "application/json" },
-					},
-				);
+				return new Response(JSON.stringify({ vectors }, null, 2), {
+					headers: { "Content-Type": "application/json" },
+				});
 			} catch (error) {
 				return new Response(
 					JSON.stringify({
 						error: "Debug failed",
-						details: error instanceof Error ? error.message : String(error)
+						details: error instanceof Error ? error.message : String(error),
 					}),
 					{
 						status: 500,
@@ -545,30 +287,30 @@ export default {
 		// Test RAG query endpoint
 		if (url.pathname === "/test-rag") {
 			try {
-				const query = url.searchParams.get('q') || 'How do I counter Garchomp?';
-				const format = url.searchParams.get('format') || undefined;
-				const pokemon = url.searchParams.get('pokemon') || undefined;
+				const query = url.searchParams.get("q") || "How do I counter Garchomp?";
+				const format = url.searchParams.get("format") || undefined;
+				const pokemon = url.searchParams.get("pokemon") || undefined;
 
 				console.log(`Testing RAG query: "${query}"`);
 
-				const response = await queryStrategy({
-					query,
-					format,
-					pokemon,
-					limit: 5
-				}, env);
-
-				return new Response(
-					JSON.stringify(response, null, 2),
+				const response = await queryStrategy(
 					{
-						headers: { "Content-Type": "application/json" },
+						query,
+						format,
+						pokemon,
+						limit: 5,
 					},
+					env,
 				);
+
+				return new Response(JSON.stringify(response, null, 2), {
+					headers: { "Content-Type": "application/json" },
+				});
 			} catch (error) {
 				return new Response(
 					JSON.stringify({
 						error: "RAG query failed",
-						details: error instanceof Error ? error.message : String(error)
+						details: error instanceof Error ? error.message : String(error),
 					}),
 					{
 						status: 500,
@@ -588,10 +330,10 @@ export default {
 
 			// Validate origin
 			if (!isOriginAllowed(request)) {
-				return new Response(
-					JSON.stringify({ error: "Origin not allowed" }),
-					{ status: 403, headers: corsHeaders }
-				);
+				return new Response(JSON.stringify({ error: "Origin not allowed" }), {
+					status: 403,
+					headers: corsHeaders,
+				});
 			}
 
 			try {
@@ -601,11 +343,13 @@ export default {
 				if (!message) {
 					return new Response(
 						JSON.stringify({ error: "Message is required" }),
-						{ status: 400, headers: corsHeaders }
+						{ status: 400, headers: corsHeaders },
 					);
 				}
 
-				console.log(`AI Chat request: "${message.substring(0, 100)}..." format=${format} team_size=${team.length}`);
+				console.log(
+					`AI Chat request: "${message.substring(0, 100)}..." format=${format} team_size=${team.length}`,
+				);
 
 				// Gather relevant context based on the message
 				const context: AIChatResponse["context"] = {};
@@ -621,8 +365,11 @@ export default {
 				// Get coverage analysis if team exists
 				if (team.length > 0) {
 					try {
-						const teamNames = team.map(p => p.pokemon);
-						const coverage = suggestTeamCoverage({ current_team: teamNames, format });
+						const teamNames = team.map((p) => p.pokemon);
+						const coverage = suggestTeamCoverage({
+							current_team: teamNames,
+							format,
+						});
 						context.coverage = coverage;
 					} catch (e) {
 						console.error("Failed to get coverage:", e);
@@ -630,14 +377,34 @@ export default {
 				}
 
 				// Get strategic content via RAG if the message seems strategic
-				const strategicKeywords = ["counter", "check", "threat", "weakness", "coverage", "improve", "suggest", "rate", "fix"];
-				const isStrategicQuery = strategicKeywords.some(kw => message.toLowerCase().includes(kw));
+				const strategicKeywords = [
+					"counter",
+					"check",
+					"threat",
+					"weakness",
+					"coverage",
+					"improve",
+					"suggest",
+					"rate",
+					"fix",
+				];
+				const isStrategicQuery = strategicKeywords.some((kw) =>
+					message.toLowerCase().includes(kw),
+				);
 
 				if (isStrategicQuery) {
 					try {
-						const strategyResponse = await queryStrategy({ query: message, format, limit: 3 }, env);
-						if (strategyResponse.results && strategyResponse.results.length > 0) {
-							context.strategy = strategyResponse.results.map((r: { content: string }) => r.content).join("\n\n");
+						const strategyResponse = await queryStrategy(
+							{ query: message, format, limit: 3 },
+							env,
+						);
+						if (
+							strategyResponse.results &&
+							strategyResponse.results.length > 0
+						) {
+							context.strategy = strategyResponse.results
+								.map((r: { content: string }) => r.content)
+								.join("\n\n");
 						}
 					} catch (e) {
 						console.error("Failed to get strategy:", e);
@@ -645,17 +412,11 @@ export default {
 				}
 
 				// Extract Pokemon mentioned in the message to fetch their popular sets
-				const commonPokemon = ["Garchomp", "Landorus", "Great Tusk", "Kingambit", "Gholdengo", "Dragapult", "Iron Valiant", "Roaring Moon", "Skeledirge", "Arcanine", "Heatran", "Toxapex", "Clefable", "Corviknight", "Ferrothorn", "Dragonite", "Volcarona", "Tyranitar", "Excadrill", "Gliscor"];
-				const pokemonMentioned: string[] = [];
-				for (const mon of commonPokemon) {
-					if (message.toLowerCase().includes(mon.toLowerCase())) {
-						pokemonMentioned.push(mon);
-					}
-				}
+				const pokemonMentioned = detectPokemonMentions(message, 3);
 
 				// Fetch popular sets for mentioned Pokemon (verified legal movesets)
 				let popularSetsContext = "";
-				for (const pokemon of pokemonMentioned.slice(0, 3)) {
+				for (const pokemon of pokemonMentioned) {
 					try {
 						const setsText = await getPopularSets({ pokemon, format }, env);
 						if (setsText && !setsText.includes("not found")) {
@@ -667,19 +428,25 @@ export default {
 				}
 
 				// Format team for context
-				const teamContext = team.length > 0
-					? team.map((p, i) => {
-						const parts = [`${i + 1}. ${p.pokemon}`];
-						if (p.item) parts.push(`@ ${p.item}`);
-						if (p.ability) parts.push(`(${p.ability})`);
-						if (p.moves && p.moves.length > 0) parts.push(`- Moves: ${p.moves.join(", ")}`);
-						return parts.join(" ");
-					}).join("\n")
-					: "No Pokemon in team yet.";
+				const teamContext =
+					team.length > 0
+						? team
+								.map((p, i) => {
+									const parts = [`${i + 1}. ${p.pokemon}`];
+									if (p.item) parts.push(`@ ${p.item}`);
+									if (p.ability) parts.push(`(${p.ability})`);
+									if (p.moves && p.moves.length > 0)
+										parts.push(`- Moves: ${p.moves.join(", ")}`);
+									return parts.join(" ");
+								})
+								.join("\n")
+						: "No Pokemon in team yet.";
 
 				// Build the full prompt for the AI
 				const teamSize = team.length;
-				const systemPrompt = system || `You are a Pokemon competitive team building assistant for ${format.toUpperCase()}.
+				const systemPrompt =
+					system ||
+					`You are a Pokemon competitive team building assistant for ${format.toUpperCase()}.
 
 CRITICAL RULES:
 1. ONLY suggest Pokemon that are legal in ${format.toUpperCase()}. Reference the meta threats list.
@@ -735,7 +502,9 @@ ${contextSection}
 User's Question: ${message}`;
 
 				// Helper function to validate ACTION blocks using our MCP tools
-				const validateActionBlock = (actionJson: string): { valid: boolean; warnings: string[] } => {
+				const validateActionBlock = (
+					actionJson: string,
+				): { valid: boolean; warnings: string[] } => {
 					const warnings: string[] = [];
 					try {
 						const action = JSON.parse(actionJson);
@@ -743,14 +512,20 @@ User's Question: ${message}`;
 							const validation = validateMoveset({
 								pokemon: action.payload.pokemon,
 								moves: action.payload.moves,
-								generation: format.startsWith('gen9') ? '9' : format.startsWith('gen8') ? '8' : '9'
+								generation: format.startsWith("gen9")
+									? "9"
+									: format.startsWith("gen8")
+										? "8"
+										: "9",
 							});
 							// Check for illegal moves in the validation result
-							if (validation.includes('❌')) {
-								const illegalMatches = validation.match(/❌ \*\*([^*]+)\*\*: ([^\n]+)/g);
+							if (validation.includes("❌")) {
+								const illegalMatches = validation.match(
+									/❌ \*\*([^*]+)\*\*: ([^\n]+)/g,
+								);
 								if (illegalMatches) {
 									for (const match of illegalMatches) {
-										warnings.push(match.replace(/\*\*/g, ''));
+										warnings.push(match.replace(/\*\*/g, ""));
 									}
 								}
 							}
@@ -765,37 +540,45 @@ User's Question: ${message}`;
 				if (!env.ANTHROPIC_API_KEY) {
 					return new Response(
 						JSON.stringify({ error: "ANTHROPIC_API_KEY not configured" }),
-						{ status: 503, headers: corsHeaders }
+						{ status: 503, headers: corsHeaders },
 					);
 				}
 
 				// Call Claude Sonnet 4.5
 				console.log("Using Claude Sonnet 4.5 for AI chat");
-				const claudeResponse = await fetch("https://api.anthropic.com/v1/messages", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-						"x-api-key": env.ANTHROPIC_API_KEY,
-						"anthropic-version": "2023-06-01",
+				const claudeResponse = await fetch(
+					"https://api.anthropic.com/v1/messages",
+					{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							"x-api-key": env.ANTHROPIC_API_KEY,
+							"anthropic-version": "2023-06-01",
+						},
+						body: JSON.stringify({
+							model: "claude-sonnet-4-5-20250514",
+							max_tokens: 1024,
+							system: systemPrompt,
+							messages: [{ role: "user", content: fullUserMessage }],
+						}),
 					},
-					body: JSON.stringify({
-						model: "claude-sonnet-4-5-20250514",
-						max_tokens: 1024,
-						system: systemPrompt,
-						messages: [{ role: "user", content: fullUserMessage }],
-					}),
-				});
+				);
 
 				if (!claudeResponse.ok) {
 					const errorText = await claudeResponse.text();
 					console.error("Claude API error:", errorText);
 					return new Response(
-						JSON.stringify({ error: "Claude API request failed", details: errorText }),
-						{ status: 502, headers: corsHeaders }
+						JSON.stringify({
+							error: "Claude API request failed",
+							details: errorText,
+						}),
+						{ status: 502, headers: corsHeaders },
 					);
 				}
 
-				const claudeData = await claudeResponse.json() as { content?: Array<{ text?: string }> };
+				const claudeData = (await claudeResponse.json()) as {
+					content?: Array<{ text?: string }>;
+				};
 				let content = claudeData.content?.[0]?.text || "";
 				console.log(`Claude response generated, length=${content.length}`);
 
@@ -809,26 +592,24 @@ User's Question: ${message}`;
 					const { valid, warnings } = validateActionBlock(actionJson);
 					if (!valid) {
 						allWarnings.push(...warnings);
-						console.log(`Move validation warnings: ${warnings.join(', ')}`);
+						console.log(`Move validation warnings: ${warnings.join(", ")}`);
 					}
 				}
 
 				// Append warnings to content if there are invalid moves
 				if (allWarnings.length > 0) {
-					content += `\n\n⚠️ **Move Legality Warning:** The following moves may not be learnable:\n${allWarnings.map(w => `- ${w}`).join('\n')}\n\nPlease verify these moves before applying.`;
+					content += `\n\n⚠️ **Move Legality Warning:** The following moves may not be learnable:\n${allWarnings.map((w) => `- ${w}`).join("\n")}\n\nPlease verify these moves before applying.`;
 				}
 
-				return new Response(
-					JSON.stringify({ content, context }),
-					{ headers: corsHeaders }
-				);
-
+				return new Response(JSON.stringify({ content, context }), {
+					headers: corsHeaders,
+				});
 			} catch (error) {
 				console.error("AI Chat error:", error);
 				return new Response(
 					JSON.stringify({
 						error: "Failed to process AI request",
-						details: error instanceof Error ? error.message : String(error)
+						details: error instanceof Error ? error.message : String(error),
 					}),
 					{
 						status: 500,
@@ -836,7 +617,7 @@ User's Question: ${message}`;
 							...getCorsHeaders(request),
 							"Content-Type": "application/json",
 						},
-					}
+					},
 				);
 			}
 		}
@@ -854,7 +635,8 @@ User's Question: ${message}`;
 				JSON.stringify({
 					name: "Pokémon MCP Server",
 					version: "0.3.0",
-					description: "Remote MCP server for Pokémon team building, validation, and strategic analysis with RAG",
+					description:
+						"Remote MCP server for Pokémon team building, validation, and strategic analysis with RAG",
 					tools: [
 						"lookup_pokemon",
 						"validate_moveset",
@@ -866,7 +648,7 @@ User's Question: ${message}`;
 						"get_checks_counters",
 						"get_metagame_stats",
 						"query_strategy (NEW)",
-						"search_strategic_content (NEW)"
+						"search_strategic_content (NEW)",
 					],
 					endpoints: {
 						sse: "/sse",
@@ -875,7 +657,7 @@ User's Question: ${message}`;
 						"test-ingestion": "/test-ingestion",
 						"test-kv": "/test-kv",
 						"test-rag": "/test-rag?q=your+query",
-						"debug-vectors": "/debug-vectors"
+						"debug-vectors": "/debug-vectors",
 					},
 				}),
 				{
@@ -888,7 +670,10 @@ User's Question: ${message}`;
 	},
 
 	async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
-		console.log("Scheduled ingestion pipeline triggered at:", new Date(event.scheduledTime).toISOString());
+		console.log(
+			"Scheduled ingestion pipeline triggered at:",
+			new Date(event.scheduledTime).toISOString(),
+		);
 
 		try {
 			const stats = await runIngestionPipeline(env);
