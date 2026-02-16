@@ -7,6 +7,8 @@ assets = { directory = ".open-next/assets", binding = "ASSETS" }
 
 [vars]
 NEXT_PUBLIC_MCP_URL = "https://api.pokemcp.com"
+# Set this to your Cloudflare Web Analytics token (from dashboard > Web Analytics)
+# NEXT_PUBLIC_CF_ANALYTICS_TOKEN = "your-token-here"
 
 [observability]
 enabled = true
