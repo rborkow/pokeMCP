@@ -8,6 +8,7 @@ import { TypeCoverage } from "@/components/analysis/TypeCoverage";
 import { VGCTeamWarnings } from "@/components/analysis/VGCTeamWarnings";
 import { ChatPanel } from "@/components/chat/ChatPanel";
 import { ErrorBoundary } from "@/components/errors/ErrorBoundary";
+import { FeedbackButton } from "@/components/feedback/FeedbackButton";
 import { TeamHistory } from "@/components/history/TeamHistory";
 import { Header } from "@/components/layout/Header";
 import { TeamGrid } from "@/components/team/TeamGrid";
@@ -155,13 +156,16 @@ export default function Home() {
 				</div>
 			</main>
 
+			{/* Floating feedback button */}
+			<FeedbackButton />
+
 			{/* Footer */}
 			<footer className="border-t py-4 mt-8">
 				<div className="container max-w-screen-2xl px-4 text-center text-sm text-muted-foreground">
 					<p>
 						PokeMCP Team Builder •{" "}
 						<a
-							href="https://pokemcp.com"
+							href="https://docs.pokemcp.com"
 							className="underline hover:text-foreground"
 						>
 							Documentation
@@ -172,6 +176,15 @@ export default function Home() {
 							className="underline hover:text-foreground"
 						>
 							API
+						</a>{" "}
+						•{" "}
+						<a
+							href="https://github.com/rborkow/pokeMCP"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="underline hover:text-foreground"
+						>
+							GitHub
 						</a>
 					</p>
 				</div>
