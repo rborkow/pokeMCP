@@ -1,27 +1,27 @@
 "use client";
 
-import { useState } from "react";
 import {
 	Bug,
-	ExternalLink,
-	Lightbulb,
-	MessageCircle,
-	Github,
 	CheckCircle2,
+	ExternalLink,
+	Github,
+	Lightbulb,
 	Loader2,
+	MessageCircle,
 } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
 	Dialog,
 	DialogContent,
+	DialogDescription,
 	DialogHeader,
 	DialogTitle,
-	DialogDescription,
 } from "@/components/ui/dialog";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { submitFeedback, type FeedbackType } from "@/lib/feedback";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
+import { type FeedbackType, submitFeedback } from "@/lib/feedback";
 
 const FEEDBACK_TYPES: {
 	value: FeedbackType;
@@ -93,7 +93,7 @@ export function FeedbackDialog({ open, onOpenChange }: FeedbackDialogProps) {
 
 	return (
 		<Dialog open={open} onOpenChange={handleOpenChange}>
-			<DialogContent className="sm:max-w-md">
+			<DialogContent className="sm:max-w-md max-w-[calc(100vw-2rem)]">
 				<DialogHeader>
 					<DialogTitle>Send Feedback</DialogTitle>
 					<DialogDescription>Help us improve PokeMCP</DialogDescription>
@@ -101,11 +101,11 @@ export function FeedbackDialog({ open, onOpenChange }: FeedbackDialogProps) {
 
 				<Tabs defaultValue="feedback" className="w-full">
 					<TabsList className="w-full">
-						<TabsTrigger value="feedback" className="flex-1">
+						<TabsTrigger value="feedback" className="flex-1 min-h-[44px]">
 							<MessageCircle className="w-4 h-4" />
 							Send Feedback
 						</TabsTrigger>
-						<TabsTrigger value="github" className="flex-1">
+						<TabsTrigger value="github" className="flex-1 min-h-[44px]">
 							<Github className="w-4 h-4" />
 							GitHub Issues
 						</TabsTrigger>
@@ -130,18 +130,22 @@ export function FeedbackDialog({ open, onOpenChange }: FeedbackDialogProps) {
 						) : (
 							<form onSubmit={handleSubmit} className="space-y-4">
 								{/* Type selector */}
-								<div className="flex gap-2">
+								<fieldset
+									className="flex gap-2 border-none p-0 m-0"
+									aria-label="Feedback type"
+								>
 									{FEEDBACK_TYPES.map((ft) => {
 										const Icon = ft.icon;
 										return (
 											<button
 												key={ft.value}
 												type="button"
+												aria-pressed={type === ft.value}
 												onClick={() => setType(ft.value)}
 												className={`flex-1 flex items-center justify-center gap-1.5 rounded-md border px-3 py-2 text-sm font-medium transition-colors ${
 													type === ft.value
 														? "border-primary bg-primary/10 text-primary"
-														: "border-border text-muted-foreground hover:bg-muted"
+														: "border-border text-muted-foreground hover:bg-muted hover:text-foreground hover:border-muted-foreground/50"
 												}`}
 											>
 												<Icon className="w-4 h-4" />
@@ -149,7 +153,7 @@ export function FeedbackDialog({ open, onOpenChange }: FeedbackDialogProps) {
 											</button>
 										);
 									})}
-								</div>
+								</fieldset>
 
 								{/* Message */}
 								<div className="space-y-1.5">
@@ -170,7 +174,7 @@ export function FeedbackDialog({ open, onOpenChange }: FeedbackDialogProps) {
 										}
 										value={message}
 										onChange={(e) => setMessage(e.target.value)}
-										className="min-h-24 resize-none"
+										className="min-h-24 resize-y"
 										maxLength={5000}
 										required
 									/>
@@ -251,7 +255,8 @@ export function FeedbackDialog({ open, onOpenChange }: FeedbackDialogProps) {
 								>
 									<Github className="w-4 h-4" />
 									Open GitHub Issue
-									<ExternalLink className="w-3 h-3" />
+									<ExternalLink className="w-3 h-3" aria-hidden="true" />
+									<span className="sr-only">(opens in new tab)</span>
 								</a>
 							</Button>
 						</div>

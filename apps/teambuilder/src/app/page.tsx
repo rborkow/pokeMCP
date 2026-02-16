@@ -162,31 +162,33 @@ export default function Home() {
 			{/* Footer */}
 			<footer className="border-t py-4 mt-8">
 				<div className="container max-w-screen-2xl px-4 text-center text-sm text-muted-foreground">
-					<p>
-						PokeMCP Team Builder •{" "}
+					<span>PokeMCP Team Builder</span>
+					<nav aria-label="Footer" className="inline">
+						{" \u2022 "}
 						<a
 							href="https://docs.pokemcp.com"
-							className="underline hover:text-foreground"
+							className="underline hover:text-foreground py-2 inline-block"
 						>
 							Documentation
-						</a>{" "}
-						•{" "}
+						</a>
+						{" \u2022 "}
 						<a
 							href="https://api.pokemcp.com"
-							className="underline hover:text-foreground"
+							className="underline hover:text-foreground py-2 inline-block"
 						>
 							API
-						</a>{" "}
-						•{" "}
+						</a>
+						{" \u2022 "}
 						<a
 							href="https://github.com/rborkow/pokeMCP"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="underline hover:text-foreground"
+							className="underline hover:text-foreground py-2 inline-block"
 						>
 							GitHub
+							<span className="sr-only">(opens in new tab)</span>
 						</a>
-					</p>
+					</nav>
 				</div>
 			</footer>
 		</div>
