@@ -1,435 +1,258 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
 } from "@/components/ui/select";
-import { PokemonSprite } from "./PokemonSprite";
-import type { TeamPokemon, BaseStats } from "@/types/pokemon";
-import { TYPES, NATURES } from "@/types/pokemon";
-import { usePokemonLookup, usePopularSets } from "@/lib/mcp-client";
-import { useTeamStore } from "@/stores/team-store";
-import { parseAbilities, parseMoves, parseItems } from "@/lib/pokemon-parser";
+import { usePokemonData } from "@/hooks/usePokemonData";
+import { usePokemonEditState } from "@/hooks/usePokemonEditState";
 import { COMMON_ITEMS } from "@/lib/data/items";
+import { useTeamStore } from "@/stores/team-store";
+import type { TeamPokemon } from "@/types/pokemon";
+import { NATURES, TYPES } from "@/types/pokemon";
+import { EVSection } from "./edit/EVSection";
+import { IVSection } from "./edit/IVSection";
+import { MovesSection } from "./edit/MovesSection";
+import { PokemonSprite } from "./PokemonSprite";
 
 interface PokemonEditDialogProps {
-  pokemon: TeamPokemon | null;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  onSave: (pokemon: TeamPokemon) => void;
-}
-
-const DEFAULT_POKEMON: TeamPokemon = {
-  pokemon: "",
-  moves: ["", "", "", ""],
-  ability: "",
-  item: "",
-  nature: "Hardy",
-  teraType: "",
-  evs: { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 },
-  ivs: { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 },
-  level: 100,
-};
-
-const STAT_LABELS: Record<keyof BaseStats, string> = {
-  hp: "HP",
-  atk: "Atk",
-  def: "Def",
-  spa: "SpA",
-  spd: "SpD",
-  spe: "Spe",
-};
-
-function getInitialPokemon(pokemon: TeamPokemon | null): TeamPokemon {
-  if (!pokemon) return DEFAULT_POKEMON;
-  return {
-    ...DEFAULT_POKEMON,
-    ...pokemon,
-    moves: [...(pokemon.moves || []), "", "", "", ""].slice(0, 4),
-    evs: { ...DEFAULT_POKEMON.evs, ...pokemon.evs },
-    ivs: { ...DEFAULT_POKEMON.ivs, ...pokemon.ivs },
-  };
+	pokemon: TeamPokemon | null;
+	open: boolean;
+	onOpenChange: (open: boolean) => void;
+	onSave: (pokemon: TeamPokemon) => void;
 }
 
 export function PokemonEditDialog({
-  pokemon,
-  open,
-  onOpenChange,
-  onSave,
+	pokemon,
+	open,
+	onOpenChange,
+	onSave,
 }: PokemonEditDialogProps) {
-  const [editedPokemon, setEditedPokemon] = useState<TeamPokemon>(() =>
-    getInitialPokemon(pokemon)
-  );
-  const { format } = useTeamStore();
+	const { format } = useTeamStore();
+	const {
+		editedPokemon,
+		updateField,
+		updateMove,
+		getMoveValue,
+		updateEV,
+		updateIV,
+		evTotal,
+		handleSave: getCleanedPokemon,
+	} = usePokemonEditState(pokemon, open);
 
-  // Sync pokemon prop to state when dialog opens
-  // This is a legitimate use case for syncing props to state on open
-  useEffect(() => {
-    if (open) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setEditedPokemon(getInitialPokemon(pokemon));
-    }
-  }, [pokemon, open]);
+	const { validAbilities, popularMoves, popularItems } = usePokemonData(
+		editedPokemon.pokemon,
+		format,
+		open,
+	);
 
-  // Calculate EV total as derived state (useMemo instead of useState + useEffect)
-  const evTotal = useMemo(() => {
-    return Object.values(editedPokemon.evs || {}).reduce(
-      (sum, val) => sum + (val || 0),
-      0
-    );
-  }, [editedPokemon.evs]);
+	const handleSave = () => {
+		onSave(getCleanedPokemon());
+		onOpenChange(false);
+	};
 
-  // Fetch Pokemon data for abilities
-  const { data: lookupData } = usePokemonLookup(
-    editedPokemon.pokemon,
-    open && editedPokemon.pokemon.length > 2
-  );
+	const isValid = editedPokemon.pokemon.trim() !== "";
 
-  // Fetch popular sets for moves, items, tera types
-  const { data: setsData } = usePopularSets(
-    editedPokemon.pokemon,
-    format,
-    open && editedPokemon.pokemon.length > 2
-  );
+	return (
+		<Dialog open={open} onOpenChange={onOpenChange}>
+			<DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
+				<DialogHeader>
+					<DialogTitle className="flex items-center gap-3">
+						{editedPokemon.pokemon && (
+							<PokemonSprite pokemon={editedPokemon.pokemon} size="md" />
+						)}
+						{pokemon ? `Edit ${pokemon.pokemon}` : "Add Pokemon"}
+					</DialogTitle>
+					<DialogDescription className="sr-only">
+						Configure Pokemon species, moves, ability, item, nature, EVs and IVs
+					</DialogDescription>
+				</DialogHeader>
 
-  // Parse abilities from lookup response
-  const validAbilities = useMemo(() => {
-    if (!lookupData || typeof lookupData !== "string") return [];
-    return parseAbilities(lookupData);
-  }, [lookupData]);
+				<div className="space-y-4">
+					{/* Pokemon Name */}
+					<div className="space-y-2">
+						<label className="text-sm font-medium">Pokemon</label>
+						<Input
+							value={editedPokemon.pokemon}
+							onChange={(e) => updateField("pokemon", e.target.value)}
+							placeholder="e.g. Garchomp, Landorus-Therian"
+						/>
+					</div>
 
-  // Parse moves and items from popular sets
-  const { popularMoves, popularItems } = useMemo(() => {
-    if (!setsData || typeof setsData !== "string") {
-      return { popularMoves: [], popularItems: [] };
-    }
-    return {
-      popularMoves: parseMoves(setsData),
-      popularItems: parseItems(setsData),
-    };
-  }, [setsData]);
+					{/* Nickname */}
+					<div className="space-y-2">
+						<label className="text-sm font-medium">Nickname (optional)</label>
+						<Input
+							value={editedPokemon.nickname || ""}
+							onChange={(e) => updateField("nickname", e.target.value)}
+							placeholder="Optional nickname"
+						/>
+					</div>
 
-  // Combine popular items with common items list (not currently used in UI but kept for future)
-  useMemo(() => {
-    const itemSet = new Set([...popularItems, ...COMMON_ITEMS]);
-    return Array.from(itemSet);
-  }, [popularItems]);
+					{/* Item & Ability Row */}
+					<div className="grid grid-cols-2 gap-3">
+						<div className="space-y-2">
+							<label className="text-sm font-medium">Item</label>
+							<Select
+								value={editedPokemon.item || "none"}
+								onValueChange={(value) =>
+									updateField("item", value === "none" ? "" : value)
+								}
+							>
+								<SelectTrigger>
+									<SelectValue placeholder="Select item" />
+								</SelectTrigger>
+								<SelectContent className="max-h-60">
+									<SelectItem value="none">None</SelectItem>
+									{popularItems.length > 0 && (
+										<>
+											<SelectItem
+												value="__popular_header__"
+												disabled
+												className="text-xs font-semibold text-muted-foreground"
+											>
+												Popular for {editedPokemon.pokemon}
+											</SelectItem>
+											{popularItems.map((item) => (
+												<SelectItem key={`popular-${item}`} value={item}>
+													⭐ {item}
+												</SelectItem>
+											))}
+											<SelectItem
+												value="__all_header__"
+												disabled
+												className="text-xs font-semibold text-muted-foreground border-t mt-1 pt-1"
+											>
+												All Items
+											</SelectItem>
+										</>
+									)}
+									{COMMON_ITEMS.filter((i) => !popularItems.includes(i)).map(
+										(item) => (
+											<SelectItem key={item} value={item}>
+												{item}
+											</SelectItem>
+										),
+									)}
+								</SelectContent>
+							</Select>
+						</div>
+						<div className="space-y-2">
+							<label className="text-sm font-medium">Ability</label>
+							{validAbilities.length > 0 ? (
+								<Select
+									value={editedPokemon.ability || "none"}
+									onValueChange={(value) =>
+										updateField("ability", value === "none" ? "" : value)
+									}
+								>
+									<SelectTrigger>
+										<SelectValue placeholder="Select ability" />
+									</SelectTrigger>
+									<SelectContent>
+										<SelectItem value="none">None</SelectItem>
+										{validAbilities.map((ability) => (
+											<SelectItem key={ability} value={ability}>
+												{ability}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+							) : (
+								<Input
+									value={editedPokemon.ability || ""}
+									onChange={(e) => updateField("ability", e.target.value)}
+									placeholder="Enter Pokemon first"
+								/>
+							)}
+						</div>
+					</div>
 
-  const updateField = <K extends keyof TeamPokemon>(
-    field: K,
-    value: TeamPokemon[K]
-  ) => {
-    setEditedPokemon((prev) => ({ ...prev, [field]: value }));
-  };
+					{/* Nature & Tera Type */}
+					<div className="grid grid-cols-2 gap-3">
+						<div className="space-y-2">
+							<label className="text-sm font-medium">Nature</label>
+							<Select
+								value={editedPokemon.nature || "Hardy"}
+								onValueChange={(value) => updateField("nature", value)}
+							>
+								<SelectTrigger>
+									<SelectValue />
+								</SelectTrigger>
+								<SelectContent>
+									{Object.keys(NATURES).map((nature) => (
+										<SelectItem key={nature} value={nature}>
+											{nature}
+										</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
+						</div>
+						<div className="space-y-2">
+							<label className="text-sm font-medium">Tera Type</label>
+							<Select
+								value={editedPokemon.teraType || "none"}
+								onValueChange={(value) =>
+									updateField("teraType", value === "none" ? "" : value)
+								}
+							>
+								<SelectTrigger>
+									<SelectValue placeholder="Select type" />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectItem value="none">None</SelectItem>
+									{TYPES.map((type) => (
+										<SelectItem key={type} value={type}>
+											{type}
+										</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
+						</div>
+					</div>
 
-  const updateMove = (index: number, move: string) => {
-    const currentMoves = editedPokemon.moves || ["", "", "", ""];
-    const newMoves = [...currentMoves];
-    // Ensure array has at least 4 slots
-    while (newMoves.length < 4) newMoves.push("");
-    newMoves[index] = move;
-    setEditedPokemon((prev) => ({ ...prev, moves: newMoves }));
-  };
+					{/* Moves */}
+					<MovesSection
+						moves={editedPokemon.moves}
+						pokemonName={editedPokemon.pokemon}
+						popularMoves={popularMoves}
+						onMoveChange={updateMove}
+						getMoveValue={getMoveValue}
+					/>
 
-  // Safe access to moves array
-  const getMoveValue = (index: number): string => {
-    return editedPokemon.moves?.[index] || "";
-  };
+					{/* EVs */}
+					<EVSection
+						evs={editedPokemon.evs}
+						evTotal={evTotal}
+						onEVChange={updateEV}
+					/>
 
-  const updateEV = (stat: keyof BaseStats, value: number) => {
-    const currentTotal = evTotal - (editedPokemon.evs?.[stat] || 0);
-    const newValue = Math.min(252, Math.max(0, value));
+					{/* IVs */}
+					<IVSection ivs={editedPokemon.ivs} onIVChange={updateIV} />
 
-    // Don't allow total to exceed 508
-    if (currentTotal + newValue > 508) {
-      return;
-    }
-
-    setEditedPokemon((prev) => ({
-      ...prev,
-      evs: { ...prev.evs, [stat]: newValue },
-    }));
-  };
-
-  const updateIV = (stat: keyof BaseStats, value: number) => {
-    const newValue = Math.min(31, Math.max(0, value));
-    setEditedPokemon((prev) => ({
-      ...prev,
-      ivs: { ...prev.ivs, [stat]: newValue },
-    }));
-  };
-
-  const handleSave = () => {
-    // Filter out empty moves
-    const cleanedPokemon = {
-      ...editedPokemon,
-      moves: editedPokemon.moves.filter((m) => m.trim() !== ""),
-    };
-    onSave(cleanedPokemon);
-    onOpenChange(false);
-  };
-
-  const isValid = editedPokemon.pokemon.trim() !== "";
-
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-3">
-            {editedPokemon.pokemon && (
-              <PokemonSprite pokemon={editedPokemon.pokemon} size="md" />
-            )}
-            {pokemon ? `Edit ${pokemon.pokemon}` : "Add Pokemon"}
-          </DialogTitle>
-          <DialogDescription className="sr-only">
-            Configure Pokemon species, moves, ability, item, nature, EVs and IVs
-          </DialogDescription>
-        </DialogHeader>
-
-        <div className="space-y-4">
-          {/* Pokemon Name */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Pokemon</label>
-            <Input
-              value={editedPokemon.pokemon}
-              onChange={(e) => updateField("pokemon", e.target.value)}
-              placeholder="e.g. Garchomp, Landorus-Therian"
-            />
-          </div>
-
-          {/* Nickname */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Nickname (optional)</label>
-            <Input
-              value={editedPokemon.nickname || ""}
-              onChange={(e) => updateField("nickname", e.target.value)}
-              placeholder="Optional nickname"
-            />
-          </div>
-
-          {/* Item & Ability Row */}
-          <div className="grid grid-cols-2 gap-3">
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Item</label>
-              <Select
-                value={editedPokemon.item || "none"}
-                onValueChange={(value) => updateField("item", value === "none" ? "" : value)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select item" />
-                </SelectTrigger>
-                <SelectContent className="max-h-60">
-                  <SelectItem value="none">None</SelectItem>
-                  {popularItems.length > 0 && (
-                    <>
-                      <SelectItem value="__popular_header__" disabled className="text-xs font-semibold text-muted-foreground">
-                        Popular for {editedPokemon.pokemon}
-                      </SelectItem>
-                      {popularItems.map((item) => (
-                        <SelectItem key={`popular-${item}`} value={item}>
-                          ⭐ {item}
-                        </SelectItem>
-                      ))}
-                      <SelectItem value="__all_header__" disabled className="text-xs font-semibold text-muted-foreground border-t mt-1 pt-1">
-                        All Items
-                      </SelectItem>
-                    </>
-                  )}
-                  {COMMON_ITEMS.filter(i => !popularItems.includes(i)).map((item) => (
-                    <SelectItem key={item} value={item}>
-                      {item}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Ability</label>
-              {validAbilities.length > 0 ? (
-                <Select
-                  value={editedPokemon.ability || "none"}
-                  onValueChange={(value) => updateField("ability", value === "none" ? "" : value)}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select ability" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="none">None</SelectItem>
-                    {validAbilities.map((ability) => (
-                      <SelectItem key={ability} value={ability}>
-                        {ability}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              ) : (
-                <Input
-                  value={editedPokemon.ability || ""}
-                  onChange={(e) => updateField("ability", e.target.value)}
-                  placeholder="Enter Pokemon first"
-                />
-              )}
-            </div>
-          </div>
-
-          {/* Nature & Tera Type */}
-          <div className="grid grid-cols-2 gap-3">
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Nature</label>
-              <Select
-                value={editedPokemon.nature || "Hardy"}
-                onValueChange={(value) => updateField("nature", value)}
-              >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.keys(NATURES).map((nature) => (
-                    <SelectItem key={nature} value={nature}>
-                      {nature}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Tera Type</label>
-              <Select
-                value={editedPokemon.teraType || "none"}
-                onValueChange={(value) => updateField("teraType", value === "none" ? "" : value)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="none">None</SelectItem>
-                  {TYPES.map((type) => (
-                    <SelectItem key={type} value={type}>
-                      {type}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          {/* Moves */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">
-              Moves
-              {popularMoves.length > 0 && (
-                <span className="text-xs text-muted-foreground ml-2">
-                  (showing popular moves for {editedPokemon.pokemon})
-                </span>
-              )}
-            </label>
-            <div className="grid grid-cols-2 gap-2">
-              {[0, 1, 2, 3].map((i) => (
-                popularMoves.length > 0 ? (
-                  <Select
-                    key={i}
-                    value={getMoveValue(i) || "none"}
-                    onValueChange={(value) => updateMove(i, value === "none" ? "" : value)}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder={`Move ${i + 1}`} />
-                    </SelectTrigger>
-                    <SelectContent className="max-h-60">
-                      <SelectItem value="none">None</SelectItem>
-                      {popularMoves.map((move) => (
-                        <SelectItem key={move} value={move}>
-                          {move}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                ) : (
-                  <Input
-                    key={i}
-                    value={getMoveValue(i)}
-                    onChange={(e) => updateMove(i, e.target.value)}
-                    placeholder={`Move ${i + 1}`}
-                  />
-                )
-              ))}
-            </div>
-          </div>
-
-          {/* EVs */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <label className="text-sm font-medium">EVs</label>
-              <span
-                className={`text-xs ${evTotal > 508 ? "text-destructive" : "text-muted-foreground"}`}
-              >
-                {evTotal}/508
-              </span>
-            </div>
-            <div className="grid grid-cols-6 gap-2">
-              {(Object.keys(STAT_LABELS) as (keyof BaseStats)[]).map((stat) => (
-                <div key={stat} className="space-y-1">
-                  <label className="text-xs text-muted-foreground text-center block">
-                    {STAT_LABELS[stat]}
-                  </label>
-                  <Input
-                    type="number"
-                    min={0}
-                    max={252}
-                    value={editedPokemon.evs?.[stat] || 0}
-                    onChange={(e) => updateEV(stat, parseInt(e.target.value) || 0)}
-                    className="text-center text-sm h-8 px-1"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* IVs */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">IVs</label>
-            <div className="grid grid-cols-6 gap-2">
-              {(Object.keys(STAT_LABELS) as (keyof BaseStats)[]).map((stat) => (
-                <div key={stat} className="space-y-1">
-                  <label className="text-xs text-muted-foreground text-center block">
-                    {STAT_LABELS[stat]}
-                  </label>
-                  <Input
-                    type="number"
-                    min={0}
-                    max={31}
-                    value={editedPokemon.ivs?.[stat] ?? 31}
-                    onChange={(e) => updateIV(stat, parseInt(e.target.value) || 0)}
-                    className="text-center text-sm h-8 px-1"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Actions */}
-          <div className="flex justify-end gap-2 pt-2">
-            <Button variant="outline" onClick={() => onOpenChange(false)}>
-              Cancel
-            </Button>
-            <Button onClick={handleSave} disabled={!isValid}>
-              Save
-            </Button>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
+					{/* Actions */}
+					<div className="flex justify-end gap-2 pt-2">
+						<Button variant="outline" onClick={() => onOpenChange(false)}>
+							Cancel
+						</Button>
+						<Button onClick={handleSave} disabled={!isValid}>
+							Save
+						</Button>
+					</div>
+				</div>
+			</DialogContent>
+		</Dialog>
+	);
 }

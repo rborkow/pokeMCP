@@ -79,7 +79,7 @@ function parseToolToAction(
     if (toolInput.ivs) payload.ivs = toolInput.ivs;
 
     // Validate the payload for add/update operations
-    let validationErrors = undefined;
+    let validationErrors ;
     if (toolInput.action_type !== "remove_pokemon") {
       const validation = validatePokemonData(payload);
       if (!validation.valid) {
