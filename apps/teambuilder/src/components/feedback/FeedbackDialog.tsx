@@ -117,7 +117,7 @@ export function FeedbackDialog({ open, onOpenChange }: FeedbackDialogProps) {
 								<CheckCircle2 className="w-10 h-10 text-green-500" />
 								<p className="font-semibold">Thanks for your feedback!</p>
 								<p className="text-sm text-muted-foreground">
-									We'll review it soon.
+									We&apos;ll review it soon.
 								</p>
 								<Button
 									variant="outline"
