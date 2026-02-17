@@ -94,6 +94,7 @@ export default function Home() {
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 					{/* Team Grid + Analysis */}
 					<div className="lg:col-span-2">
+						<h2 className="sr-only">Team Analysis</h2>
 						<ErrorBoundary level="section">
 							{/* Analysis Tabs */}
 							<Tabs defaultValue="threats" className="w-full">
@@ -149,6 +150,7 @@ export default function Home() {
 
 					{/* AI Assistant Panel */}
 					<div className="lg:col-span-1">
+						<h2 className="sr-only">AI Coach</h2>
 						<ErrorBoundary level="section">
 							<ChatPanel />
 						</ErrorBoundary>
