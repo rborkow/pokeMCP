@@ -629,6 +629,143 @@ User's Question: ${message}`;
 			});
 		}
 
+		// Feedback submission endpoint
+		if (url.pathname === "/api/feedback" && request.method === "POST") {
+			const corsHeaders = {
+				...getCorsHeaders(request),
+				"Content-Type": "application/json",
+			};
+
+			if (!isOriginAllowed(request)) {
+				return new Response(JSON.stringify({ error: "Origin not allowed" }), {
+					status: 403,
+					headers: corsHeaders,
+				});
+			}
+
+			try {
+				const body = (await request.json()) as {
+					type?: string;
+					message?: string;
+					email?: string;
+					page?: string;
+				};
+
+				const { type, message, email, page } = body;
+
+				// Validate type
+				const validTypes = ["bug", "feature", "feedback"];
+				if (!type || !validTypes.includes(type)) {
+					return new Response(
+						JSON.stringify({
+							success: false,
+							error: `Invalid type. Must be one of: ${validTypes.join(", ")}`,
+						}),
+						{ status: 400, headers: corsHeaders },
+					);
+				}
+
+				// Validate message
+				if (!message || typeof message !== "string") {
+					return new Response(
+						JSON.stringify({
+							success: false,
+							error: "Message is required",
+						}),
+						{ status: 400, headers: corsHeaders },
+					);
+				}
+
+				const trimmed = message.trim();
+				if (trimmed.length < 10) {
+					return new Response(
+						JSON.stringify({
+							success: false,
+							error: "Message must be at least 10 characters",
+						}),
+						{ status: 400, headers: corsHeaders },
+					);
+				}
+
+				if (trimmed.length > 5000) {
+					return new Response(
+						JSON.stringify({
+							success: false,
+							error: "Message must be 5000 characters or less",
+						}),
+						{ status: 400, headers: corsHeaders },
+					);
+				}
+
+				// Validate optional email format
+				if (email && typeof email === "string" && email.trim().length > 0) {
+					const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+					if (!emailRegex.test(email.trim())) {
+						return new Response(
+							JSON.stringify({
+								success: false,
+								error: "Invalid email format",
+							}),
+							{ status: 400, headers: corsHeaders },
+						);
+					}
+				}
+
+				const id = crypto.randomUUID();
+				const now = new Date();
+				const feedbackEntry = {
+					id,
+					type,
+					message: trimmed,
+					email: email?.trim() || undefined,
+					page: page || undefined,
+					timestamp: now.toISOString(),
+				};
+
+				// Store in R2 under feedback/YYYY/MM/DD/{uuid}.json
+				if (env.INTERACTION_LOGS) {
+					const path = [
+						"feedback",
+						now.getUTCFullYear(),
+						String(now.getUTCMonth() + 1).padStart(2, "0"),
+						String(now.getUTCDate()).padStart(2, "0"),
+						`${id}.json`,
+					].join("/");
+
+					ctx.waitUntil(
+						env.INTERACTION_LOGS.put(path, JSON.stringify(feedbackEntry), {
+							httpMetadata: { contentType: "application/json" },
+						}),
+					);
+				} else {
+					console.warn(
+						"[Feedback] R2 bucket not configured, logging to console",
+					);
+					console.log("[Feedback]", JSON.stringify(feedbackEntry));
+				}
+
+				return new Response(JSON.stringify({ success: true, id }), {
+					headers: corsHeaders,
+				});
+			} catch (error) {
+				console.error("Feedback endpoint error:", error);
+				return new Response(
+					JSON.stringify({
+						success: false,
+						error: "Failed to process feedback",
+					}),
+					{ status: 500, headers: corsHeaders },
+				);
+			}
+		}
+
+		// CORS preflight for /api/feedback
+		if (url.pathname === "/api/feedback" && request.method === "OPTIONS") {
+			return new Response(null, {
+				headers: getCorsHeaders(request),
+			});
+		}
+
 		// Root endpoint - return server info
 		if (url.pathname === "/") {
 			return new Response(
@@ -654,6 +791,7 @@ User's Question: ${message}`;
 						sse: "/sse",
 						mcp: "/mcp",
 						"ai/chat": "/ai/chat (POST) - AI assistant for team builder",
+						"api/feedback": "/api/feedback (POST) - Submit feedback",
 						"test-ingestion": "/test-ingestion",
 						"test-kv": "/test-kv",
 						"test-rag": "/test-rag?q=your+query",

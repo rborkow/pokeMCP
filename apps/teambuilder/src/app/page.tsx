@@ -8,6 +8,7 @@ import { TypeCoverage } from "@/components/analysis/TypeCoverage";
 import { VGCTeamWarnings } from "@/components/analysis/VGCTeamWarnings";
 import { ChatPanel } from "@/components/chat/ChatPanel";
 import { ErrorBoundary } from "@/components/errors/ErrorBoundary";
+import { FeedbackButton } from "@/components/feedback/FeedbackButton";
 import { TeamHistory } from "@/components/history/TeamHistory";
 import { Header } from "@/components/layout/Header";
 import { TeamGrid } from "@/components/team/TeamGrid";
@@ -93,6 +94,7 @@ export default function Home() {
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 					{/* Team Grid + Analysis */}
 					<div className="lg:col-span-2">
+						<h2 className="sr-only">Team Analysis</h2>
 						<ErrorBoundary level="section">
 							{/* Analysis Tabs */}
 							<Tabs defaultValue="threats" className="w-full">
@@ -148,6 +150,7 @@ export default function Home() {
 
 					{/* AI Assistant Panel */}
 					<div className="lg:col-span-1">
+						<h2 className="sr-only">AI Coach</h2>
 						<ErrorBoundary level="section">
 							<ChatPanel />
 						</ErrorBoundary>
@@ -155,25 +158,39 @@ export default function Home() {
 				</div>
 			</main>
 
+			{/* Floating feedback button */}
+			<FeedbackButton />
+
 			{/* Footer */}
 			<footer className="border-t py-4 mt-8">
 				<div className="container max-w-screen-2xl px-4 text-center text-sm text-muted-foreground">
-					<p>
-						PokeMCP Team Builder •{" "}
+					<span>PokeMCP Team Builder</span>
+					<nav aria-label="Footer" className="inline">
+						{" \u2022 "}
 						<a
-							href="https://pokemcp.com"
-							className="underline hover:text-foreground"
+							href="https://docs.pokemcp.com"
+							className="underline hover:text-foreground py-2 inline-block"
 						>
 							Documentation
-						</a>{" "}
-						•{" "}
+						</a>
+						{" \u2022 "}
 						<a
 							href="https://api.pokemcp.com"
-							className="underline hover:text-foreground"
+							className="underline hover:text-foreground py-2 inline-block"
 						>
 							API
 						</a>
-					</p>
+						{" \u2022 "}
+						<a
+							href="https://github.com/rborkow/pokeMCP"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="underline hover:text-foreground py-2 inline-block"
+						>
+							GitHub
+							<span className="sr-only">(opens in new tab)</span>
+						</a>
+					</nav>
 				</div>
 			</footer>
 		</div>

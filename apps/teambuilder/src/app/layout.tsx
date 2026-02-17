@@ -80,6 +80,9 @@ export const metadata: Metadata = {
 		icon: "/favicon.ico",
 		apple: "/apple-touch-icon.png",
 	},
+	alternates: {
+		canonical: "https://www.pokemcp.com",
+	},
 };
 
 // JSON-LD structured data for rich search results
