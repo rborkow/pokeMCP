@@ -26,14 +26,14 @@ export interface InteractionLog {
 }
 
 interface LoggerConfig {
-    sampleRate: number;  // 0.0 to 1.0 (e.g., 0.1 = 10% of requests)
+    sampleRate: number; // 0.0 to 1.0 (e.g., 0.1 = 10% of requests)
     maxResponseLength: number;
     enabled: boolean;
 }
 
 const DEFAULT_CONFIG: LoggerConfig = {
-    sampleRate: 0.1,  // Log 10% of interactions
-    maxResponseLength: 4000,  // Truncate long responses
+    sampleRate: 0.1, // Log 10% of interactions
+    maxResponseLength: 4000, // Truncate long responses
     enabled: true,
 };
 
@@ -44,13 +44,13 @@ function sanitizeArgs(args: Record<string, unknown>): Record<string, unknown> {
     const sanitized = { ...args };
 
     // Pokemon nicknames might contain personal info - remove them
-    if ('nickname' in sanitized) {
+    if ("nickname" in sanitized) {
         delete sanitized.nickname;
     }
 
     // Team data might have nicknames
-    if ('team' in sanitized && Array.isArray(sanitized.team)) {
-        sanitized.team = (sanitized.team as Array<Record<string, unknown>>).map(pokemon => {
+    if ("team" in sanitized && Array.isArray(sanitized.team)) {
+        sanitized.team = (sanitized.team as Array<Record<string, unknown>>).map((pokemon) => {
             const { nickname, ...rest } = pokemon as Record<string, unknown>;
             return rest;
         });
@@ -66,12 +66,12 @@ function extractPokemonMentioned(args: Record<string, unknown>, response: string
     const mentioned = new Set<string>();
 
     // From args
-    if (typeof args.pokemon === 'string') {
+    if (typeof args.pokemon === "string") {
         mentioned.add(args.pokemon);
     }
     if (Array.isArray(args.team)) {
         for (const p of args.team) {
-            if (typeof p === 'object' && p && 'pokemon' in p) {
+            if (typeof p === "object" && p && "pokemon" in p) {
                 mentioned.add(String(p.pokemon));
             }
         }
@@ -79,7 +79,7 @@ function extractPokemonMentioned(args: Record<string, unknown>, response: string
 
     // Could also parse response for Pokemon names, but keeping it simple for now
 
-    return Array.from(mentioned).slice(0, 10);  // Limit to 10
+    return Array.from(mentioned).slice(0, 10); // Limit to 10
 }
 
 /**
@@ -89,7 +89,7 @@ function truncateResponse(response: string, maxLength: number): string {
     if (response.length <= maxLength) {
         return response;
     }
-    return response.slice(0, maxLength) + '... [truncated]';
+    return response.slice(0, maxLength) + "... [truncated]";
 }
 
 /**
@@ -117,7 +117,7 @@ export async function logInteraction(
     response: string,
     responseTimeMs: number,
     success: boolean,
-    config: Partial<LoggerConfig> = {}
+    config: Partial<LoggerConfig> = {},
 ): Promise<void> {
     const cfg = { ...DEFAULT_CONFIG, ...config };
 
@@ -135,7 +135,9 @@ export async function logInteraction(
 
     // Sampling - only log a percentage of requests
     if (!shouldSample(cfg.sampleRate)) {
-        console.log(`[R2 Logging] Skipped: not sampled (rate: ${cfg.sampleRate}) for tool: ${tool}`);
+        console.log(
+            `[R2 Logging] Skipped: not sampled (rate: ${cfg.sampleRate}) for tool: ${tool}`,
+        );
         return;
     }
 
@@ -148,7 +150,7 @@ export async function logInteraction(
             response: truncateResponse(response, cfg.maxResponseLength),
             responseTimeMs,
             success,
-            format: typeof args.format === 'string' ? args.format : undefined,
+            format: typeof args.format === "string" ? args.format : undefined,
             pokemonMentioned: extractPokemonMentioned(args, response),
         };
 
@@ -156,26 +158,26 @@ export async function logInteraction(
         // Format: logs/YYYY/MM/DD/HH/{id}.json
         const now = new Date();
         const path = [
-            'logs',
+            "logs",
             now.getUTCFullYear(),
-            String(now.getUTCMonth() + 1).padStart(2, '0'),
-            String(now.getUTCDate()).padStart(2, '0'),
-            String(now.getUTCHours()).padStart(2, '0'),
-            `${log.id}.json`
-        ].join('/');
+            String(now.getUTCMonth() + 1).padStart(2, "0"),
+            String(now.getUTCDate()).padStart(2, "0"),
+            String(now.getUTCHours()).padStart(2, "0"),
+            `${log.id}.json`,
+        ].join("/");
 
         console.log(`[R2 Logging] Writing to path: ${path} for tool: ${tool}`);
 
         await env.INTERACTION_LOGS.put(path, JSON.stringify(log), {
             httpMetadata: {
-                contentType: 'application/json',
+                contentType: "application/json",
             },
         });
 
         console.log(`[R2 Logging] Successfully wrote log for tool: ${tool}`);
     } catch (error) {
         // Don't let logging errors affect the main request
-        console.error('[R2 Logging] Failed to log interaction:', error);
+        console.error("[R2 Logging] Failed to log interaction:", error);
     }
 }
 
@@ -189,7 +191,7 @@ export async function withLogging<T extends string>(
     args: Record<string, unknown>,
     executor: () => Promise<T> | T,
     config?: Partial<LoggerConfig>,
-    ctx?: ExecutionContext
+    ctx?: ExecutionContext,
 ): Promise<T> {
     const startTime = performance.now();
     let success = true;
@@ -199,13 +201,21 @@ export async function withLogging<T extends string>(
         response = await executor();
     } catch (error) {
         success = false;
-        response = `Error: ${error instanceof Error ? error.message : 'Unknown error'}` as T;
+        response = `Error: ${error instanceof Error ? error.message : "Unknown error"}` as T;
         throw error;
     } finally {
         const responseTimeMs = Math.round(performance.now() - startTime);
 
         // Log asynchronously - use waitUntil to ensure R2 write completes
-        const logPromise = logInteraction(env, tool, args, response!, responseTimeMs, success, config);
+        const logPromise = logInteraction(
+            env,
+            tool,
+            args,
+            response!,
+            responseTimeMs,
+            success,
+            config,
+        );
         if (ctx) {
             ctx.waitUntil(logPromise);
         }
@@ -235,8 +245,8 @@ export function createLoggedToolHandler<TArgs extends Record<string, unknown>>(
     env: Env,
     toolName: string,
     handler: (args: TArgs) => Promise<string> | string,
-    config?: Partial<LoggerConfig>
-): (args: TArgs) => Promise<{ content: Array<{ type: 'text'; text: string }> }> {
+    config?: Partial<LoggerConfig>,
+): (args: TArgs) => Promise<{ content: Array<{ type: "text"; text: string }> }> {
     return async (args: TArgs) => {
         const startTime = performance.now();
         let success = true;
@@ -246,7 +256,7 @@ export function createLoggedToolHandler<TArgs extends Record<string, unknown>>(
             result = await handler(args);
         } catch (error) {
             success = false;
-            result = `Error: ${error instanceof Error ? error.message : 'Unknown error'}`;
+            result = `Error: ${error instanceof Error ? error.message : "Unknown error"}`;
             throw error;
         } finally {
             const responseTimeMs = Math.round(performance.now() - startTime);
@@ -259,12 +269,12 @@ export function createLoggedToolHandler<TArgs extends Record<string, unknown>>(
                 result!,
                 responseTimeMs,
                 success,
-                config
-            ).catch(err => console.error('Logging error:', err));
+                config,
+            ).catch((err) => console.error("Logging error:", err));
         }
 
         return {
-            content: [{ type: 'text' as const, text: result }]
+            content: [{ type: "text" as const, text: result }],
         };
     };
 }

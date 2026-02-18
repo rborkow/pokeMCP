@@ -1,866 +1,761 @@
 {
-  "format": "gen7nu",
-  "fetchedAt": "2026-02-05T22:04:44.989Z",
-  "date": "2023-06",
-  "data": {
-    "info": {
-      "team type": null,
-      "cutoff": 1630,
-      "cutoff deviation": 0,
-      "metagame": "gen7nu",
-      "number of battles": 10
-    },
+    "format": "gen7nu",
+    "fetchedAt": "2026-02-05T22:04:44.989Z",
+    "date": "2023-06",
     "data": {
-      "Glalie-Mega": {
-        "Moves": {
-          "spikes": 0.0599774874,
-          "explosion": 0.0599774874,
-          "hiddenpowersteel": 0,
-          "freezedry": 0,
-          "waterpulse": 0,
-          "icebeam": 0,
-          "return": 0.0599774874,
-          "earthquake": 0.0599774874
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "refrigerate": 0.0599774874
-        },
-        "Teammates": {
-          "Hariyama": 0,
-          "Comfey": 0.0599774874,
-          "Incineroar": 0,
-          "Vikavolt": 0,
-          "Passimian": 0.0599774874,
-          "Sigilyph": 0.0599774874,
-          "Skuntank": 0.0599774874,
-          "Druddigon": 0,
-          "Klinklang": 0.0599774874
-        },
-        "usage": 0.0075018,
-        "Items": {
-          "glalitite": 0.0599774874
-        },
-        "Raw count": 3,
-        "Spreads": {
-          "Jolly:0/252/0/0/4/252": 0.0599774874,
-          "Timid:0/0/0/252/4/252": 0
-        },
-        "Happiness": {
-          "255": 0.0599774874
-        },
-        "Viability Ceiling": [
-          2,
-          54,
-          54,
-          54
-        ]
-      },
-      "Delphox": {
-        "Moves": {
-          "shadowball": 0.9041988131,
-          "psychic": 0.9041988131,
-          "dazzlinggleam": 0.9041988131,
-          "flamethrower": 0.9041988131
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "blaze": 0.9041988131
-        },
-        "Teammates": {
-          "Ambipom": 0.9041988131,
-          "Samurott": 0.9041988131,
-          "Comfey": 0.9041988131,
-          "Weezing": 0.9041988131,
-          "Druddigon": 0.9041988131
-        },
-        "usage": 0.1130947,
-        "Items": {
-          "choicespecs": 0.9041988131
-        },
-        "Raw count": 1,
-        "Spreads": {
-          "Timid:0/0/0/246/16/246": 0.9041988131
-        },
-        "Happiness": {
-          "255": 0.9041988131
-        },
-        "Viability Ceiling": [
-          1,
-          74,
-          74,
-          74
-        ]
-      },
-      "Comfey": {
-        "Moves": {
-          "hiddenpowerground": 0.0599774874,
-          "gigadrain": 7.9641625325,
-          "calmmind": 7.0599637194,
-          "defog": 0.9041988131,
-          "hiddenpowerfire": 6.999986232,
-          "taunt": 0.9041988131,
-          "drainingkiss": 7.9641625325
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "triage": 7.9641625325
-        },
-        "Teammates": {
-          "Glalie-Mega": 0.0599774874,
-          "Delphox": 0.9041988131,
-          "Gurdurr": 6.999986232,
-          "Garbodor": 6.999986232,
-          "Decidueye": 6.999986232,
-          "Mesprit": 6.999986232,
-          "Samurott": 0.9041988131,
-          "Klinklang": 0.0599774874,
-          "Passimian": 0.0599774874,
-          "Ambipom": 0.9041988131,
-          "Sigilyph": 0.0599774874,
-          "Skuntank": 0.0599774874,
-          "Druddigon": 0.9041988131,
-          "Piloswine": 6.999986232,
-          "Weezing": 0.9041988131
-        },
-        "usage": 0.9961359,
-        "Items": {
-          "leftovers": 0.9041988131,
-          "lifeorb": 7.0599637194
-        },
-        "Raw count": 9,
-        "Spreads": {
-          "Modest:0/0/0/252/4/252": 6.999986232,
-          "Calm:218/2/16/2/252/18": 0.9041988131,
-          "Modest:236/0/0/252/0/20": 0.0599774874
-        },
-        "Happiness": {
-          "255": 7.9641625325
-        },
-        "Viability Ceiling": [
-          3,
-          88,
-          88,
-          88
-        ]
-      },
-      "Gurdurr": {
-        "Moves": {
-          "drainpunch": 6.999986232,
-          "knockoff": 6.999986232,
-          "machpunch": 6.999986232,
-          "bulkup": 6.999986232
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "guts": 6.999986232
-        },
-        "Teammates": {
-          "Comfey": 6.999986232,
-          "Piloswine": 6.999986232,
-          "Decidueye": 6.999986232,
-          "Garbodor": 6.999986232,
-          "Mesprit": 6.999986232
-        },
-        "usage": 0.8755394,
-        "Items": {
-          "eviolite": 6.999986232
-        },
-        "Raw count": 7,
-        "Spreads": {
-          "Adamant:212/252/0/0/4/40": 6.999986232
-        },
-        "Happiness": {
-          "255": 6.999986232
-        },
-        "Viability Ceiling": [
-          1,
-          88,
-          88,
-          88
-        ]
-      },
-      "Audino-Mega": {
-        "Moves": {
-          "calmmind": 0.0308934864,
-          "drainingkiss": 0.0308934864,
-          "healbell": 0.0308934864,
-          "hypervoice": 0.0308934864
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "healer": 0.0308934864
-        },
-        "Teammates": {
-          "Rhydon": 0.0308934864,
-          "Magmortar": 0.0308934864,
-          "Braviary": 0.0308934864,
-          "Decidueye": 0.0308934864,
-          "Blastoise": 0.0308934864
-        },
-        "usage": 0.0038641,
-        "Items": {
-          "audinite": 0.0308934864
-        },
-        "Raw count": 3,
-        "Spreads": {
-          "Modest:252/0/0/252/4/0": 0.0308934864
-        },
-        "Happiness": {
-          "255": 0.0308934864
-        },
-        "Viability Ceiling": [
-          1,
-          45,
-          45,
-          45
-        ]
-      },
-      "Braviary": {
-        "Moves": {
-          "defog": 0.0308934864,
-          "roost": 0.0308934864,
-          "bravebird": 0.0308934864,
-          "superpower": 0.0308934864
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "defiant": 0.0308934864
-        },
-        "Teammates": {
-          "Rhydon": 0.0308934864,
-          "Magmortar": 0.0308934864,
-          "Audino-Mega": 0.0308934864,
-          "Decidueye": 0.0308934864,
-          "Blastoise": 0.0308934864
-        },
-        "usage": 0.0038641,
-        "Items": {
-          "leftovers": 0.0308934864
-        },
-        "Raw count": 3,
-        "Spreads": {
-          "Adamant:252/252/0/0/4/0": 0.0308934864
-        },
-        "Happiness": {
-          "255": 0.0308934864
-        },
-        "Viability Ceiling": [
-          1,
-          45,
-          45,
-          45
-        ]
-      },
-      "Samurott": {
-        "Moves": {
-          "swordsdance": 0.9041988131,
-          "aquajet": 0.9041988131,
-          "liquidation": 0.9041988131,
-          "xscissor": 0.9041988131
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "shellarmor": 0.9041988131
-        },
-        "Teammates": {
-          "Ambipom": 0.9041988131,
-          "Delphox": 0.9041988131,
-          "Comfey": 0.9041988131,
-          "Weezing": 0.9041988131,
-          "Druddigon": 0.9041988131
-        },
-        "usage": 0.1130947,
-        "Items": {
-          "buginiumz": 0.9041988131
-        },
-        "Raw count": 1,
-        "Spreads": {
-          "Adamant:202/252/16/2/18/18": 0.9041988131
-        },
-        "Happiness": {
-          "255": 0.9041988131
-        },
-        "Viability Ceiling": [
-          1,
-          74,
-          74,
-          74
-        ]
-      },
-      "Decidueye": {
-        "Moves": {
-          "bravebird": 0.0308934864,
-          "leafblade": 7.0308797184,
-          "hiddenpowerwater": 0,
-          "spiritshackle": 6.999986232,
-          "nastyplot": 0,
-          "roost": 0.0308934864,
-          "swordsdance": 6.999986232,
-          "shadowsneak": 7.0308797184,
-          "energyball": 0,
-          "leafstorm": 0
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "longreach": 0.0308934864,
-          "overgrow": 6.999986232
-        },
-        "Teammates": {
-          "Comfey": 6.999986232,
-          "Gurdurr": 6.999986232,
-          "Abomasnow-Mega": 0,
-          "Braviary": 0.0308934864,
-          "Vikavolt": 0,
-          "Magmortar": 0.0308934864,
-          "Rhydon": 0.0308934864,
-          "Piloswine": 6.999986232,
-          "Audino-Mega": 0.0308934864,
-          "Ambipom": 0,
-          "Mesprit": 6.999986232,
-          "Xatu": 0,
-          "Druddigon": 0,
-          "Garbodor": 6.999986232,
-          "Blastoise": 0.0308934864
-        },
-        "usage": 0.8794034,
-        "Items": {
-          "decidiumz": 6.999986232,
-          "lifeorb": 0.0308934864
-        },
-        "Raw count": 11,
-        "Spreads": {
-          "Adamant:4/252/0/0/0/252": 6.999986232,
-          "Adamant:248/252/0/0/8/0": 0.0308934864,
-          "Timid:28/0/0/228/0/252": 0
-        },
-        "Happiness": {
-          "255": 7.0308797184
-        },
-        "Viability Ceiling": [
-          3,
-          88,
-          88,
-          88
-        ]
-      },
-      "Mesprit": {
-        "Moves": {
-          "calmmind": 6.999986232,
-          "psychic": 6.999986232,
-          "thunderbolt": 6.999986232,
-          "dazzlinggleam": 6.999986232
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "levitate": 6.999986232
-        },
-        "Teammates": {
-          "Gurdurr": 6.999986232,
-          "Comfey": 6.999986232,
-          "Piloswine": 6.999986232,
-          "Decidueye": 6.999986232,
-          "Garbodor": 6.999986232
-        },
-        "usage": 0.8755394,
-        "Items": {
-          "expertbelt": 6.999986232
-        },
-        "Raw count": 7,
-        "Spreads": {
-          "Modest:0/0/0/252/4/252": 6.999986232
-        },
-        "Happiness": {
-          "255": 6.999986232
-        },
-        "Viability Ceiling": [
-          1,
-          88,
-          88,
-          88
-        ]
-      },
-      "Rhydon": {
-        "Moves": {
-          "megahorn": 0.0308934864,
-          "firepunch": 0.0308934864,
-          "earthquake": 0.0308934864,
-          "stoneedge": 0.0308934864
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "rockhead": 0.0308934864
-        },
-        "Teammates": {
-          "Magmortar": 0.0308934864,
-          "Braviary": 0.0308934864,
-          "Audino-Mega": 0.0308934864,
-          "Decidueye": 0.0308934864,
-          "Blastoise": 0.0308934864
-        },
-        "usage": 0.0038641,
-        "Items": {
-          "eviolite": 0.0308934864
-        },
-        "Raw count": 3,
-        "Spreads": {
-          "Adamant:252/252/0/0/4/0": 0.0308934864
-        },
-        "Happiness": {
-          "255": 0.0308934864
-        },
-        "Viability Ceiling": [
-          1,
-          45,
-          45,
-          45
-        ]
-      },
-      "Piloswine": {
-        "Moves": {
-          "toxic": 0,
-          "stealthrock": 6.999986232,
-          "iceshard": 6.999986232,
-          "earthquake": 6.999986232,
-          "iciclecrash": 6.999986232
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "thickfat": 6.999986232
-        },
-        "Teammates": {
-          "Heliolisk": 0,
-          "Comfey": 6.999986232,
-          "Gurdurr": 6.999986232,
-          "Slowking": 0,
-          "Decidueye": 6.999986232,
-          "Mesprit": 6.999986232,
-          "Hitmonlee": 0,
-          "Xatu": 0,
-          "Clefairy": 0,
-          "Garbodor": 6.999986232
-        },
-        "usage": 0.8755394,
-        "Items": {
-          "eviolite": 6.999986232
-        },
-        "Raw count": 8,
-        "Spreads": {
-          "Adamant:176/252/0/0/4/76": 6.999986232,
-          "Impish:252/4/252/0/0/0": 0
-        },
-        "Happiness": {
-          "255": 6.999986232
-        },
-        "Viability Ceiling": [
-          2,
-          88,
-          88,
-          88
-        ]
-      },
-      "Klinklang": {
-        "Moves": {
-          "thunderbolt": 0,
-          "magnetrise": 0.0599774874,
-          "geargrind": 0.0599774874,
-          "flashcannon": 0,
-          "voltswitch": 0,
-          "hiddenpowerwater": 0,
-          "shiftgear": 0.0599774874,
-          "wildcharge": 0.0599774874
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "clearbody": 0.0599774874
-        },
-        "Teammates": {
-          "Glalie-Mega": 0.0599774874,
-          "Hariyama": 0,
-          "Comfey": 0.0599774874,
-          "Incineroar": 0,
-          "Vikavolt": 0,
-          "Passimian": 0.0599774874,
-          "Sigilyph": 0.0599774874,
-          "Skuntank": 0.0599774874,
-          "Druddigon": 0
-        },
-        "usage": 0.0075018,
-        "Items": {
-          "choicespecs": 0,
-          "electriumz": 0.0599774874
-        },
-        "Raw count": 3,
-        "Spreads": {
-          "Timid:0/0/0/252/4/252": 0,
-          "Adamant:68/252/0/0/0/188": 0.0599774874
-        },
-        "Happiness": {
-          "255": 0.0599774874
-        },
-        "Viability Ceiling": [
-          2,
-          54,
-          54,
-          54
-        ]
-      },
-      "Passimian": {
-        "Moves": {
-          "uturn": 0.0599774874,
-          "gunkshot": 0.0599774874,
-          "knockoff": 0.0599774874,
-          "earthquake": 0,
-          "closecombat": 0.0599774874
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "receiver": 0.0599774874
-        },
-        "Teammates": {
-          "Glalie-Mega": 0.0599774874,
-          "Comfey": 0.0599774874,
-          "Incineroar": 0,
-          "Sceptile": 0,
-          "Steelix": 0,
-          "Rotom": 0,
-          "Sigilyph": 0.0599774874,
-          "Skuntank": 0.0599774874,
-          "Aromatisse": 0,
-          "Klinklang": 0.0599774874
-        },
-        "usage": 0.0075018,
-        "Items": {
-          "choicescarf": 0.0599774874
-        },
-        "Raw count": 3,
-        "Spreads": {
-          "Jolly:0/252/0/0/4/252": 0.0599774874
-        },
-        "Happiness": {
-          "255": 0.0599774874
-        },
-        "Viability Ceiling": [
-          2,
-          54,
-          54,
-          54
-        ]
-      },
-      "Sigilyph": {
-        "Moves": {
-          "heatwave": 0.0599774874,
-          "psychic": 0.0599774874,
-          "energyball": 0.0599774874,
-          "airslash": 0.0599774874
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "magicguard": 0.0599774874
-        },
-        "Teammates": {
-          "Glalie-Mega": 0.0599774874,
-          "Comfey": 0.0599774874,
-          "Skuntank": 0.0599774874,
-          "Passimian": 0.0599774874,
-          "Klinklang": 0.0599774874
-        },
-        "usage": 0.0075018,
-        "Items": {
-          "lifeorb": 0.0599774874
-        },
-        "Raw count": 1,
-        "Spreads": {
-          "Timid:0/0/0/252/4/252": 0.0599774874
-        },
-        "Happiness": {
-          "255": 0.0599774874
-        },
-        "Viability Ceiling": [
-          1,
-          52,
-          52,
-          52
-        ]
-      },
-      "Ambipom": {
-        "Moves": {
-          "uturn": 0.9041988131,
-          "brickbreak": 0,
-          "knockoff": 0.9041988131,
-          "frustration": 0.9041988131,
-          "fakeout": 0.9041988131
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "technician": 0.9041988131
-        },
-        "Teammates": {
-          "Delphox": 0.9041988131,
-          "Comfey": 0.9041988131,
-          "Weezing": 0.9041988131,
-          "Abomasnow-Mega": 0,
-          "Vikavolt": 0,
-          "Samurott": 0.9041988131,
-          "Decidueye": 0,
-          "Xatu": 0,
-          "Druddigon": 0.9041988131
-        },
-        "usage": 0.1130947,
-        "Items": {
-          "silkscarf": 0.9041988131,
-          "choiceband": 0
-        },
-        "Raw count": 2,
-        "Spreads": {
-          "Jolly:4/252/0/0/0/252": 0,
-          "Jolly:8/252/0/0/0/248": 0.9041988131
-        },
-        "Happiness": {
-          "0": 0.9041988131,
-          "255": 0
-        },
-        "Viability Ceiling": [
-          2,
-          74,
-          74,
-          74
-        ]
-      },
-      "Weezing": {
-        "Moves": {
-          "sludgebomb": 0.9041988131,
-          "painsplit": 0.9041988131,
-          "toxicspikes": 0.9041988131,
-          "willowisp": 0.9041988131
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "levitate": 0.9041988131
-        },
-        "Teammates": {
-          "Ambipom": 0.9041988131,
-          "Delphox": 0.9041988131,
-          "Samurott": 0.9041988131,
-          "Comfey": 0.9041988131,
-          "Druddigon": 0.9041988131
-        },
-        "usage": 0.1130947,
-        "Items": {
-          "blacksludge": 0.9041988131
-        },
-        "Raw count": 1,
-        "Spreads": {
-          "Bold:202/6/252/16/18/16": 0.9041988131
-        },
-        "Happiness": {
-          "255": 0.9041988131
-        },
-        "Viability Ceiling": [
-          1,
-          74,
-          74,
-          74
-        ]
-      },
-      "Skuntank": {
-        "Moves": {
-          "crunch": 0.0599774874,
-          "suckerpunch": 0.0599774874,
-          "pursuit": 0.0599774874,
-          "poisonjab": 0.0599774874
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "aftermath": 0.0599774874
-        },
-        "Teammates": {
-          "Glalie-Mega": 0.0599774874,
-          "Sigilyph": 0.0599774874,
-          "Comfey": 0.0599774874,
-          "Passimian": 0.0599774874,
-          "Klinklang": 0.0599774874
-        },
-        "usage": 0.0075018,
-        "Items": {
-          "expertbelt": 0.0599774874
-        },
-        "Raw count": 1,
-        "Spreads": {
-          "Adamant:0/252/0/0/4/252": 0.0599774874
-        },
-        "Happiness": {
-          "255": 0.0599774874
-        },
-        "Viability Ceiling": [
-          1,
-          52,
-          52,
-          52
-        ]
-      },
-      "Magmortar": {
-        "Moves": {
-          "thunderbolt": 0.0308934864,
-          "fireblast": 0.0308934864,
-          "focusblast": 0.0308934864,
-          "hiddenpowergrass": 0.0308934864
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "vitalspirit": 0.0308934864
-        },
-        "Teammates": {
-          "Rhydon": 0.0308934864,
-          "Braviary": 0.0308934864,
-          "Audino-Mega": 0.0308934864,
-          "Decidueye": 0.0308934864,
-          "Blastoise": 0.0308934864
-        },
-        "usage": 0.0038641,
-        "Items": {
-          "lifeorb": 0.0308934864
-        },
-        "Raw count": 3,
-        "Spreads": {
-          "Timid:0/0/0/252/4/252": 0.0308934864
-        },
-        "Happiness": {
-          "255": 0.0308934864
-        },
-        "Viability Ceiling": [
-          1,
-          45,
-          45,
-          45
-        ]
-      },
-      "Druddigon": {
-        "Moves": {
-          "dragontail": 0.9041988131,
-          "glare": 0.9041988131,
-          "gunkshot": 0.9041988131,
-          "ironhead": 0,
-          "stealthrock": 0.9041988131,
-          "firepunch": 0,
-          "outrage": 0,
-          "toxic": 0,
-          "dragonclaw": 0,
-          "earthquake": 0
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "roughskin": 0.9041988131,
-          "sheerforce": 0
-        },
-        "Teammates": {
-          "Glalie-Mega": 0,
-          "Delphox": 0.9041988131,
-          "Hariyama": 0,
-          "Comfey": 0.9041988131,
-          "Weezing": 0.9041988131,
-          "Abomasnow-Mega": 0,
-          "Vikavolt": 0,
-          "Samurott": 0.9041988131,
-          "Decidueye": 0,
-          "Ambipom": 0.9041988131,
-          "Incineroar": 0,
-          "Xatu": 0,
-          "Klinklang": 0
-        },
-        "usage": 0.1130947,
-        "Items": {
-          "rockyhelmet": 0.9041988131,
-          "choiceband": 0
-        },
-        "Raw count": 4,
-        "Spreads": {
-          "Adamant:252/252/0/0/4/0": 0,
-          "Impish:248/16/228/0/18/0": 0.9041988131,
-          "Impish:252/0/228/0/28/0": 0
-        },
-        "Happiness": {
-          "255": 0.9041988131
-        },
-        "Viability Ceiling": [
-          3,
-          74,
-          74,
-          74
-        ]
-      },
-      "Garbodor": {
-        "Moves": {
-          "gunkshot": 6.999986232,
-          "spikes": 6.999986232,
-          "explosion": 6.999986232,
-          "toxicspikes": 6.999986232
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "aftermath": 6.999986232
-        },
-        "Teammates": {
-          "Gurdurr": 6.999986232,
-          "Comfey": 6.999986232,
-          "Piloswine": 6.999986232,
-          "Decidueye": 6.999986232,
-          "Mesprit": 6.999986232
-        },
-        "usage": 0.8755394,
-        "Items": {
-          "rockyhelmet": 6.999986232
-        },
-        "Raw count": 7,
-        "Spreads": {
-          "Adamant:252/252/0/0/4/0": 6.999986232
-        },
-        "Happiness": {
-          "255": 6.999986232
-        },
-        "Viability Ceiling": [
-          1,
-          88,
-          88,
-          88
-        ]
-      },
-      "Blastoise": {
-        "Moves": {
-          "scald": 0.0308934864,
-          "seismictoss": 0.0308934864,
-          "haze": 0.0308934864,
-          "rapidspin": 0.0308934864
-        },
-        "Checks and Counters": {},
-        "Abilities": {
-          "torrent": 0.0308934864
-        },
-        "Teammates": {
-          "Rhydon": 0.0308934864,
-          "Braviary": 0.0308934864,
-          "Audino-Mega": 0.0308934864,
-          "Decidueye": 0.0308934864,
-          "Magmortar": 0.0308934864
-        },
-        "usage": 0.0038641,
-        "Items": {
-          "leftovers": 0.0308934864
-        },
-        "Raw count": 3,
-        "Spreads": {
-          "Bold:252/0/252/0/4/0": 0.0308934864
-        },
-        "Happiness": {
-          "255": 0.0308934864
-        },
-        "Viability Ceiling": [
-          1,
-          45,
-          45,
-          45
-        ]
-      }
+        "info": {
+            "team type": null,
+            "cutoff": 1630,
+            "cutoff deviation": 0,
+            "metagame": "gen7nu",
+            "number of battles": 10
+        },
+        "data": {
+            "Glalie-Mega": {
+                "Moves": {
+                    "spikes": 0.0599774874,
+                    "explosion": 0.0599774874,
+                    "hiddenpowersteel": 0,
+                    "freezedry": 0,
+                    "waterpulse": 0,
+                    "icebeam": 0,
+                    "return": 0.0599774874,
+                    "earthquake": 0.0599774874
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "refrigerate": 0.0599774874
+                },
+                "Teammates": {
+                    "Hariyama": 0,
+                    "Comfey": 0.0599774874,
+                    "Incineroar": 0,
+                    "Vikavolt": 0,
+                    "Passimian": 0.0599774874,
+                    "Sigilyph": 0.0599774874,
+                    "Skuntank": 0.0599774874,
+                    "Druddigon": 0,
+                    "Klinklang": 0.0599774874
+                },
+                "usage": 0.0075018,
+                "Items": {
+                    "glalitite": 0.0599774874
+                },
+                "Raw count": 3,
+                "Spreads": {
+                    "Jolly:0/252/0/0/4/252": 0.0599774874,
+                    "Timid:0/0/0/252/4/252": 0
+                },
+                "Happiness": {
+                    "255": 0.0599774874
+                },
+                "Viability Ceiling": [2, 54, 54, 54]
+            },
+            "Delphox": {
+                "Moves": {
+                    "shadowball": 0.9041988131,
+                    "psychic": 0.9041988131,
+                    "dazzlinggleam": 0.9041988131,
+                    "flamethrower": 0.9041988131
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "blaze": 0.9041988131
+                },
+                "Teammates": {
+                    "Ambipom": 0.9041988131,
+                    "Samurott": 0.9041988131,
+                    "Comfey": 0.9041988131,
+                    "Weezing": 0.9041988131,
+                    "Druddigon": 0.9041988131
+                },
+                "usage": 0.1130947,
+                "Items": {
+                    "choicespecs": 0.9041988131
+                },
+                "Raw count": 1,
+                "Spreads": {
+                    "Timid:0/0/0/246/16/246": 0.9041988131
+                },
+                "Happiness": {
+                    "255": 0.9041988131
+                },
+                "Viability Ceiling": [1, 74, 74, 74]
+            },
+            "Comfey": {
+                "Moves": {
+                    "hiddenpowerground": 0.0599774874,
+                    "gigadrain": 7.9641625325,
+                    "calmmind": 7.0599637194,
+                    "defog": 0.9041988131,
+                    "hiddenpowerfire": 6.999986232,
+                    "taunt": 0.9041988131,
+                    "drainingkiss": 7.9641625325
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "triage": 7.9641625325
+                },
+                "Teammates": {
+                    "Glalie-Mega": 0.0599774874,
+                    "Delphox": 0.9041988131,
+                    "Gurdurr": 6.999986232,
+                    "Garbodor": 6.999986232,
+                    "Decidueye": 6.999986232,
+                    "Mesprit": 6.999986232,
+                    "Samurott": 0.9041988131,
+                    "Klinklang": 0.0599774874,
+                    "Passimian": 0.0599774874,
+                    "Ambipom": 0.9041988131,
+                    "Sigilyph": 0.0599774874,
+                    "Skuntank": 0.0599774874,
+                    "Druddigon": 0.9041988131,
+                    "Piloswine": 6.999986232,
+                    "Weezing": 0.9041988131
+                },
+                "usage": 0.9961359,
+                "Items": {
+                    "leftovers": 0.9041988131,
+                    "lifeorb": 7.0599637194
+                },
+                "Raw count": 9,
+                "Spreads": {
+                    "Modest:0/0/0/252/4/252": 6.999986232,
+                    "Calm:218/2/16/2/252/18": 0.9041988131,
+                    "Modest:236/0/0/252/0/20": 0.0599774874
+                },
+                "Happiness": {
+                    "255": 7.9641625325
+                },
+                "Viability Ceiling": [3, 88, 88, 88]
+            },
+            "Gurdurr": {
+                "Moves": {
+                    "drainpunch": 6.999986232,
+                    "knockoff": 6.999986232,
+                    "machpunch": 6.999986232,
+                    "bulkup": 6.999986232
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "guts": 6.999986232
+                },
+                "Teammates": {
+                    "Comfey": 6.999986232,
+                    "Piloswine": 6.999986232,
+                    "Decidueye": 6.999986232,
+                    "Garbodor": 6.999986232,
+                    "Mesprit": 6.999986232
+                },
+                "usage": 0.8755394,
+                "Items": {
+                    "eviolite": 6.999986232
+                },
+                "Raw count": 7,
+                "Spreads": {
+                    "Adamant:212/252/0/0/4/40": 6.999986232
+                },
+                "Happiness": {
+                    "255": 6.999986232
+                },
+                "Viability Ceiling": [1, 88, 88, 88]
+            },
+            "Audino-Mega": {
+                "Moves": {
+                    "calmmind": 0.0308934864,
+                    "drainingkiss": 0.0308934864,
+                    "healbell": 0.0308934864,
+                    "hypervoice": 0.0308934864
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "healer": 0.0308934864
+                },
+                "Teammates": {
+                    "Rhydon": 0.0308934864,
+                    "Magmortar": 0.0308934864,
+                    "Braviary": 0.0308934864,
+                    "Decidueye": 0.0308934864,
+                    "Blastoise": 0.0308934864
+                },
+                "usage": 0.0038641,
+                "Items": {
+                    "audinite": 0.0308934864
+                },
+                "Raw count": 3,
+                "Spreads": {
+                    "Modest:252/0/0/252/4/0": 0.0308934864
+                },
+                "Happiness": {
+                    "255": 0.0308934864
+                },
+                "Viability Ceiling": [1, 45, 45, 45]
+            },
+            "Braviary": {
+                "Moves": {
+                    "defog": 0.0308934864,
+                    "roost": 0.0308934864,
+                    "bravebird": 0.0308934864,
+                    "superpower": 0.0308934864
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "defiant": 0.0308934864
+                },
+                "Teammates": {
+                    "Rhydon": 0.0308934864,
+                    "Magmortar": 0.0308934864,
+                    "Audino-Mega": 0.0308934864,
+                    "Decidueye": 0.0308934864,
+                    "Blastoise": 0.0308934864
+                },
+                "usage": 0.0038641,
+                "Items": {
+                    "leftovers": 0.0308934864
+                },
+                "Raw count": 3,
+                "Spreads": {
+                    "Adamant:252/252/0/0/4/0": 0.0308934864
+                },
+                "Happiness": {
+                    "255": 0.0308934864
+                },
+                "Viability Ceiling": [1, 45, 45, 45]
+            },
+            "Samurott": {
+                "Moves": {
+                    "swordsdance": 0.9041988131,
+                    "aquajet": 0.9041988131,
+                    "liquidation": 0.9041988131,
+                    "xscissor": 0.9041988131
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "shellarmor": 0.9041988131
+                },
+                "Teammates": {
+                    "Ambipom": 0.9041988131,
+                    "Delphox": 0.9041988131,
+                    "Comfey": 0.9041988131,
+                    "Weezing": 0.9041988131,
+                    "Druddigon": 0.9041988131
+                },
+                "usage": 0.1130947,
+                "Items": {
+                    "buginiumz": 0.9041988131
+                },
+                "Raw count": 1,
+                "Spreads": {
+                    "Adamant:202/252/16/2/18/18": 0.9041988131
+                },
+                "Happiness": {
+                    "255": 0.9041988131
+                },
+                "Viability Ceiling": [1, 74, 74, 74]
+            },
+            "Decidueye": {
+                "Moves": {
+                    "bravebird": 0.0308934864,
+                    "leafblade": 7.0308797184,
+                    "hiddenpowerwater": 0,
+                    "spiritshackle": 6.999986232,
+                    "nastyplot": 0,
+                    "roost": 0.0308934864,
+                    "swordsdance": 6.999986232,
+                    "shadowsneak": 7.0308797184,
+                    "energyball": 0,
+                    "leafstorm": 0
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "longreach": 0.0308934864,
+                    "overgrow": 6.999986232
+                },
+                "Teammates": {
+                    "Comfey": 6.999986232,
+                    "Gurdurr": 6.999986232,
+                    "Abomasnow-Mega": 0,
+                    "Braviary": 0.0308934864,
+                    "Vikavolt": 0,
+                    "Magmortar": 0.0308934864,
+                    "Rhydon": 0.0308934864,
+                    "Piloswine": 6.999986232,
+                    "Audino-Mega": 0.0308934864,
+                    "Ambipom": 0,
+                    "Mesprit": 6.999986232,
+                    "Xatu": 0,
+                    "Druddigon": 0,
+                    "Garbodor": 6.999986232,
+                    "Blastoise": 0.0308934864
+                },
+                "usage": 0.8794034,
+                "Items": {
+                    "decidiumz": 6.999986232,
+                    "lifeorb": 0.0308934864
+                },
+                "Raw count": 11,
+                "Spreads": {
+                    "Adamant:4/252/0/0/0/252": 6.999986232,
+                    "Adamant:248/252/0/0/8/0": 0.0308934864,
+                    "Timid:28/0/0/228/0/252": 0
+                },
+                "Happiness": {
+                    "255": 7.0308797184
+                },
+                "Viability Ceiling": [3, 88, 88, 88]
+            },
+            "Mesprit": {
+                "Moves": {
+                    "calmmind": 6.999986232,
+                    "psychic": 6.999986232,
+                    "thunderbolt": 6.999986232,
+                    "dazzlinggleam": 6.999986232
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "levitate": 6.999986232
+                },
+                "Teammates": {
+                    "Gurdurr": 6.999986232,
+                    "Comfey": 6.999986232,
+                    "Piloswine": 6.999986232,
+                    "Decidueye": 6.999986232,
+                    "Garbodor": 6.999986232
+                },
+                "usage": 0.8755394,
+                "Items": {
+                    "expertbelt": 6.999986232
+                },
+                "Raw count": 7,
+                "Spreads": {
+                    "Modest:0/0/0/252/4/252": 6.999986232
+                },
+                "Happiness": {
+                    "255": 6.999986232
+                },
+                "Viability Ceiling": [1, 88, 88, 88]
+            },
+            "Rhydon": {
+                "Moves": {
+                    "megahorn": 0.0308934864,
+                    "firepunch": 0.0308934864,
+                    "earthquake": 0.0308934864,
+                    "stoneedge": 0.0308934864
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "rockhead": 0.0308934864
+                },
+                "Teammates": {
+                    "Magmortar": 0.0308934864,
+                    "Braviary": 0.0308934864,
+                    "Audino-Mega": 0.0308934864,
+                    "Decidueye": 0.0308934864,
+                    "Blastoise": 0.0308934864
+                },
+                "usage": 0.0038641,
+                "Items": {
+                    "eviolite": 0.0308934864
+                },
+                "Raw count": 3,
+                "Spreads": {
+                    "Adamant:252/252/0/0/4/0": 0.0308934864
+                },
+                "Happiness": {
+                    "255": 0.0308934864
+                },
+                "Viability Ceiling": [1, 45, 45, 45]
+            },
+            "Piloswine": {
+                "Moves": {
+                    "toxic": 0,
+                    "stealthrock": 6.999986232,
+                    "iceshard": 6.999986232,
+                    "earthquake": 6.999986232,
+                    "iciclecrash": 6.999986232
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "thickfat": 6.999986232
+                },
+                "Teammates": {
+                    "Heliolisk": 0,
+                    "Comfey": 6.999986232,
+                    "Gurdurr": 6.999986232,
+                    "Slowking": 0,
+                    "Decidueye": 6.999986232,
+                    "Mesprit": 6.999986232,
+                    "Hitmonlee": 0,
+                    "Xatu": 0,
+                    "Clefairy": 0,
+                    "Garbodor": 6.999986232
+                },
+                "usage": 0.8755394,
+                "Items": {
+                    "eviolite": 6.999986232
+                },
+                "Raw count": 8,
+                "Spreads": {
+                    "Adamant:176/252/0/0/4/76": 6.999986232,
+                    "Impish:252/4/252/0/0/0": 0
+                },
+                "Happiness": {
+                    "255": 6.999986232
+                },
+                "Viability Ceiling": [2, 88, 88, 88]
+            },
+            "Klinklang": {
+                "Moves": {
+                    "thunderbolt": 0,
+                    "magnetrise": 0.0599774874,
+                    "geargrind": 0.0599774874,
+                    "flashcannon": 0,
+                    "voltswitch": 0,
+                    "hiddenpowerwater": 0,
+                    "shiftgear": 0.0599774874,
+                    "wildcharge": 0.0599774874
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "clearbody": 0.0599774874
+                },
+                "Teammates": {
+                    "Glalie-Mega": 0.0599774874,
+                    "Hariyama": 0,
+                    "Comfey": 0.0599774874,
+                    "Incineroar": 0,
+                    "Vikavolt": 0,
+                    "Passimian": 0.0599774874,
+                    "Sigilyph": 0.0599774874,
+                    "Skuntank": 0.0599774874,
+                    "Druddigon": 0
+                },
+                "usage": 0.0075018,
+                "Items": {
+                    "choicespecs": 0,
+                    "electriumz": 0.0599774874
+                },
+                "Raw count": 3,
+                "Spreads": {
+                    "Timid:0/0/0/252/4/252": 0,
+                    "Adamant:68/252/0/0/0/188": 0.0599774874
+                },
+                "Happiness": {
+                    "255": 0.0599774874
+                },
+                "Viability Ceiling": [2, 54, 54, 54]
+            },
+            "Passimian": {
+                "Moves": {
+                    "uturn": 0.0599774874,
+                    "gunkshot": 0.0599774874,
+                    "knockoff": 0.0599774874,
+                    "earthquake": 0,
+                    "closecombat": 0.0599774874
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "receiver": 0.0599774874
+                },
+                "Teammates": {
+                    "Glalie-Mega": 0.0599774874,
+                    "Comfey": 0.0599774874,
+                    "Incineroar": 0,
+                    "Sceptile": 0,
+                    "Steelix": 0,
+                    "Rotom": 0,
+                    "Sigilyph": 0.0599774874,
+                    "Skuntank": 0.0599774874,
+                    "Aromatisse": 0,
+                    "Klinklang": 0.0599774874
+                },
+                "usage": 0.0075018,
+                "Items": {
+                    "choicescarf": 0.0599774874
+                },
+                "Raw count": 3,
+                "Spreads": {
+                    "Jolly:0/252/0/0/4/252": 0.0599774874
+                },
+                "Happiness": {
+                    "255": 0.0599774874
+                },
+                "Viability Ceiling": [2, 54, 54, 54]
+            },
+            "Sigilyph": {
+                "Moves": {
+                    "heatwave": 0.0599774874,
+                    "psychic": 0.0599774874,
+                    "energyball": 0.0599774874,
+                    "airslash": 0.0599774874
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "magicguard": 0.0599774874
+                },
+                "Teammates": {
+                    "Glalie-Mega": 0.0599774874,
+                    "Comfey": 0.0599774874,
+                    "Skuntank": 0.0599774874,
+                    "Passimian": 0.0599774874,
+                    "Klinklang": 0.0599774874
+                },
+                "usage": 0.0075018,
+                "Items": {
+                    "lifeorb": 0.0599774874
+                },
+                "Raw count": 1,
+                "Spreads": {
+                    "Timid:0/0/0/252/4/252": 0.0599774874
+                },
+                "Happiness": {
+                    "255": 0.0599774874
+                },
+                "Viability Ceiling": [1, 52, 52, 52]
+            },
+            "Ambipom": {
+                "Moves": {
+                    "uturn": 0.9041988131,
+                    "brickbreak": 0,
+                    "knockoff": 0.9041988131,
+                    "frustration": 0.9041988131,
+                    "fakeout": 0.9041988131
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "technician": 0.9041988131
+                },
+                "Teammates": {
+                    "Delphox": 0.9041988131,
+                    "Comfey": 0.9041988131,
+                    "Weezing": 0.9041988131,
+                    "Abomasnow-Mega": 0,
+                    "Vikavolt": 0,
+                    "Samurott": 0.9041988131,
+                    "Decidueye": 0,
+                    "Xatu": 0,
+                    "Druddigon": 0.9041988131
+                },
+                "usage": 0.1130947,
+                "Items": {
+                    "silkscarf": 0.9041988131,
+                    "choiceband": 0
+                },
+                "Raw count": 2,
+                "Spreads": {
+                    "Jolly:4/252/0/0/0/252": 0,
+                    "Jolly:8/252/0/0/0/248": 0.9041988131
+                },
+                "Happiness": {
+                    "0": 0.9041988131,
+                    "255": 0
+                },
+                "Viability Ceiling": [2, 74, 74, 74]
+            },
+            "Weezing": {
+                "Moves": {
+                    "sludgebomb": 0.9041988131,
+                    "painsplit": 0.9041988131,
+                    "toxicspikes": 0.9041988131,
+                    "willowisp": 0.9041988131
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "levitate": 0.9041988131
+                },
+                "Teammates": {
+                    "Ambipom": 0.9041988131,
+                    "Delphox": 0.9041988131,
+                    "Samurott": 0.9041988131,
+                    "Comfey": 0.9041988131,
+                    "Druddigon": 0.9041988131
+                },
+                "usage": 0.1130947,
+                "Items": {
+                    "blacksludge": 0.9041988131
+                },
+                "Raw count": 1,
+                "Spreads": {
+                    "Bold:202/6/252/16/18/16": 0.9041988131
+                },
+                "Happiness": {
+                    "255": 0.9041988131
+                },
+                "Viability Ceiling": [1, 74, 74, 74]
+            },
+            "Skuntank": {
+                "Moves": {
+                    "crunch": 0.0599774874,
+                    "suckerpunch": 0.0599774874,
+                    "pursuit": 0.0599774874,
+                    "poisonjab": 0.0599774874
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "aftermath": 0.0599774874
+                },
+                "Teammates": {
+                    "Glalie-Mega": 0.0599774874,
+                    "Sigilyph": 0.0599774874,
+                    "Comfey": 0.0599774874,
+                    "Passimian": 0.0599774874,
+                    "Klinklang": 0.0599774874
+                },
+                "usage": 0.0075018,
+                "Items": {
+                    "expertbelt": 0.0599774874
+                },
+                "Raw count": 1,
+                "Spreads": {
+                    "Adamant:0/252/0/0/4/252": 0.0599774874
+                },
+                "Happiness": {
+                    "255": 0.0599774874
+                },
+                "Viability Ceiling": [1, 52, 52, 52]
+            },
+            "Magmortar": {
+                "Moves": {
+                    "thunderbolt": 0.0308934864,
+                    "fireblast": 0.0308934864,
+                    "focusblast": 0.0308934864,
+                    "hiddenpowergrass": 0.0308934864
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "vitalspirit": 0.0308934864
+                },
+                "Teammates": {
+                    "Rhydon": 0.0308934864,
+                    "Braviary": 0.0308934864,
+                    "Audino-Mega": 0.0308934864,
+                    "Decidueye": 0.0308934864,
+                    "Blastoise": 0.0308934864
+                },
+                "usage": 0.0038641,
+                "Items": {
+                    "lifeorb": 0.0308934864
+                },
+                "Raw count": 3,
+                "Spreads": {
+                    "Timid:0/0/0/252/4/252": 0.0308934864
+                },
+                "Happiness": {
+                    "255": 0.0308934864
+                },
+                "Viability Ceiling": [1, 45, 45, 45]
+            },
+            "Druddigon": {
+                "Moves": {
+                    "dragontail": 0.9041988131,
+                    "glare": 0.9041988131,
+                    "gunkshot": 0.9041988131,
+                    "ironhead": 0,
+                    "stealthrock": 0.9041988131,
+                    "firepunch": 0,
+                    "outrage": 0,
+                    "toxic": 0,
+                    "dragonclaw": 0,
+                    "earthquake": 0
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "roughskin": 0.9041988131,
+                    "sheerforce": 0
+                },
+                "Teammates": {
+                    "Glalie-Mega": 0,
+                    "Delphox": 0.9041988131,
+                    "Hariyama": 0,
+                    "Comfey": 0.9041988131,
+                    "Weezing": 0.9041988131,
+                    "Abomasnow-Mega": 0,
+                    "Vikavolt": 0,
+                    "Samurott": 0.9041988131,
+                    "Decidueye": 0,
+                    "Ambipom": 0.9041988131,
+                    "Incineroar": 0,
+                    "Xatu": 0,
+                    "Klinklang": 0
+                },
+                "usage": 0.1130947,
+                "Items": {
+                    "rockyhelmet": 0.9041988131,
+                    "choiceband": 0
+                },
+                "Raw count": 4,
+                "Spreads": {
+                    "Adamant:252/252/0/0/4/0": 0,
+                    "Impish:248/16/228/0/18/0": 0.9041988131,
+                    "Impish:252/0/228/0/28/0": 0
+                },
+                "Happiness": {
+                    "255": 0.9041988131
+                },
+                "Viability Ceiling": [3, 74, 74, 74]
+            },
+            "Garbodor": {
+                "Moves": {
+                    "gunkshot": 6.999986232,
+                    "spikes": 6.999986232,
+                    "explosion": 6.999986232,
+                    "toxicspikes": 6.999986232
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "aftermath": 6.999986232
+                },
+                "Teammates": {
+                    "Gurdurr": 6.999986232,
+                    "Comfey": 6.999986232,
+                    "Piloswine": 6.999986232,
+                    "Decidueye": 6.999986232,
+                    "Mesprit": 6.999986232
+                },
+                "usage": 0.8755394,
+                "Items": {
+                    "rockyhelmet": 6.999986232
+                },
+                "Raw count": 7,
+                "Spreads": {
+                    "Adamant:252/252/0/0/4/0": 6.999986232
+                },
+                "Happiness": {
+                    "255": 6.999986232
+                },
+                "Viability Ceiling": [1, 88, 88, 88]
+            },
+            "Blastoise": {
+                "Moves": {
+                    "scald": 0.0308934864,
+                    "seismictoss": 0.0308934864,
+                    "haze": 0.0308934864,
+                    "rapidspin": 0.0308934864
+                },
+                "Checks and Counters": {},
+                "Abilities": {
+                    "torrent": 0.0308934864
+                },
+                "Teammates": {
+                    "Rhydon": 0.0308934864,
+                    "Braviary": 0.0308934864,
+                    "Audino-Mega": 0.0308934864,
+                    "Decidueye": 0.0308934864,
+                    "Magmortar": 0.0308934864
+                },
+                "usage": 0.0038641,
+                "Items": {
+                    "leftovers": 0.0308934864
+                },
+                "Raw count": 3,
+                "Spreads": {
+                    "Bold:252/0/252/0/4/0": 0.0308934864
+                },
+                "Happiness": {
+                    "255": 0.0308934864
+                },
+                "Viability Ceiling": [1, 45, 45, 45]
+            }
+        }
     }
-  }
 }

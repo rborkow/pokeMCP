@@ -5,24 +5,25 @@
 export type FormatType = "singles" | "doubles" | "both";
 
 export interface TeamArchetype {
-  id: string;
-  name: string;
-  description: string;
-  icon: string; // emoji for display
-  prompt: string;
-  keyFeatures: string[];
-  formats: FormatType; // Which formats this archetype works in
+    id: string;
+    name: string;
+    description: string;
+    icon: string; // emoji for display
+    prompt: string;
+    keyFeatures: string[];
+    formats: FormatType; // Which formats this archetype works in
 }
 
 // Singles-focused archetypes
 const SINGLES_ARCHETYPES: TeamArchetype[] = [
-  {
-    id: "hyper-offense",
-    name: "Hyper Offense",
-    description: "Fast, aggressive teams that aim to overwhelm opponents before they can set up",
-    icon: "⚡",
-    formats: "singles",
-    prompt: `Build a Hyper Offense team for SINGLES. This archetype focuses on:
+    {
+        id: "hyper-offense",
+        name: "Hyper Offense",
+        description:
+            "Fast, aggressive teams that aim to overwhelm opponents before they can set up",
+        icon: "⚡",
+        formats: "singles",
+        prompt: `Build a Hyper Offense team for SINGLES. This archetype focuses on:
 - A suicide lead that sets hazards (Stealth Rock, Spikes) and possibly screens
 - Multiple fast, hard-hitting sweepers with high Attack/Special Attack and Speed
 - Setup sweepers (Swords Dance, Dragon Dance, Nasty Plot users)
@@ -31,15 +32,15 @@ const SINGLES_ARCHETYPES: TeamArchetype[] = [
 - Minimal defensive investment - every Pokemon should threaten KOs
 
 The win condition is overwhelming the opponent with continuous offensive pressure, not trading blows.`,
-    keyFeatures: ["Hazard lead", "Setup sweepers", "Priority moves", "High speed"],
-  },
-  {
-    id: "bulky-offense",
-    name: "Bulky Offense",
-    description: "Balanced attackers with natural bulk that can take hits while dealing damage",
-    icon: "🛡️",
-    formats: "singles",
-    prompt: `Build a Bulky Offense team for SINGLES. This archetype focuses on:
+        keyFeatures: ["Hazard lead", "Setup sweepers", "Priority moves", "High speed"],
+    },
+    {
+        id: "bulky-offense",
+        name: "Bulky Offense",
+        description: "Balanced attackers with natural bulk that can take hits while dealing damage",
+        icon: "🛡️",
+        formats: "singles",
+        prompt: `Build a Bulky Offense team for SINGLES. This archetype focuses on:
 - Pokemon with naturally high stats that don't need full offensive investment
 - Pivot moves (U-turn, Volt Switch, Flip Turn) to maintain momentum
 - At least one reliable defensive backbone that can check common threats
@@ -48,15 +49,15 @@ The win condition is overwhelming the opponent with continuous offensive pressur
 - Pokemon that can take a hit and hit back hard
 
 The win condition is using superior bulk to outlast offensive teams while maintaining enough firepower to break through defensive cores.`,
-    keyFeatures: ["Pivots", "Natural bulk", "Hazard control", "Balanced coverage"],
-  },
-  {
-    id: "balance",
-    name: "Balance",
-    description: "Well-rounded teams with answers to most threats and multiple win conditions",
-    icon: "⚖️",
-    formats: "singles",
-    prompt: `Build a Balance team for SINGLES. This archetype focuses on:
+        keyFeatures: ["Pivots", "Natural bulk", "Hazard control", "Balanced coverage"],
+    },
+    {
+        id: "balance",
+        name: "Balance",
+        description: "Well-rounded teams with answers to most threats and multiple win conditions",
+        icon: "⚖️",
+        formats: "singles",
+        prompt: `Build a Balance team for SINGLES. This archetype focuses on:
 - A solid defensive core (2-3 Pokemon) that covers each other's weaknesses
 - At least one reliable win condition (setup sweeper or wallbreaker)
 - Hazard setter AND hazard removal
@@ -65,15 +66,15 @@ The win condition is using superior bulk to outlast offensive teams while mainta
 - Good type synergy and defensive pivoting
 
 The win condition is playing the long game - removing threats one by one, keeping hazards up, and eventually sweeping with your preserved win condition.`,
-    keyFeatures: ["Defensive core", "Hazards both ways", "Status control", "Long game"],
-  },
-  {
-    id: "stall",
-    name: "Stall",
-    description: "Defensive teams that win through residual damage and PP stalling",
-    icon: "🧱",
-    formats: "singles",
-    prompt: `Build a Stall team for SINGLES. This archetype focuses on:
+        keyFeatures: ["Defensive core", "Hazards both ways", "Status control", "Long game"],
+    },
+    {
+        id: "stall",
+        name: "Stall",
+        description: "Defensive teams that win through residual damage and PP stalling",
+        icon: "🧱",
+        formats: "singles",
+        prompt: `Build a Stall team for SINGLES. This archetype focuses on:
 - Multiple defensive walls covering physical and special attacks
 - Reliable recovery on most Pokemon (Recover, Roost, Wish, Regenerator)
 - Hazard stacking (Stealth Rock + Spikes + Toxic Spikes ideally)
@@ -87,19 +88,19 @@ The win condition is NOT attacking - it's wearing down the opponent through:
 3. Eventually PP stalling their answers
 
 Include a way to handle common wallbreakers and setup sweepers in your metagame.`,
-    keyFeatures: ["Recovery", "Hazard stack", "Status spread", "Phazing"],
-  },
+        keyFeatures: ["Recovery", "Hazard stack", "Status spread", "Phazing"],
+    },
 ];
 
 // Doubles/VGC-focused archetypes
 const DOUBLES_ARCHETYPES: TeamArchetype[] = [
-  {
-    id: "goodstuffs",
-    name: "Goodstuffs",
-    description: "The best individual Pokemon that work well together without a gimmick",
-    icon: "⭐",
-    formats: "doubles",
-    prompt: `Build a Goodstuffs team for VGC/DOUBLES. This archetype focuses on:
+    {
+        id: "goodstuffs",
+        name: "Goodstuffs",
+        description: "The best individual Pokemon that work well together without a gimmick",
+        icon: "⭐",
+        formats: "doubles",
+        prompt: `Build a Goodstuffs team for VGC/DOUBLES. This archetype focuses on:
 - Picking the strongest, most versatile Pokemon in the format
 - No reliance on specific combos or weather - each Pokemon is independently strong
 - Strong spread moves (Earthquake, Rock Slide, Heat Wave, Dazzling Gleam)
@@ -113,15 +114,15 @@ Key elements:
 - Flexible team preview options - no auto-loss matchups
 
 The win condition is outplaying the opponent with superior individual Pokemon quality and flexibility.`,
-    keyFeatures: ["Top threats", "Spread moves", "Protect", "Flexible leads"],
-  },
-  {
-    id: "trick-room-doubles",
-    name: "Trick Room",
-    description: "Slow, powerful Pokemon that dominate under reversed speed",
-    icon: "🔮",
-    formats: "doubles",
-    prompt: `Build a Trick Room team for VGC/DOUBLES. This archetype focuses on:
+        keyFeatures: ["Top threats", "Spread moves", "Protect", "Flexible leads"],
+    },
+    {
+        id: "trick-room-doubles",
+        name: "Trick Room",
+        description: "Slow, powerful Pokemon that dominate under reversed speed",
+        icon: "🔮",
+        formats: "doubles",
+        prompt: `Build a Trick Room team for VGC/DOUBLES. This archetype focuses on:
 - 2 reliable Trick Room setters (you NEED backup in Doubles)
 - Multiple slow, powerful attackers with MINIMUM Speed (0 IVs, negative nature)
 - Pokemon with base Speed under 50 are ideal
@@ -140,15 +141,15 @@ IMPORTANT FOR DOUBLES:
 - Have 1-2 Pokemon that work outside of TR as backup
 
 The win condition is setting Trick Room and overwhelming with powerful slow attackers before TR ends.`,
-    keyFeatures: ["Dual TR setters", "0 Speed IVs", "Fake Out", "Spread moves"],
-  },
-  {
-    id: "tailwind",
-    name: "Tailwind",
-    description: "Fast teams that use Tailwind for speed control and offensive pressure",
-    icon: "💨",
-    formats: "doubles",
-    prompt: `Build a Tailwind team for VGC/DOUBLES. This archetype focuses on:
+        keyFeatures: ["Dual TR setters", "0 Speed IVs", "Fake Out", "Spread moves"],
+    },
+    {
+        id: "tailwind",
+        name: "Tailwind",
+        description: "Fast teams that use Tailwind for speed control and offensive pressure",
+        icon: "💨",
+        formats: "doubles",
+        prompt: `Build a Tailwind team for VGC/DOUBLES. This archetype focuses on:
 - 1-2 reliable Tailwind setters (Whimsicott, Tornadus, Talonflame, Murkrow)
 - Fast attackers that become blazing fast under Tailwind
 - Priority Tailwind (Prankster) is valuable but not required
@@ -166,15 +167,15 @@ IMPORTANT FOR DOUBLES:
 - Spread moves to pressure both opponents
 
 The win condition is setting Tailwind and sweeping with doubled speed before it expires.`,
-    keyFeatures: ["Tailwind setter", "Fast attackers", "Prankster", "4-turn window"],
-  },
-  {
-    id: "sun-doubles",
-    name: "Sun",
-    description: "Drought-based teams with Chlorophyll sweepers and boosted Fire moves",
-    icon: "☀️",
-    formats: "doubles",
-    prompt: `Build a Sun team for VGC/DOUBLES. This archetype focuses on:
+        keyFeatures: ["Tailwind setter", "Fast attackers", "Prankster", "4-turn window"],
+    },
+    {
+        id: "sun-doubles",
+        name: "Sun",
+        description: "Drought-based teams with Chlorophyll sweepers and boosted Fire moves",
+        icon: "☀️",
+        formats: "doubles",
+        prompt: `Build a Sun team for VGC/DOUBLES. This archetype focuses on:
 - Drought setter (Torkoal is most common, Koraidon if legal)
 - Chlorophyll sweepers that outspeed under Sun (Venusaur, Lilligant)
 - Fire-types with boosted STAB (1.5x Fire moves in Sun)
@@ -196,15 +197,15 @@ IMPORTANT FOR DOUBLES:
 - Consider Wide Guard for Earthquake/Rock Slide
 
 The win condition is maintaining Sun and sweeping with boosted Chlorophyll users and Fire-types.`,
-    keyFeatures: ["Drought", "Chlorophyll", "Eruption", "Sleep Powder"],
-  },
-  {
-    id: "rain-doubles",
-    name: "Rain",
-    description: "Drizzle-based teams with Swift Swim sweepers and 100% accurate Thunder",
-    icon: "🌧️",
-    formats: "doubles",
-    prompt: `Build a Rain team for VGC/DOUBLES. This archetype focuses on:
+        keyFeatures: ["Drought", "Chlorophyll", "Eruption", "Sleep Powder"],
+    },
+    {
+        id: "rain-doubles",
+        name: "Rain",
+        description: "Drizzle-based teams with Swift Swim sweepers and 100% accurate Thunder",
+        icon: "🌧️",
+        formats: "doubles",
+        prompt: `Build a Rain team for VGC/DOUBLES. This archetype focuses on:
 - Drizzle setter (Pelipper, Politoed, Kyogre if legal)
 - Swift Swim sweepers that outspeed everything in Rain
 - Water-types with boosted STAB (1.5x Water moves in Rain)
@@ -226,15 +227,15 @@ IMPORTANT FOR DOUBLES:
 - Wide Guard blocks spread Water moves from opponents
 
 The win condition is maintaining Rain and overwhelming with Swift Swim speed + boosted Water damage.`,
-    keyFeatures: ["Drizzle", "Swift Swim", "Thunder", "Water Spout"],
-  },
-  {
-    id: "sand-doubles",
-    name: "Sand",
-    description: "Sandstorm teams with Sand Rush sweepers and specially defensive boost",
-    icon: "🏜️",
-    formats: "doubles",
-    prompt: `Build a Sand team for VGC/DOUBLES. This archetype focuses on:
+        keyFeatures: ["Drizzle", "Swift Swim", "Thunder", "Water Spout"],
+    },
+    {
+        id: "sand-doubles",
+        name: "Sand",
+        description: "Sandstorm teams with Sand Rush sweepers and specially defensive boost",
+        icon: "🏜️",
+        formats: "doubles",
+        prompt: `Build a Sand team for VGC/DOUBLES. This archetype focuses on:
 - Sand Stream setter (Tyranitar, Hippowdon, Gigalith)
 - Sand Rush sweepers (Excadrill is the premier choice)
 - Rock/Ground/Steel types immune to Sand damage
@@ -256,18 +257,18 @@ IMPORTANT FOR DOUBLES:
 - Wide Guard blocks opposing Earthquakes
 
 The win condition is maintaining Sand for chip damage + Sand Rush speed while tanking special hits.`,
-    keyFeatures: ["Sand Stream", "Sand Rush", "SpDef boost", "Ground immunity"],
-  },
+        keyFeatures: ["Sand Stream", "Sand Rush", "SpDef boost", "Ground immunity"],
+    },
 ];
 
 // Goblin Mode - Wolfe Glick-inspired creative/unorthodox teams
 const GOBLIN_MODE: TeamArchetype = {
-  id: "goblin-mode",
-  name: "Goblin Mode",
-  description: "Unorthodox, creative teams that catch opponents off-guard with unexpected tech",
-  icon: "🎨", // Smeargle energy - anything goes
-  formats: "both",
-  prompt: `Build a GOBLIN MODE team - an unorthodox, creative team inspired by Wolfe Glick's World Championship-winning teams that use unexpected strategies and tech choices.
+    id: "goblin-mode",
+    name: "Goblin Mode",
+    description: "Unorthodox, creative teams that catch opponents off-guard with unexpected tech",
+    icon: "🎨", // Smeargle energy - anything goes
+    formats: "both",
+    prompt: `Build a GOBLIN MODE team - an unorthodox, creative team inspired by Wolfe Glick's World Championship-winning teams that use unexpected strategies and tech choices.
 
 Goblin Mode principles:
 - USE POKEMON THAT AREN'T COMMON IN THE META but have untapped potential
@@ -292,17 +293,17 @@ Creative tech to consider:
 The goal is to make your opponent think "WHAT?!" every turn. Win by confusion and superior preparation for your own weird strategy.
 
 DO NOT just pick standard meta Pokemon with standard sets. The whole point is catching people off-guard with creativity and deep game knowledge.`,
-  keyFeatures: ["Surprise tech", "Anti-meta", "Mind games", "Uncommon picks"],
+    keyFeatures: ["Surprise tech", "Anti-meta", "Mind games", "Uncommon picks"],
 };
 
 // Weather archetype for Singles (different considerations)
 const WEATHER_SINGLES: TeamArchetype = {
-  id: "weather-singles",
-  name: "Weather",
-  description: "Teams built around Sun, Rain, Sand, or Snow to boost specific attackers",
-  icon: "🌦️",
-  formats: "singles",
-  prompt: `Build a Weather team for SINGLES. Choose ONE weather and commit to it:
+    id: "weather-singles",
+    name: "Weather",
+    description: "Teams built around Sun, Rain, Sand, or Snow to boost specific attackers",
+    icon: "🌦️",
+    formats: "singles",
+    prompt: `Build a Weather team for SINGLES. Choose ONE weather and commit to it:
 
 For Sun: Drought setter + Chlorophyll sweepers + Fire-types that abuse sun
 For Rain: Drizzle setter + Swift Swim sweepers + Water-types + Thunder users
@@ -321,73 +322,74 @@ Key Singles considerations:
 - Individual Pokemon need to handle more threats (no partner support)
 
 The win condition is establishing weather and sweeping with speed-boosted or power-boosted attackers.`,
-  keyFeatures: ["Weather setter", "Speed/Power boost", "Independent backup", "Hazards"],
+    keyFeatures: ["Weather setter", "Speed/Power boost", "Independent backup", "Hazards"],
 };
 
 // Combine all archetypes
 export const TEAM_ARCHETYPES: TeamArchetype[] = [
-  ...SINGLES_ARCHETYPES.slice(0, 2), // Hyper Offense, Bulky Offense
-  ...DOUBLES_ARCHETYPES.slice(0, 2), // Goodstuffs, Trick Room
-  WEATHER_SINGLES,
-  DOUBLES_ARCHETYPES[2], // Tailwind
-  GOBLIN_MODE, // Wolfe-style creative teams
-  ...SINGLES_ARCHETYPES.slice(2), // Balance, Stall
-  ...DOUBLES_ARCHETYPES.slice(3), // Sun, Rain, Sand
+    ...SINGLES_ARCHETYPES.slice(0, 2), // Hyper Offense, Bulky Offense
+    ...DOUBLES_ARCHETYPES.slice(0, 2), // Goodstuffs, Trick Room
+    WEATHER_SINGLES,
+    DOUBLES_ARCHETYPES[2], // Tailwind
+    GOBLIN_MODE, // Wolfe-style creative teams
+    ...SINGLES_ARCHETYPES.slice(2), // Balance, Stall
+    ...DOUBLES_ARCHETYPES.slice(3), // Sun, Rain, Sand
 ];
 
 /**
  * Check if format is a doubles format
  */
 export function isDoublesFormat(format: string): boolean {
-  const doublesFormats = ["vgc", "doubles", "battlestadium", "bsd", "bss"];
-  const lowerFormat = format.toLowerCase();
-  return doublesFormats.some(f => lowerFormat.includes(f));
+    const doublesFormats = ["vgc", "doubles", "battlestadium", "bsd", "bss"];
+    const lowerFormat = format.toLowerCase();
+    return doublesFormats.some((f) => lowerFormat.includes(f));
 }
 
 /**
  * Get archetypes filtered by format
  */
 export function getArchetypesForFormat(format: string): TeamArchetype[] {
-  const isDoubles = isDoublesFormat(format);
-  return TEAM_ARCHETYPES.filter(a =>
-    a.formats === "both" ||
-    (isDoubles && a.formats === "doubles") ||
-    (!isDoubles && a.formats === "singles")
-  );
+    const isDoubles = isDoublesFormat(format);
+    return TEAM_ARCHETYPES.filter(
+        (a) =>
+            a.formats === "both" ||
+            (isDoubles && a.formats === "doubles") ||
+            (!isDoubles && a.formats === "singles"),
+    );
 }
 
 export function getArchetype(id: string): TeamArchetype | undefined {
-  return TEAM_ARCHETYPES.find(a => a.id === id);
+    return TEAM_ARCHETYPES.find((a) => a.id === id);
 }
 
 export function getArchetypePrompt(id: string, format: string): string {
-  const archetype = getArchetype(id);
-  const isDoubles = isDoublesFormat(format);
-  const teamSize = isDoubles ? 6 : 6; // VGC brings 6, picks 4
+    const archetype = getArchetype(id);
+    const isDoubles = isDoublesFormat(format);
+    const teamSize = isDoubles ? 6 : 6; // VGC brings 6, picks 4
 
-  if (!archetype) {
-    return `Build me a competitive ${teamSize} Pokemon team for ${format.toUpperCase()}. ${
-      isDoubles
-        ? "This is a DOUBLES format - include Protect on most Pokemon, use spread moves, and consider speed control options."
-        : "This is a SINGLES format - include entry hazards, pivot moves, and reliable recovery where appropriate."
-    }`;
-  }
+    if (!archetype) {
+        return `Build me a competitive ${teamSize} Pokemon team for ${format.toUpperCase()}. ${
+            isDoubles
+                ? "This is a DOUBLES format - include Protect on most Pokemon, use spread moves, and consider speed control options."
+                : "This is a SINGLES format - include entry hazards, pivot moves, and reliable recovery where appropriate."
+        }`;
+    }
 
-  const formatNote = isDoubles
-    ? `\n\nDOUBLES FORMAT REQUIREMENTS:
+    const formatNote = isDoubles
+        ? `\n\nDOUBLES FORMAT REQUIREMENTS:
 - Most Pokemon should have Protect
 - Include spread moves (Earthquake, Rock Slide, Heat Wave, etc.)
 - Speed control is essential (Tailwind, Trick Room, Icy Wind, Electroweb)
 - Consider redirection (Follow Me, Rage Powder) or Fake Out support
 - Team preview matters - have flexible lead combinations`
-    : `\n\nSINGLES FORMAT REQUIREMENTS:
+        : `\n\nSINGLES FORMAT REQUIREMENTS:
 - Include entry hazards (Stealth Rock at minimum)
 - Have hazard removal (Defog, Rapid Spin, or Magic Bounce)
 - Pivot moves (U-turn, Volt Switch, Flip Turn) are valuable
 - Recovery moves are important for longevity
 - Consider status moves (Toxic, Will-O-Wisp, Thunder Wave)`;
 
-  return `${archetype.prompt}${formatNote}
+    return `${archetype.prompt}${formatNote}
 
 Build a complete ${teamSize} Pokemon team for ${format.toUpperCase()}. For EACH Pokemon, provide the full competitive set using the modify_team tool with:
 - Optimal moves from the meta (4 moves each)

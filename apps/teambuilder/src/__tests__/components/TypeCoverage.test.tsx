@@ -121,9 +121,9 @@ describe("TypeCoverage", () => {
         // Verify badges render with counts in parentheses
         // Garchomp (Dragon/Ground) is weak to Ice
         // Both are represented with counts
-        const badges = screen.getAllByRole("generic").filter((el) =>
-            el.className.includes("cursor-help") && el.textContent?.includes("(")
-        );
+        const badges = screen
+            .getAllByRole("generic")
+            .filter((el) => el.className.includes("cursor-help") && el.textContent?.includes("("));
         expect(badges.length).toBeGreaterThan(0);
     });
 

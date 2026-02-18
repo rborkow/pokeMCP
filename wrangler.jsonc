@@ -1,164 +1,158 @@
 {
-	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "pokemon-mcp-production",
-	"main": "src/index.ts",
-	"compatibility_date": "2025-03-10",
-	"compatibility_flags": [
-		"nodejs_compat"
-	],
-	"migrations": [
-		{
-			"new_sqlite_classes": [
-				"PokemonMCP"
-			],
-			"tag": "v1"
-		}
-	],
-	/**
-	 * DEFAULT ENVIRONMENT (Local Development)
-	 *
-	 * When running `npm run dev`, wrangler uses local simulation for KV/DO.
-	 * No cloud resources are accessed. This is safe for contributors.
-	 *
-	 * For production deployment, use: npm run deploy:production
-	 */
-	"durable_objects": {
-		"bindings": [
-			{
-				"class_name": "PokemonMCP",
-				"name": "MCP_OBJECT"
-			}
-		]
-	},
-	"kv_namespaces": [
-		{
-			"binding": "POKEMON_STATS",
-			// Production KV - only accessed when deploying (not during local dev)
-			"id": "58525ad4ec5c454eb3e1ae7586414483"
-		},
-		{
-			"binding": "STRATEGY_DOCS",
-			"id": "3be55e1e98144776a62ee00f5bced815"
-		}
-	],
-	"vectorize": [
-		{
-			"binding": "VECTOR_INDEX",
-			"index_name": "pokemon-strategy-index"
-		}
-	],
-	"ai": {
-		"binding": "AI"
-	},
-	// R2 bucket for anonymized interaction logging (fine-tuning data)
-	// Created with: npx wrangler r2 bucket create pokemcp-interaction-logs
-	"r2_buckets": [
-		{
-			"binding": "INTERACTION_LOGS",
-			"bucket_name": "pokemcp-interaction-logs"
-		}
-	],
-	// No cron triggers in default environment (only production)
-	"observability": {
-		"enabled": true
-	},
-	"vars": {
-		"ENVIRONMENT": "development"
-	},
-	/**
-	 * ENVIRONMENT-SPECIFIC CONFIGURATIONS
-	 *
-	 * Production: Deployed via CI/CD on merge to main
-	 * Staging: Optional preview environment for testing
-	 */
-	"env": {
-		"staging": {
-			"name": "pokemon-mcp-staging",
-			"vars": {
-				"ENVIRONMENT": "staging"
-			},
-			// Staging uses the same KV as production (read-only access is fine)
-			// To create separate staging KV, run:
-			//   npx wrangler kv namespace create POKEMON_STATS_STAGING
-			//   npx wrangler kv namespace create STRATEGY_DOCS_STAGING
-			"kv_namespaces": [
-				{
-					"binding": "POKEMON_STATS",
-					"id": "58525ad4ec5c454eb3e1ae7586414483"
-				},
-				{
-					"binding": "STRATEGY_DOCS",
-					"id": "3be55e1e98144776a62ee00f5bced815"
-				}
-			],
-			"r2_buckets": [
-				{
-					"binding": "INTERACTION_LOGS",
-					"bucket_name": "pokemcp-interaction-logs"
-				}
-			],
-			"vectorize": [
-				{
-					"binding": "VECTOR_INDEX",
-					"index_name": "pokemon-strategy-index"
-				}
-			],
-			"durable_objects": {
-				"bindings": [
-					{
-						"class_name": "PokemonMCP",
-						"name": "MCP_OBJECT"
-					}
-				]
-			},
-			"ai": {
-				"binding": "AI"
-			}
-		},
-		"production": {
-			"name": "pokemon-mcp-production",
-			"vars": {
-				"ENVIRONMENT": "production"
-			},
-			"kv_namespaces": [
-				{
-					"binding": "POKEMON_STATS",
-					"id": "58525ad4ec5c454eb3e1ae7586414483"
-				},
-				{
-					"binding": "STRATEGY_DOCS",
-					"id": "3be55e1e98144776a62ee00f5bced815"
-				}
-			],
-			"r2_buckets": [
-				{
-					"binding": "INTERACTION_LOGS",
-					"bucket_name": "pokemcp-interaction-logs"
-				}
-			],
-			"vectorize": [
-				{
-					"binding": "VECTOR_INDEX",
-					"index_name": "pokemon-strategy-index"
-				}
-			],
-			"durable_objects": {
-				"bindings": [
-					{
-						"class_name": "PokemonMCP",
-						"name": "MCP_OBJECT"
-					}
-				]
-			},
-			"ai": {
-				"binding": "AI"
-			},
-			// Weekly cron for RAG content ingestion (Sundays at 3 AM UTC)
-			"triggers": {
-				"crons": [
-					"0 3 * * SUN"
-				]
-			}
-		}
-	}
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "pokemon-mcp-production",
+    "main": "src/index.ts",
+    "compatibility_date": "2025-03-10",
+    "compatibility_flags": ["nodejs_compat"],
+    "migrations": [
+        {
+            "new_sqlite_classes": ["PokemonMCP"],
+            "tag": "v1"
+        }
+    ],
+    /**
+     * DEFAULT ENVIRONMENT (Local Development)
+     *
+     * When running `npm run dev`, wrangler uses local simulation for KV/DO.
+     * No cloud resources are accessed. This is safe for contributors.
+     *
+     * For production deployment, use: npm run deploy:production
+     */
+    "durable_objects": {
+        "bindings": [
+            {
+                "class_name": "PokemonMCP",
+                "name": "MCP_OBJECT"
+            }
+        ]
+    },
+    "kv_namespaces": [
+        {
+            "binding": "POKEMON_STATS",
+            // Production KV - only accessed when deploying (not during local dev)
+            "id": "58525ad4ec5c454eb3e1ae7586414483"
+        },
+        {
+            "binding": "STRATEGY_DOCS",
+            "id": "3be55e1e98144776a62ee00f5bced815"
+        }
+    ],
+    "vectorize": [
+        {
+            "binding": "VECTOR_INDEX",
+            "index_name": "pokemon-strategy-index"
+        }
+    ],
+    "ai": {
+        "binding": "AI"
+    },
+    // R2 bucket for anonymized interaction logging (fine-tuning data)
+    // Created with: npx wrangler r2 bucket create pokemcp-interaction-logs
+    "r2_buckets": [
+        {
+            "binding": "INTERACTION_LOGS",
+            "bucket_name": "pokemcp-interaction-logs"
+        }
+    ],
+    // No cron triggers in default environment (only production)
+    "observability": {
+        "enabled": true
+    },
+    "vars": {
+        "ENVIRONMENT": "development"
+    },
+    /**
+     * ENVIRONMENT-SPECIFIC CONFIGURATIONS
+     *
+     * Production: Deployed via CI/CD on merge to main
+     * Staging: Optional preview environment for testing
+     */
+    "env": {
+        "staging": {
+            "name": "pokemon-mcp-staging",
+            "vars": {
+                "ENVIRONMENT": "staging"
+            },
+            // Staging uses the same KV as production (read-only access is fine)
+            // To create separate staging KV, run:
+            //   npx wrangler kv namespace create POKEMON_STATS_STAGING
+            //   npx wrangler kv namespace create STRATEGY_DOCS_STAGING
+            "kv_namespaces": [
+                {
+                    "binding": "POKEMON_STATS",
+                    "id": "58525ad4ec5c454eb3e1ae7586414483"
+                },
+                {
+                    "binding": "STRATEGY_DOCS",
+                    "id": "3be55e1e98144776a62ee00f5bced815"
+                }
+            ],
+            "r2_buckets": [
+                {
+                    "binding": "INTERACTION_LOGS",
+                    "bucket_name": "pokemcp-interaction-logs"
+                }
+            ],
+            "vectorize": [
+                {
+                    "binding": "VECTOR_INDEX",
+                    "index_name": "pokemon-strategy-index"
+                }
+            ],
+            "durable_objects": {
+                "bindings": [
+                    {
+                        "class_name": "PokemonMCP",
+                        "name": "MCP_OBJECT"
+                    }
+                ]
+            },
+            "ai": {
+                "binding": "AI"
+            }
+        },
+        "production": {
+            "name": "pokemon-mcp-production",
+            "vars": {
+                "ENVIRONMENT": "production"
+            },
+            "kv_namespaces": [
+                {
+                    "binding": "POKEMON_STATS",
+                    "id": "58525ad4ec5c454eb3e1ae7586414483"
+                },
+                {
+                    "binding": "STRATEGY_DOCS",
+                    "id": "3be55e1e98144776a62ee00f5bced815"
+                }
+            ],
+            "r2_buckets": [
+                {
+                    "binding": "INTERACTION_LOGS",
+                    "bucket_name": "pokemcp-interaction-logs"
+                }
+            ],
+            "vectorize": [
+                {
+                    "binding": "VECTOR_INDEX",
+                    "index_name": "pokemon-strategy-index"
+                }
+            ],
+            "durable_objects": {
+                "bindings": [
+                    {
+                        "class_name": "PokemonMCP",
+                        "name": "MCP_OBJECT"
+                    }
+                ]
+            },
+            "ai": {
+                "binding": "AI"
+            },
+            // Weekly cron for RAG content ingestion (Sundays at 3 AM UTC)
+            "triggers": {
+                "crons": ["0 3 * * SUN"]
+            }
+        }
+    }
 }

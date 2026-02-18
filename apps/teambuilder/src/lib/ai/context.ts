@@ -8,8 +8,8 @@ export type { TeamPokemon };
  * Get mode-specific guidance for the AI
  */
 function getModeGuidance(mode: Mode): string {
-  if (mode === "vgc") {
-    return `
+    if (mode === "vgc") {
+        return `
 VGC-SPECIFIC GUIDANCE (This is a DOUBLES format):
 - Protect is ESSENTIAL on most Pokemon - suggest it unless there's a good reason not to
 - IMPORTANT: Choice items (Choice Band, Specs, Scarf) + Protect is LEGAL and sometimes strategic
@@ -22,9 +22,9 @@ VGC-SPECIFIC GUIDANCE (This is a DOUBLES format):
 - Teams bring 6, pick 4 at team preview - consider flexible cores
 - Partner synergy matters: don't suggest Earthquake if partner is weak to Ground
 - Common VGC Pokemon often have different sets than Singles (more Protect, less recovery)`;
-  }
+    }
 
-  return `
+    return `
 SINGLES-SPECIFIC GUIDANCE (This is a 6v6 format):
 - Entry hazards (Stealth Rock, Spikes, Toxic Spikes) are crucial for chip damage
 - Hazard removal (Defog, Rapid Spin) or Magic Bounce is valuable
@@ -42,202 +42,213 @@ const MCP_URL = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
  * Returns analysis of common partners that aren't already on the team
  */
 export async function fetchTeammateAnalysis(team: TeamPokemon[], format: string): Promise<string> {
-  if (team.length === 0) return "";
+    if (team.length === 0) return "";
 
-  // Only fetch for up to 3 Pokemon to avoid too many requests
-  const pokemonToCheck = team.slice(0, 3);
-  const currentTeamNames = new Set(team.map(p => p.pokemon.toLowerCase()));
+    // Only fetch for up to 3 Pokemon to avoid too many requests
+    const pokemonToCheck = team.slice(0, 3);
+    const currentTeamNames = new Set(team.map((p) => p.pokemon.toLowerCase()));
 
-  const allSuggestions: Map<string, { count: number; from: string[] }> = new Map();
+    const allSuggestions: Map<string, { count: number; from: string[] }> = new Map();
 
-  for (const mon of pokemonToCheck) {
-    try {
-      const response = await fetch(`${MCP_URL}/api/tools`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          tool: "get_teammates",
-          args: { pokemon: mon.pokemon, format, limit: 8 },
-        }),
-      });
+    for (const mon of pokemonToCheck) {
+        try {
+            const response = await fetch(`${MCP_URL}/api/tools`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    tool: "get_teammates",
+                    args: { pokemon: mon.pokemon, format, limit: 8 },
+                }),
+            });
 
-      if (response.ok) {
-        const data = await response.json();
-        const text = data.result?.content?.[0]?.text || "";
+            if (response.ok) {
+                const data = await response.json();
+                const text = data.result?.content?.[0]?.text || "";
 
-        // Parse teammate names from the response (format: "- **Name**: X.X%")
-        const teammateRegex = /\*\*([^*]+)\*\*:\s*(\d+(?:\.\d+)?)/g;
-        let match;
-        while ((match = teammateRegex.exec(text)) !== null) {
-          const teammateName = match[0].split("**")[1];
-          const usage = parseFloat(match[2]);
+                // Parse teammate names from the response (format: "- **Name**: X.X%")
+                const teammateRegex = /\*\*([^*]+)\*\*:\s*(\d+(?:\.\d+)?)/g;
+                let match;
+                while ((match = teammateRegex.exec(text)) !== null) {
+                    const teammateName = match[0].split("**")[1];
+                    const usage = Number.parseFloat(match[2]);
 
-          // Skip if already on team
-          if (currentTeamNames.has(teammateName.toLowerCase())) continue;
+                    // Skip if already on team
+                    if (currentTeamNames.has(teammateName.toLowerCase())) continue;
 
-          // Only track teammates with >5% usage
-          if (usage < 5) continue;
+                    // Only track teammates with >5% usage
+                    if (usage < 5) continue;
 
-          const existing = allSuggestions.get(teammateName);
-          if (existing) {
-            existing.count++;
-            existing.from.push(mon.pokemon);
-          } else {
-            allSuggestions.set(teammateName, { count: 1, from: [mon.pokemon] });
-          }
+                    const existing = allSuggestions.get(teammateName);
+                    if (existing) {
+                        existing.count++;
+                        existing.from.push(mon.pokemon);
+                    } else {
+                        allSuggestions.set(teammateName, { count: 1, from: [mon.pokemon] });
+                    }
+                }
+            }
+        } catch (e) {
+            console.error(`Failed to fetch teammates for ${mon.pokemon}:`, e);
         }
-      }
-    } catch (e) {
-      console.error(`Failed to fetch teammates for ${mon.pokemon}:`, e);
     }
-  }
 
-  if (allSuggestions.size === 0) return "";
+    if (allSuggestions.size === 0) return "";
 
-  // Sort by how many team members share the teammate
-  const sortedSuggestions = Array.from(allSuggestions.entries())
-    .sort((a, b) => b[1].count - a[1].count)
-    .slice(0, 6);
+    // Sort by how many team members share the teammate
+    const sortedSuggestions = Array.from(allSuggestions.entries())
+        .sort((a, b) => b[1].count - a[1].count)
+        .slice(0, 6);
 
-  let output = "TEAMMATE SYNERGY SUGGESTIONS:\n";
-  output += "These Pokemon commonly pair well with your current team:\n";
+    let output = "TEAMMATE SYNERGY SUGGESTIONS:\n";
+    output += "These Pokemon commonly pair well with your current team:\n";
 
-  for (const [name, data] of sortedSuggestions) {
-    if (data.count > 1) {
-      output += `- ${name} (pairs with ${data.from.join(", ")})\n`;
-    } else {
-      output += `- ${name} (pairs with ${data.from[0]})\n`;
+    for (const [name, data] of sortedSuggestions) {
+        if (data.count > 1) {
+            output += `- ${name} (pairs with ${data.from.join(", ")})\n`;
+        } else {
+            output += `- ${name} (pairs with ${data.from[0]})\n`;
+        }
     }
-  }
 
-  return output;
+    return output;
 }
 
 // Common Pokemon names to look for in messages
 const COMMON_POKEMON = [
-  "Garchomp", "Landorus", "Great Tusk", "Kingambit", "Gholdengo",
-  "Dragapult", "Iron Valiant", "Roaring Moon", "Skeledirge",
-  "Arcanine", "Heatran", "Toxapex"
+    "Garchomp",
+    "Landorus",
+    "Great Tusk",
+    "Kingambit",
+    "Gholdengo",
+    "Dragapult",
+    "Iron Valiant",
+    "Roaring Moon",
+    "Skeledirge",
+    "Arcanine",
+    "Heatran",
+    "Toxapex",
 ];
 
 /**
  * Fetch meta threats from MCP server
  */
 export async function fetchMetaThreats(format: string): Promise<string> {
-  try {
-    const response = await fetch(`${MCP_URL}/api/tools`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        tool: "get_meta_threats",
-        args: { format, limit: 15 },
-      }),
-    });
-    if (response.ok) {
-      const data = await response.json();
-      return data.result?.content?.[0]?.text || "";
+    try {
+        const response = await fetch(`${MCP_URL}/api/tools`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                tool: "get_meta_threats",
+                args: { format, limit: 15 },
+            }),
+        });
+        if (response.ok) {
+            const data = await response.json();
+            return data.result?.content?.[0]?.text || "";
+        }
+    } catch (e) {
+        console.error("Failed to fetch meta threats:", e);
     }
-  } catch (e) {
-    console.error("Failed to fetch meta threats:", e);
-  }
-  return "";
+    return "";
 }
 
 /**
  * Extract Pokemon names mentioned in message and fetch their popular sets
  */
 export async function fetchPopularSetsContext(message: string, format: string): Promise<string> {
-  const pokemonMentioned: string[] = [];
-  for (const mon of COMMON_POKEMON) {
-    if (message.toLowerCase().includes(mon.toLowerCase())) {
-      pokemonMentioned.push(mon);
-    }
-  }
-
-  let context = "";
-  for (const pokemon of pokemonMentioned.slice(0, 3)) {
-    try {
-      const response = await fetch(`${MCP_URL}/api/tools`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          tool: "get_popular_sets",
-          args: { pokemon, format },
-        }),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        const text = data.result?.content?.[0]?.text || "";
-        if (text) {
-          context += `\n\n${text}`;
+    const pokemonMentioned: string[] = [];
+    for (const mon of COMMON_POKEMON) {
+        if (message.toLowerCase().includes(mon.toLowerCase())) {
+            pokemonMentioned.push(mon);
         }
-      }
-    } catch (e) {
-      console.error(`Failed to fetch sets for ${pokemon}:`, e);
     }
-  }
-  return context;
+
+    let context = "";
+    for (const pokemon of pokemonMentioned.slice(0, 3)) {
+        try {
+            const response = await fetch(`${MCP_URL}/api/tools`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    tool: "get_popular_sets",
+                    args: { pokemon, format },
+                }),
+            });
+            if (response.ok) {
+                const data = await response.json();
+                const text = data.result?.content?.[0]?.text || "";
+                if (text) {
+                    context += `\n\n${text}`;
+                }
+            }
+        } catch (e) {
+            console.error(`Failed to fetch sets for ${pokemon}:`, e);
+        }
+    }
+    return context;
 }
 
 /**
  * Format EV spread into readable string
  */
 function formatEVs(evs: TeamPokemon["evs"]): string {
-  if (!evs) return "";
-  const parts: string[] = [];
-  if (evs.hp) parts.push(`${evs.hp} HP`);
-  if (evs.atk) parts.push(`${evs.atk} Atk`);
-  if (evs.def) parts.push(`${evs.def} Def`);
-  if (evs.spa) parts.push(`${evs.spa} SpA`);
-  if (evs.spd) parts.push(`${evs.spd} SpD`);
-  if (evs.spe) parts.push(`${evs.spe} Spe`);
-  return parts.join(" / ");
+    if (!evs) return "";
+    const parts: string[] = [];
+    if (evs.hp) parts.push(`${evs.hp} HP`);
+    if (evs.atk) parts.push(`${evs.atk} Atk`);
+    if (evs.def) parts.push(`${evs.def} Def`);
+    if (evs.spa) parts.push(`${evs.spa} SpA`);
+    if (evs.spd) parts.push(`${evs.spd} SpD`);
+    if (evs.spe) parts.push(`${evs.spe} Spe`);
+    return parts.join(" / ");
 }
 
 /**
  * Format team array into readable context string
  */
 export function formatTeamContext(team: TeamPokemon[]): string {
-  if (team.length === 0) {
-    return "No Pokemon in team yet.";
-  }
-  return team.map((p, i) => {
-    const lines: string[] = [];
-    // Header line: name @ item (ability)
-    let header = `${i + 1}. ${p.pokemon}`;
-    if (p.item) header += ` @ ${p.item}`;
-    if (p.ability) header += ` (${p.ability})`;
-    lines.push(header);
-    // Tera type if present
-    if (p.teraType) lines.push(`   Tera Type: ${p.teraType}`);
-    // Nature if present
-    if (p.nature) lines.push(`   Nature: ${p.nature}`);
-    // EVs if present
-    const evStr = formatEVs(p.evs);
-    if (evStr) lines.push(`   EVs: ${evStr}`);
-    // Moves
-    if (p.moves && p.moves.length > 0) lines.push(`   Moves: ${p.moves.join(", ")}`);
-    return lines.join("\n");
-  }).join("\n\n");
+    if (team.length === 0) {
+        return "No Pokemon in team yet.";
+    }
+    return team
+        .map((p, i) => {
+            const lines: string[] = [];
+            // Header line: name @ item (ability)
+            let header = `${i + 1}. ${p.pokemon}`;
+            if (p.item) header += ` @ ${p.item}`;
+            if (p.ability) header += ` (${p.ability})`;
+            lines.push(header);
+            // Tera type if present
+            if (p.teraType) lines.push(`   Tera Type: ${p.teraType}`);
+            // Nature if present
+            if (p.nature) lines.push(`   Nature: ${p.nature}`);
+            // EVs if present
+            const evStr = formatEVs(p.evs);
+            if (evStr) lines.push(`   EVs: ${evStr}`);
+            // Moves
+            if (p.moves && p.moves.length > 0) lines.push(`   Moves: ${p.moves.join(", ")}`);
+            return lines.join("\n");
+        })
+        .join("\n\n");
 }
 
 /**
  * Get generation number from format string
  */
 function getGeneration(format: string): number {
-  const match = format.match(/gen(\d+)/i);
-  return match ? parseInt(match[1], 10) : 9; // Default to gen 9
+    const match = format.match(/gen(\d+)/i);
+    return match ? Number.parseInt(match[1], 10) : 9; // Default to gen 9
 }
 
 /**
  * Get format-specific battle gimmick guidance
  */
 function getGimmickGuidance(format: string): string {
-  const gen = getGeneration(format);
-  const lowerFormat = format.toLowerCase();
+    const gen = getGeneration(format);
+    const lowerFormat = format.toLowerCase();
 
-  if (gen >= 9) {
-    return `
+    if (gen >= 9) {
+        return `
 TERASTALLIZATION (Gen 9 Mechanic):
 - EVERY Pokemon should have a tera_type specified
 - Choose Tera types strategically:
@@ -246,27 +257,27 @@ TERASTALLIZATION (Gen 9 Mechanic):
   - Coverage: Enable unexpected coverage (e.g., Tera Electric for Tera Blast)
 - Common Tera choices: Fairy (great defensive type), Steel (many resistances), Ghost (immunities)
 - Consider the team's Tera type diversity - don't stack the same type`;
-  }
+    }
 
-  if (gen === 8) {
-    // Dynamax is typically banned in Smogon singles but used in VGC
-    if (lowerFormat.includes("vgc") || lowerFormat.includes("doubles")) {
-      return `
+    if (gen === 8) {
+        // Dynamax is typically banned in Smogon singles but used in VGC
+        if (lowerFormat.includes("vgc") || lowerFormat.includes("doubles")) {
+            return `
 DYNAMAX (Gen 8 Mechanic):
 - Any Pokemon can Dynamax once per battle (doubles HP, boosts moves)
 - Max Moves have secondary effects (Max Airstream boosts Speed, Max Steelspike sets Spikes, etc.)
 - Plan which Pokemon will Dynamax - typically sweepers or setup Pokemon
 - Note: tera_type field is NOT used in Gen 8 - leave it empty or omit`;
-    }
-    return `
+        }
+        return `
 GEN 8 NOTES:
 - Dynamax is banned in Smogon singles formats
 - No Terastallization in this generation
 - Note: tera_type field is NOT used in Gen 8 - leave it empty or omit`;
-  }
+    }
 
-  if (gen === 7) {
-    return `
+    if (gen === 7) {
+        return `
 Z-MOVES & MEGA EVOLUTION (Gen 7 Mechanics):
 - Z-Crystals: One Pokemon can hold a Z-Crystal for a powerful one-time Z-Move
   - Type Z-Crystals (e.g., Groundium Z) boost any move of that type
@@ -276,48 +287,51 @@ Z-MOVES & MEGA EVOLUTION (Gen 7 Mechanics):
   - Mega Pokemon get boosted stats and sometimes new abilities/types
 - Only ONE Mega OR Z-Move user per team typically
 - Note: tera_type field is NOT used in Gen 7 - leave it empty or omit`;
-  }
+    }
 
-  if (gen <= 6) {
-    return `
+    if (gen <= 6) {
+        return `
 MEGA EVOLUTION (Gen 6 Mechanic):
 - Pokemon holding Mega Stones can Mega Evolve once per battle
 - Include "-Mega" suffix for Mega forms (e.g., "Kangaskhan-Mega")
 - Plan your Mega Evolution user carefully - only one per team
 - Note: tera_type field is NOT used in Gen 6 - leave it empty or omit`;
-  }
+    }
 
-  return "";
+    return "";
 }
 
 /**
  * Build the system prompt with personality enrichment and mode-specific guidance
  */
 export function buildSystemPrompt(
-  personalityId: PersonalityId,
-  format: string,
-  teamSize: number,
-  mode: Mode = "singles"
+    personalityId: PersonalityId,
+    format: string,
+    teamSize: number,
+    mode: Mode = "singles",
 ): string {
-  const personality = getPersonality(personalityId);
-  const gen = getGeneration(format);
-  const gimmickGuidance = getGimmickGuidance(format);
+    const personality = getPersonality(personalityId);
+    const gen = getGeneration(format);
+    const gimmickGuidance = getGimmickGuidance(format);
 
-  const loreSection = personality.loreReferences.length > 0
-    ? `\n\nCHARACTER BACKGROUND (use these naturally in conversation):\n${personality.loreReferences.map(l => `- ${l.topic}: "${l.reference}"`).join('\n')}`
-    : "";
+    const loreSection =
+        personality.loreReferences.length > 0
+            ? `\n\nCHARACTER BACKGROUND (use these naturally in conversation):\n${personality.loreReferences.map((l) => `- ${l.topic}: "${l.reference}"`).join("\n")}`
+            : "";
 
-  const preferredPokemonSection = personality.preferredPokemon.length > 0
-    ? `\n\nYOUR FAVORITE POKEMON (show extra enthusiasm for these):\n${personality.preferredPokemon.join(', ')}`
-    : "";
+    const preferredPokemonSection =
+        personality.preferredPokemon.length > 0
+            ? `\n\nYOUR FAVORITE POKEMON (show extra enthusiasm for these):\n${personality.preferredPokemon.join(", ")}`
+            : "";
 
-  const feedbackSection = `\n\nFEEDBACK STYLE:\n- When praising: ${personality.praiseStyle[0]}\n- When critiquing: ${personality.criticismStyle[0]}`;
+    const feedbackSection = `\n\nFEEDBACK STYLE:\n- When praising: ${personality.praiseStyle[0]}\n- When critiquing: ${personality.criticismStyle[0]}`;
 
-  const modeGuidance = getModeGuidance(mode);
+    const modeGuidance = getModeGuidance(mode);
 
-  // Build tool fields list based on generation
-  const toolFields = gen >= 9
-    ? `- pokemon: Species name (e.g., "Great Tusk")
+    // Build tool fields list based on generation
+    const toolFields =
+        gen >= 9
+            ? `- pokemon: Species name (e.g., "Great Tusk")
 - moves: Array of 4 move names
 - ability: The Pokemon's ability
 - item: Held item
@@ -325,7 +339,7 @@ export function buildSystemPrompt(
 - tera_type: Tera type for terastallization (REQUIRED for Gen 9)
 - evs: Object with hp, atk, def, spa, spd, spe values
 - reason: Brief explanation of the choice`
-    : `- pokemon: Species name (e.g., "Landorus-Therian")
+            : `- pokemon: Species name (e.g., "Landorus-Therian")
 - moves: Array of 4 move names
 - ability: The Pokemon's ability
 - item: Held item (include Mega Stone or Z-Crystal if applicable)
@@ -333,7 +347,7 @@ export function buildSystemPrompt(
 - evs: Object with hp, atk, def, spa, spd, spe values
 - reason: Brief explanation of the choice`;
 
-  return `${personality.systemPromptPrefix}${loreSection}${preferredPokemonSection}${feedbackSection}
+    return `${personality.systemPromptPrefix}${loreSection}${preferredPokemonSection}${feedbackSection}
 
 You are helping with Pokemon competitive team building for ${format.toUpperCase()}.
 ${modeGuidance}
@@ -387,37 +401,37 @@ Guidelines:
  * Build the full user message with context sections
  */
 export function buildUserMessage(
-  teamContext: string,
-  metaThreats: string,
-  popularSetsContext: string,
-  message: string,
-  format: string,
-  team?: TeamPokemon[],
-  mode?: Mode,
-  teammateAnalysis?: string
+    teamContext: string,
+    metaThreats: string,
+    popularSetsContext: string,
+    message: string,
+    format: string,
+    team?: TeamPokemon[],
+    mode?: Mode,
+    teammateAnalysis?: string,
 ): string {
-  let contextSection = "";
-  if (metaThreats) {
-    contextSection += `\n\n## Current Meta Threats (${format}):\n${metaThreats}`;
-  }
-  if (popularSetsContext) {
-    contextSection += `\n\n## Popular Sets (USE THESE MOVES - they are verified legal):\n${popularSetsContext}`;
-  }
-
-  // Add VGC-specific team analysis if in VGC mode
-  if (mode === "vgc" && team && team.length > 0) {
-    const vgcAnalysis = getVGCAnalysisSummary(team);
-    if (vgcAnalysis) {
-      contextSection += `\n\n## ${vgcAnalysis}`;
+    let contextSection = "";
+    if (metaThreats) {
+        contextSection += `\n\n## Current Meta Threats (${format}):\n${metaThreats}`;
     }
-  }
+    if (popularSetsContext) {
+        contextSection += `\n\n## Popular Sets (USE THESE MOVES - they are verified legal):\n${popularSetsContext}`;
+    }
 
-  // Add teammate synergy suggestions (useful for both modes but especially VGC)
-  if (teammateAnalysis) {
-    contextSection += `\n\n## ${teammateAnalysis}`;
-  }
+    // Add VGC-specific team analysis if in VGC mode
+    if (mode === "vgc" && team && team.length > 0) {
+        const vgcAnalysis = getVGCAnalysisSummary(team);
+        if (vgcAnalysis) {
+            contextSection += `\n\n## ${vgcAnalysis}`;
+        }
+    }
 
-  return `Current Team:
+    // Add teammate synergy suggestions (useful for both modes but especially VGC)
+    if (teammateAnalysis) {
+        contextSection += `\n\n## ${teammateAnalysis}`;
+    }
+
+    return `Current Team:
 ${teamContext}
 ${contextSection}
 
