@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Package, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -122,9 +123,9 @@ export function SharedTeamView({ team: sharedTeam }: SharedTeamViewProps) {
                     <span>PokeMCP Team Builder</span>
                     <nav aria-label="Footer" className="inline">
                         {" \u2022 "}
-                        <a href="/" className="underline hover:text-foreground py-2 inline-block">
+                        <Link href="/" className="underline hover:text-foreground py-2 inline-block">
                             Build a Team
-                        </a>
+                        </Link>
                         {" \u2022 "}
                         <a
                             href="https://docs.pokemcp.com"
