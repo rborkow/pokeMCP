@@ -26,6 +26,7 @@
         "start": "wrangler dev",
         "cf-typegen": "wrangler types",
         "type-check": "tsc --noEmit",
+        "generate-pokemon-data": "tsx scripts/generate-pokemon-types.ts",
         "fetch-stats": "tsx scripts/fetch-stats.ts",
         "upload-stats": "bash scripts/upload-stats.sh",
         "export-logs": "tsx scripts/export-logs.ts",
