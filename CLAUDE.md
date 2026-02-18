@@ -7,9 +7,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 A monorepo containing an MCP (Model Context Protocol) server for Pokémon competitive team building, plus a team builder web UI and documentation site. The MCP server is deployed on Cloudflare Workers and provides tools for Pokémon lookup, moveset/team validation, type coverage analysis, and usage statistics from Smogon. Includes RAG (Retrieval-Augmented Generation) capabilities for strategic advice using Cloudflare Vectorize and AI Workers.
 
 **Monorepo Structure:**
-- `src/` - MCP Worker (Cloudflare Workers)
-- `apps/teambuilder/` - Next.js team building UI (Cloudflare Pages)
-- `apps/docs/` - Nextra documentation site (Cloudflare Pages)
+- `src/` - MCP Worker (Cloudflare Workers) — see [`src/CLAUDE.md`](src/CLAUDE.md)
+- `apps/teambuilder/` - Next.js team building UI (Cloudflare Pages) — see [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md)
+- `apps/docs/` - Nextra documentation site (Cloudflare Pages) — see [`apps/CLAUDE.md`](apps/CLAUDE.md)
 
 **Deployed URLs:**
 - MCP Worker: https://api.pokemcp.com
@@ -45,61 +45,6 @@ cd apps/teambuilder && npm run test:coverage # Coverage report
 # Documentation (Nextra)
 npm run dev:docs               # Start dev server (port 3001)
 ```
-
-### Team Builder Features
-The team builder UI (`apps/teambuilder/`) includes:
-- **AI Coach**: Claude-powered assistant with personality themes (Professor Kukui, Oak, Blue)
-- **Team Archetypes**: Guided team generation with strategic presets (Hyper Offense, Balance, Trick Room, Weather, etc.)
-- **Format Selector**: Quick Singles/Doubles toggle with advanced format dropdown
-- **Welcome Overlay**: Onboarding flow for new users (Generate Team, Import, Build Own)
-- **Type Coverage**: Visual analysis of team weaknesses and resistances
-- **Threat Matrix**: Matchup analysis against meta threats
-- **Import/Export/Share**: Showdown format with shareable URLs
-- **Reset Button**: Clears team, chat, and undo history
-
-### Team Builder AI Architecture
-
-The AI coach uses Claude with structured tool calling for team modifications.
-
-**Key Files:**
-- `src/lib/ai/context.ts` - System prompts, team formatting, gimmick guidance
-- `src/lib/ai/tools.ts` - Claude tool schema for `modify_team`
-- `src/lib/ai/archetypes.ts` - Team archetype definitions and prompts
-- `src/lib/ai/index.ts` - Streaming client with tool parsing
-- `src/lib/ai/personalities.ts` - AI personality configurations
-- `src/app/api/ai/claude/stream/route.ts` - SSE streaming endpoint
-
-**Tool Calling Flow:**
-1. User sends message → ChatPanel calls `streamChatMessage()`
-2. Server builds system prompt with personality, format, gimmick guidance
-3. Claude responds with text + `modify_team` tool calls
-4. Client parses tool calls into `TeamAction` objects
-5. Actions displayed as cards for user approval or auto-applied (team gen)
-
-**Team Archetypes (`archetypes.ts`):**
-- Format-aware: Singles archetypes (Hyper Offense, Stall) vs Doubles (Goodstuffs, Trick Room)
-- Each archetype has a detailed prompt with strategy and key Pokemon traits
-- `getArchetypesForFormat()` filters by Singles/Doubles
-- `getArchetypePrompt()` adds format-specific requirements
-
-**Battle Gimmicks by Generation:**
-| Gen | Gimmick | Handling |
-|-----|---------|----------|
-| 9 | Terastallization | `tera_type` required in tool calls, strategic guidance in prompt |
-| 8 | Dynamax | Notes about Smogon ban vs VGC usage |
-| 7 | Z-Moves + Megas | Item field for Z-Crystals/Mega Stones, form naming |
-| 6 | Mega Evolution | Mega Stone items, `-Mega` suffix forms |
-
-**Chat Context:**
-- Last 10 messages sent to Claude for conversation continuity
-- Team context includes: Pokemon, item, ability, Tera type, nature, EVs, moves
-- `formatTeamContext()` builds readable team summary for Claude
-
-**Streaming UI:**
-- `onChunk` - Text content updates
-- `onThinking` - Extended thinking display (collapsible)
-- `onToolUse` - Building progress ("Adding Great Tusk... (1/6)")
-- `buildingStatus` field on ChatMessage for progress indicator
 
 ### Stats Management
 ```bash
@@ -166,73 +111,6 @@ Each environment has its own:
 - Vectorize index
 - Cron schedule
 
-### Core Components
-
-**MCP Server (src/index.ts)**
-- Entry point: `export default` Cloudflare Worker with fetch handler
-- `PokemonMCP` class extends `McpAgent` from agents library
-- Routes:
-  - `/mcp`: MCP protocol endpoint
-  - `/sse`: Server-sent events transport
-  - `/`: Server info JSON
-  - `/test-*`: Debug endpoints
-
-**Tools Layer (src/tools.ts)**
-- Synchronous tools using bundled Pokémon Showdown data
-- `lookupPokemon`: Species info, stats, abilities, tier
-- `validateMoveset`: Check move legality via learnsets
-- `validateTeam`: Species clause, team composition rules
-- `suggestTeamCoverage`: Type effectiveness analysis
-
-**Stats Layer (src/stats.ts)**
-- Async tools querying Cloudflare KV
-- Uses Smogon usage statistics JSON (cached monthly)
-- `getPopularSets`: Most used moves/items/abilities/spreads
-- `getMetaThreats`: Top Pokemon by usage %
-- `getTeammates`: Common partners from actual teams
-- `getChecksCounters`: Win/loss rates against specific Pokemon
-- `getMetagameStats`: Format-level statistics
-
-**Data Loading (src/data-loader.ts)**
-- Imports from `smogon` package (Pokémon Showdown data)
-- Helper functions: `getPokemon`, `getMove`, `getPokemonLearnset`, `toID`
-- Direct imports at build time (no runtime fetches)
-
-### RAG Pipeline
-
-**Purpose**: Semantic search over Smogon strategy articles for strategic advice beyond stats.
-
-**Ingestion Pipeline (src/ingestion/):**
-1. **Scraper** (scraper.ts): Fetches HTML from smogon.com/dex/sv/pokemon/{name}
-2. **Chunker** (chunker.ts): Splits strategy articles into sections (overview, moveset, counters, teammates)
-3. **Embedder** (embedder.ts): Generates embeddings via Cloudflare AI Workers
-4. **Indexer** (indexer.ts): Stores chunks in KV (`STRATEGY_DOCS`) and vectors in Vectorize
-
-**Orchestrator** (ingestion/orchestrator.ts):
-- `runIngestionPipeline()`: Processes top 50 Pokemon per format (triggered by cron)
-- `runTestIngestion()`: Manually test with specific Pokemon
-- Supports formats: Gen 9/8/7 Singles (OU/Ubers/UU/RU/NU/PU/LC), Gen 9 VGC
-
-**Query Pipeline (src/rag/):**
-1. **Embedder**: Convert query to vector
-2. **Search** (search.ts): Vector similarity search in Vectorize, fetch content from KV
-3. **Rerank** (rerank.ts): Boost scores by metadata (format/pokemon match)
-4. **Filter**: Remove results below minScore (default 0.5)
-5. **Format** (format.ts): Return structured JSON or text
-
-**RAG Tools:**
-- `query_strategy`: Natural language questions about strategy
-- `search_strategic_content`: Filtered search by pokemon/format/section
-
-### Data Sources
-
-**Bundled at build time:**
-- `smogon` package: Pokedex, moves, abilities, learnsets, format data
-
-**Fetched/Cached in KV:**
-- Smogon usage stats: Monthly JSON files from smogon.com/stats/
-- Strategy docs: Scraped and chunked from smogon.com/dex/
-
 ## Code Style
 
 **Linter:** Biome (not ESLint/Prettier)
@@ -260,24 +138,7 @@ Format IDs use lowercase: `gen9ou`, `gen9vgc2024regh`, etc.
 - Forms: "Landorus-Therian" → `landorustherian`
 - Megas: "Charizard-Mega-X" → `charizardmegax`
 
-**KV Data Structure:**
-Stats stored as: `{ data: UsageStatistics, info: { ... } }`
-Strategy docs stored with chunk IDs: `{pokemon}-{format}-{section}-{index}`
-
-**Vector Metadata:**
-```typescript
-{
-  pokemon: string,
-  format: string,
-  sectionType: "overview" | "moveset" | "counters" | "teammates",
-  chunkId: string // KV key
-}
-```
-
-**Error Handling:**
-- Tools return user-friendly error strings (not exceptions)
-- Log errors with `console.error` for Cloudflare dashboard
-- Use `ctx.waitUntil()` for background tasks (ingestion)
+See [`src/CLAUDE.md`](src/CLAUDE.md) for KV data structures, vector metadata, error handling patterns, and module dependency graph.
 
 ## CI/CD Pipeline
 
@@ -317,29 +178,14 @@ npm run test:run        # Run all tests
 npm run test:coverage   # Run with coverage report
 ```
 
-**Test Structure:**
-- `src/__tests__/*.test.ts` - Unit tests for stores, parsers, utilities
-- `src/__tests__/components/*.test.tsx` - Component tests with React Testing Library
-
-**Key Test Files:**
-- `archetypes.test.ts` - Team archetype filtering and prompt generation
-- `personalities.test.ts` - AI personality configuration
-- `showdown-parser.test.ts` - Pokemon Showdown format parsing
-- `team-store.test.ts` - Team state management
-- `chat-store.test.ts` - Chat message handling
-
-**Coverage Targets:**
-- `lib/ai/archetypes.ts` - 100% (archetype filtering, format detection)
-- `lib/ai/personalities.ts` - 100% (personality lookup)
-- `stores/` - 80%+ (state management)
-- `lib/showdown-parser.ts` - 90%+ (critical parsing logic)
+See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for test structure and coverage targets.
 
 ## Common Tasks
 
 **Adding a new tool:**
-1. Implement function in src/tools.ts or src/stats.ts
-2. Register in src/index.ts `init()` with Zod schema
-3. Update endpoint list in root handler (line 348)
+1. Implement function in `src/tools.ts` or `src/stats.ts`
+2. Register in `src/tool-registry.ts` with Zod schema
+3. Tool is auto-available via MCP `init()` and `/api/tools` REST endpoint
 
 **Adding a new format:**
 1. Add format to src/ingestion/orchestrator.ts FORMATS array
@@ -359,26 +205,21 @@ Option 2 - Manual:
 
 ### Team Builder AI Tasks
 
+See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for directory layout and conventions. Key files for AI changes:
+
 **Adding a new team archetype:**
 1. Add archetype to `apps/teambuilder/src/lib/ai/archetypes.ts`
 2. Include: `id`, `name`, `description`, `icon`, `prompt`, `keyFeatures`, `formats`
 3. Set `formats` to "singles", "doubles", or "both"
-4. Add tests in `src/__tests__/archetypes.test.ts`
-
-**Modifying Claude's system prompt:**
-1. Edit `apps/teambuilder/src/lib/ai/context.ts`
-2. `buildSystemPrompt()` - Main prompt with rules and tool instructions
-3. `getGimmickGuidance()` - Generation-specific battle mechanics
-4. `formatTeamContext()` - How team data is shown to Claude
+4. Add tests in `apps/teambuilder/src/__tests__/archetypes.test.ts`
 
 **Adding a new AI personality:**
 1. Add to `apps/teambuilder/src/lib/ai/personalities.ts`
 2. Include: `id`, `name`, `systemPromptPrefix`, `praiseStyle`, `criticismStyle`
-3. Optional: `loreReferences`, `preferredPokemon`
-4. Add tests in `src/__tests__/personalities.test.ts`
+3. Add tests in `apps/teambuilder/src/__tests__/personalities.test.ts`
+
+**Modifying Claude's system prompt:**
+- Edit `apps/teambuilder/src/lib/ai/context.ts` (`buildSystemPrompt()`, `getGimmickGuidance()`, `formatTeamContext()`)
 
 **Modifying the modify_team tool schema:**
-1. Edit `apps/teambuilder/src/lib/ai/tools.ts` - `TEAM_TOOLS` array
-2. Update `ModifyTeamInput` interface to match
-3. Update `parseToolToAction()` in `src/lib/ai/index.ts` if needed
-4. Update system prompt in `context.ts` to document new fields
+- Edit `apps/teambuilder/src/lib/ai/tools.ts` → update `ModifyTeamInput` interface → update system prompt in `context.ts`
