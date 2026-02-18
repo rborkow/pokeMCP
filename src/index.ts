@@ -6,6 +6,13 @@ import { detectPokemonMentions } from "./data-loader.js";
 import { runIngestionPipeline, runTestIngestion } from "./ingestion/orchestrator.js";
 import { withLogging } from "./logging.js";
 import { queryStrategy } from "./rag/query.js";
+import {
+    checkRateLimit,
+    getSharedTeam,
+    refreshSharedTeamTtl,
+    storeSharedTeam,
+    validateTeamForSharing,
+} from "./share.js";
 import { getMetaThreats, getPopularSets } from "./stats.js";
 import { TOOL_REGISTRY } from "./tool-registry.js";
 import { suggestTeamCoverage, validateMoveset } from "./tools.js";
@@ -808,6 +815,145 @@ User's Question: ${message}`;
             });
         }
 
+        // Team sharing: create a shared team with short URL
+        if (url.pathname === "/api/team/share" && request.method === "POST") {
+            const corsHeaders = {
+                ...getCorsHeaders(request),
+                "Content-Type": "application/json",
+            };
+
+            if (!isOriginAllowed(request)) {
+                return new Response(JSON.stringify({ error: "Origin not allowed" }), {
+                    status: 403,
+                    headers: corsHeaders,
+                });
+            }
+
+            try {
+                // Rate limit by IP
+                const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+                const allowed = await checkRateLimit(env.SHARED_TEAMS, ip);
+                if (!allowed) {
+                    return new Response(
+                        JSON.stringify({ error: "Rate limit exceeded. Try again in a minute." }),
+                        { status: 429, headers: corsHeaders },
+                    );
+                }
+
+                const body = (await request.json()) as {
+                    team?: unknown;
+                    format?: unknown;
+                };
+
+                const validation = validateTeamForSharing(body.team, body.format);
+                if (!validation.valid) {
+                    return new Response(
+                        JSON.stringify({
+                            error: (validation as { valid: false; error: string }).error,
+                        }),
+                        { status: 400, headers: corsHeaders },
+                    );
+                }
+
+                const { team, format } = validation;
+                const id = await storeSharedTeam(env.SHARED_TEAMS, team, format);
+
+                return new Response(
+                    JSON.stringify({
+                        id,
+                        url: `https://www.pokemcp.com/t/${id}`,
+                    }),
+                    { headers: corsHeaders },
+                );
+            } catch (error) {
+                console.error("Team share error:", error);
+                return new Response(
+                    JSON.stringify({
+                        error: "Failed to share team",
+                        details: error instanceof Error ? error.message : String(error),
+                    }),
+                    { status: 500, headers: corsHeaders },
+                );
+            }
+        }
+
+        // CORS preflight for /api/team/*
+        if (url.pathname.startsWith("/api/team/") && request.method === "OPTIONS") {
+            return new Response(null, {
+                headers: getCorsHeaders(request),
+            });
+        }
+
+        // Team sharing: retrieve a shared team by ID
+        if (url.pathname.startsWith("/api/team/") && request.method === "GET") {
+            const corsHeaders = {
+                ...getCorsHeaders(request),
+                "Content-Type": "application/json",
+            };
+
+            const id = url.pathname.replace("/api/team/", "");
+            if (!id || id.includes("/")) {
+                return new Response(JSON.stringify({ error: "Invalid team ID" }), {
+                    status: 400,
+                    headers: corsHeaders,
+                });
+            }
+
+            try {
+                const sharedTeam = await getSharedTeam(env.SHARED_TEAMS, id);
+                if (!sharedTeam) {
+                    return new Response(JSON.stringify({ error: "Team not found" }), {
+                        status: 404,
+                        headers: corsHeaders,
+                    });
+                }
+
+                // Refresh TTL in background so frequently-accessed teams don't expire
+                ctx.waitUntil(refreshSharedTeamTtl(env.SHARED_TEAMS, id));
+
+                return new Response(JSON.stringify(sharedTeam), {
+                    headers: {
+                        ...corsHeaders,
+                        "Cache-Control": "public, max-age=300",
+                    },
+                });
+            } catch (error) {
+                console.error("Team retrieve error:", error);
+                return new Response(JSON.stringify({ error: "Failed to retrieve team" }), {
+                    status: 500,
+                    headers: corsHeaders,
+                });
+            }
+        }
+
+        // OG image generation for shared teams
+        if (url.pathname.startsWith("/og/team/") && request.method === "GET") {
+            const id = url.pathname.replace("/og/team/", "");
+            if (!id || id.includes("/")) {
+                return new Response("Invalid team ID", { status: 400 });
+            }
+
+            try {
+                const sharedTeam = await getSharedTeam(env.SHARED_TEAMS, id);
+                if (!sharedTeam) {
+                    return new Response("Team not found", { status: 404 });
+                }
+
+                const { renderTeamOgImage } = await import("./og/render.js");
+                const png = await renderTeamOgImage(sharedTeam);
+
+                return new Response(png, {
+                    headers: {
+                        "Content-Type": "image/png",
+                        "Cache-Control": "public, max-age=604800, s-maxage=604800",
+                    },
+                });
+            } catch (error) {
+                console.error("OG image generation error:", error);
+                return new Response("Failed to generate image", { status: 500 });
+            }
+        }
+
         // Root endpoint - return server info
         if (url.pathname === "/") {
             return new Response(
@@ -834,6 +980,9 @@ User's Question: ${message}`;
                         mcp: "/mcp",
                         "ai/chat": "/ai/chat (POST) - AI assistant for team builder",
                         "api/feedback": "/api/feedback (POST) - Submit feedback",
+                        "api/team/share": "/api/team/share (POST) - Create shared team link",
+                        "api/team/:id": "/api/team/:id (GET) - Retrieve shared team",
+                        "og/team/:id": "/og/team/:id (GET) - OG image for shared team",
                         "test-ingestion": "/test-ingestion",
                         "test-kv": "/test-kv",
                         "test-rag": "/test-rag?q=your+query",

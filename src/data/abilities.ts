@@ -4394,8 +4394,8 @@ export const Abilities: import("../sim/dex-abilities").AbilityDataTable = {
                     this.debug("Rivalry boost");
                     return this.chainModify(1.25);
                 }
-                    this.debug("Rivalry weaken");
-                    return this.chainModify(0.75);
+                this.debug("Rivalry weaken");
+                return this.chainModify(0.75);
             }
         },
         flags: {},

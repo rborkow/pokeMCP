@@ -268,7 +268,8 @@ export async function getChecksCounters(
         .slice(0, limit);
 
     let output = `**Checks and Counters for ${args.pokemon} in ${format.toUpperCase()}:**\n\n`;
-    output += "(Score: higher = more effective. KOed % = KO rate, Switched % = switch out rate)\n\n";
+    output +=
+        "(Score: higher = more effective. KOed % = KO rate, Switched % = switch out rate)\n\n";
 
     for (const check of checksCounters) {
         output += `- **${check.name}**: Score ${check.score.toFixed(2)} (${check.koed.toFixed(1)}% KOed, ${check.switched.toFixed(1)}% switched)\n`;

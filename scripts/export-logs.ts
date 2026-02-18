@@ -211,7 +211,8 @@ function calculateStats(logs: InteractionLog[]): ExportStats {
         successRate: logs.length > 0 ? successCount / logs.length : 0,
         avgResponseTimeMs: logs.length > 0 ? totalResponseTime / logs.length : 0,
         dateRange: {
-            earliest: earliest === Number.POSITIVE_INFINITY ? "N/A" : new Date(earliest).toISOString(),
+            earliest:
+                earliest === Number.POSITIVE_INFINITY ? "N/A" : new Date(earliest).toISOString(),
             latest: latest === Number.NEGATIVE_INFINITY ? "N/A" : new Date(latest).toISOString(),
         },
         exportedAt: new Date().toISOString(),
