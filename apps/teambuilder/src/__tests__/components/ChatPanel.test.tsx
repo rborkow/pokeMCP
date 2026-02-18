@@ -58,14 +58,14 @@ describe("ChatPanel", () => {
         render(<ChatPanel />);
         // Input should have a placeholder
         expect(
-            screen.getByPlaceholderText(/import a team first|ask about your team/i)
+            screen.getByPlaceholderText(/import a team first|ask about your team/i),
         ).toBeInTheDocument();
     });
 
     it("shows different placeholder when team is empty", () => {
         render(<ChatPanel />);
         expect(
-            screen.getByPlaceholderText("Import a team first, then ask me anything...")
+            screen.getByPlaceholderText("Import a team first, then ask me anything..."),
         ).toBeInTheDocument();
     });
 

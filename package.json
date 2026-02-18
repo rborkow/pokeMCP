@@ -1,49 +1,49 @@
 {
-	"name": "pokemcp",
-	"version": "1.0.0",
-	"description": "MCP server for Pokémon competitive team building with Smogon data",
-	"private": true,
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/rborkow/pokeMCP.git"
-	},
-	"homepage": "https://www.pokemcp.com",
-	"author": "Robert Borkowski",
-	"license": "AGPL-3.0",
-	"scripts": {
-		"deploy": "wrangler deploy",
-		"deploy:staging": "wrangler deploy --env staging",
-		"deploy:production": "wrangler deploy --env production",
-		"deploy:all": "npm run deploy:production && npm run deploy:teambuilder && npm run deploy:docs",
-		"deploy:teambuilder": "cd apps/teambuilder && npm run deploy",
-		"deploy:docs": "cd apps/docs && npm run build",
-		"dev": "wrangler dev",
-		"dev:teambuilder": "cd apps/teambuilder && npm run dev",
-		"dev:docs": "cd apps/docs && npm run dev",
-		"format": "biome format --write",
-		"lint": "biome lint",
-		"lint:fix": "biome lint --fix",
-		"start": "wrangler dev",
-		"cf-typegen": "wrangler types",
-		"type-check": "tsc --noEmit",
-		"fetch-stats": "tsx scripts/fetch-stats.ts",
-		"upload-stats": "bash scripts/upload-stats.sh",
-		"export-logs": "tsx scripts/export-logs.ts",
-		"tail": "wrangler tail",
-		"tail:staging": "wrangler tail --env staging",
-		"tail:production": "wrangler tail --env production",
-		"setup:staging": "bash scripts/setup-staging.sh"
-	},
-	"dependencies": {
-		"agents": "^0.3.3",
-		"smogon": "^4.0.2",
-		"zod": "^3.25.76"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^2.3.8",
-		"@types/node": "^24.10.2",
-		"tsx": "^4.19.2",
-		"typescript": "5.9.3",
-		"wrangler": "^4.53.0"
-	}
+    "name": "pokemcp",
+    "version": "1.0.0",
+    "description": "MCP server for Pokémon competitive team building with Smogon data",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rborkow/pokeMCP.git"
+    },
+    "homepage": "https://www.pokemcp.com",
+    "author": "Robert Borkowski",
+    "license": "AGPL-3.0",
+    "scripts": {
+        "deploy": "wrangler deploy",
+        "deploy:staging": "wrangler deploy --env staging",
+        "deploy:production": "wrangler deploy --env production",
+        "deploy:all": "npm run deploy:production && npm run deploy:teambuilder && npm run deploy:docs",
+        "deploy:teambuilder": "cd apps/teambuilder && npm run deploy",
+        "deploy:docs": "cd apps/docs && npm run build",
+        "dev": "wrangler dev",
+        "dev:teambuilder": "cd apps/teambuilder && npm run dev",
+        "dev:docs": "cd apps/docs && npm run dev",
+        "format": "biome format --write",
+        "lint": "biome lint",
+        "lint:fix": "biome lint --fix",
+        "start": "wrangler dev",
+        "cf-typegen": "wrangler types",
+        "type-check": "tsc --noEmit",
+        "fetch-stats": "tsx scripts/fetch-stats.ts",
+        "upload-stats": "bash scripts/upload-stats.sh",
+        "export-logs": "tsx scripts/export-logs.ts",
+        "tail": "wrangler tail",
+        "tail:staging": "wrangler tail --env staging",
+        "tail:production": "wrangler tail --env production",
+        "setup:staging": "bash scripts/setup-staging.sh"
+    },
+    "dependencies": {
+        "agents": "^0.3.3",
+        "smogon": "^4.0.2",
+        "zod": "^3.25.76"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^2.3.8",
+        "@types/node": "^24.10.2",
+        "tsx": "^4.19.2",
+        "typescript": "5.9.3",
+        "wrangler": "^4.53.0"
+    }
 }

@@ -62,8 +62,7 @@ export const PERSONALITIES: Record<PersonalityId, Personality> = {
         loreReferences: [
             {
                 topic: "research",
-                reference:
-                    "Back when I was studying the effects of moves on my own body...",
+                reference: "Back when I was studying the effects of moves on my own body...",
             },
             {
                 topic: "incineroar",
@@ -81,14 +80,7 @@ export const PERSONALITIES: Record<PersonalityId, Personality> = {
                     "In the Battle Royal Dome... er, from what I've heard, multi-target moves are key!",
             },
         ],
-        preferredPokemon: [
-            "Incineroar",
-            "Lycanroc",
-            "Kommo-o",
-            "Bewear",
-            "Braviary",
-            "Rockruff",
-        ],
+        preferredPokemon: ["Incineroar", "Lycanroc", "Kommo-o", "Bewear", "Braviary", "Rockruff"],
         praiseStyle: [
             "Woo! Excellent choice, cousin!",
             "Oh yeah, that move synergy is BEAUTIFUL!",
@@ -279,14 +271,7 @@ Your goal is to help trainers understand their Pokemon's NATURE and POTENTIAL. Y
                     "Team Preview is where battles are won. I can tell your gameplan instantly.",
             },
         ],
-        preferredPokemon: [
-            "Alakazam",
-            "Arcanine",
-            "Gyarados",
-            "Exeggutor",
-            "Pidgeot",
-            "Rhyperior",
-        ],
+        preferredPokemon: ["Alakazam", "Arcanine", "Gyarados", "Exeggutor", "Pidgeot", "Rhyperior"],
         praiseStyle: [
             "Hmph, not bad. You might actually have some skill.",
             "Alright, I'll admit it - that's a solid choice.",

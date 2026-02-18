@@ -28,10 +28,7 @@ function AllProviders({ children }: ProvidersProps) {
     );
 }
 
-function renderWithProviders(
-    ui: React.ReactElement,
-    options?: Omit<RenderOptions, "wrapper">
-) {
+function renderWithProviders(ui: React.ReactElement, options?: Omit<RenderOptions, "wrapper">) {
     return render(ui, { wrapper: AllProviders, ...options });
 }
 

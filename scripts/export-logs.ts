@@ -63,7 +63,7 @@ function parseArgs(): { days: number; all: boolean; format: "jsonl" | "csv" } {
 
     for (let i = 0; i < args.length; i++) {
         if (args[i] === "--days" && args[i + 1]) {
-            days = parseInt(args[i + 1], 10);
+            days = Number.parseInt(args[i + 1], 10);
             i++;
         } else if (args[i] === "--all") {
             all = true;
@@ -102,7 +102,7 @@ function listR2Objects(prefix: string): string[] {
     try {
         const result = execSync(
             `npx wrangler r2 object list ${BUCKET_NAME} --prefix="${prefix}" --json 2>/dev/null`,
-            { encoding: "utf-8", maxBuffer: 50 * 1024 * 1024 }
+            { encoding: "utf-8", maxBuffer: 50 * 1024 * 1024 },
         );
 
         const parsed = JSON.parse(result);
@@ -118,7 +118,7 @@ function downloadR2Object(key: string): InteractionLog | null {
         const outputPath = join(TEMP_DIR, key.replace(/\//g, "_"));
         execSync(
             `npx wrangler r2 object get ${BUCKET_NAME} "${key}" --file="${outputPath}" 2>/dev/null`,
-            { encoding: "utf-8" }
+            { encoding: "utf-8" },
         );
 
         const content = readFileSync(outputPath, "utf-8");
@@ -148,8 +148,7 @@ function formatAsFineTuning(log: InteractionLog): FineTuningExample {
             "You are a Pokemon team building assistant. Suggest good teammates for a Pokemon.",
         get_checks_counters:
             "You are a Pokemon competitive assistant. Identify checks and counters for specific Pokemon.",
-        get_metagame_stats:
-            "You are a Pokemon metagame analyst. Provide format-level statistics.",
+        get_metagame_stats: "You are a Pokemon metagame analyst. Provide format-level statistics.",
         query_strategy:
             "You are a Pokemon strategy expert. Answer questions about competitive strategies using Smogon knowledge.",
         search_strategic_content:
@@ -157,8 +156,7 @@ function formatAsFineTuning(log: InteractionLog): FineTuningExample {
     };
 
     const systemPrompt =
-        toolDescriptions[log.tool] ||
-        "You are a helpful Pokemon competitive assistant.";
+        toolDescriptions[log.tool] || "You are a helpful Pokemon competitive assistant.";
 
     // Format the user message based on the tool and args
     let userMessage = `Tool: ${log.tool}\n`;
@@ -184,8 +182,8 @@ function calculateStats(logs: InteractionLog[]): ExportStats {
     const byFormat: Record<string, number> = {};
     let successCount = 0;
     let totalResponseTime = 0;
-    let earliest = Infinity;
-    let latest = -Infinity;
+    let earliest = Number.POSITIVE_INFINITY;
+    let latest = Number.NEGATIVE_INFINITY;
 
     for (const log of logs) {
         // By tool
@@ -213,8 +211,8 @@ function calculateStats(logs: InteractionLog[]): ExportStats {
         successRate: logs.length > 0 ? successCount / logs.length : 0,
         avgResponseTimeMs: logs.length > 0 ? totalResponseTime / logs.length : 0,
         dateRange: {
-            earliest: earliest === Infinity ? "N/A" : new Date(earliest).toISOString(),
-            latest: latest === -Infinity ? "N/A" : new Date(latest).toISOString(),
+            earliest: earliest === Number.POSITIVE_INFINITY ? "N/A" : new Date(earliest).toISOString(),
+            latest: latest === Number.NEGATIVE_INFINITY ? "N/A" : new Date(latest).toISOString(),
         },
         exportedAt: new Date().toISOString(),
     };
@@ -223,7 +221,7 @@ function calculateStats(logs: InteractionLog[]): ExportStats {
 async function main() {
     const { days, all, format } = parseArgs();
 
-    console.log(`Exporting interaction logs...`);
+    console.log("Exporting interaction logs...");
     console.log(`  Days: ${all ? "all" : days}`);
     console.log(`  Format: ${format}`);
     console.log();
@@ -329,7 +327,7 @@ async function main() {
                 log.success,
                 log.responseTimeMs,
                 (log.pokemonMentioned || []).join(";"),
-            ].join(",")
+            ].join(","),
         );
         writeFileSync(csvPath, [headers.join(","), ...csvRows].join("\n"));
         console.log(`\nWrote CSV to: ${csvPath}`);
