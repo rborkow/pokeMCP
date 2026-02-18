@@ -40,7 +40,9 @@ export function EVSection({ evs, evTotal, onEVChange }: EVSectionProps) {
                             min={0}
                             max={252}
                             value={evs?.[stat] || 0}
-                            onChange={(e) => onEVChange(stat, Number.parseInt(e.target.value, 10) || 0)}
+                            onChange={(e) =>
+                                onEVChange(stat, Number.parseInt(e.target.value, 10) || 0)
+                            }
                             className="text-center text-sm h-8 px-1"
                         />
                     </div>

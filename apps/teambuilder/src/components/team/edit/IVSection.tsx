@@ -32,7 +32,9 @@ export function IVSection({ ivs, onIVChange }: IVSectionProps) {
                             min={0}
                             max={31}
                             value={ivs?.[stat] ?? 31}
-                            onChange={(e) => onIVChange(stat, Number.parseInt(e.target.value, 10) || 0)}
+                            onChange={(e) =>
+                                onIVChange(stat, Number.parseInt(e.target.value, 10) || 0)
+                            }
                             className="text-center text-sm h-8 px-1"
                         />
                     </div>

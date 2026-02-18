@@ -25,9 +25,8 @@ import {
 import { useTeamStore } from "@/stores/team-store";
 import { useChatStore } from "@/stores/chat-store";
 import { useHistoryStore } from "@/stores/history-store";
-import { Upload, Download, Copy, Check, Share2, Link, RotateCcw } from "lucide-react";
-import { generateShareUrl, copyToClipboard } from "@/lib/share";
-import { getFormatDisplayName } from "@/types/pokemon";
+import { Upload, Download, Copy, Check, Share2, RotateCcw } from "lucide-react";
+import { ShareDialog } from "@/components/team/ShareDialog";
 
 export function TeamImportExport() {
     const { team, format, importTeam, exportTeam, clearTeam } = useTeamStore();
@@ -39,7 +38,6 @@ export function TeamImportExport() {
     const [exportOpen, setExportOpen] = useState(false);
     const [shareOpen, setShareOpen] = useState(false);
     const [copied, setCopied] = useState(false);
-    const [shareCopied, setShareCopied] = useState(false);
 
     const handleReset = () => {
         clearTeam();
@@ -170,66 +168,17 @@ Landorus-Therian @ Choice Scarf
             </Dialog>
 
             {/* Share Dialog */}
-            <Dialog open={shareOpen} onOpenChange={setShareOpen}>
-                <DialogTrigger asChild>
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        className="gap-2"
-                        disabled={team.length === 0}
-                    >
-                        <Share2 className="h-4 w-4" />
-                        <span className="hidden sm:inline">Share</span>
-                    </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-[95vw] sm:max-w-[500px]">
-                    <DialogHeader>
-                        <DialogTitle>Share Team</DialogTitle>
-                        <DialogDescription>
-                            Copy this link to share your {getFormatDisplayName(format)} team with
-                            others.
-                        </DialogDescription>
-                    </DialogHeader>
-                    <div className="space-y-4">
-                        <div className="flex gap-2">
-                            <input
-                                type="text"
-                                value={generateShareUrl(team, format)}
-                                readOnly
-                                className="flex-1 px-3 py-2 text-sm bg-muted rounded-md font-mono truncate"
-                            />
-                            <Button
-                                onClick={async () => {
-                                    const success = await copyToClipboard(
-                                        generateShareUrl(team, format),
-                                    );
-                                    if (success) {
-                                        setShareCopied(true);
-                                        setTimeout(() => setShareCopied(false), 2000);
-                                    }
-                                }}
-                                className="gap-2"
-                            >
-                                {shareCopied ? (
-                                    <>
-                                        <Check className="h-4 w-4" />
-                                        Copied!
-                                    </>
-                                ) : (
-                                    <>
-                                        <Link className="h-4 w-4" />
-                                        Copy Link
-                                    </>
-                                )}
-                            </Button>
-                        </div>
-                        <p className="text-xs text-muted-foreground">
-                            This link includes your full team configuration and format. Anyone with
-                            this link can view and import your team.
-                        </p>
-                    </div>
-                </DialogContent>
-            </Dialog>
+            <Button
+                variant="outline"
+                size="sm"
+                className="gap-2"
+                disabled={team.length === 0}
+                onClick={() => setShareOpen(true)}
+            >
+                <Share2 className="h-4 w-4" />
+                <span className="hidden sm:inline">Share</span>
+            </Button>
+            <ShareDialog open={shareOpen} onOpenChange={setShareOpen} team={team} format={format} />
 
             {/* Reset Confirmation */}
             <AlertDialog>

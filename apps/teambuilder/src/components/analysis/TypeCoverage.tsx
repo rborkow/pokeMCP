@@ -149,7 +149,8 @@ function analyzeTeamCoverage(teamData: { name: string; types: string[] }[]): Typ
                     if (chart[attackType] === -1) {
                         effectiveness = 0; // Immune
                         break;
-                    }if (chart[attackType] === 1 || chart[attackType] === 2) {
+                    }
+                    if (chart[attackType] === 1 || chart[attackType] === 2) {
                         effectiveness *= 2;
                     } else if (chart[attackType] === 0) {
                         effectiveness *= 0.5;

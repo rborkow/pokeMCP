@@ -9,6 +9,7 @@ declare namespace Cloudflare {
 	interface Env {
 		POKEMON_STATS: KVNamespace;
 		STRATEGY_DOCS: KVNamespace;
+		SHARED_TEAMS: KVNamespace;
 		MCP_OBJECT: DurableObjectNamespace<import("./src/index").PokemonMCP>;
 		VECTOR_INDEX: VectorizeIndex;
 		AI: Ai;

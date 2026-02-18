@@ -48,16 +48,20 @@ function parsePopularSets(response: string): Partial<PopularSet> {
         if (lowerTrimmed.includes("move")) {
             currentSection = "moves";
             continue;
-        }if (lowerTrimmed.includes("abilit")) {
+        }
+        if (lowerTrimmed.includes("abilit")) {
             currentSection = "abilities";
             continue;
-        }if (lowerTrimmed.includes("item")) {
+        }
+        if (lowerTrimmed.includes("item")) {
             currentSection = "items";
             continue;
-        }if (lowerTrimmed.includes("spread") || lowerTrimmed.includes("ev spread")) {
+        }
+        if (lowerTrimmed.includes("spread") || lowerTrimmed.includes("ev spread")) {
             currentSection = "spreads";
             continue;
-        }if (lowerTrimmed.includes("tera")) {
+        }
+        if (lowerTrimmed.includes("tera")) {
             currentSection = "tera";
             continue;
         }
