@@ -1,5 +1,7 @@
+import { EmailMessage } from "cloudflare:email";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { McpAgent } from "agents/mcp";
+import { createMimeMessage } from "mimetext/browser";
 import { detectPokemonMentions } from "./data-loader.js";
 import { runIngestionPipeline, runTestIngestion } from "./ingestion/orchestrator.js";
 import { withLogging } from "./logging.js";
@@ -617,6 +619,54 @@ User's Question: ${message}`;
         }
 
         // Feedback submission endpoint
+        async function sendFeedbackNotification(
+            feedbackEnv: Env,
+            feedback: {
+                id: string;
+                type: string;
+                message: string;
+                email?: string;
+                page?: string;
+                timestamp: string;
+            },
+        ): Promise<void> {
+            if (!feedbackEnv.SEND_EMAIL) {
+                console.warn("[Feedback] Email binding not configured, skipping notification");
+                return;
+            }
+
+            const typeLabel = feedback.type.charAt(0).toUpperCase() + feedback.type.slice(1);
+            const msg = createMimeMessage();
+            msg.setSender({ name: "PokeMCP Feedback", addr: "feedback@pokemcp.com" });
+            msg.setRecipient("feedback@pokemcp.com");
+            msg.setSubject(`[${typeLabel}] New feedback received`);
+            msg.addMessage({
+                contentType: "text/plain",
+                data: [
+                    `New ${feedback.type} feedback submitted`,
+                    "",
+                    `ID: ${feedback.id}`,
+                    `Type: ${typeLabel}`,
+                    `Time: ${feedback.timestamp}`,
+                    feedback.page ? `Page: ${feedback.page}` : null,
+                    feedback.email ? `Contact: ${feedback.email}` : null,
+                    "",
+                    "--- Message ---",
+                    feedback.message,
+                ]
+                    .filter(Boolean)
+                    .join("\n"),
+            });
+
+            const emailMsg = new EmailMessage(
+                "feedback@pokemcp.com",
+                "feedback@pokemcp.com",
+                msg.asRaw(),
+            );
+
+            await feedbackEnv.SEND_EMAIL.send(emailMsg);
+        }
+
         if (url.pathname === "/api/feedback" && request.method === "POST") {
             const corsHeaders = {
                 ...getCorsHeaders(request),
@@ -728,6 +778,13 @@ User's Question: ${message}`;
                     console.warn("[Feedback] R2 bucket not configured, logging to console");
                     console.log("[Feedback]", JSON.stringify(feedbackEntry));
                 }
+
+                // Send email notification (non-blocking)
+                ctx.waitUntil(
+                    sendFeedbackNotification(env, feedbackEntry).catch((err) => {
+                        console.error("[Feedback] Email notification failed:", err);
+                    }),
+                );
 
                 return new Response(JSON.stringify({ success: true, id }), {
                     headers: corsHeaders,

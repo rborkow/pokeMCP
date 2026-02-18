@@ -54,6 +54,14 @@
             "bucket_name": "pokemcp-interaction-logs"
         }
     ],
+    // Email Workers binding for feedback notifications
+    // Requires Email Routing enabled on pokemcp.com with feedback@ routed to a destination
+    "send_email": [
+        {
+            "name": "SEND_EMAIL",
+            "destination_address": "feedback@pokemcp.com"
+        }
+    ],
     // No cron triggers in default environment (only production)
     "observability": {
         "enabled": true
@@ -107,6 +115,12 @@
                     }
                 ]
             },
+            "send_email": [
+                {
+                    "name": "SEND_EMAIL",
+                    "destination_address": "feedback@pokemcp.com"
+                }
+            ],
             "ai": {
                 "binding": "AI"
             }
@@ -146,6 +160,12 @@
                     }
                 ]
             },
+            "send_email": [
+                {
+                    "name": "SEND_EMAIL",
+                    "destination_address": "feedback@pokemcp.com"
+                }
+            ],
             "ai": {
                 "binding": "AI"
             },

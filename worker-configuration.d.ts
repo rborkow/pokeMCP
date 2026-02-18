@@ -13,6 +13,7 @@ declare namespace Cloudflare {
 		VECTOR_INDEX: VectorizeIndex;
 		AI: Ai;
 		INTERACTION_LOGS?: R2Bucket; // Optional - for anonymized logging
+		SEND_EMAIL?: SendEmail; // Optional - for feedback email notifications
 		ANTHROPIC_API_KEY?: string; // Optional - for Claude Sonnet 4.5 AI chat
 	}
 }
