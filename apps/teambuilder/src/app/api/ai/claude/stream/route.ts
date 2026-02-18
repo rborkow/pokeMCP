@@ -138,8 +138,8 @@ export async function POST(request: NextRequest) {
 
         // Build request body with tools and prompt caching
         const requestBody: Record<string, unknown> = {
-            model: "claude-sonnet-4-5-20250929",
-            max_tokens: useThinking ? 16000 : 4096,
+            model: "claude-sonnet-4-6",
+            max_tokens: 16000,
             stream: true,
             // Use structured system message with cache_control for prompt caching
             system: [
@@ -153,13 +153,14 @@ export async function POST(request: NextRequest) {
             tools: TEAM_TOOLS,
         };
 
-        // Add thinking configuration if enabled
-        if (useThinking) {
-            requestBody.thinking = {
-                type: "enabled",
-                budget_tokens: 4000,
-            };
-        }
+        // Use adaptive thinking (Claude decides when/how much to think)
+        // Effort controls depth: "high" when user enables thinking, "medium" otherwise
+        requestBody.thinking = {
+            type: "adaptive",
+        };
+        requestBody.output_config = {
+            effort: useThinking ? "high" : "medium",
+        };
 
         // Make streaming request to Claude with prompt caching enabled
         const response = await fetch("https://api.anthropic.com/v1/messages", {
@@ -168,7 +169,6 @@ export async function POST(request: NextRequest) {
                 "Content-Type": "application/json",
                 "x-api-key": apiKey,
                 "anthropic-version": "2023-06-01",
-                "anthropic-beta": "prompt-caching-2024-07-31",
             },
             body: JSON.stringify(requestBody),
         });

@@ -62,11 +62,11 @@ export async function POST(request: Request) {
                 "Content-Type": "application/json",
                 "x-api-key": apiKey,
                 "anthropic-version": "2023-06-01",
-                "anthropic-beta": "prompt-caching-2024-07-31",
             },
             body: JSON.stringify({
-                model: "claude-sonnet-4-5-20250929",
+                model: "claude-sonnet-4-6",
                 max_tokens: 1024,
+                output_config: { effort: "medium" },
                 system: [
                     {
                         type: "text",
