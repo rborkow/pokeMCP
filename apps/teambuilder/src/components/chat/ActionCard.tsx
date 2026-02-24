@@ -30,7 +30,8 @@ const ACTION_LABELS: Record<TeamAction["type"], string> = {
 
 export function ActionCard({ action, isApplied = false }: ActionCardProps) {
     const { team, setPokemon, removePokemon } = useTeamStore();
-    const { advancePendingAction, addMessage, lastUserPrompt, queuePrompt } = useChatStore();
+    const { setPendingAction, advancePendingAction, addMessage, lastUserPrompt, queuePrompt } =
+        useChatStore();
     const { pushState } = useHistoryStore();
 
     const hasValidationErrors = action.validationErrors && action.validationErrors.length > 0;
