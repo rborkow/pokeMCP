@@ -206,9 +206,9 @@ export function ChatPanel() {
     }, [queuedPrompt, isLoading, handleSend, clearQueuedPrompt]);
 
     return (
-        <div className="glass-panel flex flex-col h-[600px] lg:h-[650px]">
+        <div className="glass-panel !p-2 flex flex-col h-[600px] lg:h-[650px]">
             {/* Header with personality selector and clear button */}
-            <div className="flex items-center justify-between px-4 py-2 border-b border-border/50 bg-muted/30">
+            <div className="flex items-center justify-between px-2 py-1.5 border-b border-border/50 bg-muted/30">
                 <PersonalitySelector />
                 {messages.length > 0 && (
                     <Button

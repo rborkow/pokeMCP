@@ -24,7 +24,7 @@ export function SuggestedPrompts({ onSelect, disabled }: SuggestedPromptsProps) 
     });
 
     return (
-        <div className="flex flex-wrap gap-2 px-4 py-2 border-b">
+        <div className="flex flex-wrap gap-1.5 px-2 py-1.5 border-b">
             {/* Show Quickstart button prominently when no team */}
             {!hasTeam && (
                 <Button

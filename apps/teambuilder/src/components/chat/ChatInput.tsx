@@ -56,7 +56,7 @@ export function ChatInput({
     };
 
     return (
-        <div className="flex items-end gap-2 p-4 border-t">
+        <div className="flex items-end gap-1.5 px-2 py-2 border-t">
             <Button
                 onClick={toggleThinking}
                 variant="ghost"

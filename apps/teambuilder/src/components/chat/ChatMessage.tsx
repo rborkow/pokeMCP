@@ -1,10 +1,10 @@
 "use client";
 
 import { memo, useMemo } from "react";
-import { cn } from "@/lib/utils";
 import type { ChatMessage as ChatMessageType, StreamingPhase } from "@/types/chat";
 import { Bot, User, Loader2, Wrench } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { ThinkingCollapsible } from "./ThinkingCollapsible";
 
 interface ChatMessageProps {
@@ -64,7 +64,10 @@ export const ChatMessage = memo(function ChatMessage({ message }: ChatMessagePro
     const isSystem = message.role === "system";
 
     const renderedContent = useMemo(
-        () => (message.content ? <ReactMarkdown>{message.content}</ReactMarkdown> : null),
+        () =>
+            message.content ? (
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
+            ) : null,
         [message.content],
     );
 
@@ -84,59 +87,61 @@ export const ChatMessage = memo(function ChatMessage({ message }: ChatMessagePro
         !message.content &&
         (message.streamingPhase === "thinking" || !message.streamingPhase);
 
-    return (
-        <div className={cn("flex gap-3 py-4", isUser ? "flex-row-reverse" : "flex-row")}>
-            {/* Avatar */}
-            <div
-                className={cn(
-                    "flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center",
-                    isUser ? "bg-primary text-primary-foreground" : "bg-muted",
-                )}
-            >
-                {isUser ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
-            </div>
-
-            {/* Message Content */}
-            <div
-                className={cn("flex-1 max-w-[80%] space-y-2", isUser ? "text-right" : "text-left")}
-            >
-                {/* Thinking collapsible for assistant messages */}
-                {!isUser && (message.thinkingContent || isThinkingActive) && (
-                    <ThinkingCollapsible
-                        content={message.thinkingContent || ""}
-                        isActive={
-                            isThinkingActive ||
-                            (message.isLoading === true && message.streamingPhase === "thinking")
-                        }
-                    />
-                )}
-
-                <div
-                    className={cn(
-                        "inline-block px-4 py-2 rounded-2xl",
-                        isUser
-                            ? "bg-primary text-primary-foreground rounded-tr-sm"
-                            : "bg-muted rounded-tl-sm",
-                    )}
-                >
-                    {message.isLoading && !message.content ? (
-                        <StreamingIndicator
-                            phase={message.streamingPhase}
-                            buildingStatus={message.buildingStatus}
-                        />
-                    ) : message.content ? (
-                        <div className="text-sm [&_p]:my-1 [&_ul]:my-1 [&_ul]:ml-4 [&_ul]:list-disc [&_ol]:my-1 [&_ol]:ml-4 [&_ol]:list-decimal [&_li]:my-0.5 [&_strong]:font-semibold [&_code]:bg-black/10 [&_code]:dark:bg-white/10 [&_code]:px-1 [&_code]:rounded [&_code]:text-xs">
-                            {renderedContent}
-                        </div>
-                    ) : null}
+    if (isUser) {
+        return (
+            <div className="flex gap-2 py-3 flex-row-reverse">
+                <div className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center bg-primary text-primary-foreground">
+                    <User className="h-3.5 w-3.5" />
                 </div>
-                <p className="text-xs text-muted-foreground">
+                <div className="flex-1 max-w-[85%] text-right space-y-1">
+                    <div className="inline-block px-3 py-2 rounded-2xl bg-primary text-primary-foreground rounded-tr-sm">
+                        <div className="text-sm">{message.content}</div>
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                        {message.timestamp.toLocaleTimeString([], {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                        })}
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    // Assistant message — full-width, no bubble, maximize content space
+    return (
+        <div className="py-3 space-y-1">
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Bot className="h-3.5 w-3.5" />
+                <span>Assistant</span>
+                <span className="ml-auto">
                     {message.timestamp.toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
                     })}
-                </p>
+                </span>
             </div>
+
+            {(message.thinkingContent || isThinkingActive) && (
+                <ThinkingCollapsible
+                    content={message.thinkingContent || ""}
+                    isActive={
+                        isThinkingActive ||
+                        (message.isLoading === true && message.streamingPhase === "thinking")
+                    }
+                />
+            )}
+
+            {message.isLoading && !message.content ? (
+                <StreamingIndicator
+                    phase={message.streamingPhase}
+                    buildingStatus={message.buildingStatus}
+                />
+            ) : message.content ? (
+                <div className="chat-markdown text-sm">
+                    {renderedContent}
+                </div>
+            ) : null}
         </div>
     );
 });
