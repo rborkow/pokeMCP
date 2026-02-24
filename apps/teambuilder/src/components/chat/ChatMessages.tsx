@@ -6,7 +6,7 @@ import { ChatMessage } from "./ChatMessage";
 import { ActionCard } from "./ActionCard";
 
 export function ChatMessages() {
-    const { messages, pendingAction, isLoading } = useChatStore();
+    const { messages, pendingAction, pendingActions, isLoading } = useChatStore();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const scrollRAFRef = useRef<number>(undefined);
     const isUserScrolledUpRef = useRef(false);
@@ -78,6 +78,11 @@ export function ChatMessages() {
             {/* Show pending action card */}
             {pendingAction && (
                 <div className="mb-3">
+                    {pendingActions.length > 0 && (
+                        <p className="text-xs text-muted-foreground mb-1 px-1">
+                            Change 1 of {pendingActions.length + 1}
+                        </p>
+                    )}
                     <ActionCard action={pendingAction} />
                 </div>
             )}

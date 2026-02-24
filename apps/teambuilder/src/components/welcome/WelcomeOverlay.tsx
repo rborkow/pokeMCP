@@ -12,9 +12,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useTeamStore } from "@/stores/team-store";
 import { useHistoryStore } from "@/stores/history-store";
-import { Sparkles, Upload, PlusCircle, ChevronLeft } from "lucide-react";
+import { Sparkles, Upload, PlusCircle, ChevronLeft, Swords, Trophy } from "lucide-react";
 import { getArchetypesForFormat, isDoublesFormat, type TeamArchetype } from "@/lib/ai/archetypes";
-import { getFormatDisplayName } from "@/types/pokemon";
+import {
+    getFormatDisplayName,
+    getFormatsForMode,
+    FORMAT_CATEGORIES,
+    MODE_INFO,
+    type FormatId,
+    type Mode,
+} from "@/types/pokemon";
+import { cn } from "@/lib/utils";
 
 interface WelcomeOverlayProps {
     onGenerate: (archetype?: TeamArchetype) => void;
@@ -22,7 +30,7 @@ interface WelcomeOverlayProps {
 }
 
 export function WelcomeOverlay({ onGenerate, onBuildOwn }: WelcomeOverlayProps) {
-    const { team, format, importTeam } = useTeamStore();
+    const { team, format, mode, setFormat, setMode, importTeam } = useTeamStore();
     const { pushState } = useHistoryStore();
     const archetypes = getArchetypesForFormat(format);
     const isDoubles = isDoublesFormat(format);
@@ -190,7 +198,59 @@ Jolly Nature
                     </DialogDescription>
                 </DialogHeader>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+                {/* Format/Mode Selector */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
+                    {/* Mode toggle */}
+                    <div className="flex rounded-lg border border-border bg-muted/50 p-0.5">
+                        {(["singles", "vgc"] as Mode[]).map((m) => {
+                            const Icon = m === "singles" ? Swords : Trophy;
+                            const info = MODE_INFO[m];
+                            const isActive = mode === m;
+                            return (
+                                <button
+                                    type="button"
+                                    key={m}
+                                    onClick={() => setMode(m)}
+                                    className={cn(
+                                        "flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-md transition-all",
+                                        isActive
+                                            ? "bg-background text-foreground shadow-sm"
+                                            : "text-muted-foreground hover:text-foreground",
+                                    )}
+                                >
+                                    <Icon className="h-4 w-4" />
+                                    <span>{info.label}</span>
+                                </button>
+                            );
+                        })}
+                    </div>
+
+                    {/* Format dropdown */}
+                    <select
+                        value={format}
+                        onChange={(e) => setFormat(e.target.value as FormatId)}
+                        className="h-9 rounded-lg border border-border bg-card px-3 text-sm font-medium text-foreground cursor-pointer hover:bg-muted transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    >
+                        {(() => {
+                            const availableFormats = getFormatsForMode(mode);
+                            const grouped = FORMAT_CATEGORIES.map((cat) => ({
+                                ...cat,
+                                formats: availableFormats.filter((f) => f.category === cat.id),
+                            })).filter((g) => g.formats.length > 0);
+                            return grouped.map((group) => (
+                                <optgroup key={group.id} label={group.label}>
+                                    {group.formats.map((f) => (
+                                        <option key={f.id} value={f.id}>
+                                            {f.name}
+                                        </option>
+                                    ))}
+                                </optgroup>
+                            ));
+                        })()}
+                    </select>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
                     {/* Generate Team Card */}
                     <button
                         onClick={() => setShowArchetypes(true)}
