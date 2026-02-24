@@ -12,17 +12,20 @@ interface ThinkingCollapsibleProps {
 
 export function ThinkingCollapsible({ content, isActive }: ThinkingCollapsibleProps) {
     const [isManuallyCollapsed, setIsManuallyCollapsed] = useState(false);
+    const [prevIsActive, setPrevIsActive] = useState(false);
     const contentRef = useRef<HTMLDivElement>(null);
+
+    // Reset manual collapse state when a new thinking session starts
+    // Uses React's "adjusting state during render" pattern instead of useEffect
+    if (isActive && !prevIsActive) {
+        setIsManuallyCollapsed(false);
+    }
+    if (isActive !== prevIsActive) {
+        setPrevIsActive(isActive);
+    }
 
     // Auto-expand while thinking is active; respect manual collapse
     const isExpanded = isActive ? !isManuallyCollapsed : !isManuallyCollapsed && content.length > 0;
-
-    // Reset manual collapse state when a new thinking session starts
-    useEffect(() => {
-        if (isActive) {
-            setIsManuallyCollapsed(false);
-        }
-    }, [isActive]);
 
     // Auto-scroll the thinking content container during streaming
     useEffect(() => {
