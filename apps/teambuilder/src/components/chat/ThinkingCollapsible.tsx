@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { ChevronDown, ChevronUp, Brain } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface ThinkingCollapsibleProps {
     content: string;
@@ -86,9 +87,9 @@ export function ThinkingCollapsible({ content, isActive }: ThinkingCollapsiblePr
             {isExpanded && (
                 <div
                     ref={contentRef}
-                    className="thinking-content max-h-[300px] overflow-y-auto text-sm [&_p]:my-1 [&_ul]:my-1 [&_ul]:ml-4 [&_ul]:list-disc [&_ol]:my-1 [&_ol]:ml-4 [&_ol]:list-decimal [&_li]:my-0.5 [&_strong]:font-semibold [&_code]:bg-black/10 [&_code]:dark:bg-white/10 [&_code]:px-1 [&_code]:rounded [&_code]:text-xs"
+                    className="thinking-content max-h-[300px] overflow-y-auto"
                 >
-                    <ReactMarkdown>{content}</ReactMarkdown>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
                 </div>
             )}
         </div>

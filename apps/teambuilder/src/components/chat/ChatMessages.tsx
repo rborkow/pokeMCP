@@ -60,7 +60,7 @@ export function ChatMessages() {
     return (
         <div
             ref={scrollContainerRef}
-            className="flex-1 overflow-y-auto px-4"
+            className="flex-1 overflow-y-auto px-3"
             onScroll={handleScroll}
         >
             {messages.map((message) => (
@@ -68,7 +68,7 @@ export function ChatMessages() {
                     <ChatMessage message={message} />
                     {/* Show action card after the message that contains it */}
                     {message.action && !pendingAction && (
-                        <div className="ml-11 mb-4">
+                        <div className="mb-3">
                             <ActionCard action={message.action} isApplied />
                         </div>
                     )}

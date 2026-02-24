@@ -277,6 +277,91 @@
     box-shadow: var(--shadow-hover), var(--shadow-glow);
   }
 
+  /* Chat markdown styles for assistant messages */
+  .chat-markdown p {
+    @apply my-1.5 leading-relaxed;
+  }
+
+  .chat-markdown p:first-child {
+    @apply mt-0;
+  }
+
+  .chat-markdown p:last-child {
+    @apply mb-0;
+  }
+
+  .chat-markdown ul {
+    @apply my-1.5 ml-4 list-disc;
+  }
+
+  .chat-markdown ol {
+    @apply my-1.5 ml-4 list-decimal;
+  }
+
+  .chat-markdown li {
+    @apply my-0.5;
+  }
+
+  .chat-markdown strong {
+    @apply font-semibold;
+  }
+
+  .chat-markdown h1, .chat-markdown h2, .chat-markdown h3 {
+    @apply font-semibold mt-3 mb-1.5;
+  }
+
+  .chat-markdown h1 {
+    @apply text-base;
+  }
+
+  .chat-markdown h2 {
+    @apply text-sm;
+  }
+
+  .chat-markdown h3 {
+    @apply text-sm;
+  }
+
+  .chat-markdown code {
+    @apply bg-black/10 dark:bg-white/10 px-1 py-0.5 rounded text-xs;
+  }
+
+  .chat-markdown pre {
+    @apply bg-black/10 dark:bg-white/10 rounded-lg p-2 my-2 overflow-x-auto;
+  }
+
+  .chat-markdown pre code {
+    @apply bg-transparent p-0;
+  }
+
+  .chat-markdown table {
+    @apply w-full my-2 text-xs border-collapse;
+  }
+
+  .chat-markdown thead {
+    @apply border-b border-border;
+  }
+
+  .chat-markdown th {
+    @apply text-left font-semibold px-2 py-1 text-muted-foreground;
+  }
+
+  .chat-markdown td {
+    @apply px-2 py-1 border-b border-border/30;
+  }
+
+  .chat-markdown blockquote {
+    @apply border-l-2 border-primary/50 pl-2 my-2 text-muted-foreground italic;
+  }
+
+  .chat-markdown hr {
+    @apply my-3 border-border/50;
+  }
+
+  .chat-markdown a {
+    @apply text-primary underline underline-offset-2;
+  }
+
   .thinking-collapsible {
     @apply rounded-lg bg-muted/50 border border-border/50 mb-3 overflow-hidden;
   }
