@@ -33,7 +33,7 @@ function SpeedRow({ info }: { info: TeamSpeedInfo }) {
         <div className={`flex items-center gap-3 p-2 rounded ${tierBg}`}>
             <div className="flex items-center gap-2 w-36">
                 <PokemonSprite pokemon={info.pokemon} size="sm" />
-                <span className="text-sm font-medium truncate">{toDisplayName(info.pokemon)}</span>
+                <span className="text-sm font-medium leading-tight">{toDisplayName(info.pokemon)}</span>
             </div>
 
             {/* Speed stat */}

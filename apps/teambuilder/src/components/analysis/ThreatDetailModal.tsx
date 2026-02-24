@@ -105,7 +105,7 @@ function parsePopularSets(response: string): Partial<PopularSet> {
 function UsageBar({ usage, label }: { usage: number; label: string }) {
     return (
         <div className="flex items-center gap-2 text-sm">
-            <span className="w-32 truncate">{label}</span>
+            <span className="w-32 break-words leading-tight">{label}</span>
             <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
                 <div
                     className="h-full bg-primary rounded-full"
