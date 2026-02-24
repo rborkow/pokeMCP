@@ -65,11 +65,11 @@ Access real competitive data from thousands of battles with cached data for inst
 - **Metagame Stats**: Overall format statistics and trends
 
 **Supported Formats:**
-- Gen 9: OU, Ubers, UU, RU, NU, PU, LC, VGC 2024 Reg F/H, Doubles OU
+- Gen 9: OU, Ubers, UU, RU, NU, PU, LC, VGC 2026 Reg F, Doubles OU
 - Gen 8: OU, Ubers, UU, RU, NU, PU, LC
 - Gen 7: OU, Ubers, UU, RU, NU, LC
 
-*Note: VGC 2025/2026 formats automatically fall back to the most recent available data*
+*VGC formats are auto-discovered monthly from Smogon's stats. New regulations are picked up automatically.*
 
 ## Deployment
 
@@ -144,7 +144,7 @@ Stats are cached in Cloudflare KV for instant access. To update:
 2. Upload to KV (the namespace ID is in `wrangler.jsonc`):
    ```bash
    npx wrangler kv key put --remote --namespace-id=YOUR_NAMESPACE_ID "gen9ou" --path="src/cached-stats/gen9ou.json"
-   # Repeat for other formats: gen9ubers, gen9uu, gen9ru, gen9nu, gen9pu, gen9lc, gen9vgc2024regf, gen9vgc2024regh
+   # Repeat for other formats: gen9ubers, gen9uu, gen9ru, gen9nu, gen9pu, gen9lc, gen9vgc2026regf, gen9vgc2024regh
    ```
 
 ## Usage in Claude

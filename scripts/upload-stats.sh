@@ -34,6 +34,15 @@ for file in "$CACHE_DIR"/*.json; do
     sleep 0.5
 done
 
+# Upload discovered formats list (used by ingestion orchestrator at runtime)
+DISCOVERY_FILE="src/discovered-formats.json"
+if [ -f "$DISCOVERY_FILE" ]; then
+    echo ""
+    echo "📤 Uploading discovered formats..."
+    npx wrangler kv key put --remote --namespace-id="$KV_NAMESPACE_ID" \
+        "_discovered_formats" --path="$DISCOVERY_FILE"
+fi
+
 echo ""
 echo "✅ Upload complete!"
 echo ""
