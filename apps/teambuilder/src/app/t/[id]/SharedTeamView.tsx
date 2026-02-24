@@ -123,7 +123,10 @@ export function SharedTeamView({ team: sharedTeam }: SharedTeamViewProps) {
                     <span>PokeMCP Team Builder</span>
                     <nav aria-label="Footer" className="inline">
                         {" \u2022 "}
-                        <Link href="/" className="underline hover:text-foreground py-2 inline-block">
+                        <Link
+                            href="/"
+                            className="underline hover:text-foreground py-2 inline-block"
+                        >
                             Build a Team
                         </Link>
                         {" \u2022 "}
