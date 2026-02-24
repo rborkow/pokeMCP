@@ -30,7 +30,8 @@ const ACTION_LABELS: Record<TeamAction["type"], string> = {
 
 export function ActionCard({ action, isApplied = false }: ActionCardProps) {
     const { team, setPokemon, removePokemon } = useTeamStore();
-    const { setPendingAction, addMessage, lastUserPrompt, queuePrompt } = useChatStore();
+    const { setPendingAction, advancePendingAction, addMessage, lastUserPrompt, queuePrompt } =
+        useChatStore();
     const { pushState } = useHistoryStore();
 
     const hasValidationErrors = action.validationErrors && action.validationErrors.length > 0;
@@ -103,8 +104,8 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
         // Record in history
         pushState(action.preview, `Applied: ${action.reason}`, "ai");
 
-        // Clear pending and add confirmation
-        setPendingAction(null);
+        // Advance to next queued action (or clear if none)
+        advancePendingAction();
         addMessage({
             role: "system",
             content: `Applied: ${action.reason}`,
@@ -112,7 +113,7 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
     };
 
     const handleDismiss = () => {
-        setPendingAction(null);
+        advancePendingAction();
         addMessage({
             role: "system",
             content: "Suggestion dismissed",
@@ -133,6 +134,20 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
     // Get the Pokemon being affected
     const targetPokemon = action.payload.pokemon;
     const currentPokemon = action.previousState?.pokemon ?? team[action.slot]?.pokemon;
+
+    // Determine if this is an update (same Pokemon, different fields)
+    const isUpdateAction = [
+        "update_moveset",
+        "update_item",
+        "update_ability",
+        "update_nature",
+        "update_evs",
+        "update_tera_type",
+        "update_move",
+    ].includes(action.type);
+    // For updates where the Pokemon stays the same, just show one sprite
+    const isSpeciesChange =
+        !isUpdateAction && currentPokemon && targetPokemon && currentPokemon !== targetPokemon;
 
     return (
         <Card className={`border-primary/50 ${isApplied ? "opacity-60" : ""}`}>
@@ -170,23 +185,41 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
 
                 {/* Visual preview of the change */}
                 <div className="flex items-center gap-4">
-                    {/* Current state (for replace/update) */}
-                    {currentPokemon && action.type !== "add_pokemon" && (
+                    {/* Replace: show old → new sprites */}
+                    {isSpeciesChange && (
+                        <>
+                            <div className="flex flex-col items-center">
+                                <PokemonSprite pokemon={currentPokemon} size="sm" />
+                                <span className="text-xs text-muted-foreground mt-1">
+                                    {currentPokemon}
+                                </span>
+                            </div>
+                            <span className="text-muted-foreground">→</span>
+                            <div className="flex flex-col items-center">
+                                <PokemonSprite pokemon={targetPokemon} size="sm" />
+                                <span className="text-xs font-medium mt-1">{targetPokemon}</span>
+                            </div>
+                        </>
+                    )}
+
+                    {/* Add: show only the new Pokemon */}
+                    {action.type === "add_pokemon" && targetPokemon && (
                         <div className="flex flex-col items-center">
-                            <PokemonSprite pokemon={currentPokemon} size="sm" />
-                            <span className="text-xs text-muted-foreground mt-1">
-                                {currentPokemon}
-                            </span>
+                            <PokemonSprite pokemon={targetPokemon} size="sm" />
+                            <span className="text-xs font-medium mt-1">{targetPokemon}</span>
                         </div>
                     )}
 
-                    {/* Arrow for transitions */}
-                    {currentPokemon && action.type !== "add_pokemon" && targetPokemon && (
-                        <span className="text-muted-foreground">→</span>
+                    {/* Update or remove: show single sprite of the current Pokemon */}
+                    {(isUpdateAction || action.type === "remove_pokemon") && currentPokemon && (
+                        <div className="flex flex-col items-center">
+                            <PokemonSprite pokemon={currentPokemon} size="sm" />
+                            <span className="text-xs font-medium mt-1">{currentPokemon}</span>
+                        </div>
                     )}
 
-                    {/* New state */}
-                    {targetPokemon && (
+                    {/* Replace same species: show single sprite */}
+                    {action.type === "replace_pokemon" && !isSpeciesChange && targetPokemon && (
                         <div className="flex flex-col items-center">
                             <PokemonSprite pokemon={targetPokemon} size="sm" />
                             <span className="text-xs font-medium mt-1">{targetPokemon}</span>
@@ -200,7 +233,9 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
                             <p>
                                 <span className="text-muted-foreground">Nature:</span>{" "}
                                 <span className="text-muted-foreground">
-                                    {action.previousState?.nature ?? team[action.slot]?.nature ?? "None"}
+                                    {action.previousState?.nature ??
+                                        team[action.slot]?.nature ??
+                                        "None"}
                                 </span>
                                 <span className="mx-1">→</span>
                                 <span className="font-medium">{action.payload.nature}</span>
@@ -225,7 +260,9 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
                             <p>
                                 <span className="text-muted-foreground">Tera Type:</span>{" "}
                                 <span className="text-muted-foreground">
-                                    {action.previousState?.teraType ?? team[action.slot]?.teraType ?? "None"}
+                                    {action.previousState?.teraType ??
+                                        team[action.slot]?.teraType ??
+                                        "None"}
                                 </span>
                                 <span className="mx-1">→</span>
                                 <span className="font-medium">{action.payload.teraType}</span>
@@ -254,7 +291,9 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
                             <p>
                                 <span className="text-muted-foreground">Item:</span>{" "}
                                 <span className="text-muted-foreground">
-                                    {action.previousState?.item ?? team[action.slot]?.item ?? "None"}
+                                    {action.previousState?.item ??
+                                        team[action.slot]?.item ??
+                                        "None"}
                                 </span>
                                 <span className="mx-1">→</span>
                                 <span className="font-medium">{action.payload.item}</span>
@@ -266,7 +305,9 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
                             <p>
                                 <span className="text-muted-foreground">Ability:</span>{" "}
                                 <span className="text-muted-foreground">
-                                    {action.previousState?.ability ?? team[action.slot]?.ability ?? "None"}
+                                    {action.previousState?.ability ??
+                                        team[action.slot]?.ability ??
+                                        "None"}
                                 </span>
                                 <span className="mx-1">→</span>
                                 <span className="font-medium">{action.payload.ability}</span>

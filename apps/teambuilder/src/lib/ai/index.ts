@@ -96,16 +96,73 @@ export function parseToolToAction(
             }
         }
 
-        // Map action type
-        const typeMap: Record<string, TeamAction["type"]> = {
-            add_pokemon: "add_pokemon",
-            replace_pokemon: "replace_pokemon",
-            update_pokemon: "update_moveset",
-            remove_pokemon: "remove_pokemon",
-        };
+        // Map action type — for update_pokemon, infer specific type from fields
+        let actionType: TeamAction["type"];
+        if (toolInput.action_type === "update_pokemon") {
+            if (
+                toolInput.move_slot !== undefined &&
+                toolInput.moves &&
+                toolInput.moves.length > 0
+            ) {
+                actionType = "update_move";
+                // Propagate move_slot into payload for ActionCard display
+                (payload as Record<string, unknown>).moveSlot = toolInput.move_slot;
+            } else if (toolInput.moves && toolInput.moves.length > 0) {
+                actionType = "update_moveset";
+            } else if (
+                toolInput.item &&
+                !toolInput.ability &&
+                !toolInput.nature &&
+                !toolInput.evs &&
+                !toolInput.tera_type
+            ) {
+                actionType = "update_item";
+            } else if (
+                toolInput.ability &&
+                !toolInput.item &&
+                !toolInput.nature &&
+                !toolInput.evs &&
+                !toolInput.tera_type
+            ) {
+                actionType = "update_ability";
+            } else if (
+                toolInput.nature &&
+                !toolInput.item &&
+                !toolInput.ability &&
+                !toolInput.evs &&
+                !toolInput.tera_type
+            ) {
+                actionType = "update_nature";
+            } else if (
+                toolInput.evs &&
+                !toolInput.item &&
+                !toolInput.ability &&
+                !toolInput.nature &&
+                !toolInput.tera_type
+            ) {
+                actionType = "update_evs";
+            } else if (
+                toolInput.tera_type &&
+                !toolInput.item &&
+                !toolInput.ability &&
+                !toolInput.nature &&
+                !toolInput.evs
+            ) {
+                actionType = "update_tera_type";
+            } else {
+                actionType = "update_moveset"; // Fallback for multi-field updates
+            }
+        } else {
+            const typeMap: Record<string, TeamAction["type"]> = {
+                add_pokemon: "add_pokemon",
+                replace_pokemon: "replace_pokemon",
+                remove_pokemon: "remove_pokemon",
+            };
+            actionType = typeMap[toolInput.action_type] || "add_pokemon";
+        }
 
         return {
-            type: typeMap[toolInput.action_type] || "add_pokemon",
+            type: actionType,
             slot: slot,
             payload: payload,
             preview: preview.filter(Boolean),

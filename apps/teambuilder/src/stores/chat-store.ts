@@ -6,6 +6,7 @@ import { type PersonalityId, DEFAULT_PERSONALITY } from "@/lib/ai/personalities"
 interface ChatState {
     messages: ChatMessage[];
     pendingAction: TeamAction | null;
+    pendingActions: TeamAction[];
     isLoading: boolean;
     aiProvider: AIProvider;
     personality: PersonalityId;
@@ -18,6 +19,8 @@ interface ChatState {
     addMessage: (message: Omit<ChatMessage, "id" | "timestamp">) => string;
     updateMessage: (id: string, updates: Partial<ChatMessage>) => void;
     setPendingAction: (action: TeamAction | null) => void;
+    setPendingActions: (actions: TeamAction[]) => void;
+    advancePendingAction: () => void;
     setAIProvider: (provider: AIProvider) => void;
     setPersonality: (personality: PersonalityId) => void;
     setLoading: (loading: boolean) => void;
@@ -36,6 +39,7 @@ export const useChatStore = create<ChatState>()(
         (set, get) => ({
             messages: [],
             pendingAction: null,
+            pendingActions: [],
             isLoading: false,
             aiProvider: "claude",
             personality: DEFAULT_PERSONALITY,
@@ -67,6 +71,29 @@ export const useChatStore = create<ChatState>()(
 
             setPendingAction: (action) => set({ pendingAction: action }),
 
+            setPendingActions: (actions) => {
+                if (actions.length === 0) {
+                    set({ pendingAction: null, pendingActions: [] });
+                    return;
+                }
+                set({
+                    pendingAction: actions[0],
+                    pendingActions: actions.slice(1),
+                });
+            },
+
+            advancePendingAction: () => {
+                const { pendingActions } = get();
+                if (pendingActions.length === 0) {
+                    set({ pendingAction: null, pendingActions: [] });
+                    return;
+                }
+                set({
+                    pendingAction: pendingActions[0],
+                    pendingActions: pendingActions.slice(1),
+                });
+            },
+
             setAIProvider: (provider) => set({ aiProvider: provider }),
 
             setPersonality: (personality) => set({ personality }),
@@ -81,6 +108,7 @@ export const useChatStore = create<ChatState>()(
                 set({
                     messages: [],
                     pendingAction: null,
+                    pendingActions: [],
                     isLoading: false,
                     abortController: null,
                 });

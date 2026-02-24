@@ -34,6 +34,7 @@ export function ChatPanel() {
         addMessage,
         setLoading,
         setPendingAction,
+        setPendingActions,
         clearChat,
         personality: personalityId,
         enableThinking,
@@ -160,9 +161,18 @@ export function ChatPanel() {
                     useChatStore.getState().abortStream();
                     setLoading(false);
 
-                    // If there are multiple actions (team generation), apply them all
-                    if (response.actions && response.actions.length > 1) {
-                        applyActions(response.actions);
+                    // Auto-apply only for team generation (all adds to empty team)
+                    const isTeamGeneration =
+                        response.actions &&
+                        response.actions.length > 1 &&
+                        team.length === 0 &&
+                        response.actions.every((a) => a.type === "add_pokemon");
+
+                    if (isTeamGeneration) {
+                        applyActions(response.actions!);
+                    } else if (response.actions && response.actions.length > 1) {
+                        // Multiple non-generation actions: queue for sequential review
+                        setPendingActions(response.actions);
                     } else if (response.action) {
                         // Single action - set as pending for user confirmation
                         setPendingAction(response.action);
@@ -189,6 +199,7 @@ export function ChatPanel() {
             personalityId,
             enableThinking,
             setPendingAction,
+            setPendingActions,
             applyActions,
         ],
     );
