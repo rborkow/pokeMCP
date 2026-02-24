@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ChevronDown, ChevronUp, Brain } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ReactMarkdown from "react-markdown";
 
 interface ThinkingCollapsibleProps {
     content: string;
@@ -10,14 +11,32 @@ interface ThinkingCollapsibleProps {
 }
 
 export function ThinkingCollapsible({ content, isActive }: ThinkingCollapsibleProps) {
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isManuallyCollapsed, setIsManuallyCollapsed] = useState(false);
+    const contentRef = useRef<HTMLDivElement>(null);
+
+    // Auto-expand while thinking is active; respect manual collapse
+    const isExpanded = isActive ? !isManuallyCollapsed : !isManuallyCollapsed && content.length > 0;
+
+    // Reset manual collapse state when a new thinking session starts
+    useEffect(() => {
+        if (isActive) {
+            setIsManuallyCollapsed(false);
+        }
+    }, [isActive]);
+
+    // Auto-scroll the thinking content container during streaming
+    useEffect(() => {
+        if (isActive && isExpanded && contentRef.current) {
+            contentRef.current.scrollTop = contentRef.current.scrollHeight;
+        }
+    }, [content, isActive, isExpanded]);
 
     // Don't render if no thinking content and not active
     if (!content && !isActive) {
         return null;
     }
 
-    // While actively thinking, show animated indicator
+    // While actively thinking with no content yet, show animated indicator
     if (isActive && !content) {
         return (
             <div className="thinking-collapsible">
@@ -43,11 +62,11 @@ export function ThinkingCollapsible({ content, isActive }: ThinkingCollapsiblePr
         );
     }
 
-    // Show collapsible thinking content
+    // Collapsible thinking content with auto-expand during streaming
     return (
-        <div className="thinking-collapsible">
+        <div className={cn("thinking-collapsible", isActive && "border-primary/30 bg-primary/5")}>
             <button
-                onClick={() => setIsExpanded(!isExpanded)}
+                onClick={() => setIsManuallyCollapsed(!isManuallyCollapsed)}
                 className="thinking-toggle"
                 type="button"
             >
@@ -61,7 +80,14 @@ export function ThinkingCollapsible({ content, isActive }: ThinkingCollapsiblePr
                     <ChevronDown className="h-3 w-3 ml-auto" />
                 )}
             </button>
-            {isExpanded && <div className="thinking-content">{content}</div>}
+            {isExpanded && (
+                <div
+                    ref={contentRef}
+                    className="thinking-content max-h-[300px] overflow-y-auto text-sm [&_p]:my-1 [&_ul]:my-1 [&_ul]:ml-4 [&_ul]:list-disc [&_ol]:my-1 [&_ol]:ml-4 [&_ol]:list-decimal [&_li]:my-0.5 [&_strong]:font-semibold [&_code]:bg-black/10 [&_code]:dark:bg-white/10 [&_code]:px-1 [&_code]:rounded [&_code]:text-xs"
+                >
+                    <ReactMarkdown>{content}</ReactMarkdown>
+                </div>
+            )}
         </div>
     );
 }

@@ -11,6 +11,8 @@ interface ChatState {
     personality: PersonalityId;
     queuedPrompt: string | null;
     lastUserPrompt: string | null;
+    enableThinking: boolean;
+    abortController: AbortController | null;
 
     // Actions
     addMessage: (message: Omit<ChatMessage, "id" | "timestamp">) => string;
@@ -24,11 +26,14 @@ interface ChatState {
     queuePrompt: (prompt: string) => void;
     clearQueuedPrompt: () => void;
     setLastUserPrompt: (prompt: string) => void;
+    toggleThinking: () => void;
+    startStream: () => AbortController;
+    abortStream: () => void;
 }
 
 export const useChatStore = create<ChatState>()(
     persist(
-        (set) => ({
+        (set, get) => ({
             messages: [],
             pendingAction: null,
             isLoading: false,
@@ -36,6 +41,8 @@ export const useChatStore = create<ChatState>()(
             personality: DEFAULT_PERSONALITY,
             queuedPrompt: null,
             lastUserPrompt: null,
+            enableThinking: false,
+            abortController: null,
 
             addMessage: (message) => {
                 const id = crypto.randomUUID();
@@ -66,7 +73,18 @@ export const useChatStore = create<ChatState>()(
 
             setLoading: (loading) => set({ isLoading: loading }),
 
-            clearChat: () => set({ messages: [], pendingAction: null }),
+            clearChat: () => {
+                const { abortController } = get();
+                if (abortController) {
+                    abortController.abort();
+                }
+                set({
+                    messages: [],
+                    pendingAction: null,
+                    isLoading: false,
+                    abortController: null,
+                });
+            },
 
             removeMessage: (id) => {
                 set((state) => ({
@@ -79,6 +97,26 @@ export const useChatStore = create<ChatState>()(
             clearQueuedPrompt: () => set({ queuedPrompt: null }),
 
             setLastUserPrompt: (prompt) => set({ lastUserPrompt: prompt }),
+
+            toggleThinking: () => set((state) => ({ enableThinking: !state.enableThinking })),
+
+            startStream: () => {
+                const { abortController: existing } = get();
+                if (existing) {
+                    existing.abort();
+                }
+                const controller = new AbortController();
+                set({ abortController: controller, isLoading: true });
+                return controller;
+            },
+
+            abortStream: () => {
+                const { abortController } = get();
+                if (abortController) {
+                    abortController.abort();
+                }
+                set({ abortController: null, isLoading: false });
+            },
         }),
         {
             name: "pokemcp-chat",
@@ -87,6 +125,7 @@ export const useChatStore = create<ChatState>()(
                 aiProvider: state.aiProvider,
                 personality: state.personality,
                 pendingAction: state.pendingAction,
+                enableThinking: state.enableThinking,
             }),
             // Handle Date serialization
             storage: {

@@ -13,6 +13,20 @@ import { streamChatMessage } from "@/lib/ai";
 import { Trash2 } from "lucide-react";
 import type { TeamAction } from "@/types/chat";
 
+function getErrorMessage(error: Error): string {
+    const errorType = (error as Error & { errorType?: string }).errorType;
+    switch (errorType) {
+        case "rate_limit":
+            return "You're sending messages too quickly. Please wait a moment and try again.";
+        case "network":
+            return "Network error — please check your connection and try again.";
+        case "api":
+            return "The AI service is temporarily unavailable. Please try again in a moment.";
+        default:
+            return `Error: ${error.message}`;
+    }
+}
+
 export function ChatPanel() {
     const {
         messages,
@@ -22,6 +36,7 @@ export function ChatPanel() {
         setPendingAction,
         clearChat,
         personality: personalityId,
+        enableThinking,
         queuedPrompt,
         clearQueuedPrompt,
         setLastUserPrompt,
@@ -34,7 +49,7 @@ export function ChatPanel() {
         (actions: TeamAction[]) => {
             // Apply each action
             actions.forEach((action, index) => {
-                if (action.payload && action.payload.pokemon) {
+                if (action.payload?.pokemon) {
                     setPokemon(index, {
                         pokemon: action.payload.pokemon,
                         moves: action.payload.moves || [],
@@ -73,9 +88,14 @@ export function ChatPanel() {
                 role: "assistant",
                 content: "",
                 isLoading: true,
+                streamingPhase: "connecting",
             });
 
-            setLoading(true);
+            // Create abort controller and start stream
+            const controller = useChatStore.getState().startStream();
+
+            // Track accumulated content in closure to avoid stale store reads
+            let accumulatedContent = "";
 
             // Use streaming for Claude
             await streamChatMessage({
@@ -84,13 +104,25 @@ export function ChatPanel() {
                 format,
                 mode,
                 personality: personalityId,
+                enableThinking,
                 chatHistory: currentMessages,
+                signal: controller.signal,
                 onChunk: (text) => {
-                    // Update message content as chunks arrive
+                    // Throttled full-content update for markdown rendering
                     useChatStore.getState().updateMessage(streamingId, {
                         content: text,
                         isLoading: true,
-                        buildingStatus: undefined, // Clear building status when text arrives
+                        buildingStatus: undefined,
+                    });
+                },
+                onTextDelta: (delta) => {
+                    // Delta-based accumulation (called on every token)
+                    accumulatedContent += delta;
+                    useChatStore.getState().updateMessage(streamingId, {
+                        content: accumulatedContent,
+                        isLoading: true,
+                        streamingPhase: "generating",
+                        buildingStatus: undefined,
                     });
                 },
                 onThinking: (_isThinking, thinkingText) => {
@@ -98,6 +130,7 @@ export function ChatPanel() {
                     if (thinkingText) {
                         useChatStore.getState().updateMessage(streamingId, {
                             thinkingContent: thinkingText,
+                            streamingPhase: "thinking",
                         });
                     }
                 },
@@ -106,6 +139,12 @@ export function ChatPanel() {
                     useChatStore.getState().updateMessage(streamingId, {
                         buildingStatus: `Adding ${pokemonName}... (${count}/6)`,
                         isLoading: true,
+                        streamingPhase: "tool_calling",
+                    });
+                },
+                onPhaseChange: (phase) => {
+                    useChatStore.getState().updateMessage(streamingId, {
+                        streamingPhase: phase,
                     });
                 },
                 onComplete: (response) => {
@@ -113,8 +152,13 @@ export function ChatPanel() {
                     useChatStore.getState().updateMessage(streamingId, {
                         content: response.content,
                         isLoading: false,
+                        streamingPhase: "complete",
                         action: response.action,
                     });
+
+                    // Clear abort controller
+                    useChatStore.getState().abortStream();
+                    setLoading(false);
 
                     // If there are multiple actions (team generation), apply them all
                     if (response.actions && response.actions.length > 1) {
@@ -123,14 +167,14 @@ export function ChatPanel() {
                         // Single action - set as pending for user confirmation
                         setPendingAction(response.action);
                     }
-
-                    setLoading(false);
                 },
                 onError: (error) => {
                     useChatStore.getState().updateMessage(streamingId, {
-                        content: `Error: ${error.message}`,
+                        content: getErrorMessage(error),
                         isLoading: false,
+                        streamingPhase: "error",
                     });
+                    useChatStore.getState().abortStream();
                     setLoading(false);
                 },
             });
@@ -143,10 +187,15 @@ export function ChatPanel() {
             format,
             mode,
             personalityId,
+            enableThinking,
             setPendingAction,
             applyActions,
         ],
     );
+
+    const handleStop = useCallback(() => {
+        useChatStore.getState().abortStream();
+    }, []);
 
     // Watch for queued prompts from WelcomeOverlay
     useEffect(() => {
@@ -180,7 +229,9 @@ export function ChatPanel() {
             <ChatMessages />
             <ChatInput
                 onSend={handleSend}
+                onStop={handleStop}
                 disabled={isLoading}
+                isStreaming={isLoading}
                 placeholder={
                     team.length === 0
                         ? "Import a team first, then ask me anything..."

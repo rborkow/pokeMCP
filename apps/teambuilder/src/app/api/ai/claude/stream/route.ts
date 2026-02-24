@@ -1,4 +1,5 @@
 import type { NextRequest } from "next/server";
+import Anthropic from "@anthropic-ai/sdk";
 import {
     buildSystemPrompt,
     buildUserMessage,
@@ -140,63 +141,7 @@ export async function POST(request: NextRequest) {
         // Build the messages array: history + current message with full context
         const messages = [...recentHistory, { role: "user" as const, content: fullUserMessage }];
 
-        // Build request body with tools and prompt caching
-        const requestBody: Record<string, unknown> = {
-            model: "claude-sonnet-4-6",
-            max_tokens: 16000,
-            stream: true,
-            // Use structured system message with cache_control for prompt caching
-            system: [
-                {
-                    type: "text",
-                    text: systemPrompt,
-                    cache_control: { type: "ephemeral" },
-                },
-            ],
-            messages,
-            tools: TEAM_TOOLS,
-        };
-
-        // Use adaptive thinking (Claude decides when/how much to think)
-        // Effort controls depth: "high" when user enables thinking, "medium" otherwise
-        requestBody.thinking = {
-            type: "adaptive",
-        };
-        requestBody.output_config = {
-            effort: useThinking ? "high" : "medium",
-        };
-
-        // Make streaming request to Claude with prompt caching enabled
-        const response = await fetch("https://api.anthropic.com/v1/messages", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "x-api-key": apiKey,
-                "anthropic-version": "2023-06-01",
-            },
-            body: JSON.stringify(requestBody),
-        });
-
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error("Claude API error:", response.status, errorText);
-            return new Response(JSON.stringify({ error: "Claude API request failed" }), {
-                status: response.status,
-                headers: { "Content-Type": "application/json" },
-            });
-        }
-
-        // Transform the Claude stream to a simpler format
-        const encoder = new TextEncoder();
-        const decoder = new TextDecoder();
-        let isThinking = false;
-        let isToolUse = false;
-        let currentToolName = "";
-        let currentToolId = "";
-        let toolInputBuffer = "";
-        let buffer = "";
-
-        // Usage logging: capture token counts from the stream
+        // Usage logging
         const usageLog = {
             format,
             personality: personalityId,
@@ -209,157 +154,153 @@ export async function POST(request: NextRequest) {
             cacheReadInputTokens: 0,
         };
 
-        const transformStream = new TransformStream({
-            async transform(chunk, controller) {
-                buffer += decoder.decode(chunk, { stream: true });
+        // Create Anthropic client and stream
+        const client = new Anthropic({ apiKey });
 
-                const events = buffer.split("\n\n");
-                buffer = events.pop() || "";
+        const stream = client.messages.stream(
+            {
+                model: "claude-sonnet-4-6",
+                max_tokens: 16000,
+                system: [
+                    {
+                        type: "text",
+                        text: systemPrompt,
+                        cache_control: { type: "ephemeral" },
+                    },
+                ],
+                messages,
+                tools: TEAM_TOOLS as Anthropic.Messages.Tool[],
+                thinking: { type: "adaptive" },
+                output_config: { effort: useThinking ? "high" : "medium" },
+            },
+            { signal: request.signal },
+        );
 
-                for (const event of events) {
-                    const lines = event.split("\n");
-                    for (const line of lines) {
-                        if (line.startsWith("data: ")) {
-                            const data = line.slice(6);
-                            if (data === "[DONE]") {
-                                controller.enqueue(encoder.encode("data: [DONE]\n\n"));
-                                continue;
-                            }
+        // Track tool use state for accumulating tool input
+        let currentToolId = "";
+        let currentToolName = "";
+        let toolInputSnapshot: unknown = null;
+        let isInThinkingBlock = false;
+        let isInToolBlock = false;
 
-                            try {
-                                const parsed = JSON.parse(data);
+        const encoder = new TextEncoder();
 
-                                // Capture usage data from message_start
-                                if (parsed.type === "message_start" && parsed.message?.usage) {
-                                    usageLog.inputTokens = parsed.message.usage.input_tokens ?? 0;
-                                    usageLog.cacheCreationInputTokens =
-                                        parsed.message.usage.cache_creation_input_tokens ?? 0;
-                                    usageLog.cacheReadInputTokens =
-                                        parsed.message.usage.cache_read_input_tokens ?? 0;
-                                }
+        const readable = new ReadableStream({
+            async start(controller) {
+                const emit = (data: unknown) => {
+                    controller.enqueue(encoder.encode(`data: ${JSON.stringify(data)}\n\n`));
+                };
 
-                                // Capture final usage data from message_delta
-                                if (parsed.type === "message_delta" && parsed.usage) {
-                                    usageLog.outputTokens = parsed.usage.output_tokens ?? 0;
-                                }
-
-                                if (parsed.type === "content_block_start") {
-                                    const blockType = parsed.content_block?.type;
-
-                                    if (blockType === "thinking") {
-                                        isThinking = true;
-                                        controller.enqueue(
-                                            encoder.encode(
-                                                `data: ${JSON.stringify({ thinking: true, text: "" })}\n\n`,
-                                            ),
-                                        );
-                                    } else if (blockType === "tool_use") {
-                                        isToolUse = true;
-                                        currentToolName = parsed.content_block?.name || "";
-                                        currentToolId = parsed.content_block?.id || "";
-                                        toolInputBuffer = "";
-                                    }
-                                }
-
-                                if (parsed.type === "content_block_delta") {
-                                    if (parsed.delta?.thinking) {
-                                        controller.enqueue(
-                                            encoder.encode(
-                                                `data: ${JSON.stringify({ thinking: true, text: parsed.delta.thinking })}\n\n`,
-                                            ),
-                                        );
-                                    } else if (parsed.delta?.text) {
-                                        controller.enqueue(
-                                            encoder.encode(
-                                                `data: ${JSON.stringify({ text: parsed.delta.text })}\n\n`,
-                                            ),
-                                        );
-                                    } else if (parsed.delta?.partial_json && isToolUse) {
-                                        // Accumulate tool input JSON
-                                        toolInputBuffer += parsed.delta.partial_json;
-                                    }
-                                }
-
-                                if (parsed.type === "content_block_stop") {
-                                    if (isThinking) {
-                                        isThinking = false;
-                                        controller.enqueue(
-                                            encoder.encode(
-                                                `data: ${JSON.stringify({ thinking: false })}\n\n`,
-                                            ),
-                                        );
-                                    } else if (isToolUse) {
-                                        // Parse the complete tool input and emit as tool_use event
-                                        try {
-                                            const toolInput = JSON.parse(toolInputBuffer);
-                                            controller.enqueue(
-                                                encoder.encode(
-                                                    `data: ${JSON.stringify({
-                                                        tool_use: {
-                                                            id: currentToolId,
-                                                            name: currentToolName,
-                                                            input: toolInput,
-                                                        },
-                                                    })}\n\n`,
-                                                ),
-                                            );
-                                        } catch (e) {
-                                            console.error(
-                                                "Failed to parse tool input:",
-                                                e,
-                                                toolInputBuffer,
-                                            );
-                                        }
-                                        isToolUse = false;
-                                        currentToolName = "";
-                                        currentToolId = "";
-                                        toolInputBuffer = "";
-                                    }
-                                }
-
-                                if (parsed.type === "message_stop") {
-                                    // Log usage data for observability (captured by Cloudflare Logs)
-                                    console.log(
-                                        JSON.stringify({
-                                            type: "ai_usage",
-                                            ...usageLog,
-                                            timestamp: Date.now(),
-                                        }),
-                                    );
-                                    controller.enqueue(encoder.encode("data: [DONE]\n\n"));
-                                }
-                            } catch {
-                                // Skip invalid JSON
+                try {
+                    stream.on("streamEvent", (event) => {
+                        // Track content block starts for phase events
+                        if (event.type === "content_block_start") {
+                            const blockType = event.content_block?.type;
+                            if (blockType === "thinking") {
+                                isInThinkingBlock = true;
+                                emit({ phase: "thinking" });
+                                emit({ thinking: true, text: "" });
+                            } else if (blockType === "text") {
+                                emit({ phase: "generating" });
+                            } else if (blockType === "tool_use") {
+                                isInToolBlock = true;
+                                const block =
+                                    event.content_block as Anthropic.Messages.ToolUseBlock;
+                                currentToolId = block.id || "";
+                                currentToolName = block.name || "";
+                                toolInputSnapshot = null;
+                                emit({ phase: "tool_calling" });
                             }
                         }
+
+                        // Track content block stops
+                        if (event.type === "content_block_stop") {
+                            if (isInThinkingBlock) {
+                                isInThinkingBlock = false;
+                                emit({ thinking: false });
+                            } else if (isInToolBlock) {
+                                // Emit the complete tool call
+                                if (currentToolName && toolInputSnapshot !== null) {
+                                    emit({
+                                        tool_use: {
+                                            id: currentToolId,
+                                            name: currentToolName,
+                                            input: toolInputSnapshot,
+                                        },
+                                    });
+                                }
+                                isInToolBlock = false;
+                                currentToolId = "";
+                                currentToolName = "";
+                                toolInputSnapshot = null;
+                            }
+                        }
+
+                        // Capture usage from message_start
+                        if (event.type === "message_start" && event.message?.usage) {
+                            const u = event.message.usage as unknown as Record<string, number>;
+                            usageLog.inputTokens = u.input_tokens ?? 0;
+                            usageLog.cacheCreationInputTokens = u.cache_creation_input_tokens ?? 0;
+                            usageLog.cacheReadInputTokens = u.cache_read_input_tokens ?? 0;
+                        }
+
+                        // Capture final usage from message_delta
+                        if (event.type === "message_delta" && event.usage) {
+                            usageLog.outputTokens = event.usage.output_tokens ?? 0;
+                        }
+                    });
+
+                    // Text deltas
+                    stream.on("text", (textDelta) => {
+                        emit({ text: textDelta });
+                    });
+
+                    // Thinking deltas
+                    stream.on("thinking", (thinkingDelta) => {
+                        emit({ thinking: true, text: thinkingDelta });
+                    });
+
+                    // Tool input JSON — track the snapshot for emission at block stop
+                    stream.on("inputJson", (_partialJson, jsonSnapshot) => {
+                        toolInputSnapshot = jsonSnapshot;
+                    });
+
+                    // Wait for the stream to complete
+                    await stream.finalMessage();
+
+                    // Log usage
+                    console.log(
+                        JSON.stringify({
+                            type: "ai_usage",
+                            ...usageLog,
+                            timestamp: Date.now(),
+                        }),
+                    );
+
+                    controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+                    controller.close();
+                } catch (err) {
+                    // Handle abort/cancellation
+                    if (err instanceof Error && err.name === "AbortError") {
+                        controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+                        controller.close();
+                        return;
                     }
+
+                    console.error("Stream error:", err);
+                    const errorMessage =
+                        err instanceof Error ? err.message : "Unknown streaming error";
+                    emit({ error: errorMessage });
+                    controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+                    controller.close();
                 }
             },
-            flush(controller) {
-                if (buffer.trim()) {
-                    const lines = buffer.split("\n");
-                    for (const line of lines) {
-                        if (line.startsWith("data: ") && line.slice(6) !== "[DONE]") {
-                            try {
-                                const parsed = JSON.parse(line.slice(6));
-                                if (parsed.delta?.text) {
-                                    controller.enqueue(
-                                        encoder.encode(
-                                            `data: ${JSON.stringify({ text: parsed.delta.text })}\n\n`,
-                                        ),
-                                    );
-                                }
-                            } catch {
-                                // Skip
-                            }
-                        }
-                    }
-                }
-                controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+            cancel() {
+                stream.abort();
             },
         });
 
-        return new Response(response.body?.pipeThrough(transformStream), {
+        return new Response(readable, {
             headers: {
                 "Content-Type": "text/event-stream",
                 "Cache-Control": "no-cache",

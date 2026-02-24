@@ -1,20 +1,46 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { useChatStore } from "@/stores/chat-store";
 import { ChatMessage } from "./ChatMessage";
 import { ActionCard } from "./ActionCard";
 
 export function ChatMessages() {
     const { messages, pendingAction, isLoading } = useChatStore();
-    const messagesEndRef = useRef<HTMLDivElement>(null);
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const scrollRAFRef = useRef<number>(undefined);
+    const isUserScrolledUpRef = useRef(false);
 
-    // Auto-scroll to bottom when new messages arrive
-    // Use instant scroll during streaming to avoid jank, smooth otherwise
+    // Track if user has scrolled away from the bottom
+    const handleScroll = useCallback(() => {
+        const container = scrollContainerRef.current;
+        if (!container) return;
+        const distanceFromBottom =
+            container.scrollHeight - container.scrollTop - container.clientHeight;
+        // Consider "near bottom" if within 100px
+        isUserScrolledUpRef.current = distanceFromBottom > 100;
+    }, []);
+
+    // Auto-scroll to bottom, debounced with RAF
+    // Only auto-scroll if user hasn't scrolled up
     useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({
-            behavior: isLoading ? "instant" : "smooth",
+        if (isUserScrolledUpRef.current && isLoading) return;
+
+        if (scrollRAFRef.current) {
+            cancelAnimationFrame(scrollRAFRef.current);
+        }
+        scrollRAFRef.current = requestAnimationFrame(() => {
+            const container = scrollContainerRef.current;
+            if (container) {
+                container.scrollTo({
+                    top: container.scrollHeight,
+                    behavior: isLoading ? "instant" : "smooth",
+                });
+            }
         });
+        return () => {
+            if (scrollRAFRef.current) cancelAnimationFrame(scrollRAFRef.current);
+        };
     }, [messages, pendingAction, isLoading]);
 
     if (messages.length === 0) {
@@ -32,7 +58,11 @@ export function ChatMessages() {
     }
 
     return (
-        <div className="flex-1 overflow-y-auto px-4">
+        <div
+            ref={scrollContainerRef}
+            className="flex-1 overflow-y-auto px-4"
+            onScroll={handleScroll}
+        >
             {messages.map((message) => (
                 <div key={message.id}>
                     <ChatMessage message={message} />
@@ -51,8 +81,6 @@ export function ChatMessages() {
                     <ActionCard action={pendingAction} />
                 </div>
             )}
-
-            <div ref={messagesEndRef} />
         </div>
     );
 }
