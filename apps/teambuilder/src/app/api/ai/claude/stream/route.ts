@@ -4,6 +4,7 @@ import {
     buildUserMessage,
     fetchMetaThreats,
     fetchPopularSetsContext,
+    fetchStrategyContext,
     fetchTeammateAnalysis,
     formatTeamContext,
     type TeamPokemon,
@@ -94,13 +95,15 @@ export async function POST(request: NextRequest) {
 
         // Fetch context in parallel
         // Only fetch teammate analysis if team has Pokemon (helps with suggestions)
-        const [metaThreats, popularSetsContext, teammateAnalysis] = await Promise.all([
-            fetchMetaThreats(format),
-            fetchPopularSetsContext(message, format),
-            team.length > 0 && team.length < 6
-                ? fetchTeammateAnalysis(team as TeamPokemon[], format)
-                : Promise.resolve(""),
-        ]);
+        const [metaThreats, popularSetsContext, teammateAnalysis, strategyContext] =
+            await Promise.all([
+                fetchMetaThreats(format),
+                fetchPopularSetsContext(message, format),
+                team.length > 0 && team.length < 6
+                    ? fetchTeammateAnalysis(team as TeamPokemon[], format)
+                    : Promise.resolve(""),
+                fetchStrategyContext(message, format),
+            ]);
 
         // Build prompts
         const teamContext = formatTeamContext(team as TeamPokemon[]);
@@ -119,6 +122,7 @@ export async function POST(request: NextRequest) {
             team as TeamPokemon[],
             mode as Mode,
             teammateAnalysis,
+            strategyContext,
         );
 
         // Only enable extended thinking when the client explicitly requests it

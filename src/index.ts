@@ -378,36 +378,19 @@ export default {
                     }
                 }
 
-                // Get strategic content via RAG if the message seems strategic
-                const strategicKeywords = [
-                    "counter",
-                    "check",
-                    "threat",
-                    "weakness",
-                    "coverage",
-                    "improve",
-                    "suggest",
-                    "rate",
-                    "fix",
-                ];
-                const isStrategicQuery = strategicKeywords.some((kw) =>
-                    message.toLowerCase().includes(kw),
-                );
-
-                if (isStrategicQuery) {
-                    try {
-                        const strategyResponse = await queryStrategy(
-                            { query: message, format, limit: 3 },
-                            env,
-                        );
-                        if (strategyResponse.results && strategyResponse.results.length > 0) {
-                            context.strategy = strategyResponse.results
-                                .map((r: { content: string }) => r.content)
-                                .join("\n\n");
-                        }
-                    } catch (e) {
-                        console.error("Failed to get strategy:", e);
+                // Get strategic content via RAG
+                try {
+                    const strategyResponse = await queryStrategy(
+                        { query: message, format, limit: 3 },
+                        env,
+                    );
+                    if (strategyResponse.results && strategyResponse.results.length > 0) {
+                        context.strategy = strategyResponse.results
+                            .map((r: { content: string }) => r.content)
+                            .join("\n\n");
                     }
+                } catch (e) {
+                    console.error("Failed to get strategy:", e);
                 }
 
                 // Extract Pokemon mentioned in the message to fetch their popular sets

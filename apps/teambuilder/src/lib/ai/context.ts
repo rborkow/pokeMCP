@@ -189,6 +189,52 @@ export async function fetchPopularSetsContext(message: string, format: string): 
 }
 
 /**
+ * Fetch strategy context from RAG (Vectorize) via the query_strategy MCP tool.
+ * Returns Smogon strategic content relevant to the user's message.
+ */
+export async function fetchStrategyContext(message: string, format: string): Promise<string> {
+    try {
+        const response = await fetch(`${MCP_URL}/api/tools`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                tool: "query_strategy",
+                args: { query: message, format, limit: 3 },
+            }),
+        });
+        if (response.ok) {
+            const data = await response.json();
+            const text = data.result?.content?.[0]?.text || "";
+            if (!text) return "";
+            try {
+                const parsed = JSON.parse(text);
+                if (parsed.results && parsed.results.length > 0) {
+                    return parsed.results
+                        .map(
+                            (r: {
+                                content: string;
+                                metadata?: { pokemon?: string; section_type?: string };
+                            }) => {
+                                const label = r.metadata?.pokemon
+                                    ? `${r.metadata.pokemon} (${r.metadata.section_type || "strategy"})`
+                                    : "Strategy";
+                                return `### ${label}\n${r.content}`;
+                            },
+                        )
+                        .join("\n\n");
+                }
+            } catch {
+                // If it's plain text, return as-is
+                return text;
+            }
+        }
+    } catch (e) {
+        console.error("Failed to fetch strategy context:", e);
+    }
+    return "";
+}
+
+/**
  * Format EV spread into readable string
  */
 function formatEVs(evs: TeamPokemon["evs"]): string {
@@ -409,6 +455,7 @@ export function buildUserMessage(
     team?: TeamPokemon[],
     mode?: Mode,
     teammateAnalysis?: string,
+    strategyContext?: string,
 ): string {
     let contextSection = "";
     if (metaThreats) {
@@ -429,6 +476,11 @@ export function buildUserMessage(
     // Add teammate synergy suggestions (useful for both modes but especially VGC)
     if (teammateAnalysis) {
         contextSection += `\n\n## ${teammateAnalysis}`;
+    }
+
+    // Add Smogon strategy insights from RAG
+    if (strategyContext) {
+        contextSection += `\n\n## Smogon Strategy Insights:\n${strategyContext}`;
     }
 
     return `Current Team:
