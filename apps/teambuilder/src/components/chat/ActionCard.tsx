@@ -132,7 +132,7 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
 
     // Get the Pokemon being affected
     const targetPokemon = action.payload.pokemon;
-    const currentPokemon = team[action.slot]?.pokemon;
+    const currentPokemon = action.previousState?.pokemon ?? team[action.slot]?.pokemon;
 
     return (
         <Card className={`border-primary/50 ${isApplied ? "opacity-60" : ""}`}>
@@ -200,7 +200,7 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
                             <p>
                                 <span className="text-muted-foreground">Nature:</span>{" "}
                                 <span className="text-muted-foreground">
-                                    {team[action.slot]?.nature || "None"}
+                                    {action.previousState?.nature ?? team[action.slot]?.nature ?? "None"}
                                 </span>
                                 <span className="mx-1">→</span>
                                 <span className="font-medium">{action.payload.nature}</span>
@@ -225,7 +225,7 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
                             <p>
                                 <span className="text-muted-foreground">Tera Type:</span>{" "}
                                 <span className="text-muted-foreground">
-                                    {team[action.slot]?.teraType || "None"}
+                                    {action.previousState?.teraType ?? team[action.slot]?.teraType ?? "None"}
                                 </span>
                                 <span className="mx-1">→</span>
                                 <span className="font-medium">{action.payload.teraType}</span>
@@ -240,9 +240,9 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
                                     {((action.payload as { moveSlot?: number }).moveSlot ?? 0) + 1}:
                                 </span>{" "}
                                 <span className="text-muted-foreground">
-                                    {team[action.slot]?.moves?.[
+                                    {(action.previousState?.moves ?? team[action.slot]?.moves)?.[
                                         (action.payload as { moveSlot?: number }).moveSlot ?? 0
-                                    ] || "None"}
+                                    ] ?? "None"}
                                 </span>
                                 <span className="mx-1">→</span>
                                 <span className="font-medium">{action.payload.moves[0]}</span>
@@ -254,7 +254,7 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
                             <p>
                                 <span className="text-muted-foreground">Item:</span>{" "}
                                 <span className="text-muted-foreground">
-                                    {team[action.slot]?.item || "None"}
+                                    {action.previousState?.item ?? team[action.slot]?.item ?? "None"}
                                 </span>
                                 <span className="mx-1">→</span>
                                 <span className="font-medium">{action.payload.item}</span>
@@ -266,7 +266,7 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
                             <p>
                                 <span className="text-muted-foreground">Ability:</span>{" "}
                                 <span className="text-muted-foreground">
-                                    {team[action.slot]?.ability || "None"}
+                                    {action.previousState?.ability ?? team[action.slot]?.ability ?? "None"}
                                 </span>
                                 <span className="mx-1">→</span>
                                 <span className="font-medium">{action.payload.ability}</span>

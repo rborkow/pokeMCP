@@ -20,6 +20,7 @@ export interface TeamAction {
     preview: TeamPokemon[];
     reason: string;
     validationErrors?: ValidationError[];
+    previousState?: Partial<TeamPokemon>; // Snapshot of team[slot] before this action
 }
 
 /** Phases of a streaming response */
