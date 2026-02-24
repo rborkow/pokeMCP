@@ -77,7 +77,7 @@ export function ChatMessages() {
 
             {/* Show pending action card */}
             {pendingAction && (
-                <div className="ml-11 mb-4">
+                <div className="mb-3">
                     <ActionCard action={pendingAction} />
                 </div>
             )}
