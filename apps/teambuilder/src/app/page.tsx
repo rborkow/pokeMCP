@@ -91,9 +91,9 @@ export default function Home() {
                 </section>
 
                 {/* Two-column layout: Analysis + Chat side by side on desktop */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
                     {/* Team Grid + Analysis */}
-                    <div className="lg:col-span-2">
+                    <div className="lg:col-span-3">
                         <h2 className="sr-only">Team Analysis</h2>
                         <ErrorBoundary level="section">
                             {/* Analysis Tabs */}
@@ -149,7 +149,7 @@ export default function Home() {
                     </div>
 
                     {/* AI Assistant Panel */}
-                    <div className="lg:col-span-1">
+                    <div className="lg:col-span-2">
                         <h2 className="sr-only">AI Coach</h2>
                         <ErrorBoundary level="section">
                             <ChatPanel />
