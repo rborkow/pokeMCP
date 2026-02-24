@@ -7,7 +7,7 @@ import type { ModifyTeamInput } from "./tools";
 /**
  * Parse a tool input into a TeamAction
  */
-function parseToolToAction(
+export function parseToolToAction(
     toolInput: ModifyTeamInput,
     team: TeamPokemon[],
     slotOffset = 0,
@@ -16,6 +16,11 @@ function parseToolToAction(
         // Build the preview team
         const preview = [...team];
         const slot = toolInput.slot ?? team.length + slotOffset;
+
+        // Snapshot the current Pokemon at this slot before applying the action
+        const previousState: Partial<TeamPokemon> | undefined = team[slot]
+            ? { ...team[slot] }
+            : undefined;
 
         if (toolInput.action_type === "remove_pokemon") {
             preview.splice(slot, 1);
@@ -106,6 +111,7 @@ function parseToolToAction(
             preview: preview.filter(Boolean),
             reason: toolInput.reason || "AI suggestion",
             validationErrors,
+            previousState,
         };
     } catch (e) {
         console.error("Failed to parse tool to action:", e);

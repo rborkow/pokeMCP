@@ -453,6 +453,13 @@ IMPORTANT: Always provide COMPLETE Pokemon data for every tool call, including:
 - tera_type (for Gen 9)
 Do NOT send partial data - always send the full build.
 
+MULTIPLE CHANGES:
+When the user asks for broad changes (e.g., "overhaul my team", "rebuild around X", "fix my team", "make major improvements"), make MULTIPLE tool calls in a single response to address all the changes at once. Don't limit yourself to a single replacement or update when the user's request calls for more. For example:
+- "Overhaul my team" → replace 3-6 Pokemon as needed
+- "My team has no answer to X, fix it" → may require 2-3 replacements/updates
+- "Improve my team" → make as many changes as the analysis warrants
+Always explain your overall strategy FIRST, then make all the tool calls.
+
 For each Pokemon, include:
 ${toolFields}
 
