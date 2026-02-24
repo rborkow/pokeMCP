@@ -60,12 +60,14 @@ npx wrangler kv key put --remote --namespace-id=58525ad4ec5c454eb3e1ae7586414483
 
 **Update Schedule:**
 - Smogon publishes new stats monthly (around the 1st-5th of each month)
-- Run `npm run fetch-stats && npm run upload-stats` monthly to update
+- Run `npm run discover-formats && npm run fetch-stats && npm run upload-stats` monthly to update
+- VGC formats are auto-discovered from Smogon's stats directory — new regulations are picked up automatically
 - The fetch script has 2-second delays between requests to be polite to Smogon
 - Stats files are cached locally in `src/cached-stats/` for reference
+- Discovered formats are saved to `src/discovered-formats.json` and uploaded to KV for the ingestion pipeline
 
 **Supported Formats for Stats:**
-- Gen 9: OU, Ubers, UU, RU, NU, PU, LC, VGC 2024 Reg F/H, Doubles OU
+- Gen 9: OU, Ubers, UU, RU, NU, PU, LC, VGC 2026 Reg F, Doubles OU (VGC formats auto-discovered)
 - Gen 8: OU, UU, RU (Ubers, NU, LC have limited data)
 - Gen 7: OU, UU, RU, NU (Ubers, LC have limited data)
 
@@ -125,7 +127,7 @@ Each environment has its own:
 
 ## Supported Formats
 
-**Gen 9:** OU, Ubers, UU, RU, NU, PU, LC, VGC Regulation F/G/H
+**Gen 9:** OU, Ubers, UU, RU, NU, PU, LC, VGC 2026 Reg F, Doubles OU (VGC formats auto-discovered)
 **Gen 8:** OU, Ubers, UU, RU, NU, PU, LC
 **Gen 7:** OU, Ubers, UU, RU, NU, PU, LC
 
@@ -188,20 +190,23 @@ See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for test structur
 3. Tool is auto-available via MCP `init()` and `/api/tools` REST endpoint
 
 **Adding a new format:**
-1. Add format to src/ingestion/orchestrator.ts FORMATS array
-2. Ensure stats exist in KV for that format
-3. Update README.md supported formats list
+1. For VGC/doubles: formats are auto-discovered — just run `npm run discover-formats`
+2. For singles: add format to the SINGLES_FORMATS array in `src/ingestion/orchestrator.ts`
+3. Add Smogon format name mapping in `src/ingestion/scraper.ts` (VGC formats auto-generate names)
+4. Update README.md supported formats list
 
 **Updating usage stats (monthly):**
 
 Option 1 - GitHub Action (recommended):
 - Runs automatically on the 5th of each month
+- Discovers new formats, fetches stats, and uploads — all automated
 - Or trigger manually: Actions → "Update Smogon Stats" → Run workflow
 
 Option 2 - Manual:
-1. `npm run fetch-stats` (downloads from Smogon, ~45 seconds)
-2. `npm run upload-stats` (uploads to KV, requires Cloudflare auth)
-3. Commit and push changes to trigger deploy
+1. `npm run discover-formats` (discovers available VGC formats from Smogon)
+2. `npm run fetch-stats` (downloads from Smogon, ~45 seconds)
+3. `npm run upload-stats` (uploads to KV, requires Cloudflare auth)
+4. Commit and push changes to trigger deploy
 
 ### Team Builder AI Tasks
 

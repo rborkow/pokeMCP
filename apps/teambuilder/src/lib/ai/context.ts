@@ -188,11 +188,13 @@ export async function fetchPopularSetsContext(message: string, format: string): 
     return context;
 }
 
+// RAG fallback format for VGC/doubles queries when exact format has no vectors
+const RAG_VGC_FALLBACK = "gen9vgc2024regh";
+
 /**
- * Fetch strategy context from RAG (Vectorize) via the query_strategy MCP tool.
- * Returns Smogon strategic content relevant to the user's message.
+ * Execute a single RAG query against the query_strategy MCP tool.
  */
-export async function fetchStrategyContext(message: string, format: string): Promise<string> {
+async function doRAGQuery(message: string, format: string): Promise<string> {
     try {
         const response = await fetch(`${MCP_URL}/api/tools`, {
             method: "POST",
@@ -229,8 +231,28 @@ export async function fetchStrategyContext(message: string, format: string): Pro
             }
         }
     } catch (e) {
-        console.error("Failed to fetch strategy context:", e);
+        console.error(`Failed RAG query for format ${format}:`, e);
     }
+    return "";
+}
+
+/**
+ * Fetch strategy context from RAG (Vectorize) via the query_strategy MCP tool.
+ * Returns Smogon strategic content relevant to the user's message.
+ * For VGC/doubles formats, falls back to the most recent VGC format with vectors
+ * if the exact format returns no results.
+ */
+export async function fetchStrategyContext(message: string, format: string): Promise<string> {
+    const result = await doRAGQuery(message, format);
+    if (result) return result;
+
+    // VGC/doubles fallback: try most established VGC format with vector content
+    if (format.includes("vgc") || format.includes("doubles")) {
+        if (format !== RAG_VGC_FALLBACK) {
+            return await doRAGQuery(message, RAG_VGC_FALLBACK);
+        }
+    }
+
     return "";
 }
 

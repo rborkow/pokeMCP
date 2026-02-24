@@ -4,7 +4,8 @@ import { generateEmbeddings } from "./embedder.js";
 import { indexChunks } from "./indexer.js";
 import type { IngestionStats } from "./types.js";
 
-const FORMATS = [
+// Singles formats (stable, rarely change)
+const SINGLES_FORMATS = [
     // Gen 9 Singles
     "gen9ou",
     "gen9ubers",
@@ -13,10 +14,6 @@ const FORMATS = [
     "gen9nu",
     "gen9pu",
     "gen9lc",
-    // Gen 9 VGC
-    "gen9vgc2024regg",
-    "gen9vgc2024regf",
-    "gen9vgc2024regh",
     // Gen 8 Singles
     "gen8ou",
     "gen8ubers",
@@ -35,6 +32,39 @@ const FORMATS = [
     "gen7lc",
 ];
 
+// Default VGC/doubles formats (used when KV discovery data is unavailable)
+const DEFAULT_VGC_FORMATS = [
+    "gen9vgc2026regf",
+    "gen9vgc2025regi",
+    "gen9vgc2024regh",
+    "gen9doublesou",
+];
+
+/**
+ * Load formats for ingestion, using discovered VGC formats from KV when available.
+ * The discovery script (scripts/discover-formats.ts) writes to KV via upload-stats.sh.
+ */
+async function getFormats(env: Env): Promise<string[]> {
+    try {
+        const discovered = (await env.POKEMON_STATS.get("_discovered_formats", "json")) as {
+            vgcFormats?: string[];
+            doublesFormats?: string[];
+        } | null;
+        if (discovered?.vgcFormats && discovered.vgcFormats.length > 0) {
+            const vgcFormats = [
+                ...(discovered.vgcFormats || []),
+                ...(discovered.doublesFormats || []),
+            ];
+            console.log(`Loaded ${vgcFormats.length} VGC/doubles formats from discovery`);
+            return [...SINGLES_FORMATS, ...vgcFormats];
+        }
+    } catch (e) {
+        console.warn("Failed to load discovered formats from KV:", e);
+    }
+    console.log("Using default VGC format list");
+    return [...SINGLES_FORMATS, ...DEFAULT_VGC_FORMATS];
+}
+
 /**
  * Main ingestion pipeline - scrapes, chunks, embeds, and indexes content
  */
@@ -49,13 +79,15 @@ export async function runIngestionPipeline(env: Env): Promise<IngestionStats> {
         startTime: new Date().toISOString(),
     };
 
+    const formats = await getFormats(env);
+
     console.log("Starting content ingestion pipeline...");
-    console.log(`Formats: ${FORMATS.join(", ")}`);
+    console.log(`Formats: ${formats.join(", ")}`);
 
     // Get top Pokemon for each format
-    const topPokemon = await getTopPokemonByFormat(FORMATS, env);
+    const topPokemon = await getTopPokemonByFormat(formats, env);
 
-    for (const format of FORMATS) {
+    for (const format of formats) {
         console.log(`\n=== Processing format: ${format} ===`);
 
         const pokemon = topPokemon[format] || [];

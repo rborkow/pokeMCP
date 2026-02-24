@@ -4,16 +4,13 @@ import type { TeamPokemon } from "@/types/pokemon";
 const MCP_PROXY_URL = "/api/mcp";
 
 /**
- * Format fallback map for VGC formats that may not have stats yet.
- * Maps newer formats to the most recent format with available data.
+ * Format fallback map for formats that have no stats data on Smogon.
+ * Only includes formats that truly lack data — formats with real stats
+ * (e.g., gen9vgc2026regf, gen9vgc2025regi) should NOT be listed here.
  */
 const FORMAT_FALLBACKS: Record<string, string> = {
-    // VGC 2026 formats fall back to VGC 2024 Reg H (most recent with data)
-    gen9vgc2026regf: "gen9vgc2024regh",
-    gen9vgc2026regfbo3: "gen9vgc2024regh",
-    gen9vgc2026regg: "gen9vgc2024regh",
-    // VGC 2025 formats also fall back
-    gen9vgc2025regi: "gen9vgc2024regh",
+    // VGC regulation variants that Smogon doesn't track separately
+    gen9vgc2026regg: "gen9vgc2026regf",
     gen9vgc2025regh: "gen9vgc2024regh",
     gen9vgc2025regg: "gen9vgc2024regh",
     // Battle Stadium formats
@@ -29,11 +26,12 @@ export function getEffectiveStatsFormat(format: string): {
     format: string;
     isFallback: boolean;
 } {
-    const fallback = FORMAT_FALLBACKS[format.toLowerCase()];
+    const normalized = format.toLowerCase();
+    const fallback = FORMAT_FALLBACKS[normalized];
     if (fallback) {
         return { format: fallback, isFallback: true };
     }
-    return { format, isFallback: false };
+    return { format: normalized, isFallback: false };
 }
 
 interface MCPResponse {
