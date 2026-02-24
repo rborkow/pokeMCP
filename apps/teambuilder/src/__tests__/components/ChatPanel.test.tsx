@@ -116,12 +116,16 @@ describe("ChatPanel", () => {
         expect(panel).toBeInTheDocument();
     });
 
-    it("disables input when loading", () => {
+    it("shows stop button when streaming", () => {
         useChatStore.getState().setLoading(true);
 
         render(<ChatPanel />);
+        // During streaming, textarea stays enabled for type-ahead
         const textarea = screen.getByPlaceholderText(/import a team first|ask about your team/i);
-        expect(textarea).toBeDisabled();
+        expect(textarea).not.toBeDisabled();
+        // Stop button should be visible (Square icon from lucide)
+        const stopButton = screen.getByTitle("Stop generating (Esc)");
+        expect(stopButton).toBeInTheDocument();
     });
 
     it("disables clear button when loading", () => {

@@ -1,7 +1,7 @@
 import type { TeamPokemon, Mode } from "@/types/pokemon";
-import type { AIResponse, TeamAction, ChatMessage } from "@/types/chat";
+import type { AIResponse, TeamAction, ChatMessage, StreamingPhase } from "@/types/chat";
 import type { PersonalityId } from "./personalities";
-import { validatePokemonData } from "@/lib/validation/pokemon";
+import { type ValidationError, validatePokemonData } from "@/lib/validation/pokemon";
 import type { ModifyTeamInput } from "./tools";
 
 /**
@@ -83,7 +83,7 @@ function parseToolToAction(
         if (toolInput.ivs) payload.ivs = toolInput.ivs;
 
         // Validate the payload for add/update operations
-        let validationErrors;
+        let validationErrors: ValidationError[] | undefined;
         if (toolInput.action_type !== "remove_pokemon") {
             const validation = validatePokemonData(payload);
             if (!validation.valid) {
@@ -133,10 +133,14 @@ interface StreamChatMessageOptions {
     format: string;
     mode?: Mode;
     personality?: PersonalityId;
+    enableThinking?: boolean;
     chatHistory?: ChatMessage[];
+    signal?: AbortSignal;
     onChunk: (text: string) => void;
+    onTextDelta?: (delta: string) => void;
     onThinking?: (isThinking: boolean, thinkingText?: string) => void;
     onToolUse?: (pokemonName: string, toolCount: number) => void;
+    onPhaseChange?: (phase: StreamingPhase) => void;
     onComplete: (response: AIResponse) => void;
     onError: (error: Error) => void;
 }
@@ -150,14 +154,20 @@ export async function streamChatMessage({
     format,
     mode = "singles",
     personality,
+    enableThinking,
     chatHistory = [],
+    signal,
     onChunk,
+    onTextDelta,
     onThinking,
     onToolUse,
+    onPhaseChange,
     onComplete,
     onError,
 }: StreamChatMessageOptions): Promise<void> {
     try {
+        onPhaseChange?.("connecting");
+
         const response = await fetch("/api/ai/claude/stream", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -167,13 +177,21 @@ export async function streamChatMessage({
                 format,
                 mode,
                 personality,
+                enableThinking,
                 chatHistory: formatChatHistory(chatHistory),
             }),
+            signal,
         });
 
         if (!response.ok) {
-            const error = await response.text();
-            throw new Error(error || `AI request failed: ${response.status}`);
+            const errorText = await response.text();
+            const error = new Error(errorText || `AI request failed: ${response.status}`);
+            if (response.status === 429) {
+                (error as Error & { errorType?: string }).errorType = "rate_limit";
+            } else if (response.status >= 500) {
+                (error as Error & { errorType?: string }).errorType = "api";
+            }
+            throw error;
         }
 
         const reader = response.body?.getReader();
@@ -187,6 +205,10 @@ export async function streamChatMessage({
         let isCurrentlyThinking = false;
         let buffer = ""; // Buffer for incomplete SSE events
         const toolCalls: ModifyTeamInput[] = []; // Accumulate tool calls
+
+        // Throttle onChunk to reduce markdown re-renders
+        let lastChunkTime = 0;
+        const CHUNK_THROTTLE_MS = 50;
 
         while (true) {
             const { done, value } = await reader.read();
@@ -206,6 +228,9 @@ export async function streamChatMessage({
                     if (line.startsWith("data: ")) {
                         const data = line.slice(6);
                         if (data === "[DONE]") {
+                            // Ensure final content is flushed
+                            onChunk(fullContent);
+
                             // Stream complete - convert tool calls to TeamActions
                             const actions: TeamAction[] = [];
                             let currentTeam = [...team];
@@ -221,6 +246,7 @@ export async function streamChatMessage({
                                 }
                             }
 
+                            onPhaseChange?.("complete");
                             onComplete({
                                 content: fullContent,
                                 action: actions[0],
@@ -231,6 +257,18 @@ export async function streamChatMessage({
 
                         try {
                             const parsed = JSON.parse(data);
+
+                            // Handle server-sent error events
+                            if (parsed.error) {
+                                const error = new Error(parsed.error);
+                                (error as Error & { errorType?: string }).errorType = "api";
+                                throw error;
+                            }
+
+                            // Handle phase change events from server
+                            if (parsed.phase) {
+                                onPhaseChange?.(parsed.phase as StreamingPhase);
+                            }
 
                             // Handle thinking state changes
                             if (parsed.thinking !== undefined) {
@@ -255,7 +293,14 @@ export async function streamChatMessage({
                             // Handle regular text (non-thinking)
                             if (parsed.text && !parsed.thinking) {
                                 fullContent += parsed.text;
-                                onChunk(fullContent);
+                                onTextDelta?.(parsed.text);
+
+                                // Throttle onChunk to reduce markdown re-renders
+                                const now = Date.now();
+                                if (now - lastChunkTime > CHUNK_THROTTLE_MS) {
+                                    onChunk(fullContent);
+                                    lastChunkTime = now;
+                                }
                             }
 
                             // Handle tool use
@@ -268,7 +313,14 @@ export async function streamChatMessage({
                                     onToolUse?.(input.pokemon || "Pokemon", toolCalls.length);
                                 }
                             }
-                        } catch {
+                        } catch (parseErr) {
+                            // Re-throw if it's an intentional error (not JSON parse failure)
+                            if (
+                                parseErr instanceof Error &&
+                                (parseErr as Error & { errorType?: string }).errorType
+                            ) {
+                                throw parseErr;
+                            }
                             // Skip invalid JSON lines
                         }
                     }
@@ -296,6 +348,9 @@ export async function streamChatMessage({
             }
         }
 
+        // Ensure final content is flushed
+        onChunk(fullContent);
+
         // If we get here without [DONE], still complete
         const actions: TeamAction[] = [];
         let currentTeam = [...team];
@@ -307,12 +362,21 @@ export async function streamChatMessage({
             }
         }
 
+        onPhaseChange?.("complete");
         onComplete({
             content: fullContent,
             action: actions[0],
             actions: actions.length > 1 ? actions : undefined,
         });
     } catch (error) {
+        // Handle abort/cancellation gracefully
+        if (error instanceof DOMException && error.name === "AbortError") {
+            onPhaseChange?.("cancelled");
+            // Don't call onError for user-initiated cancellation
+            return;
+        }
+
+        onPhaseChange?.("error");
         onError(error instanceof Error ? error : new Error(String(error)));
     }
 }

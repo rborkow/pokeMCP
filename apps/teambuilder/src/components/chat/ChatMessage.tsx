@@ -1,9 +1,9 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import { cn } from "@/lib/utils";
-import type { ChatMessage as ChatMessageType } from "@/types/chat";
-import { Bot, User } from "lucide-react";
+import type { ChatMessage as ChatMessageType, StreamingPhase } from "@/types/chat";
+import { Bot, User, Loader2, Wrench } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { ThinkingCollapsible } from "./ThinkingCollapsible";
 
@@ -11,9 +11,62 @@ interface ChatMessageProps {
     message: ChatMessageType;
 }
 
+function StreamingIndicator({
+    phase,
+    buildingStatus,
+}: {
+    phase?: StreamingPhase;
+    buildingStatus?: string;
+}) {
+    switch (phase) {
+        case "connecting":
+            return (
+                <div className="flex items-center gap-2">
+                    <Loader2 className="h-3.5 w-3.5 animate-spin text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">Connecting...</span>
+                </div>
+            );
+        case "thinking":
+            // ThinkingCollapsible handles this display
+            return null;
+        case "tool_calling":
+            return (
+                <div className="flex items-center gap-2">
+                    <Wrench className="h-3.5 w-3.5 animate-pulse text-primary" />
+                    <span className="text-sm text-muted-foreground">
+                        {buildingStatus || "Modifying team..."}
+                    </span>
+                </div>
+            );
+        default:
+            // "generating" or fallback — bouncing dots
+            return (
+                <div className="flex items-center gap-1">
+                    <span
+                        className="w-2 h-2 bg-current rounded-full animate-bounce"
+                        style={{ animationDelay: "0ms" }}
+                    />
+                    <span
+                        className="w-2 h-2 bg-current rounded-full animate-bounce"
+                        style={{ animationDelay: "150ms" }}
+                    />
+                    <span
+                        className="w-2 h-2 bg-current rounded-full animate-bounce"
+                        style={{ animationDelay: "300ms" }}
+                    />
+                </div>
+            );
+    }
+}
+
 export const ChatMessage = memo(function ChatMessage({ message }: ChatMessageProps) {
     const isUser = message.role === "user";
     const isSystem = message.role === "system";
+
+    const renderedContent = useMemo(
+        () => (message.content ? <ReactMarkdown>{message.content}</ReactMarkdown> : null),
+        [message.content],
+    );
 
     if (isSystem) {
         return (
@@ -24,6 +77,12 @@ export const ChatMessage = memo(function ChatMessage({ message }: ChatMessagePro
             </div>
         );
     }
+
+    // Determine if thinking collapsible should show as active
+    const isThinkingActive =
+        message.isLoading === true &&
+        !message.content &&
+        (message.streamingPhase === "thinking" || !message.streamingPhase);
 
     return (
         <div className={cn("flex gap-3 py-4", isUser ? "flex-row-reverse" : "flex-row")}>
@@ -42,13 +101,15 @@ export const ChatMessage = memo(function ChatMessage({ message }: ChatMessagePro
                 className={cn("flex-1 max-w-[80%] space-y-2", isUser ? "text-right" : "text-left")}
             >
                 {/* Thinking collapsible for assistant messages */}
-                {!isUser &&
-                    (message.thinkingContent || (message.isLoading && !message.content)) && (
-                        <ThinkingCollapsible
-                            content={message.thinkingContent || ""}
-                            isActive={message.isLoading === true && !message.content}
-                        />
-                    )}
+                {!isUser && (message.thinkingContent || isThinkingActive) && (
+                    <ThinkingCollapsible
+                        content={message.thinkingContent || ""}
+                        isActive={
+                            isThinkingActive ||
+                            (message.isLoading === true && message.streamingPhase === "thinking")
+                        }
+                    />
+                )}
 
                 <div
                     className={cn(
@@ -59,34 +120,13 @@ export const ChatMessage = memo(function ChatMessage({ message }: ChatMessagePro
                     )}
                 >
                     {message.isLoading && !message.content ? (
-                        <div className="flex items-center gap-2">
-                            {message.buildingStatus ? (
-                                <>
-                                    <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                                    <span className="text-sm text-muted-foreground">
-                                        {message.buildingStatus}
-                                    </span>
-                                </>
-                            ) : (
-                                <>
-                                    <span
-                                        className="w-2 h-2 bg-current rounded-full animate-bounce"
-                                        style={{ animationDelay: "0ms" }}
-                                    />
-                                    <span
-                                        className="w-2 h-2 bg-current rounded-full animate-bounce"
-                                        style={{ animationDelay: "150ms" }}
-                                    />
-                                    <span
-                                        className="w-2 h-2 bg-current rounded-full animate-bounce"
-                                        style={{ animationDelay: "300ms" }}
-                                    />
-                                </>
-                            )}
-                        </div>
+                        <StreamingIndicator
+                            phase={message.streamingPhase}
+                            buildingStatus={message.buildingStatus}
+                        />
                     ) : message.content ? (
                         <div className="text-sm [&_p]:my-1 [&_ul]:my-1 [&_ul]:ml-4 [&_ul]:list-disc [&_ol]:my-1 [&_ol]:ml-4 [&_ol]:list-decimal [&_li]:my-0.5 [&_strong]:font-semibold [&_code]:bg-black/10 [&_code]:dark:bg-white/10 [&_code]:px-1 [&_code]:rounded [&_code]:text-xs">
-                            <ReactMarkdown>{message.content}</ReactMarkdown>
+                            {renderedContent}
                         </div>
                     ) : null}
                 </div>

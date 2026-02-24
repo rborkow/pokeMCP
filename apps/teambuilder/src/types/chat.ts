@@ -22,6 +22,16 @@ export interface TeamAction {
     validationErrors?: ValidationError[];
 }
 
+/** Phases of a streaming response */
+export type StreamingPhase =
+    | "connecting"
+    | "thinking"
+    | "generating"
+    | "tool_calling"
+    | "complete"
+    | "cancelled"
+    | "error";
+
 export interface ChatMessage {
     id: string;
     role: "user" | "assistant" | "system";
@@ -31,6 +41,7 @@ export interface ChatMessage {
     isLoading?: boolean;
     thinkingContent?: string;
     buildingStatus?: string; // Status message when building team via tools
+    streamingPhase?: StreamingPhase;
 }
 
 export type AIProvider = "cloudflare" | "claude";
