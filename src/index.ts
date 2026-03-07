@@ -2,6 +2,8 @@ import { EmailMessage } from "cloudflare:email";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { McpAgent } from "agents/mcp";
 import { createMimeMessage } from "mimetext/browser";
+import { handleAdminRequest } from "./admin.js";
+import { trackAIChat, trackSession, trackToolCall } from "./analytics.js";
 import { detectPokemonMentions } from "./data-loader.js";
 import { runIngestionPipeline, runTestIngestion } from "./ingestion/orchestrator.js";
 import { withLogging } from "./logging.js";
@@ -75,11 +77,30 @@ export class PokemonMCP extends McpAgent {
         version: "0.3.0",
     });
 
+    // Privacy-safe session ID — random per DO instance, not tied to any user
+    sessionId = crypto.randomUUID();
+
     async init() {
         const env = this.env as Env;
+
+        // Track session connection
+        trackSession(env, "connect", this.sessionId, "mcp");
+
         for (const tool of TOOL_REGISTRY) {
             this.server.tool(tool.name, tool.schema, async (args) => {
-                const text = await withLogging(env, tool.name, args, () => tool.execute(args, env));
+                const startTime = performance.now();
+                let success = true;
+                let text: string;
+                try {
+                    text = await withLogging(env, tool.name, args, () => tool.execute(args, env));
+                } catch (error) {
+                    success = false;
+                    throw error;
+                } finally {
+                    const responseTimeMs = Math.round(performance.now() - startTime);
+                    const format = typeof args.format === "string" ? args.format : undefined;
+                    trackToolCall(env, tool.name, format, success, responseTimeMs, this.sessionId);
+                }
                 return { content: [{ type: "text", text }] };
             });
         }
@@ -137,14 +158,26 @@ export default {
                     });
                 }
 
-                const result = await withLogging(
-                    env,
-                    tool,
-                    args,
-                    () => toolDef.execute(args, env),
-                    undefined,
-                    ctx,
-                );
+                const restStartTime = performance.now();
+                let restSuccess = true;
+                let result: string;
+                try {
+                    result = await withLogging(
+                        env,
+                        tool,
+                        args,
+                        () => toolDef.execute(args, env),
+                        undefined,
+                        ctx,
+                    );
+                } catch (error) {
+                    restSuccess = false;
+                    throw error;
+                } finally {
+                    const restResponseTime = Math.round(performance.now() - restStartTime);
+                    const restFormat = typeof args?.format === "string" ? args.format : undefined;
+                    trackToolCall(env, tool, restFormat, restSuccess, restResponseTime);
+                }
 
                 return new Response(
                     JSON.stringify({
@@ -937,6 +970,18 @@ User's Question: ${message}`;
             }
         }
 
+        // Admin dashboard API endpoints
+        if (url.pathname.startsWith("/admin/")) {
+            return handleAdminRequest(request, env);
+        }
+
+        // CORS preflight for /admin/*
+        if (url.pathname.startsWith("/admin/") && request.method === "OPTIONS") {
+            return new Response(null, {
+                headers: getCorsHeaders(request),
+            });
+        }
+
         // Root endpoint - return server info
         if (url.pathname === "/") {
             return new Response(
@@ -966,6 +1011,13 @@ User's Question: ${message}`;
                         "api/team/share": "/api/team/share (POST) - Create shared team link",
                         "api/team/:id": "/api/team/:id (GET) - Retrieve shared team",
                         "og/team/:id": "/og/team/:id (GET) - OG image for shared team",
+                        "admin/api/overview":
+                            "/admin/api/overview (GET) - Usage overview (protected)",
+                        "admin/api/usage": "/admin/api/usage (GET) - Time-series usage (protected)",
+                        "admin/api/costs": "/admin/api/costs (GET) - AI cost breakdown (protected)",
+                        "admin/api/tools": "/admin/api/tools (GET) - Tool metrics (protected)",
+                        "admin/api/sessions":
+                            "/admin/api/sessions (GET) - Session list (protected)",
                         "test-ingestion": "/test-ingestion",
                         "test-kv": "/test-kv",
                         "test-rag": "/test-rag?q=your+query",

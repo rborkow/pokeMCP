@@ -16,6 +16,10 @@ declare namespace Cloudflare {
 		INTERACTION_LOGS?: R2Bucket; // Optional - for anonymized logging
 		SEND_EMAIL?: SendEmail; // Optional - for feedback email notifications
 		ANTHROPIC_API_KEY?: string; // Optional - for Claude Sonnet 4.5 AI chat
+		ANALYTICS?: AnalyticsEngineDataset; // Optional - for usage monitoring
+		CLOUDFLARE_API_TOKEN?: string; // Optional - for Analytics Engine queries
+		CLOUDFLARE_ACCOUNT_ID?: string; // Optional - for Analytics Engine queries
+		CF_ACCESS_TEAM_DOMAIN?: string; // Optional - for Cloudflare Access JWT validation
 	}
 }
 interface Env extends Cloudflare.Env {}
