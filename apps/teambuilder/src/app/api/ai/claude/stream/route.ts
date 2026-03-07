@@ -269,12 +269,32 @@ export async function POST(request: NextRequest) {
                     await stream.finalMessage();
 
                     // Log usage
-                    console.log(
-                        JSON.stringify({
-                            type: "ai_usage",
-                            ...usageLog,
-                            timestamp: Date.now(),
+                    const usageData = {
+                        type: "ai_usage",
+                        ...usageLog,
+                        timestamp: Date.now(),
+                    };
+                    console.log(JSON.stringify(usageData));
+
+                    // Forward usage to MCP Worker's analytics endpoint (fire-and-forget)
+                    const mcpUrl = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
+                    fetch(`${mcpUrl}/admin/api/track-ai`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            format: usageLog.format,
+                            personality: usageLog.personality,
+                            mode: usageLog.mode,
+                            thinking: usageLog.thinkingEnabled,
+                            inputTokens: usageLog.inputTokens,
+                            outputTokens: usageLog.outputTokens,
+                            cacheCreationTokens: usageLog.cacheCreationInputTokens,
+                            cacheReadTokens: usageLog.cacheReadInputTokens,
+                            teamSize: usageLog.teamSize,
+                            responseTimeMs: 0,
                         }),
+                    }).catch((err) =>
+                        console.error("[Analytics] Failed to forward usage:", err),
                     );
 
                     controller.enqueue(encoder.encode("data: [DONE]\n\n"));

@@ -66,6 +66,13 @@
             "destination_address": "feedback@pokemcp.com"
         }
     ],
+    // Analytics Engine for usage monitoring (admin dashboard)
+    "analytics_engine_datasets": [
+        {
+            "binding": "ANALYTICS",
+            "dataset": "pokemcp-analytics"
+        }
+    ],
     // No cron triggers in default environment (only production)
     "observability": {
         "enabled": true
@@ -131,7 +138,13 @@
             ],
             "ai": {
                 "binding": "AI"
-            }
+            },
+            "analytics_engine_datasets": [
+                {
+                    "binding": "ANALYTICS",
+                    "dataset": "pokemcp-analytics"
+                }
+            ]
         },
         "production": {
             "name": "pokemon-mcp-production",
@@ -181,6 +194,12 @@
             "ai": {
                 "binding": "AI"
             },
+            "analytics_engine_datasets": [
+                {
+                    "binding": "ANALYTICS",
+                    "dataset": "pokemcp-analytics"
+                }
+            ],
             // Weekly cron for RAG content ingestion (Sundays at 3 AM UTC)
             "triggers": {
                 "crons": ["0 3 * * SUN"]
