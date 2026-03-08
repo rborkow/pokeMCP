@@ -41,7 +41,8 @@ async function embedBatch(chunks: DocumentChunk[], env: Env): Promise<EmbeddedCh
     });
 
     // Handle response format
-    const embeddings = Array.isArray(response.data) ? response.data : [response.data];
+    const res = response as { data: number[][] };
+    const embeddings = Array.isArray(res.data) ? res.data : [res.data];
 
     if (embeddings.length !== chunks.length) {
         throw new Error(
@@ -63,6 +64,7 @@ export async function generateQueryEmbedding(query: string, env: Env): Promise<n
         text: [query],
     });
 
-    const embeddings = Array.isArray(response.data) ? response.data : [response.data];
+    const res = response as { data: number[][] };
+    const embeddings = Array.isArray(res.data) ? res.data : [res.data];
     return embeddings[0] as number[];
 }
