@@ -439,15 +439,15 @@ export async function handleAdminRequest(request: Request, env: Env): Promise<Re
     try {
         switch (path) {
             case "overview":
-                return handleOverview(env, url);
+                return await handleOverview(env, url);
             case "usage":
-                return handleUsage(env, url);
+                return await handleUsage(env, url);
             case "costs":
-                return handleCosts(env, url);
+                return await handleCosts(env, url);
             case "tools":
-                return handleTools(env, url);
+                return await handleTools(env, url);
             case "sessions":
-                return handleSessions(env, url);
+                return await handleSessions(env, url);
             default:
                 return jsonResponse({ error: "Not found", path }, 404);
         }
