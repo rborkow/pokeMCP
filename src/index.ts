@@ -185,7 +185,7 @@ export default {
                 } finally {
                     const restResponseTime = Math.round(performance.now() - restStartTime);
                     const restFormat = typeof args?.format === "string" ? args.format : undefined;
-                    trackToolCall(env, tool, restFormat, restSuccess, restResponseTime);
+                    trackToolCall(env, tool, restFormat, restSuccess, restResponseTime, restSessionId);
                 }
 
                 return new Response(
