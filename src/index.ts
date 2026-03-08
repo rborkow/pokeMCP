@@ -105,6 +105,11 @@ export class PokemonMCP extends McpAgent {
             });
         }
     }
+
+    async destroy() {
+        const env = this.env as Env;
+        trackSession(env, "disconnect", this.sessionId, "mcp");
+    }
 }
 
 export default {
@@ -134,6 +139,10 @@ export default {
                     headers: corsHeaders,
                 });
             }
+
+            // Track REST session (no Durable Object involved)
+            const restSessionId = crypto.randomUUID();
+            trackSession(env, "connect", restSessionId, "rest");
 
             try {
                 const body = (await request.json()) as {
@@ -559,8 +568,9 @@ User's Question: ${message}`;
                     );
                 }
 
-                // Call Claude Sonnet 4.5
-                console.log("Using Claude Sonnet 4.5 for AI chat");
+                // Call Claude Sonnet 4.6
+                console.log("Using Claude Sonnet 4.6 for AI chat");
+                const aiChatStart = performance.now();
                 const claudeResponse = await fetch("https://api.anthropic.com/v1/messages", {
                     method: "POST",
                     headers: {
@@ -569,7 +579,7 @@ User's Question: ${message}`;
                         "anthropic-version": "2023-06-01",
                     },
                     body: JSON.stringify({
-                        model: "claude-sonnet-4-5-20250514",
+                        model: "claude-sonnet-4-6",
                         max_tokens: 1024,
                         system: systemPrompt,
                         messages: [{ role: "user", content: fullUserMessage }],
@@ -590,9 +600,30 @@ User's Question: ${message}`;
 
                 const claudeData = (await claudeResponse.json()) as {
                     content?: Array<{ text?: string }>;
+                    usage?: {
+                        input_tokens?: number;
+                        output_tokens?: number;
+                        cache_creation_input_tokens?: number;
+                        cache_read_input_tokens?: number;
+                    };
                 };
                 let content = claudeData.content?.[0]?.text || "";
                 console.log(`Claude response generated, length=${content.length}`);
+
+                // Track AI chat usage with token counts
+                const usage = claudeData.usage;
+                trackAIChat(env, {
+                    format,
+                    personality: "default",
+                    mode: "singles",
+                    thinking: false,
+                    inputTokens: usage?.input_tokens ?? 0,
+                    outputTokens: usage?.output_tokens ?? 0,
+                    cacheCreationTokens: usage?.cache_creation_input_tokens ?? 0,
+                    cacheReadTokens: usage?.cache_read_input_tokens ?? 0,
+                    teamSize: team.length,
+                    responseTimeMs: Math.round(performance.now() - aiChatStart),
+                });
 
                 // Validate any ACTION blocks in the response using our MCP tools
                 const actionBlockRegex = /\[ACTION\]([\s\S]*?)\[\/ACTION\]/g;
