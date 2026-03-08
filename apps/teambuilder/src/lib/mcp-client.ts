@@ -48,15 +48,25 @@ interface MCPResponse {
 
 class MCPClient {
     private proxyUrl: string;
+    private sessionId: string;
 
     constructor(proxyUrl: string = MCP_PROXY_URL) {
         this.proxyUrl = proxyUrl;
+        this.sessionId = crypto.randomUUID();
+    }
+
+    /** Reset session ID (call when user starts a new conversation) */
+    resetSession() {
+        this.sessionId = crypto.randomUUID();
     }
 
     private async callTool<T = string>(tool: string, args: Record<string, unknown>): Promise<T> {
         const response = await fetch(this.proxyUrl, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "X-Session-Id": this.sessionId,
+            },
             body: JSON.stringify({
                 jsonrpc: "2.0",
                 method: "tools/call",

@@ -1,3 +1,5 @@
+import { trackAIChat } from "./analytics.js";
+
 /**
  * Admin API endpoints for usage monitoring dashboard
  *
@@ -393,9 +395,8 @@ async function handleTrackAI(request: Request, env: Env): Promise<Response> {
 
     try {
         const data: TrackAIRequest = await request.json();
+        console.log("[Admin] track-ai received:", JSON.stringify(data));
 
-        // Import trackAIChat dynamically to avoid circular deps
-        const { trackAIChat } = await import("./analytics.js");
         trackAIChat(env, {
             format: data.format || "unknown",
             personality: data.personality || "unknown",

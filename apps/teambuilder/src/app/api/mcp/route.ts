@@ -23,10 +23,12 @@ export async function POST(request: Request) {
         }
 
         // Forward to the stateless /api/tools endpoint
+        const sessionId = request.headers.get("X-Session-Id");
         const response = await fetch(`${MCP_URL}/api/tools`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                ...(sessionId && { "X-Session-Id": sessionId }),
             },
             body: JSON.stringify({
                 tool: toolName,
