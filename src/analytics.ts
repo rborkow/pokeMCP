@@ -47,13 +47,17 @@ export function trackToolCall(
     responseTimeMs: number,
     sessionId?: string,
 ): void {
-    if (!env.ANALYTICS) return;
+    if (!env.ANALYTICS) {
+        console.warn("[Analytics] SKIP tool_call: ANALYTICS binding missing");
+        return;
+    }
 
     env.ANALYTICS.writeDataPoint({
         indexes: ["tool_call"],
         blobs: [toolName, format ?? "", success ? "1" : "0", sessionId ?? ""],
         doubles: [responseTimeMs],
     });
+    console.log(`[Analytics] tool_call written: ${toolName} (${format ?? "no-format"})`);
 }
 
 /**
@@ -75,7 +79,10 @@ export function trackAIChat(
         responseTimeMs: number;
     },
 ): void {
-    if (!env.ANALYTICS) return;
+    if (!env.ANALYTICS) {
+        console.warn("[Analytics] SKIP ai_chat: ANALYTICS binding missing");
+        return;
+    }
 
     const cost = estimateCost({
         inputTokens: data.inputTokens,
@@ -97,6 +104,7 @@ export function trackAIChat(
             cost,
         ],
     });
+    console.log(`[Analytics] ai_chat written: ${data.format}/${data.personality}`);
 }
 
 /**
@@ -109,11 +117,15 @@ export function trackSession(
     sessionId: string,
     transport: "sse" | "mcp" | "rest",
 ): void {
-    if (!env.ANALYTICS) return;
+    if (!env.ANALYTICS) {
+        console.warn("[Analytics] SKIP session: ANALYTICS binding missing");
+        return;
+    }
 
     env.ANALYTICS.writeDataPoint({
         indexes: ["session"],
         blobs: [action, sessionId, transport],
         doubles: [],
     });
+    console.log(`[Analytics] session written: ${action}`);
 }
