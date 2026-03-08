@@ -9,7 +9,10 @@ import type { NextRequest } from "next/server";
 
 const MCP_URL = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
 
-export async function GET(request: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+export async function GET(
+    request: NextRequest,
+    { params }: { params: Promise<{ path: string[] }> },
+) {
     const { path } = await params;
     const apiPath = path.join("/");
     const searchParams = request.nextUrl.searchParams.toString();

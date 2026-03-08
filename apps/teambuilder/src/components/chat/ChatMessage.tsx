@@ -138,9 +138,7 @@ export const ChatMessage = memo(function ChatMessage({ message }: ChatMessagePro
                     buildingStatus={message.buildingStatus}
                 />
             ) : message.content ? (
-                <div className="chat-markdown text-sm">
-                    {renderedContent}
-                </div>
+                <div className="chat-markdown text-sm">{renderedContent}</div>
             ) : null}
         </div>
     );
