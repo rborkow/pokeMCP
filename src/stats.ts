@@ -1,16 +1,28 @@
 import { toID } from "./data-loader.js";
 import type { UsageStatistics } from "smogon";
 
+// In-memory cache for parsed stats to avoid re-parsing large KV JSON on every request.
+// Per-isolate: resets on deploy or isolate recycle. TTL keeps data fresh enough for monthly updates.
+const STATS_CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+const statsCache = new Map<string, { data: UsageStatistics; timestamp: number }>();
+
 /**
- * Get cached stats for a format from KV
+ * Get cached stats for a format, checking in-memory cache before KV.
  */
 async function getCachedStats(format: string, env: Env): Promise<UsageStatistics | null> {
+    const now = Date.now();
+    const cached = statsCache.get(format);
+    if (cached && now - cached.timestamp < STATS_CACHE_TTL_MS) {
+        return cached.data;
+    }
+
     try {
-        const cached = await env.POKEMON_STATS.get(format, "json");
-        if (!cached || typeof cached !== "object" || !cached.data) {
+        const kv = await env.POKEMON_STATS.get(format, "json") as any;
+        if (!kv || typeof kv !== "object" || !kv.data) {
             return null;
         }
-        return cached.data;
+        statsCache.set(format, { data: kv.data as UsageStatistics, timestamp: now });
+        return kv.data as UsageStatistics;
     } catch (error) {
         console.error(`Error fetching stats from KV for ${format}:`, error);
         return null;

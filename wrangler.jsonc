@@ -74,6 +74,9 @@
         }
     ],
     // No cron triggers in default environment (only production)
+    "limits": {
+        "cpu_ms": 5000
+    },
     "observability": {
         "enabled": true
     },
