@@ -21,15 +21,12 @@ export function useAdminData<T>(endpoint: string, range: string): FetchState<T> 
 
             try {
                 const separator = endpoint.includes("?") ? "&" : "?";
-                const response = await fetch(
-                    `/api/admin/${endpoint}${separator}range=${range}`,
-                );
+                const response = await fetch(`/api/admin/${endpoint}${separator}range=${range}`);
 
                 if (!response.ok) {
                     const errorData = await response.json().catch(() => ({}));
                     throw new Error(
-                        (errorData as { error?: string }).error ||
-                            `HTTP ${response.status}`,
+                        (errorData as { error?: string }).error || `HTTP ${response.status}`,
                     );
                 }
 

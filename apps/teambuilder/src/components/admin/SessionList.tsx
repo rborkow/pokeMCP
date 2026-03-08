@@ -42,10 +42,7 @@ function formatDuration(first: string, last: string): string {
 }
 
 export function SessionList({ range }: { range: string }) {
-    const { data, loading, error } = useAdminData<SessionsData>(
-        "sessions?limit=20",
-        range,
-    );
+    const { data, loading, error } = useAdminData<SessionsData>("sessions?limit=20", range);
 
     if (error) {
         return (
@@ -96,10 +93,7 @@ export function SessionList({ range }: { range: string }) {
                                             {session.tool_calls}
                                         </td>
                                         <td className="py-2 text-right tabular-nums text-muted-foreground">
-                                            {formatDuration(
-                                                session.first_seen,
-                                                session.last_seen,
-                                            )}
+                                            {formatDuration(session.first_seen, session.last_seen)}
                                         </td>
                                         <td className="py-2 text-right tabular-nums text-muted-foreground">
                                             {formatMs(session.avg_response_ms)}

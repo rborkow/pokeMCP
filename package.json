@@ -29,7 +29,7 @@
         "generate-pokemon-data": "tsx scripts/generate-pokemon-types.ts",
         "discover-formats": "tsx scripts/discover-formats.ts",
         "fetch-stats": "tsx scripts/fetch-stats.ts",
-        "upload-stats": "bash scripts/upload-stats.sh",
+        "upload-stats": "tsx scripts/upload-stats.ts",
         "export-logs": "tsx scripts/export-logs.ts",
         "tail": "wrangler tail",
         "tail:staging": "wrangler tail --env staging",

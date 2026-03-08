@@ -85,10 +85,7 @@ export function ThinkingCollapsible({ content, isActive }: ThinkingCollapsiblePr
                 )}
             </button>
             {isExpanded && (
-                <div
-                    ref={contentRef}
-                    className="thinking-content max-h-[300px] overflow-y-auto"
-                >
+                <div ref={contentRef} className="thinking-content max-h-[300px] overflow-y-auto">
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
                 </div>
             )}

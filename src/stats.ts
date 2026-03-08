@@ -1,50 +1,161 @@
 import { toID } from "./data-loader.js";
 import type { UsageStatistics } from "smogon";
 
-// In-memory cache for parsed stats to avoid re-parsing large KV JSON on every request.
-// Per-isolate: resets on deploy or isolate recycle. TTL keeps data fresh enough for monthly updates.
-const STATS_CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
-const statsCache = new Map<string, { data: UsageStatistics; timestamp: number }>();
+// --- Caches ---
+
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+// Cache for format indexes (lightweight: info + usage map)
+const indexCache = new Map<string, { data: FormatIndex; timestamp: number }>();
+
+// Cache for individual Pokemon stats
+const pokemonCache = new Map<string, { data: PokemonStats; timestamp: number }>();
+
+// Legacy cache for full format blobs (migration fallback only)
+const legacyCache = new Map<string, { data: UsageStatistics; timestamp: number }>();
+
+// --- Types ---
+
+interface FormatIndex {
+    info: UsageStatistics["info"];
+    pokemon: Record<string, number>; // displayName → usage
+    version: number;
+}
+
+interface PokemonStats {
+    displayName: string;
+    usage: number;
+    Abilities?: Record<string, number>;
+    Items?: Record<string, number>;
+    Moves?: Record<string, number>;
+    Spreads?: Record<string, number>;
+    Teammates?: Record<string, number>;
+    "Checks and Counters"?: Record<string, any>;
+    "Tera Types"?: Record<string, number>;
+    [key: string]: any;
+}
+
+// --- Data Access ---
 
 /**
- * Get cached stats for a format, checking in-memory cache before KV.
+ * Get the format index (info + pokemon usage map).
+ * Used by tools that need all Pokemon: getMetaThreats, getMetagameStats.
  */
-async function getCachedStats(format: string, env: Env): Promise<UsageStatistics | null> {
+async function getFormatIndex(format: string, env: Env): Promise<FormatIndex | null> {
     const now = Date.now();
-    const cached = statsCache.get(format);
-    if (cached && now - cached.timestamp < STATS_CACHE_TTL_MS) {
+    const cached = indexCache.get(format);
+    if (cached && now - cached.timestamp < CACHE_TTL_MS) {
         return cached.data;
     }
 
     try {
-        const kv = await env.POKEMON_STATS.get(format, "json") as any;
+        // Try v2 per-Pokemon index key
+        const index = (await env.POKEMON_STATS.get(
+            `${format}:_index`,
+            "json",
+        )) as FormatIndex | null;
+        if (index && index.version === 2) {
+            indexCache.set(format, { data: index, timestamp: now });
+            return index;
+        }
+    } catch (e) {
+        console.error(`Error fetching index for ${format}:`, e);
+    }
+
+    // Fallback: load legacy blob and extract index shape
+    const legacy = await getLegacyStats(format, env);
+    if (!legacy) return null;
+
+    const pokemonUsage: Record<string, number> = {};
+    for (const [name, data] of Object.entries(legacy.data)) {
+        pokemonUsage[name] = data.usage;
+    }
+
+    const index: FormatIndex = { info: legacy.info, pokemon: pokemonUsage, version: 2 };
+    indexCache.set(format, { data: index, timestamp: now });
+    return index;
+}
+
+/**
+ * Get stats for a single Pokemon in a format.
+ * Used by per-Pokemon tools: getPopularSets, getTeammates, getChecksCounters.
+ */
+async function getPokemonStats(
+    pokemonName: string,
+    format: string,
+    env: Env,
+): Promise<PokemonStats | null> {
+    const pokemonId = toID(pokemonName);
+    const cacheKey = `${format}:${pokemonId}`;
+    const now = Date.now();
+
+    const cached = pokemonCache.get(cacheKey);
+    if (cached && now - cached.timestamp < CACHE_TTL_MS) {
+        return cached.data;
+    }
+
+    try {
+        // Try v2 per-Pokemon key
+        const stats = (await env.POKEMON_STATS.get(
+            `${format}:${pokemonId}`,
+            "json",
+        )) as PokemonStats | null;
+        if (stats && stats.displayName) {
+            pokemonCache.set(cacheKey, { data: stats, timestamp: now });
+            return stats;
+        }
+    } catch (e) {
+        console.error(`Error fetching ${pokemonId} stats for ${format}:`, e);
+    }
+
+    // Fallback: load legacy blob and find Pokemon
+    const legacy = await getLegacyStats(format, env);
+    if (!legacy) return null;
+
+    const found = findPokemonInLegacy(legacy, pokemonName);
+    if (!found) return null;
+
+    const stats: PokemonStats = { displayName: found.key, ...found.data };
+    pokemonCache.set(cacheKey, { data: stats, timestamp: now });
+    return stats;
+}
+
+/**
+ * Legacy blob loader — used as fallback during migration.
+ */
+async function getLegacyStats(format: string, env: Env): Promise<UsageStatistics | null> {
+    const now = Date.now();
+    const cached = legacyCache.get(format);
+    if (cached && now - cached.timestamp < CACHE_TTL_MS) {
+        return cached.data;
+    }
+
+    try {
+        const kv = (await env.POKEMON_STATS.get(format, "json")) as any;
         if (!kv || typeof kv !== "object" || !kv.data) {
             return null;
         }
-        statsCache.set(format, { data: kv.data as UsageStatistics, timestamp: now });
+        legacyCache.set(format, { data: kv.data as UsageStatistics, timestamp: now });
         return kv.data as UsageStatistics;
     } catch (error) {
-        console.error(`Error fetching stats from KV for ${format}:`, error);
+        console.error(`Error fetching legacy stats from KV for ${format}:`, error);
         return null;
     }
 }
 
 /**
- * Find a Pokemon in stats data by trying different name formats.
- * Stats keys use display names like "Great Tusk" while we receive IDs like "greattusk".
+ * Find a Pokemon in legacy stats data by trying different name formats.
  */
-function findPokemonInStats(
+function findPokemonInLegacy(
     stats: UsageStatistics,
     pokemonName: string,
 ): { key: string; data: any } | null {
     const pokemonId = toID(pokemonName);
 
-    // First try direct ID match
     if (stats.data[pokemonId]) {
         return { key: pokemonId, data: stats.data[pokemonId] };
     }
 
-    // Search through all keys and compare their IDs
     for (const key of Object.keys(stats.data)) {
         if (toID(key) === pokemonId) {
             return { key, data: stats.data[key] };
@@ -54,8 +165,10 @@ function findPokemonInStats(
     return null;
 }
 
+// --- Tool Functions ---
+
 /**
- * Get the most popular sets for a Pokémon from usage stats
+ * Get the most popular sets for a Pokemon from usage stats
  */
 export async function getPopularSets(
     args: {
@@ -66,20 +179,16 @@ export async function getPopularSets(
 ): Promise<string> {
     const format = args.format || "gen9ou";
 
-    const stats = await getCachedStats(format, env);
+    const pokemonStats = await getPokemonStats(args.pokemon, format, env);
 
-    if (!stats) {
-        return `No usage statistics found for format "${format}".`;
-    }
-
-    const found = findPokemonInStats(stats, args.pokemon);
-
-    if (!found) {
+    if (!pokemonStats) {
+        // Check if format exists at all
+        const index = await getFormatIndex(format, env);
+        if (!index) {
+            return `No usage statistics found for format "${format}".`;
+        }
         return `${args.pokemon} not found in ${format} usage statistics.`;
     }
-
-    const pokemonStats = found.data;
-    const displayName = found.key;
 
     let output = `**${args.pokemon} in ${format.toUpperCase()}**\n\n`;
     output += `**Usage:** ${(pokemonStats.usage * 100).toFixed(2)}%\n\n`;
@@ -136,13 +245,12 @@ export async function getPopularSets(
     // Tera Types (Gen 9 only)
     if (pokemonStats["Tera Types"] && format.startsWith("gen9")) {
         const teraTypes = normalize(pokemonStats["Tera Types"])
-            .filter(([type]) => type.toLowerCase() !== "nothing") // Filter out "nothing" entries
+            .filter(([type]) => type.toLowerCase() !== "nothing")
             .slice(0, 5);
 
         if (teraTypes.length > 0) {
             output += "**Popular Tera Types:**\n";
             for (const [type, pct] of teraTypes) {
-                // Capitalize first letter
                 const displayType = type.charAt(0).toUpperCase() + type.slice(1);
                 output += `- ${displayType}: ${pct.toFixed(1)}%\n`;
             }
@@ -162,14 +270,14 @@ export async function getMetaThreats(
     const format = args.format || "gen9ou";
     const limit = args.limit || 20;
 
-    const stats = await getCachedStats(format, env);
+    const index = await getFormatIndex(format, env);
 
-    if (!stats) {
+    if (!index) {
         return `No usage statistics found for format "${format}".`;
     }
 
-    const threats = Object.entries(stats.data)
-        .map(([id, data]) => ({ name: id, usage: data.usage }))
+    const threats = Object.entries(index.pokemon)
+        .map(([name, usage]) => ({ name, usage }))
         .sort((a, b) => b.usage - a.usage)
         .slice(0, limit);
 
@@ -184,7 +292,7 @@ export async function getMetaThreats(
 }
 
 /**
- * Get common teammates for a Pokémon
+ * Get common teammates for a Pokemon
  */
 export async function getTeammates(
     args: {
@@ -197,34 +305,25 @@ export async function getTeammates(
     const format = args.format || "gen9ou";
     const limit = args.limit || 10;
 
-    const stats = await getCachedStats(format, env);
+    const pokemonStats = await getPokemonStats(args.pokemon, format, env);
 
-    if (!stats) {
-        return `No usage statistics found for format "${format}".`;
-    }
-
-    const found = findPokemonInStats(stats, args.pokemon);
-
-    if (!found) {
+    if (!pokemonStats) {
+        const index = await getFormatIndex(format, env);
+        if (!index) {
+            return `No usage statistics found for format "${format}".`;
+        }
         return `${args.pokemon} not found in ${format} usage statistics.`;
     }
-
-    const pokemonStats = found.data;
 
     if (!pokemonStats.Teammates) {
         return `No teammate data available for ${args.pokemon} in ${format}.`;
     }
 
     // Normalize teammate values (chaos format uses weighted counts)
-    const total = Object.values(pokemonStats.Teammates).reduce(
-        (sum: number, v: number) => sum + v,
-        0,
-    );
-    const teammates = Object.entries(pokemonStats.Teammates)
-        .map(
-            ([key, value]) =>
-                [key, total > 0 ? ((value as number) / total) * 100 : 0] as [string, number],
-        )
+    const teammateValues = pokemonStats.Teammates as Record<string, number>;
+    const total = Object.values(teammateValues).reduce((sum, v) => sum + v, 0);
+    const teammates = Object.entries(teammateValues)
+        .map(([key, value]) => [key, total > 0 ? (value / total) * 100 : 0] as [string, number])
         .sort(([, a], [, b]) => b - a)
         .slice(0, limit);
 
@@ -238,7 +337,7 @@ export async function getTeammates(
 }
 
 /**
- * Get checks and counters for a Pokémon
+ * Get checks and counters for a Pokemon
  */
 export async function getChecksCounters(
     args: {
@@ -251,19 +350,15 @@ export async function getChecksCounters(
     const format = args.format || "gen9ou";
     const limit = args.limit || 15;
 
-    const stats = await getCachedStats(format, env);
+    const pokemonStats = await getPokemonStats(args.pokemon, format, env);
 
-    if (!stats) {
-        return `No usage statistics found for format "${format}".`;
-    }
-
-    const found = findPokemonInStats(stats, args.pokemon);
-
-    if (!found) {
+    if (!pokemonStats) {
+        const index = await getFormatIndex(format, env);
+        if (!index) {
+            return `No usage statistics found for format "${format}".`;
+        }
         return `${args.pokemon} not found in ${format} usage statistics.`;
     }
-
-    const pokemonStats = found.data;
 
     if (!pokemonStats["Checks and Counters"]) {
         return `No checks and counters data available for ${args.pokemon} in ${format}.`;
@@ -296,19 +391,18 @@ export async function getChecksCounters(
 export async function getMetagameStats(args: { format?: string }, env: Env): Promise<string> {
     const format = args.format || "gen9ou";
 
-    const stats = await getCachedStats(format, env);
+    const index = await getFormatIndex(format, env);
 
-    if (!stats) {
+    if (!index) {
         return `No usage statistics found for format "${format}".`;
     }
 
-    const info = stats.info;
-    const totalPokemon = Object.keys(stats.data).length;
+    const totalPokemon = Object.keys(index.pokemon).length;
 
     let output = `**Metagame Statistics for ${format.toUpperCase()}:**\n\n`;
-    output += `- **Total Pokémon:** ${totalPokemon}\n`;
-    output += `- **Total Battles:** ${info["number of battles"].toLocaleString()}\n`;
-    output += `- **Average Weight/Team:** ${info["avg weight/team"]}\n\n`;
+    output += `- **Total Pokemon:** ${totalPokemon}\n`;
+    output += `- **Total Battles:** ${index.info["number of battles"].toLocaleString()}\n`;
+    output += `- **Average Weight/Team:** ${index.info["avg weight/team"]}\n\n`;
 
     // Get usage tiers
     const usageTiers = {
@@ -319,18 +413,18 @@ export async function getMetagameStats(args: { format?: string }, env: Env): Pro
         "D Tier (<1%)": 0,
     };
 
-    for (const [, data] of Object.entries(stats.data)) {
-        const usage = data.usage * 100;
-        if (usage > 10) usageTiers["S Tier (>10%)"]++;
-        else if (usage > 5) usageTiers["A Tier (5-10%)"]++;
-        else if (usage > 2) usageTiers["B Tier (2-5%)"]++;
-        else if (usage > 1) usageTiers["C Tier (1-2%)"]++;
+    for (const usage of Object.values(index.pokemon)) {
+        const pct = usage * 100;
+        if (pct > 10) usageTiers["S Tier (>10%)"]++;
+        else if (pct > 5) usageTiers["A Tier (5-10%)"]++;
+        else if (pct > 2) usageTiers["B Tier (2-5%)"]++;
+        else if (pct > 1) usageTiers["C Tier (1-2%)"]++;
         else usageTiers["D Tier (<1%)"]++;
     }
 
     output += "**Usage Tiers:**\n";
     for (const [tier, count] of Object.entries(usageTiers)) {
-        output += `- ${tier}: ${count} Pokémon\n`;
+        output += `- ${tier}: ${count} Pokemon\n`;
     }
 
     return output;
