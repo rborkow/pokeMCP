@@ -171,18 +171,18 @@ async function queryAnalyticsEngine(
 function parseRange(range: string | null): string {
     switch (range) {
         case "1h":
-            return "1 HOUR";
+            return "'1' HOUR";
         case "24h":
         case null:
-            return "24 HOUR";
+            return "'24' HOUR";
         case "7d":
-            return "7 DAY";
+            return "'7' DAY";
         case "30d":
-            return "30 DAY";
+            return "'30' DAY";
         case "90d":
-            return "90 DAY";
+            return "'90' DAY";
         default:
-            return "24 HOUR";
+            return "'24' HOUR";
     }
 }
 
@@ -200,7 +200,7 @@ async function handleOverview(env: Env, url: URL): Promise<Response> {
             avg(double1) as avg_response_ms
         FROM "pokemcp-analytics"
         WHERE index1 = 'tool_call'
-            AND timestamp > NOW() - INTERVAL '${range}'`,
+            AND timestamp > NOW() - INTERVAL ${range}`,
     );
     const aiChatStats = await queryAnalyticsEngine(
         env,
@@ -214,7 +214,7 @@ async function handleOverview(env: Env, url: URL): Promise<Response> {
             avg(double6) as avg_response_ms
         FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
-            AND timestamp > NOW() - INTERVAL '${range}'`,
+            AND timestamp > NOW() - INTERVAL ${range}`,
     );
     const sessionStats = await queryAnalyticsEngine(
         env,
@@ -224,7 +224,7 @@ async function handleOverview(env: Env, url: URL): Promise<Response> {
             sum(if(blob1 = 'disconnect', 1, 0)) as disconnections
         FROM "pokemcp-analytics"
         WHERE index1 = 'session'
-            AND timestamp > NOW() - INTERVAL '${range}'`,
+            AND timestamp > NOW() - INTERVAL ${range}`,
     );
 
     return jsonResponse({
@@ -248,7 +248,7 @@ async function handleUsage(env: Env, url: URL): Promise<Response> {
             index1 as event_type,
             count() as count
         FROM "pokemcp-analytics"
-        WHERE timestamp > NOW() - INTERVAL '${range}'
+        WHERE timestamp > NOW() - INTERVAL ${range}
         GROUP BY bucket, event_type
         ORDER BY bucket ASC`,
     );
@@ -272,7 +272,7 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
             sum(double7) as cost_usd
         FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
-            AND timestamp > NOW() - INTERVAL '${range}'
+            AND timestamp > NOW() - INTERVAL ${range}
         GROUP BY day
         ORDER BY day ASC`,
     );
@@ -286,7 +286,7 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
             sum(double2) as output_tokens
         FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
-            AND timestamp > NOW() - INTERVAL '${range}'
+            AND timestamp > NOW() - INTERVAL ${range}
         GROUP BY format
         ORDER BY cost_usd DESC`,
     );
@@ -298,7 +298,7 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
             sum(double7) as cost_usd
         FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
-            AND timestamp > NOW() - INTERVAL '${range}'
+            AND timestamp > NOW() - INTERVAL ${range}
         GROUP BY personality
         ORDER BY requests DESC`,
     );
@@ -310,7 +310,7 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
             sum(double3) as total_cache_creation
         FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
-            AND timestamp > NOW() - INTERVAL '${range}'`,
+            AND timestamp > NOW() - INTERVAL ${range}`,
     );
 
     const cacheData = cacheStats.data[0] as Record<string, number> | undefined;
@@ -338,7 +338,7 @@ async function handleTools(env: Env, url: URL): Promise<Response> {
             avg(double1) as avg_response_ms
         FROM "pokemcp-analytics"
         WHERE index1 = 'tool_call'
-            AND timestamp > NOW() - INTERVAL '${range}'
+            AND timestamp > NOW() - INTERVAL ${range}
         GROUP BY tool_name
         ORDER BY calls DESC`,
     );
@@ -362,7 +362,7 @@ async function handleSessions(env: Env, url: URL): Promise<Response> {
         FROM "pokemcp-analytics"
         WHERE index1 = 'tool_call'
             AND blob4 != ''
-            AND timestamp > NOW() - INTERVAL '${range}'
+            AND timestamp > NOW() - INTERVAL ${range}
         GROUP BY session_id
         ORDER BY last_seen DESC
         LIMIT ${limit}`,
@@ -460,7 +460,7 @@ async function handleDiagnostics(env: Env): Promise<Response> {
                         Authorization: `Bearer ${env.CLOUDFLARE_API_TOKEN}`,
                         "Content-Type": "text/plain",
                     },
-                    body: "SELECT count() as total FROM \"pokemcp-analytics\" WHERE timestamp > NOW() - INTERVAL '1 HOUR'",
+                    body: "SELECT count() as total FROM \"pokemcp-analytics\" WHERE timestamp > NOW() - INTERVAL '1' HOUR",
                 },
             );
             const body = await response.text();
