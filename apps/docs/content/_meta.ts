@@ -7,6 +7,5 @@ export default {
     teambuilder: {
         title: "Team Builder",
         href: "https://www.pokemcp.com",
-        newWindow: true,
     },
 };
