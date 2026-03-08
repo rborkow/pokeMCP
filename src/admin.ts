@@ -114,31 +114,50 @@ interface AnalyticsQueryResult {
     rows: number;
 }
 
-async function queryAnalyticsEngine(env: Env, sql: string): Promise<AnalyticsQueryResult> {
+async function queryAnalyticsEngine(
+    env: Env,
+    sql: string,
+    retries = 3,
+): Promise<AnalyticsQueryResult> {
     if (!env.CLOUDFLARE_API_TOKEN || !env.CLOUDFLARE_ACCOUNT_ID) {
         throw new Error("Analytics Engine credentials not configured");
     }
 
-    const response = await fetch(
-        `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/analytics_engine/sql`,
-        {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${env.CLOUDFLARE_API_TOKEN}`,
-                "Content-Type": "text/plain",
+    for (let attempt = 0; attempt <= retries; attempt++) {
+        const response = await fetch(
+            `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/analytics_engine/sql`,
+            {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${env.CLOUDFLARE_API_TOKEN}`,
+                    "Content-Type": "text/plain",
+                },
+                body: sql,
             },
-            body: sql,
-        },
-    );
+        );
 
-    if (!response.ok) {
-        const errorText = await response.text();
-        console.error("[Admin] Analytics Engine query failed:", errorText);
-        throw new Error(`Analytics Engine query failed: ${response.status}`);
+        if (response.status === 429 && attempt < retries) {
+            // Exponential backoff: 500ms, 1s, 2s
+            const delay = 500 * 2 ** attempt;
+            console.warn(`[Admin] Analytics Engine rate limited, retrying in ${delay}ms...`);
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            continue;
+        }
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error("[Admin] Analytics Engine query failed:", errorText);
+            throw new Error(`Analytics Engine query failed: ${response.status}`);
+        }
+
+        const result = (await response.json()) as {
+            data: Record<string, unknown>[];
+            rows: number;
+        };
+        return result;
     }
 
-    const result = (await response.json()) as { data: Record<string, unknown>[]; rows: number };
-    return result;
+    throw new Error("Analytics Engine query failed: max retries exceeded");
 }
 
 function parseRange(range: string | null): string {
@@ -164,43 +183,42 @@ function parseRange(range: string | null): string {
 async function handleOverview(env: Env, url: URL): Promise<Response> {
     const range = parseRange(url.searchParams.get("range"));
 
-    const [toolCallStats, aiChatStats, sessionStats] = await Promise.all([
-        queryAnalyticsEngine(
-            env,
-            `SELECT
-                count() as total,
-                sum(if(blob3 = '1', 1, 0)) as successes,
-                avg(double1) as avg_response_ms,
-                quantileWeighted(0.95)(double1, 1) as p95_response_ms
-            FROM pokemcp-analytics
-            WHERE index1 = 'tool_call'
-                AND timestamp > NOW() - INTERVAL '${range}'`,
-        ),
-        queryAnalyticsEngine(
-            env,
-            `SELECT
-                count() as total,
-                sum(double1) as total_input_tokens,
-                sum(double2) as total_output_tokens,
-                sum(double3) as total_cache_creation_tokens,
-                sum(double4) as total_cache_read_tokens,
-                sum(double7) as total_cost_usd,
-                avg(double6) as avg_response_ms
-            FROM pokemcp-analytics
-            WHERE index1 = 'ai_chat'
-                AND timestamp > NOW() - INTERVAL '${range}'`,
-        ),
-        queryAnalyticsEngine(
-            env,
-            `SELECT
-                count() as total_events,
-                sum(if(blob1 = 'connect', 1, 0)) as connections,
-                sum(if(blob1 = 'disconnect', 1, 0)) as disconnections
-            FROM pokemcp-analytics
-            WHERE index1 = 'session'
-                AND timestamp > NOW() - INTERVAL '${range}'`,
-        ),
-    ]);
+    // Serialize queries to avoid Analytics Engine rate limits
+    const toolCallStats = await queryAnalyticsEngine(
+        env,
+        `SELECT
+            count() as total,
+            sum(if(blob3 = '1', 1, 0)) as successes,
+            avg(double1) as avg_response_ms,
+            quantileWeighted(0.95)(double1, 1) as p95_response_ms
+        FROM \`pokemcp-analytics\`
+        WHERE index1 = 'tool_call'
+            AND timestamp > NOW() - INTERVAL '${range}'`,
+    );
+    const aiChatStats = await queryAnalyticsEngine(
+        env,
+        `SELECT
+            count() as total,
+            sum(double1) as total_input_tokens,
+            sum(double2) as total_output_tokens,
+            sum(double3) as total_cache_creation_tokens,
+            sum(double4) as total_cache_read_tokens,
+            sum(double7) as total_cost_usd,
+            avg(double6) as avg_response_ms
+        FROM \`pokemcp-analytics\`
+        WHERE index1 = 'ai_chat'
+            AND timestamp > NOW() - INTERVAL '${range}'`,
+    );
+    const sessionStats = await queryAnalyticsEngine(
+        env,
+        `SELECT
+            count() as total_events,
+            sum(if(blob1 = 'connect', 1, 0)) as connections,
+            sum(if(blob1 = 'disconnect', 1, 0)) as disconnections
+        FROM \`pokemcp-analytics\`
+        WHERE index1 = 'session'
+            AND timestamp > NOW() - INTERVAL '${range}'`,
+    );
 
     return jsonResponse({
         range,
@@ -222,7 +240,7 @@ async function handleUsage(env: Env, url: URL): Promise<Response> {
             ${bucketFn} as bucket,
             index1 as event_type,
             count() as count
-        FROM pokemcp-analytics
+        FROM \`pokemcp-analytics\`
         WHERE timestamp > NOW() - INTERVAL '${range}'
         GROUP BY bucket, event_type
         ORDER BY bucket ASC`,
@@ -234,60 +252,59 @@ async function handleUsage(env: Env, url: URL): Promise<Response> {
 async function handleCosts(env: Env, url: URL): Promise<Response> {
     const range = parseRange(url.searchParams.get("range"));
 
-    const [dailyCosts, byFormat, byPersonality, cacheStats] = await Promise.all([
-        queryAnalyticsEngine(
-            env,
-            `SELECT
-                toStartOfDay(timestamp) as day,
-                count() as requests,
-                sum(double1) as input_tokens,
-                sum(double2) as output_tokens,
-                sum(double3) as cache_creation_tokens,
-                sum(double4) as cache_read_tokens,
-                sum(double7) as cost_usd
-            FROM pokemcp-analytics
-            WHERE index1 = 'ai_chat'
-                AND timestamp > NOW() - INTERVAL '${range}'
-            GROUP BY day
-            ORDER BY day ASC`,
-        ),
-        queryAnalyticsEngine(
-            env,
-            `SELECT
-                blob1 as format,
-                count() as requests,
-                sum(double7) as cost_usd,
-                sum(double1) as input_tokens,
-                sum(double2) as output_tokens
-            FROM pokemcp-analytics
-            WHERE index1 = 'ai_chat'
-                AND timestamp > NOW() - INTERVAL '${range}'
-            GROUP BY format
-            ORDER BY cost_usd DESC`,
-        ),
-        queryAnalyticsEngine(
-            env,
-            `SELECT
-                blob2 as personality,
-                count() as requests,
-                sum(double7) as cost_usd
-            FROM pokemcp-analytics
-            WHERE index1 = 'ai_chat'
-                AND timestamp > NOW() - INTERVAL '${range}'
-            GROUP BY personality
-            ORDER BY requests DESC`,
-        ),
-        queryAnalyticsEngine(
-            env,
-            `SELECT
-                sum(double1) as total_input,
-                sum(double4) as total_cache_read,
-                sum(double3) as total_cache_creation
-            FROM pokemcp-analytics
-            WHERE index1 = 'ai_chat'
-                AND timestamp > NOW() - INTERVAL '${range}'`,
-        ),
-    ]);
+    // Serialize queries to avoid Analytics Engine rate limits
+    const dailyCosts = await queryAnalyticsEngine(
+        env,
+        `SELECT
+            toStartOfDay(timestamp) as day,
+            count() as requests,
+            sum(double1) as input_tokens,
+            sum(double2) as output_tokens,
+            sum(double3) as cache_creation_tokens,
+            sum(double4) as cache_read_tokens,
+            sum(double7) as cost_usd
+        FROM \`pokemcp-analytics\`
+        WHERE index1 = 'ai_chat'
+            AND timestamp > NOW() - INTERVAL '${range}'
+        GROUP BY day
+        ORDER BY day ASC`,
+    );
+    const byFormat = await queryAnalyticsEngine(
+        env,
+        `SELECT
+            blob1 as format,
+            count() as requests,
+            sum(double7) as cost_usd,
+            sum(double1) as input_tokens,
+            sum(double2) as output_tokens
+        FROM \`pokemcp-analytics\`
+        WHERE index1 = 'ai_chat'
+            AND timestamp > NOW() - INTERVAL '${range}'
+        GROUP BY format
+        ORDER BY cost_usd DESC`,
+    );
+    const byPersonality = await queryAnalyticsEngine(
+        env,
+        `SELECT
+            blob2 as personality,
+            count() as requests,
+            sum(double7) as cost_usd
+        FROM \`pokemcp-analytics\`
+        WHERE index1 = 'ai_chat'
+            AND timestamp > NOW() - INTERVAL '${range}'
+        GROUP BY personality
+        ORDER BY requests DESC`,
+    );
+    const cacheStats = await queryAnalyticsEngine(
+        env,
+        `SELECT
+            sum(double1) as total_input,
+            sum(double4) as total_cache_read,
+            sum(double3) as total_cache_creation
+        FROM \`pokemcp-analytics\`
+        WHERE index1 = 'ai_chat'
+            AND timestamp > NOW() - INTERVAL '${range}'`,
+    );
 
     const cacheData = cacheStats.data[0] as Record<string, number> | undefined;
     const totalInput = (cacheData?.total_input ?? 0) + (cacheData?.total_cache_read ?? 0);
@@ -314,7 +331,7 @@ async function handleTools(env: Env, url: URL): Promise<Response> {
             avg(double1) as avg_response_ms,
             quantileWeighted(0.5)(double1, 1) as p50_response_ms,
             quantileWeighted(0.95)(double1, 1) as p95_response_ms
-        FROM pokemcp-analytics
+        FROM \`pokemcp-analytics\`
         WHERE index1 = 'tool_call'
             AND timestamp > NOW() - INTERVAL '${range}'
         GROUP BY tool_name
@@ -337,7 +354,7 @@ async function handleSessions(env: Env, url: URL): Promise<Response> {
             count() as tool_calls,
             sum(if(blob3 = '1', 1, 0)) as successes,
             avg(double1) as avg_response_ms
-        FROM pokemcp-analytics
+        FROM \`pokemcp-analytics\`
         WHERE index1 = 'tool_call'
             AND blob4 != ''
             AND timestamp > NOW() - INTERVAL '${range}'
