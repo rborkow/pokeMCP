@@ -164,12 +164,29 @@ async function getTopPokemonByFormat(
 
     for (const format of formats) {
         try {
+            // Try v2 index key first (lightweight, ~10-15KB)
+            const index = (await env.POKEMON_STATS.get(`${format}:_index`, "json")) as {
+                pokemon: Record<string, number>;
+                version: number;
+            } | null;
+
+            if (index && index.version === 2) {
+                const top = Object.entries(index.pokemon)
+                    .sort(([, a], [, b]) => b - a)
+                    .slice(0, 50)
+                    .map(([name]) => name);
+
+                topPokemon[format] = top;
+                console.log(`Found ${top.length} Pokemon for ${format} (v2 index)`);
+                continue;
+            }
+
+            // Fallback: load legacy blob
             const cached = await env.POKEMON_STATS.get(format, "json");
 
             if (cached && typeof cached === "object" && (cached as any).data) {
                 const stats = (cached as any).data;
 
-                // Get top 50 by usage
                 const top = Object.entries(stats.data)
                     .map(([id, data]: [string, any]) => ({ name: id, usage: data.usage }))
                     .sort((a, b) => b.usage - a.usage)
@@ -177,7 +194,7 @@ async function getTopPokemonByFormat(
                     .map((p) => p.name);
 
                 topPokemon[format] = top;
-                console.log(`Found ${top.length} Pokemon for ${format}`);
+                console.log(`Found ${top.length} Pokemon for ${format} (legacy)`);
             } else {
                 console.warn(`No stats found for ${format}`);
                 topPokemon[format] = [];
