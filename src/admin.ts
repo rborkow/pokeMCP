@@ -198,7 +198,7 @@ async function handleOverview(env: Env, url: URL): Promise<Response> {
             count() as total,
             sum(if(blob3 = '1', 1, 0)) as successes,
             avg(double1) as avg_response_ms
-        FROM \`pokemcp-analytics\`
+        FROM "pokemcp-analytics"
         WHERE index1 = 'tool_call'
             AND timestamp > NOW() - INTERVAL '${range}'`,
     );
@@ -212,7 +212,7 @@ async function handleOverview(env: Env, url: URL): Promise<Response> {
             sum(double4) as total_cache_read_tokens,
             sum(double7) as total_cost_usd,
             avg(double6) as avg_response_ms
-        FROM \`pokemcp-analytics\`
+        FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
             AND timestamp > NOW() - INTERVAL '${range}'`,
     );
@@ -222,7 +222,7 @@ async function handleOverview(env: Env, url: URL): Promise<Response> {
             count() as total_events,
             sum(if(blob1 = 'connect', 1, 0)) as connections,
             sum(if(blob1 = 'disconnect', 1, 0)) as disconnections
-        FROM \`pokemcp-analytics\`
+        FROM "pokemcp-analytics"
         WHERE index1 = 'session'
             AND timestamp > NOW() - INTERVAL '${range}'`,
     );
@@ -247,7 +247,7 @@ async function handleUsage(env: Env, url: URL): Promise<Response> {
             ${bucketFn} as bucket,
             index1 as event_type,
             count() as count
-        FROM \`pokemcp-analytics\`
+        FROM "pokemcp-analytics"
         WHERE timestamp > NOW() - INTERVAL '${range}'
         GROUP BY bucket, event_type
         ORDER BY bucket ASC`,
@@ -270,7 +270,7 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
             sum(double3) as cache_creation_tokens,
             sum(double4) as cache_read_tokens,
             sum(double7) as cost_usd
-        FROM \`pokemcp-analytics\`
+        FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
             AND timestamp > NOW() - INTERVAL '${range}'
         GROUP BY day
@@ -284,7 +284,7 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
             sum(double7) as cost_usd,
             sum(double1) as input_tokens,
             sum(double2) as output_tokens
-        FROM \`pokemcp-analytics\`
+        FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
             AND timestamp > NOW() - INTERVAL '${range}'
         GROUP BY format
@@ -296,7 +296,7 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
             blob2 as personality,
             count() as requests,
             sum(double7) as cost_usd
-        FROM \`pokemcp-analytics\`
+        FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
             AND timestamp > NOW() - INTERVAL '${range}'
         GROUP BY personality
@@ -308,7 +308,7 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
             sum(double1) as total_input,
             sum(double4) as total_cache_read,
             sum(double3) as total_cache_creation
-        FROM \`pokemcp-analytics\`
+        FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
             AND timestamp > NOW() - INTERVAL '${range}'`,
     );
@@ -336,7 +336,7 @@ async function handleTools(env: Env, url: URL): Promise<Response> {
             count() as calls,
             sum(if(blob3 = '1', 1, 0)) as successes,
             avg(double1) as avg_response_ms
-        FROM \`pokemcp-analytics\`
+        FROM "pokemcp-analytics"
         WHERE index1 = 'tool_call'
             AND timestamp > NOW() - INTERVAL '${range}'
         GROUP BY tool_name
@@ -359,7 +359,7 @@ async function handleSessions(env: Env, url: URL): Promise<Response> {
             count() as tool_calls,
             sum(if(blob3 = '1', 1, 0)) as successes,
             avg(double1) as avg_response_ms
-        FROM \`pokemcp-analytics\`
+        FROM "pokemcp-analytics"
         WHERE index1 = 'tool_call'
             AND blob4 != ''
             AND timestamp > NOW() - INTERVAL '${range}'
@@ -460,7 +460,7 @@ async function handleDiagnostics(env: Env): Promise<Response> {
                         Authorization: `Bearer ${env.CLOUDFLARE_API_TOKEN}`,
                         "Content-Type": "text/plain",
                     },
-                    body: "SELECT count() as total FROM `pokemcp-analytics` WHERE timestamp > NOW() - INTERVAL '1 HOUR'",
+                    body: "SELECT count() as total FROM \"pokemcp-analytics\" WHERE timestamp > NOW() - INTERVAL '1 HOUR'",
                 },
             );
             const body = await response.text();
