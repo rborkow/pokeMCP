@@ -276,26 +276,29 @@ export async function POST(request: NextRequest) {
                     };
                     console.log(JSON.stringify(usageData));
 
-                    // Forward usage to MCP Worker's analytics endpoint (fire-and-forget)
+                    // Forward usage to MCP Worker's analytics endpoint
+                    // Must await — unawaited fetches get killed when the isolate shuts down
                     const mcpUrl = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
-                    fetch(`${mcpUrl}/admin/api/track-ai`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            format: usageLog.format,
-                            personality: usageLog.personality,
-                            mode: usageLog.mode,
-                            thinking: usageLog.thinkingEnabled,
-                            inputTokens: usageLog.inputTokens,
-                            outputTokens: usageLog.outputTokens,
-                            cacheCreationTokens: usageLog.cacheCreationInputTokens,
-                            cacheReadTokens: usageLog.cacheReadInputTokens,
-                            teamSize: usageLog.teamSize,
-                            responseTimeMs: 0,
-                        }),
-                    }).catch((err) =>
-                        console.error("[Analytics] Failed to forward usage:", err),
-                    );
+                    try {
+                        await fetch(`${mcpUrl}/admin/api/track-ai`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                format: usageLog.format,
+                                personality: usageLog.personality,
+                                mode: usageLog.mode,
+                                thinking: usageLog.thinkingEnabled,
+                                inputTokens: usageLog.inputTokens,
+                                outputTokens: usageLog.outputTokens,
+                                cacheCreationTokens: usageLog.cacheCreationInputTokens,
+                                cacheReadTokens: usageLog.cacheReadInputTokens,
+                                teamSize: usageLog.teamSize,
+                                responseTimeMs: 0,
+                            }),
+                        });
+                    } catch (err) {
+                        console.error("[Analytics] Failed to forward usage:", err);
+                    }
 
                     controller.enqueue(encoder.encode("data: [DONE]\n\n"));
                     controller.close();
