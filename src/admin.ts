@@ -436,25 +436,25 @@ export async function handleAdminRequest(request: Request, env: Env): Promise<Re
         return new Response(null, {
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, OPTIONS",
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
                 "Access-Control-Allow-Headers": "Content-Type, Cf-Access-Jwt-Assertion, Cookie",
                 "Access-Control-Max-Age": "86400",
             },
         });
     }
 
-    // Validate Cloudflare Access JWT
-    const jwtPayload = await validateAccessJwt(request, env);
-    if (!jwtPayload) {
-        return jsonResponse({ error: "Unauthorized" }, 401);
-    }
-
     const url = new URL(request.url);
     const path = url.pathname.replace("/admin/api/", "").replace(/\/$/, "");
 
-    // Internal tracking endpoint — doesn't require Access JWT, but validates origin
+    // Internal tracking endpoint — no JWT required (server-to-server from teambuilder)
     if (path === "track-ai") {
         return handleTrackAI(request, env);
+    }
+
+    // All other admin endpoints require Cloudflare Access JWT
+    const jwtPayload = await validateAccessJwt(request, env);
+    if (!jwtPayload) {
+        return jsonResponse({ error: "Unauthorized" }, 401);
     }
 
     try {
