@@ -1006,13 +1006,6 @@ User's Question: ${message}`;
             return handleAdminRequest(request, env);
         }
 
-        // CORS preflight for /admin/*
-        if (url.pathname.startsWith("/admin/") && request.method === "OPTIONS") {
-            return new Response(null, {
-                headers: getCorsHeaders(request),
-            });
-        }
-
         // Root endpoint - return server info
         if (url.pathname === "/") {
             return new Response(

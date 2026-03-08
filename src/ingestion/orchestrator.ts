@@ -166,8 +166,8 @@ async function getTopPokemonByFormat(
         try {
             const cached = await env.POKEMON_STATS.get(format, "json");
 
-            if (cached && typeof cached === "object" && cached.data) {
-                const stats = cached.data;
+            if (cached && typeof cached === "object" && (cached as any).data) {
+                const stats = (cached as any).data;
 
                 // Get top 50 by usage
                 const top = Object.entries(stats.data)

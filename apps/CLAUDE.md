@@ -7,7 +7,7 @@ This directory contains two independently managed applications. There is **no wo
 | App | Framework | React | Tailwind | Deploy Target |
 |-----|-----------|-------|----------|---------------|
 | `teambuilder/` | Next.js 16 (App Router) | 19 | 4 | Cloudflare Pages (OpenNext) |
-| `docs/` | Next.js 14 (Pages Router) | 18 | 3 | Cloudflare Pages (static export) |
+| `docs/` | Next.js 15 (App Router) | 19 | — | Cloudflare Pages (static export) |
 
 Do **not** align framework versions across apps — they are intentionally pinned differently.
 
@@ -31,7 +31,7 @@ npm run dev:docs          # port 3001
 
 ## Docs App Notes
 
-- Uses Nextra 3 with `nextra-theme-docs`
+- Uses Nextra 4 with `nextra-theme-docs` (App Router)
 - Static export (`output: "export"`) — no server runtime
-- Pages live in `docs/pages/` as `.mdx` files with `_meta.ts` for nav ordering
-- Theme configured in `theme.config.tsx`
+- Content lives in `docs/content/` as `.mdx` files with `_meta.ts` for nav ordering
+- Layout configured in `docs/app/layout.tsx`, catch-all route in `docs/app/[[...mdxPath]]/page.tsx`

@@ -515,7 +515,7 @@ export async function handleAdminRequest(request: Request, env: Env): Promise<Re
     const url = new URL(request.url);
     const path = url.pathname.replace("/admin/api/", "").replace(/\/$/, "");
 
-    // Internal tracking endpoint — exempt from Access JWT (server-to-server from teambuilder)
+    // Internal tracking endpoint — no JWT required (server-to-server from teambuilder)
     if (path === "track-ai") {
         return handleTrackAI(request, env);
     }
