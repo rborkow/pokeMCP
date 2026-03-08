@@ -38,7 +38,7 @@
         "clsx": "^2.1.1",
         "html-to-image": "^1.11.13",
         "lucide-react": "^0.561.0",
-        "next": "^16.0.10",
+        "next": "^16.1.5",
         "qrcode.react": "^4.2.0",
         "react": "^19.2.1",
         "react-dom": "^19.2.1",
@@ -50,7 +50,7 @@
         "zustand": "^5.0.9"
     },
     "devDependencies": {
-        "@opennextjs/cloudflare": "^1.14.6",
+        "@opennextjs/cloudflare": "^1.17.1",
         "@tailwindcss/postcss": "^4",
         "@tailwindcss/typography": "^0.5.19",
         "@testing-library/jest-dom": "^6.9.1",
