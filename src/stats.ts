@@ -11,9 +11,6 @@ const indexCache = new Map<string, { data: FormatIndex; timestamp: number }>();
 // Cache for individual Pokemon stats
 const pokemonCache = new Map<string, { data: PokemonStats; timestamp: number }>();
 
-// Legacy cache for full format blobs (migration fallback only)
-const legacyCache = new Map<string, { data: UsageStatistics; timestamp: number }>();
-
 // --- Types ---
 
 interface FormatIndex {
@@ -49,7 +46,6 @@ async function getFormatIndex(format: string, env: Env): Promise<FormatIndex | n
     }
 
     try {
-        // Try v2 per-Pokemon index key
         const index = (await env.POKEMON_STATS.get(
             `${format}:_index`,
             "json",
@@ -62,18 +58,7 @@ async function getFormatIndex(format: string, env: Env): Promise<FormatIndex | n
         console.error(`Error fetching index for ${format}:`, e);
     }
 
-    // Fallback: load legacy blob and extract index shape
-    const legacy = await getLegacyStats(format, env);
-    if (!legacy) return null;
-
-    const pokemonUsage: Record<string, number> = {};
-    for (const [name, data] of Object.entries(legacy.data)) {
-        pokemonUsage[name] = data.usage;
-    }
-
-    const index: FormatIndex = { info: legacy.info, pokemon: pokemonUsage, version: 2 };
-    indexCache.set(format, { data: index, timestamp: now });
-    return index;
+    return null;
 }
 
 /**
@@ -95,7 +80,6 @@ async function getPokemonStats(
     }
 
     try {
-        // Try v2 per-Pokemon key
         const stats = (await env.POKEMON_STATS.get(
             `${format}:${pokemonId}`,
             "json",
@@ -106,60 +90,6 @@ async function getPokemonStats(
         }
     } catch (e) {
         console.error(`Error fetching ${pokemonId} stats for ${format}:`, e);
-    }
-
-    // Fallback: load legacy blob and find Pokemon
-    const legacy = await getLegacyStats(format, env);
-    if (!legacy) return null;
-
-    const found = findPokemonInLegacy(legacy, pokemonName);
-    if (!found) return null;
-
-    const stats: PokemonStats = { displayName: found.key, ...found.data };
-    pokemonCache.set(cacheKey, { data: stats, timestamp: now });
-    return stats;
-}
-
-/**
- * Legacy blob loader — used as fallback during migration.
- */
-async function getLegacyStats(format: string, env: Env): Promise<UsageStatistics | null> {
-    const now = Date.now();
-    const cached = legacyCache.get(format);
-    if (cached && now - cached.timestamp < CACHE_TTL_MS) {
-        return cached.data;
-    }
-
-    try {
-        const kv = (await env.POKEMON_STATS.get(format, "json")) as any;
-        if (!kv || typeof kv !== "object" || !kv.data) {
-            return null;
-        }
-        legacyCache.set(format, { data: kv.data as UsageStatistics, timestamp: now });
-        return kv.data as UsageStatistics;
-    } catch (error) {
-        console.error(`Error fetching legacy stats from KV for ${format}:`, error);
-        return null;
-    }
-}
-
-/**
- * Find a Pokemon in legacy stats data by trying different name formats.
- */
-function findPokemonInLegacy(
-    stats: UsageStatistics,
-    pokemonName: string,
-): { key: string; data: any } | null {
-    const pokemonId = toID(pokemonName);
-
-    if (stats.data[pokemonId]) {
-        return { key: pokemonId, data: stats.data[pokemonId] };
-    }
-
-    for (const key of Object.keys(stats.data)) {
-        if (toID(key) === pokemonId) {
-            return { key, data: stats.data[key] };
-        }
     }
 
     return null;
@@ -182,7 +112,6 @@ export async function getPopularSets(
     const pokemonStats = await getPokemonStats(args.pokemon, format, env);
 
     if (!pokemonStats) {
-        // Check if format exists at all
         const index = await getFormatIndex(format, env);
         if (!index) {
             return `No usage statistics found for format "${format}".`;
