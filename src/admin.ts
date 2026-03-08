@@ -149,8 +149,9 @@ async function queryAnalyticsEngine(
             console.error("[Admin] Analytics Engine query failed:", response.status, errorText);
 
             // 422 typically means the dataset table doesn't exist yet (no data written)
-            // Return empty results instead of erroring
+            // Return empty results instead of erroring, but log for diagnostics
             if (response.status === 422) {
+                console.error("[Admin] Analytics Engine 422:", errorText);
                 return { data: [], rows: 0 };
             }
 
@@ -415,6 +416,74 @@ async function handleTrackAI(request: Request, env: Env): Promise<Response> {
     }
 }
 
+// --- Diagnostics endpoint ---
+
+async function handleDiagnostics(env: Env): Promise<Response> {
+    const diagnostics: Record<string, unknown> = {
+        timestamp: new Date().toISOString(),
+        bindings: {
+            ANALYTICS: !!env.ANALYTICS,
+            CLOUDFLARE_API_TOKEN: !!env.CLOUDFLARE_API_TOKEN,
+            CLOUDFLARE_ACCOUNT_ID: !!env.CLOUDFLARE_ACCOUNT_ID,
+            CF_ACCESS_TEAM_DOMAIN: !!env.CF_ACCESS_TEAM_DOMAIN,
+        },
+        environment: (env as unknown as Record<string, unknown>).ENVIRONMENT ?? "unknown",
+    };
+
+    // Test write path
+    if (env.ANALYTICS) {
+        try {
+            env.ANALYTICS.writeDataPoint({
+                indexes: ["diagnostic"],
+                blobs: ["test", new Date().toISOString()],
+                doubles: [1],
+            });
+            diagnostics.writeTest = { success: true };
+        } catch (error) {
+            diagnostics.writeTest = {
+                success: false,
+                error: error instanceof Error ? error.message : String(error),
+            };
+        }
+    } else {
+        diagnostics.writeTest = { success: false, error: "ANALYTICS binding missing" };
+    }
+
+    // Test read path — raw HTTP response, not the swallowed version
+    if (env.CLOUDFLARE_API_TOKEN && env.CLOUDFLARE_ACCOUNT_ID) {
+        try {
+            const response = await fetch(
+                `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/analytics_engine/sql`,
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${env.CLOUDFLARE_API_TOKEN}`,
+                        "Content-Type": "text/plain",
+                    },
+                    body: "SELECT count() as total FROM `pokemcp-analytics` WHERE timestamp > NOW() - INTERVAL '1 HOUR'",
+                },
+            );
+            const body = await response.text();
+            diagnostics.readTest = {
+                status: response.status,
+                body: body.substring(0, 500),
+            };
+        } catch (error) {
+            diagnostics.readTest = {
+                status: 0,
+                error: error instanceof Error ? error.message : String(error),
+            };
+        }
+    } else {
+        diagnostics.readTest = {
+            status: 0,
+            error: "Missing CLOUDFLARE_API_TOKEN or CLOUDFLARE_ACCOUNT_ID",
+        };
+    }
+
+    return jsonResponse(diagnostics);
+}
+
 // --- Request router ---
 
 function jsonResponse(data: unknown, status = 200): Response {
@@ -469,6 +538,8 @@ export async function handleAdminRequest(request: Request, env: Env): Promise<Re
                 return await handleTools(env, url);
             case "sessions":
                 return await handleSessions(env, url);
+            case "diagnostics":
+                return await handleDiagnostics(env);
             default:
                 return jsonResponse({ error: "Not found", path }, 404);
         }
