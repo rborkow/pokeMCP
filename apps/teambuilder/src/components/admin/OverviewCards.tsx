@@ -8,7 +8,6 @@ interface OverviewData {
         total: number;
         successes: number;
         avg_response_ms: number;
-        p95_response_ms: number;
     };
     aiChat: {
         total: number;
@@ -78,8 +77,8 @@ export function OverviewCards({ range }: { range: string }) {
         {
             title: "MCP Sessions",
             value: formatNumber(data?.sessions?.connections),
-            subtitle: data?.toolCalls?.p95_response_ms
-                ? `p95 ${formatMs(data.toolCalls.p95_response_ms)}`
+            subtitle: data?.toolCalls?.avg_response_ms
+                ? `avg ${formatMs(data.toolCalls.avg_response_ms)}`
                 : "No data",
         },
     ];

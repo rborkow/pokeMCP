@@ -146,7 +146,14 @@ async function queryAnalyticsEngine(
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.error("[Admin] Analytics Engine query failed:", errorText);
+            console.error("[Admin] Analytics Engine query failed:", response.status, errorText);
+
+            // 422 typically means the dataset table doesn't exist yet (no data written)
+            // Return empty results instead of erroring
+            if (response.status === 422) {
+                return { data: [], rows: 0 };
+            }
+
             throw new Error(`Analytics Engine query failed: ${response.status}`);
         }
 
@@ -189,8 +196,7 @@ async function handleOverview(env: Env, url: URL): Promise<Response> {
         `SELECT
             count() as total,
             sum(if(blob3 = '1', 1, 0)) as successes,
-            avg(double1) as avg_response_ms,
-            quantileWeighted(0.95)(double1, 1) as p95_response_ms
+            avg(double1) as avg_response_ms
         FROM \`pokemcp-analytics\`
         WHERE index1 = 'tool_call'
             AND timestamp > NOW() - INTERVAL '${range}'`,
@@ -328,9 +334,7 @@ async function handleTools(env: Env, url: URL): Promise<Response> {
             blob1 as tool_name,
             count() as calls,
             sum(if(blob3 = '1', 1, 0)) as successes,
-            avg(double1) as avg_response_ms,
-            quantileWeighted(0.5)(double1, 1) as p50_response_ms,
-            quantileWeighted(0.95)(double1, 1) as p95_response_ms
+            avg(double1) as avg_response_ms
         FROM \`pokemcp-analytics\`
         WHERE index1 = 'tool_call'
             AND timestamp > NOW() - INTERVAL '${range}'

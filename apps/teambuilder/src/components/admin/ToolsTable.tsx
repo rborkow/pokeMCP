@@ -9,8 +9,6 @@ interface ToolsData {
         calls: number;
         successes: number;
         avg_response_ms: number;
-        p50_response_ms: number;
-        p95_response_ms: number;
     }>;
 }
 
@@ -54,8 +52,7 @@ export function ToolsTable({ range }: { range: string }) {
                                     <th className="pb-2 font-medium">Tool</th>
                                     <th className="pb-2 font-medium text-right">Calls</th>
                                     <th className="pb-2 font-medium text-right">OK%</th>
-                                    <th className="pb-2 font-medium text-right">p50</th>
-                                    <th className="pb-2 font-medium text-right">p95</th>
+                                    <th className="pb-2 font-medium text-right">Avg</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,10 +84,7 @@ export function ToolsTable({ range }: { range: string }) {
                                                 </span>
                                             </td>
                                             <td className="py-2 text-right tabular-nums text-muted-foreground">
-                                                {formatMs(tool.p50_response_ms)}
-                                            </td>
-                                            <td className="py-2 text-right tabular-nums text-muted-foreground">
-                                                {formatMs(tool.p95_response_ms)}
+                                                {formatMs(tool.avg_response_ms)}
                                             </td>
                                         </tr>
                                     );
