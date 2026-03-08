@@ -4,7 +4,6 @@
  * For each format, uploads:
  *   {format}:_index  — lightweight index with info + pokemon usage map
  *   {format}:{id}    — individual Pokemon stats keyed by toID(name)
- *   {format}         — legacy full blob (for backward compat during migration)
  *
  * Uses `wrangler kv bulk put` to batch all keys per format into a single API call,
  * dramatically reducing upload time vs individual key puts.
@@ -88,8 +87,7 @@ function uploadFormat(file: string): void {
         return;
     }
 
-    const raw = readFileSync(filePath, "utf-8");
-    const parsed = JSON.parse(raw);
+    const parsed = JSON.parse(readFileSync(filePath, "utf-8"));
 
     const info = parsed.data?.info;
     const pokemonData = parsed.data?.data;
@@ -121,9 +119,6 @@ function uploadFormat(file: string): void {
         const value = { displayName: name, ...pokemonData[name] };
         entries.push({ key: `${format}:${id}`, value: JSON.stringify(value) });
     }
-
-    // 3. Legacy blob key
-    entries.push({ key: format, value: raw });
 
     // Upload in batches
     const totalBatches = Math.ceil(entries.length / BULK_BATCH_SIZE);
