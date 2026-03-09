@@ -228,12 +228,26 @@ async function handleOverview(env: Env, url: URL): Promise<Response> {
         WHERE index1 = 'session'
             AND timestamp > NOW() - INTERVAL ${range}`,
     );
+    // Source breakdown for ai_chat (blob5 = source: "web", "mcp", "rest")
+    const aiBySource = await queryAnalyticsEngine(
+        env,
+        `SELECT
+            blob5 as source,
+            count() as total,
+            sum(double7) as cost_usd
+        FROM "pokemcp-analytics"
+        WHERE index1 = 'ai_chat'
+            AND timestamp > NOW() - INTERVAL ${range}
+        GROUP BY source
+        ORDER BY total DESC`,
+    );
 
     return jsonResponse({
         range,
         toolCalls: toolCallStats.data[0] || {},
         aiChat: aiChatStats.data[0] || {},
         sessions: sessionStats.data[0] || {},
+        aiBySource: aiBySource.data,
     });
 }
 
@@ -315,6 +329,21 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
             AND timestamp > NOW() - INTERVAL ${range}`,
     );
 
+    const bySource = await queryAnalyticsEngine(
+        env,
+        `SELECT
+            blob5 as source,
+            count() as requests,
+            sum(double7) as cost_usd,
+            sum(double1) as input_tokens,
+            sum(double2) as output_tokens
+        FROM "pokemcp-analytics"
+        WHERE index1 = 'ai_chat'
+            AND timestamp > NOW() - INTERVAL ${range}
+        GROUP BY source
+        ORDER BY cost_usd DESC`,
+    );
+
     const cacheData = cacheStats.data[0] as Record<string, number> | undefined;
     const totalInput = (cacheData?.total_input ?? 0) + (cacheData?.total_cache_read ?? 0);
     const cacheHitRate = totalInput > 0 ? (cacheData?.total_cache_read ?? 0) / totalInput : 0;
@@ -324,6 +353,7 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
         daily: dailyCosts.data,
         byFormat: byFormat.data,
         byPersonality: byPersonality.data,
+        bySource: bySource.data,
         cacheHitRate,
     });
 }
@@ -331,6 +361,7 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
 async function handleTools(env: Env, url: URL): Promise<Response> {
     const range = parseRange(url.searchParams.get("range"));
 
+    // Serialize queries to avoid Analytics Engine rate limits
     const result = await queryAnalyticsEngine(
         env,
         `SELECT
@@ -344,8 +375,19 @@ async function handleTools(env: Env, url: URL): Promise<Response> {
         GROUP BY tool_name
         ORDER BY calls DESC`,
     );
+    const bySource = await queryAnalyticsEngine(
+        env,
+        `SELECT
+            blob5 as source,
+            count() as calls
+        FROM "pokemcp-analytics"
+        WHERE index1 = 'tool_call'
+            AND timestamp > NOW() - INTERVAL ${range}
+        GROUP BY source
+        ORDER BY calls DESC`,
+    );
 
-    return jsonResponse({ range, tools: result.data });
+    return jsonResponse({ range, tools: result.data, bySource: bySource.data });
 }
 
 async function handleSessions(env: Env, url: URL): Promise<Response> {
@@ -386,6 +428,7 @@ interface TrackAIRequest {
     cacheReadTokens: number;
     teamSize: number;
     responseTimeMs: number;
+    source?: string;
 }
 
 async function handleTrackAI(request: Request, env: Env): Promise<Response> {
@@ -396,6 +439,11 @@ async function handleTrackAI(request: Request, env: Env): Promise<Response> {
     try {
         const data: TrackAIRequest = await request.json();
         console.log("[Admin] track-ai received:", JSON.stringify(data));
+
+        const source =
+            data.source === "web" || data.source === "mcp" || data.source === "rest"
+                ? data.source
+                : "web";
 
         trackAIChat(env, {
             format: data.format || "unknown",
@@ -408,6 +456,7 @@ async function handleTrackAI(request: Request, env: Env): Promise<Response> {
             cacheReadTokens: data.cacheReadTokens || 0,
             teamSize: data.teamSize || 0,
             responseTimeMs: data.responseTimeMs || 0,
+            source,
         });
 
         return jsonResponse({ ok: true });

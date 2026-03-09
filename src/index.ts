@@ -84,7 +84,7 @@ export class PokemonMCP extends McpAgent {
         const env = this.env as Env;
 
         // Track session connection
-        trackSession(env, "connect", this.sessionId, "mcp");
+        trackSession(env, "connect", this.sessionId, "mcp", "mcp");
 
         for (const tool of TOOL_REGISTRY) {
             this.server.tool(tool.name, tool.schema, async (args) => {
@@ -99,7 +99,15 @@ export class PokemonMCP extends McpAgent {
                 } finally {
                     const responseTimeMs = Math.round(performance.now() - startTime);
                     const format = typeof args.format === "string" ? args.format : undefined;
-                    trackToolCall(env, tool.name, format, success, responseTimeMs, this.sessionId);
+                    trackToolCall(
+                        env,
+                        tool.name,
+                        format,
+                        success,
+                        responseTimeMs,
+                        this.sessionId,
+                        "mcp",
+                    );
                 }
                 return { content: [{ type: "text", text }] };
             });
@@ -108,7 +116,7 @@ export class PokemonMCP extends McpAgent {
 
     async destroy() {
         const env = this.env as Env;
-        trackSession(env, "disconnect", this.sessionId, "mcp");
+        trackSession(env, "disconnect", this.sessionId, "mcp", "mcp");
     }
 }
 
@@ -142,7 +150,7 @@ export default {
 
             // Use client-provided session ID to group tool calls from the same conversation
             const restSessionId = request.headers.get("X-Session-Id") || crypto.randomUUID();
-            trackSession(env, "connect", restSessionId, "rest");
+            trackSession(env, "connect", restSessionId, "rest", "rest");
 
             try {
                 const body = (await request.json()) as {
@@ -192,6 +200,7 @@ export default {
                         restSuccess,
                         restResponseTime,
                         restSessionId,
+                        "rest",
                     );
                 }
 
@@ -630,6 +639,7 @@ User's Question: ${message}`;
                     cacheReadTokens: usage?.cache_read_input_tokens ?? 0,
                     teamSize: team.length,
                     responseTimeMs: Math.round(performance.now() - aiChatStart),
+                    source: "mcp",
                 });
 
                 // Validate any ACTION blocks in the response using our MCP tools

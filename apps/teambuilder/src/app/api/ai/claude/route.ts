@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import {
     buildSystemPrompt,
     buildUserMessage,
@@ -56,6 +56,8 @@ export async function POST(request: Request) {
             format,
         );
 
+        const requestStart = performance.now();
+
         const response = await fetch("https://api.anthropic.com/v1/messages", {
             method: "POST",
             headers: {
@@ -93,6 +95,7 @@ export async function POST(request: Request) {
 
         const data = await response.json();
         const content = data.content?.[0]?.text || "";
+        const responseTimeMs = Math.round(performance.now() - requestStart);
 
         // Log usage data for observability (captured by Cloudflare Logs)
         if (data.usage) {
@@ -108,9 +111,38 @@ export async function POST(request: Request) {
                     outputTokens: data.usage.output_tokens ?? 0,
                     cacheCreationInputTokens: data.usage.cache_creation_input_tokens ?? 0,
                     cacheReadInputTokens: data.usage.cache_read_input_tokens ?? 0,
+                    responseTimeMs,
                     timestamp: Date.now(),
                 }),
             );
+
+            // Forward usage to MCP Worker analytics
+            after(async () => {
+                const mcpUrl = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
+                try {
+                    const trackResp = await fetch(`${mcpUrl}/admin/api/track-ai`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            format,
+                            personality: personalityId,
+                            mode,
+                            thinking: false,
+                            inputTokens: data.usage.input_tokens ?? 0,
+                            outputTokens: data.usage.output_tokens ?? 0,
+                            cacheCreationTokens: data.usage.cache_creation_input_tokens ?? 0,
+                            cacheReadTokens: data.usage.cache_read_input_tokens ?? 0,
+                            teamSize: (team as TeamPokemon[]).length,
+                            responseTimeMs,
+                            source: "web",
+                        }),
+                        signal: AbortSignal.timeout(5000),
+                    });
+                    console.log(`[Analytics] track-ai response: ${trackResp.status}`);
+                } catch (err) {
+                    console.error("[Analytics] Failed to forward usage:", err);
+                }
+            });
         }
 
         return NextResponse.json({ content });

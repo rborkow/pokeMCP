@@ -19,6 +19,11 @@ interface OverviewData {
     sessions: {
         connections: number;
     };
+    aiBySource: Array<{
+        source: string;
+        total: number;
+        cost_usd: number;
+    }>;
 }
 
 function formatNumber(n: number | undefined): string {
@@ -39,6 +44,15 @@ function formatMs(n: number | undefined): string {
     return `${Math.round(n)}ms`;
 }
 
+/** Build a compact source summary like "3 web, 1 mcp" */
+function formatSourceSummary(sources: OverviewData["aiBySource"] | undefined): string {
+    if (!sources || sources.length === 0) return "";
+    return sources
+        .filter((s) => s.total > 0)
+        .map((s) => `${s.total} ${s.source || "unknown"}`)
+        .join(", ");
+}
+
 export function OverviewCards({ range }: { range: string }) {
     const { data, loading, error } = useAdminData<OverviewData>("overview", range);
 
@@ -52,6 +66,8 @@ export function OverviewCards({ range }: { range: string }) {
         );
     }
 
+    const sourceSummary = formatSourceSummary(data?.aiBySource);
+
     const cards = [
         {
             title: "Tool Calls",
@@ -63,9 +79,11 @@ export function OverviewCards({ range }: { range: string }) {
         {
             title: "AI Chats",
             value: formatNumber(data?.aiChat?.total),
-            subtitle: data?.aiChat?.avg_response_ms
-                ? `avg ${formatMs(data.aiChat.avg_response_ms)}`
-                : "No data",
+            subtitle: sourceSummary
+                ? sourceSummary
+                : data?.aiChat?.avg_response_ms
+                  ? `avg ${formatMs(data.aiChat.avg_response_ms)}`
+                  : "No data",
         },
         {
             title: "AI Cost",
