@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { ChatMessage, TeamAction, AIProvider } from "@/types/chat";
 import { type PersonalityId, DEFAULT_PERSONALITY } from "@/lib/ai/personalities";
+import { mcpClient } from "@/lib/mcp-client";
 
 interface ChatState {
     messages: ChatMessage[];
@@ -105,6 +106,8 @@ export const useChatStore = create<ChatState>()(
                 if (abortController) {
                     abortController.abort();
                 }
+                // Reset MCP session so new conversations get a fresh session ID
+                mcpClient.resetSession();
                 set({
                     messages: [],
                     pendingAction: null,

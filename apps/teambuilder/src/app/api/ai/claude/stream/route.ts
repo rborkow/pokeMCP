@@ -154,6 +154,9 @@ export async function POST(request: NextRequest) {
             cacheReadInputTokens: 0,
         };
 
+        // Track response time from stream start
+        const streamStartTime = performance.now();
+
         // Create Anthropic client and stream
         const client = new Anthropic({ apiKey });
 
@@ -280,7 +283,7 @@ export async function POST(request: NextRequest) {
                     // Must await — unawaited fetches get killed when the isolate shuts down
                     const mcpUrl = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
                     try {
-                        await fetch(`${mcpUrl}/admin/api/track-ai`, {
+                        const trackResp = await fetch(`${mcpUrl}/admin/api/track-ai`, {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({
@@ -293,9 +296,15 @@ export async function POST(request: NextRequest) {
                                 cacheCreationTokens: usageLog.cacheCreationInputTokens,
                                 cacheReadTokens: usageLog.cacheReadInputTokens,
                                 teamSize: usageLog.teamSize,
-                                responseTimeMs: 0,
+                                responseTimeMs: Math.round(
+                                    performance.now() - streamStartTime,
+                                ),
                             }),
+                            signal: AbortSignal.timeout(5000),
                         });
+                        console.log(
+                            `[Analytics] track-ai response: ${trackResp.status}`,
+                        );
                     } catch (err) {
                         console.error("[Analytics] Failed to forward usage:", err);
                     }

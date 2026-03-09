@@ -39,7 +39,7 @@ function getCorsHeaders(request: Request): Record<string, string> {
     return {
         "Access-Control-Allow-Origin": allowedOrigin,
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Headers": "Content-Type, X-Session-Id",
         "Access-Control-Max-Age": "86400", // Cache preflight for 24 hours
         Vary: "Origin", // Important for caching
     };
@@ -140,8 +140,8 @@ export default {
                 });
             }
 
-            // Track REST session (no Durable Object involved)
-            const restSessionId = crypto.randomUUID();
+            // Use client-provided session ID to group tool calls from the same conversation
+            const restSessionId = request.headers.get("X-Session-Id") || crypto.randomUUID();
             trackSession(env, "connect", restSessionId, "rest");
 
             try {
@@ -185,7 +185,14 @@ export default {
                 } finally {
                     const restResponseTime = Math.round(performance.now() - restStartTime);
                     const restFormat = typeof args?.format === "string" ? args.format : undefined;
-                    trackToolCall(env, tool, restFormat, restSuccess, restResponseTime, restSessionId);
+                    trackToolCall(
+                        env,
+                        tool,
+                        restFormat,
+                        restSuccess,
+                        restResponseTime,
+                        restSessionId,
+                    );
                 }
 
                 return new Response(
