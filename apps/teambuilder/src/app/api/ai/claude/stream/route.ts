@@ -273,7 +273,6 @@ export async function POST(request: NextRequest) {
                     // Wait for the stream to complete — the returned message has
                     // authoritative usage data (more reliable than event-based capture)
                     const finalMsg = await stream.finalMessage();
-                    const usage = finalMsg.usage as Record<string, number>;
 
                     const usageData = {
                         format,
@@ -281,10 +280,11 @@ export async function POST(request: NextRequest) {
                         mode,
                         thinkingEnabled: useThinking,
                         teamSize: (team as TeamPokemon[]).length,
-                        inputTokens: usage.input_tokens ?? 0,
-                        outputTokens: usage.output_tokens ?? 0,
-                        cacheCreationInputTokens: usage.cache_creation_input_tokens ?? 0,
-                        cacheReadInputTokens: usage.cache_read_input_tokens ?? 0,
+                        inputTokens: finalMsg.usage.input_tokens ?? 0,
+                        outputTokens: finalMsg.usage.output_tokens ?? 0,
+                        cacheCreationInputTokens:
+                            finalMsg.usage.cache_creation_input_tokens ?? 0,
+                        cacheReadInputTokens: finalMsg.usage.cache_read_input_tokens ?? 0,
                         responseTimeMs: Math.round(performance.now() - streamStartTime),
                     };
 
