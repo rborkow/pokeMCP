@@ -7,6 +7,7 @@
  * Data point schema uses Analytics Engine's slots:
  * - indexes[0]: event type ("tool_call", "ai_chat", "session")
  * - blobs[0-4]: string dimensions (tool name, format, etc.)
+ * - blob5 (tool_call, ai_chat) / blob4 (session): source tag ("web", "mcp", "rest")
  * - doubles[0-6]: numeric metrics (tokens, response time, cost, etc.)
  */
 
@@ -35,6 +36,9 @@ export function estimateCost(tokens: {
     );
 }
 
+/** Valid source tags for tracking */
+export type TrackingSource = "web" | "mcp" | "rest";
+
 /**
  * Track a tool call event.
  * Fire-and-forget — writeDataPoint is synchronous.
@@ -46,6 +50,7 @@ export function trackToolCall(
     success: boolean,
     responseTimeMs: number,
     sessionId?: string,
+    source?: TrackingSource,
 ): void {
     if (!env.ANALYTICS) {
         console.warn("[Analytics] SKIP tool_call: ANALYTICS binding missing");
@@ -54,10 +59,12 @@ export function trackToolCall(
 
     env.ANALYTICS.writeDataPoint({
         indexes: ["tool_call"],
-        blobs: [toolName, format ?? "", success ? "1" : "0", sessionId ?? ""],
+        blobs: [toolName, format ?? "", success ? "1" : "0", sessionId ?? "", source ?? ""],
         doubles: [responseTimeMs],
     });
-    console.log(`[Analytics] tool_call written: ${toolName} (${format ?? "no-format"})`);
+    console.log(
+        `[Analytics] tool_call written: ${toolName} (${format ?? "no-format"}) [${source ?? "unknown"}]`,
+    );
 }
 
 /**
@@ -77,6 +84,7 @@ export function trackAIChat(
         cacheReadTokens: number;
         teamSize: number;
         responseTimeMs: number;
+        source?: TrackingSource;
     },
 ): void {
     if (!env.ANALYTICS) {
@@ -93,7 +101,13 @@ export function trackAIChat(
 
     env.ANALYTICS.writeDataPoint({
         indexes: ["ai_chat"],
-        blobs: [data.format, data.personality, data.mode, data.thinking ? "1" : "0"],
+        blobs: [
+            data.format,
+            data.personality,
+            data.mode,
+            data.thinking ? "1" : "0",
+            data.source ?? "",
+        ],
         doubles: [
             data.inputTokens,
             data.outputTokens,
@@ -104,7 +118,9 @@ export function trackAIChat(
             cost,
         ],
     });
-    console.log(`[Analytics] ai_chat written: ${data.format}/${data.personality}`);
+    console.log(
+        `[Analytics] ai_chat written: ${data.format}/${data.personality} [${data.source ?? "unknown"}]`,
+    );
 }
 
 /**
@@ -116,6 +132,7 @@ export function trackSession(
     action: "connect" | "disconnect",
     sessionId: string,
     transport: "sse" | "mcp" | "rest",
+    source?: TrackingSource,
 ): void {
     if (!env.ANALYTICS) {
         console.warn("[Analytics] SKIP session: ANALYTICS binding missing");
@@ -124,8 +141,8 @@ export function trackSession(
 
     env.ANALYTICS.writeDataPoint({
         indexes: ["session"],
-        blobs: [action, sessionId, transport],
+        blobs: [action, sessionId, transport, source ?? ""],
         doubles: [],
     });
-    console.log(`[Analytics] session written: ${action}`);
+    console.log(`[Analytics] session written: ${action} [${source ?? "unknown"}]`);
 }

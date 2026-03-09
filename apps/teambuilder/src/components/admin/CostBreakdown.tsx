@@ -23,6 +23,11 @@ interface CostData {
         requests: number;
         cost_usd: number;
     }>;
+    bySource: Array<{
+        source: string;
+        requests: number;
+        cost_usd: number;
+    }>;
     cacheHitRate: number;
 }
 
@@ -71,6 +76,30 @@ export function CostBreakdown({ range }: { range: string }) {
                                 {((data?.cacheHitRate ?? 0) * 100).toFixed(1)}%
                             </span>
                         </div>
+
+                        {/* Cost by source */}
+                        {data?.bySource && data.bySource.length > 0 && (
+                            <div>
+                                <h4 className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">
+                                    By Source
+                                </h4>
+                                <div className="space-y-1.5">
+                                    {data.bySource.map((s) => (
+                                        <div
+                                            key={s.source}
+                                            className="flex items-center justify-between text-sm"
+                                        >
+                                            <span className="capitalize">
+                                                {s.source || "unknown"}
+                                            </span>
+                                            <span className="text-muted-foreground">
+                                                {formatCost(s.cost_usd)} ({s.requests} req)
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
 
                         {/* Cost by format */}
                         {data?.byFormat && data.byFormat.length > 0 && (
