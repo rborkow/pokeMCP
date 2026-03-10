@@ -20,6 +20,7 @@ declare namespace Cloudflare {
 		CLOUDFLARE_API_TOKEN?: string; // Optional - for Analytics Engine queries
 		CLOUDFLARE_ACCOUNT_ID?: string; // Optional - for Analytics Engine queries
 		CF_ACCESS_TEAM_DOMAIN?: string; // Optional - for Cloudflare Access JWT validation
+		AI_GATEWAY_ID?: string; // Optional - routes Claude calls through AI Gateway for automatic usage/cost tracking
 	}
 }
 interface Env extends Cloudflare.Env {}

@@ -1,5 +1,3 @@
-import { trackAIChat } from "./analytics.js";
-
 /**
  * Admin API endpoints for usage monitoring dashboard
  *
@@ -415,57 +413,6 @@ async function handleSessions(env: Env, url: URL): Promise<Response> {
     return jsonResponse({ range, sessions: result.data });
 }
 
-// --- Internal tracking endpoint (called by teambuilder) ---
-
-interface TrackAIRequest {
-    format: string;
-    personality: string;
-    mode: string;
-    thinking: boolean;
-    inputTokens: number;
-    outputTokens: number;
-    cacheCreationTokens: number;
-    cacheReadTokens: number;
-    teamSize: number;
-    responseTimeMs: number;
-    source?: string;
-}
-
-async function handleTrackAI(request: Request, env: Env): Promise<Response> {
-    if (request.method !== "POST") {
-        return jsonResponse({ error: "Method not allowed" }, 405);
-    }
-
-    try {
-        const data: TrackAIRequest = await request.json();
-        console.log("[Admin] track-ai received:", JSON.stringify(data));
-
-        const source =
-            data.source === "web" || data.source === "mcp" || data.source === "rest"
-                ? data.source
-                : "web";
-
-        trackAIChat(env, {
-            format: data.format || "unknown",
-            personality: data.personality || "unknown",
-            mode: data.mode || "singles",
-            thinking: data.thinking || false,
-            inputTokens: data.inputTokens || 0,
-            outputTokens: data.outputTokens || 0,
-            cacheCreationTokens: data.cacheCreationTokens || 0,
-            cacheReadTokens: data.cacheReadTokens || 0,
-            teamSize: data.teamSize || 0,
-            responseTimeMs: data.responseTimeMs || 0,
-            source,
-        });
-
-        return jsonResponse({ ok: true });
-    } catch (error) {
-        console.error("[Admin] Track AI error:", error);
-        return jsonResponse({ error: "Invalid request" }, 400);
-    }
-}
-
 // --- Diagnostics endpoint ---
 
 async function handleDiagnostics(env: Env): Promise<Response> {
@@ -565,12 +512,7 @@ export async function handleAdminRequest(request: Request, env: Env): Promise<Re
     const url = new URL(request.url);
     const path = url.pathname.replace("/admin/api/", "").replace(/\/$/, "");
 
-    // Internal tracking endpoint — no JWT required (server-to-server from teambuilder)
-    if (path === "track-ai") {
-        return handleTrackAI(request, env);
-    }
-
-    // All other admin endpoints require Cloudflare Access JWT
+    // All admin endpoints require Cloudflare Access JWT
     const jwtPayload = await validateAccessJwt(request, env);
     if (!jwtPayload) {
         return jsonResponse({ error: "Unauthorized" }, 401);

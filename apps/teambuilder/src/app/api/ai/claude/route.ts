@@ -1,4 +1,4 @@
-import { NextResponse, after } from "next/server";
+import { NextResponse } from "next/server";
 import {
     buildSystemPrompt,
     buildUserMessage,
@@ -58,12 +58,21 @@ export async function POST(request: Request) {
 
         const requestStart = performance.now();
 
-        const response = await fetch("https://api.anthropic.com/v1/messages", {
+        // Route through AI Gateway if configured (automatic cost/token tracking)
+        const gatewayUrl = process.env.CLOUDFLARE_AI_GATEWAY_URL;
+        const apiUrl = gatewayUrl
+            ? `${gatewayUrl}/v1/messages`
+            : "https://api.anthropic.com/v1/messages";
+
+        const response = await fetch(apiUrl, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "x-api-key": apiKey,
                 "anthropic-version": "2023-06-01",
+                ...(gatewayUrl && {
+                    "cf-aig-metadata": JSON.stringify({ source: "web" }),
+                }),
             },
             body: JSON.stringify({
                 model: "claude-sonnet-4-6",
@@ -97,7 +106,7 @@ export async function POST(request: Request) {
         const content = data.content?.[0]?.text || "";
         const responseTimeMs = Math.round(performance.now() - requestStart);
 
-        // Log usage data for observability (captured by Cloudflare Logs)
+        // Log usage for observability (AI Gateway tracks cost/tokens automatically)
         if (data.usage) {
             console.log(
                 JSON.stringify({
@@ -106,7 +115,6 @@ export async function POST(request: Request) {
                     personality: personalityId,
                     mode,
                     teamSize: (team as TeamPokemon[]).length,
-                    thinkingEnabled: false,
                     inputTokens: data.usage.input_tokens ?? 0,
                     outputTokens: data.usage.output_tokens ?? 0,
                     cacheCreationInputTokens: data.usage.cache_creation_input_tokens ?? 0,
@@ -115,34 +123,6 @@ export async function POST(request: Request) {
                     timestamp: Date.now(),
                 }),
             );
-
-            // Forward usage to MCP Worker analytics
-            after(async () => {
-                const mcpUrl = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
-                try {
-                    const trackResp = await fetch(`${mcpUrl}/admin/api/track-ai`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            format,
-                            personality: personalityId,
-                            mode,
-                            thinking: false,
-                            inputTokens: data.usage.input_tokens ?? 0,
-                            outputTokens: data.usage.output_tokens ?? 0,
-                            cacheCreationTokens: data.usage.cache_creation_input_tokens ?? 0,
-                            cacheReadTokens: data.usage.cache_read_input_tokens ?? 0,
-                            teamSize: (team as TeamPokemon[]).length,
-                            responseTimeMs,
-                            source: "web",
-                        }),
-                        signal: AbortSignal.timeout(5000),
-                    });
-                    console.log(`[Analytics] track-ai response: ${trackResp.status}`);
-                } catch (err) {
-                    console.error("[Analytics] Failed to forward usage:", err);
-                }
-            });
         }
 
         return NextResponse.json({ content });
