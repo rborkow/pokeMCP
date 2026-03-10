@@ -14,10 +14,6 @@ interface StreamingTextProps {
 export function StreamingText({ content }: StreamingTextProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const rafRef = useRef<number>(undefined);
-    const contentRef = useRef(content);
-
-    // Keep ref in sync
-    contentRef.current = content;
 
     useEffect(() => {
         if (rafRef.current) {
@@ -30,7 +26,7 @@ export function StreamingText({ content }: StreamingTextProps) {
 
             // Build DOM safely without innerHTML
             const fragment = document.createDocumentFragment();
-            const text = contentRef.current;
+            const text = content;
 
             // Split by newlines, create text nodes and <br> elements
             const lines = text.split("\n");
