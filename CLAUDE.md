@@ -97,6 +97,7 @@ npm run tail:production
   - `STRATEGY_DOCS`: Raw strategy documents (chunks) for RAG
 - **Vectorize**: Vector database for semantic search (pokemon-strategy-index)
 - **AI Workers**: Text embeddings for RAG (@cf/baai/bge-base-en-v1.5)
+- **AI Gateway**: Proxy for Anthropic API calls — automatic token/cost tracking, request logging, caching (gateway ID: `pokemcp`)
 - **R2 Bucket**: pokemcp-interaction-logs for anonymized fine-tuning data
 - **Scheduled Triggers**: Weekly cron job (Sunday 3 AM) for content ingestion
 

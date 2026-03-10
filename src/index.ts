@@ -584,15 +584,23 @@ User's Question: ${message}`;
                     );
                 }
 
-                // Call Claude Sonnet 4.6
-                console.log("Using Claude Sonnet 4.6 for AI chat");
+                // Call Claude Sonnet 4.6 (via AI Gateway if configured)
+                const aiGatewayId = env.AI_GATEWAY_ID;
+                const claudeApiUrl =
+                    aiGatewayId && env.CLOUDFLARE_ACCOUNT_ID
+                        ? `https://gateway.ai.cloudflare.com/v1/${env.CLOUDFLARE_ACCOUNT_ID}/${aiGatewayId}/anthropic/v1/messages`
+                        : "https://api.anthropic.com/v1/messages";
+                console.log(`Using Claude Sonnet 4.6 for AI chat (gateway=${!!aiGatewayId})`);
                 const aiChatStart = performance.now();
-                const claudeResponse = await fetch("https://api.anthropic.com/v1/messages", {
+                const claudeResponse = await fetch(claudeApiUrl, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                         "x-api-key": env.ANTHROPIC_API_KEY,
                         "anthropic-version": "2023-06-01",
+                        ...(aiGatewayId && {
+                            "cf-aig-metadata": JSON.stringify({ source: "mcp" }),
+                        }),
                     },
                     body: JSON.stringify({
                         model: "claude-sonnet-4-6",

@@ -61,6 +61,7 @@ src/
 |----------|----------|---------|
 | `NEXT_PUBLIC_MCP_URL` | No | `https://api.pokemcp.com` |
 | `ANTHROPIC_API_KEY` | Yes (for AI) | — |
+| `CLOUDFLARE_AI_GATEWAY_URL` | No | Direct Anthropic API |
 
 ## Testing
 

@@ -1,5 +1,5 @@
-import { type NextRequest, after } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
+import type { NextRequest } from "next/server";
 import {
     buildSystemPrompt,
     buildUserMessage,
@@ -144,8 +144,17 @@ export async function POST(request: NextRequest) {
         // Track response time from stream start
         const streamStartTime = performance.now();
 
-        // Create Anthropic client and stream
-        const client = new Anthropic({ apiKey });
+        // Create Anthropic client — route through AI Gateway if configured
+        const gatewayUrl = process.env.CLOUDFLARE_AI_GATEWAY_URL;
+        const client = new Anthropic({
+            apiKey,
+            ...(gatewayUrl && {
+                baseURL: gatewayUrl,
+                defaultHeaders: {
+                    "cf-aig-metadata": JSON.stringify({ source: "web" }),
+                },
+            }),
+        });
 
         const stream = client.messages.stream(
             {
@@ -172,34 +181,6 @@ export async function POST(request: NextRequest) {
         let toolInputSnapshot: unknown = null;
         let isInThinkingBlock = false;
         let isInToolBlock = false;
-
-        // Promise that resolves with usage data once the stream completes
-        let resolveUsage: (data: {
-            format: string;
-            personality: string;
-            mode: string;
-            thinkingEnabled: boolean;
-            teamSize: number;
-            inputTokens: number;
-            outputTokens: number;
-            cacheCreationInputTokens: number;
-            cacheReadInputTokens: number;
-            responseTimeMs: number;
-        }) => void;
-        const usageReady = new Promise<{
-            format: string;
-            personality: string;
-            mode: string;
-            thinkingEnabled: boolean;
-            teamSize: number;
-            inputTokens: number;
-            outputTokens: number;
-            cacheCreationInputTokens: number;
-            cacheReadInputTokens: number;
-            responseTimeMs: number;
-        }>((resolve) => {
-            resolveUsage = resolve;
-        });
 
         const encoder = new TextEncoder();
 
@@ -270,30 +251,26 @@ export async function POST(request: NextRequest) {
                         toolInputSnapshot = jsonSnapshot;
                     });
 
-                    // Wait for the stream to complete — the returned message has
-                    // authoritative usage data (more reliable than event-based capture)
+                    // Wait for stream to complete (AI Gateway tracks tokens/costs automatically)
                     const finalMsg = await stream.finalMessage();
 
-                    const usageData = {
-                        format,
-                        personality: personalityId,
-                        mode,
-                        thinkingEnabled: useThinking,
-                        teamSize: (team as TeamPokemon[]).length,
-                        inputTokens: finalMsg.usage.input_tokens ?? 0,
-                        outputTokens: finalMsg.usage.output_tokens ?? 0,
-                        cacheCreationInputTokens:
-                            finalMsg.usage.cache_creation_input_tokens ?? 0,
-                        cacheReadInputTokens: finalMsg.usage.cache_read_input_tokens ?? 0,
-                        responseTimeMs: Math.round(performance.now() - streamStartTime),
-                    };
-
                     console.log(
-                        JSON.stringify({ type: "ai_usage", ...usageData, timestamp: Date.now() }),
+                        JSON.stringify({
+                            type: "ai_usage",
+                            format,
+                            personality: personalityId,
+                            mode,
+                            thinkingEnabled: useThinking,
+                            teamSize: (team as TeamPokemon[]).length,
+                            inputTokens: finalMsg.usage.input_tokens ?? 0,
+                            outputTokens: finalMsg.usage.output_tokens ?? 0,
+                            cacheCreationInputTokens:
+                                finalMsg.usage.cache_creation_input_tokens ?? 0,
+                            cacheReadInputTokens: finalMsg.usage.cache_read_input_tokens ?? 0,
+                            responseTimeMs: Math.round(performance.now() - streamStartTime),
+                            timestamp: Date.now(),
+                        }),
                     );
-
-                    // Resolve the usage promise so after() can send it to analytics
-                    resolveUsage!(usageData);
 
                     controller.enqueue(encoder.encode("data: [DONE]\n\n"));
                     controller.close();
@@ -316,36 +293,6 @@ export async function POST(request: NextRequest) {
             cancel() {
                 stream.abort();
             },
-        });
-
-        // Schedule analytics tracking via after() — runs after the response is sent,
-        // guaranteed to complete even if the isolate would otherwise shut down
-        after(async () => {
-            try {
-                const usage = await usageReady;
-                const mcpUrl = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
-                const trackResp = await fetch(`${mcpUrl}/admin/api/track-ai`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        format: usage.format,
-                        personality: usage.personality,
-                        mode: usage.mode,
-                        thinking: usage.thinkingEnabled,
-                        inputTokens: usage.inputTokens,
-                        outputTokens: usage.outputTokens,
-                        cacheCreationTokens: usage.cacheCreationInputTokens,
-                        cacheReadTokens: usage.cacheReadInputTokens,
-                        teamSize: usage.teamSize,
-                        responseTimeMs: usage.responseTimeMs,
-                        source: "web",
-                    }),
-                    signal: AbortSignal.timeout(5000),
-                });
-                console.log(`[Analytics] track-ai response: ${trackResp.status}`);
-            } catch (err) {
-                console.error("[Analytics] Failed to forward usage:", err);
-            }
         });
 
         return new Response(readable, {
