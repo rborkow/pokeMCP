@@ -271,7 +271,7 @@ export async function streamChatMessage({
 
         // Throttle onChunk to reduce markdown re-renders
         let lastChunkTime = 0;
-        const CHUNK_THROTTLE_MS = 50;
+        const CHUNK_THROTTLE_MS = 80;
 
         while (true) {
             const { done, value } = await reader.read();

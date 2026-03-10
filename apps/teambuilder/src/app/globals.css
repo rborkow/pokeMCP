@@ -362,6 +362,13 @@
     @apply text-primary underline underline-offset-2;
   }
 
+  .chat-markdown.streaming::after {
+    content: '▊';
+    display: inline;
+    animation: blink-cursor 0.8s step-end infinite;
+    color: var(--primary);
+  }
+
   .thinking-collapsible {
     @apply rounded-lg bg-muted/50 border border-border/50 mb-3 overflow-hidden;
   }
@@ -459,6 +466,11 @@
 @keyframes slide-up {
   0% { transform: translateY(20px); opacity: 0; }
   100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* Scrollbar styling for dark theme */

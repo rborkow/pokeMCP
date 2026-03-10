@@ -63,10 +63,16 @@ export const useChatStore = create<ChatState>()(
             },
 
             updateMessage: (id, updates) => {
+                // Guard: skip no-op updates to prevent unnecessary re-renders
+                const msg = get().messages.find((m) => m.id === id);
+                if (msg) {
+                    const keys = Object.keys(updates) as (keyof ChatMessage)[];
+                    const hasChange = keys.some((k) => msg[k] !== updates[k]);
+                    if (!hasChange) return;
+                }
+
                 set((state) => ({
-                    messages: state.messages.map((msg) =>
-                        msg.id === id ? { ...msg, ...updates } : msg,
-                    ),
+                    messages: state.messages.map((m) => (m.id === id ? { ...m, ...updates } : m)),
                 }));
             },
 

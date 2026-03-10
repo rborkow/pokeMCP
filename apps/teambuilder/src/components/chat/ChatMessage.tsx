@@ -6,6 +6,7 @@ import { Bot, User, Loader2, Wrench } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ThinkingCollapsible } from "./ThinkingCollapsible";
+import { StreamingText } from "./StreamingText";
 
 interface ChatMessageProps {
     message: ChatMessageType;
@@ -137,6 +138,8 @@ export const ChatMessage = memo(function ChatMessage({ message }: ChatMessagePro
                     phase={message.streamingPhase}
                     buildingStatus={message.buildingStatus}
                 />
+            ) : message.isLoading && message.content ? (
+                <StreamingText content={message.content} />
             ) : message.content ? (
                 <div className="chat-markdown text-sm">{renderedContent}</div>
             ) : null}
