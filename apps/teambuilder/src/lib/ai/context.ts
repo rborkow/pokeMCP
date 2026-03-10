@@ -37,6 +37,23 @@ SINGLES-SPECIFIC GUIDANCE (This is a 6v6 format):
 
 const MCP_URL = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
 
+// Simple in-memory cache for MCP responses that don't change within a session.
+// Edge isolates are short-lived so a 5-minute TTL is plenty to avoid redundant
+// fetches across messages in the same conversation without stale data risk.
+const mcpCache = new Map<string, { data: string; expiresAt: number }>();
+const CACHE_TTL_MS = 5 * 60_000; // 5 minutes
+
+function getCached(key: string): string | undefined {
+    const entry = mcpCache.get(key);
+    if (entry && Date.now() < entry.expiresAt) return entry.data;
+    mcpCache.delete(key);
+    return undefined;
+}
+
+function setCache(key: string, data: string): void {
+    mcpCache.set(key, { data, expiresAt: Date.now() + CACHE_TTL_MS });
+}
+
 /**
  * Fetch teammate suggestions for Pokemon on the team
  * Returns analysis of common partners that aren't already on the team
@@ -44,51 +61,58 @@ const MCP_URL = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
 export async function fetchTeammateAnalysis(team: TeamPokemon[], format: string): Promise<string> {
     if (team.length === 0) return "";
 
-    // Only fetch for up to 3 Pokemon to avoid too many requests
+    // Fetch for up to 3 Pokemon in parallel
     const pokemonToCheck = team.slice(0, 3);
     const currentTeamNames = new Set(team.map((p) => p.pokemon.toLowerCase()));
 
     const allSuggestions: Map<string, { count: number; from: string[] }> = new Map();
 
-    for (const mon of pokemonToCheck) {
-        try {
-            const response = await fetch(`${MCP_URL}/api/tools`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    tool: "get_teammates",
-                    args: { pokemon: mon.pokemon, format, limit: 8 },
-                }),
-            });
+    const results = await Promise.all(
+        pokemonToCheck.map(async (mon) => {
+            const cacheKey = `teammates:${mon.pokemon}:${format}`;
+            const cached = getCached(cacheKey);
+            if (cached !== undefined) return { pokemon: mon.pokemon, text: cached };
 
-            if (response.ok) {
-                const data = await response.json();
-                const text = data.result?.content?.[0]?.text || "";
+            try {
+                const response = await fetch(`${MCP_URL}/api/tools`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        tool: "get_teammates",
+                        args: { pokemon: mon.pokemon, format, limit: 8 },
+                    }),
+                });
 
-                // Parse teammate names from the response (format: "- **Name**: X.X%")
-                const teammateRegex = /\*\*([^*]+)\*\*:\s*(\d+(?:\.\d+)?)/g;
-                let match;
-                while ((match = teammateRegex.exec(text)) !== null) {
-                    const teammateName = match[0].split("**")[1];
-                    const usage = Number.parseFloat(match[2]);
-
-                    // Skip if already on team
-                    if (currentTeamNames.has(teammateName.toLowerCase())) continue;
-
-                    // Only track teammates with >5% usage
-                    if (usage < 5) continue;
-
-                    const existing = allSuggestions.get(teammateName);
-                    if (existing) {
-                        existing.count++;
-                        existing.from.push(mon.pokemon);
-                    } else {
-                        allSuggestions.set(teammateName, { count: 1, from: [mon.pokemon] });
-                    }
+                if (response.ok) {
+                    const data = await response.json();
+                    const text = data.result?.content?.[0]?.text || "";
+                    setCache(cacheKey, text);
+                    return { pokemon: mon.pokemon, text };
                 }
+            } catch (e) {
+                console.error(`Failed to fetch teammates for ${mon.pokemon}:`, e);
             }
-        } catch (e) {
-            console.error(`Failed to fetch teammates for ${mon.pokemon}:`, e);
+            return { pokemon: mon.pokemon, text: "" };
+        }),
+    );
+
+    for (const { pokemon, text } of results) {
+        const teammateRegex = /\*\*([^*]+)\*\*:\s*(\d+(?:\.\d+)?)/g;
+        let match;
+        while ((match = teammateRegex.exec(text)) !== null) {
+            const teammateName = match[0].split("**")[1];
+            const usage = Number.parseFloat(match[2]);
+
+            if (currentTeamNames.has(teammateName.toLowerCase())) continue;
+            if (usage < 5) continue;
+
+            const existing = allSuggestions.get(teammateName);
+            if (existing) {
+                existing.count++;
+                existing.from.push(pokemon);
+            } else {
+                allSuggestions.set(teammateName, { count: 1, from: [pokemon] });
+            }
         }
     }
 
@@ -133,6 +157,10 @@ const COMMON_POKEMON = [
  * Fetch meta threats from MCP server
  */
 export async function fetchMetaThreats(format: string): Promise<string> {
+    const cacheKey = `meta_threats:${format}`;
+    const cached = getCached(cacheKey);
+    if (cached !== undefined) return cached;
+
     try {
         const response = await fetch(`${MCP_URL}/api/tools`, {
             method: "POST",
@@ -144,7 +172,9 @@ export async function fetchMetaThreats(format: string): Promise<string> {
         });
         if (response.ok) {
             const data = await response.json();
-            return data.result?.content?.[0]?.text || "";
+            const text = data.result?.content?.[0]?.text || "";
+            setCache(cacheKey, text);
+            return text;
         }
     } catch (e) {
         console.error("Failed to fetch meta threats:", e);
@@ -163,29 +193,35 @@ export async function fetchPopularSetsContext(message: string, format: string): 
         }
     }
 
-    let context = "";
-    for (const pokemon of pokemonMentioned.slice(0, 3)) {
-        try {
-            const response = await fetch(`${MCP_URL}/api/tools`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    tool: "get_popular_sets",
-                    args: { pokemon, format },
-                }),
-            });
-            if (response.ok) {
-                const data = await response.json();
-                const text = data.result?.content?.[0]?.text || "";
-                if (text) {
-                    context += `\n\n${text}`;
+    const results = await Promise.all(
+        pokemonMentioned.slice(0, 3).map(async (pokemon) => {
+            const cacheKey = `popular_sets:${pokemon}:${format}`;
+            const cached = getCached(cacheKey);
+            if (cached !== undefined) return cached;
+
+            try {
+                const response = await fetch(`${MCP_URL}/api/tools`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        tool: "get_popular_sets",
+                        args: { pokemon, format },
+                    }),
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    const text = data.result?.content?.[0]?.text || "";
+                    setCache(cacheKey, text);
+                    return text;
                 }
+            } catch (e) {
+                console.error(`Failed to fetch sets for ${pokemon}:`, e);
             }
-        } catch (e) {
-            console.error(`Failed to fetch sets for ${pokemon}:`, e);
-        }
-    }
-    return context;
+            return "";
+        }),
+    );
+
+    return results.filter(Boolean).join("\n\n");
 }
 
 // RAG fallback format for VGC/doubles queries when exact format has no vectors
@@ -195,6 +231,10 @@ const RAG_VGC_FALLBACK = "gen9vgc2024regh";
  * Execute a single RAG query against the query_strategy MCP tool.
  */
 async function doRAGQuery(message: string, format: string): Promise<string> {
+    const cacheKey = `rag:${format}:${message.slice(0, 100)}`;
+    const cached = getCached(cacheKey);
+    if (cached !== undefined) return cached;
+
     try {
         const response = await fetch(`${MCP_URL}/api/tools`, {
             method: "POST",
@@ -211,7 +251,7 @@ async function doRAGQuery(message: string, format: string): Promise<string> {
             try {
                 const parsed = JSON.parse(text);
                 if (parsed.results && parsed.results.length > 0) {
-                    return parsed.results
+                    const result = parsed.results
                         .map(
                             (r: {
                                 content: string;
@@ -224,9 +264,12 @@ async function doRAGQuery(message: string, format: string): Promise<string> {
                             },
                         )
                         .join("\n\n");
+                    setCache(cacheKey, result);
+                    return result;
                 }
             } catch {
                 // If it's plain text, return as-is
+                setCache(cacheKey, text);
                 return text;
             }
         }
