@@ -147,8 +147,8 @@ export function ThreatDetailModal({
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        tool: "get_popular_sets",
-                        args: { pokemon, format: normalizedFormat },
+                        tool: "get_usage_stats",
+                        args: { type: "popular_sets", pokemon, format: normalizedFormat },
                     }),
                 });
 
