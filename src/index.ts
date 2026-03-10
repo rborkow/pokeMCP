@@ -599,6 +599,9 @@ User's Question: ${message}`;
                         "x-api-key": env.ANTHROPIC_API_KEY,
                         "anthropic-version": "2023-06-01",
                         ...(aiGatewayId && {
+                            ...(env.CF_AIG_TOKEN && {
+                                "cf-aig-authorization": `Bearer ${env.CF_AIG_TOKEN}`,
+                            }),
                             "cf-aig-metadata": JSON.stringify({ source: "mcp" }),
                         }),
                     },

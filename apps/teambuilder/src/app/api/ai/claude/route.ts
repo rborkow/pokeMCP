@@ -60,6 +60,7 @@ export async function POST(request: Request) {
 
         // Route through AI Gateway if configured (automatic cost/token tracking)
         const gatewayUrl = process.env.CLOUDFLARE_AI_GATEWAY_URL;
+        const gatewayToken = process.env.CF_AIG_TOKEN;
         const apiUrl = gatewayUrl
             ? `${gatewayUrl}/v1/messages`
             : "https://api.anthropic.com/v1/messages";
@@ -71,6 +72,9 @@ export async function POST(request: Request) {
                 "x-api-key": apiKey,
                 "anthropic-version": "2023-06-01",
                 ...(gatewayUrl && {
+                    ...(gatewayToken && {
+                        "cf-aig-authorization": `Bearer ${gatewayToken}`,
+                    }),
                     "cf-aig-metadata": JSON.stringify({ source: "web" }),
                 }),
             },
