@@ -109,22 +109,18 @@ export function ChatPanel() {
                 chatHistory: currentMessages,
                 signal: controller.signal,
                 onChunk: (text) => {
-                    // Throttled full-content update for markdown rendering
+                    // Throttled full-content update — sole store update path during streaming
                     useChatStore.getState().updateMessage(streamingId, {
                         content: text,
-                        isLoading: true,
-                        buildingStatus: undefined,
-                    });
-                },
-                onTextDelta: (delta) => {
-                    // Delta-based accumulation (called on every token)
-                    accumulatedContent += delta;
-                    useChatStore.getState().updateMessage(streamingId, {
-                        content: accumulatedContent,
                         isLoading: true,
                         streamingPhase: "generating",
                         buildingStatus: undefined,
                     });
+                },
+                onTextDelta: (delta) => {
+                    // Delta-based accumulation only — no store update here.
+                    // onChunk (throttled) is the sole store update path during streaming.
+                    accumulatedContent += delta;
                 },
                 onThinking: (_isThinking, thinkingText) => {
                     // Store thinking content in the message for inline display
