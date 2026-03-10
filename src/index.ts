@@ -411,18 +411,41 @@ export default {
                     `AI Chat request: "${message.substring(0, 100)}..." format=${format} team_size=${team.length}`,
                 );
 
-                // Gather relevant context based on the message
+                // Gather relevant context in parallel
                 const context: AIChatResponse["context"] = {};
+                const pokemonMentioned = detectPokemonMentions(message, 3);
 
-                // Get meta threats for context
-                try {
-                    const metaThreats = await getMetaThreats({ format, limit: 10 }, env);
-                    context.metaThreats = metaThreats;
-                } catch (e) {
-                    console.error("Failed to get meta threats:", e);
+                const [metaResult, strategyResult, ...setsResults] = await Promise.allSettled([
+                    getMetaThreats({ format, limit: 10 }, env),
+                    queryStrategy({ query: message, format, limit: 3 }, env),
+                    ...pokemonMentioned.map((p) => getPopularSets({ pokemon: p, format }, env)),
+                ]);
+
+                if (metaResult.status === "fulfilled") {
+                    context.metaThreats = metaResult.value;
                 }
 
-                // Get coverage analysis if team exists
+                if (
+                    strategyResult.status === "fulfilled" &&
+                    strategyResult.value.results?.length > 0
+                ) {
+                    context.strategy = strategyResult.value.results
+                        .map((r: { content: string }) => r.content)
+                        .join("\n\n");
+                }
+
+                let popularSetsContext = "";
+                for (const result of setsResults) {
+                    if (
+                        result.status === "fulfilled" &&
+                        result.value &&
+                        !result.value.includes("not found")
+                    ) {
+                        popularSetsContext += `\n\n${result.value}`;
+                    }
+                }
+
+                // Get coverage analysis (sync, uses bundled data)
                 if (team.length > 0) {
                     try {
                         const teamNames = team.map((p) => p.pokemon);
@@ -433,37 +456,6 @@ export default {
                         context.coverage = coverage;
                     } catch (e) {
                         console.error("Failed to get coverage:", e);
-                    }
-                }
-
-                // Get strategic content via RAG
-                try {
-                    const strategyResponse = await queryStrategy(
-                        { query: message, format, limit: 3 },
-                        env,
-                    );
-                    if (strategyResponse.results && strategyResponse.results.length > 0) {
-                        context.strategy = strategyResponse.results
-                            .map((r: { content: string }) => r.content)
-                            .join("\n\n");
-                    }
-                } catch (e) {
-                    console.error("Failed to get strategy:", e);
-                }
-
-                // Extract Pokemon mentioned in the message to fetch their popular sets
-                const pokemonMentioned = detectPokemonMentions(message, 3);
-
-                // Fetch popular sets for mentioned Pokemon (verified legal movesets)
-                let popularSetsContext = "";
-                for (const pokemon of pokemonMentioned) {
-                    try {
-                        const setsText = await getPopularSets({ pokemon, format }, env);
-                        if (setsText && !setsText.includes("not found")) {
-                            popularSetsContext += `\n\n${setsText}`;
-                        }
-                    } catch (e) {
-                        console.error(`Failed to fetch sets for ${pokemon}:`, e);
                     }
                 }
 
@@ -1047,13 +1039,8 @@ User's Question: ${message}`;
                         "validate_moveset",
                         "validate_team",
                         "suggest_team_coverage",
-                        "get_popular_sets",
-                        "get_meta_threats",
-                        "get_teammates",
-                        "get_checks_counters",
-                        "get_metagame_stats",
-                        "query_strategy (NEW)",
-                        "search_strategic_content (NEW)",
+                        "get_usage_stats",
+                        "query_strategy",
                     ],
                     endpoints: {
                         sse: "/sse",

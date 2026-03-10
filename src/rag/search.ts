@@ -16,24 +16,15 @@ export async function vectorSearch(
     if (pokemon) filter.pokemon = pokemon.toLowerCase();
     if (sectionType) filter.section_type = sectionType;
 
-    console.log("Searching Vectorize with filters:", JSON.stringify(filter));
-    console.log("Filter object keys:", Object.keys(filter));
-    console.log("Has filter:", Object.keys(filter).length > 0);
-
     try {
         const queryOptions = {
             topK: limit * 2, // Get more results for reranking
             filter: Object.keys(filter).length > 0 ? filter : undefined,
             returnMetadata: "all" as const,
         };
-        console.log("Query options:", JSON.stringify(queryOptions));
 
         const results = await env.VECTOR_INDEX.query(queryEmbedding, queryOptions);
-
         console.log(`Found ${results.matches.length} vector matches`);
-        if (results.matches.length > 0) {
-            console.log("Sample match metadata:", JSON.stringify(results.matches[0].metadata));
-        }
 
         return results.matches.map((match) => ({
             id: match.id,
@@ -59,34 +50,27 @@ export async function vectorSearch(
  * Enrich vector matches with full content from KV
  */
 export async function enrichWithContent(matches: VectorMatch[], env: Env): Promise<SearchResult[]> {
-    console.log(`Enriching ${matches.length} matches with content from KV`);
+    const results = await Promise.allSettled(
+        matches.map((match) => env.STRATEGY_DOCS.get(match.id, "json")),
+    );
 
     const enriched: SearchResult[] = [];
-
-    for (const match of matches) {
-        try {
-            const stored = await env.STRATEGY_DOCS.get(match.id, "json");
-
-            if (!stored || typeof stored !== "object") {
-                console.warn(`No content found in KV for ${match.id}`);
-                continue;
-            }
-
-            const data = stored as any;
-
-            enriched.push({
-                id: match.id,
-                content: data.content || "",
-                score: match.score,
-                metadata: {
-                    ...match.metadata,
-                    chunk_index: data.metadata?.chunk_index || 0,
-                    total_chunks: data.metadata?.total_chunks || 1,
-                },
-            });
-        } catch (error) {
-            console.error(`Failed to retrieve content for ${match.id}:`, error);
+    for (let i = 0; i < matches.length; i++) {
+        const result = results[i];
+        if (result.status !== "fulfilled" || !result.value || typeof result.value !== "object") {
+            continue;
         }
+        const data = result.value as any;
+        enriched.push({
+            id: matches[i].id,
+            content: data.content || "",
+            score: matches[i].score,
+            metadata: {
+                ...matches[i].metadata,
+                chunk_index: data.metadata?.chunk_index || 0,
+                total_chunks: data.metadata?.total_chunks || 1,
+            },
+        });
     }
 
     console.log(`Enriched ${enriched.length}/${matches.length} results`);

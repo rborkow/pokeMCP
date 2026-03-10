@@ -120,25 +120,30 @@ class MCPClient {
         });
     }
 
-    // Usage statistics
+    // Usage statistics (unified get_usage_stats tool)
     async getPopularSets(pokemon: string, format?: string) {
-        return this.callTool("get_popular_sets", { pokemon, format });
+        return this.callTool("get_usage_stats", { type: "popular_sets", pokemon, format });
     }
 
     async getMetaThreats(format?: string, limit = 20) {
-        return this.callTool("get_meta_threats", { format, limit });
+        return this.callTool("get_usage_stats", { type: "meta_threats", format, limit });
     }
 
     async getTeammates(pokemon: string, format?: string, limit = 10) {
-        return this.callTool("get_teammates", { pokemon, format, limit });
+        return this.callTool("get_usage_stats", { type: "teammates", pokemon, format, limit });
     }
 
     async getChecksCounters(pokemon: string, format?: string, limit = 10) {
-        return this.callTool("get_checks_counters", { pokemon, format, limit });
+        return this.callTool("get_usage_stats", {
+            type: "checks_counters",
+            pokemon,
+            format,
+            limit,
+        });
     }
 
     async getMetagameStats(format?: string) {
-        return this.callTool("get_metagame_stats", { format });
+        return this.callTool("get_usage_stats", { type: "metagame", format });
     }
 
     // RAG strategy search

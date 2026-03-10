@@ -78,8 +78,8 @@ export async function fetchTeammateAnalysis(team: TeamPokemon[], format: string)
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        tool: "get_teammates",
-                        args: { pokemon: mon.pokemon, format, limit: 8 },
+                        tool: "get_usage_stats",
+                        args: { type: "teammates", pokemon: mon.pokemon, format, limit: 8 },
                     }),
                 });
 
@@ -166,8 +166,8 @@ export async function fetchMetaThreats(format: string): Promise<string> {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                tool: "get_meta_threats",
-                args: { format, limit: 15 },
+                tool: "get_usage_stats",
+                args: { type: "meta_threats", format, limit: 15 },
             }),
         });
         if (response.ok) {
@@ -204,8 +204,8 @@ export async function fetchPopularSetsContext(message: string, format: string): 
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        tool: "get_popular_sets",
-                        args: { pokemon, format },
+                        tool: "get_usage_stats",
+                        args: { type: "popular_sets", pokemon, format },
                     }),
                 });
                 if (response.ok) {
