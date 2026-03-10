@@ -146,11 +146,15 @@ export async function POST(request: NextRequest) {
 
         // Create Anthropic client — route through AI Gateway if configured
         const gatewayUrl = process.env.CLOUDFLARE_AI_GATEWAY_URL;
+        const gatewayToken = process.env.CF_AIG_TOKEN;
         const client = new Anthropic({
             apiKey,
             ...(gatewayUrl && {
                 baseURL: gatewayUrl,
                 defaultHeaders: {
+                    ...(gatewayToken && {
+                        "cf-aig-authorization": `Bearer ${gatewayToken}`,
+                    }),
                     "cf-aig-metadata": JSON.stringify({ source: "web" }),
                 },
             }),
