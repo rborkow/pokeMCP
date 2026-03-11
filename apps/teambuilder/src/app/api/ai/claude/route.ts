@@ -81,7 +81,7 @@ export async function POST(request: Request) {
             body: JSON.stringify({
                 model: "claude-sonnet-4-6",
                 max_tokens: 1024,
-                output_config: { effort: "medium" },
+                output_config: { effort: "low" },
                 system: [
                     {
                         type: "text",
