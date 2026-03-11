@@ -173,8 +173,8 @@ export async function POST(request: NextRequest) {
                 ],
                 messages,
                 tools: TEAM_TOOLS as Anthropic.Messages.Tool[],
-                thinking: { type: "adaptive" },
-                output_config: { effort: useThinking ? "high" : "medium" },
+                ...(useThinking && { thinking: { type: "adaptive" } }),
+                output_config: { effort: useThinking ? "high" : "low" },
             },
             { signal: request.signal },
         );
