@@ -108,21 +108,40 @@ export async function refreshSharedTeamTtl(kv: KVNamespace, id: string): Promise
 }
 
 /**
- * Simple IP-based rate limiting using KV
+ * Generic IP-based rate limiting using KV
  * Returns true if the request should be allowed, false if rate limited
  */
-export async function checkRateLimit(kv: KVNamespace, ip: string): Promise<boolean> {
-    const key = `rate:share:${ip}`;
+export async function checkRateLimitGeneric(
+    kv: KVNamespace,
+    prefix: string,
+    ip: string,
+    maxRequests: number,
+    windowSeconds: number,
+): Promise<boolean> {
+    const key = `rate:${prefix}:${ip}`;
     const current = await kv.get(key, "json");
     const count = (current as number) || 0;
 
-    if (count >= RATE_LIMIT_MAX_REQUESTS) {
+    if (count >= maxRequests) {
         return false;
     }
 
     await kv.put(key, JSON.stringify(count + 1), {
-        expirationTtl: RATE_LIMIT_WINDOW_SECONDS,
+        expirationTtl: windowSeconds,
     });
 
     return true;
+}
+
+/**
+ * Simple IP-based rate limiting for team sharing
+ */
+export async function checkRateLimit(kv: KVNamespace, ip: string): Promise<boolean> {
+    return checkRateLimitGeneric(
+        kv,
+        "share",
+        ip,
+        RATE_LIMIT_MAX_REQUESTS,
+        RATE_LIMIT_WINDOW_SECONDS,
+    );
 }

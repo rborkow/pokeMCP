@@ -77,12 +77,6 @@ npx wrangler kv key put --remote --namespace-id=58525ad4ec5c454eb3e1ae7586414483
 npm run tail
 npm run tail:staging
 npm run tail:production
-
-# Test endpoints (when deployed)
-# https://<worker-url>/test-ingestion - Trigger RAG ingestion for test Pokemon
-# https://<worker-url>/test-kv - Verify KV storage access
-# https://<worker-url>/test-rag?q=your+query - Test RAG query
-# https://<worker-url>/debug-vectors - Inspect vector metadata
 ```
 
 ## Architecture

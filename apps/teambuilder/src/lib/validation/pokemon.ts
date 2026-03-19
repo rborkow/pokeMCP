@@ -130,6 +130,53 @@ export function validateMoves(moves: string[] | undefined): ValidationResult {
     return { valid: errors.length === 0, errors };
 }
 
+const VALID_ACTION_TYPES = ["add_pokemon", "replace_pokemon", "update_pokemon", "remove_pokemon"];
+
+/**
+ * Validate a modify_team tool input from Claude at runtime.
+ * Catches malformed or out-of-range values before they reach team state.
+ */
+export function validateModifyTeamInput(input: unknown): ValidationResult {
+    const errors: ValidationError[] = [];
+
+    if (!input || typeof input !== "object") {
+        return { valid: false, errors: [{ field: "input", message: "Input must be an object" }] };
+    }
+
+    const i = input as Record<string, unknown>;
+
+    if (!VALID_ACTION_TYPES.includes(i.action_type as string)) {
+        errors.push({ field: "action_type", message: `Invalid action_type: ${i.action_type}` });
+    }
+
+    if (typeof i.slot !== "number" || i.slot < 0 || i.slot > 5 || !Number.isInteger(i.slot)) {
+        errors.push({ field: "slot", message: `Slot must be integer 0-5, got ${i.slot}` });
+    }
+
+    if ((i.action_type === "add_pokemon" || i.action_type === "replace_pokemon") && !i.pokemon) {
+        errors.push({ field: "pokemon", message: "pokemon name required for add/replace" });
+    }
+
+    if (i.evs) {
+        const evResult = validateEvs(i.evs as Partial<BaseStats>);
+        errors.push(...evResult.errors);
+    }
+
+    if (i.ivs) {
+        const ivResult = validateIvs(i.ivs as Partial<BaseStats>);
+        errors.push(...ivResult.errors);
+    }
+
+    if (
+        i.move_slot !== undefined &&
+        (typeof i.move_slot !== "number" || i.move_slot < 0 || i.move_slot > 3)
+    ) {
+        errors.push({ field: "move_slot", message: "move_slot must be 0-3" });
+    }
+
+    return { valid: errors.length === 0, errors };
+}
+
 /**
  * Validate complete Pokemon data
  * Runs all validations and returns combined results

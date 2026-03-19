@@ -10,6 +10,15 @@ import type { QueryOptions, QueryResponse } from "./types.js";
 export async function queryStrategy(options: QueryOptions, env: Env): Promise<QueryResponse> {
     const startTime = Date.now();
 
+    // Guard against excessively long queries that could abuse the embedding API
+    const MAX_QUERY_LENGTH = 2000;
+    if (options.query.length > MAX_QUERY_LENGTH) {
+        console.warn(
+            `RAG query truncated from ${options.query.length} to ${MAX_QUERY_LENGTH} chars`,
+        );
+        options = { ...options, query: options.query.substring(0, MAX_QUERY_LENGTH) };
+    }
+
     console.log("=== RAG Query Started ===");
     console.log("Query:", options.query);
     console.log("Options:", {
