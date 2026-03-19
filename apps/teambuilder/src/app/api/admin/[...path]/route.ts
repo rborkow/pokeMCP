@@ -9,10 +9,27 @@ import type { NextRequest } from "next/server";
 
 const MCP_URL = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
 
+function requireAccessCredentials(request: NextRequest): Response | null {
+    const accessJwt = request.headers.get("Cf-Access-Jwt-Assertion");
+    const cookie = request.headers.get("Cookie");
+    const hasCfAuth = cookie?.includes("CF_Authorization");
+
+    if (!accessJwt && !hasCfAuth) {
+        return new Response(
+            JSON.stringify({ error: "Unauthorized - Cloudflare Access credentials required" }),
+            { status: 401, headers: { "Content-Type": "application/json" } },
+        );
+    }
+    return null;
+}
+
 export async function GET(
     request: NextRequest,
     { params }: { params: Promise<{ path: string[] }> },
 ) {
+    const unauthorized = requireAccessCredentials(request);
+    if (unauthorized) return unauthorized;
+
     const { path } = await params;
     const apiPath = path.join("/");
     const searchParams = request.nextUrl.searchParams.toString();

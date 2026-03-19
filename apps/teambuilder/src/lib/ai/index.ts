@@ -1,7 +1,11 @@
 import type { TeamPokemon, Mode } from "@/types/pokemon";
 import type { AIResponse, TeamAction, ChatMessage, StreamingPhase } from "@/types/chat";
 import type { PersonalityId } from "./personalities";
-import { type ValidationError, validatePokemonData } from "@/lib/validation/pokemon";
+import {
+    type ValidationError,
+    validateModifyTeamInput,
+    validatePokemonData,
+} from "@/lib/validation/pokemon";
 import type { ModifyTeamInput } from "./tools";
 
 /**
@@ -370,6 +374,14 @@ export async function streamChatMessage({
                             if (parsed.tool_use) {
                                 const toolUse = parsed.tool_use;
                                 if (toolUse.name === "modify_team" && toolUse.input) {
+                                    const validation = validateModifyTeamInput(toolUse.input);
+                                    if (!validation.valid) {
+                                        console.warn(
+                                            "[AI] Invalid tool input from Claude:",
+                                            validation.errors,
+                                        );
+                                        continue;
+                                    }
                                     const input = toolUse.input as ModifyTeamInput;
                                     toolCalls.push(input);
                                     // Notify about the tool use with Pokemon name

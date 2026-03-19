@@ -30,6 +30,16 @@ interface AccessJwtPayload {
 async function validateAccessJwt(request: Request, env: Env): Promise<AccessJwtPayload | null> {
     // Skip auth in development (no team domain configured)
     if (!env.CF_ACCESS_TEAM_DOMAIN) {
+        const environment = (env as unknown as Record<string, unknown>).ENVIRONMENT;
+        if (environment === "production") {
+            console.error(
+                "[Admin] CRITICAL: CF_ACCESS_TEAM_DOMAIN not set in production - denying access",
+            );
+            return null;
+        }
+        console.warn(
+            "[Admin] Auth bypassed - CF_ACCESS_TEAM_DOMAIN not configured (dev/staging mode)",
+        );
         return { iss: "dev", sub: "dev", email: "dev@localhost", exp: 0, iat: 0 };
     }
 
@@ -251,7 +261,8 @@ async function handleOverview(env: Env, url: URL): Promise<Response> {
 
 async function handleUsage(env: Env, url: URL): Promise<Response> {
     const range = parseRange(url.searchParams.get("range"));
-    const interval = url.searchParams.get("interval") || "hour";
+    const intervalParam = url.searchParams.get("interval") || "hour";
+    const interval = intervalParam === "day" ? "day" : "hour";
 
     const bucketFn = interval === "day" ? "toStartOfDay(timestamp)" : "toStartOfHour(timestamp)";
 
