@@ -61,13 +61,14 @@ export function ChatInput({
                 onClick={toggleThinking}
                 variant="ghost"
                 size="icon"
+                aria-pressed={enableThinking}
+                aria-label={enableThinking ? "Deep thinking enabled" : "Enable deep thinking"}
                 className={cn(
                     "h-10 w-10 flex-shrink-0",
                     enableThinking
                         ? "text-primary bg-primary/10 hover:bg-primary/20"
                         : "text-muted-foreground hover:text-foreground",
                 )}
-                title={enableThinking ? "Deep thinking enabled" : "Enable deep thinking"}
             >
                 <Brain className="h-4 w-4" />
             </Button>

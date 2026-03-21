@@ -35,23 +35,10 @@ export function ThreatMatrix() {
     // Parse meta threats
     const metaThreats = useMemo(() => {
         if (!metaThreatsData || typeof metaThreatsData !== "string") {
-            console.log(
-                "[ThreatMatrix] No meta threats data for format:",
-                normalizedFormat,
-                "data:",
-                metaThreatsData,
-            );
             return [];
         }
-        const parsed = parseMetaThreats(metaThreatsData);
-        console.log(
-            "[ThreatMatrix] Parsed",
-            parsed.length,
-            "threats for format:",
-            normalizedFormat,
-        );
-        return parsed;
-    }, [metaThreatsData, normalizedFormat]);
+        return parseMetaThreats(metaThreatsData);
+    }, [metaThreatsData]);
 
     // Calculate matchups (both defensive and offensive)
     const matchups = useMemo(() => {

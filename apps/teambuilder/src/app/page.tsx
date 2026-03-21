@@ -62,10 +62,10 @@ export default function Home() {
 
             <Header />
 
-            <main className="relative flex-1 container max-w-screen-2xl px-4 py-6 md:py-10">
+            <main className="relative flex-1 container max-w-screen-2xl px-4 py-6 md:py-8">
                 {/* Team Section */}
-                <section className="space-y-4 mb-8">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <section className="space-y-4 mb-10 md:mb-12">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
                         <div>
                             <h1 className="text-3xl md:text-4xl font-display font-bold">
                                 <span className="text-gradient">Your Team</span>
@@ -91,7 +91,7 @@ export default function Home() {
                 </section>
 
                 {/* Two-column layout: Analysis + Chat side by side on desktop */}
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
                     {/* Team Grid + Analysis */}
                     <div className="lg:col-span-3">
                         <h2 className="sr-only">Team Analysis</h2>
@@ -129,19 +129,19 @@ export default function Home() {
                                     </TabsTrigger>
                                 </TabsList>
 
-                                <TabsContent value="coverage" className="mt-4">
+                                <TabsContent value="coverage" className="mt-5">
                                     <TypeCoverage />
                                 </TabsContent>
 
-                                <TabsContent value="threats" className="mt-4">
+                                <TabsContent value="threats" className="mt-5">
                                     <ThreatMatrix />
                                 </TabsContent>
 
-                                <TabsContent value="speed" className="mt-4">
+                                <TabsContent value="speed" className="mt-5">
                                     <SpeedTiers />
                                 </TabsContent>
 
-                                <TabsContent value="history" className="mt-4">
+                                <TabsContent value="history" className="mt-5">
                                     <TeamHistory />
                                 </TabsContent>
                             </Tabs>
@@ -162,30 +162,27 @@ export default function Home() {
             <FeedbackButton />
 
             {/* Footer */}
-            <footer className="border-t py-4 mt-8">
-                <div className="container max-w-screen-2xl px-4 text-center text-sm text-muted-foreground">
+            <footer className="border-t py-6 mt-12">
+                <div className="container max-w-screen-2xl px-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-muted-foreground">
                     <span>PokeMCP Team Builder</span>
-                    <nav aria-label="Footer" className="inline">
-                        {" \u2022 "}
+                    <nav aria-label="Footer" className="flex items-center gap-4">
                         <a
                             href="https://docs.pokemcp.com"
-                            className="underline hover:text-foreground py-2 inline-block"
+                            className="hover:text-foreground transition-colors"
                         >
                             Documentation
                         </a>
-                        {" \u2022 "}
                         <a
                             href="https://api.pokemcp.com"
-                            className="underline hover:text-foreground py-2 inline-block"
+                            className="hover:text-foreground transition-colors"
                         >
                             API
                         </a>
-                        {" \u2022 "}
                         <a
                             href="https://github.com/rborkow/pokeMCP"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="underline hover:text-foreground py-2 inline-block"
+                            className="hover:text-foreground transition-colors"
                         >
                             GitHub
                             <span className="sr-only">(opens in new tab)</span>

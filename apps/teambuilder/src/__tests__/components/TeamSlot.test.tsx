@@ -98,8 +98,8 @@ describe("TeamSlot", () => {
         const onRemove = vi.fn();
         render(<TeamSlot {...defaultProps} onRemove={onRemove} />);
 
-        // Find and click the X button
-        const removeButton = screen.getByRole("button");
+        // Find the remove button by its aria-label
+        const removeButton = screen.getByRole("button", { name: /remove/i });
         fireEvent.click(removeButton);
         expect(onRemove).toHaveBeenCalledTimes(1);
     });
@@ -109,7 +109,7 @@ describe("TeamSlot", () => {
         const onRemove = vi.fn();
         render(<TeamSlot {...defaultProps} onSelect={onSelect} onRemove={onRemove} />);
 
-        const removeButton = screen.getByRole("button");
+        const removeButton = screen.getByRole("button", { name: /remove/i });
         fireEvent.click(removeButton);
 
         expect(onRemove).toHaveBeenCalledTimes(1);
@@ -145,7 +145,7 @@ describe("TeamSlot", () => {
     it("renders without onRemove prop", () => {
         const { onRemove, ...propsWithoutRemove } = defaultProps;
         render(<TeamSlot {...propsWithoutRemove} />);
-        // Should not have a remove button
-        expect(screen.queryByRole("button")).not.toBeInTheDocument();
+        // Should not have a remove button (card itself has role="button" but remove button should be absent)
+        expect(screen.queryByRole("button", { name: /remove/i })).not.toBeInTheDocument();
     });
 });

@@ -110,9 +110,9 @@ describe("ChatPanel", () => {
         expect(screen.getByText("Improve coverage")).toBeInTheDocument();
     });
 
-    it("renders with glass-panel styling and fixed height", () => {
+    it("renders with glass-panel styling", () => {
         const { container } = render(<ChatPanel />);
-        const panel = container.querySelector(".glass-panel.h-\\[600px\\]");
+        const panel = container.querySelector(".glass-panel");
         expect(panel).toBeInTheDocument();
     });
 

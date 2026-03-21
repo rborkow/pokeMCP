@@ -2,29 +2,8 @@
 
 import { Swords, Sparkles, Shield } from "lucide-react";
 import { getMoveData } from "@/lib/data/moves";
+import { TYPE_BG_CLASSES } from "@/lib/data/type-colors";
 import type { LucideIcon } from "lucide-react";
-
-// Reuse Pokemon type colors for move types
-const TYPE_COLORS: Record<string, string> = {
-    Normal: "bg-pokemon-normal",
-    Fire: "bg-pokemon-fire",
-    Water: "bg-pokemon-water",
-    Electric: "bg-pokemon-electric text-black",
-    Grass: "bg-pokemon-grass",
-    Ice: "bg-pokemon-ice text-black",
-    Fighting: "bg-pokemon-fighting",
-    Poison: "bg-pokemon-poison",
-    Ground: "bg-pokemon-ground",
-    Flying: "bg-pokemon-flying text-black",
-    Psychic: "bg-pokemon-psychic",
-    Bug: "bg-pokemon-bug",
-    Rock: "bg-pokemon-rock",
-    Ghost: "bg-pokemon-ghost",
-    Dragon: "bg-pokemon-dragon",
-    Dark: "bg-pokemon-dark",
-    Steel: "bg-pokemon-steel",
-    Fairy: "bg-pokemon-fairy text-black",
-};
 
 // Category icons
 const CATEGORY_ICONS: Record<string, LucideIcon> = {
@@ -49,7 +28,7 @@ export function MoveBadge({ move }: MoveBadgeProps) {
         );
     }
 
-    const typeClass = TYPE_COLORS[moveData.type] || "bg-muted";
+    const typeClass = TYPE_BG_CLASSES[moveData.type as keyof typeof TYPE_BG_CLASSES] || "bg-muted";
     const Icon = CATEGORY_ICONS[moveData.category];
 
     return (
