@@ -120,6 +120,15 @@
   --type-dark: oklch(0.35 0.05 50);
   --type-steel: oklch(0.65 0.03 250);
   --type-fairy: oklch(0.75 0.12 350);
+
+  /* Gradients & shadows (light mode) */
+  --gradient-primary: linear-gradient(135deg, oklch(0.205 0 0), oklch(0.35 0.05 50));
+  --gradient-secondary: linear-gradient(135deg, oklch(0.55 0.05 250), oklch(0.45 0.08 280));
+  --gradient-card: linear-gradient(145deg, oklch(0.99 0 0), oklch(0.97 0 0));
+  --gradient-glow: radial-gradient(ellipse at center, oklch(0.205 0 0 / 0.08), transparent 70%);
+  --shadow-card: 0 2px 12px -2px oklch(0 0 0 / 0.08);
+  --shadow-glow: 0 0 30px oklch(0.205 0 0 / 0.06);
+  --shadow-hover: 0 4px 20px -2px oklch(0 0 0 / 0.12);
 }
 
 .dark {
@@ -186,7 +195,9 @@
     @apply relative overflow-hidden rounded-xl sm:rounded-2xl border border-border p-3 sm:p-4 cursor-pointer;
     background: var(--gradient-card);
     box-shadow: var(--shadow-card);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .pokemon-card:hover {
@@ -199,7 +210,9 @@
     @apply relative overflow-hidden rounded-xl sm:rounded-2xl border border-dashed border-border/50 p-3 sm:p-4 cursor-pointer;
     background: var(--gradient-card);
     box-shadow: var(--shadow-card);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .pokemon-card-empty:hover {
@@ -259,7 +272,9 @@
     @apply relative overflow-hidden rounded-2xl border border-border/50 cursor-pointer;
     background: var(--gradient-card);
     box-shadow: var(--shadow-card);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .welcome-option-card:hover {
@@ -471,6 +486,16 @@
 @keyframes blink-cursor {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+/* Reduce motion for users with vestibular disorders */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Scrollbar styling for dark theme */

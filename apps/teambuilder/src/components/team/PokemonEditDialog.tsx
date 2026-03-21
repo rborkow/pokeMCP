@@ -78,8 +78,9 @@ export function PokemonEditDialog({ pokemon, open, onOpenChange, onSave }: Pokem
                 <div className="space-y-4">
                     {/* Pokemon Name */}
                     <div className="space-y-2">
-                        <label className="text-sm font-medium">Pokemon</label>
+                        <label htmlFor="edit-pokemon-name" className="text-sm font-medium">Pokemon</label>
                         <Input
+                            id="edit-pokemon-name"
                             value={editedPokemon.pokemon}
                             onChange={(e) => updateField("pokemon", e.target.value)}
                             placeholder="e.g. Garchomp, Landorus-Therian"
@@ -88,8 +89,9 @@ export function PokemonEditDialog({ pokemon, open, onOpenChange, onSave }: Pokem
 
                     {/* Nickname */}
                     <div className="space-y-2">
-                        <label className="text-sm font-medium">Nickname (optional)</label>
+                        <label htmlFor="edit-pokemon-nickname" className="text-sm font-medium">Nickname (optional)</label>
                         <Input
+                            id="edit-pokemon-nickname"
                             value={editedPokemon.nickname || ""}
                             onChange={(e) => updateField("nickname", e.target.value)}
                             placeholder="Optional nickname"
@@ -99,14 +101,14 @@ export function PokemonEditDialog({ pokemon, open, onOpenChange, onSave }: Pokem
                     {/* Item & Ability Row */}
                     <div className="grid grid-cols-2 gap-3">
                         <div className="space-y-2">
-                            <label className="text-sm font-medium">Item</label>
+                            <label htmlFor="edit-pokemon-item" className="text-sm font-medium">Item</label>
                             <Select
                                 value={editedPokemon.item || "none"}
                                 onValueChange={(value) =>
                                     updateField("item", value === "none" ? "" : value)
                                 }
                             >
-                                <SelectTrigger>
+                                <SelectTrigger id="edit-pokemon-item">
                                     <SelectValue placeholder="Select item" />
                                 </SelectTrigger>
                                 <SelectContent className="max-h-60">
@@ -145,7 +147,7 @@ export function PokemonEditDialog({ pokemon, open, onOpenChange, onSave }: Pokem
                             </Select>
                         </div>
                         <div className="space-y-2">
-                            <label className="text-sm font-medium">Ability</label>
+                            <label htmlFor="edit-pokemon-ability" className="text-sm font-medium">Ability</label>
                             {validAbilities.length > 0 ? (
                                 <Select
                                     value={editedPokemon.ability || "none"}
@@ -153,7 +155,7 @@ export function PokemonEditDialog({ pokemon, open, onOpenChange, onSave }: Pokem
                                         updateField("ability", value === "none" ? "" : value)
                                     }
                                 >
-                                    <SelectTrigger>
+                                    <SelectTrigger id="edit-pokemon-ability">
                                         <SelectValue placeholder="Select ability" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -167,6 +169,7 @@ export function PokemonEditDialog({ pokemon, open, onOpenChange, onSave }: Pokem
                                 </Select>
                             ) : (
                                 <Input
+                                    id="edit-pokemon-ability"
                                     value={editedPokemon.ability || ""}
                                     onChange={(e) => updateField("ability", e.target.value)}
                                     placeholder="Enter Pokemon first"
@@ -178,12 +181,12 @@ export function PokemonEditDialog({ pokemon, open, onOpenChange, onSave }: Pokem
                     {/* Nature & Tera Type */}
                     <div className="grid grid-cols-2 gap-3">
                         <div className="space-y-2">
-                            <label className="text-sm font-medium">Nature</label>
+                            <label htmlFor="edit-pokemon-nature" className="text-sm font-medium">Nature</label>
                             <Select
                                 value={editedPokemon.nature || "Hardy"}
                                 onValueChange={(value) => updateField("nature", value)}
                             >
-                                <SelectTrigger>
+                                <SelectTrigger id="edit-pokemon-nature">
                                     <SelectValue />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -196,14 +199,14 @@ export function PokemonEditDialog({ pokemon, open, onOpenChange, onSave }: Pokem
                             </Select>
                         </div>
                         <div className="space-y-2">
-                            <label className="text-sm font-medium">Tera Type</label>
+                            <label htmlFor="edit-pokemon-tera" className="text-sm font-medium">Tera Type</label>
                             <Select
                                 value={editedPokemon.teraType || "none"}
                                 onValueChange={(value) =>
                                     updateField("teraType", value === "none" ? "" : value)
                                 }
                             >
-                                <SelectTrigger>
+                                <SelectTrigger id="edit-pokemon-tera">
                                     <SelectValue placeholder="Select type" />
                                 </SelectTrigger>
                                 <SelectContent>

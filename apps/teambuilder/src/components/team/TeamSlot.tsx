@@ -4,32 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import { PokemonSprite } from "./PokemonSprite";
 import { MoveBadge } from "./MoveBadge";
 import { EVBar } from "./EVBar";
-import type { TeamPokemon, PokemonType } from "@/types/pokemon";
+import type { TeamPokemon } from "@/types/pokemon";
 import { X, Sparkles, Package } from "lucide-react";
 import { getPokemonTypes } from "@/lib/data/pokemon-types";
+import { TYPE_BG_CLASSES } from "@/lib/data/type-colors";
 import { toDisplayName } from "@/lib/showdown-parser";
-
-// Type colors for badges - using Pokemon type colors from CSS variables
-const TYPE_COLORS: Record<PokemonType, string> = {
-    Normal: "bg-pokemon-normal",
-    Fire: "bg-pokemon-fire",
-    Water: "bg-pokemon-water",
-    Electric: "bg-pokemon-electric text-black",
-    Grass: "bg-pokemon-grass",
-    Ice: "bg-pokemon-ice text-black",
-    Fighting: "bg-pokemon-fighting",
-    Poison: "bg-pokemon-poison",
-    Ground: "bg-pokemon-ground",
-    Flying: "bg-pokemon-flying text-black",
-    Psychic: "bg-pokemon-psychic",
-    Bug: "bg-pokemon-bug",
-    Rock: "bg-pokemon-rock",
-    Ghost: "bg-pokemon-ghost",
-    Dragon: "bg-pokemon-dragon",
-    Dark: "bg-pokemon-dark",
-    Steel: "bg-pokemon-steel",
-    Fairy: "bg-pokemon-fairy text-black",
-};
 
 // Crystalline Tera type colors - lighter, more gem-like appearance
 const TERA_COLORS: Record<string, string> = {
@@ -76,20 +55,30 @@ export function TeamSlot({
 
     return (
         <div
+            role="button"
+            tabIndex={0}
+            aria-label={`${toDisplayName(pokemon.pokemon)}${isSelected ? ", selected" : ""}. Click to edit.`}
             className={`pokemon-card glow-effect group animate-in fade-in slide-in-from-bottom-2 ${
                 isSelected ? "border-primary ring-2 ring-primary/20" : ""
             }`}
             style={{ animationDelay: `${index * 100}ms`, animationFillMode: "both" }}
             onClick={onSelect}
+            onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onSelect?.();
+                }
+            }}
         >
-            {/* Remove button - positioned inside card with proper spacing */}
+            {/* Remove button - visible on hover and focus-within for keyboard/touch users */}
             {onRemove && (
                 <button
                     onClick={(e) => {
                         e.stopPropagation();
                         onRemove();
                     }}
-                    className="absolute top-3 right-3 p-1.5 rounded-full bg-muted/50 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive/20 hover:text-destructive z-10"
+                    aria-label={`Remove ${toDisplayName(pokemon.pokemon)}`}
+                    className="absolute top-3 right-3 p-1.5 rounded-full bg-muted/50 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus:opacity-100 transition-opacity hover:bg-destructive/20 hover:text-destructive focus:bg-destructive/20 focus:text-destructive z-10"
                 >
                     <X className="w-4 h-4" />
                 </button>
@@ -120,7 +109,7 @@ export function TeamSlot({
                         {types.map((type) => (
                             <span
                                 key={type}
-                                className={`type-badge ${TYPE_COLORS[type]} text-foreground shadow-sm px-1.5 sm:px-2 py-0.5 text-[9px] sm:text-[10px]`}
+                                className={`type-badge ${TYPE_BG_CLASSES[type]} text-foreground shadow-sm px-1.5 sm:px-2 py-0.5 text-[9px] sm:text-[10px]`}
                             >
                                 {type}
                             </span>

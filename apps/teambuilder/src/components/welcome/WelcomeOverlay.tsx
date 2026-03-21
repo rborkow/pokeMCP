@@ -184,7 +184,7 @@ Jolly Nature
 
     // Main welcome view
     return (
-        <Dialog open={isOpen} onOpenChange={() => {}}>
+        <Dialog open={isOpen} onOpenChange={() => setDismissed(true)}>
             <DialogContent className="max-w-[95vw] sm:max-w-[700px] p-8" showCloseButton={false}>
                 <DialogHeader className="text-center space-y-4">
                     <div className="mx-auto">

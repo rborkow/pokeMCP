@@ -6,28 +6,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { useTeamStore } from "@/stores/team-store";
 import { TYPES, type PokemonType } from "@/types/pokemon";
 import { getPokemonTypes } from "@/lib/data/pokemon-types";
-
-// Type colors for badges
-const TYPE_COLORS: Record<PokemonType, string> = {
-    Normal: "bg-gray-400",
-    Fire: "bg-orange-500",
-    Water: "bg-blue-500",
-    Electric: "bg-yellow-400",
-    Grass: "bg-green-500",
-    Ice: "bg-cyan-300",
-    Fighting: "bg-red-700",
-    Poison: "bg-purple-500",
-    Ground: "bg-amber-600",
-    Flying: "bg-indigo-300",
-    Psychic: "bg-pink-500",
-    Bug: "bg-lime-500",
-    Rock: "bg-stone-500",
-    Ghost: "bg-purple-700",
-    Dragon: "bg-violet-600",
-    Dark: "bg-stone-700",
-    Steel: "bg-slate-400",
-    Fairy: "bg-pink-300",
-};
+import { TYPE_BG_CLASSES } from "@/lib/data/type-colors";
 
 // Simplified type effectiveness (1 = weak, 2 = 2x weak, 0 = resist, -1 = immune)
 const TYPE_CHART: Record<string, Record<string, number>> = {
@@ -228,7 +207,7 @@ export function TypeCoverage() {
                                 <Tooltip key={type}>
                                     <TooltipTrigger asChild>
                                         <Badge
-                                            className={`${TYPE_COLORS[type]} text-white cursor-help`}
+                                            className={`${TYPE_BG_CLASSES[type]} text-foreground cursor-help`}
                                         >
                                             {type} ({count})
                                         </Badge>
@@ -257,9 +236,9 @@ export function TypeCoverage() {
                                     <TooltipTrigger asChild>
                                         <Badge
                                             variant="outline"
-                                            className={"border-2 cursor-help"}
+                                            className="border-2 cursor-help"
                                             style={{
-                                                borderColor: TYPE_COLORS[type].replace("bg-", ""),
+                                                borderColor: `var(--type-${type.toLowerCase()})`,
                                             }}
                                         >
                                             {type} ({count})

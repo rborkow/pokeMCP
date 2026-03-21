@@ -173,6 +173,7 @@ export function PokemonSprite({
                 alt={pokemon}
                 width={dimension}
                 height={dimension}
+                loading="lazy"
                 className="object-contain max-w-full max-h-full"
                 style={{ imageRendering: "pixelated" }}
                 onError={() => {

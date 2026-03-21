@@ -24,13 +24,13 @@ export function SuggestedPrompts({ onSelect, disabled }: SuggestedPromptsProps) 
     });
 
     return (
-        <div className="flex flex-wrap gap-1.5 px-2 py-1.5 border-b">
+        <div className="flex flex-wrap gap-1.5 px-2 py-2 border-b">
             {/* Show Quickstart button prominently when no team */}
             {!hasTeam && (
                 <Button
                     variant="default"
                     size="sm"
-                    className="text-xs h-7 bg-primary hover:bg-primary/90"
+                    className="text-xs min-h-[36px] px-3 bg-primary hover:bg-primary/90"
                     onClick={() => onSelect(QUICKSTART_PROMPT.prompt)}
                     disabled={disabled}
                 >
@@ -43,7 +43,7 @@ export function SuggestedPrompts({ onSelect, disabled }: SuggestedPromptsProps) 
                     key={label}
                     variant="outline"
                     size="sm"
-                    className="text-xs h-7"
+                    className="text-xs min-h-[36px] px-3"
                     onClick={() => onSelect(prompt)}
                     disabled={disabled}
                 >
