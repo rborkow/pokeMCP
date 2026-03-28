@@ -1,4 +1,6 @@
-import Anthropic from "@anthropic-ai/sdk";
+import { chat, toServerSentEventsResponse, maxIterations } from "@tanstack/ai";
+import { anthropicText } from "@tanstack/ai-anthropic";
+import type { ChatMiddleware } from "@tanstack/ai";
 import type { NextRequest } from "next/server";
 import {
     buildSystemPrompt,
@@ -11,7 +13,7 @@ import {
     type TeamPokemon,
 } from "@/lib/ai/context";
 import { DEFAULT_PERSONALITY, type PersonalityId } from "@/lib/ai/personalities";
-import { TEAM_TOOLS } from "@/lib/ai/tools";
+import { modifyTeamTool } from "@/lib/ai/tools-tanstack";
 import type { Mode } from "@/types/pokemon";
 
 // Max number of previous messages to include for context (to manage token usage)
@@ -94,8 +96,7 @@ export async function POST(request: NextRequest) {
             });
         }
 
-        // Fetch context in parallel
-        // Only fetch teammate analysis if team has Pokemon (helps with suggestions)
+        // Fetch context in parallel (same as before)
         const [metaThreats, popularSetsContext, teammateAnalysis, strategyContext] =
             await Promise.all([
                 fetchMetaThreats(format),
@@ -126,11 +127,9 @@ export async function POST(request: NextRequest) {
             strategyContext,
         );
 
-        // Only enable extended thinking when the client explicitly requests it
         const useThinking = enableThinking === true;
 
         // Build conversation messages with history
-        // Take only the most recent messages to avoid token limits
         const recentHistory = (chatHistory as { role: string; content: string }[])
             .slice(-MAX_HISTORY_MESSAGES)
             .map((msg) => ({
@@ -138,16 +137,15 @@ export async function POST(request: NextRequest) {
                 content: msg.content,
             }));
 
-        // Build the messages array: history + current message with full context
         const messages = [...recentHistory, { role: "user" as const, content: fullUserMessage }];
 
-        // Track response time from stream start
+        // Track response time
         const streamStartTime = performance.now();
 
-        // Create Anthropic client — route through AI Gateway if configured
+        // Create adapter — route through AI Gateway if configured
         const gatewayUrl = process.env.CLOUDFLARE_AI_GATEWAY_URL;
         const gatewayToken = process.env.CF_AIG_TOKEN;
-        const client = new Anthropic({
+        const adapter = anthropicText("claude-sonnet-4-6", {
             apiKey,
             ...(gatewayUrl && {
                 baseURL: gatewayUrl,
@@ -160,152 +158,59 @@ export async function POST(request: NextRequest) {
             }),
         });
 
-        const stream = client.messages.stream(
-            {
-                model: "claude-sonnet-4-6",
-                max_tokens: 16000,
+        // Logging middleware — replaces the manual console.log in the old route
+        const loggingMiddleware: ChatMiddleware = {
+            name: "usage-logging",
+            onUsage(_ctx, usage) {
+                console.log(
+                    JSON.stringify({
+                        type: "ai_usage",
+                        format,
+                        personality: personalityId,
+                        mode,
+                        thinkingEnabled: useThinking,
+                        teamSize: (team as TeamPokemon[]).length,
+                        inputTokens: usage.promptTokens,
+                        outputTokens: usage.completionTokens,
+                        responseTimeMs: Math.round(performance.now() - streamStartTime),
+                        timestamp: Date.now(),
+                    }),
+                );
+            },
+        };
+
+        // Create the streaming response via TanStack AI
+        const stream = chat({
+            adapter,
+            messages,
+            tools: [modifyTeamTool],
+            maxTokens: 16000,
+            // Use modelOptions for Anthropic-specific features:
+            // - system with cache_control for prompt caching
+            // - thinking mode configuration
+            // modelOptions uses Anthropic-specific fields.
+            // `effort` is a valid runtime option but missing from the per-model
+            // type in @tanstack/ai-anthropic (alpha type gap — validKeys includes it).
+            modelOptions: {
                 system: [
                     {
-                        type: "text",
+                        type: "text" as const,
                         text: systemPrompt,
-                        cache_control: { type: "ephemeral" },
+                        cache_control: { type: "ephemeral" as const },
                     },
                 ],
-                messages,
-                tools: TEAM_TOOLS as Anthropic.Messages.Tool[],
-                ...(useThinking && { thinking: { type: "adaptive" } }),
-                output_config: { effort: useThinking ? "high" : "low" },
-            },
-            { signal: request.signal },
-        );
-
-        // Track tool use state for accumulating tool input
-        let currentToolId = "";
-        let currentToolName = "";
-        let toolInputSnapshot: unknown = null;
-        let isInThinkingBlock = false;
-        let isInToolBlock = false;
-
-        const encoder = new TextEncoder();
-
-        const readable = new ReadableStream({
-            async start(controller) {
-                const emit = (data: unknown) => {
-                    controller.enqueue(encoder.encode(`data: ${JSON.stringify(data)}\n\n`));
-                };
-
-                try {
-                    stream.on("streamEvent", (event) => {
-                        // Track content block starts for phase events
-                        if (event.type === "content_block_start") {
-                            const blockType = event.content_block?.type;
-                            if (blockType === "thinking") {
-                                isInThinkingBlock = true;
-                                emit({ phase: "thinking" });
-                                emit({ thinking: true, text: "" });
-                            } else if (blockType === "text") {
-                                emit({ phase: "generating" });
-                            } else if (blockType === "tool_use") {
-                                isInToolBlock = true;
-                                const block =
-                                    event.content_block as Anthropic.Messages.ToolUseBlock;
-                                currentToolId = block.id || "";
-                                currentToolName = block.name || "";
-                                toolInputSnapshot = null;
-                                emit({ phase: "tool_calling" });
-                            }
-                        }
-
-                        // Track content block stops
-                        if (event.type === "content_block_stop") {
-                            if (isInThinkingBlock) {
-                                isInThinkingBlock = false;
-                                emit({ thinking: false });
-                            } else if (isInToolBlock) {
-                                // Emit the complete tool call
-                                if (currentToolName && toolInputSnapshot !== null) {
-                                    emit({
-                                        tool_use: {
-                                            id: currentToolId,
-                                            name: currentToolName,
-                                            input: toolInputSnapshot,
-                                        },
-                                    });
-                                }
-                                isInToolBlock = false;
-                                currentToolId = "";
-                                currentToolName = "";
-                                toolInputSnapshot = null;
-                            }
-                        }
-                    });
-
-                    // Text deltas
-                    stream.on("text", (textDelta) => {
-                        emit({ text: textDelta });
-                    });
-
-                    // Thinking deltas
-                    stream.on("thinking", (thinkingDelta) => {
-                        emit({ thinking: true, text: thinkingDelta });
-                    });
-
-                    // Tool input JSON — track the snapshot for emission at block stop
-                    stream.on("inputJson", (_partialJson, jsonSnapshot) => {
-                        toolInputSnapshot = jsonSnapshot;
-                    });
-
-                    // Wait for stream to complete (AI Gateway tracks tokens/costs automatically)
-                    const finalMsg = await stream.finalMessage();
-
-                    console.log(
-                        JSON.stringify({
-                            type: "ai_usage",
-                            format,
-                            personality: personalityId,
-                            mode,
-                            thinkingEnabled: useThinking,
-                            teamSize: (team as TeamPokemon[]).length,
-                            inputTokens: finalMsg.usage.input_tokens ?? 0,
-                            outputTokens: finalMsg.usage.output_tokens ?? 0,
-                            cacheCreationInputTokens:
-                                finalMsg.usage.cache_creation_input_tokens ?? 0,
-                            cacheReadInputTokens: finalMsg.usage.cache_read_input_tokens ?? 0,
-                            responseTimeMs: Math.round(performance.now() - streamStartTime),
-                            timestamp: Date.now(),
-                        }),
-                    );
-
-                    controller.enqueue(encoder.encode("data: [DONE]\n\n"));
-                    controller.close();
-                } catch (err) {
-                    // Handle abort/cancellation
-                    if (err instanceof Error && err.name === "AbortError") {
-                        controller.enqueue(encoder.encode("data: [DONE]\n\n"));
-                        controller.close();
-                        return;
-                    }
-
-                    console.error("Stream error:", err);
-                    const errorMessage =
-                        err instanceof Error ? err.message : "Unknown streaming error";
-                    emit({ error: errorMessage });
-                    controller.enqueue(encoder.encode("data: [DONE]\n\n"));
-                    controller.close();
-                }
-            },
-            cancel() {
-                stream.abort();
-            },
+                ...(useThinking && { thinking: { type: "adaptive" as const } }),
+                effort: (useThinking ? "high" : "low") as "high" | "low",
+            } as typeof adapter extends { "~types": { providerOptions: infer P } } ? P : never,
+            // Stop after first iteration — tool calls are handled client-side
+            agentLoopStrategy: maxIterations(1),
+            abortController: request.signal
+                ? { signal: request.signal, abort: () => {} }
+                : undefined,
+            middleware: [loggingMiddleware],
         });
 
-        return new Response(readable, {
-            headers: {
-                "Content-Type": "text/event-stream",
-                "Cache-Control": "no-cache",
-                Connection: "keep-alive",
-            },
-        });
+        return toServerSentEventsResponse(stream);
     } catch (error) {
         console.error("Claude streaming error:", error);
         return new Response(JSON.stringify({ error: "Failed to process Claude request" }), {
