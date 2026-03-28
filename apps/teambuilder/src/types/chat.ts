@@ -23,41 +23,11 @@ export interface TeamAction {
     previousState?: Partial<TeamPokemon>; // Snapshot of team[slot] before this action
 }
 
-/** Phases of a streaming response */
-export type StreamingPhase =
-    | "connecting"
-    | "thinking"
-    | "generating"
-    | "tool_calling"
-    | "complete"
-    | "cancelled"
-    | "error";
-
-export interface ChatMessage {
-    id: string;
-    role: "user" | "assistant" | "system";
-    content: string;
-    timestamp: Date;
-    action?: TeamAction;
-    isLoading?: boolean;
-    thinkingContent?: string;
-    buildingStatus?: string; // Status message when building team via tools
-    streamingPhase?: StreamingPhase;
-}
-
 export type AIProvider = "cloudflare" | "claude";
 
 export interface AIContext {
     team: TeamPokemon[];
     format: string;
-    chatHistory: ChatMessage[];
-}
-
-export interface AIResponse {
-    content: string;
-    action?: TeamAction;
-    actions?: TeamAction[]; // Multiple actions for team generation
-    rawContent?: string; // Original response for retry
 }
 
 // Suggested prompts for the chat UI
