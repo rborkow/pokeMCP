@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useMemo } from "react";
+import { useMemo } from "react";
 import type { UIMessage, MessagePart } from "@tanstack/ai-client";
 import { Bot, User, Loader2 } from "lucide-react";
 import { MemoizedMarkdown } from "./MemoizedMarkdown";
@@ -40,7 +40,7 @@ function hasToolCalls(parts: MessagePart[]): boolean {
     return parts.some((p) => p.type === "tool-call");
 }
 
-export const ChatMessage = memo(function ChatMessage({ message, isStreaming }: ChatMessageProps) {
+export function ChatMessage({ message, isStreaming }: ChatMessageProps) {
     const isUser = message.role === "user";
     const isSystem = message.role === "system";
 
@@ -124,4 +124,4 @@ export const ChatMessage = memo(function ChatMessage({ message, isStreaming }: C
             ) : null}
         </div>
     );
-});
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import type { UIMessage } from "@tanstack/ai-client";
 import type { ChatClientState } from "@tanstack/ai-client";
@@ -20,7 +20,7 @@ interface ChatMessagesProps {
 /**
  * Wrapper for a single message — memoised on message identity.
  */
-const ChatMessageWrapper = memo(function ChatMessageWrapper({
+function ChatMessageWrapper({
     message,
     isStreaming,
 }: {
@@ -32,7 +32,7 @@ const ChatMessageWrapper = memo(function ChatMessageWrapper({
             <ChatMessage message={message} isStreaming={isStreaming} />
         </div>
     );
-});
+}
 
 export function ChatMessages({
     messages,
