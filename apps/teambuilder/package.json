@@ -37,6 +37,7 @@
         "@tanstack/ai-anthropic": "^0.7.1",
         "@tanstack/ai-react": "^0.7.5",
         "@tanstack/react-query": "^5.90.12",
+        "@tanstack/react-virtual": "^3.13.23",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "html-to-image": "^1.11.13",
