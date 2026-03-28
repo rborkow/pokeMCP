@@ -1,6 +1,4 @@
-import { chat, toServerSentEventsResponse, maxIterations } from "@tanstack/ai";
-import { anthropicText } from "@tanstack/ai-anthropic";
-import type { ChatMiddleware } from "@tanstack/ai";
+import Anthropic from "@anthropic-ai/sdk";
 import type { NextRequest } from "next/server";
 import {
     buildSystemPrompt,
@@ -13,7 +11,7 @@ import {
     type TeamPokemon,
 } from "@/lib/ai/context";
 import { DEFAULT_PERSONALITY, type PersonalityId } from "@/lib/ai/personalities";
-import { modifyTeamTool } from "@/lib/ai/tools-tanstack";
+import { TEAM_TOOLS } from "@/lib/ai/tools";
 import type { Mode } from "@/types/pokemon";
 
 // Max number of previous messages to include for context (to manage token usage)
@@ -49,6 +47,21 @@ function cleanupRateLimits() {
 
 // Clean up every 5 minutes
 setInterval(cleanupRateLimits, 5 * 60_000);
+
+/**
+ * AG-UI event emitter helpers.
+ *
+ * The server emits events in the AG-UI protocol format (used by TanStack AI)
+ * so the client parser is unified regardless of what drives the stream.
+ */
+let eventCounter = 0;
+function nextId(): string {
+    return `evt_${++eventCounter}_${Date.now()}`;
+}
+
+function aguiEvent(data: Record<string, unknown>): string {
+    return `data: ${JSON.stringify({ timestamp: Date.now(), ...data })}\n\n`;
+}
 
 export async function POST(request: NextRequest) {
     // Rate limiting check
@@ -96,7 +109,7 @@ export async function POST(request: NextRequest) {
             });
         }
 
-        // Fetch context in parallel (same as before)
+        // Fetch context in parallel
         const [metaThreats, popularSetsContext, teammateAnalysis, strategyContext] =
             await Promise.all([
                 fetchMetaThreats(format),
@@ -139,13 +152,12 @@ export async function POST(request: NextRequest) {
 
         const messages = [...recentHistory, { role: "user" as const, content: fullUserMessage }];
 
-        // Track response time
         const streamStartTime = performance.now();
 
-        // Create adapter — route through AI Gateway if configured
+        // Create Anthropic client — route through AI Gateway if configured
         const gatewayUrl = process.env.CLOUDFLARE_AI_GATEWAY_URL;
         const gatewayToken = process.env.CF_AIG_TOKEN;
-        const adapter = anthropicText("claude-sonnet-4-6", {
+        const client = new Anthropic({
             apiKey,
             ...(gatewayUrl && {
                 baseURL: gatewayUrl,
@@ -158,59 +170,212 @@ export async function POST(request: NextRequest) {
             }),
         });
 
-        // Logging middleware — replaces the manual console.log in the old route
-        const loggingMiddleware: ChatMiddleware = {
-            name: "usage-logging",
-            onUsage(_ctx, usage) {
-                console.log(
-                    JSON.stringify({
-                        type: "ai_usage",
-                        format,
-                        personality: personalityId,
-                        mode,
-                        thinkingEnabled: useThinking,
-                        teamSize: (team as TeamPokemon[]).length,
-                        inputTokens: usage.promptTokens,
-                        outputTokens: usage.completionTokens,
-                        responseTimeMs: Math.round(performance.now() - streamStartTime),
-                        timestamp: Date.now(),
-                    }),
-                );
-            },
-        };
-
-        // Create the streaming response via TanStack AI
-        const stream = chat({
-            adapter,
-            messages,
-            tools: [modifyTeamTool],
-            maxTokens: 16000,
-            // Use modelOptions for Anthropic-specific features:
-            // - system with cache_control for prompt caching
-            // - thinking mode configuration
-            // modelOptions uses Anthropic-specific fields.
-            // `effort` is a valid runtime option but missing from the per-model
-            // type in @tanstack/ai-anthropic (alpha type gap — validKeys includes it).
-            modelOptions: {
+        const stream = client.messages.stream(
+            {
+                model: "claude-sonnet-4-6",
+                max_tokens: 16000,
                 system: [
                     {
-                        type: "text" as const,
+                        type: "text",
                         text: systemPrompt,
-                        cache_control: { type: "ephemeral" as const },
+                        cache_control: { type: "ephemeral" },
                     },
                 ],
-                ...(useThinking && { thinking: { type: "adaptive" as const } }),
-                effort: (useThinking ? "high" : "low") as "high" | "low",
-            } as typeof adapter extends { "~types": { providerOptions: infer P } } ? P : never,
-            // Stop after first iteration — tool calls are handled client-side
-            agentLoopStrategy: maxIterations(1),
-            abortController: request.signal
-                ? { signal: request.signal, abort: () => {} }
-                : undefined,
-            middleware: [loggingMiddleware],
+                messages,
+                tools: TEAM_TOOLS as Anthropic.Messages.Tool[],
+                ...(useThinking && { thinking: { type: "adaptive" } }),
+                output_config: { effort: useThinking ? "high" : "low" },
+            },
+            { signal: request.signal },
+        );
+
+        // Track tool use state for accumulating tool input
+        let currentToolId = "";
+        let currentToolName = "";
+        let toolInputSnapshot: unknown = null;
+        let isInThinkingBlock = false;
+        let isInToolBlock = false;
+
+        const encoder = new TextEncoder();
+        const runId = nextId();
+        const messageId = nextId();
+
+        const readable = new ReadableStream({
+            async start(controller) {
+                const emit = (data: string) => {
+                    controller.enqueue(encoder.encode(data));
+                };
+
+                try {
+                    // Emit RUN_STARTED
+                    emit(aguiEvent({ type: "RUN_STARTED", runId }));
+
+                    stream.on("streamEvent", (event) => {
+                        if (event.type === "content_block_start") {
+                            const blockType = event.content_block?.type;
+                            if (blockType === "thinking") {
+                                isInThinkingBlock = true;
+                                const stepId = nextId();
+                                emit(
+                                    aguiEvent({
+                                        type: "STEP_STARTED",
+                                        stepId,
+                                        stepType: "thinking",
+                                    }),
+                                );
+                            } else if (blockType === "text") {
+                                emit(
+                                    aguiEvent({
+                                        type: "TEXT_MESSAGE_START",
+                                        messageId,
+                                        role: "assistant",
+                                    }),
+                                );
+                            } else if (blockType === "tool_use") {
+                                isInToolBlock = true;
+                                const block =
+                                    event.content_block as Anthropic.Messages.ToolUseBlock;
+                                currentToolId = block.id || nextId();
+                                currentToolName = block.name || "";
+                                toolInputSnapshot = null;
+                                emit(
+                                    aguiEvent({
+                                        type: "TOOL_CALL_START",
+                                        toolCallId: currentToolId,
+                                        toolName: currentToolName,
+                                    }),
+                                );
+                            }
+                        }
+
+                        if (event.type === "content_block_stop") {
+                            if (isInThinkingBlock) {
+                                isInThinkingBlock = false;
+                            } else if (isInToolBlock) {
+                                // Emit complete tool call
+                                if (currentToolName && toolInputSnapshot !== null) {
+                                    emit(
+                                        aguiEvent({
+                                            type: "TOOL_CALL_END",
+                                            toolCallId: currentToolId,
+                                            toolName: currentToolName,
+                                            input: toolInputSnapshot,
+                                        }),
+                                    );
+                                }
+                                isInToolBlock = false;
+                                currentToolId = "";
+                                currentToolName = "";
+                                toolInputSnapshot = null;
+                            }
+                        }
+                    });
+
+                    // Text deltas → AG-UI TEXT_MESSAGE_CONTENT
+                    stream.on("text", (textDelta) => {
+                        emit(
+                            aguiEvent({
+                                type: "TEXT_MESSAGE_CONTENT",
+                                messageId,
+                                delta: textDelta,
+                            }),
+                        );
+                    });
+
+                    // Thinking deltas → AG-UI STEP_FINISHED with delta
+                    stream.on("thinking", (thinkingDelta) => {
+                        emit(
+                            aguiEvent({
+                                type: "STEP_FINISHED",
+                                stepId: nextId(),
+                                delta: thinkingDelta,
+                            }),
+                        );
+                    });
+
+                    // Tool input JSON
+                    stream.on("inputJson", (_partialJson, jsonSnapshot) => {
+                        toolInputSnapshot = jsonSnapshot;
+                    });
+
+                    const finalMsg = await stream.finalMessage();
+
+                    // Emit TEXT_MESSAGE_END
+                    emit(aguiEvent({ type: "TEXT_MESSAGE_END", messageId }));
+
+                    // Emit RUN_FINISHED with usage
+                    emit(
+                        aguiEvent({
+                            type: "RUN_FINISHED",
+                            runId,
+                            finishReason: "stop",
+                            usage: {
+                                promptTokens: finalMsg.usage.input_tokens ?? 0,
+                                completionTokens: finalMsg.usage.output_tokens ?? 0,
+                                totalTokens:
+                                    (finalMsg.usage.input_tokens ?? 0) +
+                                    (finalMsg.usage.output_tokens ?? 0),
+                            },
+                        }),
+                    );
+
+                    console.log(
+                        JSON.stringify({
+                            type: "ai_usage",
+                            format,
+                            personality: personalityId,
+                            mode,
+                            thinkingEnabled: useThinking,
+                            teamSize: (team as TeamPokemon[]).length,
+                            inputTokens: finalMsg.usage.input_tokens ?? 0,
+                            outputTokens: finalMsg.usage.output_tokens ?? 0,
+                            cacheCreationInputTokens:
+                                finalMsg.usage.cache_creation_input_tokens ?? 0,
+                            cacheReadInputTokens: finalMsg.usage.cache_read_input_tokens ?? 0,
+                            responseTimeMs: Math.round(performance.now() - streamStartTime),
+                            timestamp: Date.now(),
+                        }),
+                    );
+
+                    controller.close();
+                } catch (err) {
+                    if (err instanceof Error && err.name === "AbortError") {
+                        emit(
+                            aguiEvent({
+                                type: "RUN_FINISHED",
+                                runId,
+                                finishReason: "stop",
+                            }),
+                        );
+                        controller.close();
+                        return;
+                    }
+
+                    console.error("Stream error:", err);
+                    const errorMessage =
+                        err instanceof Error ? err.message : "Unknown streaming error";
+                    emit(
+                        aguiEvent({
+                            type: "RUN_ERROR",
+                            runId,
+                            error: { message: errorMessage },
+                        }),
+                    );
+                    controller.close();
+                }
+            },
+            cancel() {
+                stream.abort();
+            },
         });
 
-        return toServerSentEventsResponse(stream);
+        return new Response(readable, {
+            headers: {
+                "Content-Type": "text/event-stream",
+                "Cache-Control": "no-cache",
+                Connection: "keep-alive",
+            },
+        });
     } catch (error) {
         console.error("Claude streaming error:", error);
         return new Response(JSON.stringify({ error: "Failed to process Claude request" }), {
