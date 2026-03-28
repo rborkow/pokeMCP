@@ -55,10 +55,11 @@ export const StreamingMarkdown = forwardRef<StreamingMarkdownHandle, { content?:
             [startTimer],
         );
 
+        // Sync target ref when prop changes — rendered state is initialized
+        // from the prop via useState(initialContent) so no setState needed here.
         useEffect(() => {
             if (initialContent !== undefined) {
                 targetRef.current = initialContent;
-                setRendered(initialContent);
             }
         }, [initialContent]);
 

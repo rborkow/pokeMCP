@@ -37,7 +37,6 @@ const ChatMessageWrapper = memo(function ChatMessageWrapper({
 export function ChatMessages({
     messages,
     isLoading,
-    status: _status,
     pendingAction,
     pendingActions,
     advancePendingAction,

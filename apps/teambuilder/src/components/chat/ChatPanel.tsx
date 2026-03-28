@@ -132,9 +132,12 @@ export function ChatPanel() {
     // This runs when messages change and detects new tool-call parts needing approval
     const processedToolCallsRef = useRef(new Set<string>());
     const teamRef = useRef(team);
-    teamRef.current = team;
     const applyActionsRef = useRef(applyActions);
-    applyActionsRef.current = applyActions;
+
+    useEffect(() => {
+        teamRef.current = team;
+        applyActionsRef.current = applyActions;
+    });
 
     useEffect(() => {
         if (isLoading) return; // Wait until stream finishes
