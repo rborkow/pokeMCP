@@ -6,7 +6,7 @@ import { useChatStore } from "@/stores/chat-store";
 import { ChatMessage } from "./ChatMessage";
 import { ActionCard } from "./ActionCard";
 import type { ChatMessage as ChatMessageType } from "@/types/chat";
-import type { StreamingTextHandle } from "./StreamingText";
+import type { StreamingMarkdownHandle } from "./StreamingMarkdown";
 
 /**
  * Wrapper that subscribes to a single message by ID.
@@ -19,7 +19,7 @@ const ChatMessageWrapper = memo(function ChatMessageWrapper({
 }: {
     messageId: string;
     hasPendingAction: boolean;
-    streamingTextRef?: RefObject<StreamingTextHandle | null>;
+    streamingTextRef?: RefObject<StreamingMarkdownHandle | null>;
 }) {
     const message = useChatStore(
         useCallback(
@@ -52,7 +52,7 @@ const ChatMessageWrapper = memo(function ChatMessageWrapper({
 export function ChatMessages({
     streamingTextRef,
 }: {
-    streamingTextRef?: RefObject<StreamingTextHandle | null>;
+    streamingTextRef?: RefObject<StreamingMarkdownHandle | null>;
 }) {
     const messageIds = useChatStore(useShallow((s) => s.messages.map((m) => m.id)));
     const pendingAction = useChatStore((s) => s.pendingAction);
@@ -74,11 +74,11 @@ export function ChatMessages({
     }, []);
 
     // Auto-scroll to bottom on new messages / pending actions (not during
-    // active streaming — StreamingText handles that via data-chat-scroll)
+    // active streaming — StreamingMarkdown handles that via data-chat-scroll)
     // biome-ignore lint/correctness/useExhaustiveDependencies: pendingAction intentionally triggers scroll when actions appear
     useEffect(() => {
         if (isUserScrolledUpRef.current) return;
-        // Skip during active streaming — the rAF loop in StreamingText scrolls
+        // Skip during active streaming — the rAF loop in StreamingMarkdown scrolls
         if (isLoading && messages.some((m) => m.isLoading && m.streamingPhase === "generating"))
             return;
 

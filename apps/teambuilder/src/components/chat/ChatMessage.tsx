@@ -6,12 +6,12 @@ import { Bot, User, Loader2, Wrench } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ThinkingCollapsible } from "./ThinkingCollapsible";
-import { StreamingText, type StreamingTextHandle } from "./StreamingText";
+import { StreamingMarkdown, type StreamingMarkdownHandle } from "./StreamingMarkdown";
 
 interface ChatMessageProps {
     message: ChatMessageType;
     /** Imperative handle ref — set only on the actively streaming message */
-    streamingTextRef?: RefObject<StreamingTextHandle | null>;
+    streamingTextRef?: RefObject<StreamingMarkdownHandle | null>;
 }
 
 function StreamingIndicator({
@@ -140,8 +140,8 @@ export const ChatMessage = memo(function ChatMessage({ message, streamingTextRef
             )}
 
             {isActiveStreaming ? (
-                /* Streaming: StreamingText gets deltas via ref — no React re-renders */
-                <StreamingText ref={streamingTextRef} />
+                /* Streaming: StreamingMarkdown gets deltas via ref — no React re-renders */
+                <StreamingMarkdown ref={streamingTextRef} />
             ) : message.isLoading && !message.content ? (
                 <StreamingIndicator
                     phase={message.streamingPhase}
@@ -149,7 +149,7 @@ export const ChatMessage = memo(function ChatMessage({ message, streamingTextRef
                 />
             ) : message.isLoading && message.content ? (
                 /* Fallback for content set before streaming handle is ready */
-                <StreamingText content={message.content} />
+                <StreamingMarkdown content={message.content} />
             ) : message.content ? (
                 <div className="chat-markdown text-sm">{renderedContent}</div>
             ) : null}

@@ -12,7 +12,7 @@ import { useHistoryStore } from "@/stores/history-store";
 import { streamChatMessage } from "@/lib/ai";
 import { Trash2 } from "lucide-react";
 import type { TeamAction } from "@/types/chat";
-import type { StreamingTextHandle } from "./StreamingText";
+import type { StreamingMarkdownHandle } from "./StreamingMarkdown";
 
 function getErrorMessage(error: Error): string {
     const errorType = (error as Error & { errorType?: string }).errorType;
@@ -46,8 +46,8 @@ export function ChatPanel() {
     const { team, format, mode, setPokemon } = useTeamStore();
     const { pushState } = useHistoryStore();
 
-    // Ref to the active StreamingText imperative handle — set by ChatMessages
-    const streamingTextRef = useRef<StreamingTextHandle | null>(null);
+    // Ref to the active StreamingMarkdown imperative handle — set by ChatMessages
+    const streamingTextRef = useRef<StreamingMarkdownHandle | null>(null);
 
     // Apply multiple actions (for team generation)
     const applyActions = useCallback(
@@ -110,11 +110,11 @@ export function ChatPanel() {
                 chatHistory: currentMessages,
                 signal: controller.signal,
                 onChunk: () => {
-                    // No-op during streaming — StreamingText handles rendering
+                    // No-op during streaming — StreamingMarkdown handles rendering
                     // via the imperative ref. Content is flushed in onComplete.
                 },
                 onTextDelta: (delta) => {
-                    // Push deltas directly to StreamingText — zero React re-renders
+                    // Push deltas directly to StreamingMarkdown — zero React re-renders
                     streamingTextRef.current?.pushDelta(delta);
                 },
                 onThinking: (_isThinking, thinkingText) => {
@@ -135,7 +135,7 @@ export function ChatPanel() {
                 onPhaseChange: (phase) => {
                     // Only update store for phase changes (not every text delta)
                     if (phase === "generating") {
-                        // Mark as generating once — StreamingText takes over rendering
+                        // Mark as generating once — StreamingMarkdown takes over rendering
                         useChatStore.getState().updateMessage(streamingId, {
                             streamingPhase: "generating",
                             isLoading: true,
@@ -205,7 +205,7 @@ export function ChatPanel() {
     );
 
     const handleStop = useCallback(() => {
-        // Persist whatever content StreamingText has accumulated
+        // Persist whatever content StreamingMarkdown has accumulated
         const messages = useChatStore.getState().messages;
         const lastMsg = messages[messages.length - 1];
         if (lastMsg?.isLoading && streamingTextRef.current) {
