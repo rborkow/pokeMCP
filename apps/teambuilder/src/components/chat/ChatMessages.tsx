@@ -2,6 +2,7 @@
 
 import { memo, useEffect, useRef, useCallback, type RefObject } from "react";
 import { useShallow } from "zustand/shallow";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import { useChatStore } from "@/stores/chat-store";
 import { ChatMessage } from "./ChatMessage";
 import { ActionCard } from "./ActionCard";
@@ -61,8 +62,14 @@ export function ChatMessages({
     const messages = useChatStore((s) => s.messages);
 
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const scrollRAFRef = useRef<number>(undefined);
     const isUserScrolledUpRef = useRef(false);
+
+    const virtualizer = useVirtualizer({
+        count: messageIds.length,
+        getScrollElement: () => scrollContainerRef.current,
+        estimateSize: () => 120,
+        overscan: 3,
+    });
 
     // Track if user has scrolled away from the bottom
     const handleScroll = useCallback(() => {
@@ -78,26 +85,16 @@ export function ChatMessages({
     // biome-ignore lint/correctness/useExhaustiveDependencies: pendingAction intentionally triggers scroll when actions appear
     useEffect(() => {
         if (isUserScrolledUpRef.current) return;
+        if (messageIds.length === 0) return;
         // Skip during active streaming — the rAF loop in StreamingMarkdown scrolls
         if (isLoading && messages.some((m) => m.isLoading && m.streamingPhase === "generating"))
             return;
 
-        if (scrollRAFRef.current) {
-            cancelAnimationFrame(scrollRAFRef.current);
-        }
-        scrollRAFRef.current = requestAnimationFrame(() => {
-            const container = scrollContainerRef.current;
-            if (container) {
-                container.scrollTo({
-                    top: container.scrollHeight,
-                    behavior: isLoading ? "instant" : "smooth",
-                });
-            }
+        virtualizer.scrollToIndex(messageIds.length - 1, {
+            align: "end",
+            behavior: isLoading ? "auto" : "smooth",
         });
-        return () => {
-            if (scrollRAFRef.current) cancelAnimationFrame(scrollRAFRef.current);
-        };
-    }, [messages, pendingAction, isLoading]);
+    }, [messages, pendingAction, isLoading, messageIds.length, virtualizer]);
 
     if (messageIds.length === 0) {
         return (
@@ -120,18 +117,40 @@ export function ChatMessages({
             onScroll={handleScroll}
             data-chat-scroll
         >
-            {messageIds.map((id, index) => (
-                <ChatMessageWrapper
-                    key={id}
-                    messageId={id}
-                    hasPendingAction={!!pendingAction}
-                    streamingTextRef={
-                        index === messageIds.length - 1 ? streamingTextRef : undefined
-                    }
-                />
-            ))}
+            <div
+                style={{
+                    height: virtualizer.getTotalSize(),
+                    width: "100%",
+                    position: "relative",
+                }}
+            >
+                {virtualizer.getVirtualItems().map((virtualItem) => (
+                    <div
+                        key={messageIds[virtualItem.index]}
+                        data-index={virtualItem.index}
+                        ref={virtualizer.measureElement}
+                        style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            transform: `translateY(${virtualItem.start}px)`,
+                        }}
+                    >
+                        <ChatMessageWrapper
+                            messageId={messageIds[virtualItem.index]}
+                            hasPendingAction={!!pendingAction}
+                            streamingTextRef={
+                                virtualItem.index === messageIds.length - 1
+                                    ? streamingTextRef
+                                    : undefined
+                            }
+                        />
+                    </div>
+                ))}
+            </div>
 
-            {/* Show pending action card */}
+            {/* Show pending action card — rendered outside virtualizer */}
             {pendingAction && (
                 <div className="mb-3">
                     {pendingActions.length > 0 && (
