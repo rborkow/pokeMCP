@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { parseToolToAction } from "@/lib/ai/index";
+import { parseToolToAction } from "@/lib/ai/parse-tool-action";
 import type { TeamPokemon } from "@/types/pokemon";
 
 describe("parseToolToAction", () => {

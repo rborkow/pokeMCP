@@ -13,85 +13,13 @@ vi.stubGlobal("localStorage", localStorageMock);
 
 describe("chat-store", () => {
     beforeEach(() => {
-        // Reset store between tests
         useChatStore.getState().clearChat();
         useChatStore.getState().setPersonality(DEFAULT_PERSONALITY);
-        useChatStore.getState().setLoading(false);
+        // Reset enableThinking to default (false)
+        if (useChatStore.getState().enableThinking) {
+            useChatStore.getState().toggleThinking();
+        }
         vi.clearAllMocks();
-    });
-
-    describe("messages", () => {
-        it("should start with empty messages", () => {
-            expect(useChatStore.getState().messages).toHaveLength(0);
-        });
-
-        it("should add a message and return its id", () => {
-            const id = useChatStore.getState().addMessage({
-                role: "user",
-                content: "Hello",
-            });
-
-            expect(id).toBeTruthy();
-            expect(useChatStore.getState().messages).toHaveLength(1);
-            expect(useChatStore.getState().messages[0].content).toBe("Hello");
-        });
-
-        it("should add timestamp to messages", () => {
-            useChatStore.getState().addMessage({
-                role: "user",
-                content: "Test",
-            });
-
-            const message = useChatStore.getState().messages[0];
-            expect(message.timestamp).toBeInstanceOf(Date);
-        });
-
-        it("should update a message by id", () => {
-            const id = useChatStore.getState().addMessage({
-                role: "assistant",
-                content: "Original",
-            });
-
-            useChatStore.getState().updateMessage(id, { content: "Updated" });
-
-            expect(useChatStore.getState().messages[0].content).toBe("Updated");
-        });
-
-        it("should remove a message by id", () => {
-            const id = useChatStore.getState().addMessage({
-                role: "user",
-                content: "To be removed",
-            });
-
-            useChatStore.getState().removeMessage(id);
-
-            expect(useChatStore.getState().messages).toHaveLength(0);
-        });
-    });
-
-    describe("clearChat", () => {
-        it("should clear all messages", () => {
-            useChatStore.getState().addMessage({ role: "user", content: "1" });
-            useChatStore.getState().addMessage({ role: "assistant", content: "2" });
-
-            useChatStore.getState().clearChat();
-
-            expect(useChatStore.getState().messages).toHaveLength(0);
-        });
-
-        it("should clear pending action", () => {
-            useChatStore.getState().setPendingAction({
-                type: "add_pokemon",
-                slot: 0,
-                payload: { pokemon: "Garchomp" },
-                preview: [],
-                reason: "Test",
-            });
-
-            useChatStore.getState().clearChat();
-
-            expect(useChatStore.getState().pendingAction).toBeNull();
-        });
     });
 
     describe("personality", () => {
@@ -131,49 +59,30 @@ describe("chat-store", () => {
         });
     });
 
-    describe("loading state", () => {
-        it("should default to not loading", () => {
-            expect(useChatStore.getState().isLoading).toBe(false);
+    describe("enableThinking", () => {
+        it("should default to false", () => {
+            expect(useChatStore.getState().enableThinking).toBe(false);
         });
 
-        it("should set loading state", () => {
-            useChatStore.getState().setLoading(true);
+        it("should toggle thinking", () => {
+            useChatStore.getState().toggleThinking();
 
-            expect(useChatStore.getState().isLoading).toBe(true);
+            expect(useChatStore.getState().enableThinking).toBe(true);
+        });
+
+        it("should toggle back to false", () => {
+            useChatStore.getState().toggleThinking();
+            useChatStore.getState().toggleThinking();
+
+            expect(useChatStore.getState().enableThinking).toBe(false);
         });
     });
 
-    describe("pendingAction", () => {
-        it("should default to null", () => {
-            expect(useChatStore.getState().pendingAction).toBeNull();
-        });
+    describe("clearChat", () => {
+        it("should clear persisted messages from localStorage", () => {
+            useChatStore.getState().clearChat();
 
-        it("should set pending action", () => {
-            const action = {
-                type: "add_pokemon" as const,
-                slot: 0,
-                payload: { pokemon: "Garchomp" },
-                preview: [{ pokemon: "Garchomp", moves: [] }],
-                reason: "Test action",
-            };
-
-            useChatStore.getState().setPendingAction(action);
-
-            expect(useChatStore.getState().pendingAction).toEqual(action);
-        });
-
-        it("should clear pending action", () => {
-            useChatStore.getState().setPendingAction({
-                type: "add_pokemon",
-                slot: 0,
-                payload: {},
-                preview: [],
-                reason: "Test",
-            });
-
-            useChatStore.getState().setPendingAction(null);
-
-            expect(useChatStore.getState().pendingAction).toBeNull();
+            expect(localStorageMock.removeItem).toHaveBeenCalledWith("pokemcp-chat-messages");
         });
     });
 

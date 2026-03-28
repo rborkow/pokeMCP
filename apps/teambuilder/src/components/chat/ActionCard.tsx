@@ -13,6 +13,8 @@ import { PokemonSprite } from "@/components/team/PokemonSprite";
 interface ActionCardProps {
     action: TeamAction;
     isApplied?: boolean;
+    onApply?: () => void;
+    onDismiss?: () => void;
 }
 
 const ACTION_LABELS: Record<TeamAction["type"], string> = {
@@ -28,10 +30,9 @@ const ACTION_LABELS: Record<TeamAction["type"], string> = {
     update_move: "Change Move",
 };
 
-export function ActionCard({ action, isApplied = false }: ActionCardProps) {
+export function ActionCard({ action, isApplied = false, onApply, onDismiss }: ActionCardProps) {
     const { team, setPokemon, removePokemon } = useTeamStore();
-    const { setPendingAction, advancePendingAction, addMessage, lastUserPrompt, queuePrompt } =
-        useChatStore();
+    const { lastUserPrompt, queuePrompt } = useChatStore();
     const { pushState } = useHistoryStore();
 
     const hasValidationErrors = action.validationErrors && action.validationErrors.length > 0;
@@ -105,28 +106,16 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
         pushState(action.preview, `Applied: ${action.reason}`, "ai");
 
         // Advance to next queued action (or clear if none)
-        advancePendingAction();
-        addMessage({
-            role: "system",
-            content: `Applied: ${action.reason}`,
-        });
+        onApply?.();
     };
 
     const handleDismiss = () => {
-        advancePendingAction();
-        addMessage({
-            role: "system",
-            content: "Suggestion dismissed",
-        });
+        onDismiss?.();
     };
 
     const handleRetry = () => {
         if (lastUserPrompt) {
-            setPendingAction(null);
-            addMessage({
-                role: "system",
-                content: "Retrying request...",
-            });
+            onDismiss?.();
             queuePrompt(lastUserPrompt);
         }
     };
@@ -176,8 +165,8 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
                             Validation Issues
                         </p>
                         <ul className="text-xs text-destructive/80 space-y-1 list-disc list-inside">
-                            {action.validationErrors?.map((err, i) => (
-                                <li key={i}>{err.message}</li>
+                            {action.validationErrors?.map((err) => (
+                                <li key={err.message}>{err.message}</li>
                             ))}
                         </ul>
                     </div>
@@ -185,7 +174,7 @@ export function ActionCard({ action, isApplied = false }: ActionCardProps) {
 
                 {/* Visual preview of the change */}
                 <div className="flex items-center gap-4">
-                    {/* Replace: show old → new sprites */}
+                    {/* Replace: show old -> new sprites */}
                     {isSpeciesChange && (
                         <>
                             <div className="flex flex-col items-center">

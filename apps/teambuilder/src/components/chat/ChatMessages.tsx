@@ -1,68 +1,55 @@
 "use client";
 
-import { memo, useEffect, useRef, useCallback, type RefObject } from "react";
-import { useShallow } from "zustand/shallow";
-import { useChatStore } from "@/stores/chat-store";
+import { memo, useEffect, useRef, useCallback } from "react";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import type { UIMessage } from "@tanstack/ai-client";
+import type { ChatClientState } from "@tanstack/ai-client";
 import { ChatMessage } from "./ChatMessage";
 import { ActionCard } from "./ActionCard";
-import type { ChatMessage as ChatMessageType } from "@/types/chat";
-import type { StreamingTextHandle } from "./StreamingText";
+import type { TeamAction } from "@/types/chat";
+
+interface ChatMessagesProps {
+    messages: UIMessage[];
+    isLoading: boolean;
+    status: ChatClientState;
+    pendingAction: TeamAction | null;
+    pendingActions: TeamAction[];
+    advancePendingAction: () => void;
+}
 
 /**
- * Wrapper that subscribes to a single message by ID.
- * Only re-renders when *this* message changes — not when siblings update.
+ * Wrapper for a single message — memoised on message identity.
  */
 const ChatMessageWrapper = memo(function ChatMessageWrapper({
-    messageId,
-    hasPendingAction,
-    streamingTextRef,
+    message,
+    isStreaming,
 }: {
-    messageId: string;
-    hasPendingAction: boolean;
-    streamingTextRef?: RefObject<StreamingTextHandle | null>;
+    message: UIMessage;
+    isStreaming: boolean;
 }) {
-    const message = useChatStore(
-        useCallback(
-            (s: { messages: ChatMessageType[] }) => s.messages.find((m) => m.id === messageId),
-            [messageId],
-        ),
-    );
-
-    if (!message) return null;
-
     return (
         <div>
-            <ChatMessage
-                message={message}
-                streamingTextRef={
-                    message.isLoading && message.streamingPhase !== "error"
-                        ? streamingTextRef
-                        : undefined
-                }
-            />
-            {message.action && !hasPendingAction && (
-                <div className="mb-3">
-                    <ActionCard action={message.action} isApplied />
-                </div>
-            )}
+            <ChatMessage message={message} isStreaming={isStreaming} />
         </div>
     );
 });
 
 export function ChatMessages({
-    streamingTextRef,
-}: {
-    streamingTextRef?: RefObject<StreamingTextHandle | null>;
-}) {
-    const messageIds = useChatStore(useShallow((s) => s.messages.map((m) => m.id)));
-    const pendingAction = useChatStore((s) => s.pendingAction);
-    const pendingActions = useChatStore((s) => s.pendingActions);
-    const isLoading = useChatStore((s) => s.isLoading);
-    const messages = useChatStore((s) => s.messages);
-
+    messages,
+    isLoading,
+    pendingAction,
+    pendingActions,
+    advancePendingAction,
+}: ChatMessagesProps) {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const scrollRAFRef = useRef<number>(undefined);
     const isUserScrolledUpRef = useRef(false);
+
+    const virtualizer = useVirtualizer({
+        count: messages.length,
+        getScrollElement: () => scrollContainerRef.current,
+        estimateSize: () => 120,
+        overscan: 3,
+    });
 
     // Track if user has scrolled away from the bottom
     const handleScroll = useCallback(() => {
@@ -73,33 +60,19 @@ export function ChatMessages({
         isUserScrolledUpRef.current = distanceFromBottom > 100;
     }, []);
 
-    // Auto-scroll to bottom on new messages / pending actions (not during
-    // active streaming — StreamingText handles that via data-chat-scroll)
+    // Auto-scroll to bottom on new messages / pending actions
     // biome-ignore lint/correctness/useExhaustiveDependencies: pendingAction intentionally triggers scroll when actions appear
     useEffect(() => {
         if (isUserScrolledUpRef.current) return;
-        // Skip during active streaming — the rAF loop in StreamingText scrolls
-        if (isLoading && messages.some((m) => m.isLoading && m.streamingPhase === "generating"))
-            return;
+        if (messages.length === 0) return;
 
-        if (scrollRAFRef.current) {
-            cancelAnimationFrame(scrollRAFRef.current);
-        }
-        scrollRAFRef.current = requestAnimationFrame(() => {
-            const container = scrollContainerRef.current;
-            if (container) {
-                container.scrollTo({
-                    top: container.scrollHeight,
-                    behavior: isLoading ? "instant" : "smooth",
-                });
-            }
+        virtualizer.scrollToIndex(messages.length - 1, {
+            align: "end",
+            behavior: isLoading ? "auto" : "smooth",
         });
-        return () => {
-            if (scrollRAFRef.current) cancelAnimationFrame(scrollRAFRef.current);
-        };
-    }, [messages, pendingAction, isLoading]);
+    }, [messages, pendingAction, isLoading, messages.length, virtualizer]);
 
-    if (messageIds.length === 0) {
+    if (messages.length === 0) {
         return (
             <div className="flex-1 flex items-center justify-center p-8">
                 <div className="text-center space-y-2">
@@ -120,18 +93,39 @@ export function ChatMessages({
             onScroll={handleScroll}
             data-chat-scroll
         >
-            {messageIds.map((id, index) => (
-                <ChatMessageWrapper
-                    key={id}
-                    messageId={id}
-                    hasPendingAction={!!pendingAction}
-                    streamingTextRef={
-                        index === messageIds.length - 1 ? streamingTextRef : undefined
-                    }
-                />
-            ))}
+            <div
+                style={{
+                    height: virtualizer.getTotalSize(),
+                    width: "100%",
+                    position: "relative",
+                }}
+            >
+                {virtualizer.getVirtualItems().map((virtualItem) => {
+                    const msg = messages[virtualItem.index];
+                    const isLast = virtualItem.index === messages.length - 1;
+                    return (
+                        <div
+                            key={msg.id}
+                            data-index={virtualItem.index}
+                            ref={virtualizer.measureElement}
+                            style={{
+                                position: "absolute",
+                                top: 0,
+                                left: 0,
+                                width: "100%",
+                                transform: `translateY(${virtualItem.start}px)`,
+                            }}
+                        >
+                            <ChatMessageWrapper
+                                message={msg}
+                                isStreaming={isLast && isLoading && msg.role === "assistant"}
+                            />
+                        </div>
+                    );
+                })}
+            </div>
 
-            {/* Show pending action card */}
+            {/* Show pending action card — rendered outside virtualizer */}
             {pendingAction && (
                 <div className="mb-3">
                     {pendingActions.length > 0 && (
@@ -139,7 +133,11 @@ export function ChatMessages({
                             Change 1 of {pendingActions.length + 1}
                         </p>
                     )}
-                    <ActionCard action={pendingAction} />
+                    <ActionCard
+                        action={pendingAction}
+                        onApply={advancePendingAction}
+                        onDismiss={advancePendingAction}
+                    />
                 </div>
             )}
         </div>
