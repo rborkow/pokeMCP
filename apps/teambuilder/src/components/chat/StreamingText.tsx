@@ -1,9 +1,17 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useImperativeHandle, forwardRef } from "react";
 
-interface StreamingTextProps {
-    content: string;
+/**
+ * Handle exposed by StreamingText for pushing content without React re-renders.
+ */
+export interface StreamingTextHandle {
+    /** Append a delta to the target content. The rAF loop reveals it smoothly. */
+    pushDelta: (delta: string) => void;
+    /** Replace the full target content (used for initial/reset). */
+    setContent: (content: string) => void;
+    /** Return the full accumulated content so far. */
+    getContent: () => string;
 }
 
 /**
@@ -36,78 +44,110 @@ function renderTextToElement(el: HTMLElement, text: string) {
  * Lightweight streaming text renderer that animates new characters in
  * progressively rather than stamping entire chunks at once.
  *
- * When `content` grows, the delta is revealed ~2-3 characters per frame
- * via requestAnimationFrame, giving a smooth typewriter effect.
- * Only used during active streaming — completed messages use ReactMarkdown.
+ * Accepts an imperative handle (ref) so the parent can push deltas
+ * directly, avoiding React re-renders during active streaming.
+ * A built-in rAF loop reveals ~2-3 characters per frame for a smooth
+ * typewriter effect and auto-scrolls the nearest scrollable ancestor.
  */
-export function StreamingText({ content }: StreamingTextProps) {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const rafRef = useRef<number>(undefined);
-    // How many characters of `content` are currently visible in the DOM
-    const displayedLenRef = useRef(0);
-    // The latest target content (updated by each render via effect)
-    const targetRef = useRef(content);
+export const StreamingText = forwardRef<StreamingTextHandle, { content?: string }>(
+    function StreamingText({ content }, ref) {
+        const containerRef = useRef<HTMLDivElement>(null);
+        const rafRef = useRef<number>(undefined);
+        const displayedLenRef = useRef(0);
+        const targetRef = useRef(content ?? "");
 
-    useEffect(() => {
-        targetRef.current = content;
+        // Stable function refs — these never change identity, satisfying the
+        // exhaustive-deps lint without introducing circular declaration issues.
+        const tickRef = useRef<() => void>(null!);
+        const ensureLoopRef = useRef<() => void>(null!);
 
-        // If this is the first render or content was reset, show what we have instantly
-        if (displayedLenRef.current === 0 && content.length > 0) {
-            const el = containerRef.current;
-            if (el) {
-                renderTextToElement(el, content);
-                displayedLenRef.current = content.length;
-            }
-            return;
-        }
-
-        // Already animating? The existing rAF loop will pick up the new target.
-        if (rafRef.current) return;
-
-        function tick() {
+        tickRef.current = () => {
             const target = targetRef.current;
             const displayed = displayedLenRef.current;
 
             if (displayed >= target.length) {
-                // Caught up — stop the loop, wait for next content update
                 rafRef.current = undefined;
                 return;
             }
 
-            // Reveal 2-3 chars per frame (~120-180 chars/sec at 60fps)
-            // Enough to feel smooth without lagging behind fast tokens
-            const step = Math.max(2, Math.ceil((target.length - displayed) / 8));
+            // Reveal characters: adaptive step — faster when far behind, slower when close
+            const remaining = target.length - displayed;
+            const step = Math.max(2, Math.ceil(remaining / 8));
             const nextLen = Math.min(displayed + step, target.length);
             displayedLenRef.current = nextLen;
 
             const el = containerRef.current;
             if (el) {
                 renderTextToElement(el, target.slice(0, nextLen));
+
+                // Auto-scroll within the same frame to avoid layout shift
+                const scroller = el.closest("[data-chat-scroll]");
+                if (scroller) {
+                    scroller.scrollTop = scroller.scrollHeight;
+                }
             }
 
-            rafRef.current = requestAnimationFrame(tick);
-        }
-
-        rafRef.current = requestAnimationFrame(tick);
-
-        return () => {
-            if (rafRef.current) {
-                cancelAnimationFrame(rafRef.current);
-                rafRef.current = undefined;
-            }
+            rafRef.current = requestAnimationFrame(() => tickRef.current());
         };
-    }, [content]);
 
-    // On unmount, flush any remaining content so the transition to
-    // ReactMarkdown doesn't flash a shorter string
-    useEffect(() => {
-        return () => {
-            if (rafRef.current) {
-                cancelAnimationFrame(rafRef.current);
-                rafRef.current = undefined;
-            }
+        ensureLoopRef.current = () => {
+            if (rafRef.current) return;
+            rafRef.current = requestAnimationFrame(() => tickRef.current());
         };
-    }, []);
 
-    return <div ref={containerRef} className="chat-markdown streaming text-sm" />;
-}
+        // Expose imperative handle for zero-re-render streaming
+        useImperativeHandle(
+            ref,
+            () => ({
+                pushDelta(delta: string) {
+                    targetRef.current += delta;
+                    ensureLoopRef.current();
+                },
+                setContent(text: string) {
+                    targetRef.current = text;
+                    ensureLoopRef.current();
+                },
+                getContent() {
+                    return targetRef.current;
+                },
+            }),
+            [],
+        );
+
+        // Sync from prop when content is provided (initial render / fallback)
+        useEffect(() => {
+            if (content === undefined) return;
+            targetRef.current = content;
+
+            if (displayedLenRef.current === 0 && content.length > 0) {
+                const el = containerRef.current;
+                if (el) {
+                    renderTextToElement(el, content);
+                    displayedLenRef.current = content.length;
+                }
+                return;
+            }
+
+            ensureLoopRef.current();
+
+            return () => {
+                if (rafRef.current) {
+                    cancelAnimationFrame(rafRef.current);
+                    rafRef.current = undefined;
+                }
+            };
+        }, [content]);
+
+        // Cleanup on unmount
+        useEffect(() => {
+            return () => {
+                if (rafRef.current) {
+                    cancelAnimationFrame(rafRef.current);
+                    rafRef.current = undefined;
+                }
+            };
+        }, []);
+
+        return <div ref={containerRef} className="chat-markdown streaming text-sm" />;
+    },
+);

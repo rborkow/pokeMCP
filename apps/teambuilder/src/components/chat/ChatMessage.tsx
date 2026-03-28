@@ -1,15 +1,17 @@
 "use client";
 
-import { memo, useMemo } from "react";
+import { memo, useMemo, type RefObject } from "react";
 import type { ChatMessage as ChatMessageType, StreamingPhase } from "@/types/chat";
 import { Bot, User, Loader2, Wrench } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ThinkingCollapsible } from "./ThinkingCollapsible";
-import { StreamingText } from "./StreamingText";
+import { StreamingText, type StreamingTextHandle } from "./StreamingText";
 
 interface ChatMessageProps {
     message: ChatMessageType;
+    /** Imperative handle ref — set only on the actively streaming message */
+    streamingTextRef?: RefObject<StreamingTextHandle | null>;
 }
 
 function StreamingIndicator({
@@ -60,7 +62,7 @@ function StreamingIndicator({
     }
 }
 
-export const ChatMessage = memo(function ChatMessage({ message }: ChatMessageProps) {
+export const ChatMessage = memo(function ChatMessage({ message, streamingTextRef }: ChatMessageProps) {
     const isUser = message.role === "user";
     const isSystem = message.role === "system";
 
@@ -109,6 +111,10 @@ export const ChatMessage = memo(function ChatMessage({ message }: ChatMessagePro
         );
     }
 
+    // Is this the actively streaming message with delta-based rendering?
+    const isActiveStreaming =
+        message.isLoading && streamingTextRef && message.streamingPhase === "generating";
+
     // Assistant message — full-width, no bubble, maximize content space
     return (
         <div className="py-3 space-y-1">
@@ -133,12 +139,16 @@ export const ChatMessage = memo(function ChatMessage({ message }: ChatMessagePro
                 />
             )}
 
-            {message.isLoading && !message.content ? (
+            {isActiveStreaming ? (
+                /* Streaming: StreamingText gets deltas via ref — no React re-renders */
+                <StreamingText ref={streamingTextRef} />
+            ) : message.isLoading && !message.content ? (
                 <StreamingIndicator
                     phase={message.streamingPhase}
                     buildingStatus={message.buildingStatus}
                 />
             ) : message.isLoading && message.content ? (
+                /* Fallback for content set before streaming handle is ready */
                 <StreamingText content={message.content} />
             ) : message.content ? (
                 <div className="chat-markdown text-sm">{renderedContent}</div>
