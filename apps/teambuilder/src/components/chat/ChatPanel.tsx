@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useCallback, useRef } from "react";
+import { useEffect, useCallback, useMemo, useRef, useState } from "react";
+import { useChat } from "@tanstack/ai-react";
+import type { UIMessage } from "@tanstack/ai-client";
 import { Button } from "@/components/ui/button";
 import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
@@ -9,50 +11,87 @@ import { PersonalitySelector } from "./PersonalitySelector";
 import { useChatStore } from "@/stores/chat-store";
 import { useTeamStore } from "@/stores/team-store";
 import { useHistoryStore } from "@/stores/history-store";
-import { streamChatMessage } from "@/lib/ai";
+import { createPokemonChatConnection } from "@/lib/ai/connection";
+import { modifyTeamTool } from "@/lib/ai/tools-tanstack";
+import { parseToolToAction } from "@/lib/ai/parse-tool-action";
 import { Trash2 } from "lucide-react";
 import type { TeamAction } from "@/types/chat";
-import type { StreamingMarkdownHandle } from "./StreamingMarkdown";
+import type { ModifyTeamInput } from "@/lib/ai/tools";
 
-function getErrorMessage(error: Error): string {
-    const errorType = (error as Error & { errorType?: string }).errorType;
-    switch (errorType) {
-        case "rate_limit":
-            return "You're sending messages too quickly. Please wait a moment and try again.";
-        case "network":
-            return "Network error — please check your connection and try again.";
-        case "api":
-            return "The AI service is temporarily unavailable. Please try again in a moment.";
-        default:
-            return `Error: ${error.message}`;
+const MESSAGES_STORAGE_KEY = "pokemcp-chat-messages";
+
+/**
+ * Serialize UIMessages for localStorage.
+ * Strips any non-serialisable data; createdAt becomes an ISO string.
+ */
+function serializeMessages(messages: UIMessage[]): string {
+    return JSON.stringify(
+        messages.map((m) => ({
+            ...m,
+            createdAt: m.createdAt?.toISOString?.() ?? undefined,
+        })),
+    );
+}
+
+/**
+ * Deserialise UIMessages from localStorage, rehydrating Date objects.
+ */
+function deserializeMessages(raw: string): UIMessage[] {
+    try {
+        const parsed = JSON.parse(raw) as UIMessage[];
+        return parsed.map((m) => ({
+            ...m,
+            createdAt: m.createdAt ? new Date(m.createdAt) : undefined,
+        }));
+    } catch {
+        return [];
     }
 }
 
 export function ChatPanel() {
-    const {
-        messages,
-        isLoading,
-        addMessage,
-        setLoading,
-        setPendingAction,
-        setPendingActions,
-        clearChat,
-        personality: personalityId,
-        enableThinking,
-        queuedPrompt,
-        clearQueuedPrompt,
-        setLastUserPrompt,
-    } = useChatStore();
-    const { team, format, mode, setPokemon } = useTeamStore();
+    const { team, setPokemon } = useTeamStore();
     const { pushState } = useHistoryStore();
 
-    // Ref to the active StreamingMarkdown imperative handle — set by ChatMessages
-    const streamingTextRef = useRef<StreamingMarkdownHandle | null>(null);
+    const queuedPrompt = useChatStore((s) => s.queuedPrompt);
+    const clearQueuedPrompt = useChatStore((s) => s.clearQueuedPrompt);
+    const setLastUserPrompt = useChatStore((s) => s.setLastUserPrompt);
+    const storeClearChat = useChatStore((s) => s.clearChat);
+
+    // Pending actions for tool approval UI
+    const [pendingAction, setPendingAction] = useState<TeamAction | null>(null);
+    const [pendingActions, setPendingActions] = useState<TeamAction[]>([]);
+
+    // Stable connection — reads context lazily from store.getState()
+    const connection = useMemo(
+        () =>
+            createPokemonChatConnection(() => ({
+                team: useTeamStore.getState().team,
+                format: useTeamStore.getState().format,
+                mode: useTeamStore.getState().mode,
+                personality: useChatStore.getState().personality,
+                enableThinking: useChatStore.getState().enableThinking,
+            })),
+        [],
+    );
+
+    // Load persisted messages on mount
+    const initialMessages = useMemo(() => {
+        if (typeof window === "undefined") return [];
+        const raw = localStorage.getItem(MESSAGES_STORAGE_KEY);
+        return raw ? deserializeMessages(raw) : [];
+    }, []);
+
+    const tools = useMemo(() => [modifyTeamTool] as const, []);
+
+    const { messages, sendMessage, stop, clear, isLoading, status } = useChat({
+        connection,
+        tools,
+        initialMessages,
+    });
 
     // Apply multiple actions (for team generation)
     const applyActions = useCallback(
         (actions: TeamAction[]) => {
-            // Apply each action
             actions.forEach((action, index) => {
                 if (action.payload?.pokemon) {
                     setPokemon(index, {
@@ -68,7 +107,6 @@ export function ChatPanel() {
                 }
             });
 
-            // Save to history
             const lastAction = actions[actions.length - 1];
             if (lastAction?.preview) {
                 pushState(lastAction.preview, `Generated ${actions.length} Pokemon team`);
@@ -77,145 +115,112 @@ export function ChatPanel() {
         [setPokemon, pushState],
     );
 
+    // Persist messages to localStorage
+    const prevMessagesRef = useRef(messages);
+    useEffect(() => {
+        if (messages !== prevMessagesRef.current) {
+            prevMessagesRef.current = messages;
+            try {
+                localStorage.setItem(MESSAGES_STORAGE_KEY, serializeMessages(messages));
+            } catch {
+                // localStorage full — ignore
+            }
+        }
+    }, [messages]);
+
+    // Process tool calls from assistant messages into TeamActions
+    // This runs when messages change and detects new tool-call parts needing approval
+    const processedToolCallsRef = useRef(new Set<string>());
+    const teamRef = useRef(team);
+    teamRef.current = team;
+    const applyActionsRef = useRef(applyActions);
+    applyActionsRef.current = applyActions;
+
+    useEffect(() => {
+        if (isLoading) return; // Wait until stream finishes
+
+        const currentTeamSnapshot = teamRef.current;
+        const newActions: TeamAction[] = [];
+        let currentTeam = [...currentTeamSnapshot];
+
+        for (const msg of messages) {
+            if (msg.role !== "assistant") continue;
+            for (const part of msg.parts) {
+                if (part.type !== "tool-call") continue;
+                if (processedToolCallsRef.current.has(part.id)) continue;
+                if (part.state !== "approval-requested") continue;
+
+                processedToolCallsRef.current.add(part.id);
+
+                // Parse tool input to TeamAction
+                const input = (typeof part.input === "object" ? part.input : undefined) as
+                    | ModifyTeamInput
+                    | undefined;
+                if (!input) continue;
+
+                const action = parseToolToAction(input, currentTeam, newActions.length);
+                if (action) {
+                    // Attach the approval ID so we can respond later
+                    (action as TeamAction & { _approvalId?: string })._approvalId =
+                        part.approval?.id;
+                    newActions.push(action);
+                    currentTeam = action.preview;
+                }
+            }
+        }
+
+        if (newActions.length === 0) return;
+
+        // Auto-apply for team generation (all adds to empty team)
+        const isTeamGeneration =
+            newActions.length > 1 &&
+            currentTeamSnapshot.length === 0 &&
+            newActions.every((a) => a.type === "add_pokemon");
+
+        if (isTeamGeneration) {
+            applyActionsRef.current(newActions);
+        } else if (newActions.length === 1) {
+            setPendingAction(newActions[0]);
+        } else {
+            setPendingAction(newActions[0]);
+            setPendingActions(newActions.slice(1));
+        }
+    }, [messages, isLoading]);
+
+    const advancePendingAction = useCallback(() => {
+        if (pendingActions.length === 0) {
+            setPendingAction(null);
+            setPendingActions([]);
+            return;
+        }
+        setPendingAction(pendingActions[0]);
+        setPendingActions((prev) => prev.slice(1));
+    }, [pendingActions]);
+
     const handleSend = useCallback(
         async (content: string) => {
-            // Save the user prompt for retry functionality
             setLastUserPrompt(content);
-
-            // Get current messages before adding new ones (for chat history context)
-            const currentMessages = useChatStore.getState().messages;
-
-            // Add user message
-            addMessage({ role: "user", content });
-
-            // Add streaming message placeholder
-            const streamingId = addMessage({
-                role: "assistant",
-                content: "",
-                isLoading: true,
-                streamingPhase: "connecting",
-            });
-
-            // Create abort controller and start stream
-            const controller = useChatStore.getState().startStream();
-
-            // Use streaming for Claude
-            await streamChatMessage({
-                message: content,
-                team,
-                format,
-                mode,
-                personality: personalityId,
-                enableThinking,
-                chatHistory: currentMessages,
-                signal: controller.signal,
-                onChunk: () => {
-                    // No-op during streaming — StreamingMarkdown handles rendering
-                    // via the imperative ref. Content is flushed in onComplete.
-                },
-                onTextDelta: (delta) => {
-                    // Push deltas directly to StreamingMarkdown — zero React re-renders
-                    streamingTextRef.current?.pushDelta(delta);
-                },
-                onThinking: (_isThinking, thinkingText) => {
-                    if (thinkingText) {
-                        useChatStore.getState().updateMessage(streamingId, {
-                            thinkingContent: thinkingText,
-                            streamingPhase: "thinking",
-                        });
-                    }
-                },
-                onToolUse: (pokemonName, count) => {
-                    useChatStore.getState().updateMessage(streamingId, {
-                        buildingStatus: `Adding ${pokemonName}... (${count}/6)`,
-                        isLoading: true,
-                        streamingPhase: "tool_calling",
-                    });
-                },
-                onPhaseChange: (phase) => {
-                    // Only update store for phase changes (not every text delta)
-                    if (phase === "generating") {
-                        // Mark as generating once — StreamingMarkdown takes over rendering
-                        useChatStore.getState().updateMessage(streamingId, {
-                            streamingPhase: "generating",
-                            isLoading: true,
-                        });
-                    } else {
-                        useChatStore.getState().updateMessage(streamingId, {
-                            streamingPhase: phase,
-                        });
-                    }
-                },
-                onComplete: (response) => {
-                    // Finalize the message with full content from the stream
-                    const finalContent =
-                        streamingTextRef.current?.getContent() || response.content;
-                    useChatStore.getState().updateMessage(streamingId, {
-                        content: finalContent,
-                        isLoading: false,
-                        streamingPhase: "complete",
-                        action: response.action,
-                    });
-
-                    // Clear abort controller
-                    useChatStore.getState().abortStream();
-                    setLoading(false);
-
-                    // Auto-apply only for team generation (all adds to empty team)
-                    const isTeamGeneration =
-                        response.actions &&
-                        response.actions.length > 1 &&
-                        team.length === 0 &&
-                        response.actions.every((a) => a.type === "add_pokemon");
-
-                    if (isTeamGeneration) {
-                        applyActions(response.actions!);
-                    } else if (response.actions && response.actions.length > 1) {
-                        // Multiple non-generation actions: queue for sequential review
-                        setPendingActions(response.actions);
-                    } else if (response.action) {
-                        // Single action - set as pending for user confirmation
-                        setPendingAction(response.action);
-                    }
-                },
-                onError: (error) => {
-                    useChatStore.getState().updateMessage(streamingId, {
-                        content: getErrorMessage(error),
-                        isLoading: false,
-                        streamingPhase: "error",
-                    });
-                    useChatStore.getState().abortStream();
-                    setLoading(false);
-                },
-            });
+            await sendMessage(content);
         },
-        [
-            addMessage,
-            setLoading,
-            setLastUserPrompt,
-            team,
-            format,
-            mode,
-            personalityId,
-            enableThinking,
-            setPendingAction,
-            setPendingActions,
-            applyActions,
-        ],
+        [sendMessage, setLastUserPrompt],
     );
 
     const handleStop = useCallback(() => {
-        // Persist whatever content StreamingMarkdown has accumulated
-        const messages = useChatStore.getState().messages;
-        const lastMsg = messages[messages.length - 1];
-        if (lastMsg?.isLoading && streamingTextRef.current) {
-            const content = streamingTextRef.current.getContent();
-            if (content) {
-                useChatStore.getState().updateMessage(lastMsg.id, { content });
-            }
+        stop();
+    }, [stop]);
+
+    const handleClear = useCallback(() => {
+        clear();
+        storeClearChat();
+        setPendingAction(null);
+        setPendingActions([]);
+        processedToolCallsRef.current.clear();
+        try {
+            localStorage.removeItem(MESSAGES_STORAGE_KEY);
+        } catch {
+            // ignore
         }
-        useChatStore.getState().abortStream();
-    }, []);
+    }, [clear, storeClearChat]);
 
     // Watch for queued prompts from WelcomeOverlay
     useEffect(() => {
@@ -234,7 +239,7 @@ export function ChatPanel() {
                     <Button
                         variant="ghost"
                         size="sm"
-                        onClick={clearChat}
+                        onClick={handleClear}
                         disabled={isLoading}
                         className="h-7 px-2 text-muted-foreground hover:text-destructive"
                     >
@@ -246,7 +251,14 @@ export function ChatPanel() {
 
             <SuggestedPrompts onSelect={handleSend} disabled={isLoading} />
 
-            <ChatMessages streamingTextRef={streamingTextRef} />
+            <ChatMessages
+                messages={messages}
+                isLoading={isLoading}
+                status={status}
+                pendingAction={pendingAction}
+                pendingActions={pendingActions}
+                advancePendingAction={advancePendingAction}
+            />
             <ChatInput
                 onSend={handleSend}
                 onStop={handleStop}

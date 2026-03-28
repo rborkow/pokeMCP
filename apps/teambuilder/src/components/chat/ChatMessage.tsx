@@ -1,94 +1,64 @@
 "use client";
 
-import { memo, useMemo, type RefObject } from "react";
-import type { ChatMessage as ChatMessageType, StreamingPhase } from "@/types/chat";
-import { Bot, User, Loader2, Wrench } from "lucide-react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { memo, useMemo } from "react";
+import type { UIMessage, MessagePart } from "@tanstack/ai-client";
+import { Bot, User, Loader2 } from "lucide-react";
+import { MemoizedMarkdown } from "./MemoizedMarkdown";
+import { StreamingMarkdown } from "./StreamingMarkdown";
 import { ThinkingCollapsible } from "./ThinkingCollapsible";
-import { StreamingMarkdown, type StreamingMarkdownHandle } from "./StreamingMarkdown";
 
 interface ChatMessageProps {
-    message: ChatMessageType;
-    /** Imperative handle ref — set only on the actively streaming message */
-    streamingTextRef?: RefObject<StreamingMarkdownHandle | null>;
+    message: UIMessage;
+    /** Whether this message is actively being streamed */
+    isStreaming: boolean;
 }
 
-function StreamingIndicator({
-    phase,
-    buildingStatus,
-}: {
-    phase?: StreamingPhase;
-    buildingStatus?: string;
-}) {
-    switch (phase) {
-        case "connecting":
-            return (
-                <div className="flex items-center gap-2">
-                    <Loader2 className="h-3.5 w-3.5 animate-spin text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">Connecting...</span>
-                </div>
-            );
-        case "thinking":
-            // ThinkingCollapsible handles this display
-            return null;
-        case "tool_calling":
-            return (
-                <div className="flex items-center gap-2">
-                    <Wrench className="h-3.5 w-3.5 animate-pulse text-primary" />
-                    <span className="text-sm text-muted-foreground">
-                        {buildingStatus || "Modifying team..."}
-                    </span>
-                </div>
-            );
-        default:
-            // "generating" or fallback — bouncing dots
-            return (
-                <div className="flex items-center gap-1">
-                    <span
-                        className="w-2 h-2 bg-current rounded-full animate-bounce"
-                        style={{ animationDelay: "0ms" }}
-                    />
-                    <span
-                        className="w-2 h-2 bg-current rounded-full animate-bounce"
-                        style={{ animationDelay: "150ms" }}
-                    />
-                    <span
-                        className="w-2 h-2 bg-current rounded-full animate-bounce"
-                        style={{ animationDelay: "300ms" }}
-                    />
-                </div>
-            );
-    }
+/**
+ * Extract all text content from a UIMessage's parts.
+ */
+function getTextContent(parts: MessagePart[]): string {
+    return parts
+        .filter((p): p is MessagePart & { type: "text" } => p.type === "text")
+        .map((p) => p.content)
+        .join("");
 }
 
-export const ChatMessage = memo(function ChatMessage({ message, streamingTextRef }: ChatMessageProps) {
+/**
+ * Extract all thinking content from a UIMessage's parts.
+ */
+function getThinkingContent(parts: MessagePart[]): string {
+    return parts
+        .filter((p): p is MessagePart & { type: "thinking" } => p.type === "thinking")
+        .map((p) => p.content)
+        .join("\n");
+}
+
+/**
+ * Check whether any tool-call parts exist.
+ */
+function hasToolCalls(parts: MessagePart[]): boolean {
+    return parts.some((p) => p.type === "tool-call");
+}
+
+export const ChatMessage = memo(function ChatMessage({ message, isStreaming }: ChatMessageProps) {
     const isUser = message.role === "user";
     const isSystem = message.role === "system";
 
-    const renderedContent = useMemo(
-        () =>
-            message.content ? (
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
-            ) : null,
-        [message.content],
-    );
+    const textContent = useMemo(() => getTextContent(message.parts), [message.parts]);
+    const thinkingContent = useMemo(() => getThinkingContent(message.parts), [message.parts]);
+    const hasTools = useMemo(() => hasToolCalls(message.parts), [message.parts]);
+
+    const timestamp = message.createdAt;
 
     if (isSystem) {
         return (
             <div className="flex justify-center py-2">
                 <span className="text-xs text-muted-foreground bg-muted px-3 py-1 rounded-full">
-                    {message.content}
+                    {textContent}
                 </span>
             </div>
         );
     }
-
-    // Determine if thinking collapsible should show as active
-    const isThinkingActive =
-        message.isLoading === true &&
-        !message.content &&
-        (message.streamingPhase === "thinking" || !message.streamingPhase);
 
     if (isUser) {
         return (
@@ -98,60 +68,59 @@ export const ChatMessage = memo(function ChatMessage({ message, streamingTextRef
                 </div>
                 <div className="flex-1 max-w-[85%] text-right space-y-1">
                     <div className="inline-block px-3 py-2 rounded-2xl bg-primary text-primary-foreground rounded-tr-sm">
-                        <div className="text-sm">{message.content}</div>
+                        <div className="text-sm">{textContent}</div>
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                        {message.timestamp.toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                        })}
-                    </p>
+                    {timestamp && (
+                        <p className="text-xs text-muted-foreground">
+                            {timestamp.toLocaleTimeString([], {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                            })}
+                        </p>
+                    )}
                 </div>
             </div>
         );
     }
 
-    // Is this the actively streaming message with delta-based rendering?
-    const isActiveStreaming =
-        message.isLoading && streamingTextRef && message.streamingPhase === "generating";
+    // Determine if the thinking is currently active
+    const isThinkingActive = isStreaming && !textContent && !hasTools;
 
-    // Assistant message — full-width, no bubble, maximize content space
+    // Assistant message — full-width, no bubble
     return (
         <div className="py-3 space-y-1">
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <Bot className="h-3.5 w-3.5" />
                 <span>Assistant</span>
-                <span className="ml-auto">
-                    {message.timestamp.toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                    })}
-                </span>
+                {timestamp && (
+                    <span className="ml-auto">
+                        {timestamp.toLocaleTimeString([], {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                        })}
+                    </span>
+                )}
             </div>
 
-            {(message.thinkingContent || isThinkingActive) && (
+            {/* Thinking content */}
+            {(thinkingContent || isThinkingActive) && (
                 <ThinkingCollapsible
-                    content={message.thinkingContent || ""}
-                    isActive={
-                        isThinkingActive ||
-                        (message.isLoading === true && message.streamingPhase === "thinking")
-                    }
+                    content={thinkingContent}
+                    isActive={isStreaming && (!textContent || thinkingContent.length > 0)}
                 />
             )}
 
-            {isActiveStreaming ? (
-                /* Streaming: StreamingMarkdown gets deltas via ref — no React re-renders */
-                <StreamingMarkdown ref={streamingTextRef} />
-            ) : message.isLoading && !message.content ? (
-                <StreamingIndicator
-                    phase={message.streamingPhase}
-                    buildingStatus={message.buildingStatus}
-                />
-            ) : message.isLoading && message.content ? (
-                /* Fallback for content set before streaming handle is ready */
-                <StreamingMarkdown content={message.content} />
-            ) : message.content ? (
-                <div className="chat-markdown text-sm">{renderedContent}</div>
+            {/* Text content */}
+            {isStreaming && textContent ? (
+                <StreamingMarkdown content={textContent} />
+            ) : textContent ? (
+                <MemoizedMarkdown content={textContent} />
+            ) : isStreaming && !thinkingContent && !hasTools ? (
+                /* Loading indicator when streaming has started but no content yet */
+                <div className="flex items-center gap-2">
+                    <Loader2 className="h-3.5 w-3.5 animate-spin text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">Connecting...</span>
+                </div>
             ) : null}
         </div>
     );
