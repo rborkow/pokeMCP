@@ -213,7 +213,11 @@ interface StreamChatMessageOptions {
 }
 
 /**
- * Send a chat message to Claude with streaming response
+ * Send a chat message to Claude with streaming response.
+ *
+ * The server returns AG-UI protocol events via TanStack AI's
+ * toServerSentEventsResponse(). This function parses them into
+ * the same callback interface used by the rest of the chat UI.
  */
 export async function streamChatMessage({
     message,
@@ -270,8 +274,11 @@ export async function streamChatMessage({
         let fullContent = "";
         let thinkingContent = "";
         let isCurrentlyThinking = false;
-        let buffer = ""; // Buffer for incomplete SSE events
-        const toolCalls: ModifyTeamInput[] = []; // Accumulate tool calls
+        let buffer = "";
+        const toolCalls: ModifyTeamInput[] = [];
+        // Map of toolCallId -> accumulated JSON args string
+        const toolArgsMap = new Map<string, string>();
+        const toolNameMap = new Map<string, string>();
 
         // Throttle onChunk to reduce markdown re-renders
         let lastChunkTime = 0;
@@ -281,152 +288,173 @@ export async function streamChatMessage({
             const { done, value } = await reader.read();
             if (done) break;
 
-            // Append new data to buffer
             buffer += decoder.decode(value, { stream: true });
 
             // Process complete SSE events (they end with \n\n)
             const events = buffer.split("\n\n");
-            // Keep the last potentially incomplete event in buffer
             buffer = events.pop() || "";
 
             for (const event of events) {
                 const lines = event.split("\n");
                 for (const line of lines) {
-                    if (line.startsWith("data: ")) {
-                        const data = line.slice(6);
-                        if (data === "[DONE]") {
-                            // Ensure final content is flushed
-                            onChunk(fullContent);
+                    if (!line.startsWith("data: ")) continue;
+                    const data = line.slice(6);
+                    if (!data || data === "[DONE]") continue;
 
-                            // Stream complete - convert tool calls to TeamActions
-                            const actions: TeamAction[] = [];
-                            let currentTeam = [...team];
-                            for (const toolInput of toolCalls) {
-                                const action = parseToolToAction(
-                                    toolInput,
-                                    currentTeam,
-                                    actions.length,
-                                );
-                                if (action) {
-                                    actions.push(action);
-                                    currentTeam = action.preview;
+                    try {
+                        const parsed = JSON.parse(data);
+                        const eventType = parsed.type as string;
+
+                        switch (eventType) {
+                            case "RUN_STARTED":
+                                onPhaseChange?.("generating");
+                                break;
+
+                            case "TEXT_MESSAGE_START":
+                                if (!isCurrentlyThinking) {
+                                    onPhaseChange?.("generating");
                                 }
+                                break;
+
+                            case "TEXT_MESSAGE_CONTENT": {
+                                const delta = parsed.delta as string;
+                                if (delta) {
+                                    fullContent += delta;
+                                    onTextDelta?.(delta);
+
+                                    const now = Date.now();
+                                    if (now - lastChunkTime > CHUNK_THROTTLE_MS) {
+                                        onChunk(fullContent);
+                                        lastChunkTime = now;
+                                    }
+                                }
+                                break;
                             }
 
-                            onPhaseChange?.("complete");
-                            onComplete({
-                                content: fullContent,
-                                action: actions[0],
-                                actions: actions.length > 1 ? actions : undefined,
-                            });
-                            return;
-                        }
-
-                        try {
-                            const parsed = JSON.parse(data);
-
-                            // Handle server-sent error events
-                            if (parsed.error) {
-                                const error = new Error(parsed.error);
-                                (error as Error & { errorType?: string }).errorType = "api";
-                                throw error;
-                            }
-
-                            // Handle phase change events from server
-                            if (parsed.phase) {
-                                onPhaseChange?.(parsed.phase as StreamingPhase);
-                            }
-
-                            // Handle thinking state changes
-                            if (parsed.thinking !== undefined) {
-                                if (parsed.thinking === true && !isCurrentlyThinking) {
-                                    // Starting thinking
+                            case "STEP_STARTED":
+                                if (parsed.stepType === "thinking") {
                                     isCurrentlyThinking = true;
                                     thinkingContent = "";
+                                    onPhaseChange?.("thinking");
                                     onThinking?.(true, "");
-                                } else if (parsed.thinking === false && isCurrentlyThinking) {
-                                    // Finished thinking
+                                }
+                                break;
+
+                            case "STEP_FINISHED":
+                                if (parsed.delta) {
+                                    // Thinking content delta
+                                    thinkingContent = parsed.content || thinkingContent + parsed.delta;
+                                    onThinking?.(true, thinkingContent);
+                                } else if (isCurrentlyThinking) {
+                                    // Thinking phase complete (no delta = final event)
                                     isCurrentlyThinking = false;
                                     onThinking?.(false, thinkingContent);
                                 }
+                                break;
 
-                                // Accumulate thinking text
-                                if (parsed.thinking === true && parsed.text) {
-                                    thinkingContent += parsed.text;
-                                    onThinking?.(true, thinkingContent);
-                                }
+                            case "TOOL_CALL_START": {
+                                onPhaseChange?.("tool_calling");
+                                const toolCallId = parsed.toolCallId as string;
+                                const toolName = parsed.toolName as string;
+                                toolArgsMap.set(toolCallId, "");
+                                toolNameMap.set(toolCallId, toolName);
+                                break;
                             }
 
-                            // Handle regular text (non-thinking)
-                            if (parsed.text && !parsed.thinking) {
-                                fullContent += parsed.text;
-                                onTextDelta?.(parsed.text);
-
-                                // Throttle onChunk to reduce markdown re-renders
-                                const now = Date.now();
-                                if (now - lastChunkTime > CHUNK_THROTTLE_MS) {
-                                    onChunk(fullContent);
-                                    lastChunkTime = now;
-                                }
+                            case "TOOL_CALL_ARGS": {
+                                const callId = parsed.toolCallId as string;
+                                const argDelta = parsed.delta as string;
+                                const existing = toolArgsMap.get(callId) || "";
+                                toolArgsMap.set(callId, existing + argDelta);
+                                break;
                             }
 
-                            // Handle tool use
-                            if (parsed.tool_use) {
-                                const toolUse = parsed.tool_use;
-                                if (toolUse.name === "modify_team" && toolUse.input) {
-                                    const validation = validateModifyTeamInput(toolUse.input);
+                            case "TOOL_CALL_END": {
+                                const endId = parsed.toolCallId as string;
+                                const name = toolNameMap.get(endId) || parsed.toolName;
+                                // Use parsed.input if provided, otherwise parse accumulated args
+                                let input = parsed.input;
+                                if (!input) {
+                                    const argsStr = toolArgsMap.get(endId);
+                                    if (argsStr) {
+                                        try {
+                                            input = JSON.parse(argsStr);
+                                        } catch {
+                                            // skip malformed args
+                                        }
+                                    }
+                                }
+
+                                if (name === "modify_team" && input) {
+                                    const validation = validateModifyTeamInput(input);
                                     if (!validation.valid) {
                                         console.warn(
                                             "[AI] Invalid tool input from Claude:",
                                             validation.errors,
                                         );
-                                        continue;
+                                        break;
                                     }
-                                    const input = toolUse.input as ModifyTeamInput;
-                                    toolCalls.push(input);
-                                    // Notify about the tool use with Pokemon name
-                                    onToolUse?.(input.pokemon || "Pokemon", toolCalls.length);
+                                    toolCalls.push(input as ModifyTeamInput);
+                                    onToolUse?.(
+                                        (input as ModifyTeamInput).pokemon || "Pokemon",
+                                        toolCalls.length,
+                                    );
                                 }
+                                break;
                             }
-                        } catch (parseErr) {
-                            // Re-throw if it's an intentional error (not JSON parse failure)
-                            if (
-                                parseErr instanceof Error &&
-                                (parseErr as Error & { errorType?: string }).errorType
-                            ) {
-                                throw parseErr;
+
+                            case "RUN_FINISHED": {
+                                // Ensure final content is flushed
+                                onChunk(fullContent);
+
+                                // Convert tool calls to TeamActions
+                                const actions: TeamAction[] = [];
+                                let currentTeam = [...team];
+                                for (const toolInput of toolCalls) {
+                                    const action = parseToolToAction(
+                                        toolInput,
+                                        currentTeam,
+                                        actions.length,
+                                    );
+                                    if (action) {
+                                        actions.push(action);
+                                        currentTeam = action.preview;
+                                    }
+                                }
+
+                                onPhaseChange?.("complete");
+                                onComplete({
+                                    content: fullContent,
+                                    action: actions[0],
+                                    actions: actions.length > 1 ? actions : undefined,
+                                });
+                                return;
                             }
-                            // Skip invalid JSON lines
+
+                            case "RUN_ERROR": {
+                                const errorMsg =
+                                    parsed.error?.message || "Unknown streaming error";
+                                const error = new Error(errorMsg);
+                                (error as Error & { errorType?: string }).errorType = "api";
+                                throw error;
+                            }
                         }
+                    } catch (parseErr) {
+                        if (
+                            parseErr instanceof Error &&
+                            (parseErr as Error & { errorType?: string }).errorType
+                        ) {
+                            throw parseErr;
+                        }
+                        // Skip invalid JSON lines
                     }
                 }
             }
         }
 
-        // Process any remaining buffer content
-        if (buffer.trim()) {
-            const lines = buffer.split("\n");
-            for (const line of lines) {
-                if (line.startsWith("data: ") && line.slice(6) !== "[DONE]") {
-                    try {
-                        const parsed = JSON.parse(line.slice(6));
-                        if (parsed.text && !parsed.thinking) {
-                            fullContent += parsed.text;
-                        }
-                        if (parsed.tool_use?.name === "modify_team" && parsed.tool_use?.input) {
-                            toolCalls.push(parsed.tool_use.input as ModifyTeamInput);
-                        }
-                    } catch {
-                        // Skip
-                    }
-                }
-            }
-        }
-
-        // Ensure final content is flushed
+        // If we get here without RUN_FINISHED, still complete
         onChunk(fullContent);
 
-        // If we get here without [DONE], still complete
         const actions: TeamAction[] = [];
         let currentTeam = [...team];
         for (const toolInput of toolCalls) {
@@ -447,7 +475,6 @@ export async function streamChatMessage({
         // Handle abort/cancellation gracefully
         if (error instanceof DOMException && error.name === "AbortError") {
             onPhaseChange?.("cancelled");
-            // Don't call onError for user-initiated cancellation
             return;
         }
 
