@@ -182,11 +182,15 @@ export function ChatPanel() {
 
         if (isTeamGeneration) {
             applyActionsRef.current(newActions);
-        } else if (newActions.length === 1) {
-            setPendingAction(newActions[0]);
         } else {
-            setPendingAction(newActions[0]);
-            setPendingActions(newActions.slice(1));
+            // Defer state update to avoid synchronous setState inside useEffect
+            // (React compiler flags direct setState in effect bodies)
+            queueMicrotask(() => {
+                setPendingAction(newActions[0]);
+                if (newActions.length > 1) {
+                    setPendingActions(newActions.slice(1));
+                }
+            });
         }
     }, [messages, isLoading]);
 
