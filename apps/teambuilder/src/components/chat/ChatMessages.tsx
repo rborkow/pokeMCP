@@ -1,11 +1,12 @@
 "use client";
 
-import { memo, useEffect, useRef, useCallback } from "react";
+import { memo, useEffect, useRef, useCallback, type RefObject } from "react";
 import { useShallow } from "zustand/shallow";
 import { useChatStore } from "@/stores/chat-store";
 import { ChatMessage } from "./ChatMessage";
 import { ActionCard } from "./ActionCard";
 import type { ChatMessage as ChatMessageType } from "@/types/chat";
+import type { StreamingTextHandle } from "./StreamingText";
 
 /**
  * Wrapper that subscribes to a single message by ID.
@@ -14,9 +15,11 @@ import type { ChatMessage as ChatMessageType } from "@/types/chat";
 const ChatMessageWrapper = memo(function ChatMessageWrapper({
     messageId,
     hasPendingAction,
+    streamingTextRef,
 }: {
     messageId: string;
     hasPendingAction: boolean;
+    streamingTextRef?: RefObject<StreamingTextHandle | null>;
 }) {
     const message = useChatStore(
         useCallback(
@@ -29,7 +32,14 @@ const ChatMessageWrapper = memo(function ChatMessageWrapper({
 
     return (
         <div>
-            <ChatMessage message={message} />
+            <ChatMessage
+                message={message}
+                streamingTextRef={
+                    message.isLoading && message.streamingPhase !== "error"
+                        ? streamingTextRef
+                        : undefined
+                }
+            />
             {message.action && !hasPendingAction && (
                 <div className="mb-3">
                     <ActionCard action={message.action} isApplied />
@@ -39,7 +49,11 @@ const ChatMessageWrapper = memo(function ChatMessageWrapper({
     );
 });
 
-export function ChatMessages() {
+export function ChatMessages({
+    streamingTextRef,
+}: {
+    streamingTextRef?: RefObject<StreamingTextHandle | null>;
+}) {
     const messageIds = useChatStore(useShallow((s) => s.messages.map((m) => m.id)));
     const pendingAction = useChatStore((s) => s.pendingAction);
     const pendingActions = useChatStore((s) => s.pendingActions);
@@ -59,9 +73,14 @@ export function ChatMessages() {
         isUserScrolledUpRef.current = distanceFromBottom > 100;
     }, []);
 
-    // Auto-scroll to bottom, debounced with RAF
+    // Auto-scroll to bottom on new messages / pending actions (not during
+    // active streaming — StreamingText handles that via data-chat-scroll)
+    // biome-ignore lint/correctness/useExhaustiveDependencies: pendingAction intentionally triggers scroll when actions appear
     useEffect(() => {
-        if (isUserScrolledUpRef.current && isLoading) return;
+        if (isUserScrolledUpRef.current) return;
+        // Skip during active streaming — the rAF loop in StreamingText scrolls
+        if (isLoading && messages.some((m) => m.isLoading && m.streamingPhase === "generating"))
+            return;
 
         if (scrollRAFRef.current) {
             cancelAnimationFrame(scrollRAFRef.current);
@@ -99,9 +118,17 @@ export function ChatMessages() {
             ref={scrollContainerRef}
             className="flex-1 overflow-y-auto px-3"
             onScroll={handleScroll}
+            data-chat-scroll
         >
-            {messageIds.map((id) => (
-                <ChatMessageWrapper key={id} messageId={id} hasPendingAction={!!pendingAction} />
+            {messageIds.map((id, index) => (
+                <ChatMessageWrapper
+                    key={id}
+                    messageId={id}
+                    hasPendingAction={!!pendingAction}
+                    streamingTextRef={
+                        index === messageIds.length - 1 ? streamingTextRef : undefined
+                    }
+                />
             ))}
 
             {/* Show pending action card */}

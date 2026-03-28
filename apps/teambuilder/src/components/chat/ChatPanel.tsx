@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
@@ -12,6 +12,7 @@ import { useHistoryStore } from "@/stores/history-store";
 import { streamChatMessage } from "@/lib/ai";
 import { Trash2 } from "lucide-react";
 import type { TeamAction } from "@/types/chat";
+import type { StreamingTextHandle } from "./StreamingText";
 
 function getErrorMessage(error: Error): string {
     const errorType = (error as Error & { errorType?: string }).errorType;
@@ -44,6 +45,9 @@ export function ChatPanel() {
     } = useChatStore();
     const { team, format, mode, setPokemon } = useTeamStore();
     const { pushState } = useHistoryStore();
+
+    // Ref to the active StreamingText imperative handle — set by ChatMessages
+    const streamingTextRef = useRef<StreamingTextHandle | null>(null);
 
     // Apply multiple actions (for team generation)
     const applyActions = useCallback(
@@ -95,9 +99,6 @@ export function ChatPanel() {
             // Create abort controller and start stream
             const controller = useChatStore.getState().startStream();
 
-            // Track accumulated content in closure to avoid stale store reads
-            let accumulatedContent = "";
-
             // Use streaming for Claude
             await streamChatMessage({
                 message: content,
@@ -108,22 +109,15 @@ export function ChatPanel() {
                 enableThinking,
                 chatHistory: currentMessages,
                 signal: controller.signal,
-                onChunk: (text) => {
-                    // Throttled full-content update — sole store update path during streaming
-                    useChatStore.getState().updateMessage(streamingId, {
-                        content: text,
-                        isLoading: true,
-                        streamingPhase: "generating",
-                        buildingStatus: undefined,
-                    });
+                onChunk: () => {
+                    // No-op during streaming — StreamingText handles rendering
+                    // via the imperative ref. Content is flushed in onComplete.
                 },
                 onTextDelta: (delta) => {
-                    // Delta-based accumulation only — no store update here.
-                    // onChunk (throttled) is the sole store update path during streaming.
-                    accumulatedContent += delta;
+                    // Push deltas directly to StreamingText — zero React re-renders
+                    streamingTextRef.current?.pushDelta(delta);
                 },
                 onThinking: (_isThinking, thinkingText) => {
-                    // Store thinking content in the message for inline display
                     if (thinkingText) {
                         useChatStore.getState().updateMessage(streamingId, {
                             thinkingContent: thinkingText,
@@ -132,7 +126,6 @@ export function ChatPanel() {
                     }
                 },
                 onToolUse: (pokemonName, count) => {
-                    // Show building progress
                     useChatStore.getState().updateMessage(streamingId, {
                         buildingStatus: `Adding ${pokemonName}... (${count}/6)`,
                         isLoading: true,
@@ -140,14 +133,25 @@ export function ChatPanel() {
                     });
                 },
                 onPhaseChange: (phase) => {
-                    useChatStore.getState().updateMessage(streamingId, {
-                        streamingPhase: phase,
-                    });
+                    // Only update store for phase changes (not every text delta)
+                    if (phase === "generating") {
+                        // Mark as generating once — StreamingText takes over rendering
+                        useChatStore.getState().updateMessage(streamingId, {
+                            streamingPhase: "generating",
+                            isLoading: true,
+                        });
+                    } else {
+                        useChatStore.getState().updateMessage(streamingId, {
+                            streamingPhase: phase,
+                        });
+                    }
                 },
                 onComplete: (response) => {
-                    // Finalize the message - include action so it persists
+                    // Finalize the message with full content from the stream
+                    const finalContent =
+                        streamingTextRef.current?.getContent() || response.content;
                     useChatStore.getState().updateMessage(streamingId, {
-                        content: response.content,
+                        content: finalContent,
                         isLoading: false,
                         streamingPhase: "complete",
                         action: response.action,
@@ -201,6 +205,15 @@ export function ChatPanel() {
     );
 
     const handleStop = useCallback(() => {
+        // Persist whatever content StreamingText has accumulated
+        const messages = useChatStore.getState().messages;
+        const lastMsg = messages[messages.length - 1];
+        if (lastMsg?.isLoading && streamingTextRef.current) {
+            const content = streamingTextRef.current.getContent();
+            if (content) {
+                useChatStore.getState().updateMessage(lastMsg.id, { content });
+            }
+        }
         useChatStore.getState().abortStream();
     }, []);
 
@@ -233,7 +246,7 @@ export function ChatPanel() {
 
             <SuggestedPrompts onSelect={handleSend} disabled={isLoading} />
 
-            <ChatMessages />
+            <ChatMessages streamingTextRef={streamingTextRef} />
             <ChatInput
                 onSend={handleSend}
                 onStop={handleStop}
