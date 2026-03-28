@@ -1,16 +1,18 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, type RefObject } from "react";
 import type { UIMessage, MessagePart } from "@tanstack/ai-client";
 import { Bot, User, Loader2 } from "lucide-react";
 import { MemoizedMarkdown } from "./MemoizedMarkdown";
-import { StreamingMarkdown } from "./StreamingMarkdown";
+import { StreamingMarkdown, type StreamingMarkdownHandle } from "./StreamingMarkdown";
 import { ThinkingCollapsible } from "./ThinkingCollapsible";
 
 interface ChatMessageProps {
     message: UIMessage;
     /** Whether this message is actively being streamed */
     isStreaming: boolean;
+    /** Imperative handle for pushing deltas directly during streaming */
+    streamingRef?: RefObject<StreamingMarkdownHandle | null>;
 }
 
 /**
@@ -40,7 +42,7 @@ function hasToolCalls(parts: MessagePart[]): boolean {
     return parts.some((p) => p.type === "tool-call");
 }
 
-export function ChatMessage({ message, isStreaming }: ChatMessageProps) {
+export function ChatMessage({ message, isStreaming, streamingRef }: ChatMessageProps) {
     const isUser = message.role === "user";
     const isSystem = message.role === "system";
 
@@ -111,7 +113,11 @@ export function ChatMessage({ message, isStreaming }: ChatMessageProps) {
             )}
 
             {/* Text content */}
-            {isStreaming && textContent ? (
+            {isStreaming && streamingRef ? (
+                /* Streaming: deltas pushed via ref from onChunk — zero React re-renders */
+                <StreamingMarkdown ref={streamingRef} />
+            ) : isStreaming && textContent ? (
+                /* Fallback: streaming without ref */
                 <StreamingMarkdown content={textContent} />
             ) : textContent ? (
                 <MemoizedMarkdown content={textContent} />

@@ -3,6 +3,7 @@
 import { useEffect, useCallback, useMemo, useRef, useState } from "react";
 import { useChat } from "@tanstack/ai-react";
 import type { UIMessage } from "@tanstack/ai-client";
+import type { StreamChunk } from "@tanstack/ai";
 import { Button } from "@/components/ui/button";
 import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
@@ -17,6 +18,7 @@ import { parseToolToAction } from "@/lib/ai/parse-tool-action";
 import { Trash2 } from "lucide-react";
 import type { TeamAction } from "@/types/chat";
 import type { ModifyTeamInput } from "@/lib/ai/tools";
+import type { StreamingMarkdownHandle } from "./StreamingMarkdown";
 
 const MESSAGES_STORAGE_KEY = "pokemcp-chat-messages";
 
@@ -83,10 +85,20 @@ export function ChatPanel() {
 
     const tools = useMemo(() => [modifyTeamTool] as const, []);
 
+    // Ref to the active StreamingMarkdown handle — push deltas directly for
+    // smooth rendering without waiting for React re-renders from useChat.
+    const streamingRef = useRef<StreamingMarkdownHandle | null>(null);
+
     const { messages, sendMessage, stop, clear, isLoading, status } = useChat({
         connection,
         tools,
         initialMessages,
+        onChunk: (chunk: StreamChunk) => {
+            // Push text deltas directly to StreamingMarkdown — bypasses React batching
+            if (chunk.type === "TEXT_MESSAGE_CONTENT" && chunk.delta) {
+                streamingRef.current?.pushDelta(chunk.delta);
+            }
+        },
     });
 
     // Apply multiple actions (for team generation)
@@ -265,6 +277,7 @@ export function ChatPanel() {
                 pendingAction={pendingAction}
                 pendingActions={pendingActions}
                 advancePendingAction={advancePendingAction}
+                streamingRef={streamingRef}
             />
             <ChatInput
                 onSend={handleSend}

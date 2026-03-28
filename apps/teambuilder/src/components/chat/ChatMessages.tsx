@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, type RefObject } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import type { UIMessage } from "@tanstack/ai-client";
 import type { ChatClientState } from "@tanstack/ai-client";
 import { ChatMessage } from "./ChatMessage";
 import { ActionCard } from "./ActionCard";
 import type { TeamAction } from "@/types/chat";
+import type { StreamingMarkdownHandle } from "./StreamingMarkdown";
 
 interface ChatMessagesProps {
     messages: UIMessage[];
@@ -15,6 +16,7 @@ interface ChatMessagesProps {
     pendingAction: TeamAction | null;
     pendingActions: TeamAction[];
     advancePendingAction: () => void;
+    streamingRef?: RefObject<StreamingMarkdownHandle | null>;
 }
 
 /**
@@ -23,13 +25,19 @@ interface ChatMessagesProps {
 function ChatMessageWrapper({
     message,
     isStreaming,
+    streamingRef,
 }: {
     message: UIMessage;
     isStreaming: boolean;
+    streamingRef?: RefObject<StreamingMarkdownHandle | null>;
 }) {
     return (
         <div>
-            <ChatMessage message={message} isStreaming={isStreaming} />
+            <ChatMessage
+                message={message}
+                isStreaming={isStreaming}
+                streamingRef={isStreaming ? streamingRef : undefined}
+            />
         </div>
     );
 }
@@ -40,6 +48,7 @@ export function ChatMessages({
     pendingAction,
     pendingActions,
     advancePendingAction,
+    streamingRef,
 }: ChatMessagesProps) {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const isUserScrolledUpRef = useRef(false);
@@ -119,6 +128,7 @@ export function ChatMessages({
                             <ChatMessageWrapper
                                 message={msg}
                                 isStreaming={isLast && isLoading && msg.role === "assistant"}
+                                streamingRef={isLast ? streamingRef : undefined}
                             />
                         </div>
                     );
