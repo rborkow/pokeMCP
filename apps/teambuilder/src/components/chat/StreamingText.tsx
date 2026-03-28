@@ -41,6 +41,58 @@ function renderTextToElement(el: HTMLElement, text: string) {
 }
 
 /**
+ * rAF-based animation tick. Defined outside the component so it never
+ * triggers exhaustive-deps lint and avoids ref-writes during render.
+ */
+function runTick(
+    containerRef: React.RefObject<HTMLDivElement | null>,
+    targetRef: React.RefObject<string>,
+    displayedLenRef: React.RefObject<number>,
+    rafRef: React.RefObject<number | undefined>,
+) {
+    const target = targetRef.current;
+    const displayed = displayedLenRef.current;
+
+    if (displayed >= target.length) {
+        rafRef.current = undefined;
+        return;
+    }
+
+    // Reveal characters: adaptive step — faster when far behind, slower when close
+    const remaining = target.length - displayed;
+    const step = Math.max(2, Math.ceil(remaining / 8));
+    const nextLen = Math.min(displayed + step, target.length);
+    displayedLenRef.current = nextLen;
+
+    const el = containerRef.current;
+    if (el) {
+        renderTextToElement(el, target.slice(0, nextLen));
+
+        // Auto-scroll within the same frame to avoid layout shift
+        const scroller = el.closest("[data-chat-scroll]");
+        if (scroller) {
+            scroller.scrollTop = scroller.scrollHeight;
+        }
+    }
+
+    rafRef.current = requestAnimationFrame(() =>
+        runTick(containerRef, targetRef, displayedLenRef, rafRef),
+    );
+}
+
+function startLoop(
+    containerRef: React.RefObject<HTMLDivElement | null>,
+    targetRef: React.RefObject<string>,
+    displayedLenRef: React.RefObject<number>,
+    rafRef: React.RefObject<number | undefined>,
+) {
+    if (rafRef.current) return;
+    rafRef.current = requestAnimationFrame(() =>
+        runTick(containerRef, targetRef, displayedLenRef, rafRef),
+    );
+}
+
+/**
  * Lightweight streaming text renderer that animates new characters in
  * progressively rather than stamping entire chunks at once.
  *
@@ -56,56 +108,17 @@ export const StreamingText = forwardRef<StreamingTextHandle, { content?: string 
         const displayedLenRef = useRef(0);
         const targetRef = useRef(content ?? "");
 
-        // Stable function refs — these never change identity, satisfying the
-        // exhaustive-deps lint without introducing circular declaration issues.
-        const tickRef = useRef<() => void>(null!);
-        const ensureLoopRef = useRef<() => void>(null!);
-
-        tickRef.current = () => {
-            const target = targetRef.current;
-            const displayed = displayedLenRef.current;
-
-            if (displayed >= target.length) {
-                rafRef.current = undefined;
-                return;
-            }
-
-            // Reveal characters: adaptive step — faster when far behind, slower when close
-            const remaining = target.length - displayed;
-            const step = Math.max(2, Math.ceil(remaining / 8));
-            const nextLen = Math.min(displayed + step, target.length);
-            displayedLenRef.current = nextLen;
-
-            const el = containerRef.current;
-            if (el) {
-                renderTextToElement(el, target.slice(0, nextLen));
-
-                // Auto-scroll within the same frame to avoid layout shift
-                const scroller = el.closest("[data-chat-scroll]");
-                if (scroller) {
-                    scroller.scrollTop = scroller.scrollHeight;
-                }
-            }
-
-            rafRef.current = requestAnimationFrame(() => tickRef.current());
-        };
-
-        ensureLoopRef.current = () => {
-            if (rafRef.current) return;
-            rafRef.current = requestAnimationFrame(() => tickRef.current());
-        };
-
         // Expose imperative handle for zero-re-render streaming
         useImperativeHandle(
             ref,
             () => ({
                 pushDelta(delta: string) {
                     targetRef.current += delta;
-                    ensureLoopRef.current();
+                    startLoop(containerRef, targetRef, displayedLenRef, rafRef);
                 },
                 setContent(text: string) {
                     targetRef.current = text;
-                    ensureLoopRef.current();
+                    startLoop(containerRef, targetRef, displayedLenRef, rafRef);
                 },
                 getContent() {
                     return targetRef.current;
@@ -128,7 +141,7 @@ export const StreamingText = forwardRef<StreamingTextHandle, { content?: string 
                 return;
             }
 
-            ensureLoopRef.current();
+            startLoop(containerRef, targetRef, displayedLenRef, rafRef);
 
             return () => {
                 if (rafRef.current) {

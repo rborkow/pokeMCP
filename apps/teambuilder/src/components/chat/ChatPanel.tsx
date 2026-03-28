@@ -109,10 +109,9 @@ export function ChatPanel() {
                 enableThinking,
                 chatHistory: currentMessages,
                 signal: controller.signal,
-                onChunk: (_text) => {
+                onChunk: () => {
                     // No-op during streaming — StreamingText handles rendering
-                    // via the imperative ref. This callback is still called for
-                    // the final flush in onComplete.
+                    // via the imperative ref. Content is flushed in onComplete.
                 },
                 onTextDelta: (delta) => {
                     // Push deltas directly to StreamingText — zero React re-renders
