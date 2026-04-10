@@ -3,13 +3,13 @@ name: Update Smogon Stats
 on:
   # Run monthly on the 5th at 6 AM UTC (Smogon publishes stats around 1st-5th)
   schedule:
-    - cron: '0 6 5 * *'
+    - cron: "0 6 5 * *"
 
   # Manual trigger for immediate updates
   workflow_dispatch:
     inputs:
       skip_deploy:
-        description: 'Skip deployment after stats update'
+        description: "Skip deployment after stats update"
         type: boolean
         default: false
 
@@ -29,8 +29,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -66,7 +66,7 @@ jobs:
           echo "Testing stats availability..."
           curl -s -X POST "https://api.pokemcp.com/api/tools" \
             -H "Content-Type: application/json" \
-            -d '{"tool":"get_meta_threats","args":{"format":"gen9ou","limit":5}}' \
+            -d '{"tool":"get_usage_stats","args":{"type":"meta_threats","format":"gen9ou","limit":5}}' \
             | head -c 500
           echo ""
           echo "✅ Stats update complete!"

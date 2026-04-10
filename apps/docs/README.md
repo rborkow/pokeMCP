@@ -21,7 +21,10 @@ Creates static export in `out/` directory.
 
 ## Deployment to Cloudflare Pages
 
-### Via GitHub (Recommended)
+Production docs are served by the Cloudflare Pages project that owns `docs.pokemcp.com`.
+That project is Git-connected and builds automatically from `main`.
+
+### Production via GitHub Integration (Recommended)
 
 1. Push code to GitHub
 2. Go to Cloudflare Dashboard → Pages
@@ -34,10 +37,15 @@ Creates static export in `out/` directory.
    - **Node version**: 20
 6. Deploy!
 
-### Via Wrangler CLI
+### Ad Hoc Upload via Wrangler
+
+Use direct uploads only for non-production or one-off verification. Do not assume
+`wrangler pages deploy` updates the live docs site unless you are targeting the
+Pages project that currently owns `docs.pokemcp.com`.
 
 ```bash
-npx wrangler pages deploy out --project-name=pokemcp-docs
+npm run build
+npx wrangler pages deploy out --project-name=<non-production-pages-project>
 ```
 
 ## Structure
@@ -57,9 +65,9 @@ pages/
 2. Add to `pages/_meta.ts`:
    ```ts
    export default {
-       index: "Home",
-       "your-page": "Your Page Title"
-   }
+     index: "Home",
+     "your-page": "Your Page Title",
+   };
    ```
 
 ## Tech Stack

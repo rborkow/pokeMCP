@@ -7,11 +7,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 A monorepo containing an MCP (Model Context Protocol) server for Pokémon competitive team building, plus a team builder web UI and documentation site. The MCP server is deployed on Cloudflare Workers and provides tools for Pokémon lookup, moveset/team validation, type coverage analysis, and usage statistics from Smogon. Includes RAG (Retrieval-Augmented Generation) capabilities for strategic advice using Cloudflare Vectorize and AI Workers.
 
 **Monorepo Structure:**
+
 - `src/` - MCP Worker (Cloudflare Workers) — see [`src/CLAUDE.md`](src/CLAUDE.md)
-- `apps/teambuilder/` - Next.js team building UI (Cloudflare Pages) — see [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md)
+- `apps/teambuilder/` - Next.js team building UI (OpenNext on Cloudflare Workers) — see [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md)
 - `apps/docs/` - Nextra documentation site (Cloudflare Pages) — see [`apps/CLAUDE.md`](apps/CLAUDE.md)
 
 **Deployed URLs:**
+
 - MCP Worker: https://api.pokemcp.com
 - Teambuilder UI: https://www.pokemcp.com
 - Documentation: https://docs.pokemcp.com
@@ -19,6 +21,7 @@ A monorepo containing an MCP (Model Context Protocol) server for Pokémon compet
 ## Development Commands
 
 ### Essential Commands
+
 ```bash
 # Type checking (required before deployment)
 npm run type-check
@@ -36,6 +39,7 @@ npm run deploy:production
 ```
 
 ### Monorepo Apps
+
 ```bash
 # Teambuilder (Next.js UI)
 npm run dev:teambuilder        # Start dev server (port 3000)
@@ -47,6 +51,7 @@ npm run dev:docs               # Start dev server (port 3001)
 ```
 
 ### Stats Management
+
 ```bash
 # Fetch latest Smogon usage statistics (rate-limited, ~45 seconds)
 npm run fetch-stats
@@ -59,6 +64,7 @@ npx wrangler kv key put --remote --namespace-id=58525ad4ec5c454eb3e1ae7586414483
 ```
 
 **Update Schedule:**
+
 - Smogon publishes new stats monthly (around the 1st-5th of each month)
 - Run `npm run discover-formats && npm run fetch-stats && npm run upload-stats` monthly to update
 - VGC formats are auto-discovered from Smogon's stats directory — new regulations are picked up automatically
@@ -67,11 +73,13 @@ npx wrangler kv key put --remote --namespace-id=58525ad4ec5c454eb3e1ae7586414483
 - Discovered formats are saved to `src/discovered-formats.json` and uploaded to KV for the ingestion pipeline
 
 **Supported Formats for Stats:**
+
 - Gen 9: OU, Ubers, UU, RU, NU, PU, LC, VGC 2026 Reg F, Doubles OU (VGC formats auto-discovered)
 - Gen 8: OU, UU, RU (Ubers, NU, LC have limited data)
 - Gen 7: OU, UU, RU, NU (Ubers, LC have limited data)
 
 ### Debugging & Monitoring
+
 ```bash
 # Tail production logs in real-time
 npm run tail
@@ -84,6 +92,7 @@ npm run tail:production
 ### Cloudflare Infrastructure
 
 **Multi-layered Cloudflare stack:**
+
 - **Workers**: Serverless compute for MCP requests (src/index.ts)
 - **Durable Objects**: Stateful MCP session management (PokemonMCP class in src/index.ts)
 - **KV Namespaces**:
@@ -98,11 +107,13 @@ npm run tail:production
 ### Environment Configuration
 
 Three environments defined in wrangler.jsonc:
+
 - **development** (default): Uses production KV/Vectorize
 - **staging**: Separate KV namespaces, Saturday 4 AM cron
 - **production**: Production resources, Sunday 3 AM cron
 
 Each environment has its own:
+
 - Worker name (pokemon-mcp-{env})
 - KV namespace IDs
 - Vectorize index
@@ -111,11 +122,13 @@ Each environment has its own:
 ## Code Style
 
 **Linter:** Biome (not ESLint/Prettier)
+
 - Indent: 4 spaces (tabs)
 - Line width: 100 characters
 - Always run `npm run lint:fix` and `npm run format` before committing
 
 **TypeScript:**
+
 - `strict: false` (Cloudflare Workers compatibility)
 - `moduleResolution: "bundler"`
 - Uses .js extensions in imports (e.g., `from './tools.js'`)
@@ -131,6 +144,7 @@ Format IDs use lowercase: `gen9ou`, `gen9vgc2024regh`, etc.
 ## Key Implementation Details
 
 **Pokemon Naming:**
+
 - Use `toID()` for all lookups (removes spaces, lowercases, handles special chars)
 - Forms: "Landorus-Therian" → `landorustherian`
 - Megas: "Charizard-Mega-X" → `charizardmegax`
@@ -141,34 +155,39 @@ See [`src/CLAUDE.md`](src/CLAUDE.md) for KV data structures, vector metadata, er
 
 **GitHub Actions Workflows:**
 
-| Workflow | Trigger | Purpose |
-|----------|---------|---------|
-| `build.yml` | Pull requests | Build verification for PRs |
-| `deploy-production.yml` | Merge to main | Auto-deploy all services |
-| `update-stats.yml` | Monthly (5th) or manual | Update Smogon statistics |
+| Workflow                | Trigger                 | Purpose                                |
+| ----------------------- | ----------------------- | -------------------------------------- |
+| `build.yml`             | Pull requests           | Build verification for PRs             |
+| `deploy-production.yml` | Merge to main           | Auto-deploy MCP Worker and teambuilder |
+| `update-stats.yml`      | Monthly (5th) or manual | Update Smogon statistics               |
 
 **Deployment Flow:**
+
 1. Push changes to a feature branch
 2. Create PR → triggers `build.yml` checks
 3. Merge to main → triggers `deploy-production.yml`
-4. All three services deploy automatically:
+4. GitHub Actions deploys the app surfaces it owns:
    - MCP Worker → https://api.pokemcp.com
    - Teambuilder → https://www.pokemcp.com
+5. Documentation changes under `apps/docs/` deploy via Cloudflare Pages Git integration:
    - Documentation → https://docs.pokemcp.com
 
 **Required GitHub Secrets:**
+
 - `CLOUDFLARE_API_TOKEN` - Cloudflare API token with Workers/Pages permissions
 - `CLOUDFLARE_ACCOUNT_ID` - Your Cloudflare account ID
 
 ## Testing Changes
 
 ### MCP Worker Testing
+
 1. Run `npm run dev` to start local Wrangler server
 2. Test MCP tools via `/test-rag?q=...` or `/test-kv` endpoints
 3. Create a PR - CI will verify builds pass
 4. After merge, deployment is automatic
 
 ### Team Builder Testing
+
 ```bash
 cd apps/teambuilder
 npm run test:run        # Run all tests
@@ -180,11 +199,13 @@ See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for test structur
 ## Common Tasks
 
 **Adding a new tool:**
+
 1. Implement function in `src/tools.ts` or `src/stats.ts`
 2. Register in `src/tool-registry.ts` with Zod schema
 3. Tool is auto-available via MCP `init()` and `/api/tools` REST endpoint
 
 **Adding a new format:**
+
 1. For VGC/doubles: formats are auto-discovered — just run `npm run discover-formats`
 2. For singles: add format to the SINGLES_FORMATS array in `src/ingestion/orchestrator.ts`
 3. Add Smogon format name mapping in `src/ingestion/scraper.ts` (VGC formats auto-generate names)
@@ -193,11 +214,13 @@ See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for test structur
 **Updating usage stats (monthly):**
 
 Option 1 - GitHub Action (recommended):
+
 - Runs automatically on the 5th of each month
 - Discovers new formats, fetches stats, and uploads — all automated
 - Or trigger manually: Actions → "Update Smogon Stats" → Run workflow
 
 Option 2 - Manual:
+
 1. `npm run discover-formats` (discovers available VGC formats from Smogon)
 2. `npm run fetch-stats` (downloads from Smogon, ~45 seconds)
 3. `npm run upload-stats` (uploads to KV, requires Cloudflare auth)
@@ -208,18 +231,22 @@ Option 2 - Manual:
 See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for directory layout and conventions. Key files for AI changes:
 
 **Adding a new team archetype:**
+
 1. Add archetype to `apps/teambuilder/src/lib/ai/archetypes.ts`
 2. Include: `id`, `name`, `description`, `icon`, `prompt`, `keyFeatures`, `formats`
 3. Set `formats` to "singles", "doubles", or "both"
 4. Add tests in `apps/teambuilder/src/__tests__/archetypes.test.ts`
 
 **Adding a new AI personality:**
+
 1. Add to `apps/teambuilder/src/lib/ai/personalities.ts`
 2. Include: `id`, `name`, `systemPromptPrefix`, `praiseStyle`, `criticismStyle`
 3. Add tests in `apps/teambuilder/src/__tests__/personalities.test.ts`
 
 **Modifying Claude's system prompt:**
+
 - Edit `apps/teambuilder/src/lib/ai/context.ts` (`buildSystemPrompt()`, `getGimmickGuidance()`, `formatTeamContext()`)
 
 **Modifying the modify_team tool schema:**
+
 - Edit `apps/teambuilder/src/lib/ai/tools.ts` → update `ModifyTeamInput` interface → update system prompt in `context.ts`

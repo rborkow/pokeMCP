@@ -13,17 +13,20 @@ Thank you for your interest in contributing to PokeMCP! This guide will help you
 ### Quick Start
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/rborkow/pokeMCP.git
    cd pokeMCP
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Start local development server**
+
    ```bash
    npm run dev
    ```
@@ -63,6 +66,7 @@ pokeMCP/
 ### Branch Strategy
 
 1. Create a feature branch from `main`:
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -74,6 +78,7 @@ pokeMCP/
 ### Code Style
 
 - Run linting before committing:
+
   ```bash
   npm run lint:fix
   npm run format
@@ -84,12 +89,14 @@ pokeMCP/
 ### Testing Your Changes
 
 1. **MCP Server changes**:
+
    ```bash
    npm run dev
    # Test your changes at http://localhost:8787
    ```
 
 2. **Teambuilder changes**:
+
    ```bash
    cd apps/teambuilder
    npm install
@@ -115,22 +122,28 @@ pokeMCP/
 ### What Happens After Merge
 
 When your PR is merged to `main`:
+
 - The **MCP Worker** automatically deploys to https://api.pokemcp.com
 - The **Teambuilder** automatically deploys to https://www.pokemcp.com
-- The **Documentation** automatically deploys to https://docs.pokemcp.com
+- The **Documentation** automatically deploys to https://docs.pokemcp.com via Cloudflare Pages Git integration
 
 ## Environment Overview
 
-| Environment | Purpose | How to Access |
-|-------------|---------|---------------|
-| Local Dev | Development & testing | `npm run dev` |
-| Production | Live services | Auto-deploys on merge to main |
+| Environment | Purpose               | How to Access                 |
+| ----------- | --------------------- | ----------------------------- |
+| Local Dev   | Development & testing | `npm run dev`                 |
+| Production  | Live services         | Auto-deploys on merge to main |
 
 ### Production Deployment (Maintainers Only)
 
-Production deployment is handled automatically by GitHub Actions:
-- **Auto-deploy**: Merging to `main` triggers deployment
-- **Manual deploy**: Use the "Deploy to Production" workflow in GitHub Actions
+Production deployment is split by surface:
+
+- **MCP Worker**: GitHub Actions deploys the Worker on merge to `main`
+- **Teambuilder**: GitHub Actions deploys the OpenNext Worker on merge to `main`
+- **Documentation**: Cloudflare Pages Git integration deploys docs changes from `main`
+
+Maintainers can still use the "Deploy to Production" workflow in GitHub Actions for the MCP Worker and teambuilder.
+
 - **Stats updates**: Run monthly via "Update Smogon Stats" workflow
 
 ## Common Tasks
