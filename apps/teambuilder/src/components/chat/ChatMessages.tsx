@@ -5,9 +5,22 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import type { UIMessage } from "@tanstack/ai-client";
 import type { ChatClientState } from "@tanstack/ai-client";
 import { ChatMessage } from "./ChatMessage";
+import { LiveAssistantMessage } from "./LiveAssistantMessage";
 import { ActionCard } from "./ActionCard";
 import type { TeamAction } from "@/types/chat";
-import type { StreamingMarkdownHandle } from "./StreamingMarkdown";
+import type { LiveTextStreamHandle } from "./LiveTextStream";
+
+export interface ActiveAssistantStream {
+    isActive: boolean;
+    messageId: string | null;
+    createdAt: Date | null;
+    hasText: boolean;
+    initialTextContent: string;
+    thinkingContent: string;
+    isThinkingActive: boolean;
+    pendingToolCalls: number;
+    finishReason: string | null;
+}
 
 interface ChatMessagesProps {
     messages: UIMessage[];
@@ -16,7 +29,8 @@ interface ChatMessagesProps {
     pendingAction: TeamAction | null;
     pendingActions: TeamAction[];
     advancePendingAction: () => void;
-    streamingRef?: RefObject<StreamingMarkdownHandle | null>;
+    activeStream: ActiveAssistantStream | null;
+    streamingRef?: RefObject<LiveTextStreamHandle | null>;
 }
 
 /**
@@ -25,19 +39,13 @@ interface ChatMessagesProps {
 function ChatMessageWrapper({
     message,
     isStreaming,
-    streamingRef,
 }: {
     message: UIMessage;
     isStreaming: boolean;
-    streamingRef?: RefObject<StreamingMarkdownHandle | null>;
 }) {
     return (
         <div>
-            <ChatMessage
-                message={message}
-                isStreaming={isStreaming}
-                streamingRef={isStreaming ? streamingRef : undefined}
-            />
+            <ChatMessage message={message} isStreaming={isStreaming} />
         </div>
     );
 }
@@ -48,13 +56,20 @@ export function ChatMessages({
     pendingAction,
     pendingActions,
     advancePendingAction,
+    activeStream,
     streamingRef,
 }: ChatMessagesProps) {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const isUserScrolledUpRef = useRef(false);
+    const stickToBottomRef = useRef(true);
+
+    const visibleMessages =
+        activeStream?.isActive && isLoading && messages.at(-1)?.role === "assistant"
+            ? messages.slice(0, -1)
+            : messages;
 
     const virtualizer = useVirtualizer({
-        count: messages.length,
+        count: visibleMessages.length,
         getScrollElement: () => scrollContainerRef.current,
         estimateSize: () => 120,
         overscan: 3,
@@ -67,21 +82,22 @@ export function ChatMessages({
         const distanceFromBottom =
             container.scrollHeight - container.scrollTop - container.clientHeight;
         isUserScrolledUpRef.current = distanceFromBottom > 100;
+        stickToBottomRef.current = !isUserScrolledUpRef.current;
     }, []);
 
     // Auto-scroll to bottom on new messages / pending actions
     // biome-ignore lint/correctness/useExhaustiveDependencies: pendingAction intentionally triggers scroll when actions appear
     useEffect(() => {
         if (isUserScrolledUpRef.current) return;
-        if (messages.length === 0) return;
+        if (visibleMessages.length === 0) return;
 
-        virtualizer.scrollToIndex(messages.length - 1, {
+        virtualizer.scrollToIndex(visibleMessages.length - 1, {
             align: "end",
             behavior: isLoading ? "auto" : "smooth",
         });
-    }, [messages, pendingAction, isLoading, messages.length, virtualizer]);
+    }, [visibleMessages, pendingAction, isLoading, visibleMessages.length, virtualizer]);
 
-    if (messages.length === 0) {
+    if (visibleMessages.length === 0 && !activeStream?.isActive) {
         return (
             <div className="flex-1 flex items-center justify-center p-8">
                 <div className="text-center space-y-2">
@@ -110,8 +126,8 @@ export function ChatMessages({
                 }}
             >
                 {virtualizer.getVirtualItems().map((virtualItem) => {
-                    const msg = messages[virtualItem.index];
-                    const isLast = virtualItem.index === messages.length - 1;
+                    const msg = visibleMessages[virtualItem.index];
+                    const isLast = virtualItem.index === visibleMessages.length - 1;
                     return (
                         <div
                             key={msg.id}
@@ -125,15 +141,23 @@ export function ChatMessages({
                                 transform: `translateY(${virtualItem.start}px)`,
                             }}
                         >
-                            <ChatMessageWrapper
-                                message={msg}
-                                isStreaming={isLast && isLoading && msg.role === "assistant"}
-                                streamingRef={isLast ? streamingRef : undefined}
-                            />
+                            <ChatMessageWrapper message={msg} isStreaming={isLast && isLoading} />
                         </div>
                     );
                 })}
             </div>
+
+            {activeStream?.isActive && streamingRef && (
+                <LiveAssistantMessage
+                    createdAt={activeStream.createdAt}
+                    hasText={activeStream.hasText}
+                    initialTextContent={activeStream.initialTextContent}
+                    thinkingContent={activeStream.thinkingContent}
+                    isThinkingActive={activeStream.isThinkingActive}
+                    streamRef={streamingRef}
+                    stickToBottomRef={stickToBottomRef}
+                />
+            )}
 
             {/* Show pending action card — rendered outside virtualizer */}
             {pendingAction && (

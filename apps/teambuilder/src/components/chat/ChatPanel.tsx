@@ -5,7 +5,7 @@ import { useChat } from "@tanstack/ai-react";
 import type { UIMessage } from "@tanstack/ai-client";
 import type { StreamChunk } from "@tanstack/ai";
 import { Button } from "@/components/ui/button";
-import { ChatMessages } from "./ChatMessages";
+import { ChatMessages, type ActiveAssistantStream } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
 import { SuggestedPrompts } from "./SuggestedPrompts";
 import { PersonalitySelector } from "./PersonalitySelector";
@@ -18,7 +18,7 @@ import { parseToolToAction } from "@/lib/ai/parse-tool-action";
 import { Trash2 } from "lucide-react";
 import type { TeamAction } from "@/types/chat";
 import type { ModifyTeamInput } from "@/lib/ai/tools";
-import type { StreamingMarkdownHandle } from "./StreamingMarkdown";
+import type { LiveTextStreamHandle } from "./LiveTextStream";
 
 const MESSAGES_STORAGE_KEY = "pokemcp-chat-messages";
 
@@ -62,6 +62,7 @@ export function ChatPanel() {
     // Pending actions for tool approval UI
     const [pendingAction, setPendingAction] = useState<TeamAction | null>(null);
     const [pendingActions, setPendingActions] = useState<TeamAction[]>([]);
+    const [activeStream, setActiveStream] = useState<ActiveAssistantStream | null>(null);
 
     // Stable connection — reads context lazily from store.getState()
     const connection = useMemo(
@@ -85,18 +86,182 @@ export function ChatPanel() {
 
     const tools = useMemo(() => [modifyTeamTool] as const, []);
 
-    // Ref to the active StreamingMarkdown handle — push deltas directly for
-    // smooth rendering without waiting for React re-renders from useChat.
-    const streamingRef = useRef<StreamingMarkdownHandle | null>(null);
+    // Ref to the active live text renderer — push deltas directly for smooth
+    // rendering without paying markdown or virtualizer costs mid-stream.
+    const streamingRef = useRef<LiveTextStreamHandle | null>(null);
+    const textBufferRef = useRef("");
+    const pendingToolInputsRef = useRef<ModifyTeamInput[]>([]);
+    const streamFinishedRef = useRef(false);
+    const thinkingBufferRef = useRef("");
+    const thinkingFlushTimerRef = useRef<number | null>(null);
+
+    const clearThinkingFlushTimer = useCallback(() => {
+        if (thinkingFlushTimerRef.current !== null) {
+            window.clearTimeout(thinkingFlushTimerRef.current);
+            thinkingFlushTimerRef.current = null;
+        }
+    }, []);
+
+    const resetActiveStream = useCallback(() => {
+        clearThinkingFlushTimer();
+        textBufferRef.current = "";
+        thinkingBufferRef.current = "";
+        pendingToolInputsRef.current = [];
+        streamFinishedRef.current = false;
+        streamingRef.current?.clear();
+        setActiveStream(null);
+    }, [clearThinkingFlushTimer]);
+
+    const ensureActiveStream = useCallback((timestamp?: number, messageId?: string) => {
+        const nextTimestamp = timestamp ?? Date.now();
+        setActiveStream((prev) => {
+            if (prev) {
+                return messageId && prev.messageId !== messageId
+                    ? { ...prev, messageId }
+                    : prev;
+            }
+
+            return {
+                isActive: true,
+                messageId: messageId ?? null,
+                createdAt: new Date(nextTimestamp),
+                hasText: false,
+                initialTextContent: "",
+                thinkingContent: "",
+                isThinkingActive: false,
+                pendingToolCalls: 0,
+                finishReason: null,
+            };
+        });
+    }, []);
+
+    const updateActiveStream = useCallback(
+        (updater: (current: ActiveAssistantStream | null) => ActiveAssistantStream | null) => {
+            setActiveStream((prev) => updater(prev));
+        },
+        [],
+    );
+
+    const flushThinkingContent = useCallback(() => {
+        clearThinkingFlushTimer();
+        const content = thinkingBufferRef.current;
+        updateActiveStream((prev) =>
+            prev
+                ? {
+                      ...prev,
+                      thinkingContent: content,
+                      isThinkingActive: content.length > 0 || prev.isThinkingActive,
+                  }
+                : prev,
+        );
+    }, [clearThinkingFlushTimer, updateActiveStream]);
+
+    const scheduleThinkingFlush = useCallback(() => {
+        if (thinkingFlushTimerRef.current !== null) return;
+        thinkingFlushTimerRef.current = window.setTimeout(() => {
+            flushThinkingContent();
+        }, 120);
+    }, [flushThinkingContent]);
 
     const { messages, sendMessage, stop, clear, isLoading, status } = useChat({
         connection,
         tools,
         initialMessages,
         onChunk: (chunk: StreamChunk) => {
-            // Push text deltas directly to StreamingMarkdown — bypasses React batching
-            if (chunk.type === "TEXT_MESSAGE_CONTENT" && chunk.delta) {
-                streamingRef.current?.pushDelta(chunk.delta);
+            const event = chunk as StreamChunk & {
+                type: string;
+                timestamp?: number;
+                messageId?: string;
+                delta?: string;
+                input?: unknown;
+            };
+
+            if (event.type === "RUN_STARTED") {
+                textBufferRef.current = "";
+                pendingToolInputsRef.current = [];
+                streamFinishedRef.current = false;
+                thinkingBufferRef.current = "";
+                streamingRef.current?.clear();
+                ensureActiveStream(event.timestamp);
+                return;
+            }
+
+            if (event.type === "TEXT_MESSAGE_CONTENT" && event.delta) {
+                textBufferRef.current += event.delta;
+                ensureActiveStream(event.timestamp, event.messageId);
+                if (streamingRef.current) {
+                    streamingRef.current.pushDelta(event.delta);
+                }
+                updateActiveStream((prev) =>
+                    prev
+                        ? {
+                              ...prev,
+                              hasText: true,
+                              messageId: event.messageId ?? prev.messageId,
+                              initialTextContent: streamingRef.current
+                                  ? prev.initialTextContent
+                                  : textBufferRef.current,
+                          }
+                        : {
+                              isActive: true,
+                              messageId: event.messageId ?? null,
+                              createdAt: new Date(event.timestamp ?? Date.now()),
+                              hasText: true,
+                              initialTextContent: textBufferRef.current,
+                              thinkingContent: "",
+                              isThinkingActive: false,
+                              pendingToolCalls: 0,
+                              finishReason: null,
+                          },
+                );
+                return;
+            }
+
+            if (event.type === "STEP_STARTED") {
+                ensureActiveStream(event.timestamp);
+                updateActiveStream((prev) =>
+                    prev
+                        ? {
+                              ...prev,
+                              isThinkingActive: true,
+                          }
+                        : prev,
+                );
+                return;
+            }
+
+            if (event.type === "STEP_FINISHED" && event.delta) {
+                ensureActiveStream(event.timestamp);
+                thinkingBufferRef.current += event.delta;
+                scheduleThinkingFlush();
+                return;
+            }
+
+            if (event.type === "TOOL_CALL_END" && event.input) {
+                const input = event.input as ModifyTeamInput;
+                pendingToolInputsRef.current.push(input);
+                updateActiveStream((prev) =>
+                    prev
+                        ? {
+                              ...prev,
+                              pendingToolCalls: pendingToolInputsRef.current.length,
+                          }
+                        : prev,
+                );
+                return;
+            }
+
+            if (event.type === "RUN_FINISHED" || event.type === "RUN_ERROR") {
+                streamFinishedRef.current = true;
+                flushThinkingContent();
+                updateActiveStream((prev) =>
+                    prev
+                        ? {
+                              ...prev,
+                              finishReason: event.type === "RUN_ERROR" ? "error" : "stop",
+                          }
+                        : prev,
+                );
             }
         },
     });
@@ -104,9 +269,9 @@ export function ChatPanel() {
     // Apply multiple actions (for team generation)
     const applyActions = useCallback(
         (actions: TeamAction[]) => {
-            actions.forEach((action, index) => {
+            actions.forEach((action) => {
                 if (action.payload?.pokemon) {
-                    setPokemon(index, {
+                    setPokemon(action.slot, {
                         pokemon: action.payload.pokemon,
                         moves: action.payload.moves || [],
                         ability: action.payload.ability,
@@ -140,9 +305,6 @@ export function ChatPanel() {
         }
     }, [messages]);
 
-    // Process tool calls from assistant messages into TeamActions
-    // This runs when messages change and detects new tool-call parts needing approval
-    const processedToolCallsRef = useRef(new Set<string>());
     const teamRef = useRef(team);
     const applyActionsRef = useRef(applyActions);
 
@@ -151,42 +313,22 @@ export function ChatPanel() {
         applyActionsRef.current = applyActions;
     });
 
-    useEffect(() => {
-        if (isLoading) return; // Wait until stream finishes
-
+    const queueBufferedActions = useCallback(() => {
         const currentTeamSnapshot = teamRef.current;
         const newActions: TeamAction[] = [];
         let currentTeam = [...currentTeamSnapshot];
 
-        for (const msg of messages) {
-            if (msg.role !== "assistant") continue;
-            for (const part of msg.parts) {
-                if (part.type !== "tool-call") continue;
-                if (processedToolCallsRef.current.has(part.id)) continue;
-                if (part.state !== "approval-requested") continue;
-
-                processedToolCallsRef.current.add(part.id);
-
-                // Parse tool input to TeamAction
-                const input = (typeof part.input === "object" ? part.input : undefined) as
-                    | ModifyTeamInput
-                    | undefined;
-                if (!input) continue;
-
-                const action = parseToolToAction(input, currentTeam, newActions.length);
-                if (action) {
-                    // Attach the approval ID so we can respond later
-                    (action as TeamAction & { _approvalId?: string })._approvalId =
-                        part.approval?.id;
-                    newActions.push(action);
-                    currentTeam = action.preview;
-                }
-            }
+        for (const input of pendingToolInputsRef.current) {
+            const action = parseToolToAction(input, currentTeam, newActions.length);
+            if (!action) continue;
+            newActions.push(action);
+            currentTeam = action.preview;
         }
+
+        pendingToolInputsRef.current = [];
 
         if (newActions.length === 0) return;
 
-        // Auto-apply for team generation (all adds to empty team)
         const isTeamGeneration =
             newActions.length > 1 &&
             currentTeamSnapshot.length === 0 &&
@@ -194,17 +336,28 @@ export function ChatPanel() {
 
         if (isTeamGeneration) {
             applyActionsRef.current(newActions);
-        } else {
-            // Defer state update to avoid synchronous setState inside useEffect
-            // (React compiler flags direct setState in effect bodies)
-            queueMicrotask(() => {
-                setPendingAction(newActions[0]);
-                if (newActions.length > 1) {
-                    setPendingActions(newActions.slice(1));
-                }
-            });
+            return;
         }
-    }, [messages, isLoading]);
+
+        queueMicrotask(() => {
+            setPendingAction(newActions[0]);
+            setPendingActions(newActions.slice(1));
+        });
+    }, []);
+
+    useEffect(() => {
+        if (isLoading || !streamFinishedRef.current) return;
+        queueMicrotask(() => {
+            queueBufferedActions();
+            resetActiveStream();
+        });
+    }, [isLoading, queueBufferedActions, resetActiveStream]);
+
+    useEffect(() => {
+        return () => {
+            clearThinkingFlushTimer();
+        };
+    }, [clearThinkingFlushTimer]);
 
     const advancePendingAction = useCallback(() => {
         if (pendingActions.length === 0) {
@@ -218,10 +371,11 @@ export function ChatPanel() {
 
     const handleSend = useCallback(
         async (content: string) => {
+            resetActiveStream();
             setLastUserPrompt(content);
             await sendMessage(content);
         },
-        [sendMessage, setLastUserPrompt],
+        [resetActiveStream, sendMessage, setLastUserPrompt],
     );
 
     const handleStop = useCallback(() => {
@@ -233,19 +387,21 @@ export function ChatPanel() {
         storeClearChat();
         setPendingAction(null);
         setPendingActions([]);
-        processedToolCallsRef.current.clear();
+        resetActiveStream();
         try {
             localStorage.removeItem(MESSAGES_STORAGE_KEY);
         } catch {
             // ignore
         }
-    }, [clear, storeClearChat]);
+    }, [clear, resetActiveStream, storeClearChat]);
 
     // Watch for queued prompts from WelcomeOverlay
     useEffect(() => {
         if (queuedPrompt && !isLoading) {
-            handleSend(queuedPrompt);
-            clearQueuedPrompt();
+            queueMicrotask(() => {
+                handleSend(queuedPrompt);
+                clearQueuedPrompt();
+            });
         }
     }, [queuedPrompt, isLoading, handleSend, clearQueuedPrompt]);
 
@@ -277,6 +433,7 @@ export function ChatPanel() {
                 pendingAction={pendingAction}
                 pendingActions={pendingActions}
                 advancePendingAction={advancePendingAction}
+                activeStream={activeStream}
                 streamingRef={streamingRef}
             />
             <ChatInput

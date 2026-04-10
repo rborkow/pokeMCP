@@ -1,9 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen } from "../test-utils";
+import { act, render, screen, waitFor } from "../test-utils";
 import { ChatPanel } from "@/components/chat/ChatPanel";
 import { useChatStore } from "@/stores/chat-store";
 import { useTeamStore } from "@/stores/team-store";
 import { useHistoryStore } from "@/stores/history-store";
+import * as parseToolActionModule from "@/lib/ai/parse-tool-action";
 
 // Mock localStorage
 const localStorageMock = {
@@ -24,18 +25,36 @@ const mockSendMessage = vi.fn();
 const mockStop = vi.fn();
 const mockClear = vi.fn();
 const mockSetMessages = vi.fn();
+let mockUseChatState: {
+    messages: Array<{
+        id: string;
+        role: "user" | "assistant" | "system";
+        parts: Array<{ type: string; content?: string }>;
+        createdAt?: Date;
+    }>;
+    isLoading: boolean;
+    status: "ready" | "submitted" | "streaming" | "error";
+} = {
+    messages: [],
+    isLoading: false,
+    status: "ready",
+};
+let latestUseChatOptions: { onChunk?: (chunk: unknown) => void } | null = null;
 
 vi.mock("@tanstack/ai-react", () => ({
-    useChat: vi.fn(() => ({
-        messages: [],
-        sendMessage: mockSendMessage,
-        stop: mockStop,
-        clear: mockClear,
-        isLoading: false,
-        status: "ready" as const,
-        error: undefined,
-        setMessages: mockSetMessages,
-    })),
+    useChat: vi.fn((options?: { onChunk?: (chunk: unknown) => void }) => {
+        latestUseChatOptions = options ?? null;
+        return {
+            messages: mockUseChatState.messages,
+            sendMessage: mockSendMessage,
+            stop: mockStop,
+            clear: mockClear,
+            isLoading: mockUseChatState.isLoading,
+            status: mockUseChatState.status,
+            error: undefined,
+            setMessages: mockSetMessages,
+        };
+    }),
 }));
 
 // Mock connection and tools
@@ -54,9 +73,12 @@ vi.mock("@/lib/ai/tools-tanstack", () => ({
     },
 }));
 
-vi.mock("@/lib/ai/parse-tool-action", () => ({
-    parseToolToAction: vi.fn(),
-}));
+vi.mock("@/lib/ai/parse-tool-action", async () => {
+    const actual = await vi.importActual<typeof import("@/lib/ai/parse-tool-action")>(
+        "@/lib/ai/parse-tool-action",
+    );
+    return actual;
+});
 
 // Mock showdown-parser
 vi.mock("@/lib/showdown-parser", () => ({
@@ -76,6 +98,12 @@ describe("ChatPanel", () => {
         useHistoryStore.getState().clearHistory();
         vi.clearAllMocks();
         localStorageMock.getItem.mockReturnValue(null);
+        mockUseChatState = {
+            messages: [],
+            isLoading: false,
+            status: "ready",
+        };
+        latestUseChatOptions = null;
     });
 
     it("renders personality selector", () => {
@@ -130,5 +158,101 @@ describe("ChatPanel", () => {
     it("renders empty state when no messages", () => {
         render(<ChatPanel />);
         expect(screen.getByText("Ask me anything about your team!")).toBeInTheDocument();
+    });
+
+    it("renders active assistant text from chunks before messages update", async () => {
+        render(<ChatPanel />);
+
+        expect(latestUseChatOptions?.onChunk).toBeDefined();
+
+        act(() => {
+            mockUseChatState.isLoading = true;
+            latestUseChatOptions?.onChunk?.({
+                type: "RUN_STARTED",
+                timestamp: Date.now(),
+            });
+            latestUseChatOptions?.onChunk?.({
+                type: "TEXT_MESSAGE_CONTENT",
+                messageId: "assistant-1",
+                delta: "Hello smooth world",
+                timestamp: Date.now(),
+            });
+        });
+
+        await waitFor(() => {
+            expect(screen.getByTestId("live-assistant-message")).toBeInTheDocument();
+            expect(screen.getByText("Hello smooth world")).toBeInTheDocument();
+        });
+    });
+
+    it("defers tool approvals until the stream completes", async () => {
+        const parseSpy = vi.spyOn(parseToolActionModule, "parseToolToAction");
+        const teamAction = {
+            type: "add_pokemon" as const,
+            slot: 0,
+            payload: { pokemon: "Garchomp", moves: ["Earthquake"] },
+            preview: [{ pokemon: "Garchomp", moves: ["Earthquake"] }],
+            reason: "Add a strong lead",
+        };
+        parseSpy.mockReturnValue(
+            teamAction as ReturnType<typeof parseToolActionModule.parseToolToAction>,
+        );
+
+        const { rerender } = render(<ChatPanel />);
+
+        act(() => {
+            mockUseChatState.isLoading = true;
+            latestUseChatOptions?.onChunk?.({
+                type: "RUN_STARTED",
+                timestamp: Date.now(),
+            });
+            latestUseChatOptions?.onChunk?.({
+                type: "TEXT_MESSAGE_CONTENT",
+                messageId: "assistant-2",
+                delta: "Let me suggest a lead.",
+                timestamp: Date.now(),
+            });
+            latestUseChatOptions?.onChunk?.({
+                type: "TOOL_CALL_END",
+                input: {
+                    action_type: "add_pokemon",
+                    slot: 0,
+                    reason: "Add a strong lead",
+                    pokemon: "Garchomp",
+                    moves: ["Earthquake"],
+                },
+                timestamp: Date.now(),
+            });
+        });
+
+        await waitFor(() => {
+            expect(screen.getByText("Let me suggest a lead.")).toBeInTheDocument();
+        });
+        expect(screen.queryByText("Add Pokemon")).not.toBeInTheDocument();
+
+        act(() => {
+            mockUseChatState = {
+                messages: [
+                    {
+                        id: "assistant-2",
+                        role: "assistant",
+                        parts: [{ type: "text", content: "Let me suggest a lead." }],
+                        createdAt: new Date(),
+                    },
+                ],
+                isLoading: false,
+                status: "ready",
+            };
+            latestUseChatOptions?.onChunk?.({
+                type: "RUN_FINISHED",
+                timestamp: Date.now(),
+            });
+        });
+
+        rerender(<ChatPanel />);
+
+        await waitFor(() => {
+            expect(screen.getByText("Add Pokemon")).toBeInTheDocument();
+        });
     });
 });
