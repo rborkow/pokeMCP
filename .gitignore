@@ -224,3 +224,4 @@ yarn-error.log*
 
 # Exported interaction logs (for fine-tuning)
 exported-logs/
+.omx/

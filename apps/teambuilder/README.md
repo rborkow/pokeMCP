@@ -7,12 +7,14 @@ Interactive web application for Pokemon competitive team building with AI-powere
 ## Features
 
 ### Team Building
+
 - Import/export Showdown format with shareable URLs
 - Click-to-edit Pokemon sets with full EV/IV/nature support
 - Drag-and-drop team reordering
 - Quick format toggle (Singles/VGC) with advanced format dropdown
 
 ### AI Coach
+
 - Claude-powered assistant with personality themes (Professor Kukui, Oak, Blue)
 - Team Archetypes for guided generation:
   - **Singles**: Hyper Offense, Bulky Offense, Balance, Stall, Weather
@@ -22,6 +24,7 @@ Interactive web application for Pokemon competitive team building with AI-powere
 - Streaming responses with tool call visualization
 
 ### Analysis Tools
+
 - **Type Coverage**: Visual breakdown of weaknesses and resistances
 - **Threat Matrix**: Matchup analysis vs top meta threats with usage weighting
 - **Speed Tiers**: Calculated speed stats at Level 50 with:
@@ -31,11 +34,13 @@ Interactive web application for Pokemon competitive team building with AI-powere
   - Modifier badges (Choice Scarf, Tailwind access)
 
 ### VGC Features
+
 - Bring Four selector for team preview practice
 - VGC-specific tips and warnings
 - Format fallback for newer regulations without stats data
 
 ### Team History
+
 - Track changes with diff view
 - Undo/redo support
 - Reset button to clear team, chat, and history
@@ -46,7 +51,7 @@ Interactive web application for Pokemon competitive team building with AI-powere
 - **UI:** shadcn/ui + Tailwind CSS 4
 - **State:** Zustand
 - **Data Fetching:** TanStack Query
-- **Deployment:** Cloudflare Pages via OpenNext
+- **Deployment:** OpenNext on Cloudflare Workers
 - **API:** Connects to PokeMCP server at api.pokemcp.com
 
 ## Development
@@ -67,7 +72,7 @@ npx tsc --noEmit
 # Build for production
 npm run pages:build
 
-# Deploy to Cloudflare Pages
+# Deploy to Cloudflare Workers
 npm run deploy
 ```
 
@@ -117,10 +122,10 @@ Copy `.env.example` to `.env.local` and configure:
 cp .env.example .env.local
 ```
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `ANTHROPIC_API_KEY` | Yes | Anthropic API key for AI coach ([get one](https://console.anthropic.com/)) |
-| `NEXT_PUBLIC_MCP_URL` | No | MCP API URL (defaults to `https://api.pokemcp.com`) |
+| Variable              | Required | Description                                                                |
+| --------------------- | -------- | -------------------------------------------------------------------------- |
+| `ANTHROPIC_API_KEY`   | Yes      | Anthropic API key for AI coach ([get one](https://console.anthropic.com/)) |
+| `NEXT_PUBLIC_MCP_URL` | No       | MCP API URL (defaults to `https://api.pokemcp.com`)                        |
 
 ## Related
 

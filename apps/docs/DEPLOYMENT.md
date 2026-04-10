@@ -2,9 +2,14 @@
 
 ## Cloudflare Pages (Recommended)
 
+Production docs are served by the Git-connected Cloudflare Pages project that owns
+`docs.pokemcp.com`. Keep production ownership in that project so pushes to `main`
+and preview branches stay visible in the Cloudflare Pages UI.
+
 ### Method 1: GitHub Integration
 
 1. **Push to GitHub**
+
    ```bash
    git add apps/docs
    git commit -m "Add documentation site"
@@ -18,7 +23,7 @@
    - Authorize GitHub and select your repository
 
 3. **Configure Build**
-   - **Project name**: `pokemcp-docs`
+   - **Project name**: Use the Git-connected Pages project that owns `docs.pokemcp.com`
    - **Production branch**: `main`
    - **Build command**: `npm run build`
    - **Build output directory**: `out`
@@ -30,14 +35,14 @@
 5. **Deploy**
    - Click "Save and Deploy"
    - First build takes ~2 minutes
-   - Site will be live at: `https://pokemcp-docs.pages.dev`
+   - Production docs will be live at: `https://docs.pokemcp.com`
 
-### Method 2: Direct Upload via Wrangler
+### Method 2: Direct Upload via Wrangler (Non-Production / Ad Hoc)
 
 ```bash
 # From apps/docs directory
 npm run build
-npx wrangler pages deploy out --project-name=pokemcp-docs
+npx wrangler pages deploy out --project-name=<non-production-pages-project>
 ```
 
 ## Custom Domain
@@ -51,9 +56,12 @@ npx wrangler pages deploy out --project-name=pokemcp-docs
 ## Automatic Deployments
 
 With GitHub integration:
+
 - Push to `main` → automatic production deployment
 - Push to other branches → preview deployment
 - Pull requests → automatic preview links
+
+GitHub Actions in this repo do not own docs production deployments.
 
 ## Build Time
 
@@ -64,7 +72,8 @@ With GitHub integration:
 ## Monitoring
 
 View build logs and analytics:
-- Cloudflare Dashboard → Pages → pokemcp-docs
+
+- Cloudflare Dashboard → Pages → the Git-connected project that owns `docs.pokemcp.com`
 - Build history
 - Analytics (visits, bandwidth)
 - Real-time logs
@@ -74,6 +83,7 @@ View build logs and analytics:
 ### Build Fails
 
 Check build logs in Cloudflare Pages dashboard. Common issues:
+
 - Node version mismatch (ensure Node 20)
 - Missing dependencies (check package.json)
 - TypeScript errors (run `npm run build` locally first)
@@ -81,6 +91,7 @@ Check build logs in Cloudflare Pages dashboard. Common issues:
 ### 404 Errors
 
 Nextra generates trailing slashes. Ensure:
+
 - `trailingSlash: true` in next.config.mjs
 - Links use `/page/` not `/page`
 
@@ -93,6 +104,7 @@ Nextra generates trailing slashes. Ensure:
 ## Costs
 
 Cloudflare Pages free tier:
+
 - **500 builds/month**
 - **Unlimited requests**
 - **Unlimited bandwidth**
@@ -102,6 +114,7 @@ More than sufficient for documentation sites.
 ## Next Steps
 
 After deployment:
+
 - Set up custom domain
 - Enable Web Analytics
 - Configure redirects (if needed)
