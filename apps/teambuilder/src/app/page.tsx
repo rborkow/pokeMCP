@@ -19,7 +19,7 @@ import { useUrlTeam } from "@/hooks/useUrlTeam";
 import { getArchetypePrompt, type TeamArchetype } from "@/lib/ai/archetypes";
 import { useChatStore } from "@/stores/chat-store";
 import { useTeamStore } from "@/stores/team-store";
-import { getFormatDisplayName } from "@/types/pokemon";
+import { FORMATS, getFormatDisplayName, isChampionsFormat } from "@/types/pokemon";
 
 function UrlTeamLoader() {
     useUrlTeam();
@@ -70,7 +70,7 @@ export default function Home() {
                             <h1 className="text-3xl md:text-4xl font-display font-bold">
                                 <span className="text-gradient">Your Team</span>
                             </h1>
-                            <p className="text-muted-foreground mt-1 flex items-center gap-2">
+                            <p className="text-muted-foreground mt-1 flex items-center gap-2 flex-wrap">
                                 <span className="font-semibold text-foreground">
                                     {team.length}/6
                                 </span>{" "}
@@ -79,6 +79,15 @@ export default function Home() {
                                 <span className="px-2 py-0.5 rounded bg-muted text-xs font-medium tracking-wider">
                                     {getFormatDisplayName(format)}
                                 </span>
+                                {isChampionsFormat(format) && (
+                                    <span
+                                        title="Pokémon Champions regulation. Mega Evolution and Victory Point mechanics are only partially supported."
+                                        className="px-2 py-0.5 rounded bg-amber-500/15 text-amber-500 text-[11px] font-semibold uppercase tracking-wider border border-amber-500/30"
+                                    >
+                                        {FORMATS.find((f) => f.id === format)?.chipLabel ??
+                                            "Champions"}
+                                    </span>
+                                )}
                             </p>
                         </div>
                         <TeamImportExport />
