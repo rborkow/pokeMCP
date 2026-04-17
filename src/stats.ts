@@ -1,4 +1,5 @@
 import { toID } from "./data-loader.js";
+import { resolveStatsFormat } from "./regulations/stats-mapping.js";
 import type { UsageStatistics } from "smogon";
 
 // --- Caches ---
@@ -106,10 +107,37 @@ function unavailableStatsMessage(format: string): string {
             `No usage statistics found for format "${format}". ` +
             "Pokémon Champions usage stats are not yet published on Smogon. " +
             "If Smogon begins publishing a matching gen9vgc2026regma-style identifier, " +
-            "the monthly ingestion will pick it up automatically."
+            "set showdownFormatId on the regulation and the monthly ingestion will " +
+            "pick it up automatically."
         );
     }
     return `No usage statistics found for format "${format}".`;
+}
+
+/**
+ * Shared preamble for stats tool entry points: apply the default, remap a
+ * Champions regulation id to its Showdown id if one is configured, and
+ * short-circuit with a clear message if the regulation has no mapping yet.
+ *
+ * Returns a tuple of (kvFormatId, displayFormatId, earlyResponse). When
+ * earlyResponse is non-null, the tool should return it immediately without
+ * hitting KV.
+ */
+function resolveFormatForLookup(requested: string | undefined): {
+    kvId: string;
+    displayId: string;
+    earlyResponse: string | null;
+} {
+    const input = requested || "gen9ou";
+    const resolved = resolveStatsFormat(input);
+    if (resolved.championsUnmapped) {
+        return {
+            kvId: input,
+            displayId: input,
+            earlyResponse: unavailableStatsMessage(input),
+        };
+    }
+    return { kvId: resolved.resolvedId, displayId: resolved.originalId, earlyResponse: null };
 }
 
 // --- Tool Functions ---
@@ -124,19 +152,20 @@ export async function getPopularSets(
     },
     env: Env,
 ): Promise<string> {
-    const format = args.format || "gen9ou";
+    const { kvId, displayId, earlyResponse } = resolveFormatForLookup(args.format);
+    if (earlyResponse) return earlyResponse;
 
-    const pokemonStats = await getPokemonStats(args.pokemon, format, env);
+    const pokemonStats = await getPokemonStats(args.pokemon, kvId, env);
 
     if (!pokemonStats) {
-        const index = await getFormatIndex(format, env);
+        const index = await getFormatIndex(kvId, env);
         if (!index) {
-            return unavailableStatsMessage(format);
+            return unavailableStatsMessage(displayId);
         }
-        return `${args.pokemon} not found in ${format} usage statistics.`;
+        return `${args.pokemon} not found in ${displayId} usage statistics.`;
     }
 
-    let output = `**${args.pokemon} in ${format.toUpperCase()}**\n\n`;
+    let output = `**${args.pokemon} in ${displayId.toUpperCase()}**\n\n`;
     output += `**Usage:** ${(pokemonStats.usage * 100).toFixed(2)}%\n\n`;
 
     // Helper to normalize values (chaos format uses weighted counts, not percentages)
@@ -188,8 +217,9 @@ export async function getPopularSets(
         output += "\n";
     }
 
-    // Tera Types (Gen 9 only)
-    if (pokemonStats["Tera Types"] && format.startsWith("gen9")) {
+    // Tera Types (Gen 9 only — detected from the Showdown-side id since
+    // Champions regulations map onto gen9vgc stats files).
+    if (pokemonStats["Tera Types"] && kvId.startsWith("gen9")) {
         const teraTypes = normalize(pokemonStats["Tera Types"])
             .filter(([type]) => type.toLowerCase() !== "nothing")
             .slice(0, 5);
@@ -213,13 +243,14 @@ export async function getMetaThreats(
     args: { format?: string; limit?: number },
     env: Env,
 ): Promise<string> {
-    const format = args.format || "gen9ou";
+    const { kvId, displayId, earlyResponse } = resolveFormatForLookup(args.format);
+    if (earlyResponse) return earlyResponse;
     const limit = args.limit || 20;
 
-    const index = await getFormatIndex(format, env);
+    const index = await getFormatIndex(kvId, env);
 
     if (!index) {
-        return unavailableStatsMessage(format);
+        return unavailableStatsMessage(displayId);
     }
 
     const threats = Object.entries(index.pokemon)
@@ -227,7 +258,7 @@ export async function getMetaThreats(
         .sort((a, b) => b.usage - a.usage)
         .slice(0, limit);
 
-    let output = `**Top ${limit} Threats in ${format.toUpperCase()}:**\n\n`;
+    let output = `**Top ${limit} Threats in ${displayId.toUpperCase()}:**\n\n`;
 
     for (let i = 0; i < threats.length; i++) {
         const threat = threats[i];
@@ -248,21 +279,22 @@ export async function getTeammates(
     },
     env: Env,
 ): Promise<string> {
-    const format = args.format || "gen9ou";
+    const { kvId, displayId, earlyResponse } = resolveFormatForLookup(args.format);
+    if (earlyResponse) return earlyResponse;
     const limit = args.limit || 10;
 
-    const pokemonStats = await getPokemonStats(args.pokemon, format, env);
+    const pokemonStats = await getPokemonStats(args.pokemon, kvId, env);
 
     if (!pokemonStats) {
-        const index = await getFormatIndex(format, env);
+        const index = await getFormatIndex(kvId, env);
         if (!index) {
-            return unavailableStatsMessage(format);
+            return unavailableStatsMessage(displayId);
         }
-        return `${args.pokemon} not found in ${format} usage statistics.`;
+        return `${args.pokemon} not found in ${displayId} usage statistics.`;
     }
 
     if (!pokemonStats.Teammates) {
-        return `No teammate data available for ${args.pokemon} in ${format}.`;
+        return `No teammate data available for ${args.pokemon} in ${displayId}.`;
     }
 
     // Normalize teammate values (chaos format uses weighted counts)
@@ -273,7 +305,7 @@ export async function getTeammates(
         .sort(([, a], [, b]) => b - a)
         .slice(0, limit);
 
-    let output = `**Common Teammates for ${args.pokemon} in ${format.toUpperCase()}:**\n\n`;
+    let output = `**Common Teammates for ${args.pokemon} in ${displayId.toUpperCase()}:**\n\n`;
 
     for (const [teammate, pct] of teammates) {
         output += `- **${teammate}**: ${pct.toFixed(1)}%\n`;
@@ -293,21 +325,22 @@ export async function getChecksCounters(
     },
     env: Env,
 ): Promise<string> {
-    const format = args.format || "gen9ou";
+    const { kvId, displayId, earlyResponse } = resolveFormatForLookup(args.format);
+    if (earlyResponse) return earlyResponse;
     const limit = args.limit || 15;
 
-    const pokemonStats = await getPokemonStats(args.pokemon, format, env);
+    const pokemonStats = await getPokemonStats(args.pokemon, kvId, env);
 
     if (!pokemonStats) {
-        const index = await getFormatIndex(format, env);
+        const index = await getFormatIndex(kvId, env);
         if (!index) {
-            return unavailableStatsMessage(format);
+            return unavailableStatsMessage(displayId);
         }
-        return `${args.pokemon} not found in ${format} usage statistics.`;
+        return `${args.pokemon} not found in ${displayId} usage statistics.`;
     }
 
     if (!pokemonStats["Checks and Counters"]) {
-        return `No checks and counters data available for ${args.pokemon} in ${format}.`;
+        return `No checks and counters data available for ${args.pokemon} in ${displayId}.`;
     }
 
     const checksCounters = Object.entries(pokemonStats["Checks and Counters"])
@@ -320,7 +353,7 @@ export async function getChecksCounters(
         .sort((a, b) => b.score - a.score)
         .slice(0, limit);
 
-    let output = `**Checks and Counters for ${args.pokemon} in ${format.toUpperCase()}:**\n\n`;
+    let output = `**Checks and Counters for ${args.pokemon} in ${displayId.toUpperCase()}:**\n\n`;
     output +=
         "(Score: higher = more effective. KOed % = KO rate, Switched % = switch out rate)\n\n";
 
@@ -335,17 +368,18 @@ export async function getChecksCounters(
  * Get overall metagame statistics
  */
 export async function getMetagameStats(args: { format?: string }, env: Env): Promise<string> {
-    const format = args.format || "gen9ou";
+    const { kvId, displayId, earlyResponse } = resolveFormatForLookup(args.format);
+    if (earlyResponse) return earlyResponse;
 
-    const index = await getFormatIndex(format, env);
+    const index = await getFormatIndex(kvId, env);
 
     if (!index) {
-        return unavailableStatsMessage(format);
+        return unavailableStatsMessage(displayId);
     }
 
     const totalPokemon = Object.keys(index.pokemon).length;
 
-    let output = `**Metagame Statistics for ${format.toUpperCase()}:**\n\n`;
+    let output = `**Metagame Statistics for ${displayId.toUpperCase()}:**\n\n`;
     output += `- **Total Pokemon:** ${totalPokemon}\n`;
     output += `- **Total Battles:** ${index.info["number of battles"].toLocaleString()}\n`;
     output += `- **Average Weight/Team:** ${index.info["avg weight/team"]}\n\n`;
