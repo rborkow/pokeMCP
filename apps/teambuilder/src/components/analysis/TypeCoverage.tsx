@@ -5,7 +5,12 @@ import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useTeamStore } from "@/stores/team-store";
 import { TYPES, type PokemonType } from "@/types/pokemon";
-import { getPokemonTypes } from "@/lib/data/pokemon-types";
+import {
+    getActiveMegaForm,
+    getActiveMegaSlot,
+    getEffectiveTypes,
+    isActiveMegaDataPending,
+} from "@/lib/champions-utils";
 import { TYPE_BG_CLASSES } from "@/lib/data/type-colors";
 
 // Simplified type effectiveness (1 = weak, 2 = 2x weak, 0 = resist, -1 = immune)
@@ -167,17 +172,26 @@ function analyzeTeamCoverage(teamData: { name: string; types: string[] }[]): Typ
 }
 
 export function TypeCoverage() {
-    const { team } = useTeamStore();
+    const { team, format } = useTeamStore();
+
+    const activeMega = useMemo(() => getActiveMegaForm(team, format), [team, format]);
+    const megaDataPending = useMemo(() => isActiveMegaDataPending(team, format), [team, format]);
+
+    const activeMegaSlot = useMemo(() => getActiveMegaSlot(team, format), [team, format]);
 
     const analysis = useMemo(() => {
         if (team.length === 0) return null;
 
-        const teamData = team.map((p) => ({
-            name: p.pokemon,
-            types: getPokemonTypes(p.pokemon),
+        const teamData = team.map((p, i) => ({
+            // Annotate the active-Mega slot so tooltips make the overlay obvious.
+            name:
+                i === activeMegaSlot && activeMega
+                    ? `${p.pokemon} (as ${activeMega.megaName})`
+                    : p.pokemon,
+            types: getEffectiveTypes(p, team, format),
         }));
         return analyzeTeamCoverage(teamData);
-    }, [team]);
+    }, [team, format, activeMega, activeMegaSlot]);
 
     if (team.length === 0) {
         return (
@@ -193,6 +207,23 @@ export function TypeCoverage() {
     return (
         <div className="glass-panel">
             <h3 className="font-display text-lg font-semibold mb-4">Type Coverage Analysis</h3>
+            {activeMega && (
+                <div className="mb-4 rounded border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs text-amber-500">
+                    {megaDataPending ? (
+                        <>
+                            Omni Ring: {activeMega.megaName} detected, but post-Mega type data is
+                            pending publication by The Pokémon Company. Coverage below uses base
+                            types.
+                        </>
+                    ) : (
+                        <>
+                            Omni Ring: coverage reflects{" "}
+                            <span className="font-semibold">{activeMega.megaName}</span> (post-Mega
+                            types: {activeMega.postMegaTypes?.join(" / ") ?? "—"}).
+                        </>
+                    )}
+                </div>
+            )}
             <div className="space-y-4">
                 {/* Weaknesses */}
                 <div>

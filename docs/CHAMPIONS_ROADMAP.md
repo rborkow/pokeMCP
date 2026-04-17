@@ -1,10 +1,20 @@
 # Pokémon Champions Roadmap
 
-This document proposes a concrete PR breakdown for Phases 2–4 of Champions
-support. It is grounded in the files Phase 1 actually touched, not the plan
-as originally specified. If you are picking this up: start by reading
-[`src/regulations/`](../src/regulations/) — that is the load-bearing
-abstraction for everything below.
+This document tracks the phased rollout of Champions support. If you are
+picking this up: start by reading [`src/regulations/`](../src/regulations/)
+and [`apps/teambuilder/src/lib/champions-utils.ts`](../apps/teambuilder/src/lib/champions-utils.ts)
+— those are the load-bearing abstractions.
+
+**Phase status:**
+
+| Phase | Status | Notes |
+|-------|--------|-------|
+| 1     | ✅ merged | Regulation abstraction, allow-list validator, teambuilder UI |
+| 2     | ✅ merged | `showdownFormatId` mapping for usage stats |
+| 3a    | ✅ shipped | Mega data model + Omni Ring "one Mega per team" validator rule |
+| 3b    | ✅ shipped | Post-Mega types in TypeCoverage + ThreatMatrix |
+| 4a    | pending | VP-aware team model |
+| 4b    | pending | Champions move overlay |
 
 ## Phase 1 recap — what was actually built
 
@@ -110,61 +120,58 @@ additive.
 
 ---
 
-## Phase 3 — Mega Evolution data modeling (1 medium PR + 1 follow-up)
+## Phase 3 — Mega Evolution (shipped)
 
-**This is the architecturally meaty phase.** Megas change a Pokémon's
-type, base stats, ability, and speed band mid-battle. Our type coverage
-and threat matrix panels currently assume static types — they need to
-learn about "potentially Mega" states.
+### PR 3a — Mega data model + Omni Ring rule (shipped)
 
-### Why this is non-trivial
+- `src/regulations/mega-data.ts` — `MegaForm` interface and
+  `CHAMPIONS_REGMA_MEGAS`: full post-Mega types/ability/stats for the
+  seven returning Gen 6/7 Megas; Meganium-Mega marked
+  `championsExclusive` with pending data.
+- `RegulationSet.allowedMegas: string[]` → `megaForms: MegaForm[]` (type
+  + Reg M-A config migrated).
+- `src/regulations/mega-helpers.ts` — `isChampionsMegaStone()` and
+  `findMegaFormForItem()` for validator + UI reuse.
+- `src/regulations/validator.ts` — Omni Ring rule: team-level "at most
+  one Mega Stone" check, separate from the Item Clause so mixed-Mega
+  teams (Charizardite X + Gardevoirite) are caught.
 
-- `apps/teambuilder/src/components/analysis/TypeCoverage.tsx` and
-  `ThreatMatrix.tsx` both key off `getPokemonTypes()`. They need either
-  a "post-Mega" variant or a dual-state rendering.
-- The Omni Ring in Reg M-A means a **team can hold one Mega Evolution
-  per battle**. That's a team-level state, not a per-Pokémon flag, and
-  doesn't fit the current `TeamPokemon` shape.
-- Mega-evolve and switch share a priority band — that's the Phase 3
-  rule. The existing `src/tools.ts` `validateTeam` doesn't model turn
-  order at all, so we only need to surface this as a warning in the UI;
-  nothing to validate server-side.
+### PR 3b — Post-Mega types in the analysis panels (shipped)
 
-### PR 3a — Mega data (medium)
+- `apps/teambuilder/src/lib/data/champions-megas.ts` — client-side mirror
+  of the MCP Mega data. Keep in sync with the worker until Phase 4b
+  unifies via RPC.
+- `apps/teambuilder/src/lib/champions-utils.ts` — `getActiveMegaSlot`,
+  `getActiveMegaForm`, `getEffectiveTypes`, `isActiveMegaDataPending`.
+  The Omni Ring rule means the active Mega is auto-detected (slot
+  holding a Mega Stone that matches its species), so **no picker was
+  needed** — a simplification from the original plan.
+- `TypeCoverage.tsx` + `ThreatMatrix.tsx` — use `getEffectiveTypes()`
+  for defensive analysis; show an amber Omni Ring banner naming the
+  active Mega and its post-Mega types (or "data pending" for
+  championsExclusive).
+- Tests in `apps/teambuilder/src/__tests__/champions-utils.test.ts`.
 
-1. Add `src/regulations/mega-data.ts`: for each Pokémon name in
-   `CHAMPIONS_REGMA.allowedMegas`, record post-Mega type(s), post-Mega
-   base stats, post-Mega ability, and the Mega Stone item (Charizardite-X,
-   etc.).
-2. Extend `RegulationSet` with `megaForms: Record<string, MegaForm>`
-   instead of the current flat `allowedMegas: string[]`. Migrate the
-   existing list.
-3. Extend `validator.ts` to enforce "at most one Mega Stone held per
-   team" once we're ready. Phase 1 left item-clause loose (one of each
-   item), which **already** catches this case incidentally for doubled
-   Megas of the same form, but not mixed Megas.
-4. Add `isChampionsMegaStone(item: string)` and surface in the
-   teambuilder so the edit dialog can warn when a second Mega Stone is
-   placed.
+### Simplifications vs the original plan
 
-### PR 3b — post-Mega type coverage UI (medium)
+- **No MegaPicker component.** Because the validator constrains teams
+  to one Mega Stone, the active Mega is unambiguous — the analysis
+  can auto-detect it. If a future regulation allows multiple Mega
+  Stones per team, revisit this decision and add a picker.
+- **Client-side data mirror** rather than an MCP RPC. Eight entries is
+  cheap to duplicate; a `get_mega_forms` tool would add a network round
+  trip to every TypeCoverage render. Revisit if the list grows past
+  ~50 entries or drifts between client and server.
 
-1. `apps/teambuilder/src/lib/data/pokemon-types.ts`: add a sibling
-   `getPostMegaTypes(pokemon)` that reads from the Champions mega data
-   module.
-2. `TypeCoverage.tsx` + `ThreatMatrix.tsx`: render "base + Mega" side by
-   side when the team is in a Champions format and a Mega candidate is
-   present. Keep the existing rendering for non-Champions.
-3. Add a new `components/analysis/MegaPicker.tsx` that lets the user mark
-   which Pokémon is the intended Mega for this battle, persisted in the
-   team store. Drives which post-Mega types the analysis panels show.
+### Not done (deferred)
 
-### Risk
-
-- Medium. The TypeCoverage component has hard-coded type chart
-  assumptions that will need a small refactor to accept "effective types"
-  rather than "declared types".
-- Low for the regulation-side code — the additions are additive.
+- **Mega Stone warning in the edit dialog.** `isChampionsMegaStone()`
+  is exported; wiring a "second Mega Stone" hint into
+  `PokemonEditDialog` is a separate, small PR if someone wants it.
+- **Mega-evolve/switch priority warning.** The "Mega-evolve and switch
+  share a priority band" note is a surface-level UX hint; we chose to
+  skip it rather than half-model turn order. Add as a tooltip in
+  `SpeedTiers` if it matters.
 
 ---
 
