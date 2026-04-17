@@ -6,10 +6,12 @@
  * per regulation (M-A, M-B, M-C...), and a handful of rules (Mega Evolution,
  * item clause, level 50, 6-bring-4) are regulation-wide.
  *
- * This interface is deliberately concrete about the subset of rules Phase 1
- * enforces. Phase 3 will add Mega post-type data, and Phase 4 will add VP spread
- * data + move overrides; both extend this struct rather than replacing it.
+ * This interface is deliberately concrete about the subset of rules each
+ * phase enforces. Phase 3a carries post-Mega data; Phase 4 will add VP
+ * spread data + move overrides.
  */
+
+import type { MegaForm } from "./mega-data.js";
 
 export type RegulationPlatform = "champions" | "showdown";
 
@@ -52,11 +54,14 @@ export interface RegulationSet {
      */
     legalityKvKey: string;
     /**
-     * Statically-known list of Pokémon that can Mega Evolve within this
-     * regulation via the Omni Ring. Held as Pokémon names (display form).
-     * Phase 1 does not enforce Mega legality — see CHAMPIONS_ROADMAP.
+     * Mega Evolutions legal within this regulation via the Omni Ring.
+     * Holds full `MegaForm` entries (post-Mega types, ability, stats,
+     * required Mega Stone item) so consumers can render the "as-Mega"
+     * state without extra lookups. Phase 3a adds the data model and
+     * enforces "at most one Mega Stone per team"; Phase 3b consumes
+     * post-Mega type data in the analysis UI.
      */
-    allowedMegas: string[];
+    megaForms: MegaForm[];
     /**
      * Items banned for this regulation regardless of the item clause.
      * Phase 1 does not enforce — see CHAMPIONS_ROADMAP.

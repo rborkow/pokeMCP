@@ -1,6 +1,7 @@
 import { getMove, getPokemon, getPokemonLearnset, toID } from "../data-loader.js";
 import type { TeamPokemon } from "../types.js";
 import { LegalityNotIngestedError, loadRegulation } from "./loader.js";
+import { findMegaFormForItem } from "./mega-helpers.js";
 import { getRegulation } from "./registry.js";
 import type { LoadedRegulation, RegulationSet } from "./types.js";
 
@@ -35,6 +36,8 @@ export function validateTeamForRegulation(
 
     const speciesSeen = new Map<string, number>();
     const itemsSeen = new Map<string, number>();
+    // Champions Omni Ring: at most one Mega Stone across the whole team.
+    const megaStoneNames: string[] = [];
 
     for (const member of team) {
         const species = getPokemon(member.pokemon);
@@ -74,6 +77,15 @@ export function validateTeamForRegulation(
             itemsSeen.set(key, count);
             if (count > 1) {
                 errors.push(`Item Clause violation: Multiple Pokémon hold ${member.item}`);
+            }
+        }
+
+        // Omni Ring: track Mega Stones for a team-level single-Mega check
+        // that runs after the loop.
+        if (member.item) {
+            const megaForm = findMegaFormForItem(member.item, regulation.megaForms);
+            if (megaForm) {
+                megaStoneNames.push(member.item);
             }
         }
 
@@ -119,6 +131,16 @@ export function validateTeamForRegulation(
 
         const allowMarker = isAllowed ? "✓" : "✗ NOT ON ALLOW-LIST";
         memberLines.push(`- ${species.name} ${allowMarker}`);
+    }
+
+    // Omni Ring: at most one Mega Stone per team. Two of the *same* stone
+    // is already caught by the Item Clause above; this check catches the
+    // mixed-Mega case (e.g. Charizardite X + Gardevoirite).
+    if (megaStoneNames.length > 1) {
+        errors.push(
+            `Omni Ring violation: team holds ${megaStoneNames.length} Mega Stones ` +
+                `(${megaStoneNames.join(", ")}). At most one Mega Evolution is allowed per team.`,
+        );
     }
 
     return {

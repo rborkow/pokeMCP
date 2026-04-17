@@ -4,11 +4,8 @@ import { useMemo, useState } from "react";
 import { PokemonSprite } from "@/components/team/PokemonSprite";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import {
-    calculateMatchupScore,
-    calculateOffensiveScore,
-    getPokemonTypes,
-} from "@/lib/data/pokemon-types";
+import { getActiveMegaForm, getActiveMegaSlot, getEffectiveTypes } from "@/lib/champions-utils";
+import { calculateMatchupScore, calculateOffensiveScore } from "@/lib/data/pokemon-types";
 import { useMetaThreats } from "@/lib/mcp-client";
 import { toDisplayName } from "@/lib/showdown-parser";
 import { type MetaThreat, parseMetaThreats } from "@/lib/threat-matrix-utils";
@@ -40,12 +37,15 @@ export function ThreatMatrix() {
         return parseMetaThreats(metaThreatsData);
     }, [metaThreatsData]);
 
+    const activeMegaSlot = useMemo(() => getActiveMegaSlot(team, format), [team, format]);
+    const activeMega = useMemo(() => getActiveMegaForm(team, format), [team, format]);
+
     // Calculate matchups (both defensive and offensive)
     const matchups = useMemo(() => {
         if (team.length === 0 || metaThreats.length === 0) return [];
 
         return team.map((pokemon) => {
-            const defenderTypes = getPokemonTypes(pokemon.pokemon);
+            const defenderTypes = getEffectiveTypes(pokemon, team, format);
             const hasKnownTypes = defenderTypes.length > 0;
             return metaThreats.map((threat) => ({
                 defScore: hasKnownTypes ? calculateMatchupScore(defenderTypes, threat.types) : null,
@@ -57,7 +57,7 @@ export function ThreatMatrix() {
                 unknownTypes: !hasKnownTypes,
             }));
         });
-    }, [team, metaThreats]);
+    }, [team, metaThreats, format]);
 
     if (team.length === 0) {
         return (
@@ -124,6 +124,15 @@ export function ThreatMatrix() {
                         {getFormatDisplayName(format)} not yet available)
                     </p>
                 )}
+                {activeMega && (
+                    <p className="text-xs text-amber-500">
+                        Omni Ring: matchups for slot {activeMegaSlot + 1} reflect{" "}
+                        <span className="font-semibold">{activeMega.megaName}</span>
+                        {activeMega.postMegaTypes
+                            ? ` (${activeMega.postMegaTypes.join(" / ")}).`
+                            : " (post-Mega type data pending — showing base types)."}
+                    </p>
+                )}
             </CardHeader>
             <CardContent>
                 <div className="overflow-x-auto">
@@ -131,25 +140,41 @@ export function ThreatMatrix() {
                         {/* Row headers (your team) */}
                         <div className="flex flex-col gap-1 pr-2">
                             <div className="h-10" /> {/* Spacer for column headers */}
-                            {team.map((pokemon, i) => (
-                                <Tooltip key={i}>
-                                    <TooltipTrigger asChild>
-                                        <div className="min-w-28 h-10 flex items-center gap-2">
-                                            <PokemonSprite pokemon={pokemon.pokemon} size="sm" />
-                                            <span className="text-xs leading-tight flex-1">
+                            {team.map((pokemon, i) => {
+                                const types = getEffectiveTypes(pokemon, team, format);
+                                const isMega = i === activeMegaSlot && !!activeMega;
+                                return (
+                                    <Tooltip key={i}>
+                                        <TooltipTrigger asChild>
+                                            <div className="min-w-28 h-10 flex items-center gap-2">
+                                                <PokemonSprite
+                                                    pokemon={pokemon.pokemon}
+                                                    size="sm"
+                                                />
+                                                <span className="text-xs leading-tight flex-1">
+                                                    {toDisplayName(pokemon.pokemon)}
+                                                    {isMega && (
+                                                        <span className="ml-1 text-[10px] text-amber-500 font-semibold uppercase">
+                                                            Mega
+                                                        </span>
+                                                    )}
+                                                </span>
+                                            </div>
+                                        </TooltipTrigger>
+                                        <TooltipContent side="left">
+                                            <p>
                                                 {toDisplayName(pokemon.pokemon)}
-                                            </span>
-                                        </div>
-                                    </TooltipTrigger>
-                                    <TooltipContent side="left">
-                                        <p>{toDisplayName(pokemon.pokemon)}</p>
-                                        <p className="text-xs text-muted-foreground">
-                                            {getPokemonTypes(pokemon.pokemon).join("/") ||
-                                                "Unknown types"}
-                                        </p>
-                                    </TooltipContent>
-                                </Tooltip>
-                            ))}
+                                                {isMega && activeMega
+                                                    ? ` → ${activeMega.megaName}`
+                                                    : ""}
+                                            </p>
+                                            <p className="text-xs text-muted-foreground">
+                                                {types.join("/") || "Unknown types"}
+                                            </p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                );
+                            })}
                         </div>
 
                         {/* Matrix grid */}
