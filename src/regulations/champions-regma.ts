@@ -1,3 +1,4 @@
+import { CHAMPIONS_REGMA_MEGAS } from "./mega-data.js";
 import type { RegulationSet } from "./types.js";
 
 /**
@@ -6,9 +7,10 @@ import type { RegulationSet } from "./types.js";
  * Runs 2026-04-08 through 2026-06-17. First regulation of the Champions
  * Championship Series; debuts at the Indianapolis Regional (2026-05-29).
  *
- * Mega list is sourced from the official announcement. The allowed-Pokémon
- * list is dynamic — fetched from the official legality page by
- * scripts/fetch-champions-legality.ts and loaded from KV at request time.
+ * The allowed-Pokémon list is dynamic — fetched from the official legality
+ * page by scripts/fetch-champions-legality.ts and loaded from KV at request
+ * time. Mega forms live in mega-data.ts so the UI and validator can share
+ * one source of truth for post-Mega types/stats/abilities.
  */
 export const CHAMPIONS_REGMA: RegulationSet = {
     id: "champions-regma",
@@ -26,16 +28,7 @@ export const CHAMPIONS_REGMA: RegulationSet = {
     officialLegalityUrl:
         "https://web-view.app.pokemonchampions.jp/battle/pages/events/rs177501629259kmzbny/en/pokemon.html",
     legalityKvKey: "champions-regma:_legality",
-    allowedMegas: [
-        "Charizard-Mega-X",
-        "Charizard-Mega-Y",
-        "Gengar-Mega",
-        "Lucario-Mega",
-        "Kangaskhan-Mega",
-        "Gyarados-Mega",
-        "Meganium-Mega",
-        "Gardevoir-Mega",
-    ],
+    megaForms: CHAMPIONS_REGMA_MEGAS,
     bannedItems: [],
     moveOverrides: {},
 };
