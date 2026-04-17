@@ -7,7 +7,12 @@ import {
     getPopularSets,
     getTeammates,
 } from "./stats.js";
-import { lookupPokemon, suggestTeamCoverage, validateMoveset, validateTeam } from "./tools.js";
+import {
+    lookupPokemon,
+    suggestTeamCoverage,
+    validateMoveset,
+    validateTeamForFormat,
+} from "./tools.js";
 
 /**
  * Definition for a single MCP tool in the registry.
@@ -47,7 +52,8 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     },
     {
         name: "validate_team",
-        description: "Validate a team against format rules",
+        description:
+            "Validate a team against format rules (Showdown formats and Pokémon Champions regulations)",
         schema: {
             team: z
                 .array(
@@ -56,12 +62,17 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
                         moves: z.array(z.string()),
                         ability: z.string().optional(),
                         item: z.string().optional(),
+                        level: z.number().optional(),
                     }),
                 )
                 .describe("Team members with movesets"),
-            format: z.string().optional().describe("Format ID (e.g., 'gen9ou')"),
+            format: z
+                .string()
+                .optional()
+                .describe("Format ID (e.g., 'gen9ou', 'gen9vgc2026regf', 'champions-regma')"),
         },
-        execute: async (args) => validateTeam(args as { team: any[]; format?: string }),
+        execute: async (args, env) =>
+            validateTeamForFormat(args as { team: any[]; format?: string }, env),
     },
     {
         name: "suggest_team_coverage",

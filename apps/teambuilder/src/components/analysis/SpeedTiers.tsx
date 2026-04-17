@@ -6,6 +6,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { useTeamStore } from "@/stores/team-store";
 import { PokemonSprite } from "@/components/team/PokemonSprite";
 import { toDisplayName } from "@/lib/showdown-parser";
+import { isChampionsFormat } from "@/types/pokemon";
 import {
     analyzeTeamSpeed,
     hasTeamSpeedControl,
@@ -143,7 +144,8 @@ function SpeedControlBadges({ control }: { control: ReturnType<typeof hasTeamSpe
 }
 
 export function SpeedTiers() {
-    const { team, mode } = useTeamStore();
+    const { team, mode, format } = useTeamStore();
+    const isChampions = isChampionsFormat(format);
 
     const speedInfo = useMemo(() => {
         if (team.length === 0) return [];
@@ -185,6 +187,13 @@ export function SpeedTiers() {
                 </p>
             </CardHeader>
             <CardContent className="space-y-4">
+                {isChampions && (
+                    <div className="rounded border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs text-amber-500">
+                        Champions VP (Victory Point) mechanics are not yet modeled. Speed values
+                        shown use the Gen 9 EV/IV formula and are directionally useful but not
+                        authoritative for Champions battles.
+                    </div>
+                )}
                 {/* Speed control summary */}
                 <div className="pb-3 border-b">
                     <p className="text-xs text-muted-foreground mb-2">Speed Control:</p>

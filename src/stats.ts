@@ -95,6 +95,23 @@ async function getPokemonStats(
     return null;
 }
 
+/**
+ * User-facing message for formats that have no KV data yet. Champions
+ * regulations will auto-discover once Smogon publishes usage stats for them;
+ * until then queries hit this branch and we want the caller to know why.
+ */
+function unavailableStatsMessage(format: string): string {
+    if (format.startsWith("champions-")) {
+        return (
+            `No usage statistics found for format "${format}". ` +
+            "Pokémon Champions usage stats are not yet published on Smogon. " +
+            "If Smogon begins publishing a matching gen9vgc2026regma-style identifier, " +
+            "the monthly ingestion will pick it up automatically."
+        );
+    }
+    return `No usage statistics found for format "${format}".`;
+}
+
 // --- Tool Functions ---
 
 /**
@@ -114,7 +131,7 @@ export async function getPopularSets(
     if (!pokemonStats) {
         const index = await getFormatIndex(format, env);
         if (!index) {
-            return `No usage statistics found for format "${format}".`;
+            return unavailableStatsMessage(format);
         }
         return `${args.pokemon} not found in ${format} usage statistics.`;
     }
@@ -202,7 +219,7 @@ export async function getMetaThreats(
     const index = await getFormatIndex(format, env);
 
     if (!index) {
-        return `No usage statistics found for format "${format}".`;
+        return unavailableStatsMessage(format);
     }
 
     const threats = Object.entries(index.pokemon)
@@ -239,7 +256,7 @@ export async function getTeammates(
     if (!pokemonStats) {
         const index = await getFormatIndex(format, env);
         if (!index) {
-            return `No usage statistics found for format "${format}".`;
+            return unavailableStatsMessage(format);
         }
         return `${args.pokemon} not found in ${format} usage statistics.`;
     }
@@ -284,7 +301,7 @@ export async function getChecksCounters(
     if (!pokemonStats) {
         const index = await getFormatIndex(format, env);
         if (!index) {
-            return `No usage statistics found for format "${format}".`;
+            return unavailableStatsMessage(format);
         }
         return `${args.pokemon} not found in ${format} usage statistics.`;
     }
@@ -323,7 +340,7 @@ export async function getMetagameStats(args: { format?: string }, env: Env): Pro
     const index = await getFormatIndex(format, env);
 
     if (!index) {
-        return `No usage statistics found for format "${format}".`;
+        return unavailableStatsMessage(format);
     }
 
     const totalPokemon = Object.keys(index.pokemon).length;

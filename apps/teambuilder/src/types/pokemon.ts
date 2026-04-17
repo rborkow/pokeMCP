@@ -113,13 +113,21 @@ export const NATURES: Record<string, { plus?: keyof BaseStats; minus?: keyof Bas
 };
 
 // Format category definitions
-export type FormatCategory = "singles" | "doubles" | "gen8" | "gen7" | "other";
+export type FormatCategory = "singles" | "doubles" | "champions" | "gen8" | "gen7" | "other";
 
 export interface FormatDefinition {
     id: string;
     name: string;
     gen: number;
     category: FormatCategory;
+    /**
+     * Platform the format belongs to. "champions" means Pokémon Champions
+     * (2026+, Omni Ring Megas, VP spreads, rotating allow-list). Omitted
+     * for legacy Showdown-based formats.
+     */
+    platform?: "showdown" | "champions";
+    /** Short label used by UI chips/banners for non-Showdown formats. */
+    chipLabel?: string;
 }
 
 // Format definitions with categories
@@ -132,6 +140,15 @@ export const FORMATS: FormatDefinition[] = [
     { id: "gen9nu", name: "Gen 9 NU", gen: 9, category: "singles" },
     { id: "gen9pu", name: "Gen 9 PU", gen: 9, category: "singles" },
     { id: "gen9lc", name: "Gen 9 LC", gen: 9, category: "singles" },
+    // Pokémon Champions (2026+) — rotating regulation allow-lists
+    {
+        id: "champions-regma",
+        name: "Champions Reg M-A",
+        gen: 9,
+        category: "champions",
+        platform: "champions",
+        chipLabel: "Champions Reg M-A",
+    },
     // Current Gen Doubles/VGC - 2026 regulations
     {
         id: "gen9vgc2026regf",
@@ -181,6 +198,7 @@ export const FORMATS: FormatDefinition[] = [
 ];
 
 export const FORMAT_CATEGORIES: { id: FormatCategory; label: string }[] = [
+    { id: "champions", label: "Pokémon Champions" },
     { id: "singles", label: "Gen 9 Singles" },
     { id: "doubles", label: "Gen 9 Doubles/VGC" },
     { id: "gen8", label: "Gen 8 (Sword/Shield)" },
@@ -209,14 +227,16 @@ export const MODE_INFO: Record<
 };
 
 /**
- * Get formats available for a given mode
+ * Get formats available for a given mode.
+ *
+ * Champions regulations surface under the VGC mode because they are doubles
+ * formats and share the same team-building shape (bring 4 of 6 at Level 50).
  */
 export function getFormatsForMode(mode: Mode): FormatDefinition[] {
     if (mode === "vgc") {
-        return FORMATS.filter((f) => f.category === "doubles");
+        return FORMATS.filter((f) => f.category === "doubles" || f.category === "champions");
     }
-    // Singles includes gen9 singles + older gens (which are all singles-focused)
-    return FORMATS.filter((f) => f.category !== "doubles");
+    return FORMATS.filter((f) => f.category !== "doubles" && f.category !== "champions");
 }
 
 /**
@@ -227,9 +247,19 @@ export function isFormatValidForMode(formatId: string, mode: Mode): boolean {
     if (!format) return false;
 
     if (mode === "vgc") {
-        return format.category === "doubles";
+        return format.category === "doubles" || format.category === "champions";
     }
-    return format.category !== "doubles";
+    return format.category !== "doubles" && format.category !== "champions";
+}
+
+/**
+ * True if the format is a Pokémon Champions regulation. Callers use this
+ * where Champions diverges from Showdown VGC (allow-list, Omni Ring Megas,
+ * VP spreads, Level-50 auto-set).
+ */
+export function isChampionsFormat(formatId: string): boolean {
+    const format = FORMATS.find((f) => f.id === formatId);
+    return format?.platform === "champions";
 }
 
 /**

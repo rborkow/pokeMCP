@@ -7,6 +7,9 @@ import {
     getTypeChart,
     getPokedex,
 } from "./data-loader.js";
+import { isRegulationId } from "./regulations/registry.js";
+import type { RegulationValidationResult } from "./regulations/validator.js";
+import { validateTeamForRegulationId } from "./regulations/validator.js";
 import type { TeamPokemon } from "./types.js";
 
 // Valid Tera Types (Gen 9)
@@ -228,9 +231,75 @@ export function validateMoveset(args: {
 }
 
 /**
- * Validate a team against format rules
+ * Validate a team against format rules.
+ *
+ * Format dispatch: Showdown-style formats (gen9ou, gen9vgc2026regf, ...) run
+ * through the legacy Showdown validator below. Champions regulation ids
+ * (champions-regma, future champions-regmb, ...) are routed via
+ * validateTeamForFormat to src/regulations/validator.ts. New regulation
+ * formats should be added to the registry, not branched here.
  */
 export function validateTeam(args: { team: TeamPokemon[]; format?: string }): string {
+    return validateShowdownTeam(args);
+}
+
+/**
+ * Format-aware entry point used by the MCP tool. Async so it can hydrate a
+ * regulation's allow-list from KV when needed. The sync `validateTeam`
+ * remains for backward compatibility with callers that don't have an `env`.
+ */
+export async function validateTeamForFormat(
+    args: { team: TeamPokemon[]; format?: string },
+    env: Env,
+): Promise<string> {
+    const format = (args.format || "").trim();
+    if (isRegulationId(format)) {
+        const outcome = await validateTeamForRegulationId(args.team, format, env);
+        if (outcome.kind === "error") {
+            return `**Team Validation for ${format}**\n\n❌ ${outcome.message}`;
+        }
+        return formatRegulationResult(outcome.result);
+    }
+    return validateShowdownTeam(args);
+}
+
+function formatRegulationResult(result: RegulationValidationResult): string {
+    const { regulation, memberLines, errors, warnings, ok } = result;
+    const lines: string[] = [];
+    lines.push(`**Team Validation for ${regulation.displayName}**\n`);
+    lines.push(
+        `Bring ${regulation.bringCount} of ${regulation.teamSize} at Level ${regulation.level}. ` +
+            `Species Clause${regulation.enforceSpeciesClause ? " ✓" : " ✗"}, ` +
+            `Item Clause${regulation.enforceItemClause ? " ✓" : " ✗"}.`,
+    );
+    lines.push("");
+    lines.push("**Team:**");
+    for (const l of memberLines) lines.push(l);
+    if (warnings.length > 0) {
+        lines.push("");
+        lines.push("**⚠️ Warnings:**");
+        for (const w of warnings) lines.push(`- ${w}`);
+    }
+    lines.push("");
+    if (ok) {
+        lines.push("**✅ Team is valid!**");
+    } else {
+        lines.push("**❌ Validation Errors:**");
+        for (const e of errors) lines.push(`- ${e}`);
+    }
+    lines.push("");
+    lines.push(
+        "_Champions VP (Victory Point) mechanics and Mega Evolution type changes are not yet modeled — see docs/CHAMPIONS_ROADMAP.md._",
+    );
+    return lines.join("\n");
+}
+
+/**
+ * Legacy Showdown-format validator. Preserved as-is while Phase 1 only
+ * introduces Champions; future refactors can move each format family into
+ * its own module the same way Champions now is.
+ */
+function validateShowdownTeam(args: { team: TeamPokemon[]; format?: string }): string {
     const format = args.format || "OU";
     const results: string[] = [];
     const errors: string[] = [];

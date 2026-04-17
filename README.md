@@ -65,11 +65,12 @@ Access real competitive data from thousands of battles with cached data for inst
 - **Metagame Stats**: Overall format statistics and trends
 
 **Supported Formats:**
+- **Pokémon Champions:** Reg M-A *(partial — Mega Evolution and Victory Point mechanics are not yet fully modeled; see [`docs/CHAMPIONS_ROADMAP.md`](docs/CHAMPIONS_ROADMAP.md))*
 - Gen 9: OU, Ubers, UU, RU, NU, PU, LC, VGC 2026 Reg F, Doubles OU
 - Gen 8: OU, Ubers, UU, RU, NU, PU, LC
 - Gen 7: OU, Ubers, UU, RU, NU, LC
 
-*VGC formats are auto-discovered monthly from Smogon's stats. New regulations are picked up automatically.*
+*VGC formats are auto-discovered monthly from Smogon's stats. New regulations are picked up automatically. Pokémon Champions regulations have a rotating allow-list fetched from the official legality page; run `npm run fetch-champions-legality && npm run upload-champions-legality` when a new regulation ships.*
 
 ## Deployment
 
