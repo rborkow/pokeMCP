@@ -105,13 +105,9 @@ describe("PokemonCombobox", () => {
         const input = screen.getByRole("combobox");
         fireEvent.focus(input);
         fireEvent.change(input, { target: { value: "landorus-therian" } });
-        // cmdk sets hidden=true on the [cmdk-group] container when all its items are
-        // filtered out — the heading stays in the DOM but the group is not visible.
-        const otherGroup = Array.from(document.querySelectorAll("[cmdk-group]")).find((el) => {
-            const heading = el.querySelector("[cmdk-group-heading]");
-            return heading?.textContent === "Other";
-        });
-        expect(otherGroup).not.toBeNull(); // group exists in DOM
-        expect(otherGroup).toHaveAttribute("hidden"); // but it's hidden by cmdk
+        // When all items in the "Other" group are filtered out, the group heading
+        // should not be visible (cmdk hides it via the hidden attribute or display:none).
+        const otherHeading = screen.queryByText("Other");
+        expect(otherHeading).not.toBeVisible();
     });
 });
