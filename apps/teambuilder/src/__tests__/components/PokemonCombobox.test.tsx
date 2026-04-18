@@ -60,4 +60,13 @@ describe("PokemonCombobox", () => {
         fireEvent.change(input, { target: { value: "zzzzzzz" } });
         expect(screen.getByText(/No Pokémon match/i)).toBeInTheDocument();
     });
+
+    it("renders a sprite next to each suggestion", () => {
+        renderWithClient(<PokemonCombobox value="" onChange={() => {}} format="gen9ou" />);
+        const input = screen.getByRole("combobox");
+        fireEvent.focus(input);
+        fireEvent.change(input, { target: { value: "pikachu" } });
+        // PokemonSprite renders an <img alt={pokemon}> inside each option.
+        expect(screen.getByAltText("Pikachu")).toBeInTheDocument();
+    });
 });
