@@ -49,6 +49,18 @@ describe("getLegalPokemon", () => {
         );
     });
 
+    it("excludes Megas from gen8ou", async () => {
+        const { legal } = await getLegalPokemon({ format: "gen8ou" }, ENV_STUB);
+        assert.ok(
+            !legal.includes("charizardmegax"),
+            "charizardmegax should be excluded from gen8ou",
+        );
+        assert.ok(
+            !legal.includes("venusaurmega"),
+            "venusaurmega should be excluded from gen8ou",
+        );
+    });
+
     it("returns an empty array for unknown formats", async () => {
         const { legal } = await getLegalPokemon({ format: "totally-fake" }, ENV_STUB);
         assert.deepEqual(legal, []);

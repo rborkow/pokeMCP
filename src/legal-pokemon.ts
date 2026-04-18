@@ -53,8 +53,10 @@ export async function getLegalPokemon(
 
         const fd = getPokemonFormatData(species.name);
 
-        // For Gen 9, "Past" format-data means the form is not in Gen 9 (e.g. Megas).
-        if (gen === 9 && fd?.isNonstandard === "Past") continue;
+        // "Past" format-data means the species is absent from the Gen 9 snapshot
+        // (Megas, Gigantamax, etc.). These are also absent from Gen 8, so exclude
+        // them for all gen 8+ formats. (Gen 7 Megas aren't marked "Past" here.)
+        if (fd?.isNonstandard === "Past") continue;
 
         // Soft singles tier filter — drop Ubers/AG from OU-and-below formats.
         if (isSinglesTierFormat && fd?.tier && UBER_TIERS.has(fd.tier)) continue;
