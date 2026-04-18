@@ -11,10 +11,10 @@ import {
     CommandList,
 } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { PokemonSprite } from "./PokemonSprite";
 import { POKEMON_LIST } from "@/lib/data/pokemon-list";
 import { useLegalPokemon } from "@/lib/mcp-client";
 import { cn } from "@/lib/utils";
+import { PokemonSprite } from "./PokemonSprite";
 
 interface PokemonComboboxProps {
     value: string;
@@ -109,7 +109,11 @@ export function PokemonCombobox({
                                         value={p.displayName}
                                         onSelect={() => handleSelect(p.displayName)}
                                     >
-                                        <PokemonSprite pokemon={p.displayName} size="sm" className="shrink-0" />
+                                        <PokemonSprite
+                                            pokemon={p.displayName}
+                                            size="sm"
+                                            className="shrink-0"
+                                        />
                                         <span>{p.displayName}</span>
                                     </CommandItem>
                                 ))}
@@ -123,7 +127,11 @@ export function PokemonCombobox({
                                             value={p.displayName}
                                             onSelect={() => handleSelect(p.displayName)}
                                         >
-                                            <PokemonSprite pokemon={p.displayName} size="sm" className="shrink-0" />
+                                            <PokemonSprite
+                                                pokemon={p.displayName}
+                                                size="sm"
+                                                className="shrink-0"
+                                            />
                                             <span>{p.displayName}</span>
                                         </CommandItem>
                                     ))}
@@ -136,7 +144,11 @@ export function PokemonCombobox({
                                             onSelect={() => handleSelect(p.displayName)}
                                             className="opacity-60"
                                         >
-                                            <PokemonSprite pokemon={p.displayName} size="sm" className="shrink-0" />
+                                            <PokemonSprite
+                                                pokemon={p.displayName}
+                                                size="sm"
+                                                className="shrink-0"
+                                            />
                                             <span>{p.displayName}</span>
                                         </CommandItem>
                                     ))}
