@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { getLegalPokemon } from "./legal-pokemon.js";
 import { queryStrategy, queryStrategyText } from "./rag/query.js";
 import {
     getChecksCounters,
@@ -13,7 +14,6 @@ import {
     validateMoveset,
     validateTeamForFormat,
 } from "./tools.js";
-import { getLegalPokemon } from "./legal-pokemon.js";
 
 /**
  * Definition for a single MCP tool in the registry.
@@ -157,7 +157,8 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     // --- Legal Pokémon for autocomplete (format filtering) ---
     {
         name: "get_legal_pokemon",
-        description: "Return canonical Pokémon IDs legal in a given format (soft-filtered: used for autocomplete grouping, not full legality enforcement)",
+        description:
+            "Return canonical Pokémon IDs legal in a given format (soft-filtered: used for autocomplete grouping, not full legality enforcement)",
         schema: {
             format: z.string().describe("Format ID, e.g. 'gen9ou' or 'champions-regma'"),
         },

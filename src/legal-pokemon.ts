@@ -1,6 +1,6 @@
 import { getPokedex, getPokemonFormatData, toID } from "./data-loader.js";
-import { isRegulationId } from "./regulations/registry.js";
 import { loadRegulation } from "./regulations/loader.js";
+import { isRegulationId } from "./regulations/registry.js";
 
 const MAX_DEX_NUM_BY_GEN: Record<number, number> = {
     7: 807,

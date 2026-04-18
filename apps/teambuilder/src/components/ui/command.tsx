@@ -35,10 +35,7 @@ function CommandInput({
     );
 }
 
-function CommandList({
-    className,
-    ...props
-}: React.ComponentProps<typeof CommandPrimitive.List>) {
+function CommandList({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.List>) {
     return (
         <CommandPrimitive.List
             data-slot="command-list"
@@ -74,10 +71,7 @@ function CommandGroup({
     );
 }
 
-function CommandItem({
-    className,
-    ...props
-}: React.ComponentProps<typeof CommandPrimitive.Item>) {
+function CommandItem({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.Item>) {
     return (
         <CommandPrimitive.Item
             data-slot="command-item"

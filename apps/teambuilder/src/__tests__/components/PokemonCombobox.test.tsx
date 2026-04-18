@@ -28,9 +28,7 @@ function renderWithClient(ui: React.ReactElement) {
 
 describe("PokemonCombobox", () => {
     it("renders the current value in the trigger input", () => {
-        renderWithClient(
-            <PokemonCombobox value="Pikachu" onChange={() => {}} format="gen9ou" />,
-        );
+        renderWithClient(<PokemonCombobox value="Pikachu" onChange={() => {}} format="gen9ou" />);
         expect(screen.getByDisplayValue("Pikachu")).toBeInTheDocument();
     });
 
