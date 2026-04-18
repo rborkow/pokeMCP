@@ -46,8 +46,20 @@ export function PokemonCombobox({
         [],
     );
 
-    // Legality data — unused here, wired in Task 10.
-    useLegalPokemon(format);
+    const { data: legalSet } = useLegalPokemon(format);
+
+    const { legal, other } = React.useMemo(() => {
+        if (!legalSet || legalSet.size === 0) {
+            return { legal: null, other: null };
+        }
+        const legalRows: (typeof POKEMON_LIST)[number][] = [];
+        const otherRows: (typeof POKEMON_LIST)[number][] = [];
+        for (const p of POKEMON_LIST) {
+            if (legalSet.has(p.id)) legalRows.push(p);
+            else otherRows.push(p);
+        }
+        return { legal: legalRows, other: otherRows };
+    }, [legalSet]);
 
     const handleSelect = (displayName: string) => {
         onChange(displayName);
@@ -89,18 +101,48 @@ export function PokemonCombobox({
                     />
                     <CommandList>
                         <CommandEmpty>No Pokémon match "{query}"</CommandEmpty>
-                        <CommandGroup heading="All Pokémon">
-                            {POKEMON_LIST.map((p) => (
-                                <CommandItem
-                                    key={p.id}
-                                    value={p.displayName}
-                                    onSelect={() => handleSelect(p.displayName)}
-                                >
-                                    <PokemonSprite pokemon={p.displayName} size="sm" className="shrink-0" />
-                                    <span>{p.displayName}</span>
-                                </CommandItem>
-                            ))}
-                        </CommandGroup>
+                        {legal === null || other === null ? (
+                            <CommandGroup heading="All Pokémon">
+                                {POKEMON_LIST.map((p) => (
+                                    <CommandItem
+                                        key={p.id}
+                                        value={p.displayName}
+                                        onSelect={() => handleSelect(p.displayName)}
+                                    >
+                                        <PokemonSprite pokemon={p.displayName} size="sm" className="shrink-0" />
+                                        <span>{p.displayName}</span>
+                                    </CommandItem>
+                                ))}
+                            </CommandGroup>
+                        ) : (
+                            <>
+                                <CommandGroup heading={`Legal in ${format}`}>
+                                    {legal.map((p) => (
+                                        <CommandItem
+                                            key={p.id}
+                                            value={p.displayName}
+                                            onSelect={() => handleSelect(p.displayName)}
+                                        >
+                                            <PokemonSprite pokemon={p.displayName} size="sm" className="shrink-0" />
+                                            <span>{p.displayName}</span>
+                                        </CommandItem>
+                                    ))}
+                                </CommandGroup>
+                                <CommandGroup heading="Other">
+                                    {other.map((p) => (
+                                        <CommandItem
+                                            key={p.id}
+                                            value={p.displayName}
+                                            onSelect={() => handleSelect(p.displayName)}
+                                            className="opacity-60"
+                                        >
+                                            <PokemonSprite pokemon={p.displayName} size="sm" className="shrink-0" />
+                                            <span>{p.displayName}</span>
+                                        </CommandItem>
+                                    ))}
+                                </CommandGroup>
+                            </>
+                        )}
                     </CommandList>
                 </Command>
             </PopoverContent>

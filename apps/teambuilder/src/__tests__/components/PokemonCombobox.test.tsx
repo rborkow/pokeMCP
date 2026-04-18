@@ -1,15 +1,24 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { PokemonCombobox } from "@/components/team/PokemonCombobox";
 
-// Stub out useLegalPokemon — we test grouping separately in Task 10.
+const legalPokemonStub: { data: Set<string> | undefined; isLoading: boolean } = {
+    data: undefined,
+    isLoading: false,
+};
 vi.mock("@/lib/mcp-client", async () => {
     const actual = await vi.importActual<Record<string, unknown>>("@/lib/mcp-client");
     return {
         ...actual,
-        useLegalPokemon: () => ({ data: undefined, isLoading: false }),
+        useLegalPokemon: () => legalPokemonStub,
     };
+});
+
+// Reset the stub between tests so earlier tests don't leak grouping state.
+beforeEach(() => {
+    legalPokemonStub.data = undefined;
+    legalPokemonStub.isLoading = false;
 });
 
 function renderWithClient(ui: React.ReactElement) {
@@ -68,5 +77,43 @@ describe("PokemonCombobox", () => {
         fireEvent.change(input, { target: { value: "pikachu" } });
         // PokemonSprite renders an <img alt={pokemon}> inside each option.
         expect(screen.getByAltText("Pikachu")).toBeInTheDocument();
+    });
+
+    it("shows an ungrouped list while legality is loading", () => {
+        legalPokemonStub.data = undefined;
+        legalPokemonStub.isLoading = true;
+        renderWithClient(<PokemonCombobox value="" onChange={() => {}} format="gen9ou" />);
+        fireEvent.focus(screen.getByRole("combobox"));
+        expect(screen.queryByText(/Legal in/i)).not.toBeInTheDocument();
+        expect(screen.getByText(/All Pokémon/i)).toBeInTheDocument();
+    });
+
+    it("groups results into 'Legal in {format}' and 'Other' when legality is available", () => {
+        legalPokemonStub.data = new Set(["pikachu"]);
+        legalPokemonStub.isLoading = false;
+        renderWithClient(<PokemonCombobox value="" onChange={() => {}} format="gen9ou" />);
+        fireEvent.focus(screen.getByRole("combobox"));
+        expect(screen.getByText(/Legal in gen9ou/i)).toBeInTheDocument();
+        expect(screen.getByText("Other")).toBeInTheDocument();
+    });
+
+    it("skips the 'Other' group when all filtered results are legal", () => {
+        // Use "landorustherian" — exactly one display name matches "landorus-therian"
+        // (the base "Landorus" form does not match the substring "landorus-therian").
+        // This ensures the Other group has zero matching items and cmdk hides it.
+        legalPokemonStub.data = new Set(["landorustherian"]);
+        legalPokemonStub.isLoading = false;
+        renderWithClient(<PokemonCombobox value="" onChange={() => {}} format="gen9ou" />);
+        const input = screen.getByRole("combobox");
+        fireEvent.focus(input);
+        fireEvent.change(input, { target: { value: "landorus-therian" } });
+        // cmdk sets hidden=true on the [cmdk-group] container when all its items are
+        // filtered out — the heading stays in the DOM but the group is not visible.
+        const otherGroup = Array.from(document.querySelectorAll("[cmdk-group]")).find((el) => {
+            const heading = el.querySelector("[cmdk-group-heading]");
+            return heading?.textContent === "Other";
+        });
+        expect(otherGroup).not.toBeNull(); // group exists in DOM
+        expect(otherGroup).toHaveAttribute("hidden"); // but it's hidden by cmdk
     });
 });
