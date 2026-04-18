@@ -1,3 +1,4 @@
+import { POKEMON_DISPLAY_NAMES } from "@/lib/showdown-parser";
 import { POKEMON_TYPES } from "./pokemon-data-generated";
 
 // POKEMON_TYPES' inner type isn't exported (the file is auto-generated), so
@@ -38,9 +39,12 @@ function buildList(): PokemonListEntry[] {
 
     const list: PokemonListEntry[] = [];
     for (const [id, entry] of canonical.entries()) {
-        const displayName = entry.hyphenated
-            ? titleCaseHyphenated(entry.hyphenated)
-            : capitalize(id);
+        // Prefer canonical Showdown display names (Tapu Koko, Type: Null, Mr. Mime,
+        // Farfetch'd, Jangmo-o, Flabébé, etc.). Fall back to title-cased hyphenated
+        // alias, then capitalized compact ID.
+        const displayName =
+            POKEMON_DISPLAY_NAMES[id] ??
+            (entry.hyphenated ? titleCaseHyphenated(entry.hyphenated) : capitalize(id));
         list.push({ id, displayName, types: entry.types });
     }
 

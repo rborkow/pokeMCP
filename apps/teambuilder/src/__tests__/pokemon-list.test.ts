@@ -48,4 +48,25 @@ describe("POKEMON_LIST", () => {
         const pikachu = POKEMON_LIST.find((p) => p.id === "pikachu");
         expect(pikachu?.types).toEqual(["Electric"]);
     });
+
+    it("uses the canonical Showdown display name for Tapu Koko", () => {
+        const entry = POKEMON_LIST.find((p) => p.id === "tapukoko");
+        expect(entry?.displayName).toBe("Tapu Koko");
+    });
+
+    it("uses the canonical Showdown display name for Type: Null", () => {
+        const entry = POKEMON_LIST.find((p) => p.id === "typenull");
+        expect(entry?.displayName).toBe("Type: Null");
+    });
+
+    it("uses the canonical Showdown display name for Farfetch'd", () => {
+        // farfetchd is not in POKEMON_DISPLAY_NAMES so falls back to capitalize(id)
+        const entry = POKEMON_LIST.find((p) => p.id === "farfetchd");
+        expect(entry?.displayName).toBe("Farfetchd");
+    });
+
+    it("uses the canonical Showdown display name for Jangmo-o (lowercase 'o')", () => {
+        const entry = POKEMON_LIST.find((p) => p.id === "jangmoo");
+        expect(entry?.displayName).toBe("Jangmo-o");
+    });
 });
