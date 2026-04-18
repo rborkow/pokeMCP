@@ -219,7 +219,7 @@ export function toID(text: string): string {
  * Common Pokemon name mappings from ID to display name
  * These are Pokemon with non-obvious formatting
  */
-const POKEMON_DISPLAY_NAMES: Record<string, string> = {
+export const POKEMON_DISPLAY_NAMES: Record<string, string> = {
     // Paradox Pokemon (space in name)
     greattusk: "Great Tusk",
     ironvaliant: "Iron Valiant",
