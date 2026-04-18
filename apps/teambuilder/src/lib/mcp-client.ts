@@ -150,6 +150,11 @@ class MCPClient {
     async queryStrategy(query: string, format?: string, limit = 5) {
         return this.callTool("query_strategy", { query, format, limit });
     }
+
+    // Legal Pokemon lookup
+    async getLegalPokemon(format: string) {
+        return this.callTool<{ legal: string[] }>("get_legal_pokemon", { format });
+    }
 }
 
 // Singleton instance
@@ -221,5 +226,17 @@ export function useQueryStrategy() {
             format?: string;
             limit?: number;
         }) => mcpClient.queryStrategy(query, format, limit),
+    });
+}
+
+export function useLegalPokemon(format: string) {
+    return useQuery({
+        queryKey: ["legal-pokemon", format],
+        queryFn: async () => {
+            const response = await mcpClient.getLegalPokemon(format);
+            return new Set(response.legal);
+        },
+        enabled: !!format,
+        staleTime: Number.POSITIVE_INFINITY, // legality is stable within a session
     });
 }
