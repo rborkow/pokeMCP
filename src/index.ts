@@ -21,6 +21,27 @@ import { TOOL_REGISTRY } from "./tool-registry.js";
 import { suggestTeamCoverage, validateMoveset } from "./tools.js";
 import type { TeamPokemon } from "./types.js";
 
+// One-time per-isolate log of gateway secret presence. Lets us verify
+// secret deployment via `wrangler tail` without exposing values.
+let gatewayHealthLogged = false;
+function logGatewayHealthOnce(env: Env): void {
+    if (gatewayHealthLogged) return;
+    gatewayHealthLogged = true;
+    console.log(
+        JSON.stringify({
+            event: "ai_gateway_health",
+            source: "mcp-worker",
+            environment: env.ENVIRONMENT ?? "unknown",
+            gateway: {
+                ai_gateway_id: Boolean(env.AI_GATEWAY_ID),
+                cloudflare_account_id: Boolean(env.CLOUDFLARE_ACCOUNT_ID),
+                cf_aig_token: Boolean(env.CF_AIG_TOKEN || env.CLOUDFLARE_API_TOKEN),
+                anthropic_api_key: Boolean(env.ANTHROPIC_API_KEY),
+            },
+        }),
+    );
+}
+
 // CORS Configuration - restrict to known origins
 const ALLOWED_ORIGINS = [
     "https://www.pokemcp.com",
@@ -252,6 +273,8 @@ export default {
 
         // AI Chat endpoint - handles team builder AI assistant requests
         if (url.pathname === "/ai/chat" && request.method === "POST") {
+            logGatewayHealthOnce(env);
+
             // Add CORS headers for cross-origin requests
             const corsHeaders = {
                 ...getCorsHeaders(request),
@@ -899,6 +922,30 @@ ${message}
         // Admin dashboard API endpoints
         if (url.pathname.startsWith("/admin/")) {
             return handleAdminRequest(request, env);
+        }
+
+        // Deploy health: secret-presence booleans for post-deploy verification.
+        // Never returns secret values — only whether each env var is populated.
+        if (url.pathname === "/health") {
+            logGatewayHealthOnce(env);
+            return new Response(
+                JSON.stringify({
+                    environment: env.ENVIRONMENT ?? "unknown",
+                    gateway: {
+                        ai_gateway_id: Boolean(env.AI_GATEWAY_ID),
+                        cloudflare_account_id: Boolean(env.CLOUDFLARE_ACCOUNT_ID),
+                        cf_aig_token: Boolean(env.CF_AIG_TOKEN || env.CLOUDFLARE_API_TOKEN),
+                        anthropic_api_key: Boolean(env.ANTHROPIC_API_KEY),
+                    },
+                }),
+                {
+                    headers: {
+                        ...getCorsHeaders(request),
+                        "Content-Type": "application/json",
+                        "Cache-Control": "no-store",
+                    },
+                },
+            );
         }
 
         // Root endpoint - return server info

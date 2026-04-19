@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import type { NextRequest } from "next/server";
+import { logGatewayHealthOnce } from "@/lib/ai/gateway-health";
 import {
     buildSynthesisSystemPrompt,
     formatAnswersForPrompt,
@@ -58,6 +59,8 @@ function hasRequiredAnswers(body: InterviewRequestBody): boolean {
 }
 
 export async function POST(request: NextRequest) {
+    logGatewayHealthOnce("interview-stream");
+
     const clientIp =
         request.headers.get("cf-connecting-ip") ??
         request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
