@@ -4,6 +4,7 @@ import { InterviewDemoStatic } from "@/components/landing/InterviewDemoStatic";
 import { SavedTeamRedirect } from "@/components/landing/SavedTeamRedirect";
 import { ThreeMoments } from "@/components/landing/ThreeMoments";
 import { TrustChips } from "@/components/landing/TrustChips";
+import { LegalAttribution } from "@/components/layout/LegalAttribution";
 
 export default function LandingPage() {
     return (
@@ -16,6 +17,7 @@ export default function LandingPage() {
                     <ThreeMoments />
                     <TrustChips />
                     <DeveloperFooter />
+                    <LegalAttribution className="border-t border-border bg-muted/40 px-6 md:px-10 py-4" />
                 </div>
             </div>
         </div>
