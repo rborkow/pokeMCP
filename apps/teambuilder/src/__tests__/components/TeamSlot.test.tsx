@@ -1,7 +1,7 @@
-import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent } from "../test-utils";
+import { describe, expect, it, vi } from "vitest";
 import { TeamSlot } from "@/components/team/TeamSlot";
 import type { TeamPokemon } from "@/types/pokemon";
+import { fireEvent, render, screen } from "../test-utils";
 
 // Mock the getPokemonTypes function
 vi.mock("@/lib/data/pokemon-types", () => ({
@@ -86,11 +86,10 @@ describe("TeamSlot", () => {
 
     it("calls onSelect when card is clicked", () => {
         const onSelect = vi.fn();
-        const { container } = render(<TeamSlot {...defaultProps} onSelect={onSelect} />);
+        render(<TeamSlot {...defaultProps} onSelect={onSelect} />);
 
-        // Find the card element (has pokemon-card class)
-        const card = container.querySelector(".pokemon-card");
-        fireEvent.click(card!);
+        const card = screen.getByRole("button", { name: /Click to edit/i });
+        fireEvent.click(card);
         expect(onSelect).toHaveBeenCalledTimes(1);
     });
 

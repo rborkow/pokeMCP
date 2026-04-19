@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
-import { useChatStore } from "@/stores/chat-store";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { DEFAULT_PERSONALITY } from "@/lib/ai/personalities";
+import { useChatStore } from "@/stores/chat-store";
 
 // Mock localStorage
 const localStorageMock = {
@@ -27,6 +27,11 @@ describe("chat-store", () => {
             expect(useChatStore.getState().personality).toBe(DEFAULT_PERSONALITY);
         });
 
+        it("default personality is coach (Kukui retired)", () => {
+            expect(DEFAULT_PERSONALITY).toBe("coach");
+            expect(useChatStore.getState().personality).toBe("coach");
+        });
+
         it("should set personality to oak", () => {
             useChatStore.getState().setPersonality("oak");
 
@@ -39,11 +44,41 @@ describe("chat-store", () => {
             expect(useChatStore.getState().personality).toBe("blue");
         });
 
-        it("should set personality back to kukui", () => {
+        it("should still allow explicitly opting into kukui", () => {
             useChatStore.getState().setPersonality("blue");
             useChatStore.getState().setPersonality("kukui");
 
             expect(useChatStore.getState().personality).toBe("kukui");
+        });
+    });
+
+    describe("persistence migration", () => {
+        it("migrates v0 persisted kukui state to coach", () => {
+            // Access the persist middleware's migrate hook directly.
+            const migrate = useChatStore.persist.getOptions().migrate;
+            expect(migrate).toBeDefined();
+
+            const migrated = migrate?.(
+                { personality: "kukui", aiProvider: "claude", enableThinking: false },
+                0,
+            );
+
+            expect(migrated).toMatchObject({ personality: "coach" });
+        });
+
+        it("leaves oak/blue choices intact", () => {
+            const migrate = useChatStore.persist.getOptions().migrate;
+            const oakMigrated = migrate?.(
+                { personality: "oak", aiProvider: "claude", enableThinking: false },
+                0,
+            );
+            const blueMigrated = migrate?.(
+                { personality: "blue", aiProvider: "claude", enableThinking: false },
+                0,
+            );
+
+            expect(oakMigrated).toMatchObject({ personality: "oak" });
+            expect(blueMigrated).toMatchObject({ personality: "blue" });
         });
     });
 
@@ -128,6 +163,47 @@ describe("chat-store", () => {
             useChatStore.getState().setLastUserPrompt("Second prompt");
 
             expect(useChatStore.getState().lastUserPrompt).toBe("Second prompt");
+        });
+    });
+
+    describe("systemLog", () => {
+        it("defaults to an empty array", () => {
+            expect(useChatStore.getState().systemLog).toEqual([]);
+        });
+
+        it("appendSystemLog adds entries with generated id and timestamp", () => {
+            useChatStore.getState().appendSystemLog({
+                text: "Changed Kingambit's item to Black Glasses.",
+                slot: 3,
+                kind: "user_edit",
+            });
+            const entries = useChatStore.getState().systemLog;
+            expect(entries).toHaveLength(1);
+            expect(entries[0].text).toContain("Black Glasses");
+            expect(entries[0].slot).toBe(3);
+            expect(typeof entries[0].id).toBe("string");
+            expect(typeof entries[0].createdAt).toBe("number");
+        });
+
+        it("is not included in the persisted snapshot", () => {
+            useChatStore.getState().appendSystemLog({
+                text: "change",
+                slot: 0,
+                kind: "user_edit",
+            });
+            const partialize = useChatStore.persist.getOptions().partialize;
+            const snapshot = partialize?.(useChatStore.getState());
+            expect(snapshot).not.toHaveProperty("systemLog");
+        });
+
+        it("clearChat wipes the system log", () => {
+            useChatStore.getState().appendSystemLog({
+                text: "hi",
+                slot: 0,
+                kind: "user_edit",
+            });
+            useChatStore.getState().clearChat();
+            expect(useChatStore.getState().systemLog).toEqual([]);
         });
     });
 });

@@ -228,25 +228,4 @@ Option 2 - Manual:
 
 ### Team Builder AI Tasks
 
-See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for directory layout and conventions. Key files for AI changes:
-
-**Adding a new team archetype:**
-
-1. Add archetype to `apps/teambuilder/src/lib/ai/archetypes.ts`
-2. Include: `id`, `name`, `description`, `icon`, `prompt`, `keyFeatures`, `formats`
-3. Set `formats` to "singles", "doubles", or "both"
-4. Add tests in `apps/teambuilder/src/__tests__/archetypes.test.ts`
-
-**Adding a new AI personality:**
-
-1. Add to `apps/teambuilder/src/lib/ai/personalities.ts`
-2. Include: `id`, `name`, `systemPromptPrefix`, `praiseStyle`, `criticismStyle`
-3. Add tests in `apps/teambuilder/src/__tests__/personalities.test.ts`
-
-**Modifying Claude's system prompt:**
-
-- Edit `apps/teambuilder/src/lib/ai/context.ts` (`buildSystemPrompt()`, `getGimmickGuidance()`, `formatTeamContext()`)
-
-**Modifying the modify_team tool schema:**
-
-- Edit `apps/teambuilder/src/lib/ai/tools.ts` → update `ModifyTeamInput` interface → update system prompt in `context.ts`
+As of v2 the teambuilder is chat-first: landing at `/`, LLM-driven interview, inline response cards, and a Grid mode behind `?mode=grid`. See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for the v2 directory layout, routes, architecture walkthrough, and step-by-step how-tos (new archetype, new personality, new response-card kind, new interview step, system-prompt edits, `modify_team` schema changes).

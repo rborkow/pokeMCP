@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PokeMCP landing — v1 sketch</title>
+<style>
+:root {
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f3f1ec;
+  --color-background-tertiary: #faf9f5;
+  --color-text-primary: #141413;
+  --color-text-secondary: #61605c;
+  --color-text-tertiary: #8a8985;
+  --color-border-tertiary: rgba(0,0,0,0.08);
+  --color-border-secondary: rgba(0,0,0,0.18);
+  --color-border-primary: rgba(0,0,0,0.28);
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  --font-serif: ui-serif, Georgia, serif;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+  background: var(--color-background-tertiary);
+  margin: 0;
+  padding: 40px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.page-header { width: 100%; max-width: 720px; margin-bottom: 24px; }
+.page-header h1 { font-size: 18px; font-weight: 500; margin: 0 0 4px; }
+.page-header p { font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.5; }
+.mock { width: 100%; max-width: 720px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+<h1>PokeMCP landing — v1 sketch</h1>
+<p>Initial positioning exploration: "The VGC team builder that actually builds the team." Cold-start framing, AI prompt demo, three-feature grid. Superseded by v2, which shifts to the "coach for the whole build" positioning.</p>
+</div>
+
+<div class="mock">
+
+<h2 class="sr-only">Mockup of a PokeMCP landing page showing a hero, an AI prompt example with a generated team, a three-card feature grid, and a developer platform band.</h2>
+
+<div style="background: var(--color-background-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; border: 0.5px solid var(--color-border-tertiary);">
+
+<div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--color-background-secondary); border-bottom: 0.5px solid var(--color-border-tertiary);">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-border-secondary);"></span>
+<span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-border-secondary);"></span>
+<span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-border-secondary);"></span>
+<span style="margin-left: 12px; font-family: var(--font-mono); font-size: 12px; color: var(--color-text-tertiary);">pokemcp.com</span>
+</div>
+
+<div style="padding: 28px 32px 0;">
+<div style="display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 11px; color: var(--color-text-secondary); margin-bottom: 20px;">
+<span style="display: inline-flex; align-items: center; gap: 6px; color: #0F6E56;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #1D9E75;"></span>LIVE</span>
+<span>/</span><span>REG M-A + GEN 9 OU</span>
+<span>/</span><span>AI-NATIVE</span>
+<span>/</span><span>OPEN SOURCE</span>
+</div>
+
+<h1 style="font-size: 32px; font-weight: 500; line-height: 1.15; margin: 0 0 14px; letter-spacing: -0.01em;">The VGC team builder that actually builds the team.</h1>
+<p style="font-size: 16px; line-height: 1.55; color: var(--color-text-secondary); margin: 0 0 22px; max-width: 520px;">Describe what you want. Paste a Showdown set. Start from a creator build. An AI coach handles the cold start, then gets out of your way while you iterate.</p>
+
+<div style="display: flex; gap: 10px; margin-bottom: 28px;">
+<button style="background: var(--color-text-primary); color: var(--color-background-primary); border: none; padding: 10px 18px; border-radius: var(--border-radius-md); font-size: 14px; font-weight: 500; cursor: pointer;">Build a team</button>
+<button style="background: transparent; border: 0.5px solid var(--color-border-secondary); padding: 10px 18px; border-radius: var(--border-radius-md); font-size: 14px; cursor: pointer;">Import from Showdown</button>
+<button style="background: transparent; border: 0.5px solid var(--color-border-tertiary); padding: 10px 18px; border-radius: var(--border-radius-md); font-size: 14px; color: var(--color-text-secondary); cursor: pointer;">Open empty builder</button>
+</div>
+</div>
+
+<div style="margin: 0 32px 32px; background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden;">
+<div style="padding: 14px 16px; border-bottom: 0.5px solid var(--color-border-tertiary); font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary); letter-spacing: 0.04em;">COACH · EXAMPLE</div>
+
+<div style="padding: 16px; display: flex; gap: 10px; align-items: flex-start;">
+<span style="font-family: var(--font-mono); color: var(--color-text-tertiary); font-size: 14px; line-height: 1.6;">&gt;</span>
+<span style="font-size: 15px; line-height: 1.6;">Build me a Trick Room team around Ursaluna-Bloodmoon for Reg MA. I want Incineroar support but not a Fake Out core.</span>
+</div>
+
+<div style="padding: 0 16px 16px;">
+<div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 14px;">
+<div style="background: #FAEEDA; border-radius: var(--border-radius-md); padding: 10px 8px; text-align: center;">
+<div style="font-size: 12px; font-weight: 500; color: #633806;">Ursaluna-BM</div>
+<div style="font-size: 10px; color: #854F0B; margin-top: 2px; font-family: var(--font-mono);">Blood Moon</div>
+</div>
+<div style="background: #FCEBEB; border-radius: var(--border-radius-md); padding: 10px 8px; text-align: center;">
+<div style="font-size: 12px; font-weight: 500; color: #791F1F;">Incineroar</div>
+<div style="font-size: 10px; color: #A32D2D; margin-top: 2px; font-family: var(--font-mono);">Parting Shot</div>
+</div>
+<div style="background: #EEEDFE; border-radius: var(--border-radius-md); padding: 10px 8px; text-align: center;">
+<div style="font-size: 12px; font-weight: 500; color: #3C3489;">Hatterene</div>
+<div style="font-size: 10px; color: #534AB7; margin-top: 2px; font-family: var(--font-mono);">TR setter</div>
+</div>
+<div style="background: #E1F5EE; border-radius: var(--border-radius-md); padding: 10px 8px; text-align: center;">
+<div style="font-size: 12px; font-weight: 500; color: #085041;">Rillaboom</div>
+<div style="font-size: 10px; color: #0F6E56; margin-top: 2px; font-family: var(--font-mono);">Grassy Glide</div>
+</div>
+<div style="background: #E6F1FB; border-radius: var(--border-radius-md); padding: 10px 8px; text-align: center;">
+<div style="font-size: 12px; font-weight: 500; color: #0C447C;">Primarina</div>
+<div style="font-size: 10px; color: #185FA5; margin-top: 2px; font-family: var(--font-mono);">Liquid Voice</div>
+</div>
+<div style="background: #F1EFE8; border-radius: var(--border-radius-md); padding: 10px 8px; text-align: center;">
+<div style="font-size: 12px; font-weight: 500; color: #2C2C2A;">Kingambit</div>
+<div style="font-size: 10px; color: #5F5E5A; margin-top: 2px; font-family: var(--font-mono);">Sucker Punch</div>
+</div>
+</div>
+
+<div style="font-size: 13px; line-height: 1.6; color: var(--color-text-secondary); border-left: 2px solid var(--color-border-tertiary); padding: 2px 0 2px 12px;">Reasoning: Hatterene sets TR without overlapping intimidate. Rillaboom covers the water matchup and gives priority outside TR. Kingambit deals with Sinistcha and punishes Protect cycles. Skipped Grimmsnarl — too slow without setup and leaves you weak to Garchomp.</div>
+
+<div style="display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap;">
+<button style="background: transparent; border: 0.5px solid var(--color-border-secondary); padding: 6px 12px; border-radius: var(--border-radius-md); font-size: 12px; cursor: pointer;">Swap Rillaboom</button>
+<button style="background: transparent; border: 0.5px solid var(--color-border-secondary); padding: 6px 12px; border-radius: var(--border-radius-md); font-size: 12px; cursor: pointer;">Tune spreads</button>
+<button style="background: transparent; border: 0.5px solid var(--color-border-secondary); padding: 6px 12px; border-radius: var(--border-radius-md); font-size: 12px; cursor: pointer;">Check vs top 10 meta</button>
+<button style="background: transparent; border: 0.5px solid var(--color-border-secondary); padding: 6px 12px; border-radius: var(--border-radius-md); font-size: 12px; cursor: pointer;">Export to Showdown</button>
+</div>
+</div>
+</div>
+
+<div style="padding: 0 32px 28px;">
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
+
+<div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px;">
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+<span style="width: 18px; height: 18px; border-radius: 4px; background: #EEEDFE; display: inline-flex; align-items: center; justify-content: center;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #534AB7;"></span></span>
+<h3 style="font-size: 14px; font-weight: 500; margin: 0;">Coach</h3>
+</div>
+<p style="font-size: 13px; line-height: 1.55; color: var(--color-text-secondary); margin: 0;">Ask in plain English. Generate, swap, counter, tune spreads, stress-test vs the meta. Not a chat toy — a team-building loop.</p>
+</div>
+
+<div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px;">
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+<span style="width: 18px; height: 18px; border-radius: 4px; background: #E1F5EE; display: inline-flex; align-items: center; justify-content: center;"><span style="width: 10px; height: 2px; background: #0F6E56;"></span></span>
+<h3 style="font-size: 14px; font-weight: 500; margin: 0;">Live meta</h3>
+</div>
+<p style="font-size: 13px; line-height: 1.55; color: var(--color-text-secondary); margin: 0;">Threat matrix, speed tiers, and usage-weighted matchups against the actual Champions meta. Refreshed after every Tour.</p>
+</div>
+
+<div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px;">
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+<span style="width: 18px; height: 18px; border-radius: 4px; background: #F1EFE8; display: inline-flex; align-items: center; justify-content: center;"><span style="font-family: var(--font-mono); font-size: 10px; font-weight: 500; color: #444441;">{}</span></span>
+<h3 style="font-size: 14px; font-weight: 500; margin: 0;">Showdown native</h3>
+</div>
+<p style="font-size: 13px; line-height: 1.55; color: var(--color-text-secondary); margin: 0;">Paste any Showdown team. Export lossless. Round-trip with your existing workflow — no lock-in, no re-entry.</p>
+</div>
+
+</div>
+</div>
+
+<div style="background: var(--color-background-secondary); border-top: 0.5px solid var(--color-border-tertiary); padding: 20px 32px;">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
+<div>
+<div style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary); letter-spacing: 0.04em; margin-bottom: 4px;">FOR DEVELOPERS</div>
+<div style="font-size: 14px; line-height: 1.5;">Built on the open Model Context Protocol. Query Pokemon data, run calcs, and wire the coach into your own tools.</div>
+</div>
+<div style="display: flex; gap: 8px;">
+<button style="background: transparent; border: 0.5px solid var(--color-border-secondary); padding: 8px 14px; border-radius: var(--border-radius-md); font-size: 13px; font-family: var(--font-mono); cursor: pointer;">docs</button>
+<button style="background: transparent; border: 0.5px solid var(--color-border-secondary); padding: 8px 14px; border-radius: var(--border-radius-md); font-size: 13px; font-family: var(--font-mono); cursor: pointer;">api</button>
+<button style="background: transparent; border: 0.5px solid var(--color-border-secondary); padding: 8px 14px; border-radius: var(--border-radius-md); font-size: 13px; font-family: var(--font-mono); cursor: pointer;">github</button>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

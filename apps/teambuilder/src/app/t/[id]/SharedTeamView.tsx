@@ -1,15 +1,15 @@
 "use client";
 
+import { ArrowRight, Package, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Package, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { PokemonSprite } from "@/components/team/PokemonSprite";
+import { Button } from "@/components/ui/button";
 import type { SharedTeam } from "@/lib/share-api";
 import { exportShowdownTeam } from "@/lib/showdown-parser";
 import { useTeamStore } from "@/stores/team-store";
-import { getFormatDisplayName } from "@/types/pokemon";
 import type { FormatId } from "@/types/pokemon";
+import { getFormatDisplayName } from "@/types/pokemon";
 
 interface SharedTeamViewProps {
     team: SharedTeam;
@@ -29,18 +29,12 @@ export function SharedTeamView({ team: sharedTeam }: SharedTeamViewProps) {
 
     return (
         <div className="min-h-screen flex flex-col">
-            {/* Background decoration */}
-            <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-bl from-primary/5 via-transparent to-transparent rounded-full blur-3xl" />
-                <div className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-to-tr from-secondary/5 via-transparent to-transparent rounded-full blur-3xl" />
-            </div>
-
             <main className="relative flex-1 container max-w-screen-lg px-4 py-10">
                 <div className="space-y-8">
                     {/* Header */}
                     <div className="text-center space-y-2">
-                        <h1 className="text-3xl md:text-4xl font-display font-bold">
-                            <span className="text-gradient">Shared Team</span>
+                        <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+                            Shared team
                         </h1>
                         <p className="text-muted-foreground">
                             <span className="px-2 py-0.5 rounded bg-muted text-sm font-medium tracking-wider">

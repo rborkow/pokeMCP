@@ -91,6 +91,7 @@ export async function POST(request: NextRequest) {
             enableThinking,
             personality: personalityId = DEFAULT_PERSONALITY,
             chatHistory = [],
+            recentEdits = [],
         } = await request.json();
 
         if (!message) {
@@ -138,6 +139,7 @@ export async function POST(request: NextRequest) {
             mode as Mode,
             teammateAnalysis,
             strategyContext,
+            recentEdits as { text: string; slot: number; createdAt: number }[],
         );
 
         const useThinking = enableThinking === true;

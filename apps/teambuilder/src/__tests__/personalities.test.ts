@@ -1,20 +1,21 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
-    PERSONALITIES,
     DEFAULT_PERSONALITY,
-    getPersonality,
     getAllPersonalities,
-    getRandomThinkingMessage,
+    getPersonality,
     getRandomCatchphrase,
+    getRandomThinkingMessage,
+    PERSONALITIES,
 } from "@/lib/ai/personalities";
 
 describe("personalities", () => {
     describe("PERSONALITIES", () => {
-        it("should have three personalities defined", () => {
-            expect(Object.keys(PERSONALITIES)).toHaveLength(3);
+        it("should have four personalities defined", () => {
+            expect(Object.keys(PERSONALITIES)).toHaveLength(4);
         });
 
-        it("should have kukui, oak, and blue personalities", () => {
+        it("should have coach, kukui, oak, and blue personalities", () => {
+            expect(PERSONALITIES.coach).toBeDefined();
             expect(PERSONALITIES.kukui).toBeDefined();
             expect(PERSONALITIES.oak).toBeDefined();
             expect(PERSONALITIES.blue).toBeDefined();
@@ -72,8 +73,8 @@ describe("personalities", () => {
     });
 
     describe("DEFAULT_PERSONALITY", () => {
-        it("should be kukui", () => {
-            expect(DEFAULT_PERSONALITY).toBe("kukui");
+        it("should be coach", () => {
+            expect(DEFAULT_PERSONALITY).toBe("coach");
         });
 
         it("should be a valid personality id", () => {
@@ -111,12 +112,13 @@ describe("personalities", () => {
         it("should return all personalities as an array", () => {
             const personalities = getAllPersonalities();
             expect(Array.isArray(personalities)).toBe(true);
-            expect(personalities).toHaveLength(3);
+            expect(personalities).toHaveLength(4);
         });
 
         it("should include all personality ids", () => {
             const personalities = getAllPersonalities();
             const ids = personalities.map((p) => p.id);
+            expect(ids).toContain("coach");
             expect(ids).toContain("kukui");
             expect(ids).toContain("oak");
             expect(ids).toContain("blue");
@@ -172,6 +174,24 @@ describe("personalities", () => {
     });
 
     describe("personality content", () => {
+        describe("Coach", () => {
+            const coach = PERSONALITIES.coach;
+
+            it("should be neutral and direct", () => {
+                expect(coach.name).toBe("Coach");
+                expect(coach.systemPromptPrefix).toContain("neutral");
+                expect(coach.systemPromptPrefix).toContain("direct");
+            });
+
+            it("should ground advice in evidence", () => {
+                expect(coach.systemPromptPrefix).toMatch(/calc|usage|benchmark/i);
+            });
+
+            it("should not borrow from any existing Pokemon NPC", () => {
+                expect(coach.systemPromptPrefix).not.toMatch(/kukui|oak|blue|professor/i);
+            });
+        });
+
         describe("Professor Kukui", () => {
             const kukui = PERSONALITIES.kukui;
 

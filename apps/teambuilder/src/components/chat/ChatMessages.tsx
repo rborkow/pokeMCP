@@ -1,14 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useCallback, type RefObject } from "react";
+import type { ChatClientState, UIMessage } from "@tanstack/ai-client";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import type { UIMessage } from "@tanstack/ai-client";
-import type { ChatClientState } from "@tanstack/ai-client";
+import { type RefObject, useCallback, useEffect, useMemo, useRef } from "react";
+import {
+    type ResponseCardEntry,
+    type SystemLogEntry as SystemLogEntryData,
+    useChatStore,
+} from "@/stores/chat-store";
+import type { TeamAction } from "@/types/chat";
+import { ActionCard } from "./ActionCard";
 import { ChatMessage } from "./ChatMessage";
 import { LiveAssistantMessage } from "./LiveAssistantMessage";
-import { ActionCard } from "./ActionCard";
-import type { TeamAction } from "@/types/chat";
 import type { LiveTextStreamHandle } from "./LiveTextStream";
+import { ResponseDispatcher } from "./response/ResponseDispatcher";
+import { SystemLogEntry } from "./SystemLogEntry";
 
 export interface ActiveAssistantStream {
     isActive: boolean;
@@ -68,8 +74,36 @@ export function ChatMessages({
             ? messages.slice(0, -1)
             : messages;
 
+    const systemLog = useChatStore((s) => s.systemLog);
+    const responseCards = useChatStore((s) => s.responseCards);
+
+    type TimelineItem =
+        | { kind: "message"; id: string; createdAt: number; message: UIMessage }
+        | { kind: "log"; id: string; createdAt: number; entry: SystemLogEntryData }
+        | { kind: "card"; id: string; createdAt: number; entry: ResponseCardEntry };
+
+    const timeline = useMemo<TimelineItem[]>(() => {
+        const items: TimelineItem[] = [];
+        for (const m of visibleMessages) {
+            items.push({
+                kind: "message",
+                id: m.id,
+                createdAt: m.createdAt?.getTime() ?? 0,
+                message: m,
+            });
+        }
+        for (const entry of systemLog) {
+            items.push({ kind: "log", id: entry.id, createdAt: entry.createdAt, entry });
+        }
+        for (const entry of responseCards) {
+            items.push({ kind: "card", id: entry.id, createdAt: entry.createdAt, entry });
+        }
+        items.sort((a, b) => a.createdAt - b.createdAt);
+        return items;
+    }, [visibleMessages, systemLog, responseCards]);
+
     const virtualizer = useVirtualizer({
-        count: visibleMessages.length,
+        count: timeline.length,
         getScrollElement: () => scrollContainerRef.current,
         estimateSize: () => 120,
         overscan: 3,
@@ -89,15 +123,15 @@ export function ChatMessages({
     // biome-ignore lint/correctness/useExhaustiveDependencies: pendingAction intentionally triggers scroll when actions appear
     useEffect(() => {
         if (isUserScrolledUpRef.current) return;
-        if (visibleMessages.length === 0) return;
+        if (timeline.length === 0) return;
 
-        virtualizer.scrollToIndex(visibleMessages.length - 1, {
+        virtualizer.scrollToIndex(timeline.length - 1, {
             align: "end",
             behavior: isLoading ? "auto" : "smooth",
         });
-    }, [visibleMessages, pendingAction, isLoading, visibleMessages.length, virtualizer]);
+    }, [timeline, pendingAction, isLoading, timeline.length, virtualizer]);
 
-    if (visibleMessages.length === 0 && !activeStream?.isActive) {
+    if (timeline.length === 0 && !activeStream?.isActive) {
         return (
             <div className="flex-1 flex items-center justify-center p-8">
                 <div className="text-center space-y-2">
@@ -126,11 +160,11 @@ export function ChatMessages({
                 }}
             >
                 {virtualizer.getVirtualItems().map((virtualItem) => {
-                    const msg = visibleMessages[virtualItem.index];
-                    const isLast = virtualItem.index === visibleMessages.length - 1;
+                    const item = timeline[virtualItem.index];
+                    const isLast = virtualItem.index === timeline.length - 1;
                     return (
                         <div
-                            key={msg.id}
+                            key={item.id}
                             data-index={virtualItem.index}
                             ref={virtualizer.measureElement}
                             style={{
@@ -141,7 +175,18 @@ export function ChatMessages({
                                 transform: `translateY(${virtualItem.start}px)`,
                             }}
                         >
-                            <ChatMessageWrapper message={msg} isStreaming={isLast && isLoading} />
+                            {item.kind === "message" ? (
+                                <ChatMessageWrapper
+                                    message={item.message}
+                                    isStreaming={isLast && isLoading}
+                                />
+                            ) : item.kind === "log" ? (
+                                <SystemLogEntry entry={item.entry} />
+                            ) : (
+                                <div className="py-2">
+                                    <ResponseDispatcher card={item.entry.card} />
+                                </div>
+                            )}
                         </div>
                     );
                 })}

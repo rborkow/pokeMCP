@@ -1,16 +1,8 @@
 "use client";
 
+import { Check, Copy, Download, RotateCcw, Share2, Upload } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
+import { ShareDialog } from "@/components/team/ShareDialog";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -22,19 +14,33 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { useTeamStore } from "@/stores/team-store";
+import { Button } from "@/components/ui/button";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
 import { useChatStore } from "@/stores/chat-store";
 import { useHistoryStore } from "@/stores/history-store";
-import { Upload, Download, Copy, Check, Share2, RotateCcw } from "lucide-react";
-import { ShareDialog } from "@/components/team/ShareDialog";
+import { useTeamStore } from "@/stores/team-store";
 
-export function TeamImportExport() {
+export interface TeamImportExportProps {
+    /** When true on mount, the Import dialog starts open. Used by the
+     * landing-page `?start=import` CTA to drop users into the import flow. */
+    defaultImportOpen?: boolean;
+}
+
+export function TeamImportExport({ defaultImportOpen = false }: TeamImportExportProps = {}) {
     const { team, format, importTeam, exportTeam, clearTeam } = useTeamStore();
     const { clearChat } = useChatStore();
     const { pushState, clearHistory } = useHistoryStore();
     const [importText, setImportText] = useState("");
     const [importError, setImportError] = useState<string | null>(null);
-    const [importOpen, setImportOpen] = useState(false);
+    const [importOpen, setImportOpen] = useState(defaultImportOpen);
     const [exportOpen, setExportOpen] = useState(false);
     const [shareOpen, setShareOpen] = useState(false);
     const [copied, setCopied] = useState(false);

@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { ModeToggle } from "./ModeToggle";
 import { FormatSelector } from "./FormatSelector";
+import { ModeSwitch } from "./ModeSwitch";
+import { ModeToggle } from "./ModeToggle";
 
 export function Header() {
     return (
@@ -12,7 +13,7 @@ export function Header() {
                     {/* Pokeball icon */}
                     <div className="pokeball-icon scale-75" />
                     <Link href="/" className="flex items-baseline gap-0">
-                        <span className="font-display font-bold text-xl text-gradient">Poke</span>
+                        <span className="font-display font-bold text-xl text-foreground">Poke</span>
                         <span className="font-display font-bold text-xl text-foreground">MCP</span>
                     </Link>
                     <span className="hidden sm:inline text-sm text-muted-foreground ml-2">
@@ -21,6 +22,7 @@ export function Header() {
                 </div>
 
                 <div className="flex items-center gap-3">
+                    <ModeSwitch />
                     <ModeToggle />
                     <FormatSelector />
                 </div>

@@ -121,13 +121,8 @@
   --type-steel: oklch(0.65 0.03 250);
   --type-fairy: oklch(0.75 0.12 350);
 
-  /* Gradients & shadows (light mode) */
-  --gradient-primary: linear-gradient(135deg, oklch(0.205 0 0), oklch(0.35 0.05 50));
-  --gradient-secondary: linear-gradient(135deg, oklch(0.55 0.05 250), oklch(0.45 0.08 280));
-  --gradient-card: linear-gradient(145deg, oklch(0.99 0 0), oklch(0.97 0 0));
-  --gradient-glow: radial-gradient(ellipse at center, oklch(0.205 0 0 / 0.08), transparent 70%);
+  /* Shadows (light mode) */
   --shadow-card: 0 2px 12px -2px oklch(0 0 0 / 0.08);
-  --shadow-glow: 0 0 30px oklch(0.205 0 0 / 0.06);
   --shadow-hover: 0 4px 20px -2px oklch(0 0 0 / 0.12);
 }
 
@@ -165,15 +160,16 @@
   --sidebar-border: oklch(0.35 0.02 260);
   --sidebar-ring: oklch(0.85 0.18 85);
 
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, oklch(0.85 0.18 85), oklch(0.8 0.2 50));
-  --gradient-secondary: linear-gradient(135deg, oklch(0.62 0.19 250), oklch(0.55 0.2 280));
-  --gradient-card: linear-gradient(145deg, oklch(0.24 0.02 260), oklch(0.18 0.02 260));
-  --gradient-glow: radial-gradient(ellipse at center, oklch(0.85 0.18 85 / 0.15), transparent 70%);
+  /* Flat palette — the v2 direction retired gradient + glow tokens, so the
+     whole UI (chat-first and grid-mode alike) consumes these solid surfaces. */
+  --surface-canvas: oklch(0.14 0.012 260);
+  --surface-panel: oklch(0.18 0.015 260);
+  --surface-inset: oklch(0.22 0.015 260);
+  --border-hairline: oklch(1 0 0 / 0.08);
+  --border-hairline-strong: oklch(1 0 0 / 0.18);
 
   /* Shadows */
   --shadow-card: 0 4px 24px -4px oklch(0 0 0 / 0.4);
-  --shadow-glow: 0 0 40px oklch(0.85 0.18 85 / 0.2);
   --shadow-hover: 0 8px 32px -4px oklch(0 0 0 / 0.5);
 }
 
@@ -191,36 +187,6 @@
 }
 
 @layer components {
-  .pokemon-card {
-    @apply relative overflow-hidden rounded-xl sm:rounded-2xl border border-border p-3 sm:p-4 cursor-pointer;
-    background: var(--gradient-card);
-    box-shadow: var(--shadow-card);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .pokemon-card:hover {
-    @apply border-primary/50;
-    box-shadow: var(--shadow-hover), var(--shadow-glow);
-    transform: translateY(-4px);
-  }
-
-  .pokemon-card-empty {
-    @apply relative overflow-hidden rounded-xl sm:rounded-2xl border border-dashed border-border/50 p-3 sm:p-4 cursor-pointer;
-    background: var(--gradient-card);
-    box-shadow: var(--shadow-card);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .pokemon-card-empty:hover {
-    @apply border-primary/40 bg-muted/30;
-    box-shadow: var(--shadow-hover), var(--shadow-glow);
-    transform: translateY(-4px);
-  }
-
   .type-badge {
     @apply inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider;
     font-family: var(--font-display, var(--font-sans));
@@ -253,43 +219,27 @@
     background: oklch(0.95 0 0);
   }
 
-  .glow-effect {
-    @apply relative;
+  /* Phase 2 chat-first surfaces. Intentionally flat — no gradients, no glow. */
+  .chat-first-surface {
+    background: var(--surface-canvas);
   }
 
-  .glow-effect::before {
-    content: '';
-    @apply absolute inset-0 -z-10 opacity-0 transition-opacity duration-300 rounded-2xl;
-    background: var(--gradient-glow);
-    filter: blur(40px);
+  .chat-first-panel {
+    background: var(--surface-panel);
+    border: 0.5px solid var(--border-hairline);
   }
 
-  .glow-effect:hover::before {
-    @apply opacity-100;
+  .chat-first-inset {
+    background: var(--surface-inset);
+    border: 0.5px solid var(--border-hairline);
   }
 
-  .welcome-option-card {
-    @apply relative overflow-hidden rounded-2xl border border-border/50 cursor-pointer;
-    background: var(--gradient-card);
-    box-shadow: var(--shadow-card);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .welcome-option-card:hover {
-    @apply border-border;
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-4px);
-  }
-
-  .welcome-option-primary {
-    @apply border-primary/30;
-  }
-
-  .welcome-option-primary:hover {
-    @apply border-primary/60;
-    box-shadow: var(--shadow-hover), var(--shadow-glow);
+  .signal-mono {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
   }
 
   /* Chat markdown styles for assistant messages */
@@ -400,16 +350,6 @@
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-primary);
-  }
-
-  .text-gradient-secondary {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-secondary);
-  }
-
   .animate-float {
     animation: float 3s ease-in-out infinite;
   }

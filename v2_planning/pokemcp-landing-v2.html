@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PokeMCP landing — v2 sketch</title>
+<style>
+:root {
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f3f1ec;
+  --color-background-tertiary: #faf9f5;
+  --color-text-primary: #141413;
+  --color-text-secondary: #61605c;
+  --color-text-tertiary: #8a8985;
+  --color-border-tertiary: rgba(0,0,0,0.08);
+  --color-border-secondary: rgba(0,0,0,0.18);
+  --color-border-primary: rgba(0,0,0,0.28);
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  --font-serif: ui-serif, Georgia, serif;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+  background: var(--color-background-tertiary);
+  margin: 0;
+  padding: 40px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.page-header { width: 100%; max-width: 720px; margin-bottom: 24px; }
+.page-header h1 { font-size: 18px; font-weight: 500; margin: 0 0 4px; }
+.page-header p { font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.5; }
+.mock { width: 100%; max-width: 720px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+input { font-family: inherit; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+<h1>PokeMCP landing — v2 sketch (current direction)</h1>
+<p>Revised positioning: "A coach for the whole build — not just the first click." Interview demo replaces the prompt example, three-moment feature sequence (01 Conception / 02 Refinement / 03 Match Prep), trust-chip row, dev footer.</p>
+</div>
+
+<div class="mock">
+
+<h2 class="sr-only">Revised PokeMCP landing mockup with hero positioning around AI throughout the build loop, an interactive interview demo, three-moment feature sequence, and developer platform footer.</h2>
+
+<div style="background: var(--color-background-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; border: 0.5px solid var(--color-border-tertiary);">
+
+<div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--color-background-secondary); border-bottom: 0.5px solid var(--color-border-tertiary);">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-border-secondary);"></span>
+<span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-border-secondary);"></span>
+<span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-border-secondary);"></span>
+<span style="margin-left: 12px; font-family: var(--font-mono); font-size: 12px; color: var(--color-text-tertiary);">pokemcp.com</span>
+</div>
+
+<div style="padding: 28px 32px 0;">
+<div style="display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 11px; color: var(--color-text-secondary); margin-bottom: 20px;">
+<span style="display: inline-flex; align-items: center; gap: 6px; color: #0F6E56;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #1D9E75;"></span>LIVE</span>
+<span>/</span><span>REG M-A + GEN 9 OU</span>
+<span>/</span><span>AI-NATIVE</span>
+<span>/</span><span>v0.4.2 · updated today</span>
+</div>
+
+<h1 style="font-size: 32px; font-weight: 500; line-height: 1.15; margin: 0 0 14px; letter-spacing: -0.01em;">A coach for the whole build — not just the first click.</h1>
+<p style="font-size: 16px; line-height: 1.55; color: var(--color-text-secondary); margin: 0 0 22px; max-width: 540px;">Interview to start. Iterate in natural language. Walk into the match with a plan. The AI shows up at every step of the build loop, not just the blank canvas.</p>
+
+<div style="display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap;">
+<button style="background: var(--color-text-primary); color: var(--color-background-primary); border: none; padding: 10px 18px; border-radius: var(--border-radius-md); font-size: 14px; font-weight: 500; cursor: pointer;">Start the interview</button>
+<button style="background: transparent; border: 0.5px solid var(--color-border-secondary); padding: 10px 18px; border-radius: var(--border-radius-md); font-size: 14px; cursor: pointer;">Import from Showdown</button>
+<button style="background: transparent; border: 0.5px solid var(--color-border-tertiary); padding: 10px 18px; border-radius: var(--border-radius-md); font-size: 14px; color: var(--color-text-secondary); cursor: pointer;">Open empty builder</button>
+</div>
+</div>
+
+<div style="margin: 0 32px 20px; background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden;">
+
+<div style="padding: 12px 16px; border-bottom: 0.5px solid var(--color-border-tertiary); display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary); letter-spacing: 0.04em;">INTERVIEW · STEP 2 OF 4</span>
+<div style="display: flex; gap: 4px;">
+<span style="width: 18px; height: 3px; background: #1D9E75; border-radius: 2px;"></span>
+<span style="width: 18px; height: 3px; background: #1D9E75; border-radius: 2px;"></span>
+<span style="width: 18px; height: 3px; background: var(--color-border-tertiary); border-radius: 2px;"></span>
+<span style="width: 18px; height: 3px; background: var(--color-border-tertiary); border-radius: 2px;"></span>
+</div>
+</div>
+
+<div style="padding: 16px 16px 0;">
+<div style="display: flex; gap: 10px; align-items: center; padding: 8px 12px; background: var(--color-background-secondary); border-radius: var(--border-radius-md); margin-bottom: 16px;">
+<span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary);">01</span>
+<span style="font-size: 13px; color: var(--color-text-secondary);">Format</span>
+<span style="font-size: 13px; font-weight: 500; margin-left: auto;">Champions · Reg MA</span>
+</div>
+
+<div style="display: flex; gap: 10px; align-items: flex-start; margin-bottom: 14px;">
+<span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary); margin-top: 3px;">02</span>
+<div>
+<div style="font-size: 15px; line-height: 1.4; margin-bottom: 4px;">Where do you want to start?</div>
+<div style="font-size: 13px; color: var(--color-text-secondary);">Pick the one that feels closest. I'll adapt the next question based on your answer.</div>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px;">
+<button style="text-align: left; padding: 10px 12px; background: transparent; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); font-size: 13px; cursor: pointer;">
+<div style="font-weight: 500; margin-bottom: 2px;">Clean slate</div>
+<div style="color: var(--color-text-secondary); font-size: 12px;">Surprise me with a strong team</div>
+</button>
+<button style="text-align: left; padding: 10px 12px; background: #E1F5EE; border: 0.5px solid #1D9E75; border-radius: var(--border-radius-md); font-size: 13px; cursor: pointer;">
+<div style="font-weight: 500; margin-bottom: 2px; color: #085041;">Pokémon in mind</div>
+<div style="color: #0F6E56; font-size: 12px;">Build around specific picks</div>
+</button>
+<button style="text-align: left; padding: 10px 12px; background: transparent; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); font-size: 13px; cursor: pointer;">
+<div style="font-weight: 500; margin-bottom: 2px;">Archetype</div>
+<div style="color: var(--color-text-secondary); font-size: 12px;">TR, rain, HO, stall, balance</div>
+</button>
+<button style="text-align: left; padding: 10px 12px; background: transparent; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); font-size: 13px; cursor: pointer;">
+<div style="font-weight: 500; margin-bottom: 2px;">Counter a team</div>
+<div style="color: var(--color-text-secondary); font-size: 12px;">Paste a Showdown set to beat</div>
+</button>
+</div>
+
+<div style="padding: 10px 12px; background: var(--color-background-secondary); border-radius: var(--border-radius-md); display: flex; gap: 10px; align-items: center; margin-bottom: 14px;">
+<span style="font-family: var(--font-mono); color: var(--color-text-tertiary); font-size: 13px;">&gt;</span>
+<input placeholder="Ursaluna-Bloodmoon, Hatterene…" style="flex: 1; border: none; background: transparent; font-size: 14px; outline: none;" />
+<button style="background: var(--color-text-primary); color: var(--color-background-primary); border: none; padding: 6px 12px; border-radius: var(--border-radius-md); font-size: 12px; cursor: pointer;">Next ↵</button>
+</div>
+
+<div style="font-size: 12px; color: var(--color-text-tertiary); padding-bottom: 14px; display: flex; justify-content: space-between;">
+<span>4 questions total · ~30 seconds · skip anytime</span>
+<span style="font-family: var(--font-mono);">esc to exit</span>
+</div>
+</div>
+</div>
+
+<div style="padding: 0 32px 28px;">
+<div style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary); letter-spacing: 0.04em; margin-bottom: 10px;">THE COACH SHOWS UP AT EVERY STEP</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
+
+<div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px;">
+<div style="font-family: var(--font-mono); font-size: 10px; color: var(--color-text-tertiary); margin-bottom: 8px;">01 — CONCEPTION</div>
+<h3 style="font-size: 14px; font-weight: 500; margin: 0 0 8px;">Talk it out</h3>
+<p style="font-size: 13px; line-height: 1.55; color: var(--color-text-secondary); margin: 0;">Interview replaces the blank grid. Describe a vibe, a core, a matchup to beat — get a starting team with reasoning.</p>
+</div>
+
+<div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px;">
+<div style="font-family: var(--font-mono); font-size: 10px; color: var(--color-text-tertiary); margin-bottom: 8px;">02 — REFINEMENT</div>
+<h3 style="font-size: 14px; font-weight: 500; margin: 0 0 8px;">Iterate in English</h3>
+<p style="font-size: 13px; line-height: 1.55; color: var(--color-text-secondary); margin: 0;">"Swap Rillaboom for something that beats Garchomp." "Tune this spread for the Incineroar mirror." No menus, no guessing.</p>
+</div>
+
+<div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px;">
+<div style="font-family: var(--font-mono); font-size: 10px; color: var(--color-text-tertiary); margin-bottom: 8px;">03 — MATCH PREP</div>
+<h3 style="font-size: 14px; font-weight: 500; margin: 0 0 8px;">Walk in with a plan</h3>
+<p style="font-size: 13px; line-height: 1.55; color: var(--color-text-secondary); margin: 0;">Paste your opponent's team. Get lead recs, expected sequences, and the lines that win the matchup most often.</p>
+</div>
+
+</div>
+
+<div style="display: flex; gap: 14px; margin-top: 14px; padding-top: 14px; border-top: 0.5px solid var(--color-border-tertiary); flex-wrap: wrap; font-size: 12px; color: var(--color-text-secondary);">
+<span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #534AB7;"></span>Live meta · refreshed every Tour</span>
+<span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #378ADD;"></span>Showdown paste in / out, lossless</span>
+<span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #BA7517;"></span>Threat matrix + speed tiers built-in</span>
+</div>
+</div>
+
+<div style="background: var(--color-background-secondary); border-top: 0.5px solid var(--color-border-tertiary); padding: 20px 32px;">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
+<div>
+<div style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary); letter-spacing: 0.04em; margin-bottom: 4px;">FOR DEVELOPERS</div>
+<div style="font-size: 14px; line-height: 1.5;">Built on Model Context Protocol. Point your own agent at the data.</div>
+</div>
+<div style="display: flex; gap: 8px;">
+<button style="background: transparent; border: 0.5px solid var(--color-border-secondary); padding: 8px 14px; border-radius: var(--border-radius-md); font-size: 13px; font-family: var(--font-mono); cursor: pointer;">docs</button>
+<button style="background: transparent; border: 0.5px solid var(--color-border-secondary); padding: 8px 14px; border-radius: var(--border-radius-md); font-size: 13px; font-family: var(--font-mono); cursor: pointer;">api</button>
+<button style="background: transparent; border: 0.5px solid var(--color-border-secondary); padding: 8px 14px; border-radius: var(--border-radius-md); font-size: 13px; font-family: var(--font-mono); cursor: pointer;">github</button>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

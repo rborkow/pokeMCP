@@ -1,39 +1,41 @@
 "use client";
 
+import { Package, Sparkles, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { PokemonSprite } from "./PokemonSprite";
-import { MoveBadge } from "./MoveBadge";
-import { EVBar } from "./EVBar";
-import type { TeamPokemon } from "@/types/pokemon";
-import { X, Sparkles, Package } from "lucide-react";
 import { getPokemonTypes } from "@/lib/data/pokemon-types";
 import { TYPE_BG_CLASSES } from "@/lib/data/type-colors";
 import { toDisplayName } from "@/lib/showdown-parser";
+import type { TeamPokemon } from "@/types/pokemon";
+import { EVBar } from "./EVBar";
+import { MoveBadge } from "./MoveBadge";
+import { PokemonSprite } from "./PokemonSprite";
 
-// Crystalline Tera type colors - lighter, more gem-like appearance
+// Flat Tera type chips — solid tinted fill at low opacity with a matching
+// text color. Preserves type identity without the gradient decoration that
+// the v2 direction retired.
 const TERA_COLORS: Record<string, string> = {
-    Normal: "bg-gradient-to-r from-gray-200 to-gray-300 text-gray-800 border border-gray-400",
-    Fire: "bg-gradient-to-r from-orange-300 to-red-300 text-orange-900 border border-orange-400",
-    Water: "bg-gradient-to-r from-blue-300 to-cyan-300 text-blue-900 border border-blue-400",
-    Electric:
-        "bg-gradient-to-r from-yellow-200 to-amber-300 text-yellow-900 border border-yellow-400",
-    Grass: "bg-gradient-to-r from-green-300 to-emerald-300 text-green-900 border border-green-400",
-    Ice: "bg-gradient-to-r from-cyan-200 to-blue-200 text-cyan-900 border border-cyan-300",
-    Fighting: "bg-gradient-to-r from-red-400 to-orange-400 text-red-950 border border-red-500",
-    Poison: "bg-gradient-to-r from-purple-300 to-fuchsia-300 text-purple-900 border border-purple-400",
-    Ground: "bg-gradient-to-r from-amber-300 to-yellow-400 text-amber-900 border border-amber-500",
-    Flying: "bg-gradient-to-r from-indigo-200 to-sky-200 text-indigo-900 border border-indigo-300",
-    Psychic: "bg-gradient-to-r from-pink-300 to-rose-300 text-pink-900 border border-pink-400",
-    Bug: "bg-gradient-to-r from-lime-300 to-green-300 text-lime-900 border border-lime-400",
-    Rock: "bg-gradient-to-r from-stone-300 to-amber-300 text-stone-900 border border-stone-400",
-    Ghost: "bg-gradient-to-r from-purple-400 to-indigo-400 text-purple-950 border border-purple-500",
-    Dragon: "bg-gradient-to-r from-violet-400 to-indigo-400 text-violet-950 border border-violet-500",
-    Dark: "bg-gradient-to-r from-stone-400 to-gray-500 text-stone-950 border border-stone-600",
-    Steel: "bg-gradient-to-r from-slate-300 to-zinc-300 text-slate-900 border border-slate-400",
-    Fairy: "bg-gradient-to-r from-pink-200 to-rose-200 text-pink-900 border border-pink-300",
-    Stellar:
-        "bg-gradient-to-r from-violet-300 via-pink-300 to-amber-300 text-violet-900 border border-violet-400",
+    Normal: "bg-gray-500/15 text-gray-300 border border-gray-500/30",
+    Fire: "bg-orange-500/15 text-orange-300 border border-orange-500/30",
+    Water: "bg-blue-500/15 text-blue-300 border border-blue-500/30",
+    Electric: "bg-yellow-500/15 text-yellow-300 border border-yellow-500/30",
+    Grass: "bg-green-500/15 text-green-300 border border-green-500/30",
+    Ice: "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30",
+    Fighting: "bg-red-500/15 text-red-300 border border-red-500/30",
+    Poison: "bg-purple-500/15 text-purple-300 border border-purple-500/30",
+    Ground: "bg-amber-500/15 text-amber-300 border border-amber-500/30",
+    Flying: "bg-indigo-500/15 text-indigo-300 border border-indigo-500/30",
+    Psychic: "bg-pink-500/15 text-pink-300 border border-pink-500/30",
+    Bug: "bg-lime-500/15 text-lime-300 border border-lime-500/30",
+    Rock: "bg-stone-500/15 text-stone-300 border border-stone-500/30",
+    Ghost: "bg-violet-500/15 text-violet-300 border border-violet-500/30",
+    Dragon: "bg-violet-600/15 text-violet-300 border border-violet-600/30",
+    Dark: "bg-zinc-600/15 text-zinc-300 border border-zinc-600/30",
+    Steel: "bg-slate-500/15 text-slate-300 border border-slate-500/30",
+    Fairy: "bg-rose-500/15 text-rose-300 border border-rose-500/30",
+    Stellar: "bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/30",
 };
+
+const TERA_DEFAULT_CLASS = "bg-muted/40 text-muted-foreground border border-border";
 
 interface TeamSlotProps {
     pokemon: TeamPokemon;
@@ -58,7 +60,7 @@ export function TeamSlot({
             role="button"
             tabIndex={0}
             aria-label={`${toDisplayName(pokemon.pokemon)}${isSelected ? ", selected" : ""}. Click to edit.`}
-            className={`pokemon-card glow-effect group animate-in fade-in slide-in-from-bottom-2 ${
+            className={`chat-first-panel group cursor-pointer rounded-xl p-3 sm:p-4 animate-in fade-in slide-in-from-bottom-2 transition-colors hover:border-border-hairline-strong ${
                 isSelected ? "border-primary ring-2 ring-primary/20" : ""
             }`}
             style={{ animationDelay: `${index * 100}ms`, animationFillMode: "both" }}
@@ -88,7 +90,7 @@ export function TeamSlot({
             <div className="flex items-start gap-2 sm:gap-3 mb-3">
                 {/* Pokemon sprite */}
                 <div className="relative flex-shrink-0">
-                    <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl bg-gradient-to-br from-muted/50 to-muted/20 flex items-center justify-center overflow-hidden">
+                    <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl bg-muted/40 flex items-center justify-center overflow-hidden">
                         <div className="group-hover:scale-110 transition-transform duration-300">
                             <PokemonSprite pokemon={pokemon.pokemon} size="lg" />
                         </div>
@@ -165,7 +167,7 @@ export function TeamSlot({
             {pokemon.teraType && (
                 <div className="mt-2">
                     <Badge
-                        className={`text-[10px] px-1.5 py-0 ${TERA_COLORS[pokemon.teraType] || "bg-gradient-to-r from-gray-200 to-gray-300 text-gray-800 border border-gray-400"}`}
+                        className={`text-[10px] px-1.5 py-0 ${TERA_COLORS[pokemon.teraType] || TERA_DEFAULT_CLASS}`}
                     >
                         Tera: {pokemon.teraType}
                     </Badge>

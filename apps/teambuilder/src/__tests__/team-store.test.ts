@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useTeamStore } from "@/stores/team-store";
 import type { TeamPokemon } from "@/types/pokemon";
 
@@ -223,6 +223,74 @@ Ability: Intimidate
         it("should export empty string for empty team", () => {
             const exported = useTeamStore.getState().exportTeam();
             expect(exported).toBe("");
+        });
+    });
+
+    describe("uiMode", () => {
+        it("defaults to chat", () => {
+            expect(useTeamStore.getState().uiMode).toBe("chat");
+        });
+
+        it("can switch to grid", () => {
+            useTeamStore.getState().setUiMode("grid");
+            expect(useTeamStore.getState().uiMode).toBe("grid");
+        });
+    });
+
+    describe("modification tracking", () => {
+        beforeEach(() => {
+            useTeamStore.getState().clearTeam();
+        });
+
+        it("tags user-driven setPokemon writes by default", () => {
+            useTeamStore.getState().setPokemon(0, {
+                pokemon: "Garchomp",
+                moves: ["Earthquake"],
+            });
+
+            const { lastModificationSource, lastModifiedAt } = useTeamStore.getState();
+            expect(lastModificationSource[0]).toBe("user");
+            expect(typeof lastModifiedAt[0]).toBe("number");
+        });
+
+        it("tags AI-driven setPokemon writes with source=ai", () => {
+            useTeamStore
+                .getState()
+                .setPokemon(1, { pokemon: "Scizor", moves: ["Bullet Punch"] }, "ai");
+
+            expect(useTeamStore.getState().lastModificationSource[1]).toBe("ai");
+        });
+
+        it("tags importTeam writes with source=import by default", () => {
+            const result = useTeamStore
+                .getState()
+                .importTeam("Garchomp @ Life Orb\nAbility: Rough Skin\n- Earthquake");
+            expect(result.success).toBe(true);
+            expect(useTeamStore.getState().lastModificationSource[0]).toBe("import");
+        });
+
+        it("clearTeam wipes the modification tracking maps", () => {
+            useTeamStore.getState().setPokemon(0, {
+                pokemon: "Garchomp",
+                moves: ["Earthquake"],
+            });
+            useTeamStore.getState().clearTeam();
+            expect(useTeamStore.getState().lastModifiedAt).toEqual({});
+            expect(useTeamStore.getState().lastModificationSource).toEqual({});
+        });
+    });
+
+    describe("persistence shape", () => {
+        it("persists mode, format, team, and uiMode — but NOT modification tracking", () => {
+            const partialize = useTeamStore.persist.getOptions().partialize;
+            expect(partialize).toBeDefined();
+            const snapshot = partialize?.(useTeamStore.getState());
+            expect(snapshot).toHaveProperty("team");
+            expect(snapshot).toHaveProperty("format");
+            expect(snapshot).toHaveProperty("mode");
+            expect(snapshot).toHaveProperty("uiMode");
+            expect(snapshot).not.toHaveProperty("lastModifiedAt");
+            expect(snapshot).not.toHaveProperty("lastModificationSource");
         });
     });
 });
