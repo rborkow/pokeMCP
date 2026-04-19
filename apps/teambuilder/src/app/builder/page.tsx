@@ -21,7 +21,9 @@ export default function BuilderPage() {
 
             <SystemLogBridge />
 
-            <Header />
+            <Suspense fallback={null}>
+                <Header />
+            </Suspense>
 
             <Suspense fallback={null}>
                 <BuilderLayout />
