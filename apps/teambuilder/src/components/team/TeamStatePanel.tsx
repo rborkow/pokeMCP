@@ -56,7 +56,7 @@ export function TeamStatePanel({ defaultImportOpen }: TeamStatePanelProps = {}) 
                 <TeamImportExport defaultImportOpen={defaultImportOpen} />
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-2">
                 {SLOT_KEYS.map((key, slot) => (
                     <TeamSlotCompact
                         key={key}

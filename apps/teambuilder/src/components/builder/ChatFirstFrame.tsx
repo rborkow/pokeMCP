@@ -37,13 +37,16 @@ export function ChatFirstFrame({ defaultImportOpen }: ChatFirstFrameProps = {}) 
         <div className="chat-first-surface grid min-h-[calc(100vh-8rem)] grid-cols-1 gap-4 p-4 md:p-6 lg:grid-cols-5">
             <section
                 aria-label="Coach chat"
-                className="flex min-h-[70vh] flex-col lg:col-span-3 lg:min-h-[520px]"
+                className="flex min-h-[70vh] flex-col lg:col-span-3 lg:min-h-[520px] animate-in fade-in duration-500"
             >
                 <ErrorBoundary level="section">
                     <ChatPanel layout="fill" />
                 </ErrorBoundary>
             </section>
-            <section aria-label="Team state" className="lg:col-span-2">
+            <section
+                aria-label="Team state"
+                className="lg:col-span-2 animate-in fade-in slide-in-from-right-4 duration-500"
+            >
                 <ErrorBoundary level="section">
                     <TeamStatePanel defaultImportOpen={defaultImportOpen} />
                 </ErrorBoundary>

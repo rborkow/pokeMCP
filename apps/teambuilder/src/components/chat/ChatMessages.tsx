@@ -133,13 +133,18 @@ export function ChatMessages({
 
     if (timeline.length === 0 && !activeStream?.isActive) {
         return (
-            <div className="flex-1 flex items-center justify-center p-8">
-                <div className="text-center space-y-2">
-                    <p className="text-muted-foreground">Ask me anything about your team!</p>
-                    <p className="text-sm text-muted-foreground">
-                        I can help with team building, coverage analysis, and competitive
-                        strategies.
+            <div className="flex-1 flex items-center justify-center p-6 sm:p-8">
+                <div className="max-w-[360px] space-y-3 text-center">
+                    <div className="signal-mono">Coach</div>
+                    <p className="text-[15px] leading-relaxed text-foreground">
+                        Ready when you are. Paste a team, describe what you're building,
+                        or ask for a read on the meta.
                     </p>
+                    <ul className="text-[12px] text-muted-foreground space-y-1 pt-1 font-mono">
+                        <li>— "rate my team in one sentence"</li>
+                        <li>— "what's my worst matchup?"</li>
+                        <li>— "swap slot 4 for something that beats Garchomp"</li>
+                    </ul>
                 </div>
             </div>
         );

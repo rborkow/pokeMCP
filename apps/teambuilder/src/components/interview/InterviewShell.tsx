@@ -277,9 +277,18 @@ export function InterviewShell() {
                     />
                 )}
 
-                {error && (
-                    <div className="rounded-md border border-destructive/50 bg-destructive/10 px-3 py-2 text-[12px] text-destructive">
-                        {error}
+                {status === "error" && (
+                    <div className="rounded-md border border-destructive/50 bg-destructive/10 px-3 py-3 text-[12px] space-y-2">
+                        <div className="text-destructive">
+                            {error ?? "Synthesis failed."}
+                        </div>
+                        <button
+                            type="button"
+                            onClick={() => void runSynthesis()}
+                            className="inline-flex items-center rounded-md border border-destructive/60 bg-destructive/20 px-2.5 py-1 text-[11px] font-medium text-destructive hover:bg-destructive/30"
+                        >
+                            Try again
+                        </button>
                     </div>
                 )}
             </div>

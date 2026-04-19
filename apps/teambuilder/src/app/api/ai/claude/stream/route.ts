@@ -20,7 +20,7 @@ const MAX_HISTORY_MESSAGES = 10;
 // Simple in-memory rate limiting (per-isolate, best-effort)
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
-const RATE_LIMIT_MAX_REQUESTS = 10; // 10 requests per minute per IP
+const RATE_LIMIT_MAX_REQUESTS = 20; // 20 requests per minute per IP
 
 function isRateLimited(ip: string): boolean {
     const now = Date.now();

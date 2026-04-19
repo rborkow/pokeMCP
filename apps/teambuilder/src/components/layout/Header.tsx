@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { BetaBadge } from "@/components/landing/BetaBadge";
 import { FormatSelector } from "./FormatSelector";
 import { ModeSwitch } from "./ModeSwitch";
 import { ModeToggle } from "./ModeToggle";
@@ -16,9 +17,7 @@ export function Header() {
                         <span className="font-display font-bold text-xl text-foreground">Poke</span>
                         <span className="font-display font-bold text-xl text-foreground">MCP</span>
                     </Link>
-                    <span className="hidden sm:inline text-sm text-muted-foreground ml-2">
-                        Team Builder
-                    </span>
+                    <BetaBadge className="ml-2" />
                 </div>
 
                 <div className="flex items-center gap-3">
