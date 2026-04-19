@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PokeMCP app refactor — chat-first</title>
+<style>
+:root {
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f3f1ec;
+  --color-background-tertiary: #faf9f5;
+  --color-text-primary: #141413;
+  --color-text-secondary: #61605c;
+  --color-text-tertiary: #8a8985;
+  --color-border-tertiary: rgba(0,0,0,0.08);
+  --color-border-secondary: rgba(0,0,0,0.18);
+  --color-border-primary: rgba(0,0,0,0.28);
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  --font-serif: ui-serif, Georgia, serif;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+  background: var(--color-background-tertiary);
+  margin: 0;
+  padding: 40px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.page-header { width: 100%; max-width: 720px; margin-bottom: 24px; }
+.page-header h1 { font-size: 18px; font-weight: 500; margin: 0 0 4px; }
+.page-header p { font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.5; }
+.mock { width: 100%; max-width: 720px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+input { font-family: inherit; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+<h1>PokeMCP app refactor — chat-first paradigm</h1>
+<p>The strategic shift: chat becomes the primary surface, the team grid becomes a state panel reflecting conversation. Mode toggle preserves the classic Grid view for power users. Shown here in active-build state with a coach-driven swap in flight.</p>
+</div>
+
+<div class="mock">
+
+<h2 class="sr-only">A mockup of a chat-first PokeMCP refactor where conversation is the main panel, the team grid reflects state on the side, and changes happen through natural-language coach exchanges.</h2>
+
+<div style="background: var(--color-background-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; border: 0.5px solid var(--color-border-tertiary);">
+
+<div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--color-background-secondary); border-bottom: 0.5px solid var(--color-border-tertiary);">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-border-secondary);"></span>
+<span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-border-secondary);"></span>
+<span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-border-secondary);"></span>
+<span style="margin-left: 12px; font-family: var(--font-mono); font-size: 12px; color: var(--color-text-tertiary);">pokemcp.com/builder</span>
+</div>
+
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--color-background-primary); border-bottom: 0.5px solid var(--color-border-tertiary); gap: 12px;">
+<div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
+<span style="font-weight: 500; font-size: 14px;">PokeMCP</span>
+<span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary);">·</span>
+<span style="font-size: 12px; color: var(--color-text-secondary);">Champions · Reg MA</span>
+</div>
+<div style="display: flex; align-items: center; gap: 6px;">
+<div style="display: inline-flex; padding: 2px; background: var(--color-background-secondary); border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); font-size: 11px;">
+<span style="padding: 4px 10px; background: var(--color-background-primary); border-radius: 6px; font-weight: 500;">Chat</span>
+<span style="padding: 4px 10px; color: var(--color-text-secondary);">Grid</span>
+</div>
+<button style="background: transparent; border: 0.5px solid var(--color-border-tertiary); padding: 4px 10px; border-radius: var(--border-radius-md); font-size: 11px; cursor: pointer;">Import</button>
+<button style="background: transparent; border: 0.5px solid var(--color-border-tertiary); padding: 4px 10px; border-radius: var(--border-radius-md); font-size: 11px; cursor: pointer;">Export</button>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1.5fr 1fr; min-height: 460px;">
+
+<div style="border-right: 0.5px solid var(--color-border-tertiary); display: flex; flex-direction: column; background: var(--color-background-primary);">
+
+<div style="padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 14px; overflow: hidden;">
+
+<div style="display: flex; gap: 8px; align-items: flex-start;">
+<div style="width: 22px; height: 22px; border-radius: 50%; background: var(--color-background-secondary); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-family: var(--font-mono); color: var(--color-text-secondary);">R</div>
+<div style="background: var(--color-background-secondary); padding: 8px 12px; border-radius: var(--border-radius-md); font-size: 13px; line-height: 1.5;">what's my worst matchup right now?</div>
+</div>
+
+<div style="display: flex; gap: 8px; align-items: flex-start;">
+<div style="width: 22px; height: 22px; border-radius: 50%; background: #E1F5EE; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #1D9E75;"></span>
+</div>
+<div style="font-size: 13px; line-height: 1.55; flex: 1;">
+<div style="margin-bottom: 10px;">Garchomp Scarf, by a notable margin. Your TR tempo is the problem — Garchomp outpaces Ursaluna both directions, and Rillaloom's Grassy Glide doesn't OHKO even with +1.</div>
+<div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 12px; font-size: 12px;">
+<div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span style="color: var(--color-text-secondary);">Win rate estimate</span><span style="font-weight: 500; color: #A32D2D;">31%</span></div>
+<div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span style="color: var(--color-text-secondary);">Lead recs</span><span>Incineroar + Hatterene</span></div>
+<div style="display: flex; justify-content: space-between;"><span style="color: var(--color-text-secondary);">Key benchmark</span><span>0 / 0 Garchomp dies to +1 Bullet Punch</span></div>
+</div>
+</div>
+</div>
+
+<div style="display: flex; gap: 8px; align-items: flex-start;">
+<div style="width: 22px; height: 22px; border-radius: 50%; background: var(--color-background-secondary); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-family: var(--font-mono); color: var(--color-text-secondary);">R</div>
+<div style="background: var(--color-background-secondary); padding: 8px 12px; border-radius: var(--border-radius-md); font-size: 13px; line-height: 1.5;">fix it. keep the TR shape.</div>
+</div>
+
+<div style="display: flex; gap: 8px; align-items: flex-start;">
+<div style="width: 22px; height: 22px; border-radius: 50%; background: #E1F5EE; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #1D9E75;"></span>
+</div>
+<div style="font-size: 13px; line-height: 1.55; flex: 1;">
+<div style="margin-bottom: 8px;">Swapped Rillaboom → Scizor. Resists Dragon Claw, Bullet Punch gives priority outside TR, still supports the defensive core. TR shape preserved.</div>
+<div style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; color: #0F6E56; background: #E1F5EE; padding: 4px 8px; border-radius: var(--border-radius-md);">
+<span style="width: 5px; height: 5px; border-radius: 50%; background: #1D9E75;"></span>team updated · slot 4
+</div>
+</div>
+</div>
+
+</div>
+
+<div style="padding: 10px 14px; border-top: 0.5px solid var(--color-border-tertiary);">
+<div style="display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap;">
+<button style="background: transparent; border: 0.5px solid var(--color-border-tertiary); padding: 4px 10px; border-radius: var(--border-radius-md); font-size: 11px; cursor: pointer; color: var(--color-text-secondary);">check vs top 5 meta</button>
+<button style="background: transparent; border: 0.5px solid var(--color-border-tertiary); padding: 4px 10px; border-radius: var(--border-radius-md); font-size: 11px; cursor: pointer; color: var(--color-text-secondary);">tune spreads</button>
+<button style="background: transparent; border: 0.5px solid var(--color-border-tertiary); padding: 4px 10px; border-radius: var(--border-radius-md); font-size: 11px; cursor: pointer; color: var(--color-text-secondary);">match prep</button>
+</div>
+<div style="display: flex; gap: 8px; align-items: center; padding: 8px 12px; background: var(--color-background-secondary); border-radius: var(--border-radius-md);">
+<input placeholder="Ask the coach anything…" style="flex: 1; border: none; background: transparent; font-size: 13px; outline: none;" />
+<span style="font-family: var(--font-mono); font-size: 10px; color: var(--color-text-tertiary);">↵</span>
+</div>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; background: var(--color-background-secondary);">
+
+<div style="padding: 12px 14px 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 0.5px solid var(--color-border-tertiary);">
+<span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-text-tertiary); letter-spacing: 0.04em;">YOUR TEAM · 6/6</span>
+<button style="background: transparent; border: none; font-size: 11px; cursor: pointer; color: var(--color-text-secondary);">edit ⚙</button>
+</div>
+
+<div style="padding: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; flex: 1;">
+
+<div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 8px;">
+<div style="width: 4px; height: 4px; background: #BA7517; border-radius: 50%; margin-bottom: 4px;"></div>
+<div style="font-size: 12px; font-weight: 500; line-height: 1.2;">Ursaluna-BM</div>
+<div style="font-size: 10px; color: var(--color-text-secondary); margin-top: 2px; font-family: var(--font-mono);">Blood Moon</div>
+</div>
+
+<div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 8px;">
+<div style="width: 4px; height: 4px; background: #A32D2D; border-radius: 50%; margin-bottom: 4px;"></div>
+<div style="font-size: 12px; font-weight: 500; line-height: 1.2;">Incineroar</div>
+<div style="font-size: 10px; color: var(--color-text-secondary); margin-top: 2px; font-family: var(--font-mono);">Parting Shot</div>
+</div>
+
+<div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 8px;">
+<div style="width: 4px; height: 4px; background: #534AB7; border-radius: 50%; margin-bottom: 4px;"></div>
+<div style="font-size: 12px; font-weight: 500; line-height: 1.2;">Hatterene</div>
+<div style="font-size: 10px; color: var(--color-text-secondary); margin-top: 2px; font-family: var(--font-mono);">TR setter</div>
+</div>
+
+<div style="background: var(--color-background-primary); border: 0.5px solid #1D9E75; border-radius: var(--border-radius-md); padding: 8px; position: relative;">
+<div style="position: absolute; top: 4px; right: 4px; font-family: var(--font-mono); font-size: 8px; color: #0F6E56; background: #E1F5EE; padding: 1px 4px; border-radius: 3px;">NEW</div>
+<div style="width: 4px; height: 4px; background: #5F5E5A; border-radius: 50%; margin-bottom: 4px;"></div>
+<div style="font-size: 12px; font-weight: 500; line-height: 1.2;">Scizor</div>
+<div style="font-size: 10px; color: var(--color-text-secondary); margin-top: 2px; font-family: var(--font-mono);">Bullet Punch</div>
+</div>
+
+<div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 8px;">
+<div style="width: 4px; height: 4px; background: #185FA5; border-radius: 50%; margin-bottom: 4px;"></div>
+<div style="font-size: 12px; font-weight: 500; line-height: 1.2;">Primarina</div>
+<div style="font-size: 10px; color: var(--color-text-secondary); margin-top: 2px; font-family: var(--font-mono);">Liquid Voice</div>
+</div>
+
+<div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 8px;">
+<div style="width: 4px; height: 4px; background: #5F5E5A; border-radius: 50%; margin-bottom: 4px;"></div>
+<div style="font-size: 12px; font-weight: 500; line-height: 1.2;">Kingambit</div>
+<div style="font-size: 10px; color: var(--color-text-secondary); margin-top: 2px; font-family: var(--font-mono);">Sucker Punch</div>
+</div>
+
+</div>
+
+<div style="padding: 10px 14px; border-top: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary);">
+<div style="font-family: var(--font-mono); font-size: 10px; color: var(--color-text-tertiary); letter-spacing: 0.04em; margin-bottom: 8px;">ANALYSIS</div>
+<div style="display: flex; flex-direction: column; gap: 5px; font-size: 11px;">
+<div style="display: flex; justify-content: space-between;">
+<span style="color: var(--color-text-secondary);">Type coverage</span>
+<span style="color: #0F6E56;">85% · good</span>
+</div>
+<div style="display: flex; justify-content: space-between;">
+<span style="color: var(--color-text-secondary);">Speed shape</span>
+<span>TR-dominant</span>
+</div>
+<div style="display: flex; justify-content: space-between;">
+<span style="color: var(--color-text-secondary);">Open threats</span>
+<span style="color: #BA7517;">2 · Sneasler, Sinistcha</span>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

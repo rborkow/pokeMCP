@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PokeMCP style guide</title>
+<style>
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 240 5.9% 10%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 240 5.9% 10%;
+  --coach: 156 65% 36%;
+  --coach-surface: 156 50% 94%;
+  --coach-foreground: 156 70% 20%;
+  --warning: 38 92% 40%;
+  --warning-surface: 40 80% 94%;
+  --info: 217 80% 45%;
+  --info-surface: 215 80% 95%;
+  --radius: 0.5rem;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 63% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --coach: 156 55% 48%;
+    --coach-surface: 156 40% 14%;
+    --coach-foreground: 156 60% 75%;
+    --warning: 38 92% 55%;
+    --warning-surface: 38 40% 14%;
+    --info: 217 80% 65%;
+    --info-surface: 215 40% 14%;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.container { max-width: 920px; margin: 0 auto; padding: 56px 28px 80px; }
+
+.doc-header { border-bottom: 1px solid hsl(var(--border)); padding-bottom: 28px; margin-bottom: 40px; }
+.doc-header .eyebrow { font-family: var(--font-mono); font-size: 11px; color: hsl(var(--muted-foreground)); letter-spacing: 0.05em; margin-bottom: 8px; }
+.doc-header h1 { font-size: 32px; font-weight: 600; margin: 0 0 10px; letter-spacing: -0.015em; line-height: 1.15; }
+.doc-header p { color: hsl(var(--muted-foreground)); margin: 0; max-width: 600px; font-size: 15px; }
+
+h2 { font-size: 22px; font-weight: 600; margin: 56px 0 8px; letter-spacing: -0.01em; }
+h2 + .section-note { color: hsl(var(--muted-foreground)); margin: 0 0 24px; font-size: 14px; max-width: 640px; }
+h3 { font-size: 15px; font-weight: 600; margin: 24px 0 8px; }
+h3 + .sub-note { color: hsl(var(--muted-foreground)); margin: 0 0 14px; font-size: 13px; }
+
+p { margin: 0 0 12px; }
+code { font-family: var(--font-mono); font-size: 13px; background: hsl(var(--muted)); padding: 1px 6px; border-radius: 4px; }
+.shadcn-tag { display: inline-block; font-family: var(--font-mono); font-size: 11px; color: hsl(var(--muted-foreground)); background: hsl(var(--muted)); padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
+
+.example {
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 12px 0 20px;
+  background: hsl(var(--background));
+}
+.example.tight { padding: 14px; }
+.example.bare { padding: 0; overflow: hidden; }
+
+.token-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin: 12px 0 16px; }
+.token { border: 1px solid hsl(var(--border)); border-radius: var(--radius); padding: 12px; display: flex; gap: 12px; align-items: center; }
+.token-swatch { width: 32px; height: 32px; border-radius: 6px; border: 1px solid hsl(var(--border)); flex-shrink: 0; }
+.token-info { min-width: 0; }
+.token-name { font-size: 13px; font-weight: 500; margin: 0 0 2px; }
+.token-value { font-family: var(--font-mono); font-size: 11px; color: hsl(var(--muted-foreground)); margin: 0; }
+
+.spec-row { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: center; padding: 8px 0; border-bottom: 1px solid hsl(var(--border)); font-size: 13px; }
+.spec-row:last-child { border-bottom: none; }
+.spec-label { color: hsl(var(--muted-foreground)); font-family: var(--font-mono); font-size: 12px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  font-family: inherit; font-size: 14px; font-weight: 500;
+  padding: 8px 16px; border-radius: calc(var(--radius) - 2px);
+  cursor: pointer; transition: background 0.12s, opacity 0.12s;
+  border: 1px solid transparent; height: 36px;
+}
+.btn-primary { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
+.btn-primary:hover { opacity: 0.9; }
+.btn-outline { background: transparent; color: hsl(var(--foreground)); border-color: hsl(var(--border)); }
+.btn-outline:hover { background: hsl(var(--accent)); }
+.btn-ghost { background: transparent; color: hsl(var(--foreground)); border-color: transparent; }
+.btn-ghost:hover { background: hsl(var(--accent)); }
+.btn-destructive { background: hsl(var(--destructive)); color: hsl(var(--destructive-foreground)); }
+.btn-sm { height: 30px; font-size: 13px; padding: 6px 12px; border-radius: 5px; }
+.btn-xs { height: 24px; font-size: 12px; padding: 3px 10px; border-radius: 4px; }
+
+.input {
+  font-family: inherit; font-size: 14px;
+  padding: 8px 12px; height: 36px; width: 100%;
+  background: hsl(var(--background)); color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--input)); border-radius: calc(var(--radius) - 2px);
+  outline: none; transition: border-color 0.12s, box-shadow 0.12s;
+}
+.input:focus { border-color: hsl(var(--ring)); box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2); }
+
+.card {
+  background: hsl(var(--card)); color: hsl(var(--card-foreground));
+  border: 1px solid hsl(var(--border)); border-radius: var(--radius);
+}
+
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 500;
+  padding: 2px 8px; border-radius: 999px;
+  border: 1px solid transparent;
+}
+.badge-default { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
+.badge-secondary { background: hsl(var(--secondary)); color: hsl(var(--secondary-foreground)); }
+.badge-outline { background: transparent; color: hsl(var(--foreground)); border-color: hsl(var(--border)); }
+.badge-coach { background: hsl(var(--coach-surface)); color: hsl(var(--coach-foreground)); font-family: var(--font-mono); letter-spacing: 0.02em; }
+.badge-info { background: hsl(var(--info-surface)); color: hsl(var(--info)); }
+.badge-warning { background: hsl(var(--warning-surface)); color: hsl(var(--warning)); }
+
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.row-tight { gap: 6px; }
+
+.mono { font-family: var(--font-mono); }
+.muted { color: hsl(var(--muted-foreground)); }
+.small { font-size: 13px; }
+
+.table-clean { width: 100%; font-size: 13px; border-collapse: collapse; margin: 12px 0; }
+.table-clean th { text-align: left; padding: 8px 10px; font-weight: 500; color: hsl(var(--muted-foreground)); border-bottom: 1px solid hsl(var(--border)); font-size: 12px; }
+.table-clean td { padding: 10px; border-bottom: 1px solid hsl(var(--border)); vertical-align: top; }
+.table-clean tr:last-child td { border-bottom: none; }
+
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 14px 0; }
+.do-dont-card { border: 1px solid hsl(var(--border)); border-radius: var(--radius); padding: 16px; }
+.do-dont-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; margin-bottom: 10px; }
+.do-dont-do .do-dont-label { color: hsl(var(--coach)); }
+.do-dont-dont .do-dont-label { color: hsl(var(--destructive)); }
+
+.status-bar {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-mono); font-size: 11px;
+  color: hsl(var(--muted-foreground));
+}
+.status-bar .dot { width: 6px; height: 6px; border-radius: 50%; background: hsl(var(--coach)); }
+.status-bar .live { color: hsl(var(--coach)); display: inline-flex; align-items: center; gap: 6px; }
+.status-bar .sep { opacity: 0.5; }
+
+.team-slot {
+  background: hsl(var(--card)); border: 1px solid hsl(var(--border));
+  border-radius: var(--radius); padding: 10px; position: relative;
+}
+.team-slot .type-dot { width: 4px; height: 4px; border-radius: 50%; margin-bottom: 6px; background: hsl(var(--info)); }
+.team-slot .name { font-size: 13px; font-weight: 500; line-height: 1.2; }
+.team-slot .role { font-size: 11px; color: hsl(var(--muted-foreground)); margin-top: 2px; font-family: var(--font-mono); }
+.team-slot .diff-flag {
+  position: absolute; top: 6px; right: 6px; font-family: var(--font-mono);
+  font-size: 9px; color: hsl(var(--coach-foreground));
+  background: hsl(var(--coach-surface));
+  padding: 1px 5px; border-radius: 3px;
+}
+.team-slot.is-new { border-color: hsl(var(--coach)); }
+
+.coach-msg { display: flex; gap: 10px; align-items: flex-start; }
+.coach-avatar {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: hsl(var(--coach-surface));
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.coach-avatar::after {
+  content: ''; width: 8px; height: 8px; border-radius: 50%;
+  background: hsl(var(--coach));
+}
+.user-msg { display: flex; gap: 10px; align-items: flex-start; }
+.user-avatar {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: hsl(var(--muted));
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-family: var(--font-mono); font-size: 11px; color: hsl(var(--muted-foreground));
+}
+.user-bubble {
+  background: hsl(var(--muted)); padding: 8px 12px; border-radius: var(--radius);
+  font-size: 13px; line-height: 1.55;
+}
+.coach-body { font-size: 13px; line-height: 1.6; flex: 1; }
+
+.data-card {
+  background: hsl(var(--muted)); border-radius: calc(var(--radius) - 2px);
+  padding: 10px 14px; font-size: 12px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.data-card-row { display: flex; justify-content: space-between; align-items: center; }
+.data-card-row .label { color: hsl(var(--muted-foreground)); }
+.data-card-row .value { font-weight: 500; }
+.data-card-row .value.negative { color: hsl(var(--destructive)); }
+
+.chip-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip {
+  font-family: inherit; font-size: 12px;
+  color: hsl(var(--muted-foreground));
+  background: transparent; border: 1px solid hsl(var(--border));
+  padding: 4px 10px; border-radius: calc(var(--radius) - 2px); cursor: pointer;
+}
+.chip:hover { background: hsl(var(--accent)); }
+
+.toggle-group {
+  display: inline-flex; padding: 2px; background: hsl(var(--muted));
+  border-radius: calc(var(--radius) - 2px);
+}
+.toggle-option {
+  padding: 4px 12px; font-size: 12px; font-weight: 500;
+  background: transparent; color: hsl(var(--muted-foreground));
+  border: none; border-radius: calc(var(--radius) - 4px); cursor: pointer;
+}
+.toggle-option.active { background: hsl(var(--background)); color: hsl(var(--foreground)); box-shadow: 0 0 0 1px hsl(var(--border)); }
+
+.trust-chip-row { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: hsl(var(--muted-foreground)); }
+.trust-chip { display: inline-flex; align-items: center; gap: 6px; }
+.trust-chip .tcdot { width: 6px; height: 6px; border-radius: 50%; }
+
+.legacy-ui {
+  background: #0a0a0a; border-radius: var(--radius); padding: 18px;
+  border: 1px solid #1a1a1a;
+  font-family: var(--font-sans);
+}
+.legacy-title { color: #f5c547; font-size: 26px; font-weight: 700; margin: 0 0 4px; text-shadow: 0 0 16px rgba(245, 197, 71, 0.35); }
+.legacy-sub { color: #8a8a8a; font-size: 12px; margin: 0; }
+.legacy-slot {
+  border: 2px dashed rgba(245, 197, 71, 0.5);
+  border-radius: 10px;
+  padding: 18px; text-align: center;
+  background: radial-gradient(ellipse at center, rgba(245, 197, 71, 0.08) 0%, rgba(20, 20, 20, 0.4) 60%);
+  color: #aaa;
+  font-size: 13px;
+  box-shadow: 0 0 18px rgba(245, 197, 71, 0.12);
+  margin-top: 10px;
+}
+.legacy-plus { color: #f5c547; font-size: 24px; line-height: 1; margin-bottom: 6px; }
+
+.kbd {
+  font-family: var(--font-mono); font-size: 11px;
+  background: hsl(var(--muted)); color: hsl(var(--muted-foreground));
+  padding: 1px 6px; border-radius: 4px; border: 1px solid hsl(var(--border));
+  border-bottom-width: 2px;
+}
+
+.install-block {
+  font-family: var(--font-mono); font-size: 13px;
+  background: hsl(var(--muted)); border-radius: var(--radius);
+  padding: 12px 14px; overflow-x: auto;
+  color: hsl(var(--foreground));
+}
+.install-block .comment { color: hsl(var(--muted-foreground)); }
+
+ul.clean { list-style: none; padding: 0; margin: 8px 0 16px; }
+ul.clean li { padding: 6px 0; border-bottom: 1px solid hsl(var(--border)); font-size: 14px; }
+ul.clean li:last-child { border-bottom: none; }
+
+.anchor-nav {
+  display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0 0;
+  padding-top: 20px; border-top: 1px solid hsl(var(--border));
+  font-size: 13px;
+}
+.anchor-nav a { color: hsl(var(--muted-foreground)); text-decoration: none; }
+.anchor-nav a:hover { color: hsl(var(--foreground)); }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="doc-header">
+  <div class="eyebrow">POKEMCP · STYLE GUIDE · V1</div>
+  <h1>Design system for the refreshed UI</h1>
+  <p>Built on shadcn/ui with minimal customization. Replaces the current dark-with-yellow-glow aesthetic with a flat, professional system that defaults to dark mode in the app and light mode on the landing page. All color, spacing, and component tokens below can be pasted directly into a shadcn install.</p>
+  <nav class="anchor-nav">
+    <a href="#foundation">Foundation</a>
+    <a href="#components">Components</a>
+    <a href="#patterns">Patterns</a>
+    <a href="#voice">Voice</a>
+    <a href="#dont">Don'ts</a>
+    <a href="#install">Install</a>
+  </nav>
+</div>
+
+<section id="foundation">
+
+<h2>Foundation</h2>
+<p class="section-note">Three principles underpin everything. When in doubt, follow them.</p>
+
+<div class="example">
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+    <div>
+      <div class="mono small muted" style="margin-bottom: 6px;">01</div>
+      <div style="font-weight: 500; margin-bottom: 4px;">Flat, not decorated</div>
+      <div class="small muted">No gradients, glows, shadows, or textures. A single pixel of border does the work ten pixels of blur used to do.</div>
+    </div>
+    <div>
+      <div class="mono small muted" style="margin-bottom: 6px;">02</div>
+      <div style="font-weight: 500; margin-bottom: 4px;">Quiet where the app is loud</div>
+      <div class="small muted">Pokémon names, moves, and data are inherently colorful. The chrome around them must not compete. Neutral surfaces, muted text.</div>
+    </div>
+    <div>
+      <div class="mono small muted" style="margin-bottom: 6px;">03</div>
+      <div style="font-weight: 500; margin-bottom: 4px;">Monospace is a signal</div>
+      <div class="small muted">Used for timestamps, IDs, version numbers, keyboard shortcuts, and technical status — never for running copy. It tells the eye "this is data."</div>
+    </div>
+  </div>
+</div>
+
+<h3>Color tokens</h3>
+<p class="sub-note">shadcn conventions. HSL values shown; dark-mode counterparts are defined via <code>prefers-color-scheme</code> in the CSS at the top of this file. Custom additions: <code>coach</code>, <code>warning</code>, <code>info</code>.</p>
+
+<div class="token-grid">
+  <div class="token">
+    <div class="token-swatch" style="background: hsl(var(--background));"></div>
+    <div class="token-info">
+      <p class="token-name">background</p>
+      <p class="token-value">0 0% 100%</p>
+    </div>
+  </div>
+  <div class="token">
+    <div class="token-swatch" style="background: hsl(var(--foreground));"></div>
+    <div class="token-info">
+      <p class="token-name">foreground</p>
+      <p class="token-value">240 10% 3.9%</p>
+    </div>
+  </div>
+  <div class="token">
+    <div class="token-swatch" style="background: hsl(var(--primary));"></div>
+    <div class="token-info">
+      <p class="token-name">primary</p>
+      <p class="token-value">240 5.9% 10%</p>
+    </div>
+  </div>
+  <div class="token">
+    <div class="token-swatch" style="background: hsl(var(--secondary));"></div>
+    <div class="token-info">
+      <p class="token-name">secondary</p>
+      <p class="token-value">240 4.8% 95.9%</p>
+    </div>
+  </div>
+  <div class="token">
+    <div class="token-swatch" style="background: hsl(var(--muted));"></div>
+    <div class="token-info">
+      <p class="token-name">muted</p>
+      <p class="token-value">240 4.8% 95.9%</p>
+    </div>
+  </div>
+  <div class="token">
+    <div class="token-swatch" style="background: hsl(var(--border));"></div>
+    <div class="token-info">
+      <p class="token-name">border</p>
+      <p class="token-value">240 5.9% 90%</p>
+    </div>
+  </div>
+  <div class="token">
+    <div class="token-swatch" style="background: hsl(var(--coach));"></div>
+    <div class="token-info">
+      <p class="token-name">coach</p>
+      <p class="token-value">156 65% 36%</p>
+    </div>
+  </div>
+  <div class="token">
+    <div class="token-swatch" style="background: hsl(var(--destructive));"></div>
+    <div class="token-info">
+      <p class="token-name">destructive</p>
+      <p class="token-value">0 72% 51%</p>
+    </div>
+  </div>
+  <div class="token">
+    <div class="token-swatch" style="background: hsl(var(--info));"></div>
+    <div class="token-info">
+      <p class="token-name">info</p>
+      <p class="token-value">217 80% 45%</p>
+    </div>
+  </div>
+  <div class="token">
+    <div class="token-swatch" style="background: hsl(var(--warning));"></div>
+    <div class="token-info">
+      <p class="token-name">warning</p>
+      <p class="token-value">38 92% 40%</p>
+    </div>
+  </div>
+</div>
+
+<p class="small muted"><strong>Semantic mapping:</strong> <code>coach</code> signals AI-originated actions (team updates, suggestions, reasoning). <code>info</code> for neutral state notices. <code>warning</code> for matchup risks, type weaknesses. <code>destructive</code> for irreversible actions (reset team, delete) — never for warnings.</p>
+
+<h3>Typography</h3>
+<div class="example">
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div>
+      <div style="font-size: 32px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.15;">Hero headline</div>
+      <div class="mono small muted">32px · 600 · -0.015em</div>
+    </div>
+    <div>
+      <div style="font-size: 22px; font-weight: 600; letter-spacing: -0.01em;">Section heading</div>
+      <div class="mono small muted">22px · 600 · -0.01em</div>
+    </div>
+    <div>
+      <div style="font-size: 15px; font-weight: 600;">Subsection heading</div>
+      <div class="mono small muted">15px · 600</div>
+    </div>
+    <div>
+      <div style="font-size: 15px;">Body text. All running copy, button labels, form inputs, and card content.</div>
+      <div class="mono small muted">15px · 400 · 1.6 line-height</div>
+    </div>
+    <div>
+      <div style="font-size: 13px; color: hsl(var(--muted-foreground));">Secondary text. Captions, timestamps, hint text, card descriptions.</div>
+      <div class="mono small muted">13px · muted-foreground</div>
+    </div>
+    <div>
+      <div class="mono" style="font-size: 11px; color: hsl(var(--muted-foreground)); letter-spacing: 0.05em;">OVERLINE / LABEL</div>
+      <div class="mono small muted">11px mono · muted · 0.05em tracking · uppercase OK</div>
+    </div>
+  </div>
+</div>
+
+<h3>Spacing, radius, and motion</h3>
+<div class="example">
+  <div class="spec-row"><span class="spec-label">spacing scale</span><span>4 / 8 / 12 / 16 / 20 / 24 / 32 / 48 / 64 px</span></div>
+  <div class="spec-row"><span class="spec-label">radius</span><span><code>--radius: 0.5rem</code> (8px) base. Buttons use <code>calc(radius - 2px)</code>. Pills use <code>999px</code>. Avoid intermediate values.</span></div>
+  <div class="spec-row"><span class="spec-label">borders</span><span>1px solid <code>hsl(var(--border))</code>. No 2px borders except for focus states. No dashed borders except in empty-state illustrations.</span></div>
+  <div class="spec-row"><span class="spec-label">focus ring</span><span>2px ring at <code>hsl(var(--ring) / 0.2)</code>. Never a thick glow.</span></div>
+  <div class="spec-row"><span class="spec-label">motion</span><span>120–180ms for hover/press. 240ms for layout shifts. Never longer. No elastic/bouncy easing.</span></div>
+  <div class="spec-row"><span class="spec-label">shadows</span><span>None by default. Use only for floating elements (tooltip, popover) at <code>0 4px 12px rgb(0 0 0 / 0.08)</code>.</span></div>
+</div>
+
+</section>
+
+<section id="components">
+
+<h2>Core components</h2>
+<p class="section-note">Use shadcn primitives. Customize only via CSS variables — don't fork components. Most of the product UI is built from six.</p>
+
+<h3>Button <span class="shadcn-tag">shadcn: button</span></h3>
+<p class="sub-note">Three variants cover 95% of cases: <code>default</code> (primary action, one per screen), <code>outline</code> (secondary actions), <code>ghost</code> (tertiary / icon buttons / toolbar). <code>destructive</code> for irreversible actions only.</p>
+<div class="example">
+  <div class="row" style="margin-bottom: 14px;">
+    <button class="btn btn-primary">Default</button>
+    <button class="btn btn-outline">Outline</button>
+    <button class="btn btn-ghost">Ghost</button>
+    <button class="btn btn-destructive">Destructive</button>
+  </div>
+  <div class="row">
+    <button class="btn btn-primary btn-sm">Small</button>
+    <button class="btn btn-outline btn-sm">Small</button>
+    <button class="btn btn-ghost btn-xs">Extra small</button>
+  </div>
+</div>
+
+<h3>Input <span class="shadcn-tag">shadcn: input</span></h3>
+<div class="example">
+  <input class="input" placeholder="Ask the coach anything…" style="margin-bottom: 12px;">
+  <input class="input" placeholder="Focused state — tab to preview" style="border-color: hsl(var(--ring)); box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);">
+</div>
+
+<h3>Card <span class="shadcn-tag">shadcn: card</span></h3>
+<div class="example">
+  <div class="card" style="padding: 18px;">
+    <div style="font-weight: 500; margin-bottom: 4px;">Card title</div>
+    <div class="small muted" style="margin-bottom: 12px;">Subdued description explaining what the card contains.</div>
+    <div class="small">Content body. All analysis panels, team state slots, and inline data cards use this base treatment. No inner shadows, no accent bars, no gradients.</div>
+  </div>
+</div>
+
+<h3>Badge <span class="shadcn-tag">shadcn: badge</span></h3>
+<p class="sub-note">Pills for status, tags, and inline annotations. <code>coach</code> variant is a PokeMCP addition — used whenever the AI has caused something.</p>
+<div class="example">
+  <div class="row">
+    <span class="badge badge-default">Default</span>
+    <span class="badge badge-secondary">Secondary</span>
+    <span class="badge badge-outline">Outline</span>
+    <span class="badge badge-coach">COACH</span>
+    <span class="badge badge-info">Info</span>
+    <span class="badge badge-warning">Warning</span>
+  </div>
+</div>
+
+<h3>Toggle group <span class="shadcn-tag">shadcn: toggle-group</span></h3>
+<p class="sub-note">Used for the Chat/Grid mode toggle. Segmented, pill-shaped, active state has a solid surface with a subtle ring.</p>
+<div class="example">
+  <div class="toggle-group">
+    <button class="toggle-option active">Chat</button>
+    <button class="toggle-option">Grid</button>
+  </div>
+</div>
+
+<h3>Avatar <span class="shadcn-tag">shadcn: avatar</span></h3>
+<p class="sub-note">Two patterns. User avatar is an initial in a neutral muted circle; coach avatar is a small teal dot in a teal-surface circle (the coach has no persona, only a signal).</p>
+<div class="example">
+  <div class="row">
+    <div class="user-avatar">R</div>
+    <div class="coach-avatar"></div>
+    <div class="small muted">User · Coach</div>
+  </div>
+</div>
+
+</section>
+
+<section id="patterns">
+
+<h2>Product patterns</h2>
+<p class="section-note">Combinations of the primitives above, specified once so every screen uses them consistently.</p>
+
+<h3>Status bar</h3>
+<p class="sub-note">Sits at the top of the app and the top of the landing. Entirely monospace, all lowercase or uppercase, slashes as separators. The only "decorative" element anywhere in the system.</p>
+<div class="example tight">
+  <div class="status-bar">
+    <span class="live"><span class="dot"></span>LIVE</span>
+    <span class="sep">/</span><span>REG M-A + GEN 9 OU</span>
+    <span class="sep">/</span><span>AI-NATIVE</span>
+    <span class="sep">/</span><span>v0.4.2 · updated today</span>
+  </div>
+</div>
+
+<h3>Team slot</h3>
+<p class="sub-note">Compact card in the right-panel 2×3 grid. One type dot, name, primary role. When the coach swaps the Pokémon, the slot gets a colored border and a <code>NEW</code> flag that fades after 10s.</p>
+<div class="example">
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+    <div class="team-slot">
+      <div class="type-dot" style="background: hsl(var(--warning));"></div>
+      <div class="name">Ursaluna-BM</div>
+      <div class="role">Blood Moon</div>
+    </div>
+    <div class="team-slot is-new">
+      <div class="diff-flag">NEW</div>
+      <div class="type-dot" style="background: hsl(var(--muted-foreground));"></div>
+      <div class="name">Scizor</div>
+      <div class="role">Bullet Punch</div>
+    </div>
+    <div class="team-slot">
+      <div class="type-dot" style="background: hsl(var(--info));"></div>
+      <div class="name">Primarina</div>
+      <div class="role">Liquid Voice</div>
+    </div>
+  </div>
+</div>
+
+<h3>Coach message</h3>
+<p class="sub-note">Coach responses have no bubble — just the avatar and flowing text, with optional inline components (data card, team-diff flag, follow-up chips). User messages use a bubble so the direction of conversation is visible.</p>
+<div class="example">
+  <div style="display: flex; flex-direction: column; gap: 14px;">
+    <div class="user-msg">
+      <div class="user-avatar">R</div>
+      <div class="user-bubble">what's my worst matchup right now?</div>
+    </div>
+    <div class="coach-msg">
+      <div class="coach-avatar"></div>
+      <div class="coach-body">
+        <div style="margin-bottom: 10px;">Garchomp Scarf, by a notable margin. Your TR tempo is the problem — Garchomp outpaces Ursaluna both directions, and Rillaboom's Grassy Glide doesn't OHKO even with +1.</div>
+        <div class="data-card">
+          <div class="data-card-row"><span class="label">Win rate estimate</span><span class="value negative">31%</span></div>
+          <div class="data-card-row"><span class="label">Lead recs</span><span class="value">Incineroar + Hatterene</span></div>
+          <div class="data-card-row"><span class="label">Key benchmark</span><span class="value">0/0 Garchomp dies to +1 Bullet Punch</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3>Inline data card</h3>
+<p class="sub-note">The load-bearing element for coach credibility. Always inside a coach message. Two-column layout, label left (muted), value right (foreground), 4px row gap. Values can carry semantic color only when the data itself is negative (low win rate = destructive, open threat = warning).</p>
+
+<h3>Quick-action chip row</h3>
+<p class="sub-note">Sits above the chat input. Contents change based on team state. Outline, small radius, muted text that darkens on hover. These are shortcuts to common messages — semantically identical to typing them — not buttons for distinct actions.</p>
+<div class="example tight">
+  <div class="chip-row">
+    <button class="chip">check vs top 5 meta</button>
+    <button class="chip">tune spreads</button>
+    <button class="chip">match prep</button>
+    <button class="chip">show threat matrix</button>
+  </div>
+</div>
+
+<h3>Interview step</h3>
+<p class="sub-note">Progress bar top-right (green segments for completed, muted for remaining). Previous answers as collapsed chips. Current question with adaptive hint. Answer options as buttons; selected state fills in coach-surface with coach-border.</p>
+<div class="example bare">
+  <div style="padding: 14px 18px; border-bottom: 1px solid hsl(var(--border)); display: flex; justify-content: space-between; align-items: center;">
+    <span class="mono small muted" style="letter-spacing: 0.04em;">INTERVIEW · STEP 2 OF 4</span>
+    <div style="display: flex; gap: 4px;">
+      <span style="width: 20px; height: 3px; background: hsl(var(--coach)); border-radius: 2px;"></span>
+      <span style="width: 20px; height: 3px; background: hsl(var(--coach)); border-radius: 2px;"></span>
+      <span style="width: 20px; height: 3px; background: hsl(var(--border)); border-radius: 2px;"></span>
+      <span style="width: 20px; height: 3px; background: hsl(var(--border)); border-radius: 2px;"></span>
+    </div>
+  </div>
+  <div style="padding: 18px;">
+    <div style="display: flex; gap: 10px; padding: 8px 12px; background: hsl(var(--muted)); border-radius: var(--radius); margin-bottom: 14px; align-items: center; font-size: 13px;">
+      <span class="mono small muted">01</span>
+      <span class="muted">Format</span>
+      <span style="font-weight: 500; margin-left: auto;">Champions · Reg MA</span>
+    </div>
+    <div style="font-size: 15px; margin-bottom: 4px;">Where do you want to start?</div>
+    <div class="small muted" style="margin-bottom: 14px;">Pick the one that feels closest. I'll adapt the next question.</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+      <button style="text-align: left; padding: 10px 12px; background: transparent; border: 1px solid hsl(var(--border)); border-radius: var(--radius); cursor: pointer;">
+        <div style="font-weight: 500; font-size: 13px; margin-bottom: 2px;">Clean slate</div>
+        <div class="small muted" style="font-size: 12px;">Surprise me</div>
+      </button>
+      <button style="text-align: left; padding: 10px 12px; background: hsl(var(--coach-surface)); border: 1px solid hsl(var(--coach)); border-radius: var(--radius); cursor: pointer;">
+        <div style="font-weight: 500; font-size: 13px; margin-bottom: 2px; color: hsl(var(--coach-foreground));">Pokémon in mind</div>
+        <div style="color: hsl(var(--coach)); font-size: 12px;">Build around specific picks</div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<h3>Trust-chip row</h3>
+<p class="sub-note">Used on the landing to acknowledge table-stakes features without competing with the three primary value cards. Small, inline, one colored dot per chip. Never stacked as its own section.</p>
+<div class="example tight">
+  <div class="trust-chip-row">
+    <span class="trust-chip"><span class="tcdot" style="background: hsl(var(--info));"></span>Live meta · refreshed every Tour</span>
+    <span class="trust-chip"><span class="tcdot" style="background: hsl(var(--coach));"></span>Showdown paste in/out, lossless</span>
+    <span class="trust-chip"><span class="tcdot" style="background: hsl(var(--warning));"></span>Threat matrix + speed tiers built-in</span>
+  </div>
+</div>
+
+<h3>Diff indicator</h3>
+<p class="sub-note">Appears on team slots after coach-driven changes, and as a small inline chip in the chat message that caused the change. Both fade after 10 seconds.</p>
+<div class="example tight">
+  <div class="row">
+    <span class="badge badge-coach"><span style="width: 5px; height: 5px; border-radius: 50%; background: hsl(var(--coach));"></span>team updated · slot 4</span>
+  </div>
+</div>
+
+<h3>Keyboard shortcut hints</h3>
+<div class="example tight">
+  <div class="small muted" style="display: flex; gap: 16px;">
+    <span>Send <span class="kbd">↵</span></span>
+    <span>Quick search <span class="kbd">⌘K</span></span>
+    <span>Exit interview <span class="kbd">Esc</span></span>
+    <span>Toggle mode <span class="kbd">⌘M</span></span>
+  </div>
+</div>
+
+</section>
+
+<section id="voice">
+
+<h2>Voice and copy</h2>
+<p class="section-note">Tone follows the visuals. Confident, specific, technical when technical, plain when plain.</p>
+
+<table class="table-clean">
+  <thead><tr><th style="width: 180px;">Principle</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Sentence case, always</td>
+      <td>"Start the interview" not "Start The Interview" or "START THE INTERVIEW." Only the monospace status bar uses caps.</td>
+    </tr>
+    <tr>
+      <td>No brand personas</td>
+      <td>"Coach" not "Professor Kukui." The AI has a role, not a name.</td>
+    </tr>
+    <tr>
+      <td>Specific over cute</td>
+      <td>"Swapped Rillaboom → Scizor. Resists Dragon Claw." Not "Done! ✨ Swapped out your grass type for something spicier."</td>
+    </tr>
+    <tr>
+      <td>Show reasoning</td>
+      <td>Every coach recommendation names the tradeoff it considered, not just the conclusion. "Skipped Grimmsnarl — too slow without setup" is better than "Here's your team."</td>
+    </tr>
+    <tr>
+      <td>Numbers when possible</td>
+      <td>"0/0 Garchomp dies to +1 Bullet Punch" not "Scizor handles Garchomp well." The calc is the authority.</td>
+    </tr>
+    <tr>
+      <td>No exclamation marks</td>
+      <td>Enthusiasm undermines the precision signal. If something is good, the data shows it.</td>
+    </tr>
+    <tr>
+      <td>No emoji in product UI</td>
+      <td>Emoji are texture. They belong in tournament Twitter posts, not the coach. (Acceptable in social copy and blog content.)</td>
+    </tr>
+    <tr>
+      <td>Monospace for data, sans for prose</td>
+      <td>Version numbers, shortcuts, timestamps, move names in calc tables = mono. Coach explanations, feature copy, marketing = sans.</td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+
+<section id="dont">
+
+<h2>Don'ts</h2>
+<p class="section-note">Concrete contrasts with the current UI. These are the patterns to actively retire.</p>
+
+<div class="do-dont">
+  <div class="do-dont-card do-dont-dont">
+    <div class="do-dont-label">DON'T · CURRENT</div>
+    <div class="legacy-ui">
+      <div class="legacy-title">Your Team</div>
+      <div class="legacy-sub">0/6 Pokemon</div>
+      <div class="legacy-slot">
+        <div class="legacy-plus">+</div>
+        <div>Add Pokemon</div>
+        <div style="color: #666; font-size: 11px; margin-top: 4px;">Click to browse</div>
+      </div>
+    </div>
+    <div class="small muted" style="margin-top: 12px;">Glowing yellow accent, dashed orange border with ambient glow, heavy weight on "Your Team," video-game aesthetic competes with the tool's own content.</div>
+  </div>
+  <div class="do-dont-card do-dont-do">
+    <div class="do-dont-label">DO · REFRESHED</div>
+    <div style="background: hsl(var(--background)); padding: 18px; border: 1px solid hsl(var(--border)); border-radius: var(--radius);">
+      <div class="mono small muted" style="letter-spacing: 0.04em; margin-bottom: 10px;">YOUR TEAM · 0/6</div>
+      <div style="border: 1px dashed hsl(var(--border)); border-radius: var(--radius); padding: 20px; text-align: center; color: hsl(var(--muted-foreground));">
+        <div style="font-size: 13px; margin-bottom: 10px;">No team yet</div>
+        <button class="btn btn-primary btn-sm">Start the interview</button>
+      </div>
+    </div>
+    <div class="small muted" style="margin-top: 12px;">Monospace overline instead of loud heading. Dashed border at 1px, no glow. Empty state offers one primary path instead of six identical empty slots.</div>
+  </div>
+</div>
+
+<ul class="clean">
+  <li><strong>No glows or radial gradients.</strong> The current "halo" around selected slots reads as gamified. Use a 1px border color change on selection, nothing else.</li>
+  <li><strong>No yellow/gold as brand accent.</strong> It competes with Pokémon type colors and cheapens the professional signal. The only accent color is <code>coach</code> (teal), used exclusively for AI actions.</li>
+  <li><strong>No 2x weight headings.</strong> Section labels are small, muted, monospace overlines. Bold 26px "Your Team" belongs in a game UI, not a tool.</li>
+  <li><strong>No placeholder language as call to action.</strong> "Add Pokemon · Click to browse" × 6 is anti-onboarding. Empty states should present one primary path, not an empty grid.</li>
+  <li><strong>No Pokéball brand marks in UI chrome.</strong> Pokéballs are fun in content (sprites, team illustrations). They're noise in navigation, headers, and logos.</li>
+  <li><strong>No decorative dividers.</strong> Gradients, glowing lines, double-rules. A single 1px <code>border</code> at spec color handles every separation need in the system.</li>
+  <li><strong>No toast notifications for positive actions.</strong> If the user asked for it and it happened visibly, don't also pop a toast. Only use toasts for off-screen events or errors.</li>
+</ul>
+
+</section>
+
+<section id="install">
+
+<h2>Install &amp; setup</h2>
+<p class="section-note">Minimum required to bootstrap the design system in a Next.js + shadcn project.</p>
+
+<h3>CLI</h3>
+<div class="install-block">
+<span class="comment"># Initialize shadcn in the project (uses New York style by default)</span><br>
+npx shadcn@latest init<br><br>
+<span class="comment"># Install the components this guide references</span><br>
+npx shadcn@latest add button card input badge avatar<br>
+npx shadcn@latest add toggle-group scroll-area separator<br>
+npx shadcn@latest add dialog sheet tooltip command skeleton
+</div>
+
+<h3>Custom tokens</h3>
+<p class="sub-note">Add to <code>app/globals.css</code> after the default shadcn tokens. These are the PokeMCP additions.</p>
+<div class="install-block">
+:root {<br>
+&nbsp;&nbsp;--coach: 156 65% 36%;<br>
+&nbsp;&nbsp;--coach-surface: 156 50% 94%;<br>
+&nbsp;&nbsp;--coach-foreground: 156 70% 20%;<br>
+&nbsp;&nbsp;--warning: 38 92% 40%;<br>
+&nbsp;&nbsp;--warning-surface: 40 80% 94%;<br>
+&nbsp;&nbsp;--info: 217 80% 45%;<br>
+&nbsp;&nbsp;--info-surface: 215 80% 95%;<br>
+}<br>
+.dark {<br>
+&nbsp;&nbsp;--coach: 156 55% 48%;<br>
+&nbsp;&nbsp;--coach-surface: 156 40% 14%;<br>
+&nbsp;&nbsp;--coach-foreground: 156 60% 75%;<br>
+&nbsp;&nbsp;--warning: 38 92% 55%;<br>
+&nbsp;&nbsp;--warning-surface: 38 40% 14%;<br>
+&nbsp;&nbsp;--info: 217 80% 65%;<br>
+&nbsp;&nbsp;--info-surface: 215 40% 14%;<br>
+}
+</div>
+
+<h3>Tailwind extension</h3>
+<p class="sub-note">Expose the custom tokens as Tailwind colors in <code>tailwind.config.ts</code>.</p>
+<div class="install-block">
+extend: {<br>
+&nbsp;&nbsp;colors: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;coach: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DEFAULT: "hsl(var(--coach))",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surface: "hsl(var(--coach-surface))",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreground: "hsl(var(--coach-foreground))",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;warning: { DEFAULT: "hsl(var(--warning))", surface: "hsl(var(--warning-surface))" },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;info: { DEFAULT: "hsl(var(--info))", surface: "hsl(var(--info-surface))" },<br>
+&nbsp;&nbsp;},<br>
+},
+</div>
+
+<h3>Default mode</h3>
+<p class="sub-note">App defaults to dark (long sessions, second-screen use during battles). Landing page defaults to light (conversion-oriented, scannable). Both respect <code>prefers-color-scheme</code> and a manual theme toggle in user settings.</p>
+
+</section>
+
+<div style="margin-top: 80px; padding-top: 20px; border-top: 1px solid hsl(var(--border)); font-size: 12px; color: hsl(var(--muted-foreground));">
+PokeMCP style guide · v1 · April 2026 · Companion to <code>pokemcp-design-direction.md</code>
+</div>
+
+</div>
+</body>
+</html>

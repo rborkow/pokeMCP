@@ -2,7 +2,74 @@
  * Claude tool definitions for structured team modifications
  */
 
+const PRESENT_RESPONSE_CARD_TOOL = {
+    name: "present_response_card",
+    description: `Render a structured response card inline with your reply. Use this when the answer has
+structured facts — a stat spread, a damage calc summary, a team diff, a matchup read.
+
+Card kinds (one per call, emit multiple calls if you need multiple cards):
+- "data": labeled rows. Great for speed benchmarks, calcs, usage percentages.
+- "team_diff": slot-by-slot changes. Use right after a swap to summarize what changed.
+- "matchup": a snapshot of how you read a specific opponent — lead rec, key benchmark, rough win rate.
+- "analysis_highlight": surface a single observation about the team — "Your speed control is Iron Valiant only" etc.
+
+Always prefer plain prose for conversational answers. Cards are for structured content only.`,
+    input_schema: {
+        type: "object" as const,
+        properties: {
+            kind: {
+                type: "string",
+                enum: ["data", "team_diff", "matchup", "analysis_highlight"],
+                description: "Discriminator for which card shape the rest of the input matches.",
+            },
+            // data
+            title: { type: "string" },
+            rows: {
+                type: "array",
+                items: {
+                    type: "object",
+                    properties: {
+                        label: { type: "string" },
+                        value: { type: "string" },
+                        tone: {
+                            type: "string",
+                            enum: ["neutral", "good", "warn", "bad"],
+                        },
+                    },
+                    required: ["label", "value"],
+                },
+            },
+            note: { type: "string" },
+            // team_diff
+            summary: { type: "string" },
+            changes: {
+                type: "array",
+                items: {
+                    type: "object",
+                    properties: {
+                        slot: { type: "number" },
+                        from: { type: "string" },
+                        to: { type: "string" },
+                        note: { type: "string" },
+                    },
+                    required: ["slot"],
+                },
+            },
+            // matchup
+            opponent: { type: "string" },
+            winRateEstimate: { type: "string" },
+            leads: { type: "string" },
+            keyBenchmark: { type: "string" },
+            // analysis_highlight
+            focus: { type: "string" },
+            detail: { type: "string" },
+        },
+        required: ["kind"],
+    },
+};
+
 export const TEAM_TOOLS = [
+    PRESENT_RESPONSE_CARD_TOOL,
     {
         name: "modify_team",
         description: `Modify the user's Pokemon team. Use this tool to add, replace, update, or remove Pokemon.

@@ -1,6 +1,6 @@
-import { getPersonality, type PersonalityId } from "./personalities";
-import type { Mode, TeamPokemon } from "@/types/pokemon";
 import { getVGCAnalysisSummary } from "@/lib/vgc-analysis";
+import type { Mode, TeamPokemon } from "@/types/pokemon";
+import { getPersonality, type PersonalityId } from "./personalities";
 
 export type { TeamPokemon };
 
@@ -512,12 +512,27 @@ Guidelines:
 - Explain type synergies and team composition briefly
 - When building a team, state your strategy/archetype FIRST, then use tools
 - If suggesting to replace a Pokemon, reference which one by name and slot number
-- When in doubt about a move, check the Popular Moves list or suggest a safe STAB move`;
+- When in doubt about a move, check the Popular Moves list or suggest a safe STAB move
+
+USING THE present_response_card TOOL:
+You can render structured cards inline with your reply by calling present_response_card. Prefer cards for structured content, prose for conversation:
+- kind: "data" — a titled list of label/value rows. Use for speed benchmarks, damage calcs, usage stats, stat spreads. Tones: "neutral" (default), "good" (emerald), "warn" (amber), "bad" (red).
+- kind: "team_diff" — summarize a swap or multi-slot change. Use right after applying modify_team calls to show what changed, with a one-line summary + per-slot from/to.
+- kind: "matchup" — a single opponent read. Pass opponent name and optionally winRateEstimate / leads / keyBenchmark as short strings.
+- kind: "analysis_highlight" — surface one pointed observation ("Your only speed control is Iron Valiant"). Short, one note at a time.
+
+Don't call present_response_card for plain conversational replies. Don't duplicate the card's content in prose — the UI renders the card.`;
 }
 
 /**
  * Build the full user message with context sections
  */
+export interface RecentEditContext {
+    text: string;
+    slot: number;
+    createdAt: number;
+}
+
 export function buildUserMessage(
     teamContext: string,
     metaThreats: string,
@@ -528,6 +543,7 @@ export function buildUserMessage(
     mode?: Mode,
     teammateAnalysis?: string,
     strategyContext?: string,
+    recentEdits?: RecentEditContext[],
 ): string {
     let contextSection = "";
     if (metaThreats) {
@@ -553,6 +569,13 @@ export function buildUserMessage(
     // Add Smogon strategy insights from RAG
     if (strategyContext) {
         contextSection += `\n\n## Smogon Strategy Insights:\n${strategyContext}`;
+    }
+
+    // Surface the trainer's most recent manual edits so the coach can react
+    // to them without the user having to narrate the change.
+    if (recentEdits && recentEdits.length > 0) {
+        const lines = recentEdits.map((e) => `- ${e.text}`).join("\n");
+        contextSection += `\n\n## Recent Manual Edits (last ${recentEdits.length}):\n${lines}`;
     }
 
     return `Current Team:

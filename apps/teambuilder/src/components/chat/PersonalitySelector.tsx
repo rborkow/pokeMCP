@@ -1,21 +1,42 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { DEFAULT_PERSONALITY, getAllPersonalities, getPersonality } from "@/lib/ai/personalities";
 import { useChatStore } from "@/stores/chat-store";
-import { getAllPersonalities, getPersonality } from "@/lib/ai/personalities";
 
+/**
+ * Persona picker. In v2 the default Coach is neutral and the selector stays
+ * hidden behind an "Advanced" toggle — power users who want Kukui/Oak/Blue
+ * can still opt in, but the branded-mentor framing doesn't sit in the chrome.
+ */
 export function PersonalitySelector() {
     const { personality: personalityId, setPersonality } = useChatStore();
     const currentPersonality = getPersonality(personalityId);
     const personalities = getAllPersonalities();
+    const isDefault = personalityId === DEFAULT_PERSONALITY;
+    const [expanded, setExpanded] = useState(!isDefault);
+
+    if (isDefault && !expanded) {
+        return (
+            <button
+                type="button"
+                onClick={() => setExpanded(true)}
+                className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Show advanced persona settings"
+            >
+                Advanced
+            </button>
+        );
+    }
 
     return (
         <DropdownMenu>

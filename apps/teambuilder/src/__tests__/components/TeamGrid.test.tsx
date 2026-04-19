@@ -1,8 +1,8 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, fireEvent } from "../test-utils";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { TeamGrid } from "@/components/team/TeamGrid";
-import { useTeamStore } from "@/stores/team-store";
 import { useHistoryStore } from "@/stores/history-store";
+import { useTeamStore } from "@/stores/team-store";
+import { fireEvent, render, screen } from "../test-utils";
 
 // Mock localStorage
 const localStorageMock = {
@@ -77,10 +77,10 @@ describe("TeamGrid", () => {
     });
 
     it("opens edit dialog when slot is clicked", () => {
-        const { container } = render(<TeamGrid />);
+        render(<TeamGrid />);
 
-        // Click an empty slot (pokemon-card-empty)
-        const emptySlots = container.querySelectorAll(".pokemon-card-empty");
+        // Click the first empty slot button ("Add Pokemon")
+        const emptySlots = screen.getAllByRole("button", { name: /Add Pokemon/i });
         fireEvent.click(emptySlots[0]);
 
         expect(screen.getByTestId("edit-dialog")).toBeInTheDocument();
@@ -89,21 +89,21 @@ describe("TeamGrid", () => {
     it("opens edit dialog when filled slot is clicked", () => {
         useTeamStore.getState().setPokemon(0, { pokemon: "Garchomp", moves: [] });
 
-        const { container } = render(<TeamGrid />);
+        render(<TeamGrid />);
 
-        // Click the Pokemon card (pokemon-card class)
-        const cards = container.querySelectorAll(".pokemon-card");
-        fireEvent.click(cards[0]);
+        // Click the filled Pokemon card
+        const card = screen.getByRole("button", { name: /Click to edit/i });
+        fireEvent.click(card);
 
         expect(screen.getByTestId("edit-dialog")).toBeInTheDocument();
     });
 
     it("calls onSlotClick callback when provided", () => {
         const onSlotClick = vi.fn();
-        const { container } = render(<TeamGrid onSlotClick={onSlotClick} />);
+        render(<TeamGrid onSlotClick={onSlotClick} />);
 
         // Click an empty slot
-        const emptySlots = container.querySelectorAll(".pokemon-card-empty");
+        const emptySlots = screen.getAllByRole("button", { name: /Add Pokemon/i });
         fireEvent.click(emptySlots[0]);
 
         expect(onSlotClick).toHaveBeenCalledWith(0);

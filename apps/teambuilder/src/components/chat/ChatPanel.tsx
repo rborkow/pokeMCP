@@ -1,24 +1,24 @@
 "use client";
 
-import { useEffect, useCallback, useMemo, useRef, useState } from "react";
-import { useChat } from "@tanstack/ai-react";
-import type { UIMessage } from "@tanstack/ai-client";
 import type { StreamChunk } from "@tanstack/ai";
-import { Button } from "@/components/ui/button";
-import { ChatMessages, type ActiveAssistantStream } from "./ChatMessages";
-import { ChatInput } from "./ChatInput";
-import { SuggestedPrompts } from "./SuggestedPrompts";
-import { PersonalitySelector } from "./PersonalitySelector";
-import { useChatStore } from "@/stores/chat-store";
-import { useTeamStore } from "@/stores/team-store";
-import { useHistoryStore } from "@/stores/history-store";
-import { createPokemonChatConnection } from "@/lib/ai/connection";
-import { modifyTeamTool } from "@/lib/ai/tools-tanstack";
-import { parseToolToAction } from "@/lib/ai/parse-tool-action";
+import type { UIMessage } from "@tanstack/ai-client";
+import { useChat } from "@tanstack/ai-react";
 import { Trash2 } from "lucide-react";
-import type { TeamAction } from "@/types/chat";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { createPokemonChatConnection } from "@/lib/ai/connection";
+import { parseToolToAction } from "@/lib/ai/parse-tool-action";
 import type { ModifyTeamInput } from "@/lib/ai/tools";
+import { modifyTeamTool } from "@/lib/ai/tools-tanstack";
+import { useChatStore } from "@/stores/chat-store";
+import { useHistoryStore } from "@/stores/history-store";
+import { useTeamStore } from "@/stores/team-store";
+import type { TeamAction } from "@/types/chat";
+import { ChatInput } from "./ChatInput";
+import { type ActiveAssistantStream, ChatMessages } from "./ChatMessages";
 import type { LiveTextStreamHandle } from "./LiveTextStream";
+import { PersonalitySelector } from "./PersonalitySelector";
+import { SuggestedPrompts } from "./SuggestedPrompts";
 
 const MESSAGES_STORAGE_KEY = "pokemcp-chat-messages";
 
@@ -50,7 +50,13 @@ function deserializeMessages(raw: string): UIMessage[] {
     }
 }
 
-export function ChatPanel() {
+export interface ChatPanelProps {
+    /** Layout mode. "tab" keeps the existing fixed-height sidebar card (Grid mode);
+     * "fill" lets the chat expand to fill its flex/grid container (chat-first frame). */
+    layout?: "tab" | "fill";
+}
+
+export function ChatPanel({ layout = "tab" }: ChatPanelProps = {}) {
     const { team, setPokemon } = useTeamStore();
     const { pushState } = useHistoryStore();
 
@@ -116,9 +122,7 @@ export function ChatPanel() {
         const nextTimestamp = timestamp ?? Date.now();
         setActiveStream((prev) => {
             if (prev) {
-                return messageId && prev.messageId !== messageId
-                    ? { ...prev, messageId }
-                    : prev;
+                return messageId && prev.messageId !== messageId ? { ...prev, messageId } : prev;
             }
 
             return {
@@ -238,6 +242,11 @@ export function ChatPanel() {
             }
 
             if (event.type === "TOOL_CALL_END" && event.input) {
+                const toolName = (event as { toolName?: string }).toolName;
+                if (toolName === "present_response_card") {
+                    useChatStore.getState().appendResponseCard(event.input);
+                    return;
+                }
                 const input = event.input as ModifyTeamInput;
                 pendingToolInputsRef.current.push(input);
                 updateActiveStream((prev) =>
@@ -271,16 +280,20 @@ export function ChatPanel() {
         (actions: TeamAction[]) => {
             actions.forEach((action) => {
                 if (action.payload?.pokemon) {
-                    setPokemon(action.slot, {
-                        pokemon: action.payload.pokemon,
-                        moves: action.payload.moves || [],
-                        ability: action.payload.ability,
-                        item: action.payload.item,
-                        nature: action.payload.nature,
-                        teraType: action.payload.teraType,
-                        evs: action.payload.evs,
-                        ivs: action.payload.ivs,
-                    });
+                    setPokemon(
+                        action.slot,
+                        {
+                            pokemon: action.payload.pokemon,
+                            moves: action.payload.moves || [],
+                            ability: action.payload.ability,
+                            item: action.payload.item,
+                            nature: action.payload.nature,
+                            teraType: action.payload.teraType,
+                            evs: action.payload.evs,
+                            ivs: action.payload.ivs,
+                        },
+                        "ai",
+                    );
                 }
             });
 
@@ -395,7 +408,7 @@ export function ChatPanel() {
         }
     }, [clear, resetActiveStream, storeClearChat]);
 
-    // Watch for queued prompts from WelcomeOverlay
+    // Watch for queued prompts from ActionCard retry / suggested prompts
     useEffect(() => {
         if (queuedPrompt && !isLoading) {
             queueMicrotask(() => {
@@ -405,8 +418,13 @@ export function ChatPanel() {
         }
     }, [queuedPrompt, isLoading, handleSend, clearQueuedPrompt]);
 
+    const outerClass =
+        layout === "fill"
+            ? "chat-first-panel !p-2 flex flex-col h-full min-h-0"
+            : "glass-panel !p-2 flex flex-col h-[min(600px,calc(100vh-12rem))] lg:h-[min(650px,calc(100vh-14rem))]";
+
     return (
-        <div className="glass-panel !p-2 flex flex-col h-[min(600px,calc(100vh-12rem))] lg:h-[min(650px,calc(100vh-14rem))]">
+        <div className={outerClass}>
             {/* Header with personality selector and clear button */}
             <div className="flex items-center justify-between px-2 py-1.5 border-b border-border/50 bg-muted/30">
                 <PersonalitySelector />

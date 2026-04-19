@@ -12,7 +12,7 @@ export function TeamSlotEmpty({ index = 0, onClick }: TeamSlotEmptyProps) {
     return (
         <button
             onClick={onClick}
-            className="pokemon-card-empty glow-effect group flex flex-col items-center justify-center min-h-[240px] animate-in fade-in slide-in-from-bottom-2"
+            className="chat-first-inset group flex flex-col items-center justify-center min-h-[240px] rounded-xl border-dashed text-muted-foreground transition-colors hover:text-foreground hover:border-border-hairline-strong animate-in fade-in slide-in-from-bottom-2"
             style={{ animationDelay: `${index * 100}ms`, animationFillMode: "both" }}
         >
             {/* Pokeball placeholder */}

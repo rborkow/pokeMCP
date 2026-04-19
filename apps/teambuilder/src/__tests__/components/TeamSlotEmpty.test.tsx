@@ -1,6 +1,6 @@
-import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent } from "../test-utils";
+import { describe, expect, it, vi } from "vitest";
 import { TeamSlotEmpty } from "@/components/team/TeamSlotEmpty";
+import { fireEvent, render, screen } from "../test-utils";
 
 describe("TeamSlotEmpty", () => {
     const defaultProps = {
@@ -27,24 +27,9 @@ describe("TeamSlotEmpty", () => {
 
     it("calls onClick when clicked", () => {
         const onClick = vi.fn();
-        const { container } = render(<TeamSlotEmpty {...defaultProps} onClick={onClick} />);
-
-        // Find the pokemon-card-empty button element
-        const card = container.querySelector(".pokemon-card-empty");
-        fireEvent.click(card!);
+        render(<TeamSlotEmpty {...defaultProps} onClick={onClick} />);
+        fireEvent.click(screen.getByRole("button"));
         expect(onClick).toHaveBeenCalledTimes(1);
-    });
-
-    it("has pokemon-card-empty class for styling", () => {
-        const { container } = render(<TeamSlotEmpty {...defaultProps} />);
-        const card = container.querySelector(".pokemon-card-empty");
-        expect(card).toBeInTheDocument();
-    });
-
-    it("has glow-effect class for hover styling", () => {
-        const { container } = render(<TeamSlotEmpty {...defaultProps} />);
-        const card = container.querySelector(".glow-effect");
-        expect(card).toBeInTheDocument();
     });
 
     it("renders without onClick prop", () => {

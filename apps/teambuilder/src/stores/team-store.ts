@@ -1,26 +1,38 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { TeamPokemon, FormatId, Mode } from "@/types/pokemon";
-import { MODE_INFO, isFormatValidForMode } from "@/types/pokemon";
-import { parseShowdownTeam, exportShowdownTeam } from "@/lib/showdown-parser";
 import { decodeTeamFromUrl } from "@/lib/share";
+import { exportShowdownTeam, parseShowdownTeam } from "@/lib/showdown-parser";
+import type { FormatId, Mode, TeamPokemon } from "@/types/pokemon";
+import { isFormatValidForMode, MODE_INFO } from "@/types/pokemon";
+
+export type UiMode = "chat" | "grid";
+export type ModificationSource = "user" | "ai" | "import";
 
 interface TeamState {
     mode: Mode;
     format: FormatId;
     team: TeamPokemon[];
     selectedSlot: number | null;
+    uiMode: UiMode;
+    /** Ephemeral — slot → timestamp of the most recent write. Not persisted. */
+    lastModifiedAt: Record<number, number>;
+    /** Ephemeral — slot → whether the last write came from the user, the AI, or an import. Not persisted. */
+    lastModificationSource: Record<number, ModificationSource>;
 
     // Actions
     setMode: (mode: Mode) => void;
     setFormat: (format: FormatId) => void;
-    setPokemon: (slot: number, pokemon: TeamPokemon) => void;
-    removePokemon: (slot: number) => void;
-    swapSlots: (from: number, to: number) => void;
-    importTeam: (showdownText: string) => { success: boolean; error?: string };
+    setPokemon: (slot: number, pokemon: TeamPokemon, source?: ModificationSource) => void;
+    removePokemon: (slot: number, source?: ModificationSource) => void;
+    swapSlots: (from: number, to: number, source?: ModificationSource) => void;
+    importTeam: (
+        showdownText: string,
+        source?: ModificationSource,
+    ) => { success: boolean; error?: string };
     exportTeam: () => string;
     clearTeam: () => void;
     setSelectedSlot: (slot: number | null) => void;
+    setUiMode: (mode: UiMode) => void;
     loadFromUrlParam: (encoded: string) => boolean;
 }
 
@@ -31,6 +43,11 @@ export const useTeamStore = create<TeamState>()(
             format: "gen9ou",
             team: [],
             selectedSlot: null,
+            uiMode: "chat",
+            lastModifiedAt: {},
+            lastModificationSource: {},
+
+            setUiMode: (uiMode) => set({ uiMode }),
 
             setMode: (mode) => {
                 const currentFormat = get().format;
@@ -47,7 +64,7 @@ export const useTeamStore = create<TeamState>()(
                 set({ format, mode });
             },
 
-            setPokemon: (slot, pokemon) => {
+            setPokemon: (slot, pokemon, source = "user") => {
                 set((state) => {
                     const newTeam = [...state.team];
                     // Extend array if needed
@@ -59,26 +76,56 @@ export const useTeamStore = create<TeamState>()(
                     while (newTeam.length > 0 && newTeam[newTeam.length - 1] === null) {
                         newTeam.pop();
                     }
-                    return { team: newTeam.filter(Boolean) };
+                    const now = Date.now();
+                    return {
+                        team: newTeam.filter(Boolean),
+                        lastModifiedAt: { ...state.lastModifiedAt, [slot]: now },
+                        lastModificationSource: {
+                            ...state.lastModificationSource,
+                            [slot]: source,
+                        },
+                    };
                 });
             },
 
-            removePokemon: (slot) => {
+            removePokemon: (slot, source = "user") => {
                 set((state) => {
                     const newTeam = state.team.filter((_, i) => i !== slot);
-                    return { team: newTeam, selectedSlot: null };
+                    const now = Date.now();
+                    return {
+                        team: newTeam,
+                        selectedSlot: null,
+                        lastModifiedAt: { ...state.lastModifiedAt, [slot]: now },
+                        lastModificationSource: {
+                            ...state.lastModificationSource,
+                            [slot]: source,
+                        },
+                    };
                 });
             },
 
-            swapSlots: (from, to) => {
+            swapSlots: (from, to, source = "user") => {
                 set((state) => {
                     const newTeam = [...state.team];
                     [newTeam[from], newTeam[to]] = [newTeam[to], newTeam[from]];
-                    return { team: newTeam };
+                    const now = Date.now();
+                    return {
+                        team: newTeam,
+                        lastModifiedAt: {
+                            ...state.lastModifiedAt,
+                            [from]: now,
+                            [to]: now,
+                        },
+                        lastModificationSource: {
+                            ...state.lastModificationSource,
+                            [from]: source,
+                            [to]: source,
+                        },
+                    };
                 });
             },
 
-            importTeam: (showdownText) => {
+            importTeam: (showdownText, source = "import") => {
                 try {
                     const team = parseShowdownTeam(showdownText);
                     if (team.length === 0) {
@@ -93,7 +140,14 @@ export const useTeamStore = create<TeamState>()(
                             error: "Team cannot have more than 6 Pokemon",
                         };
                     }
-                    set({ team });
+                    const now = Date.now();
+                    const lastModifiedAt: Record<number, number> = {};
+                    const lastModificationSource: Record<number, ModificationSource> = {};
+                    for (let i = 0; i < team.length; i++) {
+                        lastModifiedAt[i] = now;
+                        lastModificationSource[i] = source;
+                    }
+                    set({ team, lastModifiedAt, lastModificationSource });
                     return { success: true };
                 } catch (error) {
                     return {
@@ -108,7 +162,13 @@ export const useTeamStore = create<TeamState>()(
                 return exportShowdownTeam(team);
             },
 
-            clearTeam: () => set({ team: [], selectedSlot: null }),
+            clearTeam: () =>
+                set({
+                    team: [],
+                    selectedSlot: null,
+                    lastModifiedAt: {},
+                    lastModificationSource: {},
+                }),
 
             setSelectedSlot: (slot) => set({ selectedSlot: slot }),
 
@@ -118,11 +178,20 @@ export const useTeamStore = create<TeamState>()(
                     const format = result.format as FormatId;
                     // Detect mode from format
                     const mode: Mode = isFormatValidForMode(format, "vgc") ? "vgc" : "singles";
+                    const now = Date.now();
+                    const lastModifiedAt: Record<number, number> = {};
+                    const lastModificationSource: Record<number, ModificationSource> = {};
+                    for (let i = 0; i < result.team.length; i++) {
+                        lastModifiedAt[i] = now;
+                        lastModificationSource[i] = "import";
+                    }
                     set({
                         team: result.team,
                         format,
                         mode,
                         selectedSlot: null,
+                        lastModifiedAt,
+                        lastModificationSource,
                     });
                     return true;
                 }
@@ -135,6 +204,7 @@ export const useTeamStore = create<TeamState>()(
                 mode: state.mode,
                 format: state.format,
                 team: state.team,
+                uiMode: state.uiMode,
             }),
         },
     ),

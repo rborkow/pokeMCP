@@ -1,6 +1,7 @@
-import type { StreamChunk, UIMessage, ModelMessage } from "@tanstack/ai";
+import type { ModelMessage, StreamChunk, UIMessage } from "@tanstack/ai";
 import type { ConnectConnectionAdapter } from "@tanstack/ai-client";
-import type { TeamPokemon, Mode } from "@/types/pokemon";
+import { useChatStore } from "@/stores/chat-store";
+import type { Mode, TeamPokemon } from "@/types/pokemon";
 import type { PersonalityId } from "./personalities";
 
 export interface PokemonChatContext {
@@ -9,6 +10,15 @@ export interface PokemonChatContext {
     mode: Mode;
     personality: PersonalityId;
     enableThinking: boolean;
+}
+
+const MAX_RECENT_EDITS = 3;
+
+/** Client → server payload shape for a manual team edit. */
+export interface RecentEditPayload {
+    text: string;
+    slot: number;
+    createdAt: number;
 }
 
 /**
@@ -110,6 +120,11 @@ export function createPokemonChatConnection(
                 }))
                 .filter((m) => m.content.trim());
 
+            const recentEdits: RecentEditPayload[] = useChatStore
+                .getState()
+                .systemLog.slice(-MAX_RECENT_EDITS)
+                .map((e) => ({ text: e.text, slot: e.slot, createdAt: e.createdAt }));
+
             const response = await fetch("/api/ai/claude/stream", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -121,6 +136,7 @@ export function createPokemonChatConnection(
                     personality: ctx.personality,
                     enableThinking: ctx.enableThinking,
                     chatHistory,
+                    recentEdits,
                 }),
                 signal,
             });

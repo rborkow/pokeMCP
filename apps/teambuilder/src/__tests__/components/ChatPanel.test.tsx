@@ -157,7 +157,7 @@ describe("ChatPanel", () => {
 
     it("renders empty state when no messages", () => {
         render(<ChatPanel />);
-        expect(screen.getByText("Ask me anything about your team!")).toBeInTheDocument();
+        expect(screen.getByText(/Ready when you are/i)).toBeInTheDocument();
     });
 
     it("renders active assistant text from chunks before messages update", async () => {
