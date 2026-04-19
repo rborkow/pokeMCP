@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useInterviewStore } from "@/stores/interview-store";
 import { useTeamStore } from "@/stores/team-store";
 import { ChatFirstFrame } from "./ChatFirstFrame";
@@ -20,7 +20,11 @@ export function BuilderLayout() {
     const setUiMode = useTeamStore((s) => s.setUiMode);
     const skipInterview = useInterviewStore((s) => s.skip);
     const startInterview = useInterviewStore((s) => s.start);
-    const [importIntent, setImportIntent] = useState(false);
+
+    // Derive the import hint straight from the URL param — no local state is
+    // needed because the value is only consumed by TeamImportExport's
+    // initial state on mount.
+    const importIntent = searchParams?.get("start") === "import";
 
     useEffect(() => {
         const mode = searchParams?.get("mode");
@@ -28,11 +32,8 @@ export function BuilderLayout() {
             setUiMode(mode);
         }
         const start = searchParams?.get("start");
-        if (start === "empty") {
+        if (start === "empty" || start === "import") {
             skipInterview();
-        } else if (start === "import") {
-            skipInterview();
-            setImportIntent(true);
         } else if (start === "interview") {
             // Peek at current status without listing it as a dep — we only want
             // to start the interview once in response to this URL hint.

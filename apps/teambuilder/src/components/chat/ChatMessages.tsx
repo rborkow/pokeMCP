@@ -137,13 +137,12 @@ export function ChatMessages({
                 <div className="max-w-[360px] space-y-3 text-center">
                     <div className="signal-mono">Coach</div>
                     <p className="text-[15px] leading-relaxed text-foreground">
-                        Ready when you are. Paste a team, describe what you're building,
-                        or ask for a read on the meta.
+                        {"Ready when you are. Paste a team, describe what you're building, or ask for a read on the meta."}
                     </p>
                     <ul className="text-[12px] text-muted-foreground space-y-1 pt-1 font-mono">
-                        <li>— "rate my team in one sentence"</li>
-                        <li>— "what's my worst matchup?"</li>
-                        <li>— "swap slot 4 for something that beats Garchomp"</li>
+                        <li>{'— "rate my team in one sentence"'}</li>
+                        <li>{'— "what\'s my worst matchup?"'}</li>
+                        <li>{'— "swap slot 4 for something that beats Garchomp"'}</li>
                     </ul>
                 </div>
             </div>

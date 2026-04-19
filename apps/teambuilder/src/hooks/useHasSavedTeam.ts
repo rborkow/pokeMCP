@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { useTeamStore } from "@/stores/team-store";
 
 /**
@@ -8,27 +8,33 @@ import { useTeamStore } from "@/stores/team-store";
  * `persist` middleware finishes rehydrating from localStorage, `hydrated` is
  * false and `hasSavedTeam` is always false — this prevents a flash where the
  * landing page briefly renders for returning users before redirecting them.
+ *
+ * Uses useSyncExternalStore so the hydration signal is read without
+ * synchronous setState-in-effect patterns.
  */
+
+function subscribeToHydration(onChange: () => void): () => void {
+    const persist = useTeamStore.persist;
+    // `persist` is attached on the client by the middleware; guard for SSR safety.
+    if (!persist) return () => {};
+    return persist.onFinishHydration(onChange);
+}
+
+function getHydrationStatus(): boolean {
+    return useTeamStore.persist?.hasHydrated() ?? false;
+}
+
+function getServerHydrationStatus(): boolean {
+    return false;
+}
+
 export function useHasSavedTeam(): { hydrated: boolean; hasSavedTeam: boolean } {
-    const [hydrated, setHydrated] = useState(false);
+    const hydrated = useSyncExternalStore(
+        subscribeToHydration,
+        getHydrationStatus,
+        getServerHydrationStatus,
+    );
     const teamLength = useTeamStore((s) => s.team.length);
-
-    useEffect(() => {
-        // `persist` is attached on the client by the middleware; guard for SSR safety.
-        const persist = useTeamStore.persist;
-        if (!persist) return;
-
-        if (persist.hasHydrated()) {
-            setHydrated(true);
-            return;
-        }
-
-        const unsubscribe = persist.onFinishHydration(() => {
-            setHydrated(true);
-        });
-
-        return unsubscribe;
-    }, []);
 
     return {
         hydrated,
