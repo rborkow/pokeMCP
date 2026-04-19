@@ -193,8 +193,20 @@ monthly stats refresh.
 **Runtime secrets** (set once on each Cloudflare Worker via the dashboard; no longer set on every
 deploy):
 
-- `pokemon-mcp-production`: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CF_ACCESS_TEAM_DOMAIN`
+- `pokemon-mcp-production`: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CF_ACCESS_TEAM_DOMAIN`,
+  `ANTHROPIC_API_KEY`, `CF_AIG_TOKEN` (the last two are required for `/ai/chat` to route through the
+  AI Gateway)
 - `pokemcp-teambuilder`: `ANTHROPIC_API_KEY`, `CLOUDFLARE_AI_GATEWAY_URL`, `CF_AIG_TOKEN`
+
+**Verify secrets after deploy:**
+
+```bash
+./scripts/verify-deploy.sh                             # hits prod defaults
+MCP_URL=... TB_URL=... ./scripts/verify-deploy.sh      # staging/dev override
+```
+
+Hits `/health` on each worker, which returns booleans for each expected secret (never values).
+Run after any secret rotation or new worker deploy — exits non-zero if any secret is missing.
 
 ## Testing Changes
 

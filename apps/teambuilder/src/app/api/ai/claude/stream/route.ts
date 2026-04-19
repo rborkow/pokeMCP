@@ -10,6 +10,7 @@ import {
     formatTeamContext,
     type TeamPokemon,
 } from "@/lib/ai/context";
+import { logGatewayHealthOnce } from "@/lib/ai/gateway-health";
 import { DEFAULT_PERSONALITY, type PersonalityId } from "@/lib/ai/personalities";
 import { TEAM_TOOLS } from "@/lib/ai/tools";
 import type { Mode } from "@/types/pokemon";
@@ -64,6 +65,8 @@ function aguiEvent(data: Record<string, unknown>): string {
 }
 
 export async function POST(request: NextRequest) {
+    logGatewayHealthOnce("claude-stream");
+
     // Rate limiting check
     const clientIp =
         request.headers.get("cf-connecting-ip") ??
