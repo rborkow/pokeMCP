@@ -133,6 +133,7 @@ export function ThreatDetailModal({
 
     useEffect(() => {
         if (!pokemon || !open) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setSetData(null);
             return;
         }

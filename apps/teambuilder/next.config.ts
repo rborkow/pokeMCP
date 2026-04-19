@@ -15,10 +15,6 @@ const nextConfig: NextConfig = {
             },
         ],
     },
-    // Environment variables
-    env: {
-        NEXT_PUBLIC_MCP_URL: process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com",
-    },
 };
 
 export default nextConfig;

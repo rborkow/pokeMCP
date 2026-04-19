@@ -13,7 +13,8 @@ Do **not** align framework versions across apps — they are intentionally pinne
 
 ## Dependency Management
 
-- Run `npm install` inside each app directory independently
+- Run `bun install` inside each app directory independently
+- Each app pins its bun minor via `packageManager` in its own `package.json`
 - Root `biome.json` formatting/linting rules apply to both apps
 - Teambuilder additionally uses `eslint-config-next` (ESLint flat config in `eslint.config.mjs`)
 
@@ -25,8 +26,8 @@ Apps are loosely coupled. The teambuilder calls the MCP server at `api.pokemcp.c
 
 ```bash
 # From repo root:
-npm run dev:teambuilder   # port 3000
-npm run dev:docs          # port 3001
+bun run dev:teambuilder   # port 3000
+bun run dev:docs          # port 3001
 ```
 
 ## Docs App Notes
