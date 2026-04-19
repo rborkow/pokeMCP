@@ -25,12 +25,13 @@ and preview branches stay visible in the Cloudflare Pages UI.
 3. **Configure Build**
    - **Project name**: Use the Git-connected Pages project that owns `docs.pokemcp.com`
    - **Production branch**: `main`
-   - **Build command**: `npm run build`
+   - **Build command**: `bun run build`
    - **Build output directory**: `out`
    - **Root directory**: `apps/docs`
 
-4. **Set Environment Variables** (if needed)
-   - **NODE_VERSION**: `20`
+4. **Set Environment Variables**
+   - **NODE_VERSION**: `22`
+   - Cloudflare Pages auto-detects bun from the `packageManager` field in `apps/docs/package.json`.
 
 5. **Deploy**
    - Click "Save and Deploy"
@@ -41,8 +42,8 @@ and preview branches stay visible in the Cloudflare Pages UI.
 
 ```bash
 # From apps/docs directory
-npm run build
-npx wrangler pages deploy out --project-name=<non-production-pages-project>
+bun run build
+bunx wrangler pages deploy out --project-name=<non-production-pages-project>
 ```
 
 ## Custom Domain
@@ -84,9 +85,10 @@ View build logs and analytics:
 
 Check build logs in Cloudflare Pages dashboard. Common issues:
 
-- Node version mismatch (ensure Node 20)
+- Node version mismatch (ensure NODE_VERSION=22)
+- Bun not detected (ensure `packageManager` is set in `package.json`)
 - Missing dependencies (check package.json)
-- TypeScript errors (run `npm run build` locally first)
+- TypeScript errors (run `bun run build` locally first)
 
 ### 404 Errors
 

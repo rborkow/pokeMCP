@@ -6,8 +6,7 @@ Thank you for your interest in contributing to PokeMCP! This guide will help you
 
 ### Prerequisites
 
-- Node.js 20+
-- npm
+- [Bun](https://bun.sh) 1.3+
 - A Cloudflare account (free tier works fine for development)
 
 ### Quick Start
@@ -22,13 +21,13 @@ Thank you for your interest in contributing to PokeMCP! This guide will help you
 2. **Install dependencies**
 
    ```bash
-   npm install
+   bun install
    ```
 
 3. **Start local development server**
 
    ```bash
-   npm run dev
+   bun run dev
    ```
 
    This runs the MCP server locally at `http://localhost:8787`. Wrangler automatically simulates KV storage locally, so you don't need any cloud resources.
@@ -41,7 +40,7 @@ Thank you for your interest in contributing to PokeMCP! This guide will help you
 
 ### Local Development Notes
 
-- **KV Storage**: When running `npm run dev`, Wrangler uses local simulation for KV. No cloud resources are accessed.
+- **KV Storage**: When running `bun run dev`, Wrangler uses local simulation for KV. No cloud resources are accessed.
 - **No API Keys Needed**: Local development doesn't require Cloudflare API tokens.
 - **Stats Data**: The `src/cached-stats/` directory contains cached Smogon statistics that are used for local testing.
 
@@ -80,8 +79,8 @@ pokeMCP/
 - Run linting before committing:
 
   ```bash
-  npm run lint:fix
-  npm run format
+  bun run lint:fix
+  bun run format
   ```
 
 - Follow existing code patterns in the repository
@@ -91,7 +90,7 @@ pokeMCP/
 1. **MCP Server changes**:
 
    ```bash
-   npm run dev
+   bun run dev
    # Test your changes at http://localhost:8787
    ```
 
@@ -99,16 +98,16 @@ pokeMCP/
 
    ```bash
    cd apps/teambuilder
-   npm install
-   npm run dev
+   bun install
+   bun run dev
    # Test at http://localhost:3000
    ```
 
 3. **Documentation changes**:
    ```bash
    cd apps/docs
-   npm install
-   npm run dev
+   bun install
+   bun run dev
    ```
 
 ## Pull Request Process
@@ -121,30 +120,28 @@ pokeMCP/
 
 ### What Happens After Merge
 
-When your PR is merged to `main`:
+When your PR is merged to `main`, Cloudflare picks it up automatically:
 
-- The **MCP Worker** automatically deploys to https://api.pokemcp.com
-- The **Teambuilder** automatically deploys to https://www.pokemcp.com
-- The **Documentation** automatically deploys to https://docs.pokemcp.com via Cloudflare Pages Git integration
+- **MCP Worker** → https://api.pokemcp.com (Cloudflare Workers Builds)
+- **Teambuilder** → https://www.pokemcp.com (Cloudflare Workers Builds)
+- **Documentation** → https://docs.pokemcp.com (Cloudflare Pages Git integration)
 
 ## Environment Overview
 
 | Environment | Purpose               | How to Access                 |
 | ----------- | --------------------- | ----------------------------- |
-| Local Dev   | Development & testing | `npm run dev`                 |
+| Local Dev   | Development & testing | `bun run dev`                 |
 | Production  | Live services         | Auto-deploys on merge to main |
 
 ### Production Deployment (Maintainers Only)
 
-Production deployment is split by surface:
+All production deploys are owned by Cloudflare. The GitHub Actions in this repo only run PR
+build verification (`build.yml`) and the monthly Smogon stats refresh (`update-stats.yml`).
 
-- **MCP Worker**: GitHub Actions deploys the Worker on merge to `main`
-- **Teambuilder**: GitHub Actions deploys the OpenNext Worker on merge to `main`
-- **Documentation**: Cloudflare Pages Git integration deploys docs changes from `main`
-
-Maintainers can still use the "Deploy to Production" workflow in GitHub Actions for the MCP Worker and teambuilder.
-
-- **Stats updates**: Run monthly via "Update Smogon Stats" workflow
+- **MCP Worker**: Cloudflare Workers Builds project `pokemon-mcp-production` redeploys on every push to `main`
+- **Teambuilder**: Cloudflare Workers Builds project `pokemcp-teambuilder` redeploys on every push to `main`
+- **Documentation**: Cloudflare Pages Git integration deploys `apps/docs/` changes from `main`
+- **Stats updates**: Run monthly via "Update Smogon Stats" workflow — the stats commit it pushes to `main` triggers the Workers Builds redeploy
 
 ## Common Tasks
 
@@ -152,7 +149,7 @@ Maintainers can still use the "Deploy to Production" workflow in GitHub Actions 
 
 1. Implement the function in `src/tools.ts` or `src/stats.ts`
 2. Register it in `src/index.ts` with a Zod schema
-3. Test locally with `npm run dev`
+3. Test locally with `bun run dev`
 
 ### Adding a New Pokemon Format
 
@@ -165,8 +162,8 @@ Maintainers can still use the "Deploy to Production" workflow in GitHub Actions 
 Stats are updated monthly via GitHub Actions, but can be run manually:
 
 ```bash
-npm run fetch-stats    # Download from Smogon
-npm run upload-stats   # Upload to KV (requires Cloudflare auth)
+bun run fetch-stats    # Download from Smogon
+bun run upload-stats   # Upload to KV (requires Cloudflare auth)
 ```
 
 ## Getting Help

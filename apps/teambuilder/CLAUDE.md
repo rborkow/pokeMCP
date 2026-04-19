@@ -106,7 +106,7 @@ src/
 - **Framework**: Vitest 4 + React Testing Library + jsdom
 - **Config**: `vitest.config.ts` (resolves `@/` alias), `vitest.setup.ts`
 - **Location**: `src/__tests__/` (unit tests), `src/__tests__/components/` (component tests), `src/__tests__/hooks/` (hook tests)
-- **Run**: `npm run test:run` (single run) or `npm run test:coverage`
+- **Run**: `bun run test:run` (single run) or `bun run test:coverage`
 
 ## Chat-first architecture (v2)
 

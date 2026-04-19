@@ -55,7 +55,8 @@ export function ShareDialog({ open, onOpenChange, team, format }: ShareDialogPro
     // Create short URL when dialog opens
     useEffect(() => {
         if (!open || team.length === 0) return;
-        // Reset state on open
+        // Reset state on open (intentional: these reflect the new open/team inputs)
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setShortUrl(null);
         setError(null);
         setLoading(true);

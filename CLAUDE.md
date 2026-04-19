@@ -22,51 +22,56 @@ A monorepo containing an MCP (Model Context Protocol) server for Pokémon compet
 
 ### Essential Commands
 
+Package manager: **Bun 1.3+** (the `packageManager` field in each `package.json` pins the version).
+
 ```bash
+# Install deps
+bun install
+
 # Type checking (required before deployment)
-npm run type-check
+bun run type-check
 
 # Linting and formatting (uses Biome)
-npm run lint
-npm run lint:fix
-npm run format
+bun run lint
+bun run lint:fix
+bun run format
 
 # Local development server
-npm run dev
+bun run dev
 
-# Deploy to production (prefer CI/CD - merging to main auto-deploys)
-npm run deploy:production
+# Deploy to production — prefer CI/CD: merging to main triggers Cloudflare Workers Builds
+bun run deploy:production
 ```
 
 ### Monorepo Apps
 
 ```bash
 # Teambuilder (Next.js UI)
-npm run dev:teambuilder        # Start dev server (port 3000)
-cd apps/teambuilder && npm run test:run      # Run Vitest tests
-cd apps/teambuilder && npm run test:coverage # Coverage report
+bun run dev:teambuilder        # Start dev server (port 3000)
+cd apps/teambuilder && bun run test:run      # Run Vitest tests
+cd apps/teambuilder && bun run test:coverage # Coverage report
 
 # Documentation (Nextra)
-npm run dev:docs               # Start dev server (port 3001)
+bun run dev:docs               # Start dev server (port 3001)
 ```
 
 ### Stats Management
 
 ```bash
 # Fetch latest Smogon usage statistics (rate-limited, ~45 seconds)
-npm run fetch-stats
+bun run fetch-stats
 
 # Upload all fetched stats to KV (skips empty formats)
-npm run upload-stats
+bun run upload-stats
 
 # Or upload individual format manually
-npx wrangler kv key put --remote --namespace-id=58525ad4ec5c454eb3e1ae7586414483 "gen9ou" --path="src/cached-stats/gen9ou.json"
+bunx wrangler kv key put --remote --namespace-id=58525ad4ec5c454eb3e1ae7586414483 "gen9ou" --path="src/cached-stats/gen9ou.json"
 ```
 
 **Update Schedule:**
 
 - Smogon publishes new stats monthly (around the 1st-5th of each month)
-- Run `npm run discover-formats && npm run fetch-stats && npm run upload-stats` monthly to update
+- Run `bun run discover-formats && bun run fetch-stats && bun run upload-stats` monthly to update
 - VGC formats are auto-discovered from Smogon's stats directory — new regulations are picked up automatically
 - The fetch script has 2-second delays between requests to be polite to Smogon
 - Stats files are cached locally in `src/cached-stats/` for reference
@@ -82,9 +87,9 @@ npx wrangler kv key put --remote --namespace-id=58525ad4ec5c454eb3e1ae7586414483
 
 ```bash
 # Tail production logs in real-time
-npm run tail
-npm run tail:staging
-npm run tail:production
+bun run tail
+bun run tail:staging
+bun run tail:production
 ```
 
 ## Architecture
@@ -125,7 +130,7 @@ Each environment has its own:
 
 - Indent: 4 spaces (tabs)
 - Line width: 100 characters
-- Always run `npm run lint:fix` and `npm run format` before committing
+- Always run `bun run lint:fix` and `bun run format` before committing
 
 **TypeScript:**
 
@@ -153,45 +158,59 @@ See [`src/CLAUDE.md`](src/CLAUDE.md) for KV data structures, vector metadata, er
 
 ## CI/CD Pipeline
 
+Cloudflare owns all production deploys. GitHub Actions only runs PR build verification and the
+monthly stats refresh.
+
 **GitHub Actions Workflows:**
 
-| Workflow                | Trigger                 | Purpose                                |
-| ----------------------- | ----------------------- | -------------------------------------- |
-| `build.yml`             | Pull requests           | Build verification for PRs             |
-| `deploy-production.yml` | Merge to main           | Auto-deploy MCP Worker and teambuilder |
-| `update-stats.yml`      | Monthly (5th) or manual | Update Smogon statistics               |
+| Workflow           | Trigger                 | Purpose                                                    |
+| ------------------ | ----------------------- | ---------------------------------------------------------- |
+| `build.yml`        | Pull requests           | Build verification (worker dry-run, teambuilder, docs)     |
+| `update-stats.yml` | Monthly (5th) or manual | Fetch Smogon stats, push to `main` (Cloudflare redeploys)  |
+
+**Cloudflare Deploy Projects:**
+
+| Project                       | Surface         | Deploy on push to `main`                  |
+| ----------------------------- | --------------- | ----------------------------------------- |
+| Workers Builds `pokemon-mcp-production`   | MCP Worker      | `bunx wrangler deploy --env production`   |
+| Workers Builds `pokemcp-teambuilder`      | Teambuilder UI  | `bun run pages:build && bunx wrangler deploy --config wrangler.toml` |
+| Pages Git integration                     | Documentation   | `bun run build` in `apps/docs/`           |
 
 **Deployment Flow:**
 
 1. Push changes to a feature branch
-2. Create PR → triggers `build.yml` checks
-3. Merge to main → triggers `deploy-production.yml`
-4. GitHub Actions deploys the app surfaces it owns:
+2. Create PR → triggers `build.yml` checks (bun install + lint/build/dry-run)
+3. Merge to main → Cloudflare Workers Builds / Pages pick up the push and redeploy:
    - MCP Worker → https://api.pokemcp.com
    - Teambuilder → https://www.pokemcp.com
-5. Documentation changes under `apps/docs/` deploy via Cloudflare Pages Git integration:
    - Documentation → https://docs.pokemcp.com
 
-**Required GitHub Secrets:**
+**Required GitHub Secrets (for `build.yml` and `update-stats.yml`):**
 
-- `CLOUDFLARE_API_TOKEN` - Cloudflare API token with Workers/Pages permissions
+- `CLOUDFLARE_API_TOKEN` - Cloudflare API token with Workers/KV permissions
 - `CLOUDFLARE_ACCOUNT_ID` - Your Cloudflare account ID
+
+**Runtime secrets** (set once on each Cloudflare Worker via the dashboard; no longer set on every
+deploy):
+
+- `pokemon-mcp-production`: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CF_ACCESS_TEAM_DOMAIN`
+- `pokemcp-teambuilder`: `ANTHROPIC_API_KEY`, `CLOUDFLARE_AI_GATEWAY_URL`, `CF_AIG_TOKEN`
 
 ## Testing Changes
 
 ### MCP Worker Testing
 
-1. Run `npm run dev` to start local Wrangler server
+1. Run `bun run dev` to start local Wrangler server
 2. Test MCP tools via `/test-rag?q=...` or `/test-kv` endpoints
 3. Create a PR - CI will verify builds pass
-4. After merge, deployment is automatic
+4. After merge, Cloudflare Workers Builds redeploys automatically
 
 ### Team Builder Testing
 
 ```bash
 cd apps/teambuilder
-npm run test:run        # Run all tests
-npm run test:coverage   # Run with coverage report
+bun run test:run        # Run all tests
+bun run test:coverage   # Run with coverage report
 ```
 
 See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for test structure and coverage targets.
@@ -206,7 +225,7 @@ See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for test structur
 
 **Adding a new format:**
 
-1. For VGC/doubles: formats are auto-discovered — just run `npm run discover-formats`
+1. For VGC/doubles: formats are auto-discovered — just run `bun run discover-formats`
 2. For singles: add format to the SINGLES_FORMATS array in `src/ingestion/orchestrator.ts`
 3. Add Smogon format name mapping in `src/ingestion/scraper.ts` (VGC formats auto-generate names)
 4. Update README.md supported formats list
@@ -221,10 +240,10 @@ Option 1 - GitHub Action (recommended):
 
 Option 2 - Manual:
 
-1. `npm run discover-formats` (discovers available VGC formats from Smogon)
-2. `npm run fetch-stats` (downloads from Smogon, ~45 seconds)
-3. `npm run upload-stats` (uploads to KV, requires Cloudflare auth)
-4. Commit and push changes to trigger deploy
+1. `bun run discover-formats` (discovers available VGC formats from Smogon)
+2. `bun run fetch-stats` (downloads from Smogon, ~45 seconds)
+3. `bun run upload-stats` (uploads to KV, requires Cloudflare auth)
+4. Commit and push changes — Cloudflare Workers Builds redeploys on merge to main
 
 ### Team Builder AI Tasks
 
