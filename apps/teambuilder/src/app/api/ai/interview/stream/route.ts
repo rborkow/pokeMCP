@@ -1,5 +1,6 @@
-import Anthropic from "@anthropic-ai/sdk";
+import type Anthropic from "@anthropic-ai/sdk";
 import type { NextRequest } from "next/server";
+import { createAnthropicClient } from "@/lib/ai/anthropic-client";
 import { logGatewayHealthOnce } from "@/lib/ai/gateway-health";
 import {
     buildSynthesisSystemPrompt,
@@ -108,18 +109,7 @@ export async function POST(request: NextRequest) {
     const systemPrompt = buildSynthesisSystemPrompt(format, mode);
     const userMessage = `Here are the trainer's answers:\n${formatAnswersForPrompt(answers)}\n\nBuild the team now.`;
 
-    const gatewayUrl = process.env.CLOUDFLARE_AI_GATEWAY_URL;
-    const gatewayToken = process.env.CF_AIG_TOKEN;
-    const client = new Anthropic({
-        apiKey,
-        ...(gatewayUrl && {
-            baseURL: gatewayUrl,
-            defaultHeaders: {
-                ...(gatewayToken && { "cf-aig-authorization": `Bearer ${gatewayToken}` }),
-                "cf-aig-metadata": JSON.stringify({ source: "interview" }),
-            },
-        }),
-    });
+    const client = createAnthropicClient("interview");
 
     const stream = client.messages.stream(
         {

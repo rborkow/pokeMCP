@@ -20,7 +20,7 @@ Do **not** align framework versions across apps — they are intentionally pinne
 
 ## Coupling
 
-Apps are loosely coupled. The teambuilder calls the MCP server at `api.pokemcp.com` via REST (`/api/tools`) and SSE (`/ai/chat`). There is no shared code between apps or between apps and the root `src/`.
+Apps are loosely coupled. The teambuilder calls the MCP server at `api.pokemcp.com` via REST (`/api/tools`). Anthropic traffic is owned by the teambuilder itself (`/api/ai/claude/stream` + `/api/ai/interview/stream`) and routed through the Cloudflare AI Gateway. There is no shared code between apps or between apps and the root `src/`.
 
 ## Running Locally
 

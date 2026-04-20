@@ -35,10 +35,13 @@ export async function generateEmbeddings(
 async function embedBatch(chunks: DocumentChunk[], env: Env): Promise<EmbeddedChunk[]> {
     const texts = chunks.map((c) => c.content);
 
-    // Use Workers AI BGE model for embeddings
-    const response = await env.AI.run("@cf/baai/bge-base-en-v1.5", {
-        text: texts,
-    });
+    // Use Workers AI BGE model for embeddings, routed through the AI Gateway
+    // for usage/latency metrics.
+    const response = await env.AI.run(
+        "@cf/baai/bge-base-en-v1.5",
+        { text: texts },
+        { gateway: { id: env.AI_GATEWAY_ID ?? "pokemcp" } },
+    );
 
     // Handle response format
     const res = response as { data: number[][] };
@@ -60,9 +63,11 @@ async function embedBatch(chunks: DocumentChunk[], env: Env): Promise<EmbeddedCh
  * Generate a single embedding for a query
  */
 export async function generateQueryEmbedding(query: string, env: Env): Promise<number[]> {
-    const response = await env.AI.run("@cf/baai/bge-base-en-v1.5", {
-        text: [query],
-    });
+    const response = await env.AI.run(
+        "@cf/baai/bge-base-en-v1.5",
+        { text: [query] },
+        { gateway: { id: env.AI_GATEWAY_ID ?? "pokemcp" } },
+    );
 
     const res = response as { data: number[][] };
     const embeddings = Array.isArray(res.data) ? res.data : [res.data];

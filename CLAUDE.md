@@ -193,10 +193,12 @@ monthly stats refresh.
 **Runtime secrets** (set once on each Cloudflare Worker via the dashboard; no longer set on every
 deploy):
 
-- `pokemon-mcp-production`: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CF_ACCESS_TEAM_DOMAIN`,
-  `ANTHROPIC_API_KEY`, `CF_AIG_TOKEN` (the last two are required for `/ai/chat` to route through the
-  AI Gateway)
+- `pokemon-mcp-production`: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CF_ACCESS_TEAM_DOMAIN`
 - `pokemcp-teambuilder`: `ANTHROPIC_API_KEY`, `CLOUDFLARE_AI_GATEWAY_URL`, `CF_AIG_TOKEN`
+
+All Anthropic traffic runs through the teambuilder worker (`/api/ai/claude/stream` +
+`/api/ai/interview/stream`), which routes through the Cloudflare AI Gateway (`pokemcp`). The MCP
+Worker uses Workers AI for embeddings, also gateway-routed. The MCP Worker never calls Anthropic.
 
 **Verify secrets after deploy:**
 
