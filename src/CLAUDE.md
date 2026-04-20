@@ -32,7 +32,7 @@ index.ts (routes + PokemonMCP Durable Object)
 | `/mcp` | POST | MCP protocol (Durable Object) |
 | `/sse` | GET | SSE transport for MCP |
 | `/api/tools` | POST | Stateless REST tool invocation |
-| `/ai/chat` | POST | AI assistant for teambuilder (Claude) |
+| `/health` | GET | Deploy health / secret-presence booleans |
 | `/api/feedback` | POST | User feedback to R2 |
 | `/` | GET | Server info JSON |
 

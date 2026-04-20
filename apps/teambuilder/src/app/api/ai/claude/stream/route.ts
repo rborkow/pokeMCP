@@ -1,5 +1,6 @@
-import Anthropic from "@anthropic-ai/sdk";
+import type Anthropic from "@anthropic-ai/sdk";
 import type { NextRequest } from "next/server";
+import { createAnthropicClient } from "@/lib/ai/anthropic-client";
 import {
     buildSystemPrompt,
     buildUserMessage,
@@ -159,21 +160,7 @@ export async function POST(request: NextRequest) {
 
         const streamStartTime = performance.now();
 
-        // Create Anthropic client — route through AI Gateway if configured
-        const gatewayUrl = process.env.CLOUDFLARE_AI_GATEWAY_URL;
-        const gatewayToken = process.env.CF_AIG_TOKEN;
-        const client = new Anthropic({
-            apiKey,
-            ...(gatewayUrl && {
-                baseURL: gatewayUrl,
-                defaultHeaders: {
-                    ...(gatewayToken && {
-                        "cf-aig-authorization": `Bearer ${gatewayToken}`,
-                    }),
-                    "cf-aig-metadata": JSON.stringify({ source: "web" }),
-                },
-            }),
-        });
+        const client = createAnthropicClient("web");
 
         const stream = client.messages.stream(
             {
