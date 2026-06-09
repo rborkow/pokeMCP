@@ -137,7 +137,7 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
             format: z
                 .string()
                 .optional()
-                .describe("Format ID (default 'gen9vgc2026regf'; e.g. 'gen9doublesou', 'gen9ou')"),
+                .describe("Format ID (default 'gen9vgc2026regi'; e.g. 'gen9doublesou', 'gen9ou')"),
             from: z.string().optional().describe("Start month 'YYYY-MM'"),
             to: z.string().optional().describe("End month 'YYYY-MM' (default: latest snapshot)"),
             window: z.number().optional().describe("Months back from `to` (alternative to `from`)"),

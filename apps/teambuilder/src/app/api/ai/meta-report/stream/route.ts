@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
 
     try {
         const {
-            format = "gen9vgc2026regf",
+            format = "gen9vgc2026regi",
             window = 6,
             mode = "vgc",
         }: { format?: string; window?: number; mode?: Mode } = await request.json();
