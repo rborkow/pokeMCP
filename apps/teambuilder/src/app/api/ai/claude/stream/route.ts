@@ -1,5 +1,6 @@
 import type Anthropic from "@anthropic-ai/sdk";
 import type { NextRequest } from "next/server";
+import { getAnalyticsBinding, trackAIChat } from "@/lib/ai/analytics";
 import { createAnthropicClient } from "@/lib/ai/anthropic-client";
 import {
     buildSystemPrompt,
@@ -159,6 +160,11 @@ export async function POST(request: NextRequest) {
         const messages = [...recentHistory, { role: "user" as const, content: fullUserMessage }];
 
         const streamStartTime = performance.now();
+
+        // Capture the Analytics Engine binding in request context — the stream
+        // body is pulled after this handler returns, so we can't resolve the
+        // Cloudflare context from inside the stream callback.
+        const analytics = getAnalyticsBinding();
 
         const client = createAnthropicClient("web");
 
@@ -328,6 +334,20 @@ export async function POST(request: NextRequest) {
                             timestamp: Date.now(),
                         }),
                     );
+
+                    trackAIChat(analytics, {
+                        format,
+                        personality: String(personalityId),
+                        mode,
+                        thinking: useThinking,
+                        inputTokens: finalMsg.usage.input_tokens ?? 0,
+                        outputTokens: finalMsg.usage.output_tokens ?? 0,
+                        cacheCreationTokens: finalMsg.usage.cache_creation_input_tokens ?? 0,
+                        cacheReadTokens: finalMsg.usage.cache_read_input_tokens ?? 0,
+                        teamSize: (team as TeamPokemon[]).length,
+                        responseTimeMs: Math.round(performance.now() - streamStartTime),
+                        source: "web",
+                    });
 
                     controller.close();
                 } catch (err) {
