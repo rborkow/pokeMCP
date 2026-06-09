@@ -41,6 +41,17 @@
             "id": "8b077446275b42d699c4e4d33b3bb353"
         }
     ],
+    // Metagame evolution time-series store (history; KV stays the "latest" source of truth).
+    "d1_databases": [
+        {
+            "binding": "META_DB",
+            "database_name": "pokemcp-meta-history",
+            // D1 id (not secret — like the KV ids above). Created via the Cloudflare API.
+            // Apply schema with: wrangler d1 migrations apply META_DB --remote
+            "database_id": "64752654-621e-4f0d-be90-3e200e73097c",
+            "migrations_dir": "migrations/d1"
+        }
+    ],
     "vectorize": [
         {
             "binding": "VECTOR_INDEX",
@@ -149,6 +160,15 @@
                     "binding": "ANALYTICS",
                     "dataset": "pokemcp-analytics"
                 }
+            ],
+            "d1_databases": [
+                {
+                    "binding": "META_DB",
+                    "database_name": "pokemcp-meta-history",
+                    // Staging may share the production DB id (as KV does), or use its own.
+                    "database_id": "64752654-621e-4f0d-be90-3e200e73097c",
+                    "migrations_dir": "migrations/d1"
+                }
             ]
         },
         "production": {
@@ -204,6 +224,14 @@
                 {
                     "binding": "ANALYTICS",
                     "dataset": "pokemcp-analytics"
+                }
+            ],
+            "d1_databases": [
+                {
+                    "binding": "META_DB",
+                    "database_name": "pokemcp-meta-history",
+                    "database_id": "64752654-621e-4f0d-be90-3e200e73097c",
+                    "migrations_dir": "migrations/d1"
                 }
             ],
             // Weekly cron for RAG content ingestion (Sundays at 3 AM UTC)

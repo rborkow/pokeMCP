@@ -183,6 +183,45 @@ export async function fetchMetaThreats(format: string): Promise<string> {
 }
 
 /**
+ * Fetch metagame trend data from the MCP get_meta_trends tool. Pulls the
+ * narrative-ready evolution summary plus momentum signals so the meta-report
+ * endpoint can hand Claude precomputed, grounded numbers (mirrors fetchMetaThreats).
+ */
+export async function fetchMetaTrends(format: string, window = 6): Promise<string> {
+    const cacheKey = `meta_trends:${format}:${window}`;
+    const cached = getCached(cacheKey);
+    if (cached !== undefined) return cached;
+
+    async function callTrend(type: "evolution_summary" | "momentum"): Promise<string> {
+        try {
+            const response = await fetch(`${MCP_URL}/api/tools`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    tool: "get_meta_trends",
+                    args: { type, format, window },
+                }),
+            });
+            if (response.ok) {
+                const data = await response.json();
+                return data.result?.content?.[0]?.text || "";
+            }
+        } catch (e) {
+            console.error(`Failed to fetch meta trends (${type}) for ${format}:`, e);
+        }
+        return "";
+    }
+
+    const [summary, momentum] = await Promise.all([
+        callTrend("evolution_summary"),
+        callTrend("momentum"),
+    ]);
+    const combined = [summary, momentum].filter(Boolean).join("\n\n");
+    if (combined) setCache(cacheKey, combined);
+    return combined;
+}
+
+/**
  * Extract Pokemon names mentioned in message and fetch their popular sets
  */
 export async function fetchPopularSetsContext(message: string, format: string): Promise<string> {
@@ -595,4 +634,52 @@ ${teamContext}
 ${contextSection}
 
 User's Question: ${message}`;
+}
+
+/**
+ * Meta-report (Phase C): system prompt for the standalone metagame-evolution
+ * narrative endpoint. The model is handed precomputed trend numbers (from
+ * fetchMetaTrends) and must stay grounded in them.
+ */
+export function buildMetaReportSystemPrompt(format: string, mode: Mode = "vgc"): string {
+    const formatLabel = format.toUpperCase();
+    const modeNote =
+        mode === "vgc"
+            ? "This is a VGC/doubles format. Frame takeaways for doubles team building (speed control, spread moves, restricted/legendary usage, common cores)."
+            : "Frame takeaways for singles team building (hazards, pivots, win conditions, defensive backbone).";
+
+    return `You are a competitive Pokémon metagame analyst specializing in VGC and doubles. You write concise, data-grounded "state of the meta" reports for ${formatLabel}.
+
+${modeNote}
+
+You are given PRECOMPUTED trend data derived from Smogon monthly usage statistics:
+- an evolution summary (current top Pokémon, biggest movers over the window, battle counts), and
+- momentum signals (rate-of-change / EWMA slopes flagging rising, falling, and volatile Pokémon).
+
+Write the report in markdown with these sections:
+1. **Where the meta stands** — the current top Pokémon and the overall shape of the format.
+2. **What's changed** — the most significant risers, fallers, new entrants, and dropouts over the window, citing the actual usage percentages and deltas.
+3. **Where it's heading** — read the momentum signals to call out Pokémon likely to keep climbing or sliding, plus any volatile picks. Frame these as extrapolations from the trend, NOT guarantees.
+4. **What to prepare for** — 2–4 actionable takeaways for a team builder.
+
+Rules:
+- Ground EVERY claim in the supplied numbers. Quote usage %s and deltas from the data.
+- Do NOT invent Pokémon, percentages, or trends that are not present in the data.
+- If the data indicates history is unavailable or thin (few snapshots), say so plainly and keep the report short — never fabricate a trend.
+- Be direct and concise — this is an analyst briefing, not a chat. No preamble.
+- VGC regulations are time-boxed, so a format's history may only span the months its regulation has been active; do not read across a regulation boundary as if it were continuous.`;
+}
+
+/**
+ * Meta-report (Phase C): user message carrying the precomputed trend payload.
+ */
+export function buildMetaReportUserMessage(format: string, window: number, trends: string): string {
+    return `Format: ${format.toUpperCase()}
+Window: last ${window} months
+
+Trend data from Smogon usage statistics:
+
+${trends}
+
+Write the metagame evolution report for ${format.toUpperCase()}.`;
 }

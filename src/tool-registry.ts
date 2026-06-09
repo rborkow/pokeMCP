@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { getMetaTrends, type MetaTrendsArgs } from "./meta-history.js";
 import { queryStrategy, queryStrategyText } from "./rag/query.js";
 import {
     getChecksCounters,
@@ -119,6 +120,30 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
                     return `Unknown stat type: ${type}`;
             }
         },
+    },
+
+    // --- Metagame evolution over time (Cloudflare D1, needs env) ---
+    {
+        name: "get_meta_trends",
+        description:
+            "Analyze how a metagame evolves over time: a Pokémon's usage trend over " +
+            "months, format-wide shifts (risers/fallers/entrants/dropouts) between two " +
+            "dates, usage momentum, or an overall evolution summary. Tuned for VGC/doubles.",
+        schema: {
+            type: z
+                .enum(["usage_trend", "shifts", "momentum", "evolution_summary"])
+                .describe("Analysis type"),
+            pokemon: z.string().optional().describe("Pokémon name (required for usage_trend)"),
+            format: z
+                .string()
+                .optional()
+                .describe("Format ID (default 'gen9vgc2026regf'; e.g. 'gen9doublesou', 'gen9ou')"),
+            from: z.string().optional().describe("Start month 'YYYY-MM'"),
+            to: z.string().optional().describe("End month 'YYYY-MM' (default: latest snapshot)"),
+            window: z.number().optional().describe("Months back from `to` (alternative to `from`)"),
+            limit: z.number().optional().describe("Max results per list"),
+        },
+        execute: async (args, env) => getMetaTrends(args as unknown as MetaTrendsArgs, env),
     },
 
     // --- Unified RAG tool (Cloudflare Vectorize + KV, needs env) ---

@@ -41,6 +41,14 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
+      # Append this month's snapshot to the D1 time-series (metagame evolution history).
+      # KV above is the "latest" source of truth; D1 accumulates one slice per month.
+      - name: Append snapshot to history (D1)
+        run: bun run append-history
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
       - name: Commit updated stats
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
