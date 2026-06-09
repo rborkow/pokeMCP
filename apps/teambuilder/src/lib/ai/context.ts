@@ -415,12 +415,21 @@ MEGA EVOLUTION (Gen 6 Mechanic):
 /**
  * Build the system prompt with personality enrichment and mode-specific guidance
  */
+// The system prompt is deterministic in (personalityId, format, teamSize, mode)
+// — it carries no per-user content (team data lives in buildUserMessage). Cache
+// the assembled ~6KB string per-isolate so repeat chat turns skip the rebuild.
+const systemPromptCache = new Map<string, string>();
+
 export function buildSystemPrompt(
     personalityId: PersonalityId,
     format: string,
     teamSize: number,
     mode: Mode = "singles",
 ): string {
+    const cacheKey = `${personalityId}|${format}|${teamSize}|${mode}`;
+    const cached = systemPromptCache.get(cacheKey);
+    if (cached !== undefined) return cached;
+
     const personality = getPersonality(personalityId);
     const gen = getGeneration(format);
     const gimmickGuidance = getGimmickGuidance(format);
@@ -458,7 +467,7 @@ export function buildSystemPrompt(
 - evs: Object with hp, atk, def, spa, spd, spe values
 - reason: Brief explanation of the choice`;
 
-    return `${personality.systemPromptPrefix}${loreSection}${preferredPokemonSection}${feedbackSection}
+    const systemPrompt = `${personality.systemPromptPrefix}${loreSection}${preferredPokemonSection}${feedbackSection}
 
 You are helping with Pokemon competitive team building for ${format.toUpperCase()}.
 ${modeGuidance}
@@ -522,6 +531,9 @@ You can render structured cards inline with your reply by calling present_respon
 - kind: "analysis_highlight" — surface one pointed observation ("Your only speed control is Iron Valiant"). Short, one note at a time.
 
 Don't call present_response_card for plain conversational replies. Don't duplicate the card's content in prose — the UI renders the card.`;
+
+    systemPromptCache.set(cacheKey, systemPrompt);
+    return systemPrompt;
 }
 
 /**
