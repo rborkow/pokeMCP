@@ -1,12 +1,35 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import { BuilderLayout } from "@/components/builder/BuilderLayout";
 import { FeedbackButton } from "@/components/feedback/FeedbackButton";
 import { Header } from "@/components/layout/Header";
 import { LegalAttribution } from "@/components/layout/LegalAttribution";
 import { SystemLogBridge } from "@/components/providers/SystemLogBridge";
 import { useUrlTeam } from "@/hooks/useUrlTeam";
+
+// Render the builder client-only. Its component tree statically pulls in the
+// full Pokédex (`pokemon-data-generated`, ~365KB) for type/stat/speed analysis;
+// SSRing it inlined that table into the /builder server bundle and dominated
+// cold-start CPU (p99 ~690ms). /builder has no useful SSR anyway — the team is
+// hydrated from localStorage — so deferring to the client removes the dex from
+// the worker cold-start path at no UX cost beyond a brief skeleton.
+const BuilderLayout = dynamic(
+    () => import("@/components/builder/BuilderLayout").then((m) => m.BuilderLayout),
+    {
+        ssr: false,
+        loading: () => (
+            <div
+                className="flex-1 flex items-center justify-center py-24"
+                role="status"
+                aria-busy="true"
+                aria-label="Loading team builder"
+            >
+                <div className="h-8 w-8 animate-spin rounded-full border-2 border-border-hairline-strong border-t-transparent" />
+            </div>
+        ),
+    },
+);
 
 function UrlTeamLoader() {
     useUrlTeam();
