@@ -1,0 +1,45 @@
+name: Backfill Metagame History
+
+# Manual one-off: pulls historical Smogon usage stats into the META_DB D1
+# time-series (all Pokémon + compact set data, per month). Ongoing monthly
+# capture is handled by update-stats.yml (the append-history step) — this is
+# only for seeding/extending history or re-backfilling after schema changes.
+on:
+  workflow_dispatch:
+    inputs:
+      formats:
+        description: "Comma-separated format IDs (leave blank for discovered VGC/doubles)"
+        required: false
+        default: ""
+      months:
+        description: "How many months back to pull from Smogon archives"
+        required: false
+        default: "18"
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # Refresh the VGC/doubles format list so the backfill targets current regs.
+      - name: Discover available formats from Smogon
+        run: bun run discover-formats
+
+      - name: Backfill historical snapshots to D1
+        run: bun run backfill-history
+        env:
+          FORMATS: ${{ github.event.inputs.formats }}
+          MONTHS: ${{ github.event.inputs.months }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
