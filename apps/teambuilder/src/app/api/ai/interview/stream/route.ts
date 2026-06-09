@@ -1,5 +1,6 @@
 import type Anthropic from "@anthropic-ai/sdk";
 import type { NextRequest } from "next/server";
+import { getAnalyticsBinding, trackAIChat } from "@/lib/ai/analytics";
 import { createAnthropicClient } from "@/lib/ai/anthropic-client";
 import { logGatewayHealthOnce } from "@/lib/ai/gateway-health";
 import {
@@ -138,6 +139,9 @@ export async function POST(request: NextRequest) {
     const messageId = nextId();
     const streamStartTime = performance.now();
 
+    // Capture the Analytics Engine binding in request context (see analytics.ts).
+    const analytics = getAnalyticsBinding();
+
     const readable = new ReadableStream({
         async start(controller) {
             const emit = (data: string) => controller.enqueue(encoder.encode(data));
@@ -235,6 +239,20 @@ export async function POST(request: NextRequest) {
                         timestamp: Date.now(),
                     }),
                 );
+
+                trackAIChat(analytics, {
+                    format,
+                    personality: "_interview",
+                    mode,
+                    thinking: false,
+                    inputTokens: finalMsg.usage.input_tokens ?? 0,
+                    outputTokens: finalMsg.usage.output_tokens ?? 0,
+                    cacheCreationTokens: finalMsg.usage.cache_creation_input_tokens ?? 0,
+                    cacheReadTokens: finalMsg.usage.cache_read_input_tokens ?? 0,
+                    teamSize: 0,
+                    responseTimeMs: Math.round(performance.now() - streamStartTime),
+                    source: "web",
+                });
 
                 controller.close();
             } catch (err) {

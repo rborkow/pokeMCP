@@ -7,12 +7,19 @@ assets = { directory = ".open-next/assets", binding = "ASSETS" }
 
 [vars]
 NEXT_PUBLIC_MCP_URL = "https://api.pokemcp.com"
-# Set this to your Cloudflare Web Analytics token (from dashboard > Web Analytics)
-# NEXT_PUBLIC_CF_ANALYTICS_TOKEN = "your-token-here"
+# NOTE: the Cloudflare Web Analytics token is NOT a runtime var — NEXT_PUBLIC_*
+# is inlined by Next at build time. Set NEXT_PUBLIC_CF_ANALYTICS_TOKEN in
+# .env.local (local deploy) or a Workers Builds env var (CI). See .env.example.
 # Secrets (set via `wrangler secret put` or Cloudflare dashboard):
 # - ANTHROPIC_API_KEY
 # - CLOUDFLARE_AI_GATEWAY_URL (contains account ID)
 # - CF_AIG_TOKEN
+
+# Shared usage-analytics dataset (also written by the MCP Worker and read by the
+# admin dashboard + pokemonitor). The AI routes write `ai_chat` events here.
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+dataset = "pokemcp-analytics"
 
 [observability]
 enabled = true
