@@ -102,7 +102,6 @@ async function main() {
             continue;
         }
         const months = monthsBack(latest.date, MONTHS);
-        let sql = "";
         let captured = 0;
 
         for (const date of months) {
@@ -113,26 +112,24 @@ async function main() {
                     continue;
                 }
                 const result = chaosToRows(format, date, chaos);
-                sql += buildSnapshotSql(result);
+                // Load per-month so large continuous formats (e.g. gen9doublesou)
+                // don't produce a multi-MB file that strains `wrangler d1 execute`.
+                const file = join(OUT_DIR, `${format}-${date}.sql`);
+                writeFileSync(file, buildSnapshotSql(result));
                 captured++;
                 console.log(`  ✓ ${format} ${date} (${result.rows.length} mons)`);
+                if (!DRY_RUN) loadIntoD1(file);
             } catch (e) {
                 console.warn(`  ✗ ${format} ${date}: ${(e as Error).message}`);
             }
             await delay(2000); // be polite to Smogon
         }
 
-        if (!sql) {
+        if (captured === 0) {
             console.log(`  (no data captured for ${format})`);
             continue;
         }
-        const file = join(OUT_DIR, `${format}.sql`);
-        writeFileSync(file, sql);
-        console.log(`  → wrote ${captured} snapshot(s) to ${file}`);
-        if (!DRY_RUN) {
-            loadIntoD1(file);
-            console.log(`  → loaded ${format} into D1`);
-        }
+        console.log(`  → ${format}: ${captured} snapshot(s) ${DRY_RUN ? "written" : "loaded"}`);
     }
 
     console.log(
