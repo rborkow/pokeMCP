@@ -1,21 +1,16 @@
 "use client";
 
 import { useMemo } from "react";
-import {
-    getActiveMegaForm,
-    getActiveMegaSlot,
-    getEffectiveTypes,
-} from "@/lib/champions-utils";
+import { getActiveMegaForm, getActiveMegaSlot, getEffectiveTypes } from "@/lib/champions-utils";
 import { getPokemonBaseStats } from "@/lib/data/pokemon-types";
 import { calculateSpeed } from "@/lib/speed-calc";
 import { analyzeTeamCoverage } from "@/lib/type-analysis";
 import { useTeamStore } from "@/stores/team-store";
+import { MetaReportDialog } from "./MetaReportDialog";
 
 type Signal = { label: string; value: string; tone: "neutral" | "good" | "warn" };
 
-function speedShapeFromTeam(
-    team: ReturnType<typeof useTeamStore.getState>["team"],
-): string {
+function speedShapeFromTeam(team: ReturnType<typeof useTeamStore.getState>["team"]): string {
     if (team.length === 0) return "—";
     const speeds: number[] = [];
     for (const mon of team) {
@@ -44,7 +39,7 @@ function speedShapeFromTeam(
  * are truthful rather than heuristic.
  */
 export function AnalysisStrip() {
-    const { team, format } = useTeamStore();
+    const { team, format, mode } = useTeamStore();
 
     const signals: Signal[] = useMemo(() => {
         const filled = team.length;
@@ -115,6 +110,7 @@ export function AnalysisStrip() {
                     </li>
                 ))}
             </ul>
+            <MetaReportDialog format={format} mode={mode} />
         </div>
     );
 }
