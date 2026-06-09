@@ -46,10 +46,9 @@
         {
             "binding": "META_DB",
             "database_name": "pokemcp-meta-history",
-            // TODO: replace with the id from `wrangler d1 create pokemcp-meta-history`
-            // BEFORE merging to main (merge auto-deploys). Local dev + type-check work
-            // with the placeholder. Apply schema: `wrangler d1 migrations apply META_DB`.
-            "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+            // D1 id (not secret — like the KV ids above). Created via the Cloudflare API.
+            // Apply schema with: wrangler d1 migrations apply META_DB --remote
+            "database_id": "64752654-621e-4f0d-be90-3e200e73097c",
             "migrations_dir": "migrations/d1"
         }
     ],
@@ -167,7 +166,7 @@
                     "binding": "META_DB",
                     "database_name": "pokemcp-meta-history",
                     // Staging may share the production DB id (as KV does), or use its own.
-                    "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+                    "database_id": "64752654-621e-4f0d-be90-3e200e73097c",
                     "migrations_dir": "migrations/d1"
                 }
             ]
@@ -231,7 +230,7 @@
                 {
                     "binding": "META_DB",
                     "database_name": "pokemcp-meta-history",
-                    "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+                    "database_id": "64752654-621e-4f0d-be90-3e200e73097c",
                     "migrations_dir": "migrations/d1"
                 }
             ],
