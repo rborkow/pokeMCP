@@ -50,10 +50,24 @@ jobs:
           # Check if there are changes to commit
           if git diff --staged --quiet; then
             echo "No stats changes to commit"
-          else
-            git commit -m "chore: update Smogon stats and discovered formats ($(date +%Y-%m))"
-            git push
+            exit 0
           fi
+
+          git commit -m "chore: update Smogon stats and discovered formats ($(date +%Y-%m))"
+
+          # main can advance while this job runs (e.g. a PR merge), which would
+          # otherwise reject the push. Rebase onto the latest main and retry.
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:main; then
+              echo "Pushed stats update on attempt $attempt"
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt); rebasing onto latest main..."
+            git pull --rebase origin main
+          done
+
+          echo "::error::Failed to push stats update after 5 attempts"
+          exit 1
 
       - name: Verify stats update
         run: |
