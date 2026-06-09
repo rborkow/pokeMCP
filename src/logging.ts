@@ -62,7 +62,7 @@ function sanitizeArgs(args: Record<string, unknown>): Record<string, unknown> {
 /**
  * Extract Pokemon names mentioned in the interaction
  */
-function extractPokemonMentioned(args: Record<string, unknown>, response: string): string[] {
+function extractPokemonMentioned(args: Record<string, unknown>): string[] {
     const mentioned = new Set<string>();
 
     // From args
@@ -80,6 +80,25 @@ function extractPokemonMentioned(args: Record<string, unknown>, response: string
     // Could also parse response for Pokemon names, but keeping it simple for now
 
     return Array.from(mentioned).slice(0, 10); // Limit to 10
+}
+
+/**
+ * True when an interaction carries a specific `pokemon` argument but the tool
+ * reported it couldn't be found. These are dominated by partial names typed
+ * mid-keystroke by as-you-type autocomplete (e.g. "gyar", "kang") and are
+ * noise for both the top-Pokémon metric and fine-tuning data.
+ */
+export function isUnproductivePokemonLookup(
+    args: Record<string, unknown>,
+    response: string,
+): boolean {
+    if (typeof args.pokemon !== "string" || args.pokemon.length === 0) {
+        return false;
+    }
+    // Matches lookup_pokemon's `Pokémon "X" not found.` and get_usage_stats'
+    // `X not found in <format> usage statistics.` — but not format-level
+    // "No usage statistics found for format ...", which is worth keeping.
+    return /not found/i.test(response);
 }
 
 /**
@@ -133,6 +152,12 @@ export async function logInteraction(
         return;
     }
 
+    // Drop as-you-type autocomplete noise before it consumes a sample slot,
+    // so the 10% sample is spent on real lookups rather than partial names.
+    if (isUnproductivePokemonLookup(args, response)) {
+        return;
+    }
+
     // Sampling - only log a percentage of requests
     if (!shouldSample(cfg.sampleRate)) {
         console.log(
@@ -151,7 +176,7 @@ export async function logInteraction(
             responseTimeMs,
             success,
             format: typeof args.format === "string" ? args.format : undefined,
-            pokemonMentioned: extractPokemonMentioned(args, response),
+            pokemonMentioned: extractPokemonMentioned(args),
         };
 
         // Store in R2 with a path structure that makes it easy to query
