@@ -31,6 +31,8 @@
     "discover-formats": "tsx scripts/discover-formats.ts",
     "fetch-stats": "tsx scripts/fetch-stats.ts",
     "upload-stats": "tsx scripts/upload-stats.ts",
+    "backfill-history": "tsx scripts/backfill-history.ts",
+    "append-history": "tsx scripts/append-history.ts",
     "fetch-champions-legality": "tsx scripts/fetch-champions-legality.ts",
     "upload-champions-legality": "tsx scripts/upload-champions-legality.ts",
     "export-logs": "tsx scripts/export-logs.ts",

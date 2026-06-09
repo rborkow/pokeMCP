@@ -615,6 +615,7 @@ export default {
                         "validate_team",
                         "suggest_team_coverage",
                         "get_usage_stats",
+                        "get_meta_trends",
                         "query_strategy",
                     ],
                     endpoints: {
