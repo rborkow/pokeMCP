@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { useDebouncedValue } from "@/hooks/useDebouncedValue";
 import { COMMON_ITEMS } from "@/lib/data/items";
 import { usePokemonLookup, usePopularSets } from "@/lib/mcp-client";
 import { parseAbilities, parseItems, parseMoves } from "@/lib/pokemon-parser";
@@ -22,17 +23,21 @@ export function usePokemonData(
     format: string,
     enabled: boolean,
 ): UsePokemonDataReturn {
-    const shouldFetch = enabled && pokemonName.length > 2;
+    // Debounce the typed name so each keystroke doesn't fire a lookup +
+    // popular-sets pair. This both cuts redundant requests/subrequests and
+    // stops partial names ("gya", "gyar", ...) from inflating usage metrics.
+    const debouncedName = useDebouncedValue(pokemonName.trim(), 300);
+    const shouldFetch = enabled && debouncedName.length > 2;
 
     // Fetch Pokemon data for abilities
     const { data: lookupData, isLoading: isLookupLoading } = usePokemonLookup(
-        pokemonName,
+        debouncedName,
         shouldFetch,
     );
 
     // Fetch popular sets for moves, items, tera types
     const { data: setsData, isLoading: isSetsLoading } = usePopularSets(
-        pokemonName,
+        debouncedName,
         format,
         shouldFetch,
     );
