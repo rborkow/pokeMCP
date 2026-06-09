@@ -22,7 +22,7 @@ const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes (mirrors stats.ts)
 const cache = new Map<string, { data: unknown; timestamp: number }>();
 
 const SOURCE = "smogon-chaos";
-const DEFAULT_FORMAT = "gen9vgc2026regf";
+const DEFAULT_FORMAT = "gen9vgc2026regi";
 const MIN_MOMENTUM_HISTORY = 4; // need >= 4 points before flagging momentum
 const ENTRY_THRESHOLD = 0.02; // 2% usage to count as a meaningful entrant/dropout
 const MOMENTUM_RELEVANCE = 0.02; // only track momentum for mons reaching ~2% usage

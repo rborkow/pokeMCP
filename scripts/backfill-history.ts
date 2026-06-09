@@ -95,6 +95,9 @@ async function main() {
             `(${LOCAL ? "local" : "remote"}${DRY_RUN ? ", DRY RUN" : ""})\n`,
     );
 
+    let totalLoaded = 0;
+    let totalFailed = 0;
+
     for (const format of FORMATS) {
         const latest = await Statistics.latestDate(format);
         if (!latest) {
@@ -102,9 +105,12 @@ async function main() {
             continue;
         }
         const months = monthsBack(latest.date, MONTHS);
-        let captured = 0;
+        let loaded = 0;
+        let failed = 0;
 
         for (const date of months) {
+            let file: string;
+            let monCount: number;
             try {
                 const chaos = await fetchChaos(format, date);
                 if (!chaos?.data || Object.keys(chaos.data).length === 0) {
@@ -114,31 +120,55 @@ async function main() {
                 const result = chaosToRows(format, date, chaos);
                 // Load per-month so large continuous formats (e.g. gen9doublesou)
                 // don't produce a multi-MB file that strains `wrangler d1 execute`.
-                const file = join(OUT_DIR, `${format}-${date}.sql`);
+                file = join(OUT_DIR, `${format}-${date}.sql`);
                 writeFileSync(file, buildSnapshotSql(result));
-                captured++;
-                console.log(`  ✓ ${format} ${date} (${result.rows.length} mons)`);
-                if (!DRY_RUN) loadIntoD1(file);
+                monCount = result.rows.length;
             } catch (e) {
-                console.warn(`  ✗ ${format} ${date}: ${(e as Error).message}`);
+                console.warn(`  ✗ fetch ${format} ${date}: ${(e as Error).message}`);
+                await delay(2000);
+                continue;
+            }
+
+            if (DRY_RUN) {
+                console.log(`  ✓ ${format} ${date} (${monCount} mons, SQL written)`);
+                loaded++;
+            } else {
+                try {
+                    loadIntoD1(file);
+                    console.log(`  ✓ ${format} ${date} (${monCount} mons, loaded)`);
+                    loaded++;
+                } catch (e) {
+                    // A load failure is real (e.g. the token lacks D1 edit permission);
+                    // count it so the run fails loudly rather than reporting false success.
+                    console.error(`  ✗ load ${format} ${date}: ${(e as Error).message}`);
+                    failed++;
+                }
             }
             await delay(2000); // be polite to Smogon
         }
 
-        if (captured === 0) {
+        totalLoaded += loaded;
+        totalFailed += failed;
+        if (loaded === 0 && failed === 0) {
             console.log(`  (no data captured for ${format})`);
-            continue;
+        } else {
+            console.log(
+                `  → ${format}: ${loaded} ${DRY_RUN ? "written" : "loaded"}, ${failed} failed`,
+            );
         }
-        console.log(`  → ${format}: ${captured} snapshot(s) ${DRY_RUN ? "written" : "loaded"}`);
     }
 
     console.log(
-        `\nDone.${
-            DRY_RUN
-                ? ` SQL in ${OUT_DIR}; load with: wrangler d1 execute ${DB} --remote --file=<file>`
-                : ""
-        }`,
+        `\nDone. ${totalLoaded} snapshot(s) ${DRY_RUN ? "written" : "loaded"}, ${totalFailed} failed.` +
+            (DRY_RUN ? ` SQL in ${OUT_DIR}.` : ""),
     );
+    if (totalFailed > 0) {
+        console.error(
+            `\n✗ ${totalFailed} snapshot load(s) failed — the CLOUDFLARE_API_TOKEN may lack D1 ` +
+                "edit permission, or D1 was unreachable. Fix and re-run.",
+        );
+        process.exitCode = 1;
+    }
 }
 
 main().catch((e) => {
