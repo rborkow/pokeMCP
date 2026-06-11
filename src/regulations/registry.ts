@@ -27,13 +27,19 @@ export function listRegulationIds(): string[] {
 }
 
 /**
- * Newest regulation by start date — the registry's notion of the "current"
- * competitive ruleset. Champions replaced mainline VGC as the flagship ladder
- * in 2026, so consumers that need a sensible default format (e.g. meta-trends)
- * key off this instead of a hardcoded VGC id.
+ * Newest regulation (by start date) that has a published Smogon stats mapping.
+ *
+ * Champions replaced mainline VGC as the flagship ladder in 2026, so stats
+ * consumers that need a sensible default format (e.g. meta-trends) key off
+ * this instead of a hardcoded VGC id. A brand-new regulation sits in the
+ * registry without `showdownFormatId` until Smogon's first monthly dump after
+ * it starts — defaults must skip it rather than dead-end on "not published
+ * yet", and will auto-advance once the mapping is flipped on.
  */
-export function getLatestRegulation(): RegulationSet | undefined {
-    return [...REGULATIONS].sort((a, b) => b.startDate.localeCompare(a.startDate))[0];
+export function getLatestStatsRegulation(): RegulationSet | undefined {
+    return REGULATIONS.filter((r) => r.showdownFormatId).sort((a, b) =>
+        b.startDate.localeCompare(a.startDate),
+    )[0];
 }
 
 /**
