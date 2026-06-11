@@ -1,66 +1,179 @@
 {
-    "id": "incineroar",
-    "name": "Incineroar",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.3682858,
-            "rank": 3,
-            "raw": 2363825
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.25106280000000003,
-            "rank": 6,
-            "raw": 1701936
-        }
-    ],
-    "abilities": [["intimidate", 99.42210074512168], ["blaze", 0.5778992548783023]],
-    "items": [
-        ["sitrusberry", 40.51276049086709],
-        ["chopleberry", 22.88863963205454],
-        ["passhoberry", 15.172638302653949],
-        ["shucaberry", 6.7916956180485295],
-        ["leftovers", 4.862257922999547],
-        ["charcoal", 4.2454656449562425],
-        ["whiteherb", 2.240246339980765],
-        ["lumberry", 1.155030004873635]
-    ],
-    "moves": [
-        ["fakeout", 24.920314769180525],
-        ["partingshot", 23.776707645569104],
-        ["flareblitz", 20.661359771421232],
-        ["throatchop", 12.330740623453158],
-        ["darkestlariat", 7.987442434668479],
-        ["protect", 4.82196425887549],
-        ["willowisp", 1.245268743716654],
-        ["helpinghand", 1.1472090525524252],
-        ["closecombat", 0.8154037967627082],
-        ["taunt", 0.7565894948662281]
-    ],
-    "spreads": [
-        ["Careful:32/0/14/0/20/0", 3.2887967270813547],
-        ["Relaxed:32/0/32/0/2/0", 1.9719727308835029],
-        ["Sassy:32/0/14/0/20/0", 1.8058663283647363],
-        ["Impish:31/0/20/0/3/12", 1.7064628166084],
-        ["Adamant:32/32/0/0/2/0", 1.562905047196574]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Sinistcha", 9.002386350241522],
-        ["Garchomp", 5.684642996173631],
-        ["Floette-Mega", 5.162208307203527],
-        ["Sneasler", 4.961024971889696],
-        ["Basculegion", 4.549690066830505],
-        ["Gengar-Mega", 4.513105887200414],
-        ["Charizard-Mega-Y", 3.501944122476449],
-        ["Kingambit", 3.4134621914439203],
-        ["Farigiraf", 2.657951140574259],
-        ["Kommo-o", 2.5460815214333024]
-    ],
-    "counters": []
+ "id": "incineroar",
+ "name": "Incineroar",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.3682858,
+   "rank": 3,
+   "raw": 2363825
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.25106280000000003,
+   "rank": 6,
+   "raw": 1701936
+  }
+ ],
+ "abilities": [
+  [
+   "intimidate",
+   99.42210074512168
+  ],
+  [
+   "blaze",
+   0.5778992548783023
+  ]
+ ],
+ "items": [
+  [
+   "sitrusberry",
+   40.51276049086709
+  ],
+  [
+   "chopleberry",
+   22.88863963205454
+  ],
+  [
+   "passhoberry",
+   15.172638302653949
+  ],
+  [
+   "shucaberry",
+   6.7916956180485295
+  ],
+  [
+   "leftovers",
+   4.862257922999547
+  ],
+  [
+   "charcoal",
+   4.2454656449562425
+  ],
+  [
+   "whiteherb",
+   2.240246339980765
+  ],
+  [
+   "lumberry",
+   1.155030004873635
+  ]
+ ],
+ "moves": [
+  [
+   "fakeout",
+   24.920314769180525
+  ],
+  [
+   "partingshot",
+   23.776707645569104
+  ],
+  [
+   "flareblitz",
+   20.661359771421232
+  ],
+  [
+   "throatchop",
+   12.330740623453158
+  ],
+  [
+   "darkestlariat",
+   7.987442434668479
+  ],
+  [
+   "protect",
+   4.82196425887549
+  ],
+  [
+   "willowisp",
+   1.245268743716654
+  ],
+  [
+   "helpinghand",
+   1.1472090525524252
+  ],
+  [
+   "closecombat",
+   0.8154037967627082
+  ],
+  [
+   "taunt",
+   0.7565894948662281
+  ]
+ ],
+ "spreads": [
+  [
+   "Careful:32/0/14/0/20/0",
+   3.2887967270813547
+  ],
+  [
+   "Relaxed:32/0/32/0/2/0",
+   1.9719727308835029
+  ],
+  [
+   "Sassy:32/0/14/0/20/0",
+   1.8058663283647363
+  ],
+  [
+   "Impish:31/0/20/0/3/12",
+   1.7064628166084
+  ],
+  [
+   "Adamant:32/32/0/0/2/0",
+   1.562905047196574
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Sinistcha",
+   9.002386350241522
+  ],
+  [
+   "Garchomp",
+   5.684642996173631
+  ],
+  [
+   "Floette-Mega",
+   5.162208307203527
+  ],
+  [
+   "Sneasler",
+   4.961024971889696
+  ],
+  [
+   "Basculegion",
+   4.549690066830505
+  ],
+  [
+   "Gengar-Mega",
+   4.513105887200414
+  ],
+  [
+   "Charizard-Mega-Y",
+   3.501944122476449
+  ],
+  [
+   "Kingambit",
+   3.4134621914439203
+  ],
+  [
+   "Farigiraf",
+   2.657951140574259
+  ],
+  [
+   "Kommo-o",
+   2.5460815214333024
+  ]
+ ],
+ "counters": []
 }

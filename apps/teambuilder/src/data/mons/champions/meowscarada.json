@@ -1,66 +1,179 @@
 {
-    "id": "meowscarada",
-    "name": "Meowscarada",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0140516,
-            "rank": 63,
-            "raw": 114513
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.020600900000000002,
-            "rank": 53,
-            "raw": 183250
-        }
-    ],
-    "abilities": [["protean", 66.82482459429421], ["overgrow", 33.17517540570579]],
-    "items": [
-        ["choicescarf", 54.67461162362969],
-        ["focussash", 38.83832414251322],
-        ["miracleseed", 1.8775234573887523],
-        ["blackglasses", 1.6206407848679887],
-        ["roseliberry", 0.7557440625894445],
-        ["whiteherb", 0.3795978398482039],
-        ["sitrusberry", 0.20179849906434133],
-        ["mentalherb", 0.18227301323614542]
-    ],
-    "moves": [
-        ["flowertrick", 24.54029956082381],
-        ["knockoff", 19.2311940841408],
-        ["tripleaxel", 14.910648799829165],
-        ["protect", 9.895037739584794],
-        ["suckerpunch", 9.30975954579729],
-        ["uturn", 9.07019418863845],
-        ["lowkick", 7.416364175472561],
-        ["throatchop", 1.0061650006321825],
-        ["playrough", 0.5587486158686094],
-        ["brickbreak", 0.5097589003412828]
-    ],
-    "spreads": [
-        ["Adamant:2/32/0/0/0/32", 23.008673467013406],
-        ["Adamant:0/32/2/0/0/32", 18.979932947448113],
-        ["Jolly:2/32/0/0/0/32", 12.832300086688827],
-        ["Jolly:0/32/0/0/2/32", 5.493679369749809],
-        ["Adamant:7/32/0/0/0/27", 3.358835670811825]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Basculegion", 7.663521378692292],
-        ["Sneasler", 7.2330967941087065],
-        ["Charizard-Mega-Y", 5.2754511767585335],
-        ["Garchomp", 4.2463791239716855],
-        ["Whimsicott", 4.0431685173882],
-        ["Froslass-Mega", 3.5737503056787947],
-        ["Farigiraf", 3.201086424736843],
-        ["Incineroar", 3.0591206020209865],
-        ["Glimmora-Mega", 2.695839035819634],
-        ["Aerodactyl-Mega", 2.388126598491246]
-    ],
-    "counters": []
+ "id": "meowscarada",
+ "name": "Meowscarada",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0140516,
+   "rank": 63,
+   "raw": 114513
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.020600900000000002,
+   "rank": 53,
+   "raw": 183250
+  }
+ ],
+ "abilities": [
+  [
+   "protean",
+   66.82482459429421
+  ],
+  [
+   "overgrow",
+   33.17517540570579
+  ]
+ ],
+ "items": [
+  [
+   "choicescarf",
+   54.67461162362969
+  ],
+  [
+   "focussash",
+   38.83832414251322
+  ],
+  [
+   "miracleseed",
+   1.8775234573887523
+  ],
+  [
+   "blackglasses",
+   1.6206407848679887
+  ],
+  [
+   "roseliberry",
+   0.7557440625894445
+  ],
+  [
+   "whiteherb",
+   0.3795978398482039
+  ],
+  [
+   "sitrusberry",
+   0.20179849906434133
+  ],
+  [
+   "mentalherb",
+   0.18227301323614542
+  ]
+ ],
+ "moves": [
+  [
+   "flowertrick",
+   24.54029956082381
+  ],
+  [
+   "knockoff",
+   19.2311940841408
+  ],
+  [
+   "tripleaxel",
+   14.910648799829165
+  ],
+  [
+   "protect",
+   9.895037739584794
+  ],
+  [
+   "suckerpunch",
+   9.30975954579729
+  ],
+  [
+   "uturn",
+   9.07019418863845
+  ],
+  [
+   "lowkick",
+   7.416364175472561
+  ],
+  [
+   "throatchop",
+   1.0061650006321825
+  ],
+  [
+   "playrough",
+   0.5587486158686094
+  ],
+  [
+   "brickbreak",
+   0.5097589003412828
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   23.008673467013406
+  ],
+  [
+   "Adamant:0/32/2/0/0/32",
+   18.979932947448113
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   12.832300086688827
+  ],
+  [
+   "Jolly:0/32/0/0/2/32",
+   5.493679369749809
+  ],
+  [
+   "Adamant:7/32/0/0/0/27",
+   3.358835670811825
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Basculegion",
+   7.663521378692292
+  ],
+  [
+   "Sneasler",
+   7.2330967941087065
+  ],
+  [
+   "Charizard-Mega-Y",
+   5.2754511767585335
+  ],
+  [
+   "Garchomp",
+   4.2463791239716855
+  ],
+  [
+   "Whimsicott",
+   4.0431685173882
+  ],
+  [
+   "Froslass-Mega",
+   3.5737503056787947
+  ],
+  [
+   "Farigiraf",
+   3.201086424736843
+  ],
+  [
+   "Incineroar",
+   3.0591206020209865
+  ],
+  [
+   "Glimmora-Mega",
+   2.695839035819634
+  ],
+  [
+   "Aerodactyl-Mega",
+   2.388126598491246
+  ]
+ ],
+ "counters": []
 }

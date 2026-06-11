@@ -1,57 +1,147 @@
 {
-    "id": "aerodactylmega",
-    "name": "Aerodactyl-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.063045,
-            "rank": 25,
-            "raw": 263338
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.1139224,
-            "rank": 14,
-            "raw": 505424
-        }
-    ],
-    "abilities": [["toughclaws", 100]],
-    "items": [["aerodactylite", 100]],
-    "moves": [
-        ["rockslide", 24.763347600573447],
-        ["dualwingbeat", 23.605976212681462],
-        ["tailwind", 22.331089423599703],
-        ["protect", 20.45623568323817],
-        ["wideguard", 4.702929847156713],
-        ["icefang", 2.5186857671894556],
-        ["taunt", 0.33558583963605315],
-        ["ironhead", 0.25853479783144134],
-        ["rocktomb", 0.22857268113648066],
-        ["crunch", 0.16045175602963174]
-    ],
-    "spreads": [
-        ["Jolly:2/32/0/0/0/32", 19.07527952849192],
-        ["Jolly:12/12/9/0/1/32", 5.86986305729698],
-        ["Jolly:0/32/0/0/2/32", 5.049378517654998],
-        ["Jolly:3/16/15/0/0/32", 3.7063208312038474],
-        ["Jolly:0/32/2/0/0/32", 3.4351962719752307]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Basculegion", 12.663445221263633],
-        ["Kingambit", 10.960343544996785],
-        ["Garchomp", 10.158897076029842],
-        ["Sylveon", 9.851989660411435],
-        ["Charizard-Mega-Y", 7.327993650104693],
-        ["Sneasler", 7.32339706968095],
-        ["Scovillain-Mega", 3.31193406359782],
-        ["Farigiraf", 2.4742200534920564],
-        ["Incineroar", 2.4649077541359166],
-        ["Kommo-o", 2.1864414955970837]
-    ],
-    "counters": []
+ "id": "aerodactylmega",
+ "name": "Aerodactyl-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.063045,
+   "rank": 25,
+   "raw": 263338
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.1139224,
+   "rank": 14,
+   "raw": 505424
+  }
+ ],
+ "abilities": [
+  [
+   "toughclaws",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "aerodactylite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "rockslide",
+   24.763347600573447
+  ],
+  [
+   "dualwingbeat",
+   23.605976212681462
+  ],
+  [
+   "tailwind",
+   22.331089423599703
+  ],
+  [
+   "protect",
+   20.45623568323817
+  ],
+  [
+   "wideguard",
+   4.702929847156713
+  ],
+  [
+   "icefang",
+   2.5186857671894556
+  ],
+  [
+   "taunt",
+   0.33558583963605315
+  ],
+  [
+   "ironhead",
+   0.25853479783144134
+  ],
+  [
+   "rocktomb",
+   0.22857268113648066
+  ],
+  [
+   "crunch",
+   0.16045175602963174
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:2/32/0/0/0/32",
+   19.07527952849192
+  ],
+  [
+   "Jolly:12/12/9/0/1/32",
+   5.86986305729698
+  ],
+  [
+   "Jolly:0/32/0/0/2/32",
+   5.049378517654998
+  ],
+  [
+   "Jolly:3/16/15/0/0/32",
+   3.7063208312038474
+  ],
+  [
+   "Jolly:0/32/2/0/0/32",
+   3.4351962719752307
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Basculegion",
+   12.663445221263633
+  ],
+  [
+   "Kingambit",
+   10.960343544996785
+  ],
+  [
+   "Garchomp",
+   10.158897076029842
+  ],
+  [
+   "Sylveon",
+   9.851989660411435
+  ],
+  [
+   "Charizard-Mega-Y",
+   7.327993650104693
+  ],
+  [
+   "Sneasler",
+   7.32339706968095
+  ],
+  [
+   "Scovillain-Mega",
+   3.31193406359782
+  ],
+  [
+   "Farigiraf",
+   2.4742200534920564
+  ],
+  [
+   "Incineroar",
+   2.4649077541359166
+  ],
+  [
+   "Kommo-o",
+   2.1864414955970837
+  ]
+ ],
+ "counters": []
 }

@@ -1,70 +1,183 @@
 {
-    "id": "basculegionf",
-    "name": "Basculegion-F",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0108872,
-            "rank": 74,
-            "raw": 47363
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0069453,
-            "rank": 91,
-            "raw": 40679
-        }
-    ],
-    "abilities": [
-        ["adaptability", 80.521043340976],
-        ["swiftswim", 19.374864698375514],
-        ["moldbreaker", 0.10409196064848983]
-    ],
-    "items": [
-        ["mysticwater", 33.14400848217484],
-        ["choicescarf", 30.83629108846731],
-        ["focussash", 17.465499579831093],
-        ["colburberry", 6.828604171573007],
-        ["kingsrock", 4.7057188573516],
-        ["spelltag", 4.001464397570447],
-        ["sitrusberry", 1.5300643065066113],
-        ["brightpowder", 0.8249544964427604]
-    ],
-    "moves": [
-        ["shadowball", 22.623046812884315],
-        ["muddywater", 20.02555505262427],
-        ["protect", 13.59751357626719],
-        ["icebeam", 12.934693098352415],
-        ["aquajet", 7.48073895814529],
-        ["hydropump", 4.913955701061487],
-        ["icywind", 3.477753836702955],
-        ["flipturn", 3.4745375509388694],
-        ["surf", 3.2946244101549094],
-        ["hex", 2.506849460004126]
-    ],
-    "spreads": [
-        ["Modest:2/0/0/32/0/32", 11.705809825629748],
-        ["Timid:2/0/0/32/0/32", 8.193245166839187],
-        ["Timid:0/0/2/32/0/32", 6.721744654960207],
-        ["Modest:0/0/2/32/0/32", 5.987811926850389],
-        ["Modest:2/0/11/30/1/18", 3.8820227958972344]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Garchomp", 5.722259805544732],
-        ["Kingambit", 5.03625817081365],
-        ["Sneasler", 4.375730666889094],
-        ["Floette-Mega", 4.026344536104001],
-        ["Pelipper", 3.9702798901585172],
-        ["Whimsicott", 3.9638778416225144],
-        ["Archaludon", 3.426040410966664],
-        ["Incineroar", 3.4091495580520674],
-        ["Aerodactyl-Mega", 3.1971484549423237],
-        ["Farigiraf", 3.1409960750029726]
-    ],
-    "counters": []
+ "id": "basculegionf",
+ "name": "Basculegion-F",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0108872,
+   "rank": 74,
+   "raw": 47363
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0069453,
+   "rank": 91,
+   "raw": 40679
+  }
+ ],
+ "abilities": [
+  [
+   "adaptability",
+   80.521043340976
+  ],
+  [
+   "swiftswim",
+   19.374864698375514
+  ],
+  [
+   "moldbreaker",
+   0.10409196064848983
+  ]
+ ],
+ "items": [
+  [
+   "mysticwater",
+   33.14400848217484
+  ],
+  [
+   "choicescarf",
+   30.83629108846731
+  ],
+  [
+   "focussash",
+   17.465499579831093
+  ],
+  [
+   "colburberry",
+   6.828604171573007
+  ],
+  [
+   "kingsrock",
+   4.7057188573516
+  ],
+  [
+   "spelltag",
+   4.001464397570447
+  ],
+  [
+   "sitrusberry",
+   1.5300643065066113
+  ],
+  [
+   "brightpowder",
+   0.8249544964427604
+  ]
+ ],
+ "moves": [
+  [
+   "shadowball",
+   22.623046812884315
+  ],
+  [
+   "muddywater",
+   20.02555505262427
+  ],
+  [
+   "protect",
+   13.59751357626719
+  ],
+  [
+   "icebeam",
+   12.934693098352415
+  ],
+  [
+   "aquajet",
+   7.48073895814529
+  ],
+  [
+   "hydropump",
+   4.913955701061487
+  ],
+  [
+   "icywind",
+   3.477753836702955
+  ],
+  [
+   "flipturn",
+   3.4745375509388694
+  ],
+  [
+   "surf",
+   3.2946244101549094
+  ],
+  [
+   "hex",
+   2.506849460004126
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:2/0/0/32/0/32",
+   11.705809825629748
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   8.193245166839187
+  ],
+  [
+   "Timid:0/0/2/32/0/32",
+   6.721744654960207
+  ],
+  [
+   "Modest:0/0/2/32/0/32",
+   5.987811926850389
+  ],
+  [
+   "Modest:2/0/11/30/1/18",
+   3.8820227958972344
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Garchomp",
+   5.722259805544732
+  ],
+  [
+   "Kingambit",
+   5.03625817081365
+  ],
+  [
+   "Sneasler",
+   4.375730666889094
+  ],
+  [
+   "Floette-Mega",
+   4.026344536104001
+  ],
+  [
+   "Pelipper",
+   3.9702798901585172
+  ],
+  [
+   "Whimsicott",
+   3.9638778416225144
+  ],
+  [
+   "Archaludon",
+   3.426040410966664
+  ],
+  [
+   "Incineroar",
+   3.4091495580520674
+  ],
+  [
+   "Aerodactyl-Mega",
+   3.1971484549423237
+  ],
+  [
+   "Farigiraf",
+   3.1409960750029726
+  ]
+ ],
+ "counters": []
 }

@@ -1,57 +1,147 @@
 {
-    "id": "gengarmega",
-    "name": "Gengar-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0729956,
-            "rank": 21,
-            "raw": 466340
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0703704,
-            "rank": 21,
-            "raw": 519375
-        }
-    ],
-    "abilities": [["shadowtag", 100]],
-    "items": [["gengarite", 100]],
-    "moves": [
-        ["protect", 24.770156149873415],
-        ["shadowball", 23.999808104778133],
-        ["perishsong", 16.569111174430816],
-        ["disable", 15.094345978234482],
-        ["sludgebomb", 12.796034026343591],
-        ["substitute", 1.4770755441927228],
-        ["icywind", 1.0524550195810631],
-        ["willowisp", 0.7496785288358554],
-        ["sludgewave", 0.5683289443653264],
-        ["focusblast", 0.41234468930288415]
-    ],
-    "spreads": [
-        ["Timid:30/0/18/2/11/5", 7.167579276710335],
-        ["Timid:2/0/0/32/0/32", 6.317807688316729],
-        ["Modest:30/0/12/0/0/24", 6.271433164964053],
-        ["Timid:32/0/9/1/1/23", 5.8002626647541735],
-        ["Timid:30/0/21/5/0/10", 5.639334625707101]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Incineroar", 16.101552420584262],
-        ["Sinistcha", 9.379160940537625],
-        ["Politoed", 7.805240969364115],
-        ["Kommo-o", 5.436075679091467],
-        ["Ninetales-Alola", 4.603045818580956],
-        ["Kingambit", 4.225807216391797],
-        ["Sneasler", 3.6226493914769646],
-        ["Maushold", 3.4852028734406155],
-        ["Archaludon", 3.0932265916709283],
-        ["Garchomp", 2.809545674310811]
-    ],
-    "counters": []
+ "id": "gengarmega",
+ "name": "Gengar-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0729956,
+   "rank": 21,
+   "raw": 466340
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0703704,
+   "rank": 21,
+   "raw": 519375
+  }
+ ],
+ "abilities": [
+  [
+   "shadowtag",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "gengarite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "protect",
+   24.770156149873415
+  ],
+  [
+   "shadowball",
+   23.999808104778133
+  ],
+  [
+   "perishsong",
+   16.569111174430816
+  ],
+  [
+   "disable",
+   15.094345978234482
+  ],
+  [
+   "sludgebomb",
+   12.796034026343591
+  ],
+  [
+   "substitute",
+   1.4770755441927228
+  ],
+  [
+   "icywind",
+   1.0524550195810631
+  ],
+  [
+   "willowisp",
+   0.7496785288358554
+  ],
+  [
+   "sludgewave",
+   0.5683289443653264
+  ],
+  [
+   "focusblast",
+   0.41234468930288415
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:30/0/18/2/11/5",
+   7.167579276710335
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   6.317807688316729
+  ],
+  [
+   "Modest:30/0/12/0/0/24",
+   6.271433164964053
+  ],
+  [
+   "Timid:32/0/9/1/1/23",
+   5.8002626647541735
+  ],
+  [
+   "Timid:30/0/21/5/0/10",
+   5.639334625707101
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Incineroar",
+   16.101552420584262
+  ],
+  [
+   "Sinistcha",
+   9.379160940537625
+  ],
+  [
+   "Politoed",
+   7.805240969364115
+  ],
+  [
+   "Kommo-o",
+   5.436075679091467
+  ],
+  [
+   "Ninetales-Alola",
+   4.603045818580956
+  ],
+  [
+   "Kingambit",
+   4.225807216391797
+  ],
+  [
+   "Sneasler",
+   3.6226493914769646
+  ],
+  [
+   "Maushold",
+   3.4852028734406155
+  ],
+  [
+   "Archaludon",
+   3.0932265916709283
+  ],
+  [
+   "Garchomp",
+   2.809545674310811
+  ]
+ ],
+ "counters": []
 }

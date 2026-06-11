@@ -1,70 +1,183 @@
 {
-    "id": "gallade",
-    "name": "Gallade",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0120184,
-            "rank": 71,
-            "raw": 78394
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0193556,
-            "rank": 57,
-            "raw": 148939
-        }
-    ],
-    "abilities": [
-        ["sharpness", 99.12447683789317],
-        ["steadfast", 0.5315535171402059],
-        ["justified", 0.343969644966623]
-    ],
-    "items": [
-        ["focussash", 44.63419838533237],
-        ["choicescarf", 14.265532501355164],
-        ["blackbelt", 10.955480297501555],
-        ["scopelens", 8.748578796541508],
-        ["whiteherb", 7.049157072777702],
-        ["sitrusberry", 3.466523723202245],
-        ["lumberry", 3.3428414225765244],
-        ["cobaberry", 1.9417832459770599]
-    ],
-    "moves": [
-        ["sacredsword", 24.66373794685869],
-        ["psychocut", 23.264586545399453],
-        ["leafblade", 14.032250083423909],
-        ["protect", 13.510560180473192],
-        ["trickroom", 7.283954809403738],
-        ["wideguard", 4.728517669878569],
-        ["nightslash", 3.262675719169988],
-        ["shadowsneak", 1.513674118639344],
-        ["trick", 1.218334887980183],
-        ["tripleaxel", 1.01227694491287]
-    ],
-    "spreads": [
-        ["Adamant:2/32/0/0/0/32", 25.075151692191362],
-        ["Jolly:0/32/0/0/2/32", 9.476146230333697],
-        ["Jolly:2/32/0/0/0/32", 9.420322323294814],
-        ["Brave:32/32/2/0/0/0", 7.668625153056075],
-        ["Brave:18/24/24/0/0/0", 3.3964088967705046]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Farigiraf", 10.063219852456031],
-        ["Kingambit", 8.203361699302983],
-        ["Camerupt-Mega", 4.279282100774575],
-        ["Pelipper", 3.986109832990152],
-        ["Basculegion", 3.9778655516468344],
-        ["Crabominable-Mega", 3.6297738743019607],
-        ["Azumarill", 3.208507766897327],
-        ["Torkoal", 2.99664511788761],
-        ["Sinistcha", 2.9677130996711596],
-        ["Blastoise-Mega", 2.877699998988953]
-    ],
-    "counters": []
+ "id": "gallade",
+ "name": "Gallade",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0120184,
+   "rank": 71,
+   "raw": 78394
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0193556,
+   "rank": 57,
+   "raw": 148939
+  }
+ ],
+ "abilities": [
+  [
+   "sharpness",
+   99.12447683789317
+  ],
+  [
+   "steadfast",
+   0.5315535171402059
+  ],
+  [
+   "justified",
+   0.343969644966623
+  ]
+ ],
+ "items": [
+  [
+   "focussash",
+   44.63419838533237
+  ],
+  [
+   "choicescarf",
+   14.265532501355164
+  ],
+  [
+   "blackbelt",
+   10.955480297501555
+  ],
+  [
+   "scopelens",
+   8.748578796541508
+  ],
+  [
+   "whiteherb",
+   7.049157072777702
+  ],
+  [
+   "sitrusberry",
+   3.466523723202245
+  ],
+  [
+   "lumberry",
+   3.3428414225765244
+  ],
+  [
+   "cobaberry",
+   1.9417832459770599
+  ]
+ ],
+ "moves": [
+  [
+   "sacredsword",
+   24.66373794685869
+  ],
+  [
+   "psychocut",
+   23.264586545399453
+  ],
+  [
+   "leafblade",
+   14.032250083423909
+  ],
+  [
+   "protect",
+   13.510560180473192
+  ],
+  [
+   "trickroom",
+   7.283954809403738
+  ],
+  [
+   "wideguard",
+   4.728517669878569
+  ],
+  [
+   "nightslash",
+   3.262675719169988
+  ],
+  [
+   "shadowsneak",
+   1.513674118639344
+  ],
+  [
+   "trick",
+   1.218334887980183
+  ],
+  [
+   "tripleaxel",
+   1.01227694491287
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   25.075151692191362
+  ],
+  [
+   "Jolly:0/32/0/0/2/32",
+   9.476146230333697
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   9.420322323294814
+  ],
+  [
+   "Brave:32/32/2/0/0/0",
+   7.668625153056075
+  ],
+  [
+   "Brave:18/24/24/0/0/0",
+   3.3964088967705046
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Farigiraf",
+   10.063219852456031
+  ],
+  [
+   "Kingambit",
+   8.203361699302983
+  ],
+  [
+   "Camerupt-Mega",
+   4.279282100774575
+  ],
+  [
+   "Pelipper",
+   3.986109832990152
+  ],
+  [
+   "Basculegion",
+   3.9778655516468344
+  ],
+  [
+   "Crabominable-Mega",
+   3.6297738743019607
+  ],
+  [
+   "Azumarill",
+   3.208507766897327
+  ],
+  [
+   "Torkoal",
+   2.99664511788761
+  ],
+  [
+   "Sinistcha",
+   2.9677130996711596
+  ],
+  [
+   "Blastoise-Mega",
+   2.877699998988953
+  ]
+ ],
+ "counters": []
 }

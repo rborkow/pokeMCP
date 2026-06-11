@@ -1,66 +1,179 @@
 {
-    "id": "ninetalesalola",
-    "name": "Ninetales-Alola",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0378733,
-            "rank": 40,
-            "raw": 251051
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0552366,
-            "rank": 31,
-            "raw": 333501
-        }
-    ],
-    "abilities": [["snowwarning", 99.3092568036257], ["snowcloak", 0.6907431963742957]],
-    "items": [
-        ["nevermeltice", 41.72218323124311],
-        ["focussash", 35.496736777455965],
-        ["choicescarf", 16.238326863906376],
-        ["occaberry", 1.2919181815682392],
-        ["sitrusberry", 1.2556167316955218],
-        ["babiriberry", 0.9427833321701331],
-        ["kebiaberry", 0.9061529579568696],
-        ["mentalherb", 0.6327845266732589]
-    ],
-    "moves": [
-        ["blizzard", 24.249495643152425],
-        ["protect", 19.07544376275401],
-        ["freezedry", 15.613563450358559],
-        ["encore", 13.501881039806651],
-        ["auroraveil", 8.25032958154242],
-        ["moonblast", 5.933082614544962],
-        ["icywind", 5.896725575056489],
-        ["disable", 4.81242784951854],
-        ["dazzlinggleam", 1.0935123511618592],
-        ["extrasensory", 0.39224310291824194]
-    ],
-    "spreads": [
-        ["Timid:2/0/0/32/0/32", 25.526166883078737],
-        ["Timid:1/0/1/32/0/32", 16.770894898157792],
-        ["Timid:21/0/1/15/0/29", 7.884047830795282],
-        ["Timid:1/0/0/32/1/32", 7.349135373344208],
-        ["Modest:2/0/0/32/0/32", 3.6274027387465173]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Kingambit", 8.316695235974937],
-        ["Incineroar", 7.660156822942541],
-        ["Gengar-Mega", 5.864194874274671],
-        ["Garchomp", 5.763933567136597],
-        ["Basculegion", 5.602417617928475],
-        ["Sneasler", 4.963997129901323],
-        ["Rotom-Wash", 4.5390458950551],
-        ["Farigiraf", 3.871919724193282],
-        ["Glimmora-Mega", 3.6521702666166638],
-        ["Aegislash", 3.1049671083468993]
-    ],
-    "counters": []
+ "id": "ninetalesalola",
+ "name": "Ninetales-Alola",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0378733,
+   "rank": 40,
+   "raw": 251051
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0552366,
+   "rank": 31,
+   "raw": 333501
+  }
+ ],
+ "abilities": [
+  [
+   "snowwarning",
+   99.3092568036257
+  ],
+  [
+   "snowcloak",
+   0.6907431963742957
+  ]
+ ],
+ "items": [
+  [
+   "nevermeltice",
+   41.72218323124311
+  ],
+  [
+   "focussash",
+   35.496736777455965
+  ],
+  [
+   "choicescarf",
+   16.238326863906376
+  ],
+  [
+   "occaberry",
+   1.2919181815682392
+  ],
+  [
+   "sitrusberry",
+   1.2556167316955218
+  ],
+  [
+   "babiriberry",
+   0.9427833321701331
+  ],
+  [
+   "kebiaberry",
+   0.9061529579568696
+  ],
+  [
+   "mentalherb",
+   0.6327845266732589
+  ]
+ ],
+ "moves": [
+  [
+   "blizzard",
+   24.249495643152425
+  ],
+  [
+   "protect",
+   19.07544376275401
+  ],
+  [
+   "freezedry",
+   15.613563450358559
+  ],
+  [
+   "encore",
+   13.501881039806651
+  ],
+  [
+   "auroraveil",
+   8.25032958154242
+  ],
+  [
+   "moonblast",
+   5.933082614544962
+  ],
+  [
+   "icywind",
+   5.896725575056489
+  ],
+  [
+   "disable",
+   4.81242784951854
+  ],
+  [
+   "dazzlinggleam",
+   1.0935123511618592
+  ],
+  [
+   "extrasensory",
+   0.39224310291824194
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   25.526166883078737
+  ],
+  [
+   "Timid:1/0/1/32/0/32",
+   16.770894898157792
+  ],
+  [
+   "Timid:21/0/1/15/0/29",
+   7.884047830795282
+  ],
+  [
+   "Timid:1/0/0/32/1/32",
+   7.349135373344208
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   3.6274027387465173
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Kingambit",
+   8.316695235974937
+  ],
+  [
+   "Incineroar",
+   7.660156822942541
+  ],
+  [
+   "Gengar-Mega",
+   5.864194874274671
+  ],
+  [
+   "Garchomp",
+   5.763933567136597
+  ],
+  [
+   "Basculegion",
+   5.602417617928475
+  ],
+  [
+   "Sneasler",
+   4.963997129901323
+  ],
+  [
+   "Rotom-Wash",
+   4.5390458950551
+  ],
+  [
+   "Farigiraf",
+   3.871919724193282
+  ],
+  [
+   "Glimmora-Mega",
+   3.6521702666166638
+  ],
+  [
+   "Aegislash",
+   3.1049671083468993
+  ]
+ ],
+ "counters": []
 }

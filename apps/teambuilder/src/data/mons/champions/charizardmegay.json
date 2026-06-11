@@ -1,57 +1,147 @@
 {
-    "id": "charizardmegay",
-    "name": "Charizard-Mega-Y",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.1470251,
-            "rank": 10,
-            "raw": 679725
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.2526538,
-            "rank": 5,
-            "raw": 962750
-        }
-    ],
-    "abilities": [["drought", 100]],
-    "items": [["charizarditey", 100]],
-    "moves": [
-        ["protect", 24.916811952137266],
-        ["heatwave", 24.906125177742215],
-        ["solarbeam", 22.319546734397356],
-        ["weatherball", 21.45377887890409],
-        ["ancientpower", 1.7769366606637722],
-        ["airslash", 1.602789647513321],
-        ["overheat", 1.4801491249595475],
-        ["scorchingsands", 0.3424256316898756],
-        ["hurricane", 0.25791070490622087],
-        ["dragonpulse", 0.2573666870056508]
-    ],
-    "spreads": [
-        ["Modest:24/0/14/11/0/17", 8.153962250387584],
-        ["Timid:2/0/0/32/0/32", 5.881999361993991],
-        ["Modest:2/0/0/32/0/32", 3.830707996350619],
-        ["Modest:32/0/10/11/0/13", 3.6554336213064484],
-        ["Modest:14/0/28/11/0/13", 3.0211249889308234]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Garchomp", 15.745158770190773],
-        ["Basculegion", 11.89668543199879],
-        ["Kingambit", 10.704311195398375],
-        ["Whimsicott", 8.090682385169663],
-        ["Sylveon", 5.182840234312587],
-        ["Floette-Mega", 4.996250366451484],
-        ["Sneasler", 4.057115078803411],
-        ["Incineroar", 3.47989204412553],
-        ["Aerodactyl-Mega", 3.3042152360148846],
-        ["Glimmora", 3.096406486358515]
-    ],
-    "counters": []
+ "id": "charizardmegay",
+ "name": "Charizard-Mega-Y",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.1470251,
+   "rank": 10,
+   "raw": 679725
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.2526538,
+   "rank": 5,
+   "raw": 962750
+  }
+ ],
+ "abilities": [
+  [
+   "drought",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "charizarditey",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "protect",
+   24.916811952137266
+  ],
+  [
+   "heatwave",
+   24.906125177742215
+  ],
+  [
+   "solarbeam",
+   22.319546734397356
+  ],
+  [
+   "weatherball",
+   21.45377887890409
+  ],
+  [
+   "ancientpower",
+   1.7769366606637722
+  ],
+  [
+   "airslash",
+   1.602789647513321
+  ],
+  [
+   "overheat",
+   1.4801491249595475
+  ],
+  [
+   "scorchingsands",
+   0.3424256316898756
+  ],
+  [
+   "hurricane",
+   0.25791070490622087
+  ],
+  [
+   "dragonpulse",
+   0.2573666870056508
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:24/0/14/11/0/17",
+   8.153962250387584
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   5.881999361993991
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   3.830707996350619
+  ],
+  [
+   "Modest:32/0/10/11/0/13",
+   3.6554336213064484
+  ],
+  [
+   "Modest:14/0/28/11/0/13",
+   3.0211249889308234
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Garchomp",
+   15.745158770190773
+  ],
+  [
+   "Basculegion",
+   11.89668543199879
+  ],
+  [
+   "Kingambit",
+   10.704311195398375
+  ],
+  [
+   "Whimsicott",
+   8.090682385169663
+  ],
+  [
+   "Sylveon",
+   5.182840234312587
+  ],
+  [
+   "Floette-Mega",
+   4.996250366451484
+  ],
+  [
+   "Sneasler",
+   4.057115078803411
+  ],
+  [
+   "Incineroar",
+   3.47989204412553
+  ],
+  [
+   "Aerodactyl-Mega",
+   3.3042152360148846
+  ],
+  [
+   "Glimmora",
+   3.096406486358515
+  ]
+ ],
+ "counters": []
 }

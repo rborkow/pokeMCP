@@ -1,57 +1,147 @@
 {
-    "id": "blastoisemega",
-    "name": "Blastoise-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0512584,
-            "rank": 28,
-            "raw": 224344
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0762863,
-            "rank": 20,
-            "raw": 402743
-        }
-    ],
-    "abilities": [["megalauncher", 100]],
-    "items": [["blastoisinite", 100]],
-    "moves": [
-        ["waterspout", 23.19051497677127],
-        ["darkpulse", 21.025554238557508],
-        ["fakeout", 14.882241623720635],
-        ["aurasphere", 13.852313425376778],
-        ["shellsmash", 10.330508097191968],
-        ["protect", 9.520594496158312],
-        ["waterpulse", 2.7166069594197766],
-        ["icebeam", 2.459818067531744],
-        ["dragonpulse", 0.6454353987266778],
-        ["muddywater", 0.4726873886192959]
-    ],
-    "spreads": [
-        ["Modest:2/0/0/32/0/32", 16.67945015594095],
-        ["Quiet:32/0/2/32/0/0", 10.130789874935799],
-        ["Quiet:32/0/0/32/2/0", 6.51073705699678],
-        ["Modest:31/0/0/32/0/3", 3.4764558611205887],
-        ["Quiet:31/0/3/32/0/0", 2.8702264221041953]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Farigiraf", 10.462745659002996],
-        ["Sinistcha", 6.962148819887225],
-        ["Basculegion", 6.532652752045499],
-        ["Kingambit", 5.106104385948152],
-        ["Vivillon", 4.932080508557077],
-        ["Torkoal", 4.819517830159609],
-        ["Sneasler", 4.805548724693137],
-        ["Sylveon", 4.646221296628608],
-        ["Pelipper", 4.397140860188713],
-        ["Archaludon", 4.030646200168282]
-    ],
-    "counters": []
+ "id": "blastoisemega",
+ "name": "Blastoise-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0512584,
+   "rank": 28,
+   "raw": 224344
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0762863,
+   "rank": 20,
+   "raw": 402743
+  }
+ ],
+ "abilities": [
+  [
+   "megalauncher",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "blastoisinite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "waterspout",
+   23.19051497677127
+  ],
+  [
+   "darkpulse",
+   21.025554238557508
+  ],
+  [
+   "fakeout",
+   14.882241623720635
+  ],
+  [
+   "aurasphere",
+   13.852313425376778
+  ],
+  [
+   "shellsmash",
+   10.330508097191968
+  ],
+  [
+   "protect",
+   9.520594496158312
+  ],
+  [
+   "waterpulse",
+   2.7166069594197766
+  ],
+  [
+   "icebeam",
+   2.459818067531744
+  ],
+  [
+   "dragonpulse",
+   0.6454353987266778
+  ],
+  [
+   "muddywater",
+   0.4726873886192959
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:2/0/0/32/0/32",
+   16.67945015594095
+  ],
+  [
+   "Quiet:32/0/2/32/0/0",
+   10.130789874935799
+  ],
+  [
+   "Quiet:32/0/0/32/2/0",
+   6.51073705699678
+  ],
+  [
+   "Modest:31/0/0/32/0/3",
+   3.4764558611205887
+  ],
+  [
+   "Quiet:31/0/3/32/0/0",
+   2.8702264221041953
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Farigiraf",
+   10.462745659002996
+  ],
+  [
+   "Sinistcha",
+   6.962148819887225
+  ],
+  [
+   "Basculegion",
+   6.532652752045499
+  ],
+  [
+   "Kingambit",
+   5.106104385948152
+  ],
+  [
+   "Vivillon",
+   4.932080508557077
+  ],
+  [
+   "Torkoal",
+   4.819517830159609
+  ],
+  [
+   "Sneasler",
+   4.805548724693137
+  ],
+  [
+   "Sylveon",
+   4.646221296628608
+  ],
+  [
+   "Pelipper",
+   4.397140860188713
+  ],
+  [
+   "Archaludon",
+   4.030646200168282
+  ]
+ ],
+ "counters": []
 }
