@@ -45,91 +45,91 @@
  ],
  "abilities": [
   [
-   "innerfocus",
+   "Inner Focus",
    92.70598658599894
   ],
   [
-   "telepathy",
+   "Telepathy",
    6.163544720312508
   ],
   [
-   "symbiosis",
+   "Symbiosis",
    1.1304686936885473
   ]
  ],
  "items": [
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    44.59241442249806
   ],
   [
-   "mentalherb",
+   "Mental Herb",
    40.59939193732597
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    9.637630662322998
   ],
   [
-   "leftovers",
+   "Leftovers",
    3.3189021813809063
   ],
   [
-   "lifeorb",
+   "Life Orb",
    0.930105838103691
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    0.6728524517200449
   ],
   [
-   "laggingtail",
+   "Lagging Tail",
    0.14101692622716422
   ],
   [
-   "choicespecs",
+   "Choice Specs",
    0.05934592928413302
   ]
  ],
  "moves": [
   [
-   "trickroom",
+   "Trick Room",
    24.94430641145683
   ],
   [
-   "instruct",
+   "Instruct",
    24.660941124248286
   ],
   [
-   "foulplay",
+   "Foul Play",
    14.634173918242311
   ],
   [
-   "protect",
+   "Protect",
    14.492029880690914
   ],
   [
-   "psychic",
+   "Psychic",
    5.5147453567437585
   ],
   [
-   "taunt",
+   "Taunt",
    3.9369961396256703
   ],
   [
-   "rockslide",
+   "Rock Slide",
    3.757572720291326
   ],
   [
-   "yawn",
+   "Yawn",
    3.2632593731914143
   ],
   [
-   "encore",
+   "Encore",
    2.7770090260644764
   ],
   [
-   "hypervoice",
+   "Hyper Voice",
    0.3806203532028118
   ]
  ],
@@ -219,5 +219,6 @@
    3.0060728566852744
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

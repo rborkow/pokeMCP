@@ -45,87 +45,87 @@
  ],
  "abilities": [
   [
-   "neutralizinggas",
+   "Neutralizing Gas",
    99.61297847180725
   ],
   [
-   "levitate",
+   "Levitate",
    0.3870215281927481
   ]
  ],
  "items": [
   [
-   "sitrusberry",
+   "Sitrus Berry",
    98.3150810601523
   ],
   [
-   "iapapaberry",
+   "Iapapa Berry",
    0.5837757398908021
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    0.4833306552763449
   ],
   [
-   "assaultvest",
+   "Assault Vest",
    0.3870215281927482
   ],
   [
-   "poisonbarb",
+   "Poison Barb",
    0.15675761938636232
   ],
   [
-   "blacksludge",
+   "Black Sludge",
    0.05392683993537589
   ],
   [
-   "mentalherb",
+   "Mental Herb",
    0.011896825568165651
   ],
   [
-   "leftovers",
+   "Leftovers",
    0.00797782728752791
   ]
  ],
  "moves": [
   [
-   "sludgebomb",
+   "Sludge Bomb",
    24.786666694888876
   ],
   [
-   "willowisp",
+   "Will-O-Wisp",
    24.466256351396932
   ],
   [
-   "protect",
+   "Protect",
    24.44238001889717
   ],
   [
-   "taunt",
+   "Taunt",
    24.07534299912646
   ],
   [
-   "haze",
+   "Haze",
    0.49088633951470967
   ],
   [
-   "painsplit",
+   "Pain Split",
    0.46076272057989137
   ],
   [
-   "toxic",
+   "Toxic",
    0.33278307625597087
   ],
   [
-   "toxicspikes",
+   "Toxic Spikes",
    0.2056128322639909
   ],
   [
-   "gunkshot",
+   "Gunk Shot",
    0.1998477441508814
   ],
   [
-   "thunderbolt",
+   "Thunderbolt",
    0.1359447868947776
   ]
  ],
@@ -215,5 +215,6 @@
    3.710487703127089
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

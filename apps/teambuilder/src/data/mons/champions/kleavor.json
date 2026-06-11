@@ -1,183 +1,108 @@
 {
- "id": "kleavor",
- "name": "Kleavor",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0054467,
-   "rank": 108,
-   "raw": 46572
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.0164038,
-   "rank": 64,
-   "raw": 100221
-  }
- ],
- "abilities": [
-  [
-   "sharpness",
-   98.40910131478567
-  ],
-  [
-   "sheerforce",
-   0.7987386117086265
-  ],
-  [
-   "swarm",
-   0.7921600735057054
-  ]
- ],
- "items": [
-  [
-   "focussash",
-   48.38007016071577
-  ],
-  [
-   "choicescarf",
-   40.1060945453962
-  ],
-  [
-   "whiteherb",
-   7.463123716157375
-  ],
-  [
-   "hardstone",
-   1.3642473316710237
-  ],
-  [
-   "sitrusberry",
-   1.1086543913967062
-  ],
-  [
-   "passhoberry",
-   0.8617499578578394
-  ],
-  [
-   "silverpowder",
-   0.14960422149376532
-  ],
-  [
-   "lumberry",
-   0.14655398673398867
-  ]
- ],
- "moves": [
-  [
-   "stoneaxe",
-   24.683336122464418
-  ],
-  [
-   "closecombat",
-   17.92560847217323
-  ],
-  [
-   "protect",
-   12.988434768687446
-  ],
-  [
-   "xscissor",
-   12.332702382835041
-  ],
-  [
-   "rockslide",
-   7.489178996959862
-  ],
-  [
-   "uturn",
-   7.234271353511021
-  ],
-  [
-   "feint",
-   6.818927309366182
-  ],
-  [
-   "tailwind",
-   3.726351424753596
-  ],
-  [
-   "nightslash",
-   3.453485739865505
-  ],
-  [
-   "aerialace",
-   0.9851815284623788
-  ]
- ],
- "spreads": [
-  [
-   "Jolly:2/32/0/0/0/32",
-   39.031220615392606
-  ],
-  [
-   "Adamant:2/32/0/0/0/32",
-   18.665938624377954
-  ],
-  [
-   "Jolly:0/32/0/0/2/32",
-   16.194136999444993
-  ],
-  [
-   "Adamant:0/32/0/0/2/32",
-   5.809465391420128
-  ],
-  [
-   "Jolly:1/32/0/0/1/32",
-   1.7242509931937173
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Basculegion",
-   9.92042434313884
-  ],
-  [
-   "Whimsicott",
-   9.887018662747012
-  ],
-  [
-   "Kingambit",
-   9.401564684868672
-  ],
-  [
-   "Sneasler",
-   7.594054563191898
-  ],
-  [
-   "Farigiraf",
-   5.962565462395528
-  ],
-  [
-   "Charizard-Mega-Y",
-   4.956632589370356
-  ],
-  [
-   "Froslass-Mega",
-   4.106181269510045
-  ],
-  [
-   "Garchomp",
-   3.587622974337063
-  ],
-  [
-   "Floette-Mega",
-   3.3702786571469403
-  ],
-  [
-   "Talonflame",
-   2.0269395474363843
-  ]
- ],
- "counters": []
+    "id": "kleavor",
+    "name": "Kleavor",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0054467,
+            "rank": 108,
+            "raw": 46572
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0164038,
+            "rank": 64,
+            "raw": 100221
+        }
+    ],
+    "abilities": [
+        ["Sharpness", 98.40910131478567],
+        ["Sheer Force", 0.7987386117086265],
+        ["Swarm", 0.7921600735057054]
+    ],
+    "items": [
+        ["Focus Sash", 48.38007016071577],
+        ["Choice Scarf", 40.1060945453962],
+        ["White Herb", 7.463123716157375],
+        ["Hard Stone", 1.3642473316710237],
+        ["Sitrus Berry", 1.1086543913967062],
+        ["Passho Berry", 0.8617499578578394],
+        ["Silver Powder", 0.14960422149376532],
+        ["Lum Berry", 0.14655398673398867]
+    ],
+    "moves": [
+        ["Stone Axe", 24.683336122464418],
+        ["Close Combat", 17.92560847217323],
+        ["Protect", 12.988434768687446],
+        ["X-Scissor", 12.332702382835041],
+        ["Rock Slide", 7.489178996959862],
+        ["U-turn", 7.234271353511021],
+        ["Feint", 6.818927309366182],
+        ["Tailwind", 3.726351424753596],
+        ["Night Slash", 3.453485739865505],
+        ["Aerial Ace", 0.9851815284623788]
+    ],
+    "spreads": [
+        ["Jolly:2/32/0/0/0/32", 39.031220615392606],
+        ["Adamant:2/32/0/0/0/32", 18.665938624377954],
+        ["Jolly:0/32/0/0/2/32", 16.194136999444993],
+        ["Adamant:0/32/0/0/2/32", 5.809465391420128],
+        ["Jolly:1/32/0/0/1/32", 1.7242509931937173]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Basculegion", 9.92042434313884],
+        ["Whimsicott", 9.887018662747012],
+        ["Kingambit", 9.401564684868672],
+        ["Sneasler", 7.594054563191898],
+        ["Farigiraf", 5.962565462395528],
+        ["Charizard-Mega-Y", 4.956632589370356],
+        ["Froslass-Mega", 4.106181269510045],
+        ["Garchomp", 3.587622974337063],
+        ["Floette-Mega", 3.3702786571469403],
+        ["Talonflame", 2.0269395474363843]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Focus Sash",
+            "ability": "Sharpness",
+            "moves": ["Stone Axe", "Close Combat", "Feint", "Protect"],
+            "count": 3,
+            "bestPlacing": 4,
+            "bestPlayer": "Scotty1vgc",
+            "eventName": "Tenki's Cart - Champions M-A",
+            "eventSlug": "2026-05-21-tenki-s-cart-champions-m-a",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a096c17dfbdf089cbbdbfef",
+            "nature": "Jolly"
+        },
+        {
+            "item": "Choice Scarf",
+            "ability": "Sharpness",
+            "moves": ["Stone Axe", "X-Scissor", "Rock Slide", "Close Combat"],
+            "count": 1,
+            "bestPlacing": 7,
+            "bestPlayer": "AndreVGC",
+            "eventName": "Alpensee Tour (Reg M-A) #61 - ✨🐢 for #1!",
+            "eventSlug": "2026-06-10-alpensee-tour-reg-m-a-61-for-1",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1420518c163b8097996cc6",
+            "nature": "Jolly"
+        },
+        {
+            "item": "Focus Sash",
+            "ability": "Sharpness",
+            "moves": ["Stone Axe", "Close Combat", "Night Slash", "Protect"],
+            "count": 1,
+            "bestPlacing": 8,
+            "bestPlayer": "Nick Engraçado ",
+            "eventName": "Intimidators Champions Challenge #16 REG M-A",
+            "eventSlug": "2026-06-08-intimidators-champions-challenge-16-reg-m-a",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a26baf056b11a587a94c139",
+            "nature": "Jolly"
+        }
+    ]
 }

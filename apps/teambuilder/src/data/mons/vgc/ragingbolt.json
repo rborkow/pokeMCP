@@ -45,83 +45,83 @@
  ],
  "abilities": [
   [
-   "protosynthesis",
+   "Protosynthesis",
    100
   ]
  ],
  "items": [
   [
-   "leftovers",
+   "Leftovers",
    33.61523601770251
   ],
   [
-   "assaultvest",
+   "Assault Vest",
    32.24580520226457
   ],
   [
-   "boosterenergy",
+   "Booster Energy",
    14.023795185190982
   ],
   [
-   "lifeorb",
+   "Life Orb",
    12.326241251239239
   ],
   [
-   "safetygoggles",
+   "Safety Goggles",
    5.4800341637759065
   ],
   [
-   "grassyseed",
+   "Grassy Seed",
    0.7600656489696416
   ],
   [
-   "choicespecs",
+   "Choice Specs",
    0.48186812930840195
   ],
   [
-   "magnet",
+   "Magnet",
    0.41475489013904243
   ]
  ],
  "moves": [
   [
-   "thunderclap",
+   "Thunderclap",
    24.602658517627493
   ],
   [
-   "protect",
+   "Protect",
    15.726380639787212
   ],
   [
-   "dragonpulse",
+   "Dragon Pulse",
    14.03360436912685
   ],
   [
-   "dracometeor",
+   "Draco Meteor",
    11.492449104157275
   ],
   [
-   "calmmind",
+   "Calm Mind",
    10.76019924919171
   ],
   [
-   "thunderbolt",
+   "Thunderbolt",
    10.642297150931801
   ],
   [
-   "electroweb",
+   "Electroweb",
    6.475914784071443
   ],
   [
-   "snarl",
+   "Snarl",
    5.407624862166257
   ],
   [
-   "voltswitch",
+   "Volt Switch",
    0.3122934180252437
   ],
   [
-   "weatherball",
+   "Weather Ball",
    0.2231226723199794
   ]
  ],
@@ -211,5 +211,6 @@
    3.146320994525837
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

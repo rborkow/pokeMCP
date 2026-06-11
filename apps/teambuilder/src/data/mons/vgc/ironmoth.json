@@ -45,83 +45,83 @@
  ],
  "abilities": [
   [
-   "quarkdrive",
+   "Quark Drive",
    100
   ]
  ],
  "items": [
   [
-   "powerherb",
+   "Power Herb",
    98.80334052767688
   ],
   [
-   "boosterenergy",
+   "Booster Energy",
    1.0500484822309024
   ],
   [
-   "choicespecs",
+   "Choice Specs",
    0.09126630224481493
   ],
   [
-   "blacksludge",
+   "Black Sludge",
    0.042500054542159736
   ],
   [
-   "leftovers",
+   "Leftovers",
    0.012527670225549533
   ],
   [
-   "focussash",
+   "Focus Sash",
    0.0003149262928929233
   ],
   [
-   "electricseed",
+   "Electric Seed",
    0.000002036770844790445
   ],
   [
-   "wiseglasses",
+   "Wise Glasses",
    1.595168196868293e-11
   ]
  ],
  "moves": [
   [
-   "energyball",
+   "Energy Ball",
    24.972288611809226
   ],
   [
-   "heatwave",
+   "Heat Wave",
    24.87819325157189
   ],
   [
-   "meteorbeam",
+   "Meteor Beam",
    24.71145956280467
   ],
   [
-   "protect",
+   "Protect",
    24.69817502527814
   ],
   [
-   "toxicspikes",
+   "Toxic Spikes",
    0.25592697713525014
   ],
   [
-   "acidspray",
+   "Acid Spray",
    0.25473831226343435
   ],
   [
-   "fierydance",
+   "Fiery Dance",
    0.09893252095583183
   ],
   [
-   "sludgewave",
+   "Sludge Wave",
    0.06225968073888604
   ],
   [
-   "flashcannon",
+   "Flash Cannon",
    0.02324875801445368
   ],
   [
-   "fireblast",
+   "Fire Blast",
    0.022816594896357397
   ]
  ],
@@ -211,5 +211,6 @@
    3.2602577944712925
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

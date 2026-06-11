@@ -45,91 +45,91 @@
  ],
  "abilities": [
   [
-   "levitate",
+   "Levitate",
    98.18339491614545
   ],
   [
-   "heavymetal",
+   "Heavy Metal",
    1.3881640216505813
   ],
   [
-   "heatproof",
+   "Heatproof",
    0.4284410622039851
   ]
  ],
  "items": [
   [
-   "mentalherb",
+   "Mental Herb",
    75.31766194186172
   ],
   [
-   "leftovers",
+   "Leftovers",
    19.5959917551186
   ],
   [
-   "assaultvest",
+   "Assault Vest",
    1.5099112517777757
   ],
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    1.0404938536140627
   ],
   [
-   "lightclay",
+   "Light Clay",
    0.8554371311879685
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    0.8219120222984461
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    0.5418737141086184
   ],
   [
-   "occaberry",
+   "Occa Berry",
    0.18387264599519446
   ]
  ],
  "moves": [
   [
-   "trickroom",
+   "Trick Room",
    24.13799059297763
   ],
   [
-   "hypnosis",
+   "Hypnosis",
    17.405905064664786
   ],
   [
-   "skillswap",
+   "Skill Swap",
    14.098078503972442
   ],
   [
-   "heavyslam",
+   "Heavy Slam",
    13.649804678705255
   ],
   [
-   "gyroball",
+   "Gyro Ball",
    10.362620011921457
   ],
   [
-   "protect",
+   "Protect",
    5.862840434402995
   ],
   [
-   "helpinghand",
+   "Helping Hand",
    4.705175934154634
   ],
   [
-   "gravity",
+   "Gravity",
    3.5422720474050795
   ],
   [
-   "bodypress",
+   "Body Press",
    2.023313285969093
   ],
   [
-   "irondefense",
+   "Iron Defense",
    1.0095716228796803
   ]
  ],
@@ -219,5 +219,6 @@
    2.9682231959928966
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

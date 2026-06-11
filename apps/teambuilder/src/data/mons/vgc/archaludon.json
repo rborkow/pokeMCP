@@ -45,91 +45,91 @@
  ],
  "abilities": [
   [
-   "stamina",
+   "Stamina",
    94.63497165559538
   ],
   [
-   "sturdy",
+   "Sturdy",
    3.0610294563433924
   ],
   [
-   "stalwart",
+   "Stalwart",
    2.3039988880612254
   ]
  ],
  "items": [
   [
-   "assaultvest",
+   "Assault Vest",
    85.1734427430912
   ],
   [
-   "powerherb",
+   "Power Herb",
    9.056686685253991
   ],
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    1.1605634504744786
   ],
   [
-   "chestoberry",
+   "Chesto Berry",
    0.9810329016048773
   ],
   [
-   "leftovers",
+   "Leftovers",
    0.927261500108263
   ],
   [
-   "lifeorb",
+   "Life Orb",
    0.8797828878561604
   ],
   [
-   "safetygoggles",
+   "Safety Goggles",
    0.6234478137279035
   ],
   [
-   "whiteherb",
+   "White Herb",
    0.5678006135569317
   ]
  ],
  "moves": [
   [
-   "electroshot",
+   "Electro Shot",
    24.275963461351342
   ],
   [
-   "flashcannon",
+   "Flash Cannon",
    22.28639397250923
   ],
   [
-   "bodypress",
+   "Body Press",
    21.36946575080406
   ],
   [
-   "dracometeor",
+   "Draco Meteor",
    14.84860230353112
   ],
   [
-   "dragonpulse",
+   "Dragon Pulse",
    9.33098551076617
   ],
   [
-   "snarl",
+   "Snarl",
    2.7745512068459917
   ],
   [
-   "protect",
+   "Protect",
    2.4758509321038376
   ],
   [
-   "heavyslam",
+   "Heavy Slam",
    0.5058801323195359
   ],
   [
-   "terablast",
+   "Tera Blast",
    0.3590236083763515
   ],
   [
-   "meteorbeam",
+   "Meteor Beam",
    0.2627203598555181
   ]
  ],
@@ -219,5 +219,6 @@
    2.2534457953257028
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

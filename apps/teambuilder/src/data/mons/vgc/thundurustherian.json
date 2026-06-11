@@ -45,33 +45,33 @@
  ],
  "abilities": [
   [
-   "voltabsorb",
+   "Volt Absorb",
    100
   ]
  ],
  "items": [
   [
-   "choicespecs",
+   "Choice Specs",
    81.43244073718922
   ],
   [
-   "aguavberry",
+   "Aguav Berry",
    11.158947228733561
   ],
   [
-   "lifeorb",
+   "Life Orb",
    6.893995462798744
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    0.27311116276350184
   ],
   [
-   "choicescarf",
+   "Choice Scarf",
    0.1642425938092942
   ],
   [
-   "focussash",
+   "Focus Sash",
    0.03921204117276364
   ],
   [
@@ -79,49 +79,49 @@
    0.025850387610888807
   ],
   [
-   "expertbelt",
+   "Expert Belt",
    0.007426885122686301
   ]
  ],
  "moves": [
   [
-   "wildboltstorm",
+   "Wildbolt Storm",
    24.90913522620745
   ],
   [
-   "sludgebomb",
+   "Sludge Bomb",
    18.493577847228202
   ],
   [
-   "focusblast",
+   "Focus Blast",
    15.731680002093062
   ],
   [
-   "thunder",
+   "Thunder",
    15.663310931971255
   ],
   [
-   "voltswitch",
+   "Volt Switch",
    4.7721380166994125
   ],
   [
-   "darkpulse",
+   "Dark Pulse",
    4.4132956419252265
   ],
   [
-   "weatherball",
+   "Weather Ball",
    3.8426583260302722
   ],
   [
-   "acrobatics",
+   "Acrobatics",
    2.7897368071833895
   ],
   [
-   "electricterrain",
+   "Electric Terrain",
    2.7897368071833895
   ],
   [
-   "terablast",
+   "Tera Blast",
    1.977277316180123
   ]
  ],
@@ -211,5 +211,6 @@
    3.311304017817503
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

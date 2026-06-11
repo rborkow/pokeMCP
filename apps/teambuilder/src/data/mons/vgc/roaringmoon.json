@@ -45,83 +45,83 @@
  ],
  "abilities": [
   [
-   "protosynthesis",
+   "Protosynthesis",
    100
   ]
  ],
  "items": [
   [
-   "boosterenergy",
+   "Booster Energy",
    94.12630149604227
   ],
   [
-   "lifeorb",
+   "Life Orb",
    2.5378337850138335
   ],
   [
-   "choicescarf",
+   "Choice Scarf",
    1.8737673413200069
   ],
   [
-   "loadeddice",
+   "Loaded Dice",
    1.0287571861081226
   ],
   [
-   "clearamulet",
+   "Clear Amulet",
    0.37545654304611464
   ],
   [
-   "choiceband",
+   "Choice Band",
    0.05787347501260094
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    0.000007322842971830599
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    0.0000020743056649882918
   ]
  ],
  "moves": [
   [
-   "knockoff",
+   "Knock Off",
    24.562048700523906
   ],
   [
-   "protect",
+   "Protect",
    21.822148119118154
   ],
   [
-   "tailwind",
+   "Tailwind",
    19.811356811331095
   ],
   [
-   "acrobatics",
+   "Acrobatics",
    13.915310351931542
   ],
   [
-   "breakingswipe",
+   "Breaking Swipe",
    7.26458032114041
   ],
   [
-   "dragondance",
+   "Dragon Dance",
    5.99585682312236
   ],
   [
-   "earthquake",
+   "Earthquake",
    2.803042229342473
   ],
   [
-   "rockslide",
+   "Rock Slide",
    1.0900668851182385
   ],
   [
-   "ironhead",
+   "Iron Head",
    0.9093661202542588
   ],
   [
-   "dragonclaw",
+   "Dragon Claw",
    0.7369926269699926
   ]
  ],
@@ -211,5 +211,6 @@
    3.213532289789762
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

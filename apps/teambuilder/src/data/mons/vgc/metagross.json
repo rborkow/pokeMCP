@@ -45,83 +45,83 @@
  ],
  "abilities": [
   [
-   "clearbody",
+   "Clear Body",
    100
   ]
  ],
  "items": [
   [
-   "assaultvest",
+   "Assault Vest",
    42.739902194282855
   ],
   [
-   "ironplate",
+   "Iron Plate",
    33.77029524707546
   ],
   [
-   "choiceband",
+   "Choice Band",
    9.537099858136951
   ],
   [
-   "weaknesspolicy",
+   "Weakness Policy",
    7.6322330705430526
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    2.7694866480485
   ],
   [
-   "leftovers",
+   "Leftovers",
    2.2618282299478882
   ],
   [
-   "lifeorb",
+   "Life Orb",
    0.8003562340438
   ],
   [
-   "choicescarf",
+   "Choice Scarf",
    0.42516048195636486
   ]
  ],
  "moves": [
   [
-   "psychicfangs",
+   "Psychic Fangs",
    22.587414787399098
   ],
   [
-   "heavyslam",
+   "Heavy Slam",
    21.47508642264884
   ],
   [
-   "bulletpunch",
+   "Bullet Punch",
    16.942000712095144
   ],
   [
-   "protect",
+   "Protect",
    9.98336815167673
   ],
   [
-   "icepunch",
+   "Ice Punch",
    8.111924742548235
   ],
   [
-   "brickbreak",
+   "Brick Break",
    7.3086246277408975
   ],
   [
-   "explosion",
+   "Explosion",
    2.8008633852239577
   ],
   [
-   "hammerarm",
+   "Hammer Arm",
    1.9769558663868136
   ],
   [
-   "meteormash",
+   "Meteor Mash",
    1.6191374347202792
   ],
   [
-   "ironhead",
+   "Iron Head",
    1.1957795846211816
   ]
  ],
@@ -211,5 +211,6 @@
    2.073475749185154
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

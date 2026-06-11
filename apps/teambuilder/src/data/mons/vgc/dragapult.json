@@ -45,41 +45,41 @@
  ],
  "abilities": [
   [
-   "clearbody",
+   "Clear Body",
    92.8881265427439
   ],
   [
-   "infiltrator",
+   "Infiltrator",
    5.670164990831299
   ],
   [
-   "cursedbody",
+   "Cursed Body",
    1.4417084664247957
   ]
  ],
  "items": [
   [
-   "assaultvest",
+   "Assault Vest",
    59.179304794282004
   ],
   [
-   "choiceband",
+   "Choice Band",
    25.627102109456136
   ],
   [
-   "lifeorb",
+   "Life Orb",
    6.281894446242033
   ],
   [
-   "choicespecs",
+   "Choice Specs",
    4.436308079970823
   ],
   [
-   "focussash",
+   "Focus Sash",
    2.098591334597471
   ],
   [
-   "weaknesspolicy",
+   "Weakness Policy",
    1.1551311487723048
   ],
   [
@@ -87,49 +87,49 @@
    0.7278261518432704
   ],
   [
-   "clearamulet",
+   "Clear Amulet",
    0.21702542962068289
   ]
  ],
  "moves": [
   [
-   "phantomforce",
+   "Phantom Force",
    21.749524835938075
   ],
   [
-   "dragondarts",
+   "Dragon Darts",
    20.9584872053195
   ],
   [
-   "surf",
+   "Surf",
    15.22103357624508
   ],
   [
-   "helpinghand",
+   "Helping Hand",
    14.780600384127995
   ],
   [
-   "uturn",
+   "U-turn",
    7.9719333289597225
   ],
   [
-   "outrage",
+   "Outrage",
    6.024334189594787
   ],
   [
-   "acrobatics",
+   "Acrobatics",
    2.6134359765745083
   ],
   [
-   "terablast",
+   "Tera Blast",
    1.5313810225018476
   ],
   [
-   "flamethrower",
+   "Flamethrower",
    1.3966131830039434
   ],
   [
-   "protect",
+   "Protect",
    1.3775159071401017
   ]
  ],
@@ -219,5 +219,6 @@
    2.0812886571005196
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

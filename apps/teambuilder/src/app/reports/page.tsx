@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getEventsIndex } from "@/lib/event-pages";
 import { formatMonthLong, getReportFormats, getReportsBySlug } from "@/lib/reports";
 
 export const dynamic = "force-static";
@@ -36,6 +37,7 @@ export default function ReportsIndexPage() {
                 {formats.map((format) => {
                     const reports = getReportsBySlug(format.slug);
                     const [latest, ...archive] = reports;
+                    const events = (getEventsIndex()[format.slug] ?? []).slice(0, 6);
                     return (
                         <section key={format.slug}>
                             <h2 className="text-xl font-semibold text-foreground">{format.name}</h2>
@@ -63,6 +65,29 @@ export default function ReportsIndexPage() {
                                     </li>
                                 ))}
                             </ul>
+                            {events.length > 0 && (
+                                <>
+                                    <h3 className="mt-4 text-sm font-semibold text-foreground">
+                                        Recent tournament results
+                                    </h3>
+                                    <ul className="mt-2 space-y-1 text-sm">
+                                        {events.map((event) => (
+                                            <li key={event.slug}>
+                                                <Link
+                                                    href={`/reports/${format.slug}/events/${event.slug}`}
+                                                    className="text-muted-foreground underline underline-offset-4 hover:text-foreground"
+                                                >
+                                                    {event.name}
+                                                </Link>
+                                                <span className="ml-2 text-muted-foreground">
+                                                    {event.date.slice(0, 10)} · {event.players}{" "}
+                                                    players
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </>
+                            )}
                         </section>
                     );
                 })}

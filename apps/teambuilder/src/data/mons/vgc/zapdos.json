@@ -45,87 +45,87 @@
  ],
  "abilities": [
   [
-   "static",
+   "Static",
    99.99991314182735
   ],
   [
-   "pressure",
+   "Pressure",
    0.00008685817264827
   ]
  ],
  "items": [
   [
-   "lifeorb",
+   "Life Orb",
    70.42699654477408
   ],
   [
-   "zapplate",
+   "Zap Plate",
    25.411913411150234
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    2.193771377547658
   ],
   [
-   "assaultvest",
+   "Assault Vest",
    1.055150056824643
   ],
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    0.4129340406808524
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    0.3118200815173554
   ],
   [
-   "leftovers",
+   "Leftovers",
    0.14117210385431359
   ],
   [
-   "heavydutyboots",
+   "Heavy-Duty Boots",
    0.023979880555504648
   ]
  ],
  "moves": [
   [
-   "thunderbolt",
+   "Thunderbolt",
    23.07026161994429
   ],
   [
-   "detect",
+   "Detect",
    22.837570622250865
   ],
   [
-   "hurricane",
+   "Hurricane",
    18.610336746746366
   ],
   [
-   "discharge",
+   "Discharge",
    17.091171310220467
   ],
   [
-   "weatherball",
+   "Weather Ball",
    7.514259015563083
   ],
   [
-   "helpinghand",
+   "Helping Hand",
    6.353097806160464
   ],
   [
-   "thunder",
+   "Thunder",
    1.3173118124877707
   ],
   [
-   "protect",
+   "Protect",
    1.1590914400239831
   ],
   [
-   "tailwind",
+   "Tailwind",
    0.7704309113683765
   ],
   [
-   "voltswitch",
+   "Volt Switch",
    0.7636789238371541
   ]
  ],
@@ -215,5 +215,6 @@
    1.4370209327004546
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

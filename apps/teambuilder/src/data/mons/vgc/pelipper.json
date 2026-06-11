@@ -45,91 +45,91 @@
  ],
  "abilities": [
   [
-   "drizzle",
+   "Drizzle",
    99.86223830640853
   ],
   [
-   "raindish",
+   "Rain Dish",
    0.13775504210033168
   ],
   [
-   "keeneye",
+   "Keen Eye",
    0.000006651491138573059
   ]
  ],
  "items": [
   [
-   "focussash",
+   "Focus Sash",
    35.55700860980488
   ],
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    23.159846696866683
   ],
   [
-   "damprock",
+   "Damp Rock",
    11.437260676849286
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    8.018470734401232
   ],
   [
-   "choicescarf",
+   "Choice Scarf",
    7.394028952153832
   ],
   [
-   "safetygoggles",
+   "Safety Goggles",
    3.5629873962390937
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    2.918085367662886
   ],
   [
-   "sharpbeak",
+   "Sharp Beak",
    1.890733757411995
   ]
  ],
  "moves": [
   [
-   "hurricane",
+   "Hurricane",
    24.73820724656913
   ],
   [
-   "weatherball",
+   "Weather Ball",
    21.936733777785175
   ],
   [
-   "tailwind",
+   "Tailwind",
    18.438094780519716
   ],
   [
-   "wideguard",
+   "Wide Guard",
    16.2722216517569
   ],
   [
-   "protect",
+   "Protect",
    7.943386333466383
   ],
   [
-   "uturn",
+   "U-turn",
    3.237849146919889
   ],
   [
-   "muddywater",
+   "Muddy Water",
    2.4885806457025734
   ],
   [
-   "helpinghand",
+   "Helping Hand",
    2.425705137050521
   ],
   [
-   "icywind",
+   "Icy Wind",
    1.2745058480894487
   ],
   [
-   "icebeam",
+   "Ice Beam",
    0.32889123732670245
   ]
  ],
@@ -219,5 +219,6 @@
    2.1873839122892003
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

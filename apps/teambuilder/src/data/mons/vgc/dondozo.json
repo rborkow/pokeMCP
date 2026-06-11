@@ -45,91 +45,91 @@
  ],
  "abilities": [
   [
-   "unaware",
+   "Unaware",
    85.0448526796275
   ],
   [
-   "oblivious",
+   "Oblivious",
    14.742358896073862
   ],
   [
-   "waterveil",
+   "Water Veil",
    0.21278842429864178
   ]
  ],
  "items": [
   [
-   "leftovers",
+   "Leftovers",
    76.77196138869009
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    12.789785286387318
   ],
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    7.316265355643707
   ],
   [
-   "clearamulet",
+   "Clear Amulet",
    1.775446696605452
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    0.679649419292026
   ],
   [
-   "safetygoggles",
+   "Safety Goggles",
    0.2813473867424595
   ],
   [
-   "choiceband",
+   "Choice Band",
    0.264308099896833
   ],
   [
-   "assaultvest",
+   "Assault Vest",
    0.061565960544875654
   ]
  ],
  "moves": [
   [
-   "protect",
+   "Protect",
    24.03102371337779
   ],
   [
-   "orderup",
+   "Order Up",
    23.69106106128493
   ],
   [
-   "earthquake",
+   "Earthquake",
    22.653784256796513
   ],
   [
-   "wavecrash",
+   "Wave Crash",
    13.315939049270545
   ],
   [
-   "bodypress",
+   "Body Press",
    10.137761929864197
   ],
   [
-   "substitute",
+   "Substitute",
    1.219142857332248
   ],
   [
-   "heavyslam",
+   "Heavy Slam",
    1.2057325124387668
   ],
   [
-   "yawn",
+   "Yawn",
    0.8839253115723441
   ],
   [
-   "sleeptalk",
+   "Sleep Talk",
    0.8059422686435761
   ],
   [
-   "rest",
+   "Rest",
    0.7261560235203025
   ]
  ],
@@ -219,5 +219,6 @@
    1.7984796957329459
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

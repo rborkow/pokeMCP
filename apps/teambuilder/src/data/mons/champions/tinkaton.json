@@ -1,183 +1,108 @@
 {
- "id": "tinkaton",
- "name": "Tinkaton",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0096037,
-   "rank": 79,
-   "raw": 92389
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.019704600000000003,
-   "rank": 56,
-   "raw": 140380
-  }
- ],
- "abilities": [
-  [
-   "moldbreaker",
-   91.64815020458778
-  ],
-  [
-   "owntempo",
-   8.177480625356354
-  ],
-  [
-   "pickpocket",
-   0.17436917005586103
-  ]
- ],
- "items": [
-  [
-   "shucaberry",
-   64.4774679648716
-  ],
-  [
-   "occaberry",
-   11.471184191115698
-  ],
-  [
-   "metalcoat",
-   6.489899890967621
-  ],
-  [
-   "sitrusberry",
-   6.073887724791229
-  ],
-  [
-   "focussash",
-   3.6467707321470555
-  ],
-  [
-   "mentalherb",
-   2.3922465856504047
-  ],
-  [
-   "leftovers",
-   2.248330876443364
-  ],
-  [
-   "kingsrock",
-   1.1385805070050337
-  ]
- ],
- "moves": [
-  [
-   "fakeout",
-   24.86402509162748
-  ],
-  [
-   "gigatonhammer",
-   24.68239562912074
-  ],
-  [
-   "encore",
-   17.83314071627511
-  ],
-  [
-   "protect",
-   17.430155613765912
-  ],
-  [
-   "playrough",
-   3.912449778882983
-  ],
-  [
-   "feint",
-   3.765651207461756
-  ],
-  [
-   "helpinghand",
-   3.4481911024223773
-  ],
-  [
-   "knockoff",
-   1.0098353025557207
-  ],
-  [
-   "thunderwave",
-   0.7390321391267327
-  ],
-  [
-   "stealthrock",
-   0.3241617297639602
-  ]
- ],
- "spreads": [
-  [
-   "Jolly:23/8/7/0/0/28",
-   25.178865363413287
-  ],
-  [
-   "Jolly:2/32/0/0/0/32",
-   8.863437075163267
-  ],
-  [
-   "Impish:32/14/20/0/0/0",
-   5.240692510629645
-  ],
-  [
-   "Jolly:1/32/0/0/1/32",
-   2.627542658653742
-  ],
-  [
-   "Jolly:0/32/0/0/0/32",
-   2.5947040726920285
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Sinistcha",
-   11.6459429438345
-  ],
-  [
-   "Incineroar",
-   10.918155907397127
-  ],
-  [
-   "Kommo-o",
-   9.715838518650449
-  ],
-  [
-   "Gengar-Mega",
-   9.613813030421998
-  ],
-  [
-   "Politoed",
-   7.954548755044338
-  ],
-  [
-   "Pelipper",
-   2.7164917386177674
-  ],
-  [
-   "Basculegion",
-   2.3918510076088353
-  ],
-  [
-   "Blastoise-Mega",
-   2.342119260539653
-  ],
-  [
-   "Farigiraf",
-   2.3406578904702333
-  ],
-  [
-   "Sableye",
-   2.1052666119235846
-  ]
- ],
- "counters": []
+    "id": "tinkaton",
+    "name": "Tinkaton",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0096037,
+            "rank": 79,
+            "raw": 92389
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.019704600000000003,
+            "rank": 56,
+            "raw": 140380
+        }
+    ],
+    "abilities": [
+        ["Mold Breaker", 91.64815020458778],
+        ["Own Tempo", 8.177480625356354],
+        ["Pickpocket", 0.17436917005586103]
+    ],
+    "items": [
+        ["Shuca Berry", 64.4774679648716],
+        ["Occa Berry", 11.471184191115698],
+        ["Metal Coat", 6.489899890967621],
+        ["Sitrus Berry", 6.073887724791229],
+        ["Focus Sash", 3.6467707321470555],
+        ["Mental Herb", 2.3922465856504047],
+        ["Leftovers", 2.248330876443364],
+        ["King's Rock", 1.1385805070050337]
+    ],
+    "moves": [
+        ["Fake Out", 24.86402509162748],
+        ["Gigaton Hammer", 24.68239562912074],
+        ["Encore", 17.83314071627511],
+        ["Protect", 17.430155613765912],
+        ["Play Rough", 3.912449778882983],
+        ["Feint", 3.765651207461756],
+        ["Helping Hand", 3.4481911024223773],
+        ["Knock Off", 1.0098353025557207],
+        ["Thunder Wave", 0.7390321391267327],
+        ["Stealth Rock", 0.3241617297639602]
+    ],
+    "spreads": [
+        ["Jolly:23/8/7/0/0/28", 25.178865363413287],
+        ["Jolly:2/32/0/0/0/32", 8.863437075163267],
+        ["Impish:32/14/20/0/0/0", 5.240692510629645],
+        ["Jolly:1/32/0/0/1/32", 2.627542658653742],
+        ["Jolly:0/32/0/0/0/32", 2.5947040726920285]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Sinistcha", 11.6459429438345],
+        ["Incineroar", 10.918155907397127],
+        ["Kommo-o", 9.715838518650449],
+        ["Gengar-Mega", 9.613813030421998],
+        ["Politoed", 7.954548755044338],
+        ["Pelipper", 2.7164917386177674],
+        ["Basculegion", 2.3918510076088353],
+        ["Blastoise-Mega", 2.342119260539653],
+        ["Farigiraf", 2.3406578904702333],
+        ["Sableye", 2.1052666119235846]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Shuca Berry",
+            "ability": "Mold Breaker",
+            "moves": ["Fake Out", "Gigaton Hammer", "Encore", "Protect"],
+            "count": 6,
+            "bestPlacing": 3,
+            "bestPlayer": "LenVGC",
+            "eventName": "10ToesDownVGC #31 Champions $100 Top 4(Late Join)",
+            "eventSlug": "2026-05-11-10toesdownvgc-31-champions-100-top-4-late-join",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69fa1b7b4f71d664893ed940",
+            "nature": "Jolly"
+        },
+        {
+            "item": "Shuca Berry",
+            "ability": "Own Tempo",
+            "moves": ["Fake Out", "Encore", "Gigaton Hammer", "Play Rough"],
+            "count": 1,
+            "bestPlacing": 4,
+            "bestPlayer": "ZipVGC",
+            "eventName": "SpearPillar Champions Tour #5 | Reg M-A $100 Prize",
+            "eventSlug": "2026-05-23-spearpillar-champions-tour-5-reg-m-a-100-prize",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69cd696dd478313a15a3921b",
+            "nature": null
+        },
+        {
+            "item": "Shuca Berry",
+            "ability": "Mold Breaker",
+            "moves": ["Fake Out", "Gigaton Hammer", "Feint", "Protect"],
+            "count": 1,
+            "bestPlacing": 8,
+            "bestPlayer": "MatRodny",
+            "eventName": "SpearPillar Champions Tour #4 | Reg M-A $100 Prize",
+            "eventSlug": "2026-05-16-spearpillar-champions-tour-4-reg-m-a-100-prize",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69cd6904d478313a15a39215",
+            "nature": null
+        }
+    ]
 }

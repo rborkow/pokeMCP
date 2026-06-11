@@ -45,33 +45,33 @@
  ],
  "abilities": [
   [
-   "guts",
+   "Guts",
    99.34301492579795
   ],
   [
-   "unnerve",
+   "Unnerve",
    0.5045288097577704
   ],
   [
-   "bulletproof",
+   "Bulletproof",
    0.15245626444429047
   ]
  ],
  "items": [
   [
-   "flameorb",
+   "Flame Orb",
    99.26572505854294
   ],
   [
-   "masterball",
+   "Master Ball",
    0.5091753158217724
   ],
   [
-   "assaultvest",
+   "Assault Vest",
    0.14781519814474314
   ],
   [
-   "lifeorb",
+   "Life Orb",
    0.02222594355619575
   ],
   [
@@ -79,57 +79,57 @@
    0.020402591877833297
   ],
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    0.01849451785849052
   ],
   [
-   "choicescarf",
+   "Choice Scarf",
    0.00971277669015173
   ],
   [
-   "choiceband",
+   "Choice Band",
    0.0029787341067843568
   ]
  ],
  "moves": [
   [
-   "protect",
+   "Protect",
    24.281287494793986
   ],
   [
-   "facade",
+   "Facade",
    24.13956722658789
   ],
   [
-   "headlongrush",
+   "Headlong Rush",
    21.103813738477463
   ],
   [
-   "earthquake",
+   "Earthquake",
    17.988438777221173
   ],
   [
-   "swordsdance",
+   "Swords Dance",
    4.794488655969343
   ],
   [
-   "icepunch",
+   "Ice Punch",
    1.359379216964981
   ],
   [
-   "heavyslam",
+   "Heavy Slam",
    1.3465914287376073
   ],
   [
-   "closecombat",
+   "Close Combat",
    0.9608749931906966
   ],
   [
-   "playrough",
+   "Play Rough",
    0.7077909863397179
   ],
   [
-   "yawn",
+   "Yawn",
    0.6802172512938788
   ]
  ],
@@ -219,5 +219,6 @@
    2.7814570685081645
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

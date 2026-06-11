@@ -45,91 +45,91 @@
  ],
  "abilities": [
   [
-   "moody",
+   "Moody",
    89.24244160822342
   ],
   [
-   "technician",
+   "Technician",
    10.453597325288563
   ],
   [
-   "owntempo",
+   "Own Tempo",
    0.3039610664880219
   ]
  ],
  "items": [
   [
-   "focussash",
+   "Focus Sash",
    62.24823584252883
   ],
   [
-   "ejectpack",
+   "Eject Pack",
    35.90991080552596
   ],
   [
-   "mentalherb",
+   "Mental Herb",
    1.3472092548765933
   ],
   [
-   "choicescarf",
+   "Choice Scarf",
    0.2717254994899018
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    0.16508181814591358
   ],
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    0.031119991715555257
   ],
   [
-   "roomservice",
+   "Room Service",
    0.01508854238710849
   ],
   [
-   "ejectbutton",
+   "Eject Button",
    0.008250657266630237
   ]
  ],
  "moves": [
   [
-   "followme",
+   "Follow Me",
    22.103616720516722
   ],
   [
-   "spore",
+   "Spore",
    20.0751572315008
   ],
   [
-   "fakeout",
+   "Fake Out",
    19.58330639063185
   ],
   [
-   "wideguard",
+   "Wide Guard",
    11.976307943131312
   ],
   [
-   "decorate",
+   "Decorate",
    10.38305704455237
   ],
   [
-   "whirlwind",
+   "Whirlwind",
    4.304304567778878
   ],
   [
-   "ruination",
+   "Ruination",
    2.6048603011625304
   ],
   [
-   "roleplay",
+   "Role Play",
    2.593109244361505
   ],
   [
-   "fissure",
+   "Fissure",
    2.579983295770424
   ],
   [
-   "endeavor",
+   "Endeavor",
    1.448558862034526
   ]
  ],
@@ -219,5 +219,6 @@
    3.1186137201913646
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

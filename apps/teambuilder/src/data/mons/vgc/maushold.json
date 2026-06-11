@@ -45,37 +45,37 @@
  ],
  "abilities": [
   [
-   "friendguard",
+   "Friend Guard",
    83.07258854762958
   ],
   [
-   "technician",
+   "Technician",
    16.927411026089523
   ],
   [
-   "cheekpouch",
+   "Cheek Pouch",
    4.262809056504955e-7
   ]
  ],
  "items": [
   [
-   "safetygoggles",
+   "Safety Goggles",
    55.817517274147065
   ],
   [
-   "widelens",
+   "Wide Lens",
    19.5679393994618
   ],
   [
-   "focussash",
+   "Focus Sash",
    9.17022707433608
   ],
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    6.57354750438021
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    2.631881363052595
   ],
   [
@@ -83,53 +83,53 @@
    2.6216934864592254
   ],
   [
-   "loadeddice",
+   "Loaded Dice",
    2.5016498502867224
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    0.5802331100186181
   ]
  ],
  "moves": [
   [
-   "followme",
+   "Follow Me",
    24.151003219810093
   ],
   [
-   "beatup",
+   "Beat Up",
    18.335887000865085
   ],
   [
-   "protect",
+   "Protect",
    18.307502641152958
   ],
   [
-   "taunt",
+   "Taunt",
    16.529133122138155
   ],
   [
-   "populationbomb",
+   "Population Bomb",
    8.33384627589893
   ],
   [
-   "encore",
+   "Encore",
    4.187994548252722
   ],
   [
-   "helpinghand",
+   "Helping Hand",
    2.622695608606373
   ],
   [
-   "superfang",
+   "Super Fang",
    2.5852486070760072
   ],
   [
-   "tidyup",
+   "Tidy Up",
    1.5923808536451158
   ],
   [
-   "batonpass",
+   "Baton Pass",
    0.9306045834982778
   ]
  ],
@@ -219,5 +219,6 @@
    1.999844208197329
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

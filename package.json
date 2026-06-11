@@ -34,6 +34,7 @@
         "backfill-history": "tsx scripts/backfill-history.ts",
         "append-history": "tsx scripts/append-history.ts",
         "generate-reports": "tsx scripts/generate-reports.ts",
+        "fetch-tournaments": "tsx scripts/fetch-tournaments.ts",
         "fetch-champions-legality": "tsx scripts/fetch-champions-legality.ts",
         "upload-champions-legality": "tsx scripts/upload-champions-legality.ts",
         "export-logs": "tsx scripts/export-logs.ts",

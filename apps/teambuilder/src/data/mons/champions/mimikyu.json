@@ -1,175 +1,92 @@
 {
- "id": "mimikyu",
- "name": "Mimikyu",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0134222,
-   "rank": 65,
-   "raw": 98226
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.0115754,
-   "rank": 73,
-   "raw": 113081
-  }
- ],
- "abilities": [
-  [
-   "disguise",
-   100
-  ]
- ],
- "items": [
-  [
-   "whiteherb",
-   28.19643000467782
-  ],
-  [
-   "mentalherb",
-   26.58743039015674
-  ],
-  [
-   "fairyfeather",
-   14.698891393182317
-  ],
-  [
-   "spelltag",
-   13.084387196127567
-  ],
-  [
-   "lumberry",
-   4.8733192648688615
-  ],
-  [
-   "sitrusberry",
-   3.575441401690007
-  ],
-  [
-   "babiriberry",
-   2.821387904953519
-  ],
-  [
-   "scopelens",
-   2.1498485053625287
-  ]
- ],
- "moves": [
-  [
-   "playrough",
-   22.449104926904955
-  ],
-  [
-   "shadowsneak",
-   20.314225100781073
-  ],
-  [
-   "shadowclaw",
-   16.525389259542607
-  ],
-  [
-   "protect",
-   13.738020904157528
-  ],
-  [
-   "trickroom",
-   12.635756319859789
-  ],
-  [
-   "swordsdance",
-   3.3787946052932964
-  ],
-  [
-   "willowisp",
-   3.317221363185953
-  ],
-  [
-   "taunt",
-   1.7697802389794182
-  ],
-  [
-   "curse",
-   1.384994919768464
-  ],
-  [
-   "destinybond",
-   0.9807884005132838
-  ]
- ],
- "spreads": [
-  [
-   "Adamant:1/32/1/0/0/32",
-   15.70051444710921
-  ],
-  [
-   "Adamant:2/32/0/0/0/32",
-   12.759802756796823
-  ],
-  [
-   "Brave:32/32/2/0/0/0",
-   10.908765039737025
-  ],
-  [
-   "Adamant:32/32/2/0/0/0",
-   7.648507533979883
-  ],
-  [
-   "Brave:32/32/0/0/2/0",
-   5.4064115581661545
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Rotom-Wash",
-   8.14134477126881
-  ],
-  [
-   "Tyranitar-Mega",
-   7.914280256162291
-  ],
-  [
-   "Excadrill",
-   7.817543269505787
-  ],
-  [
-   "Corviknight",
-   7.650771608038828
-  ],
-  [
-   "Hydreigon",
-   7.424873014459582
-  ],
-  [
-   "Kingambit",
-   3.0502090768466434
-  ],
-  [
-   "Torkoal",
-   3.033148990599351
-  ],
-  [
-   "Incineroar",
-   3.0212584566273595
-  ],
-  [
-   "Farigiraf",
-   2.782477662661464
-  ],
-  [
-   "Blastoise-Mega",
-   1.9592061517622674
-  ]
- ],
- "counters": []
+    "id": "mimikyu",
+    "name": "Mimikyu",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0134222,
+            "rank": 65,
+            "raw": 98226
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0115754,
+            "rank": 73,
+            "raw": 113081
+        }
+    ],
+    "abilities": [["Disguise", 100]],
+    "items": [
+        ["White Herb", 28.19643000467782],
+        ["Mental Herb", 26.58743039015674],
+        ["Fairy Feather", 14.698891393182317],
+        ["Spell Tag", 13.084387196127567],
+        ["Lum Berry", 4.8733192648688615],
+        ["Sitrus Berry", 3.575441401690007],
+        ["Babiri Berry", 2.821387904953519],
+        ["Scope Lens", 2.1498485053625287]
+    ],
+    "moves": [
+        ["Play Rough", 22.449104926904955],
+        ["Shadow Sneak", 20.314225100781073],
+        ["Shadow Claw", 16.525389259542607],
+        ["Protect", 13.738020904157528],
+        ["Trick Room", 12.635756319859789],
+        ["Swords Dance", 3.3787946052932964],
+        ["Will-O-Wisp", 3.317221363185953],
+        ["Taunt", 1.7697802389794182],
+        ["Curse", 1.384994919768464],
+        ["Destiny Bond", 0.9807884005132838]
+    ],
+    "spreads": [
+        ["Adamant:1/32/1/0/0/32", 15.70051444710921],
+        ["Adamant:2/32/0/0/0/32", 12.759802756796823],
+        ["Brave:32/32/2/0/0/0", 10.908765039737025],
+        ["Adamant:32/32/2/0/0/0", 7.648507533979883],
+        ["Brave:32/32/0/0/2/0", 5.4064115581661545]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Rotom-Wash", 8.14134477126881],
+        ["Tyranitar-Mega", 7.914280256162291],
+        ["Excadrill", 7.817543269505787],
+        ["Corviknight", 7.650771608038828],
+        ["Hydreigon", 7.424873014459582],
+        ["Kingambit", 3.0502090768466434],
+        ["Torkoal", 3.033148990599351],
+        ["Incineroar", 3.0212584566273595],
+        ["Farigiraf", 2.782477662661464],
+        ["Blastoise-Mega", 1.9592061517622674]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "White Herb",
+            "ability": "Disguise",
+            "moves": ["Play Rough", "Shadow Claw", "Shadow Sneak", "Protect"],
+            "count": 4,
+            "bestPlacing": 3,
+            "bestPlayer": "Amoht",
+            "eventName": "Alpensee Tour (Reg M-A) #60 -  ✨🐢 for #1!",
+            "eventSlug": "2026-06-03-alpensee-tour-reg-m-a-60-for-1",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a141fe98c163b8097996cc4",
+            "nature": "Adamant"
+        },
+        {
+            "item": "Babiri Berry",
+            "ability": "Disguise",
+            "moves": ["Play Rough", "Shadow Claw", "Curse", "Trick Room"],
+            "count": 1,
+            "bestPlacing": 3,
+            "bestPlayer": "KennethIsBack",
+            "eventName": "Sketch Academy Pride Month x MMHM Qualifier 1",
+            "eventSlug": "2026-06-08-sketch-academy-pride-month-x-mmhm-qualifier-1",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1cceb847f3797bf6ba8b3b",
+            "nature": "Sassy"
+        }
+    ]
 }

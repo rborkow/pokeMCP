@@ -45,63 +45,63 @@
  ],
  "abilities": [
   [
-   "vitalspirit",
+   "Vital Spirit",
    99.26703817466554
   ],
   [
-   "static",
+   "Static",
    0.732961825334446
   ]
  ],
  "items": [
   [
-   "eviolite",
+   "Eviolite",
    99.99999999999994
   ],
   [
-   "focussash",
+   "Focus Sash",
    4.740200859174152e-14
   ]
  ],
  "moves": [
   [
-   "followme",
+   "Follow Me",
    25
   ],
   [
-   "protect",
+   "Protect",
    24.926271416830286
   ],
   [
-   "taunt",
+   "Taunt",
    24.64058918281547
   ],
   [
-   "electroweb",
+   "Electroweb",
    24.43849465223848
   ],
   [
-   "thunderwave",
+   "Thunder Wave",
    0.3563058682105839
   ],
   [
-   "voltswitch",
+   "Volt Switch",
    0.2385212219424158
   ],
   [
-   "supercellslam",
+   "Supercell Slam",
    0.1727905868428352
   ],
   [
-   "thunderbolt",
+   "Thunderbolt",
    0.15618404955880222
   ],
   [
-   "feint",
+   "Feint",
    0.05968255245495457
   ],
   [
-   "discharge",
+   "Discharge",
    0.004613797826777558
   ]
  ],
@@ -191,5 +191,6 @@
    0.14284211381384102
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

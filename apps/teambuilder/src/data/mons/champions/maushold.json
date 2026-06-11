@@ -1,183 +1,108 @@
 {
- "id": "maushold",
- "name": "Maushold",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0748436,
-   "rank": 20,
-   "raw": 435225
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.0778363,
-   "rank": 18,
-   "raw": 396553
-  }
- ],
- "abilities": [
-  [
-   "friendguard",
-   96.66570715336556
-  ],
-  [
-   "technician",
-   3.2312616802822847
-  ],
-  [
-   "cheekpouch",
-   0.10303116635215373
-  ]
- ],
- "items": [
-  [
-   "chopleberry",
-   48.29361410039955
-  ],
-  [
-   "focussash",
-   33.404256276646585
-  ],
-  [
-   "sitrusberry",
-   11.950083420512486
-  ],
-  [
-   "mentalherb",
-   1.5403589352347624
-  ],
-  [
-   "kingsrock",
-   1.5092425733832742
-  ],
-  [
-   "silkscarf",
-   1.3854730537725413
-  ],
-  [
-   "choicescarf",
-   0.47879690586796186
-  ],
-  [
-   "brightpowder",
-   0.47204710726844684
-  ]
- ],
- "moves": [
-  [
-   "followme",
-   24.72288204205504
-  ],
-  [
-   "protect",
-   22.96605513799184
-  ],
-  [
-   "superfang",
-   18.91358721410425
-  ],
-  [
-   "feint",
-   8.548878293809382
-  ],
-  [
-   "encore",
-   7.4229474021027295
-  ],
-  [
-   "taunt",
-   6.01314838080832
-  ],
-  [
-   "helpinghand",
-   4.346060458686447
-  ],
-  [
-   "raindance",
-   1.6080625809185414
-  ],
-  [
-   "populationbomb",
-   1.5167086215856982
-  ],
-  [
-   "uturn",
-   0.8726805320596029
-  ]
- ],
- "spreads": [
-  [
-   "Jolly:32/0/2/0/0/32",
-   7.594973467903099
-  ],
-  [
-   "Timid:32/0/2/0/0/32",
-   6.861805002828736
-  ],
-  [
-   "Jolly:32/0/1/0/1/32",
-   5.8082079853302595
-  ],
-  [
-   "Timid:32/0/0/0/2/32",
-   3.495033115905926
-  ],
-  [
-   "Jolly:10/32/0/0/0/24",
-   2.492196578779331
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Basculegion",
-   8.322883873275423
-  ],
-  [
-   "Incineroar",
-   6.7970488902387345
-  ],
-  [
-   "Gardevoir-Mega",
-   6.4891837814818905
-  ],
-  [
-   "Garchomp",
-   6.1472660670895785
-  ],
-  [
-   "Floette-Mega",
-   5.950825995247777
-  ],
-  [
-   "Kingambit",
-   5.160526905398759
-  ],
-  [
-   "Sinistcha",
-   4.7902550181427
-  ],
-  [
-   "Talonflame",
-   3.640181922482786
-  ],
-  [
-   "Sneasler",
-   3.5088221793262218
-  ],
-  [
-   "Archaludon",
-   3.228720706404722
-  ]
- ],
- "counters": []
+    "id": "maushold",
+    "name": "Maushold",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0748436,
+            "rank": 20,
+            "raw": 435225
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0778363,
+            "rank": 18,
+            "raw": 396553
+        }
+    ],
+    "abilities": [
+        ["Friend Guard", 96.66570715336556],
+        ["Technician", 3.2312616802822847],
+        ["Cheek Pouch", 0.10303116635215373]
+    ],
+    "items": [
+        ["Chople Berry", 48.29361410039955],
+        ["Focus Sash", 33.404256276646585],
+        ["Sitrus Berry", 11.950083420512486],
+        ["Mental Herb", 1.5403589352347624],
+        ["King's Rock", 1.5092425733832742],
+        ["Silk Scarf", 1.3854730537725413],
+        ["Choice Scarf", 0.47879690586796186],
+        ["Bright Powder", 0.47204710726844684]
+    ],
+    "moves": [
+        ["Follow Me", 24.72288204205504],
+        ["Protect", 22.96605513799184],
+        ["Super Fang", 18.91358721410425],
+        ["Feint", 8.548878293809382],
+        ["Encore", 7.4229474021027295],
+        ["Taunt", 6.01314838080832],
+        ["Helping Hand", 4.346060458686447],
+        ["Rain Dance", 1.6080625809185414],
+        ["Population Bomb", 1.5167086215856982],
+        ["U-turn", 0.8726805320596029]
+    ],
+    "spreads": [
+        ["Jolly:32/0/2/0/0/32", 7.594973467903099],
+        ["Timid:32/0/2/0/0/32", 6.861805002828736],
+        ["Jolly:32/0/1/0/1/32", 5.8082079853302595],
+        ["Timid:32/0/0/0/2/32", 3.495033115905926],
+        ["Jolly:10/32/0/0/0/24", 2.492196578779331]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Basculegion", 8.322883873275423],
+        ["Incineroar", 6.7970488902387345],
+        ["Gardevoir-Mega", 6.4891837814818905],
+        ["Garchomp", 6.1472660670895785],
+        ["Floette-Mega", 5.950825995247777],
+        ["Kingambit", 5.160526905398759],
+        ["Sinistcha", 4.7902550181427],
+        ["Talonflame", 3.640181922482786],
+        ["Sneasler", 3.5088221793262218],
+        ["Archaludon", 3.228720706404722]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Chople Berry",
+            "ability": "Friend Guard",
+            "moves": ["Protect", "Follow Me", "Feint", "Super Fang"],
+            "count": 5,
+            "bestPlacing": 5,
+            "bestPlayer": "Bebot",
+            "eventName": "Talon's FIGHT CLUB #86 POKEMON CHAMPIONS",
+            "eventSlug": "2026-05-28-talon-s-fight-club-86-pokemon-champions",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69e2b31878b359b789d64d36",
+            "nature": "Impish"
+        },
+        {
+            "item": "Focus Sash",
+            "ability": "Friend Guard",
+            "moves": ["Super Fang", "Follow Me", "Rain Dance", "Protect"],
+            "count": 2,
+            "bestPlacing": 1,
+            "bestPlayer": "Snorlaxpikachu1",
+            "eventName": "CHAMPIONS REG. M-A |👑CROWN FIGHT Bo3 TOUR #70👑",
+            "eventSlug": "2026-05-29-champions-reg-m-a-crown-fight-bo3-tour-70",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eb09bb78b359b789d6aa3d",
+            "nature": "Jolly"
+        },
+        {
+            "item": "Focus Sash",
+            "ability": "Friend Guard",
+            "moves": ["Super Fang", "Follow Me", "Encore", "Protect"],
+            "count": 2,
+            "bestPlacing": 2,
+            "bestPlayer": "Rees",
+            "eventName": "Alpensee Tour (Reg M-A) #60 -  ✨🐢 for #1!",
+            "eventSlug": "2026-06-03-alpensee-tour-reg-m-a-60-for-1",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a141fe98c163b8097996cc4",
+            "nature": "Timid"
+        }
+    ]
 }

@@ -1,183 +1,108 @@
 {
- "id": "whimsicott",
- "name": "Whimsicott",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.11471450000000001,
-   "rank": 15,
-   "raw": 869297
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.17547239999999997,
-   "rank": 9,
-   "raw": 1035859
-  }
- ],
- "abilities": [
-  [
-   "prankster",
-   99.56474456507546
-  ],
-  [
-   "chlorophyll",
-   0.2979390274187209
-  ],
-  [
-   "infiltrator",
-   0.13731640750583196
-  ]
- ],
- "items": [
-  [
-   "focussash",
-   43.11747076156568
-  ],
-  [
-   "fairyfeather",
-   30.104730124109626
-  ],
-  [
-   "cobaberry",
-   10.017591560327311
-  ],
-  [
-   "mentalherb",
-   5.879170728076566
-  ],
-  [
-   "sitrusberry",
-   5.334717441516307
-  ],
-  [
-   "kebiaberry",
-   1.6419360587253324
-  ],
-  [
-   "occaberry",
-   1.5127220317802217
-  ],
-  [
-   "brightpowder",
-   0.7593052835179831
-  ]
- ],
- "moves": [
-  [
-   "tailwind",
-   24.839762528304203
-  ],
-  [
-   "moonblast",
-   23.788493801868054
-  ],
-  [
-   "encore",
-   22.17728440138596
-  ],
-  [
-   "protect",
-   17.856509926265847
-  ],
-  [
-   "sunnyday",
-   4.112996482168695
-  ],
-  [
-   "faketears",
-   1.1610085386911222
-  ],
-  [
-   "trickroom",
-   1.0114511468094425
-  ],
-  [
-   "taunt",
-   0.970595174391671
-  ],
-  [
-   "dazzlinggleam",
-   0.7617201318048629
-  ],
-  [
-   "energyball",
-   0.7122638526997462
-  ]
- ],
- "spreads": [
-  [
-   "Timid:2/0/0/32/0/32",
-   20.890482433706683
-  ],
-  [
-   "Timid:14/0/0/32/0/20",
-   4.803610399554822
-  ],
-  [
-   "Modest:2/0/0/32/0/32",
-   4.0461594063510375
-  ],
-  [
-   "Bold:32/0/15/0/19/0",
-   3.5306313838705945
-  ],
-  [
-   "Modest:14/0/0/32/0/20",
-   2.2346652194464087
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Garchomp",
-   11.789052115579029
-  ],
-  [
-   "Charizard-Mega-Y",
-   11.649362836324203
-  ],
-  [
-   "Basculegion",
-   11.078475156630946
-  ],
-  [
-   "Kingambit",
-   10.15129152483056
-  ],
-  [
-   "Glimmora",
-   5.117333419259253
-  ],
-  [
-   "Floette-Mega",
-   5.076714424362883
-  ],
-  [
-   "Sneasler",
-   4.940056642656328
-  ],
-  [
-   "Farigiraf",
-   3.0496081564374182
-  ],
-  [
-   "Incineroar",
-   2.363133085460702
-  ],
-  [
-   "Glimmora-Mega",
-   1.75778603689331
-  ]
- ],
- "counters": []
+    "id": "whimsicott",
+    "name": "Whimsicott",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.11471450000000001,
+            "rank": 15,
+            "raw": 869297
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.17547239999999997,
+            "rank": 9,
+            "raw": 1035859
+        }
+    ],
+    "abilities": [
+        ["Prankster", 99.56474456507546],
+        ["Chlorophyll", 0.2979390274187209],
+        ["Infiltrator", 0.13731640750583196]
+    ],
+    "items": [
+        ["Focus Sash", 43.11747076156568],
+        ["Fairy Feather", 30.104730124109626],
+        ["Coba Berry", 10.017591560327311],
+        ["Mental Herb", 5.879170728076566],
+        ["Sitrus Berry", 5.334717441516307],
+        ["Kebia Berry", 1.6419360587253324],
+        ["Occa Berry", 1.5127220317802217],
+        ["Bright Powder", 0.7593052835179831]
+    ],
+    "moves": [
+        ["Tailwind", 24.839762528304203],
+        ["Moonblast", 23.788493801868054],
+        ["Encore", 22.17728440138596],
+        ["Protect", 17.856509926265847],
+        ["Sunny Day", 4.112996482168695],
+        ["Fake Tears", 1.1610085386911222],
+        ["Trick Room", 1.0114511468094425],
+        ["Taunt", 0.970595174391671],
+        ["Dazzling Gleam", 0.7617201318048629],
+        ["Energy Ball", 0.7122638526997462]
+    ],
+    "spreads": [
+        ["Timid:2/0/0/32/0/32", 20.890482433706683],
+        ["Timid:14/0/0/32/0/20", 4.803610399554822],
+        ["Modest:2/0/0/32/0/32", 4.0461594063510375],
+        ["Bold:32/0/15/0/19/0", 3.5306313838705945],
+        ["Modest:14/0/0/32/0/20", 2.2346652194464087]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Garchomp", 11.789052115579029],
+        ["Charizard-Mega-Y", 11.649362836324203],
+        ["Basculegion", 11.078475156630946],
+        ["Kingambit", 10.15129152483056],
+        ["Glimmora", 5.117333419259253],
+        ["Floette-Mega", 5.076714424362883],
+        ["Sneasler", 4.940056642656328],
+        ["Farigiraf", 3.0496081564374182],
+        ["Incineroar", 2.363133085460702],
+        ["Glimmora-Mega", 1.75778603689331]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Fairy Feather",
+            "ability": "Prankster",
+            "moves": ["Tailwind", "Moonblast", "Encore", "Protect"],
+            "count": 35,
+            "bestPlacing": 1,
+            "bestPlayer": "Dr_Bejan",
+            "eventName": "Pokepal Smackdown #144 (Champions) (Reg M-A)",
+            "eventSlug": "2026-06-08-pokepal-smackdown-144-champions-reg-m-a",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15a9910f6c1f089986169a",
+            "nature": "Timid"
+        },
+        {
+            "item": "Focus Sash",
+            "ability": "Prankster",
+            "moves": ["Tailwind", "Moonblast", "Encore", "Protect"],
+            "count": 19,
+            "bestPlacing": 1,
+            "bestPlayer": "KoonKy2",
+            "eventName": "*Sitrus-Series*|Champions|$50 to First Place|#62",
+            "eventSlug": "2026-06-10-sitrus-series-champions-50-to-first-place-62",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a21741847f3797bf6bab7f3",
+            "nature": "Timid"
+        },
+        {
+            "item": "Coba Berry",
+            "ability": "Prankster",
+            "moves": ["Moonblast", "Encore", "Tailwind", "Protect"],
+            "count": 7,
+            "bestPlacing": 2,
+            "bestPlayer": "Brendu",
+            "eventName": "Intimidators Champions Challenge #16 REG M-A",
+            "eventSlug": "2026-06-08-intimidators-champions-challenge-16-reg-m-a",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a26baf056b11a587a94c139",
+            "nature": "Bold"
+        }
+    ]
 }

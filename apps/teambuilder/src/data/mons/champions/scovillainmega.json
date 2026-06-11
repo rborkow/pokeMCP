@@ -1,147 +1,58 @@
 {
- "id": "scovillainmega",
- "name": "Scovillain-Mega",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.047599,
-   "rank": 34,
-   "raw": 253258
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.062484599999999994,
-   "rank": 24,
-   "raw": 343628
-  }
- ],
- "abilities": [
-  [
-   "spicyspray",
-   100
-  ]
- ],
- "items": [
-  [
-   "scovillainite",
-   100
-  ]
- ],
- "moves": [
-  [
-   "ragepowder",
-   24.72810981802743
-  ],
-  [
-   "protect",
-   24.45529664523812
-  ],
-  [
-   "overheat",
-   19.120118589733508
-  ],
-  [
-   "leechseed",
-   18.13603358770804
-  ],
-  [
-   "gigadrain",
-   4.414504521093137
-  ],
-  [
-   "flamethrower",
-   3.3703991814086685
-  ],
-  [
-   "leafstorm",
-   1.7899520058176015
-  ],
-  [
-   "superfang",
-   1.1442199508099609
-  ],
-  [
-   "spicyextract",
-   0.6887177001918787
-  ],
-  [
-   "energyball",
-   0.4880852218720423
-  ]
- ],
- "spreads": [
-  [
-   "Calm:32/0/19/0/15/0",
-   14.405231848933692
-  ],
-  [
-   "Calm:31/0/15/0/20/0",
-   9.700531239375
-  ],
-  [
-   "Bold:32/0/15/0/19/0",
-   6.242668957542317
-  ],
-  [
-   "Bold:32/0/25/0/9/0",
-   4.867917586077996
-  ],
-  [
-   "Calm:32/0/9/0/25/0",
-   3.2154855087298553
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Basculegion",
-   10.769661128679232
-  ],
-  [
-   "Sneasler",
-   8.066702880739362
-  ],
-  [
-   "Kingambit",
-   7.028428154888166
-  ],
-  [
-   "Archaludon",
-   6.383952212376973
-  ],
-  [
-   "Aerodactyl-Mega",
-   6.038341665332715
-  ],
-  [
-   "Pelipper",
-   4.549789103859016
-  ],
-  [
-   "Sylveon",
-   4.008957085256211
-  ],
-  [
-   "Garchomp",
-   3.105403833875535
-  ],
-  [
-   "Kommo-o",
-   3.064965399693635
-  ],
-  [
-   "Sableye",
-   2.9685960984658144
-  ]
- ],
- "counters": []
+    "id": "scovillainmega",
+    "name": "Scovillain-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.047599,
+            "rank": 34,
+            "raw": 253258
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.062484599999999994,
+            "rank": 24,
+            "raw": 343628
+        }
+    ],
+    "abilities": [["spicyspray", 100]],
+    "items": [["scovillainite", 100]],
+    "moves": [
+        ["Rage Powder", 24.72810981802743],
+        ["Protect", 24.45529664523812],
+        ["Overheat", 19.120118589733508],
+        ["Leech Seed", 18.13603358770804],
+        ["Giga Drain", 4.414504521093137],
+        ["Flamethrower", 3.3703991814086685],
+        ["Leaf Storm", 1.7899520058176015],
+        ["Super Fang", 1.1442199508099609],
+        ["Spicy Extract", 0.6887177001918787],
+        ["Energy Ball", 0.4880852218720423]
+    ],
+    "spreads": [
+        ["Calm:32/0/19/0/15/0", 14.405231848933692],
+        ["Calm:31/0/15/0/20/0", 9.700531239375],
+        ["Bold:32/0/15/0/19/0", 6.242668957542317],
+        ["Bold:32/0/25/0/9/0", 4.867917586077996],
+        ["Calm:32/0/9/0/25/0", 3.2154855087298553]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Basculegion", 10.769661128679232],
+        ["Sneasler", 8.066702880739362],
+        ["Kingambit", 7.028428154888166],
+        ["Archaludon", 6.383952212376973],
+        ["Aerodactyl-Mega", 6.038341665332715],
+        ["Pelipper", 4.549789103859016],
+        ["Sylveon", 4.008957085256211],
+        ["Garchomp", 3.105403833875535],
+        ["Kommo-o", 3.064965399693635],
+        ["Sableye", 2.9685960984658144]
+    ],
+    "counters": [],
+    "builds": []
 }

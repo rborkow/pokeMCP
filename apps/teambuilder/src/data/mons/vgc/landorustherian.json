@@ -45,83 +45,83 @@
  ],
  "abilities": [
   [
-   "intimidate",
+   "Intimidate",
    100
   ]
  ],
  "items": [
   [
-   "choiceband",
+   "Choice Band",
    47.95450419381689
   ],
   [
-   "choicescarf",
+   "Choice Scarf",
    30.571584874658896
   ],
   [
-   "assaultvest",
+   "Assault Vest",
    10.108868755418554
   ],
   [
-   "focussash",
+   "Focus Sash",
    4.870172061045867
   ],
   [
-   "clearamulet",
+   "Clear Amulet",
    4.6294003101938
   ],
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    0.34939725254418763
   ],
   [
-   "absorbbulb",
+   "Absorb Bulb",
    0.2979464688840992
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    0.28551900311838296
   ]
  ],
  "moves": [
   [
-   "rockslide",
+   "Rock Slide",
    24.628405891157723
   ],
   [
-   "uturn",
+   "U-turn",
    23.53822622204513
   ],
   [
-   "stompingtantrum",
+   "Stomping Tantrum",
    22.511168639796228
   ],
   [
-   "earthquake",
+   "Earthquake",
    16.49075202983484
   ],
   [
-   "terablast",
+   "Tera Blast",
    7.148357056734839
   ],
   [
-   "protect",
+   "Protect",
    2.6353660507609264
   ],
   [
-   "crunch",
+   "Crunch",
    1.2771052219628896
   ],
   [
-   "sandsearstorm",
+   "Sandsear Storm",
    0.3298311040534238
   ],
   [
-   "outrage",
+   "Outrage",
    0.28396877600530773
   ],
   [
-   "brickbreak",
+   "Brick Break",
    0.2760389226003671
   ]
  ],
@@ -211,5 +211,6 @@
    3.1565195718589165
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

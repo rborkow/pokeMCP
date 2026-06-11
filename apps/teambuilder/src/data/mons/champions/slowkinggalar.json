@@ -1,183 +1,71 @@
 {
- "id": "slowkinggalar",
- "name": "Slowking-Galar",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0061493,
-   "rank": 101,
-   "raw": 66228
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.0085385,
-   "rank": 87,
-   "raw": 101019
-  }
- ],
- "abilities": [
-  [
-   "regenerator",
-   93.12842462174999
-  ],
-  [
-   "curiousmedicine",
-   5.704244188588677
-  ],
-  [
-   "owntempo",
-   1.1673311896613356
-  ]
- ],
- "items": [
-  [
-   "mentalherb",
-   25.2194443581536
-  ],
-  [
-   "colburberry",
-   22.564544498333344
-  ],
-  [
-   "kasibberry",
-   15.98612304358092
-  ],
-  [
-   "sitrusberry",
-   13.969066792875676
-  ],
-  [
-   "shucaberry",
-   10.102076923707589
-  ],
-  [
-   "leftovers",
-   5.939609167390163
-  ],
-  [
-   "poisonbarb",
-   4.141112877246458
-  ],
-  [
-   "focussash",
-   0.6543052544391137
-  ]
- ],
- "moves": [
-  [
-   "trickroom",
-   23.043894162745573
-  ],
-  [
-   "healpulse",
-   12.92610033228704
-  ],
-  [
-   "acidspray",
-   11.733751113435304
-  ],
-  [
-   "sludgebomb",
-   11.323352761192758
-  ],
-  [
-   "raindance",
-   10.159942668989016
-  ],
-  [
-   "chillyreception",
-   7.557184000143654
-  ],
-  [
-   "psychic",
-   7.199534135256612
-  ],
-  [
-   "protect",
-   3.5629682105014293
-  ],
-  [
-   "flamethrower",
-   2.20866160911747
-  ],
-  [
-   "psychicnoise",
-   1.7105839223623294
-  ]
- ],
- "spreads": [
-  [
-   "Relaxed:32/0/32/0/2/0",
-   10.366192103716894
-  ],
-  [
-   "Sassy:32/0/24/0/10/0",
-   10.083837211914348
-  ],
-  [
-   "Relaxed:31/0/30/0/5/0",
-   7.219806981751065
-  ],
-  [
-   "Relaxed:32/0/31/0/3/0",
-   7.1161136727354695
-  ],
-  [
-   "Quiet:32/0/2/32/0/0",
-   6.519873559851542
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Blastoise-Mega",
-   7.195232099796002
-  ],
-  [
-   "Kingambit",
-   7.169907520015043
-  ],
-  [
-   "Sylveon",
-   7.012625653272798
-  ],
-  [
-   "Archaludon",
-   6.542137117162842
-  ],
-  [
-   "Pelipper",
-   5.7105272844861314
-  ],
-  [
-   "Incineroar",
-   4.100836417153885
-  ],
-  [
-   "Sinistcha",
-   2.703840912072065
-  ],
-  [
-   "Scovillain-Mega",
-   2.569719816398676
-  ],
-  [
-   "Crabominable-Mega",
-   2.524154159623422
-  ],
-  [
-   "Farigiraf",
-   2.4390136893784353
-  ]
- ],
- "counters": []
+    "id": "slowkinggalar",
+    "name": "Slowking-Galar",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0061493,
+            "rank": 101,
+            "raw": 66228
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0085385,
+            "rank": 87,
+            "raw": 101019
+        }
+    ],
+    "abilities": [
+        ["Regenerator", 93.12842462174999],
+        ["Curious Medicine", 5.704244188588677],
+        ["Own Tempo", 1.1673311896613356]
+    ],
+    "items": [
+        ["Mental Herb", 25.2194443581536],
+        ["Colbur Berry", 22.564544498333344],
+        ["Kasib Berry", 15.98612304358092],
+        ["Sitrus Berry", 13.969066792875676],
+        ["Shuca Berry", 10.102076923707589],
+        ["Leftovers", 5.939609167390163],
+        ["Poison Barb", 4.141112877246458],
+        ["Focus Sash", 0.6543052544391137]
+    ],
+    "moves": [
+        ["Trick Room", 23.043894162745573],
+        ["Heal Pulse", 12.92610033228704],
+        ["Acid Spray", 11.733751113435304],
+        ["Sludge Bomb", 11.323352761192758],
+        ["Rain Dance", 10.159942668989016],
+        ["Chilly Reception", 7.557184000143654],
+        ["Psychic", 7.199534135256612],
+        ["Protect", 3.5629682105014293],
+        ["Flamethrower", 2.20866160911747],
+        ["Psychic Noise", 1.7105839223623294]
+    ],
+    "spreads": [
+        ["Relaxed:32/0/32/0/2/0", 10.366192103716894],
+        ["Sassy:32/0/24/0/10/0", 10.083837211914348],
+        ["Relaxed:31/0/30/0/5/0", 7.219806981751065],
+        ["Relaxed:32/0/31/0/3/0", 7.1161136727354695],
+        ["Quiet:32/0/2/32/0/0", 6.519873559851542]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Blastoise-Mega", 7.195232099796002],
+        ["Kingambit", 7.169907520015043],
+        ["Sylveon", 7.012625653272798],
+        ["Archaludon", 6.542137117162842],
+        ["Pelipper", 5.7105272844861314],
+        ["Incineroar", 4.100836417153885],
+        ["Sinistcha", 2.703840912072065],
+        ["Scovillain-Mega", 2.569719816398676],
+        ["Crabominable-Mega", 2.524154159623422],
+        ["Farigiraf", 2.4390136893784353]
+    ],
+    "counters": [],
+    "builds": []
 }

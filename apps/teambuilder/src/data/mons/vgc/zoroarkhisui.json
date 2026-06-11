@@ -45,83 +45,83 @@
  ],
  "abilities": [
   [
-   "illusion",
+   "Illusion",
    100
   ]
  ],
  "items": [
   [
-   "lifeorb",
+   "Life Orb",
    56.47280623197781
   ],
   [
-   "focussash",
+   "Focus Sash",
    29.544400836089263
   ],
   [
-   "choicescarf",
+   "Choice Scarf",
    5.522388299495329
   ],
   [
-   "choicespecs",
+   "Choice Specs",
    5.386534534927381
   ],
   [
-   "airballoon",
+   "Air Balloon",
    2.6413641489300037
   ],
   [
-   "brightpowder",
+   "Bright Powder",
    0.3811171823054116
   ],
   [
-   "weaknesspolicy",
+   "Weakness Policy",
    0.048522649618168524
   ],
   [
-   "clearamulet",
+   "Clear Amulet",
    0.0014241808443051164
   ]
  ],
  "moves": [
   [
-   "protect",
+   "Protect",
    21.82960712601406
   ],
   [
-   "hypervoice",
+   "Hyper Voice",
    19.23406851385491
   ],
   [
-   "shadowball",
+   "Shadow Ball",
    13.485867934013873
   ],
   [
-   "bittermalice",
+   "Bitter Malice",
    11.383420357338382
   ],
   [
-   "icywind",
+   "Icy Wind",
    11.346384656263364
   ],
   [
-   "terablast",
+   "Tera Blast",
    6.990469584485074
   ],
   [
-   "taunt",
+   "Taunt",
    6.0811000306214185
   ],
   [
-   "nastyplot",
+   "Nasty Plot",
    2.4577358293987746
   ],
   [
-   "trick",
+   "Trick",
    1.3886431773531833
   ],
   [
-   "psychic",
+   "Psychic",
    1.104842582941275
   ]
  ],
@@ -211,5 +211,6 @@
    3.0624939310807617
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getMonParams, getMonsIndex, type MonPageData } from "@/lib/mon-pages";
+import { getMonParams, getMonsIndex, type MonBuild, type MonPageData } from "@/lib/mon-pages";
 import { formatMonthLong, getLatestReport } from "@/lib/reports";
 
 export const dynamic = "force-static";
@@ -84,6 +84,62 @@ function PercentTable({
     );
 }
 
+/** Showdown-importable paste for a tournament build. */
+function buildPaste(name: string, build: MonBuild): string {
+    const lines = [
+        `${name}${build.item ? ` @ ${build.item}` : ""}`,
+        ...(build.ability ? [`Ability: ${build.ability}`] : []),
+        "Level: 50",
+        ...(build.nature ? [`${build.nature} Nature`] : []),
+        ...build.moves.map((move) => `- ${move}`),
+    ];
+    return lines.join("\n");
+}
+
+function ordinal(n: number): string {
+    const suffix =
+        n % 100 >= 11 && n % 100 <= 13 ? "th" : (["th", "st", "nd", "rd"][n % 10] ?? "th");
+    return `${n}${suffix}`;
+}
+
+function TournamentBuilds({ mon, format }: { mon: MonPageData; format: string }) {
+    const builds = mon.builds ?? [];
+    if (builds.length === 0) return null;
+    return (
+        <section>
+            <h2 className="mt-10 mb-2 text-xl font-semibold tracking-tight text-foreground">
+                Common tournament builds
+            </h2>
+            <p className="mb-4 text-sm text-muted-foreground">
+                Exact sets from recent tournament top cuts (via Limitless). Champions does not
+                publish stat spreads, so builds list item, ability, nature, and moves only.
+            </p>
+            <div className="space-y-6">
+                {builds.map((build) => (
+                    <div
+                        key={`${build.item}-${build.moves.join()}`}
+                        className="chat-first-inset rounded-lg p-4"
+                    >
+                        <p className="mb-2 text-sm text-muted-foreground">
+                            Seen on {build.count} top-cut team{build.count === 1 ? "" : "s"} · best
+                            finish {ordinal(build.bestPlacing)} ({build.bestPlayer}) at{" "}
+                            <Link
+                                href={`/reports/${format}/events/${build.eventSlug}`}
+                                className="underline underline-offset-4 hover:text-foreground"
+                            >
+                                {build.eventName}
+                            </Link>
+                        </p>
+                        <pre className="overflow-x-auto whitespace-pre-wrap text-sm text-foreground">
+                            {buildPaste(mon.name, build)}
+                        </pre>
+                    </div>
+                ))}
+            </div>
+        </section>
+    );
+}
+
 export default async function MonPage({ params }: PageProps) {
     const { id, format } = await params;
     const mon = await loadMon(format, id);
@@ -162,9 +218,23 @@ export default async function MonPage({ params }: PageProps) {
                 </table>
             </section>
 
-            <PercentTable title={`Top ${mon.name} moves`} rows={mon.moves} nameHeader="Move" />
-            <PercentTable title={`Top ${mon.name} items`} rows={mon.items} nameHeader="Item" />
-            <PercentTable title="Abilities" rows={mon.abilities} nameHeader="Ability" />
+            <TournamentBuilds mon={mon} format={format} />
+
+            <PercentTable
+                title={`Top ${mon.name} moves (ladder share)`}
+                rows={mon.moves}
+                nameHeader="Move"
+            />
+            <PercentTable
+                title={`Top ${mon.name} items (ladder share)`}
+                rows={mon.items}
+                nameHeader="Item"
+            />
+            <PercentTable
+                title="Abilities (ladder share)"
+                rows={mon.abilities}
+                nameHeader="Ability"
+            />
             <PercentTable
                 title="Common EV spreads (Showdown ladder)"
                 rows={mon.spreads}
@@ -172,7 +242,7 @@ export default async function MonPage({ params }: PageProps) {
             />
             <PercentTable title="Tera types" rows={mon.teraTypes} nameHeader="Tera type" />
             <PercentTable
-                title={`Common ${mon.name} teammates`}
+                title={`Common ${mon.name} teammates (ladder share)`}
                 rows={mon.teammates}
                 nameHeader="Teammate"
             />

@@ -1,183 +1,71 @@
 {
- "id": "taurospaldeaaqua",
- "name": "Tauros-Paldea-Aqua",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0118786,
-   "rank": 73,
-   "raw": 117166
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.0092868,
-   "rank": 82,
-   "raw": 96762
-  }
- ],
- "abilities": [
-  [
-   "intimidate",
-   92.04722854733129
-  ],
-  [
-   "angerpoint",
-   7.228831537306774
-  ],
-  [
-   "cudchew",
-   0.7239399153619517
-  ]
- ],
- "items": [
-  [
-   "mysticwater",
-   33.66412725014869
-  ],
-  [
-   "whiteherb",
-   29.640504252306126
-  ],
-  [
-   "sitrusberry",
-   19.2235204899096
-  ],
-  [
-   "choicescarf",
-   4.216359495901819
-  ],
-  [
-   "hardstone",
-   3.3733993530511754
-  ],
-  [
-   "focussash",
-   1.995434351451831
-  ],
-  [
-   "softsand",
-   1.383931322344616
-  ],
-  [
-   "leftovers",
-   1.3226670097654425
-  ]
- ],
- "moves": [
-  [
-   "protect",
-   23.586967912905045
-  ],
-  [
-   "closecombat",
-   23.075655463469943
-  ],
-  [
-   "aquajet",
-   23.027647043012777
-  ],
-  [
-   "wavecrash",
-   16.254036207785077
-  ],
-  [
-   "ragingbull",
-   6.975485134303189
-  ],
-  [
-   "rockslide",
-   2.5561287504417796
-  ],
-  [
-   "earthquake",
-   1.4157967449178532
-  ],
-  [
-   "wildcharge",
-   0.6864141863152327
-  ],
-  [
-   "bodypress",
-   0.482714621817515
-  ],
-  [
-   "bulkup",
-   0.4543825642264134
-  ]
- ],
- "spreads": [
-  [
-   "Adamant:13/32/0/0/0/21",
-   16.705166271859735
-  ],
-  [
-   "Jolly:2/32/0/0/0/32",
-   12.498635275132568
-  ],
-  [
-   "Adamant:2/32/0/0/0/32",
-   8.648868241423987
-  ],
-  [
-   "Jolly:0/32/0/0/2/32",
-   5.806763141203395
-  ],
-  [
-   "Adamant:26/20/1/0/6/13",
-   4.401595443314606
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Floette-Mega",
-   7.280564078694295
-  ],
-  [
-   "Whimsicott",
-   6.4918029028887725
-  ],
-  [
-   "Kingambit",
-   5.361812364972715
-  ],
-  [
-   "Typhlosion-Hisui",
-   4.897659860622919
-  ],
-  [
-   "Tsareena",
-   4.421497825266936
-  ],
-  [
-   "Sinistcha",
-   4.390271690159185
-  ],
-  [
-   "Sneasler",
-   3.3083781765716225
-  ],
-  [
-   "Farigiraf",
-   3.104943859601784
-  ],
-  [
-   "Garchomp",
-   2.645724047413136
-  ],
-  [
-   "Charizard-Mega-X",
-   2.5795761160424466
-  ]
- ],
- "counters": []
+    "id": "taurospaldeaaqua",
+    "name": "Tauros-Paldea-Aqua",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0118786,
+            "rank": 73,
+            "raw": 117166
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0092868,
+            "rank": 82,
+            "raw": 96762
+        }
+    ],
+    "abilities": [
+        ["Intimidate", 92.04722854733129],
+        ["Anger Point", 7.228831537306774],
+        ["Cud Chew", 0.7239399153619517]
+    ],
+    "items": [
+        ["Mystic Water", 33.66412725014869],
+        ["White Herb", 29.640504252306126],
+        ["Sitrus Berry", 19.2235204899096],
+        ["Choice Scarf", 4.216359495901819],
+        ["Hard Stone", 3.3733993530511754],
+        ["Focus Sash", 1.995434351451831],
+        ["Soft Sand", 1.383931322344616],
+        ["Leftovers", 1.3226670097654425]
+    ],
+    "moves": [
+        ["Protect", 23.586967912905045],
+        ["Close Combat", 23.075655463469943],
+        ["Aqua Jet", 23.027647043012777],
+        ["Wave Crash", 16.254036207785077],
+        ["Raging Bull", 6.975485134303189],
+        ["Rock Slide", 2.5561287504417796],
+        ["Earthquake", 1.4157967449178532],
+        ["Wild Charge", 0.6864141863152327],
+        ["Body Press", 0.482714621817515],
+        ["Bulk Up", 0.4543825642264134]
+    ],
+    "spreads": [
+        ["Adamant:13/32/0/0/0/21", 16.705166271859735],
+        ["Jolly:2/32/0/0/0/32", 12.498635275132568],
+        ["Adamant:2/32/0/0/0/32", 8.648868241423987],
+        ["Jolly:0/32/0/0/2/32", 5.806763141203395],
+        ["Adamant:26/20/1/0/6/13", 4.401595443314606]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Floette-Mega", 7.280564078694295],
+        ["Whimsicott", 6.4918029028887725],
+        ["Kingambit", 5.361812364972715],
+        ["Typhlosion-Hisui", 4.897659860622919],
+        ["Tsareena", 4.421497825266936],
+        ["Sinistcha", 4.390271690159185],
+        ["Sneasler", 3.3083781765716225],
+        ["Farigiraf", 3.104943859601784],
+        ["Garchomp", 2.645724047413136],
+        ["Charizard-Mega-X", 2.5795761160424466]
+    ],
+    "counters": [],
+    "builds": []
 }

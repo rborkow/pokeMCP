@@ -1,183 +1,84 @@
 {
- "id": "bellibolt",
- "name": "Bellibolt",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0025615,
-   "rank": 136,
-   "raw": 30870
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.0057454,
-   "rank": 97,
-   "raw": 61218
-  }
- ],
- "abilities": [
-  [
-   "electromorphosis",
-   99.55090382876254
-  ],
-  [
-   "static",
-   0.37487064401465764
-  ],
-  [
-   "damp",
-   0.07422552722279972
-  ]
- ],
- "items": [
-  [
-   "magnet",
-   51.50225607461054
-  ],
-  [
-   "sitrusberry",
-   21.722185246618874
-  ],
-  [
-   "leftovers",
-   20.248564189865505
-  ],
-  [
-   "shucaberry",
-   4.503196101924564
-  ],
-  [
-   "shellbell",
-   0.8545202663250653
-  ],
-  [
-   "quickclaw",
-   0.6647360583866551
-  ],
-  [
-   "chestoberry",
-   0.1829592989686936
-  ],
-  [
-   "mentalherb",
-   0.09178050258989325
-  ]
- ],
- "moves": [
-  [
-   "protect",
-   22.61034705364519
-  ],
-  [
-   "paraboliccharge",
-   21.981425342874815
-  ],
-  [
-   "thunderbolt",
-   17.587637873012792
-  ],
-  [
-   "soak",
-   14.791678692188295
-  ],
-  [
-   "voltswitch",
-   3.620706214620231
-  ],
-  [
-   "weatherball",
-   3.2500620851804296
-  ],
-  [
-   "electroweb",
-   2.7466673640473225
-  ],
-  [
-   "slackoff",
-   1.8838510763796885
-  ],
-  [
-   "discharge",
-   1.8608155374133808
-  ],
-  [
-   "muddywater",
-   1.7975156704172515
-  ]
- ],
- "spreads": [
-  [
-   "Bold:31/0/16/0/19/0",
-   12.772604277605573
-  ],
-  [
-   "Quiet:32/0/0/32/2/0",
-   8.90673216607297
-  ],
-  [
-   "Modest:32/0/0/32/2/0",
-   4.3861290932218875
-  ],
-  [
-   "Quiet:32/0/17/17/0/0",
-   3.7199126835468643
-  ],
-  [
-   "Quiet:32/0/1/32/1/0",
-   3.493788998992521
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Sinistcha",
-   6.527833877873904
-  ],
-  [
-   "Farigiraf",
-   4.9738387618136555
-  ],
-  [
-   "Garchomp",
-   4.522521272551608
-  ],
-  [
-   "Araquanid",
-   3.650405658350173
-  ],
-  [
-   "Basculegion",
-   3.600875278804083
-  ],
-  [
-   "Kingambit",
-   3.150881405054019
-  ],
-  [
-   "Incineroar",
-   3.0245140435150586
-  ],
-  [
-   "Charizard-Mega-Y",
-   3.0037307120326897
-  ],
-  [
-   "Sneasler",
-   2.6720650409499855
-  ],
-  [
-   "Krookodile",
-   2.628443116965157
-  ]
- ],
- "counters": []
+    "id": "bellibolt",
+    "name": "Bellibolt",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0025615,
+            "rank": 136,
+            "raw": 30870
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0057454,
+            "rank": 97,
+            "raw": 61218
+        }
+    ],
+    "abilities": [
+        ["Electromorphosis", 99.55090382876254],
+        ["Static", 0.37487064401465764],
+        ["Damp", 0.07422552722279972]
+    ],
+    "items": [
+        ["Magnet", 51.50225607461054],
+        ["Sitrus Berry", 21.722185246618874],
+        ["Leftovers", 20.248564189865505],
+        ["Shuca Berry", 4.503196101924564],
+        ["Shell Bell", 0.8545202663250653],
+        ["Quick Claw", 0.6647360583866551],
+        ["Chesto Berry", 0.1829592989686936],
+        ["Mental Herb", 0.09178050258989325]
+    ],
+    "moves": [
+        ["Protect", 22.61034705364519],
+        ["Parabolic Charge", 21.981425342874815],
+        ["Thunderbolt", 17.587637873012792],
+        ["Soak", 14.791678692188295],
+        ["Volt Switch", 3.620706214620231],
+        ["Weather Ball", 3.2500620851804296],
+        ["Electroweb", 2.7466673640473225],
+        ["Slack Off", 1.8838510763796885],
+        ["Discharge", 1.8608155374133808],
+        ["Muddy Water", 1.7975156704172515]
+    ],
+    "spreads": [
+        ["Bold:31/0/16/0/19/0", 12.772604277605573],
+        ["Quiet:32/0/0/32/2/0", 8.90673216607297],
+        ["Modest:32/0/0/32/2/0", 4.3861290932218875],
+        ["Quiet:32/0/17/17/0/0", 3.7199126835468643],
+        ["Quiet:32/0/1/32/1/0", 3.493788998992521]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Sinistcha", 6.527833877873904],
+        ["Farigiraf", 4.9738387618136555],
+        ["Garchomp", 4.522521272551608],
+        ["Araquanid", 3.650405658350173],
+        ["Basculegion", 3.600875278804083],
+        ["Kingambit", 3.150881405054019],
+        ["Incineroar", 3.0245140435150586],
+        ["Charizard-Mega-Y", 3.0037307120326897],
+        ["Sneasler", 2.6720650409499855],
+        ["Krookodile", 2.628443116965157]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Magnet",
+            "ability": "Electromorphosis",
+            "moves": ["Thunderbolt", "Parabolic Charge", "Soak", "Protect"],
+            "count": 1,
+            "bestPlacing": 7,
+            "bestPlayer": "Sunning",
+            "eventName": "Talon's FIGHT CLUB #85 POKEMON CHAMPIONS",
+            "eventSlug": "2026-05-21-talon-s-fight-club-85-pokemon-champions",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69e2b2f578b359b789d64d31",
+            "nature": null
+        }
+    ]
 }

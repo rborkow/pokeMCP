@@ -45,83 +45,83 @@
  ],
  "abilities": [
   [
-   "quarkdrive",
+   "Quark Drive",
    100
   ]
  ],
  "items": [
   [
-   "assaultvest",
+   "Assault Vest",
    78.52658124913549
   ],
   [
-   "clearamulet",
+   "Clear Amulet",
    6.7911763975420465
   ],
   [
-   "weaknesspolicy",
+   "Weakness Policy",
    6.1210093624437345
   ],
   [
-   "lumberry",
+   "Lum Berry",
    2.8954862034223936
   ],
   [
-   "boosterenergy",
+   "Booster Energy",
    1.7346866527374678
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    1.1763774150817932
   ],
   [
-   "grassyseed",
+   "Grassy Seed",
    0.8914906877132475
   ],
   [
-   "safetygoggles",
+   "Safety Goggles",
    0.8827297251176036
   ]
  ],
  "moves": [
   [
-   "fakeout",
+   "Fake Out",
    24.102583229908998
   ],
   [
-   "wildcharge",
+   "Wild Charge",
    22.68149225130057
   ],
   [
-   "drainpunch",
+   "Drain Punch",
    20.898662424227325
   ],
   [
-   "heavyslam",
+   "Heavy Slam",
    18.735530862432213
   ],
   [
-   "closecombat",
+   "Close Combat",
    4.026607683928698
   ],
   [
-   "protect",
+   "Protect",
    1.6149777371828866
   ],
   [
-   "earthquake",
+   "Earthquake",
    1.5357944011401061
   ],
   [
-   "firepunch",
+   "Fire Punch",
    1.4956170649327853
   ],
   [
-   "voltswitch",
+   "Volt Switch",
    1.3221916735313364
   ],
   [
-   "swordsdance",
+   "Swords Dance",
    1.2334104498648488
   ]
  ],
@@ -211,5 +211,6 @@
    2.2056141048989955
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

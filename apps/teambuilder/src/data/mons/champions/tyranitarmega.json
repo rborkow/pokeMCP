@@ -1,147 +1,58 @@
 {
- "id": "tyranitarmega",
- "name": "Tyranitar-Mega",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.07584010000000001,
-   "rank": 19,
-   "raw": 458428
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.060295800000000004,
-   "rank": 27,
-   "raw": 452583
-  }
- ],
- "abilities": [
-  [
-   "sandstream",
-   100
-  ]
- ],
- "items": [
-  [
-   "tyranitarite",
-   100
-  ]
- ],
- "moves": [
-  [
-   "protect",
-   24.657691202439576
-  ],
-  [
-   "rockslide",
-   24.641441995133842
-  ],
-  [
-   "knockoff",
-   21.29276203180068
-  ],
-  [
-   "lowkick",
-   15.297478271717505
-  ],
-  [
-   "dragondance",
-   3.6127099058670487
-  ],
-  [
-   "crunch",
-   3.118287044105322
-  ],
-  [
-   "icepunch",
-   2.5986369329175387
-  ],
-  [
-   "highhorsepower",
-   1.6272526655945734
-  ],
-  [
-   "superpower",
-   0.649555149442748
-  ],
-  [
-   "earthquake",
-   0.3912798775655179
-  ]
- ],
- "spreads": [
-  [
-   "Adamant:32/32/0/0/2/0",
-   6.041906246988945
-  ],
-  [
-   "Adamant:30/16/1/0/2/17",
-   4.342668554731468
-  ],
-  [
-   "Adamant:32/32/0/0/0/2",
-   4.152373330898758
-  ],
-  [
-   "Adamant:32/32/2/0/0/0",
-   2.6619816174800772
-  ],
-  [
-   "Adamant:32/16/1/0/0/17",
-   2.4860161095699542
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Excadrill",
-   11.511668788510809
-  ],
-  [
-   "Corviknight",
-   8.816957054549183
-  ],
-  [
-   "Sinistcha",
-   8.1127335171892
-  ],
-  [
-   "Rotom-Wash",
-   6.620139040967635
-  ],
-  [
-   "Sneasler",
-   5.630657818783569
-  ],
-  [
-   "Basculegion",
-   4.772150576161382
-  ],
-  [
-   "Incineroar",
-   4.4641391050777335
-  ],
-  [
-   "Hydreigon",
-   3.056036305166144
-  ],
-  [
-   "Scovillain-Mega",
-   2.974746557782746
-  ],
-  [
-   "Milotic",
-   2.829482510595691
-  ]
- ],
- "counters": []
+    "id": "tyranitarmega",
+    "name": "Tyranitar-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.07584010000000001,
+            "rank": 19,
+            "raw": 458428
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.060295800000000004,
+            "rank": 27,
+            "raw": 452583
+        }
+    ],
+    "abilities": [["Sand Stream", 100]],
+    "items": [["Tyranitarite", 100]],
+    "moves": [
+        ["Protect", 24.657691202439576],
+        ["Rock Slide", 24.641441995133842],
+        ["Knock Off", 21.29276203180068],
+        ["Low Kick", 15.297478271717505],
+        ["Dragon Dance", 3.6127099058670487],
+        ["Crunch", 3.118287044105322],
+        ["Ice Punch", 2.5986369329175387],
+        ["High Horsepower", 1.6272526655945734],
+        ["Superpower", 0.649555149442748],
+        ["Earthquake", 0.3912798775655179]
+    ],
+    "spreads": [
+        ["Adamant:32/32/0/0/2/0", 6.041906246988945],
+        ["Adamant:30/16/1/0/2/17", 4.342668554731468],
+        ["Adamant:32/32/0/0/0/2", 4.152373330898758],
+        ["Adamant:32/32/2/0/0/0", 2.6619816174800772],
+        ["Adamant:32/16/1/0/0/17", 2.4860161095699542]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Excadrill", 11.511668788510809],
+        ["Corviknight", 8.816957054549183],
+        ["Sinistcha", 8.1127335171892],
+        ["Rotom-Wash", 6.620139040967635],
+        ["Sneasler", 5.630657818783569],
+        ["Basculegion", 4.772150576161382],
+        ["Incineroar", 4.4641391050777335],
+        ["Hydreigon", 3.056036305166144],
+        ["Scovillain-Mega", 2.974746557782746],
+        ["Milotic", 2.829482510595691]
+    ],
+    "counters": [],
+    "builds": []
 }

@@ -45,83 +45,83 @@
  ],
  "abilities": [
   [
-   "slowstart",
+   "Slow Start",
    100
   ]
  ],
  "items": [
   [
-   "lifeorb",
+   "Life Orb",
    90.19837916854745
   ],
   [
-   "clearamulet",
+   "Clear Amulet",
    5.924986859772853
   ],
   [
-   "choiceband",
+   "Choice Band",
    1.3247568240917087
   ],
   [
-   "leftovers",
+   "Leftovers",
    1.1971735274638011
   ],
   [
-   "muscleband",
+   "Muscle Band",
    0.5211931163176282
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    0.4633234130164523
   ],
   [
-   "safetygoggles",
+   "Safety Goggles",
    0.2495662876302198
   ],
   [
-   "weaknesspolicy",
+   "Weakness Policy",
    0.035839449708547605
   ]
  ],
  "moves": [
   [
-   "protect",
+   "Protect",
    24.504274176231
   ],
   [
-   "crushgrip",
+   "Crush Grip",
    18.151169399051707
   ],
   [
-   "knockoff",
+   "Knock Off",
    15.459714974026395
   ],
   [
-   "highhorsepower",
+   "High Horsepower",
    13.49309320654978
   ],
   [
-   "doubleedge",
+   "Double-Edge",
    4.932500935025488
   ],
   [
-   "wideguard",
+   "Wide Guard",
    4.657861705694663
   ],
   [
-   "earthquake",
+   "Earthquake",
    4.086314965305426
   ],
   [
-   "heatcrash",
+   "Heat Crash",
    4.045352777773074
   ],
   [
-   "substitute",
+   "Substitute",
    3.3552294401656293
   ],
   [
-   "drainpunch",
+   "Drain Punch",
    1.676609652352174
   ]
  ],
@@ -211,5 +211,6 @@
    3.633899073953819
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

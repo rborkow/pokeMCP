@@ -45,87 +45,87 @@
  ],
  "abilities": [
   [
-   "prankster",
+   "Prankster",
    99.99881275230759
   ],
   [
-   "keeneye",
+   "Keen Eye",
    0.0011872476924115057
   ]
  ],
  "items": [
   [
-   "lightclay",
+   "Light Clay",
    53.06177243534359
   ],
   [
-   "abilityshield",
+   "Ability Shield",
    16.532713187418228
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    10.827722517942748
   ],
   [
-   "ejectbutton",
+   "Eject Button",
    8.933898349313832
   ],
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    2.6426402923460124
   ],
   [
-   "lumberry",
+   "Lum Berry",
    2.0834687118736763
   ],
   [
-   "mentalherb",
+   "Mental Herb",
    2.056277868355402
   ],
   [
-   "roseliberry",
+   "Roseli Berry",
    1.8016995181695246
   ]
  ],
  "moves": [
   [
-   "encore",
+   "Encore",
    23.724052330977944
   ],
   [
-   "disable",
+   "Disable",
    23.40917859433384
   ],
   [
-   "lightscreen",
+   "Light Screen",
    13.92882771758949
   ],
   [
-   "reflect",
+   "Reflect",
    13.270997617318947
   ],
   [
-   "quash",
+   "Quash",
    6.850376884592636
   ],
   [
-   "fakeout",
+   "Fake Out",
    4.749810406958122
   ],
   [
-   "snarl",
+   "Snarl",
    4.156123409068202
   ],
   [
-   "knockoff",
+   "Knock Off",
    2.7352072124107454
   ],
   [
-   "foulplay",
+   "Foul Play",
    2.1046158446659016
   ],
   [
-   "protect",
+   "Protect",
    0.9767415746707184
   ]
  ],
@@ -215,5 +215,6 @@
    3.322717633555592
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

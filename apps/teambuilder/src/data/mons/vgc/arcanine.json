@@ -45,37 +45,37 @@
  ],
  "abilities": [
   [
-   "intimidate",
+   "Intimidate",
    99.99836233854302
   ],
   [
-   "justified",
+   "Justified",
    0.0014217639319877842
   ],
   [
-   "flashfire",
+   "Flash Fire",
    0.00021589752499927628
   ]
  ],
  "items": [
   [
-   "sitrusberry",
+   "Sitrus Berry",
    88.45488667573031
   ],
   [
-   "ejectbutton",
+   "Eject Button",
    2.913774741982441
   ],
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    2.039081513453062
   ],
   [
-   "widelens",
+   "Wide Lens",
    1.8779976418965727
   ],
   [
-   "safetygoggles",
+   "Safety Goggles",
    1.6915444369753538
   ],
   [
@@ -83,53 +83,53 @@
    0.8927004830261607
   ],
   [
-   "lifeorb",
+   "Life Orb",
    0.6547564151140861
   ],
   [
-   "choicescarf",
+   "Choice Scarf",
    0.6229138904767728
   ]
  ],
  "moves": [
   [
-   "willowisp",
+   "Will-O-Wisp",
    24.516677433164226
   ],
   [
-   "flareblitz",
+   "Flare Blitz",
    24.329851804868053
   ],
   [
-   "extremespeed",
+   "Extreme Speed",
    22.705919261040414
   ],
   [
-   "protect",
+   "Protect",
    22.346724238507523
   ],
   [
-   "snarl",
+   "Snarl",
    3.2276814593075582
   ],
   [
-   "morningsun",
+   "Morning Sun",
    0.9420181723840836
   ],
   [
-   "howl",
+   "Howl",
    0.6496295159395025
   ],
   [
-   "fireblast",
+   "Fire Blast",
    0.46949941047414284
   ],
   [
-   "playrough",
+   "Play Rough",
    0.16368301232990687
   ],
   [
-   "bodyslam",
+   "Body Slam",
    0.15583268154026209
   ]
  ],
@@ -219,5 +219,6 @@
    0.6302301462593923
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

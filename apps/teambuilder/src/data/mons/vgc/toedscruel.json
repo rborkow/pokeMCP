@@ -45,17 +45,17 @@
  ],
  "abilities": [
   [
-   "myceliummight",
+   "Mycelium Might",
    100
   ]
  ],
  "items": [
   [
-   "focussash",
+   "Focus Sash",
    71.09250287943733
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    28.276393814376338
   ],
   [
@@ -63,65 +63,65 @@
    0.560109862805926
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    0.0645823931616143
   ],
   [
-   "mentalherb",
+   "Mental Herb",
    0.006171923920121318
   ],
   [
-   "occaberry",
+   "Occa Berry",
    0.00023332412424062525
   ],
   [
-   "leftovers",
+   "Leftovers",
    0.000004141488056779736
   ],
   [
-   "choicescarf",
+   "Choice Scarf",
    0.0000016606863579928387
   ]
  ],
  "moves": [
   [
-   "earthpower",
+   "Earth Power",
    24.983853349992987
   ],
   [
-   "spore",
+   "Spore",
    24.886550224650758
   ],
   [
-   "ragepowder",
+   "Rage Powder",
    21.2686151282049
   ],
   [
-   "dazzlinggleam",
+   "Dazzling Gleam",
    17.77404789797306
   ],
   [
-   "acidspray",
+   "Acid Spray",
    6.708588640764838
   ],
   [
-   "protect",
+   "Protect",
    3.717440015032927
   ],
   [
-   "gigadrain",
+   "Giga Drain",
    0.21864267486784364
   ],
   [
-   "taunt",
+   "Taunt",
    0.1400274657014815
   ],
   [
-   "stunspore",
+   "Stun Spore",
    0.11344977534924261
   ],
   [
-   "toxic",
+   "Toxic",
    0.100805271375839
   ]
  ],
@@ -211,5 +211,6 @@
    2.476487925835176
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

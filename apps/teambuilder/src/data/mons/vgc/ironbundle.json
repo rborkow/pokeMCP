@@ -45,25 +45,25 @@
  ],
  "abilities": [
   [
-   "quarkdrive",
+   "Quark Drive",
    100
   ]
  ],
  "items": [
   [
-   "boosterenergy",
+   "Booster Energy",
    59.274398794512365
   ],
   [
-   "focussash",
+   "Focus Sash",
    34.756275000961644
   ],
   [
-   "choicespecs",
+   "Choice Specs",
    4.363382351629684
   ],
   [
-   "choicescarf",
+   "Choice Scarf",
    1.2447159619432617
   ],
   [
@@ -71,57 +71,57 @@
    0.14750257612127887
   ],
   [
-   "heavydutyboots",
+   "Heavy-Duty Boots",
    0.12786697705966313
   ],
   [
-   "lifeorb",
+   "Life Orb",
    0.07992406113128671
   ],
   [
-   "salacberry",
+   "Salac Berry",
    0.005861994192762444
   ]
  ],
  "moves": [
   [
-   "icywind",
+   "Icy Wind",
    21.91318785544741
   ],
   [
-   "freezedry",
+   "Freeze-Dry",
    20.221890681545737
   ],
   [
-   "protect",
+   "Protect",
    19.284583983634146
   ],
   [
-   "hydropump",
+   "Hydro Pump",
    19.098803510324654
   ],
   [
-   "blizzard",
+   "Blizzard",
    7.8737312565876
   ],
   [
-   "flipturn",
+   "Flip Turn",
    5.720361028705287
   ],
   [
-   "encore",
+   "Encore",
    4.079163873429523
   ],
   [
-   "chillingwater",
+   "Chilling Water",
    0.6845884666660772
   ],
   [
-   "icebeam",
+   "Ice Beam",
    0.39801900819246294
   ],
   [
-   "endure",
+   "Endure",
    0.3111789904858156
   ]
  ],
@@ -211,5 +211,6 @@
    3.6307189374328805
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

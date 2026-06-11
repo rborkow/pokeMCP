@@ -1,183 +1,108 @@
 {
- "id": "scizor",
- "name": "Scizor",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0104057,
-   "rank": 77,
-   "raw": 78027
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.0131546,
-   "rank": 66,
-   "raw": 113462
-  }
- ],
- "abilities": [
-  [
-   "technician",
-   99.34991789139443
-  ],
-  [
-   "swarm",
-   0.6485137545545648
-  ],
-  [
-   "lightmetal",
-   0.0015683540510065905
-  ]
- ],
- "items": [
-  [
-   "metalcoat",
-   56.75251952090774
-  ],
-  [
-   "sitrusberry",
-   23.711401825965837
-  ],
-  [
-   "whiteherb",
-   5.12009992794515
-  ],
-  [
-   "lumberry",
-   3.566469545968619
-  ],
-  [
-   "leftovers",
-   3.4853118753808996
-  ],
-  [
-   "focussash",
-   2.67541735120262
-  ],
-  [
-   "occaberry",
-   2.6043608843636323
-  ],
-  [
-   "silverpowder",
-   0.9005455585596317
-  ]
- ],
- "moves": [
-  [
-   "bulletpunch",
-   24.854501061220528
-  ],
-  [
-   "protect",
-   20.17870314793047
-  ],
-  [
-   "bugbite",
-   15.872307268767985
-  ],
-  [
-   "swordsdance",
-   14.253417728416123
-  ],
-  [
-   "closecombat",
-   9.354628969769898
-  ],
-  [
-   "knockoff",
-   3.5532562559608114
-  ],
-  [
-   "feint",
-   3.017761594476797
-  ],
-  [
-   "dualwingbeat",
-   2.574014364473964
-  ],
-  [
-   "uturn",
-   2.028997780958842
-  ],
-  [
-   "tailwind",
-   1.1901536757915885
-  ]
- ],
- "spreads": [
-  [
-   "Adamant:32/32/0/0/2/0",
-   24.72878174281199
-  ],
-  [
-   "Adamant:32/32/0/0/0/2",
-   8.9758714029219
-  ],
-  [
-   "Adamant:25/30/0/0/1/10",
-   8.651332666312282
-  ],
-  [
-   "Adamant:32/32/2/0/0/0",
-   5.634206635427498
-  ],
-  [
-   "Adamant:17/32/17/0/0/0",
-   5.095818195793724
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Garchomp",
-   5.933628333629634
-  ],
-  [
-   "Pelipper",
-   5.385048771384066
-  ],
-  [
-   "Archaludon",
-   4.749540596063884
-  ],
-  [
-   "Sneasler",
-   4.528075534832662
-  ],
-  [
-   "Basculegion",
-   4.505147993462322
-  ],
-  [
-   "Sinistcha",
-   4.155051221794589
-  ],
-  [
-   "Incineroar",
-   3.8620421517894488
-  ],
-  [
-   "Charizard-Mega-Y",
-   3.5294460080180445
-  ],
-  [
-   "Blastoise-Mega",
-   3.3527362760707433
-  ],
-  [
-   "Sableye",
-   3.2169978486151503
-  ]
- ],
- "counters": []
+    "id": "scizor",
+    "name": "Scizor",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0104057,
+            "rank": 77,
+            "raw": 78027
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0131546,
+            "rank": 66,
+            "raw": 113462
+        }
+    ],
+    "abilities": [
+        ["Technician", 99.34991789139443],
+        ["Swarm", 0.6485137545545648],
+        ["Light Metal", 0.0015683540510065905]
+    ],
+    "items": [
+        ["Metal Coat", 56.75251952090774],
+        ["Sitrus Berry", 23.711401825965837],
+        ["White Herb", 5.12009992794515],
+        ["Lum Berry", 3.566469545968619],
+        ["Leftovers", 3.4853118753808996],
+        ["Focus Sash", 2.67541735120262],
+        ["Occa Berry", 2.6043608843636323],
+        ["Silver Powder", 0.9005455585596317]
+    ],
+    "moves": [
+        ["Bullet Punch", 24.854501061220528],
+        ["Protect", 20.17870314793047],
+        ["Bug Bite", 15.872307268767985],
+        ["Swords Dance", 14.253417728416123],
+        ["Close Combat", 9.354628969769898],
+        ["Knock Off", 3.5532562559608114],
+        ["Feint", 3.017761594476797],
+        ["Dual Wingbeat", 2.574014364473964],
+        ["U-turn", 2.028997780958842],
+        ["Tailwind", 1.1901536757915885]
+    ],
+    "spreads": [
+        ["Adamant:32/32/0/0/2/0", 24.72878174281199],
+        ["Adamant:32/32/0/0/0/2", 8.9758714029219],
+        ["Adamant:25/30/0/0/1/10", 8.651332666312282],
+        ["Adamant:32/32/2/0/0/0", 5.634206635427498],
+        ["Adamant:17/32/17/0/0/0", 5.095818195793724]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Garchomp", 5.933628333629634],
+        ["Pelipper", 5.385048771384066],
+        ["Archaludon", 4.749540596063884],
+        ["Sneasler", 4.528075534832662],
+        ["Basculegion", 4.505147993462322],
+        ["Sinistcha", 4.155051221794589],
+        ["Incineroar", 3.8620421517894488],
+        ["Charizard-Mega-Y", 3.5294460080180445],
+        ["Blastoise-Mega", 3.3527362760707433],
+        ["Sableye", 3.2169978486151503]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Scizorite",
+            "ability": "Technician",
+            "moves": ["Bullet Punch", "Close Combat", "Swords Dance", "Protect"],
+            "count": 10,
+            "bestPlacing": 1,
+            "bestPlayer": "Altkyle",
+            "eventName": "Talon's FIGHT CLUB #86 POKEMON CHAMPIONS",
+            "eventSlug": "2026-05-28-talon-s-fight-club-86-pokemon-champions",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69e2b31878b359b789d64d36",
+            "nature": "Adamant"
+        },
+        {
+            "item": "Scizorite",
+            "ability": "Technician",
+            "moves": ["Bug Bite", "Bullet Punch", "Swords Dance", "Protect"],
+            "count": 8,
+            "bestPlacing": 2,
+            "bestPlayer": "Raichu123",
+            "eventName": "Unova Champions League #5 / POKÉMON CHAMPIONS",
+            "eventSlug": "2026-05-15-unova-champions-league-5-pok-mon-champions",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a0059b2dfbdf089cbbd6e9e",
+            "nature": "Adamant"
+        },
+        {
+            "item": "Scizorite",
+            "ability": "Technician",
+            "moves": ["Bullet Punch", "Assurance", "Swords Dance", "Protect"],
+            "count": 3,
+            "bestPlacing": 4,
+            "bestPlayer": "JoMcCloud23",
+            "eventName": "Alpensee Tour (Reg M-A) #60 -  ✨🐢 for #1!",
+            "eventSlug": "2026-06-03-alpensee-tour-reg-m-a-60-for-1",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a141fe98c163b8097996cc4",
+            "nature": "Adamant"
+        }
+    ]
 }

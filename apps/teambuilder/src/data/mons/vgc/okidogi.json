@@ -45,87 +45,87 @@
  ],
  "abilities": [
   [
-   "guarddog",
+   "Guard Dog",
    99.99925152022459
   ],
   [
-   "toxicchain",
+   "Toxic Chain",
    0.0007484797754075834
   ]
  ],
  "items": [
   [
-   "assaultvest",
+   "Assault Vest",
    97.77924874676235
   ],
   [
-   "leftovers",
+   "Leftovers",
    1.1957663611889986
   ],
   [
-   "adrenalineorb",
+   "Adrenaline Orb",
    0.6552111044127772
   ],
   [
-   "choiceband",
+   "Choice Band",
    0.3686584554920521
   ],
   [
-   "choicescarf",
+   "Choice Scarf",
    0.0008909270841915377
   ],
   [
-   "safetygoggles",
+   "Safety Goggles",
    0.00022343911186103655
   ],
   [
-   "shellbell",
+   "Shell Bell",
    4.927075004367173e-7
   ],
   [
-   "poisonbarb",
+   "Poison Barb",
    3.5445809411147746e-7
   ]
  ],
  "moves": [
   [
-   "drainpunch",
+   "Drain Punch",
    24.907770295328802
   ],
   [
-   "upperhand",
+   "Upper Hand",
    23.458525281446306
   ],
   [
-   "gunkshot",
+   "Gunk Shot",
    21.561935951255396
   ],
   [
-   "stompingtantrum",
+   "Stomping Tantrum",
    8.159859951883437
   ],
   [
-   "highhorsepower",
+   "High Horsepower",
    6.0095855152364965
   ],
   [
-   "icepunch",
+   "Ice Punch",
    5.761364519449563
   ],
   [
-   "knockoff",
+   "Knock Off",
    5.4054501060313
   ],
   [
-   "poisonjab",
+   "Poison Jab",
    3.437048370212344
   ],
   [
-   "thunderpunch",
+   "Thunder Punch",
    0.5153480592975429
   ],
   [
-   "snarl",
+   "Snarl",
    0.34819369981175013
   ]
  ],
@@ -215,5 +215,6 @@
    6.59880239157199
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

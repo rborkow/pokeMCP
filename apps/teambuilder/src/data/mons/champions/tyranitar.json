@@ -1,179 +1,104 @@
 {
- "id": "tyranitar",
- "name": "Tyranitar",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0425956,
-   "rank": 37,
-   "raw": 322230
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.025610499999999998,
-   "rank": 48,
-   "raw": 228144
-  }
- ],
- "abilities": [
-  [
-   "sandstream",
-   98.35424986800736
-  ],
-  [
-   "unnerve",
-   1.6457501319926335
-  ]
- ],
- "items": [
-  [
-   "focussash",
-   33.1659343149784
-  ],
-  [
-   "chopleberry",
-   25.403380336174784
-  ],
-  [
-   "choicescarf",
-   19.75500727772754
-  ],
-  [
-   "shucaberry",
-   6.336473954388926
-  ],
-  [
-   "passhoberry",
-   3.6086008275200068
-  ],
-  [
-   "whiteherb",
-   2.47330076806435
-  ],
-  [
-   "sitrusberry",
-   2.200523145177773
-  ],
-  [
-   "leftovers",
-   1.7757013204821166
-  ]
- ],
- "moves": [
-  [
-   "rockslide",
-   24.303143814777485
-  ],
-  [
-   "knockoff",
-   21.76956717546321
-  ],
-  [
-   "protect",
-   18.67009367998297
-  ],
-  [
-   "lowkick",
-   12.833568647539112
-  ],
-  [
-   "icepunch",
-   7.8524416906685754
-  ],
-  [
-   "crunch",
-   2.4346433828948193
-  ],
-  [
-   "superpower",
-   2.311508298385444
-  ],
-  [
-   "highhorsepower",
-   1.9887097022329985
-  ],
-  [
-   "brickbreak",
-   1.5574889353801342
-  ],
-  [
-   "stoneedge",
-   0.7201847020542558
-  ]
- ],
- "spreads": [
-  [
-   "Jolly:2/32/0/0/0/32",
-   14.389966145460805
-  ],
-  [
-   "Adamant:2/32/0/0/0/32",
-   8.924015493548813
-  ],
-  [
-   "Adamant:32/32/0/0/2/0",
-   7.015156821558987
-  ],
-  [
-   "Adamant:18/26/0/0/0/22",
-   6.642875937925649
-  ],
-  [
-   "Jolly:0/32/0/0/2/32",
-   2.8719587294063613
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Garchomp",
-   4.720107502827647
-  ],
-  [
-   "Sinistcha",
-   4.46408368957423
-  ],
-  [
-   "Excadrill",
-   4.2601080327587075
-  ],
-  [
-   "Incineroar",
-   4.161364620815082
-  ],
-  [
-   "Farigiraf",
-   4.1226353388293395
-  ],
-  [
-   "Corviknight",
-   4.074629184129821
-  ],
-  [
-   "Whimsicott",
-   3.937300684669752
-  ],
-  [
-   "Floette-Mega",
-   3.800196458371895
-  ],
-  [
-   "Milotic",
-   3.594158339668137
-  ],
-  [
-   "Sneasler",
-   3.4611245787139
-  ]
- ],
- "counters": []
+    "id": "tyranitar",
+    "name": "Tyranitar",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0425956,
+            "rank": 37,
+            "raw": 322230
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.025610499999999998,
+            "rank": 48,
+            "raw": 228144
+        }
+    ],
+    "abilities": [["Sand Stream", 98.35424986800736], ["Unnerve", 1.6457501319926335]],
+    "items": [
+        ["Focus Sash", 33.1659343149784],
+        ["Chople Berry", 25.403380336174784],
+        ["Choice Scarf", 19.75500727772754],
+        ["Shuca Berry", 6.336473954388926],
+        ["Passho Berry", 3.6086008275200068],
+        ["White Herb", 2.47330076806435],
+        ["Sitrus Berry", 2.200523145177773],
+        ["Leftovers", 1.7757013204821166]
+    ],
+    "moves": [
+        ["Rock Slide", 24.303143814777485],
+        ["Knock Off", 21.76956717546321],
+        ["Protect", 18.67009367998297],
+        ["Low Kick", 12.833568647539112],
+        ["Ice Punch", 7.8524416906685754],
+        ["Crunch", 2.4346433828948193],
+        ["Superpower", 2.311508298385444],
+        ["High Horsepower", 1.9887097022329985],
+        ["Brick Break", 1.5574889353801342],
+        ["Stone Edge", 0.7201847020542558]
+    ],
+    "spreads": [
+        ["Jolly:2/32/0/0/0/32", 14.389966145460805],
+        ["Adamant:2/32/0/0/0/32", 8.924015493548813],
+        ["Adamant:32/32/0/0/2/0", 7.015156821558987],
+        ["Adamant:18/26/0/0/0/22", 6.642875937925649],
+        ["Jolly:0/32/0/0/2/32", 2.8719587294063613]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Garchomp", 4.720107502827647],
+        ["Sinistcha", 4.46408368957423],
+        ["Excadrill", 4.2601080327587075],
+        ["Incineroar", 4.161364620815082],
+        ["Farigiraf", 4.1226353388293395],
+        ["Corviknight", 4.074629184129821],
+        ["Whimsicott", 3.937300684669752],
+        ["Floette-Mega", 3.800196458371895],
+        ["Milotic", 3.594158339668137],
+        ["Sneasler", 3.4611245787139]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Tyranitarite",
+            "ability": "Sand Stream",
+            "moves": ["Protect", "Rock Slide", "Knock Off", "Low Kick"],
+            "count": 12,
+            "bestPlacing": 2,
+            "bestPlayer": "JenZzz",
+            "eventName": "*Sitrus-Series*|Champions|#60",
+            "eventSlug": "2026-05-27-sitrus-series-champions-60",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a0f02afdfbdf089cbbde577",
+            "nature": "Adamant"
+        },
+        {
+            "item": "Tyranitarite",
+            "ability": "Sand Stream",
+            "moves": ["Rock Slide", "Knock Off", "Dragon Dance", "Protect"],
+            "count": 5,
+            "bestPlacing": 1,
+            "bestPlayer": "Rees",
+            "eventName": "Alpensee Tour (Reg M-A) #61 - ✨🐢 for #1!",
+            "eventSlug": "2026-06-10-alpensee-tour-reg-m-a-61-for-1",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1420518c163b8097996cc6",
+            "nature": "Jolly"
+        },
+        {
+            "item": "Focus Sash",
+            "ability": "Sand Stream",
+            "moves": ["Rock Slide", "Knock Off", "Protect", "High Horsepower"],
+            "count": 1,
+            "bestPlacing": 1,
+            "bestPlayer": "ShrimpTheShrimp",
+            "eventName": "SpearPillar Champions Tour #3 | Reg M-A $100 Prize",
+            "eventSlug": "2026-05-09-spearpillar-champions-tour-3-reg-m-a-100-prize",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69cd689636f5b5c303dc45b3",
+            "nature": null
+        }
+    ]
 }
