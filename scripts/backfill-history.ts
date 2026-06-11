@@ -20,6 +20,7 @@ import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { Statistics } from "smogon";
+import { listRegulationStatsFormats } from "../src/regulations/registry.js";
 import { type ChaosSnapshot, chaosToRows } from "./lib/chaos-to-rows.js";
 import { buildSnapshotSql } from "./lib/d1-sql.js";
 
@@ -44,6 +45,13 @@ function getVGCFormats(): string[] {
     return FALLBACK_VGC_FORMATS;
 }
 
+// Regulation-mapped formats (e.g. Champions' gen9championsvgc2026regma) use a
+// Smogon prefix the VGC/doubles discovery patterns never match, so pull them
+// from the regulation registry — same source of truth as fetch-stats.ts.
+function getDefaultFormats(): string[] {
+    return [...new Set([...getVGCFormats(), ...listRegulationStatsFormats()])];
+}
+
 const MONTHS = Number(process.env.MONTHS || 18);
 const DB = process.env.D1_DATABASE || "META_DB";
 const OUT_DIR = process.env.OUT_DIR || "/tmp/d1-backfill";
@@ -54,7 +62,7 @@ const FORMATS = process.env.FORMATS
     ? process.env.FORMATS.split(",")
           .map((s) => s.trim())
           .filter(Boolean)
-    : getVGCFormats();
+    : getDefaultFormats();
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -72,6 +80,43 @@ function monthsBack(latest: string, n: number): string[] {
     const out: string[] = [];
     for (let i = n - 1; i >= 0; i--) out.push(indexToMonth(end - i));
     return out;
+}
+
+/**
+ * Latest published stats month from Smogon's live directory listing.
+ *
+ * `Statistics.latestDate()` reads a latest.json table bundled into the smogon
+ * package at publish time — it lags months behind the live data and is missing
+ * brand-new formats entirely (e.g. the `gen9champions…` Champions formats).
+ * Mirrors the same workaround in fetch-stats.ts; the bundled table stays as a
+ * per-format fallback below.
+ */
+async function getLiveLatestMonth(): Promise<string | null> {
+    try {
+        const response = await fetch(Statistics.URL);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return Statistics.latest(await response.text()) || null;
+    } catch (error) {
+        console.warn("Could not resolve live latest month, using bundled latestDate:", error);
+        return null;
+    }
+}
+
+/**
+ * Candidate lookback-window anchors for a format: the live latest month first,
+ * then the bundled per-format latest — which covers rotated-out formats whose
+ * last published data predates the live month by more than the window.
+ */
+async function getAnchors(format: string, liveLatest: string | null): Promise<string[]> {
+    const anchors: string[] = [];
+    if (liveLatest) anchors.push(liveLatest);
+    try {
+        const bundled = await Statistics.latestDate(format);
+        if (bundled?.date && !anchors.includes(bundled.date)) anchors.push(bundled.date);
+    } catch {
+        // Bundled-table lookup is best-effort only.
+    }
+    return anchors;
 }
 
 async function fetchChaos(format: string, date: string): Promise<ChaosSnapshot | null> {
@@ -97,54 +142,60 @@ async function main() {
 
     let totalLoaded = 0;
     let totalFailed = 0;
+    const liveLatest = await getLiveLatestMonth();
+    if (liveLatest) console.log(`Live latest stats month: ${liveLatest}\n`);
 
     for (const format of FORMATS) {
-        const latest = await Statistics.latestDate(format);
-        if (!latest) {
+        const anchors = await getAnchors(format, liveLatest);
+        if (anchors.length === 0) {
             console.warn(`No stats found for ${format}, skipping`);
             continue;
         }
-        const months = monthsBack(latest.date, MONTHS);
         let loaded = 0;
         let failed = 0;
 
-        for (const date of months) {
-            let file: string;
-            let monCount: number;
-            try {
-                const chaos = await fetchChaos(format, date);
-                if (!chaos?.data || Object.keys(chaos.data).length === 0) {
+        for (const anchor of anchors) {
+            for (const date of monthsBack(anchor, MONTHS)) {
+                let file: string;
+                let monCount: number;
+                try {
+                    const chaos = await fetchChaos(format, date);
+                    if (!chaos?.data || Object.keys(chaos.data).length === 0) {
+                        await delay(2000);
+                        continue;
+                    }
+                    const result = chaosToRows(format, date, chaos);
+                    // Load per-month so large continuous formats (e.g. gen9doublesou)
+                    // don't produce a multi-MB file that strains `wrangler d1 execute`.
+                    file = join(OUT_DIR, `${format}-${date}.sql`);
+                    writeFileSync(file, buildSnapshotSql(result));
+                    monCount = result.rows.length;
+                } catch (e) {
+                    console.warn(`  ✗ fetch ${format} ${date}: ${(e as Error).message}`);
                     await delay(2000);
                     continue;
                 }
-                const result = chaosToRows(format, date, chaos);
-                // Load per-month so large continuous formats (e.g. gen9doublesou)
-                // don't produce a multi-MB file that strains `wrangler d1 execute`.
-                file = join(OUT_DIR, `${format}-${date}.sql`);
-                writeFileSync(file, buildSnapshotSql(result));
-                monCount = result.rows.length;
-            } catch (e) {
-                console.warn(`  ✗ fetch ${format} ${date}: ${(e as Error).message}`);
-                await delay(2000);
-                continue;
-            }
 
-            if (DRY_RUN) {
-                console.log(`  ✓ ${format} ${date} (${monCount} mons, SQL written)`);
-                loaded++;
-            } else {
-                try {
-                    loadIntoD1(file);
-                    console.log(`  ✓ ${format} ${date} (${monCount} mons, loaded)`);
+                if (DRY_RUN) {
+                    console.log(`  ✓ ${format} ${date} (${monCount} mons, SQL written)`);
                     loaded++;
-                } catch (e) {
-                    // A load failure is real (e.g. the token lacks D1 edit permission);
-                    // count it so the run fails loudly rather than reporting false success.
-                    console.error(`  ✗ load ${format} ${date}: ${(e as Error).message}`);
-                    failed++;
+                } else {
+                    try {
+                        loadIntoD1(file);
+                        console.log(`  ✓ ${format} ${date} (${monCount} mons, loaded)`);
+                        loaded++;
+                    } catch (e) {
+                        // A load failure is real (e.g. the token lacks D1 edit permission);
+                        // count it so the run fails loudly rather than reporting false success.
+                        console.error(`  ✗ load ${format} ${date}: ${(e as Error).message}`);
+                        failed++;
+                    }
                 }
+                await delay(2000); // be polite to Smogon
             }
-            await delay(2000); // be polite to Smogon
+            // Anything captured (or a real load failure) means this anchor's
+            // window was right — don't refetch an older, overlapping window.
+            if (loaded + failed > 0) break;
         }
 
         totalLoaded += loaded;

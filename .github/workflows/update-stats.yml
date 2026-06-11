@@ -60,7 +60,11 @@ jobs:
             echo "No stats changes to commit"
           else
             git commit -m "chore: update Smogon stats and discovered formats ($(date +%Y-%m))"
-            git push
+            # The job can sit days in the production-environment approval queue,
+            # so main may have moved past the pinned checkout SHA. Replay the
+            # stats commit on top of the latest main before pushing.
+            git pull --rebase origin main
+            git push origin HEAD:main
           fi
 
       - name: Verify stats update
