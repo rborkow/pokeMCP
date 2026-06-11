@@ -28,6 +28,12 @@ export const CHAMPIONS_REGMA: RegulationSet = {
     officialLegalityUrl:
         "https://web-view.app.pokemonchampions.jp/battle/pages/events/rs177501629259kmzbny/en/pokemon.html",
     legalityKvKey: "champions-regma:_legality",
+    // Smogon publishes Champions usage stats under a `gen9champions…` prefix
+    // (not the `gen9vgc…` shape originally anticipated). Reg M-A's VGC-style
+    // doubles ladder lives at `gen9championsvgc2026regma`; setting it here lets
+    // the stats tools transparently serve that data against `champions-regma`,
+    // and drives which file the monthly fetch/upload pipeline pulls.
+    showdownFormatId: "gen9championsvgc2026regma",
     megaForms: CHAMPIONS_REGMA_MEGAS,
     bannedItems: [],
     moveOverrides: {},

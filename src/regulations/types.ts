@@ -74,12 +74,13 @@ export interface RegulationSet {
     moveOverrides: Record<string, Partial<MoveOverride>>;
     /**
      * Showdown usage-stats format identifier this regulation mirrors,
-     * when one exists. When Smogon publishes a gen9vgc2026regma-style
-     * stats file for this Champions regulation, set this to that id so
-     * `get_usage_stats` can transparently serve Showdown data against the
-     * Champions format. Leave undefined until Showdown publishes — an
-     * unmapped Champions format surfaces a clear "not yet published"
-     * message rather than empty data.
+     * when one exists. Smogon publishes Champions stats under a
+     * `gen9champions…` prefix (e.g. `gen9championsvgc2026regma` for Reg
+     * M-A's doubles ladder); set this to that id so `get_usage_stats` can
+     * transparently serve Showdown data against the Champions format. It
+     * also drives which file the monthly fetch/upload pipeline pulls. Leave
+     * undefined until Smogon publishes — an unmapped Champions format
+     * surfaces a clear "not yet published" message rather than empty data.
      */
     showdownFormatId?: string;
 }

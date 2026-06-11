@@ -8,15 +8,20 @@
  *
  * Usage: npm run discover-formats
  */
-import { Statistics } from "smogon";
-import { writeFileSync, readFileSync } from "fs";
+
+import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
+import { Statistics } from "smogon";
 
 const OUTPUT_PATH = join(process.cwd(), "src", "discovered-formats.json");
 
 // Patterns for VGC and doubles formats
 const VGC_PATTERN = /^gen\d+vgc/;
 const DOUBLES_PATTERN = /^gen\d+doubles/;
+// Pokémon Champions formats (e.g. gen9championsvgc2026regma, gen9championsbssregma).
+// Tracked for visibility so new regulations surface in the monthly run; which of
+// these we actually ingest is decided by the regulation registry's showdownFormatId.
+const CHAMPIONS_PATTERN = /^gen\d+champions/;
 
 // Hardcoded fallback in case Smogon is unreachable
 const FALLBACK_VGC = [
@@ -26,6 +31,7 @@ const FALLBACK_VGC = [
     "gen9vgc2024regh",
 ];
 const FALLBACK_DOUBLES = ["gen9doublesou"];
+const FALLBACK_CHAMPIONS = ["gen9championsvgc2026regma"];
 
 async function discoverFormats() {
     console.log("Discovering available formats from Smogon stats...\n");
@@ -54,9 +60,10 @@ async function discoverFormats() {
         const allFormats = Statistics.formats(monthHtml);
         console.log(`Found ${allFormats.length} total formats\n`);
 
-        // Step 4: Filter for VGC and doubles
+        // Step 4: Filter for VGC, doubles, and Champions
         const vgcFormats = allFormats.filter((f) => VGC_PATTERN.test(f)).sort();
         const doublesFormats = allFormats.filter((f) => DOUBLES_PATTERN.test(f)).sort();
+        const championsFormats = allFormats.filter((f) => CHAMPIONS_PATTERN.test(f)).sort();
 
         console.log(`VGC formats (${vgcFormats.length}):`);
         for (const f of vgcFormats) {
@@ -68,14 +75,22 @@ async function discoverFormats() {
             console.log(`  - ${f}`);
         }
 
+        console.log(`\nChampions formats (${championsFormats.length}):`);
+        for (const f of championsFormats) {
+            console.log(`  - ${f}`);
+        }
+
         // Step 5: Compare with previous discovery
         try {
             const previous = JSON.parse(readFileSync(OUTPUT_PATH, "utf-8"));
             const prevAll = new Set([
                 ...(previous.vgcFormats || []),
                 ...(previous.doublesFormats || []),
+                ...(previous.championsFormats || []),
             ]);
-            const newFormats = [...vgcFormats, ...doublesFormats].filter((f) => !prevAll.has(f));
+            const newFormats = [...vgcFormats, ...doublesFormats, ...championsFormats].filter(
+                (f) => !prevAll.has(f),
+            );
             if (newFormats.length > 0) {
                 console.log(`\nNEW formats discovered: ${newFormats.join(", ")}`);
             } else {
@@ -89,6 +104,7 @@ async function discoverFormats() {
         const result = {
             vgcFormats,
             doublesFormats,
+            championsFormats,
             discoveredAt: new Date().toISOString(),
             sourceMonth: latestDate,
         };
@@ -102,6 +118,7 @@ async function discoverFormats() {
         const result = {
             vgcFormats: FALLBACK_VGC,
             doublesFormats: FALLBACK_DOUBLES,
+            championsFormats: FALLBACK_CHAMPIONS,
             discoveredAt: new Date().toISOString(),
             sourceMonth: "fallback",
         };

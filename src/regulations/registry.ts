@@ -24,3 +24,18 @@ export function isRegulationId(id: string): boolean {
 export function listRegulationIds(): string[] {
     return [...REGULATIONS_BY_ID.keys()];
 }
+
+/**
+ * Showdown usage-stats format ids that the regulations mirror.
+ *
+ * These are the `gen9champions…`-style Smogon formats backing each regulation
+ * (via `showdownFormatId`). The stats fetch/upload pipeline reads this so that
+ * adding a future regulation with a published stats file is a pure registry
+ * change — no edits to the fetch script required. Regulations without a
+ * published stats file yet are omitted.
+ */
+export function listRegulationStatsFormats(): string[] {
+    return REGULATIONS.map((r) => r.showdownFormatId).filter(
+        (id): id is string => typeof id === "string" && id.length > 0,
+    );
+}
