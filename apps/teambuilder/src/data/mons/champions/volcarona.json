@@ -1,0 +1,66 @@
+{
+    "id": "volcarona",
+    "name": "Volcarona",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.021881400000000002,
+            "rank": 49,
+            "raw": 139937
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.020379,
+            "rank": 54,
+            "raw": 177178
+        }
+    ],
+    "abilities": [["flamebody", 99.2021940583387], ["swarm", 0.7978059416612946]],
+    "items": [
+        ["sitrusberry", 33.571571701471996],
+        ["leftovers", 19.896095929015264],
+        ["passhoberry", 15.131744563193964],
+        ["chartiberry", 10.350246039492776],
+        ["mentalherb", 5.840118765024397],
+        ["focussash", 4.790064290322655],
+        ["charcoal", 3.868033806485634],
+        ["lumberry", 2.1564153339613674]
+    ],
+    "moves": [
+        ["ragepowder", 15.702807612515427],
+        ["protect", 15.583015394995906],
+        ["heatwave", 12.551619009895528],
+        ["quiverdance", 9.910441015200362],
+        ["strugglebug", 9.653143207417951],
+        ["tailwind", 7.329396944275407],
+        ["gigadrain", 6.762043909181778],
+        ["overheat", 6.067398409911915],
+        ["fierydance", 5.176779591182356],
+        ["willowisp", 4.9800881824137155]
+    ],
+    "spreads": [
+        ["Modest:0/0/20/32/0/14", 6.353964496226368],
+        ["Bold:32/0/32/0/2/0", 5.301522908742149],
+        ["Bold:31/0/32/1/1/0", 4.098375695713904],
+        ["Bold:32/0/25/0/9/0", 3.089075177026682],
+        ["Bold:31/0/32/1/1/1", 2.929454235515939]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Floette-Mega", 6.195542563370454],
+        ["Basculegion", 5.96803642199461],
+        ["Sneasler", 4.650876252772603],
+        ["Rotom-Wash", 4.525962968866447],
+        ["Sableye", 4.448697491130234],
+        ["Garchomp", 3.891586056971931],
+        ["Sinistcha", 3.563690272105033],
+        ["Kingambit", 3.555833151527336],
+        ["Whimsicott", 3.5330139216524863],
+        ["Maushold", 3.0131067560835585]
+    ],
+    "counters": []
+}

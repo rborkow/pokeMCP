@@ -47,8 +47,7 @@ export function InterviewStep({
             if (match) parts.push(`[${match.label}]`);
         }
         if (text.trim()) parts.push(text.trim());
-        const combined =
-            parts.length > 0 ? parts.join(" ") : (initialValue?.trim() ?? "");
+        const combined = parts.length > 0 ? parts.join(" ") : (initialValue?.trim() ?? "");
         if (!combined) return;
         onSubmit(combined);
     };

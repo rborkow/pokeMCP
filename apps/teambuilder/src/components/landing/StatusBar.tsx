@@ -4,8 +4,7 @@ import { BetaBadge } from "./BetaBadge";
 
 // NEXT_PUBLIC_BUILD_DATE is baked in at build time. In dev we fall back to
 // today's date so the badge always renders something sensible.
-const BUILD_DATE =
-    process.env.NEXT_PUBLIC_BUILD_DATE ?? new Date().toISOString().slice(0, 10);
+const BUILD_DATE = process.env.NEXT_PUBLIC_BUILD_DATE ?? new Date().toISOString().slice(0, 10);
 
 export function StatusBar() {
     return (

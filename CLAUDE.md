@@ -76,6 +76,12 @@ bunx wrangler kv key put --remote --namespace-id=58525ad4ec5c454eb3e1ae758641448
 - The fetch script has 2-second delays between requests to be polite to Smogon
 - Stats files are cached locally in `src/cached-stats/` for reference
 - Discovered formats are saved to `src/discovered-formats.json` and uploaded to KV for the ingestion pipeline
+- `bun run generate-reports` builds the publishable meta-report MDX + per-Pokémon trend JSON
+  (`apps/teambuilder/src/content/reports/` + `src/data/mons/`) straight from Smogon's monthly
+  chaos archives. Deterministic tables always; narrative sections only when `ANTHROPIC_API_KEY`
+  is set (`NARRATIVE=0` to skip). The monthly GitHub Action runs it and opens a review PR —
+  reports publish at https://www.pokemcp.com/reports on merge. Hand-written manifest entries
+  (no `generated: true` flag) are never overwritten.
 
 **Supported Formats for Stats:**
 

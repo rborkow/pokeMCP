@@ -1,0 +1,57 @@
+{
+    "id": "golurkmega",
+    "name": "Golurk-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0147439,
+            "rank": 60,
+            "raw": 150254
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0050231,
+            "rank": 103,
+            "raw": 90711
+        }
+    ],
+    "abilities": [["unseenfist", 100]],
+    "items": [["golurkite", 100]],
+    "moves": [
+        ["protect", 23.244113940488315],
+        ["poltergeist", 23.117131218209217],
+        ["headlongrush", 22.145462794425434],
+        ["icepunch", 12.42513989327706],
+        ["rockslide", 3.5347605259686707],
+        ["drainpunch", 3.116485538430512],
+        ["earthquake", 3.03518165610611],
+        ["closecombat", 2.7979248792233915],
+        ["thunderpunch", 1.4614349043363966],
+        ["highhorsepower", 1.3428960749566863]
+    ],
+    "spreads": [
+        ["Brave:32/32/0/0/2/0", 27.592477088993476],
+        ["Brave:32/32/2/0/0/0", 13.361343054870234],
+        ["Brave:32/32/1/0/1/0", 9.521766283687155],
+        ["Adamant:27/32/1/0/1/5", 6.1661753433458815],
+        ["Adamant:32/32/0/0/2/0", 5.670795802233989]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Farigiraf", 12.936860299438816],
+        ["Torkoal", 12.20035064143688],
+        ["Incineroar", 6.958311440446015],
+        ["Sinistcha", 5.00657196881823],
+        ["Sneasler", 4.674066670547968],
+        ["Kingambit", 4.553788936749888],
+        ["Hatterene", 3.5394060239708804],
+        ["Sylveon", 3.4474578776336924],
+        ["Kangaskhan", 3.4119849695654527],
+        ["Oranguru", 2.609251979976255]
+    ],
+    "counters": []
+}

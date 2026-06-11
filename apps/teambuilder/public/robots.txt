@@ -1,4 +1,47 @@
 User-Agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# AI assistant crawlers — explicitly welcome.
+# Retrieval bots (search-time fetching):
+User-Agent: OAI-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-Agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-Agent: Claude-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-Agent: Claude-User
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-Agent: PerplexityBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# Training crawlers (deferred payoff: model knowledge in future training runs):
+User-Agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-Agent: ClaudeBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-Agent: Google-Extended
+Allow: /
 
 Sitemap: https://www.pokemcp.com/sitemap.xml

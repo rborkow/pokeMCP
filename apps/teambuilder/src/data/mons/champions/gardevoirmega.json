@@ -1,0 +1,57 @@
+{
+    "id": "gardevoirmega",
+    "name": "Gardevoir-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0494102,
+            "rank": 32,
+            "raw": 281945
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0529749,
+            "rank": 32,
+            "raw": 283527
+        }
+    ],
+    "abilities": [["pixilate", 100]],
+    "items": [["gardevoirite", 100]],
+    "moves": [
+        ["hypervoice", 24.85025366949112],
+        ["protect", 24.377270302522675],
+        ["trickroom", 15.306024029611134],
+        ["psychic", 12.570246569246935],
+        ["psyshock", 10.804064278940514],
+        ["calmmind", 3.1227729641945343],
+        ["vacuumwave", 2.6109091996758607],
+        ["hyperbeam", 1.2065467512003798],
+        ["moonblast", 0.7191279885626632],
+        ["expandingforce", 0.6312344649168128]
+    ],
+    "spreads": [
+        ["Modest:32/0/2/32/0/0", 7.667936444440955],
+        ["Modest:16/0/2/32/0/16", 4.715700158187175],
+        ["Modest:32/0/7/25/2/0", 3.151949110075367],
+        ["Timid:2/0/0/32/0/32", 2.860818092975605],
+        ["Modest:30/0/14/21/1/0", 2.3624394005956617]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Basculegion", 9.64556307284578],
+        ["Maushold", 9.534602302139364],
+        ["Garchomp", 8.185074106189022],
+        ["Kingambit", 7.357708561803483],
+        ["Talonflame", 5.843254261847627],
+        ["Incineroar", 5.514774579871526],
+        ["Archaludon", 4.3259097090015075],
+        ["Sneasler", 3.974482434306482],
+        ["Pelipper", 3.5656816306790553],
+        ["Sinistcha", 2.9043430835624706]
+    ],
+    "counters": []
+}

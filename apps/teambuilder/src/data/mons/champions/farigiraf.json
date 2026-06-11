@@ -1,0 +1,70 @@
+{
+    "id": "farigiraf",
+    "name": "Farigiraf",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.1452775,
+            "rank": 12,
+            "raw": 920518
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.1739334,
+            "rank": 10,
+            "raw": 1123830
+        }
+    ],
+    "abilities": [
+        ["armortail", 98.99433270509694],
+        ["cudchew", 0.5555218341537567],
+        ["sapsipper", 0.45014546074930784]
+    ],
+    "items": [
+        ["sitrusberry", 53.97159958711447],
+        ["colburberry", 31.766600348999578],
+        ["mentalherb", 5.985395785537583],
+        ["leftovers", 1.8756647456393376],
+        ["focussash", 1.6370273072587835],
+        ["silkscarf", 1.5018718522934704],
+        ["twistedspoon", 1.327558202789528],
+        ["lumberry", 0.7519634345904435]
+    ],
+    "moves": [
+        ["trickroom", 23.59414067790862],
+        ["psychic", 15.76420933361851],
+        ["helpinghand", 14.180169092648157],
+        ["hypervoice", 10.453500946011673],
+        ["protect", 9.964287007155823],
+        ["twinbeam", 5.371066612589088],
+        ["imprison", 3.367056178497734],
+        ["thunderbolt", 3.1903574225338938],
+        ["foulplay", 2.6130952198677138],
+        ["raindance", 2.1143833065298647]
+    ],
+    "spreads": [
+        ["Quiet:17/0/19/10/20/0", 5.044748923133338],
+        ["Bold:32/0/23/0/11/0", 2.1338190152868868],
+        ["Bold:31/0/24/0/11/0", 1.9214697455262835],
+        ["Relaxed:32/0/32/0/2/0", 1.5666890002898264],
+        ["Sassy:32/0/14/0/20/0", 1.4350953298326168]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Kingambit", 7.075387218349924],
+        ["Basculegion", 6.811719546496812],
+        ["Torkoal", 5.349355641821607],
+        ["Blastoise-Mega", 4.58890837910137],
+        ["Sylveon", 4.403661071424289],
+        ["Incineroar", 3.8365992650005065],
+        ["Charizard-Mega-Y", 3.8173262319593704],
+        ["Sneasler", 3.525449136856084],
+        ["Garchomp", 3.466362151867053],
+        ["Kangaskhan-Mega", 3.351352312331487]
+    ],
+    "counters": []
+}

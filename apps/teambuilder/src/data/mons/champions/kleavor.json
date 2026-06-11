@@ -1,0 +1,70 @@
+{
+    "id": "kleavor",
+    "name": "Kleavor",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0054467,
+            "rank": 108,
+            "raw": 46572
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0164038,
+            "rank": 64,
+            "raw": 100221
+        }
+    ],
+    "abilities": [
+        ["sharpness", 98.40910131478567],
+        ["sheerforce", 0.7987386117086265],
+        ["swarm", 0.7921600735057054]
+    ],
+    "items": [
+        ["focussash", 48.38007016071577],
+        ["choicescarf", 40.1060945453962],
+        ["whiteherb", 7.463123716157375],
+        ["hardstone", 1.3642473316710237],
+        ["sitrusberry", 1.1086543913967062],
+        ["passhoberry", 0.8617499578578394],
+        ["silverpowder", 0.14960422149376532],
+        ["lumberry", 0.14655398673398867]
+    ],
+    "moves": [
+        ["stoneaxe", 24.683336122464418],
+        ["closecombat", 17.92560847217323],
+        ["protect", 12.988434768687446],
+        ["xscissor", 12.332702382835041],
+        ["rockslide", 7.489178996959862],
+        ["uturn", 7.234271353511021],
+        ["feint", 6.818927309366182],
+        ["tailwind", 3.726351424753596],
+        ["nightslash", 3.453485739865505],
+        ["aerialace", 0.9851815284623788]
+    ],
+    "spreads": [
+        ["Jolly:2/32/0/0/0/32", 39.031220615392606],
+        ["Adamant:2/32/0/0/0/32", 18.665938624377954],
+        ["Jolly:0/32/0/0/2/32", 16.194136999444993],
+        ["Adamant:0/32/0/0/2/32", 5.809465391420128],
+        ["Jolly:1/32/0/0/1/32", 1.7242509931937173]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Basculegion", 9.92042434313884],
+        ["Whimsicott", 9.887018662747012],
+        ["Kingambit", 9.401564684868672],
+        ["Sneasler", 7.594054563191898],
+        ["Farigiraf", 5.962565462395528],
+        ["Charizard-Mega-Y", 4.956632589370356],
+        ["Froslass-Mega", 4.106181269510045],
+        ["Garchomp", 3.587622974337063],
+        ["Floette-Mega", 3.3702786571469403],
+        ["Talonflame", 2.0269395474363843]
+    ],
+    "counters": []
+}

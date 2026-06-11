@@ -1,0 +1,70 @@
+{
+    "id": "vivillon",
+    "name": "Vivillon",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.008198800000000001,
+            "rank": 87,
+            "raw": 52021
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0370456,
+            "rank": 40,
+            "raw": 151522
+        }
+    ],
+    "abilities": [
+        ["compoundeyes", 94.1181503005788],
+        ["friendguard", 4.047493505656865],
+        ["shielddust", 1.8343561937643347]
+    ],
+    "items": [
+        ["choicescarf", 53.37479632372533],
+        ["focussash", 45.2457976811506],
+        ["brightpowder", 0.4909050671864232],
+        ["chartiberry", 0.2323327154001061],
+        ["sitrusberry", 0.20168349518181525],
+        ["mentalherb", 0.14606277772513965],
+        ["leftovers", 0.09002851246910372],
+        ["lumberry", 0.08609665353157533]
+    ],
+    "moves": [
+        ["sleeppowder", 24.194744253416395],
+        ["hurricane", 21.718637870062818],
+        ["ragepowder", 18.155240176481197],
+        ["tailwind", 11.48010287451429],
+        ["protect", 8.673468879696927],
+        ["raindance", 7.160450831246141],
+        ["pollenpuff", 5.572588985110281],
+        ["bugbuzz", 0.7939226053890241],
+        ["uturn", 0.5557583501803183],
+        ["strugglebug", 0.5327865835878688]
+    ],
+    "spreads": [
+        ["Timid:2/0/0/32/0/32", 33.76372922494942],
+        ["Timid:0/0/24/5/5/32", 21.829164294399238],
+        ["Timid:0/0/1/32/1/32", 6.8748759415088765],
+        ["Timid:0/0/2/32/0/32", 5.573785068269181],
+        ["Timid:32/0/0/2/0/32", 4.401290500566649]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Farigiraf", 11.106793686774951],
+        ["Blastoise-Mega", 10.156420857411609],
+        ["Basculegion", 9.36244392522269],
+        ["Torkoal", 7.290427861305658],
+        ["Kangaskhan-Mega", 6.679672390391074],
+        ["Incineroar", 4.9576982242493735],
+        ["Garchomp", 4.713170461931215],
+        ["Sinistcha", 3.8176354104834074],
+        ["Floette-Mega", 3.594529711978456],
+        ["Kingambit", 3.537533719290362]
+    ],
+    "counters": []
+}

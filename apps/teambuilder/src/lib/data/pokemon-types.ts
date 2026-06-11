@@ -245,12 +245,8 @@ export function getPokemonTypes(pokemon: string): PokemonType[] {
     const namesToTry = [
         lower.replace(/[^a-z0-9-]/g, ""), // Keep hyphens: "great-tusk"
         lower.replace(/[^a-z0-9]/g, ""), // No hyphens: "greattusk"
-        lower
-            .replace(/\s+/g, "-")
-            .replace(/[^a-z0-9-]/g, ""), // Spaces to hyphens: "great-tusk"
-        lower
-            .replace(/\s+/g, "")
-            .replace(/[^a-z0-9]/g, ""), // No spaces/hyphens: "greattusk"
+        lower.replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, ""), // Spaces to hyphens: "great-tusk"
+        lower.replace(/\s+/g, "").replace(/[^a-z0-9]/g, ""), // No spaces/hyphens: "greattusk"
     ];
 
     for (const name of namesToTry) {

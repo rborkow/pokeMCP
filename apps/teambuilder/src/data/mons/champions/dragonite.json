@@ -1,0 +1,66 @@
+{
+    "id": "dragonite",
+    "name": "Dragonite",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0324864,
+            "rank": 43,
+            "raw": 154196
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0328652,
+            "rank": 43,
+            "raw": 178824
+        }
+    ],
+    "abilities": [["multiscale", 79.83581716219152], ["innerfocus", 20.16418283780848]],
+    "items": [
+        ["dragonfang", 77.96372878855999],
+        ["lumberry", 6.947500458404451],
+        ["silkscarf", 3.171464433550169],
+        ["leftovers", 3.1406344430310615],
+        ["sitrusberry", 1.9039293278133043],
+        ["roseliberry", 1.163456087034507],
+        ["whiteherb", 1.1468132254853665],
+        ["habanberry", 1.1029786182232033]
+    ],
+    "moves": [
+        ["extremespeed", 22.42432198021621],
+        ["dragonclaw", 20.83277842440558],
+        ["lowkick", 17.87838989471661],
+        ["protect", 14.822888838064937],
+        ["tailwind", 11.340301570322065],
+        ["scaleshot", 2.3305910997495145],
+        ["firepunch", 1.0457071085095704],
+        ["dragondance", 1.0042873772366767],
+        ["rockslide", 0.9635705494608838],
+        ["aerialace", 0.6489342303557147]
+    ],
+    "spreads": [
+        ["Adamant:2/32/0/0/0/32", 24.253052332445737],
+        ["Adamant:21/32/0/0/0/13", 16.909664045028148],
+        ["Adamant:19/32/1/0/1/13", 2.876479602430392],
+        ["Adamant:32/32/0/0/0/2", 2.4566239394009988],
+        ["Adamant:1/32/1/0/0/32", 2.306612836822581]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Kingambit", 10.793426916422295],
+        ["Sneasler", 10.182469963747796],
+        ["Basculegion", 7.376709976246159],
+        ["Incineroar", 6.684765554436031],
+        ["Gengar-Mega", 5.153685442152189],
+        ["Ninetales-Alola", 5.1015162736743935],
+        ["Froslass-Mega", 3.8085600940373228],
+        ["Milotic", 3.6361312229167595],
+        ["Floette-Mega", 2.9489768367561013],
+        ["Aegislash", 2.254251665622427]
+    ],
+    "counters": []
+}

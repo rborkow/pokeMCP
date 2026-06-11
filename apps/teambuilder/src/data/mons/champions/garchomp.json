@@ -1,0 +1,66 @@
+{
+    "id": "garchomp",
+    "name": "Garchomp",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.37232109999999996,
+            "rank": 2,
+            "raw": 1787384
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.3599953,
+            "rank": 3,
+            "raw": 1722130
+        }
+    ],
+    "abilities": [["roughskin", 97.0240426139321], ["sandveil", 2.975957386067917]],
+    "items": [
+        ["choicescarf", 28.350242509032192],
+        ["sitrusberry", 28.141929032830838],
+        ["dragonfang", 9.50122515327243],
+        ["softsand", 7.840187277085669],
+        ["roseliberry", 6.588775396877303],
+        ["whiteherb", 6.202799325491701],
+        ["lumberry", 4.741925760451141],
+        ["habanberry", 4.408574712152292]
+    ],
+    "moves": [
+        ["earthquake", 22.105358907903096],
+        ["dragonclaw", 18.4935134354051],
+        ["rockslide", 16.65762090303189],
+        ["protect", 15.848321837865353],
+        ["stompingtantrum", 12.78748885021341],
+        ["rocktomb", 4.726332179972095],
+        ["scaleshot", 3.273271869104465],
+        ["poisonjab", 2.861488502567071],
+        ["swordsdance", 0.9553355962165494],
+        ["breakingswipe", 0.5101442284587078]
+    ],
+    "spreads": [
+        ["Jolly:2/32/0/0/0/32", 9.233503108904548],
+        ["Adamant:2/32/0/0/0/32", 8.749046983729444],
+        ["Adamant:20/20/0/0/1/25", 4.487183292391474],
+        ["Jolly:0/32/0/0/2/32", 3.8843702491028247],
+        ["Adamant:4/30/0/0/0/32", 2.580350275673711]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Charizard-Mega-Y", 11.050350051018194],
+        ["Kingambit", 10.062400894319882],
+        ["Basculegion", 9.975924272273419],
+        ["Whimsicott", 5.7463339198238605],
+        ["Floette-Mega", 5.548397260344372],
+        ["Sneasler", 4.8101150949192695],
+        ["Incineroar", 3.964502955873529],
+        ["Sylveon", 3.957744449133576],
+        ["Aerodactyl-Mega", 3.2148358069377143],
+        ["Aerodactyl", 2.5594624005441973]
+    ],
+    "counters": []
+}

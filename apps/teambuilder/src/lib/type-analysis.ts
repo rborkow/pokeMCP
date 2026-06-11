@@ -115,9 +115,7 @@ export interface TypeAnalysis {
  * Analyze a team's defensive coverage: for each attacking type, how many
  * team members are 2×+ weak to it, 0.5×− resistant to it, or fully immune.
  */
-export function analyzeTeamCoverage(
-    teamData: { name: string; types: string[] }[],
-): TypeAnalysis {
+export function analyzeTeamCoverage(teamData: { name: string; types: string[] }[]): TypeAnalysis {
     const weaknessMap: Record<string, string[]> = {};
     const resistMap: Record<string, string[]> = {};
     const immuneMap: Record<string, string[]> = {};

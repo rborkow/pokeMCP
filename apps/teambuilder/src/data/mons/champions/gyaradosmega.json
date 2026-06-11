@@ -1,0 +1,57 @@
+{
+    "id": "gyaradosmega",
+    "name": "Gyarados-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0129157,
+            "rank": 68,
+            "raw": 102075
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0096229,
+            "rank": 81,
+            "raw": 112287
+        }
+    ],
+    "abilities": [["moldbreaker", 100]],
+    "items": [["gyaradosite", 100]],
+    "moves": [
+        ["waterfall", 24.589894607431674],
+        ["protect", 22.58983080998881],
+        ["crunch", 22.459256705545556],
+        ["dragondance", 21.54752813730142],
+        ["earthquake", 2.775849763310536],
+        ["powerwhip", 1.5175334273329082],
+        ["icefang", 1.3026419609500564],
+        ["lashout", 0.9813489693975288],
+        ["taunt", 0.840594633188893],
+        ["thunderwave", 0.2900421321227755]
+    ],
+    "spreads": [
+        ["Jolly:2/32/0/0/0/32", 9.48888149063966],
+        ["Adamant:2/32/0/0/0/32", 5.676281523382752],
+        ["Adamant:0/32/0/0/2/32", 3.4371315893200234],
+        ["Adamant:29/5/0/0/0/32", 3.2195089249723967],
+        ["Jolly:5/32/0/0/0/29", 2.494130775654527]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Sneasler", 10.781205083339946],
+        ["Sinistcha", 7.706437805597124],
+        ["Garchomp", 7.45889652817608],
+        ["Delphox-Mega", 3.787975859716218],
+        ["Kingambit", 3.6066028613037737],
+        ["Archaludon", 3.332462111919531],
+        ["Whimsicott", 3.0733999175404305],
+        ["Incineroar", 2.4789025282294515],
+        ["Sableye", 2.4413236824206237],
+        ["Ninetales-Alola", 2.2380167862560993]
+    ],
+    "counters": []
+}

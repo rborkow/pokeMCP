@@ -1,0 +1,66 @@
+{
+    "id": "sylveon",
+    "name": "Sylveon",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.056479299999999996,
+            "rank": 26,
+            "raw": 227918
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.1551446,
+            "rank": 12,
+            "raw": 727054
+        }
+    ],
+    "abilities": [["pixilate", 99.7821821715733], ["cutecharm", 0.21781782842669764]],
+    "items": [
+        ["fairyfeather", 94.10802438688013],
+        ["leftovers", 2.7390738921193774],
+        ["sitrusberry", 2.1979213936578637],
+        ["choicescarf", 0.24505991050739512],
+        ["babiriberry", 0.18094032561743165],
+        ["kebiaberry", 0.18043554764602612],
+        ["mentalherb", 0.06292607926643412],
+        ["quickclaw", 0.05276459615679181]
+    ],
+    "moves": [
+        ["hypervoice", 24.967813145222927],
+        ["quickattack", 19.673408195642256],
+        ["hyperbeam", 13.383707564068251],
+        ["detect", 12.839534247600925],
+        ["protect", 11.845205555699073],
+        ["moonblast", 6.666408840290402],
+        ["calmmind", 3.24371478499554],
+        ["yawn", 2.9092991644534334],
+        ["substitute", 0.8789422439758424],
+        ["mysticalfire", 0.8372445286479631]
+    ],
+    "spreads": [
+        ["Modest:9/0/22/20/0/15", 7.300755675952993],
+        ["Quiet:32/0/2/32/0/0", 3.9400818847747785],
+        ["Modest:32/0/2/32/0/0", 2.2475074211148303],
+        ["Modest:7/0/22/23/0/14", 1.9710501180646711],
+        ["Modest:6/0/0/32/0/28", 1.8886687220027347]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Basculegion", 10.375527473455605],
+        ["Garchomp", 9.183493759806606],
+        ["Charizard-Mega-Y", 8.44028282713504],
+        ["Kingambit", 7.808390960184271],
+        ["Aerodactyl-Mega", 7.234297602622348],
+        ["Farigiraf", 4.936966465799769],
+        ["Sneasler", 3.2207452831803476],
+        ["Incineroar", 3.0141098226050222],
+        ["Archaludon", 2.602606118652961],
+        ["Blastoise-Mega", 2.2845985724052533]
+    ],
+    "counters": []
+}

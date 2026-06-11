@@ -1,0 +1,57 @@
+{
+    "id": "crabominablemega",
+    "name": "Crabominable-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0190155,
+            "rank": 54,
+            "raw": 175066
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0127738,
+            "rank": 70,
+            "raw": 158296
+        }
+    ],
+    "abilities": [["ironfist", 100]],
+    "items": [["crabominite", 100]],
+    "moves": [
+        ["icehammer", 23.37445609435676],
+        ["protect", 21.717471851678212],
+        ["drainpunch", 20.475062493874105],
+        ["machpunch", 18.29184255520388],
+        ["thunderpunch", 4.811749778625746],
+        ["closecombat", 4.568382371037889],
+        ["icepunch", 1.5211873718193123],
+        ["knockoff", 1.0718255917170993],
+        ["bulkup", 0.9706391921987014],
+        ["rockslide", 0.7977977593165662]
+    ],
+    "spreads": [
+        ["Brave:32/32/0/0/2/0", 38.78365938358972],
+        ["Brave:32/32/2/0/0/0", 28.896007289079595],
+        ["Adamant:32/32/0/0/2/0", 5.678541988671076],
+        ["Brave:32/32/1/0/1/0", 3.9342592553523175],
+        ["Adamant:32/32/2/0/0/0", 1.2426184958624016]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Farigiraf", 14.689851759423997],
+        ["Kingambit", 9.617012579990423],
+        ["Camerupt-Mega", 7.348946714675613],
+        ["Incineroar", 7.249090545838305],
+        ["Gallade", 5.500027786132875],
+        ["Torkoal", 5.356802286430313],
+        ["Azumarill", 4.787595901833579],
+        ["Sinistcha", 3.8601706364312856],
+        ["Basculegion", 2.0050544503980485],
+        ["Kangaskhan", 1.810855315771635]
+    ],
+    "counters": []
+}

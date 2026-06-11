@@ -1,0 +1,57 @@
+{
+    "id": "kangaskhanmega",
+    "name": "Kangaskhan-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.040989000000000005,
+            "rank": 39,
+            "raw": 221416
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0510371,
+            "rank": 33,
+            "raw": 227727
+        }
+    ],
+    "abilities": [["parentalbond", 100]],
+    "items": [["kangaskhanite", 100]],
+    "moves": [
+        ["fakeout", 24.57794904208136],
+        ["doubleedge", 23.92565926193251],
+        ["suckerpunch", 11.348372282611532],
+        ["icepunch", 10.986007902872643],
+        ["lowkick", 10.417153670294656],
+        ["drainpunch", 6.757026244970998],
+        ["hammerarm", 5.476032225133907],
+        ["protect", 1.8344139583055075],
+        ["crunch", 1.5811334789571665],
+        ["", 0.6807246310104592]
+    ],
+    "spreads": [
+        ["Adamant:32/32/1/0/1/0", 17.412423030714272],
+        ["Brave:32/32/1/0/1/0", 5.965745701230572],
+        ["Adamant:2/32/0/0/0/32", 5.360885071013126],
+        ["Adamant:32/32/2/0/0/0", 4.870531424909952],
+        ["Brave:32/32/2/0/0/0", 4.492795804384329]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Farigiraf", 11.421351174033484],
+        ["Basculegion", 10.298430821615376],
+        ["Torkoal", 8.710159841509963],
+        ["Vivillon", 4.848481571953391],
+        ["Blastoise-Mega", 4.7753630838551535],
+        ["Kingambit", 4.43530810636507],
+        ["Charizard-Mega-Y", 4.149613477192771],
+        ["Garchomp", 3.9160378191826566],
+        ["Sylveon", 3.8513868625109504],
+        ["Sinistcha", 3.216940645347493]
+    ],
+    "counters": []
+}

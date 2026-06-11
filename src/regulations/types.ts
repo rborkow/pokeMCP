@@ -26,8 +26,12 @@ export interface RegulationSet {
     platform: RegulationPlatform;
     /** ISO date (YYYY-MM-DD) the regulation becomes legal. */
     startDate: string;
-    /** ISO date (YYYY-MM-DD) the regulation stops being legal. */
-    endDate: string;
+    /**
+     * ISO date (YYYY-MM-DD) the regulation stops being legal. Undefined while
+     * the regulation is current and no end date has been announced (set it
+     * once the successor regulation's start date is published).
+     */
+    endDate?: string;
     /** Fixed level at which Pokémon battle under this regulation. */
     level: number;
     /** Team size minted on the bring-N team preview (e.g. 6). */

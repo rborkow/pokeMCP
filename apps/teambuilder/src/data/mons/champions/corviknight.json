@@ -1,0 +1,70 @@
+{
+    "id": "corviknight",
+    "name": "Corviknight",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.06616380000000001,
+            "rank": 23,
+            "raw": 397508
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.048557199999999995,
+            "rank": 35,
+            "raw": 386014
+        }
+    ],
+    "abilities": [
+        ["mirrorarmor", 95.00080630598707],
+        ["unnerve", 2.523917994915157],
+        ["pressure", 2.4752756990977764]
+    ],
+    "items": [
+        ["leftovers", 78.6915071054716],
+        ["sitrusberry", 11.302587094889516],
+        ["occaberry", 4.316443163688632],
+        ["metalcoat", 2.088366192727709],
+        ["lumberry", 1.1302812363520593],
+        ["sharpbeak", 0.6489544890891353],
+        ["mentalherb", 0.507210852976827],
+        ["wacanberry", 0.37990111710828983]
+    ],
+    "moves": [
+        ["bravebird", 22.59658233049748],
+        ["tailwind", 19.158184873101707],
+        ["roost", 15.7272370566316],
+        ["bulkup", 14.273010021762087],
+        ["ironhead", 10.910530939759337],
+        ["bodypress", 7.95648600256009],
+        ["protect", 4.021269589718755],
+        ["irondefense", 3.3330807055068092],
+        ["taunt", 0.7976489943481722],
+        ["uturn", 0.31047765047608666]
+    ],
+    "spreads": [
+        ["Adamant:32/13/0/0/13/8", 7.492077528389333],
+        ["Careful:27/11/1/0/5/22", 5.056132704753232],
+        ["Adamant:32/13/1/0/12/8", 2.7184081717969772],
+        ["Impish:32/0/32/0/2/0", 2.6924919450110085],
+        ["Careful:32/0/2/0/32/0", 2.2467889750754386]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Tyranitar-Mega", 10.948442181076754],
+        ["Excadrill", 8.684102614412367],
+        ["Rotom-Wash", 6.295968273245986],
+        ["Garchomp", 5.7999969670459235],
+        ["Sneasler", 4.603722166141271],
+        ["Sinistcha", 4.568632543943257],
+        ["Basculegion", 4.543917909883417],
+        ["Incineroar", 3.886366639033244],
+        ["Hydreigon", 3.428171446695753],
+        ["Scovillain-Mega", 2.9097072363951626]
+    ],
+    "counters": []
+}
