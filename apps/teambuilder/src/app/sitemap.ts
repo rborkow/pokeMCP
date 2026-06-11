@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import monsIndex from "@/data/mons/index.json";
+import { getEventsIndex } from "@/lib/event-pages";
 import { getAllReports, getReportFormats } from "@/lib/reports";
 
 const SITE_URL = "https://www.pokemcp.com";
@@ -62,5 +63,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
         })),
     );
 
-    return [...staticPages, ...latestPages, ...monthlyPages, ...monPages];
+    const eventPages: MetadataRoute.Sitemap = Object.entries(getEventsIndex()).flatMap(
+        ([slug, events]) =>
+            events.map((event) => ({
+                url: `${SITE_URL}/reports/${slug}/events/${event.slug}`,
+                lastModified: event.date.slice(0, 10),
+                changeFrequency: "yearly" as const,
+                priority: 0.6,
+            })),
+    );
+
+    return [...staticPages, ...latestPages, ...monthlyPages, ...monPages, ...eventPages];
 }

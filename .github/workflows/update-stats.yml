@@ -5,8 +5,16 @@ on:
   schedule:
     - cron: "0 6 5 * *"
 
-  # Manual trigger for immediate updates
+  # Manual trigger for immediate updates. With tournaments_only, skips the
+  # Smogon stats refresh and report generation entirely and just pulls new
+  # tournament results + regenerates event recap pages — run this after a
+  # big event weekend.
   workflow_dispatch:
+    inputs:
+      tournaments_only:
+        description: "Only fetch tournaments and regenerate event pages"
+        type: boolean
+        default: false
 
 jobs:
   update-stats:
@@ -32,12 +40,15 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Discover available formats from Smogon
+        if: ${{ !inputs.tournaments_only }}
         run: bun run discover-formats
 
       - name: Fetch latest stats from Smogon
+        if: ${{ !inputs.tournaments_only }}
         run: bun run fetch-stats
 
       - name: Upload stats to KV
+        if: ${{ !inputs.tournaments_only }}
         run: bun run upload-stats
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -46,12 +57,14 @@ jobs:
       # Append this month's snapshot to the D1 time-series (metagame evolution history).
       # KV above is the "latest" source of truth; D1 accumulates one slice per month.
       - name: Append snapshot to history (D1)
+        if: ${{ !inputs.tournaments_only }}
         run: bun run append-history
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Commit updated stats
+        if: ${{ !inputs.tournaments_only }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
@@ -70,6 +83,7 @@ jobs:
           fi
 
       - name: Verify stats update
+        if: ${{ !inputs.tournaments_only }}
         run: |
           echo "Testing stats availability..."
           curl -s -X POST "https://api.pokemcp.com/api/tools" \
@@ -79,14 +93,27 @@ jobs:
           echo ""
           echo "✅ Stats update complete! Push to main will trigger Cloudflare Workers Builds redeploy."
 
+      # Pull recent tournament results + teams from the Limitless platform into
+      # the committed cache (drives the report's "Tournament results" section,
+      # event recap pages, and common-builds data).
+      - name: Fetch tournament results (Limitless)
+        run: bun run fetch-tournaments
+        env:
+          LIMITLESS_API_KEY: ${{ secrets.LIMITLESS_API_KEY }}
+
       # Generate meta-report MDX + per-Pokémon trend data from the fresh stats.
       # Deterministic tables come from Smogon data; the narrative needs
       # ANTHROPIC_API_KEY (repo secret). Goes out as a PR — not a direct push —
       # so a human reviews/edits the narrative before it publishes.
       - name: Generate meta reports
+        if: ${{ !inputs.tournaments_only }}
         run: bun run generate-reports
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Regenerate event pages only
+        if: ${{ inputs.tournaments_only }}
+        run: EVENTS_ONLY=1 bun run generate-reports
 
       - name: Open meta-report review PR
         uses: peter-evans/create-pull-request@v7
@@ -94,13 +121,16 @@ jobs:
           add-paths: |
             apps/teambuilder/src/content/reports/**
             apps/teambuilder/src/data/mons/**
+            apps/teambuilder/src/data/events/**
+            src/cached-tournaments/**
           branch: chore/meta-reports
           base: main
           commit-message: "content(reports): monthly meta report refresh"
           title: "Monthly meta reports — review before publish"
           body: |
-            Auto-generated meta reports and per-Pokémon trend data from this month's
-            Smogon stats. Review the narrative sections (everything below the tables)
-            before merging — the tables are deterministic and trace to the raw data.
+            Auto-generated meta reports, per-Pokémon trend data, and tournament
+            event pages from this month's Smogon stats + Limitless results.
+            Review the narrative sections (everything below the tables) before
+            merging — the tables are deterministic and trace to the raw data.
 
             Merging publishes to https://www.pokemcp.com/reports via Workers Builds.

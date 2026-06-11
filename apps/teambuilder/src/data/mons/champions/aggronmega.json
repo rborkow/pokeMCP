@@ -1,147 +1,58 @@
 {
- "id": "aggronmega",
- "name": "Aggron-Mega",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0221582,
-   "rank": 48,
-   "raw": 194627
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.007685300000000001,
-   "rank": 89,
-   "raw": 117334
-  }
- ],
- "abilities": [
-  [
-   "filter",
-   100
-  ]
- ],
- "items": [
-  [
-   "aggronite",
-   100
-  ]
- ],
- "moves": [
-  [
-   "bodypress",
-   24.732985207195952
-  ],
-  [
-   "heavyslam",
-   23.560308267731312
-  ],
-  [
-   "protect",
-   22.803749117465095
-  ],
-  [
-   "irondefense",
-   22.185605381225997
-  ],
-  [
-   "rockslide",
-   1.9757828709794023
-  ],
-  [
-   "curse",
-   0.9035665125147887
-  ],
-  [
-   "substitute",
-   0.8849612634861094
-  ],
-  [
-   "ironhead",
-   0.8718243550864347
-  ],
-  [
-   "crunch",
-   0.23586940232109355
-  ],
-  [
-   "rest",
-   0.22966467855001418
-  ]
- ],
- "spreads": [
-  [
-   "Careful:32/0/2/0/32/0",
-   11.832568925349204
-  ],
-  [
-   "Impish:31/0/3/0/32/0",
-   8.426280370416226
-  ],
-  [
-   "Careful:32/2/0/0/32/0",
-   5.8090621901977935
-  ],
-  [
-   "Sassy:32/0/2/0/32/0",
-   5.648715839634342
-  ],
-  [
-   "Sassy:32/2/0/0/32/0",
-   5.385968012895802
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Sinistcha",
-   15.44243366808791
-  ],
-  [
-   "Incineroar",
-   8.473474936012344
-  ],
-  [
-   "Farigiraf",
-   4.949245908411292
-  ],
-  [
-   "Sneasler",
-   4.866583890332368
-  ],
-  [
-   "Pelipper",
-   4.510154326649431
-  ],
-  [
-   "Basculegion",
-   4.103615536794913
-  ],
-  [
-   "Hydreigon",
-   2.6617397687431925
-  ],
-  [
-   "Sableye",
-   2.6308603969985556
-  ],
-  [
-   "Dragonite-Mega",
-   2.3449808119973237
-  ],
-  [
-   "Kingambit",
-   2.256105307767322
-  ]
- ],
- "counters": []
+    "id": "aggronmega",
+    "name": "Aggron-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0221582,
+            "rank": 48,
+            "raw": 194627
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.007685300000000001,
+            "rank": 89,
+            "raw": 117334
+        }
+    ],
+    "abilities": [["Filter", 100]],
+    "items": [["Aggronite", 100]],
+    "moves": [
+        ["Body Press", 24.732985207195952],
+        ["Heavy Slam", 23.560308267731312],
+        ["Protect", 22.803749117465095],
+        ["Iron Defense", 22.185605381225997],
+        ["Rock Slide", 1.9757828709794023],
+        ["Curse", 0.9035665125147887],
+        ["Substitute", 0.8849612634861094],
+        ["Iron Head", 0.8718243550864347],
+        ["Crunch", 0.23586940232109355],
+        ["Rest", 0.22966467855001418]
+    ],
+    "spreads": [
+        ["Careful:32/0/2/0/32/0", 11.832568925349204],
+        ["Impish:31/0/3/0/32/0", 8.426280370416226],
+        ["Careful:32/2/0/0/32/0", 5.8090621901977935],
+        ["Sassy:32/0/2/0/32/0", 5.648715839634342],
+        ["Sassy:32/2/0/0/32/0", 5.385968012895802]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Sinistcha", 15.44243366808791],
+        ["Incineroar", 8.473474936012344],
+        ["Farigiraf", 4.949245908411292],
+        ["Sneasler", 4.866583890332368],
+        ["Pelipper", 4.510154326649431],
+        ["Basculegion", 4.103615536794913],
+        ["Hydreigon", 2.6617397687431925],
+        ["Sableye", 2.6308603969985556],
+        ["Dragonite-Mega", 2.3449808119973237],
+        ["Kingambit", 2.256105307767322]
+    ],
+    "counters": [],
+    "builds": []
 }

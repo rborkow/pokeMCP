@@ -45,87 +45,87 @@
  ],
  "abilities": [
   [
-   "intimidate",
+   "Intimidate",
    99.95510546146691
   ],
   [
-   "blaze",
+   "Blaze",
    0.04489453853307731
   ]
  ],
  "items": [
   [
-   "safetygoggles",
+   "Safety Goggles",
    35.49861809013657
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    28.593567839332234
   ],
   [
-   "assaultvest",
+   "Assault Vest",
    22.735574698099953
   ],
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    8.166614398064826
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    1.501429749882697
   ],
   [
-   "leftovers",
+   "Leftovers",
    0.8376852522539228
   ],
   [
-   "shucaberry",
+   "Shuca Berry",
    0.5427626349572994
   ],
   [
-   "figyberry",
+   "Figy Berry",
    0.3408499851330538
   ]
  ],
  "moves": [
   [
-   "fakeout",
+   "Fake Out",
    24.774254324469617
   ],
   [
-   "knockoff",
+   "Knock Off",
    20.960835366710548
   ],
   [
-   "flareblitz",
+   "Flare Blitz",
    20.321448770803574
   ],
   [
-   "partingshot",
+   "Parting Shot",
    18.977473153385336
   ],
   [
-   "uturn",
+   "U-turn",
    5.801069744917721
   ],
   [
-   "taunt",
+   "Taunt",
    3.1319925109387166
   ],
   [
-   "willowisp",
+   "Will-O-Wisp",
    2.526457017772268
   ],
   [
-   "protect",
+   "Protect",
    1.5639903460218547
   ],
   [
-   "snarl",
+   "Snarl",
    0.5053143692139308
   ],
   [
-   "helpinghand",
+   "Helping Hand",
    0.484056467664439
   ]
  ],
@@ -215,5 +215,6 @@
    2.882489940532778
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

@@ -45,33 +45,33 @@
  ],
  "abilities": [
   [
-   "beadsofruin",
+   "Beads of Ruin",
    100
   ]
  ],
  "items": [
   [
-   "lifeorb",
+   "Life Orb",
    32.95812572241102
   ],
   [
-   "choicespecs",
+   "Choice Specs",
    25.499433044415294
   ],
   [
-   "focussash",
+   "Focus Sash",
    18.110131633464796
   ],
   [
-   "choicescarf",
+   "Choice Scarf",
    17.832875866070708
   ],
   [
-   "assaultvest",
+   "Assault Vest",
    1.5307522749008422
   ],
   [
-   "blackglasses",
+   "Black Glasses",
    1.1948952021509558
   ],
   [
@@ -79,49 +79,49 @@
    1.1723938457101972
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    0.45286898755800187
   ]
  ],
  "moves": [
   [
-   "heatwave",
+   "Heat Wave",
    24.623774229686028
   ],
   [
-   "darkpulse",
+   "Dark Pulse",
    23.094845270111268
   ],
   [
-   "overheat",
+   "Overheat",
    19.224254891752775
   ],
   [
-   "protect",
+   "Protect",
    13.84235492381071
   ],
   [
-   "snarl",
+   "Snarl",
    12.148414338606015
   ],
   [
-   "flamethrower",
+   "Flamethrower",
    3.428793427322786
   ],
   [
-   "psychic",
+   "Psychic",
    1.180826879082942
   ],
   [
-   "taunt",
+   "Taunt",
    1.0163577102524528
   ],
   [
-   "terablast",
+   "Tera Blast",
    0.7584169026079416
   ],
   [
-   "nastyplot",
+   "Nasty Plot",
    0.5117727157143899
   ]
  ],
@@ -211,5 +211,6 @@
    2.2970470800633795
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

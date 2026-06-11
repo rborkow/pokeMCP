@@ -1,10 +1,5 @@
 {
-    "vgcFormats": [
-        "gen4vgc2009",
-        "gen8vgc2022",
-        "gen9vgc2026regi",
-        "gen9vgc2026regibo3"
-    ],
+    "vgcFormats": ["gen4vgc2009", "gen8vgc2022", "gen9vgc2026regi", "gen9vgc2026regibo3"],
     "doublesFormats": [
         "gen6doublesou",
         "gen7doublesou",

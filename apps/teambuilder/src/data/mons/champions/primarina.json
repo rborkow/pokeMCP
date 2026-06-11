@@ -1,179 +1,104 @@
 {
- "id": "primarina",
- "name": "Primarina",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0467876,
-   "rank": 35,
-   "raw": 320671
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.032693,
-   "rank": 44,
-   "raw": 325998
-  }
- ],
- "abilities": [
-  [
-   "liquidvoice",
-   97.62622437611668
-  ],
-  [
-   "torrent",
-   2.3737756238833163
-  ]
- ],
- "items": [
-  [
-   "leftovers",
-   34.48638328840945
-  ],
-  [
-   "mysticwater",
-   29.380331225839683
-  ],
-  [
-   "sitrusberry",
-   22.41096203004691
-  ],
-  [
-   "kebiaberry",
-   6.747026112452467
-  ],
-  [
-   "fairyfeather",
-   3.670993321423733
-  ],
-  [
-   "choicescarf",
-   1.0559514323776586
-  ],
-  [
-   "focussash",
-   0.8286487880602248
-  ],
-  [
-   "wacanberry",
-   0.3062971433288713
-  ]
- ],
- "moves": [
-  [
-   "hypervoice",
-   23.951813011872204
-  ],
-  [
-   "protect",
-   23.822381121007595
-  ],
-  [
-   "moonblast",
-   23.69926255456853
-  ],
-  [
-   "calmmind",
-   10.124423442429158
-  ],
-  [
-   "psychic",
-   1.83326198126249
-  ],
-  [
-   "icywind",
-   1.6795715012933927
-  ],
-  [
-   "substitute",
-   1.6419042412238194
-  ],
-  [
-   "hydrocannon",
-   1.5318828672447493
-  ],
-  [
-   "aquajet",
-   1.4773624774107605
-  ],
-  [
-   "dazzlinggleam",
-   1.2454078709390293
-  ]
- ],
- "spreads": [
-  [
-   "Modest:32/0/0/32/2/0",
-   7.322046608831665
-  ],
-  [
-   "Modest:16/0/21/24/0/5",
-   5.944597979710272
-  ],
-  [
-   "Quiet:32/0/2/32/0/0",
-   5.683481911039135
-  ],
-  [
-   "Modest:32/0/2/32/0/0",
-   4.965044374981955
-  ],
-  [
-   "Modest:10/0/0/24/0/32",
-   4.14533886569379
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Sinistcha",
-   5.787774355170634
-  ],
-  [
-   "Incineroar",
-   5.484176590279131
-  ],
-  [
-   "Sneasler",
-   5.416640856761978
-  ],
-  [
-   "Farigiraf",
-   5.155317428988086
-  ],
-  [
-   "Garchomp",
-   4.872065492239102
-  ],
-  [
-   "Kingambit",
-   4.385597303151768
-  ],
-  [
-   "Charizard-Mega-Y",
-   3.1007359618905923
-  ],
-  [
-   "Corviknight",
-   2.758675933822811
-  ],
-  [
-   "Scovillain-Mega",
-   2.4072416175678084
-  ],
-  [
-   "Tyranitar-Mega",
-   2.3829727517029324
-  ]
- ],
- "counters": []
+    "id": "primarina",
+    "name": "Primarina",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0467876,
+            "rank": 35,
+            "raw": 320671
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.032693,
+            "rank": 44,
+            "raw": 325998
+        }
+    ],
+    "abilities": [["Liquid Voice", 97.62622437611668], ["Torrent", 2.3737756238833163]],
+    "items": [
+        ["Leftovers", 34.48638328840945],
+        ["Mystic Water", 29.380331225839683],
+        ["Sitrus Berry", 22.41096203004691],
+        ["Kebia Berry", 6.747026112452467],
+        ["Fairy Feather", 3.670993321423733],
+        ["Choice Scarf", 1.0559514323776586],
+        ["Focus Sash", 0.8286487880602248],
+        ["Wacan Berry", 0.3062971433288713]
+    ],
+    "moves": [
+        ["Hyper Voice", 23.951813011872204],
+        ["Protect", 23.822381121007595],
+        ["Moonblast", 23.69926255456853],
+        ["Calm Mind", 10.124423442429158],
+        ["Psychic", 1.83326198126249],
+        ["Icy Wind", 1.6795715012933927],
+        ["Substitute", 1.6419042412238194],
+        ["Hydro Cannon", 1.5318828672447493],
+        ["Aqua Jet", 1.4773624774107605],
+        ["Dazzling Gleam", 1.2454078709390293]
+    ],
+    "spreads": [
+        ["Modest:32/0/0/32/2/0", 7.322046608831665],
+        ["Modest:16/0/21/24/0/5", 5.944597979710272],
+        ["Quiet:32/0/2/32/0/0", 5.683481911039135],
+        ["Modest:32/0/2/32/0/0", 4.965044374981955],
+        ["Modest:10/0/0/24/0/32", 4.14533886569379]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Sinistcha", 5.787774355170634],
+        ["Incineroar", 5.484176590279131],
+        ["Sneasler", 5.416640856761978],
+        ["Farigiraf", 5.155317428988086],
+        ["Garchomp", 4.872065492239102],
+        ["Kingambit", 4.385597303151768],
+        ["Charizard-Mega-Y", 3.1007359618905923],
+        ["Corviknight", 2.758675933822811],
+        ["Scovillain-Mega", 2.4072416175678084],
+        ["Tyranitar-Mega", 2.3829727517029324]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Sitrus Berry",
+            "ability": "Liquid Voice",
+            "moves": ["Hyper Voice", "Moonblast", "Calm Mind", "Protect"],
+            "count": 3,
+            "bestPlacing": 3,
+            "bestPlayer": "trevYah",
+            "eventName": "Alpensee Tour (Reg M-A) #58",
+            "eventSlug": "2026-05-20-alpensee-tour-reg-m-a-58",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69f62816e23aab068aad8a2d",
+            "nature": "Modest"
+        },
+        {
+            "item": "Mystic Water",
+            "ability": "Liquid Voice",
+            "moves": ["Hyper Voice", "Protect", "Moonblast", "Dazzling Gleam"],
+            "count": 1,
+            "bestPlacing": 3,
+            "bestPlayer": "VGCDan",
+            "eventName": "Pokepal Smackdown #144 (Champions) (Reg M-A)",
+            "eventSlug": "2026-06-08-pokepal-smackdown-144-champions-reg-m-a",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15a9910f6c1f089986169a",
+            "nature": "Modest"
+        },
+        {
+            "item": "Leftovers",
+            "ability": "Liquid Voice",
+            "moves": ["Hyper Voice", "Moonblast", "Calm Mind", "Protect"],
+            "count": 1,
+            "bestPlacing": 4,
+            "bestPlayer": "lukasjoel1",
+            "eventName": "CHAMPIONS REG. M-A |👑CROWN FIGHT Bo3 TOUR #68👑",
+            "eventSlug": "2026-05-08-champions-reg-m-a-crown-fight-bo3-tour-68",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eb095278b359b789d6aa3a",
+            "nature": null
+        }
+    ]
 }

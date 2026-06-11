@@ -45,87 +45,87 @@
  ],
  "abilities": [
   [
-   "drought",
+   "Drought",
    99.97770900483037
   ],
   [
-   "flashfire",
+   "Flash Fire",
    0.022290995169629756
   ]
  ],
  "items": [
   [
-   "lifeorb",
+   "Life Orb",
    60.76221783988738
   ],
   [
-   "ejectpack",
+   "Eject Pack",
    10.408965016022028
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    9.693429367278474
   ],
   [
-   "ejectbutton",
+   "Eject Button",
    7.096596256156644
   ],
   [
-   "focussash",
+   "Focus Sash",
    3.0676629864268685
   ],
   [
-   "choicespecs",
+   "Choice Specs",
    2.9592753470167974
   ],
   [
-   "safetygoggles",
+   "Safety Goggles",
    2.4503665506479817
   ],
   [
-   "charcoal",
+   "Charcoal",
    1.538304807404833
   ]
  ],
  "moves": [
   [
-   "protect",
+   "Protect",
    21.380672713064357
   ],
   [
-   "heatwave",
+   "Heat Wave",
    19.200114387429313
   ],
   [
-   "helpinghand",
+   "Helping Hand",
    17.629335538340694
   ],
   [
-   "overheat",
+   "Overheat",
    13.519394555945283
   ],
   [
-   "encore",
+   "Encore",
    8.631935763319394
   ],
   [
-   "willowisp",
+   "Will-O-Wisp",
    4.932709521605561
   ],
   [
-   "snarl",
+   "Snarl",
    2.7404124819715223
   ],
   [
-   "faketears",
+   "Fake Tears",
    2.0121462649692488
   ],
   [
-   "disable",
+   "Disable",
    1.993522877169953
   ],
   [
-   "weatherball",
+   "Weather Ball",
    1.8871345220800178
   ]
  ],
@@ -215,5 +215,6 @@
    3.3097041356564834
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

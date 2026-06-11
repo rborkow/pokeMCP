@@ -45,87 +45,87 @@
  ],
  "abilities": [
   [
-   "toxicdebris",
+   "Toxic Debris",
    99.46133199329323
   ],
   [
-   "corrosion",
+   "Corrosion",
    0.5386680067067664
   ]
  ],
  "items": [
   [
-   "powerherb",
+   "Power Herb",
    48.52716372413471
   ],
   [
-   "focussash",
+   "Focus Sash",
    21.907538978524673
   ],
   [
-   "assaultvest",
+   "Assault Vest",
    18.429314560434918
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    7.566119818191669
   ],
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    2.1735961568963313
   ],
   [
-   "redcard",
+   "Red Card",
    1.3067528477979968
   ],
   [
-   "mentalherb",
+   "Mental Herb",
    0.08777197583233709
   ],
   [
-   "lightclay",
+   "Light Clay",
    0.001345940277851922
   ]
  ],
  "moves": [
   [
-   "sludgebomb",
+   "Sludge Bomb",
    23.65068372724997
   ],
   [
-   "earthpower",
+   "Earth Power",
    19.36773858118838
   ],
   [
-   "powergem",
+   "Power Gem",
    12.82982626601823
   ],
   [
-   "spikyshield",
+   "Spiky Shield",
    12.648473768940367
   ],
   [
-   "meteorbeam",
+   "Meteor Beam",
    12.131791012177947
   ],
   [
-   "mortalspin",
+   "Mortal Spin",
    10.038253395667688
   ],
   [
-   "protect",
+   "Protect",
    6.945527234105489
   ],
   [
-   "energyball",
+   "Energy Ball",
    0.6094510899497088
   ],
   [
-   "acidspray",
+   "Acid Spray",
    0.5433966985708235
   ],
   [
-   "stealthrock",
+   "Stealth Rock",
    0.4522425863436449
   ]
  ],
@@ -215,5 +215,6 @@
    3.2988235376193047
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

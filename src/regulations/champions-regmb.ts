@@ -38,6 +38,10 @@ export const CHAMPIONS_REGMB: RegulationSet = {
     // field to that id when it appears; until then `showdownFormatId` stays
     // undefined and the stats tools surface the "not yet published" message.
     // showdownFormatId: "gen9championsvgc2026regmb",
+    // Limitless format string for M-B is likewise unverified until events
+    // appear on play.limitlesstcg.com after 2026-06-17. Expected value "M-B" —
+    // verify with GET /api/tournaments?game=VGC&format=M-B, then flip:
+    // limitlessFormatId: "M-B",
     // Starting point: Reg M-A's Mega allow-list. Press coverage indicates M-B
     // adds new Pokémon and items, and the exact Mega list is unverified —
     // review against the official M-B regulation when published, and split

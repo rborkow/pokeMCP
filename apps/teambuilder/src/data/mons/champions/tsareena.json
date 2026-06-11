@@ -1,183 +1,108 @@
 {
- "id": "tsareena",
- "name": "Tsareena",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.021827,
-   "rank": 50,
-   "raw": 141165
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.0258446,
-   "rank": 47,
-   "raw": 258765
-  }
- ],
- "abilities": [
-  [
-   "queenlymajesty",
-   99.0196444018037
-  ],
-  [
-   "leafguard",
-   0.8596626551657928
-  ],
-  [
-   "sweetveil",
-   0.1206929430305076
-  ]
- ],
- "items": [
-  [
-   "sitrusberry",
-   28.49230666030813
-  ],
-  [
-   "miracleseed",
-   22.678752393922096
-  ],
-  [
-   "choicescarf",
-   21.704863291325964
-  ],
-  [
-   "focussash",
-   10.410816836452184
-  ],
-  [
-   "whiteherb",
-   3.716257031583149
-  ],
-  [
-   "occaberry",
-   3.459775627050296
-  ],
-  [
-   "cobaberry",
-   2.907122516678696
-  ],
-  [
-   "kebiaberry",
-   1.6467650525184867
-  ]
- ],
- "moves": [
-  [
-   "tripleaxel",
-   20.254226303480653
-  ],
-  [
-   "protect",
-   14.879805653961956
-  ],
-  [
-   "lowkick",
-   14.175817987059697
-  ],
-  [
-   "tropkick",
-   13.641121804486959
-  ],
-  [
-   "powerwhip",
-   11.061666386796617
-  ],
-  [
-   "helpinghand",
-   6.043304058118756
-  ],
-  [
-   "taunt",
-   5.491955662652946
-  ],
-  [
-   "uturn",
-   4.893959744946836
-  ],
-  [
-   "zenheadbutt",
-   3.3630153646770493
-  ],
-  [
-   "highjumpkick",
-   2.2881618397957677
-  ]
- ],
- "spreads": [
-  [
-   "Jolly:2/32/0/0/0/32",
-   13.53899985916485
-  ],
-  [
-   "Adamant:2/32/0/0/0/32",
-   8.378882010885954
-  ],
-  [
-   "Adamant:30/14/4/0/1/17",
-   6.9086783107806475
-  ],
-  [
-   "Jolly:4/32/0/0/0/30",
-   3.782659448825777
-  ],
-  [
-   "Jolly:0/32/0/0/2/32",
-   2.752884905879867
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Whimsicott",
-   5.3466983924363864
-  ],
-  [
-   "Sneasler",
-   4.6609354410960115
-  ],
-  [
-   "Basculegion",
-   4.567972188808533
-  ],
-  [
-   "Garchomp",
-   4.3759679462397525
-  ],
-  [
-   "Kingambit",
-   3.871358740629109
-  ],
-  [
-   "Floette-Mega",
-   3.7857360729695353
-  ],
-  [
-   "Typhlosion-Hisui",
-   3.7185287778835763
-  ],
-  [
-   "Aerodactyl-Mega",
-   2.852656977172781
-  ],
-  [
-   "Delphox-Mega",
-   2.618410326523823
-  ],
-  [
-   "Milotic",
-   2.338990749528216
-  ]
- ],
- "counters": []
+    "id": "tsareena",
+    "name": "Tsareena",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.021827,
+            "rank": 50,
+            "raw": 141165
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0258446,
+            "rank": 47,
+            "raw": 258765
+        }
+    ],
+    "abilities": [
+        ["Queenly Majesty", 99.0196444018037],
+        ["Leaf Guard", 0.8596626551657928],
+        ["Sweet Veil", 0.1206929430305076]
+    ],
+    "items": [
+        ["Sitrus Berry", 28.49230666030813],
+        ["Miracle Seed", 22.678752393922096],
+        ["Choice Scarf", 21.704863291325964],
+        ["Focus Sash", 10.410816836452184],
+        ["White Herb", 3.716257031583149],
+        ["Occa Berry", 3.459775627050296],
+        ["Coba Berry", 2.907122516678696],
+        ["Kebia Berry", 1.6467650525184867]
+    ],
+    "moves": [
+        ["Triple Axel", 20.254226303480653],
+        ["Protect", 14.879805653961956],
+        ["Low Kick", 14.175817987059697],
+        ["Trop Kick", 13.641121804486959],
+        ["Power Whip", 11.061666386796617],
+        ["Helping Hand", 6.043304058118756],
+        ["Taunt", 5.491955662652946],
+        ["U-turn", 4.893959744946836],
+        ["Zen Headbutt", 3.3630153646770493],
+        ["High Jump Kick", 2.2881618397957677]
+    ],
+    "spreads": [
+        ["Jolly:2/32/0/0/0/32", 13.53899985916485],
+        ["Adamant:2/32/0/0/0/32", 8.378882010885954],
+        ["Adamant:30/14/4/0/1/17", 6.9086783107806475],
+        ["Jolly:4/32/0/0/0/30", 3.782659448825777],
+        ["Jolly:0/32/0/0/2/32", 2.752884905879867]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Whimsicott", 5.3466983924363864],
+        ["Sneasler", 4.6609354410960115],
+        ["Basculegion", 4.567972188808533],
+        ["Garchomp", 4.3759679462397525],
+        ["Kingambit", 3.871358740629109],
+        ["Floette-Mega", 3.7857360729695353],
+        ["Typhlosion-Hisui", 3.7185287778835763],
+        ["Aerodactyl-Mega", 2.852656977172781],
+        ["Delphox-Mega", 2.618410326523823],
+        ["Milotic", 2.338990749528216]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Choice Scarf",
+            "ability": "Queenly Majesty",
+            "moves": ["U-turn", "Triple Axel", "Low Kick", "Trop Kick"],
+            "count": 2,
+            "bestPlacing": 6,
+            "bestPlayer": "oppePoiZ",
+            "eventName": "CHAMPIONS REG. M-A |👑CROWN FIGHT Bo3 TOUR #68👑",
+            "eventSlug": "2026-05-08-champions-reg-m-a-crown-fight-bo3-tour-68",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eb095278b359b789d6aa3a",
+            "nature": null
+        },
+        {
+            "item": "Sitrus Berry",
+            "ability": "Queenly Majesty",
+            "moves": ["Power Whip", "Low Kick", "Taunt", "Protect"],
+            "count": 1,
+            "bestPlacing": 5,
+            "bestPlayer": "PabloVGC",
+            "eventName": "VGCA Battle Hall: Academy Ace Edition #1",
+            "eventSlug": "2026-05-24-vgca-battle-hall-academy-ace-edition-1",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a0de44013f957d6d4b4be7b",
+            "nature": null
+        },
+        {
+            "item": "Sitrus Berry",
+            "ability": "Queenly Majesty",
+            "moves": ["Protect", "Triple Axel", "Taunt", "Trop Kick"],
+            "count": 1,
+            "bestPlacing": 7,
+            "bestPlayer": "NemesisxD",
+            "eventName": "Sketch Academy Champions Regulation M-A Tournament",
+            "eventSlug": "2026-05-25-sketch-academy-champions-regulation-m-a-tournament",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eefa72f9b24b9bd5b02a26",
+            "nature": null
+        }
+    ]
 }

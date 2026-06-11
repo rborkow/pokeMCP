@@ -1,179 +1,104 @@
 {
- "id": "garchomp",
- "name": "Garchomp",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.37232109999999996,
-   "rank": 2,
-   "raw": 1787384
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.3599953,
-   "rank": 3,
-   "raw": 1722130
-  }
- ],
- "abilities": [
-  [
-   "roughskin",
-   97.0240426139321
-  ],
-  [
-   "sandveil",
-   2.975957386067917
-  ]
- ],
- "items": [
-  [
-   "choicescarf",
-   28.350242509032192
-  ],
-  [
-   "sitrusberry",
-   28.141929032830838
-  ],
-  [
-   "dragonfang",
-   9.50122515327243
-  ],
-  [
-   "softsand",
-   7.840187277085669
-  ],
-  [
-   "roseliberry",
-   6.588775396877303
-  ],
-  [
-   "whiteherb",
-   6.202799325491701
-  ],
-  [
-   "lumberry",
-   4.741925760451141
-  ],
-  [
-   "habanberry",
-   4.408574712152292
-  ]
- ],
- "moves": [
-  [
-   "earthquake",
-   22.105358907903096
-  ],
-  [
-   "dragonclaw",
-   18.4935134354051
-  ],
-  [
-   "rockslide",
-   16.65762090303189
-  ],
-  [
-   "protect",
-   15.848321837865353
-  ],
-  [
-   "stompingtantrum",
-   12.78748885021341
-  ],
-  [
-   "rocktomb",
-   4.726332179972095
-  ],
-  [
-   "scaleshot",
-   3.273271869104465
-  ],
-  [
-   "poisonjab",
-   2.861488502567071
-  ],
-  [
-   "swordsdance",
-   0.9553355962165494
-  ],
-  [
-   "breakingswipe",
-   0.5101442284587078
-  ]
- ],
- "spreads": [
-  [
-   "Jolly:2/32/0/0/0/32",
-   9.233503108904548
-  ],
-  [
-   "Adamant:2/32/0/0/0/32",
-   8.749046983729444
-  ],
-  [
-   "Adamant:20/20/0/0/1/25",
-   4.487183292391474
-  ],
-  [
-   "Jolly:0/32/0/0/2/32",
-   3.8843702491028247
-  ],
-  [
-   "Adamant:4/30/0/0/0/32",
-   2.580350275673711
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Charizard-Mega-Y",
-   11.050350051018194
-  ],
-  [
-   "Kingambit",
-   10.062400894319882
-  ],
-  [
-   "Basculegion",
-   9.975924272273419
-  ],
-  [
-   "Whimsicott",
-   5.7463339198238605
-  ],
-  [
-   "Floette-Mega",
-   5.548397260344372
-  ],
-  [
-   "Sneasler",
-   4.8101150949192695
-  ],
-  [
-   "Incineroar",
-   3.964502955873529
-  ],
-  [
-   "Sylveon",
-   3.957744449133576
-  ],
-  [
-   "Aerodactyl-Mega",
-   3.2148358069377143
-  ],
-  [
-   "Aerodactyl",
-   2.5594624005441973
-  ]
- ],
- "counters": []
+    "id": "garchomp",
+    "name": "Garchomp",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.37232109999999996,
+            "rank": 2,
+            "raw": 1787384
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.3599953,
+            "rank": 3,
+            "raw": 1722130
+        }
+    ],
+    "abilities": [["Rough Skin", 97.0240426139321], ["Sand Veil", 2.975957386067917]],
+    "items": [
+        ["Choice Scarf", 28.350242509032192],
+        ["Sitrus Berry", 28.141929032830838],
+        ["Dragon Fang", 9.50122515327243],
+        ["Soft Sand", 7.840187277085669],
+        ["Roseli Berry", 6.588775396877303],
+        ["White Herb", 6.202799325491701],
+        ["Lum Berry", 4.741925760451141],
+        ["Haban Berry", 4.408574712152292]
+    ],
+    "moves": [
+        ["Earthquake", 22.105358907903096],
+        ["Dragon Claw", 18.4935134354051],
+        ["Rock Slide", 16.65762090303189],
+        ["Protect", 15.848321837865353],
+        ["Stomping Tantrum", 12.78748885021341],
+        ["Rock Tomb", 4.726332179972095],
+        ["Scale Shot", 3.273271869104465],
+        ["Poison Jab", 2.861488502567071],
+        ["Swords Dance", 0.9553355962165494],
+        ["Breaking Swipe", 0.5101442284587078]
+    ],
+    "spreads": [
+        ["Jolly:2/32/0/0/0/32", 9.233503108904548],
+        ["Adamant:2/32/0/0/0/32", 8.749046983729444],
+        ["Adamant:20/20/0/0/1/25", 4.487183292391474],
+        ["Jolly:0/32/0/0/2/32", 3.8843702491028247],
+        ["Adamant:4/30/0/0/0/32", 2.580350275673711]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Charizard-Mega-Y", 11.050350051018194],
+        ["Kingambit", 10.062400894319882],
+        ["Basculegion", 9.975924272273419],
+        ["Whimsicott", 5.7463339198238605],
+        ["Floette-Mega", 5.548397260344372],
+        ["Sneasler", 4.8101150949192695],
+        ["Incineroar", 3.964502955873529],
+        ["Sylveon", 3.957744449133576],
+        ["Aerodactyl-Mega", 3.2148358069377143],
+        ["Aerodactyl", 2.5594624005441973]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Sitrus Berry",
+            "ability": "Rough Skin",
+            "moves": ["Earthquake", "Dragon Claw", "Rock Slide", "Protect"],
+            "count": 31,
+            "bestPlacing": 1,
+            "bestPlayer": "Zachvgc2",
+            "eventName": "Pokepal Smackdown #142 (Champions) (Reg M-A)",
+            "eventSlug": "2026-05-25-pokepal-smackdown-142-champions-reg-m-a",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69f8a712e23aab068aada7f0",
+            "nature": "Adamant"
+        },
+        {
+            "item": "Choice Scarf",
+            "ability": "Rough Skin",
+            "moves": ["Earthquake", "Stomping Tantrum", "Rock Slide", "Dragon Claw"],
+            "count": 17,
+            "bestPlacing": 1,
+            "bestPlayer": "PokeReplay",
+            "eventName": "Tenki's Cart - Road to Turin M-A",
+            "eventSlug": "2026-06-01-tenki-s-cart-road-to-turin-m-a",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a196f5856b11a587a94281c",
+            "nature": "Adamant"
+        },
+        {
+            "item": "Sitrus Berry",
+            "ability": "Rough Skin",
+            "moves": ["Earthquake", "Dragon Claw", "Rock Tomb", "Protect"],
+            "count": 17,
+            "bestPlacing": 1,
+            "bestPlayer": "washy",
+            "eventName": "Pokepal Smackdown #143 (Champions) (Reg M-A)",
+            "eventSlug": "2026-06-01-pokepal-smackdown-143-champions-reg-m-a",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15a9698c163b8097997c21",
+            "nature": "Jolly"
+        }
+    ]
 }

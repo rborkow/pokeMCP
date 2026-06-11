@@ -1,179 +1,104 @@
 {
- "id": "talonflame",
- "name": "Talonflame",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.07700109999999999,
-   "rank": 18,
-   "raw": 419970
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.06715399999999999,
-   "rank": 23,
-   "raw": 408465
-  }
- ],
- "abilities": [
-  [
-   "galewings",
-   98.39427865985843
-  ],
-  [
-   "flamebody",
-   1.6057213401415718
-  ]
- ],
- "items": [
-  [
-   "nothing",
-   47.213294059276336
-  ],
-  [
-   "sharpbeak",
-   33.65050179501781
-  ],
-  [
-   "focussash",
-   8.589067392538572
-  ],
-  [
-   "chartiberry",
-   2.683176635554145
-  ],
-  [
-   "charcoal",
-   2.5297374288161296
-  ],
-  [
-   "leftovers",
-   1.874351568357542
-  ],
-  [
-   "mentalherb",
-   1.1159595316098236
-  ],
-  [
-   "whiteherb",
-   0.7027539540483346
-  ]
- ],
- "moves": [
-  [
-   "tailwind",
-   24.754332302105166
-  ],
-  [
-   "protect",
-   19.43169716242365
-  ],
-  [
-   "flareblitz",
-   14.208850323361677
-  ],
-  [
-   "acrobatics",
-   11.925224208421605
-  ],
-  [
-   "bravebird",
-   7.794096138907512
-  ],
-  [
-   "quickguard",
-   5.385993524681412
-  ],
-  [
-   "dualwingbeat",
-   4.719506439049137
-  ],
-  [
-   "willowisp",
-   3.7845576781334547
-  ],
-  [
-   "taunt",
-   2.5278616937109444
-  ],
-  [
-   "overheat",
-   1.1961036294148926
-  ]
- ],
- "spreads": [
-  [
-   "Jolly:2/32/0/0/0/32",
-   30.2315545659336
-  ],
-  [
-   "Adamant:2/32/0/0/0/32",
-   10.73335545419702
-  ],
-  [
-   "Jolly:0/32/0/0/2/32",
-   5.849617971682079
-  ],
-  [
-   "Jolly:7/32/0/0/0/27",
-   4.483649979855596
-  ],
-  [
-   "Adamant:7/32/0/0/0/27",
-   3.988983083428363
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Garchomp",
-   11.005872839432767
-  ],
-  [
-   "Basculegion",
-   9.133455416185017
-  ],
-  [
-   "Kingambit",
-   8.442881142901909
-  ],
-  [
-   "Floette-Mega",
-   5.782451262471845
-  ],
-  [
-   "Gardevoir-Mega",
-   4.609486289283807
-  ],
-  [
-   "Sneasler",
-   4.480802123345404
-  ],
-  [
-   "Maushold",
-   4.219231360190177
-  ],
-  [
-   "Rotom-Wash",
-   3.4726783006481146
-  ],
-  [
-   "Sylveon",
-   2.9212823419372653
-  ],
-  [
-   "Sinistcha",
-   2.841644233784433
-  ]
- ],
- "counters": []
+    "id": "talonflame",
+    "name": "Talonflame",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.07700109999999999,
+            "rank": 18,
+            "raw": 419970
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.06715399999999999,
+            "rank": 23,
+            "raw": 408465
+        }
+    ],
+    "abilities": [["Gale Wings", 98.39427865985843], ["Flame Body", 1.6057213401415718]],
+    "items": [
+        ["nothing", 47.213294059276336],
+        ["Sharp Beak", 33.65050179501781],
+        ["Focus Sash", 8.589067392538572],
+        ["Charti Berry", 2.683176635554145],
+        ["Charcoal", 2.5297374288161296],
+        ["Leftovers", 1.874351568357542],
+        ["Mental Herb", 1.1159595316098236],
+        ["White Herb", 0.7027539540483346]
+    ],
+    "moves": [
+        ["Tailwind", 24.754332302105166],
+        ["Protect", 19.43169716242365],
+        ["Flare Blitz", 14.208850323361677],
+        ["Acrobatics", 11.925224208421605],
+        ["Brave Bird", 7.794096138907512],
+        ["Quick Guard", 5.385993524681412],
+        ["Dual Wingbeat", 4.719506439049137],
+        ["Will-O-Wisp", 3.7845576781334547],
+        ["Taunt", 2.5278616937109444],
+        ["Overheat", 1.1961036294148926]
+    ],
+    "spreads": [
+        ["Jolly:2/32/0/0/0/32", 30.2315545659336],
+        ["Adamant:2/32/0/0/0/32", 10.73335545419702],
+        ["Jolly:0/32/0/0/2/32", 5.849617971682079],
+        ["Jolly:7/32/0/0/0/27", 4.483649979855596],
+        ["Adamant:7/32/0/0/0/27", 3.988983083428363]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Garchomp", 11.005872839432767],
+        ["Basculegion", 9.133455416185017],
+        ["Kingambit", 8.442881142901909],
+        ["Floette-Mega", 5.782451262471845],
+        ["Gardevoir-Mega", 4.609486289283807],
+        ["Sneasler", 4.480802123345404],
+        ["Maushold", 4.219231360190177],
+        ["Rotom-Wash", 3.4726783006481146],
+        ["Sylveon", 2.9212823419372653],
+        ["Sinistcha", 2.841644233784433]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Sharp Beak",
+            "ability": "Gale Wings",
+            "moves": ["Tailwind", "Dual Wingbeat", "Flare Blitz", "Protect"],
+            "count": 6,
+            "bestPlacing": 2,
+            "bestPlayer": "Scarlett01",
+            "eventName": "Talon's FIGHT CLUB #83 POKEMON CHAMPIONS",
+            "eventSlug": "2026-05-07-talon-s-fight-club-83-pokemon-champions",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69e2b29c78b359b789d64d2e",
+            "nature": "Jolly"
+        },
+        {
+            "item": "Sharp Beak",
+            "ability": "Gale Wings",
+            "moves": ["Brave Bird", "Will-O-Wisp", "Tailwind", "Protect"],
+            "count": 3,
+            "bestPlacing": 1,
+            "bestPlayer": "yungelmersglue",
+            "eventName": "CHAMPIONS REG. M-A |👑CROWN FIGHT Bo3 TOUR #71👑",
+            "eventSlug": "2026-06-05-champions-reg-m-a-crown-fight-bo3-tour-71",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eb09e448d465883f71b854",
+            "nature": "Jolly"
+        },
+        {
+            "item": "no item",
+            "ability": "Gale Wings",
+            "moves": ["Protect", "Acrobatics", "Tailwind", "Flare Blitz"],
+            "count": 3,
+            "bestPlacing": 1,
+            "bestPlayer": "Hush",
+            "eventName": "*Sitrus-Series*|Champions|#60",
+            "eventSlug": "2026-05-27-sitrus-series-champions-60",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a0f02afdfbdf089cbbde577",
+            "nature": null
+        }
+    ]
 }

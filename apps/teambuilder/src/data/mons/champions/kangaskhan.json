@@ -1,183 +1,108 @@
 {
- "id": "kangaskhan",
- "name": "Kangaskhan",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0090851,
-   "rank": 80,
-   "raw": 66196
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.0203592,
-   "rank": 55,
-   "raw": 181545
-  }
- ],
- "abilities": [
-  [
-   "scrappy",
-   98.74667517045283
-  ],
-  [
-   "innerfocus",
-   0.9368661238477988
-  ],
-  [
-   "earlybird",
-   0.3164587056993725
-  ]
- ],
- "items": [
-  [
-   "silkscarf",
-   92.35869683782613
-  ],
-  [
-   "chopleberry",
-   4.079994808461067
-  ],
-  [
-   "kingsrock",
-   1.2420055145847346
-  ],
-  [
-   "sitrusberry",
-   0.7447899916544649
-  ],
-  [
-   "lumberry",
-   0.5201128554944418
-  ],
-  [
-   "leftovers",
-   0.3325170917900108
-  ],
-  [
-   "focussash",
-   0.21888585303370847
-  ],
-  [
-   "whiteherb",
-   0.14319928135331134
-  ]
- ],
- "moves": [
-  [
-   "",
-   42.63953035419383
-  ],
-  [
-   "fakeout",
-   24.97683778452603
-  ],
-  [
-   "lastresort",
-   21.456716150522873
-  ],
-  [
-   "doubleedge",
-   3.1202448604994477
-  ],
-  [
-   "suckerpunch",
-   1.3417763276342964
-  ],
-  [
-   "hammerarm",
-   1.0288945678266328
-  ],
-  [
-   "lowkick",
-   0.9330702465178562
-  ],
-  [
-   "drainpunch",
-   0.7715748971360222
-  ],
-  [
-   "icepunch",
-   0.7566833027452478
-  ],
-  [
-   "protect",
-   0.6135425622112174
-  ]
- ],
- "spreads": [
-  [
-   "Brave:32/32/2/0/0/0",
-   11.094127813875117
-  ],
-  [
-   "Brave:32/32/0/0/2/0",
-   8.461347098525675
-  ],
-  [
-   "Adamant:32/32/2/0/0/0",
-   6.53078983914803
-  ],
-  [
-   "Adamant:11/32/0/0/0/23",
-   5.884915189984868
-  ],
-  [
-   "Adamant:32/32/0/0/0/2",
-   5.609809394600724
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Farigiraf",
-   11.312142391162476
-  ],
-  [
-   "Torkoal",
-   5.882384235784941
-  ],
-  [
-   "Kingambit",
-   5.261746143576489
-  ],
-  [
-   "Basculegion",
-   4.494477861769223
-  ],
-  [
-   "Blastoise-Mega",
-   3.9366045777213996
-  ],
-  [
-   "Sylveon",
-   3.8119339773009036
-  ],
-  [
-   "Whimsicott",
-   3.5722116247315063
-  ],
-  [
-   "Camerupt-Mega",
-   3.105830080467253
-  ],
-  [
-   "Garchomp",
-   3.08246928241433
-  ],
-  [
-   "Sinistcha",
-   2.3465824393337673
-  ]
- ],
- "counters": []
+    "id": "kangaskhan",
+    "name": "Kangaskhan",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0090851,
+            "rank": 80,
+            "raw": 66196
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0203592,
+            "rank": 55,
+            "raw": 181545
+        }
+    ],
+    "abilities": [
+        ["Scrappy", 98.74667517045283],
+        ["Inner Focus", 0.9368661238477988],
+        ["Early Bird", 0.3164587056993725]
+    ],
+    "items": [
+        ["Silk Scarf", 92.35869683782613],
+        ["Chople Berry", 4.079994808461067],
+        ["King's Rock", 1.2420055145847346],
+        ["Sitrus Berry", 0.7447899916544649],
+        ["Lum Berry", 0.5201128554944418],
+        ["Leftovers", 0.3325170917900108],
+        ["Focus Sash", 0.21888585303370847],
+        ["White Herb", 0.14319928135331134]
+    ],
+    "moves": [
+        ["", 42.63953035419383],
+        ["Fake Out", 24.97683778452603],
+        ["Last Resort", 21.456716150522873],
+        ["Double-Edge", 3.1202448604994477],
+        ["Sucker Punch", 1.3417763276342964],
+        ["Hammer Arm", 1.0288945678266328],
+        ["Low Kick", 0.9330702465178562],
+        ["Drain Punch", 0.7715748971360222],
+        ["Ice Punch", 0.7566833027452478],
+        ["Protect", 0.6135425622112174]
+    ],
+    "spreads": [
+        ["Brave:32/32/2/0/0/0", 11.094127813875117],
+        ["Brave:32/32/0/0/2/0", 8.461347098525675],
+        ["Adamant:32/32/2/0/0/0", 6.53078983914803],
+        ["Adamant:11/32/0/0/0/23", 5.884915189984868],
+        ["Adamant:32/32/0/0/0/2", 5.609809394600724]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Farigiraf", 11.312142391162476],
+        ["Torkoal", 5.882384235784941],
+        ["Kingambit", 5.261746143576489],
+        ["Basculegion", 4.494477861769223],
+        ["Blastoise-Mega", 3.9366045777213996],
+        ["Sylveon", 3.8119339773009036],
+        ["Whimsicott", 3.5722116247315063],
+        ["Camerupt-Mega", 3.105830080467253],
+        ["Garchomp", 3.08246928241433],
+        ["Sinistcha", 2.3465824393337673]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Kangaskhanite",
+            "ability": "Scrappy",
+            "moves": ["Double-Edge", "Sucker Punch", "Drain Punch", "Fake Out"],
+            "count": 2,
+            "bestPlacing": 2,
+            "bestPlayer": "AlmostGoodGamer",
+            "eventName": "CHAMPIONS REG. M-A |👑CROWN FIGHT Bo3 TOUR #70👑",
+            "eventSlug": "2026-05-29-champions-reg-m-a-crown-fight-bo3-tour-70",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eb09bb78b359b789d6aa3d",
+            "nature": "Adamant"
+        },
+        {
+            "item": "Silk Scarf",
+            "ability": "Scrappy",
+            "moves": ["Fake Out", "Last Resort"],
+            "count": 2,
+            "bestPlacing": 5,
+            "bestPlayer": "PonchoRed",
+            "eventName": "Talon's FIGHT CLUB #85 POKEMON CHAMPIONS",
+            "eventSlug": "2026-05-21-talon-s-fight-club-85-pokemon-champions",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69e2b2f578b359b789d64d31",
+            "nature": "Adamant"
+        },
+        {
+            "item": "Kangaskhanite",
+            "ability": "Scrappy",
+            "moves": ["Fake Out", "Double-Edge", "Crunch", "Drain Punch"],
+            "count": 1,
+            "bestPlacing": 1,
+            "bestPlayer": "Snorlaxpikachu1",
+            "eventName": "CHAMPIONS REG. M-A |👑CROWN FIGHT Bo3 TOUR #70👑",
+            "eventSlug": "2026-05-29-champions-reg-m-a-crown-fight-bo3-tour-70",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eb09bb78b359b789d6aa3d",
+            "nature": "Adamant"
+        }
+    ]
 }

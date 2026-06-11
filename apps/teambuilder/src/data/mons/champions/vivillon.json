@@ -1,183 +1,108 @@
 {
- "id": "vivillon",
- "name": "Vivillon",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.008198800000000001,
-   "rank": 87,
-   "raw": 52021
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.0370456,
-   "rank": 40,
-   "raw": 151522
-  }
- ],
- "abilities": [
-  [
-   "compoundeyes",
-   94.1181503005788
-  ],
-  [
-   "friendguard",
-   4.047493505656865
-  ],
-  [
-   "shielddust",
-   1.8343561937643347
-  ]
- ],
- "items": [
-  [
-   "choicescarf",
-   53.37479632372533
-  ],
-  [
-   "focussash",
-   45.2457976811506
-  ],
-  [
-   "brightpowder",
-   0.4909050671864232
-  ],
-  [
-   "chartiberry",
-   0.2323327154001061
-  ],
-  [
-   "sitrusberry",
-   0.20168349518181525
-  ],
-  [
-   "mentalherb",
-   0.14606277772513965
-  ],
-  [
-   "leftovers",
-   0.09002851246910372
-  ],
-  [
-   "lumberry",
-   0.08609665353157533
-  ]
- ],
- "moves": [
-  [
-   "sleeppowder",
-   24.194744253416395
-  ],
-  [
-   "hurricane",
-   21.718637870062818
-  ],
-  [
-   "ragepowder",
-   18.155240176481197
-  ],
-  [
-   "tailwind",
-   11.48010287451429
-  ],
-  [
-   "protect",
-   8.673468879696927
-  ],
-  [
-   "raindance",
-   7.160450831246141
-  ],
-  [
-   "pollenpuff",
-   5.572588985110281
-  ],
-  [
-   "bugbuzz",
-   0.7939226053890241
-  ],
-  [
-   "uturn",
-   0.5557583501803183
-  ],
-  [
-   "strugglebug",
-   0.5327865835878688
-  ]
- ],
- "spreads": [
-  [
-   "Timid:2/0/0/32/0/32",
-   33.76372922494942
-  ],
-  [
-   "Timid:0/0/24/5/5/32",
-   21.829164294399238
-  ],
-  [
-   "Timid:0/0/1/32/1/32",
-   6.8748759415088765
-  ],
-  [
-   "Timid:0/0/2/32/0/32",
-   5.573785068269181
-  ],
-  [
-   "Timid:32/0/0/2/0/32",
-   4.401290500566649
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Farigiraf",
-   11.106793686774951
-  ],
-  [
-   "Blastoise-Mega",
-   10.156420857411609
-  ],
-  [
-   "Basculegion",
-   9.36244392522269
-  ],
-  [
-   "Torkoal",
-   7.290427861305658
-  ],
-  [
-   "Kangaskhan-Mega",
-   6.679672390391074
-  ],
-  [
-   "Incineroar",
-   4.9576982242493735
-  ],
-  [
-   "Garchomp",
-   4.713170461931215
-  ],
-  [
-   "Sinistcha",
-   3.8176354104834074
-  ],
-  [
-   "Floette-Mega",
-   3.594529711978456
-  ],
-  [
-   "Kingambit",
-   3.537533719290362
-  ]
- ],
- "counters": []
+    "id": "vivillon",
+    "name": "Vivillon",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.008198800000000001,
+            "rank": 87,
+            "raw": 52021
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0370456,
+            "rank": 40,
+            "raw": 151522
+        }
+    ],
+    "abilities": [
+        ["Compound Eyes", 94.1181503005788],
+        ["Friend Guard", 4.047493505656865],
+        ["Shield Dust", 1.8343561937643347]
+    ],
+    "items": [
+        ["Choice Scarf", 53.37479632372533],
+        ["Focus Sash", 45.2457976811506],
+        ["Bright Powder", 0.4909050671864232],
+        ["Charti Berry", 0.2323327154001061],
+        ["Sitrus Berry", 0.20168349518181525],
+        ["Mental Herb", 0.14606277772513965],
+        ["Leftovers", 0.09002851246910372],
+        ["Lum Berry", 0.08609665353157533]
+    ],
+    "moves": [
+        ["Sleep Powder", 24.194744253416395],
+        ["Hurricane", 21.718637870062818],
+        ["Rage Powder", 18.155240176481197],
+        ["Tailwind", 11.48010287451429],
+        ["Protect", 8.673468879696927],
+        ["Rain Dance", 7.160450831246141],
+        ["Pollen Puff", 5.572588985110281],
+        ["Bug Buzz", 0.7939226053890241],
+        ["U-turn", 0.5557583501803183],
+        ["Struggle Bug", 0.5327865835878688]
+    ],
+    "spreads": [
+        ["Timid:2/0/0/32/0/32", 33.76372922494942],
+        ["Timid:0/0/24/5/5/32", 21.829164294399238],
+        ["Timid:0/0/1/32/1/32", 6.8748759415088765],
+        ["Timid:0/0/2/32/0/32", 5.573785068269181],
+        ["Timid:32/0/0/2/0/32", 4.401290500566649]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Farigiraf", 11.106793686774951],
+        ["Blastoise-Mega", 10.156420857411609],
+        ["Basculegion", 9.36244392522269],
+        ["Torkoal", 7.290427861305658],
+        ["Kangaskhan-Mega", 6.679672390391074],
+        ["Incineroar", 4.9576982242493735],
+        ["Garchomp", 4.713170461931215],
+        ["Sinistcha", 3.8176354104834074],
+        ["Floette-Mega", 3.594529711978456],
+        ["Kingambit", 3.537533719290362]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Focus Sash",
+            "ability": "Compound Eyes",
+            "moves": ["Sleep Powder", "Rage Powder", "Hurricane", "Protect"],
+            "count": 8,
+            "bestPlacing": 1,
+            "bestPlayer": "GengarIsMad",
+            "eventName": "*Sitrus-Series*|Champions|#61",
+            "eventSlug": "2026-06-03-sitrus-series-champions-61",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1843740f6c1f08998629ca",
+            "nature": "Timid"
+        },
+        {
+            "item": "Focus Sash",
+            "ability": "Compound Eyes",
+            "moves": ["Pollen Puff", "Rage Powder", "Sleep Powder", "Protect"],
+            "count": 3,
+            "bestPlacing": 2,
+            "bestPlayer": "AlmostGoodGamer",
+            "eventName": "CHAMPIONS REG. M-A |👑CROWN FIGHT Bo3 TOUR #70👑",
+            "eventSlug": "2026-05-29-champions-reg-m-a-crown-fight-bo3-tour-70",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eb09bb78b359b789d6aa3d",
+            "nature": "Timid"
+        },
+        {
+            "item": "Choice Scarf",
+            "ability": "Compound Eyes",
+            "moves": ["Sleep Powder", "Hurricane", "Tailwind", "Rage Powder"],
+            "count": 2,
+            "bestPlacing": 2,
+            "bestPlayer": "Wyuku",
+            "eventName": "The Drywalls Series #6 - Champions!",
+            "eventSlug": "2026-05-26-the-drywalls-series-6-champions",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a131c910f6c1f0899860158",
+            "nature": "Timid"
+        }
+    ]
 }

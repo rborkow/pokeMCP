@@ -1,0 +1,653 @@
+{
+    "id": "6a1826260f6c1f08998628ef",
+    "slug": "2026-06-02-road-to-turin-reg-m-a",
+    "name": "Road To Turin - [Reg M-A]",
+    "date": "2026-06-02T17:00:00.000Z",
+    "players": 64,
+    "format": "M-A",
+    "regulationId": "champions-regma",
+    "source": "limitless",
+    "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1826260f6c1f08998628ef",
+    "attribution": "Data via Limitless (play.limitlesstcg.com)",
+    "fetchedAt": "2026-06-11T14:15:00.163Z",
+    "topCut": [
+        {
+            "placing": 1,
+            "player": "almondspy",
+            "country": "GB",
+            "record": {
+                "wins": 8,
+                "losses": 2,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "charizard",
+                    "name": "Charizard",
+                    "item": "Charizardite X",
+                    "ability": "Blaze",
+                    "moves": ["Flare Blitz", "Dragon Claw", "Dragon Dance", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "floette-eternal",
+                    "name": "Eternal Flower Floette",
+                    "item": "Floettite",
+                    "ability": "Flower Veil",
+                    "moves": ["Dazzling Gleam", "Draining Kiss", "Calm Mind", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "incineroar",
+                    "name": "Incineroar",
+                    "item": "Sitrus Berry",
+                    "ability": "Intimidate",
+                    "moves": ["Flare Blitz", "Throat Chop", "Fake Out", "Parting Shot"],
+                    "nature": "Careful"
+                },
+                {
+                    "id": "sinistcha",
+                    "name": "Sinistcha",
+                    "item": "Kasib Berry",
+                    "ability": "Hospitality",
+                    "moves": ["Matcha Gotcha", "Rage Powder", "Trick Room", "Protect"],
+                    "nature": "Calm"
+                },
+                {
+                    "id": "basculegion",
+                    "name": "Basculegion",
+                    "item": "Choice Scarf",
+                    "ability": "Adaptability",
+                    "moves": ["Wave Crash", "Last Respects", "Aqua Jet", "Flip Turn"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "sneasler",
+                    "name": "Sneasler",
+                    "item": "White Herb",
+                    "ability": "Unburden",
+                    "moves": ["Close Combat", "Dire Claw", "Fake Out", "Protect"],
+                    "nature": "Adamant"
+                }
+            ]
+        },
+        {
+            "placing": 2,
+            "player": "Helmy B",
+            "country": "FR",
+            "record": {
+                "wins": 7,
+                "losses": 3,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "ninetales-alola",
+                    "name": "Alolan Ninetales",
+                    "item": "Focus Sash",
+                    "ability": "Snow Warning",
+                    "moves": ["Blizzard", "Freeze-Dry", "Encore", "Protect"],
+                    "nature": "Timid"
+                },
+                {
+                    "id": "aerodactyl",
+                    "name": "Aerodactyl",
+                    "item": "Aerodactylite",
+                    "ability": "Unnerve",
+                    "moves": ["Rock Slide", "Dual Wingbeat", "Tailwind", "Protect"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "kingambit",
+                    "name": "Kingambit",
+                    "item": "Black Glasses",
+                    "ability": "Defiant",
+                    "moves": ["Kowtow Cleave", "Sucker Punch", "Iron Head", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "basculegion",
+                    "name": "Basculegion",
+                    "item": "Mystic Water",
+                    "ability": "Adaptability",
+                    "moves": ["Wave Crash", "Last Respects", "Aqua Jet", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "scovillain",
+                    "name": "Scovillain",
+                    "item": "Scovillainite",
+                    "ability": "Moody",
+                    "moves": ["Overheat", "Giga Drain", "Rage Powder", "Protect"],
+                    "nature": "Calm"
+                },
+                {
+                    "id": "garchomp",
+                    "name": "Garchomp",
+                    "item": "Sitrus Berry",
+                    "ability": "Rough Skin",
+                    "moves": ["Earthquake", "Dragon Claw", "Rock Tomb", "Protect"],
+                    "nature": "Jolly"
+                }
+            ]
+        },
+        {
+            "placing": 3,
+            "player": "kayle1gh",
+            "country": "IM",
+            "record": {
+                "wins": 6,
+                "losses": 3,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "clefable",
+                    "name": "Clefable",
+                    "item": "Clefablite",
+                    "ability": "Unaware",
+                    "moves": ["Life Dew", "Follow Me", "Helping Hand", "Icy Wind"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "garchomp",
+                    "name": "Garchomp",
+                    "item": "Choice Scarf",
+                    "ability": "Rough Skin",
+                    "moves": ["Earthquake", "Stomping Tantrum", "Dragon Claw", "Rock Slide"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "charizard",
+                    "name": "Charizard",
+                    "item": "Charizardite Y",
+                    "ability": "Blaze",
+                    "moves": ["Heat Wave", "Weather Ball", "Solar Beam", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "basculegion",
+                    "name": "Basculegion",
+                    "item": "Focus Sash",
+                    "ability": "Adaptability",
+                    "moves": ["Liquidation", "Last Respects", "Aqua Jet", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "kingambit",
+                    "name": "Kingambit",
+                    "item": "Chople Berry",
+                    "ability": "Defiant",
+                    "moves": ["Kowtow Cleave", "Sucker Punch", "Low Kick", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "sneasler",
+                    "name": "Sneasler",
+                    "item": "White Herb",
+                    "ability": "Unburden",
+                    "moves": ["Fake Out", "Dire Claw", "Protect", "Close Combat"],
+                    "nature": "Adamant"
+                }
+            ]
+        },
+        {
+            "placing": 4,
+            "player": "JoMcCloud23",
+            "country": "IT",
+            "record": {
+                "wins": 6,
+                "losses": 3,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "dragonite",
+                    "name": "Dragonite",
+                    "item": "Dragoninite",
+                    "ability": "Multiscale",
+                    "moves": ["Dragon Pulse", "Hurricane", "Thunderbolt", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "scizor",
+                    "name": "Scizor",
+                    "item": "Scizorite",
+                    "ability": "Technician",
+                    "moves": ["Bullet Punch", "Assurance", "Swords Dance", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "basculegion",
+                    "name": "Basculegion",
+                    "item": "Focus Sash",
+                    "ability": "Adaptability",
+                    "moves": ["Aqua Jet", "Liquidation", "Last Respects", "Protect"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "sneasler",
+                    "name": "Sneasler",
+                    "item": "Poison Barb",
+                    "ability": "Poison Touch",
+                    "moves": ["Fake Out", "Low Kick", "Dire Claw", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "archaludon",
+                    "name": "Archaludon",
+                    "item": "Leftovers",
+                    "ability": "Stamina",
+                    "moves": ["Flash Cannon", "Dragon Pulse", "Electro Shot", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "pelipper",
+                    "name": "Pelipper",
+                    "item": "Sitrus Berry",
+                    "ability": "Drizzle",
+                    "moves": ["Weather Ball", "Wide Guard", "Tailwind", "Helping Hand"],
+                    "nature": "Bold"
+                }
+            ]
+        },
+        {
+            "placing": 5,
+            "player": "eanna_h",
+            "country": "IE",
+            "record": {
+                "wins": 7,
+                "losses": 1,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "charizard",
+                    "name": "Charizard",
+                    "item": "Charizardite Y",
+                    "ability": "Blaze",
+                    "moves": ["Heat Wave", "Solar Beam", "Weather Ball", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "garchomp",
+                    "name": "Garchomp",
+                    "item": "Sitrus Berry",
+                    "ability": "Rough Skin",
+                    "moves": ["Protect", "Dragon Claw", "Earthquake", "Rock Slide"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "kingambit",
+                    "name": "Kingambit",
+                    "item": "Occa Berry",
+                    "ability": "Defiant",
+                    "moves": ["Kowtow Cleave", "Sucker Punch", "Iron Head", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "basculegion",
+                    "name": "Basculegion",
+                    "item": "Focus Sash",
+                    "ability": "Adaptability",
+                    "moves": ["Liquidation", "Last Respects", "Aqua Jet", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "whimsicott",
+                    "name": "Whimsicott",
+                    "item": "Fairy Feather",
+                    "ability": "Prankster",
+                    "moves": ["Moonblast", "Tailwind", "Encore", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "floette",
+                    "name": "Floette",
+                    "item": "Floettite",
+                    "ability": "Flower Veil",
+                    "moves": ["Dazzling Gleam", "Moonblast", "Light of Ruin", "Protect"],
+                    "nature": "Timid"
+                }
+            ]
+        },
+        {
+            "placing": 6,
+            "player": "Silo",
+            "country": "IT",
+            "record": {
+                "wins": 6,
+                "losses": 2,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "charizard",
+                    "name": "Charizard",
+                    "item": "Charizardite Y",
+                    "ability": "Blaze",
+                    "moves": ["Heat Wave", "Weather Ball", "Solar Beam", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "garchomp",
+                    "name": "Garchomp",
+                    "item": "Sitrus Berry",
+                    "ability": "Rough Skin",
+                    "moves": ["Dragon Claw", "Earthquake", "Rock Tomb", "Protect"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "kingambit",
+                    "name": "Kingambit",
+                    "item": "Chople Berry",
+                    "ability": "Defiant",
+                    "moves": ["Kowtow Cleave", "Sucker Punch", "Iron Head", "Low Kick"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "sylveon",
+                    "name": "Sylveon",
+                    "item": "Fairy Feather",
+                    "ability": "Pixilate",
+                    "moves": ["Hyper Voice", "Hyper Beam", "Quick Attack", "Detect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "aerodactyl",
+                    "name": "Aerodactyl",
+                    "item": "Aerodactylite",
+                    "ability": "Unnerve",
+                    "moves": ["Rock Slide", "Dual Wingbeat", "Tailwind", "Wide Guard"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "basculegion",
+                    "name": "Basculegion",
+                    "item": "Focus Sash",
+                    "ability": "Adaptability",
+                    "moves": ["Waterfall", "Aqua Jet", "Last Respects", "Protect"],
+                    "nature": "Adamant"
+                }
+            ]
+        },
+        {
+            "placing": 7,
+            "player": "bpecina03",
+            "country": "US",
+            "record": {
+                "wins": 5,
+                "losses": 3,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "lopunny",
+                    "name": "Lopunny",
+                    "item": "Lopunnite",
+                    "ability": "Cute Charm",
+                    "moves": ["Fake Out", "Close Combat", "Triple Axel", "After You"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "garchomp",
+                    "name": "Garchomp",
+                    "item": "Dragon Fang",
+                    "ability": "Rough Skin",
+                    "moves": ["Rock Slide", "Stomping Tantrum", "Scale Shot", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "torkoal",
+                    "name": "Torkoal",
+                    "item": "Charcoal",
+                    "ability": "Drought",
+                    "moves": ["Eruption", "Protect", "Flamethrower", "Earth Power"],
+                    "nature": "Quiet"
+                },
+                {
+                    "id": "venusaur",
+                    "name": "Venusaur",
+                    "item": "Focus Sash",
+                    "ability": "Chlorophyll",
+                    "moves": ["Sludge Bomb", "Protect", "Leaf Storm", "Sleep Powder"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "sylveon",
+                    "name": "Sylveon",
+                    "item": "Fairy Feather",
+                    "ability": "Pixilate",
+                    "moves": ["Hyper Voice", "Moonblast", "Calm Mind", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "farigiraf",
+                    "name": "Farigiraf",
+                    "item": "Sitrus Berry",
+                    "ability": "Armor Tail",
+                    "moves": ["Twin Beam", "Trick Room", "Foul Play", "Helping Hand"],
+                    "nature": "Relaxed"
+                }
+            ]
+        },
+        {
+            "placing": 8,
+            "player": "SomeoneOffical",
+            "country": "US",
+            "record": {
+                "wins": 5,
+                "losses": 3,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "garchomp",
+                    "name": "Garchomp",
+                    "item": "Garchompite",
+                    "ability": "Rough Skin",
+                    "moves": ["Stomping Tantrum", "Rock Slide", "Protect", "Earthquake"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "tyranitar",
+                    "name": "Tyranitar",
+                    "item": "Tyranitarite",
+                    "ability": "Sand Stream",
+                    "moves": ["Rock Slide", "Knock Off", "Dragon Dance", "Protect"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "sinistcha",
+                    "name": "Sinistcha",
+                    "item": "Colbur Berry",
+                    "ability": "Hospitality",
+                    "moves": ["Rage Powder", "Matcha Gotcha", "Imprison", "Trick Room"],
+                    "nature": "Bold"
+                },
+                {
+                    "id": "corviknight",
+                    "name": "Corviknight",
+                    "item": "Leftovers",
+                    "ability": "Mirror Armor",
+                    "moves": ["Brave Bird", "Roost", "Iron Head", "Tailwind"],
+                    "nature": "Impish"
+                },
+                {
+                    "id": "rotom-wash",
+                    "name": "Wash Rotom",
+                    "item": "Magnet",
+                    "ability": "Levitate",
+                    "moves": ["Protect", "Thunderbolt", "Will-O-Wisp", "Hydro Pump"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "sneasler",
+                    "name": "Sneasler",
+                    "item": "White Herb",
+                    "ability": "Unburden",
+                    "moves": ["Protect", "Close Combat", "Dire Claw", "Fake Out"],
+                    "nature": "Adamant"
+                }
+            ]
+        }
+    ],
+    "topCutUsage": [
+        {
+            "id": "basculegion",
+            "name": "Basculegion",
+            "count": 6,
+            "pct": 75
+        },
+        {
+            "id": "garchomp",
+            "name": "Garchomp",
+            "count": 6,
+            "pct": 75
+        },
+        {
+            "id": "charizard",
+            "name": "Charizard",
+            "count": 4,
+            "pct": 50
+        },
+        {
+            "id": "sneasler",
+            "name": "Sneasler",
+            "count": 4,
+            "pct": 50
+        },
+        {
+            "id": "kingambit",
+            "name": "Kingambit",
+            "count": 4,
+            "pct": 50
+        },
+        {
+            "id": "sinistcha",
+            "name": "Sinistcha",
+            "count": 2,
+            "pct": 25
+        },
+        {
+            "id": "aerodactyl",
+            "name": "Aerodactyl",
+            "count": 2,
+            "pct": 25
+        },
+        {
+            "id": "sylveon",
+            "name": "Sylveon",
+            "count": 2,
+            "pct": 25
+        },
+        {
+            "id": "floette-eternal",
+            "name": "Eternal Flower Floette",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "incineroar",
+            "name": "Incineroar",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "ninetales-alola",
+            "name": "Alolan Ninetales",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "scovillain",
+            "name": "Scovillain",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "clefable",
+            "name": "Clefable",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "dragonite",
+            "name": "Dragonite",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "scizor",
+            "name": "Scizor",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "archaludon",
+            "name": "Archaludon",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "pelipper",
+            "name": "Pelipper",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "whimsicott",
+            "name": "Whimsicott",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "floette",
+            "name": "Floette",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "lopunny",
+            "name": "Lopunny",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "torkoal",
+            "name": "Torkoal",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "venusaur",
+            "name": "Venusaur",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "farigiraf",
+            "name": "Farigiraf",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "tyranitar",
+            "name": "Tyranitar",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "corviknight",
+            "name": "Corviknight",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "rotom-wash",
+            "name": "Wash Rotom",
+            "count": 1,
+            "pct": 12.5
+        }
+    ]
+}

@@ -1,183 +1,96 @@
 {
- "id": "hatterene",
- "name": "Hatterene",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0141259,
-   "rank": 62,
-   "raw": 135790
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.008553100000000001,
-   "rank": 86,
-   "raw": 141191
-  }
- ],
- "abilities": [
-  [
-   "magicbounce",
-   96.55553540659861
-  ],
-  [
-   "healer",
-   3.3504436969491813
-  ],
-  [
-   "anticipation",
-   0.09402089645221888
-  ]
- ],
- "items": [
-  [
-   "fairyfeather",
-   44.633743451733885
-  ],
-  [
-   "focussash",
-   26.689012691527598
-  ],
-  [
-   "sitrusberry",
-   6.4900659044058004
-  ],
-  [
-   "leftovers",
-   5.746657461498924
-  ],
-  [
-   "babiriberry",
-   3.732869675475594
-  ],
-  [
-   "twistedspoon",
-   3.563645453177375
-  ],
-  [
-   "kasibberry",
-   3.4708597113451076
-  ],
-  [
-   "kebiaberry",
-   2.41984595684693
-  ]
- ],
- "moves": [
-  [
-   "dazzlinggleam",
-   23.93756056153666
-  ],
-  [
-   "trickroom",
-   23.741967877222688
-  ],
-  [
-   "protect",
-   17.245886219519306
-  ],
-  [
-   "psychic",
-   15.365820416136359
-  ],
-  [
-   "mysticalfire",
-   3.9152549897911606
-  ],
-  [
-   "expandingforce",
-   3.394391609953129
-  ],
-  [
-   "magicpowder",
-   2.588837595587796
-  ],
-  [
-   "psyshock",
-   1.6375916984210936
-  ],
-  [
-   "calmmind",
-   0.8713560936518221
-  ],
-  [
-   "drainingkiss",
-   0.7637238719652858
-  ]
- ],
- "spreads": [
-  [
-   "Quiet:32/0/2/32/0/0",
-   32.519082472387986
-  ],
-  [
-   "Quiet:32/0/0/32/2/0",
-   7.635791081354585
-  ],
-  [
-   "Quiet:27/0/7/32/0/0",
-   4.263115050400273
-  ],
-  [
-   "Quiet:32/0/1/32/1/0",
-   3.803488124243776
-  ],
-  [
-   "Quiet:28/0/5/32/1/0",
-   3.684150564766222
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Torkoal",
-   10.640469708310132
-  ],
-  [
-   "Farigiraf",
-   10.420089026547739
-  ],
-  [
-   "Kingambit",
-   7.673578025125523
-  ],
-  [
-   "Incineroar",
-   6.031076052631152
-  ],
-  [
-   "Sinistcha",
-   3.119894285002521
-  ],
-  [
-   "Blastoise-Mega",
-   2.9696149097149744
-  ],
-  [
-   "Camerupt-Mega",
-   2.230199877980506
-  ],
-  [
-   "Kangaskhan-Mega",
-   2.194184732504942
-  ],
-  [
-   "Charizard-Mega-Y",
-   2.144107860539865
-  ],
-  [
-   "Golurk-Mega",
-   2.0786452573430694
-  ]
- ],
- "counters": []
+    "id": "hatterene",
+    "name": "Hatterene",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0141259,
+            "rank": 62,
+            "raw": 135790
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.008553100000000001,
+            "rank": 86,
+            "raw": 141191
+        }
+    ],
+    "abilities": [
+        ["Magic Bounce", 96.55553540659861],
+        ["Healer", 3.3504436969491813],
+        ["Anticipation", 0.09402089645221888]
+    ],
+    "items": [
+        ["Fairy Feather", 44.633743451733885],
+        ["Focus Sash", 26.689012691527598],
+        ["Sitrus Berry", 6.4900659044058004],
+        ["Leftovers", 5.746657461498924],
+        ["Babiri Berry", 3.732869675475594],
+        ["Twisted Spoon", 3.563645453177375],
+        ["Kasib Berry", 3.4708597113451076],
+        ["Kebia Berry", 2.41984595684693]
+    ],
+    "moves": [
+        ["Dazzling Gleam", 23.93756056153666],
+        ["Trick Room", 23.741967877222688],
+        ["Protect", 17.245886219519306],
+        ["Psychic", 15.365820416136359],
+        ["Mystical Fire", 3.9152549897911606],
+        ["Expanding Force", 3.394391609953129],
+        ["Magic Powder", 2.588837595587796],
+        ["Psyshock", 1.6375916984210936],
+        ["Calm Mind", 0.8713560936518221],
+        ["Draining Kiss", 0.7637238719652858]
+    ],
+    "spreads": [
+        ["Quiet:32/0/2/32/0/0", 32.519082472387986],
+        ["Quiet:32/0/0/32/2/0", 7.635791081354585],
+        ["Quiet:27/0/7/32/0/0", 4.263115050400273],
+        ["Quiet:32/0/1/32/1/0", 3.803488124243776],
+        ["Quiet:28/0/5/32/1/0", 3.684150564766222]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Torkoal", 10.640469708310132],
+        ["Farigiraf", 10.420089026547739],
+        ["Kingambit", 7.673578025125523],
+        ["Incineroar", 6.031076052631152],
+        ["Sinistcha", 3.119894285002521],
+        ["Blastoise-Mega", 2.9696149097149744],
+        ["Camerupt-Mega", 2.230199877980506],
+        ["Kangaskhan-Mega", 2.194184732504942],
+        ["Charizard-Mega-Y", 2.144107860539865],
+        ["Golurk-Mega", 2.0786452573430694]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Fairy Feather",
+            "ability": "Magic Bounce",
+            "moves": ["Psychic", "Trick Room", "Dazzling Gleam", "Protect"],
+            "count": 1,
+            "bestPlacing": 6,
+            "bestPlayer": "鼠 鼠",
+            "eventName": "Sheep Cup#14[Reg M-A]",
+            "eventSlug": "2026-05-17-sheep-cup-14-reg-m-a",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69f05abfe23aab068aad421a",
+            "nature": null
+        },
+        {
+            "item": "Focus Sash",
+            "ability": "Magic Bounce",
+            "moves": ["Dazzling Gleam", "Psychic", "Trick Room", "Protect"],
+            "count": 1,
+            "bestPlacing": 7,
+            "bestPlayer": "Orttega15",
+            "eventName": "Intimidators Champions Challenge #16 REG M-A",
+            "eventSlug": "2026-06-08-intimidators-champions-challenge-16-reg-m-a",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a26baf056b11a587a94c139",
+            "nature": "Quiet"
+        }
+    ]
 }

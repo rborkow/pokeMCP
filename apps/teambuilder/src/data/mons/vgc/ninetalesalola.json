@@ -45,37 +45,37 @@
  ],
  "abilities": [
   [
-   "snowwarning",
+   "Snow Warning",
    99.96330303703903
   ],
   [
-   "snowcloak",
+   "Snow Cloak",
    0.036696962960981724
   ]
  ],
  "items": [
   [
-   "lightclay",
+   "Light Clay",
    71.58724031880337
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    18.28701535420067
   ],
   [
-   "focussash",
+   "Focus Sash",
    5.583055859869679
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    1.6188559199233516
   ],
   [
-   "brightpowder",
+   "Bright Powder",
    1.3015902529112306
   ],
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    0.7430945583839959
   ],
   [
@@ -83,49 +83,49 @@
    0.22776486002908974
   ],
   [
-   "icyrock",
+   "Icy Rock",
    0.1972289408896579
   ]
  ],
  "moves": [
   [
-   "auroraveil",
+   "Aurora Veil",
    24.53234832254339
   ],
   [
-   "blizzard",
+   "Blizzard",
    21.9394150674454
   ],
   [
-   "moonblast",
+   "Moonblast",
    19.54765261455321
   ],
   [
-   "helpinghand",
+   "Helping Hand",
    9.171288219817647
   ],
   [
-   "icywind",
+   "Icy Wind",
    8.53542745508729
   ],
   [
-   "protect",
+   "Protect",
    7.700640050102729
   ],
   [
-   "encore",
+   "Encore",
    2.8557447666157287
   ],
   [
-   "freezedry",
+   "Freeze-Dry",
    1.91934030054215
   ],
   [
-   "faketears",
+   "Fake Tears",
    1.3590490034579084
   ],
   [
-   "dazzlinggleam",
+   "Dazzling Gleam",
    1.2144416237608529
   ]
  ],
@@ -215,5 +215,6 @@
    2.9463831011493977
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

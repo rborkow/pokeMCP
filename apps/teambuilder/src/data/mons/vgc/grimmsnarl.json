@@ -45,91 +45,91 @@
  ],
  "abilities": [
   [
-   "prankster",
+   "Prankster",
    99.9803865151176
   ],
   [
-   "pickpocket",
+   "Pickpocket",
    0.019613484882391723
   ],
   [
-   "frisk",
+   "Frisk",
    0
   ]
  ],
  "items": [
   [
-   "lightclay",
+   "Light Clay",
    92.7177977983671
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    4.202335968573875
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    1.4667336757017824
   ],
   [
-   "laggingtail",
+   "Lagging Tail",
    1.1810744572223852
   ],
   [
-   "focussash",
+   "Focus Sash",
    0.1428446748807137
   ],
   [
-   "lightball",
+   "Light Ball",
    0.10551499299704935
   ],
   [
-   "abilityshield",
+   "Ability Shield",
    0.10529039636717229
   ],
   [
-   "safetygoggles",
+   "Safety Goggles",
    0.060185137207882655
   ]
  ],
  "moves": [
   [
-   "spiritbreak",
+   "Spirit Break",
    24.738530721031307
   ],
   [
-   "lightscreen",
+   "Light Screen",
    23.7171940398414
   ],
   [
-   "reflect",
+   "Reflect",
    23.42892253727746
   ],
   [
-   "mistyterrain",
+   "Misty Terrain",
    11.374467092524023
   ],
   [
-   "thunderwave",
+   "Thunder Wave",
    10.066406718710445
   ],
   [
-   "partingshot",
+   "Parting Shot",
    3.2682727870026453
   ],
   [
-   "fakeout",
+   "Fake Out",
    1.0654123444132773
   ],
   [
-   "faketears",
+   "Fake Tears",
    0.7912001907170069
   ],
   [
-   "taunt",
+   "Taunt",
    0.6789015971915688
   ],
   [
-   "trick",
+   "Trick",
    0.2991025264703218
   ]
  ],
@@ -219,5 +219,6 @@
    2.367927339598046
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

@@ -19,6 +19,20 @@ export interface MonCounter {
     switchPct: number;
 }
 
+/** An exact tournament build (joint set) with provenance, from Limitless top cuts. */
+export interface MonBuild {
+    item: string | null;
+    ability: string | null;
+    moves: string[];
+    nature: string | null;
+    count: number;
+    bestPlacing: number;
+    bestPlayer: string;
+    eventName: string;
+    eventSlug: string;
+    sourceUrl: string;
+}
+
 export interface MonPageData {
     id: string;
     name: string;
@@ -34,6 +48,8 @@ export interface MonPageData {
     teraTypes: [string, number][];
     teammates: [string, number][];
     counters: MonCounter[];
+    /** Absent in data generated before reports v2. */
+    builds?: MonBuild[];
 }
 
 export interface MonsFormatIndex {

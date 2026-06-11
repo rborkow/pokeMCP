@@ -87,6 +87,14 @@ export interface RegulationSet {
      * surfaces a clear "not yet published" message rather than empty data.
      */
     showdownFormatId?: string;
+    /**
+     * Limitless tournament-platform format identifier (play.limitlesstcg.com).
+     * Champions events live under `game=VGC` with format strings like "M-A".
+     * Drives scripts/fetch-tournaments.ts. Leave undefined until events for
+     * the regulation are observed on the platform — an unmapped regulation is
+     * simply skipped by the tournament fetcher.
+     */
+    limitlessFormatId?: string;
 }
 
 /**

@@ -1,147 +1,58 @@
 {
- "id": "garchompmega",
- "name": "Garchomp-Mega",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0089424,
-   "rank": 81,
-   "raw": 88185
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.0096311,
-   "rank": 80,
-   "raw": 107007
-  }
- ],
- "abilities": [
-  [
-   "sandforce",
-   100
-  ]
- ],
- "items": [
-  [
-   "garchompite",
-   100
-  ]
- ],
- "moves": [
-  [
-   "protect",
-   23.55603493430074
-  ],
-  [
-   "earthquake",
-   18.22910159748566
-  ],
-  [
-   "dragonclaw",
-   14.580514196079477
-  ],
-  [
-   "rockslide",
-   14.123436875468245
-  ],
-  [
-   "stompingtantrum",
-   8.415089842930685
-  ],
-  [
-   "scaleshot",
-   4.855823519737233
-  ],
-  [
-   "earthpower",
-   3.2401500889463843
-  ],
-  [
-   "swordsdance",
-   2.9084428583489137
-  ],
-  [
-   "rocktomb",
-   2.2228002742681845
-  ],
-  [
-   "powergem",
-   1.6297744088107344
-  ]
- ],
- "spreads": [
-  [
-   "Jolly:2/32/0/0/0/32",
-   6.244447856216761
-  ],
-  [
-   "Jolly:2/32/1/0/1/30",
-   4.058142659682391
-  ],
-  [
-   "Adamant:2/32/0/0/0/32",
-   3.7222544095092562
-  ],
-  [
-   "Jolly:0/32/0/0/2/32",
-   3.644972559964043
-  ],
-  [
-   "Adamant:32/32/0/0/2/0",
-   3.391956947975853
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Kingambit",
-   5.5108602549270636
-  ],
-  [
-   "Incineroar",
-   5.303098834899443
-  ],
-  [
-   "Sneasler",
-   5.2757819058410975
-  ],
-  [
-   "Tyranitar",
-   4.757076750486503
-  ],
-  [
-   "Farigiraf",
-   4.080631243641415
-  ],
-  [
-   "Sylveon",
-   4.062278455034423
-  ],
-  [
-   "Sinistcha",
-   4.054155950059158
-  ],
-  [
-   "Aerodactyl",
-   3.9446186840842077
-  ],
-  [
-   "Basculegion",
-   3.8814304123754995
-  ],
-  [
-   "Charizard-Mega-Y",
-   3.794859888717324
-  ]
- ],
- "counters": []
+    "id": "garchompmega",
+    "name": "Garchomp-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0089424,
+            "rank": 81,
+            "raw": 88185
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0096311,
+            "rank": 80,
+            "raw": 107007
+        }
+    ],
+    "abilities": [["Sand Force", 100]],
+    "items": [["Garchompite", 100]],
+    "moves": [
+        ["Protect", 23.55603493430074],
+        ["Earthquake", 18.22910159748566],
+        ["Dragon Claw", 14.580514196079477],
+        ["Rock Slide", 14.123436875468245],
+        ["Stomping Tantrum", 8.415089842930685],
+        ["Scale Shot", 4.855823519737233],
+        ["Earth Power", 3.2401500889463843],
+        ["Swords Dance", 2.9084428583489137],
+        ["Rock Tomb", 2.2228002742681845],
+        ["Power Gem", 1.6297744088107344]
+    ],
+    "spreads": [
+        ["Jolly:2/32/0/0/0/32", 6.244447856216761],
+        ["Jolly:2/32/1/0/1/30", 4.058142659682391],
+        ["Adamant:2/32/0/0/0/32", 3.7222544095092562],
+        ["Jolly:0/32/0/0/2/32", 3.644972559964043],
+        ["Adamant:32/32/0/0/2/0", 3.391956947975853]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Kingambit", 5.5108602549270636],
+        ["Incineroar", 5.303098834899443],
+        ["Sneasler", 5.2757819058410975],
+        ["Tyranitar", 4.757076750486503],
+        ["Farigiraf", 4.080631243641415],
+        ["Sylveon", 4.062278455034423],
+        ["Sinistcha", 4.054155950059158],
+        ["Aerodactyl", 3.9446186840842077],
+        ["Basculegion", 3.8814304123754995],
+        ["Charizard-Mega-Y", 3.794859888717324]
+    ],
+    "counters": [],
+    "builds": []
 }

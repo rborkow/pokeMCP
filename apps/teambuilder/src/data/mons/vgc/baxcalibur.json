@@ -45,87 +45,87 @@
  ],
  "abilities": [
   [
-   "thermalexchange",
+   "Thermal Exchange",
    97.84800894317138
   ],
   [
-   "icebody",
+   "Ice Body",
    2.1519910568286233
   ]
  ],
  "items": [
   [
-   "assaultvest",
+   "Assault Vest",
    73.6434106648297
   ],
   [
-   "clearamulet",
+   "Clear Amulet",
    15.066132844916238
   ],
   [
-   "loadeddice",
+   "Loaded Dice",
    9.556944955558933
   ],
   [
-   "lifeorb",
+   "Life Orb",
    1.1981469709076016
   ],
   [
-   "choiceband",
+   "Choice Band",
    0.19440413964819886
   ],
   [
-   "choicescarf",
+   "Choice Scarf",
    0.17556327202317307
   ],
   [
-   "nevermeltice",
+   "Never-Melt Ice",
    0.13334452951499456
   ],
   [
-   "leftovers",
+   "Leftovers",
    0.0320524756395587
   ]
  ],
  "moves": [
   [
-   "iceshard",
+   "Ice Shard",
    23.03378356335968
   ],
   [
-   "glaiverush",
+   "Glaive Rush",
    22.67026087064442
   ],
   [
-   "iciclecrash",
+   "Icicle Crash",
    21.865456241157432
   ],
   [
-   "earthquake",
+   "Earthquake",
    18.890540683226174
   ],
   [
-   "protect",
+   "Protect",
    5.594084202354506
   ],
   [
-   "iciclespear",
+   "Icicle Spear",
    2.3892381978218187
   ],
   [
-   "scaleshot",
+   "Scale Shot",
    2.284676439556423
   ],
   [
-   "swordsdance",
+   "Swords Dance",
    1.1015646500012006
   ],
   [
-   "dragondance",
+   "Dragon Dance",
    0.9183418286604741
   ],
   [
-   "brickbreak",
+   "Brick Break",
    0.29778845867207326
   ]
  ],
@@ -215,5 +215,6 @@
    1.4006084506429404
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

@@ -1,183 +1,108 @@
 {
- "id": "snorlax",
- "name": "Snorlax",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0088787,
-   "rank": 83,
-   "raw": 71019
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.0169056,
-   "rank": 63,
-   "raw": 147321
-  }
- ],
- "abilities": [
-  [
-   "thickfat",
-   98.33257059857954
-  ],
-  [
-   "immunity",
-   0.90038977961467
-  ],
-  [
-   "gluttony",
-   0.7670396218058008
-  ]
- ],
- "items": [
-  [
-   "leftovers",
-   80.57755981883268
-  ],
-  [
-   "sitrusberry",
-   11.920500847557236
-  ],
-  [
-   "silkscarf",
-   4.276605519292576
-  ],
-  [
-   "chopleberry",
-   2.296186349647718
-  ],
-  [
-   "lumberry",
-   0.3258382932046456
-  ],
-  [
-   "chestoberry",
-   0.21698035838287327
-  ],
-  [
-   "quickclaw",
-   0.09624422352996571
-  ],
-  [
-   "whiteherb",
-   0.06992359182480032
-  ]
- ],
- "moves": [
-  [
-   "protect",
-   23.52581983666307
-  ],
-  [
-   "fissure",
-   16.309177626737316
-  ],
-  [
-   "stockpile",
-   13.598832354330703
-  ],
-  [
-   "bodypress",
-   10.490806014519661
-  ],
-  [
-   "yawn",
-   5.232719742766386
-  ],
-  [
-   "doubleedge",
-   4.825761928694263
-  ],
-  [
-   "highhorsepower",
-   4.145517002550265
-  ],
-  [
-   "smackdown",
-   3.3485134286076503
-  ],
-  [
-   "bodyslam",
-   3.1881989569417417
-  ],
-  [
-   "curse",
-   2.9892203378558855
-  ]
- ],
- "spreads": [
-  [
-   "Relaxed:32/0/32/0/2/0",
-   23.239122089019446
-  ],
-  [
-   "Impish:32/0/32/0/2/0",
-   10.384363673687167
-  ],
-  [
-   "Sassy:21/0/32/0/13/0",
-   5.61861581319797
-  ],
-  [
-   "Relaxed:22/0/32/0/12/0",
-   3.3990991835610336
-  ],
-  [
-   "Relaxed:29/0/32/0/5/0",
-   1.5787919009486149
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Sinistcha",
-   12.986832394401905
-  ],
-  [
-   "Incineroar",
-   12.173105926368637
-  ],
-  [
-   "Hawlucha-Mega",
-   10.54711623986795
-  ],
-  [
-   "Gengar-Mega",
-   8.19222073074228
-  ],
-  [
-   "Politoed",
-   7.181729779622923
-  ],
-  [
-   "Basculegion",
-   3.1117200614856992
-  ],
-  [
-   "Farigiraf",
-   2.9861228305052863
-  ],
-  [
-   "Floette-Mega",
-   2.3794891265363205
-  ],
-  [
-   "Garchomp",
-   2.215232524461661
-  ],
-  [
-   "Glimmora",
-   1.8749652374091712
-  ]
- ],
- "counters": []
+    "id": "snorlax",
+    "name": "Snorlax",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0088787,
+            "rank": 83,
+            "raw": 71019
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0169056,
+            "rank": 63,
+            "raw": 147321
+        }
+    ],
+    "abilities": [
+        ["Thick Fat", 98.33257059857954],
+        ["Immunity", 0.90038977961467],
+        ["Gluttony", 0.7670396218058008]
+    ],
+    "items": [
+        ["Leftovers", 80.57755981883268],
+        ["Sitrus Berry", 11.920500847557236],
+        ["Silk Scarf", 4.276605519292576],
+        ["Chople Berry", 2.296186349647718],
+        ["Lum Berry", 0.3258382932046456],
+        ["Chesto Berry", 0.21698035838287327],
+        ["Quick Claw", 0.09624422352996571],
+        ["White Herb", 0.06992359182480032]
+    ],
+    "moves": [
+        ["Protect", 23.52581983666307],
+        ["Fissure", 16.309177626737316],
+        ["Stockpile", 13.598832354330703],
+        ["Body Press", 10.490806014519661],
+        ["Yawn", 5.232719742766386],
+        ["Double-Edge", 4.825761928694263],
+        ["High Horsepower", 4.145517002550265],
+        ["Smack Down", 3.3485134286076503],
+        ["Body Slam", 3.1881989569417417],
+        ["Curse", 2.9892203378558855]
+    ],
+    "spreads": [
+        ["Relaxed:32/0/32/0/2/0", 23.239122089019446],
+        ["Impish:32/0/32/0/2/0", 10.384363673687167],
+        ["Sassy:21/0/32/0/13/0", 5.61861581319797],
+        ["Relaxed:22/0/32/0/12/0", 3.3990991835610336],
+        ["Relaxed:29/0/32/0/5/0", 1.5787919009486149]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Sinistcha", 12.986832394401905],
+        ["Incineroar", 12.173105926368637],
+        ["Hawlucha-Mega", 10.54711623986795],
+        ["Gengar-Mega", 8.19222073074228],
+        ["Politoed", 7.181729779622923],
+        ["Basculegion", 3.1117200614856992],
+        ["Farigiraf", 2.9861228305052863],
+        ["Floette-Mega", 2.3794891265363205],
+        ["Garchomp", 2.215232524461661],
+        ["Glimmora", 1.8749652374091712]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Leftovers",
+            "ability": "Thick Fat",
+            "moves": ["Fissure", "Body Press", "Stockpile", "Protect"],
+            "count": 2,
+            "bestPlacing": 2,
+            "bestPlayer": "JenZzz",
+            "eventName": "*Sitrus-Series*|Champions|#60",
+            "eventSlug": "2026-05-27-sitrus-series-champions-60",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a0f02afdfbdf089cbbde577",
+            "nature": null
+        },
+        {
+            "item": "Sitrus Berry",
+            "ability": "Thick Fat",
+            "moves": ["Facade", "Yawn", "Self-Destruct", "High Horsepower"],
+            "count": 2,
+            "bestPlacing": 3,
+            "bestPlayer": "Gotou",
+            "eventName": "Tenki's Cart - Road to Turin M-A",
+            "eventSlug": "2026-06-01-tenki-s-cart-road-to-turin-m-a",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a196f5856b11a587a94281c",
+            "nature": "Relaxed"
+        },
+        {
+            "item": "Leftovers",
+            "ability": "Thick Fat",
+            "moves": ["Protect", "Smack Down", "Fissure", "Stockpile"],
+            "count": 1,
+            "bestPlacing": 2,
+            "bestPlayer": "MEGA_Meganium",
+            "eventName": "Tenki's Cart - Champions M-A",
+            "eventSlug": "2026-05-21-tenki-s-cart-champions-m-a",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a096c17dfbdf089cbbdbfef",
+            "nature": null
+        }
+    ]
 }

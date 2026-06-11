@@ -45,87 +45,87 @@
  ],
  "abilities": [
   [
-   "frisk",
+   "Frisk",
    63.89700279889716
   ],
   [
-   "blaze",
+   "Blaze",
    36.10299720110284
   ]
  ],
  "items": [
   [
-   "choicescarf",
+   "Choice Scarf",
    77.63693841349605
   ],
   [
-   "choicespecs",
+   "Choice Specs",
    20.363283829417405
   ],
   [
-   "charcoal",
+   "Charcoal",
    0.6640316822721869
   ],
   [
-   "quickclaw",
+   "Quick Claw",
    0.4577908924578524
   ],
   [
-   "weaknesspolicy",
+   "Weakness Policy",
    0.41335462787316923
   ],
   [
-   "focussash",
+   "Focus Sash",
    0.1947987735633857
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    0.16095597718648794
   ],
   [
-   "flameplate",
+   "Flame Plate",
    0.07585371305589937
   ]
  ],
  "moves": [
   [
-   "eruption",
+   "Eruption",
    24.873486796332468
   ],
   [
-   "shadowball",
+   "Shadow Ball",
    24.740148767133196
   ],
   [
-   "heatwave",
+   "Heat Wave",
    19.248762697662865
   ],
   [
-   "focusblast",
+   "Focus Blast",
    7.3353909160409945
   ],
   [
-   "overheat",
+   "Overheat",
    6.767312923028215
   ],
   [
-   "solarbeam",
+   "Solar Beam",
    5.872842003256619
   ],
   [
-   "sleeptalk",
+   "Sleep Talk",
    3.6029967436711487
   ],
   [
-   "firepledge",
+   "Fire Pledge",
    3.3224091837261946
   ],
   [
-   "flamethrower",
+   "Flamethrower",
    1.1791287310582073
   ],
   [
-   "fireblast",
+   "Fire Blast",
    1.165703946693655
   ]
  ],
@@ -215,5 +215,6 @@
    3.3383776848468436
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

@@ -45,37 +45,37 @@
  ],
  "abilities": [
   [
-   "eartheater",
+   "Earth Eater",
    100
   ],
   [
-   "sandveil",
+   "Sand Veil",
    0
   ]
  ],
  "items": [
   [
-   "sitrusberry",
+   "Sitrus Berry",
    98.39419728132664
   ],
   [
-   "mirrorherb",
+   "Mirror Herb",
    0.8275648625709705
   ],
   [
-   "mentalherb",
+   "Mental Herb",
    0.649301816987003
   ],
   [
-   "assaultvest",
+   "Assault Vest",
    0.10758907377535507
   ],
   [
-   "leftovers",
+   "Leftovers",
    0.021313369310627526
   ],
   [
-   "rockyhelmet",
+   "Rocky Helmet",
    0.00003359602940481152
   ],
   [
@@ -83,49 +83,49 @@
    1.4107512141618174e-15
   ],
   [
-   "airballoon",
+   "Air Balloon",
    0
   ]
  ],
  "moves": [
   [
-   "shedtail",
+   "Shed Tail",
    24.93632517603778
   ],
   [
-   "bodypress",
+   "Body Press",
    24.74030920034675
   ],
   [
-   "heavyslam",
+   "Heavy Slam",
    24.577562401768333
   ],
   [
-   "protect",
+   "Protect",
    24.495125536777397
   ],
   [
-   "irondefense",
+   "Iron Defense",
    0.2777717465041415
   ],
   [
-   "ironhead",
+   "Iron Head",
    0.2142885496750927
   ],
   [
-   "coil",
+   "Coil",
    0.2074502323003754
   ],
   [
-   "stealthrock",
+   "Stealth Rock",
    0.20689121564274263
   ],
   [
-   "helpinghand",
+   "Helping Hand",
    0.16838380105127618
   ],
   [
-   "earthquake",
+   "Earthquake",
    0.12370359719269483
   ]
  ],
@@ -215,5 +215,6 @@
    0.3207094873295278
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

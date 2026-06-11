@@ -45,83 +45,83 @@
  ],
  "abilities": [
   [
-   "transistor",
+   "Transistor",
    100
   ]
  ],
  "items": [
   [
-   "choicescarf",
+   "Choice Scarf",
    60.374966120000906
   ],
   [
-   "focussash",
+   "Focus Sash",
    18.249933177968263
   ],
   [
-   "lightclay",
+   "Light Clay",
    8.861329722663399
   ],
   [
-   "choicespecs",
+   "Choice Specs",
    8.090141659201027
   ],
   [
-   "sitrusberry",
+   "Sitrus Berry",
    3.7302709813160764
   ],
   [
-   "lifeorb",
+   "Life Orb",
    0.40291663408492234
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    0.1019214523267684
   ],
   [
-   "airballoon",
+   "Air Balloon",
    0.07930637798674786
   ]
  ],
  "moves": [
   [
-   "thunderbolt",
+   "Thunderbolt",
    22.59554383402517
   ],
   [
-   "electroweb",
+   "Electroweb",
    21.774102941584616
   ],
   [
-   "voltswitch",
+   "Volt Switch",
    21.691726638847292
   ],
   [
-   "hyperbeam",
+   "Hyper Beam",
    15.084384684229683
   ],
   [
-   "protect",
+   "Protect",
    4.880412233815093
   ],
   [
-   "lightscreen",
+   "Light Screen",
    2.761727899290159
   ],
   [
-   "reflect",
+   "Reflect",
    2.2153353118869528
   ],
   [
-   "thunderwave",
+   "Thunder Wave",
    1.5964177971785545
   ],
   [
-   "rapidspin",
+   "Rapid Spin",
    1.559004962989597
   ],
   [
-   "extremespeed",
+   "Extreme Speed",
    1.5322257745137546
   ]
  ],
@@ -211,5 +211,6 @@
    2.7200971834644405
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

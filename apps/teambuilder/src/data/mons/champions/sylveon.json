@@ -1,179 +1,104 @@
 {
- "id": "sylveon",
- "name": "Sylveon",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.056479299999999996,
-   "rank": 26,
-   "raw": 227918
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.1551446,
-   "rank": 12,
-   "raw": 727054
-  }
- ],
- "abilities": [
-  [
-   "pixilate",
-   99.7821821715733
-  ],
-  [
-   "cutecharm",
-   0.21781782842669764
-  ]
- ],
- "items": [
-  [
-   "fairyfeather",
-   94.10802438688013
-  ],
-  [
-   "leftovers",
-   2.7390738921193774
-  ],
-  [
-   "sitrusberry",
-   2.1979213936578637
-  ],
-  [
-   "choicescarf",
-   0.24505991050739512
-  ],
-  [
-   "babiriberry",
-   0.18094032561743165
-  ],
-  [
-   "kebiaberry",
-   0.18043554764602612
-  ],
-  [
-   "mentalherb",
-   0.06292607926643412
-  ],
-  [
-   "quickclaw",
-   0.05276459615679181
-  ]
- ],
- "moves": [
-  [
-   "hypervoice",
-   24.967813145222927
-  ],
-  [
-   "quickattack",
-   19.673408195642256
-  ],
-  [
-   "hyperbeam",
-   13.383707564068251
-  ],
-  [
-   "detect",
-   12.839534247600925
-  ],
-  [
-   "protect",
-   11.845205555699073
-  ],
-  [
-   "moonblast",
-   6.666408840290402
-  ],
-  [
-   "calmmind",
-   3.24371478499554
-  ],
-  [
-   "yawn",
-   2.9092991644534334
-  ],
-  [
-   "substitute",
-   0.8789422439758424
-  ],
-  [
-   "mysticalfire",
-   0.8372445286479631
-  ]
- ],
- "spreads": [
-  [
-   "Modest:9/0/22/20/0/15",
-   7.300755675952993
-  ],
-  [
-   "Quiet:32/0/2/32/0/0",
-   3.9400818847747785
-  ],
-  [
-   "Modest:32/0/2/32/0/0",
-   2.2475074211148303
-  ],
-  [
-   "Modest:7/0/22/23/0/14",
-   1.9710501180646711
-  ],
-  [
-   "Modest:6/0/0/32/0/28",
-   1.8886687220027347
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Basculegion",
-   10.375527473455605
-  ],
-  [
-   "Garchomp",
-   9.183493759806606
-  ],
-  [
-   "Charizard-Mega-Y",
-   8.44028282713504
-  ],
-  [
-   "Kingambit",
-   7.808390960184271
-  ],
-  [
-   "Aerodactyl-Mega",
-   7.234297602622348
-  ],
-  [
-   "Farigiraf",
-   4.936966465799769
-  ],
-  [
-   "Sneasler",
-   3.2207452831803476
-  ],
-  [
-   "Incineroar",
-   3.0141098226050222
-  ],
-  [
-   "Archaludon",
-   2.602606118652961
-  ],
-  [
-   "Blastoise-Mega",
-   2.2845985724052533
-  ]
- ],
- "counters": []
+    "id": "sylveon",
+    "name": "Sylveon",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.056479299999999996,
+            "rank": 26,
+            "raw": 227918
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.1551446,
+            "rank": 12,
+            "raw": 727054
+        }
+    ],
+    "abilities": [["Pixilate", 99.7821821715733], ["Cute Charm", 0.21781782842669764]],
+    "items": [
+        ["Fairy Feather", 94.10802438688013],
+        ["Leftovers", 2.7390738921193774],
+        ["Sitrus Berry", 2.1979213936578637],
+        ["Choice Scarf", 0.24505991050739512],
+        ["Babiri Berry", 0.18094032561743165],
+        ["Kebia Berry", 0.18043554764602612],
+        ["Mental Herb", 0.06292607926643412],
+        ["Quick Claw", 0.05276459615679181]
+    ],
+    "moves": [
+        ["Hyper Voice", 24.967813145222927],
+        ["Quick Attack", 19.673408195642256],
+        ["Hyper Beam", 13.383707564068251],
+        ["Detect", 12.839534247600925],
+        ["Protect", 11.845205555699073],
+        ["Moonblast", 6.666408840290402],
+        ["Calm Mind", 3.24371478499554],
+        ["Yawn", 2.9092991644534334],
+        ["Substitute", 0.8789422439758424],
+        ["Mystical Fire", 0.8372445286479631]
+    ],
+    "spreads": [
+        ["Modest:9/0/22/20/0/15", 7.300755675952993],
+        ["Quiet:32/0/2/32/0/0", 3.9400818847747785],
+        ["Modest:32/0/2/32/0/0", 2.2475074211148303],
+        ["Modest:7/0/22/23/0/14", 1.9710501180646711],
+        ["Modest:6/0/0/32/0/28", 1.8886687220027347]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Basculegion", 10.375527473455605],
+        ["Garchomp", 9.183493759806606],
+        ["Charizard-Mega-Y", 8.44028282713504],
+        ["Kingambit", 7.808390960184271],
+        ["Aerodactyl-Mega", 7.234297602622348],
+        ["Farigiraf", 4.936966465799769],
+        ["Sneasler", 3.2207452831803476],
+        ["Incineroar", 3.0141098226050222],
+        ["Archaludon", 2.602606118652961],
+        ["Blastoise-Mega", 2.2845985724052533]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Fairy Feather",
+            "ability": "Pixilate",
+            "moves": ["Hyper Voice", "Quick Attack", "Hyper Beam", "Detect"],
+            "count": 26,
+            "bestPlacing": 1,
+            "bestPlayer": "TingusThePingus",
+            "eventName": "SpearPillar Champions Tour #6 | Reg M-A $100 Prize",
+            "eventSlug": "2026-06-06-spearpillar-champions-tour-6-reg-m-a-100-prize",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69cd69a336f5b5c303dc45bb",
+            "nature": "Modest"
+        },
+        {
+            "item": "Fairy Feather",
+            "ability": "Pixilate",
+            "moves": ["Hyper Beam", "Hyper Voice", "Quick Attack", "Protect"],
+            "count": 12,
+            "bestPlacing": 1,
+            "bestPlayer": "washy",
+            "eventName": "Pokepal Smackdown #143 (Champions) (Reg M-A)",
+            "eventSlug": "2026-06-01-pokepal-smackdown-143-champions-reg-m-a",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15a9698c163b8097997c21",
+            "nature": "Modest"
+        },
+        {
+            "item": "Fairy Feather",
+            "ability": "Pixilate",
+            "moves": ["Hyper Voice", "Moonblast", "Detect", "Quick Attack"],
+            "count": 4,
+            "bestPlacing": 1,
+            "bestPlayer": "ARegularGuy",
+            "eventName": "Maddo's Cup #8 | 100€ for the Winner | Reg M-A",
+            "eventSlug": "2026-05-23-maddo-s-cup-8-100-for-the-winner-reg-m-a",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69d54e0c800d329be2e74f86",
+            "nature": null
+        }
+    ]
 }

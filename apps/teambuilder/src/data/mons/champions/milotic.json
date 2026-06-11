@@ -1,183 +1,108 @@
 {
- "id": "milotic",
- "name": "Milotic",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.12137460000000001,
-   "rank": 14,
-   "raw": 844726
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.0692424,
-   "rank": 22,
-   "raw": 663886
-  }
- ],
- "abilities": [
-  [
-   "competitive",
-   98.27070920266463
-  ],
-  [
-   "marvelscale",
-   1.650187486506168
-  ],
-  [
-   "cutecharm",
-   0.07910331082919962
-  ]
- ],
- "items": [
-  [
-   "leftovers",
-   76.27351550470118
-  ],
-  [
-   "sitrusberry",
-   18.05551897825656
-  ],
-  [
-   "mysticwater",
-   1.7829989134973832
-  ],
-  [
-   "wacanberry",
-   1.2299945279785074
-  ],
-  [
-   "rindoberry",
-   0.9706951168993991
-  ],
-  [
-   "choicescarf",
-   0.37460384556483356
-  ],
-  [
-   "scopelens",
-   0.2878968281481718
-  ],
-  [
-   "brightpowder",
-   0.22525150639938238
-  ]
- ],
- "moves": [
-  [
-   "scald",
-   16.830081071207932
-  ],
-  [
-   "protect",
-   16.821978606870626
-  ],
-  [
-   "icywind",
-   13.398428305195234
-  ],
-  [
-   "recover",
-   12.092712915627626
-  ],
-  [
-   "coil",
-   8.310162316417937
-  ],
-  [
-   "muddywater",
-   8.236936555550102
-  ],
-  [
-   "hypnosis",
-   8.168871760823958
-  ],
-  [
-   "lifedew",
-   7.219666969223355
-  ],
-  [
-   "icebeam",
-   5.416021312979969
-  ],
-  [
-   "helpinghand",
-   0.5101083431537401
-  ]
- ],
- "spreads": [
-  [
-   "Bold:31/0/11/7/4/13",
-   4.8799835307784205
-  ],
-  [
-   "Bold:32/0/32/2/0/0",
-   3.929682850927273
-  ],
-  [
-   "Bold:32/0/32/0/2/0",
-   3.7069493693529076
-  ],
-  [
-   "Bold:31/0/21/1/12/1",
-   3.1464215009773033
-  ],
-  [
-   "Calm:32/0/29/0/5/0",
-   2.913523020227335
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Sneasler",
-   7.824537302614987
-  ],
-  [
-   "Incineroar",
-   6.586604488952842
-  ],
-  [
-   "Garchomp",
-   5.673156236833597
-  ],
-  [
-   "Sinistcha",
-   5.2366503557596005
-  ],
-  [
-   "Kingambit",
-   3.885656130143621
-  ],
-  [
-   "Charizard-Mega-Y",
-   3.830676499094971
-  ],
-  [
-   "Floette-Mega",
-   3.3772903743117944
-  ],
-  [
-   "Charizard-Mega-X",
-   2.914650834697032
-  ],
-  [
-   "Whimsicott",
-   2.6059277084819357
-  ],
-  [
-   "Basculegion",
-   2.552584390754227
-  ]
- ],
- "counters": []
+    "id": "milotic",
+    "name": "Milotic",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.12137460000000001,
+            "rank": 14,
+            "raw": 844726
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0692424,
+            "rank": 22,
+            "raw": 663886
+        }
+    ],
+    "abilities": [
+        ["Competitive", 98.27070920266463],
+        ["Marvel Scale", 1.650187486506168],
+        ["Cute Charm", 0.07910331082919962]
+    ],
+    "items": [
+        ["Leftovers", 76.27351550470118],
+        ["Sitrus Berry", 18.05551897825656],
+        ["Mystic Water", 1.7829989134973832],
+        ["Wacan Berry", 1.2299945279785074],
+        ["Rindo Berry", 0.9706951168993991],
+        ["Choice Scarf", 0.37460384556483356],
+        ["Scope Lens", 0.2878968281481718],
+        ["Bright Powder", 0.22525150639938238]
+    ],
+    "moves": [
+        ["Scald", 16.830081071207932],
+        ["Protect", 16.821978606870626],
+        ["Icy Wind", 13.398428305195234],
+        ["Recover", 12.092712915627626],
+        ["Coil", 8.310162316417937],
+        ["Muddy Water", 8.236936555550102],
+        ["Hypnosis", 8.168871760823958],
+        ["Life Dew", 7.219666969223355],
+        ["Ice Beam", 5.416021312979969],
+        ["Helping Hand", 0.5101083431537401]
+    ],
+    "spreads": [
+        ["Bold:31/0/11/7/4/13", 4.8799835307784205],
+        ["Bold:32/0/32/2/0/0", 3.929682850927273],
+        ["Bold:32/0/32/0/2/0", 3.7069493693529076],
+        ["Bold:31/0/21/1/12/1", 3.1464215009773033],
+        ["Calm:32/0/29/0/5/0", 2.913523020227335]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Sneasler", 7.824537302614987],
+        ["Incineroar", 6.586604488952842],
+        ["Garchomp", 5.673156236833597],
+        ["Sinistcha", 5.2366503557596005],
+        ["Kingambit", 3.885656130143621],
+        ["Charizard-Mega-Y", 3.830676499094971],
+        ["Floette-Mega", 3.3772903743117944],
+        ["Charizard-Mega-X", 2.914650834697032],
+        ["Whimsicott", 2.6059277084819357],
+        ["Basculegion", 2.552584390754227]
+    ],
+    "counters": [],
+    "builds": [
+        {
+            "item": "Leftovers",
+            "ability": "Competitive",
+            "moves": ["Scald", "Ice Beam", "Recover", "Protect"],
+            "count": 2,
+            "bestPlacing": 2,
+            "bestPlayer": "ismaaelh",
+            "eventName": "*Sitrus-Series*|Champions|#61",
+            "eventSlug": "2026-06-03-sitrus-series-champions-61",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1843740f6c1f08998629ca",
+            "nature": "Modest"
+        },
+        {
+            "item": "Leftovers",
+            "ability": "Competitive",
+            "moves": ["Coil", "Muddy Water", "Hypnosis", "Recover"],
+            "count": 1,
+            "bestPlacing": 2,
+            "bestPlayer": "BadassFroslass",
+            "eventName": "SpearPillar Champions Tour #4 | Reg M-A $100 Prize",
+            "eventSlug": "2026-05-16-spearpillar-champions-tour-4-reg-m-a-100-prize",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69cd6904d478313a15a39215",
+            "nature": null
+        },
+        {
+            "item": "Leftovers",
+            "ability": "Competitive",
+            "moves": ["Muddy Water", "Hypnosis", "Coil", "Protect"],
+            "count": 1,
+            "bestPlacing": 3,
+            "bestPlayer": "ironingots",
+            "eventName": "CHAMPIONS REG. M-A |👑CROWN FIGHT Bo3 TOUR #70👑",
+            "eventSlug": "2026-05-29-champions-reg-m-a-crown-fight-bo3-tour-70",
+            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eb09bb78b359b789d6aa3d",
+            "nature": "Modest"
+        }
+    ]
 }

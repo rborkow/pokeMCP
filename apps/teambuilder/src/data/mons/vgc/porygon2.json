@@ -45,75 +45,75 @@
  ],
  "abilities": [
   [
-   "download",
+   "Download",
    93.73954628108359
   ],
   [
-   "trace",
+   "Trace",
    5.719936465178743
   ],
   [
-   "analytic",
+   "Analytic",
    0.5405172537376793
   ]
  ],
  "items": [
   [
-   "eviolite",
+   "Eviolite",
    94.17652924223512
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    4.696698667354929
   ],
   [
-   "leftovers",
+   "Leftovers",
    1.0902064885594307
   ],
   [
-   "choicespecs",
+   "Choice Specs",
    0.0365656018505292
   ]
  ],
  "moves": [
   [
-   "trickroom",
+   "Trick Room",
    24.744972584893006
   ],
   [
-   "recover",
+   "Recover",
    22.90769665095204
   ],
   [
-   "icebeam",
+   "Ice Beam",
    21.975586619201326
   ],
   [
-   "terablast",
+   "Tera Blast",
    20.56782766656751
   ],
   [
-   "triattack",
+   "Tri Attack",
    2.465665720549756
   ],
   [
-   "thunderbolt",
+   "Thunderbolt",
    1.8356861827167708
   ],
   [
-   "protect",
+   "Protect",
    1.3112857441056713
   ],
   [
-   "psyshock",
+   "Psyshock",
    1.1741746668387318
   ],
   [
-   "shadowball",
+   "Shadow Ball",
    1.0489001396740374
   ],
   [
-   "foulplay",
+   "Foul Play",
    0.7770137486915407
   ]
  ],
@@ -203,5 +203,6 @@
    1.2373243077508227
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

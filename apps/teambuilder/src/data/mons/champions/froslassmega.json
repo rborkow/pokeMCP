@@ -1,147 +1,58 @@
 {
- "id": "froslassmega",
- "name": "Froslass-Mega",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0835862,
-   "rank": 17,
-   "raw": 485068
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.049887499999999994,
-   "rank": 34,
-   "raw": 343698
-  }
- ],
- "abilities": [
-  [
-   "snowwarning",
-   100
-  ]
- ],
- "items": [
-  [
-   "froslassite",
-   100
-  ]
- ],
- "moves": [
-  [
-   "blizzard",
-   24.950870938090727
-  ],
-  [
-   "protect",
-   24.371661710190118
-  ],
-  [
-   "shadowball",
-   23.611330809410504
-  ],
-  [
-   "auroraveil",
-   19.132831859567307
-  ],
-  [
-   "taunt",
-   2.0846681707220744
-  ],
-  [
-   "substitute",
-   1.1544403006464607
-  ],
-  [
-   "nastyplot",
-   0.9992243968558726
-  ],
-  [
-   "thunderbolt",
-   0.7028865626831415
-  ],
-  [
-   "icywind",
-   0.5366529091254425
-  ],
-  [
-   "willowisp",
-   0.4975348915463122
-  ]
- ],
- "spreads": [
-  [
-   "Timid:2/0/0/32/0/32",
-   11.634155225455098
-  ],
-  [
-   "Modest:32/0/2/32/0/0",
-   5.966531477269895
-  ],
-  [
-   "Timid:0/0/0/32/2/32",
-   5.8084600590872855
-  ],
-  [
-   "Timid:32/0/15/1/0/18",
-   5.542032748554056
-  ],
-  [
-   "Modest:12/0/1/20/1/32",
-   4.718314686040311
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Sneasler",
-   14.435778837829488
-  ],
-  [
-   "Kingambit",
-   11.9595876988079
-  ],
-  [
-   "Basculegion",
-   10.19452746061136
-  ],
-  [
-   "Garchomp",
-   6.776465434218328
-  ],
-  [
-   "Whimsicott",
-   4.013171547106633
-  ],
-  [
-   "Incineroar",
-   3.276061061704679
-  ],
-  [
-   "Milotic",
-   3.2093499205080978
-  ],
-  [
-   "Aerodactyl-Mega",
-   2.6602139378310516
-  ],
-  [
-   "Dragonite",
-   2.509026805107763
-  ],
-  [
-   "Rotom-Wash",
-   2.378842421291704
-  ]
- ],
- "counters": []
+    "id": "froslassmega",
+    "name": "Froslass-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0835862,
+            "rank": 17,
+            "raw": 485068
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.049887499999999994,
+            "rank": 34,
+            "raw": 343698
+        }
+    ],
+    "abilities": [["Snow Warning", 100]],
+    "items": [["Froslassite", 100]],
+    "moves": [
+        ["Blizzard", 24.950870938090727],
+        ["Protect", 24.371661710190118],
+        ["Shadow Ball", 23.611330809410504],
+        ["Aurora Veil", 19.132831859567307],
+        ["Taunt", 2.0846681707220744],
+        ["Substitute", 1.1544403006464607],
+        ["Nasty Plot", 0.9992243968558726],
+        ["Thunderbolt", 0.7028865626831415],
+        ["Icy Wind", 0.5366529091254425],
+        ["Will-O-Wisp", 0.4975348915463122]
+    ],
+    "spreads": [
+        ["Timid:2/0/0/32/0/32", 11.634155225455098],
+        ["Modest:32/0/2/32/0/0", 5.966531477269895],
+        ["Timid:0/0/0/32/2/32", 5.8084600590872855],
+        ["Timid:32/0/15/1/0/18", 5.542032748554056],
+        ["Modest:12/0/1/20/1/32", 4.718314686040311]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Sneasler", 14.435778837829488],
+        ["Kingambit", 11.9595876988079],
+        ["Basculegion", 10.19452746061136],
+        ["Garchomp", 6.776465434218328],
+        ["Whimsicott", 4.013171547106633],
+        ["Incineroar", 3.276061061704679],
+        ["Milotic", 3.2093499205080978],
+        ["Aerodactyl-Mega", 2.6602139378310516],
+        ["Dragonite", 2.509026805107763],
+        ["Rotom-Wash", 2.378842421291704]
+    ],
+    "counters": [],
+    "builds": []
 }

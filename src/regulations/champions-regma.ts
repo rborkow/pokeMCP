@@ -34,6 +34,9 @@ export const CHAMPIONS_REGMA: RegulationSet = {
     // the stats tools transparently serve that data against `champions-regma`,
     // and drives which file the monthly fetch/upload pipeline pulls.
     showdownFormatId: "gen9championsvgc2026regma",
+    // Verified June 2026: Champions events on play.limitlesstcg.com are listed
+    // under game=VGC with format "M-A".
+    limitlessFormatId: "M-A",
     megaForms: CHAMPIONS_REGMA_MEGAS,
     bannedItems: [],
     moveOverrides: {},

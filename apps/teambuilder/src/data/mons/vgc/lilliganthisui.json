@@ -45,91 +45,91 @@
  ],
  "abilities": [
   [
-   "chlorophyll",
+   "Chlorophyll",
    99.80564124462161
   ],
   [
-   "leafguard",
+   "Leaf Guard",
    0.16249815623956143
   ],
   [
-   "hustle",
+   "Hustle",
    0.03186059913883304
   ]
  ],
  "items": [
   [
-   "focussash",
+   "Focus Sash",
    92.55146158497027
   ],
   [
-   "clearamulet",
+   "Clear Amulet",
    2.05986382013183
   ],
   [
-   "widelens",
+   "Wide Lens",
    2.0296817671591687
   ],
   [
-   "choiceband",
+   "Choice Band",
    1.4241012043849828
   ],
   [
-   "leftovers",
+   "Leftovers",
    0.8342426293086092
   ],
   [
-   "lifeorb",
+   "Life Orb",
    0.30544614321639496
   ],
   [
-   "airballoon",
+   "Air Balloon",
    0.2766645187314318
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    0.21661309408300625
   ]
  ],
  "moves": [
   [
-   "closecombat",
+   "Close Combat",
    22.977933521477393
   ],
   [
-   "afteryou",
+   "After You",
    21.948001431244894
   ],
   [
-   "sleeppowder",
+   "Sleep Powder",
    19.637162420614846
   ],
   [
-   "solarblade",
+   "Solar Blade",
    15.742303739567976
   ],
   [
-   "helpinghand",
+   "Helping Hand",
    5.983110723581147
   ],
   [
-   "protect",
+   "Protect",
    3.862238561588565
   ],
   [
-   "icespinner",
+   "Ice Spinner",
    3.067280942179439
   ],
   [
-   "upperhand",
+   "Upper Hand",
    1.6812511175983578
   ],
   [
-   "encore",
+   "Encore",
    1.0790619825169367
   ],
   [
-   "leafblade",
+   "Leaf Blade",
    0.9358003275238111
   ]
  ],
@@ -219,5 +219,6 @@
    4.6980548672836315
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }

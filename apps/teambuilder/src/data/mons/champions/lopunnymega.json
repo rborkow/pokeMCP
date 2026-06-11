@@ -1,147 +1,58 @@
 {
- "id": "lopunnymega",
- "name": "Lopunny-Mega",
- "slug": "champions",
- "formatId": "gen9championsvgc2026regma",
- "formatLabel": "Pokémon Champions — Regulation M-A",
- "dataThrough": "2026-05",
- "history": [
-  {
-   "month": "2026-04",
-   "usage": 0.0178566,
-   "rank": 57,
-   "raw": 93587
-  },
-  {
-   "month": "2026-05",
-   "usage": 0.032501699999999994,
-   "rank": 45,
-   "raw": 220724
-  }
- ],
- "abilities": [
-  [
-   "scrappy",
-   100
-  ]
- ],
- "items": [
-  [
-   "lopunnite",
-   100
-  ]
- ],
- "moves": [
-  [
-   "fakeout",
-   24.799230919666012
-  ],
-  [
-   "closecombat",
-   24.432098875373036
-  ],
-  [
-   "encore",
-   14.14175006991921
-  ],
-  [
-   "tripleaxel",
-   10.099393257309595
-  ],
-  [
-   "protect",
-   7.127429329190998
-  ],
-  [
-   "gigaimpact",
-   5.479948052276681
-  ],
-  [
-   "machpunch",
-   4.230043890485277
-  ],
-  [
-   "afteryou",
-   2.728747046659107
-  ],
-  [
-   "uturn",
-   1.7576383108245857
-  ],
-  [
-   "facade",
-   1.4392245652853448
-  ]
- ],
- "spreads": [
-  [
-   "Jolly:2/32/0/0/0/32",
-   37.32578356983345
-  ],
-  [
-   "Jolly:5/29/0/0/0/32",
-   12.858613148089981
-  ],
-  [
-   "Jolly:1/32/1/0/0/32",
-   9.142533042623366
-  ],
-  [
-   "Jolly:0/32/0/0/2/32",
-   8.959526583942532
-  ],
-  [
-   "Jolly:0/32/2/0/0/32",
-   4.531509872169904
-  ]
- ],
- "teraTypes": [
-  [
-   "nothing",
-   100
-  ]
- ],
- "teammates": [
-  [
-   "Basculegion",
-   11.712828031177144
-  ],
-  [
-   "Kingambit",
-   8.042141219927014
-  ],
-  [
-   "Sylveon",
-   6.770164831445376
-  ],
-  [
-   "Farigiraf",
-   6.69457003541684
-  ],
-  [
-   "Ceruledge",
-   5.641037186786643
-  ],
-  [
-   "Ninetales-Alola",
-   4.881000339619988
-  ],
-  [
-   "Archaludon",
-   4.795854806027804
-  ],
-  [
-   "Garchomp",
-   3.5368273278073166
-  ],
-  [
-   "Sinistcha",
-   2.5579426063945645
-  ],
-  [
-   "Talonflame",
-   2.5262348895201936
-  ]
- ],
- "counters": []
+    "id": "lopunnymega",
+    "name": "Lopunny-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0178566,
+            "rank": 57,
+            "raw": 93587
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.032501699999999994,
+            "rank": 45,
+            "raw": 220724
+        }
+    ],
+    "abilities": [["Scrappy", 100]],
+    "items": [["Lopunnite", 100]],
+    "moves": [
+        ["Fake Out", 24.799230919666012],
+        ["Close Combat", 24.432098875373036],
+        ["Encore", 14.14175006991921],
+        ["Triple Axel", 10.099393257309595],
+        ["Protect", 7.127429329190998],
+        ["Giga Impact", 5.479948052276681],
+        ["Mach Punch", 4.230043890485277],
+        ["After You", 2.728747046659107],
+        ["U-turn", 1.7576383108245857],
+        ["Facade", 1.4392245652853448]
+    ],
+    "spreads": [
+        ["Jolly:2/32/0/0/0/32", 37.32578356983345],
+        ["Jolly:5/29/0/0/0/32", 12.858613148089981],
+        ["Jolly:1/32/1/0/0/32", 9.142533042623366],
+        ["Jolly:0/32/0/0/2/32", 8.959526583942532],
+        ["Jolly:0/32/2/0/0/32", 4.531509872169904]
+    ],
+    "teraTypes": [],
+    "teammates": [
+        ["Basculegion", 11.712828031177144],
+        ["Kingambit", 8.042141219927014],
+        ["Sylveon", 6.770164831445376],
+        ["Farigiraf", 6.69457003541684],
+        ["Ceruledge", 5.641037186786643],
+        ["Ninetales-Alola", 4.881000339619988],
+        ["Archaludon", 4.795854806027804],
+        ["Garchomp", 3.5368273278073166],
+        ["Sinistcha", 2.5579426063945645],
+        ["Talonflame", 2.5262348895201936]
+    ],
+    "counters": [],
+    "builds": []
 }

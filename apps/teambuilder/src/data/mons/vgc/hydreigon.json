@@ -45,83 +45,83 @@
  ],
  "abilities": [
   [
-   "levitate",
+   "Levitate",
    100
   ]
  ],
  "items": [
   [
-   "weaknesspolicy",
+   "Weakness Policy",
    68.75328170638056
   ],
   [
-   "blackglasses",
+   "Black Glasses",
    20.192436208690136
   ],
   [
-   "safetygoggles",
+   "Safety Goggles",
    4.900488124590289
   ],
   [
-   "chopleberry",
+   "Chople Berry",
    4.235581682536439
   ],
   [
-   "lifeorb",
+   "Life Orb",
    1.5138519851821914
   ],
   [
-   "choicespecs",
+   "Choice Specs",
    0.1843024922362435
   ],
   [
-   "covertcloak",
+   "Covert Cloak",
    0.180769892701352
   ],
   [
-   "scopelens",
+   "Scope Lens",
    0.024052123740828192
   ]
  ],
  "moves": [
   [
-   "dracometeor",
+   "Draco Meteor",
    18.632711532115852
   ],
   [
-   "heatwave",
+   "Heat Wave",
    17.564669698873995
   ],
   [
-   "tailwind",
+   "Tailwind",
    17.191972790423605
   ],
   [
-   "protect",
+   "Protect",
    12.900292358579579
   ],
   [
-   "flashcannon",
+   "Flash Cannon",
    9.309407540019086
   ],
   [
-   "snarl",
+   "Snarl",
    7.36675573198905
   ],
   [
-   "darkpulse",
+   "Dark Pulse",
    5.239014392967371
   ],
   [
-   "terablast",
+   "Tera Blast",
    5.06359762190513
   ],
   [
-   "taunt",
+   "Taunt",
    5.048146414216965
   ],
   [
-   "earthpower",
+   "Earth Power",
    1.1451363181443486
   ]
  ],
@@ -211,5 +211,6 @@
    4.038525170668762
   ]
  ],
- "counters": []
+ "counters": [],
+ "builds": []
 }
