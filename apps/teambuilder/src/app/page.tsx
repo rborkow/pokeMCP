@@ -1,6 +1,7 @@
 import { DeveloperFooter } from "@/components/landing/DeveloperFooter";
 import { Hero } from "@/components/landing/Hero";
 import { InterviewDemoStatic } from "@/components/landing/InterviewDemoStatic";
+import { LatestReportSection } from "@/components/landing/LatestReportSection";
 import { SavedTeamRedirect } from "@/components/landing/SavedTeamRedirect";
 import { ThreeMoments } from "@/components/landing/ThreeMoments";
 import { TrustChips } from "@/components/landing/TrustChips";
@@ -15,6 +16,7 @@ export default function LandingPage() {
                     <Hero />
                     <InterviewDemoStatic />
                     <ThreeMoments />
+                    <LatestReportSection />
                     <TrustChips />
                     <DeveloperFooter />
                     <LegalAttribution className="border-t border-border bg-muted/40 px-6 md:px-10 py-4" />

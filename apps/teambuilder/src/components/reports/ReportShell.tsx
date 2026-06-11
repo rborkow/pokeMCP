@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { ReportChat } from "@/components/reports/ReportChat";
 import { formatMonthLong, type ReportEntry } from "@/lib/reports";
 
 const SITE_URL = "https://www.pokemcp.com";
@@ -56,6 +57,10 @@ export function ReportShell({ report, canonicalPath, children }: ReportShellProp
             </header>
 
             {children}
+
+            <div className="mt-12">
+                <ReportChat slug={report.slug} month={report.month} reportTitle={report.title} />
+            </div>
 
             <footer className="mt-12 space-y-6 border-t border-border pt-6">
                 <section>

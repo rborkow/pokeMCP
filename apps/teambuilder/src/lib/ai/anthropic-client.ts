@@ -1,6 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 
-export type GatewaySource = "web" | "interview";
+export type GatewaySource = "web" | "interview" | "report";
 
 /**
  * Construct an Anthropic SDK client that routes through the Cloudflare AI
