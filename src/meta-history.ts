@@ -14,7 +14,7 @@
  * Continuous formats like gen9doublesou (and singles) give unbroken series.
  */
 import { toID } from "./data-loader.js";
-import { getLatestRegulation } from "./regulations/registry.js";
+import { getLatestStatsRegulation } from "./regulations/registry.js";
 import { resolveStatsFormat } from "./regulations/stats-mapping.js";
 
 // --- Config & cache ---
@@ -24,8 +24,9 @@ const cache = new Map<string, { data: unknown; timestamp: number }>();
 
 const SOURCE = "smogon-chaos";
 // Champions replaced mainline VGC as the flagship ladder in 2026; default to
-// the registry's current regulation so new regs update this automatically.
-const DEFAULT_FORMAT = getLatestRegulation()?.id ?? "gen9doublesou";
+// the newest regulation with published Smogon stats so new regs take over
+// automatically once their stats mapping is flipped on.
+const DEFAULT_FORMAT = getLatestStatsRegulation()?.id ?? "gen9doublesou";
 const MIN_MOMENTUM_HISTORY = 4; // need >= 4 points before flagging momentum
 const ENTRY_THRESHOLD = 0.02; // 2% usage to count as a meaningful entrant/dropout
 const MOMENTUM_RELEVANCE = 0.02; // only track momentum for mons reaching ~2% usage
