@@ -82,6 +82,12 @@ bunx wrangler kv key put --remote --namespace-id=58525ad4ec5c454eb3e1ae758641448
 - Gen 9: OU, Ubers, UU, RU, NU, PU, LC, VGC 2026 Reg F, Doubles OU (VGC formats auto-discovered)
 - Gen 8: OU, UU, RU (Ubers, NU, LC have limited data)
 - Gen 7: OU, UU, RU, NU (Ubers, LC have limited data)
+- Pokémon Champions: Reg M-A (`champions-regma`). Smogon publishes these under a
+  `gen9champions…` prefix (e.g. `gen9championsvgc2026regma`). The format pulled is
+  driven by each regulation's `showdownFormatId` (see `src/regulations/`), not the
+  VGC/doubles discovery patterns — `fetch-stats` reads it from the registry. The
+  stats tools transparently remap `champions-regma` → the Smogon id via
+  `resolveStatsFormat`.
 
 ### Debugging & Monitoring
 

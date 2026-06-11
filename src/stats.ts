@@ -1,6 +1,6 @@
+import type { UsageStatistics } from "smogon";
 import { toID } from "./data-loader.js";
 import { resolveStatsFormat } from "./regulations/stats-mapping.js";
-import type { UsageStatistics } from "smogon";
 
 // --- Caches ---
 
@@ -106,7 +106,7 @@ function unavailableStatsMessage(format: string): string {
         return (
             `No usage statistics found for format "${format}". ` +
             "Pokémon Champions usage stats are not yet published on Smogon. " +
-            "If Smogon begins publishing a matching gen9vgc2026regma-style identifier, " +
+            "If Smogon begins publishing a matching gen9champions… identifier, " +
             "set showdownFormatId on the regulation and the monthly ingestion will " +
             "pick it up automatically."
         );
