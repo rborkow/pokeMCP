@@ -1,57 +1,147 @@
 {
-    "id": "ampharosmega",
-    "name": "Ampharos-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0057552,
-            "rank": 104,
-            "raw": 58302
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0052642999999999995,
-            "rank": 102,
-            "raw": 74864
-        }
-    ],
-    "abilities": [["moldbreaker", 100]],
-    "items": [["ampharosite", 100]],
-    "moves": [
-        ["dragonpulse", 24.629727596759206],
-        ["protect", 22.64508085200852],
-        ["thunderbolt", 18.808611524679197],
-        ["paraboliccharge", 8.5146775846686],
-        ["cottonguard", 7.189884587170975],
-        ["dazzlinggleam", 3.7736493788771934],
-        ["voltswitch", 2.869189382935082],
-        ["focusblast", 2.779115603449858],
-        ["discharge", 2.177007510250546],
-        ["powergem", 1.8916542916977888]
-    ],
-    "spreads": [
-        ["Quiet:32/0/2/32/0/0", 27.820806177866825],
-        ["Quiet:32/0/0/32/2/0", 11.467308013212781],
-        ["Modest:32/0/2/32/0/0", 4.190272058384601],
-        ["Modest:32/0/0/32/2/0", 3.8380393389092964],
-        ["Modest:32/0/0/25/9/0", 3.6108323927507784]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Farigiraf", 9.745393527342815],
-        ["Incineroar", 8.391992544077633],
-        ["Sinistcha", 7.14924172815736],
-        ["Torkoal", 5.372076635731241],
-        ["Kingambit", 4.869359148554218],
-        ["Basculegion", 3.3990390357846305],
-        ["Sneasler", 3.2786957317880394],
-        ["Sylveon", 2.736897514706042],
-        ["Primarina", 2.4134427010882824],
-        ["Araquanid", 2.1304466085637555]
-    ],
-    "counters": []
+ "id": "ampharosmega",
+ "name": "Ampharos-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0057552,
+   "rank": 104,
+   "raw": 58302
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0052642999999999995,
+   "rank": 102,
+   "raw": 74864
+  }
+ ],
+ "abilities": [
+  [
+   "moldbreaker",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "ampharosite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "dragonpulse",
+   24.629727596759206
+  ],
+  [
+   "protect",
+   22.64508085200852
+  ],
+  [
+   "thunderbolt",
+   18.808611524679197
+  ],
+  [
+   "paraboliccharge",
+   8.5146775846686
+  ],
+  [
+   "cottonguard",
+   7.189884587170975
+  ],
+  [
+   "dazzlinggleam",
+   3.7736493788771934
+  ],
+  [
+   "voltswitch",
+   2.869189382935082
+  ],
+  [
+   "focusblast",
+   2.779115603449858
+  ],
+  [
+   "discharge",
+   2.177007510250546
+  ],
+  [
+   "powergem",
+   1.8916542916977888
+  ]
+ ],
+ "spreads": [
+  [
+   "Quiet:32/0/2/32/0/0",
+   27.820806177866825
+  ],
+  [
+   "Quiet:32/0/0/32/2/0",
+   11.467308013212781
+  ],
+  [
+   "Modest:32/0/2/32/0/0",
+   4.190272058384601
+  ],
+  [
+   "Modest:32/0/0/32/2/0",
+   3.8380393389092964
+  ],
+  [
+   "Modest:32/0/0/25/9/0",
+   3.6108323927507784
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Farigiraf",
+   9.745393527342815
+  ],
+  [
+   "Incineroar",
+   8.391992544077633
+  ],
+  [
+   "Sinistcha",
+   7.14924172815736
+  ],
+  [
+   "Torkoal",
+   5.372076635731241
+  ],
+  [
+   "Kingambit",
+   4.869359148554218
+  ],
+  [
+   "Basculegion",
+   3.3990390357846305
+  ],
+  [
+   "Sneasler",
+   3.2786957317880394
+  ],
+  [
+   "Sylveon",
+   2.736897514706042
+  ],
+  [
+   "Primarina",
+   2.4134427010882824
+  ],
+  [
+   "Araquanid",
+   2.1304466085637555
+  ]
+ ],
+ "counters": []
 }

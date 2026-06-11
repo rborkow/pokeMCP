@@ -1,66 +1,179 @@
 {
-    "id": "weavile",
-    "name": "Weavile",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.007138,
-            "rank": 97,
-            "raw": 74338
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0130299,
-            "rank": 68,
-            "raw": 117327
-        }
-    ],
-    "abilities": [["pickpocket", 67.6976698634757], ["pressure", 32.302330136524304]],
-    "items": [
-        ["focussash", 86.14052915195568],
-        ["kingsrock", 5.321227396403059],
-        ["nevermeltice", 2.5398217797064144],
-        ["choicescarf", 1.8203684062166023],
-        ["whiteherb", 1.4326136846424846],
-        ["blackglasses", 0.9116580716792065],
-        ["nothing", 0.43743341209028935],
-        ["chartiberry", 0.36917001823558543]
-    ],
-    "moves": [
-        ["fakeout", 22.773268315168394],
-        ["knockoff", 21.026205825984228],
-        ["lowkick", 11.678169179327693],
-        ["iciclecrash", 10.877820064698962],
-        ["protect", 7.269066285383706],
-        ["tripleaxel", 6.678071496070317],
-        ["iceshard", 4.689766855577973],
-        ["feint", 2.414248558390996],
-        ["throatchop", 2.039687957356589],
-        ["icespinner", 1.947476642386904]
-    ],
-    "spreads": [
-        ["Jolly:2/32/0/0/0/32", 23.201924091674783],
-        ["Adamant:1/32/1/0/0/32", 16.46162895120797],
-        ["Adamant:2/32/0/0/0/32", 12.754567557461508],
-        ["Jolly:0/32/0/0/2/32", 9.086440683746734],
-        ["Jolly:0/32/2/0/0/32", 8.745085653062961]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Garchomp", 9.507379680365531],
-        ["Charizard-Mega-Y", 9.203935637453847],
-        ["Basculegion", 8.801951767207768],
-        ["Glimmora-Mega", 7.550026618686988],
-        ["Whimsicott", 7.517390270976114],
-        ["Sinistcha", 3.31479644118595],
-        ["Pelipper", 2.7672199612932062],
-        ["Archaludon", 2.5907467380821214],
-        ["Incineroar", 2.4499434123648403],
-        ["Farigiraf", 2.3211413772988103]
-    ],
-    "counters": []
+ "id": "weavile",
+ "name": "Weavile",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.007138,
+   "rank": 97,
+   "raw": 74338
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0130299,
+   "rank": 68,
+   "raw": 117327
+  }
+ ],
+ "abilities": [
+  [
+   "pickpocket",
+   67.6976698634757
+  ],
+  [
+   "pressure",
+   32.302330136524304
+  ]
+ ],
+ "items": [
+  [
+   "focussash",
+   86.14052915195568
+  ],
+  [
+   "kingsrock",
+   5.321227396403059
+  ],
+  [
+   "nevermeltice",
+   2.5398217797064144
+  ],
+  [
+   "choicescarf",
+   1.8203684062166023
+  ],
+  [
+   "whiteherb",
+   1.4326136846424846
+  ],
+  [
+   "blackglasses",
+   0.9116580716792065
+  ],
+  [
+   "nothing",
+   0.43743341209028935
+  ],
+  [
+   "chartiberry",
+   0.36917001823558543
+  ]
+ ],
+ "moves": [
+  [
+   "fakeout",
+   22.773268315168394
+  ],
+  [
+   "knockoff",
+   21.026205825984228
+  ],
+  [
+   "lowkick",
+   11.678169179327693
+  ],
+  [
+   "iciclecrash",
+   10.877820064698962
+  ],
+  [
+   "protect",
+   7.269066285383706
+  ],
+  [
+   "tripleaxel",
+   6.678071496070317
+  ],
+  [
+   "iceshard",
+   4.689766855577973
+  ],
+  [
+   "feint",
+   2.414248558390996
+  ],
+  [
+   "throatchop",
+   2.039687957356589
+  ],
+  [
+   "icespinner",
+   1.947476642386904
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:2/32/0/0/0/32",
+   23.201924091674783
+  ],
+  [
+   "Adamant:1/32/1/0/0/32",
+   16.46162895120797
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   12.754567557461508
+  ],
+  [
+   "Jolly:0/32/0/0/2/32",
+   9.086440683746734
+  ],
+  [
+   "Jolly:0/32/2/0/0/32",
+   8.745085653062961
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Garchomp",
+   9.507379680365531
+  ],
+  [
+   "Charizard-Mega-Y",
+   9.203935637453847
+  ],
+  [
+   "Basculegion",
+   8.801951767207768
+  ],
+  [
+   "Glimmora-Mega",
+   7.550026618686988
+  ],
+  [
+   "Whimsicott",
+   7.517390270976114
+  ],
+  [
+   "Sinistcha",
+   3.31479644118595
+  ],
+  [
+   "Pelipper",
+   2.7672199612932062
+  ],
+  [
+   "Archaludon",
+   2.5907467380821214
+  ],
+  [
+   "Incineroar",
+   2.4499434123648403
+  ],
+  [
+   "Farigiraf",
+   2.3211413772988103
+  ]
+ ],
+ "counters": []
 }

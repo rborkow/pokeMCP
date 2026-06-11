@@ -1,57 +1,147 @@
 {
-    "id": "charizardmegax",
-    "name": "Charizard-Mega-X",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0213367,
-            "rank": 52,
-            "raw": 149787
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0235837,
-            "rank": 51,
-            "raw": 156848
-        }
-    ],
-    "abilities": [["toughclaws", 100]],
-    "items": [["charizarditex", 100]],
-    "moves": [
-        ["protect", 24.38871964087368],
-        ["dragondance", 22.953253623143627],
-        ["flareblitz", 22.04739230556862],
-        ["dragonclaw", 21.21502152410197],
-        ["breakingswipe", 3.5562776017067685],
-        ["temperflare", 2.332060899134979],
-        ["thunderpunch", 0.5845441497360216],
-        ["flamecharge", 0.5802687084133346],
-        ["rockslide", 0.35628188456728865],
-        ["roost", 0.3561542219562315]
-    ],
-    "spreads": [
-        ["Adamant:14/21/1/0/1/29", 13.765138469455703],
-        ["Adamant:2/32/0/0/0/32", 4.9590237785221465],
-        ["Adamant:23/10/2/0/2/29", 3.8364394189820272],
-        ["Jolly:2/32/0/0/0/32", 3.515873499322005],
-        ["Jolly:0/32/2/0/0/32", 3.2825580541787565]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Sneasler", 14.575274518992822],
-        ["Sinistcha", 14.43934490937519],
-        ["Incineroar", 10.398229414395656],
-        ["Milotic", 8.557482309225627],
-        ["Floette-Mega", 7.5380212860832785],
-        ["Kingambit", 6.604691488068715],
-        ["Basculegion", 2.544237266029592],
-        ["Sylveon", 2.3815313427113023],
-        ["Farigiraf", 1.9685166285602436],
-        ["Ninetales-Alola", 1.8398718119276205]
-    ],
-    "counters": []
+ "id": "charizardmegax",
+ "name": "Charizard-Mega-X",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0213367,
+   "rank": 52,
+   "raw": 149787
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0235837,
+   "rank": 51,
+   "raw": 156848
+  }
+ ],
+ "abilities": [
+  [
+   "toughclaws",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "charizarditex",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "protect",
+   24.38871964087368
+  ],
+  [
+   "dragondance",
+   22.953253623143627
+  ],
+  [
+   "flareblitz",
+   22.04739230556862
+  ],
+  [
+   "dragonclaw",
+   21.21502152410197
+  ],
+  [
+   "breakingswipe",
+   3.5562776017067685
+  ],
+  [
+   "temperflare",
+   2.332060899134979
+  ],
+  [
+   "thunderpunch",
+   0.5845441497360216
+  ],
+  [
+   "flamecharge",
+   0.5802687084133346
+  ],
+  [
+   "rockslide",
+   0.35628188456728865
+  ],
+  [
+   "roost",
+   0.3561542219562315
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:14/21/1/0/1/29",
+   13.765138469455703
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   4.9590237785221465
+  ],
+  [
+   "Adamant:23/10/2/0/2/29",
+   3.8364394189820272
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   3.515873499322005
+  ],
+  [
+   "Jolly:0/32/2/0/0/32",
+   3.2825580541787565
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Sneasler",
+   14.575274518992822
+  ],
+  [
+   "Sinistcha",
+   14.43934490937519
+  ],
+  [
+   "Incineroar",
+   10.398229414395656
+  ],
+  [
+   "Milotic",
+   8.557482309225627
+  ],
+  [
+   "Floette-Mega",
+   7.5380212860832785
+  ],
+  [
+   "Kingambit",
+   6.604691488068715
+  ],
+  [
+   "Basculegion",
+   2.544237266029592
+  ],
+  [
+   "Sylveon",
+   2.3815313427113023
+  ],
+  [
+   "Farigiraf",
+   1.9685166285602436
+  ],
+  [
+   "Ninetales-Alola",
+   1.8398718119276205
+  ]
+ ],
+ "counters": []
 }

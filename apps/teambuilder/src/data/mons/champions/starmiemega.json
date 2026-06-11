@@ -1,57 +1,147 @@
 {
-    "id": "starmiemega",
-    "name": "Starmie-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0187142,
-            "rank": 56,
-            "raw": 184229
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.009874,
-            "rank": 77,
-            "raw": 142566
-        }
-    ],
-    "abilities": [["hugepower", 100]],
-    "items": [["starminite", 100]],
-    "moves": [
-        ["protect", 21.997681171408942],
-        ["liquidation", 21.346637523398414],
-        ["aquajet", 17.92498933247996],
-        ["zenheadbutt", 10.002251952020702],
-        ["psychocut", 8.486959712654917],
-        ["icespinner", 7.64755535883835],
-        ["flipturn", 2.9171447548749003],
-        ["skillswap", 2.495943859371955],
-        ["selfdestruct", 1.37506635068689],
-        ["waterfall", 1.1790129982845077]
-    ],
-    "spreads": [
-        ["Adamant:2/32/0/0/0/32", 29.379196141170024],
-        ["Jolly:2/32/0/0/0/32", 12.949142909182179],
-        ["Jolly:0/32/0/0/2/32", 9.115997570338468],
-        ["Adamant:1/32/1/0/0/32", 2.5807292633145815],
-        ["Adamant:30/32/0/0/0/4", 2.5517045607715594]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Sneasler", 12.181522158731124],
-        ["Pelipper", 11.16295049092334],
-        ["Archaludon", 8.66308878999293],
-        ["Kingambit", 8.329415167511321],
-        ["Sinistcha", 6.534686049322354],
-        ["Incineroar", 3.943687014291298],
-        ["Basculegion", 3.6679962468114966],
-        ["Sableye", 2.8578211986048903],
-        ["Garchomp", 2.591113455068882],
-        ["Dragonite-Mega", 2.0438468875372036]
-    ],
-    "counters": []
+ "id": "starmiemega",
+ "name": "Starmie-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0187142,
+   "rank": 56,
+   "raw": 184229
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.009874,
+   "rank": 77,
+   "raw": 142566
+  }
+ ],
+ "abilities": [
+  [
+   "hugepower",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "starminite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "protect",
+   21.997681171408942
+  ],
+  [
+   "liquidation",
+   21.346637523398414
+  ],
+  [
+   "aquajet",
+   17.92498933247996
+  ],
+  [
+   "zenheadbutt",
+   10.002251952020702
+  ],
+  [
+   "psychocut",
+   8.486959712654917
+  ],
+  [
+   "icespinner",
+   7.64755535883835
+  ],
+  [
+   "flipturn",
+   2.9171447548749003
+  ],
+  [
+   "skillswap",
+   2.495943859371955
+  ],
+  [
+   "selfdestruct",
+   1.37506635068689
+  ],
+  [
+   "waterfall",
+   1.1790129982845077
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   29.379196141170024
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   12.949142909182179
+  ],
+  [
+   "Jolly:0/32/0/0/2/32",
+   9.115997570338468
+  ],
+  [
+   "Adamant:1/32/1/0/0/32",
+   2.5807292633145815
+  ],
+  [
+   "Adamant:30/32/0/0/0/4",
+   2.5517045607715594
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Sneasler",
+   12.181522158731124
+  ],
+  [
+   "Pelipper",
+   11.16295049092334
+  ],
+  [
+   "Archaludon",
+   8.66308878999293
+  ],
+  [
+   "Kingambit",
+   8.329415167511321
+  ],
+  [
+   "Sinistcha",
+   6.534686049322354
+  ],
+  [
+   "Incineroar",
+   3.943687014291298
+  ],
+  [
+   "Basculegion",
+   3.6679962468114966
+  ],
+  [
+   "Sableye",
+   2.8578211986048903
+  ],
+  [
+   "Garchomp",
+   2.591113455068882
+  ],
+  [
+   "Dragonite-Mega",
+   2.0438468875372036
+  ]
+ ],
+ "counters": []
 }

@@ -1,70 +1,183 @@
 {
-    "id": "kommoo",
-    "name": "Kommo-o",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0494334,
-            "rank": 31,
-            "raw": 246925
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.060232799999999996,
-            "rank": 28,
-            "raw": 287074
-        }
-    ],
-    "abilities": [
-        ["soundproof", 88.29624173692017],
-        ["overcoat", 7.1604955026221635],
-        ["bulletproof", 4.54326276045767]
-    ],
-    "items": [
-        ["leftovers", 73.92892495827552],
-        ["dragonfang", 14.195563195246159],
-        ["sitrusberry", 5.880436870960266],
-        ["habanberry", 2.5114355547838776],
-        ["choicescarf", 0.7964780533612829],
-        ["blackbelt", 0.5768200492989103],
-        ["roseliberry", 0.43817573713140445],
-        ["lumberry", 0.3711259755366364]
-    ],
-    "moves": [
-        ["protect", 24.34904684015579],
-        ["clangingscales", 24.050555084588744],
-        ["aurasphere", 22.87625668980036],
-        ["clangoroussoul", 21.35537897590087],
-        ["vacuumwave", 1.1732972914678907],
-        ["dracometeor", 1.0473211335058674],
-        ["flashcannon", 0.9478675535470849],
-        ["bodypress", 0.8117835792976189],
-        ["flamethrower", 0.6497142851629804],
-        ["irondefense", 0.6393414579534809]
-    ],
-    "spreads": [
-        ["Timid:2/0/0/32/0/32", 23.625840612706682],
-        ["Modest:2/0/0/32/0/32", 10.509402301631185],
-        ["Timid:0/0/0/32/2/32", 2.45694236111633],
-        ["Modest:5/0/1/30/1/29", 1.9973508362638548],
-        ["Timid:10/0/1/28/1/26", 1.9721419603931891]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Incineroar", 10.612595888545734],
-        ["Sinistcha", 8.808880666083729],
-        ["Basculegion", 6.861242909696539],
-        ["Gengar-Mega", 6.351006970190806],
-        ["Kingambit", 4.774308787203896],
-        ["Aerodactyl-Mega", 4.135365207068955],
-        ["Sneasler", 3.537535191598672],
-        ["Politoed", 3.4214377683690693],
-        ["Scovillain-Mega", 3.1795494489777707],
-        ["Tinkaton", 3.178440365142394]
-    ],
-    "counters": []
+ "id": "kommoo",
+ "name": "Kommo-o",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0494334,
+   "rank": 31,
+   "raw": 246925
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.060232799999999996,
+   "rank": 28,
+   "raw": 287074
+  }
+ ],
+ "abilities": [
+  [
+   "soundproof",
+   88.29624173692017
+  ],
+  [
+   "overcoat",
+   7.1604955026221635
+  ],
+  [
+   "bulletproof",
+   4.54326276045767
+  ]
+ ],
+ "items": [
+  [
+   "leftovers",
+   73.92892495827552
+  ],
+  [
+   "dragonfang",
+   14.195563195246159
+  ],
+  [
+   "sitrusberry",
+   5.880436870960266
+  ],
+  [
+   "habanberry",
+   2.5114355547838776
+  ],
+  [
+   "choicescarf",
+   0.7964780533612829
+  ],
+  [
+   "blackbelt",
+   0.5768200492989103
+  ],
+  [
+   "roseliberry",
+   0.43817573713140445
+  ],
+  [
+   "lumberry",
+   0.3711259755366364
+  ]
+ ],
+ "moves": [
+  [
+   "protect",
+   24.34904684015579
+  ],
+  [
+   "clangingscales",
+   24.050555084588744
+  ],
+  [
+   "aurasphere",
+   22.87625668980036
+  ],
+  [
+   "clangoroussoul",
+   21.35537897590087
+  ],
+  [
+   "vacuumwave",
+   1.1732972914678907
+  ],
+  [
+   "dracometeor",
+   1.0473211335058674
+  ],
+  [
+   "flashcannon",
+   0.9478675535470849
+  ],
+  [
+   "bodypress",
+   0.8117835792976189
+  ],
+  [
+   "flamethrower",
+   0.6497142851629804
+  ],
+  [
+   "irondefense",
+   0.6393414579534809
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   23.625840612706682
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   10.509402301631185
+  ],
+  [
+   "Timid:0/0/0/32/2/32",
+   2.45694236111633
+  ],
+  [
+   "Modest:5/0/1/30/1/29",
+   1.9973508362638548
+  ],
+  [
+   "Timid:10/0/1/28/1/26",
+   1.9721419603931891
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Incineroar",
+   10.612595888545734
+  ],
+  [
+   "Sinistcha",
+   8.808880666083729
+  ],
+  [
+   "Basculegion",
+   6.861242909696539
+  ],
+  [
+   "Gengar-Mega",
+   6.351006970190806
+  ],
+  [
+   "Kingambit",
+   4.774308787203896
+  ],
+  [
+   "Aerodactyl-Mega",
+   4.135365207068955
+  ],
+  [
+   "Sneasler",
+   3.537535191598672
+  ],
+  [
+   "Politoed",
+   3.4214377683690693
+  ],
+  [
+   "Scovillain-Mega",
+   3.1795494489777707
+  ],
+  [
+   "Tinkaton",
+   3.178440365142394
+  ]
+ ],
+ "counters": []
 }

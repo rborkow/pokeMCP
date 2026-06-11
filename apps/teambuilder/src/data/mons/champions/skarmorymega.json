@@ -1,57 +1,147 @@
 {
-    "id": "skarmorymega",
-    "name": "Skarmory-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.008494699999999999,
-            "rank": 85,
-            "raw": 70613
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.017119,
-            "rank": 62,
-            "raw": 96414
-        }
-    ],
-    "abilities": [["stalwart", 100]],
-    "items": [["skarmorite", 100]],
-    "moves": [
-        ["ironhead", 23.986581738645967],
-        ["bravebird", 23.10086964268095],
-        ["protect", 16.807853082474004],
-        ["rocktomb", 10.051870908174465],
-        ["tailwind", 7.367401627853219],
-        ["taunt", 4.733767663922209],
-        ["swordsdance", 4.617151735166487],
-        ["rockslide", 4.385545739794841],
-        ["drillrun", 1.1148484470194242],
-        ["dualwingbeat", 1.0590784410645995]
-    ],
-    "spreads": [
-        ["Adamant:9/32/0/0/0/25", 20.73263675923572],
-        ["Jolly:2/32/0/0/0/32", 14.661520619408904],
-        ["Adamant:2/32/0/0/0/32", 8.75151088180737],
-        ["Jolly:0/32/0/0/2/32", 3.8741152623450694],
-        ["Jolly:32/2/0/0/0/32", 3.465545430935748]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Garchomp", 9.168261579870958],
-        ["Whimsicott", 6.833504267101913],
-        ["Basculegion", 6.106677056723115],
-        ["Sneasler", 6.029539208436288],
-        ["Charizard-Mega-Y", 5.946008427692425],
-        ["Sinistcha", 4.447903633442685],
-        ["Archaludon", 3.7095729267868096],
-        ["Incineroar", 3.585462369057631],
-        ["Sylveon", 3.0144974200066734],
-        ["Pelipper", 2.9474201393605086]
-    ],
-    "counters": []
+ "id": "skarmorymega",
+ "name": "Skarmory-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.008494699999999999,
+   "rank": 85,
+   "raw": 70613
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.017119,
+   "rank": 62,
+   "raw": 96414
+  }
+ ],
+ "abilities": [
+  [
+   "stalwart",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "skarmorite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "ironhead",
+   23.986581738645967
+  ],
+  [
+   "bravebird",
+   23.10086964268095
+  ],
+  [
+   "protect",
+   16.807853082474004
+  ],
+  [
+   "rocktomb",
+   10.051870908174465
+  ],
+  [
+   "tailwind",
+   7.367401627853219
+  ],
+  [
+   "taunt",
+   4.733767663922209
+  ],
+  [
+   "swordsdance",
+   4.617151735166487
+  ],
+  [
+   "rockslide",
+   4.385545739794841
+  ],
+  [
+   "drillrun",
+   1.1148484470194242
+  ],
+  [
+   "dualwingbeat",
+   1.0590784410645995
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:9/32/0/0/0/25",
+   20.73263675923572
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   14.661520619408904
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   8.75151088180737
+  ],
+  [
+   "Jolly:0/32/0/0/2/32",
+   3.8741152623450694
+  ],
+  [
+   "Jolly:32/2/0/0/0/32",
+   3.465545430935748
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Garchomp",
+   9.168261579870958
+  ],
+  [
+   "Whimsicott",
+   6.833504267101913
+  ],
+  [
+   "Basculegion",
+   6.106677056723115
+  ],
+  [
+   "Sneasler",
+   6.029539208436288
+  ],
+  [
+   "Charizard-Mega-Y",
+   5.946008427692425
+  ],
+  [
+   "Sinistcha",
+   4.447903633442685
+  ],
+  [
+   "Archaludon",
+   3.7095729267868096
+  ],
+  [
+   "Incineroar",
+   3.585462369057631
+  ],
+  [
+   "Sylveon",
+   3.0144974200066734
+  ],
+  [
+   "Pelipper",
+   2.9474201393605086
+  ]
+ ],
+ "counters": []
 }

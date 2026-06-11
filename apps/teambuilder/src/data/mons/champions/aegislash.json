@@ -1,66 +1,175 @@
 {
-    "id": "aegislash",
-    "name": "Aegislash",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0872979,
-            "rank": 16,
-            "raw": 481558
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0769047,
-            "rank": 19,
-            "raw": 449513
-        }
-    ],
-    "abilities": [["stancechange", 100]],
-    "items": [
-        ["spelltag", 44.410314634625706],
-        ["focussash", 30.083678623562438],
-        ["colburberry", 10.042250903272643],
-        ["leftovers", 7.632510232678944],
-        ["kasibberry", 2.064697349232999],
-        ["sitrusberry", 1.6871987172183422],
-        ["occaberry", 0.8303606002671832],
-        ["whiteherb", 0.8241445366975044]
-    ],
-    "moves": [
-        ["shadowsneak", 21.894163825852228],
-        ["poltergeist", 21.106798415733902],
-        ["kingsshield", 20.269907178753186],
-        ["ironhead", 9.649612539878909],
-        ["sacredsword", 7.836723940814519],
-        ["closecombat", 7.5005399209963315],
-        ["wideguard", 6.644257399324613],
-        ["shadowball", 1.9024374445262429],
-        ["flashcannon", 1.5599415251087525],
-        ["swordsdance", 0.5837228659396002]
-    ],
-    "spreads": [
-        ["Adamant:2/32/0/0/0/32", 22.362741460944076],
-        ["Adamant:32/32/0/0/2/0", 5.878059133910136],
-        ["Adamant:32/32/0/0/0/2", 4.992383141347108],
-        ["Adamant:32/32/2/0/0/0", 4.2538760432648814],
-        ["Adamant:32/27/1/0/3/3", 3.615898840490459]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Garchomp", 11.488487182199734],
-        ["Incineroar", 7.354430603744354],
-        ["Charizard-Mega-Y", 6.958017040219112],
-        ["Floette-Mega", 5.323012065058923],
-        ["Rotom-Wash", 4.4138106450175165],
-        ["Sinistcha", 4.111992472932636],
-        ["Sylveon", 3.326770856044501],
-        ["Sneasler", 3.238544876864523],
-        ["Basculegion", 2.911308037415673],
-        ["Aerodactyl-Mega", 2.8294295786347825]
-    ],
-    "counters": []
+ "id": "aegislash",
+ "name": "Aegislash",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0872979,
+   "rank": 16,
+   "raw": 481558
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0769047,
+   "rank": 19,
+   "raw": 449513
+  }
+ ],
+ "abilities": [
+  [
+   "stancechange",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "spelltag",
+   44.410314634625706
+  ],
+  [
+   "focussash",
+   30.083678623562438
+  ],
+  [
+   "colburberry",
+   10.042250903272643
+  ],
+  [
+   "leftovers",
+   7.632510232678944
+  ],
+  [
+   "kasibberry",
+   2.064697349232999
+  ],
+  [
+   "sitrusberry",
+   1.6871987172183422
+  ],
+  [
+   "occaberry",
+   0.8303606002671832
+  ],
+  [
+   "whiteherb",
+   0.8241445366975044
+  ]
+ ],
+ "moves": [
+  [
+   "shadowsneak",
+   21.894163825852228
+  ],
+  [
+   "poltergeist",
+   21.106798415733902
+  ],
+  [
+   "kingsshield",
+   20.269907178753186
+  ],
+  [
+   "ironhead",
+   9.649612539878909
+  ],
+  [
+   "sacredsword",
+   7.836723940814519
+  ],
+  [
+   "closecombat",
+   7.5005399209963315
+  ],
+  [
+   "wideguard",
+   6.644257399324613
+  ],
+  [
+   "shadowball",
+   1.9024374445262429
+  ],
+  [
+   "flashcannon",
+   1.5599415251087525
+  ],
+  [
+   "swordsdance",
+   0.5837228659396002
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   22.362741460944076
+  ],
+  [
+   "Adamant:32/32/0/0/2/0",
+   5.878059133910136
+  ],
+  [
+   "Adamant:32/32/0/0/0/2",
+   4.992383141347108
+  ],
+  [
+   "Adamant:32/32/2/0/0/0",
+   4.2538760432648814
+  ],
+  [
+   "Adamant:32/27/1/0/3/3",
+   3.615898840490459
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Garchomp",
+   11.488487182199734
+  ],
+  [
+   "Incineroar",
+   7.354430603744354
+  ],
+  [
+   "Charizard-Mega-Y",
+   6.958017040219112
+  ],
+  [
+   "Floette-Mega",
+   5.323012065058923
+  ],
+  [
+   "Rotom-Wash",
+   4.4138106450175165
+  ],
+  [
+   "Sinistcha",
+   4.111992472932636
+  ],
+  [
+   "Sylveon",
+   3.326770856044501
+  ],
+  [
+   "Sneasler",
+   3.238544876864523
+  ],
+  [
+   "Basculegion",
+   2.911308037415673
+  ],
+  [
+   "Aerodactyl-Mega",
+   2.8294295786347825
+  ]
+ ],
+ "counters": []
 }

@@ -1,57 +1,147 @@
 {
-    "id": "cameruptmega",
-    "name": "Camerupt-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.013438499999999999,
-            "rank": 64,
-            "raw": 110607
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.018477399999999998,
-            "rank": 59,
-            "raw": 158064
-        }
-    ],
-    "abilities": [["sheerforce", 100]],
-    "items": [["cameruptite", 100]],
-    "moves": [
-        ["earthpower", 24.768212252038026],
-        ["protect", 23.684960074094754],
-        ["heatwave", 21.89828795743084],
-        ["ancientpower", 15.424148283933341],
-        ["eruption", 10.267944250168473],
-        ["flamethrower", 1.2107170457443373],
-        ["rockslide", 0.7686719216203239],
-        ["fireblast", 0.45107921642701676],
-        ["flashcannon", 0.4399341545259717],
-        ["solarbeam", 0.2332507706392401]
-    ],
-    "spreads": [
-        ["Quiet:32/0/2/32/0/0", 37.43379311359708],
-        ["Quiet:32/0/0/32/2/0", 15.247409444836826],
-        ["Modest:32/0/2/32/0/0", 10.272719995489963],
-        ["Quiet:32/0/1/32/1/0", 9.370395862278924],
-        ["Quiet:32/0/0/32/0/0", 4.590132207604758]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Farigiraf", 15.59443587291117],
-        ["Kingambit", 10.08851577511801],
-        ["Crabominable-Mega", 5.080478852049034],
-        ["Incineroar", 5.015545235370545],
-        ["Basculegion", 4.534275877703188],
-        ["Gallade", 4.482659793171886],
-        ["Sylveon", 4.453806422254971],
-        ["Azumarill", 3.6392244312441644],
-        ["Sinistcha", 3.4954995684594925],
-        ["Kangaskhan", 3.422137285920024]
-    ],
-    "counters": []
+ "id": "cameruptmega",
+ "name": "Camerupt-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.013438499999999999,
+   "rank": 64,
+   "raw": 110607
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.018477399999999998,
+   "rank": 59,
+   "raw": 158064
+  }
+ ],
+ "abilities": [
+  [
+   "sheerforce",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "cameruptite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "earthpower",
+   24.768212252038026
+  ],
+  [
+   "protect",
+   23.684960074094754
+  ],
+  [
+   "heatwave",
+   21.89828795743084
+  ],
+  [
+   "ancientpower",
+   15.424148283933341
+  ],
+  [
+   "eruption",
+   10.267944250168473
+  ],
+  [
+   "flamethrower",
+   1.2107170457443373
+  ],
+  [
+   "rockslide",
+   0.7686719216203239
+  ],
+  [
+   "fireblast",
+   0.45107921642701676
+  ],
+  [
+   "flashcannon",
+   0.4399341545259717
+  ],
+  [
+   "solarbeam",
+   0.2332507706392401
+  ]
+ ],
+ "spreads": [
+  [
+   "Quiet:32/0/2/32/0/0",
+   37.43379311359708
+  ],
+  [
+   "Quiet:32/0/0/32/2/0",
+   15.247409444836826
+  ],
+  [
+   "Modest:32/0/2/32/0/0",
+   10.272719995489963
+  ],
+  [
+   "Quiet:32/0/1/32/1/0",
+   9.370395862278924
+  ],
+  [
+   "Quiet:32/0/0/32/0/0",
+   4.590132207604758
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Farigiraf",
+   15.59443587291117
+  ],
+  [
+   "Kingambit",
+   10.08851577511801
+  ],
+  [
+   "Crabominable-Mega",
+   5.080478852049034
+  ],
+  [
+   "Incineroar",
+   5.015545235370545
+  ],
+  [
+   "Basculegion",
+   4.534275877703188
+  ],
+  [
+   "Gallade",
+   4.482659793171886
+  ],
+  [
+   "Sylveon",
+   4.453806422254971
+  ],
+  [
+   "Azumarill",
+   3.6392244312441644
+  ],
+  [
+   "Sinistcha",
+   3.4954995684594925
+  ],
+  [
+   "Kangaskhan",
+   3.422137285920024
+  ]
+ ],
+ "counters": []
 }

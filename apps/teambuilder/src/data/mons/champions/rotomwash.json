@@ -1,66 +1,175 @@
 {
-    "id": "rotomwash",
-    "name": "Rotom-Wash",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.1466828,
-            "rank": 11,
-            "raw": 846006
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0935791,
-            "rank": 15,
-            "raw": 738144
-        }
-    ],
-    "abilities": [["levitate", 100]],
-    "items": [
-        ["sitrusberry", 42.14770133783001],
-        ["choicescarf", 26.793501751990263],
-        ["leftovers", 19.417341631061277],
-        ["magnet", 7.762723162792004],
-        ["rindoberry", 1.4800030134040547],
-        ["lumberry", 1.1110814534655626],
-        ["brightpowder", 0.3059140564063021],
-        ["focussash", 0.2830428441609865]
-    ],
-    "moves": [
-        ["hydropump", 23.2294129138854],
-        ["thunderbolt", 16.797431619106618],
-        ["willowisp", 16.477550944620805],
-        ["protect", 13.747226552480726],
-        ["voltswitch", 13.130673044127988],
-        ["electroweb", 8.54837669280284],
-        ["trick", 2.5392281127085314],
-        ["eerieimpulse", 1.70921311397435],
-        ["discharge", 0.829830602382521],
-        ["lightscreen", 0.6976651227464516]
-    ],
-    "spreads": [
-        ["Timid:2/0/0/32/0/32", 5.45861481378616],
-        ["Bold:32/0/23/1/6/4", 4.967385591073885],
-        ["Modest:32/0/0/32/0/2", 3.3547668072883217],
-        ["Modest:2/0/0/32/0/32", 2.9800106913609006],
-        ["Modest:32/0/2/15/5/12", 2.775412485166989]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Garchomp", 9.123833113222144],
-        ["Incineroar", 6.140108410273392],
-        ["Sneasler", 5.62524175580529],
-        ["Kingambit", 4.77001254344185],
-        ["Tyranitar-Mega", 4.265553998066665],
-        ["Floette-Mega", 3.7492529571417306],
-        ["Sinistcha", 3.6674659248714123],
-        ["Aegislash", 3.627333440528609],
-        ["Corviknight", 3.266910677209483],
-        ["Excadrill", 3.231794515728644]
-    ],
-    "counters": []
+ "id": "rotomwash",
+ "name": "Rotom-Wash",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.1466828,
+   "rank": 11,
+   "raw": 846006
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0935791,
+   "rank": 15,
+   "raw": 738144
+  }
+ ],
+ "abilities": [
+  [
+   "levitate",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "sitrusberry",
+   42.14770133783001
+  ],
+  [
+   "choicescarf",
+   26.793501751990263
+  ],
+  [
+   "leftovers",
+   19.417341631061277
+  ],
+  [
+   "magnet",
+   7.762723162792004
+  ],
+  [
+   "rindoberry",
+   1.4800030134040547
+  ],
+  [
+   "lumberry",
+   1.1110814534655626
+  ],
+  [
+   "brightpowder",
+   0.3059140564063021
+  ],
+  [
+   "focussash",
+   0.2830428441609865
+  ]
+ ],
+ "moves": [
+  [
+   "hydropump",
+   23.2294129138854
+  ],
+  [
+   "thunderbolt",
+   16.797431619106618
+  ],
+  [
+   "willowisp",
+   16.477550944620805
+  ],
+  [
+   "protect",
+   13.747226552480726
+  ],
+  [
+   "voltswitch",
+   13.130673044127988
+  ],
+  [
+   "electroweb",
+   8.54837669280284
+  ],
+  [
+   "trick",
+   2.5392281127085314
+  ],
+  [
+   "eerieimpulse",
+   1.70921311397435
+  ],
+  [
+   "discharge",
+   0.829830602382521
+  ],
+  [
+   "lightscreen",
+   0.6976651227464516
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   5.45861481378616
+  ],
+  [
+   "Bold:32/0/23/1/6/4",
+   4.967385591073885
+  ],
+  [
+   "Modest:32/0/0/32/0/2",
+   3.3547668072883217
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   2.9800106913609006
+  ],
+  [
+   "Modest:32/0/2/15/5/12",
+   2.775412485166989
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Garchomp",
+   9.123833113222144
+  ],
+  [
+   "Incineroar",
+   6.140108410273392
+  ],
+  [
+   "Sneasler",
+   5.62524175580529
+  ],
+  [
+   "Kingambit",
+   4.77001254344185
+  ],
+  [
+   "Tyranitar-Mega",
+   4.265553998066665
+  ],
+  [
+   "Floette-Mega",
+   3.7492529571417306
+  ],
+  [
+   "Sinistcha",
+   3.6674659248714123
+  ],
+  [
+   "Aegislash",
+   3.627333440528609
+  ],
+  [
+   "Corviknight",
+   3.266910677209483
+  ],
+  [
+   "Excadrill",
+   3.231794515728644
+  ]
+ ],
+ "counters": []
 }

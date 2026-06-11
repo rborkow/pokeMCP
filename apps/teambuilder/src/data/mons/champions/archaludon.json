@@ -1,70 +1,183 @@
 {
-    "id": "archaludon",
-    "name": "Archaludon",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.1322536,
-            "rank": 13,
-            "raw": 831302
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.1632171,
-            "rank": 11,
-            "raw": 1040266
-        }
-    ],
-    "abilities": [
-        ["stamina", 83.31185389316462],
-        ["sturdy", 13.775437701606597],
-        ["stalwart", 2.912708405228795]
-    ],
-    "items": [
-        ["leftovers", 73.7956254485655],
-        ["choicescarf", 8.320542567349385],
-        ["chopleberry", 5.999592477738502],
-        ["whiteherb", 3.248336455226474],
-        ["sitrusberry", 2.5039617295313055],
-        ["magnet", 2.125817509839983],
-        ["dragonfang", 1.4426882952938878],
-        ["shucaberry", 0.6749379828319355]
-    ],
-    "moves": [
-        ["electroshot", 22.49831953305998],
-        ["flashcannon", 22.332652222116543],
-        ["protect", 21.839211382342583],
-        ["dragonpulse", 15.58177822880436],
-        ["dracometeor", 7.99139591406329],
-        ["aurasphere", 5.649186197231127],
-        ["thunderbolt", 1.8309468888032043],
-        ["snarl", 1.0962453837782533],
-        ["steelbeam", 0.514507168155604],
-        ["substitute", 0.1752399792452561]
-    ],
-    "spreads": [
-        ["Modest:32/0/1/5/25/3", 7.655948917356804],
-        ["Modest:2/0/0/32/0/32", 6.890715380430603],
-        ["Timid:2/0/0/32/0/32", 4.308227893590822],
-        ["Timid:0/0/0/32/2/32", 2.6116083922828657],
-        ["Bold:32/0/1/0/30/3", 2.5559712257546736]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Pelipper", 12.613690446197618],
-        ["Basculegion", 12.407662011492052],
-        ["Sableye", 7.27646936082549],
-        ["Sinistcha", 5.210451470415031],
-        ["Sneasler", 5.074968492829884],
-        ["Dragonite-Mega", 4.143440550175473],
-        ["Incineroar", 3.2090728402354967],
-        ["Venusaur-Mega", 2.945066117775989],
-        ["Kingambit", 2.651415635052388],
-        ["Politoed", 2.487911863943841]
-    ],
-    "counters": []
+ "id": "archaludon",
+ "name": "Archaludon",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.1322536,
+   "rank": 13,
+   "raw": 831302
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.1632171,
+   "rank": 11,
+   "raw": 1040266
+  }
+ ],
+ "abilities": [
+  [
+   "stamina",
+   83.31185389316462
+  ],
+  [
+   "sturdy",
+   13.775437701606597
+  ],
+  [
+   "stalwart",
+   2.912708405228795
+  ]
+ ],
+ "items": [
+  [
+   "leftovers",
+   73.7956254485655
+  ],
+  [
+   "choicescarf",
+   8.320542567349385
+  ],
+  [
+   "chopleberry",
+   5.999592477738502
+  ],
+  [
+   "whiteherb",
+   3.248336455226474
+  ],
+  [
+   "sitrusberry",
+   2.5039617295313055
+  ],
+  [
+   "magnet",
+   2.125817509839983
+  ],
+  [
+   "dragonfang",
+   1.4426882952938878
+  ],
+  [
+   "shucaberry",
+   0.6749379828319355
+  ]
+ ],
+ "moves": [
+  [
+   "electroshot",
+   22.49831953305998
+  ],
+  [
+   "flashcannon",
+   22.332652222116543
+  ],
+  [
+   "protect",
+   21.839211382342583
+  ],
+  [
+   "dragonpulse",
+   15.58177822880436
+  ],
+  [
+   "dracometeor",
+   7.99139591406329
+  ],
+  [
+   "aurasphere",
+   5.649186197231127
+  ],
+  [
+   "thunderbolt",
+   1.8309468888032043
+  ],
+  [
+   "snarl",
+   1.0962453837782533
+  ],
+  [
+   "steelbeam",
+   0.514507168155604
+  ],
+  [
+   "substitute",
+   0.1752399792452561
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:32/0/1/5/25/3",
+   7.655948917356804
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   6.890715380430603
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   4.308227893590822
+  ],
+  [
+   "Timid:0/0/0/32/2/32",
+   2.6116083922828657
+  ],
+  [
+   "Bold:32/0/1/0/30/3",
+   2.5559712257546736
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Pelipper",
+   12.613690446197618
+  ],
+  [
+   "Basculegion",
+   12.407662011492052
+  ],
+  [
+   "Sableye",
+   7.27646936082549
+  ],
+  [
+   "Sinistcha",
+   5.210451470415031
+  ],
+  [
+   "Sneasler",
+   5.074968492829884
+  ],
+  [
+   "Dragonite-Mega",
+   4.143440550175473
+  ],
+  [
+   "Incineroar",
+   3.2090728402354967
+  ],
+  [
+   "Venusaur-Mega",
+   2.945066117775989
+  ],
+  [
+   "Kingambit",
+   2.651415635052388
+  ],
+  [
+   "Politoed",
+   2.487911863943841
+  ]
+ ],
+ "counters": []
 }

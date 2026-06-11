@@ -1,57 +1,147 @@
 {
-    "id": "scizormega",
-    "name": "Scizor-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0412092,
-            "rank": 38,
-            "raw": 222781
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0450609,
-            "rank": 37,
-            "raw": 330481
-        }
-    ],
-    "abilities": [["technician", 100]],
-    "items": [["scizorite", 100]],
-    "moves": [
-        ["bulletpunch", 24.986298117193893],
-        ["protect", 23.373760088134453],
-        ["swordsdance", 21.527151670788523],
-        ["bugbite", 20.001675403908408],
-        ["closecombat", 5.691529657019502],
-        ["dualwingbeat", 1.3064936932838984],
-        ["knockoff", 0.9792465207909705],
-        ["uturn", 0.7431726126085536],
-        ["tailwind", 0.2000129068740967],
-        ["assurance", 0.19313964224588231]
-    ],
-    "spreads": [
-        ["Adamant:32/32/0/0/2/0", 22.964999342171733],
-        ["Adamant:32/32/0/0/0/2", 11.311147921750182],
-        ["Adamant:32/32/2/0/0/0", 5.764232137617753],
-        ["Adamant:32/32/1/0/1/0", 4.917455421475763],
-        ["Adamant:32/32/0/0/1/1", 3.4546908424723646]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Basculegion", 9.352720004717929],
-        ["Pelipper", 7.909064543420083],
-        ["Archaludon", 7.303371394915617],
-        ["Incineroar", 6.953531914218877],
-        ["Sinistcha", 6.907358830556907],
-        ["Sneasler", 6.27609473072876],
-        ["Dragonite-Mega", 4.201121537285205],
-        ["Garchomp", 3.5999670078012205],
-        ["Kommo-o", 2.7601171599987517],
-        ["Sableye", 2.4832348004239093]
-    ],
-    "counters": []
+ "id": "scizormega",
+ "name": "Scizor-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0412092,
+   "rank": 38,
+   "raw": 222781
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0450609,
+   "rank": 37,
+   "raw": 330481
+  }
+ ],
+ "abilities": [
+  [
+   "technician",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "scizorite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "bulletpunch",
+   24.986298117193893
+  ],
+  [
+   "protect",
+   23.373760088134453
+  ],
+  [
+   "swordsdance",
+   21.527151670788523
+  ],
+  [
+   "bugbite",
+   20.001675403908408
+  ],
+  [
+   "closecombat",
+   5.691529657019502
+  ],
+  [
+   "dualwingbeat",
+   1.3064936932838984
+  ],
+  [
+   "knockoff",
+   0.9792465207909705
+  ],
+  [
+   "uturn",
+   0.7431726126085536
+  ],
+  [
+   "tailwind",
+   0.2000129068740967
+  ],
+  [
+   "assurance",
+   0.19313964224588231
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:32/32/0/0/2/0",
+   22.964999342171733
+  ],
+  [
+   "Adamant:32/32/0/0/0/2",
+   11.311147921750182
+  ],
+  [
+   "Adamant:32/32/2/0/0/0",
+   5.764232137617753
+  ],
+  [
+   "Adamant:32/32/1/0/1/0",
+   4.917455421475763
+  ],
+  [
+   "Adamant:32/32/0/0/1/1",
+   3.4546908424723646
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Basculegion",
+   9.352720004717929
+  ],
+  [
+   "Pelipper",
+   7.909064543420083
+  ],
+  [
+   "Archaludon",
+   7.303371394915617
+  ],
+  [
+   "Incineroar",
+   6.953531914218877
+  ],
+  [
+   "Sinistcha",
+   6.907358830556907
+  ],
+  [
+   "Sneasler",
+   6.27609473072876
+  ],
+  [
+   "Dragonite-Mega",
+   4.201121537285205
+  ],
+  [
+   "Garchomp",
+   3.5999670078012205
+  ],
+  [
+   "Kommo-o",
+   2.7601171599987517
+  ],
+  [
+   "Sableye",
+   2.4832348004239093
+  ]
+ ],
+ "counters": []
 }

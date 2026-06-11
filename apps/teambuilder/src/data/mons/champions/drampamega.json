@@ -1,57 +1,147 @@
 {
-    "id": "drampamega",
-    "name": "Drampa-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0119001,
-            "rank": 72,
-            "raw": 134646
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0080397,
-            "rank": 88,
-            "raw": 121672
-        }
-    ],
-    "abilities": [["berserk", 100]],
-    "items": [["drampanite", 100]],
-    "moves": [
-        ["hypervoice", 23.62853805479737],
-        ["protect", 21.937172395850453],
-        ["earthpower", 13.686852395456006],
-        ["calmmind", 11.516587150765696],
-        ["dragonpulse", 10.509968655170551],
-        ["dracometeor", 5.4596567086173176],
-        ["flamethrower", 2.4246643422418304],
-        ["thunderbolt", 2.4117170173240474],
-        ["heatwave", 2.1957148455897593],
-        ["roost", 1.6785332821239742]
-    ],
-    "spreads": [
-        ["Quiet:32/0/2/32/0/0", 19.524210833890933],
-        ["Quiet:32/0/8/25/0/1", 12.183401702725856],
-        ["Quiet:32/0/0/32/2/0", 10.72573686463177],
-        ["Quiet:32/0/1/32/1/0", 7.698048796175113],
-        ["Modest:32/0/0/32/2/0", 5.602134666059758]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Sinistcha", 11.205238058362085],
-        ["Torkoal", 7.273457229569261],
-        ["Oranguru", 7.2392093978727425],
-        ["Incineroar", 6.922362912990193],
-        ["Farigiraf", 6.4116520029750514],
-        ["Sylveon", 5.0740408857846155],
-        ["Kingambit", 4.468154397377414],
-        ["Basculegion", 2.7453176638694616],
-        ["Lucario", 2.708991356565978],
-        ["Sneasler", 2.4421624876590378]
-    ],
-    "counters": []
+ "id": "drampamega",
+ "name": "Drampa-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0119001,
+   "rank": 72,
+   "raw": 134646
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0080397,
+   "rank": 88,
+   "raw": 121672
+  }
+ ],
+ "abilities": [
+  [
+   "berserk",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "drampanite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "hypervoice",
+   23.62853805479737
+  ],
+  [
+   "protect",
+   21.937172395850453
+  ],
+  [
+   "earthpower",
+   13.686852395456006
+  ],
+  [
+   "calmmind",
+   11.516587150765696
+  ],
+  [
+   "dragonpulse",
+   10.509968655170551
+  ],
+  [
+   "dracometeor",
+   5.4596567086173176
+  ],
+  [
+   "flamethrower",
+   2.4246643422418304
+  ],
+  [
+   "thunderbolt",
+   2.4117170173240474
+  ],
+  [
+   "heatwave",
+   2.1957148455897593
+  ],
+  [
+   "roost",
+   1.6785332821239742
+  ]
+ ],
+ "spreads": [
+  [
+   "Quiet:32/0/2/32/0/0",
+   19.524210833890933
+  ],
+  [
+   "Quiet:32/0/8/25/0/1",
+   12.183401702725856
+  ],
+  [
+   "Quiet:32/0/0/32/2/0",
+   10.72573686463177
+  ],
+  [
+   "Quiet:32/0/1/32/1/0",
+   7.698048796175113
+  ],
+  [
+   "Modest:32/0/0/32/2/0",
+   5.602134666059758
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Sinistcha",
+   11.205238058362085
+  ],
+  [
+   "Torkoal",
+   7.273457229569261
+  ],
+  [
+   "Oranguru",
+   7.2392093978727425
+  ],
+  [
+   "Incineroar",
+   6.922362912990193
+  ],
+  [
+   "Farigiraf",
+   6.4116520029750514
+  ],
+  [
+   "Sylveon",
+   5.0740408857846155
+  ],
+  [
+   "Kingambit",
+   4.468154397377414
+  ],
+  [
+   "Basculegion",
+   2.7453176638694616
+  ],
+  [
+   "Lucario",
+   2.708991356565978
+  ],
+  [
+   "Sneasler",
+   2.4421624876590378
+  ]
+ ],
+ "counters": []
 }

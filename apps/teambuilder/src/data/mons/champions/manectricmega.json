@@ -1,57 +1,147 @@
 {
-    "id": "manectricmega",
-    "name": "Manectric-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.012238800000000001,
-            "rank": 70,
-            "raw": 70186
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0106265,
-            "rank": 75,
-            "raw": 97113
-        }
-    ],
-    "abilities": [["intimidate", 100]],
-    "items": [["manectite", 100]],
-    "moves": [
-        ["protect", 22.73976277066676],
-        ["voltswitch", 22.680483840729483],
-        ["snarl", 20.284025053769675],
-        ["thunder", 9.391914256502513],
-        ["thunderbolt", 9.159047841671018],
-        ["overheat", 5.5186562623704045],
-        ["flamethrower", 1.7597867811450465],
-        ["lightscreen", 1.6895672509619517],
-        ["eerieimpulse", 1.6808754380033726],
-        ["raindance", 1.5638157407952646]
-    ],
-    "spreads": [
-        ["Timid:2/0/0/32/0/32", 16.053840585941856],
-        ["Timid:32/0/0/2/0/32", 9.027948348847021],
-        ["Timid:0/0/0/32/2/32", 7.831694532825509],
-        ["Timid:32/0/1/1/0/32", 5.138480896727344],
-        ["Timid:28/0/5/1/0/32", 4.708352158792386]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Pelipper", 10.733948032077587],
-        ["Archaludon", 10.25543323905157],
-        ["Sinistcha", 9.457636899911575],
-        ["Basculegion", 8.764464237050262],
-        ["Sneasler", 7.682523113002894],
-        ["Incineroar", 3.195683892620506],
-        ["Sableye", 2.8252213050529043],
-        ["Garchomp", 2.2184972250539037],
-        ["Kingambit", 1.687926728802276],
-        ["Sylveon", 1.6652749737719554]
-    ],
-    "counters": []
+ "id": "manectricmega",
+ "name": "Manectric-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.012238800000000001,
+   "rank": 70,
+   "raw": 70186
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0106265,
+   "rank": 75,
+   "raw": 97113
+  }
+ ],
+ "abilities": [
+  [
+   "intimidate",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "manectite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "protect",
+   22.73976277066676
+  ],
+  [
+   "voltswitch",
+   22.680483840729483
+  ],
+  [
+   "snarl",
+   20.284025053769675
+  ],
+  [
+   "thunder",
+   9.391914256502513
+  ],
+  [
+   "thunderbolt",
+   9.159047841671018
+  ],
+  [
+   "overheat",
+   5.5186562623704045
+  ],
+  [
+   "flamethrower",
+   1.7597867811450465
+  ],
+  [
+   "lightscreen",
+   1.6895672509619517
+  ],
+  [
+   "eerieimpulse",
+   1.6808754380033726
+  ],
+  [
+   "raindance",
+   1.5638157407952646
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   16.053840585941856
+  ],
+  [
+   "Timid:32/0/0/2/0/32",
+   9.027948348847021
+  ],
+  [
+   "Timid:0/0/0/32/2/32",
+   7.831694532825509
+  ],
+  [
+   "Timid:32/0/1/1/0/32",
+   5.138480896727344
+  ],
+  [
+   "Timid:28/0/5/1/0/32",
+   4.708352158792386
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Pelipper",
+   10.733948032077587
+  ],
+  [
+   "Archaludon",
+   10.25543323905157
+  ],
+  [
+   "Sinistcha",
+   9.457636899911575
+  ],
+  [
+   "Basculegion",
+   8.764464237050262
+  ],
+  [
+   "Sneasler",
+   7.682523113002894
+  ],
+  [
+   "Incineroar",
+   3.195683892620506
+  ],
+  [
+   "Sableye",
+   2.8252213050529043
+  ],
+  [
+   "Garchomp",
+   2.2184972250539037
+  ],
+  [
+   "Kingambit",
+   1.687926728802276
+  ],
+  [
+   "Sylveon",
+   1.6652749737719554
+  ]
+ ],
+ "counters": []
 }

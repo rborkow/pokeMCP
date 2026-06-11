@@ -1,66 +1,179 @@
 {
-    "id": "glimmora",
-    "name": "Glimmora",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0066778,
-            "rank": 100,
-            "raw": 54048
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.061368099999999995,
-            "rank": 26,
-            "raw": 249293
-        }
-    ],
-    "abilities": [["toxicdebris", 99.78643174676235], ["corrosion", 0.21356825323764378]],
-    "items": [
-        ["focussash", 93.36226896112633],
-        ["shucaberry", 2.898857194106131],
-        ["choicescarf", 1.7931801781062657],
-        ["hardstone", 0.5926327392236128],
-        ["sitrusberry", 0.5410474052189518],
-        ["passhoberry", 0.2953801743347292],
-        ["mentalherb", 0.09368734423834055],
-        ["leftovers", 0.08506032240520367]
-    ],
-    "moves": [
-        ["powergem", 24.60970656809036],
-        ["sludgebomb", 24.13384451650776],
-        ["earthpower", 23.414162373638312],
-        ["spikyshield", 22.603909030065804],
-        ["energyball", 2.1078071477520663],
-        ["mortalspin", 1.092617340895955],
-        ["protect", 0.6347279313147439],
-        ["stealthrock", 0.4189788632064794],
-        ["sludgewave", 0.3204427746828094],
-        ["dazzlinggleam", 0.20364161982818108]
-    ],
-    "spreads": [
-        ["Modest:2/0/0/32/0/32", 27.617527551191767],
-        ["Modest:1/0/0/32/1/32", 15.607234316310098],
-        ["Timid:2/0/0/32/0/32", 14.736248231172166],
-        ["Timid:0/0/0/32/2/32", 7.164806727134003],
-        ["Modest:1/0/1/32/0/32", 5.843706392227992]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Whimsicott", 14.632210607913057],
-        ["Basculegion", 13.410885674660717],
-        ["Garchomp", 13.0966592036338],
-        ["Charizard-Mega-Y", 12.747975422264316],
-        ["Kingambit", 10.974321208010798],
-        ["Floette-Mega", 4.51721797707299],
-        ["Farigiraf", 1.8916068786701232],
-        ["Incineroar", 1.7135594984707414],
-        ["Talonflame", 1.2672987763794858],
-        ["Sinistcha", 1.0906677188115261]
-    ],
-    "counters": []
+ "id": "glimmora",
+ "name": "Glimmora",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0066778,
+   "rank": 100,
+   "raw": 54048
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.061368099999999995,
+   "rank": 26,
+   "raw": 249293
+  }
+ ],
+ "abilities": [
+  [
+   "toxicdebris",
+   99.78643174676235
+  ],
+  [
+   "corrosion",
+   0.21356825323764378
+  ]
+ ],
+ "items": [
+  [
+   "focussash",
+   93.36226896112633
+  ],
+  [
+   "shucaberry",
+   2.898857194106131
+  ],
+  [
+   "choicescarf",
+   1.7931801781062657
+  ],
+  [
+   "hardstone",
+   0.5926327392236128
+  ],
+  [
+   "sitrusberry",
+   0.5410474052189518
+  ],
+  [
+   "passhoberry",
+   0.2953801743347292
+  ],
+  [
+   "mentalherb",
+   0.09368734423834055
+  ],
+  [
+   "leftovers",
+   0.08506032240520367
+  ]
+ ],
+ "moves": [
+  [
+   "powergem",
+   24.60970656809036
+  ],
+  [
+   "sludgebomb",
+   24.13384451650776
+  ],
+  [
+   "earthpower",
+   23.414162373638312
+  ],
+  [
+   "spikyshield",
+   22.603909030065804
+  ],
+  [
+   "energyball",
+   2.1078071477520663
+  ],
+  [
+   "mortalspin",
+   1.092617340895955
+  ],
+  [
+   "protect",
+   0.6347279313147439
+  ],
+  [
+   "stealthrock",
+   0.4189788632064794
+  ],
+  [
+   "sludgewave",
+   0.3204427746828094
+  ],
+  [
+   "dazzlinggleam",
+   0.20364161982818108
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:2/0/0/32/0/32",
+   27.617527551191767
+  ],
+  [
+   "Modest:1/0/0/32/1/32",
+   15.607234316310098
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   14.736248231172166
+  ],
+  [
+   "Timid:0/0/0/32/2/32",
+   7.164806727134003
+  ],
+  [
+   "Modest:1/0/1/32/0/32",
+   5.843706392227992
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Whimsicott",
+   14.632210607913057
+  ],
+  [
+   "Basculegion",
+   13.410885674660717
+  ],
+  [
+   "Garchomp",
+   13.0966592036338
+  ],
+  [
+   "Charizard-Mega-Y",
+   12.747975422264316
+  ],
+  [
+   "Kingambit",
+   10.974321208010798
+  ],
+  [
+   "Floette-Mega",
+   4.51721797707299
+  ],
+  [
+   "Farigiraf",
+   1.8916068786701232
+  ],
+  [
+   "Incineroar",
+   1.7135594984707414
+  ],
+  [
+   "Talonflame",
+   1.2672987763794858
+  ],
+  [
+   "Sinistcha",
+   1.0906677188115261
+  ]
+ ],
+ "counters": []
 }

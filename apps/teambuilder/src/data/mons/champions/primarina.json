@@ -1,66 +1,179 @@
 {
-    "id": "primarina",
-    "name": "Primarina",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0467876,
-            "rank": 35,
-            "raw": 320671
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.032693,
-            "rank": 44,
-            "raw": 325998
-        }
-    ],
-    "abilities": [["liquidvoice", 97.62622437611668], ["torrent", 2.3737756238833163]],
-    "items": [
-        ["leftovers", 34.48638328840945],
-        ["mysticwater", 29.380331225839683],
-        ["sitrusberry", 22.41096203004691],
-        ["kebiaberry", 6.747026112452467],
-        ["fairyfeather", 3.670993321423733],
-        ["choicescarf", 1.0559514323776586],
-        ["focussash", 0.8286487880602248],
-        ["wacanberry", 0.3062971433288713]
-    ],
-    "moves": [
-        ["hypervoice", 23.951813011872204],
-        ["protect", 23.822381121007595],
-        ["moonblast", 23.69926255456853],
-        ["calmmind", 10.124423442429158],
-        ["psychic", 1.83326198126249],
-        ["icywind", 1.6795715012933927],
-        ["substitute", 1.6419042412238194],
-        ["hydrocannon", 1.5318828672447493],
-        ["aquajet", 1.4773624774107605],
-        ["dazzlinggleam", 1.2454078709390293]
-    ],
-    "spreads": [
-        ["Modest:32/0/0/32/2/0", 7.322046608831665],
-        ["Modest:16/0/21/24/0/5", 5.944597979710272],
-        ["Quiet:32/0/2/32/0/0", 5.683481911039135],
-        ["Modest:32/0/2/32/0/0", 4.965044374981955],
-        ["Modest:10/0/0/24/0/32", 4.14533886569379]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Sinistcha", 5.787774355170634],
-        ["Incineroar", 5.484176590279131],
-        ["Sneasler", 5.416640856761978],
-        ["Farigiraf", 5.155317428988086],
-        ["Garchomp", 4.872065492239102],
-        ["Kingambit", 4.385597303151768],
-        ["Charizard-Mega-Y", 3.1007359618905923],
-        ["Corviknight", 2.758675933822811],
-        ["Scovillain-Mega", 2.4072416175678084],
-        ["Tyranitar-Mega", 2.3829727517029324]
-    ],
-    "counters": []
+ "id": "primarina",
+ "name": "Primarina",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0467876,
+   "rank": 35,
+   "raw": 320671
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.032693,
+   "rank": 44,
+   "raw": 325998
+  }
+ ],
+ "abilities": [
+  [
+   "liquidvoice",
+   97.62622437611668
+  ],
+  [
+   "torrent",
+   2.3737756238833163
+  ]
+ ],
+ "items": [
+  [
+   "leftovers",
+   34.48638328840945
+  ],
+  [
+   "mysticwater",
+   29.380331225839683
+  ],
+  [
+   "sitrusberry",
+   22.41096203004691
+  ],
+  [
+   "kebiaberry",
+   6.747026112452467
+  ],
+  [
+   "fairyfeather",
+   3.670993321423733
+  ],
+  [
+   "choicescarf",
+   1.0559514323776586
+  ],
+  [
+   "focussash",
+   0.8286487880602248
+  ],
+  [
+   "wacanberry",
+   0.3062971433288713
+  ]
+ ],
+ "moves": [
+  [
+   "hypervoice",
+   23.951813011872204
+  ],
+  [
+   "protect",
+   23.822381121007595
+  ],
+  [
+   "moonblast",
+   23.69926255456853
+  ],
+  [
+   "calmmind",
+   10.124423442429158
+  ],
+  [
+   "psychic",
+   1.83326198126249
+  ],
+  [
+   "icywind",
+   1.6795715012933927
+  ],
+  [
+   "substitute",
+   1.6419042412238194
+  ],
+  [
+   "hydrocannon",
+   1.5318828672447493
+  ],
+  [
+   "aquajet",
+   1.4773624774107605
+  ],
+  [
+   "dazzlinggleam",
+   1.2454078709390293
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:32/0/0/32/2/0",
+   7.322046608831665
+  ],
+  [
+   "Modest:16/0/21/24/0/5",
+   5.944597979710272
+  ],
+  [
+   "Quiet:32/0/2/32/0/0",
+   5.683481911039135
+  ],
+  [
+   "Modest:32/0/2/32/0/0",
+   4.965044374981955
+  ],
+  [
+   "Modest:10/0/0/24/0/32",
+   4.14533886569379
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Sinistcha",
+   5.787774355170634
+  ],
+  [
+   "Incineroar",
+   5.484176590279131
+  ],
+  [
+   "Sneasler",
+   5.416640856761978
+  ],
+  [
+   "Farigiraf",
+   5.155317428988086
+  ],
+  [
+   "Garchomp",
+   4.872065492239102
+  ],
+  [
+   "Kingambit",
+   4.385597303151768
+  ],
+  [
+   "Charizard-Mega-Y",
+   3.1007359618905923
+  ],
+  [
+   "Corviknight",
+   2.758675933822811
+  ],
+  [
+   "Scovillain-Mega",
+   2.4072416175678084
+  ],
+  [
+   "Tyranitar-Mega",
+   2.3829727517029324
+  ]
+ ],
+ "counters": []
 }

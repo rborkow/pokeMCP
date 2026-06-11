@@ -1,66 +1,175 @@
 {
-    "id": "hydreigon",
-    "name": "Hydreigon",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.026032000000000003,
-            "rank": 46,
-            "raw": 163705
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0361368,
-            "rank": 41,
-            "raw": 225635
-        }
-    ],
-    "abilities": [["levitate", 100]],
-    "items": [
-        ["choicescarf", 60.08831550610713],
-        ["habanberry", 10.805894962243391],
-        ["chopleberry", 7.055182157654653],
-        ["focussash", 5.8089017232115445],
-        ["dragonfang", 3.912642324154663],
-        ["blackglasses", 3.3577183936871875],
-        ["scopelens", 2.3882423534630797],
-        ["leftovers", 2.055583882281776]
-    ],
-    "moves": [
-        ["darkpulse", 23.37640896017674],
-        ["dracometeor", 22.196365256292015],
-        ["snarl", 15.835111721952227],
-        ["heatwave", 8.42602739009932],
-        ["protect", 8.172119422419636],
-        ["earthpower", 6.581452135357754],
-        ["tailwind", 3.648963642671668],
-        ["flamethrower", 2.898711817640186],
-        ["dragonpulse", 2.1443085565008526],
-        ["uturn", 1.933971864003476]
-    ],
-    "spreads": [
-        ["Modest:2/0/0/32/0/32", 27.64643811002752],
-        ["Timid:2/0/0/32/0/32", 6.646017395502296],
-        ["Modest:4/0/3/32/0/27", 4.273235020514186],
-        ["Timid:0/0/0/32/2/32", 4.216819861943575],
-        ["Modest:8/0/0/32/0/26", 2.3523407947033044]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Sneasler", 5.219931957098423],
-        ["Tyranitar-Mega", 5.0991230509623335],
-        ["Rotom-Wash", 5.084361293778996],
-        ["Excadrill", 4.636326935535777],
-        ["Corviknight", 4.606445239456035],
-        ["Basculegion", 4.071936357924052],
-        ["Aegislash", 3.2800476866285853],
-        ["Whimsicott", 3.007815004250474],
-        ["Garchomp", 2.805864511776768],
-        ["Charizard-Mega-Y", 2.805315456516488]
-    ],
-    "counters": []
+ "id": "hydreigon",
+ "name": "Hydreigon",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.026032000000000003,
+   "rank": 46,
+   "raw": 163705
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0361368,
+   "rank": 41,
+   "raw": 225635
+  }
+ ],
+ "abilities": [
+  [
+   "levitate",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "choicescarf",
+   60.08831550610713
+  ],
+  [
+   "habanberry",
+   10.805894962243391
+  ],
+  [
+   "chopleberry",
+   7.055182157654653
+  ],
+  [
+   "focussash",
+   5.8089017232115445
+  ],
+  [
+   "dragonfang",
+   3.912642324154663
+  ],
+  [
+   "blackglasses",
+   3.3577183936871875
+  ],
+  [
+   "scopelens",
+   2.3882423534630797
+  ],
+  [
+   "leftovers",
+   2.055583882281776
+  ]
+ ],
+ "moves": [
+  [
+   "darkpulse",
+   23.37640896017674
+  ],
+  [
+   "dracometeor",
+   22.196365256292015
+  ],
+  [
+   "snarl",
+   15.835111721952227
+  ],
+  [
+   "heatwave",
+   8.42602739009932
+  ],
+  [
+   "protect",
+   8.172119422419636
+  ],
+  [
+   "earthpower",
+   6.581452135357754
+  ],
+  [
+   "tailwind",
+   3.648963642671668
+  ],
+  [
+   "flamethrower",
+   2.898711817640186
+  ],
+  [
+   "dragonpulse",
+   2.1443085565008526
+  ],
+  [
+   "uturn",
+   1.933971864003476
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:2/0/0/32/0/32",
+   27.64643811002752
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   6.646017395502296
+  ],
+  [
+   "Modest:4/0/3/32/0/27",
+   4.273235020514186
+  ],
+  [
+   "Timid:0/0/0/32/2/32",
+   4.216819861943575
+  ],
+  [
+   "Modest:8/0/0/32/0/26",
+   2.3523407947033044
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Sneasler",
+   5.219931957098423
+  ],
+  [
+   "Tyranitar-Mega",
+   5.0991230509623335
+  ],
+  [
+   "Rotom-Wash",
+   5.084361293778996
+  ],
+  [
+   "Excadrill",
+   4.636326935535777
+  ],
+  [
+   "Corviknight",
+   4.606445239456035
+  ],
+  [
+   "Basculegion",
+   4.071936357924052
+  ],
+  [
+   "Aegislash",
+   3.2800476866285853
+  ],
+  [
+   "Whimsicott",
+   3.007815004250474
+  ],
+  [
+   "Garchomp",
+   2.805864511776768
+  ],
+  [
+   "Charizard-Mega-Y",
+   2.805315456516488
+  ]
+ ],
+ "counters": []
 }

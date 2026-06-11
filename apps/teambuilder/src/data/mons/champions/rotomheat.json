@@ -1,66 +1,175 @@
 {
-    "id": "rotomheat",
-    "name": "Rotom-Heat",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0305465,
-            "rank": 44,
-            "raw": 193467
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.017647200000000002,
-            "rank": 61,
-            "raw": 156149
-        }
-    ],
-    "abilities": [["levitate", 100]],
-    "items": [
-        ["choicescarf", 55.24307321979184],
-        ["sitrusberry", 24.662660475708133],
-        ["leftovers", 7.260403476926373],
-        ["passhoberry", 4.484774931846954],
-        ["magnet", 4.036794849989219],
-        ["whiteherb", 1.07834038908271],
-        ["chartiberry", 1.0745187199524802],
-        ["focussash", 0.7517558402625244]
-    ],
-    "moves": [
-        ["overheat", 24.830939534777745],
-        ["thunderbolt", 17.923581491634103],
-        ["voltswitch", 16.952730382618114],
-        ["electroweb", 13.393513706263525],
-        ["willowisp", 9.576316907856333],
-        ["protect", 9.298359218705189],
-        ["trick", 4.227474239442766],
-        ["discharge", 0.9781683428059983],
-        ["nastyplot", 0.47520980349471925],
-        ["helpinghand", 0.46719147775851594]
-    ],
-    "spreads": [
-        ["Timid:12/0/0/29/0/25", 10.550678667979717],
-        ["Timid:2/0/0/32/0/32", 8.535652378322142],
-        ["Timid:0/0/0/32/2/32", 4.5201174647402285],
-        ["Timid:9/0/0/32/0/25", 4.478928759311843],
-        ["Modest:2/0/0/32/0/32", 4.074471944389711]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Garchomp", 7.477042555348959],
-        ["Corviknight", 5.90667052159217],
-        ["Venusaur-Mega", 5.149053313532334],
-        ["Tyranitar-Mega", 4.843299079340674],
-        ["Sinistcha", 4.410037520078812],
-        ["Sneasler", 4.202628683020803],
-        ["Basculegion", 4.129724987229709],
-        ["Excadrill", 3.7077542215993566],
-        ["Kingambit", 3.60177244013992],
-        ["Milotic", 3.5321421940238413]
-    ],
-    "counters": []
+ "id": "rotomheat",
+ "name": "Rotom-Heat",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0305465,
+   "rank": 44,
+   "raw": 193467
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.017647200000000002,
+   "rank": 61,
+   "raw": 156149
+  }
+ ],
+ "abilities": [
+  [
+   "levitate",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "choicescarf",
+   55.24307321979184
+  ],
+  [
+   "sitrusberry",
+   24.662660475708133
+  ],
+  [
+   "leftovers",
+   7.260403476926373
+  ],
+  [
+   "passhoberry",
+   4.484774931846954
+  ],
+  [
+   "magnet",
+   4.036794849989219
+  ],
+  [
+   "whiteherb",
+   1.07834038908271
+  ],
+  [
+   "chartiberry",
+   1.0745187199524802
+  ],
+  [
+   "focussash",
+   0.7517558402625244
+  ]
+ ],
+ "moves": [
+  [
+   "overheat",
+   24.830939534777745
+  ],
+  [
+   "thunderbolt",
+   17.923581491634103
+  ],
+  [
+   "voltswitch",
+   16.952730382618114
+  ],
+  [
+   "electroweb",
+   13.393513706263525
+  ],
+  [
+   "willowisp",
+   9.576316907856333
+  ],
+  [
+   "protect",
+   9.298359218705189
+  ],
+  [
+   "trick",
+   4.227474239442766
+  ],
+  [
+   "discharge",
+   0.9781683428059983
+  ],
+  [
+   "nastyplot",
+   0.47520980349471925
+  ],
+  [
+   "helpinghand",
+   0.46719147775851594
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:12/0/0/29/0/25",
+   10.550678667979717
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   8.535652378322142
+  ],
+  [
+   "Timid:0/0/0/32/2/32",
+   4.5201174647402285
+  ],
+  [
+   "Timid:9/0/0/32/0/25",
+   4.478928759311843
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   4.074471944389711
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Garchomp",
+   7.477042555348959
+  ],
+  [
+   "Corviknight",
+   5.90667052159217
+  ],
+  [
+   "Venusaur-Mega",
+   5.149053313532334
+  ],
+  [
+   "Tyranitar-Mega",
+   4.843299079340674
+  ],
+  [
+   "Sinistcha",
+   4.410037520078812
+  ],
+  [
+   "Sneasler",
+   4.202628683020803
+  ],
+  [
+   "Basculegion",
+   4.129724987229709
+  ],
+  [
+   "Excadrill",
+   3.7077542215993566
+  ],
+  [
+   "Kingambit",
+   3.60177244013992
+  ],
+  [
+   "Milotic",
+   3.5321421940238413
+  ]
+ ],
+ "counters": []
 }

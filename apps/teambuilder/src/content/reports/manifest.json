@@ -19,5 +19,49 @@
                 "url": "https://www.smogon.com/stats/2026-04/gen9championsvgc2026regma-0.txt"
             }
         ]
+    },
+    {
+        "slug": "ou",
+        "month": "2026-06",
+        "title": "Smogon Gen 9 OU Meta Report — June 2026",
+        "description": "Great Tusk leads Smogon Gen 9 OU with 34.93% usage in May 2026. Full usage table, month-over-month risers and fallers, and data-grounded analysis.",
+        "datePublished": "2026-06-11",
+        "dateModified": "2026-06-11",
+        "dataThrough": "2026-05",
+        "formatId": "gen9ou",
+        "formatName": "Smogon Gen 9 OU",
+        "sources": [
+            {
+                "label": "Smogon usage stats — gen9ou, May 2026",
+                "url": "https://www.smogon.com/stats/2026-05/gen9ou-0.txt"
+            },
+            {
+                "label": "Smogon usage stats — gen9ou, April 2026",
+                "url": "https://www.smogon.com/stats/2026-04/gen9ou-0.txt"
+            }
+        ],
+        "generated": true
+    },
+    {
+        "slug": "vgc",
+        "month": "2026-05",
+        "title": "VGC 2026 Regulation F Meta Report — May 2026",
+        "description": "Flutter Mane leads VGC 2026 Regulation F with 44.17% usage in April 2026. Full usage table, month-over-month risers and fallers, and data-grounded analysis.",
+        "datePublished": "2026-06-11",
+        "dateModified": "2026-06-11",
+        "dataThrough": "2026-04",
+        "formatId": "gen9vgc2026regf",
+        "formatName": "VGC 2026 Regulation F",
+        "sources": [
+            {
+                "label": "Smogon usage stats — gen9vgc2026regf, April 2026",
+                "url": "https://www.smogon.com/stats/2026-04/gen9vgc2026regf-0.txt"
+            },
+            {
+                "label": "Smogon usage stats — gen9vgc2026regf, March 2026",
+                "url": "https://www.smogon.com/stats/2026-03/gen9vgc2026regf-0.txt"
+            }
+        ],
+        "generated": true
     }
 ]

@@ -1,70 +1,183 @@
 {
-    "id": "arcaninehisui",
-    "name": "Arcanine-Hisui",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0188393,
-            "rank": 55,
-            "raw": 162330
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0128832,
-            "rank": 69,
-            "raw": 126015
-        }
-    ],
-    "abilities": [
-        ["rockhead", 53.106581036987755],
-        ["intimidate", 46.56958400032979],
-        ["flashfire", 0.3238349626824585]
-    ],
-    "items": [
-        ["focussash", 36.67470977438202],
-        ["choicescarf", 26.549966727311116],
-        ["hardstone", 9.764275573713505],
-        ["shucaberry", 5.822770474632864],
-        ["sitrusberry", 5.508360915048905],
-        ["whiteherb", 4.9535480278277495],
-        ["chopleberry", 3.6904995725606944],
-        ["charcoal", 2.747949382871504]
-    ],
-    "moves": [
-        ["flareblitz", 24.318871967433203],
-        ["rockslide", 19.324130819950998],
-        ["protect", 17.40186176248141],
-        ["extremespeed", 15.611697734565144],
-        ["headsmash", 13.627401233833872],
-        ["closecombat", 3.0032623851318676],
-        ["psychicfangs", 1.356329988556791],
-        ["wildcharge", 1.2282913692673891],
-        ["willowisp", 0.8055886744890304],
-        ["snarl", 0.5733163546905706]
-    ],
-    "spreads": [
-        ["Adamant:2/32/0/0/0/32", 19.806228350151432],
-        ["Jolly:2/32/0/0/0/32", 18.94148779461658],
-        ["Jolly:0/32/0/0/2/32", 9.565406127230736],
-        ["Adamant:1/32/1/0/0/32", 5.485262656943232],
-        ["Jolly:1/32/0/0/1/32", 4.914237218555241]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Kingambit", 6.600555484594377],
-        ["Sneasler", 6.371842939598831],
-        ["Whimsicott", 6.342376061692303],
-        ["Sinistcha", 5.303395055165946],
-        ["Floette-Mega", 5.0818981021469645],
-        ["Basculegion", 4.532748204012546],
-        ["Froslass-Mega", 4.482148206224679],
-        ["Garchomp", 3.4332872574893583],
-        ["Farigiraf", 2.8001032617214645],
-        ["Milotic", 2.2579352410249647]
-    ],
-    "counters": []
+ "id": "arcaninehisui",
+ "name": "Arcanine-Hisui",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0188393,
+   "rank": 55,
+   "raw": 162330
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0128832,
+   "rank": 69,
+   "raw": 126015
+  }
+ ],
+ "abilities": [
+  [
+   "rockhead",
+   53.106581036987755
+  ],
+  [
+   "intimidate",
+   46.56958400032979
+  ],
+  [
+   "flashfire",
+   0.3238349626824585
+  ]
+ ],
+ "items": [
+  [
+   "focussash",
+   36.67470977438202
+  ],
+  [
+   "choicescarf",
+   26.549966727311116
+  ],
+  [
+   "hardstone",
+   9.764275573713505
+  ],
+  [
+   "shucaberry",
+   5.822770474632864
+  ],
+  [
+   "sitrusberry",
+   5.508360915048905
+  ],
+  [
+   "whiteherb",
+   4.9535480278277495
+  ],
+  [
+   "chopleberry",
+   3.6904995725606944
+  ],
+  [
+   "charcoal",
+   2.747949382871504
+  ]
+ ],
+ "moves": [
+  [
+   "flareblitz",
+   24.318871967433203
+  ],
+  [
+   "rockslide",
+   19.324130819950998
+  ],
+  [
+   "protect",
+   17.40186176248141
+  ],
+  [
+   "extremespeed",
+   15.611697734565144
+  ],
+  [
+   "headsmash",
+   13.627401233833872
+  ],
+  [
+   "closecombat",
+   3.0032623851318676
+  ],
+  [
+   "psychicfangs",
+   1.356329988556791
+  ],
+  [
+   "wildcharge",
+   1.2282913692673891
+  ],
+  [
+   "willowisp",
+   0.8055886744890304
+  ],
+  [
+   "snarl",
+   0.5733163546905706
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   19.806228350151432
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   18.94148779461658
+  ],
+  [
+   "Jolly:0/32/0/0/2/32",
+   9.565406127230736
+  ],
+  [
+   "Adamant:1/32/1/0/0/32",
+   5.485262656943232
+  ],
+  [
+   "Jolly:1/32/0/0/1/32",
+   4.914237218555241
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Kingambit",
+   6.600555484594377
+  ],
+  [
+   "Sneasler",
+   6.371842939598831
+  ],
+  [
+   "Whimsicott",
+   6.342376061692303
+  ],
+  [
+   "Sinistcha",
+   5.303395055165946
+  ],
+  [
+   "Floette-Mega",
+   5.0818981021469645
+  ],
+  [
+   "Basculegion",
+   4.532748204012546
+  ],
+  [
+   "Froslass-Mega",
+   4.482148206224679
+  ],
+  [
+   "Garchomp",
+   3.4332872574893583
+  ],
+  [
+   "Farigiraf",
+   2.8001032617214645
+  ],
+  [
+   "Milotic",
+   2.2579352410249647
+  ]
+ ],
+ "counters": []
 }

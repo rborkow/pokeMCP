@@ -1,70 +1,183 @@
 {
-    "id": "azumarill",
-    "name": "Azumarill",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0078896,
-            "rank": 90,
-            "raw": 62565
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0096373,
-            "rank": 79,
-            "raw": 80466
-        }
-    ],
-    "abilities": [
-        ["hugepower", 98.05546565883006],
-        ["sapsipper", 1.73356178288207],
-        ["thickfat", 0.2109725582878833]
-    ],
-    "items": [
-        ["sitrusberry", 57.88544603485799],
-        ["mysticwater", 37.62979834781736],
-        ["lumberry", 1.4645629128768483],
-        ["leftovers", 0.7156092010906574],
-        ["fairyfeather", 0.7111823375656272],
-        ["kebiaberry", 0.409801112934478],
-        ["whiteherb", 0.37430253342564285],
-        ["mentalherb", 0.32577113969107835]
-    ],
-    "moves": [
-        ["aquajet", 24.284580665189686],
-        ["playrough", 23.795210670216164],
-        ["protect", 22.739245200824566],
-        ["bellydrum", 14.159702361728396],
-        ["liquidation", 12.03242241872291],
-        ["icespinner", 0.5523243974707823],
-        ["perishsong", 0.513520280845441],
-        ["knockoff", 0.4966094572599549],
-        ["encore", 0.24058216813696204],
-        ["superpower", 0.178006937565232]
-    ],
-    "spreads": [
-        ["Brave:32/32/0/0/2/0", 29.84275614037427],
-        ["Brave:31/32/0/0/3/0", 5.759179810339208],
-        ["Adamant:31/32/0/0/3/0", 5.54489368724818],
-        ["Adamant:31/32/3/0/0/0", 5.146060767626974],
-        ["Adamant:25/32/6/0/2/1", 3.4573562445399246]
-    ],
-    "teraTypes": [["nothing", 100]],
-    "teammates": [
-        ["Farigiraf", 9.195863938197094],
-        ["Kingambit", 8.257054345827466],
-        ["Camerupt-Mega", 6.977403178938099],
-        ["Sinistcha", 6.470871527199357],
-        ["Gallade", 6.443961498410933],
-        ["Crabominable-Mega", 6.3457362208880985],
-        ["Incineroar", 4.453010027685198],
-        ["Sneasler", 2.902839278961987],
-        ["Kangaskhan-Mega", 2.715925687446517],
-        ["Garchomp", 2.2997717743356216]
-    ],
-    "counters": []
+ "id": "azumarill",
+ "name": "Azumarill",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regma",
+ "formatLabel": "Pokémon Champions — Regulation M-A",
+ "dataThrough": "2026-05",
+ "history": [
+  {
+   "month": "2026-04",
+   "usage": 0.0078896,
+   "rank": 90,
+   "raw": 62565
+  },
+  {
+   "month": "2026-05",
+   "usage": 0.0096373,
+   "rank": 79,
+   "raw": 80466
+  }
+ ],
+ "abilities": [
+  [
+   "hugepower",
+   98.05546565883006
+  ],
+  [
+   "sapsipper",
+   1.73356178288207
+  ],
+  [
+   "thickfat",
+   0.2109725582878833
+  ]
+ ],
+ "items": [
+  [
+   "sitrusberry",
+   57.88544603485799
+  ],
+  [
+   "mysticwater",
+   37.62979834781736
+  ],
+  [
+   "lumberry",
+   1.4645629128768483
+  ],
+  [
+   "leftovers",
+   0.7156092010906574
+  ],
+  [
+   "fairyfeather",
+   0.7111823375656272
+  ],
+  [
+   "kebiaberry",
+   0.409801112934478
+  ],
+  [
+   "whiteherb",
+   0.37430253342564285
+  ],
+  [
+   "mentalherb",
+   0.32577113969107835
+  ]
+ ],
+ "moves": [
+  [
+   "aquajet",
+   24.284580665189686
+  ],
+  [
+   "playrough",
+   23.795210670216164
+  ],
+  [
+   "protect",
+   22.739245200824566
+  ],
+  [
+   "bellydrum",
+   14.159702361728396
+  ],
+  [
+   "liquidation",
+   12.03242241872291
+  ],
+  [
+   "icespinner",
+   0.5523243974707823
+  ],
+  [
+   "perishsong",
+   0.513520280845441
+  ],
+  [
+   "knockoff",
+   0.4966094572599549
+  ],
+  [
+   "encore",
+   0.24058216813696204
+  ],
+  [
+   "superpower",
+   0.178006937565232
+  ]
+ ],
+ "spreads": [
+  [
+   "Brave:32/32/0/0/2/0",
+   29.84275614037427
+  ],
+  [
+   "Brave:31/32/0/0/3/0",
+   5.759179810339208
+  ],
+  [
+   "Adamant:31/32/0/0/3/0",
+   5.54489368724818
+  ],
+  [
+   "Adamant:31/32/3/0/0/0",
+   5.146060767626974
+  ],
+  [
+   "Adamant:25/32/6/0/2/1",
+   3.4573562445399246
+  ]
+ ],
+ "teraTypes": [
+  [
+   "nothing",
+   100
+  ]
+ ],
+ "teammates": [
+  [
+   "Farigiraf",
+   9.195863938197094
+  ],
+  [
+   "Kingambit",
+   8.257054345827466
+  ],
+  [
+   "Camerupt-Mega",
+   6.977403178938099
+  ],
+  [
+   "Sinistcha",
+   6.470871527199357
+  ],
+  [
+   "Gallade",
+   6.443961498410933
+  ],
+  [
+   "Crabominable-Mega",
+   6.3457362208880985
+  ],
+  [
+   "Incineroar",
+   4.453010027685198
+  ],
+  [
+   "Sneasler",
+   2.902839278961987
+  ],
+  [
+   "Kangaskhan-Mega",
+   2.715925687446517
+  ],
+  [
+   "Garchomp",
+   2.2997717743356216
+  ]
+ ],
+ "counters": []
 }
