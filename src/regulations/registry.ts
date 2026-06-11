@@ -27,6 +27,16 @@ export function listRegulationIds(): string[] {
 }
 
 /**
+ * Newest regulation by start date — the registry's notion of the "current"
+ * competitive ruleset. Champions replaced mainline VGC as the flagship ladder
+ * in 2026, so consumers that need a sensible default format (e.g. meta-trends)
+ * key off this instead of a hardcoded VGC id.
+ */
+export function getLatestRegulation(): RegulationSet | undefined {
+    return [...REGULATIONS].sort((a, b) => b.startDate.localeCompare(a.startDate))[0];
+}
+
+/**
  * Showdown usage-stats format ids that the regulations mirror.
  *
  * These are the `gen9champions…`-style Smogon formats backing each regulation
