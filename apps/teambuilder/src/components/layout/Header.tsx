@@ -21,6 +21,12 @@ export function Header() {
                 </div>
 
                 <div className="flex items-center gap-3">
+                    <Link
+                        href="/reports"
+                        className="hidden text-sm text-muted-foreground hover:text-foreground sm:block"
+                    >
+                        Meta Reports
+                    </Link>
                     <ModeSwitch />
                     <ModeToggle />
                     <FormatSelector />
