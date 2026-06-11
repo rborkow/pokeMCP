@@ -1,0 +1,70 @@
+{
+    "id": "maushold",
+    "name": "Maushold",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0748436,
+            "rank": 20,
+            "raw": 435225
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0778363,
+            "rank": 18,
+            "raw": 396553
+        }
+    ],
+    "abilities": [
+        ["friendguard", 96.66570715336556],
+        ["technician", 3.2312616802822847],
+        ["cheekpouch", 0.10303116635215373]
+    ],
+    "items": [
+        ["chopleberry", 48.29361410039955],
+        ["focussash", 33.404256276646585],
+        ["sitrusberry", 11.950083420512486],
+        ["mentalherb", 1.5403589352347624],
+        ["kingsrock", 1.5092425733832742],
+        ["silkscarf", 1.3854730537725413],
+        ["choicescarf", 0.47879690586796186],
+        ["brightpowder", 0.47204710726844684]
+    ],
+    "moves": [
+        ["followme", 24.72288204205504],
+        ["protect", 22.96605513799184],
+        ["superfang", 18.91358721410425],
+        ["feint", 8.548878293809382],
+        ["encore", 7.4229474021027295],
+        ["taunt", 6.01314838080832],
+        ["helpinghand", 4.346060458686447],
+        ["raindance", 1.6080625809185414],
+        ["populationbomb", 1.5167086215856982],
+        ["uturn", 0.8726805320596029]
+    ],
+    "spreads": [
+        ["Jolly:32/0/2/0/0/32", 7.594973467903099],
+        ["Timid:32/0/2/0/0/32", 6.861805002828736],
+        ["Jolly:32/0/1/0/1/32", 5.8082079853302595],
+        ["Timid:32/0/0/0/2/32", 3.495033115905926],
+        ["Jolly:10/32/0/0/0/24", 2.492196578779331]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Basculegion", 8.322883873275423],
+        ["Incineroar", 6.7970488902387345],
+        ["Gardevoir-Mega", 6.4891837814818905],
+        ["Garchomp", 6.1472660670895785],
+        ["Floette-Mega", 5.950825995247777],
+        ["Kingambit", 5.160526905398759],
+        ["Sinistcha", 4.7902550181427],
+        ["Talonflame", 3.640181922482786],
+        ["Sneasler", 3.5088221793262218],
+        ["Archaludon", 3.228720706404722]
+    ],
+    "counters": []
+}

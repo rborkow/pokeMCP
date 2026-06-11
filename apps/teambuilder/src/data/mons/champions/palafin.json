@@ -1,0 +1,66 @@
+{
+    "id": "palafin",
+    "name": "Palafin",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.021779299999999998,
+            "rank": 51,
+            "raw": 180219
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0130812,
+            "rank": 67,
+            "raw": 154081
+        }
+    ],
+    "abilities": [["zerotohero", 100]],
+    "items": [
+        ["mysticwater", 72.68174914582127],
+        ["leftovers", 12.358157598088193],
+        ["choicescarf", 9.232248384446025],
+        ["sitrusberry", 3.2027581091507553],
+        ["lumberry", 0.5846381780344702],
+        ["whiteherb", 0.5037568926680177],
+        ["focussash", 0.29749534740973216],
+        ["wacanberry", 0.26015415003444603]
+    ],
+    "moves": [
+        ["jetpunch", 23.68169130807767],
+        ["wavecrash", 22.596027404186035],
+        ["protect", 20.819820551357523],
+        ["flipturn", 9.753546103302254],
+        ["closecombat", 7.60812114559313],
+        ["bulkup", 5.445885969568251],
+        ["drainpunch", 2.8211602798657243],
+        ["encore", 1.7542599512524137],
+        ["icepunch", 1.6591570303177503],
+        ["taunt", 0.6839215149634748]
+    ],
+    "spreads": [
+        ["Adamant:32/32/0/0/2/0", 8.755505925091525],
+        ["Adamant:32/32/0/0/0/2", 7.209015473338305],
+        ["Adamant:2/32/0/0/0/32", 7.111872250608828],
+        ["Jolly:0/32/0/0/2/32", 5.696337970581363],
+        ["Adamant:31/32/0/0/0/3", 5.522091605398656]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Incineroar", 10.691434710916853],
+        ["Sneasler", 7.149667155193952],
+        ["Kingambit", 6.2213735540767985],
+        ["Sinistcha", 5.728550628719669],
+        ["Pelipper", 4.841044000065216],
+        ["Archaludon", 4.287983511133186],
+        ["Floette-Mega", 4.188249514636422],
+        ["Gengar-Mega", 4.144539994630941],
+        ["Garchomp", 2.5480098846299777],
+        ["Froslass-Mega", 2.2332370209710404]
+    ],
+    "counters": []
+}

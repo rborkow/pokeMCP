@@ -1,0 +1,70 @@
+{
+    "id": "vanilluxe",
+    "name": "Vanilluxe",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0059426,
+            "rank": 103,
+            "raw": 49154
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0057394,
+            "rank": 98,
+            "raw": 58438
+        }
+    ],
+    "abilities": [
+        ["snowwarning", 99.18330427612341],
+        ["weakarmor", 0.5088457708079617],
+        ["icebody", 0.30784995306861923]
+    ],
+    "items": [
+        ["choicescarf", 71.86446200230172],
+        ["nevermeltice", 17.243531592269328],
+        ["focussash", 2.9654040563616357],
+        ["leftovers", 2.5538262495531128],
+        ["silkscarf", 1.7246266068186082],
+        ["sitrusberry", 1.460192512981426],
+        ["chopleberry", 0.7381190220830897],
+        ["occaberry", 0.5475698319763603]
+    ],
+    "moves": [
+        ["blizzard", 24.117427695649276],
+        ["freezedry", 22.928603692072333],
+        ["icywind", 16.798233257127247],
+        ["auroraveil", 9.042492080499272],
+        ["sheercold", 5.640837326986043],
+        ["protect", 5.35723732639604],
+        ["iceshard", 4.328170441189311],
+        ["weatherball", 3.84898189196734],
+        ["icebeam", 1.8851321172499789],
+        ["taunt", 1.267426631910881]
+    ],
+    "spreads": [
+        ["Timid:2/0/0/32/0/32", 39.94573224604069],
+        ["Timid:1/0/1/32/0/32", 12.221026183624362],
+        ["Timid:0/0/0/32/2/32", 5.05323328660012],
+        ["Timid:5/0/1/28/0/32", 3.9347342675800445],
+        ["Modest:1/0/1/32/0/32", 2.998742893327202]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Basculegion", 5.00146820412312],
+        ["Garchomp", 4.679969311532683],
+        ["Kingambit", 4.455708336818025],
+        ["Incineroar", 4.382616746732361],
+        ["Sneasler", 4.184479977873886],
+        ["Milotic", 3.6977609064763857],
+        ["Whimsicott", 3.6549725762787104],
+        ["Lopunny-Mega", 3.1055658078790453],
+        ["Farigiraf", 2.895130274488369],
+        ["Sinistcha", 2.7308826648972184]
+    ],
+    "counters": []
+}

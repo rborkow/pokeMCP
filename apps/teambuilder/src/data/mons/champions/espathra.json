@@ -1,0 +1,70 @@
+{
+    "id": "espathra",
+    "name": "Espathra",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.007512799999999999,
+            "rank": 93,
+            "raw": 79920
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0217224,
+            "rank": 52,
+            "raw": 146085
+        }
+    ],
+    "abilities": [
+        ["speedboost", 99.65833962898152],
+        ["opportunist", 0.2901817928006985],
+        ["frisk", 0.05147857821779034]
+    ],
+    "items": [
+        ["mentalherb", 29.42438942929006],
+        ["colburberry", 23.82862100652229],
+        ["focussash", 22.42144358182003],
+        ["sitrusberry", 14.429601353341646],
+        ["kasibberry", 4.512179073972487],
+        ["leftovers", 3.594730824949578],
+        ["twistedspoon", 0.6736068747951085],
+        ["nothing", 0.598227568005202]
+    ],
+    "moves": [
+        ["protect", 24.84149112269144],
+        ["luminacrash", 22.75584286731239],
+        ["batonpass", 21.586826447502986],
+        ["calmmind", 21.349135653625375],
+        ["dazzlinggleam", 1.6588954571165506],
+        ["storedpower", 1.4504141003469055],
+        ["skillswap", 1.3291380748352126],
+        ["raindance", 1.0814370850671002],
+        ["hypnosis", 0.7196806667508675],
+        ["psychicterrain", 0.42819879143658884]
+    ],
+    "spreads": [
+        ["Timid:32/0/2/0/0/32", 13.211144636765553],
+        ["Timid:24/0/26/0/10/6", 5.229943938441589],
+        ["Timid:2/0/0/32/0/32", 5.188903812956702],
+        ["Timid:32/0/0/0/15/19", 3.6759417953717377],
+        ["Modest:2/0/0/32/0/32", 3.600247206423772]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Archaludon", 12.665800049575102],
+        ["Sableye", 9.140411873678431],
+        ["Politoed", 7.955523818833189],
+        ["Floette-Mega", 7.6525083220455095],
+        ["Scovillain-Mega", 7.0119093885848],
+        ["Sinistcha", 6.4189281853947415],
+        ["Sneasler", 3.8575757368306594],
+        ["Incineroar", 3.318980100723455],
+        ["Basculegion", 3.0650132605665856],
+        ["Maushold", 2.819871991276236]
+    ],
+    "counters": []
+}

@@ -1,0 +1,70 @@
+{
+    "id": "scizor",
+    "name": "Scizor",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0104057,
+            "rank": 77,
+            "raw": 78027
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0131546,
+            "rank": 66,
+            "raw": 113462
+        }
+    ],
+    "abilities": [
+        ["technician", 99.34991789139443],
+        ["swarm", 0.6485137545545648],
+        ["lightmetal", 0.0015683540510065905]
+    ],
+    "items": [
+        ["metalcoat", 56.75251952090774],
+        ["sitrusberry", 23.711401825965837],
+        ["whiteherb", 5.12009992794515],
+        ["lumberry", 3.566469545968619],
+        ["leftovers", 3.4853118753808996],
+        ["focussash", 2.67541735120262],
+        ["occaberry", 2.6043608843636323],
+        ["silverpowder", 0.9005455585596317]
+    ],
+    "moves": [
+        ["bulletpunch", 24.854501061220528],
+        ["protect", 20.17870314793047],
+        ["bugbite", 15.872307268767985],
+        ["swordsdance", 14.253417728416123],
+        ["closecombat", 9.354628969769898],
+        ["knockoff", 3.5532562559608114],
+        ["feint", 3.017761594476797],
+        ["dualwingbeat", 2.574014364473964],
+        ["uturn", 2.028997780958842],
+        ["tailwind", 1.1901536757915885]
+    ],
+    "spreads": [
+        ["Adamant:32/32/0/0/2/0", 24.72878174281199],
+        ["Adamant:32/32/0/0/0/2", 8.9758714029219],
+        ["Adamant:25/30/0/0/1/10", 8.651332666312282],
+        ["Adamant:32/32/2/0/0/0", 5.634206635427498],
+        ["Adamant:17/32/17/0/0/0", 5.095818195793724]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Garchomp", 5.933628333629634],
+        ["Pelipper", 5.385048771384066],
+        ["Archaludon", 4.749540596063884],
+        ["Sneasler", 4.528075534832662],
+        ["Basculegion", 4.505147993462322],
+        ["Sinistcha", 4.155051221794589],
+        ["Incineroar", 3.8620421517894488],
+        ["Charizard-Mega-Y", 3.5294460080180445],
+        ["Blastoise-Mega", 3.3527362760707433],
+        ["Sableye", 3.2169978486151503]
+    ],
+    "counters": []
+}

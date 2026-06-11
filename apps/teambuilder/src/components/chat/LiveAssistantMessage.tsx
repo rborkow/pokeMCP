@@ -1,6 +1,6 @@
 "use client";
 
-import { type RefObject } from "react";
+import type { RefObject } from "react";
 import { Bot, Loader2 } from "lucide-react";
 import { LiveTextStream, type LiveTextStreamHandle } from "./LiveTextStream";
 import { ThinkingCollapsible } from "./ThinkingCollapsible";

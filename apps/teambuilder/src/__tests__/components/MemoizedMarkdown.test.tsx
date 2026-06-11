@@ -15,9 +15,7 @@ describe("MemoizedMarkdown", () => {
     });
 
     it("renders multiple blocks independently", () => {
-        render(
-            <MemoizedMarkdown content={"# Title\n\nParagraph one.\n\n- Item 1\n- Item 2"} />,
-        );
+        render(<MemoizedMarkdown content={"# Title\n\nParagraph one.\n\n- Item 1\n- Item 2"} />);
         expect(screen.getByRole("heading")).toHaveTextContent("Title");
         expect(screen.getByText("Paragraph one.")).toBeInTheDocument();
         expect(screen.getByText("Item 1")).toBeInTheDocument();

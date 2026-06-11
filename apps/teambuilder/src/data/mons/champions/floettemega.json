@@ -1,0 +1,57 @@
+{
+    "id": "floettemega",
+    "name": "Floette-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.1921677,
+            "rank": 7,
+            "raw": 699330
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.1966582,
+            "rank": 8,
+            "raw": 659882
+        }
+    ],
+    "abilities": [["fairyaura", 100]],
+    "items": [["floettite", 100]],
+    "moves": [
+        ["protect", 24.877336734513108],
+        ["dazzlinggleam", 24.29080818664714],
+        ["moonblast", 21.06646204207262],
+        ["lightofruin", 13.398333632668958],
+        ["calmmind", 10.506134487393446],
+        ["drainingkiss", 4.549388350780749],
+        ["psychic", 0.7358915884150435],
+        ["substitute", 0.15332112735201706],
+        ["gigadrain", 0.07696607076344185],
+        ["energyball", 0.06711309867838552]
+    ],
+    "spreads": [
+        ["Modest:2/0/0/32/0/32", 11.874557496283224],
+        ["Modest:1/0/1/32/0/32", 6.520955568064117],
+        ["Timid:2/0/0/32/0/32", 5.196618937732541],
+        ["Modest:28/0/1/5/0/32", 2.1823445977875657],
+        ["Timid:0/0/0/32/2/32", 1.9316778029129396]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Garchomp", 10.15669455687635],
+        ["Basculegion", 9.514293168278309],
+        ["Kingambit", 8.584934374114521],
+        ["Incineroar", 6.590311145790542],
+        ["Charizard-Mega-Y", 6.418861840143955],
+        ["Sneasler", 6.332513536935587],
+        ["Sinistcha", 5.864281820106024],
+        ["Whimsicott", 4.529805442940614],
+        ["Aerodactyl", 3.294184682323976],
+        ["Maushold", 2.3553075313371443]
+    ],
+    "counters": []
+}

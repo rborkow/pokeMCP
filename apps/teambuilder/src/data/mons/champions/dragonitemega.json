@@ -1,0 +1,57 @@
+{
+    "id": "dragonitemega",
+    "name": "Dragonite-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0494072,
+            "rank": 33,
+            "raw": 333537
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.057104,
+            "rank": 29,
+            "raw": 349671
+        }
+    ],
+    "abilities": [["multiscale", 100]],
+    "items": [["dragoninite", 100]],
+    "moves": [
+        ["protect", 16.635581019639563],
+        ["hurricane", 14.629353836893422],
+        ["dragonpulse", 13.954348385234],
+        ["tailwind", 13.797018965121815],
+        ["dracometeor", 10.213727312737072],
+        ["flamethrower", 6.745120305041278],
+        ["thunderbolt", 4.963771097365174],
+        ["heatwave", 4.140221946080317],
+        ["extremespeed", 4.0316313603761404],
+        ["airslash", 2.525903747332546]
+    ],
+    "spreads": [
+        ["Modest:2/0/0/32/0/32", 33.320349867678374],
+        ["Timid:2/0/0/32/0/32", 12.294960994363196],
+        ["Modest:1/0/1/32/0/32", 2.5563279038930444],
+        ["Timid:1/0/1/32/0/32", 2.1840521061833025],
+        ["Modest:32/0/0/32/0/2", 1.76878099701379]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Basculegion", 14.880416518413114],
+        ["Archaludon", 11.842954969044571],
+        ["Pelipper", 9.387074065369445],
+        ["Sneasler", 6.895918193959336],
+        ["Sableye", 5.91566825510175],
+        ["Kingambit", 5.190446858979913],
+        ["Sinistcha", 4.252672677459597],
+        ["Garchomp", 3.944127674764254],
+        ["Sylveon", 3.640551293783076],
+        ["Scizor-Mega", 3.3151160477983734]
+    ],
+    "counters": []
+}

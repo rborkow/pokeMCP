@@ -78,7 +78,9 @@ export function PokemonEditDialog({ pokemon, open, onOpenChange, onSave }: Pokem
                 <div className="space-y-4">
                     {/* Pokemon Name */}
                     <div className="space-y-2">
-                        <label htmlFor="edit-pokemon-name" className="text-sm font-medium">Pokemon</label>
+                        <label htmlFor="edit-pokemon-name" className="text-sm font-medium">
+                            Pokemon
+                        </label>
                         <Input
                             id="edit-pokemon-name"
                             value={editedPokemon.pokemon}
@@ -89,7 +91,9 @@ export function PokemonEditDialog({ pokemon, open, onOpenChange, onSave }: Pokem
 
                     {/* Nickname */}
                     <div className="space-y-2">
-                        <label htmlFor="edit-pokemon-nickname" className="text-sm font-medium">Nickname (optional)</label>
+                        <label htmlFor="edit-pokemon-nickname" className="text-sm font-medium">
+                            Nickname (optional)
+                        </label>
                         <Input
                             id="edit-pokemon-nickname"
                             value={editedPokemon.nickname || ""}
@@ -101,7 +105,9 @@ export function PokemonEditDialog({ pokemon, open, onOpenChange, onSave }: Pokem
                     {/* Item & Ability Row */}
                     <div className="grid grid-cols-2 gap-3">
                         <div className="space-y-2">
-                            <label htmlFor="edit-pokemon-item" className="text-sm font-medium">Item</label>
+                            <label htmlFor="edit-pokemon-item" className="text-sm font-medium">
+                                Item
+                            </label>
                             <Select
                                 value={editedPokemon.item || "none"}
                                 onValueChange={(value) =>
@@ -147,7 +153,9 @@ export function PokemonEditDialog({ pokemon, open, onOpenChange, onSave }: Pokem
                             </Select>
                         </div>
                         <div className="space-y-2">
-                            <label htmlFor="edit-pokemon-ability" className="text-sm font-medium">Ability</label>
+                            <label htmlFor="edit-pokemon-ability" className="text-sm font-medium">
+                                Ability
+                            </label>
                             {validAbilities.length > 0 ? (
                                 <Select
                                     value={editedPokemon.ability || "none"}
@@ -181,7 +189,9 @@ export function PokemonEditDialog({ pokemon, open, onOpenChange, onSave }: Pokem
                     {/* Nature & Tera Type */}
                     <div className="grid grid-cols-2 gap-3">
                         <div className="space-y-2">
-                            <label htmlFor="edit-pokemon-nature" className="text-sm font-medium">Nature</label>
+                            <label htmlFor="edit-pokemon-nature" className="text-sm font-medium">
+                                Nature
+                            </label>
                             <Select
                                 value={editedPokemon.nature || "Hardy"}
                                 onValueChange={(value) => updateField("nature", value)}
@@ -199,7 +209,9 @@ export function PokemonEditDialog({ pokemon, open, onOpenChange, onSave }: Pokem
                             </Select>
                         </div>
                         <div className="space-y-2">
-                            <label htmlFor="edit-pokemon-tera" className="text-sm font-medium">Tera Type</label>
+                            <label htmlFor="edit-pokemon-tera" className="text-sm font-medium">
+                                Tera Type
+                            </label>
                             <Select
                                 value={editedPokemon.teraType || "none"}
                                 onValueChange={(value) =>

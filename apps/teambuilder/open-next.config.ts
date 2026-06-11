@@ -6,7 +6,14 @@ export default {
             wrapper: "cloudflare-node",
             converter: "edge",
             proxyExternalRequest: "fetch",
-            incrementalCache: "dummy",
+            // Read-only cache backed by Workers static assets: serves the
+            // build-time prerenders (reports, /pokemon/* trend pages) as plain
+            // HTML without re-rendering. No revalidation — pages update only on
+            // deploy, which is exactly how the monthly report pipeline works.
+            incrementalCache: () =>
+                import(
+                    "@opennextjs/cloudflare/overrides/incremental-cache/static-assets-incremental-cache"
+                ).then((m) => m.default),
             tagCache: "dummy",
             queue: "dummy",
         },

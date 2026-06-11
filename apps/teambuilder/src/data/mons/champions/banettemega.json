@@ -1,0 +1,57 @@
+{
+    "id": "banettemega",
+    "name": "Banette-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0045831,
+            "rank": 115,
+            "raw": 34515
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.005751699999999999,
+            "rank": 96,
+            "raw": 79572
+        }
+    ],
+    "abilities": [["prankster", 100]],
+    "items": [["banettite", 100]],
+    "moves": [
+        ["poltergeist", 22.806104937107943],
+        ["destinybond", 19.4607563714964],
+        ["willowisp", 12.36426513458969],
+        ["encore", 11.167365636796802],
+        ["raindance", 9.604977656662337],
+        ["shadowsneak", 5.375898369224667],
+        ["disable", 4.703088903576677],
+        ["trickroom", 4.0789318126956],
+        ["protect", 3.9207515262051027],
+        ["swagger", 0.9202797621756094]
+    ],
+    "spreads": [
+        ["Adamant:32/27/0/0/7/0", 20.352709033230028],
+        ["Adamant:32/15/0/0/18/1", 4.436956192916885],
+        ["Adamant:32/32/0/0/0/2", 3.7342301214545675],
+        ["Adamant:32/32/2/0/0/0", 3.6258102724993164],
+        ["Careful:32/0/9/0/25/0", 2.8798697412921883]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Sneasler", 12.548401060975081],
+        ["Basculegion", 11.215896459628032],
+        ["Archaludon", 8.939032555704374],
+        ["Sylveon", 8.858906886224403],
+        ["Kingambit", 6.992469119486196],
+        ["Aerodactyl-Mega", 6.364111106131309],
+        ["Pelipper", 2.7186304577534925],
+        ["Garchomp", 2.266446606217617],
+        ["Milotic", 1.8240888441336571],
+        ["Glimmora", 1.7486993552570231]
+    ],
+    "counters": []
+}

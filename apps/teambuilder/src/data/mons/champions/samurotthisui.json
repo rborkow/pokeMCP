@@ -1,0 +1,66 @@
+{
+    "id": "samurotthisui",
+    "name": "Samurott-Hisui",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.005079200000000001,
+            "rank": 110,
+            "raw": 31681
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0116422,
+            "rank": 72,
+            "raw": 91645
+        }
+    ],
+    "abilities": [["sharpness", 99.20716683634676], ["torrent", 0.7928331636532375]],
+    "items": [
+        ["scopelens", 26.058187002625864],
+        ["choicescarf", 24.668886765353726],
+        ["blackglasses", 20.66718794106286],
+        ["focussash", 16.71256088556177],
+        ["chopleberry", 4.358012217017716],
+        ["sitrusberry", 2.4289970900474587],
+        ["whiteherb", 2.116366485065006],
+        ["roseliberry", 0.7870308610587468]
+    ],
+    "moves": [
+        ["sacredsword", 21.573396183342584],
+        ["nightslash", 15.179742217232278],
+        ["aquacutter", 14.141471405262113],
+        ["protect", 13.324986122860269],
+        ["suckerpunch", 12.882770034011305],
+        ["ceaselessedge", 8.44733677882377],
+        ["flipturn", 4.885306418001618],
+        ["detect", 3.2684666048528435],
+        ["razorshell", 3.0776653456997467],
+        ["aquajet", 0.9879085851365624]
+    ],
+    "spreads": [
+        ["Adamant:2/32/0/0/0/32", 18.15292320767579],
+        ["Jolly:2/32/0/0/0/32", 11.490344988014838],
+        ["Adamant:18/22/0/0/0/26", 6.9550719567290535],
+        ["Jolly:0/32/0/0/2/32", 5.661652518423506],
+        ["Adamant:0/32/0/0/2/32", 4.567512465756911]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Garchomp", 5.9429247964120115],
+        ["Whimsicott", 5.694361296417839],
+        ["Sneasler", 5.50938440083031],
+        ["Ninetales-Alola", 4.095408038091287],
+        ["Glimmora", 3.4000243493642106],
+        ["Sylveon", 3.301012651212702],
+        ["Incineroar", 3.130628507647779],
+        ["Chandelure-Mega", 3.1243650396339415],
+        ["Aegislash", 2.691213472485831],
+        ["Aerodactyl-Mega", 2.4652110859393894]
+    ],
+    "counters": []
+}

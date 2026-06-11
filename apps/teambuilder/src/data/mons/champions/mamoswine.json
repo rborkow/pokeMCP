@@ -1,0 +1,70 @@
+{
+    "id": "mamoswine",
+    "name": "Mamoswine",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0130468,
+            "rank": 67,
+            "raw": 90509
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0097576,
+            "rank": 78,
+            "raw": 82687
+        }
+    ],
+    "abilities": [
+        ["oblivious", 84.42501280274524],
+        ["thickfat", 14.288123981753687],
+        ["snowcloak", 1.286863215501064]
+    ],
+    "items": [
+        ["focussash", 53.2379761278588],
+        ["nevermeltice", 19.362192898909612],
+        ["choicescarf", 15.938117153751014],
+        ["occaberry", 3.150048893461387],
+        ["softsand", 2.1370570755661995],
+        ["chopleberry", 1.3012990333830168],
+        ["sitrusberry", 1.273895436100181],
+        ["leftovers", 0.9593878579307475]
+    ],
+    "moves": [
+        ["iceshard", 21.143822801248735],
+        ["protect", 19.659929345097037],
+        ["earthquake", 15.922258011200455],
+        ["iciclecrash", 15.480167579105364],
+        ["highhorsepower", 13.143529746074961],
+        ["iciclespear", 5.0701189522891426],
+        ["rockslide", 4.7260338396325094],
+        ["knockoff", 1.3662060154453826],
+        ["stompingtantrum", 0.7618417171460452],
+        ["stoneedge", 0.7443121224972218]
+    ],
+    "spreads": [
+        ["Adamant:2/32/0/0/0/32", 32.69365058216992],
+        ["Adamant:0/32/0/0/2/32", 9.762771344557814],
+        ["Jolly:0/32/0/0/2/32", 7.31302277851764],
+        ["Jolly:2/32/0/0/0/32", 5.591858370202539],
+        ["Adamant:1/32/1/0/0/32", 4.433033109370479]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Charizard-Mega-Y", 5.968479104554504],
+        ["Basculegion", 4.45044649788077],
+        ["Talonflame", 4.4276453145597445],
+        ["Kingambit", 4.367371636129038],
+        ["Hydreigon", 4.139512764926821],
+        ["Whimsicott", 4.013245392368434],
+        ["Rotom-Wash", 3.7629353974291306],
+        ["Glimmora-Mega", 3.5306115248269125],
+        ["Aegislash", 3.5234772832469083],
+        ["Sneasler", 3.312340937701298]
+    ],
+    "counters": []
+}

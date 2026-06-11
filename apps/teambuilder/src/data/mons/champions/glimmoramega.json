@@ -1,0 +1,57 @@
+{
+    "id": "glimmoramega",
+    "name": "Glimmora-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0227589,
+            "rank": 47,
+            "raw": 166469
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.037205,
+            "rank": 39,
+            "raw": 208773
+        }
+    ],
+    "abilities": [["adaptability", 100]],
+    "items": [["glimmoranite", 100]],
+    "moves": [
+        ["powergem", 24.893339907480616],
+        ["sludgebomb", 23.84879705918677],
+        ["spikyshield", 23.4259043962649],
+        ["earthpower", 23.18486705234957],
+        ["sludgewave", 1.6619324804739142],
+        ["protect", 1.4996255471509627],
+        ["substitute", 0.5779374378298783],
+        ["energyball", 0.27453513970150406],
+        ["dazzlinggleam", 0.16181778561515642],
+        ["mortalspin", 0.12432934682970294]
+    ],
+    "spreads": [
+        ["Timid:2/0/0/32/0/32", 16.375086730979778],
+        ["Modest:27/0/0/20/1/18", 10.239665764720922],
+        ["Modest:2/0/0/32/0/32", 6.771142362967579],
+        ["Timid:15/0/1/28/1/21", 6.316456668449319],
+        ["Timid:0/0/0/32/2/32", 6.258179316539479]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Basculegion", 8.672908994339302],
+        ["Whimsicott", 8.290359523787941],
+        ["Garchomp", 7.729235653491781],
+        ["Kingambit", 5.479181841176828],
+        ["Ninetales-Alola", 5.42221365524953],
+        ["Charizard-Mega-Y", 4.248539781127294],
+        ["Talonflame", 4.19809029079239],
+        ["Rotom-Wash", 3.4344509831141194],
+        ["Aegislash", 2.7131163545781165],
+        ["Farigiraf", 2.679905046628895]
+    ],
+    "counters": []
+}

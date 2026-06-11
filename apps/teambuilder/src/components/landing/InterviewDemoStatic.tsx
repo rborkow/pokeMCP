@@ -37,7 +37,9 @@ export function InterviewDemoStatic() {
                                 Where do you want to start?
                             </div>
                             <div className="text-[13px] text-muted-foreground mt-0.5">
-                                {"Pick the one that feels closest. I'll adapt the next question based on your answer."}
+                                {
+                                    "Pick the one that feels closest. I'll adapt the next question based on your answer."
+                                }
                             </div>
                         </div>
                     </div>

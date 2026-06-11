@@ -1,0 +1,70 @@
+{
+    "id": "oranguru",
+    "name": "Oranguru",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0131777,
+            "rank": 66,
+            "raw": 139281
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.012726900000000001,
+            "rank": 71,
+            "raw": 196629
+        }
+    ],
+    "abilities": [
+        ["innerfocus", 77.1939788238622],
+        ["telepathy", 22.394961780375993],
+        ["symbiosis", 0.41105939576181066]
+    ],
+    "items": [
+        ["colburberry", 40.69761001330453],
+        ["mentalherb", 36.47001541914137],
+        ["sitrusberry", 18.762710756950064],
+        ["leftovers", 1.9111493685937595],
+        ["focussash", 0.6331718701974645],
+        ["brightpowder", 0.412039084777455],
+        ["choicescarf", 0.37812091999728425],
+        ["nothing", 0.1643005866746436]
+    ],
+    "moves": [
+        ["instruct", 24.605278933705147],
+        ["trickroom", 24.56485379644414],
+        ["psychic", 16.168949982104202],
+        ["protect", 10.350906496264251],
+        ["encore", 7.6147947127582425],
+        ["foulplay", 5.203534958785496],
+        ["psychicnoise", 1.5433274637877792],
+        ["taunt", 1.0911416506791567],
+        ["hypervoice", 0.8318248334848973],
+        ["psychicterrain", 0.7917912908243664]
+    ],
+    "spreads": [
+        ["Calm:32/0/21/0/13/0", 9.49758409908055],
+        ["Relaxed:32/0/32/0/2/0", 9.418731349745528],
+        ["Relaxed:32/0/32/0/0/2", 6.50743884632692],
+        ["Sassy:32/0/32/0/2/0", 6.2751040104165146],
+        ["Relaxed:32/0/30/0/4/0", 4.512565264350826]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Torkoal", 9.18388134380744],
+        ["Sylveon", 7.662992702575797],
+        ["Sinistcha", 6.502148842636765],
+        ["Kingambit", 5.1631374485052905],
+        ["Drampa-Mega", 4.573067509980752],
+        ["Incineroar", 4.408780914455419],
+        ["Lucario", 3.085555239429737],
+        ["Camerupt-Mega", 2.792988426089329],
+        ["Basculegion", 2.0539760680002557],
+        ["Farigiraf", 1.7100199486634744]
+    ],
+    "counters": []
+}

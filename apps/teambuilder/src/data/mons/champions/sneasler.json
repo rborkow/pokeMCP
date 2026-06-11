@@ -1,0 +1,70 @@
+{
+    "id": "sneasler",
+    "name": "Sneasler",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.4385189,
+            "rank": 1,
+            "raw": 2262250
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.2869659,
+            "rank": 4,
+            "raw": 1849286
+        }
+    ],
+    "abilities": [
+        ["unburden", 92.40048257677408],
+        ["poisontouch", 6.492953160522013],
+        ["pressure", 1.1065642627039056]
+    ],
+    "items": [
+        ["whiteherb", 78.40326504803234],
+        ["focussash", 17.91247781072491],
+        ["sitrusberry", 1.2256796882264145],
+        ["mentalherb", 0.8316314813037502],
+        ["lumberry", 0.3133965341777599],
+        ["shucaberry", 0.2846416844900107],
+        ["kingsrock", 0.25602784922067956],
+        ["blackbelt", 0.25161029636309773]
+    ],
+    "moves": [
+        ["closecombat", 24.922916464167525],
+        ["direclaw", 23.823090423676092],
+        ["fakeout", 22.678309672577157],
+        ["protect", 18.173356059995196],
+        ["coaching", 3.226157559809035],
+        ["feint", 1.3349731877346285],
+        ["rockslide", 1.1625143023470308],
+        ["rocktomb", 0.9537359703132483],
+        ["throatchop", 0.7783685043439723],
+        ["gunkshot", 0.7491964877135849]
+    ],
+    "spreads": [
+        ["Jolly:2/32/0/0/0/32", 17.31331008367115],
+        ["Adamant:2/32/0/0/0/32", 17.08277101436571],
+        ["Adamant:0/32/0/0/2/32", 6.476702925588206],
+        ["Adamant:0/32/2/0/0/32", 4.524545086673673],
+        ["Jolly:0/32/0/0/2/32", 4.273466584199728]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Kingambit", 8.964902030748522],
+        ["Basculegion", 8.883145896159002],
+        ["Garchomp", 6.034232961124735],
+        ["Incineroar", 4.340338170365651],
+        ["Floette-Mega", 4.339681812654224],
+        ["Sinistcha", 4.128960195722742],
+        ["Charizard-Mega-Y", 3.5720121098674738],
+        ["Whimsicott", 3.0207202355599714],
+        ["Aerodactyl-Mega", 2.907310542264964],
+        ["Archaludon", 2.886480855278529]
+    ],
+    "counters": []
+}

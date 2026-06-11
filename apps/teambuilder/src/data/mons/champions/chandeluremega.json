@@ -1,0 +1,57 @@
+{
+    "id": "chandeluremega",
+    "name": "Chandelure-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0067763,
+            "rank": 98,
+            "raw": 74472
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0064227,
+            "rank": 93,
+            "raw": 76939
+        }
+    ],
+    "abilities": [["infiltrator", 100]],
+    "items": [["chandelurite", 100]],
+    "moves": [
+        ["shadowball", 24.687235244654435],
+        ["heatwave", 24.26050672471722],
+        ["protect", 23.93166777131867],
+        ["trickroom", 11.128620309933329],
+        ["substitute", 6.672318427910097],
+        ["calmmind", 2.1121149523228713],
+        ["energyball", 1.8278747376518159],
+        ["flamethrower", 1.2170539039546466],
+        ["overheat", 1.1661295056946361],
+        ["willowisp", 0.6163315620645222]
+    ],
+    "spreads": [
+        ["Modest:5/0/15/22/0/24", 13.00995478722985],
+        ["Modest:32/0/0/31/0/3", 6.676385991105812],
+        ["Modest:32/0/2/32/0/0", 6.435302448910028],
+        ["Modest:32/0/16/14/0/4", 5.596710705661977],
+        ["Modest:32/0/0/32/0/2", 5.37204278227956]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Whimsicott", 11.77208434843017],
+        ["Sneasler", 5.721597034825136],
+        ["Samurott-Hisui", 5.663407505163773],
+        ["Kingambit", 4.27504172415817],
+        ["Glimmora", 4.095502246061166],
+        ["Torkoal", 4.030742381743215],
+        ["Ninetales-Alola", 3.8631816531724947],
+        ["Basculegion", 3.7137568952423825],
+        ["Farigiraf", 3.6486795840751505],
+        ["Garchomp", 3.12504951297267]
+    ],
+    "counters": []
+}

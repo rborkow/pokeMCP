@@ -1,0 +1,70 @@
+{
+    "id": "tsareena",
+    "name": "Tsareena",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.021827,
+            "rank": 50,
+            "raw": 141165
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0258446,
+            "rank": 47,
+            "raw": 258765
+        }
+    ],
+    "abilities": [
+        ["queenlymajesty", 99.0196444018037],
+        ["leafguard", 0.8596626551657928],
+        ["sweetveil", 0.1206929430305076]
+    ],
+    "items": [
+        ["sitrusberry", 28.49230666030813],
+        ["miracleseed", 22.678752393922096],
+        ["choicescarf", 21.704863291325964],
+        ["focussash", 10.410816836452184],
+        ["whiteherb", 3.716257031583149],
+        ["occaberry", 3.459775627050296],
+        ["cobaberry", 2.907122516678696],
+        ["kebiaberry", 1.6467650525184867]
+    ],
+    "moves": [
+        ["tripleaxel", 20.254226303480653],
+        ["protect", 14.879805653961956],
+        ["lowkick", 14.175817987059697],
+        ["tropkick", 13.641121804486959],
+        ["powerwhip", 11.061666386796617],
+        ["helpinghand", 6.043304058118756],
+        ["taunt", 5.491955662652946],
+        ["uturn", 4.893959744946836],
+        ["zenheadbutt", 3.3630153646770493],
+        ["highjumpkick", 2.2881618397957677]
+    ],
+    "spreads": [
+        ["Jolly:2/32/0/0/0/32", 13.53899985916485],
+        ["Adamant:2/32/0/0/0/32", 8.378882010885954],
+        ["Adamant:30/14/4/0/1/17", 6.9086783107806475],
+        ["Jolly:4/32/0/0/0/30", 3.782659448825777],
+        ["Jolly:0/32/0/0/2/32", 2.752884905879867]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Whimsicott", 5.3466983924363864],
+        ["Sneasler", 4.6609354410960115],
+        ["Basculegion", 4.567972188808533],
+        ["Garchomp", 4.3759679462397525],
+        ["Kingambit", 3.871358740629109],
+        ["Floette-Mega", 3.7857360729695353],
+        ["Typhlosion-Hisui", 3.7185287778835763],
+        ["Aerodactyl-Mega", 2.852656977172781],
+        ["Delphox-Mega", 2.618410326523823],
+        ["Milotic", 2.338990749528216]
+    ],
+    "counters": []
+}

@@ -1,0 +1,70 @@
+{
+    "id": "heliolisk",
+    "name": "Heliolisk",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.008907,
+            "rank": 82,
+            "raw": 89553
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0110029,
+            "rank": 74,
+            "raw": 171856
+        }
+    ],
+    "abilities": [
+        ["dryskin", 83.70234232969558],
+        ["solarpower", 14.8116196849061],
+        ["sandveil", 1.486037985398325]
+    ],
+    "items": [
+        ["focussash", 37.316590329509616],
+        ["choicescarf", 28.154453892546915],
+        ["magnet", 15.244325050409739],
+        ["sitrusberry", 11.900102340067505],
+        ["shucaberry", 1.9017171597561986],
+        ["brightpowder", 1.7984268652214677],
+        ["chopleberry", 0.9277832246289092],
+        ["leftovers", 0.8672410676045261]
+    ],
+    "moves": [
+        ["thunderbolt", 18.11195946332318],
+        ["protect", 15.239064846207615],
+        ["voltswitch", 9.79983331921214],
+        ["electroweb", 9.24909721262682],
+        ["hypervoice", 9.028704533813306],
+        ["shedtail", 7.432587606233485],
+        ["allyswitch", 6.214653648677627],
+        ["focusblast", 4.553567122868662],
+        ["eerieimpulse", 4.028647191963228],
+        ["weatherball", 2.9596870459224633]
+    ],
+    "spreads": [
+        ["Timid:2/0/0/32/0/32", 25.19732318572524],
+        ["Modest:2/0/0/32/0/32", 16.385856950923124],
+        ["Timid:0/0/0/32/2/32", 10.515602855089904],
+        ["Timid:32/0/0/2/0/32", 5.707480371288324],
+        ["Modest:0/0/0/32/2/32", 2.7886940663870905]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Garchomp", 5.0789777039280075],
+        ["Sinistcha", 4.753996983449828],
+        ["Basculegion", 4.73820121951304],
+        ["Sneasler", 4.009519325254792],
+        ["Incineroar", 3.521909741643804],
+        ["Pelipper", 2.947826904922724],
+        ["Kingambit", 2.9252073587298533],
+        ["Scizor-Mega", 2.6966704373686134],
+        ["Charizard-Mega-Y", 2.6677474137018797],
+        ["Farigiraf", 2.608443069759191]
+    ],
+    "counters": []
+}

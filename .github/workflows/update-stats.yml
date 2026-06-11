@@ -14,6 +14,8 @@ jobs:
     environment: production
     permissions:
       contents: write
+      # create-pull-request opens the monthly meta-report review PR
+      pull-requests: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -72,3 +74,29 @@ jobs:
             | head -c 500
           echo ""
           echo "✅ Stats update complete! Push to main will trigger Cloudflare Workers Builds redeploy."
+
+      # Generate meta-report MDX + per-Pokémon trend data from the fresh stats.
+      # Deterministic tables come from Smogon data; the narrative needs
+      # ANTHROPIC_API_KEY (repo secret). Goes out as a PR — not a direct push —
+      # so a human reviews/edits the narrative before it publishes.
+      - name: Generate meta reports
+        run: bun run generate-reports
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Open meta-report review PR
+        uses: peter-evans/create-pull-request@v7
+        with:
+          add-paths: |
+            apps/teambuilder/src/content/reports/**
+            apps/teambuilder/src/data/mons/**
+          branch: chore/meta-reports
+          base: main
+          commit-message: "content(reports): monthly meta report refresh"
+          title: "Monthly meta reports — review before publish"
+          body: |
+            Auto-generated meta reports and per-Pokémon trend data from this month's
+            Smogon stats. Review the narrative sections (everything below the tables)
+            before merging — the tables are deterministic and trace to the raw data.
+
+            Merging publishes to https://www.pokemcp.com/reports via Workers Builds.

@@ -19,6 +19,8 @@ Next.js 16 App Router application for competitive Pokemon team building with an 
 | `/builder?mode=grid` | Classic Grid layout (team grid + analysis tabs + side chat) preserved for power users. |
 | `/builder?start=interview\|import\|empty` | Landing CTAs pass the user's intent into the builder. `import` auto-opens the import dialog; `empty` skips the interview. |
 | `/t/[id]` | Shareable team view. Unchanged by v2. |
+| `/reports` + `/reports/[slug]` + `/reports/[slug]/[month]` | SEO-facing monthly meta reports. MDX content in `src/content/reports/` + `manifest.json`, both maintained by `scripts/generate-reports.ts` (repo root). `[slug]` renders the latest month; `[month]` is the permanent archive URL. Fully prerendered (force-static, served via the OpenNext static-assets cache). |
+| `/pokemon/[id]/[format]` | Per-Pokémon usage-trend pages (~100+/format) from `src/data/mons/{slug}/{id}.json`. Same generator, same prerender strategy. Format slug is stable across regulation rotations (`champions`, `vgc`). |
 | `/admin` | Analytics dashboard. |
 | `/api/ai/claude/stream` | Server-sent events endpoint for the chat coach. Streams AG-UI events (TEXT + tool calls). |
 | `/api/ai/interview/stream` | Stateless synthesis endpoint for the LLM interview. Accepts the collected answers, streams six `modify_team` + one `interview_synthesis` tool call. |

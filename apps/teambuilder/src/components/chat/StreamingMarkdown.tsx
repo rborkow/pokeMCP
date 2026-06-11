@@ -20,9 +20,7 @@ function scheduleFlush(
     targetRef: React.RefObject<string>,
     cacheRef: React.RefObject<BlockCache>,
     rafRef: React.RefObject<boolean>,
-    setResult: React.Dispatch<
-        React.SetStateAction<{ blocks: string[]; cachedCount: number }>
-    >,
+    setResult: React.Dispatch<React.SetStateAction<{ blocks: string[]; cachedCount: number }>>,
     scrollRef: React.RefObject<HTMLDivElement | null>,
 ) {
     if (rafRef.current) return;

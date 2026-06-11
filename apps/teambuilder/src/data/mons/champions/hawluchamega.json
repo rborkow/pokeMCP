@@ -1,0 +1,57 @@
+{
+    "id": "hawluchamega",
+    "name": "Hawlucha-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0048965,
+            "rank": 111,
+            "raw": 71604
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0105369,
+            "rank": 76,
+            "raw": 125374
+        }
+    ],
+    "abilities": [["noguard", 100]],
+    "items": [["hawluchanite", 100]],
+    "moves": [
+        ["entrainment", 23.25485166601573],
+        ["bravebird", 18.61658380877539],
+        ["closecombat", 17.013739355785276],
+        ["detect", 15.792838500860364],
+        ["protect", 8.248341684039088],
+        ["crosschop", 4.721505394859794],
+        ["dualwingbeat", 4.631045731961579],
+        ["stoneedge", 2.7416563646005687],
+        ["highjumpkick", 1.3738611884132046],
+        ["coaching", 0.4078396516986427]
+    ],
+    "spreads": [
+        ["Jolly:32/0/0/0/2/32", 27.05150833780618],
+        ["Jolly:2/32/0/0/0/32", 11.72865347193714],
+        ["Jolly:32/2/0/0/0/32", 11.070542876960499],
+        ["Jolly:32/1/1/0/1/31", 9.210078366313304],
+        ["Jolly:0/32/0/0/2/32", 4.4388319233638045]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Sinistcha", 16.9814581632915],
+        ["Snorlax", 16.92206630647126],
+        ["Incineroar", 15.890104278423788],
+        ["Gengar-Mega", 11.999139311014854],
+        ["Politoed", 11.388258357873747],
+        ["Kingambit", 1.5657865858192577],
+        ["Farigiraf", 1.3325830797676224],
+        ["Zoroark-Hisui", 1.218616101230103],
+        ["Basculegion", 1.152264189499456],
+        ["Sableye", 1.0638975119025607]
+    ],
+    "counters": []
+}

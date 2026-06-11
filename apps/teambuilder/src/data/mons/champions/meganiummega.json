@@ -1,0 +1,57 @@
+{
+    "id": "meganiummega",
+    "name": "Meganium-Mega",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0632098,
+            "rank": 24,
+            "raw": 462894
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0294612,
+            "rank": 46,
+            "raw": 328501
+        }
+    ],
+    "abilities": [["megasol", 100]],
+    "items": [["meganiumite", 100]],
+    "moves": [
+        ["solarbeam", 24.618157533866654],
+        ["weatherball", 24.25796481562196],
+        ["dazzlinggleam", 23.7456815847403],
+        ["protect", 23.181707524537014],
+        ["synthesis", 1.9288618259136228],
+        ["earthpower", 1.3462699787433985],
+        ["leechseed", 0.1664345507962443],
+        ["energyball", 0.166057632750258],
+        ["gigadrain", 0.16389797680929657],
+        ["ancientpower", 0.10521329058772919]
+    ],
+    "spreads": [
+        ["Modest:32/0/0/32/0/2", 8.77360866738314],
+        ["Timid:0/0/0/32/2/32", 3.7040562250670037],
+        ["Modest:2/0/0/32/0/32", 3.6077084214081045],
+        ["Modest:31/0/4/27/3/1", 3.3815522291122293],
+        ["Modest:5/0/0/32/0/29", 2.7589704925816316]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Basculegion", 10.29988408126533],
+        ["Sneasler", 8.15916089365665],
+        ["Pelipper", 7.423473579655127],
+        ["Archaludon", 6.485728924742504],
+        ["Farigiraf", 5.619173802929974],
+        ["Kingambit", 5.282996213592643],
+        ["Aerodactyl", 4.179691573830041],
+        ["Incineroar", 4.068686717872102],
+        ["Garchomp", 3.73727596234143],
+        ["Milotic", 2.224504630413191]
+    ],
+    "counters": []
+}

@@ -1,0 +1,66 @@
+{
+    "id": "umbreon",
+    "name": "Umbreon",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.0024715,
+            "rank": 138,
+            "raw": 32853
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.0072238,
+            "rank": 90,
+            "raw": 54643
+        }
+    ],
+    "abilities": [["innerfocus", 97.65815974088984], ["synchronize", 2.341840259110154]],
+    "items": [
+        ["leftovers", 56.65092783311577],
+        ["sitrusberry", 26.873520572983267],
+        ["chopleberry", 10.409342265885696],
+        ["choicescarf", 2.240881076744909],
+        ["blackglasses", 1.627468235568142],
+        ["roseliberry", 1.4952010045781186],
+        ["brightpowder", 0.3027357948886252],
+        ["mentalherb", 0.1697061820750381]
+    ],
+    "moves": [
+        ["foulplay", 24.348251700625724],
+        ["snarl", 18.992070820948175],
+        ["yawn", 16.41884017898409],
+        ["moonlight", 13.764773183953366],
+        ["taunt", 8.058886511970945],
+        ["protect", 3.341688820830558],
+        ["detect", 3.039959146171766],
+        ["helpinghand", 2.673093372770735],
+        ["skillswap", 1.6148347797033276],
+        ["roar", 1.2100216296343913]
+    ],
+    "spreads": [
+        ["Calm:32/0/24/0/10/0", 25.229694864085957],
+        ["Bold:32/0/32/0/2/0", 12.572056181947827],
+        ["Bold:31/0/17/0/11/7", 7.992095264463588],
+        ["Impish:30/0/20/0/15/1", 7.12768949747241],
+        ["Bold:32/0/20/0/14/0", 4.771230565286768]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Charizard-Mega-Y", 12.202516430595644],
+        ["Basculegion", 10.282066838931293],
+        ["Sylveon", 8.56930072405257],
+        ["Archaludon", 7.353344808657717],
+        ["Garchomp", 5.821230850039463],
+        ["Lopunny-Mega", 4.321488031205291],
+        ["Sneasler", 3.767470395630933],
+        ["Whimsicott", 3.4224226944081027],
+        ["Scovillain-Mega", 2.848063618304485],
+        ["Aegislash", 2.708681688566147]
+    ],
+    "counters": []
+}

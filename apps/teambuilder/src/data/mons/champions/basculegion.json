@@ -1,0 +1,70 @@
+{
+    "id": "basculegion",
+    "name": "Basculegion",
+    "slug": "champions",
+    "formatId": "gen9championsvgc2026regma",
+    "formatLabel": "Pokémon Champions — Regulation M-A",
+    "dataThrough": "2026-05",
+    "history": [
+        {
+            "month": "2026-04",
+            "usage": 0.3270075,
+            "rank": 5,
+            "raw": 1370686
+        },
+        {
+            "month": "2026-05",
+            "usage": 0.4387831,
+            "rank": 1,
+            "raw": 1749052
+        }
+    ],
+    "abilities": [
+        ["adaptability", 92.56029174006655],
+        ["swiftswim", 7.330815279617764],
+        ["moldbreaker", 0.10889298031568884]
+    ],
+    "items": [
+        ["choicescarf", 44.81954040049973],
+        ["focussash", 29.19744640603319],
+        ["mysticwater", 14.786781135187322],
+        ["sitrusberry", 5.225832372237473],
+        ["colburberry", 2.9681316687298507],
+        ["kasibberry", 2.152309158940189],
+        ["spelltag", 0.5712267403683431],
+        ["whiteherb", 0.07367928684547005]
+    ],
+    "moves": [
+        ["lastrespects", 24.92920469063517],
+        ["aquajet", 24.04628061336506],
+        ["wavecrash", 17.91321913233962],
+        ["protect", 13.318952572962257],
+        ["flipturn", 11.323101316139319],
+        ["liquidation", 6.533010818893703],
+        ["psychicfangs", 0.5610929446646471],
+        ["waterfall", 0.5234541753551039],
+        ["icywind", 0.24243501889421593],
+        ["substitute", 0.1435691510665298]
+    ],
+    "spreads": [
+        ["Jolly:2/32/0/0/0/32", 14.632153702856654],
+        ["Jolly:0/32/2/0/0/32", 14.47659885525819],
+        ["Adamant:2/32/0/0/0/32", 12.719154429666556],
+        ["Adamant:0/32/2/0/0/32", 9.59461274330232],
+        ["Jolly:0/32/0/0/2/32", 4.220941830505768]
+    ],
+    "teraTypes": [["nothing", 100]],
+    "teammates": [
+        ["Kingambit", 9.633580093077951],
+        ["Garchomp", 8.184650474877321],
+        ["Charizard-Mega-Y", 6.85017968661662],
+        ["Sneasler", 5.809612744063195],
+        ["Archaludon", 4.615360989375869],
+        ["Whimsicott", 4.430359350852845],
+        ["Floette-Mega", 4.2642109380897475],
+        ["Pelipper", 3.8315571859165],
+        ["Sylveon", 3.668571533676708],
+        ["Aerodactyl-Mega", 3.287843268076197]
+    ],
+    "counters": []
+}
