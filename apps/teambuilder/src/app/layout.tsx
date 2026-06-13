@@ -19,6 +19,13 @@ const exo2 = Exo_2({
     weight: ["400", "500", "600", "700", "800"],
 });
 
+// Cloudflare Web Analytics beacon token. Public by design (inlined into every
+// page's HTML), so a hardcoded default is safe. Must NOT depend solely on
+// .env.local: that file is gitignored, so builds from git worktrees or CI
+// silently drop the beacon (this broke visitor analytics on 2026-06-10/11).
+const CF_ANALYTICS_TOKEN =
+    process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN ?? "760a922acb5c4ad0bb6726211198945f";
+
 export const metadata: Metadata = {
     title: {
         default: "PokeMCP Team Builder - AI Pokemon Team Building",
@@ -121,11 +128,11 @@ export default function RootLayout({
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                 />
-                {process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN && (
+                {CF_ANALYTICS_TOKEN && (
                     <script
                         defer
                         src="https://static.cloudflareinsights.com/beacon.min.js"
-                        data-cf-beacon={`{"token": "${process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN}"}`}
+                        data-cf-beacon={`{"token": "${CF_ANALYTICS_TOKEN}"}`}
                     />
                 )}
             </head>

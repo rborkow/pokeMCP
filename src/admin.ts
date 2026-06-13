@@ -205,9 +205,9 @@ async function handleOverview(env: Env, url: URL): Promise<Response> {
     const toolCallStats = await queryAnalyticsEngine(
         env,
         `SELECT
-            count() as total,
-            sum(if(blob3 = '1', 1, 0)) as successes,
-            avg(double1) as avg_response_ms
+            sum(_sample_interval) as total,
+            sum(if(blob3 = '1', _sample_interval, 0)) as successes,
+            sum(double1 * _sample_interval) / sum(_sample_interval) as avg_response_ms
         FROM "pokemcp-analytics"
         WHERE index1 = 'tool_call'
             AND timestamp > NOW() - INTERVAL ${range}`,
@@ -215,13 +215,13 @@ async function handleOverview(env: Env, url: URL): Promise<Response> {
     const aiChatStats = await queryAnalyticsEngine(
         env,
         `SELECT
-            count() as total,
-            sum(double1) as total_input_tokens,
-            sum(double2) as total_output_tokens,
-            sum(double3) as total_cache_creation_tokens,
-            sum(double4) as total_cache_read_tokens,
-            sum(double7) as total_cost_usd,
-            avg(double6) as avg_response_ms
+            sum(_sample_interval) as total,
+            sum(double1 * _sample_interval) as total_input_tokens,
+            sum(double2 * _sample_interval) as total_output_tokens,
+            sum(double3 * _sample_interval) as total_cache_creation_tokens,
+            sum(double4 * _sample_interval) as total_cache_read_tokens,
+            sum(double7 * _sample_interval) as total_cost_usd,
+            sum(double6 * _sample_interval) / sum(_sample_interval) as avg_response_ms
         FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
             AND timestamp > NOW() - INTERVAL ${range}`,
@@ -229,9 +229,9 @@ async function handleOverview(env: Env, url: URL): Promise<Response> {
     const sessionStats = await queryAnalyticsEngine(
         env,
         `SELECT
-            count() as total_events,
-            sum(if(blob1 = 'connect', 1, 0)) as connections,
-            sum(if(blob1 = 'disconnect', 1, 0)) as disconnections
+            sum(_sample_interval) as total_events,
+            sum(if(blob1 = 'connect', _sample_interval, 0)) as connections,
+            sum(if(blob1 = 'disconnect', _sample_interval, 0)) as disconnections
         FROM "pokemcp-analytics"
         WHERE index1 = 'session'
             AND timestamp > NOW() - INTERVAL ${range}`,
@@ -241,8 +241,8 @@ async function handleOverview(env: Env, url: URL): Promise<Response> {
         env,
         `SELECT
             blob5 as source,
-            count() as total,
-            sum(double7) as cost_usd
+            sum(_sample_interval) as total,
+            sum(double7 * _sample_interval) as cost_usd
         FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
             AND timestamp > NOW() - INTERVAL ${range}
@@ -271,7 +271,7 @@ async function handleUsage(env: Env, url: URL): Promise<Response> {
         `SELECT
             ${bucketFn} as bucket,
             index1 as event_type,
-            count() as count
+            sum(_sample_interval) as count
         FROM "pokemcp-analytics"
         WHERE timestamp > NOW() - INTERVAL ${range}
         GROUP BY bucket, event_type
@@ -289,12 +289,12 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
         env,
         `SELECT
             toStartOfDay(timestamp) as day,
-            count() as requests,
-            sum(double1) as input_tokens,
-            sum(double2) as output_tokens,
-            sum(double3) as cache_creation_tokens,
-            sum(double4) as cache_read_tokens,
-            sum(double7) as cost_usd
+            sum(_sample_interval) as requests,
+            sum(double1 * _sample_interval) as input_tokens,
+            sum(double2 * _sample_interval) as output_tokens,
+            sum(double3 * _sample_interval) as cache_creation_tokens,
+            sum(double4 * _sample_interval) as cache_read_tokens,
+            sum(double7 * _sample_interval) as cost_usd
         FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
             AND timestamp > NOW() - INTERVAL ${range}
@@ -305,10 +305,10 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
         env,
         `SELECT
             blob1 as format,
-            count() as requests,
-            sum(double7) as cost_usd,
-            sum(double1) as input_tokens,
-            sum(double2) as output_tokens
+            sum(_sample_interval) as requests,
+            sum(double7 * _sample_interval) as cost_usd,
+            sum(double1 * _sample_interval) as input_tokens,
+            sum(double2 * _sample_interval) as output_tokens
         FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
             AND timestamp > NOW() - INTERVAL ${range}
@@ -319,8 +319,8 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
         env,
         `SELECT
             blob2 as personality,
-            count() as requests,
-            sum(double7) as cost_usd
+            sum(_sample_interval) as requests,
+            sum(double7 * _sample_interval) as cost_usd
         FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
             AND timestamp > NOW() - INTERVAL ${range}
@@ -330,9 +330,9 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
     const cacheStats = await queryAnalyticsEngine(
         env,
         `SELECT
-            sum(double1) as total_input,
-            sum(double4) as total_cache_read,
-            sum(double3) as total_cache_creation
+            sum(double1 * _sample_interval) as total_input,
+            sum(double4 * _sample_interval) as total_cache_read,
+            sum(double3 * _sample_interval) as total_cache_creation
         FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
             AND timestamp > NOW() - INTERVAL ${range}`,
@@ -342,10 +342,10 @@ async function handleCosts(env: Env, url: URL): Promise<Response> {
         env,
         `SELECT
             blob5 as source,
-            count() as requests,
-            sum(double7) as cost_usd,
-            sum(double1) as input_tokens,
-            sum(double2) as output_tokens
+            sum(_sample_interval) as requests,
+            sum(double7 * _sample_interval) as cost_usd,
+            sum(double1 * _sample_interval) as input_tokens,
+            sum(double2 * _sample_interval) as output_tokens
         FROM "pokemcp-analytics"
         WHERE index1 = 'ai_chat'
             AND timestamp > NOW() - INTERVAL ${range}
@@ -375,9 +375,9 @@ async function handleTools(env: Env, url: URL): Promise<Response> {
         env,
         `SELECT
             blob1 as tool_name,
-            count() as calls,
-            sum(if(blob3 = '1', 1, 0)) as successes,
-            avg(double1) as avg_response_ms
+            sum(_sample_interval) as calls,
+            sum(if(blob3 = '1', _sample_interval, 0)) as successes,
+            sum(double1 * _sample_interval) / sum(_sample_interval) as avg_response_ms
         FROM "pokemcp-analytics"
         WHERE index1 = 'tool_call'
             AND timestamp > NOW() - INTERVAL ${range}
@@ -388,7 +388,7 @@ async function handleTools(env: Env, url: URL): Promise<Response> {
         env,
         `SELECT
             blob5 as source,
-            count() as calls
+            sum(_sample_interval) as calls
         FROM "pokemcp-analytics"
         WHERE index1 = 'tool_call'
             AND timestamp > NOW() - INTERVAL ${range}
@@ -409,9 +409,9 @@ async function handleSessions(env: Env, url: URL): Promise<Response> {
             blob4 as session_id,
             min(timestamp) as first_seen,
             max(timestamp) as last_seen,
-            count() as tool_calls,
-            sum(if(blob3 = '1', 1, 0)) as successes,
-            avg(double1) as avg_response_ms
+            sum(_sample_interval) as tool_calls,
+            sum(if(blob3 = '1', _sample_interval, 0)) as successes,
+            sum(double1 * _sample_interval) / sum(_sample_interval) as avg_response_ms
         FROM "pokemcp-analytics"
         WHERE index1 = 'tool_call'
             AND blob4 != ''
