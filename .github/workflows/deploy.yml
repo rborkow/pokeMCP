@@ -1,0 +1,72 @@
+name: Deploy
+
+# Manual production deploys from CI. Always deploy from here (or a clean main
+# checkout) rather than local git worktrees: gitignored .env.local files don't
+# exist in worktrees, which silently dropped the Web Analytics beacon from the
+# teambuilder build on 2026-06-11. CI builds pin every build-time input below.
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "What to deploy"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all
+          - worker
+          - teambuilder
+
+jobs:
+  deploy-worker:
+    name: Deploy MCP Worker
+    if: ${{ inputs.target == 'all' || inputs.target == 'worker' }}
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Deploy pokemon-mcp-production
+        run: bunx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  deploy-teambuilder:
+    name: Deploy Teambuilder
+    if: ${{ inputs.target == 'all' || inputs.target == 'teambuilder' }}
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: apps/teambuilder/package.json
+
+      - name: Install dependencies
+        working-directory: ./apps/teambuilder
+        run: bun install --frozen-lockfile
+
+      - name: Build and deploy pokemcp-teambuilder
+        working-directory: ./apps/teambuilder
+        run: bun run deploy
+        env:
+          NEXT_PUBLIC_MCP_URL: https://api.pokemcp.com
+          # Web Analytics beacon token — public by design (shipped in page HTML).
+          # layout.tsx also hardcodes this as a fallback; set explicitly so the
+          # build never depends on a gitignored .env.local.
+          NEXT_PUBLIC_CF_ANALYTICS_TOKEN: 760a922acb5c4ad0bb6726211198945f
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
