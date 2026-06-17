@@ -20,11 +20,15 @@ import type { TeamPokemon } from "@/types/pokemon";
  * Mega form list for a format id. Returns `undefined` for non-Champions
  * formats so callers can skip overlay logic cheaply.
  *
- * Extend this when M-B ships: add another branch or consult a registry.
- * For now the mapping is explicit to keep one-click grep-ability.
+ * The mapping is explicit to keep one-click grep-ability. M-B currently
+ * reuses M-A's Omni Ring list (mirroring CHAMPIONS_REGMB.megaForms in the
+ * worker); split into a dedicated CHAMPIONS_REGMB_MEGAS here and in
+ * src/regulations/mega-data.ts if the official M-B list diverges.
  */
 export function getMegaFormsForFormat(formatId: string): MegaForm[] | undefined {
-    if (formatId === "champions-regma") return CHAMPIONS_REGMA_MEGAS;
+    if (formatId === "champions-regma" || formatId === "champions-regmb") {
+        return CHAMPIONS_REGMA_MEGAS;
+    }
     return undefined;
 }
 

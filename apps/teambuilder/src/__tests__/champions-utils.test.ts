@@ -19,6 +19,12 @@ describe("getMegaFormsForFormat", () => {
         expect(forms!.some((f) => f.megaName === "Charizard-Mega-Y")).toBe(true);
     });
 
+    it("returns forms for champions-regmb (reuses M-A's Omni Ring list)", () => {
+        const forms = getMegaFormsForFormat("champions-regmb");
+        expect(forms).toBeDefined();
+        expect(forms!.some((f) => f.megaName === "Charizard-Mega-Y")).toBe(true);
+    });
+
     it("returns undefined for Showdown formats", () => {
         expect(getMegaFormsForFormat("gen9ou")).toBeUndefined();
         expect(getMegaFormsForFormat("gen9vgc2026regf")).toBeUndefined();
