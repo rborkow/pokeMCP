@@ -142,6 +142,14 @@ export const FORMATS: FormatDefinition[] = [
     { id: "gen9lc", name: "Gen 9 LC", gen: 9, category: "singles" },
     // Pokémon Champions (2026+) — rotating regulation allow-lists
     {
+        id: "champions-regmb",
+        name: "Champions Reg M-B",
+        gen: 9,
+        category: "champions",
+        platform: "champions",
+        chipLabel: "Champions Reg M-B",
+    },
+    {
         id: "champions-regma",
         name: "Champions Reg M-A",
         gen: 9,
