@@ -1,108 +1,274 @@
 {
-    "id": "corviknight",
-    "name": "Corviknight",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.06616380000000001,
-            "rank": 23,
-            "raw": 397508
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.048557199999999995,
-            "rank": 35,
-            "raw": 386014
-        }
-    ],
-    "abilities": [
-        ["Mirror Armor", 95.00080630598707],
-        ["Unnerve", 2.523917994915157],
-        ["Pressure", 2.4752756990977764]
-    ],
-    "items": [
-        ["Leftovers", 78.6915071054716],
-        ["Sitrus Berry", 11.302587094889516],
-        ["Occa Berry", 4.316443163688632],
-        ["Metal Coat", 2.088366192727709],
-        ["Lum Berry", 1.1302812363520593],
-        ["Sharp Beak", 0.6489544890891353],
-        ["Mental Herb", 0.507210852976827],
-        ["Wacan Berry", 0.37990111710828983]
-    ],
-    "moves": [
-        ["Brave Bird", 22.59658233049748],
-        ["Tailwind", 19.158184873101707],
-        ["Roost", 15.7272370566316],
-        ["Bulk Up", 14.273010021762087],
-        ["Iron Head", 10.910530939759337],
-        ["Body Press", 7.95648600256009],
-        ["Protect", 4.021269589718755],
-        ["Iron Defense", 3.3330807055068092],
-        ["Taunt", 0.7976489943481722],
-        ["U-turn", 0.31047765047608666]
-    ],
-    "spreads": [
-        ["Adamant:32/13/0/0/13/8", 7.492077528389333],
-        ["Careful:27/11/1/0/5/22", 5.056132704753232],
-        ["Adamant:32/13/1/0/12/8", 2.7184081717969772],
-        ["Impish:32/0/32/0/2/0", 2.6924919450110085],
-        ["Careful:32/0/2/0/32/0", 2.2467889750754386]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Tyranitar-Mega", 10.948442181076754],
-        ["Excadrill", 8.684102614412367],
-        ["Rotom-Wash", 6.295968273245986],
-        ["Garchomp", 5.7999969670459235],
-        ["Sneasler", 4.603722166141271],
-        ["Sinistcha", 4.568632543943257],
-        ["Basculegion", 4.543917909883417],
-        ["Incineroar", 3.886366639033244],
-        ["Hydreigon", 3.428171446695753],
-        ["Scovillain-Mega", 2.9097072363951626]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Leftovers",
-            "ability": "Mirror Armor",
-            "moves": ["Brave Bird", "Bulk Up", "Tailwind", "Roost"],
-            "count": 6,
-            "bestPlacing": 3,
-            "bestPlayer": "Amoht",
-            "eventName": "Alpensee Tour (Reg M-A) #60 -  ✨🐢 for #1!",
-            "eventSlug": "2026-06-03-alpensee-tour-reg-m-a-60-for-1",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a141fe98c163b8097996cc4",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Leftovers",
-            "ability": "Mirror Armor",
-            "moves": ["Tailwind", "Iron Head", "Brave Bird", "Roost"],
-            "count": 2,
-            "bestPlacing": 1,
-            "bestPlayer": "Rees",
-            "eventName": "Alpensee Tour (Reg M-A) #61 - ✨🐢 for #1!",
-            "eventSlug": "2026-06-10-alpensee-tour-reg-m-a-61-for-1",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1420518c163b8097996cc6",
-            "nature": "Impish"
-        },
-        {
-            "item": "Leftovers",
-            "ability": "Mirror Armor",
-            "moves": ["Brave Bird", "Body Press", "Bulk Up", "Tailwind"],
-            "count": 2,
-            "bestPlacing": 3,
-            "bestPlayer": "[DNR] Isaac Moreira",
-            "eventName": "Talon's FIGHT CLUB #87 POKEMON CHAMPIONS",
-            "eventSlug": "2026-06-04-talon-s-fight-club-87-pokemon-champions",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a14cc4c8c163b8097997614",
-            "nature": "Impish"
-        }
-    ]
+ "id": "corviknight",
+ "name": "Corviknight",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.019912,
+   "rank": 58,
+   "raw": 71333
+  }
+ ],
+ "abilities": [
+  [
+   "Mirror Armor",
+   94.18423042026045
+  ],
+  [
+   "Pressure",
+   4.185555022379833
+  ],
+  [
+   "Unnerve",
+   1.630214557359714
+  ]
+ ],
+ "items": [
+  [
+   "Leftovers",
+   68.72429053187743
+  ],
+  [
+   "Occa Berry",
+   13.613138440649303
+  ],
+  [
+   "Sitrus Berry",
+   10.398070608255095
+  ],
+  [
+   "Sharp Beak",
+   2.2116469064541
+  ],
+  [
+   "Wacan Berry",
+   0.8174530432268058
+  ],
+  [
+   "Life Orb",
+   0.7534561816536356
+  ],
+  [
+   "Metal Coat",
+   0.6564747549966965
+  ],
+  [
+   "Lum Berry",
+   0.6349579788950829
+  ]
+ ],
+ "moves": [
+  [
+   "Brave Bird",
+   20.887937846307782
+  ],
+  [
+   "Roost",
+   15.703880392986877
+  ],
+  [
+   "Tailwind",
+   15.633735629869053
+  ],
+  [
+   "Iron Head",
+   11.621903883966093
+  ],
+  [
+   "Bulk Up",
+   10.704692454071756
+  ],
+  [
+   "Body Press",
+   10.27226607198648
+  ],
+  [
+   "Protect",
+   6.639296029828856
+  ],
+  [
+   "Iron Defense",
+   4.413529782205521
+  ],
+  [
+   "Taunt",
+   1.3004214014592883
+  ],
+  [
+   "U-turn",
+   0.8928962955015675
+  ]
+ ],
+ "spreads": [
+  [
+   "Careful:32/2/0/0/32/0",
+   7.9144076800426175
+  ],
+  [
+   "Impish:32/2/32/0/0/0",
+   6.676634571387266
+  ],
+  [
+   "Careful:27/11/1/0/5/22",
+   4.068109541626708
+  ],
+  [
+   "Adamant:32/13/0/0/13/8",
+   3.786670427103772
+  ],
+  [
+   "Impish:32/0/32/0/2/0",
+   2.827570721732125
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Garchomp",
+   7.297446371818669
+  ],
+  [
+   "Tyranitar-Mega",
+   5.921278142047312
+  ],
+  [
+   "Sinistcha",
+   5.049111721482498
+  ],
+  [
+   "Incineroar",
+   3.901910639638496
+  ],
+  [
+   "Excadrill",
+   3.482157228968577
+  ],
+  [
+   "Sneasler",
+   3.228144202383234
+  ],
+  [
+   "Rotom-Wash",
+   3.2186470969015604
+  ],
+  [
+   "Basculegion",
+   3.180150059569205
+  ],
+  [
+   "Raichu-Mega-Y",
+   2.733301251434519
+  ],
+  [
+   "Hydreigon",
+   2.4491459288059234
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Floette-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Leftovers",
+   "ability": "Mirror Armor",
+   "moves": [
+    "Brave Bird",
+    "Tailwind",
+    "Bulk Up",
+    "Roost"
+   ],
+   "count": 1,
+   "bestPlacing": 1,
+   "bestPlayer": "JurassicJoints",
+   "eventName": "Road to Area 229 #4",
+   "eventSlug": "2026-06-27-road-to-area-229-4",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c370fc87cd9ff0a30eaa1",
+   "nature": "Careful"
+  },
+  {
+   "item": "Occa Berry",
+   "ability": "Mirror Armor",
+   "moves": [
+    "Tailwind",
+    "Roost",
+    "Brave Bird",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 4,
+   "bestPlayer": "tdotstay2tact",
+   "eventName": "Road to Area 229 #4",
+   "eventSlug": "2026-06-27-road-to-area-229-4",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c370fc87cd9ff0a30eaa1",
+   "nature": "Impish"
+  },
+  {
+   "item": "Leftovers",
+   "ability": "Mirror Armor",
+   "moves": [
+    "Tailwind",
+    "Body Press",
+    "Protect",
+    "Brave Bird"
+   ],
+   "count": 1,
+   "bestPlacing": 4,
+   "bestPlayer": "MDN10",
+   "eventName": "Palafin Pals Jet Punch Series 🌊✊Reg M-B #2",
+   "eventSlug": "2026-06-22-palafin-pals-jet-punch-series-reg-m-b-2",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a390b81c87cd9ff0a30cfc3",
+   "nature": "Adamant"
+  }
+ ]
 }

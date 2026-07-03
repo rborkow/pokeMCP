@@ -1,71 +1,222 @@
 {
-    "id": "kommoo",
-    "name": "Kommo-o",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0494334,
-            "rank": 31,
-            "raw": 246925
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.060232799999999996,
-            "rank": 28,
-            "raw": 287074
-        }
-    ],
-    "abilities": [
-        ["Soundproof", 88.29624173692017],
-        ["Overcoat", 7.1604955026221635],
-        ["Bulletproof", 4.54326276045767]
-    ],
-    "items": [
-        ["Leftovers", 73.92892495827552],
-        ["Dragon Fang", 14.195563195246159],
-        ["Sitrus Berry", 5.880436870960266],
-        ["Haban Berry", 2.5114355547838776],
-        ["Choice Scarf", 0.7964780533612829],
-        ["Black Belt", 0.5768200492989103],
-        ["Roseli Berry", 0.43817573713140445],
-        ["Lum Berry", 0.3711259755366364]
-    ],
-    "moves": [
-        ["Protect", 24.34904684015579],
-        ["Clanging Scales", 24.050555084588744],
-        ["Aura Sphere", 22.87625668980036],
-        ["Clangorous Soul", 21.35537897590087],
-        ["Vacuum Wave", 1.1732972914678907],
-        ["Draco Meteor", 1.0473211335058674],
-        ["Flash Cannon", 0.9478675535470849],
-        ["Body Press", 0.8117835792976189],
-        ["Flamethrower", 0.6497142851629804],
-        ["Iron Defense", 0.6393414579534809]
-    ],
-    "spreads": [
-        ["Timid:2/0/0/32/0/32", 23.625840612706682],
-        ["Modest:2/0/0/32/0/32", 10.509402301631185],
-        ["Timid:0/0/0/32/2/32", 2.45694236111633],
-        ["Modest:5/0/1/30/1/29", 1.9973508362638548],
-        ["Timid:10/0/1/28/1/26", 1.9721419603931891]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Incineroar", 10.612595888545734],
-        ["Sinistcha", 8.808880666083729],
-        ["Basculegion", 6.861242909696539],
-        ["Gengar-Mega", 6.351006970190806],
-        ["Kingambit", 4.774308787203896],
-        ["Aerodactyl-Mega", 4.135365207068955],
-        ["Sneasler", 3.537535191598672],
-        ["Politoed", 3.4214377683690693],
-        ["Scovillain-Mega", 3.1795494489777707],
-        ["Tinkaton", 3.178440365142394]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "kommoo",
+ "name": "Kommo-o",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0156914,
+   "rank": 67,
+   "raw": 36050
+  }
+ ],
+ "abilities": [
+  [
+   "Soundproof",
+   77.29532573061762
+  ],
+  [
+   "Overcoat",
+   14.973465167325383
+  ],
+  [
+   "Bulletproof",
+   7.731209102056987
+  ]
+ ],
+ "items": [
+  [
+   "Leftovers",
+   66.16460377303316
+  ],
+  [
+   "Dragon Fang",
+   10.975252407362882
+  ],
+  [
+   "Sitrus Berry",
+   6.842454849343269
+  ],
+  [
+   "Haban Berry",
+   6.066386152269031
+  ],
+  [
+   "Life Orb",
+   6.063839340709826
+  ],
+  [
+   "Lum Berry",
+   0.8430016237405521
+  ],
+  [
+   "White Herb",
+   0.6849893211540861
+  ],
+  [
+   "Black Belt",
+   0.4594464201050707
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   23.98520055193967
+  ],
+  [
+   "Clanging Scales",
+   23.94870376873306
+  ],
+  [
+   "Aura Sphere",
+   22.57523270829338
+  ],
+  [
+   "Clangorous Soul",
+   22.017600792054967
+  ],
+  [
+   "Drain Punch",
+   1.0635121476894323
+  ],
+  [
+   "Vacuum Wave",
+   0.8855266491550648
+  ],
+  [
+   "Draco Meteor",
+   0.8602640158474472
+  ],
+  [
+   "Flamethrower",
+   0.7426660225727486
+  ],
+  [
+   "Body Press",
+   0.7339054842984989
+  ],
+  [
+   "Flash Cannon",
+   0.6843942028181599
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:2/0/0/32/0/32",
+   13.411853415529318
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   11.65534649020989
+  ],
+  [
+   "Modest:5/0/1/30/1/29",
+   3.6657479792483154
+  ],
+  [
+   "Timid:1/0/0/32/1/32",
+   3.630789841744101
+  ],
+  [
+   "Modest:10/0/1/28/1/26",
+   2.961602372410396
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Incineroar",
+   10.248901625146043
+  ],
+  [
+   "Sinistcha",
+   8.498334987551166
+  ],
+  [
+   "Basculegion",
+   5.775096366272529
+  ],
+  [
+   "Gengar-Mega",
+   4.78200522483122
+  ],
+  [
+   "Metagross-Mega",
+   4.499666591997481
+  ],
+  [
+   "Kingambit",
+   2.7329095243827894
+  ],
+  [
+   "Whimsicott",
+   2.6484977968189694
+  ],
+  [
+   "Sneasler",
+   2.6318618746098945
+  ],
+  [
+   "Aerodactyl-Mega",
+   2.605895138071201
+  ],
+  [
+   "Milotic",
+   2.5232650969937436
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

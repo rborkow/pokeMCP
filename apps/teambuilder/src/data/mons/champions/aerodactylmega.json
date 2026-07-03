@@ -1,58 +1,186 @@
 {
-    "id": "aerodactylmega",
-    "name": "Aerodactyl-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.063045,
-            "rank": 25,
-            "raw": 263338
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.1139224,
-            "rank": 14,
-            "raw": 505424
-        }
-    ],
-    "abilities": [["Tough Claws", 100]],
-    "items": [["Aerodactylite", 100]],
-    "moves": [
-        ["Rock Slide", 24.763347600573447],
-        ["Dual Wingbeat", 23.605976212681462],
-        ["Tailwind", 22.331089423599703],
-        ["Protect", 20.45623568323817],
-        ["Wide Guard", 4.702929847156713],
-        ["Ice Fang", 2.5186857671894556],
-        ["Taunt", 0.33558583963605315],
-        ["Iron Head", 0.25853479783144134],
-        ["Rock Tomb", 0.22857268113648066],
-        ["Crunch", 0.16045175602963174]
-    ],
-    "spreads": [
-        ["Jolly:2/32/0/0/0/32", 19.07527952849192],
-        ["Jolly:12/12/9/0/1/32", 5.86986305729698],
-        ["Jolly:0/32/0/0/2/32", 5.049378517654998],
-        ["Jolly:3/16/15/0/0/32", 3.7063208312038474],
-        ["Jolly:0/32/2/0/0/32", 3.4351962719752307]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Basculegion", 12.663445221263633],
-        ["Kingambit", 10.960343544996785],
-        ["Garchomp", 10.158897076029842],
-        ["Sylveon", 9.851989660411435],
-        ["Charizard-Mega-Y", 7.327993650104693],
-        ["Sneasler", 7.32339706968095],
-        ["Scovillain-Mega", 3.31193406359782],
-        ["Farigiraf", 2.4742200534920564],
-        ["Incineroar", 2.4649077541359166],
-        ["Kommo-o", 2.1864414955970837]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "aerodactylmega",
+ "name": "Aerodactyl-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0553063,
+   "rank": 27,
+   "raw": 102961
+  }
+ ],
+ "abilities": [
+  [
+   "Tough Claws",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Aerodactylite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Rock Slide",
+   24.803120553314116
+  ],
+  [
+   "Dual Wingbeat",
+   23.590711619045923
+  ],
+  [
+   "Tailwind",
+   23.055098280264023
+  ],
+  [
+   "Protect",
+   11.267949382384154
+  ],
+  [
+   "Ice Fang",
+   9.590826588486777
+  ],
+  [
+   "Wide Guard",
+   6.222377115017499
+  ],
+  [
+   "Taunt",
+   0.230549449201615
+  ],
+  [
+   "Iron Head",
+   0.17954526073212498
+  ],
+  [
+   "Rain Dance",
+   0.14775739044812553
+  ],
+  [
+   "Crunch",
+   0.14404533992623653
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:2/32/0/0/0/32",
+   30.071576299053692
+  ],
+  [
+   "Jolly:22/12/0/0/0/32",
+   10.013882982350971
+  ],
+  [
+   "Jolly:15/17/0/0/5/29",
+   5.308641580533564
+  ],
+  [
+   "Jolly:8/15/0/0/11/32",
+   3.0337643083746957
+  ],
+  [
+   "Jolly:26/7/0/0/1/32",
+   2.9146931767322624
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sylveon",
+   11.1494467109135
+  ],
+  [
+   "Kingambit",
+   10.95365401667915
+  ],
+  [
+   "Garchomp",
+   9.507880493124757
+  ],
+  [
+   "Basculegion",
+   7.5161322310123335
+  ],
+  [
+   "Charizard-Mega-Y",
+   6.1889017649025355
+  ],
+  [
+   "Farigiraf",
+   5.828735331252872
+  ],
+  [
+   "Sinistcha",
+   3.701709193272748
+  ],
+  [
+   "Incineroar",
+   3.179307639110761
+  ],
+  [
+   "Torkoal",
+   3.0561642765180355
+  ],
+  [
+   "Sneasler",
+   2.8962005514717197
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sableye",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

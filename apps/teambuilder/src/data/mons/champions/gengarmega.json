@@ -1,58 +1,186 @@
 {
-    "id": "gengarmega",
-    "name": "Gengar-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0729956,
-            "rank": 21,
-            "raw": 466340
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0703704,
-            "rank": 21,
-            "raw": 519375
-        }
-    ],
-    "abilities": [["Shadow Tag", 100]],
-    "items": [["Gengarite", 100]],
-    "moves": [
-        ["Protect", 24.770156149873415],
-        ["Shadow Ball", 23.999808104778133],
-        ["Perish Song", 16.569111174430816],
-        ["Disable", 15.094345978234482],
-        ["Sludge Bomb", 12.796034026343591],
-        ["Substitute", 1.4770755441927228],
-        ["Icy Wind", 1.0524550195810631],
-        ["Will-O-Wisp", 0.7496785288358554],
-        ["Sludge Wave", 0.5683289443653264],
-        ["Focus Blast", 0.41234468930288415]
-    ],
-    "spreads": [
-        ["Timid:30/0/18/2/11/5", 7.167579276710335],
-        ["Timid:2/0/0/32/0/32", 6.317807688316729],
-        ["Modest:30/0/12/0/0/24", 6.271433164964053],
-        ["Timid:32/0/9/1/1/23", 5.8002626647541735],
-        ["Timid:30/0/21/5/0/10", 5.639334625707101]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Incineroar", 16.101552420584262],
-        ["Sinistcha", 9.379160940537625],
-        ["Politoed", 7.805240969364115],
-        ["Kommo-o", 5.436075679091467],
-        ["Ninetales-Alola", 4.603045818580956],
-        ["Kingambit", 4.225807216391797],
-        ["Sneasler", 3.6226493914769646],
-        ["Maushold", 3.4852028734406155],
-        ["Archaludon", 3.0932265916709283],
-        ["Garchomp", 2.809545674310811]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "gengarmega",
+ "name": "Gengar-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0351811,
+   "rank": 35,
+   "raw": 89335
+  }
+ ],
+ "abilities": [
+  [
+   "Shadow Tag",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Gengarite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   24.6597846021563
+  ],
+  [
+   "Shadow Ball",
+   23.516941796299186
+  ],
+  [
+   "Perish Song",
+   18.852971867484293
+  ],
+  [
+   "Sludge Bomb",
+   12.767903698015667
+  ],
+  [
+   "Disable",
+   12.571355074742588
+  ],
+  [
+   "Substitute",
+   1.2548796656068353
+  ],
+  [
+   "Icy Wind",
+   0.9589791859324563
+  ],
+  [
+   "Sludge Wave",
+   0.6603110004697846
+  ],
+  [
+   "Taunt",
+   0.5760729589015758
+  ],
+  [
+   "Will-O-Wisp",
+   0.4605905524145447
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   14.520685479898582
+  ],
+  [
+   "Modest:30/0/1/1/28/6",
+   4.372171373638507
+  ],
+  [
+   "Timid:32/0/0/2/0/32",
+   4.114805048783542
+  ],
+  [
+   "Timid:32/0/9/1/1/23",
+   2.904217602899647
+  ],
+  [
+   "Modest:30/0/15/0/1/20",
+   2.561242514110821
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Incineroar",
+   15.517343285016919
+  ],
+  [
+   "Sinistcha",
+   9.176693959427858
+  ],
+  [
+   "Politoed",
+   7.153488621565697
+  ],
+  [
+   "Archaludon",
+   5.072312181091563
+  ],
+  [
+   "Kingambit",
+   4.732924510167042
+  ],
+  [
+   "Ninetales-Alola",
+   3.6377143360132673
+  ],
+  [
+   "Grimmsnarl",
+   3.238699289242656
+  ],
+  [
+   "Swampert-Mega",
+   2.6913350501428073
+  ],
+  [
+   "Sneasler",
+   2.559092198508457
+  ],
+  [
+   "Garchomp",
+   2.3986971019165493
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Rotom-Wash",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Swampert-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

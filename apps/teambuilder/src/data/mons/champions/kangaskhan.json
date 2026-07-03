@@ -1,108 +1,272 @@
 {
-    "id": "kangaskhan",
-    "name": "Kangaskhan",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0090851,
-            "rank": 80,
-            "raw": 66196
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0203592,
-            "rank": 55,
-            "raw": 181545
-        }
-    ],
-    "abilities": [
-        ["Scrappy", 98.74667517045283],
-        ["Inner Focus", 0.9368661238477988],
-        ["Early Bird", 0.3164587056993725]
-    ],
-    "items": [
-        ["Silk Scarf", 92.35869683782613],
-        ["Chople Berry", 4.079994808461067],
-        ["King's Rock", 1.2420055145847346],
-        ["Sitrus Berry", 0.7447899916544649],
-        ["Lum Berry", 0.5201128554944418],
-        ["Leftovers", 0.3325170917900108],
-        ["Focus Sash", 0.21888585303370847],
-        ["White Herb", 0.14319928135331134]
-    ],
-    "moves": [
-        ["", 42.63953035419383],
-        ["Fake Out", 24.97683778452603],
-        ["Last Resort", 21.456716150522873],
-        ["Double-Edge", 3.1202448604994477],
-        ["Sucker Punch", 1.3417763276342964],
-        ["Hammer Arm", 1.0288945678266328],
-        ["Low Kick", 0.9330702465178562],
-        ["Drain Punch", 0.7715748971360222],
-        ["Ice Punch", 0.7566833027452478],
-        ["Protect", 0.6135425622112174]
-    ],
-    "spreads": [
-        ["Brave:32/32/2/0/0/0", 11.094127813875117],
-        ["Brave:32/32/0/0/2/0", 8.461347098525675],
-        ["Adamant:32/32/2/0/0/0", 6.53078983914803],
-        ["Adamant:11/32/0/0/0/23", 5.884915189984868],
-        ["Adamant:32/32/0/0/0/2", 5.609809394600724]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Farigiraf", 11.312142391162476],
-        ["Torkoal", 5.882384235784941],
-        ["Kingambit", 5.261746143576489],
-        ["Basculegion", 4.494477861769223],
-        ["Blastoise-Mega", 3.9366045777213996],
-        ["Sylveon", 3.8119339773009036],
-        ["Whimsicott", 3.5722116247315063],
-        ["Camerupt-Mega", 3.105830080467253],
-        ["Garchomp", 3.08246928241433],
-        ["Sinistcha", 2.3465824393337673]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Kangaskhanite",
-            "ability": "Scrappy",
-            "moves": ["Double-Edge", "Sucker Punch", "Drain Punch", "Fake Out"],
-            "count": 2,
-            "bestPlacing": 2,
-            "bestPlayer": "AlmostGoodGamer",
-            "eventName": "CHAMPIONS REG. M-A |👑CROWN FIGHT Bo3 TOUR #70👑",
-            "eventSlug": "2026-05-29-champions-reg-m-a-crown-fight-bo3-tour-70",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eb09bb78b359b789d6aa3d",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Silk Scarf",
-            "ability": "Scrappy",
-            "moves": ["Fake Out", "Last Resort"],
-            "count": 2,
-            "bestPlacing": 5,
-            "bestPlayer": "PonchoRed",
-            "eventName": "Talon's FIGHT CLUB #85 POKEMON CHAMPIONS",
-            "eventSlug": "2026-05-21-talon-s-fight-club-85-pokemon-champions",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69e2b2f578b359b789d64d31",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Kangaskhanite",
-            "ability": "Scrappy",
-            "moves": ["Fake Out", "Double-Edge", "Crunch", "Drain Punch"],
-            "count": 1,
-            "bestPlacing": 1,
-            "bestPlayer": "Snorlaxpikachu1",
-            "eventName": "CHAMPIONS REG. M-A |👑CROWN FIGHT Bo3 TOUR #70👑",
-            "eventSlug": "2026-05-29-champions-reg-m-a-crown-fight-bo3-tour-70",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eb09bb78b359b789d6aa3d",
-            "nature": "Adamant"
-        }
-    ]
+ "id": "kangaskhan",
+ "name": "Kangaskhan",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0206576,
+   "rank": 55,
+   "raw": 48142
+  }
+ ],
+ "abilities": [
+  [
+   "Scrappy",
+   98.58624137571759
+  ],
+  [
+   "Inner Focus",
+   1.0696357041280253
+  ],
+  [
+   "Early Bird",
+   0.3441229201543901
+  ]
+ ],
+ "items": [
+  [
+   "Silk Scarf",
+   81.17408182472853
+  ],
+  [
+   "Life Orb",
+   14.661111947941363
+  ],
+  [
+   "Iron Ball",
+   0.7885424502486986
+  ],
+  [
+   "Chople Berry",
+   0.7409514533693566
+  ],
+  [
+   "Sitrus Berry",
+   0.6514315331503593
+  ],
+  [
+   "Metronome",
+   0.4417258686293554
+  ],
+  [
+   "Leftovers",
+   0.32432201909233027
+  ],
+  [
+   "Lum Berry",
+   0.25349394464191277
+  ]
+ ],
+ "moves": [
+  [
+   "",
+   42.37854103707399
+  ],
+  [
+   "Fake Out",
+   24.971361732982512
+  ],
+  [
+   "Last Resort",
+   21.23346949119508
+  ],
+  [
+   "Double-Edge",
+   3.320249408507636
+  ],
+  [
+   "Ice Punch",
+   1.5238139455201722
+  ],
+  [
+   "Sucker Punch",
+   1.48602469051052
+  ],
+  [
+   "Low Kick",
+   1.2995430989336971
+  ],
+  [
+   "Hammer Arm",
+   0.9925808208042005
+  ],
+  [
+   "Brick Break",
+   0.7080100829244815
+  ],
+  [
+   "Protect",
+   0.6989617670301058
+  ]
+ ],
+ "spreads": [
+  [
+   "Brave:32/32/2/0/0/0",
+   19.63950522956316
+  ],
+  [
+   "Brave:32/32/1/0/1/0",
+   13.60156884761197
+  ],
+  [
+   "Adamant:32/32/2/0/0/0",
+   10.349906955448118
+  ],
+  [
+   "Brave:32/32/0/0/2/0",
+   7.795655862837804
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   5.9272422859184815
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Farigiraf",
+   14.900782758896955
+  ],
+  [
+   "Torkoal",
+   11.819948893041238
+  ],
+  [
+   "Mawile-Mega",
+   9.858769236457354
+  ],
+  [
+   "Staraptor",
+   4.6364792154102075
+  ],
+  [
+   "Kingambit",
+   2.738466586438906
+  ],
+  [
+   "Basculegion",
+   2.729975553827623
+  ],
+  [
+   "Camerupt-Mega",
+   2.7156632781374235
+  ],
+  [
+   "Sinistcha",
+   2.6899555854365773
+  ],
+  [
+   "Sylveon",
+   2.3725699402748366
+  ],
+  [
+   "Gallade",
+   2.123261190274898
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Maushold",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Silk Scarf",
+   "ability": "Scrappy",
+   "moves": [
+    "Fake Out",
+    "Last Resort"
+   ],
+   "count": 4,
+   "bestPlacing": 2,
+   "bestPlayer": "CloudDino",
+   "eventName": "VGCA Battle Hall: Academy Ace Edition #4",
+   "eventSlug": "2026-06-28-vgca-battle-hall-academy-ace-edition-4",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a400a3ac87cd9ff0a3113d4",
+   "nature": "Brave"
+  },
+  {
+   "item": "Kangaskhanite",
+   "ability": "Scrappy",
+   "moves": [
+    "Fake Out",
+    "Double-Edge",
+    "Low Kick",
+    "Sucker Punch"
+   ],
+   "count": 4,
+   "bestPlacing": 3,
+   "bestPlayer": "Katiclus",
+   "eventName": "Alpensee Tour (Reg M-B) #64",
+   "eventSlug": "2026-07-01-alpensee-tour-reg-m-b-64",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a392defc87cd9ff0a30d0ac",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Life Orb",
+   "ability": "Scrappy",
+   "moves": [
+    "Fake Out",
+    "Double-Edge",
+    "Ice Punch",
+    "Hammer Arm"
+   ],
+   "count": 2,
+   "bestPlacing": 1,
+   "bestPlayer": "scrambledegg6",
+   "eventName": "Amoonguss Bus Tour Champions Practice Reg M-B #1",
+   "eventSlug": "2026-06-23-amoonguss-bus-tour-champions-practice-reg-m-b-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a387661af50e1230840809c",
+   "nature": "Brave"
+  }
+ ]
 }

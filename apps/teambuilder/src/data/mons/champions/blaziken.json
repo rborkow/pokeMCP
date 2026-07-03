@@ -1,0 +1,246 @@
+{
+ "id": "blaziken",
+ "name": "Blaziken",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0064589,
+   "rank": 95,
+   "raw": 25374
+  }
+ ],
+ "abilities": [
+  [
+   "Speed Boost",
+   99.16956629146611
+  ],
+  [
+   "Blaze",
+   0.8304337085338916
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   60.839033002194064
+  ],
+  [
+   "Life Orb",
+   23.916201138476158
+  ],
+  [
+   "Shuca Berry",
+   2.531743647380669
+  ],
+  [
+   "White Herb",
+   2.4799201964401316
+  ],
+  [
+   "Wide Lens",
+   1.5752054941427303
+  ],
+  [
+   "Expert Belt",
+   1.435080136760558
+  ],
+  [
+   "Mental Herb",
+   1.3950603952823917
+  ],
+  [
+   "Scope Lens",
+   1.1570089254306684
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   16.748049074048634
+  ],
+  [
+   "Coaching",
+   14.488051908676233
+  ],
+  [
+   "Close Combat",
+   11.84562345318131
+  ],
+  [
+   "Heat Wave",
+   10.043249793478932
+  ],
+  [
+   "Aura Sphere",
+   9.870441291216416
+  ],
+  [
+   "Flare Blitz",
+   8.536437847015916
+  ],
+  [
+   "Detect",
+   7.6332070053089796
+  ],
+  [
+   "Rock Slide",
+   3.023668291124821
+  ],
+  [
+   "Swords Dance",
+   2.5723190935989466
+  ],
+  [
+   "Overheat",
+   2.3901225735318063
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   18.00195383381349
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   17.69420607731018
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   10.629543097803964
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   8.796952612779684
+  ],
+  [
+   "Naive:0/32/0/2/0/32",
+   5.50237271519168
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Metagross-Mega",
+   9.060513766631876
+  ],
+  [
+   "Sinistcha",
+   9.059315948838394
+  ],
+  [
+   "Garchomp",
+   5.9423005465252325
+  ],
+  [
+   "Kingambit",
+   4.784439976403209
+  ],
+  [
+   "Basculegion",
+   4.777474976988947
+  ],
+  [
+   "Aerodactyl-Mega",
+   3.9393965037409733
+  ],
+  [
+   "Grimmsnarl",
+   3.7774391670620764
+  ],
+  [
+   "Whimsicott",
+   3.5435382524076076
+  ],
+  [
+   "Floette-Mega",
+   3.086872262288737
+  ],
+  [
+   "Rotom-Wash",
+   2.723832822892118
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Blazikenite",
+   "ability": "Speed Boost",
+   "moves": [
+    "Close Combat",
+    "Rock Slide",
+    "Flare Blitz",
+    "Detect"
+   ],
+   "count": 7,
+   "bestPlacing": 1,
+   "bestPlayer": "AthenaStriveVGC",
+   "eventName": "Alpensee Tour (Reg M-B) #63 - ✨ Sylveon for #1!",
+   "eventSlug": "2026-06-24-alpensee-tour-reg-m-b-63-sylveon-for-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1420b18c163b8097996cc7",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Blazikenite",
+   "ability": "Speed Boost",
+   "moves": [
+    "Flare Blitz",
+    "Close Combat",
+    "Protect",
+    "Rock Slide"
+   ],
+   "count": 3,
+   "bestPlacing": 1,
+   "bestPlayer": "Conia",
+   "eventName": "Ratorneo #4 Champions 2026 | Reg MB",
+   "eventSlug": "2026-06-25-ratorneo-4-champions-2026-reg-mb",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c190783fd320299bcf5c9",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Blazikenite",
+   "ability": "Speed Boost",
+   "moves": [
+    "Protect",
+    "Rock Tomb",
+    "Flare Blitz",
+    "Close Combat"
+   ],
+   "count": 2,
+   "bestPlacing": 3,
+   "bestPlayer": "Soraxjm",
+   "eventName": "Mens Mental Health Month Invitational ($350 Prize)",
+   "eventSlug": "2026-06-28-mens-mental-health-month-invitational-350-prize",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a256b8f56b11a587a94b55b",
+   "nature": "Adamant"
+  }
+ ]
+}

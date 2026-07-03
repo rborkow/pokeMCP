@@ -1,67 +1,190 @@
 {
-    "id": "zoroarkhisui",
-    "name": "Zoroark-Hisui",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0159199,
-            "rank": 59,
-            "raw": 163802
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.014424999999999999,
-            "rank": 65,
-            "raw": 187669
-        }
-    ],
-    "abilities": [["Illusion", 100]],
-    "items": [
-        ["Choice Scarf", 53.30749122534224],
-        ["Focus Sash", 29.211191715908157],
-        ["Colbur Berry", 5.037405170579834],
-        ["Silk Scarf", 3.6370880915393],
-        ["Spell Tag", 3.591693847779602],
-        ["Sitrus Berry", 2.652037175564688],
-        ["King's Rock", 0.619071989388726],
-        ["Bright Powder", 0.5349501754602476]
-    ],
-    "moves": [
-        ["Icy Wind", 15.057558076566476],
-        ["Shadow Ball", 14.807698877981062],
-        ["Hyper Voice", 11.472870361690674],
-        ["Psychic", 9.188208816218095],
-        ["Bitter Malice", 8.366229735295533],
-        ["Protect", 5.740885914417136],
-        ["Will-O-Wisp", 4.430051851359506],
-        ["Taunt", 3.9569523404914904],
-        ["Flamethrower", 3.909782881987255],
-        ["Snarl", 3.3130066265684652]
-    ],
-    "spreads": [
-        ["Modest:2/0/0/32/0/32", 26.144286853630156],
-        ["Timid:2/0/0/32/0/32", 22.712404577088094],
-        ["Timid:0/0/0/32/2/32", 9.594920189284156],
-        ["Modest:9/0/0/32/0/25", 4.346896123464432],
-        ["Modest:0/0/0/32/2/32", 4.11557629726729]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Sneasler", 5.630893615574305],
-        ["Kingambit", 4.7481409172971345],
-        ["Whimsicott", 4.215027857678746],
-        ["Garchomp", 3.887137554978314],
-        ["Basculegion", 3.116815890376305],
-        ["Charizard-Mega-Y", 2.97675594523443],
-        ["Farigiraf", 2.818834113513258],
-        ["Tsareena", 2.615958810718626],
-        ["Blastoise-Mega", 2.493431542254549],
-        ["Archaludon", 2.4566030799945326]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "zoroarkhisui",
+ "name": "Zoroark-Hisui",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.008562,
+   "rank": 85,
+   "raw": 35998
+  }
+ ],
+ "abilities": [
+  [
+   "Illusion",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   35.589405375620956
+  ],
+  [
+   "Choice Scarf",
+   35.25176556224848
+  ],
+  [
+   "Life Orb",
+   17.656639505561223
+  ],
+  [
+   "Spell Tag",
+   3.571098629710021
+  ],
+  [
+   "Colbur Berry",
+   2.716672766742624
+  ],
+  [
+   "Silk Scarf",
+   1.1788840870649857
+  ],
+  [
+   "Wide Lens",
+   0.8420392164214234
+  ],
+  [
+   "Expert Belt",
+   0.7499011269287382
+  ]
+ ],
+ "moves": [
+  [
+   "Hyper Voice",
+   14.00677882191636
+  ],
+  [
+   "Icy Wind",
+   12.714012852490983
+  ],
+  [
+   "Shadow Ball",
+   12.419551792885995
+  ],
+  [
+   "Bitter Malice",
+   11.325224493080524
+  ],
+  [
+   "Protect",
+   7.964462265657278
+  ],
+  [
+   "Flamethrower",
+   5.445563729594472
+  ],
+  [
+   "Taunt",
+   4.827386901811055
+  ],
+  [
+   "Will-O-Wisp",
+   4.346190337225077
+  ],
+  [
+   "Psychic",
+   4.056945757695034
+  ],
+  [
+   "Grass Knot",
+   2.94036040855875
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   47.59082283718685
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   18.649687642035673
+  ],
+  [
+   "Timid:1/0/1/32/0/32",
+   5.809573919254783
+  ],
+  [
+   "Modest:1/0/0/32/1/32",
+   5.352147576291392
+  ],
+  [
+   "Timid:0/0/0/32/0/32",
+   2.4455597916892726
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Whimsicott",
+   6.381615493246176
+  ],
+  [
+   "Garchomp",
+   4.586569574960446
+  ],
+  [
+   "Farigiraf",
+   3.9473500483349877
+  ],
+  [
+   "Sneasler",
+   3.7399951253850707
+  ],
+  [
+   "Kingambit",
+   3.6822953958282985
+  ],
+  [
+   "Incineroar",
+   3.600641321653581
+  ],
+  [
+   "Sinistcha",
+   3.469508609701683
+  ],
+  [
+   "Staraptor-Mega",
+   2.721046397223355
+  ],
+  [
+   "Basculegion",
+   2.546222115609289
+  ],
+  [
+   "Floette-Mega",
+   2.492049140110766
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

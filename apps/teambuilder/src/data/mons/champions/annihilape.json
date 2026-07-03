@@ -1,0 +1,274 @@
+{
+ "id": "annihilape",
+ "name": "Annihilape",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0502867,
+   "rank": 30,
+   "raw": 132021
+  }
+ ],
+ "abilities": [
+  [
+   "Defiant",
+   97.95151891434261
+  ],
+  [
+   "Inner Focus",
+   1.1666578554306024
+  ],
+  [
+   "Vital Spirit",
+   0.8818232302267727
+  ]
+ ],
+ "items": [
+  [
+   "Leftovers",
+   41.54830497781106
+  ],
+  [
+   "Sitrus Berry",
+   15.57272274841094
+  ],
+  [
+   "Choice Scarf",
+   14.668766875619296
+  ],
+  [
+   "Focus Sash",
+   11.004663929554935
+  ],
+  [
+   "Life Orb",
+   3.5838438285694045
+  ],
+  [
+   "Roseli Berry",
+   2.746890110972903
+  ],
+  [
+   "Spell Tag",
+   2.6341763944131023
+  ],
+  [
+   "Lum Berry",
+   2.243311616661712
+  ]
+ ],
+ "moves": [
+  [
+   "Rage Fist",
+   21.880966775100696
+  ],
+  [
+   "Protect",
+   18.270716418118763
+  ],
+  [
+   "Drain Punch",
+   16.91618109828291
+  ],
+  [
+   "Bulk Up",
+   14.56672637141729
+  ],
+  [
+   "Close Combat",
+   8.363600588777704
+  ],
+  [
+   "Coaching",
+   3.0122535108522146
+  ],
+  [
+   "U-turn",
+   2.828585180069772
+  ],
+  [
+   "Taunt",
+   2.8096172629087666
+  ],
+  [
+   "Shadow Claw",
+   2.3287396011343637
+  ],
+  [
+   "Ice Punch",
+   1.4498843602959859
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:2/32/0/0/0/32",
+   17.276514815414206
+  ],
+  [
+   "Adamant:32/32/0/0/2/0",
+   7.433150316931883
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   4.864871743362483
+  ],
+  [
+   "Adamant:32/32/0/0/0/2",
+   2.691657944903418
+  ],
+  [
+   "Adamant:17/18/0/0/26/5",
+   1.9333108565766033
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Maushold",
+   7.248817900062075
+  ],
+  [
+   "Sinistcha",
+   5.762578808149916
+  ],
+  [
+   "Whimsicott",
+   5.504402370181365
+  ],
+  [
+   "Incineroar",
+   4.937221171231801
+  ],
+  [
+   "Garchomp",
+   4.268572141967226
+  ],
+  [
+   "Metagross-Mega",
+   3.842450197952273
+  ],
+  [
+   "Pelipper",
+   3.4769682715076216
+  ],
+  [
+   "Basculegion",
+   3.1948657736209265
+  ],
+  [
+   "Grimmsnarl",
+   2.9996426843726387
+  ],
+  [
+   "Farigiraf",
+   2.8388387838432108
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Leftovers",
+   "ability": "Defiant",
+   "moves": [
+    "Drain Punch",
+    "Rage Fist",
+    "Bulk Up",
+    "Protect"
+   ],
+   "count": 3,
+   "bestPlacing": 2,
+   "bestPlayer": "MudkipFan",
+   "eventName": "Champions League VGC June",
+   "eventSlug": "2026-06-27-champions-league-vgc-june",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a397c79c87cd9ff0a30d359",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Black Belt",
+   "ability": "Defiant",
+   "moves": [
+    "Close Combat",
+    "Rage Fist",
+    "Drain Punch",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 2,
+   "bestPlayer": "Sam Badenach",
+   "eventName": "Tyrant Thursdays #2",
+   "eventSlug": "2026-06-25-tyrant-thursdays-2",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3b53a483fd320299bcf113",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Choice Scarf",
+   "ability": "Defiant",
+   "moves": [
+    "Shadow Claw",
+    "Close Combat",
+    "Seed Bomb",
+    "Ice Punch"
+   ],
+   "count": 1,
+   "bestPlacing": 8,
+   "bestPlayer": "Dot1Q",
+   "eventName": "TARTAN TAKEDOWN #30! - [CHAMPIONS REG M-B]",
+   "eventSlug": "2026-06-30-tartan-takedown-30-champions-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a41634e83fd320299bd3356",
+   "nature": "Adamant"
+  }
+ ]
+}

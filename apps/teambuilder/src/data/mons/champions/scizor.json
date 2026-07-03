@@ -1,108 +1,173 @@
 {
-    "id": "scizor",
-    "name": "Scizor",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0104057,
-            "rank": 77,
-            "raw": 78027
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0131546,
-            "rank": 66,
-            "raw": 113462
-        }
-    ],
-    "abilities": [
-        ["Technician", 99.34991789139443],
-        ["Swarm", 0.6485137545545648],
-        ["Light Metal", 0.0015683540510065905]
-    ],
-    "items": [
-        ["Metal Coat", 56.75251952090774],
-        ["Sitrus Berry", 23.711401825965837],
-        ["White Herb", 5.12009992794515],
-        ["Lum Berry", 3.566469545968619],
-        ["Leftovers", 3.4853118753808996],
-        ["Focus Sash", 2.67541735120262],
-        ["Occa Berry", 2.6043608843636323],
-        ["Silver Powder", 0.9005455585596317]
-    ],
-    "moves": [
-        ["Bullet Punch", 24.854501061220528],
-        ["Protect", 20.17870314793047],
-        ["Bug Bite", 15.872307268767985],
-        ["Swords Dance", 14.253417728416123],
-        ["Close Combat", 9.354628969769898],
-        ["Knock Off", 3.5532562559608114],
-        ["Feint", 3.017761594476797],
-        ["Dual Wingbeat", 2.574014364473964],
-        ["U-turn", 2.028997780958842],
-        ["Tailwind", 1.1901536757915885]
-    ],
-    "spreads": [
-        ["Adamant:32/32/0/0/2/0", 24.72878174281199],
-        ["Adamant:32/32/0/0/0/2", 8.9758714029219],
-        ["Adamant:25/30/0/0/1/10", 8.651332666312282],
-        ["Adamant:32/32/2/0/0/0", 5.634206635427498],
-        ["Adamant:17/32/17/0/0/0", 5.095818195793724]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Garchomp", 5.933628333629634],
-        ["Pelipper", 5.385048771384066],
-        ["Archaludon", 4.749540596063884],
-        ["Sneasler", 4.528075534832662],
-        ["Basculegion", 4.505147993462322],
-        ["Sinistcha", 4.155051221794589],
-        ["Incineroar", 3.8620421517894488],
-        ["Charizard-Mega-Y", 3.5294460080180445],
-        ["Blastoise-Mega", 3.3527362760707433],
-        ["Sableye", 3.2169978486151503]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Scizorite",
-            "ability": "Technician",
-            "moves": ["Bullet Punch", "Close Combat", "Swords Dance", "Protect"],
-            "count": 10,
-            "bestPlacing": 1,
-            "bestPlayer": "Altkyle",
-            "eventName": "Talon's FIGHT CLUB #86 POKEMON CHAMPIONS",
-            "eventSlug": "2026-05-28-talon-s-fight-club-86-pokemon-champions",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69e2b31878b359b789d64d36",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Scizorite",
-            "ability": "Technician",
-            "moves": ["Bug Bite", "Bullet Punch", "Swords Dance", "Protect"],
-            "count": 8,
-            "bestPlacing": 2,
-            "bestPlayer": "Raichu123",
-            "eventName": "Unova Champions League #5 / POKÉMON CHAMPIONS",
-            "eventSlug": "2026-05-15-unova-champions-league-5-pok-mon-champions",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a0059b2dfbdf089cbbd6e9e",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Scizorite",
-            "ability": "Technician",
-            "moves": ["Bullet Punch", "Assurance", "Swords Dance", "Protect"],
-            "count": 3,
-            "bestPlacing": 4,
-            "bestPlayer": "JoMcCloud23",
-            "eventName": "Alpensee Tour (Reg M-A) #60 -  ✨🐢 for #1!",
-            "eventSlug": "2026-06-03-alpensee-tour-reg-m-a-60-for-1",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a141fe98c163b8097996cc4",
-            "nature": "Adamant"
-        }
-    ]
+ "id": "scizor",
+ "name": "Scizor",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.005354299999999999,
+   "rank": 103,
+   "raw": 24565
+  }
+ ],
+ "abilities": [
+  [
+   "Technician",
+   97.41007183903466
+  ],
+  [
+   "Swarm",
+   1.8764759429837925
+  ],
+  [
+   "Light Metal",
+   0.713452217981545
+  ]
+ ],
+ "items": [
+  [
+   "Life Orb",
+   50.36404862972349
+  ],
+  [
+   "Metal Coat",
+   19.719298624430856
+  ],
+  [
+   "Expert Belt",
+   10.044608198960105
+  ],
+  [
+   "Occa Berry",
+   4.608913864875503
+  ],
+  [
+   "Sitrus Berry",
+   3.465646928318317
+  ],
+  [
+   "Leftovers",
+   2.6073047469492923
+  ],
+  [
+   "White Herb",
+   2.2658270989840057
+  ],
+  [
+   "Lum Berry",
+   2.0364878011620298
+  ]
+ ],
+ "moves": [
+  [
+   "Bullet Punch",
+   24.948921939820536
+  ],
+  [
+   "Protect",
+   19.35310427953894
+  ],
+  [
+   "Bug Bite",
+   17.929132988557818
+  ],
+  [
+   "Swords Dance",
+   13.589186832679886
+  ],
+  [
+   "Close Combat",
+   6.3042320746994704
+  ],
+  [
+   "Dual Wingbeat",
+   4.294451924041709
+  ],
+  [
+   "U-turn",
+   3.619125529043981
+  ],
+  [
+   "Tailwind",
+   1.823346166350669
+  ],
+  [
+   "Knock Off",
+   1.7538392087291372
+  ],
+  [
+   "Brick Break",
+   0.9626596315338987
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:32/32/0/0/2/0",
+   46.322794430261794
+  ],
+  [
+   "Adamant:32/32/0/0/0/2",
+   8.628277096502709
+  ],
+  [
+   "Adamant:32/32/2/0/0/0",
+   4.878714434317014
+  ],
+  [
+   "Brave:32/32/0/0/2/0",
+   3.364525650624185
+  ],
+  [
+   "Adamant:21/32/4/0/9/0",
+   2.1419343808521605
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Pelipper",
+   5.624532506872916
+  ],
+  [
+   "Sinistcha",
+   5.498502957047718
+  ],
+  [
+   "Swampert-Mega",
+   5.066947123705443
+  ],
+  [
+   "Incineroar",
+   4.254238466557255
+  ],
+  [
+   "Whimsicott",
+   3.5403831589813395
+  ],
+  [
+   "Archaludon",
+   3.4541701374176164
+  ],
+  [
+   "Garchomp",
+   3.446694122058401
+  ],
+  [
+   "Staraptor-Mega",
+   3.2178428926733145
+  ],
+  [
+   "Raichu-Mega-Y",
+   3.124407689711176
+  ],
+  [
+   "Sneasler",
+   2.7388938165891807
+  ]
+ ],
+ "counters": [],
+ "builds": []
 }

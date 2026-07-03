@@ -1,0 +1,274 @@
+{
+ "id": "grimmsnarl",
+ "name": "Grimmsnarl",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.1502407,
+   "rank": 13,
+   "raw": 440427
+  }
+ ],
+ "abilities": [
+  [
+   "Prankster",
+   99.4727944821981
+  ],
+  [
+   "Frisk",
+   0.3335759114212517
+  ],
+  [
+   "Pickpocket",
+   0.19362960638064342
+  ]
+ ],
+ "items": [
+  [
+   "Light Clay",
+   78.93824791758273
+  ],
+  [
+   "Roseli Berry",
+   10.038823213051504
+  ],
+  [
+   "Sitrus Berry",
+   2.496862978150122
+  ],
+  [
+   "Babiri Berry",
+   1.3948912566279335
+  ],
+  [
+   "Black Glasses",
+   1.17723305848207
+  ],
+  [
+   "Leftovers",
+   1.1217022781126396
+  ],
+  [
+   "Mental Herb",
+   1.0773843997141686
+  ],
+  [
+   "Focus Sash",
+   0.9249795178866725
+  ]
+ ],
+ "moves": [
+  [
+   "Parting Shot",
+   21.38005019300437
+  ],
+  [
+   "Reflect",
+   20.797619471413846
+  ],
+  [
+   "Light Screen",
+   20.59940623523375
+  ],
+  [
+   "Spirit Break",
+   14.065702956266692
+  ],
+  [
+   "Fake Out",
+   7.785313407837446
+  ],
+  [
+   "Foul Play",
+   5.830631342874628
+  ],
+  [
+   "Scary Face",
+   3.243447868431372
+  ],
+  [
+   "Sucker Punch",
+   1.662985722979907
+  ],
+  [
+   "Fake Tears",
+   1.232370381557517
+  ],
+  [
+   "Swagger",
+   0.6984080632009383
+  ]
+ ],
+ "spreads": [
+  [
+   "Careful:32/0/19/0/15/0",
+   7.709819994300809
+  ],
+  [
+   "Careful:32/2/0/0/32/0",
+   6.848970772473249
+  ],
+  [
+   "Calm:32/0/20/0/14/0",
+   5.863994741711073
+  ],
+  [
+   "Careful:32/0/20/0/14/0",
+   2.90018639427383
+  ],
+  [
+   "Sassy:31/0/24/0/11/0",
+   2.6852492717687126
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   11.292856286670933
+  ],
+  [
+   "Pelipper",
+   6.547643937641369
+  ],
+  [
+   "Staraptor-Mega",
+   6.5385911514970845
+  ],
+  [
+   "Archaludon",
+   5.85936878642615
+  ],
+  [
+   "Swampert-Mega",
+   5.509239565278343
+  ],
+  [
+   "Garchomp",
+   5.249838765942512
+  ],
+  [
+   "Metagross-Mega",
+   4.830587071655593
+  ],
+  [
+   "Incineroar",
+   4.545618905794395
+  ],
+  [
+   "Basculegion",
+   3.4333132712720142
+  ],
+  [
+   "Gholdengo",
+   3.188264828266231
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Floette-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rotom-Wash",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sableye",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Scovillain-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Light Clay",
+   "ability": "Prankster",
+   "moves": [
+    "Light Screen",
+    "Reflect",
+    "Foul Play",
+    "Parting Shot"
+   ],
+   "count": 20,
+   "bestPlacing": 1,
+   "bestPlayer": "Samuel T",
+   "eventName": "Talon's FIGHT CLUB #91 POKEMON CHAMPIONS",
+   "eventSlug": "2026-07-02-talon-s-fight-club-91-pokemon-champions",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a32e85d2d97f3b0c26189c9",
+   "nature": "Calm"
+  },
+  {
+   "item": "Light Clay",
+   "ability": "Prankster",
+   "moves": [
+    "Spirit Break",
+    "Reflect",
+    "Light Screen",
+    "Parting Shot"
+   ],
+   "count": 20,
+   "bestPlacing": 1,
+   "bestPlayer": "Force_India",
+   "eventName": "Pep_uni Pokémon Champions #1",
+   "eventSlug": "2026-06-28-pep-uni-pok-mon-champions-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3db5bdc87cd9ff0a30f75a",
+   "nature": "Careful"
+  },
+  {
+   "item": "Roseli Berry",
+   "ability": "Prankster",
+   "moves": [
+    "Foul Play",
+    "Parting Shot",
+    "Reflect",
+    "Fake Out"
+   ],
+   "count": 2,
+   "bestPlacing": 3,
+   "bestPlayer": "Aidan Junker",
+   "eventName": "Tyrant Thursdays #2",
+   "eventSlug": "2026-06-25-tyrant-thursdays-2",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3b53a483fd320299bcf113",
+   "nature": "Sassy"
+  }
+ ]
+}

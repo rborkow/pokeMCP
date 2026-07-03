@@ -1,0 +1,270 @@
+{
+ "id": "staraptor",
+ "name": "Staraptor",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.033977400000000005,
+   "rank": 36,
+   "raw": 79502
+  }
+ ],
+ "abilities": [
+  [
+   "Intimidate",
+   93.93418233212275
+  ],
+  [
+   "Reckless",
+   6.0658176678772575
+  ]
+ ],
+ "items": [
+  [
+   "Choice Scarf",
+   98.32849540403139
+  ],
+  [
+   "Focus Sash",
+   0.49799949779783464
+  ],
+  [
+   "Sitrus Berry",
+   0.21719448343541273
+  ],
+  [
+   "nothing",
+   0.1910606064406495
+  ],
+  [
+   "Life Orb",
+   0.18826365743110746
+  ],
+  [
+   "Sharp Beak",
+   0.18340921193225965
+  ],
+  [
+   "Bright Powder",
+   0.06220987321384858
+  ],
+  [
+   "Quick Claw",
+   0.05025556383004902
+  ]
+ ],
+ "moves": [
+  [
+   "Final Gambit",
+   24.58829000901308
+  ],
+  [
+   "Brave Bird",
+   21.260900586223926
+  ],
+  [
+   "U-turn",
+   20.745545512200287
+  ],
+  [
+   "Close Combat",
+   20.174482757762625
+  ],
+  [
+   "Double-Edge",
+   3.0264645936123444
+  ],
+  [
+   "Dual Wingbeat",
+   2.970251070394704
+  ],
+  [
+   "Tailwind",
+   2.3276802446791445
+  ],
+  [
+   "Sunny Day",
+   1.0312228596034316
+  ],
+  [
+   "Rain Dance",
+   0.6960712368891949
+  ],
+  [
+   "Blaze Kick",
+   0.5725716840038211
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:32/2/0/0/0/32",
+   66.11683787490648
+  ],
+  [
+   "Adamant:32/2/0/0/0/32",
+   3.8803203898812506
+  ],
+  [
+   "Jolly:32/0/0/0/2/32",
+   3.7471438850896086
+  ],
+  [
+   "Jolly:32/0/0/0/0/32",
+   3.4680742682683015
+  ],
+  [
+   "Jolly:32/1/0/0/1/32",
+   3.436602130171176
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Farigiraf",
+   14.088489902759898
+  ],
+  [
+   "Torkoal",
+   11.0770158687196
+  ],
+  [
+   "Mawile-Mega",
+   9.244427425632338
+  ],
+  [
+   "Kingambit",
+   4.185958339553164
+  ],
+  [
+   "Sylveon",
+   3.582699735184746
+  ],
+  [
+   "Vileplume",
+   3.45310748645164
+  ],
+  [
+   "Incineroar",
+   2.9877566290224515
+  ],
+  [
+   "Whimsicott",
+   2.96292523554382
+  ],
+  [
+   "Kangaskhan",
+   2.8188916398365267
+  ],
+  [
+   "Sinistcha",
+   2.515944801466437
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Floette-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Mawile-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sylveon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Swampert-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Staraptite",
+   "ability": "Intimidate",
+   "moves": [
+    "Brave Bird",
+    "Close Combat",
+    "Roost",
+    "Protect"
+   ],
+   "count": 11,
+   "bestPlacing": 1,
+   "bestPlayer": "Mollusk ",
+   "eventName": "The Wide League Saturday Night Rumble #87 REG M-B",
+   "eventSlug": "2026-06-28-the-wide-league-saturday-night-rumble-87-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3dbda083fd320299bd0416",
+   "nature": "Jolly"
+  },
+  {
+   "item": "Staraptite",
+   "ability": "Contrary",
+   "moves": [
+    "Close Combat",
+    "Brave Bird",
+    "Roost",
+    "Protect"
+   ],
+   "count": 2,
+   "bestPlacing": 5,
+   "bestPlayer": "Luca Bartoli",
+   "eventName": "First Impression Mondays",
+   "eventSlug": "2026-06-29-first-impression-mondays",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a41cf1383fd320299bd39a4",
+   "nature": "Jolly"
+  },
+  {
+   "item": "Staraptite",
+   "ability": "Reckless",
+   "moves": [
+    "Close Combat",
+    "Brave Bird",
+    "Roost",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 4,
+   "bestPlayer": "TheFiendishMeep",
+   "eventName": "Alpensee Tour (Reg M-B) #63 - ✨ Sylveon for #1!",
+   "eventSlug": "2026-06-24-alpensee-tour-reg-m-b-63-sylveon-for-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1420b18c163b8097996cc7",
+   "nature": "Jolly"
+  }
+ ]
+}

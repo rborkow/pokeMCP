@@ -1,104 +1,236 @@
 {
-    "id": "primarina",
-    "name": "Primarina",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0467876,
-            "rank": 35,
-            "raw": 320671
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.032693,
-            "rank": 44,
-            "raw": 325998
-        }
-    ],
-    "abilities": [["Liquid Voice", 97.62622437611668], ["Torrent", 2.3737756238833163]],
-    "items": [
-        ["Leftovers", 34.48638328840945],
-        ["Mystic Water", 29.380331225839683],
-        ["Sitrus Berry", 22.41096203004691],
-        ["Kebia Berry", 6.747026112452467],
-        ["Fairy Feather", 3.670993321423733],
-        ["Choice Scarf", 1.0559514323776586],
-        ["Focus Sash", 0.8286487880602248],
-        ["Wacan Berry", 0.3062971433288713]
-    ],
-    "moves": [
-        ["Hyper Voice", 23.951813011872204],
-        ["Protect", 23.822381121007595],
-        ["Moonblast", 23.69926255456853],
-        ["Calm Mind", 10.124423442429158],
-        ["Psychic", 1.83326198126249],
-        ["Icy Wind", 1.6795715012933927],
-        ["Substitute", 1.6419042412238194],
-        ["Hydro Cannon", 1.5318828672447493],
-        ["Aqua Jet", 1.4773624774107605],
-        ["Dazzling Gleam", 1.2454078709390293]
-    ],
-    "spreads": [
-        ["Modest:32/0/0/32/2/0", 7.322046608831665],
-        ["Modest:16/0/21/24/0/5", 5.944597979710272],
-        ["Quiet:32/0/2/32/0/0", 5.683481911039135],
-        ["Modest:32/0/2/32/0/0", 4.965044374981955],
-        ["Modest:10/0/0/24/0/32", 4.14533886569379]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Sinistcha", 5.787774355170634],
-        ["Incineroar", 5.484176590279131],
-        ["Sneasler", 5.416640856761978],
-        ["Farigiraf", 5.155317428988086],
-        ["Garchomp", 4.872065492239102],
-        ["Kingambit", 4.385597303151768],
-        ["Charizard-Mega-Y", 3.1007359618905923],
-        ["Corviknight", 2.758675933822811],
-        ["Scovillain-Mega", 2.4072416175678084],
-        ["Tyranitar-Mega", 2.3829727517029324]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Sitrus Berry",
-            "ability": "Liquid Voice",
-            "moves": ["Hyper Voice", "Moonblast", "Calm Mind", "Protect"],
-            "count": 3,
-            "bestPlacing": 3,
-            "bestPlayer": "trevYah",
-            "eventName": "Alpensee Tour (Reg M-A) #58",
-            "eventSlug": "2026-05-20-alpensee-tour-reg-m-a-58",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69f62816e23aab068aad8a2d",
-            "nature": "Modest"
-        },
-        {
-            "item": "Mystic Water",
-            "ability": "Liquid Voice",
-            "moves": ["Hyper Voice", "Protect", "Moonblast", "Dazzling Gleam"],
-            "count": 1,
-            "bestPlacing": 3,
-            "bestPlayer": "VGCDan",
-            "eventName": "Pokepal Smackdown #144 (Champions) (Reg M-A)",
-            "eventSlug": "2026-06-08-pokepal-smackdown-144-champions-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15a9910f6c1f089986169a",
-            "nature": "Modest"
-        },
-        {
-            "item": "Leftovers",
-            "ability": "Liquid Voice",
-            "moves": ["Hyper Voice", "Moonblast", "Calm Mind", "Protect"],
-            "count": 1,
-            "bestPlacing": 4,
-            "bestPlayer": "lukasjoel1",
-            "eventName": "CHAMPIONS REG. M-A |👑CROWN FIGHT Bo3 TOUR #68👑",
-            "eventSlug": "2026-05-08-champions-reg-m-a-crown-fight-bo3-tour-68",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eb095278b359b789d6aa3a",
-            "nature": null
-        }
-    ]
+ "id": "primarina",
+ "name": "Primarina",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0305744,
+   "rank": 40,
+   "raw": 87596
+  }
+ ],
+ "abilities": [
+  [
+   "Liquid Voice",
+   98.82406249431256
+  ],
+  [
+   "Torrent",
+   1.1759375056874442
+  ]
+ ],
+ "items": [
+  [
+   "Leftovers",
+   35.65378766627995
+  ],
+  [
+   "Life Orb",
+   32.09029847479367
+  ],
+  [
+   "Mystic Water",
+   14.800501812722109
+  ],
+  [
+   "Sitrus Berry",
+   9.575590935888565
+  ],
+  [
+   "Fairy Feather",
+   1.9841585681192153
+  ],
+  [
+   "Expert Belt",
+   1.3455248029275222
+  ],
+  [
+   "Kebia Berry",
+   1.0746817837039528
+  ],
+  [
+   "Choice Scarf",
+   0.9479307531740578
+  ]
+ ],
+ "moves": [
+  [
+   "Hyper Voice",
+   24.569262646321743
+  ],
+  [
+   "Protect",
+   23.674998091461138
+  ],
+  [
+   "Moonblast",
+   22.636411961121446
+  ],
+  [
+   "Calm Mind",
+   10.254429004143352
+  ],
+  [
+   "Energy Ball",
+   3.0572970860952955
+  ],
+  [
+   "Dazzling Gleam",
+   2.953045298336106
+  ],
+  [
+   "Ice Beam",
+   2.2615408424656898
+  ],
+  [
+   "Haze",
+   1.5633057482354524
+  ],
+  [
+   "Aqua Jet",
+   1.0033593390513413
+  ],
+  [
+   "Icy Wind",
+   0.925062847830787
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:32/0/0/32/2/0",
+   14.073661008341146
+  ],
+  [
+   "Quiet:32/0/2/32/0/0",
+   10.025177947396092
+  ],
+  [
+   "Modest:32/0/2/32/0/0",
+   5.112175584015448
+  ],
+  [
+   "Quiet:32/0/0/32/2/0",
+   4.441463140957165
+  ],
+  [
+   "Modest:21/0/24/14/0/7",
+   4.110491153450217
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   7.830072475300076
+  ],
+  [
+   "Farigiraf",
+   6.077298084288714
+  ],
+  [
+   "Incineroar",
+   5.721528373674464
+  ],
+  [
+   "Garchomp",
+   4.948505705090827
+  ],
+  [
+   "Kingambit",
+   4.342190315011678
+  ],
+  [
+   "Sneasler",
+   3.627060450879037
+  ],
+  [
+   "Metagross-Mega",
+   3.178561748554827
+  ],
+  [
+   "Staraptor-Mega",
+   2.938186790249083
+  ],
+  [
+   "Grimmsnarl",
+   2.739796950555306
+  ],
+  [
+   "Whimsicott",
+   2.674893446465835
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Swampert-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sableye",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Life Orb",
+   "ability": "Liquid Voice",
+   "moves": [
+    "Hyper Voice",
+    "Dazzling Gleam",
+    "Protect",
+    "Blizzard"
+   ],
+   "count": 1,
+   "bestPlacing": 5,
+   "bestPlayer": "Cloudzin",
+   "eventName": "The Wide League Saturday Night Rumble #87 REG M-B",
+   "eventSlug": "2026-06-28-the-wide-league-saturday-night-rumble-87-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3dbda083fd320299bd0416",
+   "nature": "Quiet"
+  }
+ ]
 }

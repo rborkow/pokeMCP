@@ -1,58 +1,186 @@
 {
-    "id": "froslassmega",
-    "name": "Froslass-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0835862,
-            "rank": 17,
-            "raw": 485068
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.049887499999999994,
-            "rank": 34,
-            "raw": 343698
-        }
-    ],
-    "abilities": [["Snow Warning", 100]],
-    "items": [["Froslassite", 100]],
-    "moves": [
-        ["Blizzard", 24.950870938090727],
-        ["Protect", 24.371661710190118],
-        ["Shadow Ball", 23.611330809410504],
-        ["Aurora Veil", 19.132831859567307],
-        ["Taunt", 2.0846681707220744],
-        ["Substitute", 1.1544403006464607],
-        ["Nasty Plot", 0.9992243968558726],
-        ["Thunderbolt", 0.7028865626831415],
-        ["Icy Wind", 0.5366529091254425],
-        ["Will-O-Wisp", 0.4975348915463122]
-    ],
-    "spreads": [
-        ["Timid:2/0/0/32/0/32", 11.634155225455098],
-        ["Modest:32/0/2/32/0/0", 5.966531477269895],
-        ["Timid:0/0/0/32/2/32", 5.8084600590872855],
-        ["Timid:32/0/15/1/0/18", 5.542032748554056],
-        ["Modest:12/0/1/20/1/32", 4.718314686040311]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Sneasler", 14.435778837829488],
-        ["Kingambit", 11.9595876988079],
-        ["Basculegion", 10.19452746061136],
-        ["Garchomp", 6.776465434218328],
-        ["Whimsicott", 4.013171547106633],
-        ["Incineroar", 3.276061061704679],
-        ["Milotic", 3.2093499205080978],
-        ["Aerodactyl-Mega", 2.6602139378310516],
-        ["Dragonite", 2.509026805107763],
-        ["Rotom-Wash", 2.378842421291704]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "froslassmega",
+ "name": "Froslass-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0427716,
+   "rank": 33,
+   "raw": 103580
+  }
+ ],
+ "abilities": [
+  [
+   "Snow Warning",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Froslassite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Blizzard",
+   24.968786102554006
+  ],
+  [
+   "Protect",
+   23.887913702709984
+  ],
+  [
+   "Shadow Ball",
+   23.489877602195623
+  ],
+  [
+   "Aurora Veil",
+   19.709258603772213
+  ],
+  [
+   "Nasty Plot",
+   1.7059038842347662
+  ],
+  [
+   "Rain Dance",
+   1.142136371366447
+  ],
+  [
+   "Thunderbolt",
+   0.7290101043299255
+  ],
+  [
+   "Weather Ball",
+   0.5367473616834493
+  ],
+  [
+   "Frost Breath",
+   0.45259494164875314
+  ],
+  [
+   "Haze",
+   0.4116614288261216
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   29.47021598472908
+  ],
+  [
+   "Timid:32/0/0/2/0/32",
+   6.526359508700032
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   5.778296931839648
+  ],
+  [
+   "Modest:32/0/0/4/0/30",
+   2.0782846431304183
+  ],
+  [
+   "Modest:24/0/0/8/4/30",
+   2.0549473346182743
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Kingambit",
+   10.226911566676373
+  ],
+  [
+   "Sneasler",
+   8.944263322431906
+  ],
+  [
+   "Basculegion",
+   7.2955535028464595
+  ],
+  [
+   "Garchomp",
+   6.762661894667174
+  ],
+  [
+   "Incineroar",
+   5.5010895435038965
+  ],
+  [
+   "Whimsicott",
+   4.301328925890832
+  ],
+  [
+   "Sinistcha",
+   3.8825487705759936
+  ],
+  [
+   "Lycanroc-Dusk",
+   3.6584191474991243
+  ],
+  [
+   "Scovillain-Mega",
+   3.2489974088904234
+  ],
+  [
+   "Arcanine-Hisui",
+   1.8751417565417312
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Maushold",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

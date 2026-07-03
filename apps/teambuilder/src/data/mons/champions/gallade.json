@@ -1,96 +1,240 @@
 {
-    "id": "gallade",
-    "name": "Gallade",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0120184,
-            "rank": 71,
-            "raw": 78394
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0193556,
-            "rank": 57,
-            "raw": 148939
-        }
-    ],
-    "abilities": [
-        ["Sharpness", 99.12447683789317],
-        ["Steadfast", 0.5315535171402059],
-        ["Justified", 0.343969644966623]
-    ],
-    "items": [
-        ["Focus Sash", 44.63419838533237],
-        ["Choice Scarf", 14.265532501355164],
-        ["Black Belt", 10.955480297501555],
-        ["Scope Lens", 8.748578796541508],
-        ["White Herb", 7.049157072777702],
-        ["Sitrus Berry", 3.466523723202245],
-        ["Lum Berry", 3.3428414225765244],
-        ["Coba Berry", 1.9417832459770599]
-    ],
-    "moves": [
-        ["Sacred Sword", 24.66373794685869],
-        ["Psycho Cut", 23.264586545399453],
-        ["Leaf Blade", 14.032250083423909],
-        ["Protect", 13.510560180473192],
-        ["Trick Room", 7.283954809403738],
-        ["Wide Guard", 4.728517669878569],
-        ["Night Slash", 3.262675719169988],
-        ["Shadow Sneak", 1.513674118639344],
-        ["Trick", 1.218334887980183],
-        ["Triple Axel", 1.01227694491287]
-    ],
-    "spreads": [
-        ["Adamant:2/32/0/0/0/32", 25.075151692191362],
-        ["Jolly:0/32/0/0/2/32", 9.476146230333697],
-        ["Jolly:2/32/0/0/0/32", 9.420322323294814],
-        ["Brave:32/32/2/0/0/0", 7.668625153056075],
-        ["Brave:18/24/24/0/0/0", 3.3964088967705046]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Farigiraf", 10.063219852456031],
-        ["Kingambit", 8.203361699302983],
-        ["Camerupt-Mega", 4.279282100774575],
-        ["Pelipper", 3.986109832990152],
-        ["Basculegion", 3.9778655516468344],
-        ["Crabominable-Mega", 3.6297738743019607],
-        ["Azumarill", 3.208507766897327],
-        ["Torkoal", 2.99664511788761],
-        ["Sinistcha", 2.9677130996711596],
-        ["Blastoise-Mega", 2.877699998988953]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Focus Sash",
-            "ability": "Sharpness",
-            "moves": ["Sacred Sword", "Psycho Cut", "Leaf Blade", "Protect"],
-            "count": 2,
-            "bestPlacing": 7,
-            "bestPlayer": "黏菌 ",
-            "eventName": "Sheep Cup#14[Reg M-A]",
-            "eventSlug": "2026-05-17-sheep-cup-14-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69f05abfe23aab068aad421a",
-            "nature": null
-        },
-        {
-            "item": "White Herb",
-            "ability": "Sharpness",
-            "moves": ["Sacred Sword", "Psycho Cut", "Wide Guard", "Trick Room"],
-            "count": 1,
-            "bestPlacing": 8,
-            "bestPlayer": "Nisanth",
-            "eventName": "Alpensee Tour (Reg M-A) #61 - ✨🐢 for #1!",
-            "eventSlug": "2026-06-10-alpensee-tour-reg-m-a-61-for-1",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1420518c163b8097996cc6",
-            "nature": "Brave"
-        }
-    ]
+ "id": "gallade",
+ "name": "Gallade",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0154896,
+   "rank": 68,
+   "raw": 34175
+  }
+ ],
+ "abilities": [
+  [
+   "Sharpness",
+   97.93873458040102
+  ],
+  [
+   "Steadfast",
+   1.6573795267198959
+  ],
+  [
+   "Justified",
+   0.4038858928790885
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   34.20285047007357
+  ],
+  [
+   "Life Orb",
+   17.937030497966646
+  ],
+  [
+   "Choice Scarf",
+   11.151490871895428
+  ],
+  [
+   "White Herb",
+   9.533613372108944
+  ],
+  [
+   "Iron Ball",
+   7.134537328031038
+  ],
+  [
+   "Black Belt",
+   6.295073769544948
+  ],
+  [
+   "Expert Belt",
+   3.5602653120776298
+  ],
+  [
+   "Scope Lens",
+   3.205668026296138
+  ]
+ ],
+ "moves": [
+  [
+   "Sacred Sword",
+   24.710983292458746
+  ],
+  [
+   "Psycho Cut",
+   21.37283077281716
+  ],
+  [
+   "Trick Room",
+   13.731391007948602
+  ],
+  [
+   "Leaf Blade",
+   12.688582429828541
+  ],
+  [
+   "Protect",
+   10.421645676398649
+  ],
+  [
+   "Wide Guard",
+   6.950717272595583
+  ],
+  [
+   "Night Slash",
+   5.233146676885853
+  ],
+  [
+   "Trick",
+   0.6854712154075621
+  ],
+  [
+   "Coaching",
+   0.6205829002796264
+  ],
+  [
+   "Triple Axel",
+   0.5205001843551088
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   18.758542436846145
+  ],
+  [
+   "Brave:32/32/2/0/0/0",
+   15.784008697491162
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   13.8839799227873
+  ],
+  [
+   "Brave:32/32/0/0/2/0",
+   7.7853194098394845
+  ],
+  [
+   "Adamant:32/32/2/0/0/0",
+   5.601371248664896
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Farigiraf",
+   12.47814095682149
+  ],
+  [
+   "Mawile-Mega",
+   11.195192347124829
+  ],
+  [
+   "Torkoal",
+   9.436161228105085
+  ],
+  [
+   "Incineroar",
+   5.057454157401434
+  ],
+  [
+   "Sinistcha",
+   3.1528695786277745
+  ],
+  [
+   "Staraptor",
+   2.919905526005968
+  ],
+  [
+   "Kangaskhan",
+   2.831664409262597
+  ],
+  [
+   "Maushold",
+   2.5020724506366747
+  ],
+  [
+   "Kingambit",
+   2.3542041348494047
+  ],
+  [
+   "Camerupt-Mega",
+   1.9707936281144318
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Iron Ball",
+   "ability": "Sharpness",
+   "moves": [
+    "Sacred Sword",
+    "Leaf Blade",
+    "Psycho Cut",
+    "Trick Room"
+   ],
+   "count": 2,
+   "bestPlacing": 1,
+   "bestPlayer": "scrambledegg6",
+   "eventName": "Amoonguss Bus Tour Champions Practice Reg M-B #1",
+   "eventSlug": "2026-06-23-amoonguss-bus-tour-champions-practice-reg-m-b-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a387661af50e1230840809c",
+   "nature": "Brave"
+  }
+ ]
 }

@@ -1,92 +1,253 @@
 {
-    "id": "ceruledge",
-    "name": "Ceruledge",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.010578700000000002,
-            "rank": 75,
-            "raw": 65472
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.023881899999999998,
-            "rank": 50,
-            "raw": 171286
-        }
-    ],
-    "abilities": [["Flash Fire", 77.63349466974326], ["Weak Armor", 22.366505330256757]],
-    "items": [
-        ["Focus Sash", 38.066184038513455],
-        ["Colbur Berry", 24.599721757649174],
-        ["Leftovers", 11.519951158093352],
-        ["Sitrus Berry", 11.146051087093664],
-        ["Charcoal", 3.7080628986909474],
-        ["Spell Tag", 3.278153405792346],
-        ["Shuca Berry", 1.820046198848746],
-        ["Kasib Berry", 1.3741562256931135]
-    ],
-    "moves": [
-        ["Bitter Blade", 24.792906161579946],
-        ["Shadow Sneak", 23.481039889633614],
-        ["Protect", 15.887275047824115],
-        ["Swords Dance", 13.11683998068734],
-        ["Poltergeist", 12.07044168203936],
-        ["Bulk Up", 7.3079821422600295],
-        ["Close Combat", 1.1670429897436618],
-        ["Will-O-Wisp", 0.5156826023363964],
-        ["Shadow Claw", 0.23219063152265643],
-        ["Taunt", 0.20149103421782757]
-    ],
-    "spreads": [
-        ["Jolly:2/32/0/0/0/32", 18.95717977076847],
-        ["Adamant:30/32/0/0/0/4", 5.386531129892696],
-        ["Adamant:2/32/0/0/0/32", 4.819035268828114],
-        ["Adamant:32/32/2/0/0/0", 4.42896165662738],
-        ["Jolly:0/32/0/0/2/32", 3.996849271781844]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Kingambit", 8.422078359564592],
-        ["Lopunny-Mega", 7.6770728034096685],
-        ["Basculegion", 7.187553282179018],
-        ["Ninetales-Alola", 7.019812370971251],
-        ["Farigiraf", 6.532602233733906],
-        ["Milotic", 3.4146073877337564],
-        ["Sneasler", 3.068624113888493],
-        ["Sinistcha", 3.046469228360545],
-        ["Garchomp", 2.233986381305619],
-        ["Rotom-Wash", 2.21174582497135]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Charcoal",
-            "ability": "Flash Fire",
-            "moves": ["Bitter Blade", "Shadow Sneak", "Bulk Up", "Protect"],
-            "count": 1,
-            "bestPlacing": 5,
-            "bestPlayer": "2005SteveNash",
-            "eventName": "Alpensee Tour (Reg M-A) #61 - ✨🐢 for #1!",
-            "eventSlug": "2026-06-10-alpensee-tour-reg-m-a-61-for-1",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1420518c163b8097996cc6",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Colbur Berry",
-            "ability": "Flash Fire",
-            "moves": ["Bitter Blade", "Phantom Force", "Close Combat", "Shadow Sneak"],
-            "count": 1,
-            "bestPlacing": 5,
-            "bestPlayer": "Nutchup",
-            "eventName": "Coupe Critique Champions VGC #2 - 200€ prize",
-            "eventSlug": "2026-05-09-coupe-critique-champions-vgc-2-200-prize",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69f0e7f6e23aab068aad44a1",
-            "nature": null
-        }
-    ]
+ "id": "ceruledge",
+ "name": "Ceruledge",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0293946,
+   "rank": 41,
+   "raw": 63976
+  }
+ ],
+ "abilities": [
+  [
+   "Flash Fire",
+   96.22802077839789
+  ],
+  [
+   "Weak Armor",
+   3.7719792216021073
+  ]
+ ],
+ "items": [
+  [
+   "Colbur Berry",
+   62.39900848433294
+  ],
+  [
+   "Leftovers",
+   8.025065942726018
+  ],
+  [
+   "Charcoal",
+   6.973310251827339
+  ],
+  [
+   "Focus Sash",
+   6.459985688089595
+  ],
+  [
+   "Life Orb",
+   5.204581752148162
+  ],
+  [
+   "Sitrus Berry",
+   4.7583551924486915
+  ],
+  [
+   "Shuca Berry",
+   1.360313238925897
+  ],
+  [
+   "Spell Tag",
+   1.1814999091094278
+  ]
+ ],
+ "moves": [
+  [
+   "Bitter Blade",
+   24.976398913759837
+  ],
+  [
+   "Shadow Sneak",
+   23.582094330135085
+  ],
+  [
+   "Protect",
+   23.0610217085481
+  ],
+  [
+   "Bulk Up",
+   18.898712622226174
+  ],
+  [
+   "Poltergeist",
+   3.270870183851631
+  ],
+  [
+   "Swords Dance",
+   3.0789080218173766
+  ],
+  [
+   "Close Combat",
+   0.857242839208084
+  ],
+  [
+   "Psych Up",
+   0.33945592031513694
+  ],
+  [
+   "Will-O-Wisp",
+   0.2727882961470838
+  ],
+  [
+   "Shadow Claw",
+   0.27169476323391206
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:31/25/10/0/0/0",
+   29.390869121265744
+  ],
+  [
+   "Jolly:1/32/0/0/1/32",
+   4.737462327891735
+  ],
+  [
+   "Adamant:31/1/26/0/0/8",
+   3.9031402588206956
+  ],
+  [
+   "Adamant:32/32/2/0/0/0",
+   3.6986896652177936
+  ],
+  [
+   "Adamant:32/32/0/0/0/2",
+   2.9560464225323844
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   10.730984324770638
+  ],
+  [
+   "Milotic",
+   9.070945282072916
+  ],
+  [
+   "Incineroar",
+   8.16326476133318
+  ],
+  [
+   "Raichu-Mega-Y",
+   7.691437957725481
+  ],
+  [
+   "Floette-Mega",
+   6.712046406033798
+  ],
+  [
+   "Mawile-Mega",
+   3.136378277444222
+  ],
+  [
+   "Sneasler",
+   3.035028128352359
+  ],
+  [
+   "Kingambit",
+   2.8907226121767735
+  ],
+  [
+   "Garchomp",
+   2.862376797027929
+  ],
+  [
+   "Whimsicott",
+   2.8066484909557663
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Hydreigon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Colbur Berry",
+   "ability": "Flash Fire",
+   "moves": [
+    "Bitter Blade",
+    "Shadow Sneak",
+    "Bulk Up",
+    "Protect"
+   ],
+   "count": 7,
+   "bestPlacing": 1,
+   "bestPlayer": "Jhan Nemo Sugui",
+   "eventName": "First Impression Mondays",
+   "eventSlug": "2026-06-29-first-impression-mondays",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a41cf1383fd320299bd39a4",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Sitrus Berry",
+   "ability": "Flash Fire",
+   "moves": [
+    "Bitter Blade",
+    "Bulk Up",
+    "Shadow Sneak",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 3,
+   "bestPlayer": "Gouillou",
+   "eventName": "INGAGE FRONTIER SERIES  #1 - $50 PRIZE (Reg M-B)",
+   "eventSlug": "2026-06-20-ingage-frontier-series-1-50-prize-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a2f143fe334c3c9befd6e8e",
+   "nature": "Adamant"
+  }
+ ]
 }

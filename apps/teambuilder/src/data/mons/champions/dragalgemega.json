@@ -1,0 +1,190 @@
+{
+ "id": "dragalgemega",
+ "name": "Dragalge-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0167169,
+   "rank": 64,
+   "raw": 67606
+  }
+ ],
+ "abilities": [
+  [
+   "No Ability",
+   80.71358017092936
+  ],
+  [
+   "Regenerator",
+   19.286419829070635
+  ]
+ ],
+ "items": [
+  [
+   "Dragalgite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   21.17611017937073
+  ],
+  [
+   "Sludge Bomb",
+   20.770819280872523
+  ],
+  [
+   "Draco Meteor",
+   18.54755811318818
+  ],
+  [
+   "Flip Turn",
+   8.581834586253926
+  ],
+  [
+   "Dragon Pulse",
+   6.067271399365591
+  ],
+  [
+   "Toxic",
+   5.671943352814426
+  ],
+  [
+   "Thunderbolt",
+   5.353390114463156
+  ],
+  [
+   "Scald",
+   2.9948749074929477
+  ],
+  [
+   "Sludge Wave",
+   1.973784551894836
+  ],
+  [
+   "Haze",
+   1.6817353708463256
+  ]
+ ],
+ "spreads": [
+  [
+   "Quiet:32/0/2/32/0/0",
+   12.458248538455125
+  ],
+  [
+   "Modest:32/0/2/32/0/0",
+   9.999982490242767
+  ],
+  [
+   "Modest:32/0/0/32/2/0",
+   8.712375574296471
+  ],
+  [
+   "Quiet:32/0/0/32/2/0",
+   3.8441468351490418
+  ],
+  [
+   "Bold:32/0/32/0/2/0",
+   3.133762899257394
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   12.598489417597738
+  ],
+  [
+   "Incineroar",
+   10.443506654220837
+  ],
+  [
+   "Grimmsnarl",
+   6.42922590478802
+  ],
+  [
+   "Farigiraf",
+   5.293670215016498
+  ],
+  [
+   "Kingambit",
+   2.6472024992046643
+  ],
+  [
+   "Gholdengo",
+   2.583967976153345
+  ],
+  [
+   "Torkoal",
+   2.1959141482885456
+  ],
+  [
+   "Pelipper",
+   2.191806674372537
+  ],
+  [
+   "Staraptor-Mega",
+   2.1188969033466103
+  ],
+  [
+   "Basculegion",
+   2.1091536798475294
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Metagross-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

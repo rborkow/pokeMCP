@@ -1,108 +1,274 @@
 {
-    "id": "excadrill",
-    "name": "Excadrill",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0495195,
-            "rank": 30,
-            "raw": 307645
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0438136,
-            "rank": 38,
-            "raw": 291894
-        }
-    ],
-    "abilities": [
-        ["Sand Rush", 91.71088639544199],
-        ["Mold Breaker", 6.991743509815258],
-        ["Sand Force", 1.2973700947427544]
-    ],
-    "items": [
-        ["Focus Sash", 86.18077025611704],
-        ["Choice Scarf", 5.3891564871777184],
-        ["White Herb", 4.6317002725304635],
-        ["Soft Sand", 1.7506396129115496],
-        ["Chople Berry", 0.49774762691532726],
-        ["Lum Berry", 0.4230706797210391],
-        ["Sitrus Berry", 0.1954642264912613],
-        ["Shuca Berry", 0.16121642761972205]
-    ],
-    "moves": [
-        ["Iron Head", 24.43417894808471],
-        ["Protect", 23.320411888064626],
-        ["Rock Slide", 20.198818095851404],
-        ["High Horsepower", 14.45310137321401],
-        ["Earthquake", 14.131590774829375],
-        ["Rock Tomb", 0.9449837908339898],
-        ["Swords Dance", 0.7560720958009314],
-        ["Stomping Tantrum", 0.5368905346487224],
-        ["Drill Run", 0.26201654280466585],
-        ["Horn Drill", 0.19663935108983654]
-    ],
-    "spreads": [
-        ["Adamant:2/32/0/0/0/32", 42.2806987251608],
-        ["Adamant:0/32/0/0/2/32", 11.251382075752945],
-        ["Jolly:2/32/0/0/0/32", 9.126490392990087],
-        ["Adamant:1/32/1/0/0/32", 7.665428681181662],
-        ["Adamant:0/32/2/0/0/32", 7.526539988184133]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Tyranitar-Mega", 15.84225131680222],
-        ["Corviknight", 9.624317810982816],
-        ["Rotom-Wash", 6.902620855487957],
-        ["Sinistcha", 5.571861699913753],
-        ["Sneasler", 4.958446822731816],
-        ["Basculegion", 4.105000375909225],
-        ["Hydreigon", 3.8239806221688815],
-        ["Scovillain-Mega", 3.713040211866789],
-        ["Incineroar", 3.493481728934903],
-        ["Milotic", 2.9673992563001597]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Focus Sash",
-            "ability": "Sand Rush",
-            "moves": ["Protect", "High Horsepower", "Iron Head", "Rock Slide"],
-            "count": 4,
-            "bestPlacing": 1,
-            "bestPlayer": "3cake",
-            "eventName": "[REG M-A] LearningtoSam's Weekly",
-            "eventSlug": "2026-06-04-reg-m-a-learningtosam-s-weekly",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a19a6fc56b11a587a942bbf",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Focus Sash",
-            "ability": "Sand Rush",
-            "moves": ["Earthquake", "Iron Head", "Rock Slide", "Protect"],
-            "count": 4,
-            "bestPlacing": 3,
-            "bestPlayer": "NMR | Kuroryu",
-            "eventName": "Intimidators Champions Challenge #16 REG M-A",
-            "eventSlug": "2026-06-08-intimidators-champions-challenge-16-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a26baf056b11a587a94c139",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Focus Sash",
-            "ability": "Sand Rush",
-            "moves": ["Iron Head", "High Horsepower", "Earthquake", "Protect"],
-            "count": 1,
-            "bestPlacing": 8,
-            "bestPlayer": "jay49",
-            "eventName": "[REG M-A] LearningtoSam's Weekly",
-            "eventSlug": "2026-06-04-reg-m-a-learningtosam-s-weekly",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a19a6fc56b11a587a942bbf",
-            "nature": "Adamant"
-        }
-    ]
+ "id": "excadrill",
+ "name": "Excadrill",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.020131,
+   "rank": 57,
+   "raw": 59404
+  }
+ ],
+ "abilities": [
+  [
+   "Sand Rush",
+   82.53701592740286
+  ],
+  [
+   "Mold Breaker",
+   15.944433576571813
+  ],
+  [
+   "Sand Force",
+   1.5185504960253289
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   68.53732649758383
+  ],
+  [
+   "Life Orb",
+   15.011147184857629
+  ],
+  [
+   "Choice Scarf",
+   6.9000903521252726
+  ],
+  [
+   "Muscle Band",
+   5.2772889983017475
+  ],
+  [
+   "Expert Belt",
+   1.5429978135864826
+  ],
+  [
+   "Soft Sand",
+   0.7067856478488556
+  ],
+  [
+   "White Herb",
+   0.32647249134593537
+  ],
+  [
+   "Lum Berry",
+   0.267004744576491
+  ]
+ ],
+ "moves": [
+  [
+   "Iron Head",
+   24.277649551747785
+  ],
+  [
+   "Protect",
+   22.313296525195213
+  ],
+  [
+   "Rock Slide",
+   18.57927340673232
+  ],
+  [
+   "Earthquake",
+   16.954917583949506
+  ],
+  [
+   "High Horsepower",
+   12.519032934845256
+  ],
+  [
+   "Swords Dance",
+   1.481098114129287
+  ],
+  [
+   "Stomping Tantrum",
+   0.8549888642747363
+  ],
+  [
+   "Rock Tomb",
+   0.5789892633357222
+  ],
+  [
+   "Drill Run",
+   0.5087300782067536
+  ],
+  [
+   "Brick Break",
+   0.46524322098426524
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   54.51661224566594
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   15.415034975115374
+  ],
+  [
+   "Adamant:0/32/7/0/12/15",
+   5.096760959255853
+  ],
+  [
+   "Adamant:0/32/2/0/0/32",
+   3.5534800339280985
+  ],
+  [
+   "Adamant:0/32/1/0/1/32",
+   2.4841056010826614
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Tyranitar-Mega",
+   11.952348412421172
+  ],
+  [
+   "Sinistcha",
+   7.919312241238092
+  ],
+  [
+   "Staraptor-Mega",
+   6.6394529792441555
+  ],
+  [
+   "Rotom-Wash",
+   4.900247018448066
+  ],
+  [
+   "Tyranitar",
+   4.430262455303128
+  ],
+  [
+   "Houndstone",
+   4.12157386985783
+  ],
+  [
+   "Corviknight",
+   3.4442749426487596
+  ],
+  [
+   "Whimsicott",
+   3.4177476316787523
+  ],
+  [
+   "Incineroar",
+   2.8505171174847623
+  ],
+  [
+   "Farigiraf",
+   2.4194388687995216
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Focus Sash",
+   "ability": "Sand Rush",
+   "moves": [
+    "Iron Head",
+    "Rock Slide",
+    "Earthquake",
+    "Protect"
+   ],
+   "count": 2,
+   "bestPlacing": 1,
+   "bestPlayer": "JurassicJoints",
+   "eventName": "Road to Area 229 #4",
+   "eventSlug": "2026-06-27-road-to-area-229-4",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c370fc87cd9ff0a30eaa1",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Sand Rush",
+   "moves": [
+    "High Horsepower",
+    "Iron Head",
+    "Rock Slide",
+    "Protect"
+   ],
+   "count": 2,
+   "bestPlacing": 2,
+   "bestPlayer": "ItsSushiii",
+   "eventName": "*Sitrus-Series*|Champions-MB|#65",
+   "eventSlug": "2026-07-01-sitrus-series-champions-mb-65",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3d2290c87cd9ff0a30f032",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Sand Rush",
+   "moves": [
+    "Protect",
+    "Iron Head",
+    "Earthquake",
+    "High Horsepower"
+   ],
+   "count": 1,
+   "bestPlacing": 4,
+   "bestPlayer": "MDN10",
+   "eventName": "Palafin Pals Jet Punch Series 🌊✊Reg M-B #2",
+   "eventSlug": "2026-06-22-palafin-pals-jet-punch-series-reg-m-b-2",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a390b81c87cd9ff0a30cfc3",
+   "nature": "Adamant"
+  }
+ ]
 }

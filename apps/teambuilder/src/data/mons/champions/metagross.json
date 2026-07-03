@@ -1,0 +1,221 @@
+{
+ "id": "metagross",
+ "name": "Metagross",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0054488,
+   "rank": 102,
+   "raw": 28159
+  }
+ ],
+ "abilities": [
+  [
+   "Clear Body",
+   99.98126030283885
+  ],
+  [
+   "Light Metal",
+   0.018739697161159568
+  ]
+ ],
+ "items": [
+  [
+   "Life Orb",
+   35.56848707325804
+  ],
+  [
+   "Metal Coat",
+   16.791040124752286
+  ],
+  [
+   "Leftovers",
+   11.442448413418813
+  ],
+  [
+   "Choice Scarf",
+   8.937698034797146
+  ],
+  [
+   "Sitrus Berry",
+   6.147663868194417
+  ],
+  [
+   "Expert Belt",
+   4.576567516817238
+  ],
+  [
+   "Shuca Berry",
+   3.0726598278720294
+  ],
+  [
+   "Focus Sash",
+   1.9627494157321752
+  ]
+ ],
+ "moves": [
+  [
+   "Psychic Fangs",
+   19.582871615721135
+  ],
+  [
+   "Protect",
+   17.121136317215775
+  ],
+  [
+   "Bullet Punch",
+   14.476183234324703
+  ],
+  [
+   "Meteor Mash",
+   11.160616412628245
+  ],
+  [
+   "Iron Head",
+   7.9251920289598825
+  ],
+  [
+   "Ice Punch",
+   3.7216048940878674
+  ],
+  [
+   "Explosion",
+   3.2324748715278515
+  ],
+  [
+   "Body Press",
+   2.7677942583915685
+  ],
+  [
+   "Earthquake",
+   2.7550627812904995
+  ],
+  [
+   "Thunder Punch",
+   2.1827065289133665
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:32/32/0/0/2/0",
+   17.000715630968482
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   9.886019419900304
+  ],
+  [
+   "Adamant:32/25/0/0/7/2",
+   7.011428950277463
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   6.406965459039895
+  ],
+  [
+   "Adamant:32/32/2/0/0/0",
+   5.537623784003643
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   5.9155483175043635
+  ],
+  [
+   "Staraptor-Mega",
+   5.335609331772438
+  ],
+  [
+   "Whimsicott",
+   4.571238957710347
+  ],
+  [
+   "Garchomp",
+   4.526987843050304
+  ],
+  [
+   "Grimmsnarl",
+   4.152898247141312
+  ],
+  [
+   "Basculegion",
+   3.4471073810077684
+  ],
+  [
+   "Scrafty-Mega",
+   3.422380456479268
+  ],
+  [
+   "Incineroar",
+   3.2689187050707544
+  ],
+  [
+   "Charizard-Mega-Y",
+   2.9612662350398264
+  ],
+  [
+   "Farigiraf",
+   2.3999949611420917
+  ]
+ ],
+ "counters": [],
+ "builds": [
+  {
+   "item": "Metagrossite",
+   "ability": "Clear Body",
+   "moves": [
+    "Iron Head",
+    "Psychic Fangs",
+    "Body Press",
+    "Protect"
+   ],
+   "count": 17,
+   "bestPlacing": 1,
+   "bestPlayer": "naibot2814",
+   "eventName": "The Drywalls Series #8 - M-B",
+   "eventSlug": "2026-06-22-the-drywalls-series-8-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a37eb4faf50e12308407acc",
+   "nature": "Jolly"
+  },
+  {
+   "item": "Metagrossite",
+   "ability": "Clear Body",
+   "moves": [
+    "Iron Head",
+    "Stomping Tantrum",
+    "Psychic Fangs",
+    "Protect"
+   ],
+   "count": 6,
+   "bestPlacing": 4,
+   "bestPlayer": "Miguelinho",
+   "eventName": "Pep_uni Pokémon Champions #1",
+   "eventSlug": "2026-06-28-pep-uni-pok-mon-champions-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3db5bdc87cd9ff0a30f75a",
+   "nature": "Jolly"
+  },
+  {
+   "item": "Metagrossite",
+   "ability": "Clear Body",
+   "moves": [
+    "Meteor Mash",
+    "Psychic Fangs",
+    "Stomping Tantrum",
+    "Protect"
+   ],
+   "count": 5,
+   "bestPlacing": 1,
+   "bestPlayer": "Samuel T",
+   "eventName": "Talon's FIGHT CLUB #91 POKEMON CHAMPIONS",
+   "eventSlug": "2026-07-02-talon-s-fight-club-91-pokemon-champions",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a32e85d2d97f3b0c26189c9",
+   "nature": "Jolly"
+  }
+ ]
+}

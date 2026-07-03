@@ -1,96 +1,222 @@
 {
-    "id": "espathra",
-    "name": "Espathra",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.007512799999999999,
-            "rank": 93,
-            "raw": 79920
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0217224,
-            "rank": 52,
-            "raw": 146085
-        }
-    ],
-    "abilities": [
-        ["Speed Boost", 99.65833962898152],
-        ["Opportunist", 0.2901817928006985],
-        ["Frisk", 0.05147857821779034]
-    ],
-    "items": [
-        ["Mental Herb", 29.42438942929006],
-        ["Colbur Berry", 23.82862100652229],
-        ["Focus Sash", 22.42144358182003],
-        ["Sitrus Berry", 14.429601353341646],
-        ["Kasib Berry", 4.512179073972487],
-        ["Leftovers", 3.594730824949578],
-        ["Twisted Spoon", 0.6736068747951085],
-        ["nothing", 0.598227568005202]
-    ],
-    "moves": [
-        ["Protect", 24.84149112269144],
-        ["Lumina Crash", 22.75584286731239],
-        ["Baton Pass", 21.586826447502986],
-        ["Calm Mind", 21.349135653625375],
-        ["Dazzling Gleam", 1.6588954571165506],
-        ["Stored Power", 1.4504141003469055],
-        ["Skill Swap", 1.3291380748352126],
-        ["Rain Dance", 1.0814370850671002],
-        ["Hypnosis", 0.7196806667508675],
-        ["Psychic Terrain", 0.42819879143658884]
-    ],
-    "spreads": [
-        ["Timid:32/0/2/0/0/32", 13.211144636765553],
-        ["Timid:24/0/26/0/10/6", 5.229943938441589],
-        ["Timid:2/0/0/32/0/32", 5.188903812956702],
-        ["Timid:32/0/0/0/15/19", 3.6759417953717377],
-        ["Modest:2/0/0/32/0/32", 3.600247206423772]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Archaludon", 12.665800049575102],
-        ["Sableye", 9.140411873678431],
-        ["Politoed", 7.955523818833189],
-        ["Floette-Mega", 7.6525083220455095],
-        ["Scovillain-Mega", 7.0119093885848],
-        ["Sinistcha", 6.4189281853947415],
-        ["Sneasler", 3.8575757368306594],
-        ["Incineroar", 3.318980100723455],
-        ["Basculegion", 3.0650132605665856],
-        ["Maushold", 2.819871991276236]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Sitrus Berry",
-            "ability": "Speed Boost",
-            "moves": ["Protect", "Lumina Crash", "Calm Mind", "Baton Pass"],
-            "count": 3,
-            "bestPlacing": 2,
-            "bestPlayer": "Foghorn",
-            "eventName": "SpearPillar Champions Tour #6 | Reg M-A $100 Prize",
-            "eventSlug": "2026-06-06-spearpillar-champions-tour-6-reg-m-a-100-prize",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69cd69a336f5b5c303dc45bb",
-            "nature": "Timid"
-        },
-        {
-            "item": "Colbur Berry",
-            "ability": "Speed Boost",
-            "moves": ["Lumina Crash", "Pounce", "Baton Pass", "Protect"],
-            "count": 1,
-            "bestPlacing": 3,
-            "bestPlayer": "Ayden24B",
-            "eventName": "Pokepal Smackdown #142 (Champions) (Reg M-A)",
-            "eventSlug": "2026-05-25-pokepal-smackdown-142-champions-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69f8a712e23aab068aada7f0",
-            "nature": null
-        }
-    ]
+ "id": "espathra",
+ "name": "Espathra",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0072123000000000005,
+   "rank": 90,
+   "raw": 28294
+  }
+ ],
+ "abilities": [
+  [
+   "Speed Boost",
+   95.24664851069154
+  ],
+  [
+   "Opportunist",
+   4.738269629402002
+  ],
+  [
+   "Frisk",
+   0.01508185990644768
+  ]
+ ],
+ "items": [
+  [
+   "Mental Herb",
+   25.875413542198512
+  ],
+  [
+   "Sitrus Berry",
+   24.902119753908657
+  ],
+  [
+   "Focus Sash",
+   17.076945477920248
+  ],
+  [
+   "Colbur Berry",
+   16.797845195076217
+  ],
+  [
+   "Leftovers",
+   9.155069788629994
+  ],
+  [
+   "Twisted Spoon",
+   2.0226822915290454
+  ],
+  [
+   "Life Orb",
+   1.3066112872939997
+  ],
+  [
+   "Kasib Berry",
+   0.8251835446108823
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   24.0947324335839
+  ],
+  [
+   "Calm Mind",
+   21.42473821402116
+  ],
+  [
+   "Lumina Crash",
+   21.140271497017405
+  ],
+  [
+   "Baton Pass",
+   20.768811419795142
+  ],
+  [
+   "Stored Power",
+   2.9608289029751784
+  ],
+  [
+   "Dazzling Gleam",
+   2.5439059338207137
+  ],
+  [
+   "Hypnosis",
+   0.9754498796403098
+  ],
+  [
+   "Psych Up",
+   0.8816397835701363
+  ],
+  [
+   "Psychic Terrain",
+   0.5363913661515678
+  ],
+  [
+   "Skill Swap",
+   0.41499742131090483
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:32/0/9/0/6/19",
+   18.770415638794567
+  ],
+  [
+   "Timid:19/0/14/0/4/29",
+   6.242401570985684
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   5.864912049894984
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   4.684748626552729
+  ],
+  [
+   "Timid:20/0/0/0/14/32",
+   4.1411465739437645
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Archaludon",
+   9.104422887761169
+  ],
+  [
+   "Scovillain-Mega",
+   7.5072481557417765
+  ],
+  [
+   "Sinistcha",
+   5.918555091700368
+  ],
+  [
+   "Politoed",
+   5.453814171231315
+  ],
+  [
+   "Sneasler",
+   5.360386754207477
+  ],
+  [
+   "Floette-Mega",
+   4.286203018000147
+  ],
+  [
+   "Incineroar",
+   3.7755160085446695
+  ],
+  [
+   "Sableye",
+   3.4882292576609797
+  ],
+  [
+   "Dragonite-Mega",
+   2.761133064168807
+  ],
+  [
+   "Garchomp",
+   2.6858750285010937
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

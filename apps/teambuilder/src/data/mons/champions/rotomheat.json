@@ -1,67 +1,214 @@
 {
-    "id": "rotomheat",
-    "name": "Rotom-Heat",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0305465,
-            "rank": 44,
-            "raw": 193467
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.017647200000000002,
-            "rank": 61,
-            "raw": 156149
-        }
-    ],
-    "abilities": [["Levitate", 100]],
-    "items": [
-        ["Choice Scarf", 55.24307321979184],
-        ["Sitrus Berry", 24.662660475708133],
-        ["Leftovers", 7.260403476926373],
-        ["Passho Berry", 4.484774931846954],
-        ["Magnet", 4.036794849989219],
-        ["White Herb", 1.07834038908271],
-        ["Charti Berry", 1.0745187199524802],
-        ["Focus Sash", 0.7517558402625244]
-    ],
-    "moves": [
-        ["Overheat", 24.830939534777745],
-        ["Thunderbolt", 17.923581491634103],
-        ["Volt Switch", 16.952730382618114],
-        ["Electroweb", 13.393513706263525],
-        ["Will-O-Wisp", 9.576316907856333],
-        ["Protect", 9.298359218705189],
-        ["Trick", 4.227474239442766],
-        ["Discharge", 0.9781683428059983],
-        ["Nasty Plot", 0.47520980349471925],
-        ["Helping Hand", 0.46719147775851594]
-    ],
-    "spreads": [
-        ["Timid:12/0/0/29/0/25", 10.550678667979717],
-        ["Timid:2/0/0/32/0/32", 8.535652378322142],
-        ["Timid:0/0/0/32/2/32", 4.5201174647402285],
-        ["Timid:9/0/0/32/0/25", 4.478928759311843],
-        ["Modest:2/0/0/32/0/32", 4.074471944389711]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Garchomp", 7.477042555348959],
-        ["Corviknight", 5.90667052159217],
-        ["Venusaur-Mega", 5.149053313532334],
-        ["Tyranitar-Mega", 4.843299079340674],
-        ["Sinistcha", 4.410037520078812],
-        ["Sneasler", 4.202628683020803],
-        ["Basculegion", 4.129724987229709],
-        ["Excadrill", 3.7077542215993566],
-        ["Kingambit", 3.60177244013992],
-        ["Milotic", 3.5321421940238413]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "rotomheat",
+ "name": "Rotom-Heat",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.024152200000000002,
+   "rank": 50,
+   "raw": 90263
+  }
+ ],
+ "abilities": [
+  [
+   "Levitate",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Choice Scarf",
+   77.27972964763835
+  ],
+  [
+   "Sitrus Berry",
+   8.281019713026184
+  ],
+  [
+   "Leftovers",
+   4.467985854030513
+  ],
+  [
+   "Life Orb",
+   2.7581931078299324
+  ],
+  [
+   "Passho Berry",
+   1.9270023257525777
+  ],
+  [
+   "Magnet",
+   1.860969166896591
+  ],
+  [
+   "Charti Berry",
+   1.1114384658515841
+  ],
+  [
+   "Expert Belt",
+   0.5838131102669536
+  ]
+ ],
+ "moves": [
+  [
+   "Overheat",
+   24.725286448767
+  ],
+  [
+   "Volt Switch",
+   19.04594503056082
+  ],
+  [
+   "Discharge",
+   16.110171849251053
+  ],
+  [
+   "Thunderbolt",
+   12.520164097983926
+  ],
+  [
+   "Trick",
+   6.818939009996698
+  ],
+  [
+   "Electroweb",
+   6.802778118007523
+  ],
+  [
+   "Will-O-Wisp",
+   6.460943419417338
+  ],
+  [
+   "Protect",
+   4.0329069490150795
+  ],
+  [
+   "Thunder",
+   0.6153273435777541
+  ],
+  [
+   "Shadow Ball",
+   0.5164551521467312
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   49.83979508215802
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   4.875447324264248
+  ],
+  [
+   "Timid:9/0/0/32/0/25",
+   2.007038658421805
+  ],
+  [
+   "Timid:12/0/0/29/0/25",
+   1.5990276674780937
+  ],
+  [
+   "Timid:4/0/0/32/0/30",
+   1.4221262305363012
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sceptile-Mega",
+   11.900877979848428
+  ],
+  [
+   "Garchomp",
+   9.295732678444999
+  ],
+  [
+   "Basculegion",
+   7.719068736912889
+  ],
+  [
+   "Aerodactyl",
+   5.154970571354987
+  ],
+  [
+   "Floette-Mega",
+   3.6808022791645327
+  ],
+  [
+   "Whimsicott",
+   3.3733266412088785
+  ],
+  [
+   "Sneasler",
+   3.1871230343032533
+  ],
+  [
+   "Sinistcha",
+   3.152246592111159
+  ],
+  [
+   "Metagross-Mega",
+   2.6915437873306387
+  ],
+  [
+   "Kingambit",
+   2.6646274774459
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Maushold",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

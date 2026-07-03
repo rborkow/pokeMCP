@@ -1,0 +1,190 @@
+{
+ "id": "pyroarmega",
+ "name": "Pyroar-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0454249,
+   "rank": 31,
+   "raw": 101117
+  }
+ ],
+ "abilities": [
+  [
+   "No Ability",
+   71.66173447743608
+  ],
+  [
+   "firemane",
+   28.33826552256391
+  ]
+ ],
+ "items": [
+  [
+   "Pyroarite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Heat Wave",
+   24.886377376589426
+  ],
+  [
+   "Protect",
+   24.829794196736096
+  ],
+  [
+   "Overheat",
+   21.30070528614124
+  ],
+  [
+   "Solar Beam",
+   14.858838915346425
+  ],
+  [
+   "Hyper Voice",
+   4.075819848638174
+  ],
+  [
+   "Flamethrower",
+   3.1911846243819575
+  ],
+  [
+   "Yawn",
+   1.8260164853702008
+  ],
+  [
+   "Scorching Sands",
+   1.2574415232654579
+  ],
+  [
+   "Round",
+   0.5216795836169874
+  ],
+  [
+   "Fire Blast",
+   0.5027686433755045
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   50.05445640581965
+  ],
+  [
+   "Timid:7/0/0/32/0/27",
+   10.109562156504433
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   8.670921979417532
+  ],
+  [
+   "Timid:0/0/7/32/0/27",
+   5.568563656519683
+  ],
+  [
+   "Timid:0/0/2/32/0/32",
+   2.326864262817988
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Farigiraf",
+   13.73688757440345
+  ],
+  [
+   "Torkoal",
+   10.501209978263457
+  ],
+  [
+   "Whimsicott",
+   9.878224654475249
+  ],
+  [
+   "Basculegion",
+   7.404784910273763
+  ],
+  [
+   "Floette-Mega",
+   5.667370891499868
+  ],
+  [
+   "Ninetales",
+   5.405551901480672
+  ],
+  [
+   "Garchomp",
+   4.110818231535183
+  ],
+  [
+   "Venusaur",
+   3.3466190239941325
+  ],
+  [
+   "Incineroar",
+   2.7258419280294004
+  ],
+  [
+   "Scrafty-Mega",
+   2.681155849683678
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sylveon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

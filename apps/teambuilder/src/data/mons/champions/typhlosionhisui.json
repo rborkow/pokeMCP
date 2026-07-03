@@ -1,67 +1,218 @@
 {
-    "id": "typhlosionhisui",
-    "name": "Typhlosion-Hisui",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0177963,
-            "rank": 58,
-            "raw": 157140
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0179438,
-            "rank": 60,
-            "raw": 162801
-        }
-    ],
-    "abilities": [["Frisk", 71.78494551935049], ["Blaze", 28.215054480649513]],
-    "items": [
-        ["Choice Scarf", 69.11637440207421],
-        ["Charcoal", 27.19281979190033],
-        ["Focus Sash", 2.908795525361703],
-        ["Colbur Berry", 0.3416577832849606],
-        ["Kasib Berry", 0.14860203437692499],
-        ["Spell Tag", 0.10935575596533689],
-        ["Charti Berry", 0.03983866158604493],
-        ["nothing", 0.036763909862109166]
-    ],
-    "moves": [
-        ["Eruption", 24.952741678517427],
-        ["Shadow Ball", 24.233936011325895],
-        ["Heat Wave", 16.131994576727397],
-        ["Overheat", 10.429098657335924],
-        ["Protect", 7.583166476272757],
-        ["Burn Up", 4.86011477325251],
-        ["Flamethrower", 2.8683814942499324],
-        ["Extrasensory", 2.218404527201865],
-        ["Focus Blast", 1.6635001469278328],
-        ["Will-O-Wisp", 1.2493753167353265]
-    ],
-    "spreads": [
-        ["Modest:2/0/0/32/0/32", 38.61894117896985],
-        ["Timid:2/0/0/32/0/32", 25.40712453386626],
-        ["Timid:1/0/0/32/1/32", 5.910523509823684],
-        ["Modest:1/0/0/32/1/32", 3.3353508829231235],
-        ["Modest:4/0/0/32/0/30", 2.878255865924794]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Whimsicott", 10.754912264035605],
-        ["Floette-Mega", 8.060718711553719],
-        ["Farigiraf", 7.67128791441062],
-        ["Kingambit", 6.14951485138993],
-        ["Tsareena", 5.355823428245408],
-        ["Aerodactyl-Mega", 5.0660437120378665],
-        ["Garchomp", 3.7205299437298454],
-        ["Sneasler", 3.0255213318373038],
-        ["Torkoal", 2.668671382231752],
-        ["Tauros-Paldea-Aqua", 2.5347931780486226]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "typhlosionhisui",
+ "name": "Typhlosion-Hisui",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.020804999999999997,
+   "rank": 54,
+   "raw": 59050
+  }
+ ],
+ "abilities": [
+  [
+   "Frisk",
+   85.03250583092223
+  ],
+  [
+   "Blaze",
+   14.967494169077769
+  ]
+ ],
+ "items": [
+  [
+   "Choice Scarf",
+   88.13507050087549
+  ],
+  [
+   "Charcoal",
+   6.603732725303195
+  ],
+  [
+   "Focus Sash",
+   2.6206896054422923
+  ],
+  [
+   "Life Orb",
+   1.2944272377923909
+  ],
+  [
+   "Colbur Berry",
+   0.7344723385734777
+  ],
+  [
+   "Iron Ball",
+   0.18698761905658368
+  ],
+  [
+   "Leftovers",
+   0.16570834084545824
+  ],
+  [
+   "Expert Belt",
+   0.10758003472725554
+  ]
+ ],
+ "moves": [
+  [
+   "Eruption",
+   24.882287587485816
+  ],
+  [
+   "Shadow Ball",
+   24.47809588736766
+  ],
+  [
+   "Heat Wave",
+   21.325883699287807
+  ],
+  [
+   "Burn Up",
+   11.203258046269674
+  ],
+  [
+   "Overheat",
+   6.178953029309843
+  ],
+  [
+   "Protect",
+   2.9490540090173614
+  ],
+  [
+   "Flamethrower",
+   2.132751922724082
+  ],
+  [
+   "Solar Beam",
+   1.2599352140970144
+  ],
+  [
+   "Extrasensory",
+   1.151168408933357
+  ],
+  [
+   "Focus Blast",
+   1.080052454808987
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:2/0/0/32/0/32",
+   54.20385928021837
+  ],
+  [
+   "Timid:1/0/0/32/1/32",
+   14.551077329748786
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   10.986340435934961
+  ],
+  [
+   "Modest:1/0/0/32/1/32",
+   5.404085790536813
+  ],
+  [
+   "Modest:5/0/0/32/0/29",
+   1.9953388931130627
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Whimsicott",
+   15.165225118717599
+  ],
+  [
+   "Garchomp",
+   11.950983936258075
+  ],
+  [
+   "Staraptor-Mega",
+   11.207704052620807
+  ],
+  [
+   "Basculegion",
+   9.425452972038702
+  ],
+  [
+   "Gholdengo",
+   8.230864869545664
+  ],
+  [
+   "Farigiraf",
+   4.406209363344547
+  ],
+  [
+   "Sinistcha",
+   2.424788394447299
+  ],
+  [
+   "Torkoal",
+   2.188269476127642
+  ],
+  [
+   "Floette-Mega",
+   2.0003192993855787
+  ],
+  [
+   "Kingambit",
+   1.7468393949109446
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

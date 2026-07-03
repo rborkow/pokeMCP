@@ -1,0 +1,257 @@
+{
+ "id": "toxapex",
+ "name": "Toxapex",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0185375,
+   "rank": 61,
+   "raw": 61722
+  }
+ ],
+ "abilities": [
+  [
+   "Regenerator",
+   97.27517289633387
+  ],
+  [
+   "Merciless",
+   2.5565527050811183
+  ],
+  [
+   "Limber",
+   0.16827439858500146
+  ]
+ ],
+ "items": [
+  [
+   "Leftovers",
+   95.90177230694626
+  ],
+  [
+   "Sitrus Berry",
+   2.282352198420432
+  ],
+  [
+   "Shuca Berry",
+   0.509708431608312
+  ],
+  [
+   "Mental Herb",
+   0.3771799493475008
+  ],
+  [
+   "Life Orb",
+   0.24218984982465652
+  ],
+  [
+   "Bright Powder",
+   0.1470876267050996
+  ],
+  [
+   "Payapa Berry",
+   0.10020179205073834
+  ],
+  [
+   "nothing",
+   0.06642218505198134
+  ]
+ ],
+ "moves": [
+  [
+   "Toxic",
+   23.780569427480035
+  ],
+  [
+   "Baneful Bunker",
+   23.689801818341124
+  ],
+  [
+   "Infestation",
+   22.91514382526516
+  ],
+  [
+   "Wide Guard",
+   20.42780201855552
+  ],
+  [
+   "Recover",
+   4.000753058288675
+  ],
+  [
+   "Haze",
+   1.4481686366394675
+  ],
+  [
+   "Stockpile",
+   0.6141408037443419
+  ],
+  [
+   "Liquidation",
+   0.4326458787324521
+  ],
+  [
+   "Chilling Water",
+   0.42498671428583235
+  ],
+  [
+   "Icy Wind",
+   0.3389776338089642
+  ]
+ ],
+ "spreads": [
+  [
+   "Bold:32/0/18/0/16/0",
+   31.395071581736673
+  ],
+  [
+   "Bold:32/0/20/0/14/0",
+   5.785917859330691
+  ],
+  [
+   "Bold:32/0/32/2/0/0",
+   5.217054616879234
+  ],
+  [
+   "Bold:32/0/32/0/2/0",
+   5.03803402541787
+  ],
+  [
+   "Bold:32/0/8/0/26/0",
+   4.311459904443017
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Charizard-Mega-Y",
+   10.094206169352066
+  ],
+  [
+   "Garchomp",
+   9.243356760463278
+  ],
+  [
+   "Grimmsnarl",
+   9.208618609545532
+  ],
+  [
+   "Hydreigon",
+   7.988424918867504
+  ],
+  [
+   "Incineroar",
+   7.106808530278834
+  ],
+  [
+   "Metagross-Mega",
+   5.897409797110317
+  ],
+  [
+   "Sinistcha",
+   4.486686380100135
+  ],
+  [
+   "Staraptor-Mega",
+   2.55891833284193
+  ],
+  [
+   "Whimsicott",
+   2.359797475235721
+  ],
+  [
+   "Gholdengo",
+   2.329923936592631
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Floette-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Swampert-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Leftovers",
+   "ability": "Regenerator",
+   "moves": [
+    "Toxic",
+    "Wide Guard",
+    "Baneful Bunker",
+    "Infestation"
+   ],
+   "count": 6,
+   "bestPlacing": 1,
+   "bestPlayer": "NMR | Gostzin I",
+   "eventName": "Intimidators Champions Challenge #22 REG M-B",
+   "eventSlug": "2026-06-30-intimidators-champions-challenge-22-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a427367c87cd9ff0a312adf",
+   "nature": "Bold"
+  },
+  {
+   "item": "Leftovers",
+   "ability": "Regenerator",
+   "moves": [
+    "Infestation",
+    "Baneful Bunker",
+    "Recover",
+    "Toxic"
+   ],
+   "count": 1,
+   "bestPlacing": 6,
+   "bestPlayer": "Anubis",
+   "eventName": "KIng's Gambit #6 | Reg M-B",
+   "eventSlug": "2026-06-21-king-s-gambit-6-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a29ab02e334c3c9befd3389",
+   "nature": "Bold"
+  }
+ ]
+}

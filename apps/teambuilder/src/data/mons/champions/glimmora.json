@@ -1,104 +1,236 @@
 {
-    "id": "glimmora",
-    "name": "Glimmora",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0066778,
-            "rank": 100,
-            "raw": 54048
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.061368099999999995,
-            "rank": 26,
-            "raw": 249293
-        }
-    ],
-    "abilities": [["Toxic Debris", 99.78643174676235], ["Corrosion", 0.21356825323764378]],
-    "items": [
-        ["Focus Sash", 93.36226896112633],
-        ["Shuca Berry", 2.898857194106131],
-        ["Choice Scarf", 1.7931801781062657],
-        ["Hard Stone", 0.5926327392236128],
-        ["Sitrus Berry", 0.5410474052189518],
-        ["Passho Berry", 0.2953801743347292],
-        ["Mental Herb", 0.09368734423834055],
-        ["Leftovers", 0.08506032240520367]
-    ],
-    "moves": [
-        ["Power Gem", 24.60970656809036],
-        ["Sludge Bomb", 24.13384451650776],
-        ["Earth Power", 23.414162373638312],
-        ["Spiky Shield", 22.603909030065804],
-        ["Energy Ball", 2.1078071477520663],
-        ["Mortal Spin", 1.092617340895955],
-        ["Protect", 0.6347279313147439],
-        ["Stealth Rock", 0.4189788632064794],
-        ["Sludge Wave", 0.3204427746828094],
-        ["Dazzling Gleam", 0.20364161982818108]
-    ],
-    "spreads": [
-        ["Modest:2/0/0/32/0/32", 27.617527551191767],
-        ["Modest:1/0/0/32/1/32", 15.607234316310098],
-        ["Timid:2/0/0/32/0/32", 14.736248231172166],
-        ["Timid:0/0/0/32/2/32", 7.164806727134003],
-        ["Modest:1/0/1/32/0/32", 5.843706392227992]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Whimsicott", 14.632210607913057],
-        ["Basculegion", 13.410885674660717],
-        ["Garchomp", 13.0966592036338],
-        ["Charizard-Mega-Y", 12.747975422264316],
-        ["Kingambit", 10.974321208010798],
-        ["Floette-Mega", 4.51721797707299],
-        ["Farigiraf", 1.8916068786701232],
-        ["Incineroar", 1.7135594984707414],
-        ["Talonflame", 1.2672987763794858],
-        ["Sinistcha", 1.0906677188115261]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Focus Sash",
-            "ability": "Toxic Debris",
-            "moves": ["Power Gem", "Sludge Bomb", "Earth Power", "Spiky Shield"],
-            "count": 38,
-            "bestPlacing": 1,
-            "bestPlayer": "Dr_Bejan",
-            "eventName": "Pokepal Smackdown #144 (Champions) (Reg M-A)",
-            "eventSlug": "2026-06-08-pokepal-smackdown-144-champions-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15a9910f6c1f089986169a",
-            "nature": "Modest"
-        },
-        {
-            "item": "Glimmoranite",
-            "ability": "Toxic Debris",
-            "moves": ["Spiky Shield", "Sludge Bomb", "Power Gem", "Earth Power"],
-            "count": 13,
-            "bestPlacing": 1,
-            "bestPlayer": "OrangeSteve",
-            "eventName": "CHAMPIONS REG. M-A |👑CROWN FIGHT Bo3 TOUR #69👑",
-            "eventSlug": "2026-05-22-champions-reg-m-a-crown-fight-bo3-tour-69",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eb099278b359b789d6aa3c",
-            "nature": "Timid"
-        },
-        {
-            "item": "Focus Sash",
-            "ability": "Toxic Debris",
-            "moves": ["Sludge Bomb", "Power Gem", "Earth Power", "Protect"],
-            "count": 3,
-            "bestPlacing": 3,
-            "bestPlayer": "DigioVGC",
-            "eventName": "Maddo's Cup #8 | 100€ for the Winner | Reg M-A",
-            "eventSlug": "2026-05-23-maddo-s-cup-8-100-for-the-winner-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69d54e0c800d329be2e74f86",
-            "nature": null
-        }
-    ]
+ "id": "glimmora",
+ "name": "Glimmora",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0208783,
+   "rank": 53,
+   "raw": 48227
+  }
+ ],
+ "abilities": [
+  [
+   "Toxic Debris",
+   98.81606035299609
+  ],
+  [
+   "Corrosion",
+   1.1839396470039136
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   86.93040054791368
+  ],
+  [
+   "Life Orb",
+   3.3246782113316025
+  ],
+  [
+   "Sitrus Berry",
+   3.1996771491467637
+  ],
+  [
+   "Choice Scarf",
+   2.286800328632757
+  ],
+  [
+   "Expert Belt",
+   1.5815574791097982
+  ],
+  [
+   "Shuca Berry",
+   1.3808934230113892
+  ],
+  [
+   "Leftovers",
+   0.46235460083667623
+  ],
+  [
+   "Passho Berry",
+   0.12940993818129645
+  ]
+ ],
+ "moves": [
+  [
+   "Power Gem",
+   24.512898016833482
+  ],
+  [
+   "Sludge Bomb",
+   22.948568959470833
+  ],
+  [
+   "Earth Power",
+   21.832898817649177
+  ],
+  [
+   "Spiky Shield",
+   21.518134340209667
+  ],
+  [
+   "Mortal Spin",
+   2.731687223046885
+  ],
+  [
+   "Energy Ball",
+   2.1163276395066126
+  ],
+  [
+   "Protect",
+   1.331483027686905
+  ],
+  [
+   "Stealth Rock",
+   0.7756124885659925
+  ],
+  [
+   "Sludge Wave",
+   0.6281148569124394
+  ],
+  [
+   "Dazzling Gleam",
+   0.4489933593669976
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:1/0/0/32/1/32",
+   20.572124879964722
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   19.949769347461594
+  ],
+  [
+   "Timid:1/0/0/32/1/32",
+   17.604375364431462
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   15.375226729416664
+  ],
+  [
+   "Modest:0/0/1/32/1/32",
+   3.408766660221512
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Whimsicott",
+   11.693391620574275
+  ],
+  [
+   "Garchomp",
+   9.535504377390236
+  ],
+  [
+   "Charizard-Mega-Y",
+   6.718821082641554
+  ],
+  [
+   "Basculegion",
+   6.075293681405896
+  ],
+  [
+   "Staraptor-Mega",
+   5.2269052702055845
+  ],
+  [
+   "Kingambit",
+   5.17587969383931
+  ],
+  [
+   "Sinistcha",
+   4.129066624199078
+  ],
+  [
+   "Incineroar",
+   3.9876893264664863
+  ],
+  [
+   "Metagross-Mega",
+   3.7290611448779862
+  ],
+  [
+   "Grimmsnarl",
+   2.4636128665543313
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Focus Sash",
+   "ability": "Toxic Debris",
+   "moves": [
+    "Power Gem",
+    "Sludge Bomb",
+    "Earth Power",
+    "Spiky Shield"
+   ],
+   "count": 3,
+   "bestPlacing": 3,
+   "bestPlayer": "VortexTheGreat",
+   "eventName": "Palafin Pals Jet Punch Series 🌊✊Reg M-B #2",
+   "eventSlug": "2026-06-22-palafin-pals-jet-punch-series-reg-m-b-2",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a390b81c87cd9ff0a30cfc3",
+   "nature": "Modest"
+  }
+ ]
 }

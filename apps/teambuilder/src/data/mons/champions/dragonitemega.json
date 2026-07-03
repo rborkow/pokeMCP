@@ -1,58 +1,186 @@
 {
-    "id": "dragonitemega",
-    "name": "Dragonite-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0494072,
-            "rank": 33,
-            "raw": 333537
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.057104,
-            "rank": 29,
-            "raw": 349671
-        }
-    ],
-    "abilities": [["Multiscale", 100]],
-    "items": [["Dragoninite", 100]],
-    "moves": [
-        ["Protect", 16.635581019639563],
-        ["Hurricane", 14.629353836893422],
-        ["Dragon Pulse", 13.954348385234],
-        ["Tailwind", 13.797018965121815],
-        ["Draco Meteor", 10.213727312737072],
-        ["Flamethrower", 6.745120305041278],
-        ["Thunderbolt", 4.963771097365174],
-        ["Heat Wave", 4.140221946080317],
-        ["Extreme Speed", 4.0316313603761404],
-        ["Air Slash", 2.525903747332546]
-    ],
-    "spreads": [
-        ["Modest:2/0/0/32/0/32", 33.320349867678374],
-        ["Timid:2/0/0/32/0/32", 12.294960994363196],
-        ["Modest:1/0/1/32/0/32", 2.5563279038930444],
-        ["Timid:1/0/1/32/0/32", 2.1840521061833025],
-        ["Modest:32/0/0/32/0/2", 1.76878099701379]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Basculegion", 14.880416518413114],
-        ["Archaludon", 11.842954969044571],
-        ["Pelipper", 9.387074065369445],
-        ["Sneasler", 6.895918193959336],
-        ["Sableye", 5.91566825510175],
-        ["Kingambit", 5.190446858979913],
-        ["Sinistcha", 4.252672677459597],
-        ["Garchomp", 3.944127674764254],
-        ["Sylveon", 3.640551293783076],
-        ["Scizor-Mega", 3.3151160477983734]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "dragonitemega",
+ "name": "Dragonite-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0265091,
+   "rank": 47,
+   "raw": 61927
+  }
+ ],
+ "abilities": [
+  [
+   "Multiscale",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Dragoninite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   20.640145067816068
+  ],
+  [
+   "Dragon Pulse",
+   15.410641838119652
+  ],
+  [
+   "Hurricane",
+   14.377129145369736
+  ],
+  [
+   "Tailwind",
+   9.80749325686961
+  ],
+  [
+   "Draco Meteor",
+   8.268277438622151
+  ],
+  [
+   "Thunderbolt",
+   5.15856125137385
+  ],
+  [
+   "Heat Wave",
+   4.2003549554095985
+  ],
+  [
+   "Flamethrower",
+   4.141826094323968
+  ],
+  [
+   "Extreme Speed",
+   4.0387846965518515
+  ],
+  [
+   "Thunder",
+   3.381137658949518
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:2/0/0/32/0/32",
+   21.795816083658533
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   7.843945066630992
+  ],
+  [
+   "Modest:32/0/0/32/2/0",
+   6.339084333656306
+  ],
+  [
+   "Modest:32/0/0/32/0/2",
+   3.41608386456115
+  ],
+  [
+   "Modest:1/0/0/32/1/32",
+   3.2060797555732394
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Pelipper",
+   9.859164341345043
+  ],
+  [
+   "Archaludon",
+   8.584612094015595
+  ],
+  [
+   "Basculegion",
+   7.803786824238179
+  ],
+  [
+   "Sneasler",
+   7.640757872440271
+  ],
+  [
+   "Sinistcha",
+   5.367624652795156
+  ],
+  [
+   "Kingambit",
+   5.302397737225887
+  ],
+  [
+   "Swampert-Mega",
+   5.281066507682797
+  ],
+  [
+   "Incineroar",
+   4.940282354245636
+  ],
+  [
+   "Gholdengo",
+   2.4640375617071446
+  ],
+  [
+   "Sableye",
+   2.2171818351824
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sylveon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

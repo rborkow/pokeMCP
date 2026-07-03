@@ -1,58 +1,168 @@
 {
-    "id": "gyaradosmega",
-    "name": "Gyarados-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0129157,
-            "rank": 68,
-            "raw": 102075
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0096229,
-            "rank": 81,
-            "raw": 112287
-        }
-    ],
-    "abilities": [["Mold Breaker", 100]],
-    "items": [["Gyaradosite", 100]],
-    "moves": [
-        ["Waterfall", 24.589894607431674],
-        ["Protect", 22.58983080998881],
-        ["Crunch", 22.459256705545556],
-        ["Dragon Dance", 21.54752813730142],
-        ["Earthquake", 2.775849763310536],
-        ["Power Whip", 1.5175334273329082],
-        ["Ice Fang", 1.3026419609500564],
-        ["Lash Out", 0.9813489693975288],
-        ["Taunt", 0.840594633188893],
-        ["Thunder Wave", 0.2900421321227755]
-    ],
-    "spreads": [
-        ["Jolly:2/32/0/0/0/32", 9.48888149063966],
-        ["Adamant:2/32/0/0/0/32", 5.676281523382752],
-        ["Adamant:0/32/0/0/2/32", 3.4371315893200234],
-        ["Adamant:29/5/0/0/0/32", 3.2195089249723967],
-        ["Jolly:5/32/0/0/0/29", 2.494130775654527]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Sneasler", 10.781205083339946],
-        ["Sinistcha", 7.706437805597124],
-        ["Garchomp", 7.45889652817608],
-        ["Delphox-Mega", 3.787975859716218],
-        ["Kingambit", 3.6066028613037737],
-        ["Archaludon", 3.332462111919531],
-        ["Whimsicott", 3.0733999175404305],
-        ["Incineroar", 2.4789025282294515],
-        ["Sableye", 2.4413236824206237],
-        ["Ninetales-Alola", 2.2380167862560993]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "gyaradosmega",
+ "name": "Gyarados-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0069158,
+   "rank": 93,
+   "raw": 20898
+  }
+ ],
+ "abilities": [
+  [
+   "Mold Breaker",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Gyaradosite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Waterfall",
+   24.730764044327493
+  ],
+  [
+   "Protect",
+   23.78020861770001
+  ],
+  [
+   "Dragon Dance",
+   22.311882486117348
+  ],
+  [
+   "Crunch",
+   14.667515328789134
+  ],
+  [
+   "Lash Out",
+   5.485458408814998
+  ],
+  [
+   "Power Whip",
+   3.8473178384789897
+  ],
+  [
+   "Earthquake",
+   1.779318066305014
+  ],
+  [
+   "Ice Fang",
+   1.270776817645135
+  ],
+  [
+   "Taunt",
+   0.40252795851295675
+  ],
+  [
+   "Stone Edge",
+   0.3826875468649847
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:11/25/0/0/0/30",
+   12.709084297138148
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   9.887236716349998
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   7.920889640327794
+  ],
+  [
+   "Adamant:4/32/0/0/0/30",
+   5.122019176291856
+  ],
+  [
+   "Jolly:13/23/0/0/0/30",
+   3.9899718559243245
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   7.462465393047125
+  ],
+  [
+   "Garchomp",
+   7.379367835092901
+  ],
+  [
+   "Sneasler",
+   6.566528248722651
+  ],
+  [
+   "Kingambit",
+   5.911765236327064
+  ],
+  [
+   "Raichu-Mega-Y",
+   4.63245196543967
+  ],
+  [
+   "Whimsicott",
+   3.790747089242947
+  ],
+  [
+   "Clefable",
+   3.5162095188835654
+  ],
+  [
+   "Gholdengo",
+   3.330913014748916
+  ],
+  [
+   "Ninetales-Alola",
+   3.282147543849448
+  ],
+  [
+   "Mamoswine",
+   3.0650505107444035
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

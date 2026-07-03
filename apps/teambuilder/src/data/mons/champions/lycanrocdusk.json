@@ -1,0 +1,214 @@
+{
+ "id": "lycanrocdusk",
+ "name": "Lycanroc-Dusk",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.014871,
+   "rank": 69,
+   "raw": 26685
+  }
+ ],
+ "abilities": [
+  [
+   "Tough Claws",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   88.99797834208147
+  ],
+  [
+   "Life Orb",
+   6.459236630208523
+  ],
+  [
+   "Hard Stone",
+   2.386479257959759
+  ],
+  [
+   "Choice Scarf",
+   1.0602014495780756
+  ],
+  [
+   "Expert Belt",
+   0.39550161082275864
+  ],
+  [
+   "White Herb",
+   0.3861446163014007
+  ],
+  [
+   "King's Rock",
+   0.11428321119614909
+  ],
+  [
+   "nothing",
+   0.04209392220711247
+  ]
+ ],
+ "moves": [
+  [
+   "Accelerock",
+   24.63971746817777
+  ],
+  [
+   "Protect",
+   23.12856029265099
+  ],
+  [
+   "Rock Slide",
+   22.22744702831423
+  ],
+  [
+   "Close Combat",
+   21.94462088116632
+  ],
+  [
+   "Psychic Fangs",
+   1.4212497238397677
+  ],
+  [
+   "Howl",
+   1.3339350436041686
+  ],
+  [
+   "Play Rough",
+   1.1053706383611113
+  ],
+  [
+   "Crunch",
+   0.7686341318155728
+  ],
+  [
+   "Drill Run",
+   0.7083726886611127
+  ],
+  [
+   "Sucker Punch",
+   0.5059320555392478
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   25.586119374835796
+  ],
+  [
+   "Jolly:1/32/0/0/1/32",
+   17.487361274752264
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   13.934119614725626
+  ],
+  [
+   "Adamant:1/32/0/0/1/32",
+   13.743946050566935
+  ],
+  [
+   "Adamant:1/32/1/0/0/32",
+   13.095522975841895
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Basculegion",
+   11.738838418232056
+  ],
+  [
+   "Kingambit",
+   11.684957846149514
+  ],
+  [
+   "Sneasler",
+   10.903702830692684
+  ],
+  [
+   "Froslass-Mega",
+   10.52224018499172
+  ],
+  [
+   "Scovillain-Mega",
+   9.340141208740924
+  ],
+  [
+   "Metagross-Mega",
+   3.527871017394007
+  ],
+  [
+   "Incineroar",
+   2.964592356743054
+  ],
+  [
+   "Sinistcha",
+   2.2715842980295062
+  ],
+  [
+   "Floette-Mega",
+   1.794213587990628
+  ],
+  [
+   "Whimsicott",
+   1.5897307058930248
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

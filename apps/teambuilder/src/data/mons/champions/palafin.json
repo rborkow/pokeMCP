@@ -1,104 +1,214 @@
 {
-    "id": "palafin",
-    "name": "Palafin",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.021779299999999998,
-            "rank": 51,
-            "raw": 180219
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0130812,
-            "rank": 67,
-            "raw": 154081
-        }
-    ],
-    "abilities": [["Zero to Hero", 100]],
-    "items": [
-        ["Mystic Water", 72.68174914582127],
-        ["Leftovers", 12.358157598088193],
-        ["Choice Scarf", 9.232248384446025],
-        ["Sitrus Berry", 3.2027581091507553],
-        ["Lum Berry", 0.5846381780344702],
-        ["White Herb", 0.5037568926680177],
-        ["Focus Sash", 0.29749534740973216],
-        ["Wacan Berry", 0.26015415003444603]
-    ],
-    "moves": [
-        ["Jet Punch", 23.68169130807767],
-        ["Wave Crash", 22.596027404186035],
-        ["Protect", 20.819820551357523],
-        ["Flip Turn", 9.753546103302254],
-        ["Close Combat", 7.60812114559313],
-        ["Bulk Up", 5.445885969568251],
-        ["Drain Punch", 2.8211602798657243],
-        ["Encore", 1.7542599512524137],
-        ["Ice Punch", 1.6591570303177503],
-        ["Taunt", 0.6839215149634748]
-    ],
-    "spreads": [
-        ["Adamant:32/32/0/0/2/0", 8.755505925091525],
-        ["Adamant:32/32/0/0/0/2", 7.209015473338305],
-        ["Adamant:2/32/0/0/0/32", 7.111872250608828],
-        ["Jolly:0/32/0/0/2/32", 5.696337970581363],
-        ["Adamant:31/32/0/0/0/3", 5.522091605398656]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Incineroar", 10.691434710916853],
-        ["Sneasler", 7.149667155193952],
-        ["Kingambit", 6.2213735540767985],
-        ["Sinistcha", 5.728550628719669],
-        ["Pelipper", 4.841044000065216],
-        ["Archaludon", 4.287983511133186],
-        ["Floette-Mega", 4.188249514636422],
-        ["Gengar-Mega", 4.144539994630941],
-        ["Garchomp", 2.5480098846299777],
-        ["Froslass-Mega", 2.2332370209710404]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Mystic Water",
-            "ability": "Zero to Hero",
-            "moves": ["Protect", "Wave Crash", "Flip Turn", "Jet Punch"],
-            "count": 4,
-            "bestPlacing": 4,
-            "bestPlayer": "Eduardo_Leite",
-            "eventName": "*Sitrus-Series*|Champions|#59",
-            "eventSlug": "2026-05-20-sitrus-series-champions-59",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a072608dfbdf089cbbdaa89",
-            "nature": null
-        },
-        {
-            "item": "White Herb",
-            "ability": "Zero to Hero",
-            "moves": ["Jet Punch", "Wave Crash", "Close Combat", "Protect"],
-            "count": 1,
-            "bestPlacing": 4,
-            "bestPlayer": "Carni",
-            "eventName": "Sketch Academy Champions Regulation M-A Tournament",
-            "eventSlug": "2026-05-25-sketch-academy-champions-regulation-m-a-tournament",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eefa72f9b24b9bd5b02a26",
-            "nature": null
-        },
-        {
-            "item": "Mystic Water",
-            "ability": "Zero to Hero",
-            "moves": ["Wave Crash", "Jet Punch", "Close Combat", "Protect"],
-            "count": 1,
-            "bestPlacing": 4,
-            "bestPlayer": "N8_dawgg",
-            "eventName": "VGCA Battle Hall: Academy Ace Edition #1",
-            "eventSlug": "2026-05-24-vgca-battle-hall-academy-ace-edition-1",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a0de44013f957d6d4b4be7b",
-            "nature": null
-        }
-    ]
+ "id": "palafin",
+ "name": "Palafin",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0080511,
+   "rank": 87,
+   "raw": 37265
+  }
+ ],
+ "abilities": [
+  [
+   "Zero to Hero",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Mystic Water",
+   44.31400949993585
+  ],
+  [
+   "Leftovers",
+   16.969067549898906
+  ],
+  [
+   "Life Orb",
+   16.266557006657067
+  ],
+  [
+   "Choice Scarf",
+   13.208918670637917
+  ],
+  [
+   "Expert Belt",
+   2.2599279634856884
+  ],
+  [
+   "Sitrus Berry",
+   2.065145513957011
+  ],
+  [
+   "Muscle Band",
+   1.4302083616080044
+  ],
+  [
+   "Lum Berry",
+   0.9504506885503229
+  ]
+ ],
+ "moves": [
+  [
+   "Jet Punch",
+   21.31113251664192
+  ],
+  [
+   "Wave Crash",
+   20.85215058480358
+  ],
+  [
+   "Protect",
+   17.56548460712247
+  ],
+  [
+   "Flip Turn",
+   12.554010976329902
+  ],
+  [
+   "Close Combat",
+   8.681926659623246
+  ],
+  [
+   "Bulk Up",
+   5.0361518323341095
+  ],
+  [
+   "Drain Punch",
+   3.7301179181168647
+  ],
+  [
+   "Ice Punch",
+   3.4328380557260285
+  ],
+  [
+   "",
+   1.0079182854566133
+  ],
+  [
+   "Haze",
+   0.9696311851979426
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:2/32/0/0/0/32",
+   22.610812274282914
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   10.062184362401926
+  ],
+  [
+   "Adamant:32/32/0/0/0/2",
+   8.9719548793937
+  ],
+  [
+   "Adamant:32/32/0/0/2/0",
+   5.831899402087128
+  ],
+  [
+   "Adamant:32/30/0/0/0/4",
+   2.9336071673978346
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Incineroar",
+   8.537151869628278
+  ],
+  [
+   "Sinistcha",
+   7.154681401122419
+  ],
+  [
+   "Whimsicott",
+   4.6258732378326
+  ],
+  [
+   "Raichu-Mega-Y",
+   4.0161848013946875
+  ],
+  [
+   "Pelipper",
+   3.6430686116160604
+  ],
+  [
+   "Gholdengo",
+   3.569730552103731
+  ],
+  [
+   "Garchomp",
+   3.5618992175195263
+  ],
+  [
+   "Kingambit",
+   2.9835999100963635
+  ],
+  [
+   "Staraptor-Mega",
+   2.85234090345952
+  ],
+  [
+   "Sneasler",
+   2.7940604792198918
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

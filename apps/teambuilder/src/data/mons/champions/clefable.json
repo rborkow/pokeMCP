@@ -1,108 +1,240 @@
 {
-    "id": "clefable",
-    "name": "Clefable",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.02008,
-            "rank": 53,
-            "raw": 189342
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.009032,
-            "rank": 84,
-            "raw": 153811
-        }
-    ],
-    "abilities": [
-        ["Unaware", 65.45905849347872],
-        ["Magic Guard", 31.73088705642502],
-        ["Cute Charm", 2.810054450096252]
-    ],
-    "items": [
-        ["Sitrus Berry", 67.55633585161725],
-        ["Leftovers", 15.336016311784977],
-        ["Kebia Berry", 5.427953646714282],
-        ["Babiri Berry", 3.7020369252792165],
-        ["Mental Herb", 3.2651281827614365],
-        ["Lum Berry", 1.3520047591309572],
-        ["Focus Sash", 1.2508868430877513],
-        ["Fairy Feather", 0.7214860398846532]
-    ],
-    "moves": [
-        ["Follow Me", 24.540019791698583],
-        ["Moonblast", 21.583468234813875],
-        ["Protect", 19.87347211446781],
-        ["Helping Hand", 11.883059752138463],
-        ["Life Dew", 6.875360442733442],
-        ["Icy Wind", 2.368805119087249],
-        ["Encore", 1.7862802850281623],
-        ["Heal Pulse", 1.3669571522998387],
-        ["Dazzling Gleam", 1.05770559191935],
-        ["Reflect", 1.023699801629365]
-    ],
-    "spreads": [
-        ["Bold:32/0/32/0/2/0", 21.91404121897444],
-        ["Bold:32/0/27/0/7/0", 5.814665149080494],
-        ["Calm:32/0/0/2/32/0", 4.035759691837723],
-        ["Bold:32/0/32/1/1/0", 3.179552568066122],
-        ["Bold:32/0/17/0/17/0", 2.9363642407685733]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Sneasler", 8.945411133351085],
-        ["Kingambit", 7.2827457556845765],
-        ["Delphox-Mega", 6.491212357553631],
-        ["Garchomp", 6.249684691765829],
-        ["Basculegion", 5.297538503142831],
-        ["Incineroar", 2.680208899613123],
-        ["Pelipper", 2.194650320589875],
-        ["Archaludon", 2.164432584707939],
-        ["Hydreigon", 2.103651152059458],
-        ["Gyarados-Mega", 1.989705662000683]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Sitrus Berry",
-            "ability": "Unaware",
-            "moves": ["Follow Me", "Helping Hand", "Moonblast", "Protect"],
-            "count": 3,
-            "bestPlacing": 2,
-            "bestPlayer": "Pendraggon26",
-            "eventName": "AUTOFULL CHAMPIONS SERIES QUALIFIER [120 USD]",
-            "eventSlug": "2026-05-30-autofull-champions-series-qualifier-120-usd",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a0de6e6dfbdf089cbbddec1",
-            "nature": "Bold"
-        },
-        {
-            "item": "Clefablite",
-            "ability": "Unaware",
-            "moves": ["Life Dew", "Follow Me", "Helping Hand", "Icy Wind"],
-            "count": 1,
-            "bestPlacing": 3,
-            "bestPlayer": "kayle1gh",
-            "eventName": "Road To Turin - [Reg M-A]",
-            "eventSlug": "2026-06-02-road-to-turin-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1826260f6c1f08998628ef",
-            "nature": "Modest"
-        },
-        {
-            "item": "Sitrus Berry",
-            "ability": "Unaware",
-            "moves": ["Follow Me", "Moonblast", "Protect", "Life Dew"],
-            "count": 1,
-            "bestPlacing": 4,
-            "bestPlayer": "Mhew",
-            "eventName": "*Sitrus-Series*|Champions|#60",
-            "eventSlug": "2026-05-27-sitrus-series-champions-60",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a0f02afdfbdf089cbbde577",
-            "nature": null
-        }
-    ]
+ "id": "clefable",
+ "name": "Clefable",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0186766,
+   "rank": 60,
+   "raw": 84341
+  }
+ ],
+ "abilities": [
+  [
+   "Unaware",
+   88.2876051464045
+  ],
+  [
+   "Magic Guard",
+   9.70761980623179
+  ],
+  [
+   "Cute Charm",
+   2.004775047363705
+  ]
+ ],
+ "items": [
+  [
+   "Sitrus Berry",
+   54.70361944182951
+  ],
+  [
+   "Leftovers",
+   27.50737926516722
+  ],
+  [
+   "Life Orb",
+   4.073404442982934
+  ],
+  [
+   "Babiri Berry",
+   3.6479838469430046
+  ],
+  [
+   "Fairy Feather",
+   2.7435715377555123
+  ],
+  [
+   "Mental Herb",
+   2.5968624463265875
+  ],
+  [
+   "Kebia Berry",
+   1.3141818211409408
+  ],
+  [
+   "Bright Powder",
+   0.6169053667942309
+  ]
+ ],
+ "moves": [
+  [
+   "Follow Me",
+   23.386161555804215
+  ],
+  [
+   "Moonblast",
+   20.910879497108752
+  ],
+  [
+   "Protect",
+   18.448314993192895
+  ],
+  [
+   "Helping Hand",
+   8.993092598951165
+  ],
+  [
+   "Life Dew",
+   7.69489444969927
+  ],
+  [
+   "Dazzling Gleam",
+   2.0557433606660895
+  ],
+  [
+   "Icy Wind",
+   1.5490333064508015
+  ],
+  [
+   "Encore",
+   1.38241100287658
+  ],
+  [
+   "Calm Mind",
+   1.3024880414018611
+  ],
+  [
+   "Thunder Wave",
+   1.3004001578018787
+  ]
+ ],
+ "spreads": [
+  [
+   "Bold:32/0/32/0/2/0",
+   10.99067598984963
+  ],
+  [
+   "Bold:32/0/17/0/12/5",
+   6.906996658328701
+  ],
+  [
+   "Calm:32/0/0/2/32/0",
+   6.672344057056695
+  ],
+  [
+   "Bold:32/0/27/0/7/0",
+   4.857331444641616
+  ],
+  [
+   "Bold:32/0/32/2/0/0",
+   4.084068392920421
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Kingambit",
+   5.601883178633786
+  ],
+  [
+   "Basculegion",
+   4.473810607260504
+  ],
+  [
+   "Garchomp",
+   4.445242290335029
+  ],
+  [
+   "Sneasler",
+   3.457027929160554
+  ],
+  [
+   "Incineroar",
+   3.4368060178955684
+  ],
+  [
+   "Sinistcha",
+   3.2267252767611505
+  ],
+  [
+   "Raichu-Mega-Y",
+   3.048224606140345
+  ],
+  [
+   "Whimsicott",
+   2.986780044411335
+  ],
+  [
+   "Staraptor-Mega",
+   2.6962633038748076
+  ],
+  [
+   "Pelipper",
+   2.4814482559792848
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Sitrus Berry",
+   "ability": "Unaware",
+   "moves": [
+    "Moonblast",
+    "Follow Me",
+    "Helping Hand",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 3,
+   "bestPlayer": "SomeoneOffical",
+   "eventName": "Road to Area 229 #4",
+   "eventSlug": "2026-06-27-road-to-area-229-4",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c370fc87cd9ff0a30eaa1",
+   "nature": "Bold"
+  }
+ ]
 }

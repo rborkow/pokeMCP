@@ -1,0 +1,236 @@
+{
+ "id": "ninetales",
+ "name": "Ninetales",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0137161,
+   "rank": 74,
+   "raw": 39442
+  }
+ ],
+ "abilities": [
+  [
+   "Drought",
+   99.47296761425648
+  ],
+  [
+   "Flash Fire",
+   0.5270323857435348
+  ]
+ ],
+ "items": [
+  [
+   "Choice Scarf",
+   83.36612360836673
+  ],
+  [
+   "Heat Rock",
+   3.9410010602613017
+  ],
+  [
+   "Focus Sash",
+   3.771570792807135
+  ],
+  [
+   "Charcoal",
+   3.273123088735977
+  ],
+  [
+   "Shuca Berry",
+   2.1705511415282355
+  ],
+  [
+   "Life Orb",
+   1.1155308516949136
+  ],
+  [
+   "Sitrus Berry",
+   0.7415277460174404
+  ],
+  [
+   "Leftovers",
+   0.4520291173623005
+  ]
+ ],
+ "moves": [
+  [
+   "Heat Wave",
+   23.33409690827646
+  ],
+  [
+   "Solar Beam",
+   19.58603985303158
+  ],
+  [
+   "Fake Tears",
+   19.055780681085725
+  ],
+  [
+   "Overheat",
+   18.277842262158714
+  ],
+  [
+   "Protect",
+   3.4705292195909907
+  ],
+  [
+   "Weather Ball",
+   2.559454512983677
+  ],
+  [
+   "Sunny Day",
+   1.672799945487697
+  ],
+  [
+   "Encore",
+   1.6499341801912006
+  ],
+  [
+   "Will-O-Wisp",
+   1.5778494860030936
+  ],
+  [
+   "Helping Hand",
+   1.4153921927514685
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:2/0/0/32/0/32",
+   51.154439187028466
+  ],
+  [
+   "Timid:1/0/0/32/1/32",
+   9.845261745109173
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   7.62798238304177
+  ],
+  [
+   "Modest:0/0/2/32/0/32",
+   5.146705056619899
+  ],
+  [
+   "Modest:0/0/1/32/1/32",
+   4.86442825020034
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Pyroar-Mega",
+   17.902016390219163
+  ],
+  [
+   "Whimsicott",
+   16.613242097767838
+  ],
+  [
+   "Farigiraf",
+   15.358917249563323
+  ],
+  [
+   "Basculegion",
+   14.632159839593212
+  ],
+  [
+   "Floette-Mega",
+   13.282150604927923
+  ],
+  [
+   "Garchomp",
+   2.4429600866261376
+  ],
+  [
+   "Sylveon",
+   2.089031688956731
+  ],
+  [
+   "Staraptor-Mega",
+   1.1994416361205784
+  ],
+  [
+   "Venusaur",
+   1.0312074443419341
+  ],
+  [
+   "Grimmsnarl",
+   0.9653303720806348
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Focus Sash",
+   "ability": "Drought",
+   "moves": [
+    "Overheat",
+    "Heat Wave",
+    "Will-O-Wisp",
+    "Helping Hand"
+   ],
+   "count": 1,
+   "bestPlacing": 4,
+   "bestPlayer": "tdotstay2tact",
+   "eventName": "Road to Area 229 #4",
+   "eventSlug": "2026-06-27-road-to-area-229-4",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c370fc87cd9ff0a30eaa1",
+   "nature": "Modest"
+  }
+ ]
+}

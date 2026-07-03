@@ -1,104 +1,266 @@
 {
-    "id": "hydreigon",
-    "name": "Hydreigon",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.026032000000000003,
-            "rank": 46,
-            "raw": 163705
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0361368,
-            "rank": 41,
-            "raw": 225635
-        }
-    ],
-    "abilities": [["Levitate", 100]],
-    "items": [
-        ["Choice Scarf", 60.08831550610713],
-        ["Haban Berry", 10.805894962243391],
-        ["Chople Berry", 7.055182157654653],
-        ["Focus Sash", 5.8089017232115445],
-        ["Dragon Fang", 3.912642324154663],
-        ["Black Glasses", 3.3577183936871875],
-        ["Scope Lens", 2.3882423534630797],
-        ["Leftovers", 2.055583882281776]
-    ],
-    "moves": [
-        ["Dark Pulse", 23.37640896017674],
-        ["Draco Meteor", 22.196365256292015],
-        ["Snarl", 15.835111721952227],
-        ["Heat Wave", 8.42602739009932],
-        ["Protect", 8.172119422419636],
-        ["Earth Power", 6.581452135357754],
-        ["Tailwind", 3.648963642671668],
-        ["Flamethrower", 2.898711817640186],
-        ["Dragon Pulse", 2.1443085565008526],
-        ["U-turn", 1.933971864003476]
-    ],
-    "spreads": [
-        ["Modest:2/0/0/32/0/32", 27.64643811002752],
-        ["Timid:2/0/0/32/0/32", 6.646017395502296],
-        ["Modest:4/0/3/32/0/27", 4.273235020514186],
-        ["Timid:0/0/0/32/2/32", 4.216819861943575],
-        ["Modest:8/0/0/32/0/26", 2.3523407947033044]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Sneasler", 5.219931957098423],
-        ["Tyranitar-Mega", 5.0991230509623335],
-        ["Rotom-Wash", 5.084361293778996],
-        ["Excadrill", 4.636326935535777],
-        ["Corviknight", 4.606445239456035],
-        ["Basculegion", 4.071936357924052],
-        ["Aegislash", 3.2800476866285853],
-        ["Whimsicott", 3.007815004250474],
-        ["Garchomp", 2.805864511776768],
-        ["Charizard-Mega-Y", 2.805315456516488]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Choice Scarf",
-            "ability": "Levitate",
-            "moves": ["Draco Meteor", "Snarl", "Dark Pulse", "Heat Wave"],
-            "count": 3,
-            "bestPlacing": 3,
-            "bestPlayer": "[DNR] Isaac Moreira",
-            "eventName": "Talon's FIGHT CLUB #87 POKEMON CHAMPIONS",
-            "eventSlug": "2026-06-04-talon-s-fight-club-87-pokemon-champions",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a14cc4c8c163b8097997614",
-            "nature": "Modest"
-        },
-        {
-            "item": "Choice Scarf",
-            "ability": "Levitate",
-            "moves": ["Draco Meteor", "Dark Pulse", "Snarl", "Flamethrower"],
-            "count": 2,
-            "bestPlacing": 5,
-            "bestPlayer": "Smogolem",
-            "eventName": "*Sitrus-Series*|Champions|#59",
-            "eventSlug": "2026-05-20-sitrus-series-champions-59",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a072608dfbdf089cbbdaa89",
-            "nature": "Modest"
-        },
-        {
-            "item": "Choice Scarf",
-            "ability": "Levitate",
-            "moves": ["Dark Pulse", "Snarl", "Draco Meteor", "Earth Power"],
-            "count": 1,
-            "bestPlacing": 3,
-            "bestPlayer": "Risten Labba",
-            "eventName": "*Sitrus-Series*|Champions|$50 to First Place|#62",
-            "eventSlug": "2026-06-10-sitrus-series-champions-50-to-first-place-62",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a21741847f3797bf6bab7f3",
-            "nature": "Timid"
-        }
-    ]
+ "id": "hydreigon",
+ "name": "Hydreigon",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0542943,
+   "rank": 29,
+   "raw": 119489
+  }
+ ],
+ "abilities": [
+  [
+   "Levitate",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Choice Scarf",
+   66.09400317340213
+  ],
+  [
+   "Life Orb",
+   16.290283703968218
+  ],
+  [
+   "Focus Sash",
+   4.872626928080745
+  ],
+  [
+   "Haban Berry",
+   4.82046994984112
+  ],
+  [
+   "Black Glasses",
+   1.4827063721589684
+  ],
+  [
+   "Expert Belt",
+   1.4676961180923482
+  ],
+  [
+   "Scope Lens",
+   1.082813385906436
+  ],
+  [
+   "Chople Berry",
+   1.0201977890240248
+  ]
+ ],
+ "moves": [
+  [
+   "Dark Pulse",
+   23.910618773405737
+  ],
+  [
+   "Draco Meteor",
+   22.466337465215204
+  ],
+  [
+   "Snarl",
+   16.36312568171544
+  ],
+  [
+   "Earth Power",
+   12.648240282944176
+  ],
+  [
+   "Protect",
+   7.65325532040175
+  ],
+  [
+   "Heat Wave",
+   5.200056296926879
+  ],
+  [
+   "Flamethrower",
+   2.6133489691179586
+  ],
+  [
+   "Tailwind",
+   2.5600758198322566
+  ],
+  [
+   "Dragon Pulse",
+   2.120246096148056
+  ],
+  [
+   "U-turn",
+   1.7221413987446719
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:2/0/0/32/0/32",
+   36.77238734700364
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   18.426216968106914
+  ],
+  [
+   "Modest:8/0/1/25/0/32",
+   7.390766131125395
+  ],
+  [
+   "Modest:6/0/0/28/0/32",
+   3.413246118437547
+  ],
+  [
+   "Modest:4/0/0/30/0/32",
+   3.086791925850365
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Metagross-Mega",
+   9.804355725780995
+  ],
+  [
+   "Sneasler",
+   5.943228394806022
+  ],
+  [
+   "Incineroar",
+   5.188757169064127
+  ],
+  [
+   "Whimsicott",
+   4.932319543756893
+  ],
+  [
+   "Sinistcha",
+   4.5502478870579735
+  ],
+  [
+   "Charizard-Mega-Y",
+   3.667001555207921
+  ],
+  [
+   "Basculegion",
+   3.6204050912791192
+  ],
+  [
+   "Garchomp",
+   3.5820369699977777
+  ],
+  [
+   "Grimmsnarl",
+   3.2495496324034043
+  ],
+  [
+   "Pelipper",
+   2.8586801672473983
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Mawile-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Ninetales-Alola",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Choice Scarf",
+   "ability": "Levitate",
+   "moves": [
+    "Heat Wave",
+    "Snarl",
+    "Draco Meteor",
+    "Dark Pulse"
+   ],
+   "count": 5,
+   "bestPlacing": 1,
+   "bestPlayer": "JurassicJoints",
+   "eventName": "Road to Area 229 #4",
+   "eventSlug": "2026-06-27-road-to-area-229-4",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c370fc87cd9ff0a30eaa1",
+   "nature": "Modest"
+  },
+  {
+   "item": "Choice Scarf",
+   "ability": "Levitate",
+   "moves": [
+    "Draco Meteor",
+    "Dark Pulse",
+    "Flamethrower",
+    "Snarl"
+   ],
+   "count": 3,
+   "bestPlacing": 1,
+   "bestPlayer": "naibot2814",
+   "eventName": "The Drywalls Series #8 - M-B",
+   "eventSlug": "2026-06-22-the-drywalls-series-8-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a37eb4faf50e12308407acc",
+   "nature": "Modest"
+  },
+  {
+   "item": "Choice Scarf",
+   "ability": "Levitate",
+   "moves": [
+    "Draco Meteor",
+    "Snarl",
+    "Earth Power",
+    "Dark Pulse"
+   ],
+   "count": 3,
+   "bestPlacing": 4,
+   "bestPlayer": "murray1672",
+   "eventName": "MMHM x Stellar Novas Tour #2",
+   "eventSlug": "2026-06-23-mmhm-x-stellar-novas-tour-2",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15e1c10f6c1f0899861874",
+   "nature": "Modest"
+  }
+ ]
 }

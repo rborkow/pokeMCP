@@ -1,0 +1,186 @@
+{
+ "id": "blazikenmega",
+ "name": "Blaziken-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0272691,
+   "rank": 44,
+   "raw": 72729
+  }
+ ],
+ "abilities": [
+  [
+   "Speed Boost",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Blazikenite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Close Combat",
+   23.84229961278405
+  ],
+  [
+   "Flare Blitz",
+   23.758683052967772
+  ],
+  [
+   "Rock Slide",
+   17.52804347491624
+  ],
+  [
+   "Protect",
+   13.623368996147041
+  ],
+  [
+   "Detect",
+   11.220072041255873
+  ],
+  [
+   "Swords Dance",
+   3.5469429424268797
+  ],
+  [
+   "Coaching",
+   1.1543179304418183
+  ],
+  [
+   "Thunder Punch",
+   0.6510623625094131
+  ],
+  [
+   "Brave Bird",
+   0.4555516790925655
+  ],
+  [
+   "Blaze Kick",
+   0.4145153590734314
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   59.4564960182311
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   4.442231088880556
+  ],
+  [
+   "Adamant:0/32/2/0/0/32",
+   3.8927071305151273
+  ],
+  [
+   "Adamant:0/32/0/0/0/32",
+   1.25920097957758
+  ],
+  [
+   "Adamant:4/30/0/0/0/32",
+   1.25075758309861
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Kingambit",
+   13.324023616697655
+  ],
+  [
+   "Basculegion",
+   12.184101473487917
+  ],
+  [
+   "Sylveon",
+   6.665869616054694
+  ],
+  [
+   "Whimsicott",
+   5.7699930361442195
+  ],
+  [
+   "Sinistcha",
+   5.131372974342181
+  ],
+  [
+   "Aerodactyl-Mega",
+   5.0768689617976
+  ],
+  [
+   "Farigiraf",
+   4.113410329894061
+  ],
+  [
+   "Ninetales-Alola",
+   3.8173975058483745
+  ],
+  [
+   "Garchomp",
+   3.281552403355672
+  ],
+  [
+   "Torkoal",
+   3.022177306584033
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Raichu-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Maushold",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

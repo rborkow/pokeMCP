@@ -1,0 +1,186 @@
+{
+ "id": "metagrossmega",
+ "name": "Metagross-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.1295973,
+   "rank": 16,
+   "raw": 306559
+  }
+ ],
+ "abilities": [
+  [
+   "Tough Claws",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Metagrossite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   23.80660388841804
+  ],
+  [
+   "Psychic Fangs",
+   22.51631805203399
+  ],
+  [
+   "Iron Head",
+   17.438510542651024
+  ],
+  [
+   "Bullet Punch",
+   7.578803042470364
+  ],
+  [
+   "Body Press",
+   6.08479605886616
+  ],
+  [
+   "Stomping Tantrum",
+   5.8731840564618585
+  ],
+  [
+   "Ice Punch",
+   4.992002731452323
+  ],
+  [
+   "Meteor Mash",
+   4.788131328251855
+  ],
+  [
+   "Rock Slide",
+   1.61284717970017
+  ],
+  [
+   "Hammer Arm",
+   1.2339570310457615
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:2/32/0/0/0/32",
+   27.52343407895709
+  ],
+  [
+   "Jolly:14/27/0/0/0/25",
+   7.166285842463031
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   5.1572619214196225
+  ],
+  [
+   "Jolly:9/32/0/0/0/25",
+   3.6224833580644953
+  ],
+  [
+   "Adamant:30/32/1/0/1/2",
+   2.8708862347825668
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   8.064458557696035
+  ],
+  [
+   "Garchomp",
+   7.053592277602753
+  ],
+  [
+   "Grimmsnarl",
+   5.600044713383361
+  ],
+  [
+   "Pelipper",
+   5.522254286121223
+  ],
+  [
+   "Incineroar",
+   5.135407628182966
+  ],
+  [
+   "Whimsicott",
+   5.035135579309196
+  ],
+  [
+   "Sneasler",
+   4.830338883363421
+  ],
+  [
+   "Basculegion",
+   4.562766779205162
+  ],
+  [
+   "Swampert-Mega",
+   4.221225885268331
+  ],
+  [
+   "Archaludon",
+   4.11617596497823
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Tyranitar-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Dragalge-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

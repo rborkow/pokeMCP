@@ -1,0 +1,190 @@
+{
+ "id": "raichumegax",
+ "name": "Raichu-Mega-X",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0163826,
+   "rank": 65,
+   "raw": 60777
+  }
+ ],
+ "abilities": [
+  [
+   "No Ability",
+   81.25575065760728
+  ],
+  [
+   "Electric Surge",
+   18.74424934239273
+  ]
+ ],
+ "items": [
+  [
+   "raichunitex",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Fake Out",
+   21.693845629092827
+  ],
+  [
+   "Protect",
+   16.642175218865248
+  ],
+  [
+   "Volt Tackle",
+   14.234362318261578
+  ],
+  [
+   "Volt Switch",
+   10.511180087604215
+  ],
+  [
+   "Rising Voltage",
+   9.849692115581286
+  ],
+  [
+   "Play Rough",
+   4.255140253155048
+  ],
+  [
+   "Encore",
+   3.459911261567177
+  ],
+  [
+   "Drain Punch",
+   2.4902615633308
+  ],
+  [
+   "Knock Off",
+   2.1043908310718877
+  ],
+  [
+   "Nuzzle",
+   1.720070535220159
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:2/32/0/0/0/32",
+   27.382751637573005
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   11.827546622301215
+  ],
+  [
+   "Hasty:0/2/0/32/0/32",
+   3.690141109572567
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   3.453072726048095
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   1.9903655919911156
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Pelipper",
+   8.52081569828352
+  ],
+  [
+   "Archaludon",
+   8.131123521385891
+  ],
+  [
+   "Sinistcha",
+   7.3237980989851055
+  ],
+  [
+   "Basculegion",
+   5.682102113436955
+  ],
+  [
+   "Swampert-Mega",
+   4.511536508874201
+  ],
+  [
+   "Whimsicott",
+   4.051559414053921
+  ],
+  [
+   "Incineroar",
+   3.8554319662928673
+  ],
+  [
+   "Garchomp",
+   3.5326005880726403
+  ],
+  [
+   "Grimmsnarl",
+   2.91367994995859
+  ],
+  [
+   "Ninetales-Alola",
+   2.6855348557309986
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Swampert-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

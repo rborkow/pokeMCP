@@ -1,1 +1,54 @@
-[]
+[
+    {
+        "month": "2026-07",
+        "slug": "champions",
+        "pokemonId": "incineroar",
+        "pokemonName": "Incineroar",
+        "claim": "Incineroar climbs further as the format's glue, rising above 31% next month.",
+        "direction": "up",
+        "thresholdPts": 3,
+        "confidence": "possible",
+        "falsifier": "Incineroar's usage stays below 31.35% (a rise under 3 points) or falls.",
+        "evidence": "Incineroar: Jun 28.35%; top-cut bring rates Incineroar 9/16, 5/8, 5/8 and present on all three tournament winners.",
+        "baselineUsagePct": 28.34633
+    },
+    {
+        "month": "2026-07",
+        "slug": "champions",
+        "pokemonId": "sneasler",
+        "pokemonName": "Sneasler",
+        "claim": "Sneasler's ladder usage rises toward its tournament representation, gaining at least 3 points.",
+        "direction": "up",
+        "thresholdPts": 3,
+        "confidence": "possible",
+        "falsifier": "Sneasler's usage fails to reach 20.24% next month.",
+        "evidence": "Sneasler: Jun 17.24%; top-cut bring rates Sneasler 7/16, 2/8, 4/8 — above its ladder rank.",
+        "baselineUsagePct": 17.24322
+    },
+    {
+        "month": "2026-07",
+        "slug": "champions",
+        "pokemonId": "sinistcha",
+        "pokemonName": "Sinistcha",
+        "claim": "Sinistcha's field-leading 33.00% softens as its top-cut conversion lags, sliding at least 3 points.",
+        "direction": "down",
+        "thresholdPts": 3,
+        "confidence": "possible",
+        "falsifier": "Sinistcha stays at or above 30.00% next month.",
+        "evidence": "Sinistcha: Jun 33.00% (ladder #1) but only 3/8 and 3/8 top-cut bring rates.",
+        "baselineUsagePct": 32.9986
+    },
+    {
+        "month": "2026-07",
+        "slug": "champions",
+        "pokemonId": "basculegion",
+        "pokemonName": "Basculegion",
+        "claim": "Basculegion holds or improves on its 30.34% given strong tournament leads.",
+        "direction": "up",
+        "thresholdPts": 2,
+        "confidence": "likely",
+        "falsifier": "Basculegion drops below 28.34% next month.",
+        "evidence": "Basculegion: Jun 30.34%; INGAGE winner led Choice Scarf Basculegion, bring rates 7/16, 5/8, 3/8.",
+        "baselineUsagePct": 30.33512
+    }
+]

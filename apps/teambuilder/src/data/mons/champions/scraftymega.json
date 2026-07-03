@@ -1,0 +1,190 @@
+{
+ "id": "scraftymega",
+ "name": "Scrafty-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0322686,
+   "rank": 38,
+   "raw": 93378
+  }
+ ],
+ "abilities": [
+  [
+   "No Ability",
+   66.94393799035683
+  ],
+  [
+   "Intimidate",
+   33.05606200964318
+  ]
+ ],
+ "items": [
+  [
+   "Scraftinite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Fake Out",
+   22.733193887276336
+  ],
+  [
+   "Knock Off",
+   22.315309591629294
+  ],
+  [
+   "Drain Punch",
+   13.758387149722697
+  ],
+  [
+   "Close Combat",
+   10.339834324182677
+  ],
+  [
+   "Protect",
+   7.014352693410217
+  ],
+  [
+   "Ice Punch",
+   5.114797106670201
+  ],
+  [
+   "Detect",
+   3.098350466111277
+  ],
+  [
+   "Rock Slide",
+   2.1441654874198006
+  ],
+  [
+   "Iron Head",
+   1.8326609027425327
+  ],
+  [
+   "Swords Dance",
+   1.5312145154449646
+  ]
+ ],
+ "spreads": [
+  [
+   "Brave:32/32/0/0/2/0",
+   20.043106798375547
+  ],
+  [
+   "Adamant:32/32/0/0/2/0",
+   14.315484740627134
+  ],
+  [
+   "Adamant:32/32/2/0/0/0",
+   7.695928166413441
+  ],
+  [
+   "Brave:32/32/2/0/0/0",
+   2.980552471778899
+  ],
+  [
+   "Brave:32/32/1/0/1/0",
+   2.2419995792602756
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Farigiraf",
+   10.27945667818119
+  ],
+  [
+   "Torkoal",
+   9.045028915776527
+  ],
+  [
+   "Sinistcha",
+   4.841697486505933
+  ],
+  [
+   "Sylveon",
+   4.465360013926513
+  ],
+  [
+   "Pyroar-Mega",
+   3.7743004473768873
+  ],
+  [
+   "Gholdengo",
+   3.549238990893643
+  ],
+  [
+   "Garchomp",
+   3.2430254155680944
+  ],
+  [
+   "Venusaur",
+   2.9668360271160976
+  ],
+  [
+   "Mamoswine",
+   2.9120568591667646
+  ],
+  [
+   "Vileplume",
+   2.365917153426448
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Mawile-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Swampert-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Hydreigon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

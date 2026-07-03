@@ -1,58 +1,186 @@
 {
-    "id": "kangaskhanmega",
-    "name": "Kangaskhan-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.040989000000000005,
-            "rank": 39,
-            "raw": 221416
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0510371,
-            "rank": 33,
-            "raw": 227727
-        }
-    ],
-    "abilities": [["Parental Bond", 100]],
-    "items": [["Kangaskhanite", 100]],
-    "moves": [
-        ["Fake Out", 24.57794904208136],
-        ["Double-Edge", 23.92565926193251],
-        ["Sucker Punch", 11.348372282611532],
-        ["Ice Punch", 10.986007902872643],
-        ["Low Kick", 10.417153670294656],
-        ["Drain Punch", 6.757026244970998],
-        ["Hammer Arm", 5.476032225133907],
-        ["Protect", 1.8344139583055075],
-        ["Crunch", 1.5811334789571665],
-        ["", 0.6807246310104592]
-    ],
-    "spreads": [
-        ["Adamant:32/32/1/0/1/0", 17.412423030714272],
-        ["Brave:32/32/1/0/1/0", 5.965745701230572],
-        ["Adamant:2/32/0/0/0/32", 5.360885071013126],
-        ["Adamant:32/32/2/0/0/0", 4.870531424909952],
-        ["Brave:32/32/2/0/0/0", 4.492795804384329]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Farigiraf", 11.421351174033484],
-        ["Basculegion", 10.298430821615376],
-        ["Torkoal", 8.710159841509963],
-        ["Vivillon", 4.848481571953391],
-        ["Blastoise-Mega", 4.7753630838551535],
-        ["Kingambit", 4.43530810636507],
-        ["Charizard-Mega-Y", 4.149613477192771],
-        ["Garchomp", 3.9160378191826566],
-        ["Sylveon", 3.8513868625109504],
-        ["Sinistcha", 3.216940645347493]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "kangaskhanmega",
+ "name": "Kangaskhan-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0123226,
+   "rank": 77,
+   "raw": 24571
+  }
+ ],
+ "abilities": [
+  [
+   "Parental Bond",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Kangaskhanite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Fake Out",
+   24.61290803343336
+  ],
+  [
+   "Double-Edge",
+   22.192483708447497
+  ],
+  [
+   "Sucker Punch",
+   11.933929891619872
+  ],
+  [
+   "Ice Punch",
+   8.826472560800571
+  ],
+  [
+   "Low Kick",
+   8.579496880830803
+  ],
+  [
+   "Drain Punch",
+   6.513598342787581
+  ],
+  [
+   "Hammer Arm",
+   5.3458344205429915
+  ],
+  [
+   "",
+   2.6595890665179556
+  ],
+  [
+   "Crunch",
+   2.2791115781916864
+  ],
+  [
+   "Protect",
+   1.6153335097304509
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:32/32/1/0/1/0",
+   13.878989308187473
+  ],
+  [
+   "Brave:32/32/2/0/0/0",
+   8.93520076523677
+  ],
+  [
+   "Brave:32/32/1/0/1/0",
+   7.823805706057212
+  ],
+  [
+   "Adamant:32/32/2/0/0/0",
+   6.984000843841702
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   6.326689232194231
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Farigiraf",
+   12.999171741296747
+  ],
+  [
+   "Torkoal",
+   11.578351867784898
+  ],
+  [
+   "Basculegion",
+   6.543426275237779
+  ],
+  [
+   "Sylveon",
+   4.276345766516882
+  ],
+  [
+   "Kingambit",
+   4.231386003609919
+  ],
+  [
+   "Sinistcha",
+   3.834918221115101
+  ],
+  [
+   "Vileplume",
+   3.5754673190403174
+  ],
+  [
+   "Incineroar",
+   3.1897061288620936
+  ],
+  [
+   "Garchomp",
+   2.7928387586139505
+  ],
+  [
+   "Blastoise-Mega",
+   2.5266973631901832
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

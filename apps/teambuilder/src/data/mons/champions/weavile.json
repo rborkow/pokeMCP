@@ -1,80 +1,217 @@
 {
-    "id": "weavile",
-    "name": "Weavile",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.007138,
-            "rank": 97,
-            "raw": 74338
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0130299,
-            "rank": 68,
-            "raw": 117327
-        }
-    ],
-    "abilities": [["Pickpocket", 67.6976698634757], ["Pressure", 32.302330136524304]],
-    "items": [
-        ["Focus Sash", 86.14052915195568],
-        ["King's Rock", 5.321227396403059],
-        ["Never-Melt Ice", 2.5398217797064144],
-        ["Choice Scarf", 1.8203684062166023],
-        ["White Herb", 1.4326136846424846],
-        ["Black Glasses", 0.9116580716792065],
-        ["nothing", 0.43743341209028935],
-        ["Charti Berry", 0.36917001823558543]
-    ],
-    "moves": [
-        ["Fake Out", 22.773268315168394],
-        ["Knock Off", 21.026205825984228],
-        ["Low Kick", 11.678169179327693],
-        ["Icicle Crash", 10.877820064698962],
-        ["Protect", 7.269066285383706],
-        ["Triple Axel", 6.678071496070317],
-        ["Ice Shard", 4.689766855577973],
-        ["Feint", 2.414248558390996],
-        ["Throat Chop", 2.039687957356589],
-        ["Ice Spinner", 1.947476642386904]
-    ],
-    "spreads": [
-        ["Jolly:2/32/0/0/0/32", 23.201924091674783],
-        ["Adamant:1/32/1/0/0/32", 16.46162895120797],
-        ["Adamant:2/32/0/0/0/32", 12.754567557461508],
-        ["Jolly:0/32/0/0/2/32", 9.086440683746734],
-        ["Jolly:0/32/2/0/0/32", 8.745085653062961]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Garchomp", 9.507379680365531],
-        ["Charizard-Mega-Y", 9.203935637453847],
-        ["Basculegion", 8.801951767207768],
-        ["Glimmora-Mega", 7.550026618686988],
-        ["Whimsicott", 7.517390270976114],
-        ["Sinistcha", 3.31479644118595],
-        ["Pelipper", 2.7672199612932062],
-        ["Archaludon", 2.5907467380821214],
-        ["Incineroar", 2.4499434123648403],
-        ["Farigiraf", 2.3211413772988103]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Focus Sash",
-            "ability": "Pickpocket",
-            "moves": ["Fake Out", "Knock Off", "Icicle Crash", "Low Kick"],
-            "count": 3,
-            "bestPlacing": 3,
-            "bestPlayer": "dameenmachine",
-            "eventName": "The Drywalls Series #5 - Champions!",
-            "eventSlug": "2026-05-19-the-drywalls-series-5-champions",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a09f29fdfbdf089cbbdc34f",
-            "nature": "Adamant"
-        }
-    ]
+ "id": "weavile",
+ "name": "Weavile",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0057407,
+   "rank": 100,
+   "raw": 28967
+  }
+ ],
+ "abilities": [
+  [
+   "Pickpocket",
+   52.65351942380641
+  ],
+  [
+   "Pressure",
+   47.34648057619359
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   64.73318176286568
+  ],
+  [
+   "Wide Lens",
+   9.816499334315143
+  ],
+  [
+   "Life Orb",
+   6.481661837164052
+  ],
+  [
+   "King's Rock",
+   5.938511199785782
+  ],
+  [
+   "Expert Belt",
+   3.0504468156591673
+  ],
+  [
+   "Iron Ball",
+   2.434034821515324
+  ],
+  [
+   "White Herb",
+   2.0146497103989973
+  ],
+  [
+   "Chople Berry",
+   1.3336063557890023
+  ]
+ ],
+ "moves": [
+  [
+   "Fake Out",
+   23.620059056976714
+  ],
+  [
+   "Knock Off",
+   19.030598087378014
+  ],
+  [
+   "Triple Axel",
+   13.65463842951549
+  ],
+  [
+   "Protect",
+   9.028218386418791
+  ],
+  [
+   "Icicle Crash",
+   4.148478788930175
+  ],
+  [
+   "Ice Shard",
+   3.8727433886831517
+  ],
+  [
+   "Feint",
+   3.740502037664977
+  ],
+  [
+   "Ice Spinner",
+   3.6728209092257442
+  ],
+  [
+   "Low Kick",
+   2.4617982162289835
+  ],
+  [
+   "Fling",
+   1.9889172928217105
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:2/32/0/0/0/32",
+   62.06905105681487
+  ],
+  [
+   "Jolly:1/32/1/0/0/32",
+   5.791600204256689
+  ],
+  [
+   "Jolly:6/32/0/0/0/28",
+   5.324550766965891
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   3.654084482942909
+  ],
+  [
+   "Jolly:0/32/2/0/0/32",
+   3.2781019052332128
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   7.684851154171307
+  ],
+  [
+   "Whimsicott",
+   4.184765046748198
+  ],
+  [
+   "Incineroar",
+   4.062036526733609
+  ],
+  [
+   "Raichu-Mega-Y",
+   4.038930111308481
+  ],
+  [
+   "Garchomp",
+   3.7138061121834918
+  ],
+  [
+   "Pelipper",
+   3.1165294210048167
+  ],
+  [
+   "Floette-Mega",
+   2.553990703932746
+  ],
+  [
+   "Kingambit",
+   2.539551047786555
+  ],
+  [
+   "Maushold",
+   2.498972317020203
+  ],
+  [
+   "Talonflame",
+   2.432569492167102
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Focus Sash",
+   "ability": "Pressure",
+   "moves": [
+    "Ice Spinner",
+    "Fake Out",
+    "Protect",
+    "Ice Shard"
+   ],
+   "count": 1,
+   "bestPlacing": 4,
+   "bestPlayer": "Incenre",
+   "eventName": "*Sitrus-Series*|Champions-MB|#64",
+   "eventSlug": "2026-06-24-sitrus-series-champions-mb-64",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a356985af50e12308405587",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Pressure",
+   "moves": [
+    "Triple Axel",
+    "Knock Off",
+    "Fake Out",
+    "Rain Dance"
+   ],
+   "count": 1,
+   "bestPlacing": 5,
+   "bestPlayer": "Samuel T",
+   "eventName": "Amoonguss Bus Tour Champions Practice Reg M-B #1",
+   "eventSlug": "2026-06-23-amoonguss-bus-tour-champions-practice-reg-m-b-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a387661af50e1230840809c",
+   "nature": "Jolly"
+  }
+ ]
 }

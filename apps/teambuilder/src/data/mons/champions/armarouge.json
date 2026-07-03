@@ -1,0 +1,206 @@
+{
+ "id": "armarouge",
+ "name": "Armarouge",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0051484,
+   "rank": 105,
+   "raw": 21380
+  }
+ ],
+ "abilities": [
+  [
+   "Flash Fire",
+   88.53814012031555
+  ],
+  [
+   "Weak Armor",
+   11.461859879684463
+  ]
+ ],
+ "items": [
+  [
+   "Life Orb",
+   26.745008422129967
+  ],
+  [
+   "Focus Sash",
+   26.461982587705357
+  ],
+  [
+   "Leftovers",
+   9.96236901917897
+  ],
+  [
+   "Colbur Berry",
+   7.981251290086733
+  ],
+  [
+   "Charcoal",
+   5.4134635596963046
+  ],
+  [
+   "Shuca Berry",
+   3.99067381983954
+  ],
+  [
+   "Sitrus Berry",
+   3.341744138468922
+  ],
+  [
+   "White Herb",
+   2.513826458135026
+  ]
+ ],
+ "moves": [
+  [
+   "Trick Room",
+   15.379571454619148
+  ],
+  [
+   "Armor Cannon",
+   15.032907826502285
+  ],
+  [
+   "Psychic",
+   12.950847881101888
+  ],
+  [
+   "Protect",
+   12.089462662199878
+  ],
+  [
+   "Wide Guard",
+   10.291408555028521
+  ],
+  [
+   "Heat Wave",
+   8.943686580153097
+  ],
+  [
+   "Expanding Force",
+   7.999753930595924
+  ],
+  [
+   "Aura Sphere",
+   2.679672061073117
+  ],
+  [
+   "Energy Ball",
+   2.617754272639371
+  ],
+  [
+   "Calm Mind",
+   1.9734278662646605
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:28/0/0/32/0/6",
+   14.677391978219035
+  ],
+  [
+   "Modest:32/0/0/32/2/0",
+   7.4598674825528954
+  ],
+  [
+   "Modest:31/0/0/32/3/0",
+   5.784089127184252
+  ],
+  [
+   "Modest:32/0/11/20/3/0",
+   5.498908616475446
+  ],
+  [
+   "Quiet:32/0/1/32/1/0",
+   4.816380839321374
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Torkoal",
+   5.543455511900126
+  ],
+  [
+   "Sinistcha",
+   4.520789994936915
+  ],
+  [
+   "Farigiraf",
+   4.469943777470201
+  ],
+  [
+   "Kingambit",
+   4.2629658258247
+  ],
+  [
+   "Mawile-Mega",
+   4.025544602916219
+  ],
+  [
+   "Meowstic",
+   3.8815333046377907
+  ],
+  [
+   "Maushold",
+   3.5311540453455756
+  ],
+  [
+   "Sylveon",
+   3.2331681515724235
+  ],
+  [
+   "Whimsicott",
+   2.963859385499008
+  ],
+  [
+   "Scrafty-Mega",
+   2.579488646896667
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Leftovers",
+   "ability": "Flash Fire",
+   "moves": [
+    "Psychic",
+    "Heat Wave",
+    "Calm Mind",
+    "Trick Room"
+   ],
+   "count": 1,
+   "bestPlacing": 8,
+   "bestPlayer": "Dot1Q",
+   "eventName": "TARTAN TAKEDOWN #30! - [CHAMPIONS REG M-B]",
+   "eventSlug": "2026-06-30-tartan-takedown-30-champions-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a41634e83fd320299bd3356",
+   "nature": "Modest"
+  }
+ ]
+}

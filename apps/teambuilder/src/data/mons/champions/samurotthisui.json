@@ -1,67 +1,188 @@
 {
-    "id": "samurotthisui",
-    "name": "Samurott-Hisui",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.005079200000000001,
-            "rank": 110,
-            "raw": 31681
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0116422,
-            "rank": 72,
-            "raw": 91645
-        }
-    ],
-    "abilities": [["Sharpness", 99.20716683634676], ["Torrent", 0.7928331636532375]],
-    "items": [
-        ["Scope Lens", 26.058187002625864],
-        ["Choice Scarf", 24.668886765353726],
-        ["Black Glasses", 20.66718794106286],
-        ["Focus Sash", 16.71256088556177],
-        ["Chople Berry", 4.358012217017716],
-        ["Sitrus Berry", 2.4289970900474587],
-        ["White Herb", 2.116366485065006],
-        ["Roseli Berry", 0.7870308610587468]
-    ],
-    "moves": [
-        ["Sacred Sword", 21.573396183342584],
-        ["Night Slash", 15.179742217232278],
-        ["Aqua Cutter", 14.141471405262113],
-        ["Protect", 13.324986122860269],
-        ["Sucker Punch", 12.882770034011305],
-        ["Ceaseless Edge", 8.44733677882377],
-        ["Flip Turn", 4.885306418001618],
-        ["Detect", 3.2684666048528435],
-        ["Razor Shell", 3.0776653456997467],
-        ["Aqua Jet", 0.9879085851365624]
-    ],
-    "spreads": [
-        ["Adamant:2/32/0/0/0/32", 18.15292320767579],
-        ["Jolly:2/32/0/0/0/32", 11.490344988014838],
-        ["Adamant:18/22/0/0/0/26", 6.9550719567290535],
-        ["Jolly:0/32/0/0/2/32", 5.661652518423506],
-        ["Adamant:0/32/0/0/2/32", 4.567512465756911]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Garchomp", 5.9429247964120115],
-        ["Whimsicott", 5.694361296417839],
-        ["Sneasler", 5.50938440083031],
-        ["Ninetales-Alola", 4.095408038091287],
-        ["Glimmora", 3.4000243493642106],
-        ["Sylveon", 3.301012651212702],
-        ["Incineroar", 3.130628507647779],
-        ["Chandelure-Mega", 3.1243650396339415],
-        ["Aegislash", 2.691213472485831],
-        ["Aerodactyl-Mega", 2.4652110859393894]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "samurotthisui",
+ "name": "Samurott-Hisui",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0059986,
+   "rank": 98,
+   "raw": 20876
+  }
+ ],
+ "abilities": [
+  [
+   "Sharpness",
+   98.56826605676562
+  ],
+  [
+   "Torrent",
+   1.431733943234366
+  ]
+ ],
+ "items": [
+  [
+   "Black Glasses",
+   31.72899555472916
+  ],
+  [
+   "Choice Scarf",
+   21.692120114085075
+  ],
+  [
+   "Life Orb",
+   18.25286741352508
+  ],
+  [
+   "Focus Sash",
+   9.075386771310944
+  ],
+  [
+   "Scope Lens",
+   5.629457149413594
+  ],
+  [
+   "Sitrus Berry",
+   4.407390703274987
+  ],
+  [
+   "Expert Belt",
+   2.6414768420736907
+  ],
+  [
+   "White Herb",
+   2.001004898868836
+  ]
+ ],
+ "moves": [
+  [
+   "Sacred Sword",
+   20.16274671690589
+  ],
+  [
+   "Ceaseless Edge",
+   16.851830363335893
+  ],
+  [
+   "Sucker Punch",
+   14.476651420699687
+  ],
+  [
+   "Aqua Cutter",
+   14.123966230148593
+  ],
+  [
+   "Protect",
+   11.488360594421207
+  ],
+  [
+   "Night Slash",
+   6.487322464209003
+  ],
+  [
+   "Flip Turn",
+   3.1880175545021388
+  ],
+  [
+   "Razor Shell",
+   2.8221286090429865
+  ],
+  [
+   "Detect",
+   2.758167842486168
+  ],
+  [
+   "Aqua Jet",
+   2.5590486534788446
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:2/32/0/0/0/32",
+   26.592865293451524
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   17.851926838439745
+  ],
+  [
+   "Adamant:24/32/0/0/2/8",
+   4.614014176728508
+  ],
+  [
+   "Adamant:0/32/0/0/0/32",
+   3.262248167784386
+  ],
+  [
+   "Jolly:8/32/0/0/0/26",
+   2.8654707352662
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Garchomp",
+   9.579874710835643
+  ],
+  [
+   "Metagross-Mega",
+   6.26535470191405
+  ],
+  [
+   "Whimsicott",
+   5.3292892778024985
+  ],
+  [
+   "Charizard-Mega-Y",
+   4.699321014099968
+  ],
+  [
+   "Aerodactyl",
+   4.583854146502498
+  ],
+  [
+   "Sylveon",
+   4.518871029256035
+  ],
+  [
+   "Farigiraf",
+   3.6073214812213616
+  ],
+  [
+   "Sneasler",
+   3.2554413339869908
+  ],
+  [
+   "Ninetales-Alola",
+   2.843429234060004
+  ],
+  [
+   "Sinistcha",
+   2.7541865212149084
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

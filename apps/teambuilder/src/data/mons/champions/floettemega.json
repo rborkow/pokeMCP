@@ -1,58 +1,186 @@
 {
-    "id": "floettemega",
-    "name": "Floette-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.1921677,
-            "rank": 7,
-            "raw": 699330
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.1966582,
-            "rank": 8,
-            "raw": 659882
-        }
-    ],
-    "abilities": [["Fairy Aura", 100]],
-    "items": [["Floettite", 100]],
-    "moves": [
-        ["Protect", 24.877336734513108],
-        ["Dazzling Gleam", 24.29080818664714],
-        ["Moonblast", 21.06646204207262],
-        ["Light of Ruin", 13.398333632668958],
-        ["Calm Mind", 10.506134487393446],
-        ["Draining Kiss", 4.549388350780749],
-        ["Psychic", 0.7358915884150435],
-        ["Substitute", 0.15332112735201706],
-        ["Giga Drain", 0.07696607076344185],
-        ["Energy Ball", 0.06711309867838552]
-    ],
-    "spreads": [
-        ["Modest:2/0/0/32/0/32", 11.874557496283224],
-        ["Modest:1/0/1/32/0/32", 6.520955568064117],
-        ["Timid:2/0/0/32/0/32", 5.196618937732541],
-        ["Modest:28/0/1/5/0/32", 2.1823445977875657],
-        ["Timid:0/0/0/32/2/32", 1.9316778029129396]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Garchomp", 10.15669455687635],
-        ["Basculegion", 9.514293168278309],
-        ["Kingambit", 8.584934374114521],
-        ["Incineroar", 6.590311145790542],
-        ["Charizard-Mega-Y", 6.418861840143955],
-        ["Sneasler", 6.332513536935587],
-        ["Sinistcha", 5.864281820106024],
-        ["Whimsicott", 4.529805442940614],
-        ["Aerodactyl", 3.294184682323976],
-        ["Maushold", 2.3553075313371443]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "floettemega",
+ "name": "Floette-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.1489987,
+   "rank": 14,
+   "raw": 239898
+  }
+ ],
+ "abilities": [
+  [
+   "Fairy Aura",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Floettite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   24.88770973134555
+  ],
+  [
+   "Dazzling Gleam",
+   23.664464948376484
+  ],
+  [
+   "Moonblast",
+   19.721951063921303
+  ],
+  [
+   "Light of Ruin",
+   12.731007517936915
+  ],
+  [
+   "Calm Mind",
+   12.287027976226764
+  ],
+  [
+   "Draining Kiss",
+   5.755812337163025
+  ],
+  [
+   "Psychic",
+   0.3300797454858514
+  ],
+  [
+   "Grass Knot",
+   0.16369082002994892
+  ],
+  [
+   "Giga Drain",
+   0.121940603680147
+  ],
+  [
+   "Energy Ball",
+   0.11882732448934182
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   16.977768833331734
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   13.757185307710623
+  ],
+  [
+   "Modest:8/0/1/25/0/32",
+   3.2521129758661984
+  ],
+  [
+   "Modest:0/0/2/32/0/32",
+   2.96850895949951
+  ],
+  [
+   "Timid:7/0/27/0/0/32",
+   2.5068115695518833
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Basculegion",
+   9.23113183022336
+  ],
+  [
+   "Garchomp",
+   8.650995398612894
+  ],
+  [
+   "Whimsicott",
+   8.440836661566605
+  ],
+  [
+   "Sinistcha",
+   7.848221941808083
+  ],
+  [
+   "Incineroar",
+   7.845198142507336
+  ],
+  [
+   "Kingambit",
+   7.056964465973832
+  ],
+  [
+   "Charizard-Mega-Y",
+   4.605343768872678
+  ],
+  [
+   "Sneasler",
+   4.094715875043783
+  ],
+  [
+   "Farigiraf",
+   2.8427341702830904
+  ],
+  [
+   "Grimmsnarl",
+   2.471565632186522
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Mawile-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Maushold",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

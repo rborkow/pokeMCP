@@ -1,0 +1,239 @@
+{
+ "id": "overqwil",
+ "name": "Overqwil",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.006734400000000001,
+   "rank": 94,
+   "raw": 24677
+  }
+ ],
+ "abilities": [
+  [
+   "Swift Swim",
+   63.04024145130427
+  ],
+  [
+   "Intimidate",
+   34.40821366331443
+  ],
+  [
+   "Poison Point",
+   2.5515448853813076
+  ]
+ ],
+ "items": [
+  [
+   "Life Orb",
+   51.06756128254847
+  ],
+  [
+   "Leftovers",
+   16.214311856226324
+  ],
+  [
+   "Focus Sash",
+   8.724171459259358
+  ],
+  [
+   "Shuca Berry",
+   7.8140883307817806
+  ],
+  [
+   "Black Glasses",
+   4.47683672914747
+  ],
+  [
+   "Sitrus Berry",
+   3.0385322655428255
+  ],
+  [
+   "Expert Belt",
+   2.0435005001224615
+  ],
+  [
+   "Poison Barb",
+   1.7638103226634925
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   21.040196717110646
+  ],
+  [
+   "Throat Chop",
+   12.530936109647033
+  ],
+  [
+   "Gunk Shot",
+   8.779304287489818
+  ],
+  [
+   "Poison Jab",
+   8.521635514278577
+  ],
+  [
+   "Crunch",
+   8.389779357782164
+  ],
+  [
+   "Barb Barrage",
+   5.886466594880344
+  ],
+  [
+   "Liquidation",
+   5.329821089809954
+  ],
+  [
+   "Aqua Jet",
+   4.748929901180466
+  ],
+  [
+   "Minimize",
+   4.093078776525831
+  ],
+  [
+   "Taunt",
+   3.054975281240334
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   12.111916103607857
+  ],
+  [
+   "Adamant:1/32/0/0/1/32",
+   10.357370605439984
+  ],
+  [
+   "Jolly:1/32/0/0/1/32",
+   6.530696949318542
+  ],
+  [
+   "Adamant:22/32/0/0/0/12",
+   3.987764068450462
+  ],
+  [
+   "Impish:32/0/5/0/29/0",
+   3.2809770992579796
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Pelipper",
+   12.275832413076587
+  ],
+  [
+   "Swampert-Mega",
+   10.122951583728037
+  ],
+  [
+   "Archaludon",
+   9.034273040667212
+  ],
+  [
+   "Sinistcha",
+   7.909571466047345
+  ],
+  [
+   "Sableye",
+   5.6889829687408335
+  ],
+  [
+   "Basculegion",
+   3.813543352483976
+  ],
+  [
+   "Grimmsnarl",
+   3.594560513675938
+  ],
+  [
+   "Metagross-Mega",
+   2.1558968250446333
+  ],
+  [
+   "Whimsicott",
+   1.9253009427252035
+  ],
+  [
+   "Gholdengo",
+   1.6671817368310755
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Life Orb",
+   "ability": "Swift Swim",
+   "moves": [
+    "Gunk Shot",
+    "Throat Chop",
+    "Icy Wind",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 1,
+   "bestPlayer": "2cake",
+   "eventName": "INGAGE FRONTIER SERIES  #1 - $50 PRIZE (Reg M-B)",
+   "eventSlug": "2026-06-20-ingage-frontier-series-1-50-prize-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a2f143fe334c3c9befd6e8e",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Swift Swim",
+   "moves": [
+    "Aqua Jet",
+    "Throat Chop",
+    "Gunk Shot",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 2,
+   "bestPlayer": "Kardeas",
+   "eventName": "Amoonguss Bus Tour Champions Practice Reg M-B #1",
+   "eventSlug": "2026-06-23-amoonguss-bus-tour-champions-practice-reg-m-b-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a387661af50e1230840809c",
+   "nature": "Adamant"
+  }
+ ]
+}

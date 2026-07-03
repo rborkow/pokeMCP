@@ -1,84 +1,274 @@
 {
-    "id": "mamoswine",
-    "name": "Mamoswine",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0130468,
-            "rank": 67,
-            "raw": 90509
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0097576,
-            "rank": 78,
-            "raw": 82687
-        }
-    ],
-    "abilities": [
-        ["Oblivious", 84.42501280274524],
-        ["Thick Fat", 14.288123981753687],
-        ["Snow Cloak", 1.286863215501064]
-    ],
-    "items": [
-        ["Focus Sash", 53.2379761278588],
-        ["Never-Melt Ice", 19.362192898909612],
-        ["Choice Scarf", 15.938117153751014],
-        ["Occa Berry", 3.150048893461387],
-        ["Soft Sand", 2.1370570755661995],
-        ["Chople Berry", 1.3012990333830168],
-        ["Sitrus Berry", 1.273895436100181],
-        ["Leftovers", 0.9593878579307475]
-    ],
-    "moves": [
-        ["Ice Shard", 21.143822801248735],
-        ["Protect", 19.659929345097037],
-        ["Earthquake", 15.922258011200455],
-        ["Icicle Crash", 15.480167579105364],
-        ["High Horsepower", 13.143529746074961],
-        ["Icicle Spear", 5.0701189522891426],
-        ["Rock Slide", 4.7260338396325094],
-        ["Knock Off", 1.3662060154453826],
-        ["Stomping Tantrum", 0.7618417171460452],
-        ["Stone Edge", 0.7443121224972218]
-    ],
-    "spreads": [
-        ["Adamant:2/32/0/0/0/32", 32.69365058216992],
-        ["Adamant:0/32/0/0/2/32", 9.762771344557814],
-        ["Jolly:0/32/0/0/2/32", 7.31302277851764],
-        ["Jolly:2/32/0/0/0/32", 5.591858370202539],
-        ["Adamant:1/32/1/0/0/32", 4.433033109370479]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Charizard-Mega-Y", 5.968479104554504],
-        ["Basculegion", 4.45044649788077],
-        ["Talonflame", 4.4276453145597445],
-        ["Kingambit", 4.367371636129038],
-        ["Hydreigon", 4.139512764926821],
-        ["Whimsicott", 4.013245392368434],
-        ["Rotom-Wash", 3.7629353974291306],
-        ["Glimmora-Mega", 3.5306115248269125],
-        ["Aegislash", 3.5234772832469083],
-        ["Sneasler", 3.312340937701298]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Focus Sash",
-            "ability": "Oblivious",
-            "moves": ["Ice Shard", "Earthquake", "Protect", "Icicle Spear"],
-            "count": 1,
-            "bestPlacing": 6,
-            "bestPlayer": "Drwildy",
-            "eventName": "Sketch Academy Champions Regulation M-A Tournament",
-            "eventSlug": "2026-05-25-sketch-academy-champions-regulation-m-a-tournament",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eefa72f9b24b9bd5b02a26",
-            "nature": null
-        }
-    ]
+ "id": "mamoswine",
+ "name": "Mamoswine",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0195349,
+   "rank": 59,
+   "raw": 52157
+  }
+ ],
+ "abilities": [
+  [
+   "Oblivious",
+   90.35334199499758
+  ],
+  [
+   "Thick Fat",
+   9.075246958858092
+  ],
+  [
+   "Snow Cloak",
+   0.5714110461443349
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   52.097972705438714
+  ],
+  [
+   "Life Orb",
+   25.407948753806686
+  ],
+  [
+   "Choice Scarf",
+   8.974577788153383
+  ],
+  [
+   "Never-Melt Ice",
+   4.50917407693412
+  ],
+  [
+   "Expert Belt",
+   2.7496567607079596
+  ],
+  [
+   "Sitrus Berry",
+   2.1321733058929904
+  ],
+  [
+   "Chople Berry",
+   1.2818732636947172
+  ],
+  [
+   "Leftovers",
+   1.095435370069568
+  ]
+ ],
+ "moves": [
+  [
+   "Ice Shard",
+   23.212180822105573
+  ],
+  [
+   "Protect",
+   21.77618689305868
+  ],
+  [
+   "Icicle Crash",
+   16.640012094730487
+  ],
+  [
+   "High Horsepower",
+   14.388661676588027
+  ],
+  [
+   "Earthquake",
+   10.887190932836448
+  ],
+  [
+   "Rock Slide",
+   8.846562195474345
+  ],
+  [
+   "Icicle Spear",
+   0.9506728534725382
+  ],
+  [
+   "Stomping Tantrum",
+   0.637697862525549
+  ],
+  [
+   "Rock Tomb",
+   0.44503108128979674
+  ],
+  [
+   "Superpower",
+   0.4372547561519123
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   25.146979169743368
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   24.521495516671273
+  ],
+  [
+   "Jolly:0/32/0/0/2/32",
+   11.730668695601588
+  ],
+  [
+   "Adamant:0/32/0/0/2/32",
+   6.308217817293779
+  ],
+  [
+   "Adamant:0/32/2/0/0/32",
+   2.794523014687675
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Farigiraf",
+   6.3804056156870255
+  ],
+  [
+   "Torkoal",
+   5.459335613142077
+  ],
+  [
+   "Scrafty-Mega",
+   4.810267863735581
+  ],
+  [
+   "Venusaur",
+   4.735635894462953
+  ],
+  [
+   "Pyroar-Mega",
+   4.650792760841265
+  ],
+  [
+   "Charizard-Mega-Y",
+   4.110129670710556
+  ],
+  [
+   "Whimsicott",
+   4.0554527485534075
+  ],
+  [
+   "Incineroar",
+   3.6350757161612797
+  ],
+  [
+   "Raichu-Mega-Y",
+   3.6118357061530966
+  ],
+  [
+   "Basculegion",
+   3.163429180539215
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sylveon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Focus Sash",
+   "ability": "Oblivious",
+   "moves": [
+    "Ice Shard",
+    "Icicle Crash",
+    "Protect",
+    "Earthquake"
+   ],
+   "count": 2,
+   "bestPlacing": 1,
+   "bestPlayer": "NMR | Gostzin I",
+   "eventName": "Intimidators Champions Challenge #22 REG M-B",
+   "eventSlug": "2026-06-30-intimidators-champions-challenge-22-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a427367c87cd9ff0a312adf",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Life Orb",
+   "ability": "Oblivious",
+   "moves": [
+    "High Horsepower",
+    "Ice Shard",
+    "Icicle Crash",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 3,
+   "bestPlayer": "SomeoneOffical",
+   "eventName": "Road to Area 229 #4",
+   "eventSlug": "2026-06-27-road-to-area-229-4",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c370fc87cd9ff0a30eaa1",
+   "nature": "Jolly"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Oblivious",
+   "moves": [
+    "Icicle Crash",
+    "Ice Shard",
+    "High Horsepower",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 7,
+   "bestPlayer": "ThomasVgc",
+   "eventName": "VGCA Battle Hall: Academy Ace Edition #4",
+   "eventSlug": "2026-06-28-vgca-battle-hall-academy-ace-edition-4",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a400a3ac87cd9ff0a3113d4",
+   "nature": "Adamant"
+  }
+ ]
 }

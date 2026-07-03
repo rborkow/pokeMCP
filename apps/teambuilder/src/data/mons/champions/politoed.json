@@ -1,108 +1,257 @@
 {
-    "id": "politoed",
-    "name": "Politoed",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0338036,
-            "rank": 42,
-            "raw": 231060
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0484013,
-            "rank": 36,
-            "raw": 314245
-        }
-    ],
-    "abilities": [
-        ["Drizzle", 99.09133948271462],
-        ["Water Absorb", 0.901026777909554],
-        ["Damp", 0.00763373937584188]
-    ],
-    "items": [
-        ["Sitrus Berry", 76.98991877211333],
-        ["Leftovers", 8.471610687007768],
-        ["Mystic Water", 6.499902861404082],
-        ["Choice Scarf", 2.536253421072907],
-        ["Focus Sash", 0.9932875752343407],
-        ["Chesto Berry", 0.9517987136952103],
-        ["Bright Powder", 0.8682644718628223],
-        ["Wacan Berry", 0.8138804673164378]
-    ],
-    "moves": [
-        ["Weather Ball", 21.850610670033394],
-        ["Protect", 20.94286135087836],
-        ["Perish Song", 15.485439516848377],
-        ["Encore", 15.062495911916193],
-        ["Muddy Water", 5.429289729509619],
-        ["Ice Beam", 5.200163206045998],
-        ["Rain Dance", 3.4556943199853434],
-        ["Icy Wind", 3.3121942149617696],
-        ["Psych Up", 2.6083319614247933],
-        ["Helping Hand", 2.466173707044887]
-    ],
-    "spreads": [
-        ["Bold:32/0/25/0/6/3", 11.139333798337478],
-        ["Calm:32/0/11/0/20/3", 6.196362286633134],
-        ["Calm:27/0/27/0/10/2", 5.6315266723752],
-        ["Calm:32/0/24/0/10/0", 3.022046810671141],
-        ["Calm:32/0/26/1/0/7", 2.347372403560387]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Incineroar", 11.746023103785218],
-        ["Gengar-Mega", 11.348000019689833],
-        ["Sinistcha", 10.829033850139043],
-        ["Archaludon", 8.389641564305549],
-        ["Kommo-o", 4.257793183540814],
-        ["Espathra", 3.5704171734784214],
-        ["Tinkaton", 3.2383608816997858],
-        ["Sableye", 3.2331159686729976],
-        ["Basculegion", 2.7885757036837604],
-        ["Snorlax", 2.5084351951917156]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Sitrus Berry",
-            "ability": "Drizzle",
-            "moves": ["Weather Ball", "Encore", "Perish Song", "Protect"],
-            "count": 11,
-            "bestPlacing": 1,
-            "bestPlayer": "LenVGC",
-            "eventName": "AUTOFULL CHAMPIONS SERIES QUALIFIER [120 USD]",
-            "eventSlug": "2026-05-30-autofull-champions-series-qualifier-120-usd",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a0de6e6dfbdf089cbbddec1",
-            "nature": "Bold"
-        },
-        {
-            "item": "Mystic Water",
-            "ability": "Drizzle",
-            "moves": ["Weather Ball", "Muddy Water", "Ice Beam", "Protect"],
-            "count": 2,
-            "bestPlacing": 2,
-            "bestPlayer": "Foghorn",
-            "eventName": "SpearPillar Champions Tour #6 | Reg M-A $100 Prize",
-            "eventSlug": "2026-06-06-spearpillar-champions-tour-6-reg-m-a-100-prize",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69cd69a336f5b5c303dc45bb",
-            "nature": "Modest"
-        },
-        {
-            "item": "Sitrus Berry",
-            "ability": "Drizzle",
-            "moves": ["Protect", "Weather Ball", "Perish Song", "Hypnosis"],
-            "count": 1,
-            "bestPlacing": 3,
-            "bestPlayer": "Gabuu",
-            "eventName": "AUTOFULL CHAMPIONS SERIES QUALIFIER [120 USD]",
-            "eventSlug": "2026-05-30-autofull-champions-series-qualifier-120-usd",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a0de6e6dfbdf089cbbddec1",
-            "nature": "Bold"
-        }
-    ]
+ "id": "politoed",
+ "name": "Politoed",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0266917,
+   "rank": 46,
+   "raw": 68322
+  }
+ ],
+ "abilities": [
+  [
+   "Drizzle",
+   99.52120137196134
+  ],
+  [
+   "Water Absorb",
+   0.44415795275607706
+  ],
+  [
+   "Damp",
+   0.03464067528256863
+  ]
+ ],
+ "items": [
+  [
+   "Sitrus Berry",
+   59.85702556157943
+  ],
+  [
+   "Mystic Water",
+   12.173270929345664
+  ],
+  [
+   "Leftovers",
+   10.524578179491975
+  ],
+  [
+   "Damp Rock",
+   5.743678168172099
+  ],
+  [
+   "Choice Scarf",
+   3.421385338077639
+  ],
+  [
+   "Life Orb",
+   1.7177299115051274
+  ],
+  [
+   "Wide Lens",
+   1.5755837381963127
+  ],
+  [
+   "Wacan Berry",
+   1.248690357648888
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   22.579410448993443
+  ],
+  [
+   "Weather Ball",
+   21.10399215385025
+  ],
+  [
+   "Perish Song",
+   14.878175829537406
+  ],
+  [
+   "Encore",
+   10.420113398718078
+  ],
+  [
+   "Ice Beam",
+   7.776942406586129
+  ],
+  [
+   "Muddy Water",
+   7.447607708830222
+  ],
+  [
+   "Icy Wind",
+   3.471247023778041
+  ],
+  [
+   "Helping Hand",
+   3.098824971689611
+  ],
+  [
+   "Hypnosis",
+   2.747921093729713
+  ],
+  [
+   "Rain Dance",
+   1.8255979791238317
+  ]
+ ],
+ "spreads": [
+  [
+   "Calm:31/0/23/0/12/0",
+   7.098884815967719
+  ],
+  [
+   "Calm:32/0/24/0/10/0",
+   5.530930943829382
+  ],
+  [
+   "Modest:23/0/12/30/0/1",
+   4.035222607649057
+  ],
+  [
+   "Bold:32/0/25/0/9/0",
+   3.8644696556933775
+  ],
+  [
+   "Calm:32/0/0/2/32/0",
+   3.732052845227262
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Incineroar",
+   10.69351259203755
+  ],
+  [
+   "Sinistcha",
+   10.154554096196298
+  ],
+  [
+   "Archaludon",
+   10.017234101464924
+  ],
+  [
+   "Gengar-Mega",
+   9.428697642832818
+  ],
+  [
+   "Swampert-Mega",
+   5.151720476436106
+  ],
+  [
+   "Grimmsnarl",
+   3.248069970467314
+  ],
+  [
+   "Sneasler",
+   2.6725307853762974
+  ],
+  [
+   "Mawile-Mega",
+   2.4087130626841833
+  ],
+  [
+   "Basculegion",
+   2.3397922618572786
+  ],
+  [
+   "Farigiraf",
+   2.1677083594065767
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sylveon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Sitrus Berry",
+   "ability": "Drizzle",
+   "moves": [
+    "Weather Ball",
+    "Perish Song",
+    "Encore",
+    "Protect"
+   ],
+   "count": 3,
+   "bestPlacing": 2,
+   "bestPlayer": "LiamJVGC",
+   "eventName": "Road to Area 229 #4",
+   "eventSlug": "2026-06-27-road-to-area-229-4",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c370fc87cd9ff0a30eaa1",
+   "nature": "Calm"
+  },
+  {
+   "item": "Sitrus Berry",
+   "ability": "Drizzle",
+   "moves": [
+    "Muddy Water",
+    "Perish Song",
+    "Encore",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 6,
+   "bestPlayer": "Noah Alampay",
+   "eventName": "Tyrant Thursdays #2",
+   "eventSlug": "2026-06-25-tyrant-thursdays-2",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3b53a483fd320299bcf113",
+   "nature": "Calm"
+  }
+ ]
 }

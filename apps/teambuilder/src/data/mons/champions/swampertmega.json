@@ -1,0 +1,186 @@
+{
+ "id": "swampertmega",
+ "name": "Swampert-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.1410022,
+   "rank": 15,
+   "raw": 319208
+  }
+ ],
+ "abilities": [
+  [
+   "Swift Swim",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Swampertite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   24.075009729304334
+  ],
+  [
+   "Wave Crash",
+   23.636755638019316
+  ],
+  [
+   "Ice Punch",
+   17.476030249243827
+  ],
+  [
+   "Earthquake",
+   16.607601725697705
+  ],
+  [
+   "High Horsepower",
+   9.30577490100976
+  ],
+  [
+   "Flip Turn",
+   2.3155648590255713
+  ],
+  [
+   "Rock Slide",
+   1.5348186557137604
+  ],
+  [
+   "Knock Off",
+   1.038396337269194
+  ],
+  [
+   "Liquidation",
+   0.9842731714719708
+  ],
+  [
+   "Bulk Up",
+   0.6306276986972473
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   21.400118499577275
+  ],
+  [
+   "Adamant:12/32/0/0/0/22",
+   8.699668260964645
+  ],
+  [
+   "Adamant:18/30/0/0/0/18",
+   7.059941721691189
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   3.1363799495377744
+  ],
+  [
+   "Adamant:32/32/0/0/2/0",
+   2.572243882718369
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Pelipper",
+   18.462009319534463
+  ],
+  [
+   "Archaludon",
+   15.883002370945757
+  ],
+  [
+   "Sinistcha",
+   10.53722644046174
+  ],
+  [
+   "Grimmsnarl",
+   5.870204886087279
+  ],
+  [
+   "Sableye",
+   5.626090148661013
+  ],
+  [
+   "Basculegion",
+   4.192938415122712
+  ],
+  [
+   "Metagross-Mega",
+   3.879793530457719
+  ],
+  [
+   "Incineroar",
+   2.9530698109966167
+  ],
+  [
+   "Sneasler",
+   2.7242273174120233
+  ],
+  [
+   "Venusaur-Mega",
+   1.83266172380936
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sableye",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sylveon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-X",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gengar-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

@@ -1,104 +1,232 @@
 {
-    "id": "aegislash",
-    "name": "Aegislash",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0872979,
-            "rank": 16,
-            "raw": 481558
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0769047,
-            "rank": 19,
-            "raw": 449513
-        }
-    ],
-    "abilities": [["Stance Change", 100]],
-    "items": [
-        ["Spell Tag", 44.410314634625706],
-        ["Focus Sash", 30.083678623562438],
-        ["Colbur Berry", 10.042250903272643],
-        ["Leftovers", 7.632510232678944],
-        ["Kasib Berry", 2.064697349232999],
-        ["Sitrus Berry", 1.6871987172183422],
-        ["Occa Berry", 0.8303606002671832],
-        ["White Herb", 0.8241445366975044]
-    ],
-    "moves": [
-        ["Shadow Sneak", 21.894163825852228],
-        ["Poltergeist", 21.106798415733902],
-        ["King's Shield", 20.269907178753186],
-        ["Iron Head", 9.649612539878909],
-        ["Sacred Sword", 7.836723940814519],
-        ["Close Combat", 7.5005399209963315],
-        ["Wide Guard", 6.644257399324613],
-        ["Shadow Ball", 1.9024374445262429],
-        ["Flash Cannon", 1.5599415251087525],
-        ["Swords Dance", 0.5837228659396002]
-    ],
-    "spreads": [
-        ["Adamant:2/32/0/0/0/32", 22.362741460944076],
-        ["Adamant:32/32/0/0/2/0", 5.878059133910136],
-        ["Adamant:32/32/0/0/0/2", 4.992383141347108],
-        ["Adamant:32/32/2/0/0/0", 4.2538760432648814],
-        ["Adamant:32/27/1/0/3/3", 3.615898840490459]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Garchomp", 11.488487182199734],
-        ["Incineroar", 7.354430603744354],
-        ["Charizard-Mega-Y", 6.958017040219112],
-        ["Floette-Mega", 5.323012065058923],
-        ["Rotom-Wash", 4.4138106450175165],
-        ["Sinistcha", 4.111992472932636],
-        ["Sylveon", 3.326770856044501],
-        ["Sneasler", 3.238544876864523],
-        ["Basculegion", 2.911308037415673],
-        ["Aerodactyl-Mega", 2.8294295786347825]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Focus Sash",
-            "ability": "Stance Change",
-            "moves": ["Poltergeist", "Close Combat", "Shadow Sneak", "Wide Guard"],
-            "count": 5,
-            "bestPlacing": 2,
-            "bestPlayer": "Scarlett01",
-            "eventName": "Talon's FIGHT CLUB #83 POKEMON CHAMPIONS",
-            "eventSlug": "2026-05-07-talon-s-fight-club-83-pokemon-champions",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69e2b29c78b359b789d64d2e",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Spell Tag",
-            "ability": "Stance Change",
-            "moves": ["Poltergeist", "Iron Head", "King's Shield", "Shadow Sneak"],
-            "count": 4,
-            "bestPlacing": 1,
-            "bestPlayer": "Samuel T",
-            "eventName": "The Drywalls Series #6 - Champions!",
-            "eventSlug": "2026-05-26-the-drywalls-series-6-champions",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a131c910f6c1f0899860158",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Spell Tag",
-            "ability": "Stance Change",
-            "moves": ["Poltergeist", "Shadow Sneak", "Sacred Sword", "King's Shield"],
-            "count": 3,
-            "bestPlacing": 4,
-            "bestPlayer": "[DNR] Isaac Moreira",
-            "eventName": "Chaos League Sunday Slam #100 ($100 Prize Pool)",
-            "eventSlug": "2026-05-10-chaos-league-sunday-slam-100-100-prize-pool",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69ef9f104f71d664893e5899",
-            "nature": null
-        }
-    ]
+ "id": "aegislash",
+ "name": "Aegislash",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.013185899999999999,
+   "rank": 76,
+   "raw": 56464
+  }
+ ],
+ "abilities": [
+  [
+   "Stance Change",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Spell Tag",
+   21.997411285946026
+  ],
+  [
+   "Leftovers",
+   18.976617577606472
+  ],
+  [
+   "Life Orb",
+   18.670659060836506
+  ],
+  [
+   "Focus Sash",
+   10.16320694287901
+  ],
+  [
+   "Colbur Berry",
+   8.91909382596611
+  ],
+  [
+   "Occa Berry",
+   4.15666261116892
+  ],
+  [
+   "Sitrus Berry",
+   3.947887811909026
+  ],
+  [
+   "Kasib Berry",
+   3.2411283005221456
+  ]
+ ],
+ "moves": [
+  [
+   "King's Shield",
+   22.902436355863724
+  ],
+  [
+   "Poltergeist",
+   15.40191791742472
+  ],
+  [
+   "Shadow Sneak",
+   14.982704248723467
+  ],
+  [
+   "Iron Head",
+   14.21550409749214
+  ],
+  [
+   "Wide Guard",
+   8.337774809815897
+  ],
+  [
+   "Sacred Sword",
+   7.928343613575057
+  ],
+  [
+   "Shadow Ball",
+   4.8465941769532925
+  ],
+  [
+   "Flash Cannon",
+   4.081327030684277
+  ],
+  [
+   "Close Combat",
+   2.6569034463296646
+  ],
+  [
+   "Swords Dance",
+   1.5551877788371302
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:32/32/0/0/2/0",
+   21.26942179551448
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   6.464606424445293
+  ],
+  [
+   "Adamant:32/32/0/0/0/2",
+   5.6223127683915886
+  ],
+  [
+   "Adamant:32/32/2/0/0/0",
+   4.768882985637443
+  ],
+  [
+   "Brave:32/32/0/0/2/0",
+   4.705247215579891
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Garchomp",
+   6.44380322306031
+  ],
+  [
+   "Incineroar",
+   5.313573212539201
+  ],
+  [
+   "Whimsicott",
+   4.355343662783779
+  ],
+  [
+   "Sinistcha",
+   4.309565312507475
+  ],
+  [
+   "Staraptor-Mega",
+   3.9536019111175524
+  ],
+  [
+   "Rotom-Wash",
+   3.8376135049387576
+  ],
+  [
+   "Sneasler",
+   3.003533641373912
+  ],
+  [
+   "Farigiraf",
+   2.712056954810836
+  ],
+  [
+   "Ninetales-Alola",
+   2.532457612994908
+  ],
+  [
+   "Grimmsnarl",
+   2.3743816911990274
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Focus Sash",
+   "ability": "Stance Change",
+   "moves": [
+    "Wide Guard",
+    "Close Combat",
+    "Shadow Sneak",
+    "Poltergeist"
+   ],
+   "count": 1,
+   "bestPlacing": 5,
+   "bestPlayer": "LightaNight08",
+   "eventName": "KIng's Gambit #6 | Reg M-B",
+   "eventSlug": "2026-06-21-king-s-gambit-6-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a29ab02e334c3c9befd3389",
+   "nature": "Adamant"
+  }
+ ]
 }

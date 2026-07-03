@@ -1,108 +1,274 @@
 {
-    "id": "sableye",
-    "name": "Sableye",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.044896399999999996,
-            "rank": 36,
-            "raw": 343844
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0902725,
-            "rank": 16,
-            "raw": 751179
-        }
-    ],
-    "abilities": [
-        ["Prankster", 99.73287801337821],
-        ["Keen Eye", 0.2584318840235676],
-        ["Stall", 0.008690102598223566]
-    ],
-    "items": [
-        ["Roseli Berry", 84.00096569320272],
-        ["Focus Sash", 5.382630348172316],
-        ["Sitrus Berry", 5.005390673225034],
-        ["Mental Herb", 2.4249085906226036],
-        ["Bright Powder", 1.1599509443132583],
-        ["Leftovers", 1.1310767751789403],
-        ["Lum Berry", 0.2999235138913987],
-        ["Black Glasses", 0.17651933768717332]
-    ],
-    "moves": [
-        ["Light Screen", 16.259463889929],
-        ["Rain Dance", 15.360168566443724],
-        ["Encore", 14.650552226625942],
-        ["Reflect", 12.497001189023212],
-        ["Disable", 9.471245564578224],
-        ["Will-O-Wisp", 8.055427191088024],
-        ["Fake Out", 5.382783996431078],
-        ["Quash", 5.00229170419729],
-        ["Foul Play", 4.7929415515042155],
-        ["Thunder Wave", 1.6410800550240907]
-    ],
-    "spreads": [
-        ["Calm:32/0/9/0/25/0", 20.221125099152093],
-        ["Sassy:32/0/9/0/25/0", 14.62924455180749],
-        ["Careful:32/0/9/0/25/0", 4.383700157120584],
-        ["Calm:32/0/2/0/32/0", 3.690990036943451],
-        ["Careful:32/0/2/0/32/0", 3.2151367395265638]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Archaludon", 13.15621726453876],
-        ["Basculegion", 10.634733393727611],
-        ["Pelipper", 8.035322150155165],
-        ["Sinistcha", 6.59725682656094],
-        ["Venusaur-Mega", 4.492046702377536],
-        ["Floette-Mega", 3.772039873566989],
-        ["Dragonite-Mega", 3.742098175001518],
-        ["Kingambit", 3.1830137796705253],
-        ["Sneasler", 3.0510170421837026],
-        ["Incineroar", 2.2436698975571945]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Roseli Berry",
-            "ability": "Prankster",
-            "moves": ["Reflect", "Rain Dance", "Light Screen", "Encore"],
-            "count": 2,
-            "bestPlacing": 6,
-            "bestPlayer": "Kevin B",
-            "eventName": "Intimidators Champions Challenge #16 REG M-A",
-            "eventSlug": "2026-06-08-intimidators-champions-challenge-16-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a26baf056b11a587a94c139",
-            "nature": "Sassy"
-        },
-        {
-            "item": "Roseli Berry",
-            "ability": "Prankster",
-            "moves": ["Will-O-Wisp", "Reflect", "Light Screen", "Rain Dance"],
-            "count": 1,
-            "bestPlacing": 1,
-            "bestPlayer": "LenVGC",
-            "eventName": "AUTOFULL CHAMPIONS SERIES QUALIFIER [120 USD]",
-            "eventSlug": "2026-05-30-autofull-champions-series-qualifier-120-usd",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a0de6e6dfbdf089cbbddec1",
-            "nature": "Relaxed"
-        },
-        {
-            "item": "Roseli Berry",
-            "ability": "Prankster",
-            "moves": ["Rain Dance", "Light Screen", "Will-O-Wisp", "Encore"],
-            "count": 1,
-            "bestPlacing": 1,
-            "bestPlayer": "TurboMatt",
-            "eventName": "Coupe Critique Champions VGC #2 - 200€ prize",
-            "eventSlug": "2026-05-09-coupe-critique-champions-vgc-2-200-prize",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69f0e7f6e23aab068aad44a1",
-            "nature": null
-        }
-    ]
+ "id": "sableye",
+ "name": "Sableye",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0685721,
+   "rank": 23,
+   "raw": 225944
+  }
+ ],
+ "abilities": [
+  [
+   "Prankster",
+   99.53297578169257
+  ],
+  [
+   "Keen Eye",
+   0.4556908368766892
+  ],
+  [
+   "Stall",
+   0.011333381430734752
+  ]
+ ],
+ "items": [
+  [
+   "Light Clay",
+   42.26535683689686
+  ],
+  [
+   "Roseli Berry",
+   40.46702834851492
+  ],
+  [
+   "Focus Sash",
+   4.858253204034869
+  ],
+  [
+   "Sitrus Berry",
+   3.5776760346105796
+  ],
+  [
+   "Mental Herb",
+   2.5341403927104764
+  ],
+  [
+   "Wide Lens",
+   1.5113988860092553
+  ],
+  [
+   "Bright Powder",
+   1.2620305043367717
+  ],
+  [
+   "Damp Rock",
+   1.1925735710950114
+  ]
+ ],
+ "moves": [
+  [
+   "Rain Dance",
+   17.644221142975304
+  ],
+  [
+   "Light Screen",
+   15.830025789824607
+  ],
+  [
+   "Reflect",
+   13.037431789374128
+  ],
+  [
+   "Encore",
+   12.084006815198203
+  ],
+  [
+   "Will-O-Wisp",
+   9.937312437029387
+  ],
+  [
+   "Disable",
+   6.30579370894445
+  ],
+  [
+   "Foul Play",
+   5.832855639770047
+  ],
+  [
+   "Fake Out",
+   5.707331522621637
+  ],
+  [
+   "Quash",
+   4.896879820089799
+  ],
+  [
+   "Sunny Day",
+   1.6940418236085681
+  ]
+ ],
+ "spreads": [
+  [
+   "Calm:32/0/9/0/25/0",
+   11.574245918074624
+  ],
+  [
+   "Calm:32/0/2/0/32/0",
+   11.092274265738265
+  ],
+  [
+   "Sassy:32/0/9/0/25/0",
+   6.136931669239942
+  ],
+  [
+   "Careful:32/0/2/0/32/0",
+   5.004528903826584
+  ],
+  [
+   "Bold:32/0/32/0/2/0",
+   4.887837519797006
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Archaludon",
+   12.725651800751269
+  ],
+  [
+   "Pelipper",
+   12.164942929931339
+  ],
+  [
+   "Swampert-Mega",
+   11.568722982831673
+  ],
+  [
+   "Sinistcha",
+   7.939792290576478
+  ],
+  [
+   "Basculegion",
+   5.994379661496566
+  ],
+  [
+   "Venusaur-Mega",
+   2.788949500989363
+  ],
+  [
+   "Metagross-Mega",
+   2.5378272298368
+  ],
+  [
+   "Sneasler",
+   2.4457465139535146
+  ],
+  [
+   "Incineroar",
+   2.3014854995317395
+  ],
+  [
+   "Kingambit",
+   2.2748298908446096
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Swampert-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Tyranitar-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Milotic",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Light Clay",
+   "ability": "Prankster",
+   "moves": [
+    "Will-O-Wisp",
+    "Light Screen",
+    "Reflect",
+    "Rain Dance"
+   ],
+   "count": 6,
+   "bestPlacing": 2,
+   "bestPlayer": "PokeHugo",
+   "eventName": "MMHM x Stellar Novas Tour #2",
+   "eventSlug": "2026-06-23-mmhm-x-stellar-novas-tour-2",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15e1c10f6c1f0899861874",
+   "nature": "Impish"
+  },
+  {
+   "item": "Light Clay",
+   "ability": "Prankster",
+   "moves": [
+    "Reflect",
+    "Light Screen",
+    "Encore",
+    "Rain Dance"
+   ],
+   "count": 2,
+   "bestPlacing": 2,
+   "bestPlayer": "Lya_3",
+   "eventName": "CHAMPIONS REG. M-B |👑CROWN FIGHT Bo3 TOUR #74👑",
+   "eventSlug": "2026-06-26-champions-reg-m-b-crown-fight-bo3-tour-74",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a2ccd742d97f3b0c2615436",
+   "nature": "Calm"
+  },
+  {
+   "item": "Roseli Berry",
+   "ability": "Prankster",
+   "moves": [
+    "Encore",
+    "Light Screen",
+    "Reflect",
+    "Rain Dance"
+   ],
+   "count": 1,
+   "bestPlacing": 2,
+   "bestPlayer": "Kardeas",
+   "eventName": "Amoonguss Bus Tour Champions Practice Reg M-B #1",
+   "eventSlug": "2026-06-23-amoonguss-bus-tour-champions-practice-reg-m-b-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a387661af50e1230840809c",
+   "nature": "Calm"
+  }
+ ]
 }
