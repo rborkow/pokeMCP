@@ -1,3 +1,4 @@
+import { getAllPokemonNames, getPokemon, toID } from "../data-loader.js";
 import type { BaseStats } from "../types.js";
 
 /**
@@ -128,3 +129,53 @@ export const CHAMPIONS_REGMA_MEGAS: MegaForm[] = [
             "by The Pokémon Company — UI should render a 'stats TBD' notice.",
     },
 ];
+
+/**
+ * Base species whose Mega formes exist in the Champions dataset but are NOT on
+ * the Regulation M-B roster — restricted Legendaries/pseudo-Legendaries kept
+ * out of the ranked pool. Everything else with a Mega forme + trigger stone is
+ * legal, per the official roster rule (any roster Pokémon's Mega Evolution may
+ * be used). Base-species legality is also enforced separately against the KV
+ * allow-list, so this exclusion is about keeping the registry semantically
+ * accurate rather than a security boundary.
+ */
+const REGMB_MEGA_EXCLUDED_BASE = new Set(
+    ["Diancie", "Latias", "Latios", "Mewtwo", "Salamence", "Zygarde"].map(toID),
+);
+
+/**
+ * Mega Evolution registry for Pokémon Champions — Regulation M-B (Omni Ring).
+ *
+ * Derived from the bundled Champions dataset (the same data powering usage-stat
+ * lookups) rather than hand-authored: standard Gen 9 Showdown has no Mega
+ * Evolutions, so every Mega forme present is Champions data with authoritative
+ * post-Mega types/ability/base-stats and trigger-stone names — including the
+ * Champions-exclusive Megas (Scrafty-Mega → Scraftinite, Meganium-Mega, …)
+ * whose stats were still pending when M-A shipped. Deriving keeps the registry
+ * in sync when the data package is refreshed, and avoids freezing a stale copy.
+ *
+ * Broader than M-A's curated eight: M-B enables the Mega of any roster Pokémon
+ * that has one (66 Megas as of 2026-07). To regenerate/inspect, filter the dex
+ * for `forme` containing "Mega" with a `requiredItem`.
+ */
+function buildChampionsRegMBMegas(): MegaForm[] {
+    const megas: MegaForm[] = [];
+    for (const name of getAllPokemonNames()) {
+        const species = getPokemon(name);
+        if (!species?.forme || !/Mega/.test(species.forme) || !species.requiredItem) continue;
+        if (REGMB_MEGA_EXCLUDED_BASE.has(toID(species.baseSpecies))) continue;
+        megas.push({
+            basePokemon: species.baseSpecies,
+            megaName: species.name,
+            formId: toID(species.name),
+            megaStone: species.requiredItem,
+            postMegaTypes: species.types,
+            postMegaAbility: species.abilities?.["0"],
+            postMegaBaseStats: species.baseStats,
+        });
+    }
+    megas.sort((a, b) => a.megaName.localeCompare(b.megaName));
+    return megas;
+}
+
+export const CHAMPIONS_REGMB_MEGAS: MegaForm[] = buildChampionsRegMBMegas();

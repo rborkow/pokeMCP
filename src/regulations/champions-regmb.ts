@@ -1,4 +1,4 @@
-import { CHAMPIONS_REGMA_MEGAS } from "./mega-data.js";
+import { CHAMPIONS_REGMB_MEGAS } from "./mega-data.js";
 import type { RegulationSet } from "./types.js";
 
 /**
@@ -46,11 +46,14 @@ export const CHAMPIONS_REGMB: RegulationSet = {
     // Verified 2026-07-02: Champions M-B events on play.limitlesstcg.com are
     // listed under game=VGC with format "M-B".
     limitlessFormatId: "M-B",
-    // Starting point: Reg M-A's Mega allow-list. Press coverage indicates M-B
-    // adds new Pokémon and items, and the exact Mega list is unverified —
-    // review against the official M-B regulation when published, and split
-    // into a dedicated CHAMPIONS_REGMB_MEGAS in mega-data.ts if it diverges.
-    megaForms: CHAMPIONS_REGMA_MEGAS,
+    // M-B's own Mega registry, derived from the Champions dataset (66 Megas —
+    // every roster Pokémon's Mega, incl. the new exclusives like Blaziken/
+    // Sceptile/Swampert and Champions-only forms). See CHAMPIONS_REGMB_MEGAS.
+    // Megas hold their Mega Stone in Champions, so the Omni Ring "one held Mega
+    // Stone per team" rule applies as-is. A Mega-capable Pokémon may also be run
+    // stoneless with a normal item (e.g. Life Orb Garchomp) — that's a valid
+    // non-Mega set, which the rule already allows since it never requires a stone.
+    megaForms: CHAMPIONS_REGMB_MEGAS,
     bannedItems: [],
     moveOverrides: {},
 };
