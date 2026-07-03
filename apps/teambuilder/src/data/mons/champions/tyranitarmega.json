@@ -1,58 +1,186 @@
 {
-    "id": "tyranitarmega",
-    "name": "Tyranitar-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.07584010000000001,
-            "rank": 19,
-            "raw": 458428
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.060295800000000004,
-            "rank": 27,
-            "raw": 452583
-        }
-    ],
-    "abilities": [["Sand Stream", 100]],
-    "items": [["Tyranitarite", 100]],
-    "moves": [
-        ["Protect", 24.657691202439576],
-        ["Rock Slide", 24.641441995133842],
-        ["Knock Off", 21.29276203180068],
-        ["Low Kick", 15.297478271717505],
-        ["Dragon Dance", 3.6127099058670487],
-        ["Crunch", 3.118287044105322],
-        ["Ice Punch", 2.5986369329175387],
-        ["High Horsepower", 1.6272526655945734],
-        ["Superpower", 0.649555149442748],
-        ["Earthquake", 0.3912798775655179]
-    ],
-    "spreads": [
-        ["Adamant:32/32/0/0/2/0", 6.041906246988945],
-        ["Adamant:30/16/1/0/2/17", 4.342668554731468],
-        ["Adamant:32/32/0/0/0/2", 4.152373330898758],
-        ["Adamant:32/32/2/0/0/0", 2.6619816174800772],
-        ["Adamant:32/16/1/0/0/17", 2.4860161095699542]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Excadrill", 11.511668788510809],
-        ["Corviknight", 8.816957054549183],
-        ["Sinistcha", 8.1127335171892],
-        ["Rotom-Wash", 6.620139040967635],
-        ["Sneasler", 5.630657818783569],
-        ["Basculegion", 4.772150576161382],
-        ["Incineroar", 4.4641391050777335],
-        ["Hydreigon", 3.056036305166144],
-        ["Scovillain-Mega", 2.974746557782746],
-        ["Milotic", 2.829482510595691]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "tyranitarmega",
+ "name": "Tyranitar-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0315671,
+   "rank": 39,
+   "raw": 90231
+  }
+ ],
+ "abilities": [
+  [
+   "Sand Stream",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Tyranitarite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Rock Slide",
+   24.653337375851088
+  ],
+  [
+   "Protect",
+   23.960637460081795
+  ],
+  [
+   "Knock Off",
+   22.465372471142746
+  ],
+  [
+   "Dragon Dance",
+   10.234533870864526
+  ],
+  [
+   "Low Kick",
+   8.195017562861931
+  ],
+  [
+   "Ice Punch",
+   3.4702914977712114
+  ],
+  [
+   "Crunch",
+   2.009646018160872
+  ],
+  [
+   "High Horsepower",
+   1.6408729769958983
+  ],
+  [
+   "Brick Break",
+   0.4689080579667061
+  ],
+  [
+   "Earthquake",
+   0.4330708839568271
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:32/32/0/0/2/0",
+   13.933056331057902
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   12.547591466744432
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   8.20090430989557
+  ],
+  [
+   "Brave:32/32/0/0/2/0",
+   2.531833458372613
+  ],
+  [
+   "Adamant:32/32/0/0/0/2",
+   2.166021182215587
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   10.470847922467657
+  ],
+  [
+   "Excadrill",
+   7.622273318412352
+  ],
+  [
+   "Incineroar",
+   4.591249855175692
+  ],
+  [
+   "Garchomp",
+   4.016128717700158
+  ],
+  [
+   "Corviknight",
+   3.7350478532130924
+  ],
+  [
+   "Rotom-Wash",
+   3.483701313312574
+  ],
+  [
+   "Houndstone",
+   3.4386945468975383
+  ],
+  [
+   "Staraptor-Mega",
+   3.230899740942527
+  ],
+  [
+   "Sneasler",
+   3.2046850457978673
+  ],
+  [
+   "Sylveon",
+   2.9251866623193883
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Ninetales-Alola",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Metagross-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sableye",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

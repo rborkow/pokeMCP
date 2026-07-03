@@ -1,6 +1,24 @@
 [
     {
         "slug": "champions",
+        "month": "2026-07",
+        "title": "Pokémon Champions — Regulation M-B Meta Report — July 2026",
+        "description": "Sinistcha leads Pokémon Champions — Regulation M-B with 33.00% usage in June 2026. Full usage table, month-over-month risers and fallers, and data-grounded analysis.",
+        "datePublished": "2026-07-03",
+        "dateModified": "2026-07-03",
+        "dataThrough": "2026-06",
+        "formatId": "gen9championsvgc2026regmb",
+        "formatName": "Pokémon Champions — Regulation M-B",
+        "sources": [
+            {
+                "label": "Smogon usage stats — gen9championsvgc2026regmb, June 2026",
+                "url": "https://www.smogon.com/stats/2026-06/gen9championsvgc2026regmb-0.txt"
+            }
+        ],
+        "generated": true
+    },
+    {
+        "slug": "champions",
         "month": "2026-06",
         "title": "Pokémon Champions Meta Report — Regulation M-A → M-B, June 2026",
         "description": "Full Regulation M-A retrospective for Pokémon Champions VGC: final usage stats, the rise and fall of the top threats, and what to expect when Regulation M-B launches alongside the mobile release on June 17, 2026.",
@@ -19,6 +37,28 @@
                 "url": "https://www.smogon.com/stats/2026-04/gen9championsvgc2026regma-0.txt"
             }
         ]
+    },
+    {
+        "slug": "ou",
+        "month": "2026-07",
+        "title": "Smogon Gen 9 OU Meta Report — July 2026",
+        "description": "Great Tusk leads Smogon Gen 9 OU with 32.83% usage in June 2026. Full usage table, month-over-month risers and fallers, and data-grounded analysis.",
+        "datePublished": "2026-07-03",
+        "dateModified": "2026-07-03",
+        "dataThrough": "2026-06",
+        "formatId": "gen9ou",
+        "formatName": "Smogon Gen 9 OU",
+        "sources": [
+            {
+                "label": "Smogon usage stats — gen9ou, June 2026",
+                "url": "https://www.smogon.com/stats/2026-06/gen9ou-0.txt"
+            },
+            {
+                "label": "Smogon usage stats — gen9ou, May 2026",
+                "url": "https://www.smogon.com/stats/2026-05/gen9ou-0.txt"
+            }
+        ],
+        "generated": true
     },
     {
         "slug": "ou",
@@ -48,7 +88,7 @@
         "title": "VGC 2026 Regulation F Meta Report — May 2026",
         "description": "Flutter Mane leads VGC 2026 Regulation F with 44.17% usage in April 2026. Full usage table, month-over-month risers and fallers, and data-grounded analysis.",
         "datePublished": "2026-06-11",
-        "dateModified": "2026-06-11",
+        "dateModified": "2026-07-03",
         "dataThrough": "2026-04",
         "formatId": "gen9vgc2026regf",
         "formatName": "VGC 2026 Regulation F",

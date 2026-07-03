@@ -1,108 +1,274 @@
 {
-    "id": "sneasler",
-    "name": "Sneasler",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.4385189,
-            "rank": 1,
-            "raw": 2262250
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.2869659,
-            "rank": 4,
-            "raw": 1849286
-        }
-    ],
-    "abilities": [
-        ["Unburden", 92.40048257677408],
-        ["Poison Touch", 6.492953160522013],
-        ["Pressure", 1.1065642627039056]
-    ],
-    "items": [
-        ["White Herb", 78.40326504803234],
-        ["Focus Sash", 17.91247781072491],
-        ["Sitrus Berry", 1.2256796882264145],
-        ["Mental Herb", 0.8316314813037502],
-        ["Lum Berry", 0.3133965341777599],
-        ["Shuca Berry", 0.2846416844900107],
-        ["King's Rock", 0.25602784922067956],
-        ["Black Belt", 0.25161029636309773]
-    ],
-    "moves": [
-        ["Close Combat", 24.922916464167525],
-        ["Dire Claw", 23.823090423676092],
-        ["Fake Out", 22.678309672577157],
-        ["Protect", 18.173356059995196],
-        ["Coaching", 3.226157559809035],
-        ["Feint", 1.3349731877346285],
-        ["Rock Slide", 1.1625143023470308],
-        ["Rock Tomb", 0.9537359703132483],
-        ["Throat Chop", 0.7783685043439723],
-        ["Gunk Shot", 0.7491964877135849]
-    ],
-    "spreads": [
-        ["Jolly:2/32/0/0/0/32", 17.31331008367115],
-        ["Adamant:2/32/0/0/0/32", 17.08277101436571],
-        ["Adamant:0/32/0/0/2/32", 6.476702925588206],
-        ["Adamant:0/32/2/0/0/32", 4.524545086673673],
-        ["Jolly:0/32/0/0/2/32", 4.273466584199728]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Kingambit", 8.964902030748522],
-        ["Basculegion", 8.883145896159002],
-        ["Garchomp", 6.034232961124735],
-        ["Incineroar", 4.340338170365651],
-        ["Floette-Mega", 4.339681812654224],
-        ["Sinistcha", 4.128960195722742],
-        ["Charizard-Mega-Y", 3.5720121098674738],
-        ["Whimsicott", 3.0207202355599714],
-        ["Aerodactyl-Mega", 2.907310542264964],
-        ["Archaludon", 2.886480855278529]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "White Herb",
-            "ability": "Unburden",
-            "moves": ["Dire Claw", "Close Combat", "Fake Out", "Protect"],
-            "count": 57,
-            "bestPlacing": 1,
-            "bestPlayer": "KoonKy2",
-            "eventName": "*Sitrus-Series*|Champions|$50 to First Place|#62",
-            "eventSlug": "2026-06-10-sitrus-series-champions-50-to-first-place-62",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a21741847f3797bf6bab7f3",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Focus Sash",
-            "ability": "Unburden",
-            "moves": ["Close Combat", "Dire Claw", "Fake Out", "Protect"],
-            "count": 9,
-            "bestPlacing": 2,
-            "bestPlayer": "Pendraggon26",
-            "eventName": "AUTOFULL CHAMPIONS SERIES QUALIFIER [120 USD]",
-            "eventSlug": "2026-05-30-autofull-champions-series-qualifier-120-usd",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a0de6e6dfbdf089cbbddec1",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Focus Sash",
-            "ability": "Unburden",
-            "moves": ["Close Combat", "Dire Claw", "Fake Out", "Coaching"],
-            "count": 8,
-            "bestPlacing": 2,
-            "bestPlayer": "Inge",
-            "eventName": "Mt. Moon Champions VGC Weekly #1 2026",
-            "eventSlug": "2026-05-10-mt-moon-champions-vgc-weekly-1-2026",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69feb07edfbdf089cbbd5716",
-            "nature": "Jolly"
-        }
-    ]
+ "id": "sneasler",
+ "name": "Sneasler",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.1724322,
+   "rank": 9,
+   "raw": 432061
+  }
+ ],
+ "abilities": [
+  [
+   "Unburden",
+   80.6458556952513
+  ],
+  [
+   "Poison Touch",
+   17.652170745841143
+  ],
+  [
+   "Pressure",
+   1.7019735589075613
+  ]
+ ],
+ "items": [
+  [
+   "White Herb",
+   66.32001570971305
+  ],
+  [
+   "Focus Sash",
+   28.755979533468224
+  ],
+  [
+   "Iron Ball",
+   1.5058241380716182
+  ],
+  [
+   "Life Orb",
+   0.9322519636713952
+  ],
+  [
+   "Mental Herb",
+   0.7867999268235389
+  ],
+  [
+   "Lum Berry",
+   0.6054641803906541
+  ],
+  [
+   "Expert Belt",
+   0.20470730281004812
+  ],
+  [
+   "King's Rock",
+   0.15730475576813507
+  ]
+ ],
+ "moves": [
+  [
+   "Close Combat",
+   24.82240014118017
+  ],
+  [
+   "Fake Out",
+   23.604307625588156
+  ],
+  [
+   "Dire Claw",
+   22.18082877874454
+  ],
+  [
+   "Protect",
+   14.97936998142908
+  ],
+  [
+   "Coaching",
+   5.477277832257538
+  ],
+  [
+   "Poison Jab",
+   1.2862070497494549
+  ],
+  [
+   "Gunk Shot",
+   1.267552799757275
+  ],
+  [
+   "Rock Slide",
+   1.2442193893272226
+  ],
+  [
+   "Quick Guard",
+   1.1255322174558693
+  ],
+  [
+   "Throat Chop",
+   0.7997198833413982
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:2/32/0/0/0/32",
+   36.480797031384654
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   21.97204814660659
+  ],
+  [
+   "Jolly:0/32/2/0/0/32",
+   4.5607543327951765
+  ],
+  [
+   "Adamant:0/32/2/0/0/32",
+   4.0633527454239085
+  ],
+  [
+   "Jolly:0/32/0/0/2/32",
+   1.890481103117308
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   7.132692841678953
+  ],
+  [
+   "Kingambit",
+   6.181760751985248
+  ],
+  [
+   "Incineroar",
+   6.1143255176089015
+  ],
+  [
+   "Basculegion",
+   5.736904361297138
+  ],
+  [
+   "Garchomp",
+   4.938436785514099
+  ],
+  [
+   "Whimsicott",
+   4.0672428803582985
+  ],
+  [
+   "Metagross-Mega",
+   3.630406571190889
+  ],
+  [
+   "Floette-Mega",
+   3.53824568448854
+  ],
+  [
+   "Pelipper",
+   3.3003485847815477
+  ],
+  [
+   "Archaludon",
+   2.438597541312136
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Toxapex",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Aerodactyl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Floette-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Dragapult",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Maushold",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "White Herb",
+   "ability": "Unburden",
+   "moves": [
+    "Close Combat",
+    "Dire Claw",
+    "Fake Out",
+    "Protect"
+   ],
+   "count": 19,
+   "bestPlacing": 2,
+   "bestPlayer": "inareallydarkplace",
+   "eventName": "TARTAN TAKEDOWN #30! - [CHAMPIONS REG M-B]",
+   "eventSlug": "2026-06-30-tartan-takedown-30-champions-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a41634e83fd320299bd3356",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Poison Touch",
+   "moves": [
+    "Dire Claw",
+    "Close Combat",
+    "Fake Out",
+    "Quick Guard"
+   ],
+   "count": 11,
+   "bestPlacing": 1,
+   "bestPlayer": "Cactusmax",
+   "eventName": "Alpensee Tour (Reg M-B) #64",
+   "eventSlug": "2026-07-01-alpensee-tour-reg-m-b-64",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a392defc87cd9ff0a30d0ac",
+   "nature": "Jolly"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Unburden",
+   "moves": [
+    "Close Combat",
+    "Dire Claw",
+    "Fake Out",
+    "Coaching"
+   ],
+   "count": 6,
+   "bestPlacing": 1,
+   "bestPlayer": "Samuel T",
+   "eventName": "Talon's FIGHT CLUB #91 POKEMON CHAMPIONS",
+   "eventSlug": "2026-07-02-talon-s-fight-club-91-pokemon-champions",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a32e85d2d97f3b0c26189c9",
+   "nature": "Jolly"
+  }
+ ]
 }

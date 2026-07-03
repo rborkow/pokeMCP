@@ -1,58 +1,186 @@
 {
-    "id": "venusaurmega",
-    "name": "Venusaur-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0362155,
-            "rank": 41,
-            "raw": 191764
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.055982000000000004,
-            "rank": 30,
-            "raw": 312923
-        }
-    ],
-    "abilities": [["Thick Fat", 100]],
-    "items": [["Venusaurite", 100]],
-    "moves": [
-        ["Sludge Bomb", 24.27454084671361],
-        ["Protect", 23.87691645916918],
-        ["Earth Power", 21.79561203201801],
-        ["Giga Drain", 21.376176586707558],
-        ["Leech Seed", 4.299034408527137],
-        ["Sleep Powder", 1.5056836148158141],
-        ["Energy Ball", 1.2439278641542235],
-        ["Sludge Wave", 0.40570711227421635],
-        ["Grass Knot", 0.26821501466032993],
-        ["Leaf Storm", 0.21630085142737712]
-    ],
-    "spreads": [
-        ["Modest:32/0/8/18/0/8", 10.506929068195495],
-        ["Modest:32/0/1/28/1/4", 8.294676169282761],
-        ["Modest:32/0/7/18/0/9", 6.034907334237093],
-        ["Modest:32/0/0/32/0/2", 2.885547798251649],
-        ["Modest:20/0/0/31/0/15", 2.264399722094371]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Basculegion", 11.137577203332787],
-        ["Archaludon", 8.586415918387377],
-        ["Sableye", 7.243539006206411],
-        ["Pelipper", 6.1868531653012475],
-        ["Incineroar", 4.988756612543376],
-        ["Kingambit", 4.654895090698993],
-        ["Sylveon", 4.138872329779824],
-        ["Garchomp", 4.115695369255454],
-        ["Corviknight", 2.2965465113490326],
-        ["Aerodactyl-Mega", 2.219310686038506]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "venusaurmega",
+ "name": "Venusaur-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0335216,
+   "rank": 37,
+   "raw": 62090
+  }
+ ],
+ "abilities": [
+  [
+   "Thick Fat",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Venusaurite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Sludge Bomb",
+   24.30025773240305
+  ],
+  [
+   "Protect",
+   23.871576905377832
+  ],
+  [
+   "Earth Power",
+   22.467289647744288
+  ],
+  [
+   "Giga Drain",
+   22.13887589018419
+  ],
+  [
+   "Sleep Powder",
+   2.5788639075916384
+  ],
+  [
+   "Leech Seed",
+   2.3533413407294086
+  ],
+  [
+   "Energy Ball",
+   1.0369114425504427
+  ],
+  [
+   "Weather Ball",
+   0.2719787708929939
+  ],
+  [
+   "Sludge Wave",
+   0.2034471298106964
+  ],
+  [
+   "Solar Beam",
+   0.15799167383352353
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:32/0/7/18/0/9",
+   8.30420307895462
+  ],
+  [
+   "Modest:30/0/0/18/0/18",
+   5.222296490696147
+  ],
+  [
+   "Bold:32/0/19/0/12/3",
+   4.9132668117331075
+  ],
+  [
+   "Modest:32/0/0/32/2/0",
+   3.6087832840845935
+  ],
+  [
+   "Modest:32/0/1/28/1/4",
+   3.5832561995875456
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Pelipper",
+   9.916215237629103
+  ],
+  [
+   "Archaludon",
+   9.59796005932314
+  ],
+  [
+   "Basculegion",
+   8.402807940438345
+  ],
+  [
+   "Swampert-Mega",
+   7.708734632016102
+  ],
+  [
+   "Sableye",
+   5.705092649793215
+  ],
+  [
+   "Grimmsnarl",
+   5.089972639734834
+  ],
+  [
+   "Incineroar",
+   3.661843638818618
+  ],
+  [
+   "Garchomp",
+   3.571334410798585
+  ],
+  [
+   "Sylveon",
+   2.4108348735305354
+  ],
+  [
+   "Kingambit",
+   2.3933564387885133
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

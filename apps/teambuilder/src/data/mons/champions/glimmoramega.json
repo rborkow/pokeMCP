@@ -1,58 +1,186 @@
 {
-    "id": "glimmoramega",
-    "name": "Glimmora-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0227589,
-            "rank": 47,
-            "raw": 166469
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.037205,
-            "rank": 39,
-            "raw": 208773
-        }
-    ],
-    "abilities": [["Adaptability", 100]],
-    "items": [["glimmoranite", 100]],
-    "moves": [
-        ["Power Gem", 24.893339907480616],
-        ["Sludge Bomb", 23.84879705918677],
-        ["Spiky Shield", 23.4259043962649],
-        ["Earth Power", 23.18486705234957],
-        ["Sludge Wave", 1.6619324804739142],
-        ["Protect", 1.4996255471509627],
-        ["Substitute", 0.5779374378298783],
-        ["Energy Ball", 0.27453513970150406],
-        ["Dazzling Gleam", 0.16181778561515642],
-        ["Mortal Spin", 0.12432934682970294]
-    ],
-    "spreads": [
-        ["Timid:2/0/0/32/0/32", 16.375086730979778],
-        ["Modest:27/0/0/20/1/18", 10.239665764720922],
-        ["Modest:2/0/0/32/0/32", 6.771142362967579],
-        ["Timid:15/0/1/28/1/21", 6.316456668449319],
-        ["Timid:0/0/0/32/2/32", 6.258179316539479]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Basculegion", 8.672908994339302],
-        ["Whimsicott", 8.290359523787941],
-        ["Garchomp", 7.729235653491781],
-        ["Kingambit", 5.479181841176828],
-        ["Ninetales-Alola", 5.42221365524953],
-        ["Charizard-Mega-Y", 4.248539781127294],
-        ["Talonflame", 4.19809029079239],
-        ["Rotom-Wash", 3.4344509831141194],
-        ["Aegislash", 2.7131163545781165],
-        ["Farigiraf", 2.679905046628895]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "glimmoramega",
+ "name": "Glimmora-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.012252,
+   "rank": 78,
+   "raw": 26857
+  }
+ ],
+ "abilities": [
+  [
+   "Adaptability",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "glimmoranite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Power Gem",
+   24.771245607095597
+  ],
+  [
+   "Earth Power",
+   22.37902974873604
+  ],
+  [
+   "Sludge Bomb",
+   22.22279049871235
+  ],
+  [
+   "Spiky Shield",
+   22.21035881464955
+  ],
+  [
+   "Sludge Wave",
+   3.275618729168532
+  ],
+  [
+   "Protect",
+   2.415860638354346
+  ],
+  [
+   "Energy Ball",
+   0.8797812349143268
+  ],
+  [
+   "Dazzling Gleam",
+   0.47005626510784837
+  ],
+  [
+   "Mortal Spin",
+   0.347389488727816
+  ],
+  [
+   "Substitute",
+   0.2815286696023306
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   18.76757247054077
+  ],
+  [
+   "Timid:9/0/0/25/0/32",
+   15.528675580867404
+  ],
+  [
+   "Timid:1/0/0/32/1/32",
+   14.540163301494685
+  ],
+  [
+   "Bold:27/0/21/0/18/0",
+   10.623294189981355
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   5.4813008549775155
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Whimsicott",
+   9.758021683559075
+  ],
+  [
+   "Staraptor-Mega",
+   6.185826385321292
+  ],
+  [
+   "Kingambit",
+   5.434478302742645
+  ],
+  [
+   "Basculegion",
+   4.859238378411622
+  ],
+  [
+   "Gholdengo",
+   4.455479185374613
+  ],
+  [
+   "Hydreigon",
+   4.331008926161503
+  ],
+  [
+   "Sinistcha",
+   4.190210330982586
+  ],
+  [
+   "Milotic",
+   3.6394506131559083
+  ],
+  [
+   "Incineroar",
+   3.500465513557333
+  ],
+  [
+   "Garchomp",
+   3.44371436209323
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sylveon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

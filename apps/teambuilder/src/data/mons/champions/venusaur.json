@@ -1,104 +1,270 @@
 {
-    "id": "venusaur",
-    "name": "Venusaur",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.049563499999999996,
-            "rank": 29,
-            "raw": 369864
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.023968600000000003,
-            "rank": 49,
-            "raw": 214292
-        }
-    ],
-    "abilities": [["Chlorophyll", 99.08533947592007], ["Overgrow", 0.9146605240799393]],
-    "items": [
-        ["Focus Sash", 63.15676438049329],
-        ["Miracle Seed", 14.602860699264001],
-        ["Leftovers", 4.196226212352217],
-        ["Sitrus Berry", 3.6894044677687714],
-        ["White Herb", 3.2386449087835243],
-        ["Occa Berry", 2.8044709642704313],
-        ["Coba Berry", 2.5443575543271617],
-        ["Poison Barb", 2.1709557740975827]
-    ],
-    "moves": [
-        ["Sludge Bomb", 21.68490527840611],
-        ["Protect", 21.563997260772354],
-        ["Sleep Powder", 19.422394141957035],
-        ["Energy Ball", 8.637375785634822],
-        ["Leaf Storm", 8.19246538280434],
-        ["Earth Power", 7.602912339528735],
-        ["Solar Beam", 3.768848608952934],
-        ["Giga Drain", 2.5538604361866772],
-        ["Weather Ball", 1.8212067699371657],
-        ["Sunny Day", 1.7768987870330741]
-    ],
-    "spreads": [
-        ["Modest:2/0/0/32/0/32", 28.343972728647728],
-        ["Modest:0/0/0/32/2/32", 8.100136445501933],
-        ["Timid:2/0/0/32/0/32", 7.601623542254261],
-        ["Modest:0/0/2/32/0/32", 6.843828715583905],
-        ["Modest:1/0/0/32/1/32", 4.903144856893561]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Charizard-Mega-Y", 17.373197800408583],
-        ["Garchomp", 13.180346207460206],
-        ["Incineroar", 8.784148828901008],
-        ["Sneasler", 5.643007821781456],
-        ["Kingambit", 5.0952478825171985],
-        ["Milotic", 4.826983213961549],
-        ["Basculegion", 4.268892004843463],
-        ["Farigiraf", 3.195502660902748],
-        ["Torkoal", 2.9205844143575863],
-        ["Whimsicott", 2.5469798506150343]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Venusaurite",
-            "ability": "Chlorophyll",
-            "moves": ["Protect", "Giga Drain", "Earth Power", "Sludge Bomb"],
-            "count": 14,
-            "bestPlacing": 1,
-            "bestPlayer": "Rezeptritter",
-            "eventName": "Alpensee Tour (Reg M-A) #59",
-            "eventSlug": "2026-05-27-alpensee-tour-reg-m-a-59",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69f628704f71d664893ea80a",
-            "nature": "Modest"
-        },
-        {
-            "item": "Focus Sash",
-            "ability": "Chlorophyll",
-            "moves": ["Leaf Storm", "Sludge Bomb", "Sleep Powder", "Protect"],
-            "count": 5,
-            "bestPlacing": 1,
-            "bestPlayer": "Ally",
-            "eventName": "Pokepal Smackdown #141 (Champions) (Reg M-A)",
-            "eventSlug": "2026-05-18-pokepal-smackdown-141-champions-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69f8a6ef4f71d664893ec55c",
-            "nature": "Modest"
-        },
-        {
-            "item": "Focus Sash",
-            "ability": "Chlorophyll",
-            "moves": ["Earth Power", "Sludge Bomb", "Protect", "Sleep Powder"],
-            "count": 4,
-            "bestPlacing": 1,
-            "bestPlayer": "PokeReplay",
-            "eventName": "Tenki's Cart - Road to Turin M-A",
-            "eventSlug": "2026-06-01-tenki-s-cart-road-to-turin-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a196f5856b11a587a94281c",
-            "nature": "Timid"
-        }
-    ]
+ "id": "venusaur",
+ "name": "Venusaur",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.026876,
+   "rank": 45,
+   "raw": 71506
+  }
+ ],
+ "abilities": [
+  [
+   "Chlorophyll",
+   98.74129098327529
+  ],
+  [
+   "Overgrow",
+   1.2587090167247124
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   42.15936061544843
+  ],
+  [
+   "Life Orb",
+   34.60746511697501
+  ],
+  [
+   "Wide Lens",
+   9.125088547726113
+  ],
+  [
+   "Leftovers",
+   2.919261978100275
+  ],
+  [
+   "Sitrus Berry",
+   2.6721456780982056
+  ],
+  [
+   "Occa Berry",
+   2.2313395451811497
+  ],
+  [
+   "Miracle Seed",
+   2.1037390883741565
+  ],
+  [
+   "Expert Belt",
+   1.1208842591801915
+  ]
+ ],
+ "moves": [
+  [
+   "Sludge Bomb",
+   23.309613779910332
+  ],
+  [
+   "Protect",
+   21.82290604629296
+  ],
+  [
+   "Sleep Powder",
+   15.758347401533182
+  ],
+  [
+   "Earth Power",
+   13.248124157066679
+  ],
+  [
+   "Energy Ball",
+   10.041504974004843
+  ],
+  [
+   "Leaf Storm",
+   5.203609653530135
+  ],
+  [
+   "Giga Drain",
+   4.58300598194406
+  ],
+  [
+   "Solar Beam",
+   2.3317432195382475
+  ],
+  [
+   "Weather Ball",
+   1.3899427380874256
+  ],
+  [
+   "Sunny Day",
+   0.473692976479809
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:2/0/0/32/0/32",
+   53.47531130603546
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   12.671379795629631
+  ],
+  [
+   "Modest:4/0/12/32/0/18",
+   2.3451849153321365
+  ],
+  [
+   "Timid:0/0/2/32/0/32",
+   2.0625509386407375
+  ],
+  [
+   "Modest:4/0/0/30/0/32",
+   1.3586749636618272
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Charizard-Mega-Y",
+   11.207240712826595
+  ],
+  [
+   "Garchomp",
+   9.423027638859315
+  ],
+  [
+   "Farigiraf",
+   8.999437423102929
+  ],
+  [
+   "Torkoal",
+   8.417253933165677
+  ],
+  [
+   "Incineroar",
+   6.411168502844232
+  ],
+  [
+   "Pyroar-Mega",
+   5.656333812794427
+  ],
+  [
+   "Scrafty-Mega",
+   3.5621146305031846
+  ],
+  [
+   "Mamoswine",
+   3.44209807266884
+  ],
+  [
+   "Sylveon",
+   3.404261102751064
+  ],
+  [
+   "Basculegion",
+   3.378209519754195
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sylveon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Venusaurite",
+   "ability": "Chlorophyll",
+   "moves": [
+    "Giga Drain",
+    "Earth Power",
+    "Sludge Bomb",
+    "Protect"
+   ],
+   "count": 12,
+   "bestPlacing": 1,
+   "bestPlayer": "Force_India",
+   "eventName": "Pep_uni Pokémon Champions #1",
+   "eventSlug": "2026-06-28-pep-uni-pok-mon-champions-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3db5bdc87cd9ff0a30f75a",
+   "nature": "Modest"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Chlorophyll",
+   "moves": [
+    "Leaf Storm",
+    "Sludge Bomb",
+    "Sleep Powder",
+    "Protect"
+   ],
+   "count": 3,
+   "bestPlacing": 1,
+   "bestPlayer": "JoeUX9",
+   "eventName": "4th Annual St. Jude VGC Charity Tournament",
+   "eventSlug": "2026-06-27-4th-annual-st-jude-vgc-charity-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/69c7cead36f5b5c303dbfa0c",
+   "nature": "Modest"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Chlorophyll",
+   "moves": [
+    "Sleep Powder",
+    "Energy Ball",
+    "Sludge Bomb",
+    "Protect"
+   ],
+   "count": 2,
+   "bestPlacing": 2,
+   "bestPlayer": "shaikhvgc786",
+   "eventName": "Mens Mental Health Month Invitational ($350 Prize)",
+   "eventSlug": "2026-06-28-mens-mental-health-month-invitational-350-prize",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a256b8f56b11a587a94b55b",
+   "nature": "Modest"
+  }
+ ]
 }

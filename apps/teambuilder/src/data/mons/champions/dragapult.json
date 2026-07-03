@@ -1,71 +1,222 @@
 {
-    "id": "dragapult",
-    "name": "Dragapult",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0272045,
-            "rank": 45,
-            "raw": 236908
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.019261900000000002,
-            "rank": 58,
-            "raw": 246999
-        }
-    ],
-    "abilities": [
-        ["Clear Body", 86.50232128661504],
-        ["Infiltrator", 7.836204866670517],
-        ["Cursed Body", 5.661473846714457]
-    ],
-    "items": [
-        ["Focus Sash", 43.59563943143009],
-        ["Dragon Fang", 19.148921450829164],
-        ["Colbur Berry", 11.830810277288],
-        ["Spell Tag", 6.854443795698076],
-        ["White Herb", 6.670166630547017],
-        ["Lum Berry", 2.1758501790272464],
-        ["Choice Scarf", 1.9016906910445535],
-        ["Roseli Berry", 1.7240753351457492]
-    ],
-    "moves": [
-        ["Protect", 16.966615489509124],
-        ["Dragon Darts", 11.902844767540113],
-        ["Draco Meteor", 10.72785340892313],
-        ["Will-O-Wisp", 8.990980549872774],
-        ["Psychic Fangs", 8.595438519050896],
-        ["Phantom Force", 6.323770985732054],
-        ["Shadow Ball", 5.222859136296966],
-        ["Hex", 4.659655220731178],
-        ["Sucker Punch", 4.4381252395255695],
-        ["Thunder Wave", 4.076275221962216]
-    ],
-    "spreads": [
-        ["Timid:2/0/0/32/0/32", 21.3033761611957],
-        ["Jolly:2/32/0/0/0/32", 16.50160394051371],
-        ["Adamant:2/32/0/0/0/32", 4.005429106181612],
-        ["Jolly:0/32/13/0/0/21", 3.31777179213732],
-        ["Jolly:0/32/0/0/2/32", 2.5898567587340082]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Sneasler", 7.487095340734834],
-        ["Kingambit", 6.032019569685889],
-        ["Incineroar", 4.985828462629968],
-        ["Floette-Mega", 4.855608241069012],
-        ["Basculegion", 4.086340539356141],
-        ["Charizard-Mega-Y", 3.287938791909846],
-        ["Whimsicott", 2.6886622713766455],
-        ["Sinistcha", 2.5896398392546045],
-        ["Sylveon", 2.326137570354825],
-        ["Scovillain-Mega", 2.3120138141888624]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "dragapult",
+ "name": "Dragapult",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.013720699999999999,
+   "rank": 73,
+   "raw": 52781
+  }
+ ],
+ "abilities": [
+  [
+   "Clear Body",
+   64.78529594763765
+  ],
+  [
+   "Cursed Body",
+   18.517847930708335
+  ],
+  [
+   "Infiltrator",
+   16.69685612165401
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   45.40911792891775
+  ],
+  [
+   "Life Orb",
+   29.966699549453818
+  ],
+  [
+   "Dragon Fang",
+   4.459601687389083
+  ],
+  [
+   "Light Clay",
+   2.806405564670643
+  ],
+  [
+   "Spell Tag",
+   2.3045753511450684
+  ],
+  [
+   "Choice Scarf",
+   2.1401013651687757
+  ],
+  [
+   "Colbur Berry",
+   1.82268310661986
+  ],
+  [
+   "White Herb",
+   1.4466761763120513
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   13.680553251302893
+  ],
+  [
+   "Will-O-Wisp",
+   12.252773878665717
+  ],
+  [
+   "Draco Meteor",
+   11.433270644044775
+  ],
+  [
+   "Dragon Darts",
+   11.121895250432352
+  ],
+  [
+   "Phantom Force",
+   7.316344516676801
+  ],
+  [
+   "Shadow Ball",
+   6.097042744132182
+  ],
+  [
+   "Psychic Fangs",
+   5.854501361473375
+  ],
+  [
+   "Hex",
+   5.003823484208494
+  ],
+  [
+   "Light Screen",
+   3.718852993250446
+  ],
+  [
+   "U-turn",
+   3.4779705942840424
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   27.926738988689582
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   23.103340268893348
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   6.312715323540311
+  ],
+  [
+   "Naive:2/0/0/32/0/32",
+   1.938475766608545
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   1.9354397807011592
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Kingambit",
+   6.7921098839813645
+  ],
+  [
+   "Whimsicott",
+   6.067883526829234
+  ],
+  [
+   "Staraptor-Mega",
+   5.5176224966506515
+  ],
+  [
+   "Sinistcha",
+   4.863087651286584
+  ],
+  [
+   "Incineroar",
+   3.978835125524052
+  ],
+  [
+   "Farigiraf",
+   3.350202718575969
+  ],
+  [
+   "Sneasler",
+   2.96429499341181
+  ],
+  [
+   "Raichu-Mega-Y",
+   2.6846465425261314
+  ],
+  [
+   "Archaludon",
+   2.6842400409568334
+  ],
+  [
+   "Sylveon",
+   2.38129047066213
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Floette-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

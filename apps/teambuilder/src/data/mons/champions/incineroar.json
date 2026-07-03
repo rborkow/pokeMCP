@@ -1,104 +1,270 @@
 {
-    "id": "incineroar",
-    "name": "Incineroar",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.3682858,
-            "rank": 3,
-            "raw": 2363825
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.25106280000000003,
-            "rank": 6,
-            "raw": 1701936
-        }
-    ],
-    "abilities": [["Intimidate", 99.42210074512168], ["Blaze", 0.5778992548783023]],
-    "items": [
-        ["Sitrus Berry", 40.51276049086709],
-        ["Chople Berry", 22.88863963205454],
-        ["Passho Berry", 15.172638302653949],
-        ["Shuca Berry", 6.7916956180485295],
-        ["Leftovers", 4.862257922999547],
-        ["Charcoal", 4.2454656449562425],
-        ["White Herb", 2.240246339980765],
-        ["Lum Berry", 1.155030004873635]
-    ],
-    "moves": [
-        ["Fake Out", 24.920314769180525],
-        ["Parting Shot", 23.776707645569104],
-        ["Flare Blitz", 20.661359771421232],
-        ["Throat Chop", 12.330740623453158],
-        ["Darkest Lariat", 7.987442434668479],
-        ["Protect", 4.82196425887549],
-        ["Will-O-Wisp", 1.245268743716654],
-        ["Helping Hand", 1.1472090525524252],
-        ["Close Combat", 0.8154037967627082],
-        ["Taunt", 0.7565894948662281]
-    ],
-    "spreads": [
-        ["Careful:32/0/14/0/20/0", 3.2887967270813547],
-        ["Relaxed:32/0/32/0/2/0", 1.9719727308835029],
-        ["Sassy:32/0/14/0/20/0", 1.8058663283647363],
-        ["Impish:31/0/20/0/3/12", 1.7064628166084],
-        ["Adamant:32/32/0/0/2/0", 1.562905047196574]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Sinistcha", 9.002386350241522],
-        ["Garchomp", 5.684642996173631],
-        ["Floette-Mega", 5.162208307203527],
-        ["Sneasler", 4.961024971889696],
-        ["Basculegion", 4.549690066830505],
-        ["Gengar-Mega", 4.513105887200414],
-        ["Charizard-Mega-Y", 3.501944122476449],
-        ["Kingambit", 3.4134621914439203],
-        ["Farigiraf", 2.657951140574259],
-        ["Kommo-o", 2.5460815214333024]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Sitrus Berry",
-            "ability": "Intimidate",
-            "moves": ["Fake Out", "Flare Blitz", "Throat Chop", "Parting Shot"],
-            "count": 28,
-            "bestPlacing": 1,
-            "bestPlayer": "yungelmersglue",
-            "eventName": "CHAMPIONS REG. M-A |👑CROWN FIGHT Bo3 TOUR #71👑",
-            "eventSlug": "2026-06-05-champions-reg-m-a-crown-fight-bo3-tour-71",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eb09e448d465883f71b854",
-            "nature": "Careful"
-        },
-        {
-            "item": "Chople Berry",
-            "ability": "Intimidate",
-            "moves": ["Flare Blitz", "Throat Chop", "Fake Out", "Parting Shot"],
-            "count": 10,
-            "bestPlacing": 1,
-            "bestPlayer": "ShrimpTheShrimp",
-            "eventName": "SpearPillar Champions Tour #3 | Reg M-A $100 Prize",
-            "eventSlug": "2026-05-09-spearpillar-champions-tour-3-reg-m-a-100-prize",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69cd689636f5b5c303dc45b3",
-            "nature": "Careful"
-        },
-        {
-            "item": "Charcoal",
-            "ability": "Intimidate",
-            "moves": ["Fake Out", "Flare Blitz", "Darkest Lariat", "Parting Shot"],
-            "count": 9,
-            "bestPlacing": 1,
-            "bestPlayer": "GengarIsMad",
-            "eventName": "*Sitrus-Series*|Champions|#61",
-            "eventSlug": "2026-06-03-sitrus-series-champions-61",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1843740f6c1f08998629ca",
-            "nature": "Adamant"
-        }
-    ]
+ "id": "incineroar",
+ "name": "Incineroar",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.2834633,
+   "rank": 4,
+   "raw": 664399
+  }
+ ],
+ "abilities": [
+  [
+   "Intimidate",
+   99.58426097548404
+  ],
+  [
+   "Blaze",
+   0.4157390245159619
+  ]
+ ],
+ "items": [
+  [
+   "Sitrus Berry",
+   53.808735382993014
+  ],
+  [
+   "Passho Berry",
+   15.571948144010763
+  ],
+  [
+   "Chople Berry",
+   13.358015136220464
+  ],
+  [
+   "Charcoal",
+   4.696222195613001
+  ],
+  [
+   "Shuca Berry",
+   3.136740170962133
+  ],
+  [
+   "Leftovers",
+   2.835440964430966
+  ],
+  [
+   "White Herb",
+   2.2228584014704955
+  ],
+  [
+   "Life Orb",
+   2.089815764468499
+  ]
+ ],
+ "moves": [
+  [
+   "Fake Out",
+   24.930292981163063
+  ],
+  [
+   "Parting Shot",
+   23.662147345049853
+  ],
+  [
+   "Flare Blitz",
+   22.713368557104623
+  ],
+  [
+   "Throat Chop",
+   12.713014017352764
+  ],
+  [
+   "Darkest Lariat",
+   7.716156757548571
+  ],
+  [
+   "Protect",
+   3.054611399609277
+  ],
+  [
+   "Will-O-Wisp",
+   1.252476554425822
+  ],
+  [
+   "Taunt",
+   0.9348232095572148
+  ],
+  [
+   "Close Combat",
+   0.9253521946041907
+  ],
+  [
+   "Helping Hand",
+   0.7771597980421284
+  ]
+ ],
+ "spreads": [
+  [
+   "Careful:32/0/14/0/20/0",
+   4.8832780469127055
+  ],
+  [
+   "Adamant:32/32/0/0/2/0",
+   4.671918859284749
+  ],
+  [
+   "Impish:32/0/24/0/8/2",
+   3.42464366374142
+  ],
+  [
+   "Careful:32/2/0/0/32/0",
+   1.9357823682618989
+  ],
+  [
+   "Sassy:32/0/14/0/20/0",
+   1.9148986175489757
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   9.42857966938733
+  ],
+  [
+   "Garchomp",
+   5.449310980120323
+  ],
+  [
+   "Floette-Mega",
+   4.12372539377484
+  ],
+  [
+   "Whimsicott",
+   4.059038492692406
+  ],
+  [
+   "Basculegion",
+   3.8474085763199923
+  ],
+  [
+   "Farigiraf",
+   3.804764341329858
+  ],
+  [
+   "Sneasler",
+   3.7193766740640446
+  ],
+  [
+   "Staraptor-Mega",
+   3.3348816281433216
+  ],
+  [
+   "Kingambit",
+   3.108041191532768
+  ],
+  [
+   "Mawile-Mega",
+   2.8114054459833895
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Weavile",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Talonflame",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Venusaur",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rotom-Wash",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Sitrus Berry",
+   "ability": "Intimidate",
+   "moves": [
+    "Flare Blitz",
+    "Throat Chop",
+    "Parting Shot",
+    "Fake Out"
+   ],
+   "count": 41,
+   "bestPlacing": 1,
+   "bestPlayer": "Cactusmax",
+   "eventName": "Alpensee Tour (Reg M-B) #64",
+   "eventSlug": "2026-07-01-alpensee-tour-reg-m-b-64",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a392defc87cd9ff0a30d0ac",
+   "nature": "Impish"
+  },
+  {
+   "item": "Sitrus Berry",
+   "ability": "Intimidate",
+   "moves": [
+    "Fake Out",
+    "Flare Blitz",
+    "Darkest Lariat",
+    "Parting Shot"
+   ],
+   "count": 14,
+   "bestPlacing": 1,
+   "bestPlayer": "NMR | Gostzin I",
+   "eventName": "Intimidators Champions Challenge #22 REG M-B",
+   "eventSlug": "2026-06-30-intimidators-champions-challenge-22-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a427367c87cd9ff0a312adf",
+   "nature": "Careful"
+  },
+  {
+   "item": "Sitrus Berry",
+   "ability": "Intimidate",
+   "moves": [
+    "Fake Out",
+    "Parting Shot",
+    "Helping Hand",
+    "Flare Blitz"
+   ],
+   "count": 11,
+   "bestPlacing": 1,
+   "bestPlayer": "Martinus_03",
+   "eventName": "Champions Collective #12",
+   "eventSlug": "2026-07-01-champions-collective-12",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3987c183fd320299bce00b",
+   "nature": "Careful"
+  }
+ ]
 }

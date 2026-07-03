@@ -1,104 +1,270 @@
 {
-    "id": "sinistcha",
-    "name": "Sinistcha",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.2842768,
-            "rank": 6,
-            "raw": 1796680
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.2220307,
-            "rank": 7,
-            "raw": 1664307
-        }
-    ],
-    "abilities": [["Hospitality", 98.91486190745974], ["Heatproof", 1.0851380925402672]],
-    "items": [
-        ["Kasib Berry", 33.947689846913285],
-        ["Sitrus Berry", 32.06824380761722],
-        ["Colbur Berry", 13.722249661582813],
-        ["Leftovers", 6.908581483110146],
-        ["Occa Berry", 4.83213006137697],
-        ["Coba Berry", 2.5345321634272757],
-        ["Focus Sash", 1.8944829814379085],
-        ["Mental Herb", 1.7869989657445116]
-    ],
-    "moves": [
-        ["Matcha Gotcha", 24.155706668107328],
-        ["Rage Powder", 24.09034656852976],
-        ["Trick Room", 17.043465006559845],
-        ["Life Dew", 15.512968466865429],
-        ["Protect", 12.282410431857661],
-        ["Shadow Ball", 3.725103706340864],
-        ["Strength Sap", 1.5157979214310386],
-        ["Imprison", 0.39563656103460915],
-        ["Leaf Storm", 0.3808070938466924],
-        ["Calm Mind", 0.2862602054291046]
-    ],
-    "spreads": [
-        ["Bold:32/0/14/0/20/0", 7.859126840359874],
-        ["Bold:32/0/4/0/30/0", 5.730557142201033],
-        ["Sassy:31/0/7/0/28/0", 4.589301965823205],
-        ["Calm:32/0/14/0/20/0", 3.82004333708422],
-        ["Relaxed:32/0/14/0/20/0", 3.140249719975588]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Incineroar", 10.179514299262731],
-        ["Sneasler", 5.33651765444627],
-        ["Floette-Mega", 5.1941423604725525],
-        ["Basculegion", 3.8831346943458147],
-        ["Archaludon", 3.830257226572565],
-        ["Garchomp", 3.5322031603147237],
-        ["Pelipper", 3.497577817634481],
-        ["Kingambit", 3.054599283936684],
-        ["Gengar-Mega", 2.972632149167335],
-        ["Sableye", 2.682289469779435]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Kasib Berry",
-            "ability": "Hospitality",
-            "moves": ["Matcha Gotcha", "Trick Room", "Rage Powder", "Protect"],
-            "count": 17,
-            "bestPlacing": 1,
-            "bestPlayer": "Rees",
-            "eventName": "Alpensee Tour (Reg M-A) #61 - ✨🐢 for #1!",
-            "eventSlug": "2026-06-10-alpensee-tour-reg-m-a-61-for-1",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1420518c163b8097996cc6",
-            "nature": "Bold"
-        },
-        {
-            "item": "Kasib Berry",
-            "ability": "Hospitality",
-            "moves": ["Matcha Gotcha", "Rage Powder", "Life Dew", "Protect"],
-            "count": 12,
-            "bestPlacing": 1,
-            "bestPlayer": "3cake",
-            "eventName": "[REG M-A] LearningtoSam's Weekly",
-            "eventSlug": "2026-06-04-reg-m-a-learningtosam-s-weekly",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a19a6fc56b11a587a942bbf",
-            "nature": "Bold"
-        },
-        {
-            "item": "Kasib Berry",
-            "ability": "Hospitality",
-            "moves": ["Matcha Gotcha", "Life Dew", "Rage Powder", "Trick Room"],
-            "count": 8,
-            "bestPlacing": 1,
-            "bestPlayer": "yungelmersglue",
-            "eventName": "CHAMPIONS REG. M-A |👑CROWN FIGHT Bo3 TOUR #71👑",
-            "eventSlug": "2026-06-05-champions-reg-m-a-crown-fight-bo3-tour-71",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eb09e448d465883f71b854",
-            "nature": "Bold"
-        }
-    ]
+ "id": "sinistcha",
+ "name": "Sinistcha",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.32998600000000006,
+   "rank": 1,
+   "raw": 860069
+  }
+ ],
+ "abilities": [
+  [
+   "Hospitality",
+   99.41215534521089
+  ],
+  [
+   "Heatproof",
+   0.5878446547890969
+  ]
+ ],
+ "items": [
+  [
+   "Kasib Berry",
+   31.726325734142097
+  ],
+  [
+   "Sitrus Berry",
+   28.255037642369135
+  ],
+  [
+   "Coba Berry",
+   11.233369145990316
+  ],
+  [
+   "Colbur Berry",
+   9.119578611234152
+  ],
+  [
+   "Leftovers",
+   7.487999600070274
+  ],
+  [
+   "Occa Berry",
+   5.565777550993214
+  ],
+  [
+   "Focus Sash",
+   2.1444712311273784
+  ],
+  [
+   "Mental Herb",
+   1.8514689146603136
+  ]
+ ],
+ "moves": [
+  [
+   "Matcha Gotcha",
+   24.692165020594196
+  ],
+  [
+   "Rage Powder",
+   24.20486831267284
+  ],
+  [
+   "Trick Room",
+   15.883491960015785
+  ],
+  [
+   "Protect",
+   14.816867138911169
+  ],
+  [
+   "Life Dew",
+   12.060505036889525
+  ],
+  [
+   "Strength Sap",
+   3.3429079105554456
+  ],
+  [
+   "Shadow Ball",
+   3.3114296416091724
+  ],
+  [
+   "Imprison",
+   0.6379733439588026
+  ],
+  [
+   "Calm Mind",
+   0.16441200384086024
+  ],
+  [
+   "Hex",
+   0.14233974491361254
+  ]
+ ],
+ "spreads": [
+  [
+   "Bold:32/0/14/0/20/0",
+   10.269603355037837
+  ],
+  [
+   "Relaxed:32/0/4/0/30/0",
+   6.019233897914429
+  ],
+  [
+   "Bold:32/0/32/2/0/0",
+   5.491242683254974
+  ],
+  [
+   "Relaxed:32/0/32/2/0/0",
+   4.715473905166964
+  ],
+  [
+   "Calm:32/0/14/0/20/0",
+   3.9986304685915854
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Incineroar",
+   8.099301511784967
+  ],
+  [
+   "Pelipper",
+   5.270022003807843
+  ],
+  [
+   "Grimmsnarl",
+   5.141572258072486
+  ],
+  [
+   "Archaludon",
+   4.7284855079591885
+  ],
+  [
+   "Swampert-Mega",
+   4.502532470298761
+  ],
+  [
+   "Staraptor-Mega",
+   3.9845069546595826
+  ],
+  [
+   "Garchomp",
+   3.8584215561985657
+  ],
+  [
+   "Sneasler",
+   3.727146131980096
+  ],
+  [
+   "Floette-Mega",
+   3.543711744782712
+  ],
+  [
+   "Kingambit",
+   3.2320611873144793
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Maushold",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Floette-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Kasib Berry",
+   "ability": "Hospitality",
+   "moves": [
+    "Trick Room",
+    "Rage Powder",
+    "Matcha Gotcha",
+    "Protect"
+   ],
+   "count": 17,
+   "bestPlacing": 1,
+   "bestPlayer": "Martinus_03",
+   "eventName": "Champions Collective #12",
+   "eventSlug": "2026-07-01-champions-collective-12",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3987c183fd320299bce00b",
+   "nature": "Bold"
+  },
+  {
+   "item": "Kasib Berry",
+   "ability": "Hospitality",
+   "moves": [
+    "Matcha Gotcha",
+    "Life Dew",
+    "Rage Powder",
+    "Protect"
+   ],
+   "count": 11,
+   "bestPlacing": 1,
+   "bestPlayer": "smearglegoat",
+   "eventName": "The Drywalls Series #9 - M-B",
+   "eventSlug": "2026-06-29-the-drywalls-series-9-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a40523cc87cd9ff0a311896",
+   "nature": "Bold"
+  },
+  {
+   "item": "Coba Berry",
+   "ability": "Hospitality",
+   "moves": [
+    "Rage Powder",
+    "Matcha Gotcha",
+    "Trick Room",
+    "Protect"
+   ],
+   "count": 10,
+   "bestPlacing": 1,
+   "bestPlayer": "gp2332",
+   "eventName": "Talon's FIGHT CLUB #90 POKEMON CHAMPIONS",
+   "eventSlug": "2026-06-25-talon-s-fight-club-90-pokemon-champions",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a14cca88c163b8097997618",
+   "nature": "Relaxed"
+  }
+ ]
 }

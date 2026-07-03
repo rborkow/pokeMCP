@@ -1,58 +1,186 @@
 {
-    "id": "delphoxmega",
-    "name": "Delphox-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0674906,
-            "rank": 22,
-            "raw": 341484
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0346954,
-            "rank": 42,
-            "raw": 275811
-        }
-    ],
-    "abilities": [["Levitate", 100]],
-    "items": [["Delphoxite", 100]],
-    "moves": [
-        ["Protect", 24.180202553042797],
-        ["Heat Wave", 24.032974599283683],
-        ["Psychic", 18.38843173864228],
-        ["Encore", 6.834716608845993],
-        ["Nasty Plot", 6.339205903944907],
-        ["Psyshock", 5.229676327174775],
-        ["Substitute", 3.5303974802900364],
-        ["Calm Mind", 2.8237895255518946],
-        ["Scorching Sands", 0.9801809443980498],
-        ["Dazzling Gleam", 0.9777720152033699]
-    ],
-    "spreads": [
-        ["Timid:2/0/0/32/0/32", 17.127415319663978],
-        ["Timid:0/0/0/32/2/32", 7.805377657664312],
-        ["Timid:5/0/0/32/0/29", 4.590513300193902],
-        ["Timid:9/0/23/5/0/29", 3.4591925048947085],
-        ["Timid:28/0/5/3/0/30", 3.4317924396644357]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Garchomp", 10.935282391048792],
-        ["Sneasler", 9.974055860428438],
-        ["Kingambit", 8.114056305519313],
-        ["Sinistcha", 5.628484147559685],
-        ["Floette-Mega", 5.601657778457643],
-        ["Whimsicott", 4.8720010818606765],
-        ["Basculegion", 4.579102419580893],
-        ["Incineroar", 3.808422682497604],
-        ["Maushold", 3.3504856032299903],
-        ["Rotom-Wash", 2.5244506565392397]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "delphoxmega",
+ "name": "Delphox-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0572687,
+   "rank": 24,
+   "raw": 106732
+  }
+ ],
+ "abilities": [
+  [
+   "Levitate",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Delphoxite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   24.591660830082606
+  ],
+  [
+   "Heat Wave",
+   24.562442254441333
+  ],
+  [
+   "Nasty Plot",
+   16.25429499797458
+  ],
+  [
+   "Psychic",
+   13.709610683648885
+  ],
+  [
+   "Psyshock",
+   10.831575561390581
+  ],
+  [
+   "Encore",
+   2.2905898614446802
+  ],
+  [
+   "Substitute",
+   1.6719395280568328
+  ],
+  [
+   "Calm Mind",
+   1.244789329637009
+  ],
+  [
+   "Scorching Sands",
+   0.9807192168632477
+  ],
+  [
+   "Dazzling Gleam",
+   0.8432543539961765
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:1/0/0/32/1/32",
+   13.122867164887172
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   8.491170380410928
+  ],
+  [
+   "Timid:19/0/1/17/0/29",
+   6.260234643029166
+  ],
+  [
+   "Timid:11/0/4/19/0/32",
+   4.61674053658255
+  ],
+  [
+   "Timid:0/0/0/32/2/32",
+   2.531741452087359
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   11.415737298333235
+  ],
+  [
+   "Incineroar",
+   8.657616150090593
+  ],
+  [
+   "Garchomp",
+   8.064007583006171
+  ],
+  [
+   "Kingambit",
+   7.350861253875298
+  ],
+  [
+   "Sneasler",
+   7.228745441051995
+  ],
+  [
+   "Whimsicott",
+   5.413421521108916
+  ],
+  [
+   "Floette-Mega",
+   5.372311098675694
+  ],
+  [
+   "Staraptor-Mega",
+   4.433797311816922
+  ],
+  [
+   "Maushold",
+   4.157424054849092
+  ],
+  [
+   "Basculegion",
+   4.061693546177094
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

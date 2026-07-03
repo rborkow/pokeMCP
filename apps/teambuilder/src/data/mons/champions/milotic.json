@@ -1,108 +1,274 @@
 {
-    "id": "milotic",
-    "name": "Milotic",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.12137460000000001,
-            "rank": 14,
-            "raw": 844726
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0692424,
-            "rank": 22,
-            "raw": 663886
-        }
-    ],
-    "abilities": [
-        ["Competitive", 98.27070920266463],
-        ["Marvel Scale", 1.650187486506168],
-        ["Cute Charm", 0.07910331082919962]
-    ],
-    "items": [
-        ["Leftovers", 76.27351550470118],
-        ["Sitrus Berry", 18.05551897825656],
-        ["Mystic Water", 1.7829989134973832],
-        ["Wacan Berry", 1.2299945279785074],
-        ["Rindo Berry", 0.9706951168993991],
-        ["Choice Scarf", 0.37460384556483356],
-        ["Scope Lens", 0.2878968281481718],
-        ["Bright Powder", 0.22525150639938238]
-    ],
-    "moves": [
-        ["Scald", 16.830081071207932],
-        ["Protect", 16.821978606870626],
-        ["Icy Wind", 13.398428305195234],
-        ["Recover", 12.092712915627626],
-        ["Coil", 8.310162316417937],
-        ["Muddy Water", 8.236936555550102],
-        ["Hypnosis", 8.168871760823958],
-        ["Life Dew", 7.219666969223355],
-        ["Ice Beam", 5.416021312979969],
-        ["Helping Hand", 0.5101083431537401]
-    ],
-    "spreads": [
-        ["Bold:31/0/11/7/4/13", 4.8799835307784205],
-        ["Bold:32/0/32/2/0/0", 3.929682850927273],
-        ["Bold:32/0/32/0/2/0", 3.7069493693529076],
-        ["Bold:31/0/21/1/12/1", 3.1464215009773033],
-        ["Calm:32/0/29/0/5/0", 2.913523020227335]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Sneasler", 7.824537302614987],
-        ["Incineroar", 6.586604488952842],
-        ["Garchomp", 5.673156236833597],
-        ["Sinistcha", 5.2366503557596005],
-        ["Kingambit", 3.885656130143621],
-        ["Charizard-Mega-Y", 3.830676499094971],
-        ["Floette-Mega", 3.3772903743117944],
-        ["Charizard-Mega-X", 2.914650834697032],
-        ["Whimsicott", 2.6059277084819357],
-        ["Basculegion", 2.552584390754227]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Leftovers",
-            "ability": "Competitive",
-            "moves": ["Scald", "Ice Beam", "Recover", "Protect"],
-            "count": 2,
-            "bestPlacing": 2,
-            "bestPlayer": "ismaaelh",
-            "eventName": "*Sitrus-Series*|Champions|#61",
-            "eventSlug": "2026-06-03-sitrus-series-champions-61",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1843740f6c1f08998629ca",
-            "nature": "Modest"
-        },
-        {
-            "item": "Leftovers",
-            "ability": "Competitive",
-            "moves": ["Coil", "Muddy Water", "Hypnosis", "Recover"],
-            "count": 1,
-            "bestPlacing": 2,
-            "bestPlayer": "BadassFroslass",
-            "eventName": "SpearPillar Champions Tour #4 | Reg M-A $100 Prize",
-            "eventSlug": "2026-05-16-spearpillar-champions-tour-4-reg-m-a-100-prize",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69cd6904d478313a15a39215",
-            "nature": null
-        },
-        {
-            "item": "Leftovers",
-            "ability": "Competitive",
-            "moves": ["Muddy Water", "Hypnosis", "Coil", "Protect"],
-            "count": 1,
-            "bestPlacing": 3,
-            "bestPlayer": "ironingots",
-            "eventName": "CHAMPIONS REG. M-A |👑CROWN FIGHT Bo3 TOUR #70👑",
-            "eventSlug": "2026-05-29-champions-reg-m-a-crown-fight-bo3-tour-70",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69eb09bb78b359b789d6aa3d",
-            "nature": "Modest"
-        }
-    ]
+ "id": "milotic",
+ "name": "Milotic",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0555712,
+   "rank": 26,
+   "raw": 159833
+  }
+ ],
+ "abilities": [
+  [
+   "Competitive",
+   98.72079408752315
+  ],
+  [
+   "Marvel Scale",
+   1.2113776462305998
+  ],
+  [
+   "Cute Charm",
+   0.06782826624625117
+  ]
+ ],
+ "items": [
+  [
+   "Leftovers",
+   83.09389685662268
+  ],
+  [
+   "Sitrus Berry",
+   10.846662049721523
+  ],
+  [
+   "Mystic Water",
+   1.2802719775436022
+  ],
+  [
+   "Life Orb",
+   0.7578479766615788
+  ],
+  [
+   "Zoom Lens",
+   0.632502649702021
+  ],
+  [
+   "Wacan Berry",
+   0.6320804830320339
+  ],
+  [
+   "Bright Powder",
+   0.5070918664373857
+  ],
+  [
+   "Wide Lens",
+   0.42527227034057896
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   17.16175973266728
+  ],
+  [
+   "Muddy Water",
+   12.941636841105359
+  ],
+  [
+   "Coil",
+   12.502249480502293
+  ],
+  [
+   "Hypnosis",
+   12.133588773458253
+  ],
+  [
+   "Scald",
+   11.919634056963769
+  ],
+  [
+   "Recover",
+   9.025564944314524
+  ],
+  [
+   "Icy Wind",
+   6.652327458948017
+  ],
+  [
+   "Ice Beam",
+   6.564601099704095
+  ],
+  [
+   "Life Dew",
+   5.4933549118087495
+  ],
+  [
+   "Haze",
+   1.5305042696868938
+  ]
+ ],
+ "spreads": [
+  [
+   "Calm:32/0/27/0/5/2",
+   14.33340038443356
+  ],
+  [
+   "Bold:32/0/32/2/0/0",
+   6.076928327381408
+  ],
+  [
+   "Calm:32/0/0/2/32/0",
+   3.8089824047094907
+  ],
+  [
+   "Bold:32/0/32/0/2/0",
+   3.7410989961140713
+  ],
+  [
+   "Bold:22/0/32/10/0/2",
+   3.3802585053823457
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   9.680122917686147
+  ],
+  [
+   "Incineroar",
+   8.478803081700017
+  ],
+  [
+   "Garchomp",
+   4.904163211033543
+  ],
+  [
+   "Ceruledge",
+   4.798110835006521
+  ],
+  [
+   "Raichu-Mega-Y",
+   4.561327062947408
+  ],
+  [
+   "Whimsicott",
+   4.102016728142257
+  ],
+  [
+   "Floette-Mega",
+   3.393578665301354
+  ],
+  [
+   "Staraptor-Mega",
+   3.2310583044579366
+  ],
+  [
+   "Sneasler",
+   3.1875977781450056
+  ],
+  [
+   "Metagross-Mega",
+   2.998577852202234
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Maushold",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Leftovers",
+   "ability": "Competitive",
+   "moves": [
+    "Muddy Water",
+    "Coil",
+    "Hypnosis",
+    "Protect"
+   ],
+   "count": 7,
+   "bestPlacing": 1,
+   "bestPlayer": "Jhan Nemo Sugui",
+   "eventName": "First Impression Mondays",
+   "eventSlug": "2026-06-29-first-impression-mondays",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a41cf1383fd320299bd39a4",
+   "nature": "Calm"
+  },
+  {
+   "item": "Leftovers",
+   "ability": "Competitive",
+   "moves": [
+    "Scald",
+    "Protect",
+    "Icy Wind",
+    "Life Dew"
+   ],
+   "count": 2,
+   "bestPlacing": 4,
+   "bestPlayer": "Julian Rueda",
+   "eventName": "Ratorneo #4 Champions 2026 | Reg MB",
+   "eventSlug": "2026-06-25-ratorneo-4-champions-2026-reg-mb",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c190783fd320299bcf5c9",
+   "nature": "Calm"
+  },
+  {
+   "item": "Leftovers",
+   "ability": "Competitive",
+   "moves": [
+    "Muddy Water",
+    "Life Dew",
+    "Hypnosis",
+    "Coil"
+   ],
+   "count": 1,
+   "bestPlacing": 6,
+   "bestPlayer": "TristanBubba",
+   "eventName": "*Sitrus-Series*|Champions-MB|#65",
+   "eventSlug": "2026-07-01-sitrus-series-champions-mb-65",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3d2290c87cd9ff0a30f032",
+   "nature": "Bold"
+  }
+ ]
 }

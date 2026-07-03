@@ -1,0 +1,190 @@
+{
+ "id": "staraptormega",
+ "name": "Staraptor-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.1514045,
+   "rank": 12,
+   "raw": 428748
+  }
+ ],
+ "abilities": [
+  [
+   "No Ability",
+   81.06943546357859
+  ],
+  [
+   "Contrary",
+   18.930564536421414
+  ]
+ ],
+ "items": [
+  [
+   "staraptite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Close Combat",
+   24.988954926004272
+  ],
+  [
+   "Protect",
+   23.480351173528753
+  ],
+  [
+   "Brave Bird",
+   20.92637417751772
+  ],
+  [
+   "Roost",
+   19.59199384055385
+  ],
+  [
+   "Dual Wingbeat",
+   3.9968769447080312
+  ],
+  [
+   "Tailwind",
+   2.907474520872467
+  ],
+  [
+   "Blaze Kick",
+   1.440059997704405
+  ],
+  [
+   "U-turn",
+   0.841066784508754
+  ],
+  [
+   "Quick Attack",
+   0.5977772322755139
+  ],
+  [
+   "Final Gambit",
+   0.316648574548828
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:2/32/0/0/0/32",
+   18.874916549042354
+  ],
+  [
+   "Jolly:1/32/0/0/1/32",
+   5.7789272097534585
+  ],
+  [
+   "Jolly:32/2/0/0/0/32",
+   5.328806103328133
+  ],
+  [
+   "Adamant:31/32/0/0/3/0",
+   5.169762203918858
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   2.573886085006075
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Whimsicott",
+   10.030312741385568
+  ],
+  [
+   "Garchomp",
+   9.339711161818107
+  ],
+  [
+   "Sinistcha",
+   8.68423190934014
+  ],
+  [
+   "Grimmsnarl",
+   6.4883332557234885
+  ],
+  [
+   "Incineroar",
+   6.243649832943537
+  ],
+  [
+   "Gholdengo",
+   6.023744424479876
+  ],
+  [
+   "Basculegion",
+   5.71412092751202
+  ],
+  [
+   "Kingambit",
+   3.2628574711435148
+  ],
+  [
+   "Maushold",
+   2.213802973499184
+  ],
+  [
+   "Sylveon",
+   1.9073950131343707
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rotom-Wash",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Metagross-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Blastoise-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Milotic",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Maushold",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

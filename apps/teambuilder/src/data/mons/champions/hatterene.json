@@ -1,96 +1,210 @@
 {
-    "id": "hatterene",
-    "name": "Hatterene",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0141259,
-            "rank": 62,
-            "raw": 135790
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.008553100000000001,
-            "rank": 86,
-            "raw": 141191
-        }
-    ],
-    "abilities": [
-        ["Magic Bounce", 96.55553540659861],
-        ["Healer", 3.3504436969491813],
-        ["Anticipation", 0.09402089645221888]
-    ],
-    "items": [
-        ["Fairy Feather", 44.633743451733885],
-        ["Focus Sash", 26.689012691527598],
-        ["Sitrus Berry", 6.4900659044058004],
-        ["Leftovers", 5.746657461498924],
-        ["Babiri Berry", 3.732869675475594],
-        ["Twisted Spoon", 3.563645453177375],
-        ["Kasib Berry", 3.4708597113451076],
-        ["Kebia Berry", 2.41984595684693]
-    ],
-    "moves": [
-        ["Dazzling Gleam", 23.93756056153666],
-        ["Trick Room", 23.741967877222688],
-        ["Protect", 17.245886219519306],
-        ["Psychic", 15.365820416136359],
-        ["Mystical Fire", 3.9152549897911606],
-        ["Expanding Force", 3.394391609953129],
-        ["Magic Powder", 2.588837595587796],
-        ["Psyshock", 1.6375916984210936],
-        ["Calm Mind", 0.8713560936518221],
-        ["Draining Kiss", 0.7637238719652858]
-    ],
-    "spreads": [
-        ["Quiet:32/0/2/32/0/0", 32.519082472387986],
-        ["Quiet:32/0/0/32/2/0", 7.635791081354585],
-        ["Quiet:27/0/7/32/0/0", 4.263115050400273],
-        ["Quiet:32/0/1/32/1/0", 3.803488124243776],
-        ["Quiet:28/0/5/32/1/0", 3.684150564766222]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Torkoal", 10.640469708310132],
-        ["Farigiraf", 10.420089026547739],
-        ["Kingambit", 7.673578025125523],
-        ["Incineroar", 6.031076052631152],
-        ["Sinistcha", 3.119894285002521],
-        ["Blastoise-Mega", 2.9696149097149744],
-        ["Camerupt-Mega", 2.230199877980506],
-        ["Kangaskhan-Mega", 2.194184732504942],
-        ["Charizard-Mega-Y", 2.144107860539865],
-        ["Golurk-Mega", 2.0786452573430694]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Fairy Feather",
-            "ability": "Magic Bounce",
-            "moves": ["Psychic", "Trick Room", "Dazzling Gleam", "Protect"],
-            "count": 1,
-            "bestPlacing": 6,
-            "bestPlayer": "鼠 鼠",
-            "eventName": "Sheep Cup#14[Reg M-A]",
-            "eventSlug": "2026-05-17-sheep-cup-14-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69f05abfe23aab068aad421a",
-            "nature": null
-        },
-        {
-            "item": "Focus Sash",
-            "ability": "Magic Bounce",
-            "moves": ["Dazzling Gleam", "Psychic", "Trick Room", "Protect"],
-            "count": 1,
-            "bestPlacing": 7,
-            "bestPlayer": "Orttega15",
-            "eventName": "Intimidators Champions Challenge #16 REG M-A",
-            "eventSlug": "2026-06-08-intimidators-champions-challenge-16-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a26baf056b11a587a94c139",
-            "nature": "Quiet"
-        }
-    ]
+ "id": "hatterene",
+ "name": "Hatterene",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0093989,
+   "rank": 84,
+   "raw": 54011
+  }
+ ],
+ "abilities": [
+  [
+   "Magic Bounce",
+   97.32403331041924
+  ],
+  [
+   "Healer",
+   2.407730805914875
+  ],
+  [
+   "Anticipation",
+   0.2682358836658874
+  ]
+ ],
+ "items": [
+  [
+   "Life Orb",
+   42.573222095662715
+  ],
+  [
+   "Fairy Feather",
+   15.339387854190841
+  ],
+  [
+   "Focus Sash",
+   14.804693788729347
+  ],
+  [
+   "Leftovers",
+   7.365487437248193
+  ],
+  [
+   "Sitrus Berry",
+   7.247822087535978
+  ],
+  [
+   "Babiri Berry",
+   4.437633118286084
+  ],
+  [
+   "Twisted Spoon",
+   1.755840942996872
+  ],
+  [
+   "Kebia Berry",
+   1.0018830108976882
+  ]
+ ],
+ "moves": [
+  [
+   "Dazzling Gleam",
+   23.740748309034252
+  ],
+  [
+   "Trick Room",
+   22.575354423036543
+  ],
+  [
+   "Protect",
+   16.81361313209239
+  ],
+  [
+   "Psychic",
+   16.314730280301937
+  ],
+  [
+   "Expanding Force",
+   4.665932768579271
+  ],
+  [
+   "Mystical Fire",
+   3.351145011330012
+  ],
+  [
+   "Psyshock",
+   1.8778400253316105
+  ],
+  [
+   "Calm Mind",
+   1.4817226723039194
+  ],
+  [
+   "Draining Kiss",
+   1.0124878024072363
+  ],
+  [
+   "Psychic Terrain",
+   0.9618920088988542
+  ]
+ ],
+ "spreads": [
+  [
+   "Quiet:32/0/2/32/0/0",
+   34.58273868969934
+  ],
+  [
+   "Quiet:32/0/0/32/2/0",
+   17.1771849592659
+  ],
+  [
+   "Sassy:32/0/0/2/32/0",
+   5.89617486642949
+  ],
+  [
+   "Quiet:27/0/7/32/0/0",
+   4.936345575726174
+  ],
+  [
+   "Modest:32/0/2/32/0/0",
+   2.9549951120443954
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Farigiraf",
+   10.010294783653078
+  ],
+  [
+   "Torkoal",
+   9.7364448952286
+  ],
+  [
+   "Kingambit",
+   4.791777000239191
+  ],
+  [
+   "Mawile-Mega",
+   4.449152234938877
+  ],
+  [
+   "Incineroar",
+   4.371695870241423
+  ],
+  [
+   "Sinistcha",
+   4.019923537538473
+  ],
+  [
+   "Oranguru",
+   2.569901755078561
+  ],
+  [
+   "Basculegion",
+   2.164170164379465
+  ],
+  [
+   "Camerupt-Mega",
+   2.1323559551988738
+  ],
+  [
+   "Scrafty-Mega",
+   2.0913201508060557
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

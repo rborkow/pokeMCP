@@ -1,108 +1,274 @@
 {
-    "id": "kingambit",
-    "name": "Kingambit",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.3380545,
-            "rank": 4,
-            "raw": 1431112
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.36319470000000004,
-            "rank": 2,
-            "raw": 1644541
-        }
-    ],
-    "abilities": [
-        ["Defiant", 93.67833760989008],
-        ["Supreme Overlord", 6.318874712807028],
-        ["Pressure", 0.00278767730287943]
-    ],
-    "items": [
-        ["Chople Berry", 63.40708409037281],
-        ["Black Glasses", 27.84964119881336],
-        ["Focus Sash", 6.4137980434169215],
-        ["Occa Berry", 0.8269236769763192],
-        ["Lum Berry", 0.36942618698357055],
-        ["Leftovers", 0.2936157027170719],
-        ["Black Belt", 0.21558284564634073],
-        ["Sitrus Berry", 0.20125587349545646]
-    ],
-    "moves": [
-        ["Sucker Punch", 24.852819991863047],
-        ["Kowtow Cleave", 23.802776123353667],
-        ["Protect", 19.045489537214237],
-        ["Iron Head", 15.150679353192075],
-        ["Low Kick", 14.421166600542742],
-        ["Swords Dance", 2.32834574734163],
-        ["Brick Break", 0.09169291494959098],
-        ["Assurance", 0.07763988442243847],
-        ["Throat Chop", 0.04868746660141561],
-        ["Taunt", 0.03085209639977196]
-    ],
-    "spreads": [
-        ["Adamant:32/32/0/0/2/0", 8.609201826540824],
-        ["Adamant:32/32/0/0/0/2", 6.452920468858771],
-        ["Adamant:32/32/2/0/0/0", 5.017903641796199],
-        ["Brave:32/32/0/0/2/0", 4.895327908065228],
-        ["Adamant:2/32/0/0/0/32", 4.325186570189906]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Basculegion", 11.638530894938498],
-        ["Garchomp", 9.973763391856439],
-        ["Charizard-Mega-Y", 7.4463794498495846],
-        ["Sneasler", 7.0833122747042525],
-        ["Whimsicott", 4.904454580489719],
-        ["Floette-Mega", 4.648465171842031],
-        ["Aerodactyl-Mega", 3.437904819528382],
-        ["Farigiraf", 3.388392895120961],
-        ["Sylveon", 3.3354835908953744],
-        ["Incineroar", 2.359598397219554]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Black Glasses",
-            "ability": "Defiant",
-            "moves": ["Kowtow Cleave", "Iron Head", "Sucker Punch", "Protect"],
-            "count": 42,
-            "bestPlacing": 1,
-            "bestPlayer": "SuperDialga",
-            "eventName": "Sketch Academy Pride Month x MMHM Qualifier 1",
-            "eventSlug": "2026-06-08-sketch-academy-pride-month-x-mmhm-qualifier-1",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1cceb847f3797bf6ba8b3b",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Chople Berry",
-            "ability": "Defiant",
-            "moves": ["Kowtow Cleave", "Sucker Punch", "Low Kick", "Protect"],
-            "count": 34,
-            "bestPlacing": 1,
-            "bestPlayer": "Dr_Bejan",
-            "eventName": "Pokepal Smackdown #144 (Champions) (Reg M-A)",
-            "eventSlug": "2026-06-08-pokepal-smackdown-144-champions-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15a9910f6c1f089986169a",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Chople Berry",
-            "ability": "Defiant",
-            "moves": ["Kowtow Cleave", "Sucker Punch", "Iron Head", "Protect"],
-            "count": 28,
-            "bestPlacing": 1,
-            "bestPlayer": "KoonKy2",
-            "eventName": "*Sitrus-Series*|Champions|$50 to First Place|#62",
-            "eventSlug": "2026-06-10-sitrus-series-champions-50-to-first-place-62",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a21741847f3797bf6bab7f3",
-            "nature": "Adamant"
-        }
-    ]
+ "id": "kingambit",
+ "name": "Kingambit",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.23090360000000001,
+   "rank": 6,
+   "raw": 452422
+  }
+ ],
+ "abilities": [
+  [
+   "Defiant",
+   98.23822228546764
+  ],
+  [
+   "Supreme Overlord",
+   1.7410041461306913
+  ],
+  [
+   "Pressure",
+   0.02077356840166011
+  ]
+ ],
+ "items": [
+  [
+   "Black Glasses",
+   41.69815655936349
+  ],
+  [
+   "Chople Berry",
+   31.797936423617422
+  ],
+  [
+   "Focus Sash",
+   11.75785107291997
+  ],
+  [
+   "Life Orb",
+   9.097877818852
+  ],
+  [
+   "Occa Berry",
+   3.1855121030126443
+  ],
+  [
+   "Expert Belt",
+   0.7056329930157457
+  ],
+  [
+   "Leftovers",
+   0.45416728810368867
+  ],
+  [
+   "Black Belt",
+   0.34877024458680167
+  ]
+ ],
+ "moves": [
+  [
+   "Sucker Punch",
+   24.859357174996727
+  ],
+  [
+   "Kowtow Cleave",
+   24.060522123907294
+  ],
+  [
+   "Protect",
+   19.011774384237658
+  ],
+  [
+   "Iron Head",
+   17.424977471099094
+  ],
+  [
+   "Low Kick",
+   8.693269260911208
+  ],
+  [
+   "Swords Dance",
+   5.2678519943246895
+  ],
+  [
+   "Brick Break",
+   0.29526418829997125
+  ],
+  [
+   "Assurance",
+   0.10132568319361278
+  ],
+  [
+   "Taunt",
+   0.0383066584930749
+  ],
+  [
+   "Iron Defense",
+   0.03633827282948049
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:32/32/0/0/2/0",
+   21.94446942629448
+  ],
+  [
+   "Adamant:32/32/0/0/0/2",
+   7.425841500674473
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   5.897658079577668
+  ],
+  [
+   "Brave:32/32/0/0/2/0",
+   5.541334707951635
+  ],
+  [
+   "Adamant:32/32/2/0/0/0",
+   4.794131354741179
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Garchomp",
+   8.972751023826161
+  ],
+  [
+   "Basculegion",
+   8.427631804713755
+  ],
+  [
+   "Whimsicott",
+   6.52444593701811
+  ],
+  [
+   "Charizard-Mega-Y",
+   5.543598706660011
+  ],
+  [
+   "Sinistcha",
+   4.618962530567937
+  ],
+  [
+   "Sneasler",
+   4.616363054197872
+  ],
+  [
+   "Floette-Mega",
+   4.55375758643943
+  ],
+  [
+   "Sylveon",
+   4.043245926571372
+  ],
+  [
+   "Incineroar",
+   3.815512870100878
+  ],
+  [
+   "Farigiraf",
+   3.560836692935104
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gallade",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Aerodactyl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Black Glasses",
+   "ability": "Defiant",
+   "moves": [
+    "Kowtow Cleave",
+    "Protect",
+    "Sucker Punch",
+    "Swords Dance"
+   ],
+   "count": 40,
+   "bestPlacing": 1,
+   "bestPlayer": "Martinus_03",
+   "eventName": "Champions Collective #12",
+   "eventSlug": "2026-07-01-champions-collective-12",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3987c183fd320299bce00b",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Black Glasses",
+   "ability": "Defiant",
+   "moves": [
+    "Kowtow Cleave",
+    "Sucker Punch",
+    "Iron Head",
+    "Protect"
+   ],
+   "count": 18,
+   "bestPlacing": 1,
+   "bestPlayer": "Snorlaxpikachu1",
+   "eventName": "Tenki's Cart Weekly #107- Reg MB",
+   "eventSlug": "2026-07-02-tenki-s-cart-weekly-107-reg-mb",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a4213a583fd320299bd3c48",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Defiant",
+   "moves": [
+    "Kowtow Cleave",
+    "Iron Head",
+    "Sucker Punch",
+    "Low Kick"
+   ],
+   "count": 14,
+   "bestPlacing": 1,
+   "bestPlayer": "Swiss",
+   "eventName": "SNT Reg M-B Tour #1",
+   "eventSlug": "2026-06-30-snt-reg-m-b-tour-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3bd39383fd320299bcf26c",
+   "nature": "Adamant"
+  }
+ ]
 }

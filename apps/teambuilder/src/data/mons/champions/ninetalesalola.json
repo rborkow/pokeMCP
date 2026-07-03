@@ -1,67 +1,218 @@
 {
-    "id": "ninetalesalola",
-    "name": "Ninetales-Alola",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0378733,
-            "rank": 40,
-            "raw": 251051
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0552366,
-            "rank": 31,
-            "raw": 333501
-        }
-    ],
-    "abilities": [["Snow Warning", 99.3092568036257], ["Snow Cloak", 0.6907431963742957]],
-    "items": [
-        ["Never-Melt Ice", 41.72218323124311],
-        ["Focus Sash", 35.496736777455965],
-        ["Choice Scarf", 16.238326863906376],
-        ["Occa Berry", 1.2919181815682392],
-        ["Sitrus Berry", 1.2556167316955218],
-        ["Babiri Berry", 0.9427833321701331],
-        ["Kebia Berry", 0.9061529579568696],
-        ["Mental Herb", 0.6327845266732589]
-    ],
-    "moves": [
-        ["Blizzard", 24.249495643152425],
-        ["Protect", 19.07544376275401],
-        ["Freeze-Dry", 15.613563450358559],
-        ["Encore", 13.501881039806651],
-        ["Aurora Veil", 8.25032958154242],
-        ["Moonblast", 5.933082614544962],
-        ["Icy Wind", 5.896725575056489],
-        ["Disable", 4.81242784951854],
-        ["Dazzling Gleam", 1.0935123511618592],
-        ["Extrasensory", 0.39224310291824194]
-    ],
-    "spreads": [
-        ["Timid:2/0/0/32/0/32", 25.526166883078737],
-        ["Timid:1/0/1/32/0/32", 16.770894898157792],
-        ["Timid:21/0/1/15/0/29", 7.884047830795282],
-        ["Timid:1/0/0/32/1/32", 7.349135373344208],
-        ["Modest:2/0/0/32/0/32", 3.6274027387465173]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Kingambit", 8.316695235974937],
-        ["Incineroar", 7.660156822942541],
-        ["Gengar-Mega", 5.864194874274671],
-        ["Garchomp", 5.763933567136597],
-        ["Basculegion", 5.602417617928475],
-        ["Sneasler", 4.963997129901323],
-        ["Rotom-Wash", 4.5390458950551],
-        ["Farigiraf", 3.871919724193282],
-        ["Glimmora-Mega", 3.6521702666166638],
-        ["Aegislash", 3.1049671083468993]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "ninetalesalola",
+ "name": "Ninetales-Alola",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.056930100000000004,
+   "rank": 25,
+   "raw": 141939
+  }
+ ],
+ "abilities": [
+  [
+   "Snow Warning",
+   98.86782944530802
+  ],
+  [
+   "Snow Cloak",
+   1.1321705546919851
+  ]
+ ],
+ "items": [
+  [
+   "Light Clay",
+   30.664491961631118
+  ],
+  [
+   "Never-Melt Ice",
+   27.246394982016536
+  ],
+  [
+   "Focus Sash",
+   23.721665612381457
+  ],
+  [
+   "Choice Scarf",
+   11.811731966795543
+  ],
+  [
+   "Life Orb",
+   3.0418259642925958
+  ],
+  [
+   "Occa Berry",
+   1.0748990881928786
+  ],
+  [
+   "Icy Rock",
+   0.5092681306963722
+  ],
+  [
+   "Mental Herb",
+   0.39325998221868264
+  ]
+ ],
+ "moves": [
+  [
+   "Blizzard",
+   23.662063529225335
+  ],
+  [
+   "Protect",
+   18.593398919977705
+  ],
+  [
+   "Freeze-Dry",
+   16.733389916721464
+  ],
+  [
+   "Aurora Veil",
+   13.82626659173284
+  ],
+  [
+   "Encore",
+   8.488447112803492
+  ],
+  [
+   "Moonblast",
+   8.426014019627363
+  ],
+  [
+   "Icy Wind",
+   4.253339658559777
+  ],
+  [
+   "Disable",
+   1.7578827654177829
+  ],
+  [
+   "Dazzling Gleam",
+   1.3854972124642642
+  ],
+  [
+   "Psyshock",
+   0.6260167735207529
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   24.211640274509527
+  ],
+  [
+   "Timid:1/0/0/32/1/32",
+   17.621431485138547
+  ],
+  [
+   "Timid:1/0/1/32/0/32",
+   5.875438684428459
+  ],
+  [
+   "Timid:0/0/2/32/0/32",
+   2.2544194495726284
+  ],
+  [
+   "Timid:31/0/0/3/0/32",
+   1.9850701251158218
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Incineroar",
+   7.187178683711344
+  ],
+  [
+   "Garchomp",
+   6.941083950287262
+  ],
+  [
+   "Kingambit",
+   5.470895496264106
+  ],
+  [
+   "Basculegion",
+   5.44406455066694
+  ],
+  [
+   "Raichu-Mega-Y",
+   5.071615953201909
+  ],
+  [
+   "Sinistcha",
+   4.891866344118895
+  ],
+  [
+   "Sneasler",
+   3.55979854648852
+  ],
+  [
+   "Whimsicott",
+   3.500556354517149
+  ],
+  [
+   "Metagross-Mega",
+   3.2237760338403683
+  ],
+  [
+   "Staraptor-Mega",
+   2.4909540890555357
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Tyranitar-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

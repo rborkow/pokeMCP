@@ -1,0 +1,148 @@
+{
+ "id": "malamarmega",
+ "name": "Malamar-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.006936299999999999,
+   "rank": 92,
+   "raw": 39880
+  }
+ ],
+ "abilities": [
+  [
+   "No Ability",
+   79.19982762544542
+  ],
+  [
+   "Contrary",
+   20.800172374554577
+  ]
+ ],
+ "items": [
+  [
+   "Malamarite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Superpower",
+   24.838218771911514
+  ],
+  [
+   "Protect",
+   21.726214071347997
+  ],
+  [
+   "Knock Off",
+   19.131109231588304
+  ],
+  [
+   "Psycho Cut",
+   12.533544985878867
+  ],
+  [
+   "Trick Room",
+   4.825258055669622
+  ],
+  [
+   "Topsy-Turvy",
+   3.3425078515975195
+  ],
+  [
+   "Throat Chop",
+   2.3895389554006456
+  ],
+  [
+   "Stored Power",
+   1.9954690969440656
+  ],
+  [
+   "Rock Slide",
+   1.636128723668103
+  ],
+  [
+   "Zen Headbutt",
+   1.534974229232335
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:32/32/2/0/0/0",
+   11.7230238399571
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   4.3961787928880165
+  ],
+  [
+   "Adamant:32/32/0/0/2/0",
+   3.641732036461059
+  ],
+  [
+   "Jolly:0/32/0/0/2/32",
+   2.875177156172987
+  ],
+  [
+   "Adamant:32/0/1/0/32/1",
+   2.365994888257587
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   11.477437995263662
+  ],
+  [
+   "Grimmsnarl",
+   7.40415862850676
+  ],
+  [
+   "Incineroar",
+   6.129217444041018
+  ],
+  [
+   "Whimsicott",
+   5.090081866169236
+  ],
+  [
+   "Sneasler",
+   5.0824790391979215
+  ],
+  [
+   "Basculegion",
+   4.319304446586099
+  ],
+  [
+   "Gholdengo",
+   3.542119330852972
+  ],
+  [
+   "Sylveon",
+   3.1947601925728866
+  ],
+  [
+   "Garchomp",
+   2.576192472403019
+  ],
+  [
+   "Torkoal",
+   2.079535132505852
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

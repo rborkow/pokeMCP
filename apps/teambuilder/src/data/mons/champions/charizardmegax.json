@@ -1,58 +1,144 @@
 {
-    "id": "charizardmegax",
-    "name": "Charizard-Mega-X",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0213367,
-            "rank": 52,
-            "raw": 149787
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0235837,
-            "rank": 51,
-            "raw": 156848
-        }
-    ],
-    "abilities": [["Tough Claws", 100]],
-    "items": [["Charizardite X", 100]],
-    "moves": [
-        ["Protect", 24.38871964087368],
-        ["Dragon Dance", 22.953253623143627],
-        ["Flare Blitz", 22.04739230556862],
-        ["Dragon Claw", 21.21502152410197],
-        ["Breaking Swipe", 3.5562776017067685],
-        ["Temper Flare", 2.332060899134979],
-        ["Thunder Punch", 0.5845441497360216],
-        ["Flame Charge", 0.5802687084133346],
-        ["Rock Slide", 0.35628188456728865],
-        ["Roost", 0.3561542219562315]
-    ],
-    "spreads": [
-        ["Adamant:14/21/1/0/1/29", 13.765138469455703],
-        ["Adamant:2/32/0/0/0/32", 4.9590237785221465],
-        ["Adamant:23/10/2/0/2/29", 3.8364394189820272],
-        ["Jolly:2/32/0/0/0/32", 3.515873499322005],
-        ["Jolly:0/32/2/0/0/32", 3.2825580541787565]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Sneasler", 14.575274518992822],
-        ["Sinistcha", 14.43934490937519],
-        ["Incineroar", 10.398229414395656],
-        ["Milotic", 8.557482309225627],
-        ["Floette-Mega", 7.5380212860832785],
-        ["Kingambit", 6.604691488068715],
-        ["Basculegion", 2.544237266029592],
-        ["Sylveon", 2.3815313427113023],
-        ["Farigiraf", 1.9685166285602436],
-        ["Ninetales-Alola", 1.8398718119276205]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "charizardmegax",
+ "name": "Charizard-Mega-X",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.005096000000000001,
+   "rank": 106,
+   "raw": 16262
+  }
+ ],
+ "abilities": [
+  [
+   "Tough Claws",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Charizardite X",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Dragon Claw",
+   22.171974822028695
+  ],
+  [
+   "Protect",
+   21.818413182466184
+  ],
+  [
+   "Flare Blitz",
+   20.706747253275953
+  ],
+  [
+   "Dragon Dance",
+   20.131024072374824
+  ],
+  [
+   "Roost",
+   2.679332926793101
+  ],
+  [
+   "Temper Flare",
+   2.4528263895989832
+  ],
+  [
+   "Breaking Swipe",
+   2.0985765214079803
+  ],
+  [
+   "Rock Slide",
+   1.644133684050456
+  ],
+  [
+   "Swords Dance",
+   1.1050844680926362
+  ],
+  [
+   "Flame Charge",
+   1.0127270549188512
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   13.288980487293978
+  ],
+  [
+   "Impish:16/15/4/0/0/31",
+   6.377393954178623
+  ],
+  [
+   "Adamant:10/32/0/0/0/24",
+   5.948551351436059
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   5.842867281256541
+  ],
+  [
+   "Adamant:0/32/0/0/0/32",
+   5.232550003681612
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   12.491931654506837
+  ],
+  [
+   "Sneasler",
+   10.432898836475319
+  ],
+  [
+   "Incineroar",
+   7.860651613290159
+  ],
+  [
+   "Kingambit",
+   5.406786053665655
+  ],
+  [
+   "Whimsicott",
+   4.715705707092833
+  ],
+  [
+   "Floette-Mega",
+   4.590184613534259
+  ],
+  [
+   "Farigiraf",
+   4.198636014205949
+  ],
+  [
+   "Milotic",
+   4.087393752479588
+  ],
+  [
+   "Basculegion",
+   3.943053668620633
+  ],
+  [
+   "Sylveon",
+   2.6369248399681338
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

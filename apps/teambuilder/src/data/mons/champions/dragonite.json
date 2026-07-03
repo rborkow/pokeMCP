@@ -1,104 +1,270 @@
 {
-    "id": "dragonite",
-    "name": "Dragonite",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0324864,
-            "rank": 43,
-            "raw": 154196
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0328652,
-            "rank": 43,
-            "raw": 178824
-        }
-    ],
-    "abilities": [["Multiscale", 79.83581716219152], ["Inner Focus", 20.16418283780848]],
-    "items": [
-        ["Dragon Fang", 77.96372878855999],
-        ["Lum Berry", 6.947500458404451],
-        ["Silk Scarf", 3.171464433550169],
-        ["Leftovers", 3.1406344430310615],
-        ["Sitrus Berry", 1.9039293278133043],
-        ["Roseli Berry", 1.163456087034507],
-        ["White Herb", 1.1468132254853665],
-        ["Haban Berry", 1.1029786182232033]
-    ],
-    "moves": [
-        ["Extreme Speed", 22.42432198021621],
-        ["Dragon Claw", 20.83277842440558],
-        ["Low Kick", 17.87838989471661],
-        ["Protect", 14.822888838064937],
-        ["Tailwind", 11.340301570322065],
-        ["Scale Shot", 2.3305910997495145],
-        ["Fire Punch", 1.0457071085095704],
-        ["Dragon Dance", 1.0042873772366767],
-        ["Rock Slide", 0.9635705494608838],
-        ["Aerial Ace", 0.6489342303557147]
-    ],
-    "spreads": [
-        ["Adamant:2/32/0/0/0/32", 24.253052332445737],
-        ["Adamant:21/32/0/0/0/13", 16.909664045028148],
-        ["Adamant:19/32/1/0/1/13", 2.876479602430392],
-        ["Adamant:32/32/0/0/0/2", 2.4566239394009988],
-        ["Adamant:1/32/1/0/0/32", 2.306612836822581]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Kingambit", 10.793426916422295],
-        ["Sneasler", 10.182469963747796],
-        ["Basculegion", 7.376709976246159],
-        ["Incineroar", 6.684765554436031],
-        ["Gengar-Mega", 5.153685442152189],
-        ["Ninetales-Alola", 5.1015162736743935],
-        ["Froslass-Mega", 3.8085600940373228],
-        ["Milotic", 3.6361312229167595],
-        ["Floette-Mega", 2.9489768367561013],
-        ["Aegislash", 2.254251665622427]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Dragoninite",
-            "ability": "Multiscale",
-            "moves": ["Flamethrower", "Draco Meteor", "Tailwind", "Extreme Speed"],
-            "count": 4,
-            "bestPlacing": 1,
-            "bestPlayer": "Ally",
-            "eventName": "Pokepal Smackdown #141 (Champions) (Reg M-A)",
-            "eventSlug": "2026-05-18-pokepal-smackdown-141-champions-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69f8a6ef4f71d664893ec55c",
-            "nature": "Timid"
-        },
-        {
-            "item": "Dragon Fang",
-            "ability": "Multiscale",
-            "moves": ["Protect", "Extreme Speed", "Dragon Claw", "Low Kick"],
-            "count": 4,
-            "bestPlacing": 1,
-            "bestPlayer": "SableyeVGC",
-            "eventName": "Talon's FIGHT CLUB #83 POKEMON CHAMPIONS",
-            "eventSlug": "2026-05-07-talon-s-fight-club-83-pokemon-champions",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69e2b29c78b359b789d64d2e",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Dragoninite",
-            "ability": "Multiscale",
-            "moves": ["Dragon Pulse", "Flamethrower", "Thunderbolt", "Protect"],
-            "count": 4,
-            "bestPlacing": 2,
-            "bestPlayer": "Ayabe",
-            "eventName": "Sketch Academy Pride Month x MMHM Qualifier 1",
-            "eventSlug": "2026-06-08-sketch-academy-pride-month-x-mmhm-qualifier-1",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1cceb847f3797bf6ba8b3b",
-            "nature": "Timid"
-        }
-    ]
+ "id": "dragonite",
+ "name": "Dragonite",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.014769000000000001,
+   "rank": 70,
+   "raw": 48025
+  }
+ ],
+ "abilities": [
+  [
+   "Multiscale",
+   73.69377855088685
+  ],
+  [
+   "Inner Focus",
+   26.306221449113153
+  ]
+ ],
+ "items": [
+  [
+   "Dragon Fang",
+   56.33198705177942
+  ],
+  [
+   "Life Orb",
+   11.501548970890525
+  ],
+  [
+   "Lum Berry",
+   5.8912449648501894
+  ],
+  [
+   "Leftovers",
+   4.885995192334876
+  ],
+  [
+   "Muscle Band",
+   2.804521801586314
+  ],
+  [
+   "Roseli Berry",
+   2.7949234706776847
+  ],
+  [
+   "White Herb",
+   1.9699490958222468
+  ],
+  [
+   "Sitrus Berry",
+   1.9542115819170776
+  ]
+ ],
+ "moves": [
+  [
+   "Extreme Speed",
+   20.58291091565462
+  ],
+  [
+   "Dragon Claw",
+   18.82625315639716
+  ],
+  [
+   "Protect",
+   17.930352182485432
+  ],
+  [
+   "Low Kick",
+   12.10337883947465
+  ],
+  [
+   "Tailwind",
+   8.69754227704645
+  ],
+  [
+   "Scale Shot",
+   2.6473005903573017
+  ],
+  [
+   "Fire Punch",
+   1.9969697694511082
+  ],
+  [
+   "Haze",
+   1.9601707298610664
+  ],
+  [
+   "Stomping Tantrum",
+   1.6457123460624452
+  ],
+  [
+   "Rock Slide",
+   1.5045508154624223
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   21.626362328569844
+  ],
+  [
+   "Adamant:0/32/1/0/1/32",
+   5.077520921367621
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   4.496193382138815
+  ],
+  [
+   "Adamant:21/32/0/0/0/13",
+   3.9719408160629133
+  ],
+  [
+   "Adamant:32/26/5/0/0/3",
+   3.433179016199038
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Incineroar",
+   9.124416727402137
+  ],
+  [
+   "Basculegion",
+   6.48177974544313
+  ],
+  [
+   "Sneasler",
+   6.168205718765086
+  ],
+  [
+   "Kingambit",
+   5.672849506816952
+  ],
+  [
+   "Raichu-Mega-Y",
+   4.703161578463362
+  ],
+  [
+   "Ninetales-Alola",
+   4.115251278261362
+  ],
+  [
+   "Gengar-Mega",
+   3.7615693936096872
+  ],
+  [
+   "Sinistcha",
+   3.702942982157162
+  ],
+  [
+   "Whimsicott",
+   2.5188190636416348
+  ],
+  [
+   "Gholdengo",
+   2.348849277652656
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Dragon Fang",
+   "ability": "Multiscale",
+   "moves": [
+    "Dragon Claw",
+    "Low Kick",
+    "Extreme Speed",
+    "Protect"
+   ],
+   "count": 2,
+   "bestPlacing": 1,
+   "bestPlayer": "root2iris",
+   "eventName": "Tenki's x MMHM - Champions M-B",
+   "eventSlug": "2026-06-25-tenki-s-x-mmhm-champions-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a04bb7e13f957d6d4b4758c",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Lum Berry",
+   "ability": "Multiscale",
+   "moves": [
+    "Extreme Speed",
+    "Dragon Claw",
+    "Protect",
+    "Fire Punch"
+   ],
+   "count": 1,
+   "bestPlacing": 2,
+   "bestPlayer": "Vgcorner",
+   "eventName": "4th Annual St. Jude VGC Charity Tournament",
+   "eventSlug": "2026-06-27-4th-annual-st-jude-vgc-charity-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/69c7cead36f5b5c303dbfa0c",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Dragoninite",
+   "ability": "Multiscale",
+   "moves": [
+    "Weather Ball",
+    "Draco Meteor",
+    "Hurricane",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 2,
+   "bestPlayer": "Malo__rx",
+   "eventName": "The Drywalls Series #8 - M-B",
+   "eventSlug": "2026-06-22-the-drywalls-series-8-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a37eb4faf50e12308407acc",
+   "nature": "Modest"
+  }
+ ]
 }

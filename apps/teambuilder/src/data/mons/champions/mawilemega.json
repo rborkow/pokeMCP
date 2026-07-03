@@ -1,0 +1,186 @@
+{
+ "id": "mawilemega",
+ "name": "Mawile-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.1031774,
+   "rank": 19,
+   "raw": 217170
+  }
+ ],
+ "abilities": [
+  [
+   "Huge Power",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Mawilite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Play Rough",
+   24.38733042370485
+  ],
+  [
+   "Protect",
+   22.43126833071242
+  ],
+  [
+   "Sucker Punch",
+   22.36963497095369
+  ],
+  [
+   "Iron Head",
+   16.15679533747828
+  ],
+  [
+   "Swords Dance",
+   7.005761670727706
+  ],
+  [
+   "Rock Slide",
+   4.591214212178622
+  ],
+  [
+   "Brick Break",
+   1.3160050438842208
+  ],
+  [
+   "Knock Off",
+   1.048927572897667
+  ],
+  [
+   "Thunder Punch",
+   0.15913267953573568
+  ],
+  [
+   "Psychic Fangs",
+   0.12115070036970593
+  ]
+ ],
+ "spreads": [
+  [
+   "Brave:32/32/0/0/2/0",
+   38.29208566730256
+  ],
+  [
+   "Adamant:32/32/0/0/2/0",
+   17.281581021715063
+  ],
+  [
+   "Brave:32/32/2/0/0/0",
+   5.231113348155518
+  ],
+  [
+   "Adamant:32/6/4/0/23/1",
+   2.589550958071847
+  ],
+  [
+   "Brave:32/32/1/0/1/0",
+   2.2684399668535447
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Farigiraf",
+   13.98541022994231
+  ],
+  [
+   "Torkoal",
+   7.84417135394068
+  ],
+  [
+   "Incineroar",
+   7.723882461202451
+  ],
+  [
+   "Sinistcha",
+   6.7981337315433485
+  ],
+  [
+   "Basculegion",
+   3.6356188897557296
+  ],
+  [
+   "Pelipper",
+   3.2140489045829583
+  ],
+  [
+   "Garchomp",
+   3.121134667802682
+  ],
+  [
+   "Staraptor",
+   3.044282451681766
+  ],
+  [
+   "Swampert-Mega",
+   2.3965388792557434
+  ],
+  [
+   "Archaludon",
+   2.1466091654672415
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Floette-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Hydreigon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Swampert-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rotom-Heat",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Scrafty-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

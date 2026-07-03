@@ -1,0 +1,244 @@
+{
+ "id": "scrafty",
+ "name": "Scrafty",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.005785200000000001,
+   "rank": 99,
+   "raw": 20180
+  }
+ ],
+ "abilities": [
+  [
+   "Intimidate",
+   92.68474501541407
+  ],
+  [
+   "Moxie",
+   6.819631161656335
+  ],
+  [
+   "Shed Skin",
+   0.49562382292960255
+  ]
+ ],
+ "items": [
+  [
+   "Sitrus Berry",
+   26.25401701473762
+  ],
+  [
+   "Roseli Berry",
+   18.69955688587039
+  ],
+  [
+   "Leftovers",
+   15.996085778483335
+  ],
+  [
+   "Life Orb",
+   8.228563550512353
+  ],
+  [
+   "Expert Belt",
+   6.590901949349647
+  ],
+  [
+   "White Herb",
+   5.364737015515726
+  ],
+  [
+   "Chople Berry",
+   4.76862902636535
+  ],
+  [
+   "Black Belt",
+   4.316180250730113
+  ]
+ ],
+ "moves": [
+  [
+   "Fake Out",
+   24.48205264632929
+  ],
+  [
+   "Knock Off",
+   22.008751850608306
+  ],
+  [
+   "Close Combat",
+   12.334009238666388
+  ],
+  [
+   "Drain Punch",
+   9.320638230193316
+  ],
+  [
+   "Coaching",
+   5.8948674519775714
+  ],
+  [
+   "Protect",
+   5.747677800117707
+  ],
+  [
+   "Detect",
+   3.0937763219697203
+  ],
+  [
+   "Ice Punch",
+   2.3351774290250638
+  ],
+  [
+   "Taunt",
+   1.8401070722361044
+  ],
+  [
+   "Brick Break",
+   1.7988287506779974
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:32/32/0/0/2/0",
+   17.0772014818224
+  ],
+  [
+   "Brave:32/32/0/0/2/0",
+   9.874206493432187
+  ],
+  [
+   "Brave:32/32/2/0/0/0",
+   5.234847600032925
+  ],
+  [
+   "Careful:32/7/17/0/5/5",
+   2.4956455450352517
+  ],
+  [
+   "Careful:32/0/19/0/15/0",
+   2.267936086822672
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Farigiraf",
+   6.438851848114979
+  ],
+  [
+   "Mawile-Mega",
+   5.743206264264127
+  ],
+  [
+   "Garchomp",
+   5.495075936161484
+  ],
+  [
+   "Torkoal",
+   5.1053790178812255
+  ],
+  [
+   "Sinistcha",
+   3.9488502524098834
+  ],
+  [
+   "Whimsicott",
+   3.223857047986578
+  ],
+  [
+   "Basculegion",
+   2.990538081610822
+  ],
+  [
+   "Metagross-Mega",
+   2.430028509770239
+  ],
+  [
+   "Pelipper",
+   2.3818871167439437
+  ],
+  [
+   "Charizard-Mega-Y",
+   2.227458820207942
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Scraftinite",
+   "ability": "Intimidate",
+   "moves": [
+    "Knock Off",
+    "Drain Punch",
+    "Fake Out",
+    "Detect"
+   ],
+   "count": 2,
+   "bestPlacing": 1,
+   "bestPlayer": "root2iris",
+   "eventName": "Tenki's x MMHM - Champions M-B",
+   "eventSlug": "2026-06-25-tenki-s-x-mmhm-champions-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a04bb7e13f957d6d4b4758c",
+   "nature": "Careful"
+  },
+  {
+   "item": "Scraftinite",
+   "ability": "Intimidate",
+   "moves": [
+    "Throat Chop",
+    "Drain Punch",
+    "Fake Out",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 1,
+   "bestPlayer": "TytokiArts",
+   "eventName": "*Sitrus-Series*|Champions-MB|#65",
+   "eventSlug": "2026-07-01-sitrus-series-champions-mb-65",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3d2290c87cd9ff0a30f032",
+   "nature": "Impish"
+  },
+  {
+   "item": "Scraftinite",
+   "ability": "Intimidate",
+   "moves": [
+    "Fake Out",
+    "Knock Off",
+    "Close Combat",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 5,
+   "bestPlayer": "Cloudzin",
+   "eventName": "The Wide League Saturday Night Rumble #87 REG M-B",
+   "eventSlug": "2026-06-28-the-wide-league-saturday-night-rumble-87-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3dbda083fd320299bd0416",
+   "nature": "Brave"
+  }
+ ]
+}

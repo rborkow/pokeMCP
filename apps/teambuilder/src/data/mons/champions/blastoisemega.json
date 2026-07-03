@@ -1,58 +1,186 @@
 {
-    "id": "blastoisemega",
-    "name": "Blastoise-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0512584,
-            "rank": 28,
-            "raw": 224344
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0762863,
-            "rank": 20,
-            "raw": 402743
-        }
-    ],
-    "abilities": [["Mega Launcher", 100]],
-    "items": [["Blastoisinite", 100]],
-    "moves": [
-        ["Water Spout", 23.19051497677127],
-        ["Dark Pulse", 21.025554238557508],
-        ["Fake Out", 14.882241623720635],
-        ["Aura Sphere", 13.852313425376778],
-        ["Shell Smash", 10.330508097191968],
-        ["Protect", 9.520594496158312],
-        ["Water Pulse", 2.7166069594197766],
-        ["Ice Beam", 2.459818067531744],
-        ["Dragon Pulse", 0.6454353987266778],
-        ["Muddy Water", 0.4726873886192959]
-    ],
-    "spreads": [
-        ["Modest:2/0/0/32/0/32", 16.67945015594095],
-        ["Quiet:32/0/2/32/0/0", 10.130789874935799],
-        ["Quiet:32/0/0/32/2/0", 6.51073705699678],
-        ["Modest:31/0/0/32/0/3", 3.4764558611205887],
-        ["Quiet:31/0/3/32/0/0", 2.8702264221041953]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Farigiraf", 10.462745659002996],
-        ["Sinistcha", 6.962148819887225],
-        ["Basculegion", 6.532652752045499],
-        ["Kingambit", 5.106104385948152],
-        ["Vivillon", 4.932080508557077],
-        ["Torkoal", 4.819517830159609],
-        ["Sneasler", 4.805548724693137],
-        ["Sylveon", 4.646221296628608],
-        ["Pelipper", 4.397140860188713],
-        ["Archaludon", 4.030646200168282]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "blastoisemega",
+ "name": "Blastoise-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0279001,
+   "rank": 42,
+   "raw": 56955
+  }
+ ],
+ "abilities": [
+  [
+   "Mega Launcher",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Blastoisinite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Water Spout",
+   23.187002817342805
+  ],
+  [
+   "Dark Pulse",
+   21.237126885744598
+  ],
+  [
+   "Protect",
+   13.03789282839554
+  ],
+  [
+   "Shell Smash",
+   12.230056272305838
+  ],
+  [
+   "Aura Sphere",
+   12.08137934513588
+  ],
+  [
+   "Fake Out",
+   11.964790202355125
+  ],
+  [
+   "Water Pulse",
+   2.0527623761409663
+  ],
+  [
+   "Ice Beam",
+   1.8721649460358516
+  ],
+  [
+   "Dragon Pulse",
+   0.7446565685344954
+  ],
+  [
+   "Muddy Water",
+   0.5171956447615957
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:2/0/0/32/0/32",
+   19.561229620974764
+  ],
+  [
+   "Quiet:32/0/0/32/2/0",
+   9.731510799234153
+  ],
+  [
+   "Quiet:32/0/2/32/0/0",
+   8.857021969454895
+  ],
+  [
+   "Modest:1/0/0/32/1/32",
+   6.499963454325851
+  ],
+  [
+   "Modest:29/0/0/32/0/5",
+   4.403544017154817
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sinistcha",
+   10.43958904369214
+  ],
+  [
+   "Farigiraf",
+   9.988419629995917
+  ],
+  [
+   "Incineroar",
+   6.334714064137939
+  ],
+  [
+   "Kingambit",
+   5.644076345139686
+  ],
+  [
+   "Sneasler",
+   5.441033530690433
+  ],
+  [
+   "Torkoal",
+   5.359981434076501
+  ],
+  [
+   "Sylveon",
+   4.265781866564371
+  ],
+  [
+   "Basculegion",
+   3.8525857087950186
+  ],
+  [
+   "Vivillon",
+   3.139418837561845
+  ],
+  [
+   "Pelipper",
+   2.6140306536418576
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

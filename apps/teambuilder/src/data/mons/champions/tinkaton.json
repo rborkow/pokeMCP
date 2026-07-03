@@ -1,108 +1,210 @@
 {
-    "id": "tinkaton",
-    "name": "Tinkaton",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0096037,
-            "rank": 79,
-            "raw": 92389
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.019704600000000003,
-            "rank": 56,
-            "raw": 140380
-        }
-    ],
-    "abilities": [
-        ["Mold Breaker", 91.64815020458778],
-        ["Own Tempo", 8.177480625356354],
-        ["Pickpocket", 0.17436917005586103]
-    ],
-    "items": [
-        ["Shuca Berry", 64.4774679648716],
-        ["Occa Berry", 11.471184191115698],
-        ["Metal Coat", 6.489899890967621],
-        ["Sitrus Berry", 6.073887724791229],
-        ["Focus Sash", 3.6467707321470555],
-        ["Mental Herb", 2.3922465856504047],
-        ["Leftovers", 2.248330876443364],
-        ["King's Rock", 1.1385805070050337]
-    ],
-    "moves": [
-        ["Fake Out", 24.86402509162748],
-        ["Gigaton Hammer", 24.68239562912074],
-        ["Encore", 17.83314071627511],
-        ["Protect", 17.430155613765912],
-        ["Play Rough", 3.912449778882983],
-        ["Feint", 3.765651207461756],
-        ["Helping Hand", 3.4481911024223773],
-        ["Knock Off", 1.0098353025557207],
-        ["Thunder Wave", 0.7390321391267327],
-        ["Stealth Rock", 0.3241617297639602]
-    ],
-    "spreads": [
-        ["Jolly:23/8/7/0/0/28", 25.178865363413287],
-        ["Jolly:2/32/0/0/0/32", 8.863437075163267],
-        ["Impish:32/14/20/0/0/0", 5.240692510629645],
-        ["Jolly:1/32/0/0/1/32", 2.627542658653742],
-        ["Jolly:0/32/0/0/0/32", 2.5947040726920285]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Sinistcha", 11.6459429438345],
-        ["Incineroar", 10.918155907397127],
-        ["Kommo-o", 9.715838518650449],
-        ["Gengar-Mega", 9.613813030421998],
-        ["Politoed", 7.954548755044338],
-        ["Pelipper", 2.7164917386177674],
-        ["Basculegion", 2.3918510076088353],
-        ["Blastoise-Mega", 2.342119260539653],
-        ["Farigiraf", 2.3406578904702333],
-        ["Sableye", 2.1052666119235846]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Shuca Berry",
-            "ability": "Mold Breaker",
-            "moves": ["Fake Out", "Gigaton Hammer", "Encore", "Protect"],
-            "count": 6,
-            "bestPlacing": 3,
-            "bestPlayer": "LenVGC",
-            "eventName": "10ToesDownVGC #31 Champions $100 Top 4(Late Join)",
-            "eventSlug": "2026-05-11-10toesdownvgc-31-champions-100-top-4-late-join",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69fa1b7b4f71d664893ed940",
-            "nature": "Jolly"
-        },
-        {
-            "item": "Shuca Berry",
-            "ability": "Own Tempo",
-            "moves": ["Fake Out", "Encore", "Gigaton Hammer", "Play Rough"],
-            "count": 1,
-            "bestPlacing": 4,
-            "bestPlayer": "ZipVGC",
-            "eventName": "SpearPillar Champions Tour #5 | Reg M-A $100 Prize",
-            "eventSlug": "2026-05-23-spearpillar-champions-tour-5-reg-m-a-100-prize",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69cd696dd478313a15a3921b",
-            "nature": null
-        },
-        {
-            "item": "Shuca Berry",
-            "ability": "Mold Breaker",
-            "moves": ["Fake Out", "Gigaton Hammer", "Feint", "Protect"],
-            "count": 1,
-            "bestPlacing": 8,
-            "bestPlayer": "MatRodny",
-            "eventName": "SpearPillar Champions Tour #4 | Reg M-A $100 Prize",
-            "eventSlug": "2026-05-16-spearpillar-champions-tour-4-reg-m-a-100-prize",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69cd6904d478313a15a39215",
-            "nature": null
-        }
-    ]
+ "id": "tinkaton",
+ "name": "Tinkaton",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.006284,
+   "rank": 96,
+   "raw": 28780
+  }
+ ],
+ "abilities": [
+  [
+   "Mold Breaker",
+   79.10941620008975
+  ],
+  [
+   "Own Tempo",
+   20.350086169430572
+  ],
+  [
+   "Pickpocket",
+   0.5404976304796628
+  ]
+ ],
+ "items": [
+  [
+   "Shuca Berry",
+   24.245226853116694
+  ],
+  [
+   "Metal Coat",
+   19.208404611785536
+  ],
+  [
+   "Sitrus Berry",
+   16.3603071476932
+  ],
+  [
+   "Occa Berry",
+   11.732497153313977
+  ],
+  [
+   "Focus Sash",
+   7.494971162022407
+  ],
+  [
+   "Leftovers",
+   5.853994542198528
+  ],
+  [
+   "Life Orb",
+   4.523011430178147
+  ],
+  [
+   "Mental Herb",
+   2.1102717096445422
+  ]
+ ],
+ "moves": [
+  [
+   "Gigaton Hammer",
+   24.577097657178744
+  ],
+  [
+   "Fake Out",
+   24.286852729263753
+  ],
+  [
+   "Protect",
+   15.206886104884044
+  ],
+  [
+   "Encore",
+   12.500245761354972
+  ],
+  [
+   "Play Rough",
+   8.430348432677658
+  ],
+  [
+   "Feint",
+   3.0913693134826037
+  ],
+  [
+   "Knock Off",
+   2.5366901298344873
+  ],
+  [
+   "Brick Break",
+   1.3430685968698721
+  ],
+  [
+   "Ice Hammer",
+   1.2850937727814018
+  ],
+  [
+   "Thunder Wave",
+   1.0904545453352377
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:1/32/0/0/1/32",
+   13.771825025130488
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   6.200747089279176
+  ],
+  [
+   "Jolly:23/8/7/0/0/28",
+   5.64788223486142
+  ],
+  [
+   "Jolly:24/10/0/0/0/32",
+   4.944693524768989
+  ],
+  [
+   "Adamant:21/32/13/0/0/0",
+   2.6318536533103445
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Incineroar",
+   6.299929828187803
+  ],
+  [
+   "Sinistcha",
+   5.46256905854619
+  ],
+  [
+   "Gengar-Mega",
+   5.136480754737609
+  ],
+  [
+   "Garchomp",
+   3.905640699673922
+  ],
+  [
+   "Staraptor-Mega",
+   3.500541951891651
+  ],
+  [
+   "Politoed",
+   3.290644624634118
+  ],
+  [
+   "Whimsicott",
+   3.1788937574253557
+  ],
+  [
+   "Kingambit",
+   2.91504851585991
+  ],
+  [
+   "Basculegion",
+   2.8837878741015723
+  ],
+  [
+   "Sableye",
+   2.8767815238377152
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

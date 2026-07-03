@@ -1,0 +1,270 @@
+{
+ "id": "raichu",
+ "name": "Raichu",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0147596,
+   "rank": 71,
+   "raw": 60585
+  }
+ ],
+ "abilities": [
+  [
+   "Lightning Rod",
+   97.42845467304645
+  ],
+  [
+   "Static",
+   2.571545326953543
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   69.25655487422956
+  ],
+  [
+   "Shuca Berry",
+   12.835269454225267
+  ],
+  [
+   "Sitrus Berry",
+   4.481303780358295
+  ],
+  [
+   "Magnet",
+   3.8882120876889976
+  ],
+  [
+   "Light Clay",
+   1.9305323328125872
+  ],
+  [
+   "Life Orb",
+   1.5103237844891513
+  ],
+  [
+   "Mental Herb",
+   1.0788992239693416
+  ],
+  [
+   "Choice Scarf",
+   0.8282358732121081
+  ]
+ ],
+ "moves": [
+  [
+   "Fake Out",
+   24.025225720599792
+  ],
+  [
+   "Volt Switch",
+   12.595583899712773
+  ],
+  [
+   "Nuzzle",
+   10.841384800699142
+  ],
+  [
+   "Encore",
+   9.76211963449852
+  ],
+  [
+   "Charm",
+   8.379696985784525
+  ],
+  [
+   "Thunderbolt",
+   7.608610270301126
+  ],
+  [
+   "Protect",
+   7.359300776472855
+  ],
+  [
+   "Endeavor",
+   3.3617378645315545
+  ],
+  [
+   "Electroweb",
+   2.748394380176502
+  ],
+  [
+   "Grass Knot",
+   1.7389125852743221
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   20.429144747375304
+  ],
+  [
+   "Timid:0/0/2/32/0/32",
+   8.943026265293694
+  ],
+  [
+   "Hasty:0/2/0/32/0/32",
+   7.147791251603194
+  ],
+  [
+   "Jolly:32/2/0/0/0/32",
+   6.134837342552134
+  ],
+  [
+   "Timid:32/0/0/2/0/32",
+   5.876943212744759
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Staraptor-Mega",
+   12.347912437984364
+  ],
+  [
+   "Sinistcha",
+   9.447596044158306
+  ],
+  [
+   "Garchomp",
+   6.9473119743580805
+  ],
+  [
+   "Grimmsnarl",
+   4.8939741997446085
+  ],
+  [
+   "Whimsicott",
+   4.825703930817114
+  ],
+  [
+   "Basculegion",
+   4.0870006027645145
+  ],
+  [
+   "Gholdengo",
+   4.0094062281707705
+  ],
+  [
+   "Incineroar",
+   3.968832450251039
+  ],
+  [
+   "Pelipper",
+   3.6244178330442134
+  ],
+  [
+   "Charizard-Mega-Y",
+   3.341036054495125
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Swampert-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Raichunite Y",
+   "ability": "Lightning Rod",
+   "moves": [
+    "Zap Cannon",
+    "Focus Blast",
+    "Fake Out",
+    "Protect"
+   ],
+   "count": 15,
+   "bestPlacing": 1,
+   "bestPlayer": "Jhan Nemo Sugui",
+   "eventName": "First Impression Mondays",
+   "eventSlug": "2026-06-29-first-impression-mondays",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a41cf1383fd320299bd39a4",
+   "nature": "Timid"
+  },
+  {
+   "item": "Raichunite Y",
+   "ability": "Lightning Rod",
+   "moves": [
+    "Zap Cannon",
+    "Focus Blast",
+    "Grass Knot",
+    "Protect"
+   ],
+   "count": 4,
+   "bestPlacing": 3,
+   "bestPlayer": "OrangePunk",
+   "eventName": "The Drywalls Series #8 - M-B",
+   "eventSlug": "2026-06-22-the-drywalls-series-8-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a37eb4faf50e12308407acc",
+   "nature": "Timid"
+  },
+  {
+   "item": "Raichunite Y",
+   "ability": "No Guard",
+   "moves": [
+    "Fake Out",
+    "Zap Cannon",
+    "Focus Blast",
+    "Volt Switch"
+   ],
+   "count": 1,
+   "bestPlacing": 8,
+   "bestPlayer": "Masuda77",
+   "eventName": "Mens Mental Health Month Invitational ($350 Prize)",
+   "eventSlug": "2026-06-28-mens-mental-health-month-invitational-350-prize",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a256b8f56b11a587a94b55b",
+   "nature": "Timid"
+  }
+ ]
+}

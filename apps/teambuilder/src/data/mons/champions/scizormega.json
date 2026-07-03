@@ -1,58 +1,168 @@
 {
-    "id": "scizormega",
-    "name": "Scizor-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0412092,
-            "rank": 38,
-            "raw": 222781
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0450609,
-            "rank": 37,
-            "raw": 330481
-        }
-    ],
-    "abilities": [["Technician", 100]],
-    "items": [["Scizorite", 100]],
-    "moves": [
-        ["Bullet Punch", 24.986298117193893],
-        ["Protect", 23.373760088134453],
-        ["Swords Dance", 21.527151670788523],
-        ["Bug Bite", 20.001675403908408],
-        ["Close Combat", 5.691529657019502],
-        ["Dual Wingbeat", 1.3064936932838984],
-        ["Knock Off", 0.9792465207909705],
-        ["U-turn", 0.7431726126085536],
-        ["Tailwind", 0.2000129068740967],
-        ["Assurance", 0.19313964224588231]
-    ],
-    "spreads": [
-        ["Adamant:32/32/0/0/2/0", 22.964999342171733],
-        ["Adamant:32/32/0/0/0/2", 11.311147921750182],
-        ["Adamant:32/32/2/0/0/0", 5.764232137617753],
-        ["Adamant:32/32/1/0/1/0", 4.917455421475763],
-        ["Adamant:32/32/0/0/1/1", 3.4546908424723646]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Basculegion", 9.352720004717929],
-        ["Pelipper", 7.909064543420083],
-        ["Archaludon", 7.303371394915617],
-        ["Incineroar", 6.953531914218877],
-        ["Sinistcha", 6.907358830556907],
-        ["Sneasler", 6.27609473072876],
-        ["Dragonite-Mega", 4.201121537285205],
-        ["Garchomp", 3.5999670078012205],
-        ["Kommo-o", 2.7601171599987517],
-        ["Sableye", 2.4832348004239093]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "scizormega",
+ "name": "Scizor-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0100067,
+   "rank": 83,
+   "raw": 30450
+  }
+ ],
+ "abilities": [
+  [
+   "Technician",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Scizorite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Bullet Punch",
+   24.99370801372003
+  ],
+  [
+   "Protect",
+   22.047931571470826
+  ],
+  [
+   "Swords Dance",
+   21.14969556175607
+  ],
+  [
+   "Bug Bite",
+   18.600240185862035
+  ],
+  [
+   "Close Combat",
+   6.390424286137695
+  ],
+  [
+   "Knock Off",
+   1.6071627059178135
+  ],
+  [
+   "Dual Wingbeat",
+   1.4141189901353433
+  ],
+  [
+   "U-turn",
+   0.9708167783296865
+  ],
+  [
+   "Trailblaze",
+   0.6998116201447034
+  ],
+  [
+   "Roost",
+   0.31671530032929984
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:32/32/0/0/2/0",
+   33.66568553677048
+  ],
+  [
+   "Adamant:32/32/2/0/0/0",
+   15.214236578751644
+  ],
+  [
+   "Adamant:32/32/0/0/0/2",
+   6.341547962562649
+  ],
+  [
+   "Adamant:17/32/1/0/1/15",
+   4.666815682299244
+  ],
+  [
+   "Brave:32/32/0/0/2/0",
+   2.3570800743788443
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Pelipper",
+   7.844700027666121
+  ],
+  [
+   "Basculegion",
+   7.0609489210651395
+  ],
+  [
+   "Sinistcha",
+   6.664119272095345
+  ],
+  [
+   "Archaludon",
+   6.346660308347925
+  ],
+  [
+   "Incineroar",
+   5.5398867987047415
+  ],
+  [
+   "Sneasler",
+   4.363016233502904
+  ],
+  [
+   "Dragonite-Mega",
+   3.807042527757866
+  ],
+  [
+   "Garchomp",
+   3.329917858491502
+  ],
+  [
+   "Whimsicott",
+   2.687135980962807
+  ],
+  [
+   "Swampert-Mega",
+   2.6515788206380937
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

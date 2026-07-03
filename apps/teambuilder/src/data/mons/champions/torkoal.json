@@ -1,108 +1,274 @@
 {
-    "id": "torkoal",
-    "name": "Torkoal",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0524878,
-            "rank": 27,
-            "raw": 363021
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0622922,
-            "rank": 25,
-            "raw": 442072
-        }
-    ],
-    "abilities": [
-        ["Drought", 99.63988890014033],
-        ["White Smoke", 0.296780578474243],
-        ["Shell Armor", 0.0633305213854327]
-    ],
-    "items": [
-        ["Charcoal", 95.43672126038271],
-        ["Leftovers", 1.562120693363527],
-        ["Sitrus Berry", 1.399571854486713],
-        ["White Herb", 0.4126046075608281],
-        ["Quick Claw", 0.39115668458521524],
-        ["Shuca Berry", 0.2518151752292153],
-        ["nothing", 0.11587965017586083],
-        ["Passho Berry", 0.10062869892134003]
-    ],
-    "moves": [
-        ["Eruption", 24.185262769386114],
-        ["Protect", 21.864624944055524],
-        ["Weather Ball", 16.761713384668976],
-        ["Heat Wave", 13.994145890964266],
-        ["Earth Power", 7.554325315118233],
-        ["Solar Beam", 6.125883478931036],
-        ["Helping Hand", 2.9377022067779377],
-        ["Flamethrower", 1.1361863648987245],
-        ["Overheat", 0.9997965415043695],
-        ["Body Press", 0.9688504886074886]
-    ],
-    "spreads": [
-        ["Quiet:32/0/0/32/2/0", 46.28956883261947],
-        ["Quiet:32/0/1/32/1/0", 19.319547469451166],
-        ["Quiet:32/0/2/32/0/0", 8.302595082260805],
-        ["Modest:32/0/0/32/2/0", 4.470929582247095],
-        ["Quiet:30/0/3/32/1/0", 1.924729046970067]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Farigiraf", 14.936564548413184],
-        ["Kangaskhan-Mega", 7.136380097787311],
-        ["Basculegion", 6.818552340008689],
-        ["Blastoise-Mega", 5.902235826060951],
-        ["Kingambit", 4.682775322211197],
-        ["Vivillon", 4.335662339270714],
-        ["Sylveon", 4.124898360011981],
-        ["Incineroar", 3.331093830637196],
-        ["Sneasler", 2.7715396867125346],
-        ["Sinistcha", 2.6582462177019837]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Charcoal",
-            "ability": "Drought",
-            "moves": ["Eruption", "Heat Wave", "Earth Power", "Protect"],
-            "count": 2,
-            "bestPlacing": 4,
-            "bestPlayer": "averagememer57",
-            "eventName": "*Sitrus-Series*|Champions|$50 to First Place|#62",
-            "eventSlug": "2026-06-10-sitrus-series-champions-50-to-first-place-62",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a21741847f3797bf6bab7f3",
-            "nature": "Quiet"
-        },
-        {
-            "item": "Charcoal",
-            "ability": "Drought",
-            "moves": ["Eruption", "Heat Wave", "Protect", "Body Press"],
-            "count": 2,
-            "bestPlacing": 5,
-            "bestPlayer": "Smogolem",
-            "eventName": "*Sitrus-Series*|Champions|#59",
-            "eventSlug": "2026-05-20-sitrus-series-champions-59",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a072608dfbdf089cbbdaa89",
-            "nature": "Modest"
-        },
-        {
-            "item": "Charcoal",
-            "ability": "Drought",
-            "moves": ["Eruption", "Weather Ball", "Earth Power", "Protect"],
-            "count": 2,
-            "bestPlacing": 7,
-            "bestPlayer": "Orttega15",
-            "eventName": "Intimidators Champions Challenge #16 REG M-A",
-            "eventSlug": "2026-06-08-intimidators-champions-challenge-16-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a26baf056b11a587a94c139",
-            "nature": "Quiet"
-        }
-    ]
+ "id": "torkoal",
+ "name": "Torkoal",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.1024502,
+   "rank": 20,
+   "raw": 239061
+  }
+ ],
+ "abilities": [
+  [
+   "Drought",
+   99.7386470461004
+  ],
+  [
+   "White Smoke",
+   0.23358498225358304
+  ],
+  [
+   "Shell Armor",
+   0.027767971646020687
+  ]
+ ],
+ "items": [
+  [
+   "Charcoal",
+   78.75522716857951
+  ],
+  [
+   "Life Orb",
+   7.207507257717087
+  ],
+  [
+   "Heat Rock",
+   6.383983763157336
+  ],
+  [
+   "Leftovers",
+   5.093247409803137
+  ],
+  [
+   "Sitrus Berry",
+   1.1372420682902793
+  ],
+  [
+   "Quick Claw",
+   0.42542818389939074
+  ],
+  [
+   "Shuca Berry",
+   0.26663288012327296
+  ],
+  [
+   "Expert Belt",
+   0.12270420685377387
+  ]
+ ],
+ "moves": [
+  [
+   "Eruption",
+   22.51329998486443
+  ],
+  [
+   "Protect",
+   22.188202162232056
+  ],
+  [
+   "Weather Ball",
+   15.552509679731596
+  ],
+  [
+   "Heat Wave",
+   12.511349589957632
+  ],
+  [
+   "Earth Power",
+   7.692974572847716
+  ],
+  [
+   "Helping Hand",
+   6.638215923897066
+  ],
+  [
+   "Solar Beam",
+   4.937567731198032
+  ],
+  [
+   "Yawn",
+   2.4644109549553677
+  ],
+  [
+   "Burning Jealousy",
+   0.980931844436748
+  ],
+  [
+   "Ancient Power",
+   0.9573817648078943
+  ]
+ ],
+ "spreads": [
+  [
+   "Quiet:32/0/0/32/2/0",
+   50.63932569571856
+  ],
+  [
+   "Quiet:32/0/2/32/0/0",
+   9.057014669284948
+  ],
+  [
+   "Quiet:32/0/1/32/1/0",
+   7.528280492303814
+  ],
+  [
+   "Modest:32/0/0/32/2/0",
+   7.068741141134548
+  ],
+  [
+   "Relaxed:31/0/1/15/19/0",
+   2.7548104910238504
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Farigiraf",
+   15.262982917623317
+  ],
+  [
+   "Mawile-Mega",
+   7.899849007957541
+  ],
+  [
+   "Pyroar-Mega",
+   4.656080840706311
+  ],
+  [
+   "Incineroar",
+   4.399030727382064
+  ],
+  [
+   "Sylveon",
+   3.749342796400755
+  ],
+  [
+   "Vileplume",
+   3.7479891438786974
+  ],
+  [
+   "Staraptor",
+   3.673663922282254
+  ],
+  [
+   "Basculegion",
+   3.4394981555285913
+  ],
+  [
+   "Scrafty-Mega",
+   2.848896816201974
+  ],
+  [
+   "Kingambit",
+   2.836230737724149
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Floette-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Metagross-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gallade",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Charcoal",
+   "ability": "Drought",
+   "moves": [
+    "Eruption",
+    "Weather Ball",
+    "Helping Hand",
+    "Protect"
+   ],
+   "count": 6,
+   "bestPlacing": 1,
+   "bestPlayer": "scrambledegg6",
+   "eventName": "Amoonguss Bus Tour Champions Practice Reg M-B #1",
+   "eventSlug": "2026-06-23-amoonguss-bus-tour-champions-practice-reg-m-b-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a387661af50e1230840809c",
+   "nature": "Quiet"
+  },
+  {
+   "item": "Charcoal",
+   "ability": "Drought",
+   "moves": [
+    "Eruption",
+    "Heat Wave",
+    "Weather Ball",
+    "Protect"
+   ],
+   "count": 5,
+   "bestPlacing": 2,
+   "bestPlayer": "CloudDino",
+   "eventName": "VGCA Battle Hall: Academy Ace Edition #4",
+   "eventSlug": "2026-06-28-vgca-battle-hall-academy-ace-edition-4",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a400a3ac87cd9ff0a3113d4",
+   "nature": "Quiet"
+  },
+  {
+   "item": "Leftovers",
+   "ability": "Drought",
+   "moves": [
+    "Burning Jealousy",
+    "Weather Ball",
+    "Protect",
+    "Yawn"
+   ],
+   "count": 2,
+   "bestPlacing": 1,
+   "bestPlayer": "Conia",
+   "eventName": "Ratorneo #4 Champions 2026 | Reg MB",
+   "eventSlug": "2026-06-25-ratorneo-4-champions-2026-reg-mb",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c190783fd320299bcf5c9",
+   "nature": "Relaxed"
+  }
+ ]
 }

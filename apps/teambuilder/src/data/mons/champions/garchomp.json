@@ -1,104 +1,270 @@
 {
-    "id": "garchomp",
-    "name": "Garchomp",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.37232109999999996,
-            "rank": 2,
-            "raw": 1787384
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.3599953,
-            "rank": 3,
-            "raw": 1722130
-        }
-    ],
-    "abilities": [["Rough Skin", 97.0240426139321], ["Sand Veil", 2.975957386067917]],
-    "items": [
-        ["Choice Scarf", 28.350242509032192],
-        ["Sitrus Berry", 28.141929032830838],
-        ["Dragon Fang", 9.50122515327243],
-        ["Soft Sand", 7.840187277085669],
-        ["Roseli Berry", 6.588775396877303],
-        ["White Herb", 6.202799325491701],
-        ["Lum Berry", 4.741925760451141],
-        ["Haban Berry", 4.408574712152292]
-    ],
-    "moves": [
-        ["Earthquake", 22.105358907903096],
-        ["Dragon Claw", 18.4935134354051],
-        ["Rock Slide", 16.65762090303189],
-        ["Protect", 15.848321837865353],
-        ["Stomping Tantrum", 12.78748885021341],
-        ["Rock Tomb", 4.726332179972095],
-        ["Scale Shot", 3.273271869104465],
-        ["Poison Jab", 2.861488502567071],
-        ["Swords Dance", 0.9553355962165494],
-        ["Breaking Swipe", 0.5101442284587078]
-    ],
-    "spreads": [
-        ["Jolly:2/32/0/0/0/32", 9.233503108904548],
-        ["Adamant:2/32/0/0/0/32", 8.749046983729444],
-        ["Adamant:20/20/0/0/1/25", 4.487183292391474],
-        ["Jolly:0/32/0/0/2/32", 3.8843702491028247],
-        ["Adamant:4/30/0/0/0/32", 2.580350275673711]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Charizard-Mega-Y", 11.050350051018194],
-        ["Kingambit", 10.062400894319882],
-        ["Basculegion", 9.975924272273419],
-        ["Whimsicott", 5.7463339198238605],
-        ["Floette-Mega", 5.548397260344372],
-        ["Sneasler", 4.8101150949192695],
-        ["Incineroar", 3.964502955873529],
-        ["Sylveon", 3.957744449133576],
-        ["Aerodactyl-Mega", 3.2148358069377143],
-        ["Aerodactyl", 2.5594624005441973]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Sitrus Berry",
-            "ability": "Rough Skin",
-            "moves": ["Earthquake", "Dragon Claw", "Rock Slide", "Protect"],
-            "count": 31,
-            "bestPlacing": 1,
-            "bestPlayer": "Zachvgc2",
-            "eventName": "Pokepal Smackdown #142 (Champions) (Reg M-A)",
-            "eventSlug": "2026-05-25-pokepal-smackdown-142-champions-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69f8a712e23aab068aada7f0",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Choice Scarf",
-            "ability": "Rough Skin",
-            "moves": ["Earthquake", "Stomping Tantrum", "Rock Slide", "Dragon Claw"],
-            "count": 17,
-            "bestPlacing": 1,
-            "bestPlayer": "PokeReplay",
-            "eventName": "Tenki's Cart - Road to Turin M-A",
-            "eventSlug": "2026-06-01-tenki-s-cart-road-to-turin-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a196f5856b11a587a94281c",
-            "nature": "Adamant"
-        },
-        {
-            "item": "Sitrus Berry",
-            "ability": "Rough Skin",
-            "moves": ["Earthquake", "Dragon Claw", "Rock Tomb", "Protect"],
-            "count": 17,
-            "bestPlacing": 1,
-            "bestPlayer": "washy",
-            "eventName": "Pokepal Smackdown #143 (Champions) (Reg M-A)",
-            "eventSlug": "2026-06-01-pokepal-smackdown-143-champions-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15a9698c163b8097997c21",
-            "nature": "Jolly"
-        }
-    ]
+ "id": "garchomp",
+ "name": "Garchomp",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.3230449,
+   "rank": 2,
+   "raw": 736366
+  }
+ ],
+ "abilities": [
+  [
+   "Rough Skin",
+   96.46959360064578
+  ],
+  [
+   "Sand Veil",
+   3.5304063993542045
+  ]
+ ],
+ "items": [
+  [
+   "Life Orb",
+   62.13219833219262
+  ],
+  [
+   "Choice Scarf",
+   11.348630617124059
+  ],
+  [
+   "Sitrus Berry",
+   9.342027393771131
+  ],
+  [
+   "Roseli Berry",
+   7.968803581291837
+  ],
+  [
+   "Soft Sand",
+   1.8760913129135588
+  ],
+  [
+   "Haban Berry",
+   1.177275443885569
+  ],
+  [
+   "White Herb",
+   1.144315213933688
+  ],
+  [
+   "Lum Berry",
+   1.1103569887874187
+  ]
+ ],
+ "moves": [
+  [
+   "Dragon Claw",
+   22.89127348228829
+  ],
+  [
+   "Rock Slide",
+   20.26860733658183
+  ],
+  [
+   "Protect",
+   19.85672076849168
+  ],
+  [
+   "Earthquake",
+   19.234471609078945
+  ],
+  [
+   "Stomping Tantrum",
+   10.002256817645582
+  ],
+  [
+   "Poison Jab",
+   2.7857502035427117
+  ],
+  [
+   "Rock Tomb",
+   2.3231070169443186
+  ],
+  [
+   "Scale Shot",
+   0.60757101680523
+  ],
+  [
+   "Swords Dance",
+   0.55494986603936
+  ],
+  [
+   "Iron Head",
+   0.33347392483927185
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:2/32/0/0/0/32",
+   42.045687483734426
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   6.889067464030589
+  ],
+  [
+   "Jolly:0/30/4/0/0/32",
+   4.987437889800813
+  ],
+  [
+   "Jolly:6/28/0/0/0/32",
+   3.0542636428626833
+  ],
+  [
+   "Jolly:0/32/0/0/2/32",
+   2.72765014968442
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Whimsicott",
+   9.174823931869664
+  ],
+  [
+   "Charizard-Mega-Y",
+   7.516057442464226
+  ],
+  [
+   "Basculegion",
+   7.44962022625095
+  ],
+  [
+   "Kingambit",
+   6.413474815641984
+  ],
+  [
+   "Incineroar",
+   4.781625140960657
+  ],
+  [
+   "Staraptor-Mega",
+   4.377329751355777
+  ],
+  [
+   "Floette-Mega",
+   3.990118877078428
+  ],
+  [
+   "Sinistcha",
+   3.941325626239167
+  ],
+  [
+   "Gholdengo",
+   3.5492658183708623
+  ],
+  [
+   "Sylveon",
+   3.3759269213716534
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Tsareena",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Life Orb",
+   "ability": "Rough Skin",
+   "moves": [
+    "Dragon Claw",
+    "Rock Slide",
+    "Earthquake",
+    "Protect"
+   ],
+   "count": 51,
+   "bestPlacing": 1,
+   "bestPlayer": "Snorlaxpikachu1",
+   "eventName": "Tenki's Cart Weekly #107- Reg MB",
+   "eventSlug": "2026-07-02-tenki-s-cart-weekly-107-reg-mb",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a4213a583fd320299bd3c48",
+   "nature": "Jolly"
+  },
+  {
+   "item": "Life Orb",
+   "ability": "Rough Skin",
+   "moves": [
+    "Earthquake",
+    "Dragon Claw",
+    "Stomping Tantrum",
+    "Protect"
+   ],
+   "count": 10,
+   "bestPlacing": 1,
+   "bestPlayer": "Swiss",
+   "eventName": "SNT Reg M-B Tour #1",
+   "eventSlug": "2026-06-30-snt-reg-m-b-tour-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3bd39383fd320299bcf26c",
+   "nature": "Jolly"
+  },
+  {
+   "item": "Life Orb",
+   "ability": "Rough Skin",
+   "moves": [
+    "Rock Slide",
+    "Dragon Claw",
+    "Stomping Tantrum",
+    "Protect"
+   ],
+   "count": 9,
+   "bestPlacing": 2,
+   "bestPlayer": "BatCoach",
+   "eventName": "Champions Collective #12",
+   "eventSlug": "2026-07-01-champions-collective-12",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3987c183fd320299bce00b",
+   "nature": "Jolly"
+  }
+ ]
 }

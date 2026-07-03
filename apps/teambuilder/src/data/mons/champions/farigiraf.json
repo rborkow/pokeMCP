@@ -1,108 +1,274 @@
 {
-    "id": "farigiraf",
-    "name": "Farigiraf",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.1452775,
-            "rank": 12,
-            "raw": 920518
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.1739334,
-            "rank": 10,
-            "raw": 1123830
-        }
-    ],
-    "abilities": [
-        ["Armor Tail", 98.99433270509694],
-        ["Cud Chew", 0.5555218341537567],
-        ["Sap Sipper", 0.45014546074930784]
-    ],
-    "items": [
-        ["Sitrus Berry", 53.97159958711447],
-        ["Colbur Berry", 31.766600348999578],
-        ["Mental Herb", 5.985395785537583],
-        ["Leftovers", 1.8756647456393376],
-        ["Focus Sash", 1.6370273072587835],
-        ["Silk Scarf", 1.5018718522934704],
-        ["Twisted Spoon", 1.327558202789528],
-        ["Lum Berry", 0.7519634345904435]
-    ],
-    "moves": [
-        ["Trick Room", 23.59414067790862],
-        ["Psychic", 15.76420933361851],
-        ["Helping Hand", 14.180169092648157],
-        ["Hyper Voice", 10.453500946011673],
-        ["Protect", 9.964287007155823],
-        ["Twin Beam", 5.371066612589088],
-        ["Imprison", 3.367056178497734],
-        ["Thunderbolt", 3.1903574225338938],
-        ["Foul Play", 2.6130952198677138],
-        ["Rain Dance", 2.1143833065298647]
-    ],
-    "spreads": [
-        ["Quiet:17/0/19/10/20/0", 5.044748923133338],
-        ["Bold:32/0/23/0/11/0", 2.1338190152868868],
-        ["Bold:31/0/24/0/11/0", 1.9214697455262835],
-        ["Relaxed:32/0/32/0/2/0", 1.5666890002898264],
-        ["Sassy:32/0/14/0/20/0", 1.4350953298326168]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Kingambit", 7.075387218349924],
-        ["Basculegion", 6.811719546496812],
-        ["Torkoal", 5.349355641821607],
-        ["Blastoise-Mega", 4.58890837910137],
-        ["Sylveon", 4.403661071424289],
-        ["Incineroar", 3.8365992650005065],
-        ["Charizard-Mega-Y", 3.8173262319593704],
-        ["Sneasler", 3.525449136856084],
-        ["Garchomp", 3.466362151867053],
-        ["Kangaskhan-Mega", 3.351352312331487]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Sitrus Berry",
-            "ability": "Armor Tail",
-            "moves": ["Psychic", "Helping Hand", "Trick Room", "Protect"],
-            "count": 17,
-            "bestPlacing": 1,
-            "bestPlayer": "GengarIsMad",
-            "eventName": "*Sitrus-Series*|Champions|#61",
-            "eventSlug": "2026-06-03-sitrus-series-champions-61",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1843740f6c1f08998629ca",
-            "nature": "Calm"
-        },
-        {
-            "item": "Colbur Berry",
-            "ability": "Armor Tail",
-            "moves": ["Psychic", "Helping Hand", "Trick Room", "Protect"],
-            "count": 5,
-            "bestPlacing": 3,
-            "bestPlayer": "VGCDan",
-            "eventName": "Pokepal Smackdown #144 (Champions) (Reg M-A)",
-            "eventSlug": "2026-06-08-pokepal-smackdown-144-champions-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15a9910f6c1f089986169a",
-            "nature": "Bold"
-        },
-        {
-            "item": "Sitrus Berry",
-            "ability": "Armor Tail",
-            "moves": ["Trick Room", "Psychic", "Hyper Voice", "Imprison"],
-            "count": 3,
-            "bestPlacing": 2,
-            "bestPlayer": "GOUKI_PR",
-            "eventName": "Pokepal Smackdown #144 (Champions) (Reg M-A)",
-            "eventSlug": "2026-06-08-pokepal-smackdown-144-champions-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15a9910f6c1f089986169a",
-            "nature": "Bold"
-        }
-    ]
+ "id": "farigiraf",
+ "name": "Farigiraf",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.2161374,
+   "rank": 7,
+   "raw": 476332
+  }
+ ],
+ "abilities": [
+  [
+   "Armor Tail",
+   99.15342458914111
+  ],
+  [
+   "Cud Chew",
+   0.74628220147237
+  ],
+  [
+   "Sap Sipper",
+   0.10029320938651907
+  ]
+ ],
+ "items": [
+  [
+   "Sitrus Berry",
+   61.11803943158536
+  ],
+  [
+   "Colbur Berry",
+   25.642357936583494
+  ],
+  [
+   "Mental Herb",
+   5.017080981818337
+  ],
+  [
+   "Leftovers",
+   2.0521151499881802
+  ],
+  [
+   "Focus Sash",
+   1.5035510578487215
+  ],
+  [
+   "Life Orb",
+   1.293031250864993
+  ],
+  [
+   "Twisted Spoon",
+   0.7956220518805814
+  ],
+  [
+   "Silk Scarf",
+   0.6916793064984179
+  ]
+ ],
+ "moves": [
+  [
+   "Trick Room",
+   24.301879939283108
+  ],
+  [
+   "Helping Hand",
+   14.25522280196348
+  ],
+  [
+   "Psychic",
+   14.220376241796007
+  ],
+  [
+   "Protect",
+   10.503213605891759
+  ],
+  [
+   "Thunderbolt",
+   9.341269546635198
+  ],
+  [
+   "Twin Beam",
+   6.866428405886994
+  ],
+  [
+   "Hyper Voice",
+   6.403196085483627
+  ],
+  [
+   "Imprison",
+   2.487644782933194
+  ],
+  [
+   "Roar",
+   2.046179023662139
+  ],
+  [
+   "Foul Play",
+   1.1334113919814948
+  ]
+ ],
+ "spreads": [
+  [
+   "Bold:25/0/26/0/15/0",
+   3.454857119954628
+  ],
+  [
+   "Sassy:32/0/0/2/32/0",
+   3.146984678249773
+  ],
+  [
+   "Bold:32/0/20/0/14/0",
+   2.606883207855122
+  ],
+  [
+   "Quiet:17/0/19/10/20/0",
+   2.4626241429557325
+  ],
+  [
+   "Bold:25/0/10/0/24/7",
+   1.9022063141145467
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Torkoal",
+   7.234729426053847
+  ],
+  [
+   "Mawile-Mega",
+   6.676207151345818
+  ],
+  [
+   "Incineroar",
+   4.98993089174276
+  ],
+  [
+   "Basculegion",
+   4.734743821032741
+  ],
+  [
+   "Whimsicott",
+   4.497900024081202
+  ],
+  [
+   "Garchomp",
+   4.37811333199215
+  ],
+  [
+   "Sylveon",
+   3.9574631068446102
+  ],
+  [
+   "Kingambit",
+   3.8041065077688994
+  ],
+  [
+   "Charizard-Mega-Y",
+   3.3680749993396493
+  ],
+  [
+   "Sinistcha",
+   2.9861505340341323
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Toxapex",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Scizor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gengar-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Sitrus Berry",
+   "ability": "Armor Tail",
+   "moves": [
+    "Psychic",
+    "Thunderbolt",
+    "Trick Room",
+    "Helping Hand"
+   ],
+   "count": 8,
+   "bestPlacing": 2,
+   "bestPlayer": "DarthGlacies",
+   "eventName": "Talon's FIGHT CLUB #91 POKEMON CHAMPIONS",
+   "eventSlug": "2026-07-02-talon-s-fight-club-91-pokemon-champions",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a32e85d2d97f3b0c26189c9",
+   "nature": "Relaxed"
+  },
+  {
+   "item": "Colbur Berry",
+   "ability": "Armor Tail",
+   "moves": [
+    "Psychic",
+    "Thunderbolt",
+    "Helping Hand",
+    "Trick Room"
+   ],
+   "count": 4,
+   "bestPlacing": 1,
+   "bestPlayer": "TytokiArts",
+   "eventName": "*Sitrus-Series*|Champions-MB|#65",
+   "eventSlug": "2026-07-01-sitrus-series-champions-mb-65",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3d2290c87cd9ff0a30f032",
+   "nature": "Modest"
+  },
+  {
+   "item": "Sitrus Berry",
+   "ability": "Armor Tail",
+   "moves": [
+    "Psychic",
+    "Thunderbolt",
+    "Roar",
+    "Trick Room"
+   ],
+   "count": 4,
+   "bestPlacing": 1,
+   "bestPlayer": "Swiss",
+   "eventName": "SNT Reg M-B Tour #1",
+   "eventSlug": "2026-06-30-snt-reg-m-b-tour-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3bd39383fd320299bcf26c",
+   "nature": "Bold"
+  }
+ ]
 }

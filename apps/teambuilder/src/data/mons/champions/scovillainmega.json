@@ -1,58 +1,186 @@
 {
-    "id": "scovillainmega",
-    "name": "Scovillain-Mega",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.047599,
-            "rank": 34,
-            "raw": 253258
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.062484599999999994,
-            "rank": 24,
-            "raw": 343628
-        }
-    ],
-    "abilities": [["spicyspray", 100]],
-    "items": [["scovillainite", 100]],
-    "moves": [
-        ["Rage Powder", 24.72810981802743],
-        ["Protect", 24.45529664523812],
-        ["Overheat", 19.120118589733508],
-        ["Leech Seed", 18.13603358770804],
-        ["Giga Drain", 4.414504521093137],
-        ["Flamethrower", 3.3703991814086685],
-        ["Leaf Storm", 1.7899520058176015],
-        ["Super Fang", 1.1442199508099609],
-        ["Spicy Extract", 0.6887177001918787],
-        ["Energy Ball", 0.4880852218720423]
-    ],
-    "spreads": [
-        ["Calm:32/0/19/0/15/0", 14.405231848933692],
-        ["Calm:31/0/15/0/20/0", 9.700531239375],
-        ["Bold:32/0/15/0/19/0", 6.242668957542317],
-        ["Bold:32/0/25/0/9/0", 4.867917586077996],
-        ["Calm:32/0/9/0/25/0", 3.2154855087298553]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Basculegion", 10.769661128679232],
-        ["Sneasler", 8.066702880739362],
-        ["Kingambit", 7.028428154888166],
-        ["Archaludon", 6.383952212376973],
-        ["Aerodactyl-Mega", 6.038341665332715],
-        ["Pelipper", 4.549789103859016],
-        ["Sylveon", 4.008957085256211],
-        ["Garchomp", 3.105403833875535],
-        ["Kommo-o", 3.064965399693635],
-        ["Sableye", 2.9685960984658144]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "scovillainmega",
+ "name": "Scovillain-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0252421,
+   "rank": 48,
+   "raw": 47161
+  }
+ ],
+ "abilities": [
+  [
+   "spicyspray",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "scovillainite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Rage Powder",
+   24.598911575754943
+  ],
+  [
+   "Protect",
+   24.17321720521942
+  ],
+  [
+   "Overheat",
+   19.004724741337988
+  ],
+  [
+   "Giga Drain",
+   12.47035983652445
+  ],
+  [
+   "Leech Seed",
+   12.411647191801624
+  ],
+  [
+   "Flamethrower",
+   4.47243015142221
+  ],
+  [
+   "Leaf Storm",
+   0.6872508601739806
+  ],
+  [
+   "Energy Ball",
+   0.41630445466227933
+  ],
+  [
+   "Spicy Extract",
+   0.39927291202056253
+  ],
+  [
+   "Burning Jealousy",
+   0.28294557338284526
+  ]
+ ],
+ "spreads": [
+  [
+   "Calm:32/0/19/0/15/0",
+   12.713092440245655
+  ],
+  [
+   "Calm:32/0/2/0/32/0",
+   6.203273605201218
+  ],
+  [
+   "Bold:32/0/15/0/19/0",
+   5.6747278436842805
+  ],
+  [
+   "Calm:32/0/9/0/25/0",
+   5.2247937672783165
+  ],
+  [
+   "Bold:32/0/25/0/5/4",
+   4.832145807278355
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Basculegion",
+   9.54174678620721
+  ],
+  [
+   "Sneasler",
+   7.944982060585066
+  ],
+  [
+   "Kingambit",
+   7.472606090380382
+  ],
+  [
+   "Froslass-Mega",
+   5.5052640867578
+  ],
+  [
+   "Lycanroc-Dusk",
+   5.502594179609696
+  ],
+  [
+   "Archaludon",
+   4.9855375730849385
+  ],
+  [
+   "Gholdengo",
+   3.04124797166534
+  ],
+  [
+   "Pelipper",
+   2.895959409686992
+  ],
+  [
+   "Grimmsnarl",
+   2.8441889661674087
+  ],
+  [
+   "Sylveon",
+   2.4801408748058376
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sylveon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Floette-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

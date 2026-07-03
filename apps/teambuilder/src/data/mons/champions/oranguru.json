@@ -1,108 +1,240 @@
 {
-    "id": "oranguru",
-    "name": "Oranguru",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0131777,
-            "rank": 66,
-            "raw": 139281
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.012726900000000001,
-            "rank": 71,
-            "raw": 196629
-        }
-    ],
-    "abilities": [
-        ["Inner Focus", 77.1939788238622],
-        ["Telepathy", 22.394961780375993],
-        ["Symbiosis", 0.41105939576181066]
-    ],
-    "items": [
-        ["Colbur Berry", 40.69761001330453],
-        ["Mental Herb", 36.47001541914137],
-        ["Sitrus Berry", 18.762710756950064],
-        ["Leftovers", 1.9111493685937595],
-        ["Focus Sash", 0.6331718701974645],
-        ["Bright Powder", 0.412039084777455],
-        ["Choice Scarf", 0.37812091999728425],
-        ["nothing", 0.1643005866746436]
-    ],
-    "moves": [
-        ["Instruct", 24.605278933705147],
-        ["Trick Room", 24.56485379644414],
-        ["Psychic", 16.168949982104202],
-        ["Protect", 10.350906496264251],
-        ["Encore", 7.6147947127582425],
-        ["Foul Play", 5.203534958785496],
-        ["Psychic Noise", 1.5433274637877792],
-        ["Taunt", 1.0911416506791567],
-        ["Hyper Voice", 0.8318248334848973],
-        ["Psychic Terrain", 0.7917912908243664]
-    ],
-    "spreads": [
-        ["Calm:32/0/21/0/13/0", 9.49758409908055],
-        ["Relaxed:32/0/32/0/2/0", 9.418731349745528],
-        ["Relaxed:32/0/32/0/0/2", 6.50743884632692],
-        ["Sassy:32/0/32/0/2/0", 6.2751040104165146],
-        ["Relaxed:32/0/30/0/4/0", 4.512565264350826]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Torkoal", 9.18388134380744],
-        ["Sylveon", 7.662992702575797],
-        ["Sinistcha", 6.502148842636765],
-        ["Kingambit", 5.1631374485052905],
-        ["Drampa-Mega", 4.573067509980752],
-        ["Incineroar", 4.408780914455419],
-        ["Lucario", 3.085555239429737],
-        ["Camerupt-Mega", 2.792988426089329],
-        ["Basculegion", 2.0539760680002557],
-        ["Farigiraf", 1.7100199486634744]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Colbur Berry",
-            "ability": "Inner Focus",
-            "moves": ["Trick Room", "Skill Swap", "Instruct", "Protect"],
-            "count": 2,
-            "bestPlacing": 5,
-            "bestPlayer": "Smogolem",
-            "eventName": "*Sitrus-Series*|Champions|#59",
-            "eventSlug": "2026-05-20-sitrus-series-champions-59",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a072608dfbdf089cbbdaa89",
-            "nature": "Bold"
-        },
-        {
-            "item": "Colbur Berry",
-            "ability": "Inner Focus",
-            "moves": ["Instruct", "Protect", "Psychic Noise", "Trick Room"],
-            "count": 1,
-            "bestPlacing": 3,
-            "bestPlayer": "BobElephant",
-            "eventName": "Alpensee Tour (Reg M-A) #59",
-            "eventSlug": "2026-05-27-alpensee-tour-reg-m-a-59",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69f628704f71d664893ea80a",
-            "nature": null
-        },
-        {
-            "item": "Colbur Berry",
-            "ability": "Telepathy",
-            "moves": ["Psychic", "Gravity", "Instruct", "Trick Room"],
-            "count": 1,
-            "bestPlacing": 6,
-            "bestPlayer": "Zeeb",
-            "eventName": "The Drywalls Series #6 - Champions!",
-            "eventSlug": "2026-05-26-the-drywalls-series-6-champions",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a131c910f6c1f0899860158",
-            "nature": null
-        }
-    ]
+ "id": "oranguru",
+ "name": "Oranguru",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0106085,
+   "rank": 81,
+   "raw": 49707
+  }
+ ],
+ "abilities": [
+  [
+   "Inner Focus",
+   68.81123184871193
+  ],
+  [
+   "Telepathy",
+   30.681151857416715
+  ],
+  [
+   "Symbiosis",
+   0.5076162938713529
+  ]
+ ],
+ "items": [
+  [
+   "Mental Herb",
+   59.79171248183257
+  ],
+  [
+   "Colbur Berry",
+   18.757280555289807
+  ],
+  [
+   "Sitrus Berry",
+   15.226007881439143
+  ],
+  [
+   "Leftovers",
+   3.433234955450322
+  ],
+  [
+   "Focus Sash",
+   0.7496903218701663
+  ],
+  [
+   "Light Clay",
+   0.32637523303073085
+  ],
+  [
+   "Iron Ball",
+   0.3092042616207364
+  ],
+  [
+   "Choice Scarf",
+   0.27172695257811497
+  ]
+ ],
+ "moves": [
+  [
+   "Instruct",
+   24.75617620420798
+  ],
+  [
+   "Trick Room",
+   24.400890744152203
+  ],
+  [
+   "Protect",
+   13.383480597265462
+  ],
+  [
+   "Psychic",
+   11.20399718199826
+  ],
+  [
+   "Encore",
+   8.344523996227498
+  ],
+  [
+   "Foul Play",
+   2.505567732317093
+  ],
+  [
+   "Psychic Terrain",
+   2.0210478295542305
+  ],
+  [
+   "Psychic Noise",
+   1.775614331453813
+  ],
+  [
+   "Hyper Voice",
+   1.5084425543371711
+  ],
+  [
+   "Yawn",
+   1.45264899132572
+  ]
+ ],
+ "spreads": [
+  [
+   "Relaxed:32/0/32/0/2/0",
+   12.86553622540685
+  ],
+  [
+   "Sassy:32/0/0/2/32/0",
+   6.480841182083131
+  ],
+  [
+   "Bold:32/0/20/0/14/0",
+   5.667977817030797
+  ],
+  [
+   "Relaxed:32/0/32/0/0/2",
+   5.1922308624975075
+  ],
+  [
+   "Relaxed:32/0/31/0/1/2",
+   4.33915459082069
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Torkoal",
+   11.36365195850655
+  ],
+  [
+   "Sinistcha",
+   5.710674599616183
+  ],
+  [
+   "Mawile-Mega",
+   3.86909922859665
+  ],
+  [
+   "Sylveon",
+   3.6546417662818103
+  ],
+  [
+   "Scrafty-Mega",
+   3.288419189659571
+  ],
+  [
+   "Incineroar",
+   2.5512469182685495
+  ],
+  [
+   "Camerupt-Mega",
+   2.439446755071868
+  ],
+  [
+   "Kingambit",
+   2.359820772867971
+  ],
+  [
+   "Hatterene",
+   2.2768720865590586
+  ],
+  [
+   "Staraptor",
+   2.197273650113955
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Iron Ball",
+   "ability": "Inner Focus",
+   "moves": [
+    "Trick Room",
+    "Skill Swap",
+    "Instruct",
+    "Protect"
+   ],
+   "count": 2,
+   "bestPlacing": 7,
+   "bestPlayer": "Smogolem",
+   "eventName": "TARTAN TAKEDOWN #30! - [CHAMPIONS REG M-B]",
+   "eventSlug": "2026-06-30-tartan-takedown-30-champions-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a41634e83fd320299bd3356",
+   "nature": "Bold"
+  }
+ ]
 }

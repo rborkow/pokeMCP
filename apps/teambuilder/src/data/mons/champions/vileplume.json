@@ -1,0 +1,270 @@
+{
+ "id": "vileplume",
+ "name": "Vileplume",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.020994799999999997,
+   "rank": 52,
+   "raw": 56140
+  }
+ ],
+ "abilities": [
+  [
+   "Chlorophyll",
+   95.2922166588133
+  ],
+  [
+   "Effect Spore",
+   4.707783341186698
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   74.97347978456858
+  ],
+  [
+   "Wide Lens",
+   10.564144529812921
+  ],
+  [
+   "Life Orb",
+   4.78004579412498
+  ],
+  [
+   "Leftovers",
+   2.195250933795136
+  ],
+  [
+   "Big Root",
+   1.6322387898997481
+  ],
+  [
+   "Coba Berry",
+   1.49216496525621
+  ],
+  [
+   "Sitrus Berry",
+   1.1542707524648708
+  ],
+  [
+   "Occa Berry",
+   0.9433983480469437
+  ]
+ ],
+ "moves": [
+  [
+   "After You",
+   22.802312207797783
+  ],
+  [
+   "Sleep Powder",
+   21.391887024597402
+  ],
+  [
+   "Sludge Bomb",
+   20.358587578565203
+  ],
+  [
+   "Leaf Storm",
+   7.452033858318447
+  ],
+  [
+   "Protect",
+   7.2808686953559425
+  ],
+  [
+   "Solar Beam",
+   6.6329077232675155
+  ],
+  [
+   "Energy Ball",
+   4.9745913585277455
+  ],
+  [
+   "Giga Drain",
+   2.425435273783104
+  ],
+  [
+   "Strength Sap",
+   1.3685817881785822
+  ],
+  [
+   "Pollen Puff",
+   1.3152550670148169
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   49.16804805806903
+  ],
+  [
+   "Timid:1/0/1/32/0/32",
+   9.491061069512995
+  ],
+  [
+   "Timid:1/0/0/32/1/32",
+   8.367632331291597
+  ],
+  [
+   "Timid:32/0/0/2/0/32",
+   4.9033060178053605
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   4.479706858319972
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Torkoal",
+   18.289383097729672
+  ],
+  [
+   "Farigiraf",
+   16.59714943601334
+  ],
+  [
+   "Mawile-Mega",
+   8.393575259420572
+  ],
+  [
+   "Staraptor",
+   5.588399885276413
+  ],
+  [
+   "Pyroar-Mega",
+   5.015002635472321
+  ],
+  [
+   "Incineroar",
+   3.8404090130819633
+  ],
+  [
+   "Scrafty-Mega",
+   3.6363612901575935
+  ],
+  [
+   "Sylveon",
+   3.62437284781829
+  ],
+  [
+   "Aerodactyl-Mega",
+   2.1236036926471216
+  ],
+  [
+   "Kangaskhan-Mega",
+   2.098565440753362
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Swampert-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Focus Sash",
+   "ability": "Chlorophyll",
+   "moves": [
+    "Sludge Bomb",
+    "Sleep Powder",
+    "After You",
+    "Protect"
+   ],
+   "count": 4,
+   "bestPlacing": 4,
+   "bestPlayer": "Hirseknabe",
+   "eventName": "CHAMPIONS REG. M-B |👑CROWN FIGHT Bo3 TOUR #74👑",
+   "eventSlug": "2026-06-26-champions-reg-m-b-crown-fight-bo3-tour-74",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a2ccd742d97f3b0c2615436",
+   "nature": "Timid"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Chlorophyll",
+   "moves": [
+    "After You",
+    "Sleep Powder",
+    "Solar Beam",
+    "Sludge Bomb"
+   ],
+   "count": 2,
+   "bestPlacing": 2,
+   "bestPlayer": "Noah Smith",
+   "eventName": "The Wide League Saturday Night Rumble #87 REG M-B",
+   "eventSlug": "2026-06-28-the-wide-league-saturday-night-rumble-87-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3dbda083fd320299bd0416",
+   "nature": "Timid"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Chlorophyll",
+   "moves": [
+    "Sleep Powder",
+    "After You",
+    "Sludge Bomb",
+    "Leaf Storm"
+   ],
+   "count": 1,
+   "bestPlacing": 2,
+   "bestPlayer": "CloudDino",
+   "eventName": "VGCA Battle Hall: Academy Ace Edition #4",
+   "eventSlug": "2026-06-28-vgca-battle-hall-academy-ace-edition-4",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a400a3ac87cd9ff0a3113d4",
+   "nature": "Timid"
+  }
+ ]
+}

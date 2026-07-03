@@ -1,0 +1,190 @@
+{
+ "id": "raichumegay",
+ "name": "Raichu-Mega-Y",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0946892,
+   "rank": 21,
+   "raw": 273299
+  }
+ ],
+ "abilities": [
+  [
+   "No Ability",
+   73.65693678216303
+  ],
+  [
+   "No Guard",
+   26.34306321783698
+  ]
+ ],
+ "items": [
+  [
+   "raichunitey",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Zap Cannon",
+   24.597646527456828
+  ],
+  [
+   "Focus Blast",
+   23.001024747392506
+  ],
+  [
+   "Protect",
+   21.85356986566641
+  ],
+  [
+   "Fake Out",
+   16.493652616224345
+  ],
+  [
+   "Grass Knot",
+   3.3136676674180237
+  ],
+  [
+   "Volt Switch",
+   3.037534658309831
+  ],
+  [
+   "Encore",
+   1.6480378969654517
+  ],
+  [
+   "Dazzling Gleam",
+   1.29685719687825
+  ],
+  [
+   "Electroweb",
+   0.9003245823950746
+  ],
+  [
+   "Nasty Plot",
+   0.7491617548983756
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   28.730188392648575
+  ],
+  [
+   "Timid:30/0/13/0/0/23",
+   8.711334874705052
+  ],
+  [
+   "Hasty:0/2/0/32/0/32",
+   7.855256326935123
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   5.103650022629188
+  ],
+  [
+   "Timid:0/0/2/32/0/32",
+   3.605488610595084
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Basculegion",
+   7.195002040135531
+  ],
+  [
+   "Incineroar",
+   7.015816706180381
+  ],
+  [
+   "Whimsicott",
+   6.700442456588919
+  ],
+  [
+   "Sinistcha",
+   6.367273263165965
+  ],
+  [
+   "Garchomp",
+   5.691173443804822
+  ],
+  [
+   "Kingambit",
+   4.055983407664193
+  ],
+  [
+   "Gholdengo",
+   3.4048171473933944
+  ],
+  [
+   "Ninetales-Alola",
+   3.0492159913883174
+  ],
+  [
+   "Sneasler",
+   2.833245559636378
+  ],
+  [
+   "Staraptor-Mega",
+   2.682326435863362
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Blaziken-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Aerodactyl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Milotic",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

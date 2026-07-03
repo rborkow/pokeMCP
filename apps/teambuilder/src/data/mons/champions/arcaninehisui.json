@@ -1,71 +1,222 @@
 {
-    "id": "arcaninehisui",
-    "name": "Arcanine-Hisui",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0188393,
-            "rank": 55,
-            "raw": 162330
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0128832,
-            "rank": 69,
-            "raw": 126015
-        }
-    ],
-    "abilities": [
-        ["Rock Head", 53.106581036987755],
-        ["Intimidate", 46.56958400032979],
-        ["Flash Fire", 0.3238349626824585]
-    ],
-    "items": [
-        ["Focus Sash", 36.67470977438202],
-        ["Choice Scarf", 26.549966727311116],
-        ["Hard Stone", 9.764275573713505],
-        ["Shuca Berry", 5.822770474632864],
-        ["Sitrus Berry", 5.508360915048905],
-        ["White Herb", 4.9535480278277495],
-        ["Chople Berry", 3.6904995725606944],
-        ["Charcoal", 2.747949382871504]
-    ],
-    "moves": [
-        ["Flare Blitz", 24.318871967433203],
-        ["Rock Slide", 19.324130819950998],
-        ["Protect", 17.40186176248141],
-        ["Extreme Speed", 15.611697734565144],
-        ["Head Smash", 13.627401233833872],
-        ["Close Combat", 3.0032623851318676],
-        ["Psychic Fangs", 1.356329988556791],
-        ["Wild Charge", 1.2282913692673891],
-        ["Will-O-Wisp", 0.8055886744890304],
-        ["Snarl", 0.5733163546905706]
-    ],
-    "spreads": [
-        ["Adamant:2/32/0/0/0/32", 19.806228350151432],
-        ["Jolly:2/32/0/0/0/32", 18.94148779461658],
-        ["Jolly:0/32/0/0/2/32", 9.565406127230736],
-        ["Adamant:1/32/1/0/0/32", 5.485262656943232],
-        ["Jolly:1/32/0/0/1/32", 4.914237218555241]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Kingambit", 6.600555484594377],
-        ["Sneasler", 6.371842939598831],
-        ["Whimsicott", 6.342376061692303],
-        ["Sinistcha", 5.303395055165946],
-        ["Floette-Mega", 5.0818981021469645],
-        ["Basculegion", 4.532748204012546],
-        ["Froslass-Mega", 4.482148206224679],
-        ["Garchomp", 3.4332872574893583],
-        ["Farigiraf", 2.8001032617214645],
-        ["Milotic", 2.2579352410249647]
-    ],
-    "counters": [],
-    "builds": []
+ "id": "arcaninehisui",
+ "name": "Arcanine-Hisui",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.013276399999999999,
+   "rank": 75,
+   "raw": 40680
+  }
+ ],
+ "abilities": [
+  [
+   "Rock Head",
+   72.37383051489549
+  ],
+  [
+   "Intimidate",
+   26.927745673910163
+  ],
+  [
+   "Flash Fire",
+   0.6984238111943519
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   51.386395655337346
+  ],
+  [
+   "Choice Scarf",
+   18.67031064182064
+  ],
+  [
+   "Life Orb",
+   12.515523416661361
+  ],
+  [
+   "Sitrus Berry",
+   5.024516218569816
+  ],
+  [
+   "Chople Berry",
+   2.3367014681946854
+  ],
+  [
+   "Shuca Berry",
+   2.2119884465624464
+  ],
+  [
+   "Charcoal",
+   1.6840216401217183
+  ],
+  [
+   "White Herb",
+   1.3195862319708758
+  ]
+ ],
+ "moves": [
+  [
+   "Flare Blitz",
+   24.444552690367953
+  ],
+  [
+   "Protect",
+   18.985404236993407
+  ],
+  [
+   "Extreme Speed",
+   17.150094083174167
+  ],
+  [
+   "Head Smash",
+   16.851747692142187
+  ],
+  [
+   "Rock Slide",
+   15.034281735659144
+  ],
+  [
+   "Close Combat",
+   2.3022389395666165
+  ],
+  [
+   "Wild Charge",
+   1.772353368256419
+  ],
+  [
+   "Psychic Fangs",
+   0.9794566805407973
+  ],
+  [
+   "Will-O-Wisp",
+   0.4618345287129495
+  ],
+  [
+   "Snarl",
+   0.26046004656566896
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:1/32/0/0/1/32",
+   24.673201944166607
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   23.59957244080344
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   11.379510299088311
+  ],
+  [
+   "Jolly:1/32/1/0/0/32",
+   7.663047852200728
+  ],
+  [
+   "Adamant:1/32/0/0/1/32",
+   4.643984875465141
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Whimsicott",
+   7.100719144931698
+  ],
+  [
+   "Garchomp",
+   7.064193420992298
+  ],
+  [
+   "Froslass-Mega",
+   6.041009688473418
+  ],
+  [
+   "Sneasler",
+   5.4405351081555136
+  ],
+  [
+   "Kingambit",
+   4.823004251853973
+  ],
+  [
+   "Sinistcha",
+   4.330718085296792
+  ],
+  [
+   "Staraptor-Mega",
+   4.234055757909181
+  ],
+  [
+   "Gholdengo",
+   4.123760056350261
+  ],
+  [
+   "Basculegion",
+   3.6630481847001115
+  ],
+  [
+   "Primarina",
+   3.125691485819971
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
 }

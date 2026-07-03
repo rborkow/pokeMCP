@@ -1,0 +1,230 @@
+{
+ "id": "houndstone",
+ "name": "Houndstone",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0084054,
+   "rank": 86,
+   "raw": 22480
+  }
+ ],
+ "abilities": [
+  [
+   "Sand Rush",
+   88.316228201731
+  ],
+  [
+   "Fluffy",
+   11.683771798269003
+  ]
+ ],
+ "items": [
+  [
+   "Sitrus Berry",
+   35.03096720131461
+  ],
+  [
+   "Spell Tag",
+   21.20502118346616
+  ],
+  [
+   "Life Orb",
+   17.99984724021042
+  ],
+  [
+   "Focus Sash",
+   8.253198675680235
+  ],
+  [
+   "Leftovers",
+   5.603766606036815
+  ],
+  [
+   "Colbur Berry",
+   5.018309664080868
+  ],
+  [
+   "Choice Scarf",
+   2.193905390323027
+  ],
+  [
+   "Kasib Berry",
+   1.9779236330413084
+  ]
+ ],
+ "moves": [
+  [
+   "Last Respects",
+   23.786066714746678
+  ],
+  [
+   "Will-O-Wisp",
+   17.52142596613683
+  ],
+  [
+   "Protect",
+   15.812803896530783
+  ],
+  [
+   "Ally Switch",
+   7.486335618746195
+  ],
+  [
+   "Body Press",
+   5.462855334532257
+  ],
+  [
+   "Shadow Sneak",
+   5.016469864966581
+  ],
+  [
+   "Psychic Fangs",
+   4.988668385180759
+  ],
+  [
+   "Howl",
+   4.120385310566988
+  ],
+  [
+   "Play Rough",
+   2.9210988988158344
+  ],
+  [
+   "Poltergeist",
+   2.5334083585770664
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:2/32/0/0/0/32",
+   19.25219839828044
+  ],
+  [
+   "Adamant:28/9/9/0/0/20",
+   13.873955459489565
+  ],
+  [
+   "Adamant:6/32/0/0/0/28",
+   4.352124607595679
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   3.4126490818404625
+  ],
+  [
+   "Jolly:32/2/0/0/0/32",
+   3.069794545618607
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Tyranitar-Mega",
+   12.914270009269055
+  ],
+  [
+   "Excadrill",
+   9.871215282049164
+  ],
+  [
+   "Rotom-Wash",
+   5.891361541938304
+  ],
+  [
+   "Staraptor-Mega",
+   5.224033299754334
+  ],
+  [
+   "Tyranitar",
+   4.973307266920038
+  ],
+  [
+   "Sinistcha",
+   4.864907985187095
+  ],
+  [
+   "Corviknight",
+   4.6573306269033745
+  ],
+  [
+   "Venusaur-Mega",
+   3.190135221951725
+  ],
+  [
+   "Hydreigon",
+   3.086585355711301
+  ],
+  [
+   "Scovillain-Mega",
+   2.865708962941731
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Spell Tag",
+   "ability": "Sand Rush",
+   "moves": [
+    "Phantom Force",
+    "Will-O-Wisp",
+    "Last Respects",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 1,
+   "bestPlayer": "JurassicJoints",
+   "eventName": "Road to Area 229 #4",
+   "eventSlug": "2026-06-27-road-to-area-229-4",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c370fc87cd9ff0a30eaa1",
+   "nature": "Adamant"
+  }
+ ]
+}

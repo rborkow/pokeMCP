@@ -1,0 +1,266 @@
+{
+ "id": "gholdengo",
+ "name": "Gholdengo",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.1168501,
+   "rank": 18,
+   "raw": 297007
+  }
+ ],
+ "abilities": [
+  [
+   "Good as Gold",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Life Orb",
+   52.58222724117198
+  ],
+  [
+   "Choice Scarf",
+   13.638655990352705
+  ],
+  [
+   "Metal Coat",
+   11.563614864171317
+  ],
+  [
+   "Leftovers",
+   7.345103781523105
+  ],
+  [
+   "Sitrus Berry",
+   3.291126893905389
+  ],
+  [
+   "White Herb",
+   2.8163522216310253
+  ],
+  [
+   "Focus Sash",
+   1.95493980379056
+  ],
+  [
+   "Spell Tag",
+   1.774219282288098
+  ]
+ ],
+ "moves": [
+  [
+   "Shadow Ball",
+   24.65956699445411
+  ],
+  [
+   "Make It Rain",
+   24.149217917403014
+  ],
+  [
+   "Protect",
+   21.24643650324263
+  ],
+  [
+   "Nasty Plot",
+   16.15405265790855
+  ],
+  [
+   "Power Gem",
+   6.336220015838362
+  ],
+  [
+   "Trick",
+   2.221291348557412
+  ],
+  [
+   "Thunderbolt",
+   1.5709163404533186
+  ],
+  [
+   "Flash Cannon",
+   1.1017369359456015
+  ],
+  [
+   "Dazzling Gleam",
+   0.7168796754951248
+  ],
+  [
+   "Steel Beam",
+   0.4311143703221312
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   18.779127248304718
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   17.874086563430843
+  ],
+  [
+   "Modest:32/0/2/10/3/19",
+   3.7165079793893607
+  ],
+  [
+   "Timid:17/0/0/17/0/32",
+   1.8389651863304828
+  ],
+  [
+   "Modest:7/0/0/27/0/32",
+   1.4829661730679233
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Garchomp",
+   9.812336547038665
+  ],
+  [
+   "Whimsicott",
+   9.100975722670738
+  ],
+  [
+   "Staraptor-Mega",
+   7.805060334067762
+  ],
+  [
+   "Incineroar",
+   5.8400519196800955
+  ],
+  [
+   "Basculegion",
+   5.490548631713481
+  ],
+  [
+   "Sinistcha",
+   5.097193795721818
+  ],
+  [
+   "Grimmsnarl",
+   4.09933189089632
+  ],
+  [
+   "Charizard-Mega-Y",
+   2.7802967918027064
+  ],
+  [
+   "Raichu-Mega-Y",
+   2.759085112778894
+  ],
+  [
+   "Floette-Mega",
+   2.4458444596013114
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Aerodactyl-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Metagross-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Annihilape",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Aerodactyl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rotom-Heat",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Life Orb",
+   "ability": "Good as Gold",
+   "moves": [
+    "Make It Rain",
+    "Shadow Ball",
+    "Nasty Plot",
+    "Protect"
+   ],
+   "count": 13,
+   "bestPlacing": 1,
+   "bestPlayer": "Alchemist_23",
+   "eventName": "Champions League VGC June",
+   "eventSlug": "2026-06-27-champions-league-vgc-june",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a397c79c87cd9ff0a30d359",
+   "nature": "Modest"
+  },
+  {
+   "item": "Spell Tag",
+   "ability": "Good as Gold",
+   "moves": [
+    "Make It Rain",
+    "Shadow Ball",
+    "Nasty Plot",
+    "Protect"
+   ],
+   "count": 5,
+   "bestPlacing": 5,
+   "bestPlayer": "マサヒロ マドリ",
+   "eventName": "Tenki's Cart Weekly #107- Reg MB",
+   "eventSlug": "2026-07-02-tenki-s-cart-weekly-107-reg-mb",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a4213a583fd320299bd3c48",
+   "nature": "Modest"
+  },
+  {
+   "item": "Leftovers",
+   "ability": "Good as Gold",
+   "moves": [
+    "Make It Rain",
+    "Shadow Ball",
+    "Nasty Plot",
+    "Protect"
+   ],
+   "count": 3,
+   "bestPlacing": 2,
+   "bestPlayer": "BatCoach",
+   "eventName": "Champions Collective #12",
+   "eventSlug": "2026-07-01-champions-collective-12",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3987c183fd320299bce00b",
+   "nature": "Modest"
+  }
+ ]
+}

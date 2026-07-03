@@ -1,84 +1,240 @@
 {
-    "id": "vanilluxe",
-    "name": "Vanilluxe",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0059426,
-            "rank": 103,
-            "raw": 49154
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0057394,
-            "rank": 98,
-            "raw": 58438
-        }
-    ],
-    "abilities": [
-        ["Snow Warning", 99.18330427612341],
-        ["Weak Armor", 0.5088457708079617],
-        ["Ice Body", 0.30784995306861923]
-    ],
-    "items": [
-        ["Choice Scarf", 71.86446200230172],
-        ["Never-Melt Ice", 17.243531592269328],
-        ["Focus Sash", 2.9654040563616357],
-        ["Leftovers", 2.5538262495531128],
-        ["Silk Scarf", 1.7246266068186082],
-        ["Sitrus Berry", 1.460192512981426],
-        ["Chople Berry", 0.7381190220830897],
-        ["Occa Berry", 0.5475698319763603]
-    ],
-    "moves": [
-        ["Blizzard", 24.117427695649276],
-        ["Freeze-Dry", 22.928603692072333],
-        ["Icy Wind", 16.798233257127247],
-        ["Aurora Veil", 9.042492080499272],
-        ["Sheer Cold", 5.640837326986043],
-        ["Protect", 5.35723732639604],
-        ["Ice Shard", 4.328170441189311],
-        ["Weather Ball", 3.84898189196734],
-        ["Ice Beam", 1.8851321172499789],
-        ["Taunt", 1.267426631910881]
-    ],
-    "spreads": [
-        ["Timid:2/0/0/32/0/32", 39.94573224604069],
-        ["Timid:1/0/1/32/0/32", 12.221026183624362],
-        ["Timid:0/0/0/32/2/32", 5.05323328660012],
-        ["Timid:5/0/1/28/0/32", 3.9347342675800445],
-        ["Modest:1/0/1/32/0/32", 2.998742893327202]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Basculegion", 5.00146820412312],
-        ["Garchomp", 4.679969311532683],
-        ["Kingambit", 4.455708336818025],
-        ["Incineroar", 4.382616746732361],
-        ["Sneasler", 4.184479977873886],
-        ["Milotic", 3.6977609064763857],
-        ["Whimsicott", 3.6549725762787104],
-        ["Lopunny-Mega", 3.1055658078790453],
-        ["Farigiraf", 2.895130274488369],
-        ["Sinistcha", 2.7308826648972184]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Choice Scarf",
-            "ability": "Snow Warning",
-            "moves": ["Freeze-Dry", "Blizzard", "Weather Ball", "Chilling Water"],
-            "count": 1,
-            "bestPlacing": 3,
-            "bestPlayer": "VGCDan",
-            "eventName": "Pokepal Smackdown #144 (Champions) (Reg M-A)",
-            "eventSlug": "2026-06-08-pokepal-smackdown-144-champions-reg-m-a",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15a9910f6c1f089986169a",
-            "nature": "Timid"
-        }
-    ]
+ "id": "vanilluxe",
+ "name": "Vanilluxe",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0077161999999999994,
+   "rank": 88,
+   "raw": 22143
+  }
+ ],
+ "abilities": [
+  [
+   "Snow Warning",
+   99.09913975237119
+  ],
+  [
+   "Weak Armor",
+   0.46662501764120373
+  ],
+  [
+   "Ice Body",
+   0.43423522998759884
+  ]
+ ],
+ "items": [
+  [
+   "Choice Scarf",
+   74.78968612420537
+  ],
+  [
+   "Never-Melt Ice",
+   14.03264450123903
+  ],
+  [
+   "Focus Sash",
+   3.6847079663644866
+  ],
+  [
+   "Light Clay",
+   2.880038831677965
+  ],
+  [
+   "Life Orb",
+   1.5703761994712917
+  ],
+  [
+   "Chople Berry",
+   0.902601412109629
+  ],
+  [
+   "Leftovers",
+   0.5542092830015684
+  ],
+  [
+   "Sitrus Berry",
+   0.5455977908113481
+  ]
+ ],
+ "moves": [
+  [
+   "Blizzard",
+   24.595154657168475
+  ],
+  [
+   "Freeze-Dry",
+   23.770032067444696
+  ],
+  [
+   "Icy Wind",
+   15.218593317767331
+  ],
+  [
+   "Sheer Cold",
+   8.328795807482114
+  ],
+  [
+   "Aurora Veil",
+   7.818649003282195
+  ],
+  [
+   "Protect",
+   4.940320686122731
+  ],
+  [
+   "Weather Ball",
+   4.231494045545416
+  ],
+  [
+   "Ice Shard",
+   3.309003087514291
+  ],
+  [
+   "Flash Cannon",
+   3.2605539508342907
+  ],
+  [
+   "Ally Switch",
+   1.079214450382871
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   24.15765334428176
+  ],
+  [
+   "Modest:5/0/0/32/0/29",
+   19.925344203445626
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   8.086450481945334
+  ],
+  [
+   "Timid:1/0/1/32/0/32",
+   7.298274366182428
+  ],
+  [
+   "Timid:1/0/0/32/1/32",
+   6.744276537446209
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Basculegion",
+   9.617837000706482
+  ],
+  [
+   "Incineroar",
+   9.43209476463253
+  ],
+  [
+   "Raichu-Mega-Y",
+   8.883424960005277
+  ],
+  [
+   "Sneasler",
+   6.1797990715083975
+  ],
+  [
+   "Dragonite",
+   4.494618336217009
+  ],
+  [
+   "Whimsicott",
+   4.319837568427007
+  ],
+  [
+   "Sinistcha",
+   3.8846467575537433
+  ],
+  [
+   "Garchomp",
+   3.705900653246324
+  ],
+  [
+   "Kingambit",
+   3.1624458633457397
+  ],
+  [
+   "Farigiraf",
+   2.9604260270097558
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Swampert-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Choice Scarf",
+   "ability": "Snow Warning",
+   "moves": [
+    "Frost Breath",
+    "Blizzard",
+    "Freeze-Dry",
+    "Icy Wind"
+   ],
+   "count": 1,
+   "bestPlacing": 1,
+   "bestPlayer": "MrAwesome",
+   "eventName": "Pokepal Smackdown #146 (Champions) (Reg M-B)",
+   "eventSlug": "2026-06-22-pokepal-smackdown-146-champions-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15ac1d0f6c1f089986169f",
+   "nature": "Timid"
+  }
+ ]
 }

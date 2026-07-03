@@ -1,80 +1,218 @@
 {
-    "id": "araquanid",
-    "name": "Araquanid",
-    "slug": "champions",
-    "formatId": "gen9championsvgc2026regma",
-    "formatLabel": "Pokémon Champions — Regulation M-A",
-    "dataThrough": "2026-05",
-    "history": [
-        {
-            "month": "2026-04",
-            "usage": 0.0085877,
-            "rank": 84,
-            "raw": 97390
-        },
-        {
-            "month": "2026-05",
-            "usage": 0.0091293,
-            "rank": 83,
-            "raw": 149247
-        }
-    ],
-    "abilities": [["Water Bubble", 99.38007859875468], ["Water Absorb", 0.6199214012453295]],
-    "items": [
-        ["Mystic Water", 63.18942275247785],
-        ["Leftovers", 9.471961968642388],
-        ["Sitrus Berry", 8.301154394493395],
-        ["Focus Sash", 6.024663043223672],
-        ["Babiri Berry", 3.007158519531348],
-        ["Coba Berry", 1.9079457190371247],
-        ["Bright Powder", 1.35973702098438],
-        ["White Herb", 1.0243452803264952]
-    ],
-    "moves": [
-        ["Liquidation", 19.921334598141634],
-        ["Wide Guard", 19.916177112078884],
-        ["Protect", 16.316354515645138],
-        ["Leech Life", 10.497068889964547],
-        ["", 6.810456066801909],
-        ["Icy Wind", 2.3658614883062232],
-        ["Facade", 2.2808342680864935],
-        ["Hydro Pump", 2.1738037328797044],
-        ["Lunge", 1.9002835230218669],
-        ["Soak", 1.8098368595286511]
-    ],
-    "spreads": [
-        ["Brave:32/32/2/0/0/0", 25.751705576839225],
-        ["Hardy:32/0/0/0/0/0", 9.000152651802496],
-        ["Adamant:32/32/2/0/0/0", 8.87890395719971],
-        ["Brave:32/32/0/0/2/0", 6.823618478511101],
-        ["Adamant:32/32/0/0/2/0", 4.339878257950047]
-    ],
-    "teraTypes": [],
-    "teammates": [
-        ["Farigiraf", 6.49084077151625],
-        ["Sinistcha", 5.4568201559674385],
-        ["Incineroar", 5.349765959353974],
-        ["Kingambit", 3.9349574265367124],
-        ["Archaludon", 2.657707727043941],
-        ["Sneasler", 2.4412110321468954],
-        ["Bellibolt", 2.2973483436600772],
-        ["Pelipper", 2.158643401087951],
-        ["Torkoal", 2.013581616163],
-        ["Charizard-Mega-Y", 1.9014244885217697]
-    ],
-    "counters": [],
-    "builds": [
-        {
-            "item": "Mystic Water",
-            "ability": "Water Bubble",
-            "moves": ["Liquidation", "Leech Life", "Soak", "Wide Guard"],
-            "count": 1,
-            "bestPlacing": 7,
-            "bestPlayer": "Sunning",
-            "eventName": "Talon's FIGHT CLUB #85 POKEMON CHAMPIONS",
-            "eventSlug": "2026-05-21-talon-s-fight-club-85-pokemon-champions",
-            "sourceUrl": "https://play.limitlesstcg.com/tournament/69e2b2f578b359b789d64d31",
-            "nature": null
-        }
-    ]
+ "id": "araquanid",
+ "name": "Araquanid",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmb",
+ "formatLabel": "Pokémon Champions — Regulation M-B",
+ "dataThrough": "2026-06",
+ "history": [
+  {
+   "month": "2026-06",
+   "usage": 0.0104222,
+   "rank": 82,
+   "raw": 38475
+  }
+ ],
+ "abilities": [
+  [
+   "Water Bubble",
+   99.15962433973787
+  ],
+  [
+   "Water Absorb",
+   0.8403756602621144
+  ]
+ ],
+ "items": [
+  [
+   "Mystic Water",
+   57.32761847466731
+  ],
+  [
+   "Leftovers",
+   9.59994710189851
+  ],
+  [
+   "Life Orb",
+   8.99035285375712
+  ],
+  [
+   "Sitrus Berry",
+   7.440923904020873
+  ],
+  [
+   "Babiri Berry",
+   4.5863298488376625
+  ],
+  [
+   "Focus Sash",
+   2.9345899532129662
+  ],
+  [
+   "White Herb",
+   1.4896010944117943
+  ],
+  [
+   "Lum Berry",
+   1.288406239208642
+  ]
+ ],
+ "moves": [
+  [
+   "Liquidation",
+   22.000701409190786
+  ],
+  [
+   "Wide Guard",
+   20.528225789613785
+  ],
+  [
+   "Protect",
+   16.87342816028236
+  ],
+  [
+   "Leech Life",
+   11.9023841799762
+  ],
+  [
+   "",
+   5.058817983670116
+  ],
+  [
+   "Rain Dance",
+   3.1193550612160106
+  ],
+  [
+   "Lunge",
+   2.768781199089377
+  ],
+  [
+   "Infestation",
+   2.270790229435045
+  ],
+  [
+   "Facade",
+   1.686032670079865
+  ],
+  [
+   "Poison Jab",
+   1.2780789991459551
+  ]
+ ],
+ "spreads": [
+  [
+   "Brave:32/32/2/0/0/0",
+   18.111765601492007
+  ],
+  [
+   "Adamant:32/32/2/0/0/0",
+   8.688866437071637
+  ],
+  [
+   "Brave:32/32/0/0/2/0",
+   6.766356971517437
+  ],
+  [
+   "Hardy:32/0/0/0/0/0",
+   6.67159051872722
+  ],
+  [
+   "Adamant:32/32/0/0/2/0",
+   6.020230113017579
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Farigiraf",
+   7.487797789402729
+  ],
+  [
+   "Mawile-Mega",
+   5.885751484652011
+  ],
+  [
+   "Sinistcha",
+   5.233533086711302
+  ],
+  [
+   "Incineroar",
+   4.735445817659601
+  ],
+  [
+   "Torkoal",
+   3.909140990083896
+  ],
+  [
+   "Pelipper",
+   3.1210329384585385
+  ],
+  [
+   "Kingambit",
+   2.886452872545771
+  ],
+  [
+   "Archaludon",
+   2.6777568237209883
+  ],
+  [
+   "Swampert-Mega",
+   2.4991790421750264
+  ],
+  [
+   "Garchomp",
+   2.4565226647159664
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Mystic Water",
+   "ability": "Water Bubble",
+   "moves": [
+    "Reflect",
+    "Liquidation",
+    "Leech Life",
+    "Wide Guard"
+   ],
+   "count": 1,
+   "bestPlacing": 4,
+   "bestPlayer": "TomatoSaiyan",
+   "eventName": "Talon's FIGHT CLUB #90 POKEMON CHAMPIONS",
+   "eventSlug": "2026-06-25-talon-s-fight-club-90-pokemon-champions",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a14cca88c163b8097997618",
+   "nature": "Brave"
+  }
+ ]
 }
