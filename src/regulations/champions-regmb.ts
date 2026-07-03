@@ -24,13 +24,17 @@ export const CHAMPIONS_REGMB: RegulationSet = {
     enforceSpeciesClause: true,
     enforceItemClause: true,
     maxMoves: 4,
-    // The official web-view legality page mints a fresh event-id per
-    // regulation (see scripts/fetch-champions-legality.ts). The M-B page was
-    // not yet published/parseable at the time of writing — set
-    // officialLegalityUrl once it goes live, then run the
-    // fetch-champions-legality / upload-champions-legality ingestion pair.
-    // Until the legality blob is ingested, the loader fails loudly rather
-    // than silently allowing every team.
+    // Official Champions legality page, linked from Pokémon HOME's "Season M-3
+    // Underway" news post (champions-news.pokemon-home.com/en/page/778.html).
+    // Note the path shape differs from M-A: M-B lives under `/regulations/<id>/`
+    // (M-A used `/events/rs…/`). The page ships the allow-list as a client-
+    // rendered JS array with parenthetical form labels, which
+    // parseChampionsLegalityHtml normalizes to Showdown names (235 mons, all
+    // dex-resolved as of 2026-07-03). Re-run fetch-champions-legality /
+    // upload-champions-legality to refresh; until the blob is ingested the
+    // loader fails loudly rather than silently allowing every team.
+    officialLegalityUrl:
+        "https://web-view.app.pokemonchampions.jp/battle/pages/regulations/r1780458vgoech/en/pokemon.html",
     legalityKvKey: "champions-regmb:_legality",
     // Verified 2026-07-02: Smogon published Reg M-B usage stats in the 2026-06
     // chaos dump (the first monthly dump after M-B's 2026-06-17 start) under
