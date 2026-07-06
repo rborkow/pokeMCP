@@ -53,13 +53,17 @@ export function ActionCard({ action, isApplied = false, onApply, onDismiss }: Ac
                     break;
                 }
                 // Merge existing data with payload updates
-                setPokemon(action.slot, {
-                    ...existing,
-                    ...action.payload,
-                    // Explicit fallbacks for critical fields
-                    pokemon: action.payload.pokemon ?? existing.pokemon,
-                    moves: action.payload.moves ?? existing.moves,
-                });
+                setPokemon(
+                    action.slot,
+                    {
+                        ...existing,
+                        ...action.payload,
+                        // Explicit fallbacks for critical fields
+                        pokemon: action.payload.pokemon ?? existing.pokemon,
+                        moves: action.payload.moves ?? existing.moves,
+                    },
+                    "ai",
+                );
                 break;
             }
             // Single move update: replace just one move slot
@@ -74,10 +78,14 @@ export function ActionCard({ action, isApplied = false, onApply, onDismiss }: Ac
                 if (newMove !== undefined) {
                     const updatedMoves = [...(existing.moves || [])];
                     updatedMoves[moveSlot] = newMove;
-                    setPokemon(action.slot, {
-                        ...existing,
-                        moves: updatedMoves,
-                    });
+                    setPokemon(
+                        action.slot,
+                        {
+                            ...existing,
+                            moves: updatedMoves,
+                        },
+                        "ai",
+                    );
                 }
                 break;
             }
@@ -85,20 +93,24 @@ export function ActionCard({ action, isApplied = false, onApply, onDismiss }: Ac
             case "add_pokemon":
             case "replace_pokemon":
                 if (action.payload.pokemon) {
-                    setPokemon(action.slot, {
-                        pokemon: action.payload.pokemon,
-                        moves: action.payload.moves || [],
-                        ability: action.payload.ability,
-                        item: action.payload.item,
-                        evs: action.payload.evs,
-                        ivs: action.payload.ivs,
-                        nature: action.payload.nature,
-                        teraType: action.payload.teraType,
-                    });
+                    setPokemon(
+                        action.slot,
+                        {
+                            pokemon: action.payload.pokemon,
+                            moves: action.payload.moves || [],
+                            ability: action.payload.ability,
+                            item: action.payload.item,
+                            evs: action.payload.evs,
+                            ivs: action.payload.ivs,
+                            nature: action.payload.nature,
+                            teraType: action.payload.teraType,
+                        },
+                        "ai",
+                    );
                 }
                 break;
             case "remove_pokemon":
-                removePokemon(action.slot);
+                removePokemon(action.slot, "ai");
                 break;
         }
 

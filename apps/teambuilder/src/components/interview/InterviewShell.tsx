@@ -113,15 +113,20 @@ export function InterviewShell() {
         beginSynthesis();
 
         try {
+            // Read fresh state from the store's imperative API rather than the
+            // render closure — the caller (handleStepSubmit) invokes this
+            // synchronously right after setAnswer() for the final step, before
+            // this component re-renders with the updated `answers` prop.
+            const currentAnswers = useInterviewStore.getState().answers;
             const response = await fetch("/api/ai/interview/stream", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     answers: {
-                        format: answers.format ?? teamFormat,
-                        start: answers.start,
-                        playstyle: answers.playstyle,
-                        preferences: answers.preferences,
+                        format: currentAnswers.format ?? teamFormat,
+                        start: currentAnswers.start,
+                        playstyle: currentAnswers.playstyle,
+                        preferences: currentAnswers.preferences,
                     },
                     format: teamFormat,
                     mode: teamMode,
@@ -174,7 +179,6 @@ export function InterviewShell() {
         }
     }, [
         addProposedAction,
-        answers,
         appendSynthesisText,
         beginSynthesis,
         fail,

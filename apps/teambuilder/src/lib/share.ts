@@ -68,7 +68,9 @@ export function generateShareUrl(team: TeamPokemon[], format: string): string {
     const origin =
         typeof window !== "undefined" ? window.location.origin : "https://www.pokemcp.com";
 
-    return `${origin}?team=${encoded}`;
+    // Only /builder mounts useUrlTeam() to read ?team= — the landing page
+    // ignores the param and SavedTeamRedirect drops it on redirect.
+    return `${origin}/builder?team=${encoded}`;
 }
 
 /**
