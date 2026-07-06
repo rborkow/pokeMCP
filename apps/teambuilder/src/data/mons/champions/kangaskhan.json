@@ -220,6 +220,23 @@
  ],
  "builds": [
   {
+   "item": "Kangaskhanite",
+   "ability": "Scrappy",
+   "moves": [
+    "Fake Out",
+    "Double-Edge",
+    "Low Kick",
+    "Sucker Punch"
+   ],
+   "count": 6,
+   "bestPlacing": 3,
+   "bestPlayer": "a8592",
+   "eventName": "King's Gambit #7 | Reg M-B",
+   "eventSlug": "2026-07-05-king-s-gambit-7-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a37eef2ceacae7d6441bbd5",
+   "nature": "Adamant"
+  },
+  {
    "item": "Silk Scarf",
    "ability": "Scrappy",
    "moves": [
@@ -233,23 +250,6 @@
    "eventSlug": "2026-06-28-vgca-battle-hall-academy-ace-edition-4",
    "sourceUrl": "https://play.limitlesstcg.com/tournament/6a400a3ac87cd9ff0a3113d4",
    "nature": "Brave"
-  },
-  {
-   "item": "Kangaskhanite",
-   "ability": "Scrappy",
-   "moves": [
-    "Fake Out",
-    "Double-Edge",
-    "Low Kick",
-    "Sucker Punch"
-   ],
-   "count": 4,
-   "bestPlacing": 3,
-   "bestPlayer": "Katiclus",
-   "eventName": "Alpensee Tour (Reg M-B) #64",
-   "eventSlug": "2026-07-01-alpensee-tour-reg-m-b-64",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a392defc87cd9ff0a30d0ac",
-   "nature": "Adamant"
   },
   {
    "item": "Life Orb",

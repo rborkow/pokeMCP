@@ -223,17 +223,34 @@
    "item": "Focus Sash",
    "ability": "Compound Eyes",
    "moves": [
-    "Sleep Powder",
     "Hurricane",
+    "Sleep Powder",
     "Rage Powder",
     "Protect"
    ],
-   "count": 2,
-   "bestPlacing": 7,
-   "bestPlayer": "jiholee32",
-   "eventName": "The Wide League Saturday Night Rumble #87 REG M-B",
-   "eventSlug": "2026-06-28-the-wide-league-saturday-night-rumble-87-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3dbda083fd320299bd0416",
+   "count": 3,
+   "bestPlacing": 5,
+   "bestPlayer": "Gio Dela Cuesta",
+   "eventName": "Khun Champions Cup #2",
+   "eventSlug": "2026-07-05-khun-champions-cup-2",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3ceab783fd320299bcfbff",
+   "nature": "Timid"
+  },
+  {
+   "item": "Choice Scarf",
+   "ability": "Compound Eyes",
+   "moves": [
+    "Hurricane",
+    "Rage Powder",
+    "Sleep Powder",
+    "Pollen Puff"
+   ],
+   "count": 1,
+   "bestPlacing": 6,
+   "bestPlayer": "MarvVGC",
+   "eventName": "Regulation M-B: Open League #1",
+   "eventSlug": "2026-07-04-regulation-m-b-open-league-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a4101e5c87cd9ff0a311dd6",
    "nature": "Timid"
   }
  ]

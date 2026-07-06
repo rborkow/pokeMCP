@@ -223,12 +223,12 @@
    "item": "Light Clay",
    "ability": "Prankster",
    "moves": [
+    "Reflect",
     "Will-O-Wisp",
     "Light Screen",
-    "Reflect",
     "Rain Dance"
    ],
-   "count": 6,
+   "count": 7,
    "bestPlacing": 2,
    "bestPlayer": "PokeHugo",
    "eventName": "MMHM x Stellar Novas Tour #2",
@@ -240,12 +240,12 @@
    "item": "Light Clay",
    "ability": "Prankster",
    "moves": [
+    "Encore",
     "Reflect",
     "Light Screen",
-    "Encore",
     "Rain Dance"
    ],
-   "count": 2,
+   "count": 3,
    "bestPlacing": 2,
    "bestPlayer": "Lya_3",
    "eventName": "CHAMPIONS REG. M-B |👑CROWN FIGHT Bo3 TOUR #74👑",
@@ -254,21 +254,21 @@
    "nature": "Calm"
   },
   {
-   "item": "Roseli Berry",
+   "item": "Focus Sash",
    "ability": "Prankster",
    "moves": [
-    "Encore",
     "Light Screen",
-    "Reflect",
-    "Rain Dance"
+    "Will-O-Wisp",
+    "Rain Dance",
+    "Protect"
    ],
-   "count": 1,
+   "count": 2,
    "bestPlacing": 2,
-   "bestPlayer": "Kardeas",
-   "eventName": "Amoonguss Bus Tour Champions Practice Reg M-B #1",
-   "eventSlug": "2026-06-23-amoonguss-bus-tour-champions-practice-reg-m-b-1",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a387661af50e1230840809c",
-   "nature": "Calm"
+   "bestPlayer": "Testing444",
+   "eventName": "Rework Esport Champions Talent Cup 2 | 50€ CP",
+   "eventSlug": "2026-07-03-rework-esport-champions-talent-cup-2-50-cp",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a39af2883fd320299bce1f4",
+   "nature": "Careful"
   }
  ]
 }
