@@ -1,5 +1,5 @@
 import { toID } from "../data-loader.js";
-import type { SearchResult, RankedResult, QueryOptions } from "./types.js";
+import type { QueryOptions, RankedResult, SearchResult } from "./types.js";
 
 /**
  * Rerank search results with metadata boosts and diversity

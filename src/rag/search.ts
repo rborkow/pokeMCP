@@ -1,5 +1,5 @@
 import { toID } from "../data-loader.js";
-import type { VectorMatch, SearchResult, QueryOptions } from "./types.js";
+import type { QueryOptions, SearchResult, VectorMatch } from "./types.js";
 
 /**
  * Check whether a match's pokemon metadata refers to the requested Pokemon.
