@@ -13,43 +13,17 @@ import {
     type TeamPokemon,
 } from "@/lib/ai/context";
 import { logGatewayHealthOnce } from "@/lib/ai/gateway-health";
-import { DEFAULT_PERSONALITY, type PersonalityId } from "@/lib/ai/personalities";
+import type { PersonalityId } from "@/lib/ai/personalities";
 import { TEAM_TOOLS } from "@/lib/ai/tools";
+import { checkOrigin, checkRateLimit, readJsonBody, validationError } from "@/lib/api/ai-guard";
+import { ChatRequestSchema, toUserFirst } from "@/lib/api/ai-schemas";
 import type { Mode } from "@/types/pokemon";
 
 // Max number of previous messages to include for context (to manage token usage)
 const MAX_HISTORY_MESSAGES = 10;
 
-// Simple in-memory rate limiting (per-isolate, best-effort)
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
-const RATE_LIMIT_MAX_REQUESTS = 20; // 20 requests per minute per IP
-
-function isRateLimited(ip: string): boolean {
-    const now = Date.now();
-    const entry = rateLimitMap.get(ip);
-
-    if (!entry || now > entry.resetAt) {
-        rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
-        return false;
-    }
-
-    entry.count++;
-    return entry.count > RATE_LIMIT_MAX_REQUESTS;
-}
-
-// Periodically clean up expired entries to prevent memory leaks
-function cleanupRateLimits() {
-    const now = Date.now();
-    for (const [ip, entry] of rateLimitMap) {
-        if (now > entry.resetAt) {
-            rateLimitMap.delete(ip);
-        }
-    }
-}
-
-// Clean up every 5 minutes
-setInterval(cleanupRateLimits, 5 * 60_000);
+// Per-IP rate limit: 20 requests per minute (shared guard, CF binding-backed).
+const RATE_LIMIT = { route: "chat", limit: 20, bindingName: "AI_RATE_LIMITER_CHAT" };
 
 /**
  * AG-UI event emitter helpers.
@@ -69,42 +43,31 @@ function aguiEvent(data: Record<string, unknown>): string {
 export async function POST(request: NextRequest) {
     logGatewayHealthOnce("claude-stream");
 
-    // Rate limiting check
-    const clientIp =
-        request.headers.get("cf-connecting-ip") ??
-        request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
-        "unknown";
+    const originError = checkOrigin(request);
+    if (originError) return originError;
 
-    if (isRateLimited(clientIp)) {
-        return new Response(
-            JSON.stringify({
-                error: "Too many requests. Please wait a minute before trying again.",
-            }),
-            {
-                status: 429,
-                headers: { "Content-Type": "application/json", "Retry-After": "60" },
-            },
-        );
-    }
+    const rateLimitError = await checkRateLimit(request, RATE_LIMIT);
+    if (rateLimitError) return rateLimitError;
 
     try {
+        const body = await readJsonBody(request);
+        if (!body.ok) return body.response;
+
+        const parsed = ChatRequestSchema.safeParse(body.data);
+        if (!parsed.success) {
+            return validationError();
+        }
+
         const {
             message,
-            team = [],
-            format = "gen9ou",
-            mode = "singles",
+            team,
+            format,
+            mode,
             enableThinking,
-            personality: personalityId = DEFAULT_PERSONALITY,
-            chatHistory = [],
-            recentEdits = [],
-        } = await request.json();
-
-        if (!message) {
-            return new Response(JSON.stringify({ error: "Message is required" }), {
-                status: 400,
-                headers: { "Content-Type": "application/json" },
-            });
-        }
+            personality: personalityId,
+            chatHistory,
+            recentEdits,
+        } = parsed.data;
 
         const apiKey = process.env.ANTHROPIC_API_KEY;
 
@@ -149,13 +112,11 @@ export async function POST(request: NextRequest) {
 
         const useThinking = enableThinking === true;
 
-        // Build conversation messages with history
-        const recentHistory = (chatHistory as { role: string; content: string }[])
-            .slice(-MAX_HISTORY_MESSAGES)
-            .map((msg) => ({
-                role: msg.role as "user" | "assistant",
-                content: msg.content,
-            }));
+        // Build conversation messages with history. After slicing to the last
+        // N messages, drop leading entries until the first "user" turn —
+        // slice(-N) can produce an assistant-first array, which the Anthropic
+        // API rejects with a 400 on long conversations.
+        const recentHistory = toUserFirst(chatHistory.slice(-MAX_HISTORY_MESSAGES));
 
         const messages = [...recentHistory, { role: "user" as const, content: fullUserMessage }];
 

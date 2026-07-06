@@ -28,3 +28,21 @@ enabled = true
 enabled = true
 head_sampling_rate = 1
 invocation_logs = true
+
+# Cloudflare Rate Limiting bindings for the paid AI streaming routes (open
+# beta — config-only, no resource to provision). Two tiers: chat (20/min) and
+# the heavier synthesis/report routes (6/min). Keys are namespaced per route
+# in src/lib/api/ai-guard.ts, so routes sharing a binding keep separate
+# per-IP buckets. Local dev and tests fall back to an in-memory limiter when
+# the bindings are absent.
+[[unsafe.bindings]]
+name = "AI_RATE_LIMITER_CHAT"
+type = "ratelimit"
+namespace_id = "1101"
+simple = { limit = 20, period = 60 }
+
+[[unsafe.bindings]]
+name = "AI_RATE_LIMITER_STRICT"
+type = "ratelimit"
+namespace_id = "1102"
+simple = { limit = 6, period = 60 }

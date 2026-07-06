@@ -9,32 +9,13 @@ import {
     INTERVIEW_STEPS,
 } from "@/lib/ai/interview-prompts";
 import { INTERVIEW_SYNTHESIS_TOOLS, type InterviewStepId } from "@/lib/ai/interview-tools";
+import { checkOrigin, checkRateLimit, readJsonBody, validationError } from "@/lib/api/ai-guard";
+import { InterviewRequestSchema } from "@/lib/api/ai-schemas";
 import type { FormatId, Mode } from "@/types/pokemon";
 
 // Interview runs are gated at a modest per-IP ceiling — well above the four
 // expected client calls, low enough to mitigate abuse.
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_WINDOW_MS = 60_000;
-const RATE_LIMIT_MAX_REQUESTS = 6;
-
-function isRateLimited(ip: string): boolean {
-    const now = Date.now();
-    const entry = rateLimitMap.get(ip);
-    if (!entry || now > entry.resetAt) {
-        rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
-        return false;
-    }
-    entry.count++;
-    return entry.count > RATE_LIMIT_MAX_REQUESTS;
-}
-
-function cleanupRateLimits() {
-    const now = Date.now();
-    for (const [ip, entry] of rateLimitMap) {
-        if (now > entry.resetAt) rateLimitMap.delete(ip);
-    }
-}
-setInterval(cleanupRateLimits, 5 * 60_000);
+const RATE_LIMIT = { route: "interview", limit: 6, bindingName: "AI_RATE_LIMITER_STRICT" };
 
 let eventCounter = 0;
 function nextId(): string {
@@ -45,17 +26,11 @@ function aguiEvent(data: Record<string, unknown>): string {
     return `data: ${JSON.stringify({ timestamp: Date.now(), ...data })}\n\n`;
 }
 
-interface InterviewRequestBody {
-    answers: Partial<Record<InterviewStepId, string>>;
-    format: FormatId;
-    mode: Mode;
-}
-
-function hasRequiredAnswers(body: InterviewRequestBody): boolean {
+function hasRequiredAnswers(answers: Partial<Record<InterviewStepId, string>>): boolean {
     for (const step of INTERVIEW_STEPS) {
         if (step.skippable) continue;
-        const value = body.answers[step.id as InterviewStepId];
-        if (!value || !value.trim()) return false;
+        const value = answers[step.id as InterviewStepId];
+        if (!value?.trim()) return false;
     }
     return true;
 }
@@ -63,32 +38,21 @@ function hasRequiredAnswers(body: InterviewRequestBody): boolean {
 export async function POST(request: NextRequest) {
     logGatewayHealthOnce("interview-stream");
 
-    const clientIp =
-        request.headers.get("cf-connecting-ip") ??
-        request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
-        "unknown";
+    const originError = checkOrigin(request);
+    if (originError) return originError;
 
-    if (isRateLimited(clientIp)) {
-        return new Response(
-            JSON.stringify({ error: "Too many requests. Wait a minute and try again." }),
-            {
-                status: 429,
-                headers: { "Content-Type": "application/json", "Retry-After": "60" },
-            },
-        );
+    const rateLimitError = await checkRateLimit(request, RATE_LIMIT);
+    if (rateLimitError) return rateLimitError;
+
+    const body = await readJsonBody(request);
+    if (!body.ok) return body.response;
+
+    const parsed = InterviewRequestSchema.safeParse(body.data);
+    if (!parsed.success) {
+        return validationError();
     }
 
-    let body: InterviewRequestBody;
-    try {
-        body = (await request.json()) as InterviewRequestBody;
-    } catch {
-        return new Response(JSON.stringify({ error: "Invalid JSON body" }), {
-            status: 400,
-            headers: { "Content-Type": "application/json" },
-        });
-    }
-
-    if (!hasRequiredAnswers(body)) {
+    if (!hasRequiredAnswers(parsed.data.answers)) {
         return new Response(
             JSON.stringify({
                 error: "Missing required answers. Fill format and start before synthesizing.",
@@ -105,7 +69,9 @@ export async function POST(request: NextRequest) {
         });
     }
 
-    const { answers, format, mode } = body;
+    const { answers } = parsed.data;
+    const format = parsed.data.format as FormatId;
+    const mode = parsed.data.mode as Mode;
 
     const systemPrompt = buildSynthesisSystemPrompt(format, mode);
     const userMessage = `Here are the trainer's answers:\n${formatAnswersForPrompt(answers)}\n\nBuild the team now.`;

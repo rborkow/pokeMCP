@@ -7,36 +7,16 @@ import {
     fetchMetaTrends,
 } from "@/lib/ai/context";
 import { logGatewayHealthOnce } from "@/lib/ai/gateway-health";
-import type { Mode } from "@/types/pokemon";
+import { checkOrigin, checkRateLimit, readJsonBody, validationError } from "@/lib/api/ai-guard";
+import { MetaReportRequestSchema } from "@/lib/api/ai-schemas";
 
 // Opus 4.8 powers the metagame-evolution narrative — the most autonomous model
 // for grounded analytical writing. Other AI routes stay on Sonnet for chat latency.
 const MODEL = "claude-opus-4-8";
 
-// Simple in-memory rate limiting (per-isolate, best-effort). Reports are heavier
-// than chat turns, so the bucket is tighter (mirrors the interview route).
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
-const RATE_LIMIT_MAX_REQUESTS = 6; // 6 reports per minute per IP
-
-function isRateLimited(ip: string): boolean {
-    const now = Date.now();
-    const entry = rateLimitMap.get(ip);
-    if (!entry || now > entry.resetAt) {
-        rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
-        return false;
-    }
-    entry.count++;
-    return entry.count > RATE_LIMIT_MAX_REQUESTS;
-}
-
-function cleanupRateLimits() {
-    const now = Date.now();
-    for (const [ip, entry] of rateLimitMap) {
-        if (now > entry.resetAt) rateLimitMap.delete(ip);
-    }
-}
-setInterval(cleanupRateLimits, 5 * 60_000);
+// Reports are heavier than chat turns, so the bucket is tighter (mirrors the
+// interview route): 6 per minute per IP (shared guard, CF binding-backed).
+const RATE_LIMIT = { route: "meta-report", limit: 6, bindingName: "AI_RATE_LIMITER_STRICT" };
 
 // AG-UI event emitter helpers (same protocol as /api/ai/claude/stream so the
 // client SSE parser is unified regardless of which route drives the stream).
@@ -52,26 +32,21 @@ function aguiEvent(data: Record<string, unknown>): string {
 export async function POST(request: NextRequest) {
     logGatewayHealthOnce("meta-report-stream");
 
-    const clientIp =
-        request.headers.get("cf-connecting-ip") ??
-        request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
-        "unknown";
+    const originError = checkOrigin(request);
+    if (originError) return originError;
 
-    if (isRateLimited(clientIp)) {
-        return new Response(
-            JSON.stringify({
-                error: "Too many requests. Please wait a minute before trying again.",
-            }),
-            { status: 429, headers: { "Content-Type": "application/json", "Retry-After": "60" } },
-        );
-    }
+    const rateLimitError = await checkRateLimit(request, RATE_LIMIT);
+    if (rateLimitError) return rateLimitError;
 
     try {
-        const {
-            format = "gen9vgc2026regi",
-            window = 6,
-            mode = "vgc",
-        }: { format?: string; window?: number; mode?: Mode } = await request.json();
+        const body = await readJsonBody(request);
+        if (!body.ok) return body.response;
+
+        const parsed = MetaReportRequestSchema.safeParse(body.data);
+        if (!parsed.success) {
+            return validationError();
+        }
+        const { format, window, mode } = parsed.data;
 
         const apiKey = process.env.ANTHROPIC_API_KEY;
         if (!apiKey) {
@@ -113,8 +88,11 @@ export async function POST(request: NextRequest) {
                     },
                 ],
                 messages: [{ role: "user", content: userMessage }],
-                // Opus 4.8: adaptive thinking only (no budget_tokens / sampling params).
-                thinking: { type: "adaptive" },
+                // Opus 4.8: adaptive thinking only (no budget_tokens / sampling
+                // params). Thinking display defaults to "omitted" on Opus 4.8,
+                // which streams empty thinking blocks — the UI would show a
+                // long silent pause. "summarized" restores visible reasoning.
+                thinking: { type: "adaptive", display: "summarized" },
                 output_config: { effort: "high" },
             },
             { signal: request.signal },
