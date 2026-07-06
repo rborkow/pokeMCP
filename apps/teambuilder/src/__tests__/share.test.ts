@@ -153,6 +153,11 @@ describe("generateShareUrl", () => {
         // jsdom provides http://localhost
         expect(url).toMatch(/^http/);
     });
+
+    it("points at /builder so useUrlTeam actually consumes the ?team= param", () => {
+        const url = generateShareUrl(sampleTeam, "gen9ou");
+        expect(url).toMatch(/\/builder\?team=/);
+    });
 });
 
 describe("copyToClipboard", () => {

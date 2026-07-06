@@ -644,7 +644,7 @@ function renderTournamentSection(
     lines.push("|---------|---------|--------|");
     for (const row of biggest.topCutUsage.slice(0, 8)) {
         const ladder = latest.rows.get(row.id);
-        const ladderPct = ladder ? pct(ladder.usage) : "<0.5%";
+        const ladderPct = ladder ? pct(ladder.usage) : "&lt;0.5%";
         const name = monLink(row.name, row.id, target, monIds.has(row.id));
         lines.push(
             `| ${name} | ${row.count}/${biggest.topCut.length} teams (${row.pct.toFixed(0)}%) | ${ladderPct} |`,

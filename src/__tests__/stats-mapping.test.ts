@@ -6,11 +6,10 @@
  *   2. A Champions regulation with showdownFormatId remaps to it.
  *   3. A Champions regulation with no showdownFormatId reports unmapped.
  *
- * We exercise the resolver against the real Reg M-A config (now mapped to
- * its published Smogon stats format) and against Reg M-B, which is genuinely
- * unmapped until Smogon publishes its stats (expected July 2026). The M-A
- * test that temporarily clears the field is kept as a regression guard for
- * the clearing pattern itself.
+ * We exercise the resolver against the real Reg M-A and Reg M-B configs
+ * (both now mapped to their published Smogon stats formats). The M-A test
+ * that temporarily clears the field is kept as a regression guard for the
+ * unmapped path itself.
  */
 
 import { strict as assert } from "node:assert";
@@ -63,13 +62,14 @@ describe("resolveStatsFormat", () => {
         assert.equal(r.championsUnmapped, false);
     });
 
-    it("marks Reg M-B as unmapped while Smogon has not published its stats", () => {
-        // No field-clearing needed: M-B genuinely has no showdownFormatId yet.
+    it("remaps Reg M-B to its published Champions stats format", () => {
+        // Smogon publishes Reg M-B's doubles ladder as gen9championsvgc2026regmb.
+        assert.equal(CHAMPIONS_REGMB.showdownFormatId, "gen9championsvgc2026regmb");
         const r = resolveStatsFormat("champions-regmb");
-        assert.equal(r.championsUnmapped, true);
-        assert.equal(r.wasRemapped, false);
-        assert.equal(r.resolvedId, "champions-regmb");
+        assert.equal(r.resolvedId, "gen9championsvgc2026regmb");
         assert.equal(r.originalId, "champions-regmb");
+        assert.equal(r.wasRemapped, true);
+        assert.equal(r.championsUnmapped, false);
     });
 });
 
@@ -79,15 +79,28 @@ describe("RegulationSet.showdownFormatId contract", () => {
         assert.equal(reg.showdownFormatId, "gen9championsvgc2026regma");
     });
 
-    it("stays undefined for Reg M-B until Smogon publishes (expected July 2026)", () => {
+    it("carries the published stats format for Reg M-B", () => {
         const reg: RegulationSet = CHAMPIONS_REGMB;
-        assert.equal(reg.showdownFormatId, undefined);
+        assert.equal(reg.showdownFormatId, "gen9championsvgc2026regmb");
+    });
+
+    it("includes mapped regulations in the stats fetch pipeline", () => {
+        const formats = listRegulationStatsFormats();
+        assert.ok(formats.includes("gen9championsvgc2026regma"));
+        assert.ok(formats.includes("gen9championsvgc2026regmb"));
     });
 
     it("excludes unmapped regulations from the stats fetch pipeline", () => {
-        const formats = listRegulationStatsFormats();
-        assert.ok(formats.includes("gen9championsvgc2026regma"));
-        assert.ok(!formats.some((f) => f.includes("regmb")));
+        // Simulate the pre-publication state by temporarily clearing the field.
+        const original = CHAMPIONS_REGMB.showdownFormatId;
+        CHAMPIONS_REGMB.showdownFormatId = undefined;
+        try {
+            const formats = listRegulationStatsFormats();
+            assert.ok(formats.includes("gen9championsvgc2026regma"));
+            assert.ok(!formats.some((f) => f.includes("regmb")));
+        } finally {
+            CHAMPIONS_REGMB.showdownFormatId = original;
+        }
     });
 });
 

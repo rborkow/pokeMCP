@@ -315,6 +315,42 @@ export async function getTeammates(
 }
 
 /**
+ * A single parsed "Checks and Counters" entry.
+ */
+export interface CheckCounterEntry {
+    name: string;
+    /** Smogon's checks/counters rating: (p − 4·d) × 100 */
+    score: number;
+    /** Raw win rate p as a percentage (KOs or forces a switch) */
+    winRate: number;
+    /** Number of encounters (rounded) */
+    sampleSize: number;
+}
+
+/**
+ * Parse the raw Smogon chaos "Checks and Counters" data into scored entries.
+ *
+ * Each raw entry is `{ n, p, d }` where n = number of encounters, p = fraction
+ * of encounters where the counter "wins" (KOs the target or forces it out),
+ * and d = the standard deviation of p. Smogon's standard rating is p − 4·d,
+ * displayed ×100. Entries are sorted by rating descending.
+ */
+export function parseChecksCounters(
+    data: Record<string, { n: number; p: number; d: number }>,
+    limit: number,
+): CheckCounterEntry[] {
+    return Object.entries(data)
+        .map(([name, { n, p, d }]) => ({
+            name,
+            score: (p - 4 * d) * 100,
+            winRate: p * 100,
+            sampleSize: Math.round(n),
+        }))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, limit);
+}
+
+/**
  * Get checks and counters for a Pokemon
  */
 export async function getChecksCounters(
@@ -343,22 +379,14 @@ export async function getChecksCounters(
         return `No checks and counters data available for ${args.pokemon} in ${displayId}.`;
     }
 
-    const checksCounters = Object.entries(pokemonStats["Checks and Counters"])
-        .map(([name, data]: [string, any]) => ({
-            name,
-            score: data[0],
-            koed: data[1],
-            switched: data[2],
-        }))
-        .sort((a, b) => b.score - a.score)
-        .slice(0, limit);
+    const checksCounters = parseChecksCounters(pokemonStats["Checks and Counters"], limit);
 
     let output = `**Checks and Counters for ${args.pokemon} in ${displayId.toUpperCase()}:**\n\n`;
     output +=
-        "(Score: higher = more effective. KOed % = KO rate, Switched % = switch out rate)\n\n";
+        "(Score = Smogon's checks/counters rating, (win rate − 4×std dev) × 100; higher = more reliably beats this Pokemon. Win % = share of encounters where it KOs the target or forces it out. n = sample size)\n\n";
 
     for (const check of checksCounters) {
-        output += `- **${check.name}**: Score ${check.score.toFixed(2)} (${check.koed.toFixed(1)}% KOed, ${check.switched.toFixed(1)}% switched)\n`;
+        output += `- **${check.name}**: Score ${check.score.toFixed(1)} (win rate ${check.winRate.toFixed(1)}%, n=${check.sampleSize})\n`;
     }
 
     return output;

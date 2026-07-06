@@ -3,6 +3,7 @@ import type { NextRequest } from "next/server";
 import { getAnalyticsBinding, trackAIChat } from "@/lib/ai/analytics";
 import { createAnthropicClient } from "@/lib/ai/anthropic-client";
 import { logGatewayHealthOnce } from "@/lib/ai/gateway-health";
+import { checkOrigin, checkRateLimit, readJsonBody } from "@/lib/api/ai-guard";
 import { getReport } from "@/lib/reports";
 
 /**
@@ -16,28 +17,8 @@ import { getReport } from "@/lib/reports";
  * {type:"delta",text} / {type:"done"} / {type:"error",message}.
  */
 
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_WINDOW_MS = 60_000;
-const RATE_LIMIT_MAX_REQUESTS = 6;
-
-function isRateLimited(ip: string): boolean {
-    const now = Date.now();
-    const entry = rateLimitMap.get(ip);
-    if (!entry || now > entry.resetAt) {
-        rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
-        return false;
-    }
-    entry.count++;
-    return entry.count > RATE_LIMIT_MAX_REQUESTS;
-}
-
-function cleanupRateLimits() {
-    const now = Date.now();
-    for (const [ip, entry] of rateLimitMap) {
-        if (now > entry.resetAt) rateLimitMap.delete(ip);
-    }
-}
-setInterval(cleanupRateLimits, 5 * 60_000);
+// 6 questions per minute per IP (shared guard, CF binding-backed).
+const RATE_LIMIT = { route: "report", limit: 6, bindingName: "AI_RATE_LIMITER_STRICT" };
 
 const MAX_QUESTION_CHARS = 500;
 const MAX_HISTORY_MESSAGES = 12;
@@ -144,27 +125,15 @@ const sse = (data: Record<string, unknown>): string => `data: ${JSON.stringify(d
 export async function POST(request: NextRequest) {
     logGatewayHealthOnce("report-stream");
 
-    const clientIp =
-        request.headers.get("cf-connecting-ip") ??
-        request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
-        "unknown";
+    const originError = checkOrigin(request);
+    if (originError) return originError;
 
-    if (isRateLimited(clientIp)) {
-        return new Response(
-            JSON.stringify({ error: "Too many requests. Wait a minute and try again." }),
-            { status: 429, headers: { "Content-Type": "application/json", "Retry-After": "60" } },
-        );
-    }
+    const rateLimitError = await checkRateLimit(request, RATE_LIMIT);
+    if (rateLimitError) return rateLimitError;
 
-    let body: ReportChatBody;
-    try {
-        body = (await request.json()) as ReportChatBody;
-    } catch {
-        return new Response(JSON.stringify({ error: "Invalid JSON body" }), {
-            status: 400,
-            headers: { "Content-Type": "application/json" },
-        });
-    }
+    const rawBody = await readJsonBody(request);
+    if (!rawBody.ok) return rawBody.response;
+    const body = rawBody.data as ReportChatBody;
 
     const question = typeof body.question === "string" ? body.question.trim() : "";
     if (!question || question.length > MAX_QUESTION_CHARS) {

@@ -1,4 +1,5 @@
-import type { SearchResult, RankedResult, QueryOptions } from "./types.js";
+import { toID } from "../data-loader.js";
+import type { QueryOptions, RankedResult, SearchResult } from "./types.js";
 
 /**
  * Rerank search results with metadata boosts and diversity
@@ -35,11 +36,8 @@ function applyBoosts(result: SearchResult, options: QueryOptions): RankedResult 
         finalScore += 0.1;
     }
 
-    // Boost for Pokemon match
-    if (
-        options.pokemon &&
-        result.metadata.pokemon.toLowerCase() === options.pokemon.toLowerCase()
-    ) {
+    // Boost for Pokemon match (toID normalizes display names vs. query input)
+    if (options.pokemon && toID(result.metadata.pokemon) === toID(options.pokemon)) {
         boosts.pokemonMatch = 0.05;
         finalScore += 0.05;
     }
