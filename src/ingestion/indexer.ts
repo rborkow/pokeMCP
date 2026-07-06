@@ -1,3 +1,4 @@
+import { toID } from "../data-loader.js";
 import type { EmbeddedChunk } from "./types.js";
 
 /**
@@ -28,7 +29,10 @@ async function upsertVectors(chunks: EmbeddedChunk[], index: VectorizeIndex): Pr
             id: chunk.id,
             values: chunk.embedding,
             metadata: {
+                // Display name — used for display/enrichment (see rag/format.ts)
                 pokemon: chunk.metadata.pokemon,
+                // Normalized id for reliable matching (older vectors lack this field)
+                pokemon_id: toID(chunk.metadata.pokemon),
                 format: chunk.metadata.format,
                 section_type: chunk.metadata.section_type,
                 set_name: chunk.metadata.set_name || "",

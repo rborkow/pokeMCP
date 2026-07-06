@@ -1,4 +1,14 @@
+import { toID } from "../data-loader.js";
 import type { VectorMatch, SearchResult, QueryOptions } from "./types.js";
+
+/**
+ * Check whether a match's pokemon metadata refers to the requested Pokemon.
+ * Metadata stores display names ("Great Tusk", "Landorus-Therian"), so both
+ * sides are normalized with toID before comparing.
+ */
+export function matchesPokemon(metadataPokemon: unknown, requestedPokemon: string): boolean {
+    return typeof metadataPokemon === "string" && toID(metadataPokemon) === toID(requestedPokemon);
+}
 
 /**
  * Execute a vector similarity search with filters
@@ -10,15 +20,21 @@ export async function vectorSearch(
 ): Promise<VectorMatch[]> {
     const { format, pokemon, sectionType, limit = 10 } = options;
 
-    // Build metadata filter
+    // Build metadata filter. Pokemon is deliberately NOT pre-filtered here:
+    // existing vectors store display-name metadata ("Great Tusk") that an
+    // exact-match filter on a normalized input can never hit, and older
+    // vectors lack the normalized pokemon_id field. We post-filter instead.
     const filter: Record<string, string> = {};
     if (format) filter.format = format;
-    if (pokemon) filter.pokemon = pokemon.toLowerCase();
     if (sectionType) filter.section_type = sectionType;
 
     try {
+        // Vectorize caps topK at 20 when returnMetadata is "all". Over-fetch
+        // up to that cap when post-filtering by pokemon so the filter has
+        // enough candidates to work with.
+        const topK = Math.min(pokemon ? 20 : limit * 2, 20);
         const queryOptions = {
-            topK: limit * 2, // Get more results for reranking
+            topK,
             filter: Object.keys(filter).length > 0 ? filter : undefined,
             returnMetadata: "all" as const,
         };
@@ -26,7 +42,7 @@ export async function vectorSearch(
         const results = await env.VECTOR_INDEX.query(queryEmbedding, queryOptions);
         console.log(`Found ${results.matches.length} vector matches`);
 
-        return results.matches.map((match) => ({
+        const matches: VectorMatch[] = results.matches.map((match) => ({
             id: match.id,
             score: match.score,
             metadata: {
@@ -38,6 +54,14 @@ export async function vectorSearch(
                 timestamp: match.metadata?.timestamp as string,
             },
         }));
+
+        if (!pokemon) {
+            return matches;
+        }
+
+        const filtered = matches.filter((match) => matchesPokemon(match.metadata.pokemon, pokemon));
+        console.log(`${filtered.length}/${matches.length} matches after pokemon filter`);
+        return filtered;
     } catch (error) {
         console.error("Vectorize query failed:", error);
         throw new Error(
