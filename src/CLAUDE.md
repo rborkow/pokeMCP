@@ -5,14 +5,17 @@ Entry point for the Pokemon MCP server deployed at `api.pokemcp.com`.
 ## Module Dependency Graph
 
 ```
-index.ts (routes + PokemonMCP Durable Object)
-├── tool-registry.ts (central registry of all 11 tools)
-│   ├── tools.ts (4 sync tools: lookup, validate_moveset, validate_team, suggest_coverage)
-│   ├── stats.ts (5 async tools: popular_sets, meta_threats, teammates, checks_counters, metagame_stats)
-│   └── rag/query.ts (2 RAG tools: query_strategy, search_strategic_content)
+index.ts (routes + PokemonMCP and IngestionCoordinator Durable Objects)
+├── tool-registry.ts (central registry of all 7 tools)
+│   ├── tools.ts (4 sync tools: lookup_pokemon, validate_moveset, validate_team, suggest_team_coverage)
+│   ├── stats.ts (get_usage_stats — one tool, `type` enum selects the stat view)
+│   ├── rag/query.ts (query_strategy — consolidated RAG search)
+│   └── meta-history.ts (get_meta_trends — D1-backed usage history)
 ├── data-loader.ts (imports from data/*.ts — bundled at build time)
 ├── logging.ts (anonymized R2 interaction logging)
-└── ingestion/orchestrator.ts (cron-triggered pipeline)
+├── share.ts (/api/team/* shared-team storage) + og/ (OG image rendering)
+├── admin.ts (Cloudflare Access-protected admin API)
+└── ingestion/coordinator.ts (Durable Object alarm chain; seeded by the cron)
 ```
 
 ## Tool Categories
@@ -20,8 +23,9 @@ index.ts (routes + PokemonMCP Durable Object)
 | Category | File | Needs Env Bindings | Count |
 |----------|------|--------------------|-------|
 | Sync (bundled data) | `tools.ts` | No | 4 |
-| Stats (KV) | `stats.ts` | `POKEMON_STATS` KV | 5 |
-| RAG (Vectorize+KV) | `rag/query.ts` | `VECTOR_INDEX` + `STRATEGY_DOCS` KV + `AI` | 2 |
+| Stats (KV) | `stats.ts` | `POKEMON_STATS` KV | 1 (`get_usage_stats`, `type` enum) |
+| RAG (Vectorize+KV) | `rag/query.ts` | `VECTOR_INDEX` + `STRATEGY_DOCS` KV + `AI` | 1 (`query_strategy`) |
+| Meta history (D1) | `meta-history.ts` | `META_DB` D1 | 1 (`get_meta_trends`) |
 
 `tool-registry.ts` is the single source of truth for all tool definitions. Both the MCP `init()` and the `/api/tools` REST endpoint consume it.
 
@@ -31,9 +35,13 @@ index.ts (routes + PokemonMCP Durable Object)
 |------|--------|---------|
 | `/mcp` | POST | MCP protocol (Durable Object) |
 | `/sse` | GET | SSE transport for MCP |
-| `/api/tools` | POST | Stateless REST tool invocation |
+| `/api/tools` | POST | Stateless REST tool invocation (origin allowlist + 30 req/min/IP) |
 | `/health` | GET | Deploy health / secret-presence booleans |
 | `/api/feedback` | POST | User feedback to R2 |
+| `/api/team/share` | POST | Store a shared team in KV, returns short id |
+| `/api/team/:id` | GET | Fetch a shared team |
+| `/og/team/:id` | GET | OG image (satori + resvg WASM) for a shared team |
+| `/admin/*` | GET | Analytics/admin API (Cloudflare Access JWT required) |
 | `/` | GET | Server info JSON |
 
 CORS allows: `pokemcp.com`, `docs.pokemcp.com`, `localhost:3000`, `localhost:3001`.
@@ -47,14 +55,25 @@ CORS allows: `pokemcp.com`, `docs.pokemcp.com`, `localhost:3000`, `localhost:300
 ## Ingestion Pipeline (`ingestion/`)
 
 ```
-orchestrator.ts → scraper.ts → chunker.ts → embedder.ts → indexer.ts
+scheduled() ──seed()──▶ coordinator.ts (DO alarm chain)
+                          └─ per alarm: orchestrator.ts ingestFormat()
+                               → scraper.ts → chunker.ts → embedder.ts → indexer.ts
 ```
 
-- Processes top 50 Pokemon per format via weekly cron
-- Scraper uses the `smogon` package's `Analyses` class (RPC API, not HTML scraping)
+- The weekly cron only builds the format list and seeds the `IngestionCoordinator`
+  Durable Object; it rethrows on failure so the cron run shows as failed
+- The coordinator processes the queue one alarm at a time: max 25 Pokemon per
+  alarm (subrequest budget), 10s spacing, one retry per failed format, loud
+  completion summary + `ingestion_run` Analytics Engine datapoint
+- Queue/retry logic is a pure state machine in `coordinator-state.ts`
+  (unit-tested in `__tests__/ingestion-coordinator.test.ts`)
+- Top 50 Pokemon per format; scraper uses the `smogon` package's `Analyses`
+  class (RPC API, not HTML scraping) with a 500ms politeness delay
 - Chunk sizes: 800 tokens for overview, 600 for moveset/counters sections
 - Embedder: `@cf/baai/bge-base-en-v1.5` via Workers AI (768-dim vectors)
-- Indexer: vectors to Vectorize (batches of 100), full content to `STRATEGY_DOCS` KV (180-day TTL)
+- Indexer: vectors to Vectorize (batches of 100) with display-name `pokemon`
+  plus `toID()`-normalized `pokemon_id` metadata; full content to
+  `STRATEGY_DOCS` KV (180-day TTL)
 
 ## RAG Query Pipeline (`rag/`)
 
@@ -70,7 +89,8 @@ query.ts → search.ts (vector similarity) → rerank.ts (metadata boosts) → f
 - 10% sampling rate, max 4000 char response truncation
 - Sanitizes PII (removes nicknames from team data)
 - R2 path: `logs/YYYY/MM/DD/HH/{uuid}.json`
-- Uses `ctx.waitUntil()` so logging does not block responses
+- The REST path passes `ctx` so the R2 write runs via `ctx.waitUntil()`; the
+  MCP (Durable Object) path currently logs fire-and-forget without it
 
 ## Error Handling
 
