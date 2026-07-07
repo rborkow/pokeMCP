@@ -63,10 +63,12 @@ bun run fetch-stats
 
 # Upload all fetched stats to KV (skips empty formats)
 bun run upload-stats
-
-# Or upload individual format manually
-bunx wrangler kv key put --remote --namespace-id=58525ad4ec5c454eb3e1ae7586414483 "gen9ou" --path="src/cached-stats/gen9ou.json"
 ```
+
+> Always upload via `bun run upload-stats` — the worker only reads the sharded
+> keys it writes (`{format}:_index` + `{format}:{pokemonid}`). Putting a whole
+> stats JSON under a bare format key (e.g. `"gen9ou"`) stores data the server
+> never reads.
 
 **Update Schedule:**
 
@@ -111,7 +113,8 @@ bun run tail:production
 **Multi-layered Cloudflare stack:**
 
 - **Workers**: Serverless compute for MCP requests (src/index.ts)
-- **Durable Objects**: Stateful MCP session management (PokemonMCP class in src/index.ts)
+- **Durable Objects**: Stateful MCP session management (PokemonMCP) and the
+  weekly ingestion alarm chain (IngestionCoordinator in src/ingestion/coordinator.ts)
 - **KV Namespaces**:
   - `POKEMON_STATS`: Cached Smogon usage statistics
   - `STRATEGY_DOCS`: Raw strategy documents (chunks) for RAG
@@ -119,22 +122,20 @@ bun run tail:production
 - **AI Workers**: Text embeddings for RAG (@cf/baai/bge-base-en-v1.5)
 - **AI Gateway**: Proxy for Anthropic API calls — automatic token/cost tracking, request logging, caching (gateway ID: `pokemcp`)
 - **R2 Bucket**: pokemcp-interaction-logs for anonymized fine-tuning data
-- **Scheduled Triggers**: Weekly cron job (Sunday 3 AM) for content ingestion
+- **Scheduled Triggers**: Weekly cron (Sunday 3 AM, production only) seeds the
+  IngestionCoordinator Durable Object, which ingests one format slice per alarm
 
 ### Environment Configuration
 
-Three environments defined in wrangler.jsonc:
+Three environments defined in wrangler.jsonc, each with its own worker name
+(`pokemon-mcp-{env}`) — but **all three currently bind the same production
+KV namespaces, Vectorize index, D1 database, and R2 bucket**. Treat any
+`--remote` dev session or staging deploy as touching production data. Only
+the production env has a cron trigger (Sunday 3 AM ingestion seed).
 
-- **development** (default): Uses production KV/Vectorize
-- **staging**: Separate KV namespaces, Saturday 4 AM cron
-- **production**: Production resources, Sunday 3 AM cron
-
-Each environment has its own:
-
-- Worker name (pokemon-mcp-{env})
-- KV namespace IDs
-- Vectorize index
-- Cron schedule
+> ⚠️ Known gap (from the 2026-07 audit): staging is not isolated and fails
+> open on `/admin/*` auth if `CF_ACCESS_TEAM_DOMAIN` is unset. Provision real
+> staging namespaces before using it for anything sensitive.
 
 ## Code Style
 
@@ -175,10 +176,12 @@ monthly stats refresh.
 
 **GitHub Actions Workflows:**
 
-| Workflow           | Trigger                 | Purpose                                                    |
-| ------------------ | ----------------------- | ---------------------------------------------------------- |
-| `build.yml`        | Pull requests           | Build verification (worker dry-run, teambuilder, docs)     |
-| `update-stats.yml` | Monthly (5th) or manual | Fetch Smogon stats, push to `main` (Cloudflare redeploys)  |
+| Workflow               | Trigger                 | Purpose                                                    |
+| ---------------------- | ----------------------- | ---------------------------------------------------------- |
+| `build.yml`            | Pull requests           | Build verification (worker dry-run, teambuilder, docs)     |
+| `update-stats.yml`     | Monthly (5th) or manual | Fetch Smogon stats, push to `main` (Cloudflare redeploys)  |
+| `deploy.yml`           | Manual (choice input)   | Manual deploy of worker/teambuilder/docs (`--env production`) |
+| `backfill-history.yml` | Manual                  | Backfill D1 meta-history from Smogon archives              |
 
 **Cloudflare Deploy Projects:**
 
@@ -226,8 +229,9 @@ Run after any secret rotation or new worker deploy — exits non-zero if any sec
 
 ### MCP Worker Testing
 
-1. Run `bun run dev` to start local Wrangler server
-2. Test MCP tools via `/test-rag?q=...` or `/test-kv` endpoints
+1. Run `bun run test` for the unit suite (`node --test` over `src/__tests__/`)
+2. Run `bun run dev` to start a local Wrangler server, then exercise tools via
+   REST: `curl -X POST localhost:8787/api/tools -H 'content-type: application/json' -d '{"tool":"lookup_pokemon","args":{"name":"Great Tusk"}}'`
 3. Create a PR - CI will verify builds pass
 4. After merge, Cloudflare Workers Builds redeploys automatically
 

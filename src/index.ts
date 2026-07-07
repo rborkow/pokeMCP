@@ -4,7 +4,7 @@ import { McpAgent } from "agents/mcp";
 import { createMimeMessage } from "mimetext/browser";
 import { handleAdminRequest } from "./admin.js";
 import { trackSession, trackToolCall } from "./analytics.js";
-import { runIngestionPipeline } from "./ingestion/orchestrator.js";
+import { getIngestionFormats } from "./ingestion/orchestrator.js";
 import { withLogging } from "./logging.js";
 import {
     checkRateLimit,
@@ -66,6 +66,10 @@ function isOriginAllowed(request: Request): boolean {
     if (!origin) return true;
     return ALLOWED_ORIGINS.includes(origin);
 }
+
+// Durable Object that runs the weekly RAG ingestion as an alarm chain
+// (one format slice per alarm). Re-exported so wrangler can bind it.
+export { IngestionCoordinator } from "./ingestion/coordinator.js";
 
 // Define our Pokemon MCP agent with tools
 export class PokemonMCP extends McpAgent {
@@ -633,10 +637,6 @@ export default {
                         "admin/api/tools": "/admin/api/tools (GET) - Tool metrics (protected)",
                         "admin/api/sessions":
                             "/admin/api/sessions (GET) - Session list (protected)",
-                        "test-ingestion": "/test-ingestion",
-                        "test-kv": "/test-kv",
-                        "test-rag": "/test-rag?q=your+query",
-                        "debug-vectors": "/debug-vectors",
                     },
                 }),
                 {
@@ -648,17 +648,26 @@ export default {
         return new Response("Not found", { status: 404 });
     },
 
-    async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
+    async scheduled(event: ScheduledEvent, env: Env, _ctx: ExecutionContext) {
         console.log(
-            "Scheduled ingestion pipeline triggered at:",
+            "Scheduled ingestion trigger fired at:",
             new Date(event.scheduledTime).toISOString(),
         );
 
         try {
-            const stats = await runIngestionPipeline(env);
-            console.log("Ingestion pipeline completed successfully:", stats);
+            // Build the format list here; the IngestionCoordinator Durable Object
+            // works through it one alarm at a time so each format gets a fresh
+            // subrequest/CPU budget instead of dying inside this single invocation.
+            const formats = await getIngestionFormats(env);
+            const stub = env.INGESTION_COORDINATOR.get(
+                env.INGESTION_COORDINATOR.idFromName("weekly-ingestion"),
+            );
+            await stub.seed(formats);
+            console.log(`Seeded ingestion coordinator with ${formats.length} formats`);
         } catch (error) {
-            console.error("Ingestion pipeline failed:", error);
+            console.error("Failed to seed ingestion coordinator:", error);
+            // Rethrow so the cron invocation is marked failed in Cloudflare observability.
+            throw error;
         }
     },
 };
