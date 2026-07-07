@@ -18,7 +18,6 @@ import type {
     PokedexTable,
     PokemonSpecies,
     TypeChartTable,
-    TypeChart as TypeChartType,
 } from "./types.js";
 
 // Use the imported data directly
@@ -95,7 +94,7 @@ export function getItem(name: string) {
 /**
  * Get the type chart
  */
-export function getTypeChart(): TypeChartType {
+export function getTypeChart(): TypeChartTable {
     return typeChartData;
 }
 

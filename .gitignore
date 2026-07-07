@@ -220,6 +220,11 @@ yarn-error.log*
 # Wrangler
 .wrangler/
 
+# Smogon stats dumps — local working dir rewritten monthly by `bun run fetch-stats`.
+# Not committed: KV is the source of truth; the monthly workflow keeps the raw
+# dumps as a 30-day workflow artifact instead. (src/cached-tournaments/ stays tracked.)
+src/cached-stats/
+
 # Claude Code
 .claude/
 

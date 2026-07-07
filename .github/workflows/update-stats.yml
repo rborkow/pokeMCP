@@ -47,6 +47,17 @@ jobs:
         if: ${{ !inputs.tournaments_only }}
         run: bun run fetch-stats
 
+      # src/cached-stats/ is gitignored (KV is the source of truth). Keep the raw
+      # monthly dumps inspectable as a workflow artifact instead of committing
+      # ~146 MB of churning JSON to git.
+      - name: Upload raw stats dump as workflow artifact
+        if: ${{ !inputs.tournaments_only }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: smogon-stats-${{ github.run_id }}
+          path: src/cached-stats/
+          retention-days: 30
+
       - name: Upload stats to KV
         if: ${{ !inputs.tournaments_only }}
         run: bun run upload-stats
@@ -63,18 +74,20 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-      - name: Commit updated stats
+      # Only the small discovery manifest is committed — the raw stats dumps in
+      # src/cached-stats/ are gitignored (kept as the workflow artifact above).
+      - name: Commit updated discovered formats
         if: ${{ !inputs.tournaments_only }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add src/cached-stats/ src/discovered-formats.json
+          git add src/discovered-formats.json
 
           # Check if there are changes to commit
           if git diff --staged --quiet; then
-            echo "No stats changes to commit"
+            echo "No discovered-formats changes to commit"
           else
-            git commit -m "chore: update Smogon stats and discovered formats ($(date +%Y-%m))"
+            git commit -m "chore: update discovered formats ($(date +%Y-%m))"
             # The job can sit days in the production-environment approval queue,
             # so main may have moved past the pinned checkout SHA. Replay the
             # stats commit on top of the latest main before pushing.
@@ -91,7 +104,7 @@ jobs:
             -d '{"tool":"get_usage_stats","args":{"type":"meta_threats","format":"gen9ou","limit":5}}' \
             | head -c 500
           echo ""
-          echo "✅ Stats update complete! Push to main will trigger Cloudflare Workers Builds redeploy."
+          echo "✅ Stats update complete! KV is live immediately; any discovered-formats push to main triggers a Cloudflare Workers Builds redeploy."
 
       # Pull recent tournament results + teams from the Limitless platform into
       # the committed cache (drives the report's "Tournament results" section,

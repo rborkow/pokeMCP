@@ -42,7 +42,7 @@ Thank you for your interest in contributing to PokeMCP! This guide will help you
 
 - **KV Storage**: When running `bun run dev`, Wrangler uses local simulation for KV. No cloud resources are accessed.
 - **No API Keys Needed**: Local development doesn't require Cloudflare API tokens.
-- **Stats Data**: The `src/cached-stats/` directory contains cached Smogon statistics that are used for local testing.
+- **Stats Data**: `src/cached-stats/` is a gitignored working directory — fresh clones don't include it. Run `bun run fetch-stats` to populate it with current Smogon statistics if you need them locally (production reads stats from KV, not from these files).
 
 ## Project Structure
 
@@ -53,7 +53,7 @@ pokeMCP/
 │   ├── tools.ts           # Pokemon lookup, validation tools
 │   ├── stats.ts           # Usage statistics tools
 │   ├── data/              # Bundled Pokemon Showdown data
-│   └── cached-stats/      # Cached Smogon usage statistics
+│   └── cached-stats/      # Smogon stats working dir (gitignored; bun run fetch-stats)
 ├── apps/
 │   ├── teambuilder/       # Next.js Team Builder UI
 │   └── docs/              # Documentation site
