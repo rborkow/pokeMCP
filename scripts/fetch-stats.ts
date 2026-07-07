@@ -7,10 +7,11 @@
  * if the discovery file doesn't exist yet.
  */
 
-import { mkdirSync, readFileSync, writeFileSync } from "fs";
-import { join } from "path";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 import { Statistics } from "smogon";
 import { listRegulationStatsFormats } from "../src/regulations/registry.js";
+import { shouldFailRun } from "./lib/stats-run-policy.js";
 
 // Singles formats (stable, rarely change)
 const SINGLES_FORMATS = [
@@ -166,9 +167,13 @@ async function main() {
 
     // Fetch formats sequentially with delay to avoid hammering Smogon
     const results: Awaited<ReturnType<typeof fetchFormatStats>>[] = [];
+    const failedFormats: string[] = [];
     for (const format of FORMATS) {
         const result = await fetchFormatStats(format);
         results.push(result);
+        if (!result) {
+            failedFormats.push(format);
+        }
         // Wait 2 seconds between requests to be polite
         if (FORMATS.indexOf(format) < FORMATS.length - 1) {
             await delay(2000);
@@ -196,7 +201,34 @@ async function main() {
         }
     }
 
-    console.log("\n✓ Cache updated successfully!");
+    // Summary + failure policy: a failed run must LOOK failed. Zero successes
+    // (full Smogon outage) or a majority of failures exits non-zero so the
+    // workflow step goes red instead of re-uploading stale cache as fresh.
+    // A minority of failures (e.g. one format lagging on Smogon's side) is
+    // logged loudly but does not fail the run.
+    const fetchedCount = FORMATS.length - failedFormats.length;
+    console.log(`\nFetch summary: ${fetchedCount} fetched, ${failedFormats.length} failed`);
+    if (failedFormats.length > 0) {
+        console.error(`✗ Failed formats: ${failedFormats.join(", ")}`);
+    }
+
+    if (shouldFailRun(fetchedCount, failedFormats.length)) {
+        console.error(
+            "\n✗ Fetch failed: zero formats succeeded or a majority failed. " +
+                "Smogon may be down — refusing to report success.",
+        );
+        process.exitCode = 1;
+    } else if (failedFormats.length > 0) {
+        console.warn(
+            "\n⚠ Cache updated, but some formats failed (see above). " +
+                "Check whether Smogon is lagging on those formats this month.",
+        );
+    } else {
+        console.log("\n✓ Cache updated successfully!");
+    }
 }
 
-main().catch(console.error);
+main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+});

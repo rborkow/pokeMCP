@@ -2,6 +2,11 @@
 /**
  * Export interaction logs from R2 for fine-tuning data preparation
  *
+ * Talks to the Cloudflare REST API directly (wrangler v4 has no
+ * `r2 object list`), so it requires:
+ *   - CLOUDFLARE_ACCOUNT_ID
+ *   - CLOUDFLARE_API_TOKEN (with R2 read access)
+ *
  * Usage:
  *   npm run export-logs                    # Export last 7 days
  *   npm run export-logs -- --days 30       # Export last 30 days
@@ -15,9 +20,9 @@
  *   - stats.json: Summary statistics
  */
 
-import { execSync } from "child_process";
-import { mkdirSync, writeFileSync, existsSync, readFileSync, readdirSync, rmSync } from "fs";
-import { join } from "path";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+import { getDatePrefixes, parseR2ListPage, type R2ListPage } from "./lib/r2-export.js";
 
 interface InteractionLog {
     id: string;
@@ -53,7 +58,32 @@ interface ExportStats {
 
 const BUCKET_NAME = "pokemcp-interaction-logs";
 const OUTPUT_DIR = "./exported-logs";
-const TEMP_DIR = "./exported-logs/.temp";
+const API_BASE = "https://api.cloudflare.com/client/v4";
+
+interface CloudflareAuth {
+    accountId: string;
+    apiToken: string;
+}
+
+function requireCloudflareAuth(): CloudflareAuth {
+    const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+    const apiToken = process.env.CLOUDFLARE_API_TOKEN;
+
+    const missing = [
+        ...(accountId ? [] : ["CLOUDFLARE_ACCOUNT_ID"]),
+        ...(apiToken ? [] : ["CLOUDFLARE_API_TOKEN"]),
+    ];
+    if (missing.length > 0) {
+        console.error(
+            `Missing required environment variable(s): ${missing.join(", ")}.\n` +
+                "Set CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN (an API token with R2 " +
+                "read access) before running export-logs.",
+        );
+        process.exit(1);
+    }
+
+    return { accountId: accountId as string, apiToken: apiToken as string };
+}
 
 function parseArgs(): { days: number; all: boolean; format: "jsonl" | "csv" } {
     const args = process.argv.slice(2);
@@ -76,56 +106,76 @@ function parseArgs(): { days: number; all: boolean; format: "jsonl" | "csv" } {
     return { days, all, format };
 }
 
-function getDatePrefixes(days: number, all: boolean): string[] {
-    if (all) {
-        return ["logs/"]; // Will list all
-    }
+/**
+ * List all object keys under a prefix via the Cloudflare REST API, following
+ * cursor pagination. Any HTTP or API failure throws — an empty array means the
+ * prefix is genuinely empty, never a swallowed error.
+ */
+async function listR2Objects(auth: CloudflareAuth, prefix: string): Promise<string[]> {
+    const keys: string[] = [];
+    let cursor: string | undefined;
 
-    const prefixes: string[] = [];
-    const now = new Date();
+    do {
+        const url = new URL(
+            `${API_BASE}/accounts/${auth.accountId}/r2/buckets/${BUCKET_NAME}/objects`,
+        );
+        url.searchParams.set("prefix", prefix);
+        url.searchParams.set("per_page", "1000");
+        if (cursor) {
+            url.searchParams.set("cursor", cursor);
+        }
 
-    for (let i = 0; i < days; i++) {
-        const date = new Date(now);
-        date.setDate(date.getDate() - i);
+        const response = await fetch(url, {
+            headers: { Authorization: `Bearer ${auth.apiToken}` },
+        });
+        const bodyText = await response.text();
 
-        const year = date.getUTCFullYear();
-        const month = String(date.getUTCMonth() + 1).padStart(2, "0");
-        const day = String(date.getUTCDate()).padStart(2, "0");
+        if (!response.ok) {
+            throw new Error(
+                `Failed to list R2 objects under "${prefix}": ` +
+                    `HTTP ${response.status} ${response.statusText}\n${bodyText}`,
+            );
+        }
 
-        prefixes.push(`logs/${year}/${month}/${day}/`);
-    }
+        let page: R2ListPage;
+        try {
+            page = parseR2ListPage(JSON.parse(bodyText));
+        } catch (error) {
+            const message = error instanceof Error ? error.message : String(error);
+            throw new Error(`Failed to list R2 objects under "${prefix}": ${message}`);
+        }
 
-    return prefixes;
+        keys.push(...page.keys);
+        cursor = page.cursor;
+    } while (cursor);
+
+    return keys;
 }
 
-function listR2Objects(prefix: string): string[] {
-    try {
-        const result = execSync(
-            `npx wrangler r2 object list ${BUCKET_NAME} --prefix="${prefix}" --json 2>/dev/null`,
-            { encoding: "utf-8", maxBuffer: 50 * 1024 * 1024 },
-        );
+/**
+ * Download one log object via the Cloudflare REST API. Throws on any HTTP
+ * failure or unparseable body — a missing or corrupt object must abort the
+ * export instead of silently shrinking it.
+ */
+async function downloadR2Object(auth: CloudflareAuth, key: string): Promise<InteractionLog> {
+    const objectPath = key.split("/").map(encodeURIComponent).join("/");
+    const response = await fetch(
+        `${API_BASE}/accounts/${auth.accountId}/r2/buckets/${BUCKET_NAME}/objects/${objectPath}`,
+        { headers: { Authorization: `Bearer ${auth.apiToken}` } },
+    );
+    const bodyText = await response.text();
 
-        const parsed = JSON.parse(result);
-        return (parsed.objects || []).map((obj: { key: string }) => obj.key);
-    } catch (error) {
-        // Prefix might not exist (no logs for that day)
-        return [];
+    if (!response.ok) {
+        throw new Error(
+            `Failed to download "${key}": HTTP ${response.status} ${response.statusText}\n${bodyText}`,
+        );
     }
-}
 
-function downloadR2Object(key: string): InteractionLog | null {
     try {
-        const outputPath = join(TEMP_DIR, key.replace(/\//g, "_"));
-        execSync(
-            `npx wrangler r2 object get ${BUCKET_NAME} "${key}" --file="${outputPath}" 2>/dev/null`,
-            { encoding: "utf-8" },
-        );
-
-        const content = readFileSync(outputPath, "utf-8");
-        return JSON.parse(content) as InteractionLog;
+        return JSON.parse(bodyText) as InteractionLog;
     } catch (error) {
-        console.error(`Failed to download ${key}:`, error);
-        return null;
+        const message = error instanceof Error ? error.message : String(error);
+        throw new Error(`Downloaded "${key}" but it is not valid JSON: ${message}`);
     }
 }
 
@@ -221,18 +271,16 @@ function calculateStats(logs: InteractionLog[]): ExportStats {
 
 async function main() {
     const { days, all, format } = parseArgs();
+    const auth = requireCloudflareAuth();
 
     console.log("Exporting interaction logs...");
     console.log(`  Days: ${all ? "all" : days}`);
     console.log(`  Format: ${format}`);
     console.log();
 
-    // Create output directories
+    // Create output directory
     if (!existsSync(OUTPUT_DIR)) {
         mkdirSync(OUTPUT_DIR, { recursive: true });
-    }
-    if (!existsSync(TEMP_DIR)) {
-        mkdirSync(TEMP_DIR, { recursive: true });
     }
 
     // Get date prefixes to scan
@@ -242,11 +290,9 @@ async function main() {
     // List all objects
     const allKeys: string[] = [];
     for (const prefix of prefixes) {
-        const keys = listR2Objects(prefix);
+        const keys = await listR2Objects(auth, prefix);
         allKeys.push(...keys);
-        if (keys.length > 0) {
-            console.log(`  ${prefix}: ${keys.length} logs`);
-        }
+        console.log(`  ${prefix}: ${keys.length > 0 ? `${keys.length} logs` : "no logs"}`);
     }
 
     console.log(`\nFound ${allKeys.length} total log files`);
@@ -259,16 +305,11 @@ async function main() {
     // Download and parse logs
     console.log("Downloading logs...");
     const logs: InteractionLog[] = [];
-    let downloaded = 0;
 
     for (const key of allKeys) {
-        const log = downloadR2Object(key);
-        if (log) {
-            logs.push(log);
-        }
-        downloaded++;
-        if (downloaded % 100 === 0) {
-            console.log(`  Downloaded ${downloaded}/${allKeys.length}...`);
+        logs.push(await downloadR2Object(auth, key));
+        if (logs.length % 100 === 0) {
+            console.log(`  Downloaded ${logs.length}/${allKeys.length}...`);
         }
     }
 
@@ -339,13 +380,10 @@ async function main() {
     writeFileSync(statsPath, JSON.stringify(stats, null, 2));
     console.log(`Wrote stats to: ${statsPath}`);
 
-    // Cleanup temp directory
-    rmSync(TEMP_DIR, { recursive: true, force: true });
-
     console.log("\nExport complete!");
 }
 
 main().catch((error) => {
-    console.error("Export failed:", error);
-    process.exit(1);
+    console.error("Export failed:", error instanceof Error ? error.message : error);
+    process.exitCode = 1;
 });
