@@ -157,7 +157,7 @@ Stats are cached in Cloudflare KV as sharded keys — `{format}:_index` (lightwe
    bun run fetch-stats
    ```
 
-2. Upload everything to KV (reads every file in `src/cached-stats/`, builds the sharded keys, and bulk-uploads them; the namespace ID defaults to the one in `wrangler.jsonc` and can be overridden with `KV_NAMESPACE_ID`):
+2. Upload everything to KV (reads every file in `src/cached-stats/` — a gitignored local working directory written by `fetch-stats` in step 1 — builds the sharded keys, and bulk-uploads them; the namespace ID defaults to the one in `wrangler.jsonc` and can be overridden with `KV_NAMESPACE_ID`). KV is the source of truth; the monthly GitHub Action keeps each raw dump as a 30-day workflow artifact instead of committing it:
    ```bash
    bun run upload-stats
    ```

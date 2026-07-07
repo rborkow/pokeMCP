@@ -76,7 +76,9 @@ bun run upload-stats
 - Run `bun run discover-formats && bun run fetch-stats && bun run upload-stats` monthly to update
 - VGC formats are auto-discovered from Smogon's stats directory — new regulations are picked up automatically
 - The fetch script has 2-second delays between requests to be polite to Smogon
-- Stats files are cached locally in `src/cached-stats/` for reference
+- Stats files are written to `src/cached-stats/`, a gitignored local working directory — KV is
+  the source of truth; the monthly workflow uploads the raw dumps as a 30-day workflow artifact
+  (`smogon-stats-<run id>`) for inspection instead of committing them
 - Discovered formats are saved to `src/discovered-formats.json` and uploaded to KV for the ingestion pipeline
 - `bun run generate-reports` builds the publishable meta-report MDX + per-Pokémon trend JSON
   (`apps/teambuilder/src/content/reports/` + `src/data/mons/`) straight from Smogon's monthly
@@ -273,7 +275,8 @@ Option 2 - Manual:
 1. `bun run discover-formats` (discovers available VGC formats from Smogon)
 2. `bun run fetch-stats` (downloads from Smogon, ~45 seconds)
 3. `bun run upload-stats` (uploads to KV, requires Cloudflare auth)
-4. Commit and push changes — Cloudflare Workers Builds redeploys on merge to main
+4. Commit `src/discovered-formats.json` if it changed — the stats dumps in `src/cached-stats/`
+   are gitignored (KV is the source of truth); a push to main triggers a Cloudflare redeploy
 
 ### Team Builder AI Tasks
 
