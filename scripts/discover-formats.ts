@@ -9,9 +9,10 @@
  * Usage: npm run discover-formats
  */
 
-import { readFileSync, writeFileSync } from "fs";
-import { join } from "path";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 import { Statistics } from "smogon";
+import { shouldWriteDiscoveryFallback } from "./lib/stats-run-policy.js";
 
 const OUTPUT_PATH = join(process.cwd(), "src", "discovered-formats.json");
 
@@ -113,19 +114,38 @@ async function discoverFormats() {
         console.log(`\nWrote ${OUTPUT_PATH}`);
     } catch (error) {
         console.error("Discovery failed:", error);
-        console.log("\nUsing hardcoded fallback formats.");
 
-        const result = {
-            vgcFormats: FALLBACK_VGC,
-            doublesFormats: FALLBACK_DOUBLES,
-            championsFormats: FALLBACK_CHAMPIONS,
-            discoveredAt: new Date().toISOString(),
-            sourceMonth: "fallback",
-        };
+        // Never clobber a previously good discovery file with the stale
+        // hardcoded fallback — the workflow commits this file and
+        // upload-stats pushes it to prod KV, so overwriting it here would
+        // silently shrink format coverage. The fallback only bootstraps a
+        // fresh clone that has no discovery file at all.
+        if (shouldWriteDiscoveryFallback(existsSync(OUTPUT_PATH))) {
+            console.log("\nNo existing discovery file — writing hardcoded bootstrap fallback.");
 
-        writeFileSync(OUTPUT_PATH, JSON.stringify(result, null, 4));
-        console.log(`Wrote fallback to ${OUTPUT_PATH}`);
+            const result = {
+                vgcFormats: FALLBACK_VGC,
+                doublesFormats: FALLBACK_DOUBLES,
+                championsFormats: FALLBACK_CHAMPIONS,
+                discoveredAt: new Date().toISOString(),
+                sourceMonth: "fallback",
+            };
+
+            writeFileSync(OUTPUT_PATH, JSON.stringify(result, null, 4));
+            console.log(`Wrote fallback to ${OUTPUT_PATH}`);
+        } else {
+            console.log(
+                `\nKeeping existing ${OUTPUT_PATH} untouched (last good discovery is preserved).`,
+            );
+        }
+
+        // Either way, discovery itself failed — exit non-zero so the workflow
+        // step goes red instead of green-shipping stale format coverage.
+        process.exitCode = 1;
     }
 }
 
-discoverFormats().catch(console.error);
+discoverFormats().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+});

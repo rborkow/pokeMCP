@@ -95,15 +95,34 @@ jobs:
             git push origin HEAD:main
           fi
 
+      # This step must be able to FAIL: -f makes curl exit non-zero on HTTP
+      # errors, jq -e fails if the response envelope is missing the tool text,
+      # and the asserts below reject the tool's "no stats" error string (tool
+      # handlers return error text with HTTP 200, so shape checks alone are
+      # not enough).
       - name: Verify stats update
         if: ${{ !inputs.tournaments_only }}
+        shell: bash
         run: |
+          set -euo pipefail
           echo "Testing stats availability..."
-          curl -s -X POST "https://api.pokemcp.com/api/tools" \
+          response=$(curl -fsS -X POST "https://api.pokemcp.com/api/tools" \
             -H "Content-Type: application/json" \
-            -d '{"tool":"get_usage_stats","args":{"type":"meta_threats","format":"gen9ou","limit":5}}' \
-            | head -c 500
-          echo ""
+            -d '{"tool":"get_usage_stats","args":{"type":"meta_threats","format":"gen9ou","limit":5}}')
+          # /api/tools envelope: {"jsonrpc":"2.0","result":{"content":[{"type":"text","text":"..."}]}}
+          if ! text=$(jq -er '.result.content[0].text' <<< "$response"); then
+            echo "::error::Unexpected /api/tools response envelope: $response"
+            exit 1
+          fi
+          echo "$text"
+          if [[ "$text" == "No usage statistics found"* ]]; then
+            echo "::error::API reports no stats for gen9ou — the KV upload did not take effect"
+            exit 1
+          fi
+          if ! grep -q "% usage" <<< "$text"; then
+            echo "::error::Response does not look like a usage-threats list"
+            exit 1
+          fi
           echo "✅ Stats update complete! KV is live immediately; any discovered-formats push to main triggers a Cloudflare Workers Builds redeploy."
 
       # Pull recent tournament results + teams from the Limitless platform into
