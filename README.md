@@ -56,20 +56,34 @@ Analyze your team's type coverage and weaknesses:
 - Suggestions for filling gaps
 
 ### 📊 Smogon Usage Statistics
-Access real competitive data from thousands of battles with cached data for instant responses:
-- **Popular Sets**: Most used moves, items, abilities, and EV spreads
-- **Meta Threats**: Top Pokémon by usage percentage
-- **Teammates**: Common team partners based on actual teams
-- **Checks & Counters**: What beats your Pokémon (with KO rates)
-- **Metagame Stats**: Overall format statistics and trends
+Access real competitive data from thousands of battles with cached data for instant responses (all exposed via the single `get_usage_stats` tool, selected with a `type` argument):
+- **Popular Sets** (`popular_sets`): Most used moves, items, abilities, and EV spreads
+- **Meta Threats** (`meta_threats`): Top Pokémon by usage percentage
+- **Teammates** (`teammates`): Common team partners based on actual teams
+- **Checks & Counters** (`checks_counters`): What beats your Pokémon (with KO rates)
+- **Metagame Stats** (`metagame`): Overall format statistics and trends
+
+### 🧠 Strategic Advice
+Search Smogon strategy write-ups with semantic (RAG) search via `query_strategy`:
+- Natural-language questions about movesets, counters, and teammates
+- Optional filters by Pokémon, format, and section type (overview/moveset/counters/teammates)
+- Powered by Cloudflare Vectorize + Workers AI embeddings
+
+### 📈 Metagame Trends
+Analyze how a format evolves month over month via `get_meta_trends`:
+- A single Pokémon's usage trend over time
+- Format-wide risers/fallers/entrants/dropouts between two snapshots
+- Usage momentum (slope, EWMA, volatility, acceleration)
+- An overall evolution summary
+- Backed by a Cloudflare D1 time-series store; tuned for VGC/doubles and Pokémon Champions regulations
 
 **Supported Formats:**
-- **Pokémon Champions:** Reg M-A *(partial — Mega Evolution and Victory Point mechanics are not yet fully modeled; see [`docs/CHAMPIONS_ROADMAP.md`](docs/CHAMPIONS_ROADMAP.md))*
-- Gen 9: OU, Ubers, UU, RU, NU, PU, LC, VGC 2026 Reg F, Doubles OU
-- Gen 8: OU, Ubers, UU, RU, NU, PU, LC
-- Gen 7: OU, Ubers, UU, RU, NU, LC
+- **Pokémon Champions:** Reg M-A (2026-04-08 – 2026-06-17) and Reg M-B (current, since 2026-06-17) *(partial — Mega Evolution and Victory Point mechanics are not yet fully modeled; see [`docs/CHAMPIONS_ROADMAP.md`](docs/CHAMPIONS_ROADMAP.md))*
+- Gen 9: OU, Ubers, UU, RU, NU, PU, LC, VGC 2026 Reg I (current), Doubles OU
+- Gen 8: OU, UU, RU, Doubles OU *(Ubers, NU, PU, LC have minimal usage data on Smogon)*
+- Gen 7: OU, Ubers, UU, RU, NU, Doubles OU *(PU, LC have minimal usage data on Smogon)*
 
-*VGC formats are auto-discovered monthly from Smogon's stats. New regulations are picked up automatically. Pokémon Champions regulations have a rotating allow-list fetched from the official legality page; run `npm run fetch-champions-legality && npm run upload-champions-legality` when a new regulation ships.*
+*VGC/Doubles formats are auto-discovered monthly from Smogon's stats directory (see `src/discovered-formats.json`); new regulations are picked up automatically — no code changes needed. Pokémon Champions regulations (`champions-regma`, `champions-regmb`) have a rotating allow-list fetched from the official legality page and are mapped internally to Smogon's `gen9championsvgc2026regm*` usage-stats files; run `bun run fetch-champions-legality && bun run upload-champions-legality` when a new regulation ships. Format IDs are lowercase and case-sensitive.*
 
 ## Deployment
 
@@ -83,14 +97,14 @@ Deployed on Cloudflare Workers and Pages:
 
 1. Install Wrangler CLI:
    ```bash
-   npm install -g wrangler
+   bun install -g wrangler
    ```
 
 2. Clone and setup:
    ```bash
    git clone https://github.com/rborkow/pokeMCP.git
    cd pokeMCP
-   npm install
+   bun install
    ```
 
 3. Login to Cloudflare:
@@ -109,12 +123,12 @@ Deployed on Cloudflare Workers and Pages:
 
 5. (Optional) Fetch latest stats:
    ```bash
-   npm run fetch-stats
+   bun run fetch-stats
    ```
 
 6. Deploy:
    ```bash
-   npm run deploy
+   bun run deploy
    ```
 
 ### Environment Variables
@@ -129,22 +143,23 @@ Deployed on Cloudflare Workers and Pages:
 **Cloudflare Bindings** (configured in `wrangler.jsonc`):
 - `POKEMON_STATS` - KV namespace for cached Smogon statistics
 - `STRATEGY_DOCS` - KV namespace for RAG documents
-- `VECTORIZE` - Vector database for semantic search
+- `VECTOR_INDEX` - Vectorize database for semantic search
+- `META_DB` - D1 database for metagame usage history (`get_meta_trends`)
 - `AI` - Cloudflare AI binding for embeddings
 
 ### Updating Cached Stats
 
-Stats are cached in Cloudflare KV for instant access. To update:
+Stats are cached in Cloudflare KV as sharded keys — `{format}:_index` (lightweight per-format usage index) and `{format}:{pokemonid}` (full stat blob per Pokémon) — so the worker only reads what a request needs. The worker never reads a single monolithic per-format key, so don't hand-`wrangler kv key put` a whole JSON file. To update:
 
-1. Run the fetch script:
+1. Discover the latest VGC/doubles formats and fetch stats from Smogon:
    ```bash
-   npm run fetch-stats
+   bun run discover-formats
+   bun run fetch-stats
    ```
 
-2. Upload to KV (the namespace ID is in `wrangler.jsonc`):
+2. Upload everything to KV (reads every file in `src/cached-stats/`, builds the sharded keys, and bulk-uploads them; the namespace ID defaults to the one in `wrangler.jsonc` and can be overridden with `KV_NAMESPACE_ID`):
    ```bash
-   npx wrangler kv key put --remote --namespace-id=YOUR_NAMESPACE_ID "gen9ou" --path="src/cached-stats/gen9ou.json"
-   # Repeat for other formats: gen9ubers, gen9uu, gen9ru, gen9nu, gen9pu, gen9lc, gen9vgc2026regf, gen9vgc2024regh
+   bun run upload-stats
    ```
 
 ## Usage in Claude
@@ -175,7 +190,11 @@ Once connected, try:
 
 ## Usage Examples
 
-### Lookup a Pokémon
+PokéMCP exposes **7 tools**. The four basic tools run entirely on bundled Pokémon Showdown
+data; `get_usage_stats`, `get_meta_trends`, and `query_strategy` read from Cloudflare KV/D1/
+Vectorize and need the `env` bindings the Worker provides.
+
+### Look Up a Pokémon
 
 ```
 Tool: lookup_pokemon
@@ -215,11 +234,13 @@ Arguments: {
       "ability": "Iron Barbs"
     }
   ],
-  "format": "OU"
+  "format": "gen9ou"
 }
 ```
 
-Validates the team against OU format rules.
+Validates the team against `gen9ou` rules (Species Clause, move/ability legality, team size).
+Pass a Pokémon Champions regulation id (e.g. `"format": "champions-regmb"`) to route through the
+dedicated regulation validator instead of the Showdown-format path.
 
 ### Analyze Team Coverage
 
@@ -227,113 +248,100 @@ Validates the team against OU format rules.
 Tool: suggest_team_coverage
 Arguments: {
   "current_team": ["Garchomp", "Ferrothorn", "Rotom-Wash"],
-  "format": "OU"
+  "format": "gen9ou"
 }
 ```
 
 Shows team weaknesses, resistances, and suggests types to add.
 
-### Get Popular Sets
+### Get Usage Statistics
 
 ```
-Tool: get_popular_sets
+Tool: get_usage_stats
 Arguments: {
+  "type": "checks_counters",
   "pokemon": "Garchomp",
-  "format": "gen9ou"
-}
-```
-
-Returns the most popular moves, items, abilities, and EV spreads from real competitive play.
-
-### Check Meta Threats
-
-```
-Tool: get_meta_threats
-Arguments: {
   "format": "gen9ou",
-  "limit": 20
+  "limit": 10
 }
 ```
 
-Shows the top 20 most used Pokémon in the format with usage percentages.
+One consolidated tool for all Smogon usage stats — set `type` to `popular_sets`, `meta_threats`,
+`teammates`, `checks_counters`, or `metagame` to pick the view. `pokemon` is required for
+`popular_sets`, `teammates`, and `checks_counters`; `format` defaults to `gen9ou`.
 
-### Find Teammates
+### Analyze Metagame Trends
 
 ```
-Tool: get_teammates
+Tool: get_meta_trends
 Arguments: {
-  "pokemon": "Garchomp",
+  "type": "shifts",
+  "format": "champions-regmb",
+  "window": 3
+}
+```
+
+Reads the Cloudflare D1 usage-history store to show how a format moves over time. `type` is
+`usage_trend` (needs `pokemon`), `shifts`, `momentum`, or `evolution_summary`. `format` defaults to
+the newest Pokémon Champions regulation with published Smogon stats (currently `champions-regmb`).
+
+### Query Strategy
+
+```
+Tool: query_strategy
+Arguments: {
+  "query": "How do I counter Kingambit in gen9ou?",
   "format": "gen9ou"
 }
 ```
 
-Discovers which Pokémon are commonly paired with Garchomp on teams.
-
-### Identify Checks & Counters
-
-```
-Tool: get_checks_counters
-Arguments: {
-  "pokemon": "Garchomp",
-  "format": "gen9ou"
-}
-```
-
-Shows which Pokémon are most effective against Garchomp with battle statistics.
-
-### View Metagame Stats
-
-```
-Tool: get_metagame_stats
-Arguments: {
-  "format": "gen9ou"
-}
-```
-
-Overall format statistics including total battles and top Pokémon.
+Semantic (RAG) search over Smogon strategy write-ups. Add `pokemon` and/or `sectionType`
+(`overview`, `moveset`, `counters`, `teammates`) to filter results.
 
 ## Available Tools
 
+<!-- AUTOGEN:TOOLS:BEGIN -->
 | Tool | Description |
 |------|-------------|
-| **Basic Tools** | |
-| `lookup_pokemon` | Get detailed Pokémon information |
-| `validate_moveset` | Check if a moveset is legal |
-| `validate_team` | Validate team against format rules |
-| `suggest_team_coverage` | Analyze team coverage and suggest improvements |
-| **Usage Stats Tools** | |
-| `get_popular_sets` | Get most used moves/items/abilities from competitive play |
-| `get_meta_threats` | See top Pokémon by usage percentage |
-| `get_teammates` | Find common team partners |
-| `get_checks_counters` | Identify effective counters with battle stats |
-| `get_metagame_stats` | View overall format statistics |
+| `lookup_pokemon` | Look up Pokémon stats, types, abilities, and moves |
+| `validate_moveset` | Check if a moveset is legal for a Pokémon |
+| `validate_team` | Validate a team against format rules (Showdown formats and Pokémon Champions regulations) |
+| `suggest_team_coverage` | Suggest Pokémon to improve team type coverage |
+| `get_usage_stats` | Get Smogon competitive usage statistics |
+| `get_meta_trends` | Analyze how a metagame evolves over time: a Pokémon's usage trend over months, format-wide shifts (risers/fallers/entrants/dropouts) between two dates, usage momentum, or an overall evolution summary. Tuned for VGC/doubles. |
+| `query_strategy` | Search Smogon strategy guides with optional filters |
+<!-- AUTOGEN:TOOLS:END -->
 
 ## Data Sources
 
 - **Pokémon Data**: [Pokémon Showdown](https://github.com/smogon/pokemon-showdown) - Complete Pokédex, moves, abilities, and learnsets
-- **Usage Statistics**: [Smogon University](https://www.smogon.com/stats/) - Real competitive battle data updated monthly, cached in Cloudflare KV
+- **Usage Statistics**: [Smogon University](https://www.smogon.com/stats/) - Real competitive battle data updated monthly, cached in Cloudflare KV (sharded per-Pokémon keys)
+- **Metagame History**: Cloudflare D1 time-series database populated by `scripts/backfill-history.ts` / `scripts/append-history.ts`, powering `get_meta_trends`
+- **Strategy Content**: Smogon strategy articles, chunked and embedded into Cloudflare Vectorize for `query_strategy`
 
 ## Development
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Run type checking
-npm run type-check
+bun run type-check
 
 # Start local development server
-npm run dev
+bun run dev
 
 # Deploy to Cloudflare
-npm run deploy
+bun run deploy
 ```
 
 ## Architecture
 
 - **Cloudflare Workers**: Serverless compute for handling MCP requests
-- **Cloudflare KV**: Distributed key-value storage for cached Smogon statistics
-- **Durable Objects**: Stateful coordination for MCP sessions
+- **Cloudflare KV**: Distributed key-value storage for cached Smogon statistics and RAG documents
+- **Cloudflare D1**: Time-series metagame usage history (`get_meta_trends`)
+- **Cloudflare Vectorize**: Vector database for semantic strategy search (`query_strategy`)
+- **Durable Objects**: Stateful coordination for MCP sessions and weekly RAG ingestion
 - **Direct Imports**: Pokémon Showdown data bundled at build time for instant access
 
 ## Security
@@ -349,7 +357,10 @@ Requests from other origins will receive a 403 error.
 
 ### Rate Limiting
 
-Configure rate limiting in the Cloudflare dashboard:
+`/api/tools` enforces its own KV-backed limit of **30 requests per minute per IP** (keyed on
+`CF-Connecting-IP`); requests over the limit get a `429` with `{"error": "Rate limited. Please try again later."}`.
+
+For additional protection, you can also configure rate limiting in the Cloudflare dashboard:
 
 1. Go to **Security → WAF → Rate limiting rules**
 2. Create a rule for your Worker domain:
@@ -375,7 +386,7 @@ Track upstream fixes: [MCP SDK Security Advisories](https://github.com/modelcont
 
 ## License
 
-MIT
+[GNU Affero General Public License v3.0 (AGPL-3.0)](LICENSE)
 
 ## Contributing
 

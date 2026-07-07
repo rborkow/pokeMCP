@@ -12,6 +12,7 @@ A **Model Context Protocol (MCP)** server for Pokémon competitive team building
 - ✅ **Team Validation** - Species clause, move legality, ability validation
 - 💡 **Coverage Analysis** - Type effectiveness, weaknesses, resistances
 - 📊 **Usage Statistics** - Real Smogon data from thousands of battles
+- 📈 **Metagame Trends** - Usage trends, shifts, and momentum over time
 - 🧠 **Strategic Advice** - RAG-powered queries over strategy articles
 - 🎮 **[Team Builder](https://www.pokemcp.com)** - Interactive web app with AI chat assistant
 
@@ -42,14 +43,15 @@ For programmatic access, use the [REST API](/api-reference):
 ```bash
 curl -X POST https://api.pokemcp.com/api/tools \
   -H "Content-Type: application/json" \
-  -d '{"tool": "get_meta_threats", "args": {"format": "gen9ou"}}'
+  -d '{"tool": "get_usage_stats", "args": {"type": "meta_threats", "format": "gen9ou"}}'
 ```
 
 ## Supported Formats
 
-**24+ formats** across Gen 7, 8, and 9:
+Formats across Gen 7, 8, and 9 ([full list](/formats)):
 - Singles: OU, Ubers, UU, RU, NU, PU, LC
-- VGC: 2026 Reg F, 2025 Reg I, 2024 Reg H, Doubles OU
+- VGC/Doubles: 2026 Reg I (current), Doubles OU/Ubers/UU
+- Pokémon Champions: Reg M-A, Reg M-B (current)
 
 ## Example Usage
 
@@ -64,6 +66,7 @@ How do I counter Kingambit?
 
 - **Cloudflare Workers** - Serverless MCP endpoints
 - **Cloudflare KV** - Cached usage statistics
+- **Cloudflare D1** - Metagame usage history over time
 - **Cloudflare Vectorize** - Semantic search over strategy content
 - **Pokémon Showdown** - Complete Pokédex data
 

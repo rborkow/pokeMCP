@@ -26,7 +26,7 @@ description: "Set up PokeMCP with Claude.ai in minutes. Add the MCP connector, v
 3. **Verify**
    - Start a new conversation
    - Ask: "What tools do you have access to?"
-   - You should see all 11 PokéMCP tools
+   - You should see all 7 PokéMCP tools
 
 ## First Commands
 
@@ -57,8 +57,9 @@ How do I counter Kingambit in Gen 9 OU?
 
 ## Available Tools
 
-- **Basic**: `lookup_pokemon`, `validate_moveset`, `validate_team`, `suggest_team_coverage`
-- **Stats**: `get_popular_sets`, `get_meta_threats`, `get_teammates`, `get_checks_counters`, `get_metagame_stats`
-- **Strategy**: `query_strategy`, `search_strategic_content`
+- **Core**: `lookup_pokemon`, `validate_moveset`, `validate_team`, `suggest_team_coverage`
+- **Stats**: `get_usage_stats` (`type`: `popular_sets` \| `meta_threats` \| `teammates` \| `checks_counters` \| `metagame`)
+- **Trends**: `get_meta_trends` (`type`: `usage_trend` \| `shifts` \| `momentum` \| `evolution_summary`)
+- **Strategy**: `query_strategy`
 
 [View all tools →](/tools)
