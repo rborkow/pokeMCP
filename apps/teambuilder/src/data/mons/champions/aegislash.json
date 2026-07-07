@@ -216,16 +216,50 @@
    "ability": "Stance Change",
    "moves": [
     "Wide Guard",
-    "Close Combat",
+    "Poltergeist",
     "Shadow Sneak",
-    "Poltergeist"
+    "Close Combat"
    ],
-   "count": 1,
+   "count": 2,
    "bestPlacing": 5,
    "bestPlayer": "LightaNight08",
    "eventName": "KIng's Gambit #6 | Reg M-B",
    "eventSlug": "2026-06-21-king-s-gambit-6-reg-m-b",
    "sourceUrl": "https://play.limitlesstcg.com/tournament/6a29ab02e334c3c9befd3389",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Stance Change",
+   "moves": [
+    "Iron Head",
+    "Shadow Sneak",
+    "Close Combat",
+    "King's Shield"
+   ],
+   "count": 1,
+   "bestPlacing": 5,
+   "bestPlayer": "Mattpode3",
+   "eventName": "King's Gambit #7 | Reg M-B",
+   "eventSlug": "2026-07-05-king-s-gambit-7-reg-m-b",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a37eef2ceacae7d6441bbd5",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Spell Tag",
+   "ability": "Stance Change",
+   "moves": [
+    "Poltergeist",
+    "Iron Head",
+    "Shadow Sneak",
+    "King's Shield"
+   ],
+   "count": 1,
+   "bestPlacing": 7,
+   "bestPlayer": "walaye",
+   "eventName": "Rework Esport Champions Talent Cup 2 | 50€ CP",
+   "eventSlug": "2026-07-03-rework-esport-champions-talent-cup-2-50-cp",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a39af2883fd320299bce1f4",
    "nature": "Adamant"
   }
  ]

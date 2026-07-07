@@ -186,6 +186,23 @@
  ],
  "builds": [
   {
+   "item": "Colbur Berry",
+   "ability": "Flash Fire",
+   "moves": [
+    "Armor Cannon",
+    "Psychic",
+    "Trick Room",
+    "Wide Guard"
+   ],
+   "count": 1,
+   "bestPlacing": 2,
+   "bestPlayer": "Ebznax02",
+   "eventName": "VGC Trainer School; champions m/b #1",
+   "eventSlug": "2026-07-05-vgc-trainer-school-champions-m-b-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3a956c83fd320299bce8bf",
+   "nature": "Modest"
+  },
+  {
    "item": "Leftovers",
    "ability": "Flash Fire",
    "moves": [

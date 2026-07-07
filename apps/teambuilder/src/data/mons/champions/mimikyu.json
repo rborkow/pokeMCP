@@ -186,5 +186,23 @@
    "switchPct": 0
   }
  ],
- "builds": []
+ "builds": [
+  {
+   "item": "Spell Tag",
+   "ability": "Disguise",
+   "moves": [
+    "Protect",
+    "Play Rough",
+    "Phantom Force",
+    "Shadow Sneak"
+   ],
+   "count": 1,
+   "bestPlacing": 8,
+   "bestPlayer": "JurassicJoints",
+   "eventName": "Regulation M-B: Open League #1",
+   "eventSlug": "2026-07-04-regulation-m-b-open-league-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a4101e5c87cd9ff0a311dd6",
+   "nature": "Adamant"
+  }
+ ]
 }

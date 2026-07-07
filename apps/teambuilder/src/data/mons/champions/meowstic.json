@@ -186,5 +186,23 @@
    "switchPct": 0
   }
  ],
- "builds": []
+ "builds": [
+  {
+   "item": "Mental Herb",
+   "ability": "Prankster",
+   "moves": [
+    "Sunny Day",
+    "Yawn",
+    "Skill Swap",
+    "Fake Out"
+   ],
+   "count": 1,
+   "bestPlacing": 3,
+   "bestPlayer": "EnryuVGC",
+   "eventName": "Mudkip's Marsh Pit #2",
+   "eventSlug": "2026-07-05-mudkip-s-marsh-pit-2",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3ed82d83fd320299bd1000",
+   "nature": "Impish"
+  }
+ ]
 }

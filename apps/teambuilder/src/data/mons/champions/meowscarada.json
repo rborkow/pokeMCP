@@ -214,5 +214,23 @@
    "switchPct": 0
   }
  ],
- "builds": []
+ "builds": [
+  {
+   "item": "Life Orb",
+   "ability": "Overgrow",
+   "moves": [
+    "Flower Trick",
+    "Sucker Punch",
+    "Triple Axel",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 4,
+   "bestPlayer": "VortexTheGreat",
+   "eventName": "VGC Trainer School; champions m/b #1",
+   "eventSlug": "2026-07-05-vgc-trainer-school-champions-m-b-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3a956c83fd320299bce8bf",
+   "nature": "Jolly"
+  }
+ ]
 }

@@ -237,6 +237,23 @@
    "nature": "Adamant"
   },
   {
+   "item": "Sitrus Berry",
+   "ability": "Defiant",
+   "moves": [
+    "Rage Fist",
+    "Drain Punch",
+    "Protect",
+    "Rock Slide"
+   ],
+   "count": 1,
+   "bestPlacing": 2,
+   "bestPlayer": "Kaige",
+   "eventName": "CHAMPIONS REG. M-B |👑CROWN FIGHT Bo3 TOUR #75👑",
+   "eventSlug": "2026-07-03-champions-reg-m-b-crown-fight-bo3-tour-75",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a2ccd93e334c3c9befd52a6",
+   "nature": "Jolly"
+  },
+  {
    "item": "Black Belt",
    "ability": "Defiant",
    "moves": [
@@ -251,23 +268,6 @@
    "eventName": "Tyrant Thursdays #2",
    "eventSlug": "2026-06-25-tyrant-thursdays-2",
    "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3b53a483fd320299bcf113",
-   "nature": "Adamant"
-  },
-  {
-   "item": "Choice Scarf",
-   "ability": "Defiant",
-   "moves": [
-    "Shadow Claw",
-    "Close Combat",
-    "Seed Bomb",
-    "Ice Punch"
-   ],
-   "count": 1,
-   "bestPlacing": 8,
-   "bestPlayer": "Dot1Q",
-   "eventName": "TARTAN TAKEDOWN #30! - [CHAMPIONS REG M-B]",
-   "eventSlug": "2026-06-30-tartan-takedown-30-champions-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a41634e83fd320299bd3356",
    "nature": "Adamant"
   }
  ]

@@ -219,17 +219,17 @@
    "item": "Staraptite",
    "ability": "Intimidate",
    "moves": [
-    "Brave Bird",
+    "Protect",
     "Close Combat",
-    "Roost",
-    "Protect"
+    "Brave Bird",
+    "Roost"
    ],
-   "count": 11,
+   "count": 15,
    "bestPlacing": 1,
-   "bestPlayer": "Mollusk ",
-   "eventName": "The Wide League Saturday Night Rumble #87 REG M-B",
-   "eventSlug": "2026-06-28-the-wide-league-saturday-night-rumble-87-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3dbda083fd320299bd0416",
+   "bestPlayer": "merijnvd",
+   "eventName": "VGC Trainer School; champions m/b #1",
+   "eventSlug": "2026-07-05-vgc-trainer-school-champions-m-b-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3a956c83fd320299bce8bf",
    "nature": "Jolly"
   },
   {
@@ -251,19 +251,19 @@
   },
   {
    "item": "Staraptite",
-   "ability": "Reckless",
+   "ability": "Intimidate",
    "moves": [
+    "Dual Wingbeat",
     "Close Combat",
-    "Brave Bird",
     "Roost",
     "Protect"
    ],
    "count": 1,
    "bestPlacing": 4,
-   "bestPlayer": "TheFiendishMeep",
-   "eventName": "Alpensee Tour (Reg M-B) #63 - ✨ Sylveon for #1!",
-   "eventSlug": "2026-06-24-alpensee-tour-reg-m-b-63-sylveon-for-1",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a1420b18c163b8097996cc7",
+   "bestPlayer": "jokerjr888",
+   "eventName": "Regulation M-B: Open League #1",
+   "eventSlug": "2026-07-04-regulation-m-b-open-league-1",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a4101e5c87cd9ff0a311dd6",
    "nature": "Jolly"
   }
  ]
