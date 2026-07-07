@@ -45,14 +45,3 @@ export interface ChunkingOptions {
     overlap: number;
     preserveContext: boolean;
 }
-
-export interface IngestionStats {
-    pokemonProcessed: number;
-    documentsScraped: number;
-    chunksCreated: number;
-    embeddingsGenerated: number;
-    vectorsIndexed: number;
-    errors: number;
-    startTime: string;
-    endTime?: string;
-}

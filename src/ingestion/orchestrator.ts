@@ -1,8 +1,7 @@
-import { scrapeWithDelay } from "./scraper.js";
 import { chunkStrategyDocument } from "./chunker.js";
 import { generateEmbeddings } from "./embedder.js";
 import { indexChunks } from "./indexer.js";
-import type { IngestionStats } from "./types.js";
+import { scrapeWithDelay } from "./scraper.js";
 
 // Singles formats (stable, rarely change)
 const SINGLES_FORMATS = [
@@ -44,7 +43,7 @@ const DEFAULT_VGC_FORMATS = [
  * Load formats for ingestion, using discovered VGC formats from KV when available.
  * The discovery script (scripts/discover-formats.ts) writes to KV via upload-stats.sh.
  */
-async function getFormats(env: Env): Promise<string[]> {
+export async function getIngestionFormats(env: Env): Promise<string[]> {
     try {
         const discovered = (await env.POKEMON_STATS.get("_discovered_formats", "json")) as {
             vgcFormats?: string[];
@@ -66,159 +65,97 @@ async function getFormats(env: Env): Promise<string[]> {
 }
 
 /**
- * Main ingestion pipeline - scrapes, chunks, embeds, and indexes content
+ * Get the top 50 Pokemon for a format from the usage-stats index in KV.
+ * Returns [] when no index exists; throws on KV errors so the coordinator's
+ * retry policy can handle transient failures.
  */
-export async function runIngestionPipeline(env: Env): Promise<IngestionStats> {
-    const stats: IngestionStats = {
-        pokemonProcessed: 0,
-        documentsScraped: 0,
-        chunksCreated: 0,
-        embeddingsGenerated: 0,
-        vectorsIndexed: 0,
-        errors: 0,
-        startTime: new Date().toISOString(),
-    };
+export async function getTopPokemon(format: string, env: Env): Promise<string[]> {
+    const index = (await env.POKEMON_STATS.get(`${format}:_index`, "json")) as {
+        pokemon: Record<string, number>;
+        version: number;
+    } | null;
 
-    const formats = await getFormats(env);
-
-    console.log("Starting content ingestion pipeline...");
-    console.log(`Formats: ${formats.join(", ")}`);
-
-    // Get top Pokemon for each format
-    const topPokemon = await getTopPokemonByFormat(formats, env);
-
-    for (const format of formats) {
-        console.log(`\n=== Processing format: ${format} ===`);
-
-        const pokemon = topPokemon[format] || [];
-        console.log(`Top Pokemon (${pokemon.length}): ${pokemon.slice(0, 5).join(", ")}...`);
-
-        for (const p of pokemon) {
-            try {
-                await processPokemon(p, format, stats, env);
-            } catch (error) {
-                console.error(`Failed to process ${p} in ${format}:`, error);
-                stats.errors++;
-            }
-        }
+    if (!index || index.version !== 2) {
+        console.warn(`No stats index found for ${format}`);
+        return [];
     }
 
-    stats.endTime = new Date().toISOString();
-    console.log("\n=== Ingestion Complete ===");
-    console.log(`Pokemon processed: ${stats.pokemonProcessed}`);
-    console.log(`Documents scraped: ${stats.documentsScraped}`);
-    console.log(`Chunks created: ${stats.chunksCreated}`);
-    console.log(`Embeddings generated: ${stats.embeddingsGenerated}`);
-    console.log(`Vectors indexed: ${stats.vectorsIndexed}`);
-    console.log(`Errors: ${stats.errors}`);
+    const top = Object.entries(index.pokemon)
+        .sort(([, a], [, b]) => b - a)
+        .slice(0, 50)
+        .map(([name]) => name);
+    console.log(`Found ${top.length} Pokemon for ${format}`);
+    return top;
+}
 
-    return stats;
+export interface FormatIngestionCounts {
+    pokemonProcessed: number;
+    chunksIndexed: number;
+    errors: number;
 }
 
 /**
- * Process a single Pokemon in a format
+ * Ingest a list of Pokemon for one format: scrape, chunk, embed, index.
+ * Per-Pokemon failures are logged and counted but never abort the format.
  */
-async function processPokemon(
-    pokemon: string,
+export async function ingestFormat(
     format: string,
-    stats: IngestionStats,
+    pokemon: string[],
     env: Env,
-): Promise<void> {
+): Promise<FormatIngestionCounts> {
+    console.log(`=== Ingesting format: ${format} (${pokemon.length} Pokemon) ===`);
+
+    const counts: FormatIngestionCounts = {
+        pokemonProcessed: 0,
+        chunksIndexed: 0,
+        errors: 0,
+    };
+
+    for (const p of pokemon) {
+        try {
+            const chunksIndexed = await processPokemon(p, format, env);
+            if (chunksIndexed !== null) {
+                counts.pokemonProcessed++;
+                counts.chunksIndexed += chunksIndexed;
+            }
+        } catch (error) {
+            console.error(`Failed to process ${p} in ${format}:`, error);
+            counts.errors++;
+        }
+    }
+
+    console.log(
+        `=== ${format} done: ${counts.pokemonProcessed} Pokemon, ` +
+            `${counts.chunksIndexed} chunks, ${counts.errors} errors ===`,
+    );
+    return counts;
+}
+
+/**
+ * Process a single Pokemon in a format.
+ * Returns the number of chunks indexed, or null when no content was found.
+ */
+async function processPokemon(pokemon: string, format: string, env: Env): Promise<number | null> {
     console.log(`Processing ${pokemon}...`);
 
     // Step 1: Scrape
     const doc = await scrapeWithDelay(pokemon, format, 500);
     if (!doc) {
         console.warn(`Skipping ${pokemon} - no content found`);
-        return;
+        return null;
     }
-
-    stats.documentsScraped++;
 
     // Step 2: Chunk
     const chunks = chunkStrategyDocument(doc);
-    stats.chunksCreated += chunks.length;
     console.log(`  Created ${chunks.length} chunks`);
 
     // Step 3: Embed
     const embedded = await generateEmbeddings(chunks, env);
-    stats.embeddingsGenerated += embedded.length;
     console.log(`  Generated ${embedded.length} embeddings`);
 
     // Step 4: Index
     await indexChunks(embedded, env);
-    stats.vectorsIndexed += embedded.length;
     console.log(`  Indexed ${embedded.length} vectors`);
 
-    stats.pokemonProcessed++;
-}
-
-/**
- * Get top Pokemon for each format from usage stats
- */
-async function getTopPokemonByFormat(
-    formats: string[],
-    env: Env,
-): Promise<Record<string, string[]>> {
-    const topPokemon: Record<string, string[]> = {};
-
-    for (const format of formats) {
-        try {
-            const index = (await env.POKEMON_STATS.get(`${format}:_index`, "json")) as {
-                pokemon: Record<string, number>;
-                version: number;
-            } | null;
-
-            if (index && index.version === 2) {
-                const top = Object.entries(index.pokemon)
-                    .sort(([, a], [, b]) => b - a)
-                    .slice(0, 50)
-                    .map(([name]) => name);
-
-                topPokemon[format] = top;
-                console.log(`Found ${top.length} Pokemon for ${format}`);
-            } else {
-                console.warn(`No stats index found for ${format}`);
-                topPokemon[format] = [];
-            }
-        } catch (error) {
-            console.error(`Failed to get stats for ${format}:`, error);
-            topPokemon[format] = [];
-        }
-    }
-
-    return topPokemon;
-}
-
-/**
- * Process a subset of Pokemon (for testing)
- */
-export async function runTestIngestion(
-    pokemon: string[],
-    format: string,
-    env: Env,
-): Promise<IngestionStats> {
-    const stats: IngestionStats = {
-        pokemonProcessed: 0,
-        documentsScraped: 0,
-        chunksCreated: 0,
-        embeddingsGenerated: 0,
-        vectorsIndexed: 0,
-        errors: 0,
-        startTime: new Date().toISOString(),
-    };
-
-    console.log(`Testing ingestion with ${pokemon.length} Pokemon in ${format}`);
-
-    for (const p of pokemon) {
-        try {
-            await processPokemon(p, format, stats, env);
-        } catch (error) {
-            console.error(`Failed to process ${p}:`, error);
-            stats.errors++;
-        }
-    }
-
-    stats.endTime = new Date().toISOString();
-    return stats;
+    return embedded.length;
 }

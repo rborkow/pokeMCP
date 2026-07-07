@@ -1,6 +1,6 @@
 import { Analyses } from "smogon";
-import type { StrategyDocument, StrategySection } from "./types.js";
 import { toID } from "../data-loader.js";
+import type { StrategyDocument, StrategySection } from "./types.js";
 
 /**
  * Map our internal format names to Smogon's format names.
@@ -67,7 +67,7 @@ export async function scrapeSmogonDex(
     try {
         // Determine generation from format (e.g., 'gen9ou' -> 9)
         const genMatch = format.match(/gen(\d+)/);
-        const gen = genMatch ? Number.parseInt(genMatch[1]) : 9;
+        const gen = genMatch ? Number.parseInt(genMatch[1], 10) : 9;
 
         // Map to Smogon's format naming
         const smogonFormat = mapToSmogonFormat(format);
@@ -84,7 +84,7 @@ export async function scrapeSmogonDex(
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
 
-        const rpcData = await response.json();
+        const rpcData = (await response.json()) as string;
 
         // Process the response to get analyses
         const result = Analyses.process(rpcData);

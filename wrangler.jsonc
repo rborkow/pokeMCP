@@ -8,6 +8,10 @@
         {
             "new_sqlite_classes": ["PokemonMCP"],
             "tag": "v1"
+        },
+        {
+            "new_sqlite_classes": ["IngestionCoordinator"],
+            "tag": "v2"
         }
     ],
     /**
@@ -23,6 +27,10 @@
             {
                 "class_name": "PokemonMCP",
                 "name": "MCP_OBJECT"
+            },
+            {
+                "class_name": "IngestionCoordinator",
+                "name": "INGESTION_COORDINATOR"
             }
         ]
     },
@@ -143,6 +151,10 @@
                     {
                         "class_name": "PokemonMCP",
                         "name": "MCP_OBJECT"
+                    },
+                    {
+                        "class_name": "IngestionCoordinator",
+                        "name": "INGESTION_COORDINATOR"
                     }
                 ]
             },
@@ -208,6 +220,10 @@
                     {
                         "class_name": "PokemonMCP",
                         "name": "MCP_OBJECT"
+                    },
+                    {
+                        "class_name": "IngestionCoordinator",
+                        "name": "INGESTION_COORDINATOR"
                     }
                 ]
             },
