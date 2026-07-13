@@ -25,7 +25,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -69,7 +69,7 @@ jobs:
     timeout-minutes: 25
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -90,7 +90,7 @@ jobs:
 
       - name: Build production Worker
         working-directory: ./apps/teambuilder
-        run: bun run pages:build
+        run: bun run pages:bundle
 
       # The generated binding types resolve .open-next/worker, so this must run
       # after a clean runner has produced the OpenNext Worker entrypoint.
@@ -108,7 +108,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
