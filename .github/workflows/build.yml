@@ -14,7 +14,9 @@ permissions:
 
 concurrency:
   group: build-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # Cancel superseded PR validation, but never interrupt a main release between
+  # the provider Worker and the web Worker.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build-worker:
@@ -121,3 +123,15 @@ jobs:
 
       - name: Success
         run: echo "✅ All builds passed"
+
+  deploy-production:
+    name: Deploy production
+    needs:
+      - build-worker
+      - build-teambuilder
+      - build-docs
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/deploy.yml
+    with:
+      target: all
+    secrets: inherit

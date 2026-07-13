@@ -1,9 +1,17 @@
-name: Deploy
+name: Deploy production
 
-# Manual production deploys from a tested main commit. D1 migrations are
-# intentionally applied before this workflow, after the release backup in the
-# runbook; this workflow refuses to deploy while migrations are pending.
+# This workflow is called by Build and Test only after every release gate passes
+# on main. It remains manually runnable for a deliberate retry or partial deploy.
+# D1 migrations are applied separately after a release backup; this workflow
+# refuses to deploy while either database has pending migrations.
 on:
+  workflow_call:
+    inputs:
+      target:
+        description: "What to deploy"
+        required: false
+        default: "all"
+        type: string
   workflow_dispatch:
     inputs:
       target:

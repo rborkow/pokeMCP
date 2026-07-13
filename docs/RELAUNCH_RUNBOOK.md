@@ -150,23 +150,27 @@ Time Travel restore overwrites the live database and cancels in-flight queries. 
 
 GitHub Actions now runs the Worker tests, teambuilder tests, typechecks,
 production OpenNext build, generated-binding checks, and empty/populated D1
-migration tests on pull requests and pushes to `main`. The manual production
-deploy workflow refuses to deploy from a non-main ref or while either database
-has pending migrations, and deploys the internal analysis Worker before the web
-Worker.
+migration tests on pull requests and pushes to `main`. After all three build
+jobs pass on a push to `main`, that workflow calls the reusable production
+deploy workflow. Deployment refuses to run from a non-main ref or while either
+database has pending migrations, and deploys the internal analysis Worker
+before the web Worker. The same workflow remains manually runnable for a
+deliberate retry or partial deployment. GitHub's `Production` environment keeps
+the existing required-reviewer approval in front of the coordinated release.
 
-Use exactly one automatic production deploy owner. The recommended setup is to
-disable the two independent Worker Git builds and use the sequential GitHub
-production workflow after required checks pass. Until that handoff is made, keep
-the GitHub deploy workflow manual to avoid duplicate releases.
+GitHub Actions is the sole automatic production deploy owner. Keep the Git build
+connections disabled for both `pokemon-mcp-production` and
+`pokemcp-teambuilder`; otherwise a push to `main` will create duplicate,
+unordered deployments alongside the sequential GitHub release.
 
-If Cloudflare Workers Builds remains the automatic owner, consolidate the
-release under one build trigger so the service binding cannot race its provider:
+If Workers Builds is intentionally restored later, first disable the automatic
+GitHub production call and consolidate the release under one build trigger so
+the service binding cannot race its provider:
 
 - Root directory: repository root
 - Build command: `bun run ci:release`
 - Deploy command: `bun run deploy:all`
 - Production branch: `main`
 
-Disconnect the separate `pokemcp-teambuilder` Git trigger after the consolidated
-trigger succeeds once. The documentation Pages integration can remain separate.
+Never enable both automatic paths at once. The documentation Pages integration
+can remain separate.
