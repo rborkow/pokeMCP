@@ -1,3 +1,4 @@
+// @ts-nocheck -- generated Showdown data references simulation-only ambient types.
 export const Pokedex: import("../sim/dex-species").SpeciesDataTable = {
     bulbasaur: {
         num: 1,

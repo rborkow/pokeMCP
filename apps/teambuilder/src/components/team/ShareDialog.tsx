@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import {
     Check,
@@ -10,7 +10,6 @@ import {
     FileJson,
     ImageIcon,
     Link,
-    Loader2,
     MessageSquare,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -23,7 +22,6 @@ import {
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
-import { createSharedTeam } from "@/lib/share-api";
 import { generateShareUrl, copyToClipboard } from "@/lib/share";
 import { exportShowdownTeam } from "@/lib/showdown-parser";
 import {
@@ -44,35 +42,12 @@ interface ShareDialogProps {
 }
 
 export function ShareDialog({ open, onOpenChange, team, format }: ShareDialogProps) {
-    const [shortUrl, setShortUrl] = useState<string | null>(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
     const [copiedLink, setCopiedLink] = useState(false);
     const [copiedShowdown, setCopiedShowdown] = useState(false);
     const [copiedDiscord, setCopiedDiscord] = useState(false);
     const teamCardRef = useRef<HTMLDivElement>(null);
 
-    // Create short URL when dialog opens
-    useEffect(() => {
-        if (!open || team.length === 0) return;
-        // Reset state on open (intentional: these reflect the new open/team inputs)
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setShortUrl(null);
-        setError(null);
-        setLoading(true);
-
-        createSharedTeam(team, format)
-            .then((result) => {
-                setShortUrl(result.url);
-            })
-            .catch((err) => {
-                console.error("Failed to create short URL:", err);
-                setError("Failed to create short link. You can still use the direct link below.");
-            })
-            .finally(() => setLoading(false));
-    }, [open, team, format]);
-
-    const shareUrl = shortUrl || generateShareUrl(team, format);
+    const shareUrl = generateShareUrl(team, format);
 
     const handleCopyLink = useCallback(async () => {
         const success = await copyToClipboard(shareUrl);
@@ -163,18 +138,15 @@ export function ShareDialog({ open, onOpenChange, team, format }: ShareDialogPro
                             <div className="flex gap-2">
                                 <input
                                     type="text"
-                                    value={loading ? "Generating short link..." : shareUrl}
+                                    value={shareUrl}
                                     readOnly
                                     className="flex-1 px-3 py-2 text-sm bg-muted rounded-md font-mono truncate"
                                 />
                                 <Button
                                     onClick={handleCopyLink}
-                                    disabled={loading}
                                     className="gap-2 shrink-0"
                                 >
-                                    {loading ? (
-                                        <Loader2 className="h-4 w-4 animate-spin" />
-                                    ) : copiedLink ? (
+                                    {copiedLink ? (
                                         <>
                                             <Check className="h-4 w-4" />
                                             Copied!
@@ -187,16 +159,13 @@ export function ShareDialog({ open, onOpenChange, team, format }: ShareDialogPro
                                     )}
                                 </Button>
                             </div>
-                            {error && <p className="text-xs text-amber-500">{error}</p>}
-                            {shortUrl && (
-                                <p className="text-xs text-muted-foreground">
-                                    Short link with rich preview on Discord, Twitter, and more.
-                                </p>
-                            )}
+                            <p className="text-xs text-muted-foreground">
+                                Portable link containing the team data. Existing /t/ links stay readable, but new stored links are no longer created.
+                            </p>
                         </div>
 
                         {/* QR Code */}
-                        {!loading && shareUrl && (
+                        {team.length > 0 && shareUrl && (
                             <div className="flex justify-center p-4 bg-white rounded-lg">
                                 <QRCodeSVG
                                     value={shareUrl}

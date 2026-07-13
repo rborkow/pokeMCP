@@ -11,21 +11,19 @@ export function Header() {
         <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-4">
                 <div className="flex items-center gap-2">
-                    {/* Pokeball icon */}
-                    <div className="pokeball-icon scale-75" />
-                    <Link href="/" className="flex items-baseline gap-0">
-                        <span className="font-display font-bold text-xl text-foreground">Poke</span>
-                        <span className="font-display font-bold text-xl text-foreground">MCP</span>
+                    <Link href="/" className="flex items-baseline gap-1 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
+                        <span className="font-semibold text-xl text-foreground">PokeMCP</span>
+                        <span className="text-sm text-muted-foreground">Prep</span>
                     </Link>
                     <BetaBadge className="ml-2" />
                 </div>
 
                 <div className="flex items-center gap-3">
                     <Link
-                        href="/reports"
+                        href="/"
                         className="hidden text-sm text-muted-foreground hover:text-foreground sm:block"
                     >
-                        Meta Reports
+                        Newsroom
                     </Link>
                     <ModeSwitch />
                     <ModeToggle />

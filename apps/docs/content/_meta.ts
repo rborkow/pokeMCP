@@ -1,11 +1,11 @@
 export default {
     index: "Home",
     "getting-started": "Getting Started",
-    tools: "Tools",
-    "api-reference": "REST API",
-    formats: "Formats",
+    formats: "Mechanics coverage",
+    tools: "Public tools retired",
+    "api-reference": "API retirement",
     teambuilder: {
-        title: "Team Builder",
+        title: "Open PokeMCP Prep",
         href: "https://www.pokemcp.com",
     },
 };

@@ -1,3 +1,4 @@
+// @ts-nocheck -- generated Showdown data references simulation-only ambient types.
 export const FormatsData: import("../sim/dex-species").SpeciesFormatsDataTable = {
     bulbasaur: {
         tier: "LC",

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Exo_2, Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 
@@ -13,12 +13,6 @@ const geistMono = Geist_Mono({
     subsets: ["latin"],
 });
 
-const exo2 = Exo_2({
-    variable: "--font-exo2",
-    subsets: ["latin"],
-    weight: ["400", "500", "600", "700", "800"],
-});
-
 // Cloudflare Web Analytics beacon token. Public by design (inlined into every
 // page's HTML), so a hardcoded default is safe. Must NOT depend solely on
 // .env.local: that file is gitignored, so builds from git worktrees or CI
@@ -28,22 +22,20 @@ const CF_ANALYTICS_TOKEN =
 
 export const metadata: Metadata = {
     title: {
-        default: "PokeMCP Team Builder - AI Pokemon Team Building",
-        template: "%s | PokeMCP Team Builder",
+        default: "PokeMCP Prep — Champions Tournament Preparation",
+        template: "%s | PokeMCP Prep",
     },
     description:
-        "Build competitive Pokemon teams with AI assistance. Get real-time meta analysis, threat matrix, type coverage, and export to Pokemon Showdown. Supports Gen 9 OU, VGC, and more formats.",
+        "Turn current Pokémon Champions tournament teams into a sourced matchup plan, Bring 4, lead options, opening lines, and a practice checklist.",
     keywords: [
         "Pokemon",
-        "team builder",
+        "tournament prep",
         "competitive Pokemon",
         "Showdown",
         "VGC",
-        "OU",
-        "meta analysis",
-        "AI",
-        "type coverage",
-        "threat matrix",
+        "Champions",
+        "matchup analysis",
+        "team sheet",
     ],
     authors: [{ name: "PokeMCP" }],
     creator: "PokeMCP",
@@ -52,24 +44,24 @@ export const metadata: Metadata = {
         type: "website",
         locale: "en_US",
         url: "https://www.pokemcp.com",
-        siteName: "PokeMCP Team Builder",
-        title: "PokeMCP Team Builder - AI Pokemon Team Building",
+        siteName: "PokeMCP Prep",
+        title: "PokeMCP Prep — Champions Tournament Preparation",
         description:
-            "Build competitive Pokemon teams with AI assistance. Real-time meta analysis, threat matrix, and Showdown export.",
+            "Study current Champions tournament teams and turn them into a matchup plan you can practice.",
         images: [
             {
                 url: "/og-image.png",
                 width: 1200,
                 height: 630,
-                alt: "PokeMCP Team Builder",
+                alt: "PokeMCP Prep",
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "PokeMCP Team Builder - AI Pokemon Team Building",
+        title: "PokeMCP Prep — Champions Tournament Preparation",
         description:
-            "Build competitive Pokemon teams with AI assistance. Real-time meta analysis and Showdown export.",
+            "Study current Champions tournament teams and turn them into a matchup plan you can practice.",
         images: ["/og-image.png"],
     },
     robots: {
@@ -97,8 +89,8 @@ export const metadata: Metadata = {
 const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    name: "PokeMCP Team Builder",
-    description: "AI-powered Pokemon competitive team builder with Showdown integration",
+    name: "PokeMCP Prep",
+    description: "Pokémon Champions tournament preparation and matchup planning",
     url: "https://www.pokemcp.com",
     applicationCategory: "GameApplication",
     operatingSystem: "Any",
@@ -107,13 +99,7 @@ const jsonLd = {
         price: "0",
         priceCurrency: "USD",
     },
-    featureList: [
-        "AI-powered team suggestions",
-        "Type coverage analysis",
-        "Threat matrix vs meta Pokemon",
-        "Pokemon Showdown import/export",
-        "Support for Gen 9 OU, VGC, and 15+ formats",
-    ],
+    featureList: ["Sourced tournament newsroom", "Bring 4 planning", "Lead planning", "Practice checklists", "Showdown import"],
 };
 
 export default function RootLayout({
@@ -137,7 +123,7 @@ export default function RootLayout({
                 )}
             </head>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} ${exo2.variable} antialiased min-h-screen bg-background`}
+                className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background`}
             >
                 <Providers>{children}</Providers>
             </body>

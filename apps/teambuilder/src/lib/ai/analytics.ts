@@ -57,7 +57,7 @@ interface AnalyticsEngine {
  */
 export function getAnalyticsBinding(): AnalyticsEngine | undefined {
     try {
-        const env = getCloudflareContext().env as unknown as { ANALYTICS?: AnalyticsEngine };
+        const env = getCloudflareContext().env as CloudflareEnv;
         return env.ANALYTICS;
     } catch {
         return undefined;

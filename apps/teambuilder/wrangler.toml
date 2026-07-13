@@ -1,12 +1,12 @@
 # Cloudflare Workers configuration for PokeMCP Team Builder
 name = "pokemcp-teambuilder"
-compatibility_date = "2024-12-01"
+compatibility_date = "2026-07-12"
 compatibility_flags = ["nodejs_compat"]
 main = ".open-next/worker.js"
 assets = { directory = ".open-next/assets", binding = "ASSETS" }
 
 [vars]
-NEXT_PUBLIC_MCP_URL = "https://api.pokemcp.com"
+BETTER_AUTH_URL = "https://www.pokemcp.com"
 # NOTE: the Cloudflare Web Analytics token is NOT a runtime var — NEXT_PUBLIC_*
 # is inlined by Next at build time. Set NEXT_PUBLIC_CF_ANALYTICS_TOKEN in
 # .env.local (local deploy) or a Workers Builds env var (CI). See .env.example.
@@ -14,6 +14,37 @@ NEXT_PUBLIC_MCP_URL = "https://api.pokemcp.com"
 # - ANTHROPIC_API_KEY
 # - CLOUDFLARE_AI_GATEWAY_URL (contains account ID)
 # - CF_AIG_TOKEN
+# - BETTER_AUTH_SECRET
+# - DISCORD_CLIENT_ID / DISCORD_CLIENT_SECRET
+# - GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET
+
+# Product data is isolated from metagame history. The database is provisioned
+# explicitly so backup and migration checks can run before web deployment.
+[[d1_databases]]
+binding = "PREP_DB"
+database_name = "pokemcp-prep"
+database_id = "c68cde48-cedf-45fd-acca-66208e3e18b7"
+migrations_dir = "migrations/prep"
+
+[[d1_databases]]
+binding = "META_DB"
+database_name = "pokemcp-meta-history"
+database_id = "64752654-621e-4f0d-be90-3e200e73097c"
+
+# Tool execution remains available to the product without traversing the
+# public internet. The named entrypoint is not exposed on api.pokemcp.com.
+[[services]]
+binding = "PREP_ANALYSIS"
+service = "pokemon-mcp-production"
+entrypoint = "PrepAnalysisService"
+
+[[ratelimits]]
+name = "PREP_RATE_LIMITER"
+namespace_id = "26071201"
+
+[ratelimits.simple]
+limit = 20
+period = 60
 
 # Shared usage-analytics dataset (also written by the MCP Worker and read by the
 # admin dashboard + pokemonitor). The AI routes write `ai_chat` events here.

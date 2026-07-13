@@ -228,9 +228,9 @@ export const MODE_INFO: Record<
         defaultFormat: "gen9ou",
     },
     vgc: {
-        label: "VGC",
-        description: "Official doubles formats",
-        defaultFormat: "gen9vgc2026regf",
+        label: "Champions",
+        description: "Pokémon Champions doubles formats",
+        defaultFormat: "champions-regmb",
     },
 };
 

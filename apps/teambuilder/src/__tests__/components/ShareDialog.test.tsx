@@ -13,14 +13,11 @@ const localStorageMock = {
 };
 vi.stubGlobal("localStorage", localStorageMock);
 
-// Mock share-api
-const mockCreateSharedTeam = vi.fn();
-vi.mock("@/lib/share-api", () => ({
-    createSharedTeam: (...args: unknown[]) => mockCreateSharedTeam(args[0], args[1]),
-}));
-
 // Mock share.ts
-const mockCopyToClipboard = vi.fn((_text: unknown) => Promise.resolve(true));
+const mockCopyToClipboard = vi.fn((_text: unknown) => {
+    void _text;
+    return Promise.resolve(true);
+});
 vi.mock("@/lib/share", () => ({
     generateShareUrl: vi.fn(() => "https://www.pokemcp.com?team=encoded123"),
     copyToClipboard: (text: unknown) => mockCopyToClipboard(text),
@@ -57,14 +54,10 @@ const sampleTeam: TeamPokemon[] = [
 describe("ShareDialog", () => {
     beforeEach(() => {
         vi.clearAllMocks();
-        mockCreateSharedTeam.mockResolvedValue({
-            id: "abc123",
-            url: "https://www.pokemcp.com/t/abc123",
-        });
     });
 
-    describe("initial render and API call", () => {
-        it("renders dialog with title when open", async () => {
+    describe("initial render", () => {
+        it("renders a portable link without creating a stored record", () => {
             render(
                 <ShareDialog
                     open={true}
@@ -74,67 +67,22 @@ describe("ShareDialog", () => {
                 />,
             );
             expect(screen.getByText("Share Team")).toBeInTheDocument();
-            await waitFor(() => {
-                expect(mockCreateSharedTeam).toHaveBeenCalled();
-            });
-        });
-
-        it("calls createSharedTeam when opened with a non-empty team", async () => {
-            render(
-                <ShareDialog
-                    open={true}
-                    onOpenChange={vi.fn()}
-                    team={sampleTeam}
-                    format="gen9ou"
-                />,
-            );
-            await waitFor(() => {
-                expect(mockCreateSharedTeam).toHaveBeenCalledWith(sampleTeam, "gen9ou");
-            });
-        });
-
-        it("shows short URL after API resolves", async () => {
-            render(
-                <ShareDialog
-                    open={true}
-                    onOpenChange={vi.fn()}
-                    team={sampleTeam}
-                    format="gen9ou"
-                />,
-            );
-            await waitFor(() => {
-                expect(
-                    screen.getByDisplayValue("https://www.pokemcp.com/t/abc123"),
-                ).toBeInTheDocument();
-            });
-        });
-
-        it("falls back to direct URL and shows error on API failure", async () => {
-            mockCreateSharedTeam.mockRejectedValue(new Error("Network error"));
-            render(
-                <ShareDialog
-                    open={true}
-                    onOpenChange={vi.fn()}
-                    team={sampleTeam}
-                    format="gen9ou"
-                />,
-            );
-            await waitFor(() => {
-                expect(screen.getByText(/Failed to create short link/)).toBeInTheDocument();
-            });
             expect(
                 screen.getByDisplayValue("https://www.pokemcp.com?team=encoded123"),
             ).toBeInTheDocument();
+            expect(
+                screen.getByText(/new stored links are no longer created/i),
+            ).toBeInTheDocument();
         });
 
-        it("does not call API when team is empty", () => {
+        it("does not render a QR code for an empty team", () => {
             render(<ShareDialog open={true} onOpenChange={vi.fn()} team={[]} format="gen9ou" />);
-            expect(mockCreateSharedTeam).not.toHaveBeenCalled();
+            expect(screen.queryByTestId("qr-code")).not.toBeInTheDocument();
         });
     });
 
     describe("Link tab", () => {
-        it("is the default active tab with URL input visible", async () => {
+        it("shows the portable URL and QR code", () => {
             render(
                 <ShareDialog
                     open={true}
@@ -143,25 +91,10 @@ describe("ShareDialog", () => {
                     format="gen9ou"
                 />,
             );
-            await waitFor(() => {
-                expect(
-                    screen.getByDisplayValue("https://www.pokemcp.com/t/abc123"),
-                ).toBeInTheDocument();
-            });
-        });
-
-        it("shows QR code after loading completes", async () => {
-            render(
-                <ShareDialog
-                    open={true}
-                    onOpenChange={vi.fn()}
-                    team={sampleTeam}
-                    format="gen9ou"
-                />,
-            );
-            await waitFor(() => {
-                expect(screen.getByTestId("qr-code")).toBeInTheDocument();
-            });
+            expect(
+                screen.getByDisplayValue("https://www.pokemcp.com?team=encoded123"),
+            ).toBeInTheDocument();
+            expect(screen.getByTestId("qr-code")).toBeInTheDocument();
         });
 
         it("copy button calls copyToClipboard with the URL", async () => {
@@ -174,16 +107,13 @@ describe("ShareDialog", () => {
                     format="gen9ou"
                 />,
             );
-            await waitFor(() => {
-                expect(
-                    screen.getByDisplayValue("https://www.pokemcp.com/t/abc123"),
-                ).toBeInTheDocument();
-            });
             const copyButtons = screen.getAllByRole("button");
             const copyButton = copyButtons.find((btn) => btn.textContent?.includes("Copy"));
             expect(copyButton).toBeDefined();
             await user.click(copyButton!);
-            expect(mockCopyToClipboard).toHaveBeenCalledWith("https://www.pokemcp.com/t/abc123");
+            expect(mockCopyToClipboard).toHaveBeenCalledWith(
+                "https://www.pokemcp.com?team=encoded123",
+            );
         });
     });
 
@@ -198,9 +128,6 @@ describe("ShareDialog", () => {
                     format="gen9ou"
                 />,
             );
-            await waitFor(() => {
-                expect(mockCreateSharedTeam).toHaveBeenCalled();
-            });
             await user.click(screen.getByRole("tab", { name: /social/i }));
             await waitFor(() => {
                 expect(screen.getByText("Share on X / Twitter")).toBeInTheDocument();
@@ -219,9 +146,6 @@ describe("ShareDialog", () => {
                     format="gen9ou"
                 />,
             );
-            await waitFor(() => {
-                expect(mockCreateSharedTeam).toHaveBeenCalled();
-            });
             await user.click(screen.getByRole("tab", { name: /social/i }));
             await waitFor(() => {
                 expect(screen.getByText("Copy for Discord")).toBeInTheDocument();
@@ -242,9 +166,6 @@ describe("ShareDialog", () => {
                     format="gen9ou"
                 />,
             );
-            await waitFor(() => {
-                expect(mockCreateSharedTeam).toHaveBeenCalled();
-            });
             await user.click(screen.getByRole("tab", { name: /export/i }));
             await waitFor(() => {
                 expect(screen.getByText("Showdown Paste")).toBeInTheDocument();
@@ -263,9 +184,6 @@ describe("ShareDialog", () => {
                     format="gen9ou"
                 />,
             );
-            await waitFor(() => {
-                expect(mockCreateSharedTeam).toHaveBeenCalled();
-            });
             await user.click(screen.getByRole("tab", { name: /export/i }));
             await waitFor(() => {
                 expect(screen.getByText("Showdown Paste")).toBeInTheDocument();

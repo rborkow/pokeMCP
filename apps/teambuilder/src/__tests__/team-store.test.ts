@@ -47,6 +47,18 @@ describe("team-store", () => {
             const team = useTeamStore.getState().team;
             expect(team).toHaveLength(6);
         });
+
+        it("keeps out-of-order AI slot writes in logical order", () => {
+            useTeamStore.getState().setPokemon(4, { pokemon: "Slot Five", moves: [] }, "ai");
+            useTeamStore.getState().setPokemon(0, { pokemon: "Slot One", moves: [] }, "ai");
+            useTeamStore.getState().setPokemon(3, { pokemon: "Slot Four", moves: [] }, "ai");
+
+            expect(useTeamStore.getState().team.map((pokemon) => pokemon.pokemon)).toEqual([
+                "Slot One",
+                "Slot Four",
+                "Slot Five",
+            ]);
+        });
     });
 
     describe("removePokemon", () => {
@@ -134,7 +146,7 @@ describe("team-store", () => {
             useTeamStore.getState().setMode("vgc");
 
             expect(useTeamStore.getState().mode).toBe("vgc");
-            expect(useTeamStore.getState().format).toBe("gen9vgc2026regf");
+            expect(useTeamStore.getState().format).toBe("champions-regmb");
         });
 
         it("should update format to singles default when switching to singles mode", () => {

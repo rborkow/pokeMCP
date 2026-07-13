@@ -4,6 +4,15 @@ import remarkGfm from "remark-gfm";
 
 const nextConfig: NextConfig = {
     pageExtensions: ["ts", "tsx", "mdx"],
+    async redirects() {
+        return [
+            {
+                source: "/builder",
+                destination: "/build",
+                permanent: true,
+            },
+        ];
+    },
     images: {
         remotePatterns: [
             {

@@ -1,4 +1,5 @@
 import { getVGCAnalysisSummary } from "@/lib/vgc-analysis";
+import { callInternalTool } from "@/lib/internal-tools";
 import type { Mode, TeamPokemon } from "@/types/pokemon";
 import { getPersonality, type PersonalityId } from "./personalities";
 
@@ -34,8 +35,6 @@ SINGLES-SPECIFIC GUIDANCE (This is a 6v6 format):
 - Consider dedicated walls, wallbreakers, and sweepers
 - Setup moves (Swords Dance, Dragon Dance, Nasty Plot) enable sweeps`;
 }
-
-const MCP_URL = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
 
 // Simple in-memory cache for MCP responses that don't change within a session.
 // Edge isolates are short-lived so a 5-minute TTL is plenty to avoid redundant
@@ -74,21 +73,14 @@ export async function fetchTeammateAnalysis(team: TeamPokemon[], format: string)
             if (cached !== undefined) return { pokemon: mon.pokemon, text: cached };
 
             try {
-                const response = await fetch(`${MCP_URL}/api/tools`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        tool: "get_usage_stats",
-                        args: { type: "teammates", pokemon: mon.pokemon, format, limit: 8 },
-                    }),
+                const text = await callInternalTool("get_usage_stats", {
+                    type: "teammates",
+                    pokemon: mon.pokemon,
+                    format,
+                    limit: 8,
                 });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    const text = data.result?.content?.[0]?.text || "";
-                    setCache(cacheKey, text);
-                    return { pokemon: mon.pokemon, text };
-                }
+                setCache(cacheKey, text);
+                return { pokemon: mon.pokemon, text };
             } catch (e) {
                 console.error(`Failed to fetch teammates for ${mon.pokemon}:`, e);
             }
@@ -162,20 +154,13 @@ export async function fetchMetaThreats(format: string): Promise<string> {
     if (cached !== undefined) return cached;
 
     try {
-        const response = await fetch(`${MCP_URL}/api/tools`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                tool: "get_usage_stats",
-                args: { type: "meta_threats", format, limit: 15 },
-            }),
+        const text = await callInternalTool("get_usage_stats", {
+            type: "meta_threats",
+            format,
+            limit: 15,
         });
-        if (response.ok) {
-            const data = await response.json();
-            const text = data.result?.content?.[0]?.text || "";
-            setCache(cacheKey, text);
-            return text;
-        }
+        setCache(cacheKey, text);
+        return text;
     } catch (e) {
         console.error("Failed to fetch meta threats:", e);
     }
@@ -194,18 +179,7 @@ export async function fetchMetaTrends(format: string, window = 6): Promise<strin
 
     async function callTrend(type: "evolution_summary" | "momentum"): Promise<string> {
         try {
-            const response = await fetch(`${MCP_URL}/api/tools`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    tool: "get_meta_trends",
-                    args: { type, format, window },
-                }),
-            });
-            if (response.ok) {
-                const data = await response.json();
-                return data.result?.content?.[0]?.text || "";
-            }
+            return await callInternalTool("get_meta_trends", { type, format, window });
         } catch (e) {
             console.error(`Failed to fetch meta trends (${type}) for ${format}:`, e);
         }
@@ -239,20 +213,13 @@ export async function fetchPopularSetsContext(message: string, format: string): 
             if (cached !== undefined) return cached;
 
             try {
-                const response = await fetch(`${MCP_URL}/api/tools`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        tool: "get_usage_stats",
-                        args: { type: "popular_sets", pokemon, format },
-                    }),
+                const text = await callInternalTool("get_usage_stats", {
+                    type: "popular_sets",
+                    pokemon,
+                    format,
                 });
-                if (response.ok) {
-                    const data = await response.json();
-                    const text = data.result?.content?.[0]?.text || "";
-                    setCache(cacheKey, text);
-                    return text;
-                }
+                setCache(cacheKey, text);
+                return text;
             } catch (e) {
                 console.error(`Failed to fetch sets for ${pokemon}:`, e);
             }
@@ -275,18 +242,12 @@ async function doRAGQuery(message: string, format: string): Promise<string> {
     if (cached !== undefined) return cached;
 
     try {
-        const response = await fetch(`${MCP_URL}/api/tools`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                tool: "query_strategy",
-                args: { query: message, format, limit: 3 },
-            }),
+        const text = await callInternalTool("query_strategy", {
+            query: message,
+            format,
+            limit: 3,
         });
-        if (response.ok) {
-            const data = await response.json();
-            const text = data.result?.content?.[0]?.text || "";
-            if (!text) return "";
+        if (text) {
             try {
                 const parsed = JSON.parse(text);
                 if (parsed.results && parsed.results.length > 0) {

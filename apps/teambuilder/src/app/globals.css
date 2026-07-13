@@ -8,7 +8,12 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-exo2);
+  --font-display: var(--font-geist-sans);
+  --color-panel: var(--surface-panel);
+  --color-inset: var(--surface-inset);
+  --color-sage: var(--favorable-sage);
+  --color-rust: var(--risk-rust);
+  --color-ochre: var(--evidence-ochre);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -127,25 +132,27 @@
 }
 
 .dark {
-  /* Pokemon-inspired dark theme */
-  --background: oklch(0.17 0.02 260);
-  --foreground: oklch(0.95 0.01 250);
-  --card: oklch(0.22 0.02 260);
-  --card-foreground: oklch(0.95 0.01 250);
-  --popover: oklch(0.2 0.02 260);
-  --popover-foreground: oklch(0.95 0.01 250);
-  --primary: oklch(0.85 0.18 85);
-  --primary-foreground: oklch(0.17 0.02 260);
-  --secondary: oklch(0.62 0.19 250);
-  --secondary-foreground: oklch(0.98 0 0);
-  --muted: oklch(0.28 0.02 260);
-  --muted-foreground: oklch(0.6 0.02 250);
-  --accent: oklch(0.6 0.18 300);
-  --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.65 0.22 25);
-  --border: oklch(0.35 0.02 260);
-  --input: oklch(0.28 0.02 260);
-  --ring: oklch(0.85 0.18 85);
+  --background: oklch(0.18 0.018 253);
+  --foreground: oklch(0.94 0.012 82);
+  --card: oklch(0.225 0.021 253);
+  --card-foreground: oklch(0.94 0.012 82);
+  --popover: oklch(0.205 0.02 253);
+  --popover-foreground: oklch(0.94 0.012 82);
+  --primary: oklch(0.68 0.082 246);
+  --primary-foreground: oklch(0.18 0.018 253);
+  --secondary: oklch(0.29 0.028 251);
+  --secondary-foreground: oklch(0.94 0.012 82);
+  --muted: oklch(0.255 0.021 253);
+  --muted-foreground: oklch(0.76 0.026 250);
+  --accent: oklch(0.31 0.035 246);
+  --accent-foreground: oklch(0.94 0.012 82);
+  --destructive: oklch(0.67 0.13 35);
+  --border: oklch(0.34 0.027 251);
+  --input: oklch(0.27 0.024 252);
+  --ring: oklch(0.68 0.082 246);
+  --favorable-sage: oklch(0.72 0.075 155);
+  --risk-rust: oklch(0.69 0.11 35);
+  --evidence-ochre: oklch(0.78 0.095 83);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -153,20 +160,20 @@
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.2 0.02 260);
   --sidebar-foreground: oklch(0.95 0.01 250);
-  --sidebar-primary: oklch(0.85 0.18 85);
-  --sidebar-primary-foreground: oklch(0.17 0.02 260);
+  --sidebar-primary: oklch(0.68 0.082 246);
+  --sidebar-primary-foreground: oklch(0.18 0.018 253);
   --sidebar-accent: oklch(0.28 0.02 260);
   --sidebar-accent-foreground: oklch(0.95 0.01 250);
   --sidebar-border: oklch(0.35 0.02 260);
-  --sidebar-ring: oklch(0.85 0.18 85);
+  --sidebar-ring: oklch(0.68 0.082 246);
 
   /* Flat palette — the v2 direction retired gradient + glow tokens, so the
      whole UI (chat-first and grid-mode alike) consumes these solid surfaces. */
-  --surface-canvas: oklch(0.14 0.012 260);
-  --surface-panel: oklch(0.18 0.015 260);
-  --surface-inset: oklch(0.22 0.015 260);
-  --border-hairline: oklch(1 0 0 / 0.08);
-  --border-hairline-strong: oklch(1 0 0 / 0.18);
+  --surface-canvas: oklch(0.18 0.018 253);
+  --surface-panel: oklch(0.225 0.021 253);
+  --surface-inset: oklch(0.27 0.024 252);
+  --border-hairline: oklch(0.94 0.012 82 / 0.1);
+  --border-hairline-strong: oklch(0.94 0.012 82 / 0.2);
 
   /* Shadows */
   --shadow-card: 0 4px 24px -4px oklch(0 0 0 / 0.4);
@@ -181,12 +188,48 @@
     @apply bg-background text-foreground antialiased;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display, var(--font-sans));
-    font-weight: 700;
+    font-family: var(--font-sans);
+    font-weight: 650;
+    text-wrap: balance;
   }
 }
 
 @layer components {
+  .prep-shell {
+    width: min(100% - 2rem, 1180px);
+    margin-inline: auto;
+  }
+
+  .prep-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    border-bottom: 1px solid var(--border);
+    background: oklch(0.18 0.018 253 / 0.96);
+    backdrop-filter: blur(12px);
+  }
+
+  .prep-button-primary,
+  .prep-button-secondary {
+    @apply inline-flex min-h-10 items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-[background-color,border-color,color,transform] duration-200;
+  }
+
+  .prep-button-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+
+  .prep-button-secondary {
+    @apply border border-border bg-panel text-foreground hover:border-primary/60 hover:bg-inset active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+
+  .prep-text-link {
+    @apply inline-flex min-h-10 items-center gap-1.5 rounded-sm text-sm text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary;
+  }
+
+  .prep-field {
+    @apply w-full rounded-md border border-border bg-inset px-3.5 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-2 focus:outline-offset-2 focus:outline-primary;
+  }
+
   .type-badge {
     @apply inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider;
     font-family: var(--font-display, var(--font-sans));
@@ -346,6 +389,37 @@
   .thinking-content {
     @apply px-3 pb-3 text-xs text-muted-foreground/80 font-mono;
     @apply max-h-[200px] overflow-y-auto whitespace-pre-wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  :root,
+  .dark {
+    --background: white;
+    --foreground: #12161d;
+    --card: white;
+    --card-foreground: #12161d;
+    --muted: #f3f4f6;
+    --muted-foreground: #4b5563;
+    --border: #d1d5db;
+    --surface-panel: white;
+    --surface-inset: #f5f6f8;
+  }
+
+  body {
+    background: white !important;
+    color: #12161d !important;
   }
 }
 

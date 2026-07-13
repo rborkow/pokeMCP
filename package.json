@@ -1,7 +1,7 @@
 {
     "name": "pokemcp",
     "version": "1.0.0",
-    "description": "MCP server for Pokémon competitive team building with Smogon data",
+    "description": "Champions tournament preparation workspace and private analysis service",
     "private": true,
     "repository": {
         "type": "git",
@@ -40,6 +40,12 @@
         "upload-champions-legality": "tsx scripts/upload-champions-legality.ts",
         "export-logs": "tsx scripts/export-logs.ts",
         "test": "node --import tsx --test src/__tests__/*.test.ts",
+        "test:migrations": "bash scripts/test-migrations.sh",
+        "ci:worker": "bun run type-check && bun run test && bun run test:migrations && wrangler types --check && wrangler deploy --dry-run --env production --outdir=dist",
+        "ci:release": "bun run ci:worker && bun run --cwd apps/teambuilder ci",
+        "cloudflare:backup": "bash scripts/cloudflare/backup-d1.sh",
+        "cloudflare:capture-state": "bash scripts/cloudflare/capture-state.sh",
+        "cloudflare:preflight": "bash scripts/cloudflare/relaunch-preflight.sh",
         "tail": "wrangler tail",
         "tail:staging": "wrangler tail --env staging",
         "tail:production": "wrangler tail --env production",
@@ -57,6 +63,6 @@
         "@types/node": "^24.10.2",
         "tsx": "^4.19.2",
         "typescript": "5.9.3",
-        "wrangler": "^4.71.0"
+        "wrangler": "4.110.0"
     }
 }

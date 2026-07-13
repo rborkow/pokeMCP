@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
         const stream = client.messages.stream(
             {
                 model: MODEL,
-                max_tokens: 8000,
+                max_tokens: 4096,
                 system: [
                     {
                         type: "text",

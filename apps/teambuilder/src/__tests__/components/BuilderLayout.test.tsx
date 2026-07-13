@@ -16,7 +16,7 @@ const searchParamsRef = { value: new URLSearchParams() };
 vi.mock("next/navigation", () => ({
     useSearchParams: () => searchParamsRef.value,
     useRouter: () => ({ replace: vi.fn(), push: vi.fn() }),
-    usePathname: () => "/builder",
+    usePathname: () => "/build",
 }));
 
 vi.mock("@/components/builder/ChatFirstFrame", () => ({

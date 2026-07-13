@@ -57,34 +57,17 @@ export function TeamSlot({
 
     return (
         <div
-            role="button"
-            tabIndex={0}
-            aria-label={`${toDisplayName(pokemon.pokemon)}${isSelected ? ", selected" : ""}. Click to edit.`}
-            className={`chat-first-panel group cursor-pointer rounded-xl p-3 sm:p-4 animate-in fade-in slide-in-from-bottom-2 transition-colors hover:border-border-hairline-strong ${
+            className={`chat-first-panel group relative rounded-xl animate-in fade-in slide-in-from-bottom-2 transition-colors hover:border-border-hairline-strong ${
                 isSelected ? "border-primary ring-2 ring-primary/20" : ""
             }`}
             style={{ animationDelay: `${index * 100}ms`, animationFillMode: "both" }}
-            onClick={onSelect}
-            onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    onSelect?.();
-                }
-            }}
         >
-            {/* Remove button - visible on hover and focus-within for keyboard/touch users */}
-            {onRemove && (
-                <button
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        onRemove();
-                    }}
-                    aria-label={`Remove ${toDisplayName(pokemon.pokemon)}`}
-                    className="absolute top-3 right-3 p-1.5 rounded-full bg-muted/50 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus:opacity-100 transition-opacity hover:bg-destructive/20 hover:text-destructive focus:bg-destructive/20 focus:text-destructive z-10"
-                >
-                    <X className="w-4 h-4" />
-                </button>
-            )}
+            <button
+                type="button"
+                aria-label={`${toDisplayName(pokemon.pokemon)}${isSelected ? ", selected" : ""}. Click to edit.`}
+                className="w-full cursor-pointer rounded-xl p-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-4"
+                onClick={onSelect}
+            >
 
             {/* Header: Sprite + Name/Types - horizontal layout like reference */}
             <div className="flex items-start gap-2 sm:gap-3 mb-3">
@@ -172,6 +155,19 @@ export function TeamSlot({
                         Tera: {pokemon.teraType}
                     </Badge>
                 </div>
+            )}
+            </button>
+
+            {/* Sibling of the edit button, so interactive controls are never nested. */}
+            {onRemove && (
+                <button
+                    type="button"
+                    onClick={onRemove}
+                    aria-label={`Remove ${toDisplayName(pokemon.pokemon)}`}
+                    className="absolute right-3 top-3 z-10 rounded-full bg-muted/80 p-1.5 opacity-0 transition-opacity hover:bg-destructive/20 hover:text-destructive focus:bg-destructive/20 focus:text-destructive focus:opacity-100 group-hover:opacity-100 group-focus-within:opacity-100"
+                >
+                    <X className="h-4 w-4" />
+                </button>
             )}
         </div>
     );

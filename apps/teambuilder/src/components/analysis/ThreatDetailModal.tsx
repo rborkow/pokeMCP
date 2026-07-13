@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Badge } from "@/components/ui/badge";
 import { PokemonSprite } from "@/components/team/PokemonSprite";
 import { toDisplayName } from "@/lib/showdown-parser";
+import { mcpClient } from "@/lib/mcp-client";
 import type { PokemonType } from "@/lib/data/pokemon-types";
 import { getFormatDisplayName } from "@/types/pokemon";
 
@@ -25,8 +26,6 @@ interface ThreatDetailModalProps {
     open: boolean;
     onOpenChange: (open: boolean) => void;
 }
-
-const MCP_URL = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
 
 function parsePopularSets(response: string): Partial<PopularSet> {
     const result: Partial<PopularSet> = {
@@ -137,6 +136,7 @@ export function ThreatDetailModal({
             setSetData(null);
             return;
         }
+        const selectedPokemon = pokemon;
 
         async function fetchSets() {
             setLoading(true);
@@ -144,36 +144,10 @@ export function ThreatDetailModal({
             try {
                 // Normalize format to lowercase for API call
                 const normalizedFormat = format.toLowerCase();
-                const response = await fetch(`${MCP_URL}/api/tools`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        tool: "get_usage_stats",
-                        args: { type: "popular_sets", pokemon, format: normalizedFormat },
-                    }),
-                });
-
-                if (!response.ok) {
-                    throw new Error("Failed to fetch sets");
-                }
-
-                const data = await response.json();
-                console.log("[ThreatDetailModal] Raw API response:", data);
-
-                // Handle nested MCP response structure: result.content[0].text
-                let resultText = "";
-                if (data.result?.content?.[0]?.text) {
-                    resultText = data.result.content[0].text;
-                } else if (typeof data.result === "string") {
-                    resultText = data.result;
-                } else if (data.content?.[0]?.text) {
-                    // Direct MCP response format
-                    resultText = data.content[0].text;
-                } else if (typeof data === "string") {
-                    resultText = data;
-                }
-
-                console.log("[ThreatDetailModal] Parsed result text:", resultText);
+                const resultText = (await mcpClient.getPopularSets(
+                    selectedPokemon,
+                    normalizedFormat,
+                )) as string;
 
                 // Check if it's a "not found" message
                 if (

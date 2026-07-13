@@ -10,6 +10,8 @@
             "tag": "v1"
         },
         {
+            // Historical migration already applied in production. Keep the tag
+            // so Wrangler does not replay v1 against existing Durable Objects.
             "new_sqlite_classes": ["IngestionCoordinator"],
             "tag": "v2"
         }
@@ -69,8 +71,8 @@
     "ai": {
         "binding": "AI"
     },
-    // R2 bucket for anonymized interaction logging (fine-tuning data)
-    // Created with: npx wrangler r2 bucket create pokemcp-interaction-logs
+    // Legacy R2 binding retained only for explicit content-sharing opt-ins.
+    // Content logging is disabled by default in src/logging.ts.
     "r2_buckets": [
         {
             "binding": "INTERACTION_LOGS",
@@ -250,9 +252,9 @@
                     "migrations_dir": "migrations/d1"
                 }
             ],
-            // Weekly cron for RAG content ingestion (Sundays at 3 AM UTC)
+            // Daily tournament refresh plus weekly RAG content ingestion.
             "triggers": {
-                "crons": ["0 3 * * SUN"]
+                "crons": ["0 6 * * *", "0 3 * * SUN"]
             }
         }
     }

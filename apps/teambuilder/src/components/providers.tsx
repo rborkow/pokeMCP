@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import { ErrorBoundary } from "@/components/errors/ErrorBoundary";
+import { WorkspaceMigrationBridge } from "@/components/prep/WorkspaceMigrationBridge";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -21,7 +22,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
     return (
         <QueryClientProvider client={queryClient}>
             <ErrorBoundary level="root">
-                <TooltipProvider>{children}</TooltipProvider>
+                <TooltipProvider>
+                    <WorkspaceMigrationBridge />
+                    {children}
+                </TooltipProvider>
             </ErrorBoundary>
         </QueryClientProvider>
     );

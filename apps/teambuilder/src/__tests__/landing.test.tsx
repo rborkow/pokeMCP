@@ -1,67 +1,74 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import LandingPage from "@/app/page";
-import { useTeamStore } from "@/stores/team-store";
-import { render, screen, waitFor } from "./test-utils";
+import NewsroomPage from "@/app/page";
+import { render, screen } from "./test-utils";
 
-const localStorageMock = {
-    getItem: vi.fn(),
-    setItem: vi.fn(),
-    removeItem: vi.fn(),
-    clear: vi.fn(),
-};
-vi.stubGlobal("localStorage", localStorageMock);
-
-const mockReplace = vi.fn();
-vi.mock("next/navigation", () => ({
-    useRouter: () => ({ replace: mockReplace, push: vi.fn() }),
+vi.mock("@/lib/prep/analytics", () => ({ trackPrepEvent: vi.fn() }));
+vi.mock("@/lib/live-events", () => ({
+    getNewsroomEvents: vi.fn(async () => ({
+        fetchedAt: "2026-07-03T05:29:15.578Z",
+        stale: false,
+        events: [
+            {
+                slug: "sample-event",
+                name: "Sitrus Series",
+                date: "2026-07-01T22:00:00.000Z",
+                players: 114,
+                format: "M-B",
+                regulationLabel: "Pokémon Champions — Regulation M-B",
+            },
+        ],
+    })),
+    getEventForRequest: vi.fn(async () => ({
+        id: "event-1",
+        slug: "sample-event",
+        name: "Sitrus Series",
+        date: "2026-07-01T22:00:00.000Z",
+        players: 114,
+        format: "M-B",
+        regulationId: "champions-regmb",
+        regulationLabel: "Pokémon Champions — Regulation M-B",
+        source: "limitless",
+        sourceUrl: "https://play.limitlesstcg.com/tournament/event-1",
+        attribution: "Data via Limitless",
+        fetchedAt: "2026-07-03T05:29:15.578Z",
+        topCut: [
+            {
+                placing: 1,
+                player: "TytokiArts",
+                country: null,
+                record: { wins: 11, losses: 1, ties: 0 },
+                team: ["Charizard", "Venusaur", "Farigiraf", "Scrafty", "Sylveon", "Garchomp"].map((name) => ({ id: name.toLowerCase(), name, item: null, ability: null, moves: [], nature: null })),
+            },
+        ],
+        topCutUsage: [],
+        usageComparison: [
+            { id: "charizard", name: "Charizard", count: 1, pct: 50, ladderUsage: 0.2 },
+        ],
+    })),
 }));
 
-describe("LandingPage", () => {
-    beforeEach(() => {
-        useTeamStore.getState().clearTeam();
-        vi.clearAllMocks();
-    });
+describe("Tournament newsroom", () => {
+    beforeEach(() => vi.clearAllMocks());
 
-    it("renders the hero, CTAs, and supporting sections", () => {
-        render(<LandingPage />);
+    it("leads with tournament preparation and a direct prep action", async () => {
+        render(await NewsroomPage());
 
         expect(
             screen.getByRole("heading", {
-                name: /A coach for the whole build/i,
+                name: /Prepare for the teams people are actually bringing/i,
             }),
         ).toBeInTheDocument();
-
-        const interviewCTA = screen.getByRole("link", { name: /Start the interview/i });
-        expect(interviewCTA).toHaveAttribute("href", "/builder?start=interview");
-
-        const importCTA = screen.getByRole("link", { name: /Import from Showdown/i });
-        expect(importCTA).toHaveAttribute("href", "/builder?start=import");
-
-        const emptyCTA = screen.getByRole("link", { name: /Open empty builder/i });
-        expect(emptyCTA).toHaveAttribute("href", "/builder?start=empty");
-
-        expect(screen.getByText(/The coach shows up at every step/i)).toBeInTheDocument();
-        expect(screen.getByText(/Built on Model Context Protocol/i)).toBeInTheDocument();
+        expect(screen.getByRole("link", { name: /Start a matchup plan/i })).toHaveAttribute(
+            "href",
+            "/prep/new",
+        );
+        expect(screen.getByText("Sitrus Series")).toBeInTheDocument();
+        expect(screen.getByText("TytokiArts")).toBeInTheDocument();
     });
 
-    it("does not redirect when no team is saved", async () => {
-        render(<LandingPage />);
-        // Wait long enough for hydration effect to settle.
-        await waitFor(() => {
-            expect(mockReplace).not.toHaveBeenCalled();
-        });
-    });
-
-    it("redirects to /builder when a team is already persisted", async () => {
-        useTeamStore.getState().setPokemon(0, {
-            pokemon: "Garchomp",
-            moves: ["Earthquake"],
-        });
-
-        render(<LandingPage />);
-
-        await waitFor(() => {
-            expect(mockReplace).toHaveBeenCalledWith("/builder");
-        });
+    it("labels sourced and calculated newsroom information", async () => {
+        render(await NewsroomPage());
+        expect(screen.getAllByText(/Tournament source/i).length).toBeGreaterThan(0);
+        expect(screen.getByText(/Top-cut vs ladder difference/i)).toBeInTheDocument();
     });
 });

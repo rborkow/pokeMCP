@@ -1,3 +1,4 @@
+// @ts-nocheck -- generated Showdown data references simulation-only ambient types.
 export const Learnsets: import('../sim/dex-species').LearnsetDataTable = {
 	missingno: {
 		learnset: {

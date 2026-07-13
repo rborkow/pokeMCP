@@ -1,9 +1,8 @@
 name: Deploy
 
-# Manual production deploys from CI. Always deploy from here (or a clean main
-# checkout) rather than local git worktrees: gitignored .env.local files don't
-# exist in worktrees, which silently dropped the Web Analytics beacon from the
-# teambuilder build on 2026-06-11. CI builds pin every build-time input below.
+# Manual production deploys from a tested main commit. D1 migrations are
+# intentionally applied before this workflow, after the release backup in the
+# runbook; this workflow refuses to deploy while migrations are pending.
 on:
   workflow_dispatch:
     inputs:
@@ -17,11 +16,19 @@ on:
           - worker
           - teambuilder
 
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
 jobs:
   deploy-worker:
-    name: Deploy MCP Worker
-    if: ${{ inputs.target == 'all' || inputs.target == 'worker' }}
+    name: Deploy internal analysis worker
+    if: ${{ github.ref == 'refs/heads/main' && (inputs.target == 'all' || inputs.target == 'worker') }}
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     environment: production
     steps:
       - name: Checkout code
@@ -35,16 +42,33 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Refuse deploy with pending META_DB migrations
+        run: |
+          status="$(bunx wrangler d1 migrations list META_DB --remote --env production)"
+          echo "$status"
+          grep -q "No migrations to apply" <<< "$status"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
       - name: Deploy pokemon-mcp-production
-        run: bunx wrangler deploy --env production
+        run: bun run deploy:production
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
   deploy-teambuilder:
     name: Deploy Teambuilder
-    if: ${{ inputs.target == 'all' || inputs.target == 'teambuilder' }}
+    needs: deploy-worker
+    if: >-
+      ${{
+        always() &&
+        github.ref == 'refs/heads/main' &&
+        (inputs.target == 'all' || inputs.target == 'teambuilder') &&
+        (inputs.target == 'teambuilder' || needs.deploy-worker.result == 'success')
+      }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     environment: production
     steps:
       - name: Checkout code
@@ -59,11 +83,20 @@ jobs:
         working-directory: ./apps/teambuilder
         run: bun install --frozen-lockfile
 
+      - name: Refuse deploy with pending PREP_DB migrations
+        working-directory: ./apps/teambuilder
+        run: |
+          status="$(bunx wrangler d1 migrations list PREP_DB --remote --config wrangler.toml)"
+          echo "$status"
+          grep -q "No migrations to apply" <<< "$status"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
       - name: Build and deploy pokemcp-teambuilder
         working-directory: ./apps/teambuilder
         run: bun run deploy
         env:
-          NEXT_PUBLIC_MCP_URL: https://api.pokemcp.com
           # Web Analytics beacon token — public by design (shipped in page HTML).
           # layout.tsx also hardcodes this as a fallback; set explicitly so the
           # build never depends on a gitignored .env.local.

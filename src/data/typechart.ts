@@ -1,3 +1,4 @@
+// @ts-nocheck -- generated Showdown data references simulation-only ambient types.
 export const TypeChart: import("../sim/dex-data").TypeDataTable = {
     bug: {
         damageTaken: {

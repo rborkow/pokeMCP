@@ -1,82 +1,13 @@
-# PokéMCP Documentation
+# PokeMCP Prep documentation
 
-Documentation site for the PokéMCP server, built with [Nextra](https://nextra.site/).
-
-## Development
+Static Nextra documentation for the Champions tournament-preparation product.
 
 ```bash
-npm install
-npm run dev
+bun install
+bun run dev
+bun run build
 ```
 
-Open http://localhost:3001
+Production docs are exported to `out/` and served from the Cloudflare Pages project for `docs.pokemcp.com`. The public MCP and tool API are retired; documentation should describe the newsroom, prep workflow, evidence labels, supported mechanics, exports, privacy, and account sync.
 
-## Building
-
-```bash
-npm run build
-```
-
-Creates static export in `out/` directory.
-
-## Deployment to Cloudflare Pages
-
-Production docs are served by the Cloudflare Pages project that owns `docs.pokemcp.com`.
-That project is Git-connected and builds automatically from `main`.
-
-### Production via GitHub Integration (Recommended)
-
-1. Push code to GitHub
-2. Go to Cloudflare Dashboard → Pages
-3. Create new project → Connect to Git
-4. Select your repository
-5. Configure build settings:
-   - **Build command**: `npm run build`
-   - **Build output directory**: `out`
-   - **Root directory**: `apps/docs`
-   - **Node version**: 20
-6. Deploy!
-
-### Ad Hoc Upload via Wrangler
-
-Use direct uploads only for non-production or one-off verification. Do not assume
-`wrangler pages deploy` updates the live docs site unless you are targeting the
-Pages project that currently owns `docs.pokemcp.com`.
-
-```bash
-npm run build
-npx wrangler pages deploy out --project-name=<non-production-pages-project>
-```
-
-## Structure
-
-```
-pages/
-├── index.mdx              # Home
-├── getting-started.mdx    # Getting started guide
-├── tools.mdx              # Tools reference
-├── formats.mdx            # Supported formats
-└── _meta.ts              # Navigation config
-```
-
-## Adding Content
-
-1. Create `pages/your-page.mdx`
-2. Add to `pages/_meta.ts`:
-   ```ts
-   export default {
-     index: "Home",
-     "your-page": "Your Page Title",
-   };
-   ```
-
-## Tech Stack
-
-- Next.js 14
-- Nextra 3 (docs theme)
-- Tailwind CSS 3
-- TypeScript
-
-## License
-
-MIT
+Licensed under AGPL-3.0.

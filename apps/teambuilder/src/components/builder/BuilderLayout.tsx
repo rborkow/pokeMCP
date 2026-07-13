@@ -8,7 +8,7 @@ import { ChatFirstFrame } from "./ChatFirstFrame";
 import { GridFrame } from "./GridFrame";
 
 /**
- * Frame switcher for /builder. On mount, syncs the `?mode=` URL param into
+ * Frame switcher for /build. On mount, syncs the `?mode=` URL param into
  * team-store.uiMode so shareable links pick the right frame; otherwise the
  * persisted uiMode (defaults to "chat") wins. Also honors the landing-page
  * `?start=interview|import|empty` hint — routing users into the interview,

@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { DEFAULT_CHAMPIONS_FORMAT } from "@/lib/prep/capabilities";
 import { persist } from "zustand/middleware";
 import { decodeTeamFromUrl } from "@/lib/share";
 import { exportShowdownTeam, parseShowdownTeam } from "@/lib/showdown-parser";
@@ -18,6 +19,8 @@ interface TeamState {
     lastModifiedAt: Record<number, number>;
     /** Ephemeral — slot → whether the last write came from the user, the AI, or an import. Not persisted. */
     lastModificationSource: Record<number, ModificationSource>;
+    /** Ephemeral logical slot map. Keeps out-of-order AI writes from compacting into the wrong slot. */
+    slotAssignments: Record<number, TeamPokemon>;
 
     // Actions
     setMode: (mode: Mode) => void;
@@ -39,13 +42,14 @@ interface TeamState {
 export const useTeamStore = create<TeamState>()(
     persist(
         (set, get) => ({
-            mode: "singles",
-            format: "gen9ou",
+            mode: "vgc",
+            format: DEFAULT_CHAMPIONS_FORMAT,
             team: [],
             selectedSlot: null,
             uiMode: "chat",
             lastModifiedAt: {},
             lastModificationSource: {},
+            slotAssignments: {},
 
             setUiMode: (uiMode) => set({ uiMode }),
 
@@ -66,19 +70,26 @@ export const useTeamStore = create<TeamState>()(
 
             setPokemon: (slot, pokemon, source = "user") => {
                 set((state) => {
-                    const newTeam = [...state.team];
-                    // Extend array if needed
-                    while (newTeam.length <= slot) {
-                        newTeam.push(null as unknown as TeamPokemon);
-                    }
-                    newTeam[slot] = pokemon;
-                    // Remove null slots from the end
-                    while (newTeam.length > 0 && newTeam[newTeam.length - 1] === null) {
-                        newTeam.pop();
-                    }
+                    const existingAssignments =
+                        Object.keys(state.slotAssignments).length > 0
+                            ? state.slotAssignments
+                            : Object.fromEntries(state.team.map((entry, index) => [index, entry]));
+                    const existingKeys = Object.keys(existingAssignments)
+                        .map(Number)
+                        .sort((a, b) => a - b);
+                    const logicalSlot =
+                        source === "ai" ? slot : (existingKeys[slot] ?? slot);
+                    const slotAssignments = {
+                        ...existingAssignments,
+                        [logicalSlot]: pokemon,
+                    };
+                    const newTeam = Object.entries(slotAssignments)
+                        .sort(([a], [b]) => Number(a) - Number(b))
+                        .map(([, entry]) => entry);
                     const now = Date.now();
                     return {
-                        team: newTeam.filter(Boolean),
+                        team: newTeam,
+                        slotAssignments,
                         lastModifiedAt: { ...state.lastModifiedAt, [slot]: now },
                         lastModificationSource: {
                             ...state.lastModificationSource,
@@ -90,10 +101,23 @@ export const useTeamStore = create<TeamState>()(
 
             removePokemon: (slot, source = "user") => {
                 set((state) => {
-                    const newTeam = state.team.filter((_, i) => i !== slot);
+                    const existingAssignments =
+                        Object.keys(state.slotAssignments).length > 0
+                            ? { ...state.slotAssignments }
+                            : Object.fromEntries(state.team.map((entry, index) => [index, entry]));
+                    const logicalSlot =
+                        Object.keys(existingAssignments)
+                            .map(Number)
+                            .sort((a, b) => a - b)[slot] ?? slot;
+                    delete existingAssignments[logicalSlot];
+                    const newTeam = Object.values(existingAssignments);
+                    const slotAssignments = Object.fromEntries(
+                        newTeam.map((entry, index) => [index, entry]),
+                    );
                     const now = Date.now();
                     return {
                         team: newTeam,
+                        slotAssignments,
                         selectedSlot: null,
                         lastModifiedAt: { ...state.lastModifiedAt, [slot]: now },
                         lastModificationSource: {
@@ -111,6 +135,9 @@ export const useTeamStore = create<TeamState>()(
                     const now = Date.now();
                     return {
                         team: newTeam,
+                        slotAssignments: Object.fromEntries(
+                            newTeam.map((entry, index) => [index, entry]),
+                        ),
                         lastModifiedAt: {
                             ...state.lastModifiedAt,
                             [from]: now,
@@ -147,7 +174,14 @@ export const useTeamStore = create<TeamState>()(
                         lastModifiedAt[i] = now;
                         lastModificationSource[i] = source;
                     }
-                    set({ team, lastModifiedAt, lastModificationSource });
+                    set({
+                        team,
+                        slotAssignments: Object.fromEntries(
+                            team.map((entry, index) => [index, entry]),
+                        ),
+                        lastModifiedAt,
+                        lastModificationSource,
+                    });
                     return { success: true };
                 } catch (error) {
                     return {
@@ -168,6 +202,7 @@ export const useTeamStore = create<TeamState>()(
                     selectedSlot: null,
                     lastModifiedAt: {},
                     lastModificationSource: {},
+                    slotAssignments: {},
                 }),
 
             setSelectedSlot: (slot) => set({ selectedSlot: slot }),
@@ -192,6 +227,9 @@ export const useTeamStore = create<TeamState>()(
                         selectedSlot: null,
                         lastModifiedAt,
                         lastModificationSource,
+                        slotAssignments: Object.fromEntries(
+                            result.team.map((entry, index) => [index, entry]),
+                        ),
                     });
                     return true;
                 }

@@ -32,9 +32,9 @@ interface LoggerConfig {
 }
 
 const DEFAULT_CONFIG: LoggerConfig = {
-    sampleRate: 0.1, // Log 10% of interactions
+    sampleRate: 0,
     maxResponseLength: 4000, // Truncate long responses
-    enabled: true,
+    enabled: false,
 };
 
 /**
@@ -142,7 +142,6 @@ export async function logInteraction(
 
     // Check if logging is enabled
     if (!cfg.enabled) {
-        console.log(`[R2 Logging] Skipped: logging disabled for tool: ${tool}`);
         return;
     }
 
@@ -232,17 +231,21 @@ export async function withLogging<T extends string>(
         const responseTimeMs = Math.round(performance.now() - startTime);
 
         // Log asynchronously - use waitUntil to ensure R2 write completes
-        const logPromise = logInteraction(
-            env,
-            tool,
-            args,
-            response!,
-            responseTimeMs,
-            success,
-            config,
-        );
-        if (ctx) {
-            ctx.waitUntil(logPromise);
+        if (config?.enabled === true) {
+            const logPromise = logInteraction(
+                env,
+                tool,
+                args,
+                response!,
+                responseTimeMs,
+                success,
+                config,
+            );
+            if (ctx) {
+                ctx.waitUntil(logPromise);
+            } else {
+                await logPromise;
+            }
         }
     }
 

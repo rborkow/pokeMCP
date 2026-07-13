@@ -33,6 +33,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: "monthly",
             priority: 0.9,
         },
+        {
+            url: `${SITE_URL}/prep/new`,
+            lastModified: newestModified,
+            changeFrequency: "weekly",
+            priority: 0.9,
+        },
+        {
+            url: `${SITE_URL}/build`,
+            lastModified: newestModified,
+            changeFrequency: "monthly",
+            priority: 0.7,
+        },
+        {
+            url: `${SITE_URL}/privacy`,
+            lastModified: newestModified,
+            changeFrequency: "yearly",
+            priority: 0.3,
+        },
     ];
 
     const latestPages: MetadataRoute.Sitemap = getReportFormats().map((format) => {
@@ -64,9 +82,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     );
 
     const eventPages: MetadataRoute.Sitemap = Object.entries(getEventsIndex()).flatMap(
-        ([slug, events]) =>
+        ([, events]) =>
             events.map((event) => ({
-                url: `${SITE_URL}/reports/${slug}/events/${event.slug}`,
+                url: `${SITE_URL}/events/${event.slug}`,
                 lastModified: event.date.slice(0, 10),
                 changeFrequency: "yearly" as const,
                 priority: 0.6,

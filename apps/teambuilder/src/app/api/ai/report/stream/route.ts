@@ -56,9 +56,7 @@ function htmlToText(html: string): string {
  */
 async function loadHtmlFromAssets(path: string): Promise<string | null> {
     try {
-        const env = getCloudflareContext().env as unknown as {
-            ASSETS?: { fetch: (url: string) => Promise<Response> };
-        };
+        const env = getCloudflareContext().env as CloudflareEnv;
         if (!env.ASSETS) return null;
         const buildId = process.env.NEXT_BUILD_ID ?? "no-build-id";
         const name = `cdn-cgi/_next_cache/${buildId}${path}.cache`.replace(/\/+/g, "/");
@@ -100,7 +98,7 @@ Rules:
 - Ground every claim in the report content. Quote the report's numbers exactly; never invent usage percentages, builds, or results.
 - If the report does not contain the answer, say so plainly and suggest what the report DOES cover. Do not answer from general knowledge about Pokémon competitive play beyond basic rules/terminology.
 - Be concise — 1-3 short paragraphs, or a short list. This is a sidebar chat, not an article.
-- When a question is about building a team, answer from the report's data and mention that the PokeMCP team builder at /builder can check coverage against these threats.
+- When a question is about building a team, answer from the report's data and mention that the secondary team builder at /build can check coverage against these threats.
 - Usage stats in the report are weighted Pokémon Showdown ladder statistics published by Smogon; tournament results come from Limitless. Say so if asked about sources.
 
 === REPORT CONTENT ===

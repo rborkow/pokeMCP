@@ -1,6 +1,6 @@
 import type { TeamPokemon } from "@/types/pokemon";
 
-const API_URL = process.env.NEXT_PUBLIC_MCP_URL || "https://api.pokemcp.com";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.pokemcp.com";
 
 export interface SharedTeam {
     id: string;
@@ -10,24 +10,15 @@ export interface SharedTeam {
 }
 
 /**
- * Create a shared team via the API, returning a short URL
+ * New persistent share records were retired with the Prep launch. Existing
+ * `/t/:id` records remain readable through `fetchSharedTeam`.
  */
 export async function createSharedTeam(
-    team: TeamPokemon[],
-    format: string,
+    _team: TeamPokemon[],
+    _format: string,
 ): Promise<{ id: string; url: string }> {
-    const response = await fetch(`${API_URL}/api/team/share`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ team, format }),
-    });
-
-    if (!response.ok) {
-        const error = await response.json().catch(() => ({ error: "Request failed" }));
-        throw new Error((error as { error?: string }).error || `HTTP ${response.status}`);
-    }
-
-    return response.json() as Promise<{ id: string; url: string }>;
+    void [_team, _format];
+    throw new Error("New persistent team links are retired. Use the portable link or export instead.");
 }
 
 /**

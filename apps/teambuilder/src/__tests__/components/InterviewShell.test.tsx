@@ -16,7 +16,7 @@ vi.stubGlobal("localStorage", localStorageMock);
 vi.mock("next/navigation", () => ({
     useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
     useSearchParams: () => new URLSearchParams(),
-    usePathname: () => "/builder",
+    usePathname: () => "/build",
 }));
 
 describe("InterviewShell", () => {

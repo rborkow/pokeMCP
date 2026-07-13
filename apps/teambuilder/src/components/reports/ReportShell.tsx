@@ -94,7 +94,7 @@ export function ReportShell({ report, canonicalPath, children }: ReportShellProp
                         coverage against the threats above, and coaches you through the process.
                     </p>
                     <Link
-                        href="/builder"
+                        href="/build"
                         className="mt-3 inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
                     >
                         Open the team builder

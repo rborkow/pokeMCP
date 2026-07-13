@@ -13,7 +13,7 @@ const MODES = [
 /**
  * Chat/Grid toggle. Writes to the team-store and reflects the choice into the
  * URL as `?mode=chat|grid` so the preference is shareable and survives a
- * reload. Only renders on /builder.
+ * reload. Only renders on /build.
  */
 export function ModeSwitch() {
     const pathname = usePathname();
@@ -37,7 +37,7 @@ export function ModeSwitch() {
         [pathname, router, searchParams, setUiMode],
     );
 
-    if (!pathname?.startsWith("/builder")) return null;
+    if (!pathname?.startsWith("/build")) return null;
 
     return (
         <div

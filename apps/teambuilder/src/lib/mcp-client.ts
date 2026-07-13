@@ -1,7 +1,7 @@
 import type { TeamPokemon } from "@/types/pokemon";
 
-// Use local proxy to avoid CORS issues with MCP server
-const MCP_PROXY_URL = "/api/mcp";
+// Product-facing semantic analysis endpoint. Internal service/tool names stay server-side.
+const ANALYSIS_URL = "/api/analysis";
 
 /**
  * Format fallback map for formats that have no stats data on Smogon.
@@ -34,108 +34,75 @@ export function getEffectiveStatsFormat(format: string): {
     return { format: normalized, isFallback: false };
 }
 
-interface MCPResponse {
-    jsonrpc: string;
-    id: string | number;
-    result?: {
-        content: { type: string; text: string }[];
-    };
-    error?: {
-        code: number;
-        message: string;
-    };
+interface AnalysisResponse {
+    data?: string;
+    error?: string;
 }
 
 class MCPClient {
-    private proxyUrl: string;
-    private sessionId: string;
+    private analysisUrl = ANALYSIS_URL;
 
-    constructor(proxyUrl: string = MCP_PROXY_URL) {
-        this.proxyUrl = proxyUrl;
-        this.sessionId = crypto.randomUUID();
-    }
+    resetSession() {}
 
-    /** Reset session ID (call when user starts a new conversation) */
-    resetSession() {
-        this.sessionId = crypto.randomUUID();
-    }
-
-    private async callTool<T = string>(tool: string, args: Record<string, unknown>): Promise<T> {
-        const response = await fetch(this.proxyUrl, {
+    private async analyze<T = string>(operation: string, input: Record<string, unknown>): Promise<T> {
+        const response = await fetch(this.analysisUrl, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-Session-Id": this.sessionId,
-            },
-            body: JSON.stringify({
-                jsonrpc: "2.0",
-                method: "tools/call",
-                params: { name: tool, arguments: args },
-                id: crypto.randomUUID(),
-            }),
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ operation, ...input }),
         });
 
         if (!response.ok) {
-            throw new Error(`MCP request failed: ${response.status} ${response.statusText}`);
+            throw new Error(`Analysis request failed: ${response.status} ${response.statusText}`);
         }
 
-        const data: MCPResponse = await response.json();
+        const responseBody: AnalysisResponse = await response.json();
+        if (responseBody.error) throw new Error(responseBody.error);
+        if (!responseBody.data) throw new Error("No analysis returned");
 
-        if (data.error) {
-            throw new Error(data.error.message);
-        }
-
-        const text = data.result?.content?.[0]?.text;
-        if (!text) {
-            throw new Error("No content in MCP response");
-        }
-
-        // Try to parse as JSON, otherwise return as string
         try {
-            return JSON.parse(text) as T;
+            return JSON.parse(responseBody.data) as T;
         } catch {
-            return text as T;
+            return responseBody.data as T;
         }
     }
 
     // Pokemon lookup
     async lookupPokemon(pokemon: string, generation?: string) {
-        return this.callTool("lookup_pokemon", { pokemon, generation });
+        return this.analyze("pokemon", { pokemon, generation });
     }
 
     // Validation
     async validateMoveset(pokemon: string, moves: string[], generation?: string) {
-        return this.callTool("validate_moveset", { pokemon, moves, generation });
+        return this.analyze("moveset", { pokemon, moves, generation });
     }
 
     async validateTeam(team: TeamPokemon[], format?: string) {
-        return this.callTool("validate_team", { team, format });
+        return this.analyze("team", { team, format });
     }
 
     // Coverage analysis
     async suggestTeamCoverage(currentTeam: string[], format?: string) {
-        return this.callTool("suggest_team_coverage", {
-            current_team: currentTeam,
+        return this.analyze("coverage", {
+            currentTeam,
             format,
         });
     }
 
     // Usage statistics (unified get_usage_stats tool)
     async getPopularSets(pokemon: string, format?: string) {
-        return this.callTool("get_usage_stats", { type: "popular_sets", pokemon, format });
+        return this.analyze("popular-sets", { pokemon, format });
     }
 
     async getMetaThreats(format?: string, limit = 20) {
-        return this.callTool("get_usage_stats", { type: "meta_threats", format, limit });
+        return this.analyze("threats", { format, limit });
     }
 
     async getTeammates(pokemon: string, format?: string, limit = 10) {
-        return this.callTool("get_usage_stats", { type: "teammates", pokemon, format, limit });
+        return this.analyze("teammates", { pokemon, format, limit });
     }
 
     async getChecksCounters(pokemon: string, format?: string, limit = 10) {
-        return this.callTool("get_usage_stats", {
-            type: "checks_counters",
+        return this.analyze("counters", {
             pokemon,
             format,
             limit,
@@ -143,12 +110,12 @@ class MCPClient {
     }
 
     async getMetagameStats(format?: string) {
-        return this.callTool("get_usage_stats", { type: "metagame", format });
+        return this.analyze("metagame", { format });
     }
 
     // RAG strategy search
     async queryStrategy(query: string, format?: string, limit = 5) {
-        return this.callTool("query_strategy", { query, format, limit });
+        return this.analyze("strategy", { query, format, limit });
     }
 }
 

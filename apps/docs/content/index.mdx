@@ -1,73 +1,23 @@
 ---
-description: "PokeMCP is an MCP server for competitive Pokemon team building with AI-powered validation, usage statistics, and strategic analysis."
+description: "PokeMCP Prep turns current Pokémon Champions tournament teams into matchup plans you can practice."
 ---
 
-# PokéMCP
+# PokeMCP Prep
 
-A **Model Context Protocol (MCP)** server for Pokémon competitive team building, validation, and strategic analysis.
+PokeMCP Prep is a **Champions tournament-preparation workspace** for players who want a practical plan for the teams they are seeing on ladder and in events.
 
-## Features
+## What it does
 
-- 🔍 **Pokémon Lookup** - Base stats, abilities, tiers, evolution chains
-- ✅ **Team Validation** - Species clause, move legality, ability validation
-- 💡 **Coverage Analysis** - Type effectiveness, weaknesses, resistances
-- 📊 **Usage Statistics** - Real Smogon data from thousands of battles
-- 📈 **Metagame Trends** - Usage trends, shifts, and momentum over time
-- 🧠 **Strategic Advice** - RAG-powered queries over strategy articles
-- 🎮 **[Team Builder](https://www.pokemcp.com)** - Interactive web app with AI chat assistant
+- Publishes a sourced newsroom of completed public Champions events.
+- Lets you choose an indexed team, paste a team sheet, or enter the known Pokémon manually.
+- Produces a battle card with Bring 4, two lead options, likely opposing leads, opening lines, danger points, and practice work.
+- Labels tournament records, calculations, coach suggestions, and incomplete Champions mechanics separately.
+- Works fully without an account; Discord or Google sign-in is optional for sync.
 
-## Quick Start
+## Start preparing
 
-### Option 1: Team Builder Web App
+Visit **[www.pokemcp.com](https://www.pokemcp.com)** and choose a published team from the newsroom, or go directly to **[New prep](https://www.pokemcp.com/prep/new)**.
 
-Visit **[www.pokemcp.com](https://www.pokemcp.com)** for the interactive team builder with:
-- **Team Archetypes** - Generate teams with guided presets (Hyper Offense, Trick Room, Goblin Mode, etc.)
-- **AI Coach** - Claude-powered assistant with personality themes
-- **Analysis Tools** - Type coverage, threat matrix, and speed tiers
-- **VGC Features** - Bring Four selector for team preview practice
-- Import/export Showdown teams with shareable URLs
-- Team history with undo/redo support
+The former public MCP and REST tool surfaces have been retired. Their analysis capabilities now support the Prep product internally.
 
-### Option 2: Claude.ai Integration
-
-Add PokéMCP to Claude.ai:
-
-1. Settings → Integrations → Custom Connectors
-2. Add URL: `https://api.pokemcp.com/mcp`
-3. Start using in conversations!
-
-### Option 3: REST API
-
-For programmatic access, use the [REST API](/api-reference):
-
-```bash
-curl -X POST https://api.pokemcp.com/api/tools \
-  -H "Content-Type: application/json" \
-  -d '{"tool": "get_usage_stats", "args": {"type": "meta_threats", "format": "gen9ou"}}'
-```
-
-## Supported Formats
-
-Formats across Gen 7, 8, and 9 ([full list](/formats)):
-- Singles: OU, Ubers, UU, RU, NU, PU, LC
-- VGC/Doubles: 2026 Reg I (current), Doubles OU/Ubers/UU
-- Pokémon Champions: Reg M-A, Reg M-B (current)
-
-## Example Usage
-
-```
-What are the base stats for Garchomp?
-Is this moveset legal: Earthquake, Dragon Claw, Swords Dance, Fire Fang?
-What are the most popular sets for Landorus-Therian in Gen 9 OU?
-How do I counter Kingambit?
-```
-
-## Architecture
-
-- **Cloudflare Workers** - Serverless MCP endpoints
-- **Cloudflare KV** - Cached usage statistics
-- **Cloudflare D1** - Metagame usage history over time
-- **Cloudflare Vectorize** - Semantic search over strategy content
-- **Pokémon Showdown** - Complete Pokédex data
-
-[Get Started →](/getting-started)
+[Set up your first matchup →](/getting-started)

@@ -75,7 +75,9 @@ export function ReportChat({ slug, month, reportTitle }: ReportChatProps) {
                 signal: controller.signal,
             });
             if (!response.ok || !response.body) {
-                const detail = await response.json().catch(() => null);
+                const detail = (await response.json().catch(() => null)) as {
+                    error?: string;
+                } | null;
                 throw new Error(detail?.error ?? `Request failed (${response.status})`);
             }
 

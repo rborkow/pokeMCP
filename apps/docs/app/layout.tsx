@@ -10,12 +10,12 @@ export const metadata = {
         template: "%s – PokeMCP Docs",
     },
     description:
-        "Documentation for PokeMCP, an MCP server for competitive Pokemon team building, validation, and strategic analysis.",
+        "Documentation for PokeMCP Prep, a Pokémon Champions tournament-preparation workspace.",
     metadataBase: new URL("https://docs.pokemcp.com"),
     openGraph: {
         title: "PokeMCP Docs",
         description:
-            "Documentation for PokeMCP, an MCP server for competitive Pokemon team building, validation, and strategic analysis.",
+            "Documentation for PokeMCP Prep, a Pokémon Champions tournament-preparation workspace.",
         url: "https://docs.pokemcp.com",
         siteName: "PokeMCP Docs",
         type: "website",
@@ -25,7 +25,7 @@ export const metadata = {
         card: "summary_large_image" as const,
         title: "PokeMCP Docs",
         description:
-            "Documentation for PokeMCP, an MCP server for competitive Pokemon team building, validation, and strategic analysis.",
+            "Documentation for PokeMCP Prep, a Pokémon Champions tournament-preparation workspace.",
         images: ["/og-image.png"],
     },
     icons: {
@@ -47,13 +47,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
                         <Navbar
                             logo={
                                 <span style={{ fontWeight: 700, fontSize: "1.25rem" }}>
-                                    PokeMCP
+                                    PokeMCP Prep
                                 </span>
                             }
                             projectLink="https://github.com/rborkow/pokeMCP"
                         />
                     }
-                    footer={<Footer>MIT {new Date().getFullYear()} © PokeMCP</Footer>}
+                    footer={<Footer>AGPL-3.0 {new Date().getFullYear()} © PokeMCP</Footer>}
                 >
                     {children}
                 </Layout>

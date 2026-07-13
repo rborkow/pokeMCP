@@ -1,65 +1,30 @@
 ---
-description: "Set up PokeMCP with Claude.ai in minutes. Add the MCP connector, verify tools, and start building competitive Pokemon teams."
+description: "Create your first PokeMCP Prep battle card from a current Champions team sheet."
 ---
 
-# Getting Started
+# Getting started
 
-## Adding PokéMCP to Claude.ai
+## 1. Add your team
 
-### Prerequisites
-- Claude Pro, Team, or Enterprise subscription
+Open **[Build a team](https://www.pokemcp.com/build?mode=grid)** to import a Showdown-style paste or edit your current Champions team. Include moves, items, and abilities when you know them; the plan becomes more specific as the team sheet becomes more complete.
 
-### Setup Steps
+## 2. Choose an opponent
 
-1. **Open Claude Settings**
-   - Go to claude.ai
-   - Click your profile → Settings
+From the newsroom, open a completed event and select **Prepare against team**. You can also start from **[New prep](https://www.pokemcp.com/prep/new)** and paste a team sheet or enter Pokémon names manually.
 
-2. **Add Custom Connector**
-   - Navigate to Integrations → Custom Connectors
-   - Click "Add Connector"
-   - Enter:
-     - **Name**: PokéMCP
-     - **URL**: `https://api.pokemcp.com/mcp`
-   - Save
+## 3. Read the battle card
 
-3. **Verify**
-   - Start a new conversation
-   - Ask: "What tools do you have access to?"
-   - You should see all 7 PokéMCP tools
+The Match Desk separates:
 
-## First Commands
+- The recommended Bring 4.
+- A primary and alternative lead pair.
+- Likely opposing leads to rehearse.
+- Opening-line principles and danger points.
+- A practice checklist.
+- Evidence and mechanics limitations for each recommendation.
 
-### Look up a Pokémon
-```
-What are the base stats for Garchomp?
-```
+Likely leads are rehearsal targets, not win-rate predictions. VP-sensitive speed order and incomplete Champions move interactions are marked as beta where they matter.
 
-### Validate a moveset
-```
-Can Garchomp learn Earthquake, Dragon Claw, Swords Dance, and Fire Fang?
-```
+## 4. Save or export
 
-### Get usage statistics
-```
-What are the most popular sets for Landorus-Therian in Gen 9 OU?
-```
-
-### Team coverage analysis
-```
-I have Garchomp, Ferrothorn, and Rotom-Wash. What types should I add?
-```
-
-### Strategic advice
-```
-How do I counter Kingambit in Gen 9 OU?
-```
-
-## Available Tools
-
-- **Core**: `lookup_pokemon`, `validate_moveset`, `validate_team`, `suggest_team_coverage`
-- **Stats**: `get_usage_stats` (`type`: `popular_sets` \| `meta_threats` \| `teammates` \| `checks_counters` \| `metagame`)
-- **Trends**: `get_meta_trends` (`type`: `usage_trend` \| `shifts` \| `momentum` \| `evolution_summary`)
-- **Strategy**: `query_strategy`
-
-[View all tools →](/tools)
+Anonymous plans stay in your browser. Copy the card as Markdown, print or save it as PDF, and download a JSON workspace backup from **Teams**. Optional Discord or Google sign-in merges the newest copy of each saved item into your account.

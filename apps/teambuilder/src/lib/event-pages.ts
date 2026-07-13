@@ -68,3 +68,18 @@ export function getEventParams(): { slug: string; event: string }[] {
 export function hasEventPage(slug: string, eventSlug: string): boolean {
     return getEventsIndex()[slug]?.some((event) => event.slug === eventSlug) ?? false;
 }
+
+export function getEventCategory(eventSlug: string): string | null {
+    return (
+        Object.entries(getEventsIndex()).find(([, events]) =>
+            events.some((event) => event.slug === eventSlug),
+        )?.[0] ?? null
+    );
+}
+
+export async function getEventBySlug(eventSlug: string): Promise<EventPageData | null> {
+    const category = getEventCategory(eventSlug);
+    if (!category) return null;
+    const data = await import(`@/data/events/${category}/${eventSlug}.json`);
+    return data.default as EventPageData;
+}

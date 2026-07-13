@@ -14,52 +14,11 @@ describe("createSharedTeam", () => {
         vi.clearAllMocks();
     });
 
-    it("POSTs to /api/team/share with team and format", async () => {
-        mockFetch.mockResolvedValueOnce({
-            ok: true,
-            json: () => Promise.resolve({ id: "abc123", url: "https://www.pokemcp.com/t/abc123" }),
-        });
-
-        await createSharedTeam(sampleTeam, "gen9ou");
-
-        expect(mockFetch).toHaveBeenCalledWith(
-            expect.stringContaining("/api/team/share"),
-            expect.objectContaining({
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ team: sampleTeam, format: "gen9ou" }),
-            }),
+    it("refuses to create a new persistent record without making a request", async () => {
+        await expect(createSharedTeam(sampleTeam, "gen9ou")).rejects.toThrow(
+            "New persistent team links are retired",
         );
-    });
-
-    it("returns { id, url } on success", async () => {
-        mockFetch.mockResolvedValueOnce({
-            ok: true,
-            json: () => Promise.resolve({ id: "abc123", url: "https://www.pokemcp.com/t/abc123" }),
-        });
-
-        const result = await createSharedTeam(sampleTeam, "gen9ou");
-        expect(result).toEqual({ id: "abc123", url: "https://www.pokemcp.com/t/abc123" });
-    });
-
-    it("throws server error message when response has error field", async () => {
-        mockFetch.mockResolvedValueOnce({
-            ok: false,
-            status: 429,
-            json: () => Promise.resolve({ error: "Rate limited" }),
-        });
-
-        await expect(createSharedTeam(sampleTeam, "gen9ou")).rejects.toThrow("Rate limited");
-    });
-
-    it("throws generic error when response body is not JSON", async () => {
-        mockFetch.mockResolvedValueOnce({
-            ok: false,
-            status: 500,
-            json: () => Promise.reject(new Error("not json")),
-        });
-
-        await expect(createSharedTeam(sampleTeam, "gen9ou")).rejects.toThrow("Request failed");
+        expect(mockFetch).not.toHaveBeenCalled();
     });
 });
 

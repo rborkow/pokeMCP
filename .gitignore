@@ -63,6 +63,9 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
+# Local Cloudflare/D1 backup exports (may contain production data)
+.backups/
+
 # Flask stuff:
 instance/
 .webassets-cache

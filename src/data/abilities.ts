@@ -1,3 +1,4 @@
+// @ts-nocheck -- generated Showdown data references simulation-only ambient types.
 /*
 
 Ratings and how they work:

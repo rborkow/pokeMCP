@@ -1,3 +1,4 @@
+// @ts-nocheck -- generated Showdown data references simulation-only ambient types.
 export const Items: import("../sim/dex-items").ItemDataTable = {
     abilityshield: {
         name: "Ability Shield",

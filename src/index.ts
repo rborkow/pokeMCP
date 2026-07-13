@@ -1,7 +1,9 @@
 import { EmailMessage } from "cloudflare:email";
+import { WorkerEntrypoint } from "cloudflare:workers";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { McpAgent } from "agents/mcp";
 import { createMimeMessage } from "mimetext/browser";
+import { z } from "zod";
 import { handleAdminRequest } from "./admin.js";
 import { trackSession, trackToolCall } from "./analytics.js";
 import { getIngestionFormats } from "./ingestion/orchestrator.js";
@@ -15,6 +17,8 @@ import {
     validateTeamForSharing,
 } from "./share.js";
 import { TOOL_REGISTRY } from "./tool-registry.js";
+import { getRetirementResponse } from "./retirement.js";
+import { refreshTournamentNewsroom } from "./tournaments/ingestion.js";
 
 // One-time per-isolate log of gateway secret presence. Lets us verify
 // secret deployment via `wrangler tail` without exposing values.
@@ -121,17 +125,30 @@ export class PokemonMCP extends McpAgent {
     }
 }
 
+/**
+ * Private, typed service-binding entrypoint used by PokeMCP Prep. It is
+ * deployed with the Worker but has no public HTTP route.
+ */
+export class PrepAnalysisService extends WorkerEntrypoint<Env> {
+    async runTool(toolName: string, args: Record<string, unknown>): Promise<string> {
+        const tool = TOOL_REGISTRY.find((candidate) => candidate.name === toolName);
+        if (!tool) throw new Error(`Unknown internal tool: ${toolName}`);
+        const parsed = z.object(tool.schema).safeParse(args);
+        if (!parsed.success) throw new Error(`Invalid arguments for internal tool: ${toolName}`);
+        return tool.execute(parsed.data, this.env);
+    }
+
+    async capabilities() {
+        return TOOL_REGISTRY.map(({ name, description }) => ({ name, description }));
+    }
+}
+
 export default {
     async fetch(request: Request, env: Env, ctx: ExecutionContext) {
         const url = new URL(request.url);
 
-        if (url.pathname === "/sse" || url.pathname === "/sse/message") {
-            return PokemonMCP.serveSSE("/sse").fetch(request, env, ctx);
-        }
-
-        if (url.pathname === "/mcp") {
-            return PokemonMCP.serve("/mcp").fetch(request, env, ctx);
-        }
+        const retirementResponse = getRetirementResponse(url.pathname, request.method);
+        if (retirementResponse) return retirementResponse;
 
         // Stateless tool call endpoint - bypasses session requirement
         // Use this for direct API access from web apps
@@ -609,26 +626,14 @@ export default {
         if (url.pathname === "/") {
             return new Response(
                 JSON.stringify({
-                    name: "Pokémon MCP Server",
-                    version: "0.3.0",
-                    description:
-                        "Remote MCP server for Pokémon team building, validation, and strategic analysis with RAG",
-                    tools: [
-                        "lookup_pokemon",
-                        "validate_moveset",
-                        "validate_team",
-                        "suggest_team_coverage",
-                        "get_usage_stats",
-                        "get_meta_trends",
-                        "query_strategy",
-                    ],
+                    name: "PokeMCP Prep analysis service",
+                    status: "internal-only",
+                    description: "The former public MCP product has been retired.",
+                    product: "https://www.pokemcp.com",
                     endpoints: {
-                        sse: "/sse",
-                        mcp: "/mcp",
                         health: "/health (GET) - Deploy health / secret-presence booleans",
                         "api/feedback": "/api/feedback (POST) - Submit feedback",
-                        "api/team/share": "/api/team/share (POST) - Create shared team link",
-                        "api/team/:id": "/api/team/:id (GET) - Retrieve shared team",
+                        "api/team/:id": "/api/team/:id (GET) - Read a legacy shared team",
                         "og/team/:id": "/og/team/:id (GET) - OG image for shared team",
                         "admin/api/overview":
                             "/admin/api/overview (GET) - Usage overview (protected)",
@@ -649,6 +654,21 @@ export default {
     },
 
     async scheduled(event: ScheduledEvent, env: Env, _ctx: ExecutionContext) {
+        if (event.cron === "0 6 * * *") {
+            try {
+                await refreshTournamentNewsroom(env);
+                return;
+            } catch (error) {
+                console.error(
+                    JSON.stringify({
+                        event: "tournament_ingestion_failed",
+                        message: error instanceof Error ? error.message : "unknown",
+                    }),
+                );
+                throw error;
+            }
+        }
+
         console.log(
             "Scheduled ingestion trigger fired at:",
             new Date(event.scheduledTime).toISOString(),

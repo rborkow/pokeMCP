@@ -1,116 +1,19 @@
 ---
-description: "PokeMCP's supported competitive Pokemon formats across Gen 7-9, including OU, VGC, Doubles, and Pokemon Champions regulations."
+description: "Champions Regulation M-B is the primary PokeMCP Prep format."
 ---
 
-# Supported Formats
+# Formats and mechanics coverage
 
-PokéMCP works with two families of format IDs, both accepted anywhere a tool takes a `format`
-argument:
+## Primary format
 
-1. **Showdown-style format IDs** (`gen9ou`, `gen9vgc2026regi`, `gen9doublesou`, ...) — validated
-   via the legacy Showdown-rules path in `validate_team`, and used directly as Smogon usage-stats
-   keys by `get_usage_stats` / `get_meta_trends`.
-2. **Pokémon Champions regulation IDs** (`champions-regma`, `champions-regmb`) — Pokémon
-   Champions' own regulations, routed through a dedicated regulation-aware validator with a
-   dynamic legality allow-list, and mapped internally to Smogon's `gen9championsvgc2026regm*`
-   usage-stats files for `get_usage_stats` / `get_meta_trends`.
+PokeMCP Prep currently defaults to **Pokémon Champions Regulation M-B** (`champions-regmb`). Tournament teams come from completed public Limitless events with published lists.
 
-Format IDs are **lowercase and case-sensitive** — `gen9ou` works, `Gen9OU` does not.
+Supported foundations include the current regulation allow-list, level and team-size rules, item and species clauses, published usage mapping, Omni Ring Mega rules, and standard typing.
 
-## Generation 9
+## Mechanics beta
 
-### Singles
-- `gen9ou` - OverUsed
-- `gen9ubers` - Ubers (Legendaries)
-- `gen9uu` - UnderUsed
-- `gen9ru` - RarelyUsed
-- `gen9nu` - NeverUsed
-- `gen9pu` - PartiallyUsed
-- `gen9lc` - Little Cup (NFE only)
+Champions differs from Showdown-era VGC in ways that are still being documented. Exact VP-aware stat and speed calculations, the complete Champions move overlay, and some new interactions remain beta. The Match Desk labels recommendations affected by these gaps rather than presenting them as exact.
 
-### VGC / Doubles (Showdown-published)
-- `gen9vgc2026regi` - VGC 2026 Regulation I **(current)**
-- `gen9vgc2026regibo3` - VGC 2026 Regulation I (Best of 3)
-- `gen9doublesou` - Doubles OU
-- `gen9doublesubers` - Doubles Ubers
-- `gen9doublesuu` - Doubles UU
+## Legacy builder formats
 
-Older regulations (e.g. `gen9vgc2025regi`, `gen9vgc2024regh`, `gen8vgc2022`, `gen4vgc2010`) may
-still return usage stats if they were previously ingested, but are no longer part of the monthly
-auto-discovery unless Smogon keeps publishing fresh data for them.
-
-**VGC/doubles formats are auto-discovered monthly** from Smogon's stats directory
-(`bun run discover-formats` writes the result to `src/discovered-formats.json`) — a new regulation
-is picked up automatically, no code changes needed.
-
-### Pokémon Champions
-
-Pokémon Champions is a separate game with its own regulation cycle, tracked in
-`src/regulations/registry.ts` rather than the Showdown format list:
-
-| Regulation ID | Display name | Active | Smogon stats file |
-|---|---|---|---|
-| `champions-regma` | Pokémon Champions — Regulation M-A | 2026-04-08 → 2026-06-17 (ended) | `gen9championsvgc2026regma` |
-| `champions-regmb` | Pokémon Champions — Regulation M-B | 2026-06-17 → present **(current)** | `gen9championsvgc2026regmb` |
-
-Both regulation IDs work with `validate_team`, `get_usage_stats`, and `get_meta_trends`.
-`get_meta_trends` defaults to whichever regulation is newest with published Smogon stats when no
-`format` is given — currently `champions-regmb`.
-
-Champions team validation is partial: Mega Evolution forms and Victory Point mechanics are
-modeled for the roster/legality check, but full VP scoring isn't — see
-[`docs/CHAMPIONS_ROADMAP.md`](https://github.com/rborkow/pokeMCP/blob/main/docs/CHAMPIONS_ROADMAP.md)
-in the repo.
-
-## Generation 8
-
-### Singles
-- `gen8ou`, `gen8uu`, `gen8ru` — full usage-stats support
-- `gen8ubers`, `gen8nu`, `gen8pu`, `gen8lc` — ⚠️ minimal usage data on Smogon (very low ladder activity for these tiers)
-
-### Doubles
-- `gen8doublesou`
-
-## Generation 7
-
-### Singles
-- `gen7ou`, `gen7ubers`, `gen7uu`, `gen7ru`, `gen7nu` — full usage-stats support
-- `gen7pu`, `gen7lc` — ⚠️ minimal usage data on Smogon
-
-### Doubles
-- `gen7doublesou`
-
-## Usage
-
-Pass format IDs in tool calls:
-
-```json
-{
-  "pokemon": "Garchomp",
-  "format": "gen9ou"
-}
-```
-
-Or a Champions regulation:
-
-```json
-{
-  "type": "meta_threats",
-  "format": "champions-regmb"
-}
-```
-
-## Data Availability
-
-- ✅ **Full support** (usage stats + RAG strategy content): all Gen 9 Singles tiers, Gen 9
-  Doubles/VGC, and Gen 8/7 tiers with meaningful ladder activity
-- ⚠️ **Minimal data**: the Gen 7/8 tiers called out above have little to no published Smogon usage
-  data, so `get_usage_stats`/`get_meta_trends` may report "not found" for most Pokémon
-- 🆕 **Champions**: usage stats are published monthly by Smogon under the `gen9championsvgc2026regm*`
-  ids; team legality comes from a separately-fetched official allow-list, not Smogon
-
-## External Resources
-
-- [Smogon Strategy Dex](https://www.smogon.com/dex/sv/)
-- [Smogon Usage Stats](https://www.smogon.com/stats/)
-- [Pokémon Showdown](https://play.pokemonshowdown.com/)
+The secondary team builder still contains older Showdown singles and doubles formats for existing local teams and shared links. They are not the focus of the tournament-prep newsroom.
