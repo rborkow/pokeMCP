@@ -32,11 +32,11 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy-worker:
-    name: Deploy internal analysis worker
-    if: ${{ github.ref == 'refs/heads/main' && (inputs.target == 'all' || inputs.target == 'worker') }}
+  deploy-production:
+    name: Deploy ordered Workers
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     environment: production
     steps:
       - name: Checkout code
@@ -48,9 +48,11 @@ jobs:
           bun-version-file: package.json
 
       - name: Install dependencies
+        if: ${{ inputs.target == 'all' || inputs.target == 'worker' }}
         run: bun install --frozen-lockfile
 
       - name: Refuse deploy with pending META_DB migrations
+        if: ${{ inputs.target == 'all' || inputs.target == 'worker' }}
         run: |
           status="$(bunx wrangler d1 migrations list META_DB --remote --env production)"
           echo "$status"
@@ -60,38 +62,21 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Deploy pokemon-mcp-production
+        if: ${{ inputs.target == 'all' || inputs.target == 'worker' }}
         run: bun run deploy:production
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-  deploy-teambuilder:
-    name: Deploy Teambuilder
-    needs: deploy-worker
-    if: >-
-      ${{
-        always() &&
-        github.ref == 'refs/heads/main' &&
-        (inputs.target == 'all' || inputs.target == 'teambuilder') &&
-        (inputs.target == 'teambuilder' || needs.deploy-worker.result == 'success')
-      }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    environment: production
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version-file: apps/teambuilder/package.json
-
-      - name: Install dependencies
+      # Keep the dependent web deploy in this same protected job so each
+      # coordinated release has one approval and one production status.
+      - name: Install Teambuilder dependencies
+        if: ${{ inputs.target == 'all' || inputs.target == 'teambuilder' }}
         working-directory: ./apps/teambuilder
         run: bun install --frozen-lockfile
 
       - name: Refuse deploy with pending PREP_DB migrations
+        if: ${{ inputs.target == 'all' || inputs.target == 'teambuilder' }}
         working-directory: ./apps/teambuilder
         run: |
           status="$(bunx wrangler d1 migrations list PREP_DB --remote --config wrangler.toml)"
@@ -102,6 +87,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Build and deploy pokemcp-teambuilder
+        if: ${{ inputs.target == 'all' || inputs.target == 'teambuilder' }}
         working-directory: ./apps/teambuilder
         run: bun run deploy
         env:
