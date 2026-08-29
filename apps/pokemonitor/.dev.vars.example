@@ -1,0 +1,24 @@
+# Copy to .dev.vars for local `wrangler dev`. Do NOT commit .dev.vars.
+# In production these are set via `wrangler secret put <NAME>`.
+
+# Cloudflare API token — needs Account Analytics Read + Workers/R2/KV read
+# and AI Gateway Read (used for Analytics Engine SQL, GraphQL Analytics,
+# and provider-side AI Gateway usage logs).
+CLOUDFLARE_API_TOKEN=""
+
+# Claude summarization call.
+ANTHROPIC_API_KEY=""
+
+# Email delivery (Resend). Sender domain (REPORT_EMAIL_FROM) must be verified in Resend.
+RESEND_API_KEY=""
+
+# Dashboard auth — your Cloudflare Access team domain, e.g. yourteam.cloudflareaccess.com.
+# Leave blank in dev to bypass auth.
+CF_ACCESS_TEAM_DOMAIN=""
+
+# Optional: allow manual /run in production via ?token=… without an Access session.
+REPORT_RUN_TOKEN=""
+
+# Optional: route the Claude call through a Cloudflare AI Gateway for observability.
+CLOUDFLARE_AI_GATEWAY_URL=""
+CF_AIG_TOKEN=""

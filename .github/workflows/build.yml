@@ -126,12 +126,46 @@ jobs:
       - name: Success
         run: echo "✅ All builds passed"
 
+  build-pokemonitor:
+    name: Build pokemonitor
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: apps/pokemonitor/package.json
+
+      - name: Install dependencies
+        working-directory: ./apps/pokemonitor
+        run: bun install --frozen-lockfile
+
+      - name: Unit tests
+        working-directory: ./apps/pokemonitor
+        run: bun run test
+
+      - name: Typecheck
+        working-directory: ./apps/pokemonitor
+        run: bun run type-check
+
+      - name: Lint
+        working-directory: ./apps/pokemonitor
+        run: bun run lint
+
+      - name: Build check (dry run)
+        working-directory: ./apps/pokemonitor
+        run: bunx wrangler deploy --dry-run --outdir=dist
+
   deploy-production:
     name: Deploy production
     needs:
       - build-worker
       - build-teambuilder
       - build-docs
+      - build-pokemonitor
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy.yml
     with:

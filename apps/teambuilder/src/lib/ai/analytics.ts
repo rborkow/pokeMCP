@@ -75,7 +75,7 @@ export interface AiChatEvent {
     cacheReadTokens: number;
     teamSize: number;
     responseTimeMs: number;
-    source?: "web" | "mcp" | "rest";
+    source?: "web" | "mcp" | "rest" | "prep";
 }
 
 /** Fire-and-forget — writeDataPoint is synchronous and non-blocking. */

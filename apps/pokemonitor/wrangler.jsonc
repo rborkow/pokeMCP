@@ -1,0 +1,59 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "pokemonitor",
+    "main": "src/index.ts",
+    "compatibility_date": "2025-06-01",
+    "compatibility_flags": ["nodejs_compat"],
+    "observability": {
+        "enabled": true
+    },
+    // Custom domain for the Access-protected dashboard. Keep workers.dev enabled
+    // too, so /run automation has a non-Access path (token-gated in code).
+    "workers_dev": true,
+    "routes": [{ "pattern": "monitor.pokemcp.com", "custom_domain": true }],
+    // Daily report at 08:00 UTC — summarizes the previous full UTC day.
+    "triggers": {
+        "crons": ["0 8 * * *"]
+    },
+    "r2_buckets": [
+        {
+            // Existing pokeMCP bucket — read-only source of sampled interaction logs.
+            "binding": "INTERACTION_LOGS",
+            "bucket_name": "pokemcp-interaction-logs"
+        },
+        {
+            // New bucket holding generated daily reports (HTML + JSON), for the
+            // dashboard and historical trend lookups. Create with:
+            //   npx wrangler r2 bucket create pokemonitor-reports
+            "binding": "REPORTS",
+            "bucket_name": "pokemonitor-reports"
+        }
+    ],
+    "vars": {
+        "ENVIRONMENT": "production",
+        // Cloudflare account that owns the pokeMCP Workers, Analytics Engine
+        // dataset, KV, R2, and Web Analytics site. Used for GraphQL + SQL API calls.
+        "CLOUDFLARE_ACCOUNT_ID": "ddddc1dcb795daf3157a761f2bf58fc5",
+        // Analytics Engine dataset written by pokeMCP (src/analytics.ts).
+        "ANALYTICS_DATASET": "pokemcp-analytics",
+        // Web Analytics (RUM) site tag for the GraphQL `siteTag` filter.
+        // This is the site_tag from the dashboard URL (…/web-analytics?siteTag~in=…),
+        // which is DISTINCT from the beacon token in apps/teambuilder/.env.local.
+        "CF_ANALYTICS_SITE_TAG": "93e9e6a5d5924320bde226e932580d17",
+        // Production Worker script names to pull compute metrics for.
+        "WORKER_SCRIPTS": "pokemon-mcp-production,pokemcp-teambuilder",
+        // Optional Cloudflare AI Gateway id for Anthropic observability.
+        "AI_GATEWAY_ID": "pokemcp",
+        // Email delivery (Resend).
+        "REPORT_EMAIL_TO": "rborkows@gmail.com",
+        "REPORT_EMAIL_FROM": "pokemonitor@pokemcp.com"
+    }
+    // Secrets (set via `wrangler secret put <NAME>`):
+    //   CLOUDFLARE_API_TOKEN  — Account Analytics Read + Workers/R2/KV read (GraphQL + AE SQL)
+    //   ANTHROPIC_API_KEY     — Claude summarization call
+    //   RESEND_API_KEY        — email delivery
+    //   CF_ACCESS_TEAM_DOMAIN — Cloudflare Access JWT validation for the dashboard
+    //   CF_AIG_TOKEN          — (optional) AI Gateway auth token
+    //   CLOUDFLARE_AI_GATEWAY_URL — (optional) AI Gateway base URL
+    //   REPORT_RUN_TOKEN      — (optional) shared secret to allow manual /run in production
+}

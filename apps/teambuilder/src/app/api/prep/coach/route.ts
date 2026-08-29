@@ -1,6 +1,7 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import type { NextRequest } from "next/server";
 import { z } from "zod";
+import { getAnalyticsBinding, trackAIChat } from "@/lib/ai/analytics";
 import { createAnthropicClient } from "@/lib/ai/anthropic-client";
 import {
     MAX_COACH_HISTORY_MESSAGES,
@@ -58,6 +59,8 @@ export async function POST(request: NextRequest) {
     }
 
     const { plan, question, history } = parsed.data;
+    const analytics = getAnalyticsBinding();
+    const startTime = performance.now();
     try {
         const client = createAnthropicClient("prep");
         const message = await client.messages.create({
@@ -85,11 +88,31 @@ ${JSON.stringify(plan)}`,
             .map((block) => block.text)
             .join("\n")
             .trim();
+        trackAIChat(analytics, {
+            format: plan.format,
+            personality: "prep-coach",
+            mode: "vgc",
+            thinking: false,
+            inputTokens: message.usage.input_tokens ?? 0,
+            outputTokens: message.usage.output_tokens ?? 0,
+            cacheCreationTokens: message.usage.cache_creation_input_tokens ?? 0,
+            cacheReadTokens: message.usage.cache_read_input_tokens ?? 0,
+            teamSize: plan.ownTeam.pokemon.length,
+            responseTimeMs: Math.round(performance.now() - startTime),
+            source: "prep",
+        });
         return Response.json({ answer });
     } catch (error) {
-        console.error(JSON.stringify({ event: "prep_coach_error", message: error instanceof Error ? error.message : "unknown" }));
+        console.error(
+            JSON.stringify({
+                event: "prep_coach_error",
+                message: error instanceof Error ? error.message : "unknown",
+            }),
+        );
         return Response.json(
-            { error: "The matchup coach is unavailable right now. Your saved battle card is unaffected." },
+            {
+                error: "The matchup coach is unavailable right now. Your saved battle card is unaffected.",
+            },
             { status: 503 },
         );
     }
