@@ -1,9 +1,7 @@
 {
     "vgcFormats": [
         "gen4vgc2010",
-        "gen8vgc2022",
-        "gen9vgc2026regi",
-        "gen9vgc2026regibo3"
+        "gen6vgc2015"
     ],
     "doublesFormats": [
         "gen6doublesou",
@@ -15,14 +13,12 @@
     ],
     "championsFormats": [
         "gen9champions4v4doublesuu",
-        "gen9championsbssregma",
         "gen9championsbssregmb",
         "gen9championsou",
-        "gen9championsvgc2026regma",
-        "gen9championsvgc2026regmabo3",
+        "gen9championsuu",
         "gen9championsvgc2026regmb",
         "gen9championsvgc2026regmbbo3"
     ],
-    "discoveredAt": "2026-07-06T05:44:14.574Z",
-    "sourceMonth": "2026-06"
+    "discoveredAt": "2026-08-29T18:07:19.039Z",
+    "sourceMonth": "2026-07"
 }
