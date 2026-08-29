@@ -21,6 +21,7 @@ The former public MCP and REST tool endpoints are retired and return `410 Gone`.
 
 - `apps/teambuilder/` — Next.js 16 / OpenNext web application.
 - `apps/docs/` — Nextra documentation.
+- `apps/pokemonitor/` — daily Cloudflare Worker reporting, AI-usage monitoring, and email delivery.
 - `src/` — internal Cloudflare analysis worker, tournament ingestion, shared-team compatibility, and administration.
 - `migrations/d1/` — metagame and tournament D1 schema.
 - `apps/teambuilder/migrations/prep/` — account, team, plan, and coach-history schema.

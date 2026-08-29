@@ -23,6 +23,7 @@ on:
           - all
           - worker
           - teambuilder
+          - pokemonitor
 
 permissions:
   contents: read
@@ -95,5 +96,18 @@ jobs:
           # layout.tsx also hardcodes this as a fallback; set explicitly so the
           # build never depends on a gitignored .env.local.
           NEXT_PUBLIC_CF_ANALYTICS_TOKEN: 760a922acb5c4ad0bb6726211198945f
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Install pokemonitor dependencies
+        if: ${{ inputs.target == 'all' || inputs.target == 'pokemonitor' }}
+        working-directory: ./apps/pokemonitor
+        run: bun install --frozen-lockfile
+
+      - name: Deploy pokemonitor
+        if: ${{ inputs.target == 'all' || inputs.target == 'pokemonitor' }}
+        working-directory: ./apps/pokemonitor
+        run: bun run deploy
+        env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
