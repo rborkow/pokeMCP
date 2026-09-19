@@ -27,3 +27,14 @@ Champions VGC format names plus our vendored SHA — run it to detect a rotation
 
 After any refresh, commit the changed data (`packages/champions-mcp/data`,
 `src/cached-tournaments`) so the cache history is reproducible.
+
+## Hermes cron (already installed)
+
+- `champions-data-refresh` — daily 07:00, `--no-agent`, runs `~/.hermes/scripts/champions-refresh.sh`
+- `champions-regulation-watch` — Mondays 08:00, monitor-script `~/.hermes/scripts/champions-regulation.sh`;
+  the agent only wakes when the upstream format list or vendored SHA changes.
+
+`~/.hermes/scripts/champions-*.sh` are thin `exec bash <repo script>` wrappers, not symlinks:
+Hermes cron rejects script paths that resolve outside `~/.hermes/scripts/` ("escapes the scripts
+directory via traversal"). Also add a regulation entry under `src/regulations/` (root worker) when
+a new set lands — see `src/regulations/champions-regmc.ts` for the template.
