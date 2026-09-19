@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { HttpJev, type Jev, makeJev } from "../jev/client.js";
-import { heuristicPlayer } from "../sim/heuristic-player.js";
+import { heuristicPlayer, heuristicSamplingPlayer } from "../sim/heuristic-player.js";
 import { runSeries } from "../sim/runner.js";
 import { parseTeamInput, teamInputSchema } from "../team.js";
 import type { ToolDefinition } from "./registry.js";
@@ -75,12 +75,16 @@ export async function triageLosses(
     const losses: LossRecord[] = [];
     let totalGames = 0;
     for (const [i, opp] of opponents.entries()) {
+        // My side samples a random bring/lead per game (so losses can be
+        // attributed to lead choice rather than one fixed lead); the
+        // opponent keeps the fixed policy so the lead variable is mine
+        // alone and "wrong_lead" attribution stays simple.
         const series = await runSeries({
             p1: team,
             p2: opp.sets,
             games: gamesPerOpponent,
             seed: seed + i * 1000,
-            makeP1: heuristicPlayer,
+            makeP1: heuristicSamplingPlayer,
             makeP2: heuristicPlayer,
         });
         totalGames += series.games;

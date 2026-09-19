@@ -33,6 +33,15 @@ interface SidePokemonInfo {
     details?: string;
 }
 
+/** How the team-preview bring/lead is chosen. */
+export type LeadMode = "fixed" | "sample";
+
+/** The PRNG methods the lead sampler uses (see vendor sim/prng.ts). */
+interface Prng {
+    random(): number;
+    shuffle<T>(items: T[]): void;
+}
+
 /** One side's acting Pokémon as passed to the choice hooks; we read its move list. */
 interface ActivePokemon {
     moves?: { id?: string; move?: string; target?: string; disabled?: boolean }[];
@@ -61,6 +70,8 @@ interface RandomPlayerAIInstance {
         active: ActivePokemon | undefined,
         switches: { slot: number; pokemon: { details?: string; ident?: string } }[],
     ): number;
+    chooseTeamPreview(team: { details?: string }[]): string;
+    prng: Prng;
     start(): Promise<void>;
 }
 
@@ -151,6 +162,29 @@ class HeuristicPlayer extends RandomPlayerAIBase {
     private ownPokemon: SidePokemonInfo[] = [];
     /** Index of the active slot currently being asked for a choice. */
     private choiceIndex = 0;
+    private readonly leadMode: LeadMode;
+
+    constructor(stream: unknown, options: { seed?: unknown; mega?: number; leadMode?: LeadMode }) {
+        const { leadMode = "fixed", ...base } = options;
+        super(stream, base);
+        this.leadMode = leadMode;
+    }
+
+    /**
+     * Team preview. `fixed` keeps the inherited `default` (bring slots 1-4,
+     * lead 1+2 — every game identical). `sample` shuffles all 6 slots with
+     * the seeded PRNG and brings the first 4 of that order, so the brought
+     * set *and* the lead pair vary per game and lead-grading tools get
+     * coverage over all 15 pairs. The choice string `team 3412` is parsed
+     * by Side.chooseTeam as 1-indexed slot positions (comma-free digit
+     * split under 10 Pokémon); the first two entries lead.
+     */
+    override chooseTeamPreview(team: { details?: string }[]): string {
+        if (this.leadMode !== "sample") return super.chooseTeamPreview(team);
+        const slots = team.map((_, i) => i + 1);
+        this.prng.shuffle(slots);
+        return `team ${slots.slice(0, Math.min(4, slots.length)).join("")}`;
+    }
 
     override receiveLine(line: string): void {
         super.receiveLine(line);
@@ -423,3 +457,7 @@ class HeuristicPlayer extends RandomPlayerAIBase {
 
 export const heuristicPlayer: PlayerFactory = (stream, seed) =>
     new HeuristicPlayer(stream, { seed: [seed, 1, 2, 3], mega: 1 });
+
+/** Same heuristic, but each game samples a fresh 4-of-6 bring and lead order. */
+export const heuristicSamplingPlayer: PlayerFactory = (stream, seed) =>
+    new HeuristicPlayer(stream, { seed: [seed, 1, 2, 3], mega: 1, leadMode: "sample" });

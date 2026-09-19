@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { z } from "zod";
-import { heuristicPlayer } from "../sim/heuristic-player.js";
+import { heuristicPlayer, heuristicSamplingPlayer } from "../sim/heuristic-player.js";
 import { type PlayerFactory, randomPlayer, runSeries, type SeriesResult } from "../sim/runner.js";
 import { type PokemonSet, parseTeamInput, setSchema, teamInputSchema } from "../team.js";
 import type { ToolDefinition } from "./registry.js";
@@ -45,15 +45,20 @@ const CAVEATS: Record<SimPolicy, string> = {
     heuristic:
         "_Caveat: players follow a heuristic policy (greedy damage/Protect/Fake Out heuristics, no prediction). " +
         "This measures raw-number robustness and lead viability, not skilled play._",
+    "heuristic-sample":
+        "_Caveat: players follow a heuristic policy with a randomised bring/lead each game (seeded); " +
+        "greedy damage/Protect/Fake Out heuristics, no prediction. " +
+        "This measures raw-number robustness and lead viability across all leads, not skilled play._",
     random: "_Caveat: both sides pick random legal actions. This measures raw-number robustness and lead viability, not skilled play._",
 };
 
 const POLICY_FACTORIES: Record<SimPolicy, PlayerFactory> = {
     heuristic: heuristicPlayer,
+    "heuristic-sample": heuristicSamplingPlayer,
     random: randomPlayer,
 };
 
-type SimPolicy = "heuristic" | "random";
+type SimPolicy = "heuristic" | "heuristic-sample" | "random";
 
 /** Appended to both sim tool descriptions: the sim performs no legality validation. */
 const SIM_LEGALITY_CAVEAT =
@@ -190,10 +195,11 @@ const seedSchema = z
     .optional()
     .describe("Base seed; equal seeds give equal runs.");
 const policySchema = z
-    .enum(["random", "heuristic"])
+    .enum(["random", "heuristic", "heuristic-sample"])
     .optional()
     .describe(
-        "Opponent/self action policy; heuristic = greedy damage + Protect/Fake Out logic (default)",
+        "Opponent/self action policy; heuristic = greedy damage + Protect/Fake Out logic (default), " +
+            "heuristic-sample = heuristic with randomised bring/lead per game",
     );
 
 export const simulateMatchupTool: ToolDefinition = {

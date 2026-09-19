@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { HttpJev, type Jev, makeJev, type Question } from "../jev/client.js";
 import { championsDex } from "../showdown.js";
-import { heuristicPlayer } from "../sim/heuristic-player.js";
+import { heuristicSamplingPlayer } from "../sim/heuristic-player.js";
 import { runSeries, type SeriesResult } from "../sim/runner.js";
 import { type PokemonSet, parseTeamInput, teamInputSchema } from "../team.js";
 import type { ToolDefinition } from "./registry.js";
@@ -78,20 +78,24 @@ export async function gradeLeads(
     const opponent = parseTeamInput({ paste: args.opponentPaste, sets: args.opponentSets });
     requireSixSets(team, "Your team");
     requireSixSets(opponent, "The opponent team");
-    const games = Math.min(Math.max(1, args.games ?? 30), 500);
+    const games = Math.min(Math.max(1, args.games ?? 60), 500);
     const seed = args.seed ?? 1;
+    // Sampling policy on BOTH sides: real opponents vary their leads too, and
+    // the grade table only means anything if my 15 pairs actually get played.
     const series = await runSeries({
         p1: team,
         p2: opponent,
         games,
         seed,
-        makeP1: heuristicPlayer,
-        makeP2: heuristicPlayer,
+        makeP1: heuristicSamplingPlayer,
+        makeP2: heuristicSamplingPlayer,
     });
     const pairs = leadPairs(team);
     const rows = simRows(pairs, series);
+    const sampledPairs = rows.filter((r) => r.games > 0).length;
     const best = bestSimLead(rows);
     const bestLine = best ? `Sim best: ${best.lead} (${best.wins}/${best.games})` : "Sim best: n/a";
+    const coverageLine = `Lead coverage: ${sampledPairs}/${rows.length} pairs sampled`;
 
     const questions: Record<string, Question> = {
         lead: {
@@ -140,6 +144,7 @@ export async function gradeLeads(
             "|---|---|---|",
             ...table,
             "",
+            coverageLine,
         );
         if (leadAnswer?.type === "choice") {
             lines.push(
@@ -170,6 +175,7 @@ export async function gradeLeads(
             "|---|---|---|",
             ...table,
             "",
+            coverageLine,
             bestLine,
             "_Jev not configured (TYPESAFE_API_KEY)_",
         );
@@ -181,7 +187,8 @@ export const gradeLeadsTool: ToolDefinition = {
     name: "grade_leads",
     description:
         "Rank all 15 possible opening leads of your 6 with two graders: a heuristic-policy sim " +
-        "against one opponent team and Jev (TypeSafe System One) reasoning over the team + sim " +
+        "(sampling a random bring/lead each game) against one opponent team and Jev (TypeSafe " +
+        "System One) reasoning over the team + sim " +
         "winrates. Reports Jev's pick, the sim's best lead, whether they disagree, and whether to " +
         "bring the Mega." +
         " Teams are imported but not legality-checked — run validate_team first; illegal sets may mis-simulate.",
@@ -194,7 +201,7 @@ export const gradeLeadsTool: ToolDefinition = {
             .int()
             .min(1)
             .optional()
-            .describe("Sim games to run for the lead winrates (default 30, cap 500)."),
+            .describe("Sim games to run for the lead winrates (default 60, cap 500)."),
         seed: z
             .number()
             .int()

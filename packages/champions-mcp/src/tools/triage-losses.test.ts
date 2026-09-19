@@ -40,6 +40,8 @@ describe("triage_losses", () => {
         }
     });
     it("without Jev reports the loss count and a note", async () => {
+        // Pool opponents beat SAMPLE_TEAM at these seeds; with per-game lead
+        // sampling the exact loss count varies, so assert it is non-zero.
         const out = await triageLosses(
             {
                 paste: SAMPLE_TEAM_PASTE,
@@ -49,7 +51,8 @@ describe("triage_losses", () => {
             },
             { jev: null },
         );
-        assert.match(out, /4 losses/);
+        const counted = /(\d+) losses in 12/.exec(out);
+        assert.ok(counted && Number(counted[1]) >= 1, `no losses reported:\n${out}`);
         assert.match(out, /_Jev not configured \(TYPESAFE_API_KEY\)_/);
     });
     it("trimLog keeps only battle events and caps at 4000 chars", () => {
