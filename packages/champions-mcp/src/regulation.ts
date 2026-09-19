@@ -23,7 +23,7 @@ export interface LegalMega {
     ability: string;
 }
 
-interface DexSpecies {
+export interface DexSpecies {
     exists: boolean;
     name: string;
     baseSpecies: string;
@@ -35,7 +35,8 @@ interface DexSpecies {
     abilities: Record<string, string>;
 }
 
-function isLegal(s: DexSpecies): boolean {
+/** Shared legality predicate: present in the dex, not Illegal, obtainable in the current set. */
+export function isLegalSpecies(s: DexSpecies): boolean {
     return (
         s.exists &&
         s.tier !== "Illegal" &&
@@ -47,14 +48,14 @@ const isMega = (s: DexSpecies) => /Mega/.test(s.forme ?? "");
 
 export function legalSpecies(): string[] {
     return (championsDex.species.all() as DexSpecies[])
-        .filter((s) => isLegal(s) && !isMega(s))
+        .filter((s) => isLegalSpecies(s) && !isMega(s))
         .map((s) => s.name)
         .sort();
 }
 
 export function legalMegas(): LegalMega[] {
     return (championsDex.species.all() as DexSpecies[])
-        .filter((s) => isLegal(s) && isMega(s) && s.requiredItem)
+        .filter((s) => isLegalSpecies(s) && isMega(s) && s.requiredItem)
         .map((s) => ({
             name: s.name,
             base: s.baseSpecies,

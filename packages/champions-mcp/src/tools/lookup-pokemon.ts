@@ -1,4 +1,6 @@
 import { z } from "zod";
+import type { DexSpecies } from "../regulation.js";
+import { isLegalSpecies } from "../regulation.js";
 import { CHAMPIONS_FORMAT_ID, championsDex, TeamValidator } from "../showdown.js";
 import type { ToolDefinition } from "./registry.js";
 import { sourceLine } from "./source.js";
@@ -32,11 +34,11 @@ function legalMoves(speciesName: string): string[] {
 export async function lookupPokemon(args: { pokemon: string; moves?: boolean }): Promise<string> {
     const species = championsDex.species.get(args.pokemon);
     if (!species.exists) return `Unknown Pokémon: ${args.pokemon}`;
-    const legal = species.tier !== "Illegal" && species.isNonstandard !== "Past";
+    const legal = isLegalSpecies(species as DexSpecies);
     const megas = (species.otherFormes ?? [])
-        .map((f: string) => championsDex.species.get(f))
+        .map((f: string) => championsDex.species.get(f) as DexSpecies)
         .filter(
-            (f: { forme: string; tier: string }) => /Mega/.test(f.forme) && f.tier !== "Illegal",
+            (f: DexSpecies) => /Mega/.test(f.forme ?? "") && isLegalSpecies(f) && f.requiredItem,
         );
     const lines = [
         `**${species.name}** — ${species.types.join("/")} — BST ${statLine(species.baseStats)}`,
