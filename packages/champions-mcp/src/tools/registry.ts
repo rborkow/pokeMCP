@@ -1,4 +1,5 @@
 import type { ZodRawShape } from "zod";
+import { getRegulationTool } from "./get-regulation.js";
 import { validateTeamTool } from "./validate-team.js";
 
 export interface ToolDefinition<S extends ZodRawShape = ZodRawShape> {
@@ -17,6 +18,7 @@ export const TOOLS: ToolDefinition[] = [
         execute: async () => "champions-mcp ok",
     },
     validateTeamTool,
+    getRegulationTool,
 ];
 
 export function findTool(name: string): ToolDefinition | undefined {
