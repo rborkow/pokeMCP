@@ -1,4 +1,5 @@
 import type { ZodRawShape } from "zod";
+import { calcStatsTool } from "./calc-stats.js";
 import { getRegulationTool } from "./get-regulation.js";
 import { lookupPokemonTool } from "./lookup-pokemon.js";
 import { validateTeamTool } from "./validate-team.js";
@@ -21,6 +22,7 @@ export const TOOLS: ToolDefinition[] = [
     validateTeamTool,
     getRegulationTool,
     lookupPokemonTool,
+    calcStatsTool,
 ];
 
 export function findTool(name: string): ToolDefinition | undefined {
