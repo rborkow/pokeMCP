@@ -4,6 +4,7 @@ import { calcStatsTool } from "./calc-stats.js";
 import { getRegulationTool } from "./get-regulation.js";
 import { getTournamentTeamsTool } from "./get-tournament-teams.js";
 import { getUsageTool } from "./get-usage.js";
+import { gradeLeadsTool } from "./grade-leads.js";
 import { lookupPokemonTool } from "./lookup-pokemon.js";
 import { metaSnapshotTool } from "./meta-snapshot.js";
 import { evaluateTeamTool, simulateMatchupTool } from "./simulate.js";
@@ -34,6 +35,7 @@ export const TOOLS: ToolDefinition[] = [
     metaSnapshotTool,
     simulateMatchupTool,
     evaluateTeamTool,
+    gradeLeadsTool,
 ];
 
 export function findTool(name: string): ToolDefinition | undefined {
