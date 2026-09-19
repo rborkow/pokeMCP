@@ -15,6 +15,12 @@ export const CURRENT_REGULATION = {
     statPointsPerStat: 32,
 } as const;
 
+/**
+ * Previous regulation's Showdown id; used as usage fallback until the current
+ * one has enough ladder months published (Smogon lags a regulation flip).
+ */
+export const PREVIOUS_FORMAT_ID = "gen9championsvgc2026regmb";
+
 export interface LegalMega {
     name: string;
     base: string;

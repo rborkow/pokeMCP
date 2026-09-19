@@ -49,8 +49,8 @@ weekly regulation watch (`hermes cron list`).
 - **Stat Points**: Champions uses 66 Stat Points total (max 32 per stat), not EVs. In pastes,
   the `EVs:` line carries Stat Points; `calc_*` args take `statPoints: {hp,atk,def,spa,spd,spe}`.
 - **Sim caveat**: matches run under a greedy heuristic policy (damage-max + Protect/Fake Out,
-  no prediction). Every policy's team preview is `default` — slots 1–4, lead 1+2 — so edits to
-  Pokémon in slots 5–6 never change the win rate unless `policy: "heuristic-sample"` is used
-  (it samples a 4-of-6 bring each game, but currently errors against teams carrying charged
-  moves like Electro Shot — known bug in the heuristic target choice). Win rates measure the
-  heuristic, not skilled play.
+  no prediction). `evaluate_team` and `simulate_matchup` default to `policy: "heuristic-sample"`:
+  each game samples a seeded random 4-of-6 bring and lead order, so every slot is exercised and
+  a single-set edit — even in slots 5–6 — moves the number. Pass `policy: "heuristic"` for the
+  fixed slots-1–4 bring (lead 1+2); there, edits to slots 5–6 are invisible by construction.
+  Win rates measure the heuristic, not skilled play.

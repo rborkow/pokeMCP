@@ -24,6 +24,19 @@ describe("simulate tools", () => {
         assert.match(out, /Overall: \d+\/\d+/);
         assert.match(out, /Hardest opponents/);
     });
+    it("evaluate_team defaults to the sampling policy and is deterministic per args", async () => {
+        const run = () =>
+            evaluateTeam({
+                paste: SAMPLE_TEAM_PASTE,
+                gamesPerOpponent: 2,
+                seed: 3,
+                maxOpponents: 2,
+            });
+        const out = await run();
+        assert.match(out, /heuristic-sample-policy players/);
+        assert.equal(out, await run());
+        assert.match(out, /Each game samples a random bring\/lead \(seeded\)/);
+    });
     it("simulate_matchup rejects a one-set team instead of dying mid-battle", async () => {
         await assert.rejects(
             simulateMatchup({

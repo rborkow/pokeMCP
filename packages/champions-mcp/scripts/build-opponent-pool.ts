@@ -9,7 +9,8 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { championsDex } from "../src/showdown.js";
+import { PREVIOUS_FORMAT_ID } from "../src/regulation.js";
+import { CHAMPIONS_FORMAT_ID, championsDex } from "../src/showdown.js";
 import type { PokemonSet } from "../src/team.js";
 import { loadEvents } from "../src/tournaments.js";
 import { latestUsage, loadUsageFromDir, topSpreads } from "../src/usage.js";
@@ -78,7 +79,7 @@ function parseSpread(spread: string): Spread | undefined {
 /** Ladder spread for a species from the newest blob of each format, M-C before M-B. */
 function ladderSpread(species: string): Spread | undefined {
     const blobs = loadUsageFromDir();
-    for (const format of ["gen9championsvgc2026regmc", "gen9championsvgc2026regmb"]) {
+    for (const format of [CHAMPIONS_FORMAT_ID, PREVIOUS_FORMAT_ID]) {
         const blob = latestUsage(blobs, format);
         if (!blob) continue;
         const top = topSpreads(blob, species, 1)[0];

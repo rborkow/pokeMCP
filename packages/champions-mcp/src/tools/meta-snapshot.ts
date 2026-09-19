@@ -1,11 +1,10 @@
-import { CURRENT_REGULATION, regulationStatus } from "../regulation.js";
+import { CURRENT_REGULATION, PREVIOUS_FORMAT_ID, regulationStatus } from "../regulation.js";
 import { CHAMPIONS_FORMAT_ID } from "../showdown.js";
 import { aggregateUsage, loadEvents } from "../tournaments.js";
 import { latestUsage, loadUsageFromDir, usageRanking } from "../usage.js";
 import type { ToolDefinition } from "./registry.js";
 import { sourceLine } from "./source.js";
 
-const PREVIOUS_FORMAT_ID = "gen9championsvgc2026regmb";
 const SNAPSHOT_DAYS = 30;
 
 /** One-call digest: regulation, ladder usage, tournament top-cut usage, and data freshness. */

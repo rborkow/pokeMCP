@@ -58,6 +58,7 @@ interface SideRequest {
 /** One candidate action as built by the inherited request handler. */
 interface CandidateMove {
     choice: string;
+    /** `target` is the REQUEST's target kind; undefined on locked move slots. */
     move: { slot?: number; target?: string; zMove?: boolean };
 }
 
@@ -318,6 +319,15 @@ class HeuristicPlayer extends RandomPlayerAIBase {
         const data = dexMove(moveId);
         if (!data) return { score: 5, choice: m.choice };
 
+        // Locked states — charge-move release (Electro Shot), Hyper Beam
+        // recharge, Outrage fury, Dig/Fly, Solar Beam release — come through
+        // the request as a single move entry with NO `target` field, and
+        // Side.chooseMove rejects any explicit targetLoc for them ("You
+        // can't choose a target for Electro Shot"). Play the inherited
+        // candidate's choice verbatim; only score it (both foes, best max),
+        // never rewrite it with a target index.
+        const locked = m.move.target === undefined;
+
         if (data.category === "Status" && !zMove) {
             return { score: this.scoreStatus(data, foeList, self), choice: m.choice };
         }
@@ -330,9 +340,12 @@ class HeuristicPlayer extends RandomPlayerAIBase {
         if (flags.selfdestruct || data.selfdestruct === "always") mult *= 0.2;
         if (typeof data.accuracy === "number") mult *= data.accuracy / 100;
 
-        const targetKind = data.target ?? "normal";
+        // The request's own target kind is authoritative for what the sim
+        // will accept; fall back to the Dex only for evaluation detail.
+        const targetKind = m.move.target ?? data.target ?? "normal";
         const spread = SPREAD_TARGETS.has(targetKind);
-        const explicit = !spread && !targetArg?.startsWith("-") && EXPLICIT_TARGETS.has(targetKind);
+        const explicit =
+            !locked && !spread && !targetArg?.startsWith("-") && EXPLICIT_TARGETS.has(targetKind);
 
         let targets: (FoeState | null)[];
         if (targetArg && !explicit) {
@@ -342,9 +355,10 @@ class HeuristicPlayer extends RandomPlayerAIBase {
         } else if (targetKind === "self" || targetKind.startsWith("all")) {
             targets = [];
         } else {
-            // Single-target (possibly with an inherited random foe target we
-            // are free to re-pick): evaluate against both living foes.
-            targets = explicit ? foeList : [foeList[0] ?? foeList[1] ?? null];
+            // Single-target with a free foe (explicit): evaluate both. Locked
+            // (targetless) moves hit a fixed target the sim picks, but the
+            // score still reads best-of foes so tied scores rank sensibly.
+            targets = explicit || locked ? foeList : [foeList[0] ?? foeList[1] ?? null];
         }
 
         const values = targets.map((foe) => (foe ? this.damage(data, foe, self) : -1));

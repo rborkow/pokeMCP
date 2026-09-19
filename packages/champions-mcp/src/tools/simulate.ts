@@ -44,11 +44,11 @@ export function loadPool(path = POOL_PATH): PoolTeam[] {
 const CAVEATS: Record<SimPolicy, string> = {
     heuristic:
         "_Caveat: players follow a heuristic policy (greedy damage/Protect/Fake Out heuristics, no prediction). " +
-        "This measures raw-number robustness and lead viability, not skilled play._",
+        "Team preview is fixed: slots 1–4, lead 1+2, so edits to Pokémon in slots 5–6 never move this number._",
     "heuristic-sample":
-        "_Caveat: players follow a heuristic policy with a randomised bring/lead each game (seeded); " +
-        "greedy damage/Protect/Fake Out heuristics, no prediction. " +
-        "This measures raw-number robustness and lead viability across all leads, not skilled play._",
+        "_Caveat: players follow a heuristic policy (greedy damage/Protect/Fake Out heuristics, no prediction). " +
+        "Each game samples a random bring/lead (seeded), so every slot is exercised and single-set edits " +
+        "move the number; use policy=heuristic for the fixed slots-1–4 bring._",
     random: "_Caveat: both sides pick random legal actions. This measures raw-number robustness and lead viability, not skilled play._",
 };
 
@@ -60,12 +60,15 @@ const POLICY_FACTORIES: Record<SimPolicy, PlayerFactory> = {
 
 type SimPolicy = "heuristic" | "heuristic-sample" | "random";
 
+/** Sampling bring/lead by default so every slot is exercised in the A/B harness. */
+const DEFAULT_POLICY: SimPolicy = "heuristic-sample";
+
 /** Appended to both sim tool descriptions: the sim performs no legality validation. */
 const SIM_LEGALITY_CAVEAT =
     " Teams are imported but not legality-checked — run validate_team first; illegal sets may mis-simulate.";
 
 function factoryFor(policy: SimPolicy | undefined): PlayerFactory {
-    return POLICY_FACTORIES[policy ?? "heuristic"];
+    return POLICY_FACTORIES[policy ?? "heuristic-sample"];
 }
 
 /**
@@ -109,7 +112,7 @@ export async function simulateMatchup(args: {
     requireSixSets(opponent, "The opponent team");
     const games = Math.min(Math.max(1, args.games ?? 50), 500);
     const seed = args.seed ?? 1;
-    const policy: SimPolicy = args.policy ?? "heuristic";
+    const policy: SimPolicy = args.policy ?? DEFAULT_POLICY;
     const factory = factoryFor(policy);
     const series = await runSeries({
         p1: team,
@@ -148,7 +151,7 @@ export async function evaluateTeam(args: {
     }
     const gamesPerOpponent = Math.min(Math.max(1, args.gamesPerOpponent ?? 20), 200);
     const seed = args.seed ?? 1;
-    const policy: SimPolicy = args.policy ?? "heuristic";
+    const policy: SimPolicy = args.policy ?? DEFAULT_POLICY;
     const factory = factoryFor(policy);
     const opponents = pool.slice(0, Math.max(1, args.maxOpponents ?? 20));
     const records: OpponentRecord[] = [];
@@ -198,15 +201,18 @@ const policySchema = z
     .enum(["random", "heuristic", "heuristic-sample"])
     .optional()
     .describe(
-        "Opponent/self action policy; heuristic = greedy damage + Protect/Fake Out logic (default), " +
-            "heuristic-sample = heuristic with randomised bring/lead per game",
+        "Action policy for both sides (default heuristic-sample). heuristic-sample = greedy damage + " +
+            "Protect/Fake Out heuristics with a seeded random bring/lead sampled per game, so all six " +
+            "slots are exercised; heuristic = the same scoring with the fixed slots-1–4 bring; " +
+            "random = random legal actions.",
     );
 
 export const simulateMatchupTool: ToolDefinition = {
     name: "simulate_matchup",
     description:
-        "Simulate your team vs one opponent team in the Champions Reg M-C sim (heuristic-policy players) and " +
-        "report win rate, ties, average turns, and your best opening leads." +
+        "Simulate your team vs one opponent team in the Champions Reg M-C sim (heuristic players with a " +
+        "seeded random bring/lead sampled per game by default) and report win rate, ties, average turns, " +
+        "and your best opening leads." +
         SIM_LEGALITY_CAVEAT,
     schema: {
         ...teamInputSchema,
@@ -223,7 +229,9 @@ export const evaluateTeamTool: ToolDefinition = {
     name: "evaluate_team",
     description:
         "Evaluate your team against the cached Reg M-C tournament opponent pool (top-cut teams with " +
-        "ladder-imputed Stat Points) and rank opponents by loss rate." +
+        "ladder-imputed Stat Points) and rank opponents by loss rate. Each game samples a random " +
+        "bring/lead (seeded), so every slot is exercised and single-set edits move the number; use " +
+        "policy=heuristic for the fixed slots-1–4 bring." +
         SIM_LEGALITY_CAVEAT,
     schema: {
         ...teamInputSchema,

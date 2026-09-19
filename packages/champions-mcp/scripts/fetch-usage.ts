@@ -7,11 +7,12 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { gzipSync } from "node:zlib";
+import { PREVIOUS_FORMAT_ID } from "../src/regulation.js";
 import { CHAMPIONS_FORMAT_ID } from "../src/showdown.js";
 import { USAGE_DIR, type UsageBlob, type UsageEntry } from "../src/usage.js";
 
 // Keep the previous regulation for trend context / fallback until the new one is published.
-const FORMATS = [CHAMPIONS_FORMAT_ID, "gen9championsvgc2026regmb"];
+const FORMATS = [CHAMPIONS_FORMAT_ID, PREVIOUS_FORMAT_ID];
 const CUTOFF = Number(process.env.CUTOFF ?? 1630);
 const UA = "pokemcp-champions-mcp/0.1 (+https://pokemcp.com)";
 

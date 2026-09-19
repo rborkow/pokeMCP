@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { PREVIOUS_FORMAT_ID } from "../regulation.js";
 import { CHAMPIONS_FORMAT_ID, championsDex } from "../showdown.js";
 import {
     latestUsage,
@@ -9,8 +10,6 @@ import {
     usageRanking,
 } from "../usage.js";
 import type { ToolDefinition } from "./registry.js";
-
-const PREVIOUS_FORMAT_ID = "gen9championsvgc2026regmb";
 
 function header(blob: UsageBlob): string {
     return `**Usage — ${blob.format} (${blob.month}, cutoff ${blob.cutoff}, ${blob.battles.toLocaleString("en-US")} battles)**\n_Source: smogon.com/stats chaos dump, cached locally in packages/champions-mcp/data/usage_`;

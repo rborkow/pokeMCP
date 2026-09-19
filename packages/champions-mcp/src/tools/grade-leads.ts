@@ -138,7 +138,7 @@ export async function gradeLeads(
         });
         lines.push(
             `**Lead grades** — ${games} heuristic-policy games, seed ${seed}, sim + Jev ranked over all 15 pairs`,
-            `${sourceLine("lead grades: sim (heuristic) + Jev " + (process.env.JEV_MODEL ?? "jev-latest"))}`,
+            `${sourceLine(`lead grades: sim (heuristic) + Jev ${process.env.JEV_MODEL ?? "jev-latest"}`)}`,
             "",
             "| lead | sim wins/games | Jev p |",
             "|---|---|---|",
