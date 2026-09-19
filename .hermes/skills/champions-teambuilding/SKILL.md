@@ -27,7 +27,10 @@ memory — the regulation rotates every ~3 months and Champions rebalances moves
    attacker={species,…} defender={…} move=…` (doubles field is the default).
 7. `evaluate_team paste=… seed=<fixed>`; then change ONE thing and re-run with the same seed.
    Report the delta with its caveat (heuristic policy, not skilled play). `simulate_matchup`
-   (same seed, `opponentPaste=`) against the hardest opponents for lead stats.
+   (same seed, `opponentPaste=`) against the hardest opponents for lead stats. After `evaluate_team`,
+   run `triage_losses` (same seed) for a typed loss-cause histogram and `grade_leads` against the
+   two hardest opponents. Jev answers are graded guesses — report its confidence and whether it
+   agrees with the sim.
 8. Output: final paste + a table of "why each mon", the 3 hardest opponents, and the unverified
    assumptions.
 
