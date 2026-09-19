@@ -7,7 +7,7 @@
     "bin": { "champions-mcp": "./bin/champions-mcp.ts" },
     "scripts": {
         "vendor": "bash scripts/vendor-showdown.sh",
-        "test": "node --import tsx --test src/**/*.test.ts",
+        "test": "node --import tsx --test \"src/**/*.test.ts\"",
         "start": "bun run bin/champions-mcp.ts",
         "type-check": "tsc --noEmit"
     },
