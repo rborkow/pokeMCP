@@ -4,11 +4,14 @@
     "private": true,
     "type": "module",
     "description": "Local stdio MCP server for Pokémon Champions VGC team building",
-    "bin": { "champions-mcp": "./bin/champions-mcp.ts" },
+    "bin": {
+        "champions-mcp": "./bin/champions-mcp.ts"
+    },
     "scripts": {
         "vendor": "bash scripts/vendor-showdown.sh",
         "test": "node --import tsx --test \"src/**/*.test.ts\"",
         "start": "bun run bin/champions-mcp.ts",
+        "fetch-usage": "bun run scripts/fetch-usage.ts",
         "type-check": "tsc --noEmit"
     },
     "dependencies": {

@@ -9,6 +9,6 @@
         "skipLibCheck": true,
         "types": ["node"]
     },
-    "include": ["src/**/*.ts", "bin/**/*.ts"],
+    "include": ["src/**/*.ts", "bin/**/*.ts", "scripts/**/*.ts"],
     "exclude": ["vendor/**"]
 }
