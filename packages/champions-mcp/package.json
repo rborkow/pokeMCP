@@ -12,6 +12,7 @@
         "test": "node --import tsx --test \"src/**/*.test.ts\"",
         "start": "bun run bin/champions-mcp.ts",
         "fetch-usage": "bun run scripts/fetch-usage.ts",
+        "build-opponent-pool": "bun run scripts/build-opponent-pool.ts",
         "type-check": "tsc --noEmit"
     },
     "dependencies": {

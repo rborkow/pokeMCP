@@ -6,6 +6,7 @@ import { getTournamentTeamsTool } from "./get-tournament-teams.js";
 import { getUsageTool } from "./get-usage.js";
 import { lookupPokemonTool } from "./lookup-pokemon.js";
 import { metaSnapshotTool } from "./meta-snapshot.js";
+import { evaluateTeamTool, simulateMatchupTool } from "./simulate.js";
 import { validateTeamTool } from "./validate-team.js";
 
 export interface ToolDefinition<S extends ZodRawShape = ZodRawShape> {
@@ -31,6 +32,8 @@ export const TOOLS: ToolDefinition[] = [
     getUsageTool,
     getTournamentTeamsTool,
     metaSnapshotTool,
+    simulateMatchupTool,
+    evaluateTeamTool,
 ];
 
 export function findTool(name: string): ToolDefinition | undefined {
