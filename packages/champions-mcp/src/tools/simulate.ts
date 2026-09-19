@@ -2,7 +2,8 @@ import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { z } from "zod";
-import { runSeries, type SeriesResult } from "../sim/runner.js";
+import { heuristicPlayer } from "../sim/heuristic-player.js";
+import { type PlayerFactory, randomPlayer, runSeries, type SeriesResult } from "../sim/runner.js";
 import { type PokemonSet, parseTeamInput, setSchema, teamInputSchema } from "../team.js";
 import type { ToolDefinition } from "./registry.js";
 import { sourceLine } from "./source.js";
@@ -40,8 +41,23 @@ export function loadPool(path = POOL_PATH): PoolTeam[] {
     });
 }
 
-const CAVEAT =
-    "_Caveat: both sides pick random legal actions. This measures raw-number robustness and lead viability, not skilled play._";
+const CAVEATS: Record<SimPolicy, string> = {
+    heuristic:
+        "_Caveat: players follow a heuristic policy (greedy damage/Protect/Fake Out heuristics, no prediction). " +
+        "This measures raw-number robustness and lead viability, not skilled play._",
+    random: "_Caveat: both sides pick random legal actions. This measures raw-number robustness and lead viability, not skilled play._",
+};
+
+const POLICY_FACTORIES: Record<SimPolicy, PlayerFactory> = {
+    heuristic: heuristicPlayer,
+    random: randomPlayer,
+};
+
+type SimPolicy = "heuristic" | "random";
+
+function factoryFor(policy: SimPolicy | undefined): PlayerFactory {
+    return POLICY_FACTORIES[policy ?? "heuristic"];
+}
 
 function summarize(series: SeriesResult): string {
     const wins = series.p1Wins;
@@ -63,16 +79,26 @@ export async function simulateMatchup(args: {
     opponentSets?: unknown[];
     games?: number;
     seed?: number;
+    policy?: SimPolicy;
 }): Promise<string> {
     const team = parseTeamInput(args);
     const opponent = parseTeamInput({ paste: args.opponentPaste, sets: args.opponentSets });
     const games = Math.min(Math.max(1, args.games ?? 50), 500);
     const seed = args.seed ?? 1;
-    const series = await runSeries({ p1: team, p2: opponent, games, seed });
+    const policy: SimPolicy = args.policy ?? "heuristic";
+    const factory = factoryFor(policy);
+    const series = await runSeries({
+        p1: team,
+        p2: opponent,
+        games,
+        seed,
+        makeP1: factory,
+        makeP2: factory,
+    });
     return (
-        `**Matchup sim** — ${games} games, seed ${seed}, random-policy players (see caveat)\n` +
+        `**Matchup sim** — ${games} games, seed ${seed}, ${policy}-policy players (see caveat)\n` +
         `${sourceLine()}\n\n` +
-        `${summarize(series)}${leadLines(series)}\n\n${CAVEAT}`
+        `${summarize(series)}${leadLines(series)}\n\n${CAVEATS[policy]}`
     );
 }
 
@@ -88,6 +114,7 @@ export async function evaluateTeam(args: {
     gamesPerOpponent?: number;
     seed?: number;
     maxOpponents?: number;
+    policy?: SimPolicy;
 }): Promise<string> {
     const team = parseTeamInput(args);
     const pool = loadPool();
@@ -96,6 +123,8 @@ export async function evaluateTeam(args: {
     }
     const gamesPerOpponent = Math.min(Math.max(1, args.gamesPerOpponent ?? 20), 200);
     const seed = args.seed ?? 1;
+    const policy: SimPolicy = args.policy ?? "heuristic";
+    const factory = factoryFor(policy);
     const opponents = pool.slice(0, Math.max(1, args.maxOpponents ?? 20));
     const records: OpponentRecord[] = [];
     for (const [i, opp] of opponents.entries()) {
@@ -104,6 +133,8 @@ export async function evaluateTeam(args: {
             p2: opp.sets,
             games: gamesPerOpponent,
             seed: seed + i * 1000,
+            makeP1: factory,
+            makeP2: factory,
         });
         records.push({ source: opp.source, wins: series.p1Wins, games: series.games });
     }
@@ -112,7 +143,7 @@ export async function evaluateTeam(args: {
     const byHardest = [...records].sort(
         (a, b) => a.wins / a.games - b.wins / b.games || a.source.localeCompare(b.source),
     );
-    const header = `**Team evaluation** — ${records.length} opponents × ${gamesPerOpponent} games, seed ${seed}`;
+    const header = `**Team evaluation** — ${records.length} opponents × ${gamesPerOpponent} games, seed ${seed}, ${policy}-policy players`;
     const hardest = byHardest
         .slice(0, 5)
         .map((r) => `- ${r.wins}/${r.games} vs ${r.source}`)
@@ -127,7 +158,7 @@ export async function evaluateTeam(args: {
         `Overall: ${totalWins}/${totalGames} (${Math.round((totalWins / totalGames) * 100)}%)\n\n` +
         `**Hardest opponents:**\n${hardest}\n\n` +
         `**Easiest:**\n${easiest}\n\n` +
-        `${CAVEAT}\nCompare runs with the same seed and pool when A/B-ing a change.`
+        `${CAVEATS[policy]}\nCompare runs with the same seed and pool when A/B-ing a change.`
     );
 }
 
@@ -138,11 +169,17 @@ const seedSchema = z
     .min(0)
     .optional()
     .describe("Base seed; equal seeds give equal runs.");
+const policySchema = z
+    .enum(["random", "heuristic"])
+    .optional()
+    .describe(
+        "Opponent/self action policy; heuristic = greedy damage + Protect/Fake Out logic (default)",
+    );
 
 export const simulateMatchupTool: ToolDefinition = {
     name: "simulate_matchup",
     description:
-        "Simulate your team vs one opponent team in the Champions Reg M-C sim (random-policy players) and " +
+        "Simulate your team vs one opponent team in the Champions Reg M-C sim (heuristic-policy players) and " +
         "report win rate, ties, average turns, and your best opening leads.",
     schema: {
         ...teamInputSchema,
@@ -150,6 +187,7 @@ export const simulateMatchupTool: ToolDefinition = {
         opponentSets: z.array(z.any()).optional().describe("Structured sets of the opponent team."),
         games: gamesSchema,
         seed: seedSchema,
+        policy: policySchema,
     },
     execute: (args) => simulateMatchup(args),
 };
@@ -174,6 +212,7 @@ export const evaluateTeamTool: ToolDefinition = {
             .min(1)
             .optional()
             .describe("Cap on pool opponents (default 20)."),
+        policy: policySchema,
     },
     execute: (args) => evaluateTeam(args),
 };
