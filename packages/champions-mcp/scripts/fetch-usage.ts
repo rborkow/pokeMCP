@@ -1,11 +1,12 @@
 /**
  * Fetch Smogon chaos usage for the current Champions ladder into data/usage/.
- * Writes {format}-{YYYY-MM}.json (normalized). Idempotent; re-run monthly.
+ * Writes {format}-{YYYY-MM}.json.gz (trimmed + gzipped). Idempotent; re-run monthly.
  *   bun run scripts/fetch-usage.ts                   # latest month, cutoff 1630
  *   CUTOFF=1760 MONTH=2026-08 bun run scripts/fetch-usage.ts
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { gzipSync } from "node:zlib";
 import { CHAMPIONS_FORMAT_ID } from "../src/showdown.js";
 import { USAGE_DIR, type UsageBlob, type UsageEntry } from "../src/usage.js";
 
@@ -13,6 +14,19 @@ import { USAGE_DIR, type UsageBlob, type UsageEntry } from "../src/usage.js";
 const FORMATS = [CHAMPIONS_FORMAT_ID, "gen9championsvgc2026regmb"];
 const CUTOFF = Number(process.env.CUTOFF ?? 1630);
 const UA = "pokemcp-champions-mcp/0.1 (+https://pokemcp.com)";
+
+// Trim policy: the raw chaos dump is ~14 MB (283 Pokémon x full teammate/spread
+// maps). Anything under 0.5% usage is noise, and long tails per field add
+// megabytes nobody reads. Keeping top-N by count caps the cache under 1 MB gz.
+const MIN_USAGE = 0.005;
+const TOP_N = {
+    Abilities: 5,
+    Items: 15,
+    Moves: 20,
+    Spreads: 15,
+    Teammates: 25,
+    "Checks and Counters": 25,
+} as const;
 
 async function latestMonth(): Promise<string> {
     if (process.env.MONTH) return process.env.MONTH;
@@ -48,6 +62,32 @@ function normaliseCounters(raw: unknown): UsageEntry["Checks and Counters"] {
     return out;
 }
 
+const round1 = (v: number) => Math.round(v * 10) / 10;
+
+/** Keep the top-N entries of a `{key: count}` map, rounded to 1 decimal. */
+function topNCounts(map: Record<string, number>, n: number): Record<string, number> {
+    return Object.fromEntries(
+        Object.entries(map)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, n)
+            .map(([k, v]) => [k, round1(v)]),
+    );
+}
+
+/** Same for Checks-and-Counters, ranked by `n` (encounter count). Only `n` is
+ * a count — `p`/`d` stay full-precision; get_usage's score depends on them. */
+function topNCounters(
+    map: UsageEntry["Checks and Counters"],
+    n: number,
+): UsageEntry["Checks and Counters"] {
+    return Object.fromEntries(
+        Object.entries(map)
+            .sort((a, b) => b[1].n - a[1].n)
+            .slice(0, n)
+            .map(([k, v]) => [k, { n: round1(v.n), p: v.p, d: v.d }]),
+    );
+}
+
 const month = await latestMonth();
 mkdirSync(USAGE_DIR, { recursive: true });
 for (const format of FORMATS) {
@@ -62,22 +102,38 @@ for (const format of FORMATS) {
         data?: Record<string, Partial<UsageEntry> & Record<string, unknown>>;
     };
     const pokemon: UsageBlob["pokemon"] = {};
+    let survivors = 0;
     for (const [name, e] of Object.entries(raw.data ?? {})) {
+        const usage = Number(e.usage) || 0;
+        if (usage < MIN_USAGE) continue;
+        survivors++;
         pokemon[name] = {
-            usage: Number(e.usage) || 0,
-            Abilities: (e.Abilities ?? {}) as Record<string, number>,
-            Items: (e.Items ?? {}) as Record<string, number>,
-            Spreads: (e.Spreads ?? {}) as Record<string, number>,
-            Moves: (e.Moves ?? {}) as Record<string, number>,
-            Teammates: (e.Teammates ?? {}) as Record<string, number>,
-            "Checks and Counters": normaliseCounters(e["Checks and Counters"]),
+            usage,
+            Abilities: topNCounts((e.Abilities ?? {}) as Record<string, number>, TOP_N.Abilities),
+            Items: topNCounts((e.Items ?? {}) as Record<string, number>, TOP_N.Items),
+            Spreads: topNCounts((e.Spreads ?? {}) as Record<string, number>, TOP_N.Spreads),
+            Moves: topNCounts((e.Moves ?? {}) as Record<string, number>, TOP_N.Moves),
+            Teammates: topNCounts((e.Teammates ?? {}) as Record<string, number>, TOP_N.Teammates),
+            "Checks and Counters": topNCounters(
+                normaliseCounters(e["Checks and Counters"]),
+                TOP_N["Checks and Counters"],
+            ),
         };
     }
     const battles = Number(raw.info?.["number of battles"]) || 0;
-    const blob: UsageBlob = { format, month, cutoff: CUTOFF, battles, pokemon };
-    const file = join(USAGE_DIR, `${format}-${month}.json`);
-    // no pretty-print: a real dump is ~1-2 MB
-    writeFileSync(file, JSON.stringify(blob));
-    console.log(`wrote ${file} (${Object.keys(pokemon).length} Pokémon, ${battles} battles)`);
+    const blob: UsageBlob = {
+        format,
+        month,
+        cutoff: CUTOFF,
+        battles,
+        pokemon,
+        trimmed: { minUsage: MIN_USAGE, topN: { ...TOP_N } },
+    };
+    const file = join(USAGE_DIR, `${format}-${month}.json.gz`);
+    // no pretty-print: gzip does the compressing
+    writeFileSync(file, gzipSync(JSON.stringify(blob), { level: 9 }));
+    console.log(
+        `wrote ${file} (${survivors}/${Object.keys(raw.data ?? {}).length} Pokémon ≥ ${MIN_USAGE} usage, ${battles} battles)`,
+    );
     await new Promise((r) => setTimeout(r, 2000)); // be polite to Smogon
 }

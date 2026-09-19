@@ -1,11 +1,13 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { gunzipSync } from "node:zlib";
 
 /**
  * Local cache of Smogon monthly chaos usage dumps for Champions formats.
  * Files live in data/usage/ and are written by scripts/fetch-usage.ts;
- * each file is a normalized `{format}-{YYYY-MM}.json` UsageBlob.
+ * each file is a normalized `{format}-{YYYY-MM}.json` (or `.json.gz`, the
+ * trimmed + gzipped form) UsageBlob. Both are read by `loadUsageFromDir`.
  */
 export interface UsageEntry {
     usage: number;
@@ -17,12 +19,27 @@ export interface UsageEntry {
     "Checks and Counters": Record<string, { n: number; p: number; d: number }>;
 }
 
+/** Trim policy applied by scripts/fetch-usage.ts before writing the cache. */
+export interface UsageTrimPolicy {
+    minUsage: number;
+    topN: {
+        Abilities: number;
+        Items: number;
+        Moves: number;
+        Spreads: number;
+        Teammates: number;
+        "Checks and Counters": number;
+    };
+}
+
 export interface UsageBlob {
     format: string;
     month: string;
     cutoff: number;
     battles: number;
     pokemon: Record<string, UsageEntry>;
+    /** Absent on untrimmed blobs (e.g. hand-written test fixtures). */
+    trimmed?: UsageTrimPolicy;
 }
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -31,8 +48,14 @@ export const USAGE_DIR = join(here, "..", "data", "usage");
 export function loadUsageFromDir(dir = USAGE_DIR): UsageBlob[] {
     if (!existsSync(dir)) return [];
     return readdirSync(dir)
-        .filter((f) => f.endsWith(".json"))
-        .map((f) => JSON.parse(readFileSync(join(dir, f), "utf-8")) as UsageBlob);
+        .filter((f) => f.endsWith(".json") || f.endsWith(".json.gz"))
+        .map((f) => {
+            const buf = readFileSync(join(dir, f));
+            const text = f.endsWith(".gz")
+                ? gunzipSync(buf).toString("utf-8")
+                : buf.toString("utf-8");
+            return JSON.parse(text) as UsageBlob;
+        });
 }
 
 export function latestUsage(blobs: UsageBlob[], format: string): UsageBlob | undefined {
