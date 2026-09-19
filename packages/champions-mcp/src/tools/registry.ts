@@ -8,6 +8,7 @@ import { gradeLeadsTool } from "./grade-leads.js";
 import { lookupPokemonTool } from "./lookup-pokemon.js";
 import { metaSnapshotTool } from "./meta-snapshot.js";
 import { evaluateTeamTool, simulateMatchupTool } from "./simulate.js";
+import { triageLossesTool } from "./triage-losses.js";
 import { validateTeamTool } from "./validate-team.js";
 
 export interface ToolDefinition<S extends ZodRawShape = ZodRawShape> {
@@ -36,6 +37,7 @@ export const TOOLS: ToolDefinition[] = [
     simulateMatchupTool,
     evaluateTeamTool,
     gradeLeadsTool,
+    triageLossesTool,
 ];
 
 export function findTool(name: string): ToolDefinition | undefined {
