@@ -1,6 +1,6 @@
 import { strict as assert } from "node:assert";
 import { describe, it } from "node:test";
-import { SAMPLE_TEAM_PASTE } from "../team.js";
+import { parseTeamInput, SAMPLE_TEAM_PASTE } from "../team.js";
 import { evaluateTeam, simulateMatchup } from "./simulate.js";
 
 describe("simulate tools", () => {
@@ -23,5 +23,30 @@ describe("simulate tools", () => {
         });
         assert.match(out, /Overall: \d+\/\d+/);
         assert.match(out, /Hardest opponents/);
+    });
+    it("simulate_matchup rejects a one-set team instead of dying mid-battle", async () => {
+        await assert.rejects(
+            simulateMatchup({
+                sets: [{ species: "Rillaboom", moves: ["Fake Out"] }],
+                opponentSets: [{ species: "Rillaboom", moves: ["Fake Out"] }],
+                games: 1,
+            }),
+            /exactly 6/,
+        );
+    });
+    it("simulate_matchup rejects a short opponent team", async () => {
+        await assert.rejects(
+            simulateMatchup({
+                paste: SAMPLE_TEAM_PASTE,
+                opponentSets: [{ species: "Rillaboom", moves: ["Fake Out"] }],
+                games: 1,
+            }),
+            /exactly 6/,
+        );
+    });
+    it("evaluate_team rejects a five-set team", async () => {
+        const fiveSets = JSON.parse(JSON.stringify(parseTeamInput({ paste: SAMPLE_TEAM_PASTE })));
+        fiveSets.pop();
+        await assert.rejects(evaluateTeam({ sets: fiveSets, gamesPerOpponent: 1 }), /exactly 6/);
     });
 });

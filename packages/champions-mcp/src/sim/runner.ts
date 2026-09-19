@@ -51,13 +51,29 @@ export async function runGame(
     makeP2: PlayerFactory = randomPlayer,
 ): Promise<GameResult> {
     const streams = getPlayerStreams(new BattleStream());
-    const errors: unknown[] = [];
+    let gameOver = false;
+    let rejectStart: ((error: unknown) => void) | undefined;
+    const startFailure = new Promise<never>((_, reject) => {
+        rejectStart = reject;
+    });
     const watch = (promise: Promise<void> | void) => {
         if (promise && typeof (promise as Promise<void>).then === "function") {
-            (promise as Promise<void>).then(undefined, (e) => errors.push(e));
+            (promise as Promise<void>).then(undefined, (error) => {
+                if (gameOver) {
+                    const msg =
+                        error instanceof Error ? (error.message ?? String(error)) : String(error);
+                    console.error("sim: late player error ignored:", msg);
+                } else {
+                    rejectStart?.(error instanceof Error ? error : new Error(String(error)));
+                }
+            });
         }
     };
     watch(makeP1(streams.p1, seed).start());
+    // The +1000 p2 offset is an arbitrary decorrelation offset. Note that
+    // evaluateTeam's per-opponent `seed + i * 1000` stride means opponent i's
+    // p2 shares a raw seed with opponent i+1's p1; that is harmless — the two
+    // sides draw from different RNG streams and use different teams.
     watch(makeP2(streams.p2, seed + 1000).start());
     streams.omniscient.write(
         `>start ${JSON.stringify({ formatid: CHAMPIONS_FORMAT_ID, seed: [seed, seed, seed, seed] })}\n` +
@@ -78,7 +94,7 @@ export async function runGame(
     });
     try {
         for (;;) {
-            const next = await Promise.race([iterator.next(), deadline]);
+            const next = await Promise.race([iterator.next(), deadline, startFailure]);
             if (next.done) break;
             for (const line of String(next.value).split("\n")) {
                 if (!line.trim()) continue;
@@ -99,14 +115,13 @@ export async function runGame(
             }
             if (winner) break;
         }
-    } catch (error) {
-        if (errors.length) throw errors[0];
-        throw error;
     } finally {
+        // A player .start() rejection arriving before this point rejects the
+        // race above (via startFailure); one arriving after is logged away.
+        gameOver = true;
         if (timer !== undefined) clearTimeout(timer);
         await iterator.return?.();
     }
-    if (errors.length) throw errors[0];
     if (!winner) throw new Error(`battle ended without a result (seed ${seed})`);
     return { seed, winner, turns, p1Lead: leads.p1, p2Lead: leads.p2, log };
 }

@@ -33,6 +33,19 @@ interface SidePokemonInfo {
     details?: string;
 }
 
+/** One side's acting Pokémon as passed to the choice hooks; we read its move list. */
+interface ActivePokemon {
+    moves?: { id?: string; move?: string; target?: string; disabled?: boolean }[];
+}
+
+/** The subset of a `request` object the policy reads before delegating upward. */
+interface SideRequest {
+    side?: {
+        id?: string;
+        pokemon?: SidePokemonInfo[];
+    };
+}
+
 /** One candidate action as built by the inherited request handler. */
 interface CandidateMove {
     choice: string;
@@ -42,10 +55,10 @@ interface CandidateMove {
 /** The members of RandomPlayerAI this subclass touches. */
 interface RandomPlayerAIInstance {
     receiveLine(line: string): void;
-    receiveRequest(request: unknown): void;
-    chooseMove(active: any, moves: CandidateMove[]): string;
+    receiveRequest(request: SideRequest): void;
+    chooseMove(active: ActivePokemon, moves: CandidateMove[]): string;
     chooseSwitch(
-        active: any,
+        active: ActivePokemon | undefined,
         switches: { slot: number; pokemon: { details?: string; ident?: string } }[],
     ): number;
     start(): Promise<void>;
@@ -167,7 +180,7 @@ class HeuristicPlayer extends RandomPlayerAIBase {
         }
     }
 
-    override receiveRequest(request: any): void {
+    override receiveRequest(request: SideRequest): void {
         const side = request?.side;
         if (side && typeof side.id === "string") {
             this.mySide = side.id;
@@ -237,7 +250,7 @@ class HeuristicPlayer extends RandomPlayerAIBase {
         return this.ownPokemon[this.choiceIndex];
     }
 
-    override chooseMove(active: any, moves: CandidateMove[]): string {
+    override chooseMove(active: ActivePokemon, moves: CandidateMove[]): string {
         const foeList = this.foes();
         const self = this.selfInfo();
         this.choiceIndex += 1;
@@ -256,7 +269,7 @@ class HeuristicPlayer extends RandomPlayerAIBase {
 
     /** Score one candidate action; may retarget single-target moves to the best foe. */
     private scoreCandidate(
-        active: any,
+        active: ActivePokemon,
         m: CandidateMove,
         foeList: (FoeState | null)[],
         self: SidePokemonInfo | undefined,
@@ -364,7 +377,7 @@ class HeuristicPlayer extends RandomPlayerAIBase {
     }
 
     override chooseSwitch(
-        active: any,
+        active: ActivePokemon | undefined,
         switches: { slot: number; pokemon: { details?: string; ident?: string } }[],
     ): number {
         this.choiceIndex += 1;

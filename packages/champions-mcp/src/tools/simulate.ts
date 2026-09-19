@@ -55,8 +55,25 @@ const POLICY_FACTORIES: Record<SimPolicy, PlayerFactory> = {
 
 type SimPolicy = "heuristic" | "random";
 
+/** Appended to both sim tool descriptions: the sim performs no legality validation. */
+const SIM_LEGALITY_CAVEAT =
+    " Teams are imported but not legality-checked — run validate_team first; illegal sets may mis-simulate.";
+
 function factoryFor(policy: SimPolicy | undefined): PlayerFactory {
     return POLICY_FACTORIES[policy ?? "heuristic"];
+}
+
+/**
+ * The sim layer has no legality checks: a team with fewer than 6 Pokémon
+ * dies mid-battle with an opaque internal error, so fail at the tool edge.
+ * Run-shape only — species/moves/Stat-Points legality is `validate_team`'s job.
+ */
+export function requireSixSets(team: PokemonSet[], label: string): void {
+    if (team.length !== 6) {
+        throw new Error(
+            `${label} must have exactly 6 Pokémon (got ${team.length}). Run validate_team first.`,
+        );
+    }
 }
 
 function summarize(series: SeriesResult): string {
@@ -83,6 +100,8 @@ export async function simulateMatchup(args: {
 }): Promise<string> {
     const team = parseTeamInput(args);
     const opponent = parseTeamInput({ paste: args.opponentPaste, sets: args.opponentSets });
+    requireSixSets(team, "Your team");
+    requireSixSets(opponent, "The opponent team");
     const games = Math.min(Math.max(1, args.games ?? 50), 500);
     const seed = args.seed ?? 1;
     const policy: SimPolicy = args.policy ?? "heuristic";
@@ -117,6 +136,7 @@ export async function evaluateTeam(args: {
     policy?: SimPolicy;
 }): Promise<string> {
     const team = parseTeamInput(args);
+    requireSixSets(team, "Your team");
     const pool = loadPool();
     if (!pool.length) {
         return "Opponent pool missing. Run `bun run --cwd packages/champions-mcp build-opponent-pool`.";
@@ -180,7 +200,8 @@ export const simulateMatchupTool: ToolDefinition = {
     name: "simulate_matchup",
     description:
         "Simulate your team vs one opponent team in the Champions Reg M-C sim (heuristic-policy players) and " +
-        "report win rate, ties, average turns, and your best opening leads.",
+        "report win rate, ties, average turns, and your best opening leads." +
+        SIM_LEGALITY_CAVEAT,
     schema: {
         ...teamInputSchema,
         opponentPaste: z.string().optional().describe("Showdown paste of the opponent team."),
@@ -196,7 +217,8 @@ export const evaluateTeamTool: ToolDefinition = {
     name: "evaluate_team",
     description:
         "Evaluate your team against the cached Reg M-C tournament opponent pool (top-cut teams with " +
-        "ladder-imputed Stat Points) and rank opponents by loss rate.",
+        "ladder-imputed Stat Points) and rank opponents by loss rate." +
+        SIM_LEGALITY_CAVEAT,
     schema: {
         ...teamInputSchema,
         gamesPerOpponent: z
