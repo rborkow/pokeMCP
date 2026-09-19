@@ -48,6 +48,18 @@ export function getLatestStatsRegulation(): RegulationSet | undefined {
 }
 
 /**
+ * Newest regulation (by start date) that has a Limitless format id.
+ *
+ * Limitless tournament ingestion keys its query off this so a new regulation
+ * takes over automatically once it is registered with a `limitlessFormatId`.
+ */
+export function getLatestLimitlessRegulation(): RegulationSet | undefined {
+    return REGULATIONS.filter((r) => r.limitlessFormatId).sort((a, b) =>
+        b.startDate.localeCompare(a.startDate),
+    )[0];
+}
+
+/**
  * Showdown usage-stats format ids that the regulations mirror.
  *
  * These are the `gen9champions…`-style Smogon formats backing each regulation

@@ -25,8 +25,10 @@ export const CHAMPIONS_REGMC: RegulationSet = {
     enforceSpeciesClause: true,
     enforceItemClause: true,
     maxMoves: 4,
-    // Official web-view URL for M-C not yet located; the champions-mcp package
-    // derives legality from the Showdown `champions` mod instead (see packages/).
+    // Official M-C legality web-view URL not yet located, so
+    // scripts/fetch-champions-legality.ts cannot ingest it and loadRegulation()
+    // throws LegalityNotIngestedError for this id until `officialLegalityUrl` is
+    // set. A Showdown-mod-derived roster is planned as an alternative source.
     legalityKvKey: "champions-regmc:_legality",
     showdownFormatId: "gen9championsvgc2026regmc",
     limitlessFormatId: "M-C",

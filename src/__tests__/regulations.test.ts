@@ -17,7 +17,12 @@ import { fileURLToPath } from "node:url";
 import { CHAMPIONS_REGMA } from "../regulations/champions-regma.js";
 import { CHAMPIONS_REGMB } from "../regulations/champions-regmb.js";
 import { LegalityNotIngestedError, loadRegulation } from "../regulations/loader.js";
-import { getRegulation, isRegulationId, listRegulationIds } from "../regulations/registry.js";
+import {
+    getLatestLimitlessRegulation,
+    getRegulation,
+    isRegulationId,
+    listRegulationIds,
+} from "../regulations/registry.js";
 import type { LegalityKvBlob } from "../regulations/types.js";
 import {
     validateTeamForRegulation,
@@ -129,17 +134,20 @@ describe("regulation registry", () => {
         assert.equal(isRegulationId("champions-regmc"), true);
         const regmc = getRegulation("champions-regmc");
         assert.ok(regmc);
-        assert.equal(regmc.startDate, "2026-09-08");
+        assert.equal(regmc.startDate, CHAMPIONS_REGMB.endDate);
         assert.equal(regmc.endDate, "2026-12-01");
-        assert.equal(CHAMPIONS_REGMB.endDate, "2026-09-08");
         assert.equal(regmc.showdownFormatId, "gen9championsvgc2026regmc");
         assert.equal(regmc.limitlessFormatId, "M-C");
         assert.equal(regmc.legalityKvKey, "champions-regmc:_legality");
         // M-C adds Megas on top of M-B's; Salamence is newly allowed.
         const names = new Set(regmc.megaForms.map((m) => m.megaName));
         assert.ok(names.has("Salamence-Mega"));
-        assert.ok(regmc.megaForms.length >= CHAMPIONS_REGMB.megaForms.length);
+        for (const m of CHAMPIONS_REGMB.megaForms)
+            assert.ok(names.has(m.megaName), `M-C should keep ${m.megaName}`);
     });
+
+    it("getLatestLimitlessRegulation returns M-C", () =>
+        assert.equal(getLatestLimitlessRegulation()?.id, "champions-regmc"));
 });
 
 describe("loadRegulation", () => {
