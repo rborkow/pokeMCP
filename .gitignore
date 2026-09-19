@@ -234,3 +234,6 @@ src/cached-stats/
 # Exported interaction logs (for fine-tuning)
 exported-logs/
 .omx/
+
+# champions-mcp vendored simulator (rebuilt by `bun run champions:vendor`)
+packages/champions-mcp/vendor/pokemon-showdown/

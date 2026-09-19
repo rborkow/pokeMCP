@@ -1,0 +1,6 @@
+# The repo gained a second workspace (packages/champions-mcp); Bun's default
+# linker for multi-workspace installs is "isolated", which breaks root `src/`
+# imports that relied on hoisted transitive deps (agents -> @modelcontextprotocol/sdk,
+# mimetext). Keep the hoisted layout the root project has always used.
+[install]
+linker = "hoisted"
