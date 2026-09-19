@@ -1,4 +1,4 @@
-import { calcStat, Generations } from "@smogon/calc";
+import { calcStat, Generations, toID } from "@smogon/calc";
 
 /** @smogon/calc models Pokémon Champions as generation 0 (calcStatChampions). */
 export const CHAMPIONS_GEN = Generations.get(0);
@@ -7,6 +7,11 @@ export const STAT_KEYS: StatKey[] = ["hp", "atk", "def", "spa", "spd", "spe"];
 export type StatPoints = Partial<Record<StatKey, number>>;
 
 export function assertStatPoints(sp: StatPoints): void {
+    for (const k of Object.keys(sp)) {
+        if (!STAT_KEYS.includes(k as StatKey)) {
+            throw new Error(`Unknown stat key: ${k} (use hp/atk/def/spa/spd/spe)`);
+        }
+    }
     let total = 0;
     for (const k of STAT_KEYS) {
         const v = sp[k] ?? 0;
@@ -16,6 +21,10 @@ export function assertStatPoints(sp: StatPoints): void {
         total += v;
     }
     if (total > 66) throw new Error(`Total Stat Points must be ≤ 66 (got ${total})`);
+}
+
+export function assertNature(nature: string): void {
+    if (!CHAMPIONS_GEN.natures.get(toID(nature))) throw new Error(`Unknown nature: ${nature}`);
 }
 
 export function championsStats(

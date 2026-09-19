@@ -1,7 +1,6 @@
-import { toID } from "@smogon/calc";
 import { z } from "zod";
 import { championsDex } from "../showdown.js";
-import { CHAMPIONS_GEN, championsStats, STAT_KEYS, type StatPoints } from "../stats.js";
+import { assertNature, championsStats, STAT_KEYS, type StatPoints } from "../stats.js";
 import type { ToolDefinition } from "./registry.js";
 import { sourceLine } from "./source.js";
 
@@ -13,7 +12,11 @@ export async function calcStats(args: {
     const species = championsDex.species.get(args.pokemon);
     if (!species.exists) return `Unknown Pokémon: ${args.pokemon}`;
     const nature = args.nature ?? "Hardy";
-    if (!CHAMPIONS_GEN.natures.get(toID(nature))) return `Unknown nature: ${nature}`;
+    try {
+        assertNature(nature);
+    } catch (error) {
+        return (error as Error).message;
+    }
     const stats = championsStats(species.baseStats, args.statPoints ?? {}, nature);
     const sp = STAT_KEYS.map((k) => `${args.statPoints?.[k] ?? 0} ${k}`).join(" / ");
     return [
