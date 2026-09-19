@@ -31,4 +31,11 @@ describe("get_usage", {
             assert.match(out, /previous regulation|Reg M-B/);
         }
     });
+    it("reports an unknown Pokémon the same way for every per-Pokémon view", async () => {
+        const expected =
+            /Nopemon not in this month's data \(usage below the 0\.5% cache cutoff, or check the Showdown display name\)\./;
+        for (const type of ["pokemon", "teammates", "counters"] as const) {
+            assert.match(await getUsage({ type, pokemon: "Nopemon" }), expected, `type=${type}`);
+        }
+    });
 });

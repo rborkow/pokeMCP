@@ -113,6 +113,8 @@ export const getTournamentTeamsTool: ToolDefinition = {
         limit: z
             .number()
             .int()
+            .min(1)
+            .max(100)
             .optional()
             .describe(
                 "Max results: sets when filtering by Pokémon (default 10), else events listed (default 5)",

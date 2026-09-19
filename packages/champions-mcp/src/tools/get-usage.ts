@@ -34,8 +34,14 @@ function resolvePokemon(blob: UsageBlob, query: string): string | undefined {
 }
 
 /** Smogon dumps key items/moves/abilities by id; render the champions-dex name. */
-function displayName(kind: "items" | "moves" | "abilities", id: string): string {
-    const entry = (championsDex as any)[kind].get(id);
+const DEX_TABLES = {
+    Items: championsDex.items,
+    Moves: championsDex.moves,
+    Abilities: championsDex.abilities,
+} as const;
+
+function displayName(field: keyof typeof DEX_TABLES, id: string): string {
+    const entry = DEX_TABLES[field].get(id);
     return entry?.exists && entry.name ? entry.name : id;
 }
 
@@ -60,8 +66,12 @@ export async function getUsage(args: UsageArgs): Promise<string> {
     }
     const limit = args.limit ?? 10;
     const target = args.pokemon ? (resolvePokemon(blob, args.pokemon) ?? args.pokemon) : "";
-    const fmt = (rows: { key: string; pct: number }[], kind?: "items" | "moves" | "abilities") =>
+    const fmt = (rows: { key: string; pct: number }[], kind?: keyof typeof DEX_TABLES) =>
         rows.map((r) => `${kind ? displayName(kind, r.key) : r.key} ${r.pct}%`).join(", ");
+    // Single shared branch: every per-Pokémon view reports a missing Pokémon alike.
+    if (args.type !== "ranking" && !blob.pokemon[target]) {
+        return `${header(blob)}${note}\n\n${target} not in this month's data (usage below the 0.5% cache cutoff, or check the Showdown display name).`;
+    }
     switch (args.type) {
         case "ranking":
             return `${header(blob)}${note}\n\n${usageRanking(blob, limit)
@@ -70,16 +80,13 @@ export async function getUsage(args: UsageArgs): Promise<string> {
         case "pokemon": {
             const p = target;
             const e = blob.pokemon[p];
-            if (!e) {
-                return `${header(blob)}${note}\n\n${p} not in this month's data (use Showdown display names, e.g. "Urshifu-Rapid-Strike").`;
-            }
             return [
                 header(blob) + note,
                 "",
                 `**${p}** — ${Math.round(e.usage * 1000) / 10}% usage`,
-                `- Items: ${fmt(topOf(blob, p, "Items", limit), "items")}`,
-                `- Abilities: ${fmt(topOf(blob, p, "Abilities", 3), "abilities")}`,
-                `- Moves: ${fmt(topOf(blob, p, "Moves", limit), "moves")}`,
+                `- Items: ${fmt(topOf(blob, p, "Items", limit), "Items")}`,
+                `- Abilities: ${fmt(topOf(blob, p, "Abilities", 3), "Abilities")}`,
+                `- Moves: ${fmt(topOf(blob, p, "Moves", limit), "Moves")}`,
                 `- Spreads (Nature:HP/Atk/Def/SpA/SpD/Spe Stat Points): ${topSpreads(blob, p, limit)
                     .map((s) => `${s.spread} ${s.pct}%`)
                     .join(", ")}`,
@@ -118,7 +125,7 @@ export const getUsageTool: ToolDefinition = {
             .string()
             .optional()
             .describe("Showdown display name; case and spaces insensitive"),
-        limit: z.number().int().optional(),
+        limit: z.number().int().min(1).max(100).optional(),
         format: z
             .string()
             .optional()

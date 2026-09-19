@@ -64,6 +64,11 @@ function normaliseCounters(raw: unknown): UsageEntry["Checks and Counters"] {
 
 const round1 = (v: number) => Math.round(v * 10) / 10;
 
+/** Sum of a `{key: count}` map — the honest denominator once topNCounts trims it. */
+function sumCounts(map: Record<string, number>): number {
+    return Object.values(map).reduce((a, b) => a + b, 0);
+}
+
 /** Keep the top-N entries of a `{key: count}` map, rounded to 1 decimal. */
 function topNCounts(map: Record<string, number>, n: number): Record<string, number> {
     return Object.fromEntries(
@@ -107,17 +112,34 @@ for (const format of FORMATS) {
         const usage = Number(e.usage) || 0;
         if (usage < MIN_USAGE) continue;
         survivors++;
+        // Capture the FULL map totals before topNCounts trims the tails away;
+        // src/usage.ts divides by these so shares stay true percentages of
+        // all battles rather than of whatever survived the trim.
+        const rawMaps = {
+            Abilities: (e.Abilities ?? {}) as Record<string, number>,
+            Items: (e.Items ?? {}) as Record<string, number>,
+            Spreads: (e.Spreads ?? {}) as Record<string, number>,
+            Moves: (e.Moves ?? {}) as Record<string, number>,
+            Teammates: (e.Teammates ?? {}) as Record<string, number>,
+        };
         pokemon[name] = {
             usage,
-            Abilities: topNCounts((e.Abilities ?? {}) as Record<string, number>, TOP_N.Abilities),
-            Items: topNCounts((e.Items ?? {}) as Record<string, number>, TOP_N.Items),
-            Spreads: topNCounts((e.Spreads ?? {}) as Record<string, number>, TOP_N.Spreads),
-            Moves: topNCounts((e.Moves ?? {}) as Record<string, number>, TOP_N.Moves),
-            Teammates: topNCounts((e.Teammates ?? {}) as Record<string, number>, TOP_N.Teammates),
+            Abilities: topNCounts(rawMaps.Abilities, TOP_N.Abilities),
+            Items: topNCounts(rawMaps.Items, TOP_N.Items),
+            Spreads: topNCounts(rawMaps.Spreads, TOP_N.Spreads),
+            Moves: topNCounts(rawMaps.Moves, TOP_N.Moves),
+            Teammates: topNCounts(rawMaps.Teammates, TOP_N.Teammates),
             "Checks and Counters": topNCounters(
                 normaliseCounters(e["Checks and Counters"]),
                 TOP_N["Checks and Counters"],
             ),
+            _totals: {
+                Abilities: sumCounts(rawMaps.Abilities),
+                Items: sumCounts(rawMaps.Items),
+                Spreads: sumCounts(rawMaps.Spreads),
+                Moves: sumCounts(rawMaps.Moves),
+                Teammates: sumCounts(rawMaps.Teammates),
+            },
         };
     }
     const battles = Number(raw.info?.["number of battles"]) || 0;
