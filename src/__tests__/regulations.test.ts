@@ -18,11 +18,11 @@ import { CHAMPIONS_REGMA } from "../regulations/champions-regma.js";
 import { CHAMPIONS_REGMB } from "../regulations/champions-regmb.js";
 import { LegalityNotIngestedError, loadRegulation } from "../regulations/loader.js";
 import { getRegulation, isRegulationId, listRegulationIds } from "../regulations/registry.js";
+import type { LegalityKvBlob } from "../regulations/types.js";
 import {
     validateTeamForRegulation,
     validateTeamForRegulationId,
 } from "../regulations/validator.js";
-import type { LegalityKvBlob } from "../regulations/types.js";
 import type { TeamPokemon } from "../types.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -106,8 +106,8 @@ describe("regulation registry", () => {
         assert.equal(reg!.id, "champions-regmb");
         assert.equal(reg!.platform, "champions");
         assert.equal(reg!.startDate, "2026-06-17");
-        // No end date announced yet — must stay unset until TPC publishes it.
-        assert.equal(reg!.endDate, undefined);
+        // M-C was announced 2026-09-08 — M-B's handoff date is now set.
+        assert.equal(reg!.endDate, "2026-09-08");
         assert.equal(reg!.level, 50);
         assert.equal(reg!.teamSize, 6);
         assert.equal(reg!.bringCount, 4);
@@ -123,6 +123,22 @@ describe("regulation registry", () => {
 
     it("M-A's end date matches M-B's start date (regulation handoff)", () => {
         assert.equal(CHAMPIONS_REGMA.endDate, CHAMPIONS_REGMB.startDate);
+    });
+
+    it("recognises champions-regmc and hands off from M-B on 2026-09-08", () => {
+        assert.equal(isRegulationId("champions-regmc"), true);
+        const regmc = getRegulation("champions-regmc");
+        assert.ok(regmc);
+        assert.equal(regmc.startDate, "2026-09-08");
+        assert.equal(regmc.endDate, "2026-12-01");
+        assert.equal(CHAMPIONS_REGMB.endDate, "2026-09-08");
+        assert.equal(regmc.showdownFormatId, "gen9championsvgc2026regmc");
+        assert.equal(regmc.limitlessFormatId, "M-C");
+        assert.equal(regmc.legalityKvKey, "champions-regmc:_legality");
+        // M-C adds Megas on top of M-B's; Salamence is newly allowed.
+        const names = new Set(regmc.megaForms.map((m) => m.megaName));
+        assert.ok(names.has("Salamence-Mega"));
+        assert.ok(regmc.megaForms.length >= CHAMPIONS_REGMB.megaForms.length);
     });
 });
 

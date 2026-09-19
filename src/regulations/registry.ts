@@ -1,5 +1,6 @@
 import { CHAMPIONS_REGMA } from "./champions-regma.js";
 import { CHAMPIONS_REGMB } from "./champions-regmb.js";
+import { CHAMPIONS_REGMC } from "./champions-regmc.js";
 import type { RegulationSet } from "./types.js";
 
 /**
@@ -10,7 +11,11 @@ import type { RegulationSet } from "./types.js";
  * consumer (validator, teambuilder UI, ingestion) dispatches by id against
  * this registry.
  */
-export const REGULATIONS: readonly RegulationSet[] = [CHAMPIONS_REGMA, CHAMPIONS_REGMB];
+export const REGULATIONS: readonly RegulationSet[] = [
+    CHAMPIONS_REGMA,
+    CHAMPIONS_REGMB,
+    CHAMPIONS_REGMC,
+];
 
 const REGULATIONS_BY_ID = new Map(REGULATIONS.map((r) => [r.id, r]));
 
