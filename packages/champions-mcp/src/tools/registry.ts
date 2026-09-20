@@ -10,6 +10,14 @@ import { metaSnapshotTool } from "./meta-snapshot.js";
 import { evaluateTeamTool, simulateMatchupTool } from "./simulate.js";
 import { triageLossesTool } from "./triage-losses.js";
 import { validateTeamTool } from "./validate-team.js";
+import {
+    compareRunsTool,
+    getRunTool,
+    listFindingsTool,
+    listRunsTool,
+    recordFindingTool,
+    replayRunTool,
+} from "./memory.js";
 
 export interface ToolDefinition<S extends ZodRawShape = ZodRawShape> {
     name: string;
@@ -38,6 +46,12 @@ export const TOOLS: ToolDefinition[] = [
     evaluateTeamTool,
     gradeLeadsTool,
     triageLossesTool,
+    getRunTool,
+    listRunsTool,
+    replayRunTool,
+    compareRunsTool,
+    recordFindingTool,
+    listFindingsTool,
 ];
 
 export function findTool(name: string): ToolDefinition | undefined {

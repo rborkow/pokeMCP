@@ -28,6 +28,37 @@ Start the server: `bun run bin/champions-mcp.ts` (works from any cwd).
 | `evaluate_team` | Your team vs the cached opponent pool; Overall + hardest opponents. |
 | `grade_leads` | Rank all 15 opening leads: seeded sim bring/lead sampling + Jev p. |
 | `triage_losses` | Jev-typed loss-cause histogram over sim logs. |
+| `get_run` / `list_runs` | Retrieve/list integrity-checked local experiment artifacts. |
+| `replay_run` | Fail-closed compatibility check and replay from the stored opponent snapshot. |
+| `compare_runs` | A/B metrics only when settings, opponent snapshots, and seeds match. |
+| `record_finding` / `list_findings` | Regulation-scoped evidence notes; test-only notes remain hidden by default. |
+
+## Durable experiment memory
+
+Successful `simulate_matchup` and `evaluate_team` calls automatically return a `run_id` and write
+an immutable artifact. By default these live at `packages/champions-mcp/data/experiment-memory`,
+resolved relative to the package (never the caller cwd). Set `CHAMPIONS_MEMORY_ROOT=/safe/path` to
+use a backupable local root; the default raw artifacts are gitignored because they include battle logs.
+Persistence is part of tool success: if an artifact cannot be written, the simulation call fails rather
+than claiming a recorded run.
+
+    simulate_matchup paste="..." opponentPaste="..." games=10 seed=7
+    get_run runId=<returned-id>
+    replay_run runId=<returned-id>
+
+Replay verifies the artifact digest and runner/policy/team/Showdown/vendor/dependency fingerprints
+before simulating. It uses the run's exact ordered opponent snapshot, so later pool edits do not affect
+it. A changed simulator or policy reports `incompatible` without running. A compatible replay compares
+winner, turns, leads, summaries, and protocol log content; it removes only Showdown `|t:|` timestamp
+lines. Equal wins alone are not verification, and old runtimes are not restored automatically.
+
+    record_finding claim="Test-only sample result" regulation=champions-regmc \
+      evidenceRunIds='["<returned-id>"]' limitations="10 heuristic games; not skilled play" \
+      status=hypothesis testOnly=true
+    list_findings regulation=champions-regmc
+
+Findings require existing integrity-valid run IDs, preserve revisions/contradictions, are never promoted
+automatically, and must be interpreted as heuristic evidence rather than skilled-play or universal truth.
 
 ## Data refresh
 

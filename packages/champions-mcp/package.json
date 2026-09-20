@@ -13,7 +13,8 @@
         "start": "bun run bin/champions-mcp.ts",
         "fetch-usage": "bun run scripts/fetch-usage.ts",
         "build-opponent-pool": "bun run scripts/build-opponent-pool.ts",
-        "type-check": "tsc --noEmit"
+        "type-check": "tsc --noEmit",
+        "memory-smoke": "node --import tsx scripts/memory-smoke.ts"
     },
     "dependencies": {
         "@modelcontextprotocol/sdk": "^1.26.0",

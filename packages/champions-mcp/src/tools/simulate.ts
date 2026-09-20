@@ -7,6 +7,10 @@ import { type PlayerFactory, randomPlayer, runSeries, type SeriesResult } from "
 import { type PokemonSet, parseTeamInput, setSchema, teamInputSchema } from "../team.js";
 import type { ToolDefinition } from "./registry.js";
 import { sourceLine } from "./source.js";
+import { assertRuntimeStable, currentFingerprints, saveRun } from "../memory.js";
+import { CHAMPIONS_FORMAT_ID } from "../showdown.js";
+import { CURRENT_REGULATION } from "../regulation.js";
+import type { RunArtifact } from "../memory.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
 export const POOL_PATH = join(here, "..", "..", "data", "opponents", "regmc.json");
@@ -71,6 +75,31 @@ function factoryFor(policy: SimPolicy | undefined): PlayerFactory {
     return POLICY_FACTORIES[policy ?? "heuristic-sample"];
 }
 
+/** Replay deliberately consumes a stored opponent snapshot, never the mutable pool. */
+export async function replayStoredRun(run: RunArtifact): Promise<unknown> {
+    const factory = factoryFor(run.parameters.policy as SimPolicy);
+    const records = [];
+    for (const opponent of run.opponents) {
+        const games =
+            run.kind === "evaluation" ? run.parameters.gamesPerOpponent! : run.parameters.games;
+        const series = await runSeries({
+            p1: run.team,
+            p2: opponent.sets,
+            games,
+            seed: opponent.seed,
+            makeP1: factory,
+            makeP2: factory,
+        });
+        records.push({ source: opponent.source, wins: series.p1Wins, games: series.games, series });
+    }
+    if (run.kind === "matchup") return { series: records[0]?.series };
+    return {
+        records,
+        totalGames: records.reduce((n, x) => n + x.games, 0),
+        totalWins: records.reduce((n, x) => n + x.wins, 0),
+    };
+}
+
 /**
  * The sim layer has no legality checks: a team with fewer than 6 Pokémon
  * dies mid-battle with an opaque internal error, so fail at the tool edge.
@@ -114,6 +143,8 @@ export async function simulateMatchup(args: {
     const seed = args.seed ?? 1;
     const policy: SimPolicy = args.policy ?? DEFAULT_POLICY;
     const factory = factoryFor(policy);
+    const fingerprints = currentFingerprints();
+    assertRuntimeStable(fingerprints);
     const series = await runSeries({
         p1: team,
         p2: opponent,
@@ -122,10 +153,22 @@ export async function simulateMatchup(args: {
         makeP1: factory,
         makeP2: factory,
     });
+    assertRuntimeStable(fingerprints);
+    const runId = saveRun({
+        kind: "matchup",
+        regulation: CURRENT_REGULATION,
+        format: CHAMPIONS_FORMAT_ID,
+        parameters: { games, seed, policy },
+        team,
+        opponents: [{ source: "explicit matchup input", sets: opponent, seed }],
+        result: { series },
+        rawInput: args,
+        fingerprints,
+    });
     return (
         `**Matchup sim** — ${games} games, seed ${seed}, ${policy}-policy players (see caveat)\n` +
         `${sourceLine()}\n\n` +
-        `${summarize(series)}${leadLines(series)}\n\n${CAVEATS[policy]}`
+        `${summarize(series)}${leadLines(series)}\n\nRun ID: \`${runId}\`\n\n${CAVEATS[policy]}`
     );
 }
 
@@ -133,6 +176,7 @@ interface OpponentRecord {
     source: string;
     wins: number;
     games: number;
+    series: SeriesResult;
 }
 
 export async function evaluateTeam(args: {
@@ -153,6 +197,8 @@ export async function evaluateTeam(args: {
     const seed = args.seed ?? 1;
     const policy: SimPolicy = args.policy ?? DEFAULT_POLICY;
     const factory = factoryFor(policy);
+    const fingerprints = currentFingerprints(pool);
+    assertRuntimeStable(fingerprints);
     const opponents = pool.slice(0, Math.max(1, args.maxOpponents ?? 20));
     const records: OpponentRecord[] = [];
     for (const [i, opp] of opponents.entries()) {
@@ -164,8 +210,9 @@ export async function evaluateTeam(args: {
             makeP1: factory,
             makeP2: factory,
         });
-        records.push({ source: opp.source, wins: series.p1Wins, games: series.games });
+        records.push({ source: opp.source, wins: series.p1Wins, games: series.games, series });
     }
+    assertRuntimeStable(fingerprints);
     const totalGames = records.reduce((a, r) => a + r.games, 0);
     const totalWins = records.reduce((a, r) => a + r.wins, 0);
     const byHardest = [...records].sort(
@@ -181,12 +228,27 @@ export async function evaluateTeam(args: {
         .reverse()
         .map((r) => `- ${r.wins}/${r.games} vs ${r.source}`)
         .join("\n");
+    const runId = saveRun({
+        kind: "evaluation",
+        regulation: CURRENT_REGULATION,
+        format: CHAMPIONS_FORMAT_ID,
+        parameters: { games: totalGames, gamesPerOpponent, seed, policy },
+        team,
+        opponents: opponents.map((opp, i) => ({
+            source: opp.source,
+            sets: opp.sets,
+            seed: seed + i * 1000,
+        })),
+        result: { records, totalGames, totalWins },
+        rawInput: args,
+        fingerprints,
+    });
     return (
         `${header}\n${sourceLine("opponents from data/opponents/regmc.json (Limitless top cuts + ladder-imputed spreads)")}\n\n` +
         `Overall: ${totalWins}/${totalGames} (${Math.round((totalWins / totalGames) * 100)}%)\n\n` +
         `**Hardest opponents:**\n${hardest}\n\n` +
         `**Easiest:**\n${easiest}\n\n` +
-        `${CAVEATS[policy]}\nCompare runs with the same seed and pool when A/B-ing a change.`
+        `Run ID: \`${runId}\`\n\n${CAVEATS[policy]}\nCompare runs with the same seed and pool when A/B-ing a change.`
     );
 }
 

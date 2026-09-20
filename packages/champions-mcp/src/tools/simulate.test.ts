@@ -1,5 +1,11 @@
 import { strict as assert } from "node:assert";
-import { describe, it } from "node:test";
+import { describe, it, after } from "node:test";
+import { mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+const memoryRoot = mkdtempSync(join(tmpdir(), "champions-sim-tests-"));
+process.env.CHAMPIONS_MEMORY_ROOT = memoryRoot;
+after(() => rmSync(memoryRoot, { recursive: true, force: true }));
 import { parseTeamInput, SAMPLE_TEAM_PASTE } from "../team.js";
 import { evaluateTeam, simulateMatchup } from "./simulate.js";
 
@@ -34,7 +40,10 @@ describe("simulate tools", () => {
             });
         const out = await run();
         assert.match(out, /heuristic-sample-policy players/);
-        assert.equal(out, await run());
+        assert.equal(
+            out.replace(/Run ID: `[^`]+`/, "Run ID: `<id>"),
+            (await run()).replace(/Run ID: `[^`]+`/, "Run ID: `<id>"),
+        );
         assert.match(out, /Each game samples a random bring\/lead \(seeded\)/);
     });
     it("simulate_matchup rejects a one-set team instead of dying mid-battle", async () => {
