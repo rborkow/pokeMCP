@@ -1,0 +1,617 @@
+{
+    "id": "6a8b52c38302ae761e5fa9fd",
+    "slug": "2026-08-24-amyverse-vgc-arena-7-pok-mon-champions",
+    "name": "Amyverse VGC Arena #7 ❤️ Pokémon Champions",
+    "date": "2026-08-24T17:00:00.000Z",
+    "players": 78,
+    "format": "M-B",
+    "regulationId": "champions-regmb",
+    "source": "limitless",
+    "sourceUrl": "https://play.limitlesstcg.com/tournament/6a8b52c38302ae761e5fa9fd",
+    "attribution": "Data via Limitless (play.limitlesstcg.com)",
+    "fetchedAt": "2026-09-19T17:11:34.533Z",
+    "topCut": [
+        {
+            "placing": 1,
+            "player": "Stallcelth",
+            "country": "BR",
+            "record": {
+                "wins": 8,
+                "losses": 1,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "floette-eternal",
+                    "name": "Eternal Flower Floette",
+                    "item": "Floettite",
+                    "ability": "Flower Veil",
+                    "moves": ["Moonblast", "Dazzling Gleam", "Calm Mind", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "sneasler",
+                    "name": "Sneasler",
+                    "item": "Focus Sash",
+                    "ability": "Unburden",
+                    "moves": ["Dire Claw", "Close Combat", "Fake Out", "Protect"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "incineroar",
+                    "name": "Incineroar",
+                    "item": "Sitrus Berry",
+                    "ability": "Intimidate",
+                    "moves": ["Fake Out", "Flare Blitz", "Darkest Lariat", "Parting Shot"],
+                    "nature": "Impish"
+                },
+                {
+                    "id": "kingambit",
+                    "name": "Kingambit",
+                    "item": "Black Glasses",
+                    "ability": "Defiant",
+                    "moves": ["Kowtow Cleave", "Sucker Punch", "Swords Dance", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "delphox",
+                    "name": "Delphox",
+                    "item": "Delphoxite",
+                    "ability": "Blaze",
+                    "moves": ["Heat Wave", "Psychic", "Nasty Plot", "Protect"],
+                    "nature": "Timid"
+                },
+                {
+                    "id": "sinistcha",
+                    "name": "Sinistcha",
+                    "item": "Kasib Berry",
+                    "ability": "Hospitality",
+                    "moves": ["Matcha Gotcha", "Life Dew", "Rage Powder", "Trick Room"],
+                    "nature": "Bold"
+                }
+            ]
+        },
+        {
+            "placing": 2,
+            "player": "wjbax",
+            "country": "IT",
+            "record": {
+                "wins": 8,
+                "losses": 1,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "charizard",
+                    "name": "Charizard",
+                    "item": "Charizardite Y",
+                    "ability": "Blaze",
+                    "moves": ["Heat Wave", "Weather Ball", "Ancient Power", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "garchomp",
+                    "name": "Garchomp",
+                    "item": "Choice Scarf",
+                    "ability": "Rough Skin",
+                    "moves": ["Earthquake", "Dragon Claw", "Stomping Tantrum", "Rock Slide"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "incineroar",
+                    "name": "Incineroar",
+                    "item": "Sitrus Berry",
+                    "ability": "Intimidate",
+                    "moves": ["Flare Blitz", "Darkest Lariat", "Fake Out", "Parting Shot"],
+                    "nature": "Impish"
+                },
+                {
+                    "id": "venusaur",
+                    "name": "Venusaur",
+                    "item": "Life Orb",
+                    "ability": "Chlorophyll",
+                    "moves": ["Leaf Storm", "Sludge Bomb", "Earth Power", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "sinistcha",
+                    "name": "Sinistcha",
+                    "item": "Colbur Berry",
+                    "ability": "Hospitality",
+                    "moves": ["Matcha Gotcha", "Shadow Ball", "Rage Powder", "Protect"],
+                    "nature": "Bold"
+                },
+                {
+                    "id": "floette-eternal",
+                    "name": "Eternal Flower Floette",
+                    "item": "Floettite",
+                    "ability": "Flower Veil",
+                    "moves": ["Moonblast", "Dazzling Gleam", "Calm Mind", "Protect"],
+                    "nature": "Modest"
+                }
+            ]
+        },
+        {
+            "placing": 3,
+            "player": "Sydaster",
+            "country": "IT",
+            "record": {
+                "wins": 6,
+                "losses": 2,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "incineroar",
+                    "name": "Incineroar",
+                    "item": "Sitrus Berry",
+                    "ability": "Intimidate",
+                    "moves": ["Fake Out", "Flare Blitz", "Darkest Lariat", "Parting Shot"],
+                    "nature": "Careful"
+                },
+                {
+                    "id": "samurott-hisui",
+                    "name": "Hisuian Samurott",
+                    "item": "Choice Scarf",
+                    "ability": "Sharpness",
+                    "moves": ["Razor Shell", "Night Slash", "Sacred Sword", "Flip Turn"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "sinistcha",
+                    "name": "Sinistcha",
+                    "item": "Occa Berry",
+                    "ability": "Hospitality",
+                    "moves": ["Matcha Gotcha", "Life Dew", "Rage Powder", "Protect"],
+                    "nature": "Relaxed"
+                },
+                {
+                    "id": "sneasler",
+                    "name": "Sneasler",
+                    "item": "Focus Sash",
+                    "ability": "Poison Touch",
+                    "moves": ["Fake Out", "Close Combat", "Poison Jab", "Rock Slide"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "floette-eternal",
+                    "name": "Eternal Flower Floette",
+                    "item": "Floettite",
+                    "ability": "Flower Veil",
+                    "moves": ["Moonblast", "Dazzling Gleam", "Calm Mind", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "delphox",
+                    "name": "Delphox",
+                    "item": "Delphoxite",
+                    "ability": "Blaze",
+                    "moves": ["Psychic", "Heat Wave", "Nasty Plot", "Protect"],
+                    "nature": "Timid"
+                }
+            ]
+        },
+        {
+            "placing": 4,
+            "player": "PokeReplay",
+            "country": "GB",
+            "record": {
+                "wins": 5,
+                "losses": 2,
+                "ties": 1
+            },
+            "team": [
+                {
+                    "id": "charizard",
+                    "name": "Charizard",
+                    "item": "Charizardite Y",
+                    "ability": "Blaze",
+                    "moves": ["Weather Ball", "Heat Wave", "Ancient Power", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "venusaur",
+                    "name": "Venusaur",
+                    "item": "Life Orb",
+                    "ability": "Chlorophyll",
+                    "moves": ["Leaf Storm", "Sludge Bomb", "Earth Power", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "garchomp",
+                    "name": "Garchomp",
+                    "item": "Choice Scarf",
+                    "ability": "Rough Skin",
+                    "moves": ["Dragon Claw", "Stomping Tantrum", "Rock Slide", "Earthquake"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "incineroar",
+                    "name": "Incineroar",
+                    "item": "Sitrus Berry",
+                    "ability": "Intimidate",
+                    "moves": ["Fake Out", "Flare Blitz", "Darkest Lariat", "Parting Shot"],
+                    "nature": "Impish"
+                },
+                {
+                    "id": "toxapex",
+                    "name": "Toxapex",
+                    "item": "Leftovers",
+                    "ability": "Regenerator",
+                    "moves": ["Infestation", "Toxic", "Wide Guard", "Baneful Bunker"],
+                    "nature": "Bold"
+                },
+                {
+                    "id": "sylveon",
+                    "name": "Sylveon",
+                    "item": "Fairy Feather",
+                    "ability": "Pixilate",
+                    "moves": ["Hyper Voice", "Quick Attack", "Yawn", "Protect"],
+                    "nature": "Modest"
+                }
+            ]
+        },
+        {
+            "placing": 5,
+            "player": "LenVGC",
+            "country": "ES",
+            "record": {
+                "wins": 6,
+                "losses": 1,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "incineroar",
+                    "name": "Incineroar",
+                    "item": "Sitrus Berry",
+                    "ability": "Intimidate",
+                    "moves": ["Fake Out", "Flare Blitz", "Darkest Lariat", "Parting Shot"],
+                    "nature": "Careful"
+                },
+                {
+                    "id": "samurott-hisui",
+                    "name": "Hisuian Samurott",
+                    "item": "Choice Scarf",
+                    "ability": "Sharpness",
+                    "moves": ["Razor Shell", "Night Slash", "Flip Turn", "Sacred Sword"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "sinistcha",
+                    "name": "Sinistcha",
+                    "item": "Occa Berry",
+                    "ability": "Hospitality",
+                    "moves": ["Protect", "Matcha Gotcha", "Life Dew", "Rage Powder"],
+                    "nature": "Relaxed"
+                },
+                {
+                    "id": "sneasler",
+                    "name": "Sneasler",
+                    "item": "Focus Sash",
+                    "ability": "Poison Touch",
+                    "moves": ["Fake Out", "Close Combat", "Poison Jab", "Quick Guard"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "floette-eternal",
+                    "name": "Eternal Flower Floette",
+                    "item": "Floettite",
+                    "ability": "Flower Veil",
+                    "moves": ["Protect", "Moonblast", "Dazzling Gleam", "Calm Mind"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "delphox",
+                    "name": "Delphox",
+                    "item": "Delphoxite",
+                    "ability": "Blaze",
+                    "moves": ["Protect", "Heat Wave", "Psychic", "Nasty Plot"],
+                    "nature": "Timid"
+                }
+            ]
+        },
+        {
+            "placing": 6,
+            "player": "MiniMitre",
+            "country": "GB",
+            "record": {
+                "wins": 5,
+                "losses": 2,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "samurott-hisui",
+                    "name": "Hisuian Samurott",
+                    "item": "Choice Scarf",
+                    "ability": "Sharpness",
+                    "moves": ["Razor Shell", "Night Slash", "Sacred Sword", "Flip Turn"],
+                    "nature": "jolly"
+                },
+                {
+                    "id": "sneasler",
+                    "name": "Sneasler",
+                    "item": "Focus Sash",
+                    "ability": "Poison Touch",
+                    "moves": ["Fake Out", "Close Combat", "Poison Jab", "Rock Slide"],
+                    "nature": "jolly"
+                },
+                {
+                    "id": "floette-eternal",
+                    "name": "Eternal Flower Floette",
+                    "item": "Floettite",
+                    "ability": "Flower Veil",
+                    "moves": ["Protect", "Moonblast", "Calm Mind", "Dazzling Gleam"],
+                    "nature": "modest"
+                },
+                {
+                    "id": "sinistcha",
+                    "name": "Sinistcha",
+                    "item": "Occa Berry",
+                    "ability": "Hospitality",
+                    "moves": ["Protect", "Matcha Gotcha", "Life Dew", "Rage Powder"],
+                    "nature": "calm"
+                },
+                {
+                    "id": "incineroar",
+                    "name": "Incineroar",
+                    "item": "Sitrus Berry",
+                    "ability": "Intimidate",
+                    "moves": ["Fake Out", "Flare Blitz", "Parting Shot", "Helping Hand"],
+                    "nature": "careful"
+                },
+                {
+                    "id": "delphox",
+                    "name": "Delphox",
+                    "item": "Delphoxite",
+                    "ability": "Blaze",
+                    "moves": ["Protect", "Heat Wave", "Nasty Plot", "Psychic"],
+                    "nature": "timid"
+                }
+            ]
+        },
+        {
+            "placing": 7,
+            "player": "NaraZeroDX",
+            "country": "DK",
+            "record": {
+                "wins": 5,
+                "losses": 2,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "farigiraf",
+                    "name": "Farigiraf",
+                    "item": "Sitrus Berry",
+                    "ability": "Armor Tail",
+                    "moves": ["Helping Hand", "Psychic", "Thunderbolt", "Trick Room"],
+                    "nature": "Bold"
+                },
+                {
+                    "id": "blaziken",
+                    "name": "Blaziken",
+                    "item": "Blazikenite",
+                    "ability": "Speed Boost",
+                    "moves": ["Close Combat", "Detect", "Flare Blitz", "Rock Slide"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "basculegion",
+                    "name": "Basculegion",
+                    "item": "Life Orb",
+                    "ability": "Adaptability",
+                    "moves": ["Protect", "Wave Crash", "Last Respects", "Aqua Jet"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "venusaur",
+                    "name": "Venusaur",
+                    "item": "Venusaurite",
+                    "ability": "Chlorophyll",
+                    "moves": ["Protect", "Sludge Bomb", "Earth Power", "Giga Drain"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "kingambit",
+                    "name": "Kingambit",
+                    "item": "Chople Berry",
+                    "ability": "Defiant",
+                    "moves": ["Kowtow Cleave", "Iron Head", "Sucker Punch", "Low Kick"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "ninetales-alola",
+                    "name": "Alolan Ninetales",
+                    "item": "Focus Sash",
+                    "ability": "Snow Warning",
+                    "moves": ["Blizzard", "Aurora Veil", "Encore", "Protect"],
+                    "nature": "Timid"
+                }
+            ]
+        },
+        {
+            "placing": 8,
+            "player": "Papucaru",
+            "country": "AR",
+            "record": {
+                "wins": 5,
+                "losses": 2,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "houndoom",
+                    "name": "Houndoom",
+                    "item": "Houndoominite",
+                    "ability": "Flash Fire",
+                    "moves": ["Heat Wave", "Dark Pulse", "Nasty Plot", "Protect"],
+                    "nature": "Timid"
+                },
+                {
+                    "id": "torkoal",
+                    "name": "Torkoal",
+                    "item": "Charcoal",
+                    "ability": "Drought",
+                    "moves": ["Eruption", "Weather Ball", "Helping Hand", "Protect"],
+                    "nature": "Quiet"
+                },
+                {
+                    "id": "annihilape",
+                    "name": "Annihilape",
+                    "item": "Choice Scarf",
+                    "ability": "Defiant",
+                    "moves": ["Close Combat", "Ice Punch", "U-turn", "Rock Slide"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "venusaur",
+                    "name": "Venusaur",
+                    "item": "Life Orb",
+                    "ability": "Chlorophyll",
+                    "moves": ["Sludge Bomb", "Solar Beam", "Earth Power", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "kangaskhan",
+                    "name": "Kangaskhan",
+                    "item": "Kangaskhanite",
+                    "ability": "Scrappy",
+                    "moves": ["Double-Edge", "Hammer Arm", "Ice Punch", "Fake Out"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "farigiraf",
+                    "name": "Farigiraf",
+                    "item": "Sitrus Berry",
+                    "ability": "Armor Tail",
+                    "moves": ["Psychic", "Trick Room", "Helping Hand", "Thunderbolt"],
+                    "nature": "Bold"
+                }
+            ]
+        }
+    ],
+    "topCutUsage": [
+        {
+            "id": "incineroar",
+            "name": "Incineroar",
+            "count": 6,
+            "pct": 75
+        },
+        {
+            "id": "floette-eternal",
+            "name": "Eternal Flower Floette",
+            "count": 5,
+            "pct": 62.5
+        },
+        {
+            "id": "sinistcha",
+            "name": "Sinistcha",
+            "count": 5,
+            "pct": 62.5
+        },
+        {
+            "id": "sneasler",
+            "name": "Sneasler",
+            "count": 4,
+            "pct": 50
+        },
+        {
+            "id": "delphox",
+            "name": "Delphox",
+            "count": 4,
+            "pct": 50
+        },
+        {
+            "id": "venusaur",
+            "name": "Venusaur",
+            "count": 4,
+            "pct": 50
+        },
+        {
+            "id": "samurott-hisui",
+            "name": "Hisuian Samurott",
+            "count": 3,
+            "pct": 37.5
+        },
+        {
+            "id": "kingambit",
+            "name": "Kingambit",
+            "count": 2,
+            "pct": 25
+        },
+        {
+            "id": "charizard",
+            "name": "Charizard",
+            "count": 2,
+            "pct": 25
+        },
+        {
+            "id": "garchomp",
+            "name": "Garchomp",
+            "count": 2,
+            "pct": 25
+        },
+        {
+            "id": "farigiraf",
+            "name": "Farigiraf",
+            "count": 2,
+            "pct": 25
+        },
+        {
+            "id": "toxapex",
+            "name": "Toxapex",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "sylveon",
+            "name": "Sylveon",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "blaziken",
+            "name": "Blaziken",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "basculegion",
+            "name": "Basculegion",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "ninetales-alola",
+            "name": "Alolan Ninetales",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "houndoom",
+            "name": "Houndoom",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "torkoal",
+            "name": "Torkoal",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "annihilape",
+            "name": "Annihilape",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "kangaskhan",
+            "name": "Kangaskhan",
+            "count": 1,
+            "pct": 12.5
+        }
+    ]
+}

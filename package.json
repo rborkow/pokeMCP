@@ -11,6 +11,7 @@
     "author": "Robert Borkowski",
     "license": "AGPL-3.0",
     "packageManager": "bun@1.3.11",
+    "workspaces": ["packages/*"],
     "scripts": {
         "deploy": "wrangler deploy --env production",
         "deploy:staging": "wrangler deploy --env staging",
@@ -51,7 +52,10 @@
         "tail": "wrangler tail",
         "tail:staging": "wrangler tail --env staging",
         "tail:production": "wrangler tail --env production",
-        "setup:staging": "bash scripts/setup-staging.sh"
+        "setup:staging": "bash scripts/setup-staging.sh",
+        "champions:vendor": "bun run --cwd packages/champions-mcp vendor",
+        "champions:test": "bun run --cwd packages/champions-mcp test",
+        "champions:mcp": "bun run --cwd packages/champions-mcp start"
     },
     "dependencies": {
         "@resvg/resvg-wasm": "^2.6.2",

@@ -1,0 +1,30 @@
+{
+    "name": "@pokemcp/champions-mcp",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "Local stdio MCP server for Pokémon Champions VGC team building",
+    "bin": {
+        "champions-mcp": "./bin/champions-mcp.ts"
+    },
+    "scripts": {
+        "vendor": "bash scripts/vendor-showdown.sh",
+        "test": "node --import tsx --test \"src/**/*.test.ts\"",
+        "start": "bun run bin/champions-mcp.ts",
+        "fetch-usage": "bun run scripts/fetch-usage.ts",
+        "build-opponent-pool": "bun run scripts/build-opponent-pool.ts",
+        "type-check": "tsc --noEmit",
+        "memory-smoke": "node --import tsx scripts/memory-smoke.ts"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.26.0",
+        "@smogon/calc": "^0.12.0",
+        "smogon": "^4.0.2",
+        "zod": "^3.25.76"
+    },
+    "devDependencies": {
+        "@types/node": "^22.0.0",
+        "tsx": "^4.19.2",
+        "typescript": "^5.6.0"
+    }
+}
