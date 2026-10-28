@@ -11,9 +11,10 @@
     // too, so /run automation has a non-Access path (token-gated in code).
     "workers_dev": true,
     "routes": [{ "pattern": "monitor.pokemcp.com", "custom_domain": true }],
-    // Daily report at 08:00 UTC — summarizes the previous full UTC day.
+    // Daily report cron disabled. An empty array removes the existing Cron
+    // Trigger on deploy. Restore ["0 8 * * *"] (08:00 UTC) to re-enable.
     "triggers": {
-        "crons": ["0 8 * * *"]
+        "crons": []
     },
     "r2_buckets": [
         {
