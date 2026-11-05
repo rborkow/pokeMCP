@@ -1,0 +1,629 @@
+{
+    "id": "6a8375bd78baaa6d1c2226e5",
+    "slug": "2026-09-03-fork-the-meta-ftm-season-1",
+    "name": "Fork the Meta (FTM) Season 1",
+    "date": "2026-09-03T13:30:00.000Z",
+    "players": 195,
+    "format": "M-B",
+    "regulationId": "champions-regmb",
+    "source": "limitless",
+    "sourceUrl": "https://play.limitlesstcg.com/tournament/6a8375bd78baaa6d1c2226e5",
+    "attribution": "Data via Limitless (play.limitlesstcg.com)",
+    "fetchedAt": "2026-09-19T17:08:17.385Z",
+    "topCut": [
+        {
+            "placing": 1,
+            "player": "EnryuVGC",
+            "country": "IN",
+            "record": {
+                "wins": 10,
+                "losses": 1,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "maushold",
+                    "name": "Maushold",
+                    "item": "Wide Lens",
+                    "ability": "Technician",
+                    "moves": ["Population Bomb", "Bite", "Protect", "Super Fang"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "clefable",
+                    "name": "Clefable",
+                    "item": "Leftovers",
+                    "ability": "Unaware",
+                    "moves": ["Dazzling Gleam", "Protect", "Follow Me", "Thunder Wave"],
+                    "nature": "Bold"
+                },
+                {
+                    "id": "scrafty",
+                    "name": "Scrafty",
+                    "item": "Roseli Berry",
+                    "ability": "Intimidate",
+                    "moves": ["Fake Out", "Close Combat", "Knock Off", "Detect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "pelipper",
+                    "name": "Pelipper",
+                    "item": "Life Orb",
+                    "ability": "Drizzle",
+                    "moves": ["Weather Ball", "Hurricane", "Tailwind", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "azumarill",
+                    "name": "Azumarill",
+                    "item": "Sitrus Berry",
+                    "ability": "Huge Power",
+                    "moves": ["Protect", "Play Rough", "Aqua Jet", "Belly Drum"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "lycanroc-dusk",
+                    "name": "Lycanroc Dusk",
+                    "item": "Choice Scarf",
+                    "ability": "Tough Claws",
+                    "moves": ["Close Combat", "Rock Slide", "Accelerock", "Iron Head"],
+                    "nature": "Adamant"
+                }
+            ]
+        },
+        {
+            "placing": 2,
+            "player": "Pacca",
+            "country": "IT",
+            "record": {
+                "wins": 9,
+                "losses": 2,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "scrafty",
+                    "name": "Scrafty",
+                    "item": "Roseli Berry",
+                    "ability": "Intimidate",
+                    "moves": ["Fake Out", "Drain Punch", "Knock Off", "Snarl"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "scolipede",
+                    "name": "Scolipede",
+                    "item": "Leftovers",
+                    "ability": "Speed Boost",
+                    "moves": ["Leech Life", "Poison Jab", "Swords Dance", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "houndstone",
+                    "name": "Houndstone",
+                    "item": "Spell Tag",
+                    "ability": "Fluffy",
+                    "moves": ["Shadow Sneak", "Last Respects", "Will-O-Wisp", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "pelipper",
+                    "name": "Pelipper",
+                    "item": "Life Orb",
+                    "ability": "Drizzle",
+                    "moves": ["Weather Ball", "Hurricane", "Wide Guard", "Protect"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "raichu",
+                    "name": "Raichu",
+                    "item": "Sitrus Berry",
+                    "ability": "Lightning Rod",
+                    "moves": ["Fake Out", "Electroweb", "Encore", "Volt Switch"],
+                    "nature": "Timid"
+                },
+                {
+                    "id": "klefki",
+                    "name": "Klefki",
+                    "item": "Light Clay",
+                    "ability": "Prankster",
+                    "moves": ["Dazzling Gleam", "Reflect", "Light Screen", "Thunder Wave"],
+                    "nature": "Calm"
+                }
+            ]
+        },
+        {
+            "placing": 3,
+            "player": "smartymax1",
+            "country": null,
+            "record": {
+                "wins": 8,
+                "losses": 2,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "cofagrigus",
+                    "name": "Cofagrigus",
+                    "item": "Sitrus Berry",
+                    "ability": "Mummy",
+                    "moves": ["Trick Room", "Shadow Ball", "Body Press", "Rain Dance"],
+                    "nature": "Relaxed"
+                },
+                {
+                    "id": "araquanid",
+                    "name": "Araquanid",
+                    "item": "Mystic Water",
+                    "ability": "Water Bubble",
+                    "moves": ["Liquidation", "Leech Life", "Wide Guard", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "mimikyu",
+                    "name": "Mimikyu",
+                    "item": "Life Orb",
+                    "ability": "Disguise",
+                    "moves": ["Swords Dance", "Play Rough", "Shadow Sneak", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "scovillain",
+                    "name": "Scovillain",
+                    "item": "Leftovers",
+                    "ability": "Moody",
+                    "moves": ["Flamethrower", "Leech Seed", "Rage Powder", "Protect"],
+                    "nature": "Bold"
+                },
+                {
+                    "id": "scrafty",
+                    "name": "Scrafty",
+                    "item": "Roseli Berry",
+                    "ability": "Intimidate",
+                    "moves": ["Fake Out", "Knock Off", "Drain Punch", "Detect"],
+                    "nature": "Careful"
+                },
+                {
+                    "id": "vivillon",
+                    "name": "Vivillon",
+                    "item": "Choice Scarf",
+                    "ability": "Compound Eyes",
+                    "moves": ["Hurricane", "Pollen Puff", "Sleep Powder", "String Shot"],
+                    "nature": "Timid"
+                }
+            ]
+        },
+        {
+            "placing": 4,
+            "player": "Lixard",
+            "country": "IN",
+            "record": {
+                "wins": 8,
+                "losses": 2,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "maushold",
+                    "name": "Maushold",
+                    "item": "Wide Lens",
+                    "ability": "Technician",
+                    "moves": ["Population Bomb", "Protect", "Feint", "Helping Hand"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "salazzle",
+                    "name": "Salazzle",
+                    "item": "Life Orb",
+                    "ability": "Oblivious",
+                    "moves": ["Fake Out", "Heat Wave", "Protect", "Sludge Bomb"],
+                    "nature": "Timid"
+                },
+                {
+                    "id": "whimsicott",
+                    "name": "Whimsicott",
+                    "item": "Focus Sash",
+                    "ability": "Prankster",
+                    "moves": ["Moonblast", "Tailwind", "Protect", "Encore"],
+                    "nature": "Timid"
+                },
+                {
+                    "id": "absol",
+                    "name": "Absol",
+                    "item": "Scope Lens",
+                    "ability": "Super Luck",
+                    "moves": ["Night Slash", "Sucker Punch", "Protect", "Psycho Cut"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "drampa",
+                    "name": "Drampa",
+                    "item": "Iron Ball",
+                    "ability": "Cloud Nine",
+                    "moves": ["Hyper Voice", "Dragon pulse", "Protect", "Thunderbolt"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "houndstone",
+                    "name": "Houndstone",
+                    "item": "White Herb",
+                    "ability": "Fluffy",
+                    "moves": ["Last Respects", "Ally Switch", "Protect", "Play Rough"],
+                    "nature": "Adamant"
+                }
+            ]
+        },
+        {
+            "placing": 5,
+            "player": "Tenex",
+            "country": "IN",
+            "record": {
+                "wins": 8,
+                "losses": 1,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "drampa",
+                    "name": "Drampa",
+                    "item": "Life Orb",
+                    "ability": "Cloud Nine",
+                    "moves": ["Protect", "Hyper Voice", "Draco Meteor", "Earth Power"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "scrafty",
+                    "name": "Scrafty",
+                    "item": "Roseli Berry",
+                    "ability": "Intimidate",
+                    "moves": ["Fake Out", "Close Combat", "Knock Off", "Helping Hand"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "houndstone",
+                    "name": "Houndstone",
+                    "item": "Choice Scarf",
+                    "ability": "Fluffy",
+                    "moves": ["Last Respects", "Trick", "Psychic Fangs", "Body Press"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "salazzle",
+                    "name": "Salazzle",
+                    "item": "Focus Sash",
+                    "ability": "Oblivious",
+                    "moves": ["Protect", "Flamethrower", "Sludge Bomb", "Disable"],
+                    "nature": "Timid"
+                },
+                {
+                    "id": "whimsicott",
+                    "name": "Whimsicott",
+                    "item": "Mental Herb",
+                    "ability": "Prankster",
+                    "moves": ["Protect", "Tailwind", "Moonblast", "Encore"],
+                    "nature": "Bold"
+                },
+                {
+                    "id": "azumarill",
+                    "name": "Azumarill",
+                    "item": "Sitrus Berry",
+                    "ability": "Huge Power",
+                    "moves": ["Protect", "Play Rough", "Aqua Jet", "Superpower"],
+                    "nature": "Adamant"
+                }
+            ]
+        },
+        {
+            "placing": 6,
+            "player": "Rishi_G",
+            "country": "IN",
+            "record": {
+                "wins": 7,
+                "losses": 2,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "maushold",
+                    "name": "Maushold",
+                    "item": "Wide Lens",
+                    "ability": "Technician",
+                    "moves": ["Follow Me", "Population Bomb", "Taunt", "Protect"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "absol",
+                    "name": "Absol",
+                    "item": "Scope Lens",
+                    "ability": "Super Luck",
+                    "moves": ["Psycho Cut", "Night Slash", "Sucker Punch", "Protect"],
+                    "nature": "Adamant"
+                },
+                {
+                    "id": "salazzle",
+                    "name": "Salazzle",
+                    "item": "Focus Sash",
+                    "ability": "Corrosion",
+                    "moves": ["Heat Wave", "Dragon Cheer", "Fake Out", "Sludge Bomb"],
+                    "nature": "Timid"
+                },
+                {
+                    "id": "drampa",
+                    "name": "Drampa",
+                    "item": "Iron Ball",
+                    "ability": "Cloud Nine",
+                    "moves": ["Hyper Voice", "Thunderbolt", "Earth Power", "Protect"],
+                    "nature": "Quiet"
+                },
+                {
+                    "id": "whimsicott",
+                    "name": "Whimsicott",
+                    "item": "Fairy Feather",
+                    "ability": "Prankster",
+                    "moves": ["Tailwind", "Moonblast", "Encore", "Protect"],
+                    "nature": "Timid"
+                },
+                {
+                    "id": "mimikyu",
+                    "name": "Mimikyu",
+                    "item": "Mental Herb",
+                    "ability": "Disguise",
+                    "moves": ["Trick Room", "Shadow Sneak", "Play Rough", "Swords Dance"],
+                    "nature": "Brave"
+                }
+            ]
+        },
+        {
+            "placing": 7,
+            "player": "AyushXD",
+            "country": "IN",
+            "record": {
+                "wins": 7,
+                "losses": 2,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "pelipper",
+                    "name": "Pelipper",
+                    "item": "Choice Scarf",
+                    "ability": "Drizzle",
+                    "moves": ["Hurricane", "Weather Ball", "Icy Wind", "Muddy Water"],
+                    "nature": "Timid"
+                },
+                {
+                    "id": "mimikyu",
+                    "name": "Mimikyu",
+                    "item": "Life Orb",
+                    "ability": "Disguise",
+                    "moves": ["Play Rough", "Phantom Force", "Shadow Sneak", "Protect"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "torkoal",
+                    "name": "Torkoal",
+                    "item": "Charcoal",
+                    "ability": "Drought",
+                    "moves": ["Eruption", "Weather Ball", "Heat Wave", "Protect"],
+                    "nature": "Quiet"
+                },
+                {
+                    "id": "maushold",
+                    "name": "Maushold",
+                    "item": "Wide Lens",
+                    "ability": "Friend Guard",
+                    "moves": ["Population Bomb", "Follow Me", "After You", "Protect"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "whimsicott",
+                    "name": "Whimsicott",
+                    "item": "Focus Sash",
+                    "ability": "Prankster",
+                    "moves": ["Moonblast", "Tailwind", "Encore", "Protect"],
+                    "nature": "Timid"
+                },
+                {
+                    "id": "azumarill",
+                    "name": "Azumarill",
+                    "item": "Sitrus Berry",
+                    "ability": "Huge Power",
+                    "moves": ["Belly Drum", "Aqua Jet", "Play Rough", "Protect"],
+                    "nature": "Impish"
+                }
+            ]
+        },
+        {
+            "placing": 8,
+            "player": "Grenade_greninja29",
+            "country": "IN",
+            "record": {
+                "wins": 7,
+                "losses": 2,
+                "ties": 0
+            },
+            "team": [
+                {
+                    "id": "maushold",
+                    "name": "Maushold",
+                    "item": "King's Rock",
+                    "ability": "Friend Guard",
+                    "moves": ["Population Bomb", "Taunt", "Encore", "Protect"],
+                    "nature": "Jolly"
+                },
+                {
+                    "id": "whimsicott",
+                    "name": "Whimsicott",
+                    "item": "Focus Sash",
+                    "ability": "Prankster",
+                    "moves": ["Moonblast", "Encore", "Tailwind", "Protect"],
+                    "nature": "Timid"
+                },
+                {
+                    "id": "espathra",
+                    "name": "Espathra",
+                    "item": "Twisted Spoon",
+                    "ability": "Speed Boost",
+                    "moves": ["Protect", "Expanding Force", "Dazzling Gleam", "Calm Mind"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "meowstic",
+                    "name": "Meowstic",
+                    "item": "Light Clay",
+                    "ability": "Prankster",
+                    "moves": ["Psychic Terrain", "Expanding Force", "Gravity", "Light Screen"],
+                    "nature": "Modest"
+                },
+                {
+                    "id": "torkoal",
+                    "name": "Torkoal",
+                    "item": "Charcoal",
+                    "ability": "Drought",
+                    "moves": ["Eruption", "Weather Ball", "Earth Power", "Protect"],
+                    "nature": "Quiet"
+                },
+                {
+                    "id": "mimikyu",
+                    "name": "Mimikyu",
+                    "item": "Life Orb",
+                    "ability": "Disguise",
+                    "moves": ["Trick Room", "Destiny Bond", "Drain Punch", "Play Rough"],
+                    "nature": "Brave"
+                }
+            ]
+        }
+    ],
+    "topCutUsage": [
+        {
+            "id": "maushold",
+            "name": "Maushold",
+            "count": 5,
+            "pct": 62.5
+        },
+        {
+            "id": "whimsicott",
+            "name": "Whimsicott",
+            "count": 5,
+            "pct": 62.5
+        },
+        {
+            "id": "scrafty",
+            "name": "Scrafty",
+            "count": 4,
+            "pct": 50
+        },
+        {
+            "id": "mimikyu",
+            "name": "Mimikyu",
+            "count": 4,
+            "pct": 50
+        },
+        {
+            "id": "pelipper",
+            "name": "Pelipper",
+            "count": 3,
+            "pct": 37.5
+        },
+        {
+            "id": "azumarill",
+            "name": "Azumarill",
+            "count": 3,
+            "pct": 37.5
+        },
+        {
+            "id": "houndstone",
+            "name": "Houndstone",
+            "count": 3,
+            "pct": 37.5
+        },
+        {
+            "id": "salazzle",
+            "name": "Salazzle",
+            "count": 3,
+            "pct": 37.5
+        },
+        {
+            "id": "drampa",
+            "name": "Drampa",
+            "count": 3,
+            "pct": 37.5
+        },
+        {
+            "id": "absol",
+            "name": "Absol",
+            "count": 2,
+            "pct": 25
+        },
+        {
+            "id": "torkoal",
+            "name": "Torkoal",
+            "count": 2,
+            "pct": 25
+        },
+        {
+            "id": "clefable",
+            "name": "Clefable",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "lycanroc-dusk",
+            "name": "Lycanroc Dusk",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "scolipede",
+            "name": "Scolipede",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "raichu",
+            "name": "Raichu",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "klefki",
+            "name": "Klefki",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "cofagrigus",
+            "name": "Cofagrigus",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "araquanid",
+            "name": "Araquanid",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "scovillain",
+            "name": "Scovillain",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "vivillon",
+            "name": "Vivillon",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "espathra",
+            "name": "Espathra",
+            "count": 1,
+            "pct": 12.5
+        },
+        {
+            "id": "meowstic",
+            "name": "Meowstic",
+            "count": 1,
+            "pct": 12.5
+        }
+    ]
+}

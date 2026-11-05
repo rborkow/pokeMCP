@@ -5,8 +5,8 @@ import type { RegulationSet } from "./types.js";
  * Pokémon Champions — Regulation M-B.
  *
  * Starts 2026-06-17 (coinciding with the Champions mobile launch), directly
- * succeeding Regulation M-A. No end date has been announced yet — set
- * `endDate` once The Pokémon Company publishes the M-C transition.
+ * succeeding Regulation M-A. Ends 2026-09-08, when Regulation M-C starts
+ * (pokemon.com: "Get Ready for Regulation Set M-C in Pokémon Champions").
  *
  * The allowed-Pokémon list is dynamic — fetched from the official legality
  * page by scripts/fetch-champions-legality.ts and loaded from KV at request
@@ -18,6 +18,7 @@ export const CHAMPIONS_REGMB: RegulationSet = {
     shortLabel: "Champions Reg M-B",
     platform: "champions",
     startDate: "2026-06-17",
+    endDate: "2026-09-08",
     level: 50,
     teamSize: 6,
     bringCount: 4,

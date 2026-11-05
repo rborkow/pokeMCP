@@ -1,5 +1,6 @@
 import { CHAMPIONS_REGMA } from "./champions-regma.js";
 import { CHAMPIONS_REGMB } from "./champions-regmb.js";
+import { CHAMPIONS_REGMC } from "./champions-regmc.js";
 import type { RegulationSet } from "./types.js";
 
 /**
@@ -10,7 +11,11 @@ import type { RegulationSet } from "./types.js";
  * consumer (validator, teambuilder UI, ingestion) dispatches by id against
  * this registry.
  */
-export const REGULATIONS: readonly RegulationSet[] = [CHAMPIONS_REGMA, CHAMPIONS_REGMB];
+export const REGULATIONS: readonly RegulationSet[] = [
+    CHAMPIONS_REGMA,
+    CHAMPIONS_REGMB,
+    CHAMPIONS_REGMC,
+];
 
 const REGULATIONS_BY_ID = new Map(REGULATIONS.map((r) => [r.id, r]));
 
@@ -38,6 +43,18 @@ export function listRegulationIds(): string[] {
  */
 export function getLatestStatsRegulation(): RegulationSet | undefined {
     return REGULATIONS.filter((r) => r.showdownFormatId).sort((a, b) =>
+        b.startDate.localeCompare(a.startDate),
+    )[0];
+}
+
+/**
+ * Newest regulation (by start date) that has a Limitless format id.
+ *
+ * Limitless tournament ingestion keys its query off this so a new regulation
+ * takes over automatically once it is registered with a `limitlessFormatId`.
+ */
+export function getLatestLimitlessRegulation(): RegulationSet | undefined {
+    return REGULATIONS.filter((r) => r.limitlessFormatId).sort((a, b) =>
         b.startDate.localeCompare(a.startDate),
     )[0];
 }
