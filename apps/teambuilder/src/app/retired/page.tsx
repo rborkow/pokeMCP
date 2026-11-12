@@ -59,12 +59,10 @@ export default function RetiredPage() {
                             Teams and plans synced to an account
                         </h2>
                         <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                            Signing in with Discord or Google is no longer possible. Anything you
-                            synced before the retirement is still stored. Email{" "}
-                            <a className="prep-text-link" href="mailto:feedback@pokemcp.com">
-                                feedback@pokemcp.com
-                            </a>{" "}
-                            to get a copy or to have it deleted, and say which sign-in you used. The{" "}
+                            Signing in with Discord or Google is no longer possible. Accounts and
+                            everything synced to them — teams, plans and coach conversations — were
+                            deleted when the feature was retired. If the same browser you are using
+                            now also held them, the download above still works. The{" "}
                             <Link href="/privacy" className="prep-text-link">
                                 privacy policy
                             </Link>{" "}
