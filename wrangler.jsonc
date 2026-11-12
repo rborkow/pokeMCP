@@ -94,6 +94,16 @@
             "dataset": "pokemcp-analytics"
         }
     ],
+    // Abuse ceiling for the public /mcp endpoint, per client IP per Cloudflare
+    // location. Generous on purpose: AI assistants reach connectors from shared
+    // egress addresses. See src/mcp-rate-limit.ts.
+    "ratelimits": [
+        {
+            "name": "MCP_RATE_LIMITER",
+            "namespace_id": "1201",
+            "simple": { "limit": 600, "period": 60 }
+        }
+    ],
     // No cron triggers in default environment (only production)
     "limits": {
         "cpu_ms": 5000
@@ -146,6 +156,13 @@
                 {
                     "binding": "VECTOR_INDEX",
                     "index_name": "pokemon-strategy-index"
+                }
+            ],
+            "ratelimits": [
+                {
+                    "name": "MCP_RATE_LIMITER",
+                    "namespace_id": "1201",
+                    "simple": { "limit": 600, "period": 60 }
                 }
             ],
             "durable_objects": {
@@ -215,6 +232,13 @@
                 {
                     "binding": "VECTOR_INDEX",
                     "index_name": "pokemon-strategy-index"
+                }
+            ],
+            "ratelimits": [
+                {
+                    "name": "MCP_RATE_LIMITER",
+                    "namespace_id": "1201",
+                    "simple": { "limit": 600, "period": 60 }
                 }
             ],
             "durable_objects": {

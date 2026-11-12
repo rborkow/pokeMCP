@@ -187,6 +187,9 @@ async function connect(env: Env, calls: ConnectorCallInfo[] = []) {
     const client = new Client({ name: "connector-test", version: "0.0.0" });
     const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
     await Promise.all([server.connect(serverTransport), client.connect(clientTransport)]);
+    // Listing first makes the SDK client validate every later result against
+    // the advertised output schema, as a real client would.
+    await client.listTools();
     return client;
 }
 
@@ -332,10 +335,10 @@ describe("connector data tools", () => {
             moves: ["Fake Out", "Flare Blitz", "Surf"],
         });
         assert.deepEqual(
-            incineroar.moves.map((m: { legal: boolean }) => m.legal),
+            incineroar.moves.map((m: { learnable: boolean }) => m.learnable),
             [true, true, false],
         );
-        assert.equal(incineroar.allLegal, false);
+        assert.equal(incineroar.allLearnable, false);
 
         // Rotom-Wash's own learnset is only Hydro Pump; the rest is Rotom's.
         const rotom = await data(client, "validate_moveset", {
@@ -343,7 +346,7 @@ describe("connector data tools", () => {
             moves: ["Hydro Pump", "Thunderbolt", "Not A Move"],
         });
         assert.deepEqual(
-            rotom.moves.map((m: { legal: boolean }) => m.legal),
+            rotom.moves.map((m: { learnable: boolean }) => m.learnable),
             [true, true, false],
         );
         assert.match(rotom.moves[2].detail, /No move with this name/);
@@ -395,6 +398,53 @@ describe("connector data tools", () => {
         });
         assert.equal(out.valid, true);
         assert.match(out.warnings.join("\n"), /Mega Stones/);
+    });
+
+    it("accepts the Mega names the usage tools report", async () => {
+        // In the dex and the regulation's Mega list.
+        const team = await data(client, "validate_team", {
+            team: [
+                { pokemon: "Charizard-Mega-Y", ability: "Drought", moves: ["Heat Wave"] },
+                { pokemon: "Kingambit" },
+            ],
+        });
+        assert.equal(team.valid, true, team.errors.join("; "));
+        assert.deepEqual(team.members[0], { pokemon: "Charizard-Mega-Y", status: "allowed" });
+
+        const wrongStone = await data(client, "validate_team", {
+            team: [{ pokemon: "Charizard-Mega-Y", item: "Leftovers" }],
+        });
+        assert.match(wrongStone.errors.join("\n"), /must hold Charizardite Y/);
+
+        const types = await data(client, "analyze_team_types", {
+            team: ["Charizard-Mega-X", "Staraptor-Mega"],
+        });
+        assert.deepEqual(types.team, [{ name: "Charizard-Mega-X", types: ["Fire", "Dragon"] }]);
+        assert.deepEqual(types.notFound, ["Staraptor-Mega"]);
+
+        const lookup = await data(client, "lookup_pokemon", { pokemon: "Charizard-Mega-Y" });
+        assert.equal(lookup.baseSpecies, "Charizard");
+        assert.equal(lookup.abilities[0].name, "Drought");
+    });
+
+    it("handles a Mega the bundled data does not know by its base Pokémon", async () => {
+        // On the ladder, but in neither the dex nor the regulation's Mega list.
+        const moves = await data(client, "validate_moveset", {
+            pokemon: "Staraptor-Mega",
+            moves: ["Brave Bird", "Surf"],
+        });
+        assert.equal(moves.pokemon, "Staraptor-Mega");
+        assert.deepEqual(
+            moves.moves.map((m: { learnable: boolean }) => m.learnable),
+            [true, false],
+        );
+
+        const lookup = await errorText(client, "lookup_pokemon", { pokemon: "Staraptor-Mega" });
+        assert.match(lookup, /base form, Staraptor/);
+
+        const team = await data(client, "validate_team", { team: [{ pokemon: "Staraptor-Mega" }] });
+        assert.deepEqual(team.members, [{ pokemon: "Staraptor-Mega", status: "not_allowed" }]);
+        assert.match(team.warnings.join("\n"), /checked as Staraptor/);
     });
 
     it("validate_team fails clearly when legality data is missing", async () => {

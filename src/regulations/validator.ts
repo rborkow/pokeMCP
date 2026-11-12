@@ -188,8 +188,8 @@ export function validateTeamForRegulation(
             code: "multiple_mega_stones",
             severity: "warning",
             message:
-                `Team holds ${megaStoneNames.length} Mega Stones (${megaStoneNames.join(", ")}). ` +
-                `${regulation.shortLabel} allows this, but expect only one Pokémon to Mega Evolve per battle.`,
+                `Team holds ${megaStoneNames.length} Mega Stones (${megaStoneNames.join(", ")}), ` +
+                `which ${regulation.shortLabel} allows.`,
         });
     } else if (megaStoneNames.length > 1) {
         error(

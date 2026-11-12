@@ -36,6 +36,8 @@ connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output 
 - Move legality uses `getFullLearnset()` (data-loader.ts), which follows pre-evolutions and
   base formes like Pokémon Showdown does. A species' own learnset entry alone rejects about
   a third of the moves actually used on the ladder.
+- Tools accept the Mega names the usage tools report ("Charizard-Mega-Y"), including Megas
+  the bundled dex lacks — resolve names with `resolvePokemon()` in `connector/pokemon.ts`.
 - After changing a tool, run `bun run generate-tool-docs` (README + apps/docs tools page).
 
 ## Module Dependency Graph
@@ -70,7 +72,7 @@ index.ts (routes + PokemonMCP and IngestionCoordinator Durable Objects)
 
 | Path | Method | Purpose |
 |------|--------|---------|
-| `/mcp` | POST | Public MCP endpoint, Streamable HTTP (Durable Object); not origin-gated |
+| `/mcp` | POST | Public MCP endpoint, Streamable HTTP (Durable Object); not origin-gated; 600 req/min per IP via the `MCP_RATE_LIMITER` binding (`mcp-rate-limit.ts`, fails open) |
 | `/sse`, `/api/tools` | any | Retired — `410 Gone` (`retirement.ts`) |
 | `/health` | GET | Deploy health / secret-presence booleans |
 | `/api/feedback` | POST | User feedback to R2 |

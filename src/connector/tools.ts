@@ -144,7 +144,12 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
                     speciesClause: z.boolean(),
                     itemClause: z.boolean(),
                     megaEvolutions: z.number().describe("Number of legal Mega Evolutions"),
-                    usageStats: z.boolean().describe("Whether usage statistics are published"),
+                    usageStats: z
+                        .boolean()
+                        .describe(
+                            "Whether usage statistics are published for the regulation. Does " +
+                                "not guarantee the latest month is loaded",
+                        ),
                 }),
             ),
         },
@@ -185,10 +190,11 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
         name: "validate_moveset",
         title: "Check which moves a Pokémon can learn",
         description:
-            "Check whether a Pokémon can learn each of the given moves, counting moves inherited " +
-            "from its pre-evolutions and base form. Based on Pokémon Showdown learnset data " +
-            "across all generations; moves added only in Pokémon Champions may be missing, so a " +
-            "move reported as not learnable can occasionally be legal there.",
+            "Check whether a Pokémon can learn each of the given moves in any Pokémon game, " +
+            "counting moves inherited from its pre-evolutions and base form. Based on Pokémon " +
+            "Showdown learnset data across all generations, not Pokémon Champions' own move " +
+            "lists: a move learnable only in an older game may not exist in Champions, and a " +
+            "move added only in Champions may be reported as not learnable.",
         inputSchema: {
             pokemon: pokemonInput,
             moves: z
@@ -199,11 +205,11 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
         },
         outputSchema: {
             pokemon: z.string(),
-            allLegal: z.boolean(),
+            allLearnable: z.boolean(),
             moves: z.array(
                 z.object({
                     move: z.string(),
-                    legal: z.boolean(),
+                    learnable: z.boolean().describe("Learnable in at least one Pokémon game"),
                     detail: z.string().describe("How the move is learned, or why it is not"),
                 }),
             ),
@@ -216,9 +222,11 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
         description:
             "Check a team against a Pokémon Champions regulation: each Pokémon is on the " +
             "regulation's allowed list, Species Clause, Item Clause, at most four moves each, " +
-            "moves are learnable and abilities belong to the Pokémon. It does not check stat " +
-            "spreads or held-item availability, and its move data comes from Pokémon Showdown, " +
-            "so moves added only in Pokémon Champions may be reported as not learnable.",
+            "moves are learnable and abilities belong to the Pokémon. A Mega Evolution named " +
+            'directly (e.g. "Charizard-Mega-Y") is checked as its base Pokémon holding its Mega ' +
+            "Stone. It does not check stat spreads or held-item availability. Move data comes " +
+            "from Pokémon Showdown across all generations, not Pokémon Champions' own move " +
+            "lists, so a move from an older game can pass and a Champions-only move can fail.",
         inputSchema: {
             team: z
                 .array(
@@ -298,8 +306,9 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
         title: "Get the most-used Pokémon",
         description:
             "Rank the most-used Pokémon in a regulation by the share of ladder teams they appear " +
-            "on, from the latest monthly usage statistics. Use it to see what a team should " +
-            "expect to face. Mega Evolutions are ranked as separate entries.",
+            "on, from the most recent month of usage statistics loaded for that regulation (the " +
+            "month itself is not reported; get_usage_trend shows dated history). Use it to see " +
+            "what a team should expect to face. Mega Evolutions are ranked as separate entries.",
         inputSchema: { format: formatInput, limit: limitInput(20, 50) },
         outputSchema: {
             ...formatOutput,

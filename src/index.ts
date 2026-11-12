@@ -10,6 +10,7 @@ import { CONNECTOR_INFO, CONNECTOR_INSTRUCTIONS } from "./connector/tools.js";
 import { trackSession, trackToolCall } from "./analytics.js";
 import { getIngestionFormats } from "./ingestion/orchestrator.js";
 import { withLogging } from "./logging.js";
+import { mcpRateLimitResponse } from "./mcp-rate-limit.js";
 import {
     checkRateLimit,
     checkRateLimitGeneric,
@@ -142,6 +143,8 @@ export default {
         // browser origin allowlist below: MCP clients such as Claude and
         // ChatGPT connect from their own infrastructure.
         if (url.pathname === "/mcp") {
+            const rateLimited = await mcpRateLimitResponse(request, env.MCP_RATE_LIMITER);
+            if (rateLimited) return rateLimited;
             return PokemonMCP.serve("/mcp").fetch(request, env, ctx);
         }
 

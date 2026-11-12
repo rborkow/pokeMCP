@@ -10,6 +10,7 @@ import {
     getTypeChart,
     toID,
 } from "../data-loader.js";
+import type { MegaForm } from "../regulations/mega-data.js";
 import { REGULATIONS } from "../regulations/registry.js";
 import type { PokemonSpecies } from "../types.js";
 import { fail, ok, type ToolOutcome } from "./types.js";
@@ -20,6 +21,58 @@ import { fail, ok, type ToolOutcome } from "./types.js";
 export function findPokemon(name: string): PokemonSpecies | undefined {
     const species = getPokemon(name);
     return species && species.num > 0 ? species : undefined;
+}
+
+/** A Mega Evolution the regulations define, by its form name ("Charizard-Mega-Y"). */
+export function findMegaForm(name: string): MegaForm | undefined {
+    const id = toID(name);
+    const newestFirst = [...REGULATIONS].sort((a, b) => b.startDate.localeCompare(a.startDate));
+    for (const regulation of newestFirst) {
+        const form = regulation.megaForms.find((f) => toID(f.megaName) === id || f.formId === id);
+        if (form) return form;
+    }
+    return undefined;
+}
+
+export interface ResolvedPokemon {
+    /** Display name — the Mega's own name when a Mega was asked for. */
+    name: string;
+    /** Dex entry. For a Mega the dex does not model, this is its base Pokémon. */
+    species: PokemonSpecies;
+    /** Set when the name is a Mega Evolution the regulations define. */
+    mega?: MegaForm;
+    /** A "-Mega" name whose base Pokémon is known but whose own data is not. */
+    unknownMega?: boolean;
+    /** Typing to analyse: post-Mega for a Mega, when known. */
+    types: string[];
+}
+
+/**
+ * Resolve a name the way the usage tools report them. Usage statistics list
+ * Mega Evolutions as their own entries, including Champions-only Megas the
+ * bundled dex lacks, so every tool has to accept those names back.
+ */
+export function resolvePokemon(input: string): ResolvedPokemon | undefined {
+    const mega = findMegaForm(input);
+    const species = findPokemon(input);
+    if (species) return { name: species.name, species, mega, types: species.types };
+
+    if (mega) {
+        const base = findPokemon(mega.basePokemon);
+        if (base) {
+            return {
+                name: mega.megaName,
+                species: base,
+                mega,
+                types: mega.postMegaTypes ?? base.types,
+            };
+        }
+    }
+
+    const megaSuffix = input.trim().match(/^(.+?)[\s-]mega(?:[\s-][xyz])?$/i);
+    const base = megaSuffix && findPokemon(megaSuffix[1]);
+    if (base) return { name: input.trim(), species: base, unknownMega: true, types: base.types };
+    return undefined;
 }
 
 /** Up to three known names that start with, or contain, the caller's input. */
@@ -57,21 +110,35 @@ function statLine(stats: Record<string, number>): string {
 }
 
 export function lookupPokemon(args: { pokemon: string }): ToolOutcome {
-    const species = findPokemon(args.pokemon);
-    if (!species) return fail(pokemonNotFound(args.pokemon));
+    const resolved = resolvePokemon(args.pokemon);
+    if (!resolved) return fail(pokemonNotFound(args.pokemon));
+    const { species, mega } = resolved;
+    if (resolved.unknownMega) {
+        return fail(
+            `${resolved.name} is not in this connector's Pokémon data yet. Look up its base ` +
+                `form, ${species.name}, instead; the usage tools do recognise ${resolved.name}.`,
+        );
+    }
+    // A Mega the dex does not model: describe it from the regulation's data.
+    const fromRegistry = mega !== undefined && toID(species.name) !== toID(mega.megaName);
 
-    const { hp, atk, def, spa, spd, spe } = species.baseStats;
+    const { hp, atk, def, spa, spd, spe } =
+        (fromRegistry && mega.postMegaBaseStats) || species.baseStats;
     const baseStats = { hp, atk, def, spa, spd, spe, total: hp + atk + def + spa + spd + spe };
 
     const abilities: { name: string; hidden: boolean }[] = [];
-    for (const slot of ["0", "1", "H", "S"] as const) {
-        const name = species.abilities[slot];
-        if (name) abilities.push({ name, hidden: slot === "H" });
+    if (fromRegistry && mega.postMegaAbility) {
+        abilities.push({ name: mega.postMegaAbility, hidden: false });
+    } else {
+        for (const slot of ["0", "1", "H", "S"] as const) {
+            const name = species.abilities[slot];
+            if (name) abilities.push({ name, hidden: slot === "H" });
+        }
     }
 
     // Mega Evolutions come from the regulation registry rather than the dex,
     // because it carries Champions-only Megas and says where each is legal.
-    const baseName = species.baseSpecies || species.name;
+    const baseName = fromRegistry ? species.name : species.baseSpecies || species.name;
     const megas = new Map<
         string,
         {
@@ -111,27 +178,26 @@ export function lookupPokemon(args: { pokemon: string }): ToolOutcome {
     }
     const megaEvolutions = [...megas.values()];
 
+    const weightKg = fromRegistry ? undefined : species.weightkg;
     const data = {
-        name: species.name,
+        name: resolved.name,
         dexNumber: species.num,
-        types: species.types,
+        types: resolved.types,
         baseStats,
         abilities,
-        ...(species.weightkg ? { weightKg: species.weightkg } : {}),
-        ...(species.baseSpecies && species.baseSpecies !== species.name
-            ? { baseSpecies: species.baseSpecies }
-            : {}),
-        otherForms: species.otherFormes ?? [],
+        ...(weightKg ? { weightKg } : {}),
+        ...(baseName !== resolved.name ? { baseSpecies: baseName } : {}),
+        otherForms: fromRegistry ? [] : (species.otherFormes ?? []),
         megaEvolutions,
     };
 
     const lines = [
-        `**${species.name}** — ${species.types.join(" / ")} (National Dex #${species.num})`,
+        `**${data.name}** — ${data.types.join(" / ")} (National Dex #${species.num})`,
         "",
         `Base stats: ${statLine(baseStats)} (total ${baseStats.total})`,
         `Abilities: ${abilities.map((a) => (a.hidden ? `${a.name} (hidden)` : a.name)).join(", ")}`,
     ];
-    if (species.weightkg) lines.push(`Weight: ${species.weightkg} kg`);
+    if (weightKg) lines.push(`Weight: ${weightKg} kg`);
     if (data.otherForms.length) lines.push(`Other forms: ${data.otherForms.join(", ")}`);
     for (const mega of megaEvolutions) {
         const parts = [
@@ -171,10 +237,12 @@ function describeSource(sources: string[]): string {
 }
 
 export function validateMoveset(args: { pokemon: string; moves: string[] }): ToolOutcome {
-    const species = findPokemon(args.pokemon);
-    if (!species) return fail(pokemonNotFound(args.pokemon));
+    const resolved = resolvePokemon(args.pokemon);
+    if (!resolved) return fail(pokemonNotFound(args.pokemon));
+    // A Mega Evolution knows exactly the moves of its base Pokémon.
+    const species = { name: resolved.name };
 
-    const learnset = getFullLearnset(species.name);
+    const learnset = getFullLearnset(resolved.species.name);
     if (!learnset) {
         return fail(
             `No move data is available for ${species.name}, so its moves can't be checked. ` +
@@ -185,25 +253,29 @@ export function validateMoveset(args: { pokemon: string; moves: string[] }): Too
     const moves = args.moves.map((input) => {
         const move = getMove(input);
         if (!move) {
-            return { move: input, legal: false, detail: "No move with this name exists." };
+            return { move: input, learnable: false, detail: "No move with this name exists." };
         }
         const sources = learnset[toID(move.name)];
         if (!sources) {
             return {
                 move: move.name,
-                legal: false,
+                learnable: false,
                 detail: `${species.name} can't learn this move, including through its pre-evolutions.`,
             };
         }
-        return { move: move.name, legal: true, detail: `Learned by ${describeSource(sources)}.` };
+        return {
+            move: move.name,
+            learnable: true,
+            detail: `Learned by ${describeSource(sources)}.`,
+        };
     });
 
-    const allLegal = moves.every((m) => m.legal);
-    const data = { pokemon: species.name, allLegal, moves };
+    const allLearnable = moves.every((m) => m.learnable);
+    const data = { pokemon: species.name, allLearnable, moves };
     const text = [
-        `**${species.name}** — ${allLegal ? "every move is learnable" : "some moves are not learnable"}`,
+        `**${species.name}** — ${allLearnable ? "every move is learnable" : "some moves are not learnable"}`,
         "",
-        ...moves.map((m) => `- ${m.legal ? "✅" : "❌"} ${m.move}: ${m.detail}`),
+        ...moves.map((m) => `- ${m.learnable ? "✅" : "❌"} ${m.move}: ${m.detail}`),
     ].join("\n");
     return ok(data, text);
 }
@@ -235,9 +307,13 @@ export function analyzeTeamTypes(args: { team: string[] }): ToolOutcome {
     const team: { name: string; types: string[] }[] = [];
     const notFound: string[] = [];
     for (const input of args.team) {
-        const species = findPokemon(input);
-        if (species) team.push({ name: species.name, types: species.types });
-        else notFound.push(input);
+        // A Mega without type data can't be analysed; its base typing would mislead.
+        const resolved = resolvePokemon(input);
+        if (resolved && !resolved.unknownMega) {
+            team.push({ name: resolved.name, types: resolved.types });
+        } else {
+            notFound.push(input);
+        }
     }
     if (team.length === 0) return fail(pokemonNotFound(notFound[0] ?? ""));
 
