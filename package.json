@@ -36,6 +36,7 @@
         "generate-reports": "tsx scripts/generate-reports.ts",
         "generate-tool-docs": "tsx scripts/generate-tool-docs.ts",
         "generate-connector-icon": "tsx scripts/generate-connector-icon.ts",
+        "probe-connector": "tsx scripts/probe-connector.ts",
         "fetch-tournaments": "tsx scripts/fetch-tournaments.ts",
         "fetch-champions-legality": "tsx scripts/fetch-champions-legality.ts",
         "upload-champions-legality": "tsx scripts/upload-champions-legality.ts",
