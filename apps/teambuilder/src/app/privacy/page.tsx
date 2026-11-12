@@ -88,12 +88,10 @@ const sections: { title: string; body: ReactNode }[] = [
                         , and clearing your browser&apos;s site data removes them.
                     </li>
                     <li>
-                        <strong>In an account.</strong> If you signed in with Discord or Google, we
-                        still hold the account identifier and basic profile from that provider
-                        (name, email address, profile image), your sign-in sessions including the IP
-                        address and browser they were created from, and the teams, plans and coach
-                        conversations you synced. Signing in is no longer possible, so email us to
-                        get a copy or to have it deleted.
+                        <strong>In an account.</strong> If you signed in with Discord or Google,
+                        your account, your sign-in sessions and the teams, plans and coach
+                        conversations you synced were deleted when the accounts were retired. We no
+                        longer hold them, and the sign-in apps have been removed.
                     </li>
                     <li>
                         <strong>Feedback.</strong> Messages sent through the site&apos;s former
@@ -140,8 +138,8 @@ const sections: { title: string; body: ReactNode }[] = [
                     <strong>Shared team links:</strong> 1 year after the link was last opened.
                 </li>
                 <li>
-                    <strong>Data from retired accounts and the former feedback form:</strong> until
-                    you ask us to delete it.
+                    <strong>Feedback sent through the site&apos;s former feedback form:</strong>{" "}
+                    until you ask us to delete it.
                 </li>
             </Items>
         ),
@@ -160,9 +158,8 @@ const sections: { title: string; body: ReactNode }[] = [
                         features left on your device.
                     </li>
                     <li>
-                        Email us to get a copy of, or delete, anything held from a retired account,
-                        to have a shared team link or earlier feedback removed, or to ask what we
-                        hold about you.
+                        Email us to have a shared team link or earlier feedback removed, or to ask
+                        what we hold about you.
                     </li>
                 </Items>
                 <p>
@@ -188,8 +185,8 @@ export default function PrivacyPage() {
                         This policy covers the PokeMCP website and the VGC Teambuilder connector for
                         AI assistants. Both work without an account. The connector stores nothing
                         about you, and the website collects none. Neither sends your data to an AI
-                        provider. Some data remains from features the website has retired; that is
-                        described below.
+                        provider. A little data remains from features the website has retired; that
+                        is described below.
                     </p>
                 </header>
                 <div className="max-w-3xl divide-y divide-border">
