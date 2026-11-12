@@ -2,31 +2,40 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CONNECTOR_DOCS_URL } from "@/lib/connector";
 
 const destinations = [
-    { href: "/", label: "Newsroom" },
-    { href: "/prep/new", label: "New prep" },
-    { href: "/teams", label: "Teams" },
+    { href: "/", label: "Results" },
+    { href: "/reports", label: "Reports" },
 ];
 
-export function PrepHeader() {
+export function SiteHeader() {
     const pathname = usePathname() ?? "/";
     return (
         <header className="prep-header print:hidden">
             <div className="prep-shell flex min-h-16 flex-wrap items-center justify-between gap-x-6 gap-y-2 py-3">
-                <Link href="/" className="flex min-h-11 items-center gap-3 rounded-md py-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-md border border-border bg-inset text-sm font-semibold text-primary" aria-hidden="true">
+                <Link
+                    href="/"
+                    className="flex min-h-11 items-center gap-3 rounded-md py-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                >
+                    <span
+                        className="flex h-8 w-8 items-center justify-center rounded-md border border-border bg-inset text-sm font-semibold text-primary"
+                        aria-hidden="true"
+                    >
                         P
                     </span>
                     <span className="font-semibold tracking-[-0.02em] text-foreground">
-                        PokeMCP <span className="text-muted-foreground">Prep</span>
+                        PokeMCP
                     </span>
                 </Link>
-                <nav aria-label="Primary" className="order-3 grid w-full grid-cols-3 items-center gap-1 sm:order-none sm:flex sm:w-auto">
+                <nav
+                    aria-label="Primary"
+                    className="order-3 grid w-full grid-cols-2 items-center gap-1 sm:order-none sm:flex sm:w-auto"
+                >
                     {destinations.map((destination) => {
                         const active =
                             destination.href === "/"
-                                ? pathname === "/"
+                                ? pathname === "/" || pathname.startsWith("/events")
                                 : pathname.startsWith(destination.href);
                         return (
                             <Link
@@ -44,20 +53,12 @@ export function PrepHeader() {
                         );
                     })}
                 </nav>
-                <div className="flex items-center gap-1">
-                    <Link
-                        href="/privacy"
-                        className="flex min-h-11 items-center rounded-md px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-inset/70 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-                    >
-                        Privacy
-                    </Link>
-                    <Link
-                        href="/account"
-                        className="flex min-h-11 items-center rounded-md border border-border px-3 py-2 text-sm text-muted-foreground transition-colors hover:border-primary/60 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-                    >
-                        Account
-                    </Link>
-                </div>
+                <a
+                    href={CONNECTOR_DOCS_URL}
+                    className="flex min-h-11 items-center rounded-md border border-border px-3 py-2 text-sm text-muted-foreground transition-colors hover:border-primary/60 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                >
+                    VGC Teambuilder connector
+                </a>
             </div>
         </header>
     );

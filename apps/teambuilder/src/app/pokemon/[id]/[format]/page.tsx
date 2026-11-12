@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CONNECTOR_DOCS_URL } from "@/lib/connector";
 import { getMonParams, getMonsIndex, type MonBuild, type MonPageData } from "@/lib/mon-pages";
 import { formatMonthLong, getLatestReport } from "@/lib/reports";
 
@@ -332,7 +333,7 @@ export default async function MonPage({ params }: PageProps) {
                         Champions team&apos;s legality and shared weaknesses.
                     </p>
                     <a
-                        href="https://docs.pokemcp.com/tools"
+                        href={CONNECTOR_DOCS_URL}
                         className="mt-3 inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
                     >
                         Add VGC Teambuilder

@@ -1,8 +1,17 @@
 import type { TeamPokemon } from "@/types/pokemon";
 
-export function PokemonLineup({ team, compact = false }: { team: TeamPokemon[]; compact?: boolean }) {
+export function PokemonLineup({
+    team,
+    compact = false,
+}: {
+    team: TeamPokemon[];
+    compact?: boolean;
+}) {
     return (
-        <ul className={`flex flex-wrap ${compact ? "gap-1.5" : "gap-2"}`} aria-label="Team composition">
+        <ul
+            className={`flex flex-wrap ${compact ? "gap-1.5" : "gap-2"}`}
+            aria-label="Team composition"
+        >
             {team.map((pokemon) => (
                 <li
                     key={pokemon.pokemon}

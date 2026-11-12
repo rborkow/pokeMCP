@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { PrepHeader } from "@/components/prep/PrepHeader";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { SiteHeader } from "@/components/site/SiteHeader";
 
 export const metadata = {
     title: "Privacy policy",
@@ -46,28 +47,18 @@ const sections: { title: string; body: ReactNode }[] = [
         ),
     },
     {
-        title: "The website without an account",
+        title: "The website",
         body: (
             <>
                 <p>
-                    You can use the website without signing in. Teams and plans you create stay in
-                    your browser&apos;s storage on your device, and you can export them from the{" "}
-                    <Link href="/teams" className="prep-text-link">
-                        Teams page
-                    </Link>
-                    .
+                    The website publishes tournament results and meta reports. It has no accounts
+                    and no forms, and it does not ask for personal information.
                 </p>
-                <p>We collect a small amount of information from all visitors:</p>
                 <Items>
                     <li>
                         <strong>Page statistics.</strong> Cloudflare Web Analytics counts page views
                         and measures page speed. It does not use cookies and does not store your IP
                         address.
-                    </li>
-                    <li>
-                        <strong>Product events.</strong> We count a few actions, such as starting a
-                        plan or exporting one, together with the format. These counts are not linked
-                        to you.
                     </li>
                     <li>
                         <strong>Shared team links.</strong> A team shared through an older{" "}
@@ -79,31 +70,36 @@ const sections: { title: string; body: ReactNode }[] = [
         ),
     },
     {
-        title: "Optional accounts",
+        title: "Retired features and the data they left",
         body: (
             <>
                 <p>
-                    Signing in with Discord or Google is optional and exists only to sync your
-                    workspace between devices. If you sign in, we store:
+                    The website used to offer matchup plans, saved teams, a coach and optional
+                    accounts under the name PokeMCP Prep. These were retired in November 2026.
                 </p>
                 <Items>
                     <li>
-                        the account identifier and basic profile from the provider you chose: your
-                        name, email address and profile image;
+                        <strong>In your browser.</strong> Teams and plans you saved without an
+                        account were kept in your browser&apos;s storage and are still there. You
+                        can download them from the{" "}
+                        <Link href="/retired" className="prep-text-link">
+                            retirement notice
+                        </Link>
+                        , and clearing your browser&apos;s site data removes them.
                     </li>
                     <li>
-                        the teams and plans you choose to sync, and any coach conversations you
-                        saved before the coach was retired;
+                        <strong>In an account.</strong> If you signed in with Discord or Google, we
+                        still hold the account identifier and basic profile from that provider
+                        (name, email address, profile image), your sign-in sessions including the IP
+                        address and browser they were created from, and the teams, plans and coach
+                        conversations you synced. Signing in is no longer possible, so email us to
+                        get a copy or to have it deleted.
                     </li>
                     <li>
-                        your sign-in sessions, including the IP address and browser they were
-                        created from, which we use to keep the account secure.
+                        <strong>Feedback.</strong> Messages sent through the site&apos;s former
+                        feedback form, with the email address if one was given, are still stored.
                     </li>
                 </Items>
-                <p>
-                    Signed-in sessions use secure, HTTP-only cookies. Sign-in tokens from Discord or
-                    Google are encrypted before they are stored.
-                </p>
             </>
         ),
     },
@@ -120,10 +116,6 @@ const sections: { title: string; body: ReactNode }[] = [
                         connector, that address belongs to your assistant&apos;s provider rather
                         than to you.
                     </li>
-                    <li>
-                        <strong>Discord or Google</strong> processes your sign-in, if you choose to
-                        sign in.
-                    </li>
                 </Items>
             </>
         ),
@@ -136,7 +128,7 @@ const sections: { title: string; body: ReactNode }[] = [
                     <strong>Connector tool inputs and results:</strong> not stored.
                 </li>
                 <li>
-                    <strong>Connector and website usage counts:</strong> 3 months.
+                    <strong>Connector usage counts:</strong> 3 months.
                 </li>
                 <li>
                     <strong>Request logs:</strong> up to 7 days.
@@ -148,12 +140,8 @@ const sections: { title: string; body: ReactNode }[] = [
                     <strong>Shared team links:</strong> 1 year after the link was last opened.
                 </li>
                 <li>
-                    <strong>Feedback sent through the site&apos;s former feedback form:</strong>{" "}
-                    until you ask us to delete it.
-                </li>
-                <li>
-                    <strong>Account, synced teams, plans and saved coach conversations:</strong>{" "}
-                    until you delete them or the account.
+                    <strong>Data from retired accounts and the former feedback form:</strong> until
+                    you ask us to delete it.
                 </li>
             </Items>
         ),
@@ -168,20 +156,13 @@ const sections: { title: string; body: ReactNode }[] = [
                         is left with us to delete.
                     </li>
                     <li>
-                        Delete synced teams, plans, saved coach conversations, sessions, sign-in
-                        links and the account itself from the{" "}
-                        <Link href="/account" className="prep-text-link">
-                            account page
-                        </Link>
-                        . You can also revoke access in your Discord or Google account settings.
+                        Clear your browser&apos;s site data to remove teams and plans the retired
+                        features left on your device.
                     </li>
                     <li>
-                        Clear your browser&apos;s site data to remove teams and plans kept on your
-                        device.
-                    </li>
-                    <li>
-                        Email us to have a shared team link or earlier feedback removed, or to ask
-                        what we hold about you.
+                        Email us to get a copy of, or delete, anything held from a retired account,
+                        to have a shared team link or earlier feedback removed, or to ask what we
+                        hold about you.
                     </li>
                 </Items>
                 <p>
@@ -196,7 +177,7 @@ const sections: { title: string; body: ReactNode }[] = [
 export default function PrivacyPage() {
     return (
         <div className="min-h-screen">
-            <PrepHeader />
+            <SiteHeader />
             <main className="prep-shell pb-20 pt-10">
                 <header className="border-b border-border pb-8">
                     <p className="text-sm text-muted-foreground">Last updated November 12, 2026</p>
@@ -206,8 +187,9 @@ export default function PrivacyPage() {
                     <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
                         This policy covers the PokeMCP website and the VGC Teambuilder connector for
                         AI assistants. Both work without an account. The connector stores nothing
-                        about you, and the website stores personal information only if you choose to
-                        sign in. Neither sends your data to an AI provider.
+                        about you, and the website collects none. Neither sends your data to an AI
+                        provider. Some data remains from features the website has retired; that is
+                        described below.
                     </p>
                 </header>
                 <div className="max-w-3xl divide-y divide-border">
@@ -237,6 +219,7 @@ export default function PrivacyPage() {
                     </section>
                 </div>
             </main>
+            <SiteFooter />
         </div>
     );
 }

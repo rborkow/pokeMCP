@@ -1,5 +1,7 @@
-import { Calculator, FlaskConical, Lightbulb, Newspaper } from "lucide-react";
-import type { EvidenceKind } from "@/lib/prep/schema";
+import { Calculator, Newspaper } from "lucide-react";
+
+/** How a figure on the page was obtained. */
+export type EvidenceKind = "tournament-source" | "calculated";
 
 const evidenceStyle: Record<
     EvidenceKind,
@@ -15,23 +17,15 @@ const evidenceStyle: Record<
         icon: Calculator,
         className: "border-sage/35 bg-sage/10 text-sage",
     },
-    "model-suggestion": {
-        label: "Coach suggestion",
-        icon: Lightbulb,
-        className: "border-rust/35 bg-rust/10 text-rust",
-    },
-    "beta-mechanics": {
-        label: "Mechanics beta",
-        icon: FlaskConical,
-        className: "border-ochre/35 bg-ochre/10 text-ochre",
-    },
 };
 
 export function EvidenceBadge({ kind, label }: { kind: EvidenceKind; label?: string }) {
     const style = evidenceStyle[kind];
     const Icon = style.icon;
     return (
-        <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs ${style.className}`}>
+        <span
+            className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs ${style.className}`}
+        >
             <Icon className="h-3.5 w-3.5" aria-hidden="true" />
             {label ?? style.label}
         </span>

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { CONNECTOR_DOCS_URL } from "@/lib/connector";
 import { formatMonthLong, type ReportEntry } from "@/lib/reports";
 
 const SITE_URL = "https://www.pokemcp.com";
-const CONNECTOR_URL = "https://docs.pokemcp.com/tools";
 
 interface ReportShellProps {
     report: ReportEntry;
@@ -91,7 +91,7 @@ export function ReportShell({ report, canonicalPath, children }: ReportShellProp
                         how the Pokémon above are usually built.
                     </p>
                     <a
-                        href={CONNECTOR_URL}
+                        href={CONNECTOR_DOCS_URL}
                         className="mt-3 inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
                     >
                         Add VGC Teambuilder

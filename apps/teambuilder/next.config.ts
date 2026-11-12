@@ -6,11 +6,14 @@ const nextConfig: NextConfig = {
     pageExtensions: ["ts", "tsx", "mdx"],
     async redirects() {
         return [
-            // The team builder is gone. `/build` was linked from reports and
-            // the sitemap but never shipped (its page was caught by a `build/`
-            // ignore rule), so both old addresses lead home, not to a 404.
-            { source: "/builder", destination: "/", permanent: false },
-            { source: "/build", destination: "/", permanent: false },
+            // PokeMCP Prep, saved teams, accounts and the team builder are
+            // retired. Their addresses lead to one notice page, which also
+            // lets a visitor download what their browser still holds.
+            { source: "/prep/:path*", destination: "/retired", permanent: false },
+            { source: "/teams", destination: "/retired", permanent: false },
+            { source: "/account", destination: "/retired", permanent: false },
+            { source: "/builder", destination: "/retired", permanent: false },
+            { source: "/build", destination: "/retired", permanent: false },
         ];
     },
     images: {

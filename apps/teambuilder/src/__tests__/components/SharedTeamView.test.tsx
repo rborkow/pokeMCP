@@ -1,23 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "../test-utils";
 import { SharedTeamView } from "@/app/t/[id]/SharedTeamView";
-import { useTeamStore } from "@/stores/team-store";
 import type { SharedTeam } from "@/lib/share-api";
-
-// Mock localStorage
-const localStorageMock = {
-    getItem: vi.fn(),
-    setItem: vi.fn(),
-    removeItem: vi.fn(),
-    clear: vi.fn(),
-};
-vi.stubGlobal("localStorage", localStorageMock);
-
-// Mock next/navigation
-const mockPush = vi.fn();
-vi.mock("next/navigation", () => ({
-    useRouter: () => ({ push: mockPush }),
-}));
 
 // Mock showdown-parser
 vi.mock("@/lib/showdown-parser", () => ({
@@ -55,7 +39,6 @@ const sharedTeam: SharedTeam = {
 
 describe("SharedTeamView", () => {
     beforeEach(() => {
-        useTeamStore.getState().clearTeam();
         vi.clearAllMocks();
     });
 
@@ -115,20 +98,25 @@ describe("SharedTeamView", () => {
         expect(screen.getByTestId("sprite-Landorus-Therian")).toBeInTheDocument();
     });
 
-    describe("Load into Builder", () => {
-        it("renders the button", () => {
+    describe("read-only actions", () => {
+        it("copies the team as Showdown text", async () => {
+            const writeText = vi.fn(async () => {});
+            vi.stubGlobal("navigator", { ...navigator, clipboard: { writeText } });
+
             render(<SharedTeamView team={sharedTeam} />);
-            expect(screen.getByText("Load into Builder")).toBeInTheDocument();
+            fireEvent.click(screen.getByRole("button", { name: "Copy as Showdown text" }));
+
+            expect(writeText).toHaveBeenCalledTimes(1);
+            expect(await screen.findByRole("button", { name: "Copied" })).toBeInTheDocument();
         });
 
-        it("clears team, sets format, imports, and navigates on click", () => {
+        it("points to the connector and offers no builder", () => {
             render(<SharedTeamView team={sharedTeam} />);
-            fireEvent.click(screen.getByText("Load into Builder"));
-
-            // After click, the store should have been modified and router pushed
-            expect(mockPush).toHaveBeenCalledWith("/");
-            // The store should have the format set
-            expect(useTeamStore.getState().format).toBe("gen9ou");
+            expect(screen.getByRole("link", { name: "VGC Teambuilder connector" })).toHaveAttribute(
+                "href",
+                "https://docs.pokemcp.com/getting-started",
+            );
+            expect(screen.queryByText(/Load into Builder/i)).toBeNull();
         });
     });
 });
