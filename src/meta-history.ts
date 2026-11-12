@@ -27,8 +27,8 @@ const SOURCE = "smogon-chaos";
 // the newest regulation with published Smogon stats so new regs take over
 // automatically once their stats mapping is flipped on.
 const DEFAULT_FORMAT = getLatestStatsRegulation()?.id ?? "gen9doublesou";
-const MIN_MOMENTUM_HISTORY = 4; // need >= 4 points before flagging momentum
-const ENTRY_THRESHOLD = 0.02; // 2% usage to count as a meaningful entrant/dropout
+export const MIN_MOMENTUM_HISTORY = 4; // need >= 4 points before flagging momentum
+export const ENTRY_THRESHOLD = 0.02; // 2% usage to count as a meaningful entrant/dropout
 const MOMENTUM_RELEVANCE = 0.02; // only track momentum for mons reaching ~2% usage
 
 // --- Types ---
@@ -43,7 +43,7 @@ export interface MetaTrendsArgs {
     limit?: number;
 }
 
-interface BoardRow {
+export interface BoardRow {
     pokemon_id: string;
     display_name: string;
     usage: number;
@@ -57,7 +57,7 @@ interface SnapshotHeaderRow {
     total_pokemon: number | null;
 }
 
-interface MoverMetric {
+export interface MoverMetric {
     name: string;
     latest: number;
     delta: number;
@@ -104,7 +104,7 @@ function nearest(dates: string[], target: string): string {
     return best;
 }
 
-function resolveRange(
+export function resolveRange(
     dates: string[],
     args: { from?: string; to?: string; window?: number },
     defaultWindow: number,
@@ -194,11 +194,11 @@ function acceleration(y: number[]): number {
 
 // --- D1 access ---
 
-function hasDb(env: Env): boolean {
+export function hasDb(env: Env): boolean {
     return Boolean((env as { META_DB?: unknown }).META_DB);
 }
 
-async function getDates(env: Env, format: string): Promise<string[]> {
+export async function getDates(env: Env, format: string): Promise<string[]> {
     return cached(`dates:${format}`, async () => {
         const res = await env.META_DB.prepare(
             "SELECT date FROM meta_snapshot WHERE format = ? AND source = ? ORDER BY date",
@@ -209,7 +209,7 @@ async function getDates(env: Env, format: string): Promise<string[]> {
     });
 }
 
-async function getBoard(env: Env, format: string, date: string): Promise<BoardRow[]> {
+export async function getBoard(env: Env, format: string, date: string): Promise<BoardRow[]> {
     return cached(`board:${format}:${date}`, async () => {
         const res = await env.META_DB.prepare(
             "SELECT pokemon_id, display_name, usage, rank, raw_count FROM usage_snapshot " +
@@ -240,16 +240,34 @@ async function getHeaders(
     };
 }
 
+/** One Pokémon's monthly usage and rank between two snapshot dates (inclusive). */
+export async function getUsageSeries(
+    env: Env,
+    format: string,
+    pokemonId: string,
+    from: string,
+    to: string,
+): Promise<{ date: string; display_name: string; usage: number; rank: number }[]> {
+    const res = await env.META_DB.prepare(
+        "SELECT date, display_name, usage, rank FROM usage_snapshot " +
+            "WHERE format = ? AND source = ? AND pokemon_id = ? AND date BETWEEN ? AND ? " +
+            "ORDER BY date",
+    )
+        .bind(format, SOURCE, pokemonId, from, to)
+        .all<{ date: string; display_name: string; usage: number; rank: number }>();
+    return res.results || [];
+}
+
 // --- Shared computations ---
 
-interface ShiftResult {
+export interface ShiftResult {
     risers: { name: string; delta: number; fromU: number; toU: number; toRank: number }[];
     fallers: { name: string; delta: number; fromU: number; toU: number; toRank: number }[];
     entrants: BoardRow[];
     dropouts: BoardRow[];
 }
 
-async function computeShifts(
+export async function computeShifts(
     env: Env,
     format: string,
     from: string,
@@ -297,7 +315,7 @@ async function computeShifts(
     };
 }
 
-async function computeMomentum(
+export async function computeMomentum(
     env: Env,
     format: string,
     from: string,

@@ -40,6 +40,7 @@ export interface PokemonSpecies {
     evoCondition?: string;
     baseSpecies?: string;
     forme?: string;
+    changesFrom?: string; // Forme that inherits its base forme's learnset (e.g. Rotom-Wash)
     otherFormes?: string[];
     formeOrder?: string[];
     // Gen-specific mechanics

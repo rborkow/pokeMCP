@@ -67,6 +67,55 @@ export function getPokemonLearnset(name: string) {
     return learnsetsData[id];
 }
 
+// Formes whose learnset is their base species' plus their own additions,
+// mirroring Pokémon Showdown's `learnsetParent` special cases.
+const FORME_INHERITS_BASE = new Set(["Gastrodon", "Pumpkaboo", "Sinistea", "Tatsugiri"]);
+
+function learnsetParent(species: PokemonSpecies, hasOwnLearnset: boolean) {
+    const base =
+        species.baseSpecies && species.baseSpecies !== species.name
+            ? species.baseSpecies
+            : undefined;
+    // Megas, Therian formes and other formes without a learnset use the base species'.
+    if (!hasOwnLearnset && base) return getPokemon(base);
+    if (base && species.forme && FORME_INHERITS_BASE.has(base)) return getPokemon(base);
+    if (species.prevo) return getPokemon(species.prevo);
+    if (species.changesFrom && species.baseSpecies !== "Kyurem") {
+        return getPokemon(species.changesFrom);
+    }
+    return undefined;
+}
+
+/**
+ * Every move a Pokémon can know, keyed by move id, with the learn sources
+ * (e.g. "9M", "8E") collected from the Pokémon itself, its pre-evolutions and,
+ * for formes, the base forme — the same inheritance Pokémon Showdown applies.
+ *
+ * `getPokemonLearnset` returns only a species' own entry, which omits
+ * pre-evolution moves (Incineroar's Fake Out, Kingambit's Sucker Punch) and is
+ * empty for most formes. Use this for legality checks.
+ *
+ * Returns undefined when the Pokémon is unknown or no learnset data exists.
+ */
+export function getFullLearnset(name: string): Record<string, string[]> | undefined {
+    const merged: Record<string, string[]> = {};
+    const seen = new Set<string>();
+    let found = false;
+    let species = getPokemon(name);
+    while (species && !seen.has(species.name)) {
+        seen.add(species.name);
+        const own = learnsetsData[toID(species.name)]?.learnset;
+        if (own) {
+            found = true;
+            for (const [moveId, sources] of Object.entries(own)) {
+                merged[moveId] = merged[moveId] ? [...merged[moveId], ...sources] : [...sources];
+            }
+        }
+        species = learnsetParent(species, Boolean(own));
+    }
+    return found ? merged : undefined;
+}
+
 /**
  * Get a Pokémon's format data (tier info, etc.)
  */

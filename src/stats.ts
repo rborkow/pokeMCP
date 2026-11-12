@@ -14,13 +14,13 @@ const pokemonCache = new Map<string, { data: PokemonStats; timestamp: number }>(
 
 // --- Types ---
 
-interface FormatIndex {
+export interface FormatIndex {
     info: UsageStatistics["info"];
     pokemon: Record<string, number>; // displayName → usage
     version: number;
 }
 
-interface PokemonStats {
+export interface PokemonStats {
     displayName: string;
     usage: number;
     Abilities?: Record<string, number>;
@@ -39,7 +39,7 @@ interface PokemonStats {
  * Get the format index (info + pokemon usage map).
  * Used by tools that need all Pokemon: getMetaThreats, getMetagameStats.
  */
-async function getFormatIndex(format: string, env: Env): Promise<FormatIndex | null> {
+export async function getFormatIndex(format: string, env: Env): Promise<FormatIndex | null> {
     const now = Date.now();
     const cached = indexCache.get(format);
     if (cached && now - cached.timestamp < CACHE_TTL_MS) {
@@ -66,7 +66,7 @@ async function getFormatIndex(format: string, env: Env): Promise<FormatIndex | n
  * Get stats for a single Pokemon in a format.
  * Used by per-Pokemon tools: getPopularSets, getTeammates, getChecksCounters.
  */
-async function getPokemonStats(
+export async function getPokemonStats(
     pokemonName: string,
     format: string,
     env: Env,

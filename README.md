@@ -14,14 +14,43 @@ PokeMCP Prep turns current Pokémon Champions tournament teams into matchup plan
 - Anonymous teams and plans live locally; optional Discord or Google accounts sync through Better Auth and D1.
 - Exact VP-sensitive speed calculations and incomplete Champions move interactions are labeled as mechanics beta.
 
-The former public MCP and REST tool endpoints are retired and return `410 Gone`. Their capabilities remain available to the web product through a private Cloudflare service binding.
+## VGC Teambuilder connector
+
+The same analysis is available to AI assistants as **VGC Teambuilder**, a read-only [Model Context Protocol](https://modelcontextprotocol.io) server:
+
+```
+https://api.pokemcp.com/mcp
+```
+
+It needs no account and takes no personal information. Connect it as a custom connector in Claude or ChatGPT, or from any MCP client that speaks Streamable HTTP. Full reference: [docs.pokemcp.com/tools](https://docs.pokemcp.com/tools).
+
+<!-- AUTOGEN:TOOLS:BEGIN -->
+| Tool | What it does |
+|------|--------------|
+| `list_formats` | List supported formats |
+| `lookup_pokemon` | Look up a Pokémon |
+| `validate_moveset` | Check which moves a Pokémon can learn |
+| `validate_team` | Validate a team for a regulation |
+| `analyze_team_types` | Analyze a team's defensive typing |
+| `get_top_usage` | Get the most-used Pokémon |
+| `get_pokemon_usage` | Get how a Pokémon is built |
+| `get_teammates` | Get a Pokémon's common teammates |
+| `get_checks_and_counters` | Get a Pokémon's checks and counters |
+| `get_usage_trend` | Get a Pokémon's usage over time |
+| `get_meta_shifts` | Compare usage between two months |
+| `get_usage_momentum` | Find rising and falling Pokémon |
+<!-- AUTOGEN:TOOLS:END -->
+
+The tools live in `src/connector/`; run `bun run generate-tool-docs` after changing them. The legacy `/sse` and `/api/tools` endpoints stay retired and return `410 Gone`. The web product reaches its own, separate tool set through a private Cloudflare service binding.
+
+VGC Teambuilder is an unofficial fan project. It is not affiliated with or endorsed by Nintendo, Creatures Inc., GAME FREAK inc. or The Pokémon Company.
 
 ## Repository
 
 - `apps/teambuilder/` — Next.js 16 / OpenNext web application.
 - `apps/docs/` — Nextra documentation.
 - `apps/pokemonitor/` — daily Cloudflare Worker reporting, AI-usage monitoring, and email delivery.
-- `src/` — internal Cloudflare analysis worker, tournament ingestion, shared-team compatibility, and administration.
+- `src/` — Cloudflare analysis worker: the public VGC Teambuilder connector (`src/connector/`), the internal analysis service, tournament ingestion, shared-team compatibility, and administration.
 - `migrations/d1/` — metagame and tournament D1 schema.
 - `apps/teambuilder/migrations/prep/` — account, team, plan, and coach-history schema.
 

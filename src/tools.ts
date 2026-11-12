@@ -1,7 +1,7 @@
 import {
     getPokemon,
     getMove,
-    getPokemonLearnset,
+    getFullLearnset,
     getPokemonFormatData,
     toID,
     getTypeChart,
@@ -165,8 +165,9 @@ export function validateMoveset(args: {
         return `Pokémon "${args.pokemon}" not found.`;
     }
 
-    const learnset = getPokemonLearnset(args.pokemon);
-    if (!learnset?.learnset) {
+    // Full learnset: includes pre-evolution and base-forme moves.
+    const learnset = getFullLearnset(args.pokemon);
+    if (!learnset) {
         return `No learnset data found for ${species.name}.`;
     }
 
@@ -185,7 +186,7 @@ export function validateMoveset(args: {
         }
 
         const moveId = toID(moveName);
-        const learnMethods = learnset.learnset[moveId];
+        const learnMethods = learnset[moveId];
 
         if (!learnMethods) {
             results.push(`❌ **${move.name}**: Cannot be learned by ${species.name}`);
@@ -351,11 +352,11 @@ function validateShowdownTeam(args: { team: TeamPokemon[]; format?: string }): s
                 errors.push(`${species.name} has ${member.moves.length} moves (max 4)`);
             }
 
-            const learnset = getPokemonLearnset(member.pokemon);
-            if (learnset?.learnset) {
+            const learnset = getFullLearnset(member.pokemon);
+            if (learnset) {
                 for (const moveName of member.moves) {
                     const moveId = toID(moveName);
-                    if (!learnset.learnset[moveId]) {
+                    if (!learnset[moveId]) {
                         const move = getMove(moveName);
                         errors.push(`${species.name} cannot learn ${move?.name || moveName}`);
                     }
