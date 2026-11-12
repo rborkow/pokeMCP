@@ -1,56 +1,20 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { formatMs, formatNumber, formatPercent, toNumber } from "./format";
 import { useAdminData } from "./useAdminData";
 
 interface OverviewData {
-    toolCalls: {
-        total: number;
-        successes: number;
-        avg_response_ms: number;
+    toolCalls: { total?: number; successes?: number; avg_response_ms?: number };
+    sessions: { connections?: number };
+    requests: {
+        total?: number;
+        errors?: number;
+        rate_limited?: number;
+        avg_ms?: number;
+        p50_ms?: number;
+        p95_ms?: number;
     };
-    aiChat: {
-        total: number;
-        total_input_tokens: number;
-        total_output_tokens: number;
-        total_cost_usd: number;
-        avg_response_ms: number;
-    };
-    sessions: {
-        connections: number;
-    };
-    aiBySource: Array<{
-        source: string;
-        total: number;
-        cost_usd: number;
-    }>;
-}
-
-function formatNumber(n: number | undefined): string {
-    if (n === undefined || n === null) return "0";
-    if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
-    if (n >= 1_000) return `${(n / 1_000).toFixed(1)}K`;
-    return Math.round(n).toLocaleString();
-}
-
-function formatCost(n: number | undefined): string {
-    if (n === undefined || n === null) return "$0.00";
-    return `$${n.toFixed(2)}`;
-}
-
-function formatMs(n: number | undefined): string {
-    if (n === undefined || n === null) return "0ms";
-    if (n >= 1000) return `${(n / 1000).toFixed(1)}s`;
-    return `${Math.round(n)}ms`;
-}
-
-/** Build a compact source summary like "3 web, 1 mcp" */
-function formatSourceSummary(sources: OverviewData["aiBySource"] | undefined): string {
-    if (!sources || sources.length === 0) return "";
-    return sources
-        .filter((s) => s.total > 0)
-        .map((s) => `${s.total} ${s.source || "unknown"}`)
-        .join(", ");
 }
 
 export function OverviewCards({ range }: { range: string }) {
@@ -66,38 +30,44 @@ export function OverviewCards({ range }: { range: string }) {
         );
     }
 
-    const sourceSummary = formatSourceSummary(data?.aiBySource);
+    const calls = toNumber(data?.toolCalls?.total);
+    const requests = toNumber(data?.requests?.total);
+    const errors = toNumber(data?.requests?.errors);
+    const rateLimited = toNumber(data?.requests?.rate_limited);
 
     const cards = [
         {
-            title: "Tool Calls",
-            value: formatNumber(data?.toolCalls?.total),
-            subtitle: data?.toolCalls?.total
-                ? `${(((data.toolCalls.successes ?? 0) / data.toolCalls.total) * 100).toFixed(1)}% success`
-                : "No data",
-        },
-        {
-            title: "AI Chats",
-            value: formatNumber(data?.aiChat?.total),
-            subtitle: sourceSummary
-                ? sourceSummary
-                : data?.aiChat?.avg_response_ms
-                  ? `avg ${formatMs(data.aiChat.avg_response_ms)}`
-                  : "No data",
-        },
-        {
-            title: "AI Cost",
-            value: formatCost(data?.aiChat?.total_cost_usd),
-            subtitle: data?.aiChat?.total_input_tokens
-                ? `${formatNumber(data.aiChat.total_input_tokens + data.aiChat.total_output_tokens)} tokens`
-                : "No data",
-        },
-        {
-            title: "MCP Sessions",
+            title: "Connections",
             value: formatNumber(data?.sessions?.connections),
-            subtitle: data?.toolCalls?.avg_response_ms
-                ? `avg ${formatMs(data.toolCalls.avg_response_ms)}`
-                : "No data",
+            subtitle: "times an assistant connected",
+        },
+        {
+            title: "Tool calls",
+            value: formatNumber(calls),
+            subtitle:
+                calls > 0
+                    ? `${formatPercent(data?.toolCalls?.successes, calls)} returned a result`
+                    : "None in this range",
+        },
+        {
+            title: "Response time",
+            value: formatMs(data?.requests?.p50_ms ?? data?.requests?.avg_ms),
+            subtitle:
+                data?.requests?.p95_ms !== undefined
+                    ? `typical; slowest 5% above ${formatMs(data.requests.p95_ms)}`
+                    : requests > 0
+                      ? "average per request"
+                      : "No requests in this range",
+        },
+        {
+            title: "Failed requests",
+            value: formatNumber(errors),
+            subtitle:
+                requests > 0
+                    ? `${formatPercent(errors, requests)} of ${formatNumber(requests)}${
+                          rateLimited > 0 ? `, ${formatNumber(rateLimited)} rate-limited` : ""
+                      }`
+                    : "No requests in this range",
         },
     ];
 
@@ -116,7 +86,7 @@ export function OverviewCards({ range }: { range: string }) {
                         >
                             {loading ? "..." : card.value}
                         </div>
-                        <p className="text-xs text-muted-foreground mt-1">
+                        <p className="mt-1 text-xs text-muted-foreground">
                             {loading ? "" : card.subtitle}
                         </p>
                     </CardContent>

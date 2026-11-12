@@ -33,7 +33,7 @@ export function ToolsTable({ range }: { range: string }) {
     return (
         <Card>
             <CardHeader>
-                <CardTitle className="text-base">Tool Performance</CardTitle>
+                <CardTitle className="text-base">Tools</CardTitle>
             </CardHeader>
             <CardContent>
                 {loading ? (

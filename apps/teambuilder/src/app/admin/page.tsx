@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { OverviewCards } from "@/components/admin/OverviewCards";
 import { UsageChart } from "@/components/admin/UsageChart";
-import { CostBreakdown } from "@/components/admin/CostBreakdown";
+import { ClientsPanel } from "@/components/admin/ClientsPanel";
 import { ToolsTable } from "@/components/admin/ToolsTable";
-import { SessionList } from "@/components/admin/SessionList";
+import { PerformancePanel } from "@/components/admin/PerformancePanel";
 
 const RANGES = [
     { label: "1h", value: "1h" },
@@ -48,14 +48,14 @@ export default function AdminDashboard() {
             {/* Usage over time */}
             <UsageChart range={range} />
 
-            {/* Two-column layout for costs and tools */}
+            {/* Who is connecting, and what they call */}
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                <CostBreakdown range={range} />
+                <ClientsPanel range={range} />
                 <ToolsTable range={range} />
             </div>
 
-            {/* Sessions */}
-            <SessionList range={range} />
+            {/* Every request by kind, with failures and latency */}
+            <PerformancePanel range={range} />
         </div>
     );
 }

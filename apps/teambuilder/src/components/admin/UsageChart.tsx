@@ -28,18 +28,17 @@ export function UsageChart({ range }: { range: string }) {
     }
 
     // Group data by bucket timestamp
-    const buckets = new Map<string, { tool_call: number; ai_chat: number; session: number }>();
+    const buckets = new Map<string, { tool_call: number; session: number }>();
 
     if (data?.data) {
         for (const row of data.data) {
             const key = row.bucket;
             if (!buckets.has(key)) {
-                buckets.set(key, { tool_call: 0, ai_chat: 0, session: 0 });
+                buckets.set(key, { tool_call: 0, session: 0 });
             }
             const bucket = buckets.get(key)!;
-            if (row.event_type === "tool_call") bucket.tool_call = row.count;
-            else if (row.event_type === "ai_chat") bucket.ai_chat = row.count;
-            else if (row.event_type === "session") bucket.session = row.count;
+            if (row.event_type === "tool_call") bucket.tool_call = Number(row.count) || 0;
+            else if (row.event_type === "session") bucket.session = Number(row.count) || 0;
         }
     }
 
@@ -48,12 +47,12 @@ export function UsageChart({ range }: { range: string }) {
     );
 
     // Find max value for scaling
-    const maxValue = Math.max(1, ...sortedBuckets.map(([, v]) => Math.max(v.tool_call, v.ai_chat)));
+    const maxValue = Math.max(1, ...sortedBuckets.map(([, v]) => Math.max(v.tool_call, v.session)));
 
     return (
         <Card>
             <CardHeader>
-                <CardTitle className="text-base">Usage Over Time</CardTitle>
+                <CardTitle className="text-base">Usage over time</CardTitle>
             </CardHeader>
             <CardContent>
                 {loading ? (
@@ -70,7 +69,7 @@ export function UsageChart({ range }: { range: string }) {
                         <div className="flex items-end gap-1 h-48">
                             {sortedBuckets.map(([bucket, counts]) => {
                                 const toolHeight = (counts.tool_call / maxValue) * 100;
-                                const aiHeight = (counts.ai_chat / maxValue) * 100;
+                                const sessionHeight = (counts.session / maxValue) * 100;
                                 const date = new Date(bucket);
                                 const label =
                                     interval === "hour"
@@ -81,7 +80,7 @@ export function UsageChart({ range }: { range: string }) {
                                     <div
                                         key={bucket}
                                         className="flex flex-1 flex-col items-center gap-0.5 min-w-0"
-                                        title={`${label}\nTool calls: ${counts.tool_call}\nAI chats: ${counts.ai_chat}`}
+                                        title={`${label}\nTool calls: ${counts.tool_call}\nConnections: ${counts.session}`}
                                     >
                                         <div className="flex w-full flex-col items-center gap-0.5 flex-1 justify-end">
                                             <div
@@ -94,8 +93,8 @@ export function UsageChart({ range }: { range: string }) {
                                             <div
                                                 className="w-full max-w-3 rounded-t bg-orange-500/70 transition-all"
                                                 style={{
-                                                    height: `${aiHeight}%`,
-                                                    minHeight: counts.ai_chat > 0 ? "2px" : "0",
+                                                    height: `${sessionHeight}%`,
+                                                    minHeight: counts.session > 0 ? "2px" : "0",
                                                 }}
                                             />
                                         </div>
@@ -113,11 +112,11 @@ export function UsageChart({ range }: { range: string }) {
                         <div className="flex gap-4 text-xs text-muted-foreground">
                             <div className="flex items-center gap-1.5">
                                 <div className="h-2.5 w-2.5 rounded-sm bg-primary/70" />
-                                Tool Calls
+                                Tool calls
                             </div>
                             <div className="flex items-center gap-1.5">
                                 <div className="h-2.5 w-2.5 rounded-sm bg-orange-500/70" />
-                                AI Chats
+                                Connections
                             </div>
                         </div>
                     </div>

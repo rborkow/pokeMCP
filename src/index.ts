@@ -4,11 +4,11 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { McpAgent } from "agents/mcp";
 import { createMimeMessage } from "mimetext/browser";
 import { handleAdminRequest } from "./admin.js";
-import { handleMcpRequest } from "./connector/http.js";
 import { registerConnectorTools } from "./connector/register.js";
 import { CONNECTOR_INFO, CONNECTOR_INSTRUCTIONS } from "./connector/tools.js";
 import { trackSession, trackToolCall } from "./analytics.js";
 import { mcpRateLimitResponse } from "./mcp-rate-limit.js";
+import { recordRateLimited, serveMcp } from "./mcp-usage.js";
 import {
     checkRateLimit,
     getSharedTeam,
@@ -128,27 +128,13 @@ export default {
         // ChatGPT connect from their own infrastructure.
         if (url.pathname === "/mcp") {
             const rateLimited = await mcpRateLimitResponse(request, env.MCP_RATE_LIMITER);
-            if (rateLimited) return rateLimited;
-            // Served statelessly in this Worker (connector/http.ts), not
-            // through the PokemonMCP Durable Object.
-            return handleMcpRequest(request, env, {
-                // Operational metrics only (tool name, format, outcome,
-                // duration). Arguments and results are never logged.
-                onCall: (call) =>
-                    trackToolCall(
-                        env,
-                        call.tool,
-                        call.format,
-                        call.success,
-                        call.durationMs,
-                        undefined,
-                        "mcp",
-                    ),
-                // One "connect" per initialize, so connections are still
-                // counted now that there is no session object. The id is
-                // random and is not sent to the client or reused.
-                onInitialize: () => trackSession(env, "connect", crypto.randomUUID(), "mcp", "mcp"),
-            });
+            if (rateLimited) {
+                recordRateLimited(request, env);
+                return rateLimited;
+            }
+            // Served statelessly in this Worker (connector/http.ts), with
+            // usage recording around it (mcp-usage.ts).
+            return serveMcp(request, env);
         }
 
         // Feedback submission endpoint
@@ -519,10 +505,11 @@ export default {
                         "admin/api/overview":
                             "/admin/api/overview (GET) - Usage overview (protected)",
                         "admin/api/usage": "/admin/api/usage (GET) - Time-series usage (protected)",
-                        "admin/api/costs": "/admin/api/costs (GET) - AI cost breakdown (protected)",
                         "admin/api/tools": "/admin/api/tools (GET) - Tool metrics (protected)",
-                        "admin/api/sessions":
-                            "/admin/api/sessions (GET) - Session list (protected)",
+                        "admin/api/clients":
+                            "/admin/api/clients (GET) - Connections by assistant (protected)",
+                        "admin/api/performance":
+                            "/admin/api/performance (GET) - Requests, errors and latency (protected)",
                     },
                 }),
                 {
