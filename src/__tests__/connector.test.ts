@@ -22,7 +22,6 @@ import { listFormats } from "../connector/team.js";
 import { CONNECTOR_INFO, CONNECTOR_INSTRUCTIONS, CONNECTOR_TOOLS } from "../connector/tools.js";
 import { getFullLearnset, getPokemonLearnset } from "../data-loader.js";
 import { listRegulationIds } from "../regulations/registry.js";
-import { TOOL_REGISTRY } from "../tool-registry.js";
 
 // --- Fixtures ---
 
@@ -286,22 +285,6 @@ describe("connector tool listing", () => {
         assert.ok(format.enum?.includes(REG.id));
         const text = await errorText(client, "get_top_usage", { format: "gen9ou" });
         assert.match(text, /format/i);
-    });
-
-    it("leaves the internal Prep tool surface unchanged", () => {
-        assert.deepEqual(
-            TOOL_REGISTRY.map((t) => t.name),
-            [
-                "lookup_pokemon",
-                "validate_moveset",
-                "validate_team",
-                "suggest_team_coverage",
-                "get_usage_stats",
-                "get_meta_trends",
-                "query_strategy",
-            ],
-        );
-        assert.ok(!CONNECTOR_TOOLS.some((t) => t.name === "query_strategy"));
     });
 });
 

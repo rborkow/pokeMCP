@@ -12,6 +12,8 @@
         {
             // Historical migration already applied in production. Keep the tag
             // so Wrangler does not replay v1 against existing Durable Objects.
+            // IngestionCoordinator is retired but must stay exported (as a stub
+            // in src/index.ts) until a `deleted_classes` migration removes it.
             "new_sqlite_classes": ["IngestionCoordinator"],
             "tag": "v2"
         }
@@ -29,10 +31,6 @@
             {
                 "class_name": "PokemonMCP",
                 "name": "MCP_OBJECT"
-            },
-            {
-                "class_name": "IngestionCoordinator",
-                "name": "INGESTION_COORDINATOR"
             }
         ]
     },
@@ -41,10 +39,6 @@
             "binding": "POKEMON_STATS",
             // Production KV - only accessed when deploying (not during local dev)
             "id": "58525ad4ec5c454eb3e1ae7586414483"
-        },
-        {
-            "binding": "STRATEGY_DOCS",
-            "id": "3be55e1e98144776a62ee00f5bced815"
         },
         {
             "binding": "SHARED_TEAMS",
@@ -62,15 +56,6 @@
             "migrations_dir": "migrations/d1"
         }
     ],
-    "vectorize": [
-        {
-            "binding": "VECTOR_INDEX",
-            "index_name": "pokemon-strategy-index"
-        }
-    ],
-    "ai": {
-        "binding": "AI"
-    },
     // Legacy R2 binding retained only for explicit content-sharing opt-ins.
     // Content logging is disabled by default in src/logging.ts.
     "r2_buckets": [
@@ -112,8 +97,7 @@
         "enabled": true
     },
     "vars": {
-        "ENVIRONMENT": "development",
-        "AI_GATEWAY_ID": "pokemcp"
+        "ENVIRONMENT": "development"
     },
     /**
      * ENVIRONMENT-SPECIFIC CONFIGURATIONS
@@ -125,21 +109,15 @@
         "staging": {
             "name": "pokemon-mcp-staging",
             "vars": {
-                "ENVIRONMENT": "staging",
-                "AI_GATEWAY_ID": "pokemcp"
+                "ENVIRONMENT": "staging"
             },
             // Staging uses the same KV as production (read-only access is fine)
             // To create separate staging KV, run:
             //   npx wrangler kv namespace create POKEMON_STATS_STAGING
-            //   npx wrangler kv namespace create STRATEGY_DOCS_STAGING
             "kv_namespaces": [
                 {
                     "binding": "POKEMON_STATS",
                     "id": "58525ad4ec5c454eb3e1ae7586414483"
-                },
-                {
-                    "binding": "STRATEGY_DOCS",
-                    "id": "3be55e1e98144776a62ee00f5bced815"
                 },
                 {
                     "binding": "SHARED_TEAMS",
@@ -150,12 +128,6 @@
                 {
                     "binding": "INTERACTION_LOGS",
                     "bucket_name": "pokemcp-interaction-logs"
-                }
-            ],
-            "vectorize": [
-                {
-                    "binding": "VECTOR_INDEX",
-                    "index_name": "pokemon-strategy-index"
                 }
             ],
             "ratelimits": [
@@ -170,10 +142,6 @@
                     {
                         "class_name": "PokemonMCP",
                         "name": "MCP_OBJECT"
-                    },
-                    {
-                        "class_name": "IngestionCoordinator",
-                        "name": "INGESTION_COORDINATOR"
                     }
                 ]
             },
@@ -183,9 +151,6 @@
                     "destination_address": "feedback@pokemcp.com"
                 }
             ],
-            "ai": {
-                "binding": "AI"
-            },
             "analytics_engine_datasets": [
                 {
                     "binding": "ANALYTICS",
@@ -205,17 +170,12 @@
         "production": {
             "name": "pokemon-mcp-production",
             "vars": {
-                "ENVIRONMENT": "production",
-                "AI_GATEWAY_ID": "pokemcp"
+                "ENVIRONMENT": "production"
             },
             "kv_namespaces": [
                 {
                     "binding": "POKEMON_STATS",
                     "id": "58525ad4ec5c454eb3e1ae7586414483"
-                },
-                {
-                    "binding": "STRATEGY_DOCS",
-                    "id": "3be55e1e98144776a62ee00f5bced815"
                 },
                 {
                     "binding": "SHARED_TEAMS",
@@ -226,12 +186,6 @@
                 {
                     "binding": "INTERACTION_LOGS",
                     "bucket_name": "pokemcp-interaction-logs"
-                }
-            ],
-            "vectorize": [
-                {
-                    "binding": "VECTOR_INDEX",
-                    "index_name": "pokemon-strategy-index"
                 }
             ],
             "ratelimits": [
@@ -246,10 +200,6 @@
                     {
                         "class_name": "PokemonMCP",
                         "name": "MCP_OBJECT"
-                    },
-                    {
-                        "class_name": "IngestionCoordinator",
-                        "name": "INGESTION_COORDINATOR"
                     }
                 ]
             },
@@ -259,9 +209,6 @@
                     "destination_address": "feedback@pokemcp.com"
                 }
             ],
-            "ai": {
-                "binding": "AI"
-            },
             "analytics_engine_datasets": [
                 {
                     "binding": "ANALYTICS",
@@ -276,9 +223,9 @@
                     "migrations_dir": "migrations/d1"
                 }
             ],
-            // Daily tournament refresh plus weekly RAG content ingestion.
+            // Daily tournament refresh.
             "triggers": {
-                "crons": ["0 6 * * *", "0 3 * * SUN"]
+                "crons": ["0 6 * * *"]
             }
         }
     }

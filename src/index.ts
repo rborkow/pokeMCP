@@ -1,45 +1,22 @@
 import { EmailMessage } from "cloudflare:email";
-import { WorkerEntrypoint } from "cloudflare:workers";
+import { DurableObject } from "cloudflare:workers";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { McpAgent } from "agents/mcp";
 import { createMimeMessage } from "mimetext/browser";
-import { z } from "zod";
 import { handleAdminRequest } from "./admin.js";
 import { registerConnectorTools } from "./connector/register.js";
 import { CONNECTOR_INFO, CONNECTOR_INSTRUCTIONS } from "./connector/tools.js";
 import { trackSession, trackToolCall } from "./analytics.js";
-import { getIngestionFormats } from "./ingestion/orchestrator.js";
-import { withLogging } from "./logging.js";
 import { mcpRateLimitResponse } from "./mcp-rate-limit.js";
 import {
     checkRateLimit,
-    checkRateLimitGeneric,
     getSharedTeam,
     refreshSharedTeamTtl,
     storeSharedTeam,
     validateTeamForSharing,
 } from "./share.js";
-import { TOOL_REGISTRY } from "./tool-registry.js";
 import { getRetirementResponse } from "./retirement.js";
 import { refreshTournamentNewsroom } from "./tournaments/ingestion.js";
-
-// One-time per-isolate log of gateway secret presence. Lets us verify
-// secret deployment via `wrangler tail` without exposing values.
-let gatewayHealthLogged = false;
-function logGatewayHealthOnce(env: Env): void {
-    if (gatewayHealthLogged) return;
-    gatewayHealthLogged = true;
-    console.log(
-        JSON.stringify({
-            event: "ai_gateway_health",
-            source: "mcp-worker",
-            environment: env.ENVIRONMENT ?? "unknown",
-            gateway: {
-                ai_gateway_id: Boolean(env.AI_GATEWAY_ID),
-            },
-        }),
-    );
-}
 
 // CORS Configuration - restrict to known origins
 const ALLOWED_ORIGINS = [
@@ -74,13 +51,25 @@ function isOriginAllowed(request: Request): boolean {
     return ALLOWED_ORIGINS.includes(origin);
 }
 
-// Durable Object that runs the weekly RAG ingestion as an alarm chain
-// (one format slice per alarm). Re-exported so wrangler can bind it.
-export { IngestionCoordinator } from "./ingestion/coordinator.js";
+/**
+ * Retired. This Durable Object used to run the weekly Smogon-analysis
+ * ingestion, which fed a strategy-search tool that no longer exists. Nothing
+ * creates or calls it now.
+ *
+ * The class stays exported because Cloudflare requires every Durable Object
+ * class named in an applied migration (`v2` in wrangler.jsonc) to exist until
+ * a `deleted_classes` migration removes it. Deleting it properly is a
+ * separate, deliberate deploy. The alarm handler only clears any state left
+ * from a run that was in progress when this was deployed.
+ */
+export class IngestionCoordinator extends DurableObject<Env> {
+    async alarm() {
+        await this.ctx.storage.deleteAll();
+    }
+}
 
-// Public MCP server: the "VGC Teambuilder" connector, served at /mcp.
-// Its tools come from src/connector/ — not TOOL_REGISTRY, which is the
-// internal surface PokeMCP Prep reaches through PrepAnalysisService.
+// Public MCP server: the "VGC Teambuilder" connector, served at /mcp. Its
+// tools are defined in src/connector/.
 export class PokemonMCP extends McpAgent {
     server = new McpServer(CONNECTOR_INFO, { instructions: CONNECTOR_INSTRUCTIONS });
 
@@ -114,24 +103,6 @@ export class PokemonMCP extends McpAgent {
     }
 }
 
-/**
- * Private, typed service-binding entrypoint used by PokeMCP Prep. It is
- * deployed with the Worker but has no public HTTP route.
- */
-export class PrepAnalysisService extends WorkerEntrypoint<Env> {
-    async runTool(toolName: string, args: Record<string, unknown>): Promise<string> {
-        const tool = TOOL_REGISTRY.find((candidate) => candidate.name === toolName);
-        if (!tool) throw new Error(`Unknown internal tool: ${toolName}`);
-        const parsed = z.object(tool.schema).safeParse(args);
-        if (!parsed.success) throw new Error(`Invalid arguments for internal tool: ${toolName}`);
-        return tool.execute(parsed.data, this.env);
-    }
-
-    async capabilities() {
-        return TOOL_REGISTRY.map(({ name, description }) => ({ name, description }));
-    }
-}
-
 export default {
     async fetch(request: Request, env: Env, ctx: ExecutionContext) {
         const url = new URL(request.url);
@@ -146,123 +117,6 @@ export default {
             const rateLimited = await mcpRateLimitResponse(request, env.MCP_RATE_LIMITER);
             if (rateLimited) return rateLimited;
             return PokemonMCP.serve("/mcp").fetch(request, env, ctx);
-        }
-
-        // Stateless tool call endpoint - bypasses session requirement
-        // Use this for direct API access from web apps
-        if (url.pathname === "/api/tools" && request.method === "POST") {
-            const corsHeaders = {
-                ...getCorsHeaders(request),
-                "Content-Type": "application/json",
-            };
-
-            // Validate origin
-            if (!isOriginAllowed(request)) {
-                return new Response(JSON.stringify({ error: "Origin not allowed" }), {
-                    status: 403,
-                    headers: corsHeaders,
-                });
-            }
-
-            // Rate limit: 30 requests per minute per IP
-            const toolsIp = request.headers.get("CF-Connecting-IP") || "unknown";
-            const toolsAllowed = await checkRateLimitGeneric(
-                env.POKEMON_STATS,
-                "tools",
-                toolsIp,
-                30,
-                60,
-            );
-            if (!toolsAllowed) {
-                return new Response(
-                    JSON.stringify({ error: "Rate limited. Please try again later." }),
-                    { status: 429, headers: corsHeaders },
-                );
-            }
-
-            // Use client-provided session ID to group tool calls from the same conversation
-            const restSessionId = request.headers.get("X-Session-Id") || crypto.randomUUID();
-            trackSession(env, "connect", restSessionId, "rest", "rest");
-
-            try {
-                const body = (await request.json()) as {
-                    tool: string;
-                    args: Record<string, unknown>;
-                    id?: unknown;
-                };
-                const { tool, args } = body;
-
-                if (!tool) {
-                    return new Response(JSON.stringify({ error: "Tool name is required" }), {
-                        status: 400,
-                        headers: corsHeaders,
-                    });
-                }
-
-                const toolDef = TOOL_REGISTRY.find((t) => t.name === tool);
-                if (!toolDef) {
-                    return new Response(JSON.stringify({ error: `Unknown tool: ${tool}` }), {
-                        status: 400,
-                        headers: corsHeaders,
-                    });
-                }
-
-                const restStartTime = performance.now();
-                let restSuccess = true;
-                let result: string;
-                try {
-                    result = await withLogging(
-                        env,
-                        tool,
-                        args,
-                        () => toolDef.execute(args, env),
-                        undefined,
-                        ctx,
-                    );
-                } catch (error) {
-                    restSuccess = false;
-                    throw error;
-                } finally {
-                    const restResponseTime = Math.round(performance.now() - restStartTime);
-                    const restFormat = typeof args?.format === "string" ? args.format : undefined;
-                    trackToolCall(
-                        env,
-                        tool,
-                        restFormat,
-                        restSuccess,
-                        restResponseTime,
-                        restSessionId,
-                        "rest",
-                    );
-                }
-
-                return new Response(
-                    JSON.stringify({
-                        jsonrpc: "2.0",
-                        id: body.id || null,
-                        result: {
-                            content: [{ type: "text", text: result }],
-                        },
-                    }),
-                    { headers: corsHeaders },
-                );
-            } catch (error) {
-                console.error("API tools error:", error);
-                return new Response(
-                    JSON.stringify({
-                        error: "Tool execution failed",
-                        details: error instanceof Error ? error.message : String(error),
-                    }),
-                    { status: 500, headers: { ...corsHeaders } },
-                );
-            }
-        }
-
-        // CORS preflight for /api/tools
-        if (url.pathname === "/api/tools" && request.method === "OPTIONS") {
-            return new Response(null, {
-                headers: getCorsHeaders(request),
-            });
         }
 
         // Feedback submission endpoint
@@ -599,25 +453,17 @@ export default {
             return handleAdminRequest(request, env);
         }
 
-        // Deploy health: secret-presence booleans for post-deploy verification.
-        // Never returns secret values — only whether each env var is populated.
+        // Liveness for post-deploy verification. The worker calls no AI
+        // provider and needs no gateway secrets, so there is nothing to report
+        // beyond being up.
         if (url.pathname === "/health") {
-            logGatewayHealthOnce(env);
-            return new Response(
-                JSON.stringify({
-                    environment: env.ENVIRONMENT ?? "unknown",
-                    gateway: {
-                        ai_gateway_id: Boolean(env.AI_GATEWAY_ID),
-                    },
-                }),
-                {
-                    headers: {
-                        ...getCorsHeaders(request),
-                        "Content-Type": "application/json",
-                        "Cache-Control": "no-store",
-                    },
+            return new Response(JSON.stringify({ environment: env.ENVIRONMENT ?? "unknown" }), {
+                headers: {
+                    ...getCorsHeaders(request),
+                    "Content-Type": "application/json",
+                    "Cache-Control": "no-store",
                 },
-            );
+            });
         }
 
         // Root endpoint - return server info
@@ -655,40 +501,18 @@ export default {
         return new Response("Not found", { status: 404 });
     },
 
-    async scheduled(event: ScheduledEvent, env: Env, _ctx: ExecutionContext) {
-        if (event.cron === "0 6 * * *") {
-            try {
-                await refreshTournamentNewsroom(env);
-                return;
-            } catch (error) {
-                console.error(
-                    JSON.stringify({
-                        event: "tournament_ingestion_failed",
-                        message: error instanceof Error ? error.message : "unknown",
-                    }),
-                );
-                throw error;
-            }
-        }
-
-        console.log(
-            "Scheduled ingestion trigger fired at:",
-            new Date(event.scheduledTime).toISOString(),
-        );
-
+    // One schedule: the daily tournament refresh (06:00 UTC).
+    async scheduled(_event: ScheduledEvent, env: Env, _ctx: ExecutionContext) {
         try {
-            // Build the format list here; the IngestionCoordinator Durable Object
-            // works through it one alarm at a time so each format gets a fresh
-            // subrequest/CPU budget instead of dying inside this single invocation.
-            const formats = await getIngestionFormats(env);
-            const stub = env.INGESTION_COORDINATOR.get(
-                env.INGESTION_COORDINATOR.idFromName("weekly-ingestion"),
-            );
-            await stub.seed(formats);
-            console.log(`Seeded ingestion coordinator with ${formats.length} formats`);
+            await refreshTournamentNewsroom(env);
         } catch (error) {
-            console.error("Failed to seed ingestion coordinator:", error);
-            // Rethrow so the cron invocation is marked failed in Cloudflare observability.
+            console.error(
+                JSON.stringify({
+                    event: "tournament_ingestion_failed",
+                    message: error instanceof Error ? error.message : "unknown",
+                }),
+            );
+            // Rethrow so the cron run is marked failed in Cloudflare observability.
             throw error;
         }
     },

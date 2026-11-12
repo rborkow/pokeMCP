@@ -2,11 +2,9 @@
  * The public "VGC Teambuilder" connector surface: every tool a directory
  * listing exposes, with the metadata reviewers and clients read.
  *
- * This is deliberately separate from `src/tool-registry.ts`, which is the
- * internal surface the web product calls through a service binding and whose
- * names, arguments and text output it depends on. Changing a tool here changes
- * the published connector: keep each description accurate about what the tool
- * does and does not check, and regenerate the docs (`bun run generate-tool-docs`).
+ * Changing a tool here changes the published connector: keep each description
+ * accurate about what the tool does and does not check, and regenerate the docs
+ * (`bun run generate-tool-docs`).
  */
 import { z } from "zod";
 import { formatInput, formatOutput, getDefaultRegulation } from "./formats.js";

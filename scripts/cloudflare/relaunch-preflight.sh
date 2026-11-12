@@ -4,9 +4,12 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 web_root="${repo_root}/apps/teambuilder"
 
+# The admin API needs these: Cloudflare Access for sign-in, and an API token to query
+# Analytics Engine. The connector itself needs no secrets.
 required_worker_secrets=(
-    "CF_AIG_TOKEN"
-    "CLOUDFLARE_AI_GATEWAY_URL"
+    "CF_ACCESS_TEAM_DOMAIN"
+    "CLOUDFLARE_ACCOUNT_ID"
+    "CLOUDFLARE_API_TOKEN"
 )
 # The website needs no secrets: it has no accounts and calls no AI provider.
 

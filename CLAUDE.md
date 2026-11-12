@@ -4,14 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A monorepo containing an MCP (Model Context Protocol) server for Pokémon competitive team building, plus a team builder web UI and documentation site. The MCP server is deployed on Cloudflare Workers and provides tools for Pokémon lookup, moveset/team validation, type coverage analysis, and usage statistics from Smogon. Includes RAG (Retrieval-Augmented Generation) capabilities for strategic advice using Cloudflare Vectorize and AI Workers.
+A monorepo for **VGC Teambuilder**, a read-only MCP (Model Context Protocol) connector for
+competitive Pokémon Champions team building, plus its content website and documentation site.
+Claude and ChatGPT, through the connector, are the only interfaces.
 
-**Public connector ("VGC Teambuilder"):** `https://api.pokemcp.com/mcp` serves a read-only,
-authless MCP server (Streamable HTTP) intended for the Claude and ChatGPT directories. Its 12
-tools live in `src/connector/`. The older `src/tool-registry.ts` surface and the
-`PrepAnalysisService` entrypoint were for the retired PokeMCP Prep site; nothing calls them now
-and they are pending removal. The legacy `/sse` and `/api/tools` endpoints stay retired (`410 Gone`). See
-[`src/CLAUDE.md`](src/CLAUDE.md).
+**The connector:** `https://api.pokemcp.com/mcp` serves an authless MCP server (Streamable HTTP)
+intended for the Claude and ChatGPT directories. Its 12 tools live in `src/connector/`: Pokémon
+lookup, move and team legality, defensive type analysis, usage statistics and usage trends, for
+Champions regulations only. The legacy `/sse` and `/api/tools` endpoints stay retired
+(`410 Gone`). See [`src/CLAUDE.md`](src/CLAUDE.md).
 
 **Monorepo Structure:**
 
@@ -86,7 +87,7 @@ bun run upload-stats
 - Stats files are written to `src/cached-stats/`, a gitignored local working directory — KV is
   the source of truth; the monthly workflow uploads the raw dumps as a 30-day workflow artifact
   (`smogon-stats-<run id>`) for inspection instead of committing them
-- Discovered formats are saved to `src/discovered-formats.json` and uploaded to KV for the ingestion pipeline
+- Discovered formats are saved to `src/discovered-formats.json` (also uploaded to KV; nothing reads that copy now)
 - `bun run generate-reports` builds the publishable meta-report MDX + per-Pokémon trend JSON
   (`apps/teambuilder/src/content/reports/` + `src/data/mons/`) straight from Smogon's monthly
   chaos archives. Deterministic tables always; narrative sections only when `ANTHROPIC_API_KEY`
@@ -119,28 +120,28 @@ bun run tail:production
 
 ### Cloudflare Infrastructure
 
-**Multi-layered Cloudflare stack:**
+- **Workers**: the MCP worker (`src/index.ts`) and the website
+- **Durable Objects**: MCP session state (`PokemonMCP`). `IngestionCoordinator` is a retired
+  stub kept only because an applied migration names it
+- **KV**: `POKEMON_STATS` (current-month usage statistics and each regulation's eligible list),
+  `SHARED_TEAMS` (legacy shared-team links)
+- **D1**: `META_DB` (`pokemcp-meta-history`) — monthly usage history and tournament results
+- **Rate limiting**: `MCP_RATE_LIMITER`, a per-IP ceiling on `/mcp`
+- **Analytics Engine**: `ANALYTICS` — tool-call counts for the admin dashboard
+- **R2**: `pokemcp-interaction-logs` — feedback submissions; interaction logging is off
+- **Scheduled trigger**: one daily cron (06:00 UTC, production only) that pulls new tournament
+  results from Limitless (`src/tournaments/ingestion.ts`)
 
-- **Workers**: Serverless compute for MCP requests (src/index.ts)
-- **Durable Objects**: Stateful MCP session management (PokemonMCP) and the
-  weekly ingestion alarm chain (IngestionCoordinator in src/ingestion/coordinator.ts)
-- **KV Namespaces**:
-  - `POKEMON_STATS`: Cached Smogon usage statistics
-  - `STRATEGY_DOCS`: Raw strategy documents (chunks) for RAG
-- **Vectorize**: Vector database for semantic search (pokemon-strategy-index)
-- **AI Workers**: Text embeddings for RAG (@cf/baai/bge-base-en-v1.5)
-- **AI Gateway**: Routes the worker's Workers AI embedding calls (gateway ID: `pokemcp`). Nothing deployed calls Anthropic any more
-- **R2 Bucket**: pokemcp-interaction-logs for anonymized fine-tuning data
-- **Scheduled Triggers**: Weekly cron (Sunday 3 AM, production only) seeds the
-  IngestionCoordinator Durable Object, which ingests one format slice per alarm
+The worker calls no AI model. The search index, strategy-document store and Workers AI binding
+that powered the old strategy-search tool were removed in November 2026.
 
 ### Environment Configuration
 
 Three environments defined in wrangler.jsonc, each with its own worker name
 (`pokemon-mcp-{env}`) — but **all three currently bind the same production
-KV namespaces, Vectorize index, D1 database, and R2 bucket**. Treat any
+KV namespaces, D1 database, and R2 bucket**. Treat any
 `--remote` dev session or staging deploy as touching production data. Only
-the production env has a cron trigger (Sunday 3 AM ingestion seed).
+the production env has a cron trigger (the daily tournament refresh).
 
 > ⚠️ Known gap (from the 2026-07 audit): staging is not isolated and fails
 > open on `/admin/*` auth if `CF_ACCESS_TEAM_DOMAIN` is unset. Provision real
@@ -220,20 +221,19 @@ deploy):
 - `pokemon-mcp-production`: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CF_ACCESS_TEAM_DOMAIN`
 - `pokemcp-teambuilder`: none. The site has no accounts and calls no AI provider.
 
-Neither worker calls Anthropic. The MCP Worker uses Workers AI for embeddings, routed through
-the Cloudflare AI Gateway (`pokemcp`). The only Anthropic use left is the report narrative in
+Neither worker calls an AI model. The only AI use left is the report narrative in
 `scripts/generate-reports.ts`, which runs in GitHub Actions with the repo's `ANTHROPIC_API_KEY`
 secret and is reviewed in a PR before it publishes.
 
-**Verify secrets after deploy:**
+**Verify after deploy:**
 
 ```bash
 ./scripts/verify-deploy.sh                             # hits prod defaults
 MCP_URL=... TB_URL=... ./scripts/verify-deploy.sh      # staging/dev override
 ```
 
-Hits `/health` on each worker, which returns booleans for each expected secret (never values).
-Run after any secret rotation or new worker deploy — exits non-zero if any secret is missing.
+Checks that each worker's health endpoint responds. For the connector itself, connect an MCP
+client to `https://api.pokemcp.com/mcp` and call a tool; the tools are read-only.
 
 ## Testing Changes
 
@@ -269,16 +269,6 @@ See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for test structur
    description, and input and output schemas — one operation per tool, no `type`
    switches (directory reviews require this)
 3. Cover it in `src/__tests__/connector.test.ts`, then run `bun run generate-tool-docs`
-
-**Do not add tools to `src/tool-registry.ts`.** It served the retired PokeMCP Prep site, has no
-caller, and is pending removal along with `PrepAnalysisService`.
-
-**Adding a new format:**
-
-1. For VGC/doubles: formats are auto-discovered — just run `bun run discover-formats`
-2. For singles: add format to the SINGLES_FORMATS array in `src/ingestion/orchestrator.ts`
-3. Add Smogon format name mapping in `src/ingestion/scraper.ts` (VGC formats auto-generate names)
-4. Update README.md supported formats list
 
 **Adding a new Champions regulation (e.g. M-D):**
 
