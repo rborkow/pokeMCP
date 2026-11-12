@@ -1,0 +1,222 @@
+{
+ "id": "gliscor",
+ "name": "Gliscor",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.0016070000000000001,
+   "rank": 162,
+   "raw": 13250
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0060161,
+   "rank": 88,
+   "raw": 40069
+  }
+ ],
+ "abilities": [
+  [
+   "Hyper Cutter",
+   98.63854838482786
+  ],
+  [
+   "Sand Veil",
+   0.7144074378792363
+  ],
+  [
+   "Poison Heal",
+   0.6470441772929177
+  ]
+ ],
+ "items": [
+  [
+   "Psychic Seed",
+   50.462005939443934
+  ],
+  [
+   "Grassy Seed",
+   24.092036158481438
+  ],
+  [
+   "Life Orb",
+   11.215248218732924
+  ],
+  [
+   "Sitrus Berry",
+   5.367175619732224
+  ],
+  [
+   "Leftovers",
+   2.130394066048786
+  ],
+  [
+   "Electric Seed",
+   1.2095230651469875
+  ],
+  [
+   "Soft Sand",
+   0.8580566147819756
+  ],
+  [
+   "nothing",
+   0.8267249195399531
+  ]
+ ],
+ "moves": [
+  [
+   "High Horsepower",
+   23.827073734093602
+  ],
+  [
+   "Protect",
+   23.502949819920044
+  ],
+  [
+   "Acrobatics",
+   19.53315190424982
+  ],
+  [
+   "Tailwind",
+   15.384180960256296
+  ],
+  [
+   "Swords Dance",
+   6.072929584494783
+  ],
+  [
+   "Dual Wingbeat",
+   2.748007517903
+  ],
+  [
+   "Rock Slide",
+   2.15620903338946
+  ],
+  [
+   "Rock Tomb",
+   2.023848847830679
+  ],
+  [
+   "Earthquake",
+   1.1618320193652472
+  ],
+  [
+   "U-turn",
+   1.0996698788507846
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:15/25/0/0/0/26",
+   16.915294503972365
+  ],
+  [
+   "Jolly:16/28/0/0/0/22",
+   7.63348886815785
+  ],
+  [
+   "Adamant:7/25/14/0/15/5",
+   3.2449035911320507
+  ],
+  [
+   "Jolly:1/32/0/0/1/32",
+   2.7282502191695004
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   2.2124895084652274
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Indeedee",
+   6.606591017108999
+  ],
+  [
+   "Rillaboom",
+   6.185334265778322
+  ],
+  [
+   "Charizard-Mega-Y",
+   6.153577479725043
+  ],
+  [
+   "Kingambit",
+   6.0540158551329695
+  ],
+  [
+   "Indeedee-F",
+   4.785336739372683
+  ],
+  [
+   "Annihilape",
+   3.781700873350037
+  ],
+  [
+   "Venusaur",
+   3.7582851133686397
+  ],
+  [
+   "Incineroar",
+   3.660683929884985
+  ],
+  [
+   "Gardevoir-Mega",
+   3.4114940077767866
+  ],
+  [
+   "Volcarona",
+   3.3721839912028733
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Psychic Seed",
+   "ability": "Hyper Cutter",
+   "moves": [
+    "High Horsepower",
+    "Acrobatics",
+    "Tailwind",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 5,
+   "bestPlayer": "Lyph88",
+   "eventName": "IV-Clash - $$$ for Indonesian participant",
+   "eventSlug": "2026-10-10-iv-clash-for-indonesian-participant",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ac24e1d245696afb351603f",
+   "nature": "Adamant"
+  }
+ ]
+}

@@ -1,0 +1,246 @@
+{
+ "id": "lycanroc",
+ "name": "Lycanroc",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.0022753,
+   "rank": 138,
+   "raw": 3399
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0058433999999999995,
+   "rank": 91,
+   "raw": 4925
+  }
+ ],
+ "abilities": [
+  [
+   "Sand Rush",
+   99.36895378186598
+  ],
+  [
+   "Keen Eye",
+   0.5878540372980846
+  ],
+  [
+   "Steadfast",
+   0.04319218083594956
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   99.21056077051834
+  ],
+  [
+   "Air Balloon",
+   0.39037420321714134
+  ],
+  [
+   "Life Orb",
+   0.2747399583957607
+  ],
+  [
+   "Wide Lens",
+   0.04827618673426638
+  ],
+  [
+   "Hard Stone",
+   0.03475397855730868
+  ],
+  [
+   "Expert Belt",
+   0.02644925587353472
+  ],
+  [
+   "Choice Scarf",
+   0.006208421833985373
+  ],
+  [
+   "King's Rock",
+   0.005951592209704806
+  ]
+ ],
+ "moves": [
+  [
+   "Rock Slide",
+   24.93072956054144
+  ],
+  [
+   "Close Combat",
+   24.823238223558427
+  ],
+  [
+   "Protect",
+   24.68271564890043
+  ],
+  [
+   "Psychic Fangs",
+   22.651670723952797
+  ],
+  [
+   "Endeavor",
+   1.7678383375595974
+  ],
+  [
+   "Accelerock",
+   0.3946223190660619
+  ],
+  [
+   "Howl",
+   0.1420610911424898
+  ],
+  [
+   "Quick Guard",
+   0.07927631816862758
+  ],
+  [
+   "Charm",
+   0.07649430791363562
+  ],
+  [
+   "Swords Dance",
+   0.06816071573873943
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:0/32/0/0/2/32",
+   72.81497652748214
+  ],
+  [
+   "Adamant:0/32/1/0/1/32",
+   14.299083536189716
+  ],
+  [
+   "Jolly:1/32/0/0/1/32",
+   6.755327325921135
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   3.458761175802057
+  ],
+  [
+   "Adamant:1/32/0/0/1/32",
+   1.1264483291722127
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Tyranitar",
+   18.903170159526812
+  ],
+  [
+   "Indeedee-F",
+   18.64146260932315
+  ],
+  [
+   "Gardevoir-Mega",
+   12.466268106928359
+  ],
+  [
+   "Sneasler",
+   8.784535007767351
+  ],
+  [
+   "Sinistcha",
+   7.356367589359351
+  ],
+  [
+   "Annihilape",
+   4.884085639061761
+  ],
+  [
+   "Basculegion-F",
+   3.902579802465176
+  ],
+  [
+   "Metagross-Mega",
+   3.429231068588369
+  ],
+  [
+   "Garchomp-Mega-Z",
+   2.593684938826281
+  ],
+  [
+   "Salamence-Mega",
+   2.162562000200062
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Indeedee-F",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Focus Sash",
+   "ability": "Sand Rush",
+   "moves": [
+    "Rock Slide",
+    "Close Combat",
+    "Protect",
+    "Psychic Fangs"
+   ],
+   "count": 1,
+   "bestPlacing": 4,
+   "bestPlayer": "Aldrich",
+   "eventName": "IV-Clash - $$$ for Indonesian participant",
+   "eventSlug": "2026-10-10-iv-clash-for-indonesian-participant",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ac24e1d245696afb351603f",
+   "nature": "Adamant"
+  }
+ ]
+}

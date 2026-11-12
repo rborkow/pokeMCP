@@ -2,15 +2,21 @@
  "id": "aerodactylmega",
  "name": "Aerodactyl-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0553063,
-   "rank": 27,
-   "raw": 102961
+   "month": "2026-09",
+   "usage": 0.018416,
+   "rank": 59,
+   "raw": 50417
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0168929,
+   "rank": 57,
+   "raw": 45135
   }
  ],
  "abilities": [
@@ -28,137 +34,113 @@
  "moves": [
   [
    "Rock Slide",
-   24.803120553314116
+   24.884297769107434
   ],
   [
    "Dual Wingbeat",
-   23.590711619045923
+   23.513332878407866
   ],
   [
    "Tailwind",
-   23.055098280264023
+   23.134341985832805
   ],
   [
    "Protect",
-   11.267949382384154
-  ],
-  [
-   "Ice Fang",
-   9.590826588486777
+   11.706662606739705
   ],
   [
    "Wide Guard",
-   6.222377115017499
+   8.273792248036079
+  ],
+  [
+   "Ice Fang",
+   7.363246827007814
   ],
   [
    "Taunt",
-   0.230549449201615
-  ],
-  [
-   "Iron Head",
-   0.17954526073212498
-  ],
-  [
-   "Rain Dance",
-   0.14775739044812553
+   0.5176142312057888
   ],
   [
    "Crunch",
-   0.14404533992623653
+   0.10978984767523348
+  ],
+  [
+   "Earthquake",
+   0.09704452464886679
+  ],
+  [
+   "Rain Dance",
+   0.08925469456123891
   ]
  ],
  "spreads": [
   [
    "Jolly:2/32/0/0/0/32",
-   30.071576299053692
+   35.250743979250885
   ],
   [
-   "Jolly:22/12/0/0/0/32",
-   10.013882982350971
+   "Jolly:0/32/0/0/2/32",
+   4.518411551706139
   ],
   [
-   "Jolly:15/17/0/0/5/29",
-   5.308641580533564
+   "Jolly:16/13/0/0/5/32",
+   4.322794655795451
   ],
   [
-   "Jolly:8/15/0/0/11/32",
-   3.0337643083746957
+   "Jolly:4/25/1/0/4/32",
+   3.76892867243555
   ],
   [
-   "Jolly:26/7/0/0/1/32",
-   2.9146931767322624
+   "Jolly:16/18/0/0/0/32",
+   3.739585985011383
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Sylveon",
-   11.1494467109135
-  ],
-  [
    "Kingambit",
-   10.95365401667915
+   13.982803084534009
   ],
   [
    "Garchomp",
-   9.507880493124757
+   11.367790521555573
   ],
   [
-   "Basculegion",
-   7.5161322310123335
+   "Sylveon",
+   11.155611526823048
   ],
   [
    "Charizard-Mega-Y",
-   6.1889017649025355
+   10.66476007048103
   ],
   [
    "Farigiraf",
-   5.828735331252872
-  ],
-  [
-   "Sinistcha",
-   3.701709193272748
+   8.71620615535582
   ],
   [
    "Incineroar",
-   3.179307639110761
+   4.120044069012989
   ],
   [
-   "Torkoal",
-   3.0561642765180355
+   "Rillaboom",
+   3.9897653023277293
+  ],
+  [
+   "Gholdengo",
+   3.355200454226138
   ],
   [
    "Sneasler",
-   2.8962005514717197
+   3.328067801077673
+  ],
+  [
+   "Basculegion",
+   2.796576264567173
   ]
  ],
  "counters": [
   {
-   "name": "Gholdengo",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sneasler",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Archaludon",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sinistcha",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Pelipper",
+   "name": "Whimsicott",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -170,13 +152,37 @@
    "switchPct": 0
   },
   {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
    "name": "Basculegion",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sableye",
+   "name": "Garchomp-Mega-Z",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Volcarona",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

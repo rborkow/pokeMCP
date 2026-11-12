@@ -2,199 +2,211 @@
  "id": "annihilape",
  "name": "Annihilape",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0502867,
-   "rank": 30,
-   "raw": 132021
+   "month": "2026-09",
+   "usage": 0.033094399999999996,
+   "rank": 41,
+   "raw": 113973
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0449944,
+   "rank": 41,
+   "raw": 135991
   }
  ],
  "abilities": [
   [
    "Defiant",
-   97.95151891434261
-  ],
-  [
-   "Inner Focus",
-   1.1666578554306024
+   99.11023057669279
   ],
   [
    "Vital Spirit",
-   0.8818232302267727
+   0.8029563268757419
+  ],
+  [
+   "Inner Focus",
+   0.08681309643147683
   ]
  ],
  "items": [
   [
-   "Leftovers",
-   41.54830497781106
+   "Choice Scarf",
+   47.2315391670793
   ],
   [
    "Sitrus Berry",
-   15.57272274841094
-  ],
-  [
-   "Choice Scarf",
-   14.668766875619296
-  ],
-  [
-   "Focus Sash",
-   11.004663929554935
+   15.856985135328012
   ],
   [
    "Life Orb",
-   3.5838438285694045
+   10.53071165431068
   ],
   [
-   "Roseli Berry",
-   2.746890110972903
+   "Leftovers",
+   10.470832891816674
   ],
   [
-   "Spell Tag",
-   2.6341763944131023
+   "Focus Sash",
+   7.577426694279088
   ],
   [
-   "Lum Berry",
-   2.243311616661712
+   "Psychic Seed",
+   3.0193687228316355
+  ],
+  [
+   "Muscle Band",
+   1.0811769085145972
+  ],
+  [
+   "Coba Berry",
+   0.7925806586189965
   ]
  ],
  "moves": [
   [
-   "Rage Fist",
-   21.880966775100696
+   "Close Combat",
+   16.800056246696567
   ],
   [
    "Protect",
-   18.270716418118763
+   10.646458350716163
   ],
   [
-   "Drain Punch",
-   16.91618109828291
-  ],
-  [
-   "Bulk Up",
-   14.56672637141729
-  ],
-  [
-   "Close Combat",
-   8.363600588777704
-  ],
-  [
-   "Coaching",
-   3.0122535108522146
-  ],
-  [
-   "U-turn",
-   2.828585180069772
-  ],
-  [
-   "Taunt",
-   2.8096172629087666
-  ],
-  [
-   "Shadow Claw",
-   2.3287396011343637
+   "Rage Fist",
+   10.394500724525708
   ],
   [
    "Ice Punch",
-   1.4498843602959859
+   9.462667707272434
+  ],
+  [
+   "Phantom Force",
+   8.217816535154315
+  ],
+  [
+   "Drain Punch",
+   7.790489678740138
+  ],
+  [
+   "Bulk Up",
+   7.200499299363717
+  ],
+  [
+   "Shadow Claw",
+   7.016885130088439
+  ],
+  [
+   "Rock Slide",
+   5.69280921295148
+  ],
+  [
+   "U-turn",
+   4.850426595527057
   ]
  ],
  "spreads": [
   [
    "Jolly:2/32/0/0/0/32",
-   17.276514815414206
-  ],
-  [
-   "Adamant:32/32/0/0/2/0",
-   7.433150316931883
+   19.414457978662842
   ],
   [
    "Adamant:2/32/0/0/0/32",
-   4.864871743362483
+   13.565802440868104
   ],
   [
-   "Adamant:32/32/0/0/0/2",
-   2.691657944903418
+   "Careful:32/0/2/0/32/0",
+   13.37164483395044
   ],
   [
-   "Adamant:17/18/0/0/26/5",
-   1.9333108565766033
+   "Jolly:0/32/2/0/0/32",
+   4.107648418270433
+  ],
+  [
+   "Adamant:0/32/2/0/0/32",
+   3.1549564452210417
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Maushold",
-   7.248817900062075
+   "Rillaboom",
+   8.051538869699186
   ],
   [
-   "Sinistcha",
-   5.762578808149916
+   "Archaludon",
+   5.968315218335515
   ],
   [
-   "Whimsicott",
-   5.504402370181365
+   "Politoed",
+   3.9972723081306927
   ],
   [
    "Incineroar",
-   4.937221171231801
+   3.9511316610905554
   ],
   [
-   "Garchomp",
-   4.268572141967226
+   "Golisopod-Mega",
+   3.935537373005122
   ],
   [
-   "Metagross-Mega",
-   3.842450197952273
+   "Charizard-Mega-Y",
+   3.8093728135444294
   ],
   [
-   "Pelipper",
-   3.4769682715076216
+   "Indeedee-F",
+   3.763832443717164
   ],
   [
-   "Basculegion",
-   3.1948657736209265
-  ],
-  [
-   "Grimmsnarl",
-   2.9996426843726387
+   "Dragapult",
+   3.6477839768537295
   ],
   [
    "Farigiraf",
-   2.8388387838432108
+   2.9820815082768104
+  ],
+  [
+   "Salamence-Mega",
+   2.833024395390663
   ]
  ],
  "counters": [
   {
-   "name": "Charizard-Mega-Y",
+   "name": "Indeedee-F",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Gholdengo",
+   "name": "Volcarona",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
+   "name": "Tyranitar-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Farigiraf",
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Golisopod-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -206,13 +218,7 @@
    "switchPct": 0
   },
   {
-   "name": "Basculegion",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sneasler",
+   "name": "Sylveon",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -220,55 +226,55 @@
  ],
  "builds": [
   {
-   "item": "Leftovers",
+   "item": "Choice Scarf",
    "ability": "Defiant",
    "moves": [
-    "Drain Punch",
-    "Rage Fist",
-    "Bulk Up",
-    "Protect"
+    "Shadow Claw",
+    "Close Combat",
+    "Ice Punch",
+    "Rock Tomb"
    ],
-   "count": 3,
-   "bestPlacing": 2,
-   "bestPlayer": "MudkipFan",
-   "eventName": "Champions League VGC June",
-   "eventSlug": "2026-06-27-champions-league-vgc-june",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a397c79c87cd9ff0a30d359",
+   "count": 8,
+   "bestPlacing": 1,
+   "bestPlayer": "Altkyle",
+   "eventName": "THE DOJO CHAMPIONS TOURNAMENT",
+   "eventSlug": "2026-11-10-the-dojo-champions-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aee2dd4e99f3235a75e25d1",
    "nature": "Adamant"
   },
   {
-   "item": "Sitrus Berry",
+   "item": "Leftovers",
    "ability": "Defiant",
    "moves": [
     "Rage Fist",
     "Drain Punch",
     "Protect",
-    "Rock Slide"
+    "Bulk Up"
    ],
-   "count": 1,
-   "bestPlacing": 2,
-   "bestPlayer": "Kaige",
-   "eventName": "CHAMPIONS REG. M-B |👑CROWN FIGHT Bo3 TOUR #75👑",
-   "eventSlug": "2026-07-03-champions-reg-m-b-crown-fight-bo3-tour-75",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a2ccd93e334c3c9befd52a6",
-   "nature": "Jolly"
+   "count": 3,
+   "bestPlacing": 1,
+   "bestPlayer": "Wb_vg",
+   "eventName": "Spooky Cup - $500 PRIZE POOL",
+   "eventSlug": "2026-10-26-spooky-cup-500-prize-pool",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6adf94b780a8f79408d1eb2f",
+   "nature": "Adamant"
   },
   {
-   "item": "Black Belt",
+   "item": "Choice Scarf",
    "ability": "Defiant",
    "moves": [
     "Close Combat",
-    "Rage Fist",
-    "Drain Punch",
-    "Protect"
+    "Ice Punch",
+    "Shadow Claw",
+    "Phantom Force"
    ],
-   "count": 1,
-   "bestPlacing": 2,
-   "bestPlayer": "Sam Badenach",
-   "eventName": "Tyrant Thursdays #2",
-   "eventSlug": "2026-06-25-tyrant-thursdays-2",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3b53a483fd320299bcf113",
-   "nature": "Adamant"
+   "count": 3,
+   "bestPlacing": 1,
+   "bestPlayer": "CCManny",
+   "eventName": "CHAMPIONS REG. M-C |👑CROWN FIGHT Bo3 TOUR #89👑",
+   "eventSlug": "2026-10-09-champions-reg-m-c-crown-fight-bo3-tour-89",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a99564fa4272c53be64592f",
+   "nature": "Jolly"
   }
  ]
 }

@@ -2,199 +2,193 @@
  "id": "sneasler",
  "name": "Sneasler",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.1724322,
-   "rank": 9,
-   "raw": 432061
+   "month": "2026-09",
+   "usage": 0.3709291,
+   "rank": 2,
+   "raw": 1241478
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.3562844,
+   "rank": 1,
+   "raw": 1077841
   }
  ],
  "abilities": [
   [
    "Unburden",
-   80.6458556952513
+   82.36859025909565
   ],
   [
    "Poison Touch",
-   17.652170745841143
+   17.34467241435619
   ],
   [
    "Pressure",
-   1.7019735589075613
+   0.2867373265481523
   ]
  ],
  "items": [
   [
    "White Herb",
-   66.32001570971305
+   38.52674576256223
+  ],
+  [
+   "Psychic Seed",
+   21.157767919062355
   ],
   [
    "Focus Sash",
-   28.755979533468224
+   18.901404149704646
+  ],
+  [
+   "Grassy Seed",
+   9.677208057145407
+  ],
+  [
+   "Electric Seed",
+   7.550601119361867
   ],
   [
    "Iron Ball",
-   1.5058241380716182
+   2.3055295820604154
   ],
   [
    "Life Orb",
-   0.9322519636713952
+   1.3148220186376918
   ],
   [
-   "Mental Herb",
-   0.7867999268235389
-  ],
-  [
-   "Lum Berry",
-   0.6054641803906541
-  ],
-  [
-   "Expert Belt",
-   0.20470730281004812
-  ],
-  [
-   "King's Rock",
-   0.15730475576813507
+   "Normal Gem",
+   0.11268974094048195
   ]
  ],
  "moves": [
   [
    "Close Combat",
-   24.82240014118017
-  ],
-  [
-   "Fake Out",
-   23.604307625588156
+   24.92355334914715
   ],
   [
    "Dire Claw",
-   22.18082877874454
+   20.279727411696165
   ],
   [
    "Protect",
-   14.97936998142908
+   18.064453245177457
   ],
   [
-   "Coaching",
-   5.477277832257538
-  ],
-  [
-   "Poison Jab",
-   1.2862070497494549
-  ],
-  [
-   "Gunk Shot",
-   1.267552799757275
+   "Fake Out",
+   11.808301805721245
   ],
   [
    "Rock Slide",
-   1.2442193893272226
+   6.51750122553655
   ],
   [
-   "Quick Guard",
-   1.1255322174558693
+   "Poison Jab",
+   3.1040103069153036
+  ],
+  [
+   "Rock Tomb",
+   2.852297509280101
   ],
   [
    "Throat Chop",
-   0.7997198833413982
+   2.5029198577154936
+  ],
+  [
+   "Swords Dance",
+   2.3874781578133057
+  ],
+  [
+   "Coaching",
+   1.9428275572262625
   ]
  ],
  "spreads": [
   [
-   "Jolly:2/32/0/0/0/32",
-   36.480797031384654
-  ],
-  [
    "Adamant:2/32/0/0/0/32",
-   21.97204814660659
+   25.367781927026435
   ],
   [
-   "Jolly:0/32/2/0/0/32",
-   4.5607543327951765
+   "Jolly:2/32/0/0/0/32",
+   17.33046567995812
   ],
   [
    "Adamant:0/32/2/0/0/32",
-   4.0633527454239085
+   4.8552212449035075
   ],
   [
-   "Jolly:0/32/0/0/2/32",
-   1.890481103117308
+   "Adamant:16/20/0/0/0/30",
+   3.406663020536006
+  ],
+  [
+   "Jolly:0/32/2/0/0/32",
+   3.038437431667544
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Sinistcha",
-   7.132692841678953
-  ],
-  [
    "Kingambit",
-   6.181760751985248
+   8.103294336667764
   ],
   [
-   "Incineroar",
-   6.1143255176089015
+   "Rillaboom",
+   5.834346233420954
   ],
   [
    "Basculegion",
-   5.736904361297138
+   5.11949433556424
   ],
   [
-   "Garchomp",
-   4.938436785514099
-  ],
-  [
-   "Whimsicott",
-   4.0672428803582985
-  ],
-  [
-   "Metagross-Mega",
-   3.630406571190889
+   "Incineroar",
+   4.2737201833426015
   ],
   [
    "Floette-Mega",
-   3.53824568448854
+   3.8714891494993937
   ],
   [
-   "Pelipper",
-   3.3003485847815477
+   "Indeedee-F",
+   3.859196998938777
+  ],
+  [
+   "Salamence-Mega",
+   3.8067069819565686
   ],
   [
    "Archaludon",
-   2.438597541312136
+   3.3371477973609545
+  ],
+  [
+   "Pelipper",
+   3.3161453113885098
+  ],
+  [
+   "Charizard-Mega-Y",
+   3.1496328821371264
   ]
  ],
  "counters": [
   {
-   "name": "Whimsicott",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Toxapex",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Torkoal",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Aerodactyl",
+   "name": "Corviknight",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -206,13 +200,25 @@
    "switchPct": 0
   },
   {
-   "name": "Dragapult",
+   "name": "Volcarona",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Maushold",
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Indeedee",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -223,52 +229,52 @@
    "item": "White Herb",
    "ability": "Unburden",
    "moves": [
-    "Protect",
-    "Fake Out",
+    "Close Combat",
     "Dire Claw",
-    "Close Combat"
+    "Fake Out",
+    "Protect"
    ],
    "count": 23,
    "bestPlacing": 1,
-   "bestPlayer": "cabalododemo",
-   "eventName": "King's Gambit #7 | Reg M-B",
-   "eventSlug": "2026-07-05-king-s-gambit-7-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a37eef2ceacae7d6441bbd5",
+   "bestPlayer": "JackG",
+   "eventName": "🍋Sitrus-Series🍋|Champions-MC|#82",
+   "eventSlug": "2026-11-11-sitrus-series-champions-mc-82",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae69d2eae67092a40740695",
    "nature": "Adamant"
   },
   {
-   "item": "Focus Sash",
-   "ability": "Poison Touch",
+   "item": "White Herb",
+   "ability": "Unburden",
    "moves": [
     "Close Combat",
     "Dire Claw",
-    "Fake Out",
-    "Quick Guard"
+    "Rock Tomb",
+    "Protect"
    ],
-   "count": 13,
+   "count": 19,
    "bestPlacing": 1,
-   "bestPlayer": "Cactusmax",
-   "eventName": "Alpensee Tour (Reg M-B) #64",
-   "eventSlug": "2026-07-01-alpensee-tour-reg-m-b-64",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a392defc87cd9ff0a30d0ac",
-   "nature": "Jolly"
+   "bestPlayer": "MakeItRain",
+   "eventName": "Alpensee Tour (Reg M-C) #83",
+   "eventSlug": "2026-11-11-alpensee-tour-reg-m-c-83",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad8f0ae8a8383117e3f0c23",
+   "nature": "Adamant"
   },
   {
-   "item": "Focus Sash",
-   "ability": "Poison Touch",
+   "item": "Psychic Seed",
+   "ability": "Unburden",
    "moves": [
-    "Fake Out",
-    "Poison Jab",
+    "Protect",
     "Close Combat",
-    "Quick Guard"
+    "Dire Claw",
+    "Rock Slide"
    ],
-   "count": 9,
+   "count": 16,
    "bestPlacing": 1,
-   "bestPlayer": "RoiRehh",
-   "eventName": "Rework Esport Champions Talent Cup 2 | 50€ CP",
-   "eventSlug": "2026-07-03-rework-esport-champions-talent-cup-2-50-cp",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a39af2883fd320299bce1f4",
-   "nature": "Jolly"
+   "bestPlayer": "TrevorIsMaiWaifu",
+   "eventName": "Trinity Tournament 18 (Double Format)",
+   "eventSlug": "2026-11-08-trinity-tournament-18-double-format",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae35ea122fd412b92a4f526",
+   "nature": "Adamant"
   }
  ]
 }

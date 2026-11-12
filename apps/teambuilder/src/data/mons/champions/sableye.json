@@ -2,199 +2,211 @@
  "id": "sableye",
  "name": "Sableye",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0685721,
-   "rank": 23,
-   "raw": 225944
+   "month": "2026-09",
+   "usage": 0.0175793,
+   "rank": 60,
+   "raw": 111871
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0095663,
+   "rank": 70,
+   "raw": 95265
   }
  ],
  "abilities": [
   [
    "Prankster",
-   99.53297578169257
+   99.73990881153973
   ],
   [
    "Keen Eye",
-   0.4556908368766892
+   0.26004722805929337
   ],
   [
    "Stall",
-   0.011333381430734752
+   0.0000439604009738307
   ]
  ],
  "items": [
   [
    "Light Clay",
-   42.26535683689686
+   41.798521621058306
   ],
   [
    "Roseli Berry",
-   40.46702834851492
-  ],
-  [
-   "Focus Sash",
-   4.858253204034869
+   32.96413335763577
   ],
   [
    "Sitrus Berry",
-   3.5776760346105796
+   8.73543091771386
   ],
   [
-   "Mental Herb",
-   2.5341403927104764
+   "Focus Sash",
+   6.244966068368041
   ],
   [
-   "Wide Lens",
-   1.5113988860092553
-  ],
-  [
-   "Bright Powder",
-   1.2620305043367717
+   "Eject Button",
+   2.728357793414115
   ],
   [
    "Damp Rock",
-   1.1925735710950114
+   1.3845297748327212
+  ],
+  [
+   "Rocky Helmet",
+   1.278534846668317
+  ],
+  [
+   "Wide Lens",
+   1.2700724300646373
   ]
  ],
  "moves": [
   [
-   "Rain Dance",
-   17.644221142975304
-  ],
-  [
    "Light Screen",
-   15.830025789824607
+   14.967106700639546
   ],
   [
    "Reflect",
-   13.037431789374128
+   12.377435380198387
   ],
   [
    "Encore",
-   12.084006815198203
+   11.752859884223248
   ],
   [
-   "Will-O-Wisp",
-   9.937312437029387
-  ],
-  [
-   "Disable",
-   6.30579370894445
+   "Rain Dance",
+   10.722401560376762
   ],
   [
    "Foul Play",
-   5.832855639770047
+   8.751196191942864
+  ],
+  [
+   "Disable",
+   7.970528825180306
   ],
   [
    "Fake Out",
-   5.707331522621637
+   7.584566403296645
+  ],
+  [
+   "Will-O-Wisp",
+   7.196441740994441
   ],
   [
    "Quash",
-   4.896879820089799
+   4.010490501346794
   ],
   [
-   "Sunny Day",
-   1.6940418236085681
+   "Taunt",
+   3.5318620059785006
   ]
  ],
  "spreads": [
   [
-   "Calm:32/0/9/0/25/0",
-   11.574245918074624
-  ],
-  [
    "Calm:32/0/2/0/32/0",
-   11.092274265738265
+   9.538094068858708
   ],
   [
-   "Sassy:32/0/9/0/25/0",
-   6.136931669239942
-  ],
-  [
-   "Careful:32/0/2/0/32/0",
-   5.004528903826584
+   "Careful:32/0/9/0/25/0",
+   6.398262695491054
   ],
   [
    "Bold:32/0/32/0/2/0",
-   4.887837519797006
+   5.447859107281296
+  ],
+  [
+   "Relaxed:32/0/15/0/19/0",
+   5.305279553151525
+  ],
+  [
+   "Sassy:32/0/9/0/25/0",
+   4.90176431406696
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Archaludon",
-   12.725651800751269
+   8.259405392614774
   ],
   [
    "Pelipper",
-   12.164942929931339
+   5.369907148164311
   ],
   [
    "Swampert-Mega",
-   11.568722982831673
+   3.9773417629998886
   ],
   [
    "Sinistcha",
-   7.939792290576478
+   3.9541305611394275
   ],
   [
-   "Basculegion",
-   5.994379661496566
-  ],
-  [
-   "Venusaur-Mega",
-   2.788949500989363
-  ],
-  [
-   "Metagross-Mega",
-   2.5378272298368
+   "Rillaboom",
+   3.602940356499952
   ],
   [
    "Sneasler",
-   2.4457465139535146
+   2.916284678330118
+  ],
+  [
+   "Golisopod-Mega",
+   2.849848340245681
+  ],
+  [
+   "Maushold",
+   2.6110900970162305
+  ],
+  [
+   "Basculegion",
+   2.5489557580196456
   ],
   [
    "Incineroar",
-   2.3014854995317395
-  ],
-  [
-   "Kingambit",
-   2.2748298908446096
+   2.4307571411413087
   ]
  ],
  "counters": [
   {
-   "name": "Pelipper",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Swampert-Mega",
+   "name": "Gholdengo",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
+   "name": "Basculegion",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Grimmsnarl",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Tyranitar-Mega",
+   "name": "Indeedee-F",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -206,13 +218,7 @@
    "switchPct": 0
   },
   {
-   "name": "Milotic",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Whimsicott",
+   "name": "Garchomp",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -223,52 +229,52 @@
    "item": "Light Clay",
    "ability": "Prankster",
    "moves": [
-    "Reflect",
-    "Will-O-Wisp",
+    "Fake Out",
+    "Foul Play",
     "Light Screen",
-    "Rain Dance"
+    "Reflect"
    ],
-   "count": 7,
-   "bestPlacing": 2,
-   "bestPlayer": "PokeHugo",
-   "eventName": "MMHM x Stellar Novas Tour #2",
-   "eventSlug": "2026-06-23-mmhm-x-stellar-novas-tour-2",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15e1c10f6c1f0899861874",
-   "nature": "Impish"
+   "count": 1,
+   "bestPlacing": 3,
+   "bestPlayer": "LD_067",
+   "eventName": "Off Meta Fight Club #9",
+   "eventSlug": "2026-11-05-off-meta-fight-club-9",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae3dd6680a8f79408d21452",
+   "nature": "Calm"
+  },
+  {
+   "item": "Sitrus Berry",
+   "ability": "Prankster",
+   "moves": [
+    "Quash",
+    "Rain Dance",
+    "Encore",
+    "Disable"
+   ],
+   "count": 1,
+   "bestPlacing": 6,
+   "bestPlayer": "Zuan",
+   "eventName": "Off Meta Fight Club #9",
+   "eventSlug": "2026-11-05-off-meta-fight-club-9",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae3dd6680a8f79408d21452",
+   "nature": "Careful"
   },
   {
    "item": "Light Clay",
    "ability": "Prankster",
    "moves": [
-    "Encore",
     "Reflect",
     "Light Screen",
-    "Rain Dance"
-   ],
-   "count": 3,
-   "bestPlacing": 2,
-   "bestPlayer": "Lya_3",
-   "eventName": "CHAMPIONS REG. M-B |👑CROWN FIGHT Bo3 TOUR #74👑",
-   "eventSlug": "2026-06-26-champions-reg-m-b-crown-fight-bo3-tour-74",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a2ccd742d97f3b0c2615436",
-   "nature": "Calm"
-  },
-  {
-   "item": "Focus Sash",
-   "ability": "Prankster",
-   "moves": [
-    "Light Screen",
-    "Will-O-Wisp",
     "Rain Dance",
-    "Protect"
+    "Encore"
    ],
-   "count": 2,
-   "bestPlacing": 2,
-   "bestPlayer": "Testing444",
-   "eventName": "Rework Esport Champions Talent Cup 2 | 50€ CP",
-   "eventSlug": "2026-07-03-rework-esport-champions-talent-cup-2-50-cp",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a39af2883fd320299bce1f4",
-   "nature": "Careful"
+   "count": 1,
+   "bestPlacing": 7,
+   "bestPlayer": "vishnu21",
+   "eventName": "Off Meta Fight Club #9",
+   "eventSlug": "2026-11-05-off-meta-fight-club-9",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae3dd6680a8f79408d21452",
+   "nature": "Calm"
   }
  ]
 }

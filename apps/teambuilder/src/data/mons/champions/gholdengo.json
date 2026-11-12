@@ -2,15 +2,21 @@
  "id": "gholdengo",
  "name": "Gholdengo",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.1168501,
-   "rank": 18,
-   "raw": 297007
+   "month": "2026-09",
+   "usage": 0.1905908,
+   "rank": 7,
+   "raw": 533753
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.1384831,
+   "rank": 13,
+   "raw": 508211
   }
  ],
  "abilities": [
@@ -22,171 +28,159 @@
  "items": [
   [
    "Life Orb",
-   52.58222724117198
+   81.49967416359613
   ],
   [
    "Choice Scarf",
-   13.638655990352705
-  ],
-  [
-   "Metal Coat",
-   11.563614864171317
+   7.320042637731807
   ],
   [
    "Leftovers",
-   7.345103781523105
+   2.5409997850906914
   ],
   [
-   "Sitrus Berry",
-   3.291126893905389
-  ],
-  [
-   "White Herb",
-   2.8163522216310253
+   "Grassy Seed",
+   2.471438299494642
   ],
   [
    "Focus Sash",
-   1.95493980379056
+   2.1578770331936417
   ],
   [
-   "Spell Tag",
-   1.774219282288098
+   "Metal Coat",
+   1.0381805867060974
+  ],
+  [
+   "White Herb",
+   0.7434522783463495
+  ],
+  [
+   "Sitrus Berry",
+   0.35300966527023614
   ]
  ],
  "moves": [
   [
    "Shadow Ball",
-   24.65956699445411
+   24.934517978174437
   ],
   [
    "Make It Rain",
-   24.149217917403014
+   24.80325340426978
   ],
   [
    "Protect",
-   21.24643650324263
+   22.978799025598846
   ],
   [
    "Nasty Plot",
-   16.15405265790855
+   21.253401033344833
   ],
   [
    "Power Gem",
-   6.336220015838362
+   2.7600680432045044
   ],
   [
    "Trick",
-   2.221291348557412
+   1.0715924650336084
+  ],
+  [
+   "Focus Blast",
+   0.5574304621287105
   ],
   [
    "Thunderbolt",
-   1.5709163404533186
+   0.4858977358323525
   ],
   [
-   "Flash Cannon",
-   1.1017369359456015
-  ],
-  [
-   "Dazzling Gleam",
-   0.7168796754951248
+   "Psychic",
+   0.3813077940222484
   ],
   [
    "Steel Beam",
-   0.4311143703221312
+   0.26810949321491384
   ]
  ],
  "spreads": [
   [
-   "Timid:2/0/0/32/0/32",
-   18.779127248304718
-  ],
-  [
    "Modest:2/0/0/32/0/32",
-   17.874086563430843
+   10.402705121347605
   ],
   [
-   "Modest:32/0/2/10/3/19",
-   3.7165079793893607
+   "Timid:2/0/0/32/0/32",
+   9.614591082336107
   ],
   [
-   "Timid:17/0/0/17/0/32",
-   1.8389651863304828
+   "Modest:17/0/0/7/22/20",
+   5.542932040038848
   ],
   [
-   "Modest:7/0/0/27/0/32",
-   1.4829661730679233
+   "Timid:7/0/0/27/0/32",
+   4.406780834049987
+  ],
+  [
+   "Modest:17/0/0/17/0/32",
+   2.780627743712827
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Garchomp",
-   9.812336547038665
-  ],
-  [
-   "Whimsicott",
-   9.100975722670738
-  ],
-  [
-   "Staraptor-Mega",
-   7.805060334067762
+   "Rillaboom",
+   13.151561865600309
   ],
   [
    "Incineroar",
-   5.8400519196800955
-  ],
-  [
-   "Basculegion",
-   5.490548631713481
-  ],
-  [
-   "Sinistcha",
-   5.097193795721818
-  ],
-  [
-   "Grimmsnarl",
-   4.09933189089632
-  ],
-  [
-   "Charizard-Mega-Y",
-   2.7802967918027064
+   8.047742755857897
   ],
   [
    "Raichu-Mega-Y",
-   2.759085112778894
+   7.584113292523097
   ],
   [
-   "Floette-Mega",
-   2.4458444596013114
+   "Staraptor-Mega",
+   5.333772278313477
+  ],
+  [
+   "Sneasler",
+   4.466796440471082
+  ],
+  [
+   "Garchomp-Mega-Z",
+   4.093157896932783
+  ],
+  [
+   "Salamence-Mega",
+   3.9424076280861478
+  ],
+  [
+   "Arcanine-Hisui",
+   3.7794805080872345
+  ],
+  [
+   "Volcarona",
+   3.729892759138838
+  ],
+  [
+   "Milotic",
+   3.683468591209456
   ]
  ],
  "counters": [
   {
-   "name": "Aerodactyl-Mega",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Metagross-Mega",
+   "name": "Espathra",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Annihilape",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Aerodactyl",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Rotom-Heat",
+   "name": "Salamence-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -198,13 +192,25 @@
    "switchPct": 0
   },
   {
-   "name": "Kingambit",
+   "name": "Volcarona",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
+   "name": "Glimmora-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Floette-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Dragapult",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -215,51 +221,51 @@
    "item": "Life Orb",
    "ability": "Good as Gold",
    "moves": [
-    "Protect",
-    "Make It Rain",
     "Shadow Ball",
-    "Nasty Plot"
-   ],
-   "count": 16,
-   "bestPlacing": 1,
-   "bestPlayer": "Alchemist_23",
-   "eventName": "Champions League VGC June",
-   "eventSlug": "2026-06-27-champions-league-vgc-june",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a397c79c87cd9ff0a30d359",
-   "nature": "Modest"
-  },
-  {
-   "item": "Spell Tag",
-   "ability": "Good as Gold",
-   "moves": [
     "Make It Rain",
-    "Shadow Ball",
     "Nasty Plot",
     "Protect"
    ],
-   "count": 6,
+   "count": 93,
    "bestPlacing": 1,
-   "bestPlayer": "cabalododemo",
-   "eventName": "King's Gambit #7 | Reg M-B",
-   "eventSlug": "2026-07-05-king-s-gambit-7-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a37eef2ceacae7d6441bbd5",
+   "bestPlayer": "Altkyle",
+   "eventName": "THE DOJO CHAMPIONS TOURNAMENT",
+   "eventSlug": "2026-11-10-the-dojo-champions-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aee2dd4e99f3235a75e25d1",
    "nature": "Modest"
   },
   {
-   "item": "Leftovers",
+   "item": "Life Orb",
    "ability": "Good as Gold",
    "moves": [
-    "Nasty Plot",
+    "Make It Rain",
     "Protect",
     "Shadow Ball",
-    "Make It Rain"
+    "Power Gem"
    ],
    "count": 5,
    "bestPlacing": 2,
-   "bestPlayer": "BatCoach",
-   "eventName": "Champions Collective #12",
-   "eventSlug": "2026-07-01-champions-collective-12",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3987c183fd320299bce00b",
+   "bestPlayer": "Draxolotl",
+   "eventName": "TARTAN'S ROAD TO GDANSK #43 - [REG M-C]",
+   "eventSlug": "2026-10-27-tartan-s-road-to-gdansk-43-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad54b56115c12b73a5a74c6",
+   "nature": "Timid"
+  },
+  {
+   "item": "Choice Scarf",
+   "ability": "Good as Gold",
+   "moves": [
+    "Make It Rain",
+    "Shadow Ball",
+    "Power Gem",
+    "Trick"
+   ],
+   "count": 2,
+   "bestPlacing": 1,
+   "bestPlayer": "CaioVGC ",
+   "eventName": "Intimidators Champions Challenge #51 REG M-C",
+   "eventSlug": "2026-10-19-intimidators-champions-challenge-51-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad5ff65115c12b73a5a789a",
    "nature": "Modest"
   }
  ]

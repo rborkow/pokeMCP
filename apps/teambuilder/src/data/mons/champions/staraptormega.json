@@ -2,25 +2,27 @@
  "id": "staraptormega",
  "name": "Staraptor-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.1514045,
-   "rank": 12,
-   "raw": 428748
+   "month": "2026-09",
+   "usage": 0.0643154,
+   "rank": 28,
+   "raw": 209549
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0863521,
+   "rank": 21,
+   "raw": 246678
   }
  ],
  "abilities": [
   [
-   "No Ability",
-   81.06943546357859
-  ],
-  [
    "Contrary",
-   18.930564536421414
+   100
   ]
  ],
  "items": [
@@ -32,135 +34,111 @@
  "moves": [
   [
    "Close Combat",
-   24.988954926004272
+   24.99832802025127
   ],
   [
    "Protect",
-   23.480351173528753
+   24.665568002012243
   ],
   [
    "Brave Bird",
-   20.92637417751772
+   23.315358936453347
   ],
   [
    "Roost",
-   19.59199384055385
-  ],
-  [
-   "Dual Wingbeat",
-   3.9968769447080312
+   12.557370554985237
   ],
   [
    "Tailwind",
-   2.907474520872467
+   12.267264844463849
+  ],
+  [
+   "Dual Wingbeat",
+   1.5270622127518152
   ],
   [
    "Blaze Kick",
-   1.440059997704405
-  ],
-  [
-   "U-turn",
-   0.841066784508754
-  ],
-  [
-   "Quick Attack",
-   0.5977772322755139
+   0.2509337487957015
   ],
   [
    "Final Gambit",
-   0.316648574548828
+   0.18623799485807704
+  ],
+  [
+   "U-turn",
+   0.07269454017535866
+  ],
+  [
+   "Sunny Day",
+   0.04430278269663411
   ]
  ],
  "spreads": [
   [
-   "Jolly:2/32/0/0/0/32",
-   18.874916549042354
-  ],
-  [
-   "Jolly:1/32/0/0/1/32",
-   5.7789272097534585
+   "Jolly:29/1/0/0/4/32",
+   10.148607705486757
   ],
   [
    "Jolly:32/2/0/0/0/32",
-   5.328806103328133
+   6.186749319772903
   ],
   [
-   "Adamant:31/32/0/0/3/0",
-   5.169762203918858
+   "Jolly:2/32/0/0/0/32",
+   5.647792865143842
   ],
   [
-   "Adamant:2/32/0/0/0/32",
-   2.573886085006075
+   "Jolly:15/23/0/0/0/28",
+   4.967205378848307
+  ],
+  [
+   "Jolly:29/2/1/0/2/32",
+   4.436392125824462
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
+   "Gholdengo",
+   8.55378030827967
+  ],
+  [
+   "Rillaboom",
+   6.39208458334858
+  ],
+  [
    "Whimsicott",
-   10.030312741385568
+   5.837921265678673
+  ],
+  [
+   "Raichu-Mega-Y",
+   5.6872046684875235
   ],
   [
    "Garchomp",
-   9.339711161818107
+   4.73759240391759
   ],
   [
-   "Sinistcha",
-   8.68423190934014
+   "Arcanine-Hisui",
+   4.0673810361574985
   ],
   [
-   "Grimmsnarl",
-   6.4883332557234885
-  ],
-  [
-   "Incineroar",
-   6.243649832943537
-  ],
-  [
-   "Gholdengo",
-   6.023744424479876
-  ],
-  [
-   "Basculegion",
-   5.71412092751202
+   "Milotic",
+   3.7533646057447556
   ],
   [
    "Kingambit",
-   3.2628574711435148
+   3.700871409288071
   ],
   [
-   "Maushold",
-   2.213802973499184
+   "Glimmora",
+   3.4061838952369916
   ],
   [
-   "Sylveon",
-   1.9073950131343707
+   "Sinistcha",
+   3.1856265576712124
   ]
  ],
  "counters": [
-  {
-   "name": "Garchomp",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Rotom-Wash",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Whimsicott",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Metagross-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
   {
    "name": "Farigiraf",
    "score": 0,
@@ -168,19 +146,43 @@
    "switchPct": 0
   },
   {
-   "name": "Blastoise-Mega",
+   "name": "Volcarona",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Milotic",
+   "name": "Garchomp-Mega-Z",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Maushold",
+   "name": "Raichu-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Arcanine-Hisui",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Armarouge",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Indeedee-F",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Dragapult",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

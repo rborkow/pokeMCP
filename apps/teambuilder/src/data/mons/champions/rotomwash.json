@@ -2,15 +2,21 @@
  "id": "rotomwash",
  "name": "Rotom-Wash",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0546261,
-   "rank": 28,
-   "raw": 183291
+   "month": "2026-09",
+   "usage": 0.011219699999999999,
+   "rank": 69,
+   "raw": 74990
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0069093,
+   "rank": 80,
+   "raw": 73651
   }
  ],
  "abilities": [
@@ -22,153 +28,147 @@
  "items": [
   [
    "Sitrus Berry",
-   32.111243083279625
-  ],
-  [
-   "Choice Scarf",
-   29.765283324924784
+   42.92959735097749
   ],
   [
    "Leftovers",
-   23.50816610002324
+   22.766826140881427
   ],
   [
-   "Magnet",
-   5.160898470115254
+   "Choice Scarf",
+   19.387557363969567
+  ],
+  [
+   "Rocky Helmet",
+   4.30022224618532
   ],
   [
    "Wide Lens",
-   2.7154366855658694
+   3.3045324408278636
   ],
   [
-   "Life Orb",
-   2.6192971285887663
-  ],
-  [
-   "Expert Belt",
-   1.1799407457121898
+   "Magnet",
+   2.138705287419688
   ],
   [
    "Rindo Berry",
-   0.8595619472177481
+   1.432426782196578
+  ],
+  [
+   "Life Orb",
+   0.873329802571081
   ]
  ],
  "moves": [
   [
    "Hydro Pump",
-   24.29905105438603
+   23.231952773532363
   ],
   [
    "Will-O-Wisp",
-   16.575387149776876
+   18.55334669663559
   ],
   [
    "Thunderbolt",
-   15.649879829448231
-  ],
-  [
-   "Volt Switch",
-   12.552342762636878
+   15.784925514014603
   ],
   [
    "Protect",
-   11.569211998146173
+   11.611650434935147
+  ],
+  [
+   "Volt Switch",
+   9.987059438791874
   ],
   [
    "Electroweb",
-   6.544799897545239
-  ],
-  [
-   "Discharge",
-   4.054686622768801
-  ],
-  [
-   "Trick",
-   2.988747148517503
+   5.520702335203842
   ],
   [
    "Light Screen",
-   2.5890355191091934
+   4.258427450060651
   ],
   [
-   "Thunder Wave",
-   0.34950504139680677
+   "Discharge",
+   3.774890639211634
+  ],
+  [
+   "Trick",
+   2.8651922225061024
+  ],
+  [
+   "Eerie Impulse",
+   0.7893469887269338
   ]
  ],
  "spreads": [
   [
    "Timid:2/0/0/32/0/32",
-   13.753878699034953
+   11.940921479508349
   ],
   [
-   "Modest:2/0/0/32/0/32",
-   4.416119656207586
+   "Modest:32/0/4/8/16/6",
+   11.575309471383441
   ],
   [
-   "Calm:32/0/0/2/32/0",
-   3.0913460872130716
-  ],
-  [
-   "Modest:32/0/12/15/1/6",
-   2.1564479911560825
+   "Modest:3/0/7/32/15/9",
+   3.9990527331639125
   ],
   [
    "Modest:32/0/0/32/0/2",
-   2.122034484565002
+   3.7613384077266057
+  ],
+  [
+   "Bold:32/0/10/7/11/6",
+   3.1506461742162357
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Garchomp",
-   8.144379699650358
+   "Sneasler",
+   8.168282527948739
   ],
   [
    "Incineroar",
-   6.695880120042638
+   7.978461089047773
   ],
   [
-   "Sinistcha",
-   5.68040740527772
-  ],
-  [
-   "Whimsicott",
-   5.124915717555057
-  ],
-  [
-   "Sneasler",
-   4.687021540003775
-  ],
-  [
-   "Metagross-Mega",
-   4.0997162416868225
-  ],
-  [
-   "Staraptor-Mega",
-   3.832618000215439
+   "Garchomp",
+   5.816186667422126
   ],
   [
    "Kingambit",
-   3.213010492876262
+   5.682225699305688
   ],
   [
-   "Gholdengo",
-   2.267324081800318
+   "Rillaboom",
+   3.9115484574135153
   ],
   [
-   "Sceptile-Mega",
-   2.140753888653403
+   "Tyranitar-Mega",
+   3.372883756842953
+  ],
+  [
+   "Gardevoir-Mega",
+   3.317106818270473
+  ],
+  [
+   "Whimsicott",
+   3.006460891488926
+  ],
+  [
+   "Charizard-Mega-Y",
+   2.7118595254193587
+  ],
+  [
+   "Indeedee-F",
+   2.5951821941139106
   ]
  ],
  "counters": [
   {
-   "name": "Aerodactyl",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Gengar-Mega",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -180,31 +180,19 @@
    "switchPct": 0
   },
   {
-   "name": "Staraptor-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Grimmsnarl",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Archaludon",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
    "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sylveon",
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

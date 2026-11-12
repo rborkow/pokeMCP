@@ -2,173 +2,185 @@
  "id": "toxapex",
  "name": "Toxapex",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0185375,
-   "rank": 61,
-   "raw": 61722
+   "month": "2026-09",
+   "usage": 0.008452,
+   "rank": 77,
+   "raw": 48545
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.021306600000000002,
+   "rank": 50,
+   "raw": 57959
   }
  ],
  "abilities": [
   [
    "Regenerator",
-   97.27517289633387
+   99.52337442969245
   ],
   [
    "Merciless",
-   2.5565527050811183
+   0.40014798985639044
   ],
   [
    "Limber",
-   0.16827439858500146
+   0.07647758045116608
   ]
  ],
  "items": [
   [
    "Leftovers",
-   95.90177230694626
+   97.07987526355952
+  ],
+  [
+   "Rocky Helmet",
+   1.0911657015514746
   ],
   [
    "Sitrus Berry",
-   2.282352198420432
+   0.6922927285149999
+  ],
+  [
+   "Binding Band",
+   0.25650049282379456
   ],
   [
    "Shuca Berry",
-   0.509708431608312
+   0.19871673711751012
+  ],
+  [
+   "Grassy Seed",
+   0.19730008557217252
   ],
   [
    "Mental Herb",
-   0.3771799493475008
-  ],
-  [
-   "Life Orb",
-   0.24218984982465652
-  ],
-  [
-   "Bright Powder",
-   0.1470876267050996
-  ],
-  [
-   "Payapa Berry",
-   0.10020179205073834
+   0.16068770604705007
   ],
   [
    "nothing",
-   0.06642218505198134
+   0.0720295159749041
   ]
  ],
  "moves": [
   [
+   "Infestation",
+   24.676033763310112
+  ],
+  [
    "Toxic",
-   23.780569427480035
+   24.664657653122553
   ],
   [
    "Baneful Bunker",
-   23.689801818341124
-  ],
-  [
-   "Infestation",
-   22.91514382526516
+   24.557875188813323
   ],
   [
    "Wide Guard",
-   20.42780201855552
+   23.894718325383963
   ],
   [
    "Recover",
-   4.000753058288675
+   1.1997232786238505
   ],
   [
    "Haze",
-   1.4481686366394675
+   0.16830597603599143
   ],
   [
-   "Stockpile",
-   0.6141408037443419
-  ],
-  [
-   "Liquidation",
-   0.4326458787324521
-  ],
-  [
-   "Chilling Water",
-   0.42498671428583235
+   "Protect",
+   0.12454565324079513
   ],
   [
    "Icy Wind",
-   0.3389776338089642
+   0.11158215322820926
+  ],
+  [
+   "Stockpile",
+   0.10696492032979445
+  ],
+  [
+   "Chilling Water",
+   0.07942548414122341
   ]
  ],
  "spreads": [
   [
+   "Relaxed:32/0/18/0/16/0",
+   53.06587996386018
+  ],
+  [
    "Bold:32/0/18/0/16/0",
-   31.395071581736673
-  ],
-  [
-   "Bold:32/0/20/0/14/0",
-   5.785917859330691
-  ],
-  [
-   "Bold:32/0/32/2/0/0",
-   5.217054616879234
-  ],
-  [
-   "Bold:32/0/32/0/2/0",
-   5.03803402541787
+   9.18251518080613
   ],
   [
    "Bold:32/0/8/0/26/0",
-   4.311459904443017
+   5.032312753220735
+  ],
+  [
+   "Calm:32/0/2/0/32/0",
+   3.2859344894707823
+  ],
+  [
+   "Relaxed:32/0/32/0/0/2",
+   2.523384765616531
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Charizard-Mega-Y",
-   10.094206169352066
+   "Incineroar",
+   17.942361259938423
   ],
   [
    "Garchomp",
-   9.243356760463278
+   17.092474952227047
   ],
   [
-   "Grimmsnarl",
-   9.208618609545532
+   "Charizard-Mega-Y",
+   16.604849765460827
   ],
   [
-   "Hydreigon",
-   7.988424918867504
+   "Sylveon",
+   15.317953396370715
   ],
   [
-   "Incineroar",
-   7.106808530278834
+   "Venusaur",
+   15.045384020110964
   ],
   [
-   "Metagross-Mega",
-   5.897409797110317
+   "Rillaboom",
+   2.0864843145547862
   ],
   [
-   "Sinistcha",
-   4.486686380100135
-  ],
-  [
-   "Staraptor-Mega",
-   2.55891833284193
+   "Floette-Mega",
+   0.8128978292325908
   ],
   [
    "Whimsicott",
-   2.359797475235721
+   0.7310686542144713
   ],
   [
-   "Gholdengo",
-   2.329923936592631
+   "Delphox-Mega",
+   0.6959004424747544
+  ],
+  [
+   "Garchomp-Mega-Z",
+   0.6709752136167842
   ]
  ],
  "counters": [
+  {
+   "name": "Salamence-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
   {
    "name": "Sneasler",
    "score": 0,
@@ -176,19 +188,19 @@
    "switchPct": 0
   },
   {
-   "name": "Farigiraf",
+   "name": "Indeedee-F",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Basculegion",
+   "name": "Garchomp",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Floette-Mega",
+   "name": "Garchomp-Mega-Z",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -200,19 +212,13 @@
    "switchPct": 0
   },
   {
-   "name": "Swampert-Mega",
+   "name": "Farigiraf",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Charizard-Mega-Y",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sinistcha",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -224,34 +230,17 @@
    "ability": "Regenerator",
    "moves": [
     "Infestation",
-    "Wide Guard",
     "Toxic",
+    "Wide Guard",
     "Baneful Bunker"
    ],
-   "count": 8,
-   "bestPlacing": 1,
-   "bestPlayer": "ScarletSkil",
-   "eventName": "BFI'26 - Frontier Tournament #3",
-   "eventSlug": "2026-07-04-bfi-26-frontier-tournament-3",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3f7832c87cd9ff0a310b57",
-   "nature": "Bold"
-  },
-  {
-   "item": "Leftovers",
-   "ability": "Regenerator",
-   "moves": [
-    "Infestation",
-    "Baneful Bunker",
-    "Recover",
-    "Toxic"
-   ],
-   "count": 1,
-   "bestPlacing": 6,
-   "bestPlayer": "Anubis",
-   "eventName": "KIng's Gambit #6 | Reg M-B",
-   "eventSlug": "2026-06-21-king-s-gambit-6-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a29ab02e334c3c9befd3389",
-   "nature": "Bold"
+   "count": 7,
+   "bestPlacing": 2,
+   "bestPlayer": "boredom",
+   "eventName": "THE DOJO CHAMPIONS TOURNAMENT",
+   "eventSlug": "2026-11-10-the-dojo-champions-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aee2dd4e99f3235a75e25d1",
+   "nature": "Relaxed"
   }
  ]
 }

@@ -1,0 +1,174 @@
+{
+ "id": "meowsticfmega",
+ "name": "Meowstic-F-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.0074824,
+   "rank": 82,
+   "raw": 23144
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0069901,
+   "rank": 79,
+   "raw": 39231
+  }
+ ],
+ "abilities": [
+  [
+   "Trace",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "meowsticite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Expanding Force",
+   24.86130900030176
+  ],
+  [
+   "Protect",
+   24.782507754572645
+  ],
+  [
+   "Thunderbolt",
+   20.346762374020507
+  ],
+  [
+   "Fake Out",
+   19.557337922226097
+  ],
+  [
+   "Dark Pulse",
+   3.4537823806920223
+  ],
+  [
+   "Nasty Plot",
+   2.149990994516061
+  ],
+  [
+   "Alluring Voice",
+   1.608311527772015
+  ],
+  [
+   "Shadow Ball",
+   0.9944685154096328
+  ],
+  [
+   "Gravity",
+   0.586183758089967
+  ],
+  [
+   "Baton Pass",
+   0.3806410769670795
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   58.34786569020004
+  ],
+  [
+   "Timid:1/0/1/32/0/32",
+   5.29388228822113
+  ],
+  [
+   "Timid:10/0/0/24/0/32",
+   4.775402520834769
+  ],
+  [
+   "Hasty:0/2/0/32/0/32",
+   4.701018808193001
+  ],
+  [
+   "Timid:15/0/0/20/0/31",
+   3.518520497069629
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sneasler",
+   16.225980408735467
+  ],
+  [
+   "Indeedee",
+   13.491150510023726
+  ],
+  [
+   "Kingambit",
+   11.62526860214701
+  ],
+  [
+   "Charizard-Mega-Y",
+   11.1555551995647
+  ],
+  [
+   "Kommo-o",
+   11.090448556606345
+  ],
+  [
+   "Indeedee-F",
+   6.323253298451864
+  ],
+  [
+   "Archaludon",
+   1.512699581956373
+  ],
+  [
+   "Torkoal",
+   1.3739051899645653
+  ],
+  [
+   "Salamence-Mega",
+   1.234594874008479
+  ],
+  [
+   "Armarouge",
+   1.2100105122714673
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

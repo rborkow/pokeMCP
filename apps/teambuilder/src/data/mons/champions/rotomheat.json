@@ -2,15 +2,21 @@
  "id": "rotomheat",
  "name": "Rotom-Heat",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.024152200000000002,
-   "rank": 50,
-   "raw": 90263
+   "month": "2026-09",
+   "usage": 0.0063005,
+   "rank": 88,
+   "raw": 35721
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.00563,
+   "rank": 92,
+   "raw": 56993
   }
  ],
  "abilities": [
@@ -22,189 +28,159 @@
  "items": [
   [
    "Choice Scarf",
-   77.27972964763835
+   81.88904135157583
   ],
   [
    "Sitrus Berry",
-   8.281019713026184
-  ],
-  [
-   "Leftovers",
-   4.467985854030513
+   6.91683500086001
   ],
   [
    "Life Orb",
-   2.7581931078299324
+   2.7669401467350423
   ],
   [
-   "Passho Berry",
-   1.9270023257525777
-  ],
-  [
-   "Magnet",
-   1.860969166896591
+   "Leftovers",
+   2.3136670489254616
   ],
   [
    "Charti Berry",
-   1.1114384658515841
+   1.5182973534448208
   ],
   [
-   "Expert Belt",
-   0.5838131102669536
+   "Passho Berry",
+   1.0185150971460577
+  ],
+  [
+   "Focus Sash",
+   0.9381919899583776
+  ],
+  [
+   "White Herb",
+   0.6307618520880689
   ]
  ],
  "moves": [
   [
    "Overheat",
-   24.725286448767
+   24.917202370772774
   ],
   [
    "Volt Switch",
-   19.04594503056082
+   20.086838670589223
   ],
   [
    "Discharge",
-   16.110171849251053
-  ],
-  [
-   "Thunderbolt",
-   12.520164097983926
+   17.868677581994852
   ],
   [
    "Trick",
-   6.818939009996698
+   15.536366103448804
   ],
   [
    "Electroweb",
-   6.802778118007523
+   5.705663279772219
+  ],
+  [
+   "Thunderbolt",
+   5.4928640886370035
   ],
   [
    "Will-O-Wisp",
-   6.460943419417338
+   3.974601695165999
   ],
   [
    "Protect",
-   4.0329069490150795
+   3.36107388452188
   ],
   [
-   "Thunder",
-   0.6153273435777541
+   "Light Screen",
+   0.8780335081950341
   ],
   [
    "Shadow Ball",
-   0.5164551521467312
+   0.5896897585248736
   ]
  ],
  "spreads": [
   [
    "Timid:2/0/0/32/0/32",
-   49.83979508215802
+   45.78715783500534
+  ],
+  [
+   "Timid:13/0/0/21/0/32",
+   7.847794907876848
   ],
   [
    "Modest:2/0/0/32/0/32",
-   4.875447324264248
+   4.931200818161562
   ],
   [
-   "Timid:9/0/0/32/0/25",
-   2.007038658421805
+   "Timid:0/0/2/32/0/32",
+   2.6813992597029803
   ],
   [
-   "Timid:12/0/0/29/0/25",
-   1.5990276674780937
-  ],
-  [
-   "Timid:4/0/0/32/0/30",
-   1.4221262305363012
+   "Timid:11/0/0/24/0/31",
+   2.317640713246495
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Sceptile-Mega",
-   11.900877979848428
+   13.878794114480586
   ],
   [
-   "Garchomp",
-   9.295732678444999
-  ],
-  [
-   "Basculegion",
-   7.719068736912889
-  ],
-  [
-   "Aerodactyl",
-   5.154970571354987
-  ],
-  [
-   "Floette-Mega",
-   3.6808022791645327
-  ],
-  [
-   "Whimsicott",
-   3.3733266412088785
+   "Indeedee-F",
+   10.042199803020644
   ],
   [
    "Sneasler",
-   3.1871230343032533
+   9.696115338364809
   ],
   [
-   "Sinistcha",
-   3.152246592111159
+   "Excadrill",
+   8.922185823758989
+  ],
+  [
+   "Tyranitar-Mega",
+   8.592762410103038
+  ],
+  [
+   "Milotic",
+   2.4918483239542373
+  ],
+  [
+   "Gholdengo",
+   2.0999950360483544
+  ],
+  [
+   "Hippowdon",
+   1.769470837901959
+  ],
+  [
+   "Salamence-Mega",
+   1.6670241850509846
   ],
   [
    "Metagross-Mega",
-   2.6915437873306387
-  ],
-  [
-   "Kingambit",
-   2.6646274774459
+   1.4033821505037423
   ]
  ],
  "counters": [
   {
-   "name": "Sinistcha",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Maushold",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Pelipper",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Archaludon",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
    "name": "Incineroar",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Basculegion",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Gholdengo",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

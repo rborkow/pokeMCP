@@ -2,205 +2,187 @@
  "id": "aerodactyl",
  "name": "Aerodactyl",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0396064,
-   "rank": 34,
-   "raw": 144590
+   "month": "2026-09",
+   "usage": 0.0133625,
+   "rank": 66,
+   "raw": 73538
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.007640200000000001,
+   "rank": 75,
+   "raw": 56493
   }
  ],
  "abilities": [
   [
    "Unnerve",
-   89.43476282170329
+   93.15191705304717
   ],
   [
    "Rock Head",
-   7.421294868750071
+   5.728683561882251
   ],
   [
    "Pressure",
-   3.143942309546646
+   1.119399385070571
   ]
  ],
  "items": [
   [
    "Focus Sash",
-   92.30993373694616
-  ],
-  [
-   "Life Orb",
-   1.877707668266005
+   90.75020062254704
   ],
   [
    "Wide Lens",
-   1.2272069648442805
+   2.0264017146120334
   ],
   [
    "Hard Stone",
-   0.6618382313407306
+   1.6421193207741276
   ],
   [
-   "Mental Herb",
-   0.6565951700830605
+   "Life Orb",
+   1.2330400915601576
+  ],
+  [
+   "Charti Berry",
+   0.6098909555780405
+  ],
+  [
+   "White Herb",
+   0.606225163154905
+  ],
+  [
+   "Lum Berry",
+   0.6001616125656201
   ],
   [
    "Sitrus Berry",
-   0.45054140585064273
-  ],
-  [
-   "King's Rock",
-   0.3529185729904325
-  ],
-  [
-   "Expert Belt",
-   0.32901046122551186
+   0.5056623660957181
   ]
  ],
  "moves": [
   [
    "Rock Slide",
-   24.69411899020541
+   24.903645019756738
   ],
   [
    "Tailwind",
-   24.24249299505319
+   23.93174887903741
   ],
   [
    "Dual Wingbeat",
-   20.029996198995086
+   18.358170675469935
   ],
   [
    "Protect",
-   13.888233860562146
+   14.08350458704428
   ],
   [
    "Wide Guard",
-   12.133918922488322
-  ],
-  [
-   "Sunny Day",
-   1.3644906342439738
+   13.995606038201885
   ],
   [
    "Taunt",
-   1.305135212268287
+   1.6487915810890992
+  ],
+  [
+   "Sunny Day",
+   0.8853734654542965
+  ],
+  [
+   "Whirlwind",
+   0.37957579309643197
   ],
   [
    "Ice Fang",
-   0.6218571777389034
+   0.361375657851484
   ],
   [
-   "Rain Dance",
-   0.30548795052278194
-  ],
-  [
-   "Stealth Rock",
-   0.16177505938241268
+   "Psychic Fangs",
+   0.23802943581197636
   ]
  ],
  "spreads": [
   [
    "Jolly:2/32/0/0/0/32",
-   75.97361469735043
-  ],
-  [
-   "Jolly:0/32/2/0/0/32",
-   4.3992894089763785
+   82.38334503393138
   ],
   [
    "Jolly:32/2/0/0/0/32",
-   2.538219506522734
+   2.4731270394974487
+  ],
+  [
+   "Jolly:0/32/2/0/0/32",
+   2.2488772997944695
+  ],
+  [
+   "Jolly:12/12/9/0/1/32",
+   1.8132787729176911
   ],
   [
    "Adamant:2/32/0/0/0/32",
-   2.0461080819668997
-  ],
-  [
-   "Jolly:0/32/0/0/2/32",
-   1.9313124308765712
+   1.7534777521827118
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Garchomp",
-   9.674188709306893
-  ],
-  [
-   "Incineroar",
-   5.966973312936859
-  ],
-  [
-   "Basculegion",
-   5.800326624527032
-  ],
-  [
-   "Floette-Mega",
-   4.555206690705478
+   "Charizard-Mega-Y",
+   7.63393225690895
   ],
   [
    "Sylveon",
-   4.221331361787262
-  ],
-  [
-   "Metagross-Mega",
-   4.181224524359998
-  ],
-  [
-   "Charizard-Mega-Y",
-   4.149995492581288
+   5.85192309124388
   ],
   [
    "Kingambit",
-   3.9889413261816706
+   5.740733122976985
+  ],
+  [
+   "Incineroar",
+   5.707057009070231
+  ],
+  [
+   "Garchomp",
+   5.49867729103479
   ],
   [
    "Sneasler",
-   3.888251105037176
+   5.4378186899587595
   ],
   [
-   "Sinistcha",
-   3.757977142619932
+   "Farigiraf",
+   4.894816574939866
+  ],
+  [
+   "Rillaboom",
+   4.727421524121714
+  ],
+  [
+   "Floette-Mega",
+   4.130396452960517
+  ],
+  [
+   "Indeedee-F",
+   2.911229237504836
   ]
  ],
  "counters": [
   {
-   "name": "Whimsicott",
+   "name": "Archaludon",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Kingambit",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Rotom-Wash",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sneasler",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Raichu-Mega-Y",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Pelipper",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -212,7 +194,31 @@
    "switchPct": 0
   },
   {
-   "name": "Grimmsnarl",
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Indeedee-F",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -225,32 +231,32 @@
    "moves": [
     "Rock Slide",
     "Dual Wingbeat",
-    "Ice Fang",
-    "Tailwind"
+    "Tailwind",
+    "Protect"
    ],
-   "count": 17,
+   "count": 7,
    "bestPlacing": 1,
-   "bestPlayer": "Louie John Valencia",
-   "eventName": "Khun Champions Cup #2",
-   "eventSlug": "2026-07-05-khun-champions-cup-2",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3ceab783fd320299bcfbff",
+   "bestPlayer": "Robin_VGC",
+   "eventName": "EXTRA LIFE - CHILDRENS HOSPITAL CHARITY TOURNAMENT",
+   "eventSlug": "2026-11-07-extra-life-childrens-hospital-charity-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aeabf35e94eae0f94746e72",
    "nature": "Jolly"
   },
   {
    "item": "Aerodactylite",
    "ability": "Unnerve",
    "moves": [
-    "Rock Slide",
-    "Dual Wingbeat",
     "Tailwind",
-    "Protect"
+    "Dual Wingbeat",
+    "Rock Slide",
+    "Wide Guard"
    ],
-   "count": 8,
-   "bestPlacing": 3,
-   "bestPlayer": "Charmoffense",
-   "eventName": "Regulation M-B: Open League #1",
-   "eventSlug": "2026-07-04-regulation-m-b-open-league-1",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a4101e5c87cd9ff0a311dd6",
+   "count": 2,
+   "bestPlacing": 1,
+   "bestPlayer": "Abnaa",
+   "eventName": "VGC Indigo League #6 (Prize: Eternal Floette)",
+   "eventSlug": "2026-11-06-vgc-indigo-league-6-prize-eternal-floette",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ac9e84b115c12b73a5a05a9",
    "nature": "Jolly"
   },
   {
@@ -259,15 +265,15 @@
    "moves": [
     "Rock Slide",
     "Dual Wingbeat",
-    "Protect",
-    "Tailwind"
+    "Tailwind",
+    "Wide Guard"
    ],
-   "count": 4,
+   "count": 2,
    "bestPlacing": 1,
-   "bestPlayer": "DonVGC",
-   "eventName": "INGAGE FRONTIER SERIES #1.2 - $80 PRIZE (Reg M-B)",
-   "eventSlug": "2026-06-24-ingage-frontier-series-1-2-80-prize-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a38f19b83fd320299bcdb33",
+   "bestPlayer": "Navarri",
+   "eventName": "Wolfey Patreon Tournament - Spooky Cup!",
+   "eventSlug": "2026-10-25-wolfey-patreon-tournament-spooky-cup",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6acf6032115c12b73a5a39fe",
    "nature": "Jolly"
   }
  ]

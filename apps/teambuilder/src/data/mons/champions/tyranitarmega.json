@@ -2,15 +2,21 @@
  "id": "tyranitarmega",
  "name": "Tyranitar-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0315671,
-   "rank": 39,
-   "raw": 90231
+   "month": "2026-09",
+   "usage": 0.0645983,
+   "rank": 27,
+   "raw": 224392
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0532044,
+   "rank": 37,
+   "raw": 249848
   }
  ],
  "abilities": [
@@ -28,149 +34,149 @@
  "moves": [
   [
    "Rock Slide",
-   24.653337375851088
+   24.837057035488478
   ],
   [
    "Protect",
-   23.960637460081795
+   24.68550999525526
   ],
   [
    "Knock Off",
-   22.465372471142746
-  ],
-  [
-   "Dragon Dance",
-   10.234533870864526
+   24.439452868393126
   ],
   [
    "Low Kick",
-   8.195017562861931
+   14.638017929813122
+  ],
+  [
+   "Dragon Dance",
+   6.983472229274638
   ],
   [
    "Ice Punch",
-   3.4702914977712114
-  ],
-  [
-   "Crunch",
-   2.009646018160872
+   1.4242650811179436
   ],
   [
    "High Horsepower",
-   1.6408729769958983
+   0.980918921608806
+  ],
+  [
+   "Crunch",
+   0.3937064837066199
+  ],
+  [
+   "Fire Punch",
+   0.35565890083584645
   ],
   [
    "Brick Break",
-   0.4689080579667061
-  ],
-  [
-   "Earthquake",
-   0.4330708839568271
+   0.309124392085272
   ]
  ],
  "spreads": [
   [
-   "Adamant:32/32/0/0/2/0",
-   13.933056331057902
+   "Jolly:2/32/0/0/0/32",
+   12.717192552422757
   ],
   [
-   "Jolly:2/32/0/0/0/32",
-   12.547591466744432
+   "Jolly:17/17/0/0/0/32",
+   12.207567821206352
+  ],
+  [
+   "Jolly:18/16/0/0/0/32",
+   7.362947351996888
   ],
   [
    "Adamant:2/32/0/0/0/32",
-   8.20090430989557
+   4.311659022210819
   ],
   [
-   "Brave:32/32/0/0/2/0",
-   2.531833458372613
-  ],
-  [
-   "Adamant:32/32/0/0/0/2",
-   2.166021182215587
+   "Adamant:32/32/0/0/2/0",
+   3.7244862875090066
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Sinistcha",
-   10.470847922467657
-  ],
-  [
    "Excadrill",
-   7.622273318412352
+   15.334556049327528
   ],
   [
-   "Incineroar",
-   4.591249855175692
-  ],
-  [
-   "Garchomp",
-   4.016128717700158
-  ],
-  [
-   "Corviknight",
-   3.7350478532130924
-  ],
-  [
-   "Rotom-Wash",
-   3.483701313312574
-  ],
-  [
-   "Houndstone",
-   3.4386945468975383
-  ],
-  [
-   "Staraptor-Mega",
-   3.230899740942527
+   "Salamence-Mega",
+   8.01735409775295
   ],
   [
    "Sneasler",
-   3.2046850457978673
+   7.1409053980578205
   ],
   [
-   "Sylveon",
-   2.9251866623193883
+   "Gholdengo",
+   6.759197972715217
+  ],
+  [
+   "Milotic",
+   6.310223919928551
+  ],
+  [
+   "Rillaboom",
+   5.26572951182239
+  ],
+  [
+   "Indeedee",
+   4.577972012780837
+  ],
+  [
+   "Corviknight",
+   4.4833639359565245
+  ],
+  [
+   "Indeedee-F",
+   4.125488647908466
+  ],
+  [
+   "Sinistcha",
+   3.8796043733503307
   ]
  ],
  "counters": [
   {
-   "name": "Ninetales-Alola",
+   "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Volcarona",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Metagross-Mega",
+   "name": "Froslass-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Archaludon",
+   "name": "Dragapult",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Torkoal",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
+   "name": "Garchomp-Mega-Z",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sableye",
+   "name": "Milotic",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

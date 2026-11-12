@@ -1,0 +1,276 @@
+{
+ "id": "rillaboom",
+ "name": "Rillaboom",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.4595769,
+   "rank": 1,
+   "raw": 1410840
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.35522489999999995,
+   "rank": 2,
+   "raw": 1173979
+  }
+ ],
+ "abilities": [
+  [
+   "Grassy Surge",
+   99.86905483496304
+  ],
+  [
+   "Overgrow",
+   0.13094516503695527
+  ]
+ ],
+ "items": [
+  [
+   "Miracle Seed",
+   74.5168215112889
+  ],
+  [
+   "Life Orb",
+   9.528686209986452
+  ],
+  [
+   "Eject Button",
+   5.182219726377802
+  ],
+  [
+   "Sitrus Berry",
+   3.9086672077760785
+  ],
+  [
+   "Occa Berry",
+   2.9290541560535637
+  ],
+  [
+   "Grassy Seed",
+   1.0206728215033571
+  ],
+  [
+   "Leftovers",
+   0.7499726065524158
+  ],
+  [
+   "Expert Belt",
+   0.5295447079705202
+  ]
+ ],
+ "moves": [
+  [
+   "Fake Out",
+   24.772896555487655
+  ],
+  [
+   "Grassy Glide",
+   24.761136610669
+  ],
+  [
+   "Wood Hammer",
+   21.863719931262494
+  ],
+  [
+   "High Horsepower",
+   12.11635577819625
+  ],
+  [
+   "U-turn",
+   11.561847712538023
+  ],
+  [
+   "Protect",
+   3.103626295698409
+  ],
+  [
+   "Superpower",
+   0.4432638050615757
+  ],
+  [
+   "Drum Beating",
+   0.2919046017596306
+  ],
+  [
+   "Knock Off",
+   0.22385202277711178
+  ],
+  [
+   "Low Kick",
+   0.16140538736183435
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:32/32/0/0/0/2",
+   5.648026716008937
+  ],
+  [
+   "Adamant:32/32/0/0/2/0",
+   3.4988105407334222
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   3.423954552954041
+  ],
+  [
+   "Adamant:26/30/1/0/4/5",
+   2.1839987406792085
+  ],
+  [
+   "Adamant:32/15/0/0/19/0",
+   1.9590142182597703
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Incineroar",
+   10.102076814296812
+  ],
+  [
+   "Raichu-Mega-Y",
+   5.875577798991256
+  ],
+  [
+   "Sneasler",
+   5.851747352643042
+  ],
+  [
+   "Gholdengo",
+   5.127085627473166
+  ],
+  [
+   "Kingambit",
+   4.915243822108049
+  ],
+  [
+   "Volcarona",
+   4.489577779785208
+  ],
+  [
+   "Basculegion",
+   4.34676403725568
+  ],
+  [
+   "Floette-Mega",
+   4.26373755584141
+  ],
+  [
+   "Salamence-Mega",
+   3.7314249166252282
+  ],
+  [
+   "Garchomp-Mega-Z",
+   3.5563792311382696
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Excadrill",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Milotic",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Salamence-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Indeedee",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Miracle Seed",
+   "ability": "Grassy Surge",
+   "moves": [
+    "Fake Out",
+    "Wood Hammer",
+    "Grassy Glide",
+    "High Horsepower"
+   ],
+   "count": 109,
+   "bestPlacing": 1,
+   "bestPlayer": "Altkyle",
+   "eventName": "THE DOJO CHAMPIONS TOURNAMENT",
+   "eventSlug": "2026-11-10-the-dojo-champions-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aee2dd4e99f3235a75e25d1",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Miracle Seed",
+   "ability": "Grassy Surge",
+   "moves": [
+    "Grassy Glide",
+    "Wood Hammer",
+    "Fake Out",
+    "U-turn"
+   ],
+   "count": 62,
+   "bestPlacing": 1,
+   "bestPlayer": "MonkeyT",
+   "eventName": "Sketch Academy Sunday Regulation M-C Tournament",
+   "eventSlug": "2026-10-19-sketch-academy-sunday-regulation-m-c-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aba1756880ed327106de55f",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Eject Button",
+   "ability": "Grassy Surge",
+   "moves": [
+    "Fake Out",
+    "U-turn",
+    "Grassy Glide",
+    "Protect"
+   ],
+   "count": 12,
+   "bestPlacing": 1,
+   "bestPlayer": "JoMcCloud23",
+   "eventName": "GLORY OF CHAMPIONS #2 - REGULATION M-C",
+   "eventSlug": "2026-10-28-glory-of-champions-2-regulation-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad923ae115c12b73a5a941c",
+   "nature": "Careful"
+  }
+ ]
+}

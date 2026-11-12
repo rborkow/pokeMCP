@@ -2,209 +2,179 @@
  "id": "vivillon",
  "name": "Vivillon",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0184898,
-   "rank": 62,
-   "raw": 35448
+   "month": "2026-09",
+   "usage": 0.012625500000000001,
+   "rank": 67,
+   "raw": 44502
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0178095,
+   "rank": 56,
+   "raw": 61394
   }
  ],
  "abilities": [
   [
    "Compound Eyes",
-   93.32352251304464
-  ],
-  [
-   "Shield Dust",
-   3.380212463747438
+   97.7823535716666
   ],
   [
    "Friend Guard",
-   3.296265023207915
+   1.2244336438935495
+  ],
+  [
+   "Shield Dust",
+   0.9932127844398403
   ]
  ],
  "items": [
   [
    "Focus Sash",
-   64.28894360709539
+   95.18825835275605
   ],
   [
    "Choice Scarf",
-   33.83158509230337
-  ],
-  [
-   "Occa Berry",
-   0.7147231736825967
-  ],
-  [
-   "Mental Herb",
-   0.3141192484756962
+   4.410972021841299
   ],
   [
    "Wide Lens",
-   0.23014766802443515
-  ],
-  [
-   "Sitrus Berry",
-   0.1809510626323488
+   0.08459358709061673
   ],
   [
    "Charti Berry",
-   0.1755393800112105
+   0.07062443544435287
   ],
   [
-   "Leftovers",
-   0.1662830460573793
+   "Life Orb",
+   0.06923893609886936
+  ],
+  [
+   "Mental Herb",
+   0.0657904704201995
+  ],
+  [
+   "Bright Powder",
+   0.029764150066421805
+  ],
+  [
+   "Sitrus Berry",
+   0.029161141144254523
   ]
  ],
  "moves": [
   [
    "Sleep Powder",
-   24.228464008907224
-  ],
-  [
-   "Hurricane",
-   20.91892149526591
+   24.76706656178993
   ],
   [
    "Rage Powder",
-   20.482500255764936
+   23.057024460025882
   ],
   [
    "Protect",
-   11.399079870456196
+   22.978782636815478
+  ],
+  [
+   "Hurricane",
+   21.826126313144485
   ],
   [
    "Pollen Puff",
-   9.428408555005474
+   3.240334864079444
   ],
   [
    "Tailwind",
-   8.060630459669984
+   2.5573455831044316
+  ],
+  [
+   "Struggle Bug",
+   0.4616807035184042
   ],
   [
    "Rain Dance",
-   2.138471087862962
+   0.37628674507220083
   ],
   [
    "U-turn",
-   0.9098134660741177
+   0.20147481223528252
   ],
   [
    "Sunny Day",
-   0.5383337916793015
-  ],
-  [
-   "Bug Buzz",
-   0.37438866699769685
+   0.106942677105828
   ]
  ],
  "spreads": [
   [
    "Timid:2/0/0/32/0/32",
-   44.166151736603574
+   55.933827093842346
   ],
   [
    "Timid:0/0/2/32/0/32",
-   11.527789250090429
+   15.316896656953533
   ],
   [
-   "Timid:0/0/24/5/5/32",
-   9.561493795507413
+   "Timid:0/0/1/32/1/32",
+   7.6924352871130806
   ],
   [
    "Timid:32/0/0/2/0/32",
-   9.15646059126988
+   4.252825067436829
   ],
   [
-   "Timid:0/0/0/32/2/32",
-   3.1189578449621242
+   "Timid:0/0/10/24/0/32",
+   2.5038043319118986
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Farigiraf",
-   9.386433635987348
-  ],
-  [
    "Incineroar",
-   7.775112652664492
+   15.792428734577582
   ],
   [
-   "Torkoal",
-   6.941690961377223
+   "Rillaboom",
+   13.711462550159201
   ],
   [
-   "Basculegion",
-   5.162485395949043
+   "Gengar-Mega",
+   13.23248724848538
   ],
   [
-   "Blastoise-Mega",
-   4.737207633218152
+   "Politoed",
+   5.919668134696156
   ],
   [
-   "Mawile-Mega",
-   3.9569843712815556
+   "Archaludon",
+   4.8848499595635415
   ],
   [
-   "Floette-Mega",
-   3.6829525034653123
+   "Kommo-o",
+   4.515419953086832
   ],
   [
-   "Sinistcha",
-   3.656516530167459
+   "Primarina",
+   4.478561216068426
   ],
   [
-   "Kingambit",
-   3.593983483488801
+   "Garchomp-Mega-Z",
+   4.082384974968566
+  ],
+  [
+   "Delphox-Mega",
+   2.4100414057036526
   ],
   [
    "Garchomp",
-   2.871583519079228
+   1.8415389720620094
   ]
  ],
  "counters": [
-  {
-   "name": "Garchomp",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Whimsicott",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Incineroar",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Pelipper",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Grimmsnarl",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sinistcha",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
   {
    "name": "Kingambit",
    "score": 0,
@@ -212,7 +182,43 @@
    "switchPct": 0
   },
   {
-   "name": "Archaludon",
+   "name": "Raichu-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Venusaur",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -228,12 +234,29 @@
     "Rage Powder",
     "Protect"
    ],
+   "count": 11,
+   "bestPlacing": 1,
+   "bestPlayer": "Eduardo Cunha",
+   "eventName": "Battle Cruise VGC",
+   "eventSlug": "2026-10-26-battle-cruise-vgc",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad8ee598a8383117e3f0bb4",
+   "nature": "Timid"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Compound Eyes",
+   "moves": [
+    "Pollen Puff",
+    "Sleep Powder",
+    "Rage Powder",
+    "Protect"
+   ],
    "count": 3,
-   "bestPlacing": 5,
-   "bestPlayer": "Gio Dela Cuesta",
-   "eventName": "Khun Champions Cup #2",
-   "eventSlug": "2026-07-05-khun-champions-cup-2",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3ceab783fd320299bcfbff",
+   "bestPlacing": 4,
+   "bestPlayer": "ali_en",
+   "eventName": "Alpensee Tour (Reg M-C) #83",
+   "eventSlug": "2026-11-11-alpensee-tour-reg-m-c-83",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad8f0ae8a8383117e3f0c23",
    "nature": "Timid"
   },
   {
@@ -241,16 +264,16 @@
    "ability": "Compound Eyes",
    "moves": [
     "Hurricane",
-    "Rage Powder",
     "Sleep Powder",
+    "Rage Powder",
     "Pollen Puff"
    ],
-   "count": 1,
-   "bestPlacing": 6,
-   "bestPlayer": "MarvVGC",
-   "eventName": "Regulation M-B: Open League #1",
-   "eventSlug": "2026-07-04-regulation-m-b-open-league-1",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a4101e5c87cd9ff0a311dd6",
+   "count": 2,
+   "bestPlacing": 7,
+   "bestPlayer": "Person7",
+   "eventName": "GLORY OF CHAMPIONS #2 - REGULATION M-C",
+   "eventSlug": "2026-10-28-glory-of-champions-2-regulation-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad923ae115c12b73a5a941c",
    "nature": "Timid"
   }
  ]

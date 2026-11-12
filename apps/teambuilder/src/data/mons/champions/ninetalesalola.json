@@ -2,195 +2,183 @@
  "id": "ninetalesalola",
  "name": "Ninetales-Alola",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.056930100000000004,
-   "rank": 25,
-   "raw": 141939
+   "month": "2026-09",
+   "usage": 0.031299600000000004,
+   "rank": 43,
+   "raw": 168774
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0266566,
+   "rank": 47,
+   "raw": 124578
   }
  ],
  "abilities": [
   [
    "Snow Warning",
-   98.86782944530802
+   99.54578169114579
   ],
   [
    "Snow Cloak",
-   1.1321705546919851
+   0.45421830885420506
   ]
  ],
  "items": [
   [
-   "Light Clay",
-   30.664491961631118
-  ],
-  [
    "Never-Melt Ice",
-   27.246394982016536
-  ],
-  [
-   "Focus Sash",
-   23.721665612381457
+   30.435103034325838
   ],
   [
    "Choice Scarf",
-   11.811731966795543
+   25.072968064854052
+  ],
+  [
+   "Light Clay",
+   21.207223190629897
+  ],
+  [
+   "Focus Sash",
+   20.539847254827055
   ],
   [
    "Life Orb",
-   3.0418259642925958
+   0.9938941873674414
   ],
   [
-   "Occa Berry",
-   1.0748990881928786
+   "Wise Glasses",
+   0.3173032338807585
   ],
   [
    "Icy Rock",
-   0.5092681306963722
+   0.27981679940548077
   ],
   [
-   "Mental Herb",
-   0.39325998221868264
+   "Babiri Berry",
+   0.17658006737628515
   ]
  ],
  "moves": [
   [
    "Blizzard",
-   23.662063529225335
-  ],
-  [
-   "Protect",
-   18.593398919977705
+   23.42866163789561
   ],
   [
    "Freeze-Dry",
-   16.733389916721464
+   18.636641767046612
+  ],
+  [
+   "Protect",
+   13.884969811203113
   ],
   [
    "Aurora Veil",
-   13.82626659173284
+   11.97021001154222
   ],
   [
    "Encore",
-   8.488447112803492
+   10.202781175197357
   ],
   [
    "Moonblast",
-   8.426014019627363
+   7.055814085481607
   ],
   [
    "Icy Wind",
-   4.253339658559777
+   6.518648336093764
+  ],
+  [
+   "Rain Dance",
+   2.4010900435579923
   ],
   [
    "Disable",
-   1.7578827654177829
+   1.2739358862101176
   ],
   [
-   "Dazzling Gleam",
-   1.3854972124642642
-  ],
-  [
-   "Psyshock",
-   0.6260167735207529
+   "Charm",
+   0.6502577256577255
   ]
  ],
  "spreads": [
   [
    "Timid:2/0/0/32/0/32",
-   24.211640274509527
+   26.24989699794366
   ],
   [
    "Timid:1/0/0/32/1/32",
-   17.621431485138547
+   11.238664332411705
   ],
   [
    "Timid:1/0/1/32/0/32",
-   5.875438684428459
+   9.04519473695888
   ],
   [
-   "Timid:0/0/2/32/0/32",
-   2.2544194495726284
+   "Timid:9/0/11/19/0/27",
+   9.003906977054237
   ],
   [
-   "Timid:31/0/0/3/0/32",
-   1.9850701251158218
+   "Modest:2/0/0/32/0/32",
+   3.904656887288564
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Incineroar",
-   7.187178683711344
-  ],
-  [
-   "Garchomp",
-   6.941083950287262
-  ],
-  [
    "Kingambit",
-   5.470895496264106
+   7.844537657549992
+  ],
+  [
+   "Rillaboom",
+   6.716723557672707
+  ],
+  [
+   "Incineroar",
+   6.65239674326161
   ],
   [
    "Basculegion",
-   5.44406455066694
-  ],
-  [
-   "Raichu-Mega-Y",
-   5.071615953201909
-  ],
-  [
-   "Sinistcha",
-   4.891866344118895
+   6.625200817092902
   ],
   [
    "Sneasler",
-   3.55979854648852
+   6.204095544583857
   ],
   [
-   "Whimsicott",
-   3.500556354517149
+   "Farigiraf",
+   3.6375971836998486
   ],
   [
-   "Metagross-Mega",
-   3.2237760338403683
+   "Raichu-Mega-Y",
+   3.5072112660113044
   ],
   [
-   "Staraptor-Mega",
-   2.4909540890555357
+   "Ceruledge",
+   3.236941827429448
+  ],
+  [
+   "Gengar-Mega",
+   2.9858900897297604
+  ],
+  [
+   "Lopunny-Mega",
+   2.6671651692614864
   ]
  ],
  "counters": [
   {
+   "name": "Golisopod-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
    "name": "Garchomp",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Tyranitar-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Basculegion",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sneasler",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Pelipper",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -202,13 +190,31 @@
    "switchPct": 0
   },
   {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
    "name": "Farigiraf",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Volcarona",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

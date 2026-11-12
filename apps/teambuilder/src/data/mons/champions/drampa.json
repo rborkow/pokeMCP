@@ -1,0 +1,280 @@
+{
+ "id": "drampa",
+ "name": "Drampa",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.0016642999999999999,
+   "rank": 160,
+   "raw": 8445
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0061463,
+   "rank": 87,
+   "raw": 24825
+  }
+ ],
+ "abilities": [
+  [
+   "Cloud Nine",
+   98.08253164203919
+  ],
+  [
+   "Berserk",
+   1.904514992236908
+  ],
+  [
+   "Sap Sipper",
+   0.012953365723903258
+  ]
+ ],
+ "items": [
+  [
+   "Life Orb",
+   37.19365955305306
+  ],
+  [
+   "Sitrus Berry",
+   24.840206209380927
+  ],
+  [
+   "Expert Belt",
+   14.962993679714032
+  ],
+  [
+   "Leftovers",
+   7.138247093049534
+  ],
+  [
+   "Haban Berry",
+   5.7363786495704945
+  ],
+  [
+   "Psychic Seed",
+   2.275995890982613
+  ],
+  [
+   "Bright Powder",
+   1.816714591688431
+  ],
+  [
+   "Focus Sash",
+   1.5180035916410757
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   18.51056439427671
+  ],
+  [
+   "Flamethrower",
+   17.10652069216716
+  ],
+  [
+   "Earth Power",
+   13.18146741574526
+  ],
+  [
+   "Hyper Voice",
+   9.686527645689631
+  ],
+  [
+   "Thunderbolt",
+   9.313479520214528
+  ],
+  [
+   "Dragon Pulse",
+   8.321234729610067
+  ],
+  [
+   "Draco Meteor",
+   7.580947870111316
+  ],
+  [
+   "Heat Wave",
+   5.35812805892752
+  ],
+  [
+   "Energy Ball",
+   3.8996937209554208
+  ],
+  [
+   "Snarl",
+   2.8013630766314015
+  ]
+ ],
+ "spreads": [
+  [
+   "Quiet:32/0/2/32/0/0",
+   34.708428400402994
+  ],
+  [
+   "Modest:32/0/0/32/2/0",
+   10.051051525841375
+  ],
+  [
+   "Calm:32/0/0/11/17/6",
+   9.042794837299754
+  ],
+  [
+   "Modest:24/0/17/25/0/0",
+   5.946208251094438
+  ],
+  [
+   "Quiet:32/0/1/32/1/0",
+   5.54436442725291
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Kingambit",
+   8.29345593708265
+  ],
+  [
+   "Indeedee-F",
+   8.10747107247685
+  ],
+  [
+   "Armarouge",
+   5.512226238738767
+  ],
+  [
+   "Metagross-Mega",
+   3.9731629524699414
+  ],
+  [
+   "Glimmora",
+   3.887900573315897
+  ],
+  [
+   "Sneasler",
+   3.433069204198637
+  ],
+  [
+   "Whimsicott",
+   3.355072663296823
+  ],
+  [
+   "Kommo-o",
+   3.3388546442957487
+  ],
+  [
+   "Absol-Mega-Z",
+   3.2616917122914333
+  ],
+  [
+   "Rillaboom",
+   3.2177038364116304
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Politoed",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Life Orb",
+   "ability": "Cloud Nine",
+   "moves": [
+    "Draco Meteor",
+    "Thunderbolt",
+    "Flamethrower",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 2,
+   "bestPlayer": "kaori_uy",
+   "eventName": "🍋Sitrus-Series🍋|Champions-MC|#82",
+   "eventSlug": "2026-11-11-sitrus-series-champions-mc-82",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae69d2eae67092a40740695",
+   "nature": "Modest"
+  },
+  {
+   "item": "Drampanite",
+   "ability": "Cloud Nine",
+   "moves": [
+    "Hyper Voice",
+    "Earth Power",
+    "Ice Beam",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 4,
+   "bestPlayer": "TheParasectKing",
+   "eventName": "Sketch Academy Sunday Regulation M-C Tournament",
+   "eventSlug": "2026-10-12-sketch-academy-sunday-regulation-m-c-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aba172d783097f8dcb725fc",
+   "nature": "Modest"
+  },
+  {
+   "item": "Haban Berry",
+   "ability": "Cloud Nine",
+   "moves": [
+    "Protect",
+    "Flamethrower",
+    "Dragon Pulse",
+    "Energy Ball"
+   ],
+   "count": 1,
+   "bestPlacing": 5,
+   "bestPlayer": "Mentalsyndrome",
+   "eventName": "VGC UmbreNews 27.10.2026 #37 - Champion",
+   "eventSlug": "2026-10-27-vgc-umbrenews-27-10-2026-37-champion",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ada09eb115c12b73a5a9904",
+   "nature": "Modest"
+  }
+ ]
+}

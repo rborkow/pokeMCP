@@ -2,181 +2,175 @@
  "id": "primarina",
  "name": "Primarina",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0305744,
-   "rank": 40,
-   "raw": 87596
+   "month": "2026-09",
+   "usage": 0.0389295,
+   "rank": 39,
+   "raw": 142440
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0578911,
+   "rank": 31,
+   "raw": 185850
   }
  ],
  "abilities": [
   [
    "Liquid Voice",
-   98.82406249431256
+   98.72427352243702
   ],
   [
    "Torrent",
-   1.1759375056874442
+   1.2757264775629953
   ]
  ],
  "items": [
   [
    "Leftovers",
-   35.65378766627995
+   50.328538692753355
   ],
   [
    "Life Orb",
-   32.09029847479367
-  ],
-  [
-   "Mystic Water",
-   14.800501812722109
+   17.93344688841688
   ],
   [
    "Sitrus Berry",
-   9.575590935888565
+   15.773527374069237
+  ],
+  [
+   "Grassy Seed",
+   6.826238658621407
+  ],
+  [
+   "Mystic Water",
+   5.354513527161742
   ],
   [
    "Fairy Feather",
-   1.9841585681192153
+   1.0119960884057233
+  ],
+  [
+   "Rindo Berry",
+   0.5911098823283675
   ],
   [
    "Expert Belt",
-   1.3455248029275222
-  ],
-  [
-   "Kebia Berry",
-   1.0746817837039528
-  ],
-  [
-   "Choice Scarf",
-   0.9479307531740578
+   0.48718344414231085
   ]
  ],
  "moves": [
   [
-   "Hyper Voice",
-   24.569262646321743
+   "Protect",
+   24.809998597939405
   ],
   [
-   "Protect",
-   23.674998091461138
+   "Hyper Voice",
+   24.615716227282096
   ],
   [
    "Moonblast",
-   22.636411961121446
+   24.233440637967703
   ],
   [
    "Calm Mind",
-   10.254429004143352
+   14.697100997230866
   ],
   [
-   "Energy Ball",
-   3.0572970860952955
+   "Perish Song",
+   3.2392494545992094
   ],
   [
    "Dazzling Gleam",
-   2.953045298336106
-  ],
-  [
-   "Ice Beam",
-   2.2615408424656898
-  ],
-  [
-   "Haze",
-   1.5633057482354524
+   2.0468968094962343
   ],
   [
    "Aqua Jet",
-   1.0033593390513413
+   1.9345961917668921
   ],
   [
-   "Icy Wind",
-   0.925062847830787
+   "Haze",
+   0.8806241033553492
+  ],
+  [
+   "Ice Beam",
+   0.606027543685349
+  ],
+  [
+   "Energy Ball",
+   0.4910285093327204
   ]
  ],
  "spreads": [
   [
-   "Modest:32/0/0/32/2/0",
-   14.073661008341146
-  ],
-  [
-   "Quiet:32/0/2/32/0/0",
-   10.025177947396092
+   "Modest:22/0/24/4/0/16",
+   5.833052123398836
   ],
   [
    "Modest:32/0/2/32/0/0",
-   5.112175584015448
+   5.099334316898101
   ],
   [
-   "Quiet:32/0/0/32/2/0",
-   4.441463140957165
+   "Modest:32/0/0/32/2/0",
+   2.8167720599535704
   ],
   [
-   "Modest:21/0/24/14/0/7",
-   4.110491153450217
+   "Quiet:32/0/2/32/0/0",
+   2.2873171762357956
+  ],
+  [
+   "Modest:29/0/0/32/0/5",
+   2.1833150911631005
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Sinistcha",
-   7.830072475300076
-  ],
-  [
-   "Farigiraf",
-   6.077298084288714
+   "Rillaboom",
+   14.28283656837244
   ],
   [
    "Incineroar",
-   5.721528373674464
+   7.743016610730104
   ],
   [
-   "Garchomp",
-   4.948505705090827
+   "Raichu-Mega-Y",
+   7.737659144041781
+  ],
+  [
+   "Gholdengo",
+   6.640475354202073
   ],
   [
    "Kingambit",
-   4.342190315011678
+   4.802841498358868
   ],
   [
-   "Sneasler",
-   3.627060450879037
-  ],
-  [
-   "Metagross-Mega",
-   3.178561748554827
+   "Arcanine-Hisui",
+   4.659988853468233
   ],
   [
    "Staraptor-Mega",
-   2.938186790249083
+   4.482534348602711
   ],
   [
-   "Grimmsnarl",
-   2.739796950555306
+   "Farigiraf",
+   3.8627267234982927
   ],
   [
-   "Whimsicott",
-   2.674893446465835
+   "Sneasler",
+   3.4917867485565126
+  ],
+  [
+   "Garchomp-Mega-Z",
+   3.1500961541318664
   ]
  ],
  "counters": [
-  {
-   "name": "Grimmsnarl",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Swampert-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
   {
    "name": "Sneasler",
    "score": 0,
@@ -190,25 +184,37 @@
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sableye",
+   "name": "Tyranitar-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
+   "name": "Garchomp-Mega-Z",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Archaludon",
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Excadrill",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Salamence-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -216,20 +222,54 @@
  ],
  "builds": [
   {
+   "item": "Leftovers",
+   "ability": "Liquid Voice",
+   "moves": [
+    "Moonblast",
+    "Hyper Voice",
+    "Calm Mind",
+    "Protect"
+   ],
+   "count": 26,
+   "bestPlacing": 1,
+   "bestPlayer": "Evan M",
+   "eventName": "Friday Fight Night 80! $50 Prize & Team Report",
+   "eventSlug": "2026-11-06-friday-fight-night-80-50-prize-team-report",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae575670d00101b48bf316a",
+   "nature": "Modest"
+  },
+  {
    "item": "Life Orb",
    "ability": "Liquid Voice",
    "moves": [
     "Hyper Voice",
-    "Dazzling Gleam",
-    "Protect",
-    "Blizzard"
+    "Moonblast",
+    "Aqua Jet",
+    "Protect"
    ],
-   "count": 1,
-   "bestPlacing": 5,
-   "bestPlayer": "Cloudzin",
-   "eventName": "The Wide League Saturday Night Rumble #87 REG M-B",
-   "eventSlug": "2026-06-28-the-wide-league-saturday-night-rumble-87-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3dbda083fd320299bd0416",
+   "count": 3,
+   "bestPlacing": 3,
+   "bestPlayer": "NMR | FelipeT",
+   "eventName": "Intimidators Champions Challenge #50 REG M-C",
+   "eventSlug": "2026-10-12-intimidators-champions-challenge-50-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6accfc7d115c12b73a5a2049",
+   "nature": "Quiet"
+  },
+  {
+   "item": "Life Orb",
+   "ability": "Liquid Voice",
+   "moves": [
+    "Protect",
+    "Moonblast",
+    "Hyper Voice",
+    "Dazzling Gleam"
+   ],
+   "count": 2,
+   "bestPlacing": 1,
+   "bestPlayer": "Papucaru",
+   "eventName": "Off Meta Fight Club #7 (NEW Rules)",
+   "eventSlug": "2026-10-15-off-meta-fight-club-7-new-rules",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aca6fc6115c12b73a5a0b4c",
    "nature": "Quiet"
   }
  ]

@@ -2,199 +2,181 @@
  "id": "dragapult",
  "name": "Dragapult",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.013720699999999999,
-   "rank": 73,
-   "raw": 52781
+   "month": "2026-09",
+   "usage": 0.0249873,
+   "rank": 50,
+   "raw": 102368
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0291308,
+   "rank": 46,
+   "raw": 100548
   }
  ],
  "abilities": [
   [
    "Clear Body",
-   64.78529594763765
-  ],
-  [
-   "Cursed Body",
-   18.517847930708335
+   65.82171308798907
   ],
   [
    "Infiltrator",
-   16.69685612165401
+   28.757102820655756
+  ],
+  [
+   "Cursed Body",
+   5.421184091355188
   ]
  ],
  "items": [
   [
-   "Focus Sash",
-   45.40911792891775
-  ],
-  [
    "Life Orb",
-   29.966699549453818
+   44.52939708671139
   ],
   [
-   "Dragon Fang",
-   4.459601687389083
+   "Focus Sash",
+   34.612577026050346
+  ],
+  [
+   "Wide Lens",
+   9.523383064833732
   ],
   [
    "Light Clay",
-   2.806405564670643
-  ],
-  [
-   "Spell Tag",
-   2.3045753511450684
-  ],
-  [
-   "Choice Scarf",
-   2.1401013651687757
-  ],
-  [
-   "Colbur Berry",
-   1.82268310661986
+   3.996101856097257
   ],
   [
    "White Herb",
-   1.4466761763120513
+   1.5634510093955132
+  ],
+  [
+   "Choice Scarf",
+   1.3277377254234926
+  ],
+  [
+   "Colbur Berry",
+   1.2640030372920579
+  ],
+  [
+   "Haban Berry",
+   0.8188719281491399
   ]
  ],
  "moves": [
   [
    "Protect",
-   13.680553251302893
+   17.610655478198716
   ],
   [
    "Will-O-Wisp",
-   12.252773878665717
+   16.78947510693154
   ],
   [
    "Draco Meteor",
-   11.433270644044775
-  ],
-  [
-   "Dragon Darts",
-   11.121895250432352
-  ],
-  [
-   "Phantom Force",
-   7.316344516676801
+   13.258006617837164
   ],
   [
    "Shadow Ball",
-   6.097042744132182
+   11.757592590445434
+  ],
+  [
+   "Dragon Darts",
+   8.542892987103503
+  ],
+  [
+   "Curse",
+   7.249271268967074
   ],
   [
    "Psychic Fangs",
-   5.854501361473375
-  ],
-  [
-   "Hex",
-   5.003823484208494
+   4.54764270937912
   ],
   [
    "Light Screen",
-   3.718852993250446
+   4.45895607487122
   ],
   [
-   "U-turn",
-   3.4779705942840424
+   "Phantom Force",
+   2.951485053859258
+  ],
+  [
+   "Beat Up",
+   2.2643345409565483
   ]
  ],
  "spreads": [
   [
+   "Adamant:2/32/0/0/0/32",
+   24.631545115777104
+  ],
+  [
    "Timid:2/0/0/32/0/32",
-   27.926738988689582
+   19.928123242955063
   ],
   [
    "Jolly:2/32/0/0/0/32",
-   23.103340268893348
-  ],
-  [
-   "Adamant:2/32/0/0/0/32",
-   6.312715323540311
-  ],
-  [
-   "Naive:2/0/0/32/0/32",
-   1.938475766608545
+   13.611732574969562
   ],
   [
    "Modest:2/0/0/32/0/32",
-   1.9354397807011592
+   10.776239869563593
+  ],
+  [
+   "Timid:0/0/1/32/1/32",
+   2.0468955156182314
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Kingambit",
-   6.7921098839813645
+   "Archaludon",
+   7.995330050920857
   ],
   [
-   "Whimsicott",
-   6.067883526829234
+   "Rillaboom",
+   7.769777772721111
   ],
   [
-   "Staraptor-Mega",
-   5.5176224966506515
+   "Politoed",
+   7.036316334441213
   ],
   [
-   "Sinistcha",
-   4.863087651286584
+   "Golisopod-Mega",
+   6.103449459569026
   ],
   [
-   "Incineroar",
-   3.978835125524052
+   "Annihilape",
+   5.634229019852512
   ],
   [
-   "Farigiraf",
-   3.350202718575969
+   "Indeedee-F",
+   4.62368328984285
+  ],
+  [
+   "Charizard-Mega-Y",
+   4.122405836126807
   ],
   [
    "Sneasler",
-   2.96429499341181
+   3.209328397161916
   ],
   [
-   "Raichu-Mega-Y",
-   2.6846465425261314
+   "Incineroar",
+   3.16237781099828
   ],
   [
-   "Archaludon",
-   2.6842400409568334
-  ],
-  [
-   "Sylveon",
-   2.38129047066213
+   "Whimsicott",
+   2.98921912166715
   ]
  ],
  "counters": [
   {
-   "name": "Sneasler",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sinistcha",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Floette-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Archaludon",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Pelipper",
+   "name": "Tyranitar-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -206,17 +188,93 @@
    "switchPct": 0
   },
   {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
    "name": "Farigiraf",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Incineroar",
+   "name": "Volcarona",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp-Mega-Z",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Indeedee-F",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   }
  ],
- "builds": []
+ "builds": [
+  {
+   "item": "Life Orb",
+   "ability": "Infiltrator",
+   "moves": [
+    "Will-O-Wisp",
+    "Draco Meteor",
+    "Shadow Ball",
+    "Protect"
+   ],
+   "count": 4,
+   "bestPlacing": 3,
+   "bestPlayer": "ronk",
+   "eventName": "Talon's FIGHT CLUB #105 POKEMON CHAMPIONS REG M-C",
+   "eventSlug": "2026-10-08-talon-s-fight-club-105-pokemon-champions-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aab46e038886b36383c21d5",
+   "nature": "Timid"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Clear Body",
+   "moves": [
+    "Dragon Darts",
+    "Phantom Force",
+    "U-turn",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 3,
+   "bestPlayer": "Absback910",
+   "eventName": "THE DOJO CHAMPIONS TOURNAMENT",
+   "eventSlug": "2026-11-10-the-dojo-champions-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aee2dd4e99f3235a75e25d1",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Life Orb",
+   "ability": "Clear Body",
+   "moves": [
+    "Dragon Darts",
+    "Will-O-Wisp",
+    "Phantom Force",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 3,
+   "bestPlayer": "Gilberto Goracci",
+   "eventName": "⚔️Torre Lotta Cup #3⚔️ 🏆50€ Amazon Gift Cards🏆",
+   "eventSlug": "2026-11-07-torre-lotta-cup-3-50-amazon-gift-cards",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aea24ef0c463890f304a725",
+   "nature": "Jolly"
+  }
+ ]
 }

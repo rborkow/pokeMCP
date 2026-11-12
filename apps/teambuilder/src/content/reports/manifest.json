@@ -1,6 +1,28 @@
 [
     {
         "slug": "champions",
+        "month": "2026-11",
+        "title": "Pokémon Champions — Regulation M-C Meta Report — November 2026",
+        "description": "Sneasler leads Pokémon Champions — Regulation M-C with 35.63% usage in October 2026. Full usage table, month-over-month risers and fallers, and data-grounded analysis.",
+        "datePublished": "2026-11-12",
+        "dateModified": "2026-11-12",
+        "dataThrough": "2026-10",
+        "formatId": "gen9championsvgc2026regmc",
+        "formatName": "Pokémon Champions — Regulation M-C",
+        "sources": [
+            {
+                "label": "Smogon usage stats — gen9championsvgc2026regmc, October 2026",
+                "url": "https://www.smogon.com/stats/2026-10/gen9championsvgc2026regmc-0.txt"
+            },
+            {
+                "label": "Smogon usage stats — gen9championsvgc2026regmc, September 2026",
+                "url": "https://www.smogon.com/stats/2026-09/gen9championsvgc2026regmc-0.txt"
+            }
+        ],
+        "generated": true
+    },
+    {
+        "slug": "champions",
         "month": "2026-07",
         "title": "Pokémon Champions — Regulation M-B Meta Report — July 2026",
         "description": "Sinistcha leads Pokémon Champions — Regulation M-B with 33.00% usage in June 2026. Full usage table, month-over-month risers and fallers, and data-grounded analysis.",
@@ -37,6 +59,28 @@
                 "url": "https://www.smogon.com/stats/2026-04/gen9championsvgc2026regma-0.txt"
             }
         ]
+    },
+    {
+        "slug": "ou",
+        "month": "2026-11",
+        "title": "Smogon Gen 9 OU Meta Report — November 2026",
+        "description": "Great Tusk leads Smogon Gen 9 OU with 32.82% usage in October 2026. Full usage table, month-over-month risers and fallers, and data-grounded analysis.",
+        "datePublished": "2026-11-12",
+        "dateModified": "2026-11-12",
+        "dataThrough": "2026-10",
+        "formatId": "gen9ou",
+        "formatName": "Smogon Gen 9 OU",
+        "sources": [
+            {
+                "label": "Smogon usage stats — gen9ou, October 2026",
+                "url": "https://www.smogon.com/stats/2026-10/gen9ou-0.txt"
+            },
+            {
+                "label": "Smogon usage stats — gen9ou, September 2026",
+                "url": "https://www.smogon.com/stats/2026-09/gen9ou-0.txt"
+            }
+        ],
+        "generated": true
     },
     {
         "slug": "ou",

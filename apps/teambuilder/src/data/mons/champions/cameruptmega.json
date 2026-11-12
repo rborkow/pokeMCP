@@ -2,15 +2,21 @@
  "id": "cameruptmega",
  "name": "Camerupt-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0175042,
-   "rank": 63,
-   "raw": 36452
+   "month": "2026-09",
+   "usage": 0.0206935,
+   "rank": 55,
+   "raw": 78147
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0246135,
+   "rank": 49,
+   "raw": 92187
   }
  ],
  "abilities": [
@@ -28,137 +34,113 @@
  "moves": [
   [
    "Earth Power",
-   24.78889505987315
-  ],
-  [
-   "Protect",
-   24.247677374948456
+   24.973383796737263
   ],
   [
    "Heat Wave",
-   20.59454619034429
+   23.48614968795946
+  ],
+  [
+   "Protect",
+   23.451357338820795
   ],
   [
    "Ancient Power",
-   13.454173317088364
+   21.69827917432218
   ],
   [
    "Eruption",
-   12.776203402099707
+   3.9089407550240796
   ],
   [
    "Flamethrower",
-   1.6810459882688533
+   0.6999458167749066
+  ],
+  [
+   "Fire Blast",
+   0.4665079552644203
+  ],
+  [
+   "Substitute",
+   0.4335468470944158
   ],
   [
    "Solar Beam",
-   0.44095283895431714
-  ],
-  [
-   "Rock Slide",
-   0.43917520070351995
-  ],
-  [
-   "Flash Cannon",
-   0.3984001075091295
+   0.14317497663105094
   ],
   [
    "Overheat",
-   0.21009706237830056
+   0.12787676236290685
   ]
  ],
  "spreads": [
   [
    "Quiet:32/0/2/32/0/0",
-   35.623697576246286
+   44.99838194624
   ],
   [
    "Quiet:32/0/0/32/2/0",
-   27.214933446818517
+   22.69155985497089
+  ],
+  [
+   "Quiet:31/0/2/32/1/0",
+   4.686375094370661
   ],
   [
    "Quiet:32/0/1/32/1/0",
-   7.309744697024624
+   3.9696935068026518
   ],
   [
    "Modest:32/0/0/32/2/0",
-   5.114886424714682
-  ],
-  [
-   "Quiet:32/0/0/32/0/0",
-   4.155766786239783
+   3.6102367590675013
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Farigiraf",
-   15.946032364814894
+   16.528031661492506
   ],
   [
-   "Kingambit",
-   6.749376360731603
-  ],
-  [
-   "Sinistcha",
-   6.1224350861192836
+   "Rillaboom",
+   8.637316946574874
   ],
   [
    "Incineroar",
-   5.875364326826605
+   8.520218441317216
+  ],
+  [
+   "Kingambit",
+   6.488235546883171
+  ],
+  [
+   "Indeedee-F",
+   5.815560771241341
   ],
   [
    "Sylveon",
-   4.451754485281809
+   5.814182864369986
   ],
   [
-   "Staraptor",
-   4.135631543129406
+   "Hatterene",
+   4.412330354068036
   ],
   [
-   "Mawile-Mega",
-   3.5176468441050046
-  ],
-  [
-   "Kangaskhan",
-   3.204897242458448
+   "Raichu-Mega-Y",
+   4.283048825596909
   ],
   [
    "Sneasler",
-   3.092749384166448
+   4.015847935520354
   ],
   [
-   "Torkoal",
-   3.07273163167124
+   "Primarina",
+   2.3060677090605886
   ]
  ],
  "counters": [
   {
-   "name": "Swampert-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Pelipper",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Archaludon",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sinistcha",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Whimsicott",
+   "name": "Floette-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -170,13 +152,37 @@
    "switchPct": 0
   },
   {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
    "name": "Incineroar",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Mawile-Mega",
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Venusaur",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

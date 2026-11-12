@@ -2,189 +2,195 @@
  "id": "incineroar",
  "name": "Incineroar",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.2834633,
-   "rank": 4,
-   "raw": 664399
+   "month": "2026-09",
+   "usage": 0.3066641,
+   "rank": 3,
+   "raw": 1005513
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.318257,
+   "rank": 3,
+   "raw": 975634
   }
  ],
  "abilities": [
   [
    "Intimidate",
-   99.58426097548404
+   99.79233638282548
   ],
   [
    "Blaze",
-   0.4157390245159619
+   0.20766361717451975
   ]
  ],
  "items": [
   [
    "Sitrus Berry",
-   53.808735382993014
-  ],
-  [
-   "Passho Berry",
-   15.571948144010763
+   62.8310076016353
   ],
   [
    "Chople Berry",
-   13.358015136220464
+   16.934874584154734
   ],
   [
-   "Charcoal",
-   4.696222195613001
+   "Passho Berry",
+   5.84538732780622
   ],
   [
-   "Shuca Berry",
-   3.136740170962133
-  ],
-  [
-   "Leftovers",
-   2.835440964430966
+   "Rocky Helmet",
+   3.1956189393687664
   ],
   [
    "White Herb",
-   2.2228584014704955
+   3.1069531875197542
+  ],
+  [
+   "Leftovers",
+   2.2681816621103046
   ],
   [
    "Life Orb",
-   2.089815764468499
+   2.058825199769361
+  ],
+  [
+   "Charcoal",
+   1.3187819309847426
   ]
  ],
  "moves": [
   [
    "Fake Out",
-   24.930292981163063
+   24.69449793044959
   ],
   [
    "Parting Shot",
-   23.662147345049853
+   23.88061885039285
   ],
   [
    "Flare Blitz",
-   22.713368557104623
-  ],
-  [
-   "Throat Chop",
-   12.713014017352764
+   23.27761571351822
   ],
   [
    "Darkest Lariat",
-   7.716156757548571
+   9.60658625799553
+  ],
+  [
+   "Throat Chop",
+   8.973375822249501
   ],
   [
    "Protect",
-   3.054611399609277
+   3.4013641243534947
   ],
   [
-   "Will-O-Wisp",
-   1.252476554425822
-  ],
-  [
-   "Taunt",
-   0.9348232095572148
-  ],
-  [
-   "Close Combat",
-   0.9253521946041907
+   "Snarl",
+   2.1820201345307653
   ],
   [
    "Helping Hand",
-   0.7771597980421284
+   1.332527979349502
+  ],
+  [
+   "Close Combat",
+   0.8422119863275457
+  ],
+  [
+   "Taunt",
+   0.5724579596295534
   ]
  ],
  "spreads": [
   [
+   "Sassy:31/0/15/0/20/0",
+   3.705537621728493
+  ],
+  [
    "Careful:32/0/14/0/20/0",
-   4.8832780469127055
+   3.0904779297774105
   ],
   [
-   "Adamant:32/32/0/0/2/0",
-   4.671918859284749
+   "Impish:32/0/16/0/17/1",
+   2.7171536311985047
   ],
   [
-   "Impish:32/0/24/0/8/2",
-   3.42464366374142
-  ],
-  [
-   "Careful:32/2/0/0/32/0",
-   1.9357823682618989
+   "Impish:30/0/20/0/14/2",
+   2.3570742978397634
   ],
   [
    "Sassy:32/0/14/0/20/0",
-   1.9148986175489757
+   1.708907696945515
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Sinistcha",
-   9.42857966938733
-  ],
-  [
-   "Garchomp",
-   5.449310980120323
-  ],
-  [
-   "Floette-Mega",
-   4.12372539377484
-  ],
-  [
-   "Whimsicott",
-   4.059038492692406
-  ],
-  [
-   "Basculegion",
-   3.8474085763199923
-  ],
-  [
-   "Farigiraf",
-   3.804764341329858
+   "Rillaboom",
+   11.275508583776707
   ],
   [
    "Sneasler",
-   3.7193766740640446
+   4.784371848437913
   ],
   [
-   "Staraptor-Mega",
-   3.3348816281433216
+   "Floette-Mega",
+   4.570873645156242
   ],
   [
-   "Kingambit",
-   3.108041191532768
+   "Garchomp",
+   4.203822659595394
   ],
   [
-   "Mawile-Mega",
-   2.8114054459833895
+   "Raichu-Mega-Y",
+   4.0751803412595615
+  ],
+  [
+   "Garchomp-Mega-Z",
+   3.7891911253578394
+  ],
+  [
+   "Charizard-Mega-Y",
+   3.6563354799076144
+  ],
+  [
+   "Sylveon",
+   3.58367929852867
+  ],
+  [
+   "Farigiraf",
+   3.504620049542468
+  ],
+  [
+   "Gholdengo",
+   3.5018117664805106
   ]
  ],
  "counters": [
   {
-   "name": "Weavile",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Kingambit",
+   "name": "Archaludon",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Farigiraf",
+   "name": "Overqwil",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Talonflame",
+   "name": "Garchomp",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -196,19 +202,19 @@
    "switchPct": 0
   },
   {
-   "name": "Venusaur",
+   "name": "Salamence-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Rotom-Wash",
+   "name": "Tyranitar-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
+   "name": "Corviknight",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -219,17 +225,34 @@
    "item": "Sitrus Berry",
    "ability": "Intimidate",
    "moves": [
+    "Fake Out",
     "Flare Blitz",
     "Throat Chop",
-    "Fake Out",
     "Parting Shot"
    ],
-   "count": 48,
+   "count": 60,
    "bestPlacing": 1,
-   "bestPlayer": "ScarletSkil",
-   "eventName": "BFI'26 - Frontier Tournament #3",
-   "eventSlug": "2026-07-04-bfi-26-frontier-tournament-3",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3f7832c87cd9ff0a310b57",
+   "bestPlayer": "Centiskorch18",
+   "eventName": "🍋Sitrus-Series🍋|Champions-MC|#81",
+   "eventSlug": "2026-11-04-sitrus-series-champions-mc-81",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ac02d2b85920e4d2536238f",
+   "nature": "Impish"
+  },
+  {
+   "item": "Sitrus Berry",
+   "ability": "Intimidate",
+   "moves": [
+    "Fake Out",
+    "Darkest Lariat",
+    "Flare Blitz",
+    "Parting Shot"
+   ],
+   "count": 32,
+   "bestPlacing": 1,
+   "bestPlayer": "Asteriio",
+   "eventName": "Friday Fight Night 77! $50 Prize & Team Report",
+   "eventSlug": "2026-10-16-friday-fight-night-77-50-prize-team-report",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6acdb7b7115c12b73a5a2cd5",
    "nature": "Impish"
   },
   {
@@ -237,34 +260,17 @@
    "ability": "Intimidate",
    "moves": [
     "Flare Blitz",
-    "Darkest Lariat",
-    "Fake Out",
-    "Parting Shot"
-   ],
-   "count": 20,
-   "bestPlacing": 1,
-   "bestPlayer": "NMR | Gostzin I",
-   "eventName": "Intimidators Champions Challenge #22 REG M-B",
-   "eventSlug": "2026-06-30-intimidators-champions-challenge-22-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a427367c87cd9ff0a312adf",
-   "nature": "Careful"
-  },
-  {
-   "item": "Sitrus Berry",
-   "ability": "Intimidate",
-   "moves": [
     "Fake Out",
     "Parting Shot",
-    "Helping Hand",
-    "Flare Blitz"
+    "Helping Hand"
    ],
    "count": 14,
    "bestPlacing": 1,
-   "bestPlayer": "Martinus_03",
-   "eventName": "Champions Collective #12",
-   "eventSlug": "2026-07-01-champions-collective-12",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3987c183fd320299bce00b",
-   "nature": "Careful"
+   "bestPlayer": "Force_India",
+   "eventName": "ValkrixVGC Pokemon Champions League #07",
+   "eventSlug": "2026-10-25-valkrixvgc-pokemon-champions-league-07",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ab54228f127b1b52c2811ed",
+   "nature": "Sassy"
   }
  ]
 }

@@ -2,177 +2,183 @@
  "id": "talonflame",
  "name": "Talonflame",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0436889,
-   "rank": 32,
-   "raw": 133930
+   "month": "2026-09",
+   "usage": 0.0204579,
+   "rank": 56,
+   "raw": 114745
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.015318700000000001,
+   "rank": 58,
+   "raw": 92770
   }
  ],
  "abilities": [
   [
    "Gale Wings",
-   97.82181868331186
+   98.55324757830981
   ],
   [
    "Flame Body",
-   2.1781813166881516
+   1.4467524216901928
   ]
  ],
  "items": [
   [
    "Sharp Beak",
-   37.34494878514707
-  ],
-  [
-   "nothing",
-   19.147147349659043
-  ],
-  [
-   "Focus Sash",
-   18.25484182273193
+   26.286508729624895
   ],
   [
    "Expert Belt",
-   8.145789478280019
-  ],
-  [
-   "Life Orb",
-   8.14226588058649
+   16.743351916957792
   ],
   [
    "Charcoal",
-   3.116172303117139
+   15.198553914476868
+  ],
+  [
+   "Life Orb",
+   11.018821097982594
+  ],
+  [
+   "Focus Sash",
+   10.483161799673681
+  ],
+  [
+   "nothing",
+   5.0357869733449485
+  ],
+  [
+   "Passho Berry",
+   4.008960099982302
   ],
   [
    "Mental Herb",
-   1.2448061957876801
-  ],
-  [
-   "Charti Berry",
-   1.0491643325087732
+   3.1195866698315777
   ]
  ],
  "moves": [
   [
    "Tailwind",
-   24.596517994407158
+   24.679322055796955
   ],
   [
    "Protect",
-   17.67682954322106
-  ],
-  [
-   "Flare Blitz",
-   13.917228933828001
+   16.53903078833176
   ],
   [
    "Brave Bird",
-   10.186227463634872
+   12.845952261809668
   ],
   [
-   "Dual Wingbeat",
-   8.962588996231236
-  ],
-  [
-   "Acrobatics",
-   4.970444375790892
-  ],
-  [
-   "Will-O-Wisp",
-   3.8835461004686134
+   "Flare Blitz",
+   12.46646849139636
   ],
   [
    "Quick Guard",
-   3.5149424521720665
-  ],
-  [
-   "Taunt",
-   2.9521803468380083
+   7.615698963252811
   ],
   [
    "Overheat",
-   2.9423057019483903
+   6.046457849628971
+  ],
+  [
+   "Dual Wingbeat",
+   4.8791955093741395
+  ],
+  [
+   "Air Slash",
+   2.7329262631693307
+  ],
+  [
+   "Taunt",
+   2.54045924018514
+  ],
+  [
+   "Will-O-Wisp",
+   2.295533000641987
   ]
  ],
  "spreads": [
   [
    "Jolly:2/32/0/0/0/32",
-   43.241030609434965
+   37.69050041503876
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   11.057080693126595
   ],
   [
    "Adamant:2/32/0/0/0/32",
-   10.431380140200247
+   6.161311134751329
   ],
   [
-   "Naive:0/9/0/30/0/27",
-   4.559600916715575
+   "Jolly:16/14/7/0/1/28",
+   3.8843417549686143
   ],
   [
-   "Jolly:7/32/0/0/0/27",
-   2.9735084117382327
-  ],
-  [
-   "Jolly:32/2/0/0/0/32",
-   2.673310250488824
+   "Jolly:1/31/1/0/1/32",
+   3.442808465527853
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Garchomp",
-   10.402272463210899
+   "Sneasler",
+   5.840278829964269
   ],
   [
-   "Basculegion",
-   5.377565629061509
+   "Gardevoir-Mega",
+   5.229412284578584
+  ],
+  [
+   "Indeedee-F",
+   4.9736902981680755
+  ],
+  [
+   "Kommo-o",
+   4.797328184674137
+  ],
+  [
+   "Rillaboom",
+   4.6366053430672824
   ],
   [
    "Kingambit",
-   5.31822299730738
+   4.499307624015054
   ],
   [
-   "Sinistcha",
-   4.9709726484461765
+   "Basculegion",
+   4.243833147323139
   ],
   [
-   "Metagross-Mega",
-   3.8388634520531593
+   "Garchomp",
+   3.933777648024465
   ],
   [
-   "Raichu-Mega-Y",
-   3.723381629063839
+   "Floette-Mega",
+   3.829317946951169
   ],
   [
-   "Maushold",
-   3.6477645085867967
-  ],
-  [
-   "Sneasler",
-   3.590763080789161
-  ],
-  [
-   "Gholdengo",
-   3.166436593849984
-  ],
-  [
-   "Ninetales-Alola",
-   3.1208443498897984
+   "Armarouge",
+   3.1154932062339795
   ]
  ],
  "counters": [
   {
-   "name": "Incineroar",
+   "name": "Farigiraf",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sneasler",
+   "name": "Gholdengo",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -184,7 +190,7 @@
    "switchPct": 0
   },
   {
-   "name": "Charizard-Mega-Y",
+   "name": "Indeedee-F",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -196,19 +202,19 @@
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sableye",
+   "name": "Incineroar",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Staraptor-Mega",
+   "name": "Pelipper",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -220,16 +226,16 @@
    "ability": "Gale Wings",
    "moves": [
     "Brave Bird",
-    "Flare Blitz",
     "Tailwind",
-    "Protect"
+    "Taunt",
+    "Quick Guard"
    ],
-   "count": 2,
-   "bestPlacing": 4,
-   "bestPlayer": "kafkafoon",
-   "eventName": "Tenki's Cart Weekly #107- Reg MB",
-   "eventSlug": "2026-07-02-tenki-s-cart-weekly-107-reg-mb",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a4213a583fd320299bd3c48",
+   "count": 1,
+   "bestPlacing": 7,
+   "bestPlayer": "Sir_Aaron",
+   "eventName": "Champions League VGC October (Prize: Shiny Gengar)",
+   "eventSlug": "2026-10-17-champions-league-vgc-october-prize-shiny-gengar",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a7c50af2b308b6067b51ef4",
    "nature": "Jolly"
   },
   {
@@ -237,34 +243,17 @@
    "ability": "Gale Wings",
    "moves": [
     "Protect",
-    "Tailwind",
+    "Brave Bird",
     "Flare Blitz",
-    "Brave Bird"
+    "Tailwind"
    ],
    "count": 1,
-   "bestPlacing": 2,
-   "bestPlayer": "Shedfan",
-   "eventName": "INGAGE FRONTIER SERIES #1.2 - $80 PRIZE (Reg M-B)",
-   "eventSlug": "2026-06-24-ingage-frontier-series-1-2-80-prize-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a38f19b83fd320299bcdb33",
+   "bestPlacing": 7,
+   "bestPlayer": "Gus_0Z",
+   "eventName": "Off Meta Fight Club #7 (NEW Rules)",
+   "eventSlug": "2026-10-15-off-meta-fight-club-7-new-rules",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aca6fc6115c12b73a5a0b4c",
    "nature": "Jolly"
-  },
-  {
-   "item": "Sharp Beak",
-   "ability": "Gale Wings",
-   "moves": [
-    "Dual Wingbeat",
-    "Flare Blitz",
-    "Tailwind",
-    "Protect"
-   ],
-   "count": 1,
-   "bestPlacing": 3,
-   "bestPlayer": "Gouillou",
-   "eventName": "INGAGE FRONTIER SERIES  #1 - $50 PRIZE (Reg M-B)",
-   "eventSlug": "2026-06-20-ingage-frontier-series-1-50-prize-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a2f143fe334c3c9befd6e8e",
-   "nature": "Adamant"
   }
  ]
 }

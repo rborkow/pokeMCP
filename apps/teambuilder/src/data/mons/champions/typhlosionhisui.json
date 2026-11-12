@@ -2,177 +2,177 @@
  "id": "typhlosionhisui",
  "name": "Typhlosion-Hisui",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.020804999999999997,
-   "rank": 54,
-   "raw": 59050
+   "month": "2026-09",
+   "usage": 0.0090418,
+   "rank": 74,
+   "raw": 49007
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0061613,
+   "rank": 86,
+   "raw": 53985
   }
  ],
  "abilities": [
   [
    "Frisk",
-   85.03250583092223
+   58.54539643295372
   ],
   [
    "Blaze",
-   14.967494169077769
+   41.45460356704628
   ]
  ],
  "items": [
   [
    "Choice Scarf",
-   88.13507050087549
+   73.96412957856239
   ],
   [
    "Charcoal",
-   6.603732725303195
-  ],
-  [
-   "Focus Sash",
-   2.6206896054422923
+   13.22434726780476
   ],
   [
    "Life Orb",
-   1.2944272377923909
+   8.242460375091886
   ],
   [
-   "Colbur Berry",
-   0.7344723385734777
+   "Focus Sash",
+   3.5723190052256526
   ],
   [
-   "Iron Ball",
-   0.18698761905658368
+   "Shuca Berry",
+   0.32261961085113694
   ],
   [
    "Leftovers",
-   0.16570834084545824
+   0.2621072183370986
   ],
   [
    "Expert Belt",
-   0.10758003472725554
+   0.12064210533440162
+  ],
+  [
+   "Colbur Berry",
+   0.08469226836519336
   ]
  ],
  "moves": [
   [
    "Eruption",
-   24.882287587485816
+   24.269513214358316
   ],
   [
    "Shadow Ball",
-   24.47809588736766
+   23.343736526752597
   ],
   [
    "Heat Wave",
-   21.325883699287807
-  ],
-  [
-   "Burn Up",
-   11.203258046269674
+   17.430091904081966
   ],
   [
    "Overheat",
-   6.178953029309843
+   10.63219624829676
   ],
   [
    "Protect",
-   2.9490540090173614
+   6.504956794616325
   ],
   [
    "Flamethrower",
-   2.132751922724082
-  ],
-  [
-   "Solar Beam",
-   1.2599352140970144
+   3.725104777465935
   ],
   [
    "Extrasensory",
-   1.151168408933357
+   2.1106899528619656
+  ],
+  [
+   "Solar Beam",
+   1.8446279609037588
   ],
   [
    "Focus Blast",
-   1.080052454808987
+   1.6857389201166626
+  ],
+  [
+   "Infernal Parade",
+   1.6559640533793285
   ]
  ],
  "spreads": [
   [
    "Modest:2/0/0/32/0/32",
-   54.20385928021837
-  ],
-  [
-   "Timid:1/0/0/32/1/32",
-   14.551077329748786
+   21.685469007343656
   ],
   [
    "Timid:2/0/0/32/0/32",
-   10.986340435934961
+   19.082845653327247
+  ],
+  [
+   "Timid:1/0/0/32/1/32",
+   17.560278366073593
   ],
   [
    "Modest:1/0/0/32/1/32",
-   5.404085790536813
+   13.590796147688891
   ],
   [
-   "Modest:5/0/0/32/0/29",
-   1.9953388931130627
+   "Modest:1/0/1/32/0/32",
+   3.6936034039054375
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Whimsicott",
-   15.165225118717599
+   8.0810055005329
   ],
   [
-   "Garchomp",
-   11.950983936258075
+   "Sneasler",
+   6.778130849292204
   ],
   [
-   "Staraptor-Mega",
-   11.207704052620807
-  ],
-  [
-   "Basculegion",
-   9.425452972038702
-  ],
-  [
-   "Gholdengo",
-   8.230864869545664
+   "Indeedee-F",
+   5.490174001551503
   ],
   [
    "Farigiraf",
-   4.406209363344547
+   4.356266612462397
   ],
   [
-   "Sinistcha",
-   2.424788394447299
+   "Rillaboom",
+   4.091566917156776
+  ],
+  [
+   "Gardevoir-Mega",
+   3.8244962010967773
+  ],
+  [
+   "Indeedee",
+   3.758716686839804
   ],
   [
    "Torkoal",
-   2.188269476127642
+   3.533071457354852
   ],
   [
-   "Floette-Mega",
-   2.0003192993855787
+   "Charizard-Mega-Y",
+   3.1491447825342695
   ],
   [
-   "Kingambit",
-   1.7468393949109446
+   "Garchomp-Mega-Z",
+   2.405763017658051
   ]
  ],
  "counters": [
   {
-   "name": "Sinistcha",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Garchomp",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -184,31 +184,13 @@
    "switchPct": 0
   },
   {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
    "name": "Kingambit",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Pelipper",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Gholdengo",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Staraptor-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Grimmsnarl",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

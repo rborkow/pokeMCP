@@ -2,236 +2,225 @@
  "id": "venusaur",
  "name": "Venusaur",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.026876,
-   "rank": 45,
-   "raw": 71506
+   "month": "2026-09",
+   "usage": 0.0271342,
+   "rank": 47,
+   "raw": 75629
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0721189,
+   "rank": 25,
+   "raw": 169603
   }
  ],
  "abilities": [
   [
    "Chlorophyll",
-   98.74129098327529
+   99.70820083170344
   ],
   [
    "Overgrow",
-   1.2587090167247124
+   0.29179916829657054
   ]
  ],
  "items": [
   [
    "Focus Sash",
-   42.15936061544843
+   59.073577735206406
   ],
   [
    "Life Orb",
-   34.60746511697501
+   31.798461210047545
   ],
   [
    "Wide Lens",
-   9.125088547726113
-  ],
-  [
-   "Leftovers",
-   2.919261978100275
-  ],
-  [
-   "Sitrus Berry",
-   2.6721456780982056
+   7.267528191289527
   ],
   [
    "Occa Berry",
-   2.2313395451811497
+   0.6730927007913362
   ],
   [
-   "Miracle Seed",
-   2.1037390883741565
+   "Wise Glasses",
+   0.254709536031091
   ],
   [
-   "Expert Belt",
-   1.1208842591801915
+   "Coba Berry",
+   0.17723444556275827
+  ],
+  [
+   "Leftovers",
+   0.16210523099552385
+  ],
+  [
+   "Poison Barb",
+   0.12311291525782707
   ]
  ],
  "moves": [
   [
    "Sludge Bomb",
-   23.309613779910332
+   24.35447466909759
   ],
   [
    "Protect",
-   21.82290604629296
-  ],
-  [
-   "Sleep Powder",
-   15.758347401533182
-  ],
-  [
-   "Earth Power",
-   13.248124157066679
-  ],
-  [
-   "Energy Ball",
-   10.041504974004843
+   23.867676093753374
   ],
   [
    "Leaf Storm",
-   5.203609653530135
+   20.685661167356596
   ],
   [
-   "Giga Drain",
-   4.58300598194406
+   "Sleep Powder",
+   17.569555340159802
+  ],
+  [
+   "Earth Power",
+   10.69879622884249
+  ],
+  [
+   "Energy Ball",
+   1.1460855316260103
   ],
   [
    "Solar Beam",
-   2.3317432195382475
+   0.532193371373585
+  ],
+  [
+   "Giga Drain",
+   0.5273604561380454
   ],
   [
    "Weather Ball",
-   1.3899427380874256
+   0.2648906811510429
   ],
   [
-   "Sunny Day",
-   0.473692976479809
+   "Bulldoze",
+   0.08014775651308183
   ]
  ],
  "spreads": [
   [
    "Modest:2/0/0/32/0/32",
-   53.47531130603546
+   65.67636887740144
+  ],
+  [
+   "Modest:1/0/0/32/1/32",
+   13.744051752861733
   ],
   [
    "Timid:2/0/0/32/0/32",
-   12.671379795629631
+   4.009994311774892
   ],
   [
-   "Modest:4/0/12/32/0/18",
-   2.3451849153321365
-  ],
-  [
-   "Timid:0/0/2/32/0/32",
-   2.0625509386407375
+   "Modest:0/0/2/32/0/32",
+   2.831858121897338
   ],
   [
    "Modest:4/0/0/30/0/32",
-   1.3586749636618272
+   1.677778021829753
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Charizard-Mega-Y",
-   11.207240712826595
+   18.71169267828894
   ],
   [
    "Garchomp",
-   9.423027638859315
-  ],
-  [
-   "Farigiraf",
-   8.999437423102929
-  ],
-  [
-   "Torkoal",
-   8.417253933165677
+   10.982630158329322
   ],
   [
    "Incineroar",
-   6.411168502844232
-  ],
-  [
-   "Pyroar-Mega",
-   5.656333812794427
-  ],
-  [
-   "Scrafty-Mega",
-   3.5621146305031846
-  ],
-  [
-   "Mamoswine",
-   3.44209807266884
+   9.298062439924962
   ],
   [
    "Sylveon",
-   3.404261102751064
+   8.72961431313953
   ],
   [
-   "Basculegion",
-   3.378209519754195
+   "Archaludon",
+   7.360110523548141
+  ],
+  [
+   "Grimmsnarl",
+   6.210341723581363
+  ],
+  [
+   "Pelipper",
+   5.885480156932391
+  ],
+  [
+   "Farigiraf",
+   5.1298073477428865
+  ],
+  [
+   "Toxapex",
+   4.444955262995707
+  ],
+  [
+   "Garchomp-Mega-Z",
+   3.3461313928329397
   ]
  ],
  "counters": [
   {
-   "name": "Whimsicott",
+   "name": "Farigiraf",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Incineroar",
+   "name": "Camerupt-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sneasler",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sylveon",
+   "name": "Swampert-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
+   "name": "Archaludon",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Charizard-Mega-Y",
+   "name": "Grimmsnarl",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Basculegion",
+   "name": "Politoed",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
+   "name": "Espathra",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   }
  ],
  "builds": [
-  {
-   "item": "Venusaurite",
-   "ability": "Chlorophyll",
-   "moves": [
-    "Giga Drain",
-    "Sludge Bomb",
-    "Earth Power",
-    "Protect"
-   ],
-   "count": 21,
-   "bestPlacing": 1,
-   "bestPlayer": "Force_India",
-   "eventName": "Pep_uni Pokémon Champions #1",
-   "eventSlug": "2026-06-28-pep-uni-pok-mon-champions-1",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3db5bdc87cd9ff0a30f75a",
-   "nature": "Modest"
-  },
   {
    "item": "Focus Sash",
    "ability": "Chlorophyll",
@@ -241,29 +230,46 @@
     "Sleep Powder",
     "Protect"
    ],
-   "count": 3,
+   "count": 28,
    "bestPlacing": 1,
-   "bestPlayer": "JoeUX9",
-   "eventName": "4th Annual St. Jude VGC Charity Tournament",
-   "eventSlug": "2026-06-27-4th-annual-st-jude-vgc-charity-tournament",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/69c7cead36f5b5c303dbfa0c",
+   "bestPlayer": "Gus_0Z",
+   "eventName": "MetaVGC Arena #1 - Reg MC - Prizes: R$ 50 + Shiny",
+   "eventSlug": "2026-10-17-metavgc-arena-1-reg-mc-prizes-r-50-shiny",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad0f6c68a8383117e3ec545",
+   "nature": "Modest"
+  },
+  {
+   "item": "Life Orb",
+   "ability": "Chlorophyll",
+   "moves": [
+    "Leaf Storm",
+    "Sludge Bomb",
+    "Earth Power",
+    "Protect"
+   ],
+   "count": 12,
+   "bestPlacing": 1,
+   "bestPlayer": "LuscaVGC",
+   "eventName": "Intimidators Champions Challenge #52 REG M-C",
+   "eventSlug": "2026-10-26-intimidators-champions-challenge-52-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6adf3a9180a8f79408d1e7e8",
    "nature": "Modest"
   },
   {
    "item": "Focus Sash",
    "ability": "Chlorophyll",
    "moves": [
-    "Sleep Powder",
-    "Energy Ball",
     "Sludge Bomb",
+    "Earth Power",
+    "Sleep Powder",
     "Protect"
    ],
-   "count": 2,
-   "bestPlacing": 2,
-   "bestPlayer": "shaikhvgc786",
-   "eventName": "Mens Mental Health Month Invitational ($350 Prize)",
-   "eventSlug": "2026-06-28-mens-mental-health-month-invitational-350-prize",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a256b8f56b11a587a94b55b",
+   "count": 4,
+   "bestPlacing": 1,
+   "bestPlayer": "Z2R Carretta",
+   "eventName": "Intimidators Champions Challenge #50 REG M-C",
+   "eventSlug": "2026-10-12-intimidators-champions-challenge-50-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6accfc7d115c12b73a5a2049",
    "nature": "Modest"
   }
  ]

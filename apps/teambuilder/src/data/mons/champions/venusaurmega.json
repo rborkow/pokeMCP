@@ -2,15 +2,21 @@
  "id": "venusaurmega",
  "name": "Venusaur-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0335216,
-   "rank": 37,
-   "raw": 62090
+   "month": "2026-09",
+   "usage": 0.006231799999999999,
+   "rank": 89,
+   "raw": 24852
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0051001,
+   "rank": 94,
+   "raw": 32076
   }
  ],
  "abilities": [
@@ -28,135 +34,111 @@
  "moves": [
   [
    "Sludge Bomb",
-   24.30025773240305
+   22.40134365430506
   ],
   [
    "Protect",
-   23.871576905377832
+   22.21215046098485
   ],
   [
    "Earth Power",
-   22.467289647744288
+   20.63407486820545
   ],
   [
    "Giga Drain",
-   22.13887589018419
-  ],
-  [
-   "Sleep Powder",
-   2.5788639075916384
+   19.81525669553205
   ],
   [
    "Leech Seed",
-   2.3533413407294086
+   6.470306606516396
+  ],
+  [
+   "Sleep Powder",
+   3.0652444420657794
+  ],
+  [
+   "Amnesia",
+   1.1728018289709534
   ],
   [
    "Energy Ball",
-   1.0369114425504427
+   0.6671045361132799
   ],
   [
-   "Weather Ball",
-   0.2719787708929939
+   "Leaf Storm",
+   0.6087319213590651
   ],
   [
-   "Sludge Wave",
-   0.2034471298106964
-  ],
-  [
-   "Solar Beam",
-   0.15799167383352353
+   "Synthesis",
+   0.5701351978476363
   ]
  ],
  "spreads": [
   [
-   "Modest:32/0/7/18/0/9",
-   8.30420307895462
+   "Modest:32/0/0/28/6/0",
+   8.273969946816914
   ],
   [
-   "Modest:30/0/0/18/0/18",
-   5.222296490696147
+   "Modest:2/0/0/32/0/32",
+   5.314393079163956
   ],
   [
-   "Bold:32/0/19/0/12/3",
-   4.9132668117331075
+   "Modest:32/0/0/18/0/16",
+   4.946823059910297
   ],
   [
-   "Modest:32/0/0/32/2/0",
-   3.6087832840845935
+   "Bold:32/0/23/0/8/3",
+   4.347630607451834
   ],
   [
    "Modest:32/0/1/28/1/4",
-   3.5832561995875456
+   2.9065365693433995
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Pelipper",
-   9.916215237629103
-  ],
-  [
    "Archaludon",
-   9.59796005932314
+   9.244229027130704
   ],
   [
-   "Basculegion",
-   8.402807940438345
-  ],
-  [
-   "Swampert-Mega",
-   7.708734632016102
-  ],
-  [
-   "Sableye",
-   5.705092649793215
+   "Pelipper",
+   7.134396826611199
   ],
   [
    "Grimmsnarl",
-   5.089972639734834
+   6.693064828176485
   ],
   [
    "Incineroar",
-   3.661843638818618
+   4.3564648549018345
+  ],
+  [
+   "Basculegion",
+   3.7676098590274383
+  ],
+  [
+   "Charizard-Mega-Y",
+   3.5699612680675257
   ],
   [
    "Garchomp",
-   3.571334410798585
+   3.2421613952774218
   ],
   [
-   "Sylveon",
-   2.4108348735305354
+   "Farigiraf",
+   2.7596639884921914
   ],
   [
-   "Kingambit",
-   2.3933564387885133
+   "Staraptor-Mega",
+   2.4539382275096613
+  ],
+  [
+   "Politoed",
+   2.389522774999216
   ]
  ],
  "counters": [
-  {
-   "name": "Garchomp",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Kingambit",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Whimsicott",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Charizard-Mega-Y",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
   {
    "name": "Sneasler",
    "score": 0,
@@ -164,19 +146,13 @@
    "switchPct": 0
   },
   {
-   "name": "Grimmsnarl",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Basculegion",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Archaludon",
+   "name": "Incineroar",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

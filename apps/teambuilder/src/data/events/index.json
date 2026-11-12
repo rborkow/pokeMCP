@@ -1,52 +1,252 @@
 {
     "champions": [
         {
-            "slug": "2026-07-05-khun-champions-cup-2",
-            "name": "Khun Champions Cup #2",
-            "date": "2026-07-05T04:30:00.000Z",
-            "players": 266,
-            "format": "M-B",
-            "regulationLabel": "Pokémon Champions — Regulation M-B"
+            "slug": "2026-11-11-alpensee-tour-reg-m-c-83",
+            "name": "Alpensee Tour (Reg M-C) #83",
+            "date": "2026-11-11T18:00:00.000Z",
+            "players": 109,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
         },
         {
-            "slug": "2026-07-01-sitrus-series-champions-mb-65",
-            "name": "*Sitrus-Series*|Champions-MB|#65",
-            "date": "2026-07-01T22:00:00.000Z",
-            "players": 114,
-            "format": "M-B",
-            "regulationLabel": "Pokémon Champions — Regulation M-B"
-        },
-        {
-            "slug": "2026-06-27-4th-annual-st-jude-vgc-charity-tournament",
-            "name": "4th Annual St. Jude VGC Charity Tournament",
-            "date": "2026-06-27T15:00:00.000Z",
-            "players": 728,
-            "format": "M-B",
-            "regulationLabel": "Pokémon Champions — Regulation M-B"
-        },
-        {
-            "slug": "2026-06-26-champions-reg-m-b-crown-fight-bo3-tour-74",
-            "name": "CHAMPIONS REG. M-B |👑CROWN FIGHT Bo3 TOUR #74👑",
-            "date": "2026-06-26T16:30:00.000Z",
-            "players": 131,
-            "format": "M-B",
-            "regulationLabel": "Pokémon Champions — Regulation M-B"
-        },
-        {
-            "slug": "2026-06-25-tenki-s-x-mmhm-champions-m-b",
-            "name": "Tenki's x MMHM - Champions M-B",
-            "date": "2026-06-25T15:00:00.000Z",
+            "slug": "2026-11-06-friday-fight-night-80-50-prize-team-report",
+            "name": "Friday Fight Night 80! $50 Prize & Team Report",
+            "date": "2026-11-06T23:00:00.000Z",
             "players": 139,
-            "format": "M-B",
-            "regulationLabel": "Pokémon Champions — Regulation M-B"
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
         },
         {
-            "slug": "2026-06-24-ingage-frontier-series-1-2-80-prize-reg-m-b",
-            "name": "INGAGE FRONTIER SERIES #1.2 - $80 PRIZE (Reg M-B)",
-            "date": "2026-06-24T15:00:00.000Z",
-            "players": 199,
-            "format": "M-B",
-            "regulationLabel": "Pokémon Champions — Regulation M-B"
+            "slug": "2026-11-04-sitrus-series-champions-mc-81",
+            "name": "🍋Sitrus-Series🍋|Champions-MC|#81",
+            "date": "2026-11-04T23:00:00.000Z",
+            "players": 170,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-30-friday-fight-night-79-50-prize-team-report",
+            "name": "Friday Fight Night 79! $50 Prize & Team Report",
+            "date": "2026-10-30T22:00:00.000Z",
+            "players": 96,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-27-tuesday-throwdowns-2-50-for-the-winner",
+            "name": "Tuesday Throwdowns #2 ($50 for the Winner!)",
+            "date": "2026-10-27T23:30:00.000Z",
+            "players": 119,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-26-spooky-cup-500-prize-pool",
+            "name": "Spooky Cup - $500 PRIZE POOL",
+            "date": "2026-10-26T21:00:00.000Z",
+            "players": 230,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-26-amyverse-vgc-champions-arena-16-cash-prize",
+            "name": "Amyverse VGC Champions Arena #16 ❤️ Cash Prize!",
+            "date": "2026-10-26T18:00:00.000Z",
+            "players": 109,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-25-valkrixvgc-pokemon-champions-league-07",
+            "name": "ValkrixVGC Pokemon Champions League #07",
+            "date": "2026-10-25T14:00:00.000Z",
+            "players": 115,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-24-maddo-s-cup-13-100-for-the-winner-reg-m-c",
+            "name": "Maddo's Cup #13 | 100€ for the Winner | Reg M-C",
+            "date": "2026-10-24T12:00:00.000Z",
+            "players": 230,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-23-friday-fight-night-78-50-prize-team-report",
+            "name": "Friday Fight Night 78! $50 Prize & Team Report",
+            "date": "2026-10-23T22:00:00.000Z",
+            "players": 134,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-23-rising-stars-finale-10-000-cash-prize",
+            "name": "Rising Stars - Finale ₹10,000 cash prize",
+            "date": "2026-10-23T15:30:00.000Z",
+            "players": 137,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-21-alpensee-tour-reg-m-c-80",
+            "name": "Alpensee Tour (Reg M-C) #80",
+            "date": "2026-10-21T17:00:00.000Z",
+            "players": 110,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-17-20-vgc-champions-tournament-ep-34",
+            "name": "⛩️$20 VGC Champions Tournament Ep 34!⛩️",
+            "date": "2026-10-17T16:00:00.000Z",
+            "players": 105,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-16-friday-fight-night-77-50-prize-team-report",
+            "name": "Friday Fight Night 77! $50 Prize & Team Report",
+            "date": "2026-10-16T22:00:00.000Z",
+            "players": 131,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-16-30-vgc-champions-tournament-ep-33",
+            "name": "⛩️$30 VGC Champions Tournament Ep 33!⛩️",
+            "date": "2026-10-16T15:00:00.000Z",
+            "players": 123,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-15-talon-s-fight-club-106-pokemon-champions-reg-m-c",
+            "name": "Talon's FIGHT CLUB #106 POKEMON CHAMPIONS REG M-C",
+            "date": "2026-10-15T23:00:00.000Z",
+            "players": 110,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-14-alpensee-tour-reg-m-c-79",
+            "name": "Alpensee Tour (Reg M-C) #79",
+            "date": "2026-10-14T17:00:00.000Z",
+            "players": 100,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-12-amyverse-vgc-champions-arena-14-cash-prize",
+            "name": "Amyverse VGC Champions Arena #14 ❤️ Cash Prize!",
+            "date": "2026-10-12T18:00:00.000Z",
+            "players": 130,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-11-valkrixvgc-pokemon-champions-league-05",
+            "name": "ValkrixVGC Pokemon Champions League #05",
+            "date": "2026-10-11T14:00:00.000Z",
+            "players": 155,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-10-vgc-indigo-league-2-prize-eternal-floette",
+            "name": "VGC Indigo League #2 (Prize: Eternal Floette)",
+            "date": "2026-10-10T12:00:00.000Z",
+            "players": 105,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-09-friday-fight-night-76-25-prize-top-8-graphic",
+            "name": "Friday Fight Night 76! $25 Prize & Top 8 Graphic",
+            "date": "2026-10-09T22:00:00.000Z",
+            "players": 127,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-09-champions-reg-m-c-crown-fight-bo3-tour-89",
+            "name": "CHAMPIONS REG. M-C |👑CROWN FIGHT Bo3 TOUR #89👑",
+            "date": "2026-10-09T16:35:00.000Z",
+            "players": 131,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-07-sitrus-series-champions-mc-79",
+            "name": "🍋Sitrus-Series🍋|Champions-MC|#79",
+            "date": "2026-10-07T22:00:00.000Z",
+            "players": 119,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-04-vgc-trainer-school-champions-m-c-4",
+            "name": "VGC Trainer School; champions M/C #4",
+            "date": "2026-10-04T15:00:00.000Z",
+            "players": 115,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-03-100-prize-the-grim-cup-1-reg-m-c",
+            "name": "[100€ prize] The Grim Cup #1 Reg M-C",
+            "date": "2026-10-03T08:00:00.000Z",
+            "players": 217,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-01-talon-s-fight-club-104-pokemon-champions-reg-m-c",
+            "name": "Talon's FIGHT CLUB #104 POKEMON CHAMPIONS REG M-C",
+            "date": "2026-10-01T23:00:00.000Z",
+            "players": 97,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-10-01-tenki-s-cart-weekly-120-reg-m-c",
+            "name": "Tenki's Cart Weekly #120 - Reg M-C",
+            "date": "2026-10-01T15:00:00.000Z",
+            "players": 137,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-09-30-sitrus-series-champions-mc-78",
+            "name": "🍋Sitrus-Series🍋|Champions-MC|#78",
+            "date": "2026-09-30T22:00:00.000Z",
+            "players": 128,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-09-30-windwork-valley-tour-qualifiers-2",
+            "name": "Windwork Valley Tour | Qualifiers 2 🇮🇳",
+            "date": "2026-09-30T13:30:00.000Z",
+            "players": 156,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-09-29-tartan-takedown-40-champions-reg-m-c",
+            "name": "TARTAN TAKEDOWN #40! - [CHAMPIONS REG M-C!]",
+            "date": "2026-09-29T17:00:00.000Z",
+            "players": 112,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
+        },
+        {
+            "slug": "2026-09-18-champions-reg-m-c-crown-fight-bo3-tour-86",
+            "name": "CHAMPIONS REG. M-C |👑CROWN FIGHT Bo3 TOUR #86👑",
+            "date": "2026-09-18T16:50:00.000Z",
+            "players": 113,
+            "format": "M-C",
+            "regulationLabel": "Pokémon Champions — Regulation M-C"
         }
     ]
 }

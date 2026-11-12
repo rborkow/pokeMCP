@@ -1,0 +1,276 @@
+{
+ "id": "hippowdon",
+ "name": "Hippowdon",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.002516,
+   "rank": 129,
+   "raw": 11010
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0087235,
+   "rank": 71,
+   "raw": 28609
+  }
+ ],
+ "abilities": [
+  [
+   "Sand Stream",
+   99.67869772126868
+  ],
+  [
+   "Sand Force",
+   0.3213022787313115
+  ]
+ ],
+ "items": [
+  [
+   "Leftovers",
+   74.14232865823479
+  ],
+  [
+   "Sitrus Berry",
+   16.187515999272676
+  ],
+  [
+   "Rocky Helmet",
+   5.39281998541712
+  ],
+  [
+   "Bright Powder",
+   0.9980310534265732
+  ],
+  [
+   "Psychic Seed",
+   0.846526382156973
+  ],
+  [
+   "Soft Sand",
+   0.7469050571065041
+  ],
+  [
+   "Smooth Rock",
+   0.40738991789161666
+  ],
+  [
+   "Life Orb",
+   0.29032923548615597
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   23.27514197940502
+  ],
+  [
+   "High Horsepower",
+   23.151644219017452
+  ],
+  [
+   "Yawn",
+   20.718570007294876
+  ],
+  [
+   "Stone Edge",
+   13.690967695455694
+  ],
+  [
+   "Slack Off",
+   4.463300696205727
+  ],
+  [
+   "Fissure",
+   1.9003559393158023
+  ],
+  [
+   "Stealth Rock",
+   1.8558268987658075
+  ],
+  [
+   "Whirlwind",
+   1.5614095463228275
+  ],
+  [
+   "Rock Tomb",
+   1.4846000490537754
+  ],
+  [
+   "Stockpile",
+   1.4641377143370236
+  ]
+ ],
+ "spreads": [
+  [
+   "Careful:32/0/2/0/32/0",
+   8.228041074966717
+  ],
+  [
+   "Careful:32/0/6/0/28/0",
+   6.8271858337996525
+  ],
+  [
+   "Brave:25/8/1/0/32/0",
+   6.058852314468923
+  ],
+  [
+   "Impish:32/0/2/0/32/0",
+   5.971882586717095
+  ],
+  [
+   "Careful:32/4/12/0/18/0",
+   4.771672558857712
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Rillaboom",
+   13.979173008889173
+  ],
+  [
+   "Incineroar",
+   13.265586053607024
+  ],
+  [
+   "Gengar-Mega",
+   11.091002615866842
+  ],
+  [
+   "Kingambit",
+   7.815167174717192
+  ],
+  [
+   "Primarina",
+   3.0550584477437868
+  ],
+  [
+   "Glimmora",
+   3.015917924032645
+  ],
+  [
+   "Kommo-o",
+   2.6601278312283645
+  ],
+  [
+   "Excadrill",
+   2.438809454979703
+  ],
+  [
+   "Pawmot",
+   2.151484489028679
+  ],
+  [
+   "Staraptor-Mega",
+   2.087239275901807
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Garchomp-Mega-Z",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Leftovers",
+   "ability": "Sand Stream",
+   "moves": [
+    "High Horsepower",
+    "Stone Edge",
+    "Yawn",
+    "Protect"
+   ],
+   "count": 7,
+   "bestPlacing": 2,
+   "bestPlayer": "Finnick",
+   "eventName": "Tenki's Cart Weekly #123 - Reg M-C",
+   "eventSlug": "2026-10-22-tenki-s-cart-weekly-123-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad1d260115c12b73a5a4ffa",
+   "nature": "Careful"
+  },
+  {
+   "item": "Sitrus Berry",
+   "ability": "Sand Stream",
+   "moves": [
+    "High Horsepower",
+    "Stone Edge",
+    "Yawn",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 7,
+   "bestPlayer": "eanna_h",
+   "eventName": "TARTAN TAKEDOWN #43! - [CHAMPIONS REG M-C!]",
+   "eventSlug": "2026-10-20-tartan-takedown-43-champions-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ac559ee85920e4d2536589b",
+   "nature": "Careful"
+  },
+  {
+   "item": "Leftovers",
+   "ability": "Sand Stream",
+   "moves": [
+    "High Horsepower",
+    "Rock Slide",
+    "Yawn",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 8,
+   "bestPlayer": "HINOX",
+   "eventName": "Off Meta Fight Club #8 ($40 USD prize pool)",
+   "eventSlug": "2026-10-29-off-meta-fight-club-8-40-usd-prize-pool",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ada821a97e21d82e5c6cc67",
+   "nature": "Impish"
+  }
+ ]
+}

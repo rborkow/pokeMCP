@@ -1,0 +1,280 @@
+{
+ "id": "indeedee",
+ "name": "Indeedee",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.0681981,
+   "rank": 26,
+   "raw": 242274
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.057714999999999995,
+   "rank": 32,
+   "raw": 244426
+  }
+ ],
+ "abilities": [
+  [
+   "Psychic Surge",
+   99.66378709055084
+  ],
+  [
+   "Inner Focus",
+   0.3252235383257208
+  ],
+  [
+   "Synchronize",
+   0.01098937112344319
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   48.83871705440704
+  ],
+  [
+   "Choice Scarf",
+   43.12205400477917
+  ],
+  [
+   "Twisted Spoon",
+   2.1109222369239107
+  ],
+  [
+   "Colbur Berry",
+   1.9982463603300669
+  ],
+  [
+   "Life Orb",
+   1.9902137538211115
+  ],
+  [
+   "Psychic Seed",
+   0.7075864130076729
+  ],
+  [
+   "Sitrus Berry",
+   0.6177857066400629
+  ],
+  [
+   "Terrain Extender",
+   0.12078716286754616
+  ]
+ ],
+ "moves": [
+  [
+   "Expanding Force",
+   24.961588962109786
+  ],
+  [
+   "Trick Room",
+   13.870079311267977
+  ],
+  [
+   "Imprison",
+   12.013830957604636
+  ],
+  [
+   "Mystical Fire",
+   10.167748489353203
+  ],
+  [
+   "Protect",
+   9.954471748289514
+  ],
+  [
+   "Trick",
+   9.292916409900421
+  ],
+  [
+   "Hyper Voice",
+   7.331189396302712
+  ],
+  [
+   "Energy Ball",
+   2.3963685660050875
+  ],
+  [
+   "Dazzling Gleam",
+   2.272338133953472
+  ],
+  [
+   "Helping Hand",
+   2.0668540862216696
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   45.12471532387423
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   18.771791080461607
+  ],
+  [
+   "Modest:0/0/2/32/0/32",
+   9.350251310170206
+  ],
+  [
+   "Modest:12/0/0/32/0/22",
+   2.8130706279259248
+  ],
+  [
+   "Timid:0/0/0/32/2/32",
+   2.51689073958935
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sneasler",
+   11.889079556771774
+  ],
+  [
+   "Charizard-Mega-Y",
+   7.278652725053718
+  ],
+  [
+   "Whimsicott",
+   5.824414376703095
+  ],
+  [
+   "Garchomp",
+   5.192699974559852
+  ],
+  [
+   "Salamence-Mega",
+   4.721684550384502
+  ],
+  [
+   "Tyranitar-Mega",
+   4.220190959740243
+  ],
+  [
+   "Excadrill",
+   4.196514090787037
+  ],
+  [
+   "Staraptor-Mega",
+   3.8366078798620897
+  ],
+  [
+   "Glimmora",
+   3.7494655036176083
+  ],
+  [
+   "Kingambit",
+   3.534006188074242
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Grimmsnarl",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Arcanine-Hisui",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Indeedee",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Salamence-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Focus Sash",
+   "ability": "Psychic Surge",
+   "moves": [
+    "Expanding Force",
+    "Energy Ball",
+    "Imprison",
+    "Trick Room"
+   ],
+   "count": 5,
+   "bestPlacing": 1,
+   "bestPlayer": "Whatsinthebox",
+   "eventName": "Sky Pillar Weekly Competition - SS9 - W4",
+   "eventSlug": "2026-10-09-sky-pillar-weekly-competition-ss9-w4",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ac330d485920e4d253643ad",
+   "nature": "Timid"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Psychic Surge",
+   "moves": [
+    "Expanding Force",
+    "Hyper Voice",
+    "Trick Room",
+    "Imprison"
+   ],
+   "count": 4,
+   "bestPlacing": 3,
+   "bestPlayer": "AndresitoKun",
+   "eventName": "Sketch Academy Sunday Regulation M-C Tournament",
+   "eventSlug": "2026-10-19-sketch-academy-sunday-regulation-m-c-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aba1756880ed327106de55f",
+   "nature": "Timid"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Psychic Surge",
+   "moves": [
+    "Expanding Force",
+    "Imprison",
+    "Trick Room",
+    "Protect"
+   ],
+   "count": 2,
+   "bestPlacing": 5,
+   "bestPlayer": "Goulz",
+   "eventName": "Tuesday Throwdowns #2 ($50 for the Winner!)",
+   "eventSlug": "2026-10-27-tuesday-throwdowns-2-50-for-the-winner",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad8e3398a8383117e3f0b5b",
+   "nature": "Timid"
+  }
+ ]
+}

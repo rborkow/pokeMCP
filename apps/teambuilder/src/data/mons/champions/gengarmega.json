@@ -2,15 +2,21 @@
  "id": "gengarmega",
  "name": "Gengar-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0351811,
-   "rank": 35,
-   "raw": 89335
+   "month": "2026-09",
+   "usage": 0.0614315,
+   "rank": 30,
+   "raw": 160372
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0655067,
+   "rank": 29,
+   "raw": 190055
   }
  ],
  "abilities": [
@@ -27,148 +33,112 @@
  ],
  "moves": [
   [
-   "Protect",
-   24.6597846021563
-  ],
-  [
    "Shadow Ball",
-   23.516941796299186
+   24.68825757137083
   ],
   [
-   "Perish Song",
-   18.852971867484293
+   "Protect",
+   24.486061927765412
   ],
   [
    "Sludge Bomb",
-   12.767903698015667
+   21.526663419533477
   ],
   [
-   "Disable",
-   12.571355074742588
+   "Perish Song",
+   16.339232675787137
   ],
   [
    "Substitute",
-   1.2548796656068353
+   3.589746789187362
+  ],
+  [
+   "Disable",
+   2.4968499282325447
   ],
   [
    "Icy Wind",
-   0.9589791859324563
+   2.339044469521913
   ],
   [
-   "Sludge Wave",
-   0.6603110004697846
+   "Focus Blast",
+   1.5028224266925774
   ],
   [
-   "Taunt",
-   0.5760729589015758
+   "Nasty Plot",
+   0.8284226073288126
   ],
   [
-   "Will-O-Wisp",
-   0.4605905524145447
+   "Dazzling Gleam",
+   0.5027472816745009
   ]
  ],
  "spreads": [
   [
    "Timid:2/0/0/32/0/32",
-   14.520685479898582
+   11.718855078356285
   ],
   [
-   "Modest:30/0/1/1/28/6",
-   4.372171373638507
+   "Modest:32/0/0/0/26/8",
+   3.551363997973268
+  ],
+  [
+   "Modest:32/0/4/10/8/12",
+   3.0753992189663157
+  ],
+  [
+   "Modest:32/0/0/0/14/20",
+   2.400140892997585
   ],
   [
    "Timid:32/0/0/2/0/32",
-   4.114805048783542
-  ],
-  [
-   "Timid:32/0/9/1/1/23",
-   2.904217602899647
-  ],
-  [
-   "Modest:30/0/15/0/1/20",
-   2.561242514110821
+   2.364211635568856
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Incineroar",
-   15.517343285016919
+   15.747514731463646
   ],
   [
-   "Sinistcha",
-   9.176693959427858
+   "Rillaboom",
+   14.78345492931876
   ],
   [
    "Politoed",
-   7.153488621565697
+   6.176952874948116
   ],
   [
    "Archaludon",
-   5.072312181091563
+   5.830535563386909
+  ],
+  [
+   "Kommo-o",
+   5.694247116170438
   ],
   [
    "Kingambit",
-   4.732924510167042
+   4.031163392039222
   ],
   [
-   "Ninetales-Alola",
-   3.6377143360132673
-  ],
-  [
-   "Grimmsnarl",
-   3.238699289242656
-  ],
-  [
-   "Swampert-Mega",
-   2.6913350501428073
+   "Vivillon",
+   3.597564219974067
   ],
   [
    "Sneasler",
-   2.559092198508457
+   2.9714111978246778
   ],
   [
-   "Garchomp",
-   2.3986971019165493
+   "Primarina",
+   2.7111797963370123
+  ],
+  [
+   "Indeedee-F",
+   1.9277049808725557
   ]
  ],
  "counters": [
-  {
-   "name": "Rotom-Wash",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Swampert-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Archaludon",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Pelipper",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sneasler",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Basculegion",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
   {
    "name": "Farigiraf",
    "score": 0,
@@ -176,7 +146,43 @@
    "switchPct": 0
   },
   {
+   "name": "Arcanine-Hisui",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Espathra",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Excadrill",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Tyranitar-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
    "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Volcarona",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

@@ -1,0 +1,192 @@
+{
+ "id": "garchompmegaz",
+ "name": "Garchomp-Mega-Z",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.082632,
+   "rank": 22,
+   "raw": 244504
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.1180231,
+   "rank": 16,
+   "raw": 409179
+  }
+ ],
+ "abilities": [
+  [
+   "Levitate",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "garchompitez",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   24.769721719267327
+  ],
+  [
+   "Power Gem",
+   22.484097487227615
+  ],
+  [
+   "Earth Power",
+   20.77415843853666
+  ],
+  [
+   "Dragon Pulse",
+   15.473138146532333
+  ],
+  [
+   "Draco Meteor",
+   9.659461262125472
+  ],
+  [
+   "Flamethrower",
+   5.4695579014841655
+  ],
+  [
+   "Substitute",
+   0.5907345959407109
+  ],
+  [
+   "Fire Blast",
+   0.16349127354107992
+  ],
+  [
+   "Rock Slide",
+   0.14117274191671902
+  ],
+  [
+   "Stomping Tantrum",
+   0.09384441669026697
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:2/0/0/32/0/32",
+   32.67611135919122
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   10.744654891225691
+  ],
+  [
+   "Modest:0/0/4/30/0/32",
+   8.826487407513875
+  ],
+  [
+   "Modest:1/0/1/32/0/32",
+   5.301658639724919
+  ],
+  [
+   "Modest:0/0/1/32/1/32",
+   3.376728989683454
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Rillaboom",
+   10.70396064292744
+  ],
+  [
+   "Incineroar",
+   10.217801848912668
+  ],
+  [
+   "Volcarona",
+   6.5886273246643405
+  ],
+  [
+   "Sneasler",
+   5.9582012040423376
+  ],
+  [
+   "Farigiraf",
+   5.163055720449424
+  ],
+  [
+   "Gholdengo",
+   4.802730030228856
+  ],
+  [
+   "Raichu-Mega-Y",
+   4.579751788066616
+  ],
+  [
+   "Archaludon",
+   4.482211328165819
+  ],
+  [
+   "Charizard-Mega-Y",
+   3.858551466878688
+  ],
+  [
+   "Pelipper",
+   3.4690402070570796
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Arcanine-Hisui",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Golisopod-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Tyranitar-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Salamence-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

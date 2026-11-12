@@ -2,187 +2,187 @@
  "id": "grimmsnarl",
  "name": "Grimmsnarl",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.1502407,
-   "rank": 13,
-   "raw": 440427
+   "month": "2026-09",
+   "usage": 0.0525287,
+   "rank": 34,
+   "raw": 174777
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0692304,
+   "rank": 28,
+   "raw": 214090
   }
  ],
  "abilities": [
   [
    "Prankster",
-   99.4727944821981
-  ],
-  [
-   "Frisk",
-   0.3335759114212517
+   99.232666477809
   ],
   [
    "Pickpocket",
-   0.19362960638064342
+   0.5700132920071002
+  ],
+  [
+   "Frisk",
+   0.19732023018389722
   ]
  ],
  "items": [
   [
    "Light Clay",
-   78.93824791758273
+   91.63535669857787
   ],
   [
    "Roseli Berry",
-   10.038823213051504
-  ],
-  [
-   "Sitrus Berry",
-   2.496862978150122
-  ],
-  [
-   "Babiri Berry",
-   1.3948912566279335
-  ],
-  [
-   "Black Glasses",
-   1.17723305848207
-  ],
-  [
-   "Leftovers",
-   1.1217022781126396
-  ],
-  [
-   "Mental Herb",
-   1.0773843997141686
+   4.73524529284275
   ],
   [
    "Focus Sash",
-   0.9249795178866725
+   0.7554893066075
+  ],
+  [
+   "Sitrus Berry",
+   0.5307537480936413
+  ],
+  [
+   "Black Glasses",
+   0.43366976472183627
+  ],
+  [
+   "Eject Button",
+   0.42897698910536614
+  ],
+  [
+   "Expert Belt",
+   0.3670046146723695
+  ],
+  [
+   "Rocky Helmet",
+   0.2254441410722829
   ]
  ],
  "moves": [
   [
    "Parting Shot",
-   21.38005019300437
-  ],
-  [
-   "Reflect",
-   20.797619471413846
+   24.134467133614304
   ],
   [
    "Light Screen",
-   20.59940623523375
+   23.296124893118378
+  ],
+  [
+   "Reflect",
+   22.556612915369783
   ],
   [
    "Spirit Break",
-   14.065702956266692
+   21.817275789928125
   ],
   [
    "Fake Out",
-   7.785313407837446
-  ],
-  [
-   "Foul Play",
-   5.830631342874628
+   3.2868490926648937
   ],
   [
    "Scary Face",
-   3.243447868431372
+   1.5792957546940691
+  ],
+  [
+   "Foul Play",
+   0.8771430350795226
   ],
   [
    "Sucker Punch",
-   1.662985722979907
+   0.6974550092365999
   ],
   [
    "Fake Tears",
-   1.232370381557517
+   0.4534503141236937
   ],
   [
-   "Swagger",
-   0.6984080632009383
+   "Protect",
+   0.30033994357425975
   ]
  ],
  "spreads": [
   [
+   "Sassy:29/0/22/0/15/0",
+   11.029137398558635
+  ],
+  [
    "Careful:32/0/19/0/15/0",
-   7.709819994300809
+   8.963073743714315
   ],
   [
-   "Careful:32/2/0/0/32/0",
-   6.848970772473249
+   "Careful:32/0/2/0/32/0",
+   3.8122981590076974
   ],
   [
-   "Calm:32/0/20/0/14/0",
-   5.863994741711073
+   "Sassy:31/0/20/0/15/0",
+   3.514340910847612
   ],
   [
-   "Careful:32/0/20/0/14/0",
-   2.90018639427383
-  ],
-  [
-   "Sassy:31/0/24/0/11/0",
-   2.6852492717687126
+   "Sassy:32/0/19/0/15/0",
+   2.9562049872145044
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Sinistcha",
-   11.292856286670933
+   "Archaludon",
+   14.671408190449014
   ],
   [
    "Pelipper",
-   6.547643937641369
+   11.836541960558373
   ],
   [
-   "Staraptor-Mega",
-   6.5385911514970845
+   "Charizard-Mega-Y",
+   10.028021404202121
   ],
   [
-   "Archaludon",
-   5.85936878642615
-  ],
-  [
-   "Swampert-Mega",
-   5.509239565278343
+   "Venusaur",
+   6.469456504941269
   ],
   [
    "Garchomp",
-   5.249838765942512
+   4.679960572913119
   ],
   [
-   "Metagross-Mega",
-   4.830587071655593
+   "Golisopod-Mega",
+   4.652933271897148
   ],
   [
-   "Incineroar",
-   4.545618905794395
+   "Garchomp-Mega-Z",
+   4.383394120924818
   ],
   [
-   "Basculegion",
-   3.4333132712720142
+   "Politoed",
+   3.3723399191618806
   ],
   [
-   "Gholdengo",
-   3.188264828266231
+   "Sinistcha",
+   2.671149257827333
+  ],
+  [
+   "Farigiraf",
+   2.639883916648391
   ]
  ],
  "counters": [
   {
-   "name": "Floette-Mega",
+   "name": "Archaludon",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Rotom-Wash",
+   "name": "Swampert-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -194,25 +194,31 @@
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
+   "name": "Raichu-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sableye",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Charizard-Mega-Y",
+   "name": "Indeedee",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Scovillain-Mega",
+   "name": "Salamence-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Indeedee-F",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -223,52 +229,35 @@
    "item": "Light Clay",
    "ability": "Prankster",
    "moves": [
-    "Foul Play",
-    "Parting Shot",
     "Light Screen",
-    "Reflect"
+    "Spirit Break",
+    "Reflect",
+    "Parting Shot"
    ],
-   "count": 27,
+   "count": 50,
    "bestPlacing": 1,
-   "bestPlayer": "Samuel T",
-   "eventName": "Talon's FIGHT CLUB #91 POKEMON CHAMPIONS",
-   "eventSlug": "2026-07-02-talon-s-fight-club-91-pokemon-champions",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a32e85d2d97f3b0c26189c9",
-   "nature": "Calm"
+   "bestPlayer": "Koalelu",
+   "eventName": "Amyverse VGC Champions Arena #18 ❤️ Cash Prize!",
+   "eventSlug": "2026-11-09-amyverse-vgc-champions-arena-18-cash-prize",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae8e279e94eae0f94745a97",
+   "nature": "Careful"
   },
   {
    "item": "Light Clay",
    "ability": "Prankster",
    "moves": [
-    "Parting Shot",
-    "Reflect",
+    "Spirit Break",
     "Light Screen",
-    "Spirit Break"
-   ],
-   "count": 24,
-   "bestPlacing": 1,
-   "bestPlayer": "Force_India",
-   "eventName": "Pep_uni Pokémon Champions #1",
-   "eventSlug": "2026-06-28-pep-uni-pok-mon-champions-1",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3db5bdc87cd9ff0a30f75a",
-   "nature": "Careful"
-  },
-  {
-   "item": "Roseli Berry",
-   "ability": "Prankster",
-   "moves": [
-    "Foul Play",
-    "Parting Shot",
     "Reflect",
     "Fake Out"
    ],
-   "count": 2,
-   "bestPlacing": 3,
-   "bestPlayer": "Aidan Junker",
-   "eventName": "Tyrant Thursdays #2",
-   "eventSlug": "2026-06-25-tyrant-thursdays-2",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3b53a483fd320299bcf113",
-   "nature": "Sassy"
+   "count": 1,
+   "bestPlacing": 2,
+   "bestPlayer": "Kronos",
+   "eventName": "Wolfey Patreon Tournament - Spooky Cup!",
+   "eventSlug": "2026-10-25-wolfey-patreon-tournament-spooky-cup",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6acf6032115c12b73a5a39fe",
+   "nature": "Bold"
   }
  ]
 }

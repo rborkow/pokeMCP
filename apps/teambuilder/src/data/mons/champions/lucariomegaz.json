@@ -1,0 +1,192 @@
+{
+ "id": "lucariomegaz",
+ "name": "Lucario-Mega-Z",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.0395736,
+   "rank": 38,
+   "raw": 206660
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0128314,
+   "rank": 65,
+   "raw": 102586
+  }
+ ],
+ "abilities": [
+  [
+   "auraguard",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "lucarionitez",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Aura Sphere",
+   23.98416684276881
+  ],
+  [
+   "Flash Cannon",
+   20.783195294849627
+  ],
+  [
+   "Protect",
+   12.878429564083113
+  ],
+  [
+   "Detect",
+   10.404691937275084
+  ],
+  [
+   "Calm Mind",
+   9.72041529360141
+  ],
+  [
+   "Dark Pulse",
+   5.743950384493654
+  ],
+  [
+   "Nasty Plot",
+   4.544545657786221
+  ],
+  [
+   "Steel Beam",
+   3.608573598474292
+  ],
+  [
+   "Terrain Pulse",
+   1.9103476576162917
+  ],
+  [
+   "Vacuum Wave",
+   0.8665565168030767
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   13.99933941070077
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   12.93033740345105
+  ],
+  [
+   "Timid:32/0/2/7/8/17",
+   5.536115359890191
+  ],
+  [
+   "Timid:24/0/0/0/10/32",
+   3.3981335017865923
+  ],
+  [
+   "Timid:32/0/0/2/0/32",
+   1.8628504739969287
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Rillaboom",
+   13.257195509541383
+  ],
+  [
+   "Incineroar",
+   9.490320503494749
+  ],
+  [
+   "Basculegion",
+   5.595210899593907
+  ],
+  [
+   "Indeedee-F",
+   4.129173123001304
+  ],
+  [
+   "Sneasler",
+   4.123391469730305
+  ],
+  [
+   "Salamence-Mega",
+   3.5752698555320697
+  ],
+  [
+   "Volcarona",
+   3.1299499687035723
+  ],
+  [
+   "Garchomp-Mega-Z",
+   3.0234897871782436
+  ],
+  [
+   "Kingambit",
+   2.1349005166292963
+  ],
+  [
+   "Garchomp",
+   2.0470169002118497
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Indeedee-F",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

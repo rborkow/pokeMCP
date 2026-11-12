@@ -2,15 +2,21 @@
  "id": "delphoxmega",
  "name": "Delphox-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0572687,
-   "rank": 24,
-   "raw": 106732
+   "month": "2026-09",
+   "usage": 0.0320742,
+   "rank": 42,
+   "raw": 113972
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0513332,
+   "rank": 39,
+   "raw": 127362
   }
  ],
  "abilities": [
@@ -28,155 +34,155 @@
  "moves": [
   [
    "Protect",
-   24.591660830082606
+   24.881809843003268
   ],
   [
    "Heat Wave",
-   24.562442254441333
+   24.61225897376472
   ],
   [
    "Nasty Plot",
-   16.25429499797458
+   17.70228628974806
   ],
   [
    "Psychic",
-   13.709610683648885
+   17.009889408744865
   ],
   [
    "Psyshock",
-   10.831575561390581
+   4.684259052968044
   ],
   [
    "Encore",
-   2.2905898614446802
+   3.4698402886220467
+  ],
+  [
+   "Expanding Force",
+   3.2064268892246486
   ],
   [
    "Substitute",
-   1.6719395280568328
+   1.3977897222400653
   ],
   [
    "Calm Mind",
-   1.244789329637009
+   0.7108917908036767
   ],
   [
-   "Scorching Sands",
-   0.9807192168632477
-  ],
-  [
-   "Dazzling Gleam",
-   0.8432543539961765
+   "Flamethrower",
+   0.31577279717689055
   ]
  ],
  "spreads": [
   [
-   "Timid:1/0/0/32/1/32",
-   13.122867164887172
+   "Timid:9/0/14/11/0/32",
+   16.44848181257791
   ],
   [
    "Timid:2/0/0/32/0/32",
-   8.491170380410928
+   11.80569288452557
   ],
   [
-   "Timid:19/0/1/17/0/29",
-   6.260234643029166
+   "Timid:1/0/0/32/1/32",
+   7.605246318308626
+  ],
+  [
+   "Timid:4/0/0/30/0/32",
+   5.0938485117954375
   ],
   [
    "Timid:11/0/4/19/0/32",
-   4.61674053658255
-  ],
-  [
-   "Timid:0/0/0/32/2/32",
-   2.531741452087359
+   3.9751927366447797
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Sinistcha",
-   11.415737298333235
-  ],
-  [
-   "Incineroar",
-   8.657616150090593
-  ],
-  [
-   "Garchomp",
-   8.064007583006171
+   "Sneasler",
+   12.679673282076296
   ],
   [
    "Kingambit",
-   7.350861253875298
+   12.621946068908338
   ],
   [
-   "Sneasler",
-   7.228745441051995
+   "Incineroar",
+   9.558943562725995
   ],
   [
-   "Whimsicott",
-   5.413421521108916
+   "Sinistcha",
+   7.71288427907242
   ],
   [
-   "Floette-Mega",
-   5.372311098675694
+   "Garchomp",
+   6.11925891852731
   ],
   [
-   "Staraptor-Mega",
-   4.433797311816922
-  ],
-  [
-   "Maushold",
-   4.157424054849092
+   "Rillaboom",
+   5.606367889547449
   ],
   [
    "Basculegion",
-   4.061693546177094
+   4.619153218290875
+  ],
+  [
+   "Floette-Mega",
+   4.320500865700027
+  ],
+  [
+   "Dragonite-Mega",
+   4.073086307288315
+  ],
+  [
+   "Kommo-o",
+   3.1379068477967986
   ]
  ],
  "counters": [
   {
-   "name": "Garchomp",
+   "name": "Milotic",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Basculegion",
+   "name": "Espathra",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Charizard-Mega-Y",
+   "name": "Archaludon",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
+   "name": "Incineroar",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Primarina",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Kingambit",
+   "name": "Indeedee",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sneasler",
+   "name": "Gholdengo",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Grimmsnarl",
+   "name": "Arcanine-Hisui",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

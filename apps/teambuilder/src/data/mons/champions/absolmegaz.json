@@ -1,0 +1,180 @@
+{
+ "id": "absolmegaz",
+ "name": "Absol-Mega-Z",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.0193824,
+   "rank": 58,
+   "raw": 120733
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.011460999999999999,
+   "rank": 67,
+   "raw": 76746
+  }
+ ],
+ "abilities": [
+  [
+   "Sharpness",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "absolitez",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Night Slash",
+   22.506622014480083
+  ],
+  [
+   "Close Combat",
+   14.698342424907631
+  ],
+  [
+   "Shadow Claw",
+   14.56958536494083
+  ],
+  [
+   "Detect",
+   11.046904354570492
+  ],
+  [
+   "Protect",
+   9.4937721945299
+  ],
+  [
+   "Psycho Cut",
+   6.649830704569649
+  ],
+  [
+   "Icy Wind",
+   6.285159422455994
+  ],
+  [
+   "Sucker Punch",
+   3.9525635235847028
+  ],
+  [
+   "Focus Energy",
+   2.743890010488316
+  ],
+  [
+   "Will-O-Wisp",
+   1.5236207773866135
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:2/32/0/0/0/32",
+   28.828990422088424
+  ],
+  [
+   "Jolly:0/32/0/0/0/32",
+   9.00938923032485
+  ],
+  [
+   "Jolly:1/32/1/0/0/32",
+   8.925960882746319
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   8.085695423330817
+  ],
+  [
+   "Jolly:0/32/2/0/0/32",
+   3.9679340418062545
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Rillaboom",
+   7.645668530074606
+  ],
+  [
+   "Indeedee-F",
+   7.240038915319966
+  ],
+  [
+   "Sneasler",
+   7.143454305616963
+  ],
+  [
+   "Incineroar",
+   5.170634154243158
+  ],
+  [
+   "Basculegion",
+   4.472669940609501
+  ],
+  [
+   "Kommo-o",
+   4.278979134545306
+  ],
+  [
+   "Armarouge",
+   4.213008937021575
+  ],
+  [
+   "Gengar-Mega",
+   3.0010652232495074
+  ],
+  [
+   "Farigiraf",
+   2.700041888493029
+  ],
+  [
+   "Maushold",
+   2.5688012525346378
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Indeedee-F",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

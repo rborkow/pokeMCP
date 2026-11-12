@@ -2,15 +2,21 @@
  "id": "scovillainmega",
  "name": "Scovillain-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0252421,
-   "rank": 48,
-   "raw": 47161
+   "month": "2026-09",
+   "usage": 0.0125976,
+   "rank": 68,
+   "raw": 45617
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.011976599999999999,
+   "rank": 66,
+   "raw": 42697
   }
  ],
  "abilities": [
@@ -28,111 +34,129 @@
  "moves": [
   [
    "Rage Powder",
-   24.598911575754943
+   24.796161412349797
   ],
   [
    "Protect",
-   24.17321720521942
+   24.39892284369982
   ],
   [
    "Overheat",
-   19.004724741337988
+   20.00633202260106
   ],
   [
    "Giga Drain",
-   12.47035983652445
+   14.090707333378377
   ],
   [
    "Leech Seed",
-   12.411647191801624
+   9.313281802541272
   ],
   [
    "Flamethrower",
-   4.47243015142221
+   4.290702123711929
   ],
   [
-   "Leaf Storm",
-   0.6872508601739806
-  ],
-  [
-   "Energy Ball",
-   0.41630445466227933
+   "Super Fang",
+   1.1110649489142284
   ],
   [
    "Spicy Extract",
-   0.39927291202056253
+   0.3266517573127045
   ],
   [
-   "Burning Jealousy",
-   0.28294557338284526
+   "Energy Ball",
+   0.2895621324085471
+  ],
+  [
+   "Leaf Storm",
+   0.2629787592117459
   ]
  ],
  "spreads": [
   [
-   "Calm:32/0/19/0/15/0",
-   12.713092440245655
+   "Bold:32/0/32/0/2/0",
+   9.515241667540414
   ],
   [
-   "Calm:32/0/2/0/32/0",
-   6.203273605201218
+   "Calm:32/0/19/0/15/0",
+   7.860297572059462
   ],
   [
    "Bold:32/0/15/0/19/0",
-   5.6747278436842805
+   5.655084386533214
   ],
   [
-   "Calm:32/0/9/0/25/0",
-   5.2247937672783165
+   "Bold:32/0/19/0/15/0",
+   4.543781695218456
   ],
   [
-   "Bold:32/0/25/0/5/4",
-   4.832145807278355
+   "Bold:31/0/27/0/8/0",
+   3.009140371186952
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Basculegion",
-   9.54174678620721
-  ],
-  [
    "Sneasler",
-   7.944982060585066
+   9.113373611618695
   ],
   [
    "Kingambit",
-   7.472606090380382
+   8.313134804705633
+  ],
+  [
+   "Basculegion",
+   7.554177966684547
   ],
   [
    "Froslass-Mega",
-   5.5052640867578
-  ],
-  [
-   "Lycanroc-Dusk",
-   5.502594179609696
+   6.711483442219931
   ],
   [
    "Archaludon",
-   4.9855375730849385
+   6.090989259465078
+  ],
+  [
+   "Lycanroc-Dusk",
+   5.4311759561142
+  ],
+  [
+   "Politoed",
+   3.9273422494379955
+  ],
+  [
+   "Incineroar",
+   3.3872810363313146
+  ],
+  [
+   "Espathra",
+   3.3295811526164747
   ],
   [
    "Gholdengo",
-   3.04124797166534
-  ],
-  [
-   "Pelipper",
-   2.895959409686992
-  ],
-  [
-   "Grimmsnarl",
-   2.8441889661674087
-  ],
-  [
-   "Sylveon",
-   2.4801408748058376
+   2.616695435475396
   ]
  ],
  "counters": [
+  {
+   "name": "Indeedee-F",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
   {
    "name": "Incineroar",
    "score": 0,
@@ -140,43 +164,25 @@
    "switchPct": 0
   },
   {
-   "name": "Sylveon",
+   "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Grimmsnarl",
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
    "name": "Sneasler",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Floette-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sinistcha",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Raichu-Mega-Y",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Charizard-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

@@ -2,193 +2,187 @@
  "id": "whimsicott",
  "name": "Whimsicott",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.2667124,
-   "rank": 5,
-   "raw": 689998
+   "month": "2026-09",
+   "usage": 0.0790718,
+   "rank": 23,
+   "raw": 390815
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.1158234,
+   "rank": 17,
+   "raw": 433490
   }
  ],
  "abilities": [
   [
    "Prankster",
-   99.88657081112045
+   95.1375801579927
   ],
   [
    "Chlorophyll",
-   0.08964328112944589
+   4.784692693221694
   ],
   [
    "Infiltrator",
-   0.02378590775009929
+   0.07772714878561873
   ]
  ],
  "items": [
   [
    "Focus Sash",
-   78.57661779485785
-  ],
-  [
-   "Fairy Feather",
-   7.494451348604121
-  ],
-  [
-   "Mental Herb",
-   5.607356949649226
-  ],
-  [
-   "Coba Berry",
-   2.374091436940731
-  ],
-  [
-   "Sitrus Berry",
-   1.6323791081494388
+   64.78707215661697
   ],
   [
    "Occa Berry",
-   1.354370930570666
-  ],
-  [
-   "Kebia Berry",
-   0.5294218890443602
+   9.353750723442515
   ],
   [
    "Babiri Berry",
-   0.4796315176874678
+   7.7307623606827
+  ],
+  [
+   "Life Orb",
+   5.503308409820619
+  ],
+  [
+   "Fairy Feather",
+   4.778207212076181
+  ],
+  [
+   "Mental Herb",
+   2.8760044388832458
+  ],
+  [
+   "Rocky Helmet",
+   1.295076910511538
+  ],
+  [
+   "Coba Berry",
+   1.29142275268702
   ]
  ],
  "moves": [
   [
    "Tailwind",
-   24.68598718612718
+   24.31050185924442
   ],
   [
    "Moonblast",
-   23.10694942746952
+   23.342532770771168
   ],
   [
    "Encore",
-   17.02242136536894
+   16.96177949783147
   ],
   [
    "Protect",
-   14.833064953917846
-  ],
-  [
-   "Charm",
-   4.286931298775098
+   15.975063472415673
   ],
   [
    "Sunny Day",
-   4.05952564992955
+   5.135114925508877
+  ],
+  [
+   "Charm",
+   4.813943980808507
   ],
   [
    "Fake Tears",
-   2.9281980146465467
+   1.6329376771997268
   ],
   [
-   "Tickle",
-   2.1665657882846756
+   "Dazzling Gleam",
+   1.0039464015322654
+  ],
+  [
+   "Grassy Terrain",
+   0.8799158967890398
   ],
   [
    "Energy Ball",
-   1.6425047810696445
-  ],
-  [
-   "Taunt",
-   1.0644817868669332
+   0.8613190950564115
   ]
  ],
  "spreads": [
   [
    "Timid:2/0/0/32/0/32",
-   47.67823579502025
+   47.511179066685976
   ],
   [
    "Modest:2/0/0/32/0/32",
-   5.130870391271978
+   7.345896936606165
   ],
   [
-   "Bold:32/0/32/2/0/0",
-   5.094043689489591
+   "Timid:32/0/10/0/17/7",
+   5.1159769583160335
   ],
   [
-   "Timid:32/0/0/2/0/32",
-   2.662293712521617
+   "Timid:15/0/0/32/0/19",
+   3.9422093360347006
   ],
   [
    "Timid:0/0/2/32/0/32",
-   2.630835301408167
+   3.854237288323293
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Garchomp",
-   11.112643803946012
-  ],
-  [
-   "Basculegion",
-   9.6987939375795
-  ],
-  [
    "Charizard-Mega-Y",
-   6.624998057686371
+   10.216760504063691
   ],
   [
-   "Staraptor-Mega",
-   5.693901475969609
+   "Garchomp",
+   9.04206520829505
   ],
   [
    "Kingambit",
-   5.648473150388784
+   7.212084179920832
   ],
   [
-   "Floette-Mega",
-   4.715469122249046
-  ],
-  [
-   "Incineroar",
-   4.3139664036315395
-  ],
-  [
-   "Gholdengo",
-   3.987252163399279
-  ],
-  [
-   "Farigiraf",
-   3.6449923283319863
+   "Basculegion",
+   7.123237951080333
   ],
   [
    "Sneasler",
-   2.6295128847496096
+   4.9159930738208555
+  ],
+  [
+   "Staraptor-Mega",
+   4.3524611216455895
+  ],
+  [
+   "Glimmora",
+   3.420308502774966
+  ],
+  [
+   "Floette-Mega",
+   3.292425413968511
+  ],
+  [
+   "Indeedee-F",
+   3.132069733233298
+  ],
+  [
+   "Indeedee",
+   2.902313703923366
   ]
  ],
  "counters": [
   {
-   "name": "Sneasler",
+   "name": "Pawmot",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Milotic",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Gardevoir-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Aerodactyl",
+   "name": "Froslass-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -200,19 +194,31 @@
    "switchPct": 0
   },
   {
+   "name": "Milotic",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
    "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Raichu",
+   "name": "Tyranitar-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -223,51 +229,51 @@
    "item": "Focus Sash",
    "ability": "Prankster",
    "moves": [
-    "Moonblast",
-    "Tailwind",
+    "Protect",
     "Encore",
-    "Protect"
+    "Moonblast",
+    "Tailwind"
    ],
-   "count": 56,
+   "count": 47,
    "bestPlacing": 1,
-   "bestPlayer": "cabalododemo",
-   "eventName": "King's Gambit #7 | Reg M-B",
-   "eventSlug": "2026-07-05-king-s-gambit-7-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a37eef2ceacae7d6441bbd5",
-   "nature": "Timid"
-  },
-  {
-   "item": "Fairy Feather",
-   "ability": "Prankster",
-   "moves": [
-    "Moonblast",
-    "Tailwind",
-    "Encore",
-    "Protect"
-   ],
-   "count": 8,
-   "bestPlacing": 3,
-   "bestPlayer": "VortexTheGreat",
-   "eventName": "Palafin Pals Jet Punch Series 🌊✊Reg M-B #2",
-   "eventSlug": "2026-06-22-palafin-pals-jet-punch-series-reg-m-b-2",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a390b81c87cd9ff0a30cfc3",
+   "bestPlayer": "MakeItRain",
+   "eventName": "Alpensee Tour (Reg M-C) #83",
+   "eventSlug": "2026-11-11-alpensee-tour-reg-m-c-83",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad8f0ae8a8383117e3f0c23",
    "nature": "Timid"
   },
   {
    "item": "Focus Sash",
    "ability": "Prankster",
    "moves": [
-    "Encore",
-    "Tailwind",
     "Moonblast",
+    "Tailwind",
+    "Protect",
     "Sunny Day"
    ],
-   "count": 5,
+   "count": 10,
    "bestPlacing": 1,
-   "bestPlayer": "Alchemist_23",
-   "eventName": "Champions League VGC June",
-   "eventSlug": "2026-06-27-champions-league-vgc-june",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a397c79c87cd9ff0a30d359",
+   "bestPlayer": "Tachyon112358",
+   "eventName": "Tuesday Throwdowns #3 (Top Cut, $50 for 1st)",
+   "eventSlug": "2026-11-11-tuesday-throwdowns-3-top-cut-50-for-1st",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae18daf80a8f79408d1ff13",
+   "nature": "Timid"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Prankster",
+   "moves": [
+    "Moonblast",
+    "Tailwind",
+    "Charm",
+    "Encore"
+   ],
+   "count": 4,
+   "bestPlacing": 3,
+   "bestPlayer": "gamervision",
+   "eventName": "⛩️$30 VGC Champions Tournament Ep 33!⛩️",
+   "eventSlug": "2026-10-16-30-vgc-champions-tournament-ep-33",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ac9235f8a8383117e3e7ca4",
    "nature": "Timid"
   }
  ]
