@@ -7,7 +7,6 @@ const destinations = [
     { href: "/", label: "Newsroom" },
     { href: "/prep/new", label: "New prep" },
     { href: "/teams", label: "Teams" },
-    { href: "/build", label: "Build" },
 ];
 
 export function PrepHeader() {
@@ -23,7 +22,7 @@ export function PrepHeader() {
                         PokeMCP <span className="text-muted-foreground">Prep</span>
                     </span>
                 </Link>
-                <nav aria-label="Primary" className="order-3 grid w-full grid-cols-4 items-center gap-1 sm:order-none sm:flex sm:w-auto">
+                <nav aria-label="Primary" className="order-3 grid w-full grid-cols-3 items-center gap-1 sm:order-none sm:flex sm:w-auto">
                     {destinations.map((destination) => {
                         const active =
                             destination.href === "/"

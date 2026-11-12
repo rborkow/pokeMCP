@@ -6,11 +6,11 @@ const nextConfig: NextConfig = {
     pageExtensions: ["ts", "tsx", "mdx"],
     async redirects() {
         return [
-            {
-                source: "/builder",
-                destination: "/build",
-                permanent: true,
-            },
+            // The team builder is gone. `/build` was linked from reports and
+            // the sitemap but never shipped (its page was caught by a `build/`
+            // ignore rule), so both old addresses lead home, not to a 404.
+            { source: "/builder", destination: "/", permanent: false },
+            { source: "/build", destination: "/", permanent: false },
         ];
     },
     images: {

@@ -327,15 +327,16 @@ export default async function MonPage({ params }: PageProps) {
                         Building a team with {mon.name}?
                     </h2>
                     <p className="mt-1 text-sm text-muted-foreground">
-                        The PokeMCP team builder checks your coverage against the counters above and
-                        validates the team for {mon.formatLabel}.
+                        VGC Teambuilder is a connector for Claude and ChatGPT. Ask your assistant
+                        for {mon.name}&apos;s common sets, teammates and counters, or to check a
+                        Champions team&apos;s legality and shared weaknesses.
                     </p>
-                    <Link
-                        href="/build"
+                    <a
+                        href="https://docs.pokemcp.com/tools"
                         className="mt-3 inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
                     >
-                        Open the team builder
-                    </Link>
+                        Add VGC Teambuilder
+                    </a>
                 </section>
             </footer>
         </article>

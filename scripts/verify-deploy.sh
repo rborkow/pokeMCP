@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# Post-deploy verification: hit the /health endpoint on each worker and
-# confirm every gateway-critical secret is populated. Exits non-zero if any
-# worker reports a missing secret.
+# Post-deploy verification: hit the health endpoint on each worker. The MCP
+# Worker must report every gateway-critical secret as populated; the website
+# no longer calls an AI provider, so it only has to respond. Exits non-zero
+# on a missing secret or an unreachable worker.
 #
 # Usage:
 #   ./scripts/verify-deploy.sh                           # prod defaults
@@ -37,16 +38,29 @@ check() {
     fi
 }
 
+check_up() {
+    local name=$1
+    local url=$2
+    local body
+    if ! body=$(curl -fsS --max-time 10 "$url"); then
+        echo "  ❌ $name: request to $url failed"
+        fail=1
+        return
+    fi
+    echo "  $name: $body"
+}
+
 echo "Checking gateway secret presence:"
 check "MCP Worker   " "$MCP_URL/health"
-check "Teambuilder  " "$TB_URL/api/health"
+echo "Checking the website responds:"
+check_up "Teambuilder  " "$TB_URL/api/health"
 
 if [ "$fail" -ne 0 ]; then
     echo
-    echo "❌ One or more workers are missing gateway secrets."
+    echo "❌ A worker is unreachable or missing gateway secrets."
     echo "   Set with: bunx wrangler secret put <NAME> --name <worker>"
     exit 1
 fi
 
 echo
-echo "✅ All workers report gateway secrets present."
+echo "✅ Both workers respond and the MCP Worker reports its gateway secrets present."

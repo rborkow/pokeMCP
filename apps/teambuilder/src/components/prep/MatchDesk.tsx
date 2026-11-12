@@ -3,7 +3,7 @@
 import { Check, Clipboard, Download, Printer, RotateCcw } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { CoachPanel } from "@/components/prep/CoachPanel";
+import { CoachHistory } from "@/components/prep/CoachHistory";
 import { EvidenceBadge } from "@/components/prep/EvidenceBadge";
 import { PokemonLineup } from "@/components/prep/PokemonLineup";
 import { battleCardToMarkdown } from "@/lib/prep/markdown";
@@ -220,7 +220,7 @@ export function MatchDesk({ planId }: { planId: string }) {
                 <p className="mt-4 text-xs text-muted-foreground">Generated with mechanics profile {plan.mechanicsVersion}. Saved {new Date(plan.updatedAt).toLocaleString()}.</p>
             </section>
 
-            <CoachPanel plan={plan} />
+            <CoachHistory plan={plan} />
         </main>
     );
 }
