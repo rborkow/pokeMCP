@@ -126,7 +126,7 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
         title: "List supported formats",
         description:
             "List the Pokémon Champions regulations this connector supports, with each one's id, " +
-            "dates, team rules, number of legal Mega Evolutions and whether usage statistics are " +
+            "dates, whether it is current, team rules, number of legal Mega Evolutions and whether usage statistics are " +
             "available. Use it to find the `format` value other tools accept and to see which " +
             "format they use by default.",
         inputSchema: {},
@@ -136,6 +136,9 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
                 z.object({
                     id: z.string(),
                     name: z.string(),
+                    status: z
+                        .enum(["upcoming", "current", "ended"])
+                        .describe("Where today falls relative to the regulation's dates"),
                     startDate: z.string().describe("YYYY-MM-DD"),
                     endDate: z.string().optional().describe("YYYY-MM-DD, when announced"),
                     level: z.number(),

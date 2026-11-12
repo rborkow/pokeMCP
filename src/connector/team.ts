@@ -12,13 +12,30 @@ import { fail, ok, type ToolOutcome } from "./types.js";
 
 // --- list_formats ---
 
-export function listFormats(): ToolOutcome {
+/** Where a regulation's dates put it relative to a day (YYYY-MM-DD). */
+function regulationStatus(
+    startDate: string,
+    endDate: string | undefined,
+    today: string,
+): "upcoming" | "current" | "ended" {
+    if (today < startDate) return "upcoming";
+    // The end date is the day the next regulation takes over.
+    if (endDate && today >= endDate) return "ended";
+    return "current";
+}
+
+/**
+ * @param today YYYY-MM-DD, UTC. Injectable so the wording around a regulation's
+ *   start and end can be tested on either side of those dates.
+ */
+export function listFormats(today = new Date().toISOString().slice(0, 10)): ToolOutcome {
     const defaultFormat = getDefaultRegulation().id;
     const formats = [...REGULATIONS]
         .sort((a, b) => b.startDate.localeCompare(a.startDate))
         .map((r) => ({
             id: r.id,
             name: r.displayName,
+            status: regulationStatus(r.startDate, r.endDate, today),
             startDate: r.startDate,
             ...(r.endDate ? { endDate: r.endDate } : {}),
             level: r.level,
@@ -35,8 +52,9 @@ export function listFormats(): ToolOutcome {
         "",
         ...formats.map(
             (f) =>
-                `- \`${f.id}\` — ${f.name}. Started ${f.startDate}` +
-                `${f.endDate ? `, ended ${f.endDate}` : ""}. ` +
+                `- \`${f.id}\` — ${f.name} (${f.status}). ` +
+                `${f.status === "upcoming" ? "Starts" : "Started"} ${f.startDate}` +
+                `${f.endDate ? `, ${f.status === "ended" ? "ended" : "ends"} ${f.endDate}` : ""}. ` +
                 `Bring ${f.bringCount} of ${f.teamSize} at level ${f.level}; ` +
                 `${f.megaEvolutions} Mega Evolutions; ` +
                 `usage statistics ${f.usageStats ? "available" : "not published yet"}.`,
