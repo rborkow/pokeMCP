@@ -17,6 +17,9 @@ eggs/
 lib/
 !apps/**/src/lib/
 !scripts/lib/
+# `build/` above also matches Next.js routes. A page at src/app/build/ was
+# silently never committed because of it; keep route directories tracked.
+!apps/**/src/app/**/build/
 lib64/
 parts/
 sdist/

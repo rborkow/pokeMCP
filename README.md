@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/rborkow/pokeMCP/actions/workflows/build.yml/badge.svg)](https://github.com/rborkow/pokeMCP/actions/workflows/build.yml)
 
-PokeMCP Prep turns current Pokémon Champions tournament teams into matchup plans players can practice. The web product combines a sourced tournament newsroom, team-sheet comparison, structured battle cards, and a plan-specific coach.
+PokeMCP Prep turns current Pokémon Champions tournament teams into matchup plans players can practice. The web product combines a sourced tournament newsroom, team-sheet comparison, and structured, rule-based battle cards. It calls no AI provider.
 
 **Product:** [www.pokemcp.com](https://www.pokemcp.com) · **Documentation:** [docs.pokemcp.com](https://docs.pokemcp.com)
 
@@ -13,7 +13,6 @@ PokeMCP Prep turns current Pokémon Champions tournament teams into matchup plan
 - A battle card includes Bring 4, two leads, likely opposing leads, opening lines, dangers, evidence, and practice work.
 - Anonymous teams and plans live locally; optional Discord or Google accounts sync through Better Auth and D1.
 - Exact VP-sensitive speed calculations and incomplete Champions move interactions are labeled as mechanics beta.
-- AI team generation remains available as a secondary **Build a team** workflow.
 
 The former public MCP and REST tool endpoints are retired and return `410 Gone`. Their capabilities remain available to the web product through a private Cloudflare service binding.
 
@@ -82,7 +81,7 @@ The internal Worker refreshes completed public Regulation M-B events daily at 06
 
 ## Privacy
 
-Operational analytics measure the preparation funnel. Arbitrary prompts and responses are not retained for model training by default. Signed-in users may delete synced teams, plans, coach history, sessions, and provider links from the account page.
+Operational analytics measure the preparation funnel. The site sends nothing to an AI provider. Signed-in users may delete synced teams, plans, saved coach conversations, sessions, and provider links from the account page. Full policy: [www.pokemcp.com/privacy](https://www.pokemcp.com/privacy).
 
 ## License
 

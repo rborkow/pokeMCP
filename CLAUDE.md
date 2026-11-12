@@ -122,7 +122,7 @@ bun run tail:production
   - `STRATEGY_DOCS`: Raw strategy documents (chunks) for RAG
 - **Vectorize**: Vector database for semantic search (pokemon-strategy-index)
 - **AI Workers**: Text embeddings for RAG (@cf/baai/bge-base-en-v1.5)
-- **AI Gateway**: Proxy for Anthropic API calls — automatic token/cost tracking, request logging, caching (gateway ID: `pokemcp`)
+- **AI Gateway**: Routes the worker's Workers AI embedding calls (gateway ID: `pokemcp`). Nothing deployed calls Anthropic any more
 - **R2 Bucket**: pokemcp-interaction-logs for anonymized fine-tuning data
 - **Scheduled Triggers**: Weekly cron (Sunday 3 AM, production only) seeds the
   IngestionCoordinator Durable Object, which ingests one format slice per alarm
@@ -211,11 +211,14 @@ monthly stats refresh.
 deploy):
 
 - `pokemon-mcp-production`: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CF_ACCESS_TEAM_DOMAIN`
-- `pokemcp-teambuilder`: `ANTHROPIC_API_KEY`, `CLOUDFLARE_AI_GATEWAY_URL`, `CF_AIG_TOKEN`
+- `pokemcp-teambuilder`: `BETTER_AUTH_SECRET`, `DISCORD_CLIENT_ID`/`_SECRET`,
+  `GOOGLE_CLIENT_ID`/`_SECRET`. (`ANTHROPIC_API_KEY`, `CLOUDFLARE_AI_GATEWAY_URL` and
+  `CF_AIG_TOKEN` are still set but unused since the site's AI features were removed.)
 
-All Anthropic traffic runs through the teambuilder worker (`/api/ai/claude/stream` +
-`/api/ai/interview/stream`), which routes through the Cloudflare AI Gateway (`pokemcp`). The MCP
-Worker uses Workers AI for embeddings, also gateway-routed. The MCP Worker never calls Anthropic.
+Neither worker calls Anthropic. The MCP Worker uses Workers AI for embeddings, routed through
+the Cloudflare AI Gateway (`pokemcp`). The only Anthropic use left is the report narrative in
+`scripts/generate-reports.ts`, which runs in GitHub Actions with the repo's `ANTHROPIC_API_KEY`
+secret and is reviewed in a PR before it publishes.
 
 **Verify secrets after deploy:**
 
@@ -298,6 +301,9 @@ Option 2 - Manual:
 4. Commit `src/discovered-formats.json` if it changed — the stats dumps in `src/cached-stats/`
    are gitignored (KV is the source of truth); a push to main triggers a Cloudflare redeploy
 
-### Team Builder AI Tasks
+### Website (`apps/teambuilder`)
 
-As of v2 the teambuilder is chat-first: landing at `/`, LLM-driven interview, inline response cards, and a Grid mode behind `?mode=grid`. See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for the v2 directory layout, routes, architecture walkthrough, and step-by-step how-tos (new archetype, new personality, new response-card kind, new interview step, system-prompt edits, `modify_team` schema changes).
+The site has no team builder and no AI features: it serves meta reports, Pokémon pages, the
+tournament newsroom and PokeMCP Prep. See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md)
+for routes, layout, the open question about Prep, and the traps (the `build/` ignore rule, saved
+coach conversations as user data).
