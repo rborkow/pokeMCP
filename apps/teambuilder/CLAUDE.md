@@ -24,6 +24,7 @@ in November 2026. Do not reintroduce interactive features here without the owner
 | `/pokemon/[id]/[format]` | Per-Pokémon trend pages (`src/data/mons/`) |
 | `/t/[id]` | Legacy shared-team view, read-only, with "Copy as Showdown text". New links can't be created |
 | `/privacy`, `/terms` | Privacy policy and terms of use for the site and the connector. Both URLs are required by the directory listings |
+| `/support` | How to get help and report a problem. OpenAI's listing requires a support page URL |
 | `/retired` | Notice for the retired features (noindex). Lets a visitor download teams and plans still held in their browser |
 | `/prep/*`, `/teams`, `/account`, `/builder`, `/build` | Redirect to `/retired` (`next.config.ts`) |
 | `/admin` | Analytics dashboard (Cloudflare Access) |

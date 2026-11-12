@@ -24,9 +24,9 @@ export function SiteFooter() {
                     <Link href="/terms" className="hover:text-foreground">
                         Terms
                     </Link>
-                    <a href="mailto:feedback@pokemcp.com" className="hover:text-foreground">
-                        Contact
-                    </a>
+                    <Link href="/support" className="hover:text-foreground">
+                        Support
+                    </Link>
                 </nav>
             </div>
         </footer>
