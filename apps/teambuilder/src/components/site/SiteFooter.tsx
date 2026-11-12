@@ -21,6 +21,9 @@ export function SiteFooter() {
                     <Link href="/privacy" className="hover:text-foreground">
                         Privacy
                     </Link>
+                    <Link href="/terms" className="hover:text-foreground">
+                        Terms
+                    </Link>
                     <a href="mailto:feedback@pokemcp.com" className="hover:text-foreground">
                         Contact
                     </a>
