@@ -12,6 +12,10 @@ https://api.pokemcp.com/mcp
 
 The **[VGC Teambuilder connector](/tools)** is served here over MCP Streamable HTTP. It needs no authentication. See the connector page for its tools.
 
+- **Protocol versions:** the current revision, `2026-07-28`, and `2025-11-25` and earlier. Clients that support the current revision can call `server/discover` to confirm it. Older clients use the usual `initialize` handshake.
+- **Stateless:** no session is created. Each request is answered on its own with a JSON reply, and an `Mcp-Session-Id` sent by an older client is ignored.
+- **POST only.** `GET` and `DELETE` return `405`. Send `Accept: application/json, text/event-stream`, as the specification requires.
+
 ## Retired endpoints
 
 These legacy endpoints return `410 Gone` and will not come back:

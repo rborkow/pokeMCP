@@ -93,21 +93,3 @@ export function trackMcpRequest(
         doubles: [request.durationMs],
     });
 }
-
-/**
- * Session lifecycle event from the retired per-session Durable Object. Kept
- * only while that class still exists; nothing calls it for live traffic.
- */
-export function trackSession(
-    env: Env,
-    action: "connect" | "disconnect",
-    sessionId: string,
-    transport: "sse" | "mcp" | "rest",
-    source?: TrackingSource,
-): void {
-    dataset(env, "session")?.writeDataPoint({
-        indexes: ["session"],
-        blobs: [action, sessionId, transport, source ?? ""],
-        doubles: [],
-    });
-}

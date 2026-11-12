@@ -12,9 +12,8 @@
 import { strict as assert } from "node:assert";
 import { before, describe, it } from "node:test";
 
-import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { Client } from "@modelcontextprotocol/client";
+import { InMemoryTransport, McpServer } from "@modelcontextprotocol/server";
 
 import { getDefaultRegulation } from "../connector/formats.js";
 import { type ConnectorCallInfo, registerConnectorTools } from "../connector/register.js";

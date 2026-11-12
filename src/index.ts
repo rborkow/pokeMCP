@@ -1,14 +1,13 @@
 import { EmailMessage } from "cloudflare:email";
 import { DurableObject } from "cloudflare:workers";
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { McpAgent } from "agents/mcp";
 import { createMimeMessage } from "mimetext/browser";
 import { handleAdminRequest } from "./admin.js";
-import { registerConnectorTools } from "./connector/register.js";
-import { CONNECTOR_INFO, CONNECTOR_INSTRUCTIONS } from "./connector/tools.js";
-import { trackSession, trackToolCall } from "./analytics.js";
+import { CONNECTOR_INFO } from "./connector/tools.js";
+import { getOpenAiChallengeResponse } from "./domain-verification.js";
+import { getFaviconResponse } from "./favicon.js";
 import { mcpRateLimitResponse } from "./mcp-rate-limit.js";
 import { recordRateLimited, serveMcp } from "./mcp-usage.js";
+import { getRetirementResponse } from "./retirement.js";
 import {
     checkRateLimit,
     getSharedTeam,
@@ -16,9 +15,6 @@ import {
     storeSharedTeam,
     validateTeamForSharing,
 } from "./share.js";
-import { getOpenAiChallengeResponse } from "./domain-verification.js";
-import { getFaviconResponse } from "./favicon.js";
-import { getRetirementResponse } from "./retirement.js";
 import { refreshTournamentNewsroom } from "./tournaments/ingestion.js";
 
 // CORS Configuration - restrict to known origins
@@ -72,47 +68,12 @@ export class IngestionCoordinator extends DurableObject<Env> {
 }
 
 /**
- * No longer serves requests. `/mcp` used to create one of these per client
- * session; it is now answered statelessly by the Worker (connector/http.ts),
- * which removed about a second from every new connection.
- *
- * The class and its binding stay for now so that this change can be undone by
- * a plain revert. Once the stateless endpoint has proved itself, replace this
- * with a stub like IngestionCoordinator, then remove it with a
- * `deleted_classes` migration.
+ * Retired. `/mcp` used to create one of these per client session; it has been
+ * answered statelessly by the Worker (connector/http.ts) since November 2026.
+ * The class stays only because an applied migration names it; removing it
+ * needs a `deleted_classes` migration.
  */
-export class PokemonMCP extends McpAgent {
-    server = new McpServer(CONNECTOR_INFO, { instructions: CONNECTOR_INSTRUCTIONS });
-
-    // Privacy-safe session ID — random per DO instance, not tied to any user
-    sessionId = crypto.randomUUID();
-
-    async init() {
-        const env = this.env as Env;
-
-        // Track session connection
-        trackSession(env, "connect", this.sessionId, "mcp", "mcp");
-
-        // Operational metrics only (tool name, format, outcome, duration).
-        // Arguments and results are never logged for connector calls.
-        registerConnectorTools(this.server, env, (call) =>
-            trackToolCall(
-                env,
-                call.tool,
-                call.format,
-                call.success,
-                call.durationMs,
-                this.sessionId,
-                "mcp",
-            ),
-        );
-    }
-
-    async destroy() {
-        const env = this.env as Env;
-        trackSession(env, "disconnect", this.sessionId, "mcp", "mcp");
-    }
-}
+export class PokemonMCP extends DurableObject<Env> {}
 
 export default {
     async fetch(request: Request, env: Env, ctx: ExecutionContext) {

@@ -1,4 +1,4 @@
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { McpServer } from "@modelcontextprotocol/server";
 import { CONNECTOR_TOOLS } from "./tools.js";
 import type { ToolOutcome } from "./types.js";
 

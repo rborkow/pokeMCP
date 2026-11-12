@@ -119,6 +119,44 @@ describe("usage recording", () => {
         assert.doesNotMatch(JSON.stringify(points), /Garchomp/i);
     });
 
+    it("attributes a 2026-07-28 tool call to the client it names, not its User-Agent", async () => {
+        const { env, points, of } = recorder();
+        const request = post(
+            {
+                jsonrpc: "2.0",
+                id: 4,
+                method: "tools/call",
+                params: {
+                    name: "lookup_pokemon",
+                    arguments: { pokemon: "Garchomp" },
+                    _meta: {
+                        "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+                        "io.modelcontextprotocol/clientInfo": { name: "claude-ai", version: "1" },
+                        "io.modelcontextprotocol/clientCapabilities": {},
+                    },
+                },
+            },
+            "node",
+        );
+        request.headers.set("MCP-Protocol-Version", "2026-07-28");
+        request.headers.set("Mcp-Method", "tools/call");
+        request.headers.set("Mcp-Name", "lookup_pokemon");
+        const response = await serveMcp(request, env);
+        assert.equal(response.status, 200);
+
+        assert.deepEqual(of("tool_call")[0].blobs, [
+            "lookup_pokemon",
+            "",
+            "1",
+            "",
+            "mcp",
+            "claude",
+        ]);
+        assert.deepEqual(of("mcp_request")[0].blobs, ["tools/call", "200", "claude"]);
+        assert.equal(of("session").length, 0, "a tool call is not a new connection");
+        assert.doesNotMatch(JSON.stringify(points), /Garchomp/i);
+    });
+
     it("records a failed tool call as a failure", async () => {
         const { env, of } = recorder();
         await serveMcp(
