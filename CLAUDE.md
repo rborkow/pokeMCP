@@ -6,6 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A monorepo containing an MCP (Model Context Protocol) server for Pokémon competitive team building, plus a team builder web UI and documentation site. The MCP server is deployed on Cloudflare Workers and provides tools for Pokémon lookup, moveset/team validation, type coverage analysis, and usage statistics from Smogon. Includes RAG (Retrieval-Augmented Generation) capabilities for strategic advice using Cloudflare Vectorize and AI Workers.
 
+**Public connector ("VGC Teambuilder"):** `https://api.pokemcp.com/mcp` serves a read-only,
+authless MCP server (Streamable HTTP) intended for the Claude and ChatGPT directories. Its 12
+tools live in `src/connector/` and are deliberately separate from the internal
+`src/tool-registry.ts` surface that PokeMCP Prep calls through the `PrepAnalysisService` service
+binding. The legacy `/sse` and `/api/tools` endpoints stay retired (`410 Gone`). See
+[`src/CLAUDE.md`](src/CLAUDE.md).
+
 **Monorepo Structure:**
 
 - `src/` - MCP Worker (Cloudflare Workers) — see [`src/CLAUDE.md`](src/CLAUDE.md)
@@ -231,9 +238,12 @@ Run after any secret rotation or new worker deploy — exits non-zero if any sec
 
 ### MCP Worker Testing
 
-1. Run `bun run test` for the unit suite (`node --test` over `src/__tests__/`)
-2. Run `bun run dev` to start a local Wrangler server, then exercise tools via
-   REST: `curl -X POST localhost:8787/api/tools -H 'content-type: application/json' -d '{"tool":"lookup_pokemon","args":{"name":"Great Tusk"}}'`
+1. Run `bun run test` for the unit suite (`node --test` over `src/__tests__/`).
+   `connector.test.ts` drives every public tool through an MCP SDK client.
+2. Run `bun run dev` to start a local Wrangler server, then connect an MCP client
+   (for example the MCP Inspector) to `http://localhost:8787/mcp`. Local KV and D1
+   start empty, so stats and trend tools return their "unavailable" errors until
+   seeded with `wrangler kv bulk put --local` / `wrangler d1 execute --local`.
 3. Create a PR - CI will verify builds pass
 4. After merge, Cloudflare Workers Builds redeploys automatically
 
@@ -249,11 +259,21 @@ See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for test structur
 
 ## Common Tasks
 
-**Adding a new tool:**
+**Adding a public connector tool:**
+
+1. Implement it in `src/connector/` returning `ok(data, text)` or `fail(message)`;
+   failures reach the client as tool errors, so the message must be actionable and
+   free of internal details
+2. Add it to `CONNECTOR_TOOLS` in `src/connector/tools.ts` with a title, an accurate
+   description, and input and output schemas — one operation per tool, no `type`
+   switches (directory reviews require this)
+3. Cover it in `src/__tests__/connector.test.ts`, then run `bun run generate-tool-docs`
+
+**Adding an internal tool (PokeMCP Prep only):**
 
 1. Implement function in `src/tools.ts` or `src/stats.ts`
-2. Register in `src/tool-registry.ts` with Zod schema
-3. Tool is auto-available via MCP `init()` and `/api/tools` REST endpoint
+2. Register in `src/tool-registry.ts` with Zod schema — reachable only through
+   `PrepAnalysisService`, never from the public MCP endpoint
 
 **Adding a new format:**
 

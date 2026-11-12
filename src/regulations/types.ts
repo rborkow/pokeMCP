@@ -67,6 +67,12 @@ export interface RegulationSet {
      */
     megaForms: MegaForm[];
     /**
+     * True when a team may hold more than one Mega Stone. The validator then
+     * reports multiple stones as a warning instead of an error. Leave unset
+     * to enforce "at most one Mega Stone per team".
+     */
+    allowsMultipleMegaStones?: boolean;
+    /**
      * Items banned for this regulation regardless of the item clause.
      * Phase 1 does not enforce — see CHAMPIONS_ROADMAP.
      */

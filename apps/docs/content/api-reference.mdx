@@ -1,17 +1,22 @@
 ---
-description: "PokeMCP no longer offers a public REST or MCP API."
+description: "Endpoints of the PokeMCP analysis service: the public MCP endpoint and the retired legacy endpoints."
 ---
 
-# API retirement
+# Endpoints
 
-PokeMCP no longer offers a supported public REST or MCP API.
+## MCP endpoint
 
-The following endpoints return `410 Gone`:
+```
+https://api.pokemcp.com/mcp
+```
 
-- `https://api.pokemcp.com/mcp`
-- `https://api.pokemcp.com/sse`
-- `https://api.pokemcp.com/api/tools`
+The **[VGC Teambuilder connector](/tools)** is served here over MCP Streamable HTTP. It needs no authentication. See the connector page for its tools.
 
-This retirement was immediate; there is no compatibility window. Existing shared-team links remain readable.
+## Retired endpoints
 
-Analysis is now called through private Cloudflare service bindings by **[PokeMCP Prep](https://www.pokemcp.com)**.
+These legacy endpoints return `410 Gone` and will not come back:
+
+- `https://api.pokemcp.com/sse` — the older SSE transport. Use `/mcp` instead.
+- `https://api.pokemcp.com/api/tools` — the REST tool endpoint.
+
+Existing shared-team links remain readable.

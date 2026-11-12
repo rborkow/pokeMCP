@@ -49,12 +49,13 @@ export const CHAMPIONS_REGMB: RegulationSet = {
     // M-B's own Mega registry, derived from the Champions dataset (66 Megas —
     // every roster Pokémon's Mega, incl. the new exclusives like Blaziken/
     // Sceptile/Swampert and Champions-only forms). See CHAMPIONS_REGMB_MEGAS.
-    // NOTE: the Omni Ring "one held Mega Stone per team" rule may not match the
-    // actual mechanic — usage stats show no Mega Stones in the held-item slot,
-    // suggesting Champions enables Megas without occupying the item slot. The
-    // post-Mega data here is correct for as-Mega analysis regardless; revisit
-    // the held-stone validation rule separately.
     megaForms: CHAMPIONS_REGMB_MEGAS,
+    // Teams on the M-B ladder routinely hold several Mega Stones: in Smogon's
+    // 2026-09 usage data every Mega is recorded holding its stone (e.g.
+    // Charizard-Mega-Y: Charizardite Y 100%), and 31% of Charizard-Mega-Y teams
+    // also include Floette-Mega. So "one Mega Stone per team" is not an M-B
+    // rule; the validator reports multiple stones as a warning here.
+    allowsMultipleMegaStones: true,
     bannedItems: [],
     moveOverrides: {},
 };

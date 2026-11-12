@@ -1,12 +1,49 @@
 # MCP Worker (Cloudflare Workers)
 
-Entry point for the Pokemon MCP server deployed at `api.pokemcp.com`.
+Entry point for the Worker deployed at `api.pokemcp.com`. It exposes two tool surfaces:
+
+- **Public connector** (`connector/`, served at `/mcp`): the "VGC Teambuilder" MCP server —
+  12 read-only tools, no auth, Champions regulations only. Listed in AI-assistant directories,
+  so its names, descriptions, annotations and output schemas are a published contract.
+- **Internal registry** (`tool-registry.ts`): the 7 tools PokeMCP Prep calls through the
+  `PrepAnalysisService` service binding. Prep depends on their names, arguments and text
+  output; they are not reachable from `/mcp`.
+
+## Public connector (`connector/`)
+
+```
+index.ts PokemonMCP.init() → connector/register.ts registerConnectorTools()
+connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output schemas
+├── connector/pokemon.ts  lookup_pokemon, validate_moveset, analyze_team_types (bundled data)
+├── connector/team.ts     list_formats, validate_team (regulations/ + KV legality)
+├── connector/usage.ts    get_top_usage, get_pokemon_usage, get_teammates,
+│                         get_checks_and_counters (KV, via stats.ts loaders)
+├── connector/trends.ts   get_usage_trend, get_meta_shifts, get_usage_momentum (D1, via
+│                         meta-history.ts computations)
+└── connector/formats.ts  `format` = a regulation id; default = newest regulation with stats
+```
+
+- Every tool returns `structuredContent` matching its `outputSchema` plus equivalent Markdown
+  text. A failure is `fail(message)`, sent as a tool error (`isError`) — keep messages
+  actionable and free of internals (no script names, binding names or file paths).
+- All tools carry `readOnlyHint: true`, `destructiveHint: false`, `openWorldHint: false`.
+- `connector/` must not import `agents` or `cloudflare:*`, so the whole surface runs under
+  `node --test` through the MCP SDK's in-memory transport (`__tests__/connector.test.ts`).
+- Connector calls record operational metrics only (`trackToolCall`); arguments and results
+  are never logged.
+- Usage percentages are shares of a Pokémon's sets (denominator = its total ability weight),
+  not shares of move or teammate slots.
+- Move legality uses `getFullLearnset()` (data-loader.ts), which follows pre-evolutions and
+  base formes like Pokémon Showdown does. A species' own learnset entry alone rejects about
+  a third of the moves actually used on the ladder.
+- After changing a tool, run `bun run generate-tool-docs` (README + apps/docs tools page).
 
 ## Module Dependency Graph
 
 ```
 index.ts (routes + PokemonMCP and IngestionCoordinator Durable Objects)
-├── tool-registry.ts (central registry of all 7 tools)
+├── connector/ (public MCP tools — see above)
+├── tool-registry.ts (internal registry of 7 tools, used by PrepAnalysisService)
 │   ├── tools.ts (4 sync tools: lookup_pokemon, validate_moveset, validate_team, suggest_team_coverage)
 │   ├── stats.ts (get_usage_stats — one tool, `type` enum selects the stat view)
 │   ├── rag/query.ts (query_strategy — consolidated RAG search)
@@ -27,15 +64,14 @@ index.ts (routes + PokemonMCP and IngestionCoordinator Durable Objects)
 | RAG (Vectorize+KV) | `rag/query.ts` | `VECTOR_INDEX` + `STRATEGY_DOCS` KV + `AI` | 1 (`query_strategy`) |
 | Meta history (D1) | `meta-history.ts` | `META_DB` D1 | 1 (`get_meta_trends`) |
 
-`tool-registry.ts` is the single source of truth for all tool definitions. Both the MCP `init()` and the `/api/tools` REST endpoint consume it.
+`tool-registry.ts` is the single source of truth for the internal tool definitions, consumed by `PrepAnalysisService`. The public MCP `init()` registers `connector/` instead.
 
 ## HTTP Endpoints
 
 | Path | Method | Purpose |
 |------|--------|---------|
-| `/mcp` | POST | MCP protocol (Durable Object) |
-| `/sse` | GET | SSE transport for MCP |
-| `/api/tools` | POST | Stateless REST tool invocation (origin allowlist + 30 req/min/IP) |
+| `/mcp` | POST | Public MCP endpoint, Streamable HTTP (Durable Object); not origin-gated |
+| `/sse`, `/api/tools` | any | Retired — `410 Gone` (`retirement.ts`) |
 | `/health` | GET | Deploy health / secret-presence booleans |
 | `/api/feedback` | POST | User feedback to R2 |
 | `/api/team/share` | POST | Store a shared team in KV, returns short id |
