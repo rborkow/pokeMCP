@@ -8,11 +8,14 @@
  *
  * NOTE: a regulation only has history for the months its ladder was active.
  */
+import { BoundedTtlCache } from "./bounded-cache.js";
 
 // --- Config & cache ---
 
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes (mirrors stats.ts)
-const cache = new Map<string, { data: unknown; timestamp: number }>();
+// One entry per format's month list or per monthly board (a few hundred rows).
+// Capped because every session on a machine shares it.
+const cache = new BoundedTtlCache<unknown>(48, CACHE_TTL_MS);
 
 const SOURCE = "smogon-chaos";
 // Three monthly points is the least a trend line can be fitted to. Regulations
@@ -45,11 +48,10 @@ export interface MoverMetric {
 // --- Small helpers ---
 
 async function cached<T>(key: string, fn: () => Promise<T>): Promise<T> {
-    const now = Date.now();
     const hit = cache.get(key);
-    if (hit && now - hit.timestamp < CACHE_TTL_MS) return hit.data as T;
+    if (hit !== undefined) return hit as T;
     const data = await fn();
-    cache.set(key, { data, timestamp: now });
+    cache.set(key, data);
     return data;
 }
 

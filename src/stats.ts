@@ -4,17 +4,21 @@
  * (src/connector/usage.ts).
  */
 import type { UsageStatistics } from "smogon";
+import { BoundedTtlCache } from "./bounded-cache.js";
 import { toID } from "./data-loader.js";
 
 // --- Caches ---
 
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
 
-// Cache for format indexes (lightweight: info + usage map)
-const indexCache = new Map<string, { data: FormatIndex; timestamp: number }>();
+// Format indexes are small (info + a usage map) and there is one per regulation.
+const indexCache = new BoundedTtlCache<FormatIndex>(8, CACHE_TTL_MS);
 
-// Cache for individual Pokemon stats
-const pokemonCache = new Map<string, { data: PokemonStats; timestamp: number }>();
+// One Pokémon's record runs from tens of kilobytes to about a megabyte in
+// memory for the most used ones, and every session on a machine shares this
+// cache. Keep only enough to serve the follow-up questions about the Pokémon
+// just looked at (usage, then teammates, then checks and counters).
+const pokemonCache = new BoundedTtlCache<PokemonStats>(16, CACHE_TTL_MS);
 
 // --- Types ---
 
@@ -44,11 +48,8 @@ export interface PokemonStats {
  * Used by the tools that rank every Pokémon in a format.
  */
 export async function getFormatIndex(format: string, env: Env): Promise<FormatIndex | null> {
-    const now = Date.now();
     const cached = indexCache.get(format);
-    if (cached && now - cached.timestamp < CACHE_TTL_MS) {
-        return cached.data;
-    }
+    if (cached) return cached;
 
     try {
         const index = (await env.POKEMON_STATS.get(
@@ -56,7 +57,7 @@ export async function getFormatIndex(format: string, env: Env): Promise<FormatIn
             "json",
         )) as FormatIndex | null;
         if (index && index.version === 2) {
-            indexCache.set(format, { data: index, timestamp: now });
+            indexCache.set(format, index);
             return index;
         }
     } catch (e) {
@@ -77,12 +78,9 @@ export async function getPokemonStats(
 ): Promise<PokemonStats | null> {
     const pokemonId = toID(pokemonName);
     const cacheKey = `${format}:${pokemonId}`;
-    const now = Date.now();
 
     const cached = pokemonCache.get(cacheKey);
-    if (cached && now - cached.timestamp < CACHE_TTL_MS) {
-        return cached.data;
-    }
+    if (cached) return cached;
 
     try {
         const stats = (await env.POKEMON_STATS.get(
@@ -90,7 +88,7 @@ export async function getPokemonStats(
             "json",
         )) as PokemonStats | null;
         if (stats?.displayName) {
-            pokemonCache.set(cacheKey, { data: stats, timestamp: now });
+            pokemonCache.set(cacheKey, stats);
             return stats;
         }
     } catch (e) {
