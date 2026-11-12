@@ -18,12 +18,7 @@ import { getAbility, getPokemon, toID } from "../data-loader.js";
 import { CHAMPIONS_REGMA } from "../regulations/champions-regma.js";
 import { CHAMPIONS_REGMB } from "../regulations/champions-regmb.js";
 import { LegalityNotIngestedError, loadRegulation } from "../regulations/loader.js";
-import {
-    getLatestLimitlessRegulation,
-    getRegulation,
-    isRegulationId,
-    listRegulationIds,
-} from "../regulations/registry.js";
+import { getRegulation, isRegulationId, listRegulationIds } from "../regulations/registry.js";
 import type { LegalityKvBlob } from "../regulations/types.js";
 import {
     validateTeamForRegulation,
@@ -178,9 +173,6 @@ describe("regulation registry", () => {
             }
         }
     });
-
-    it("getLatestLimitlessRegulation returns M-C", () =>
-        assert.equal(getLatestLimitlessRegulation()?.id, "champions-regmc"));
 });
 
 describe("loadRegulation", () => {

@@ -623,11 +623,18 @@ describe("connector data tools", () => {
         assert.equal(out.volatile[0].name, "Garchomp");
     });
 
+    it("get_usage_momentum works from three months, the length of a regulation", async () => {
+        const out = await data(client, "get_usage_momentum", { months: 3 });
+        assert.equal(out.snapshots, 3);
+        assert.equal(out.from, "2026-07");
+        assert.equal(out.rising[0].name, "Kingambit");
+    });
+
     it("trend tools explain missing history without internals", async () => {
         const unknown = await errorText(client, "get_usage_trend", { pokemon: "Magikarp" });
         assert.match(unknown, /no recorded usage/);
         const short = await errorText(client, "get_usage_momentum", { months: 2 });
-        assert.match(short, /at least 4 monthly snapshots/);
+        assert.match(short, /at least 3 monthly snapshots/);
         assert.match(short, /get_meta_shifts/);
         const badMonth = await errorText(client, "get_meta_shifts", { from: "June" });
         assert.match(badMonth, /YYYY-MM/);

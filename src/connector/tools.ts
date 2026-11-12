@@ -476,7 +476,8 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
         description:
             "Fit a trend to each Pokémon's monthly usage across a range and list the fastest " +
             "rising, fastest declining and most volatile. These are descriptive trends, not " +
-            "forecasts. Needs at least four months of history in the range.",
+            "forecasts. Needs at least three months of history in the range; with so few points, " +
+            "treat the result as a direction, not a measurement.",
         inputSchema: {
             format: formatInput,
             ...rangeInput,
