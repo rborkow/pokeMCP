@@ -194,35 +194,90 @@ export const CHAMPIONS_REGMB_MEGAS: MegaForm[] = buildChampionsMegas(REGMB_MEGA_
 const REGMC_MEGA_EXCLUDED_BASE = new Set(
     ["Diancie", "Latias", "Latios", "Mewtwo", "Zygarde"].map(toID),
 );
+/**
+ * Megas the bundled dex snapshot does not model. Names, Mega Stones and
+ * abilities are taken from Smogon's 2026-10 M-C ladder data, where each of
+ * these appears holding exactly this stone with exactly this ability; the
+ * stone display names are the ladder's item ids re-cased, so they match by
+ * `toID()`. Post-Mega types and stats are not in the ladder data and stay
+ * pending. Abilities new to Champions (not in the bundled data) are omitted.
+ */
 const REGMC_NEW_MEGAS_PENDING: MegaForm[] = [
+    // New with Regulation M-C.
     {
         basePokemon: "Golisopod",
         megaName: "Golisopod-Mega",
         megaStone: "Golisopite",
+        postMegaAbility: "Tough Claws",
         championsExclusive: true,
     },
     {
         basePokemon: "Baxcalibur",
         megaName: "Baxcalibur-Mega",
         megaStone: "Baxcalibrite",
+        postMegaAbility: "Thermal Exchange",
         championsExclusive: true,
     },
     {
         basePokemon: "Absol",
         megaName: "Absol-Mega-Z",
         megaStone: "Absolite Z",
+        postMegaAbility: "Sharpness",
         championsExclusive: true,
     },
     {
         basePokemon: "Garchomp",
         megaName: "Garchomp-Mega-Z",
         megaStone: "Garchompite Z",
+        postMegaAbility: "Levitate",
         championsExclusive: true,
     },
     {
         basePokemon: "Lucario",
         megaName: "Lucario-Mega-Z",
         megaStone: "Lucarionite Z",
+        championsExclusive: true,
+    },
+    // On the ladder since Regulation M-B, but absent from the dex snapshot.
+    {
+        basePokemon: "Raichu",
+        megaName: "Raichu-Mega-X",
+        megaStone: "Raichunite X",
+        postMegaAbility: "Electric Surge",
+        championsExclusive: true,
+    },
+    {
+        basePokemon: "Raichu",
+        megaName: "Raichu-Mega-Y",
+        megaStone: "Raichunite Y",
+        postMegaAbility: "No Guard",
+        championsExclusive: true,
+    },
+    {
+        basePokemon: "Staraptor",
+        megaName: "Staraptor-Mega",
+        megaStone: "Staraptite",
+        postMegaAbility: "Contrary",
+        championsExclusive: true,
+    },
+    {
+        basePokemon: "Glimmora",
+        megaName: "Glimmora-Mega",
+        megaStone: "Glimmoranite",
+        postMegaAbility: "Adaptability",
+        championsExclusive: true,
+    },
+    {
+        basePokemon: "Scovillain",
+        megaName: "Scovillain-Mega",
+        megaStone: "Scovillainite",
+        championsExclusive: true,
+    },
+    {
+        basePokemon: "Meowstic-F",
+        megaName: "Meowstic-F-Mega",
+        megaStone: "Meowsticite",
+        postMegaAbility: "Trace",
         championsExclusive: true,
     },
 ];

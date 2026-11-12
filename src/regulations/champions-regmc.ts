@@ -25,10 +25,15 @@ export const CHAMPIONS_REGMC: RegulationSet = {
     enforceSpeciesClause: true,
     enforceItemClause: true,
     maxMoves: 4,
-    // Official M-C legality web-view URL not yet located, so
-    // scripts/fetch-champions-legality.ts cannot ingest it and loadRegulation()
-    // throws LegalityNotIngestedError for this id until `officialLegalityUrl` is
-    // set. A Showdown-mod-derived roster is planned as an alternative source.
+    // Official M-C eligible-Pokémon page. Like M-A (and unlike M-B) it lives
+    // under `/events/rs…/`. Verified 2026-11-12: it parses to 261 Pokémon, all
+    // dex-resolved — M-B's 235 plus 26 (Rillaboom, Salamence, Toxtricity, …),
+    // none removed — and every non-Mega Pokémon with at least 0.5% usage in
+    // Smogon's 2026-09 and 2026-10 M-C ladder data is on it. Until the blob is
+    // ingested (fetch-champions-legality + upload-champions-legality),
+    // loadRegulation() fails loudly rather than allowing every team.
+    officialLegalityUrl:
+        "https://web-view.app.pokemonchampions.jp/battle/pages/events/rs178713870219xeaaio/en/pokemon.html",
     legalityKvKey: "champions-regmc:_legality",
     showdownFormatId: "gen9championsvgc2026regmc",
     limitlessFormatId: "M-C",

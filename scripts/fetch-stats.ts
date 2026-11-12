@@ -11,6 +11,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { Statistics } from "smogon";
 import { listRegulationStatsFormats } from "../src/regulations/registry.js";
+import { previousMonths } from "./lib/months.js";
 import { shouldFailRun } from "./lib/stats-run-policy.js";
 
 // Singles formats (stable, rarely change)
@@ -104,6 +105,12 @@ async function getLiveLatestMonth(): Promise<string | null> {
     return liveLatestMonth;
 }
 
+// Delay helper to be polite to Smogon's servers
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// How far back to look for an ended regulation's last published month.
+const REGULATION_LOOKBACK_MONTHS = 6;
+
 async function fetchFormatStats(format: string) {
     console.log(`Fetching stats for ${format}...`);
 
@@ -122,6 +129,23 @@ async function fetchFormatStats(format: string) {
                     `✓ Fetched ${format} @ ${liveMonth} (${Object.keys(stats.data).length} Pokemon)`,
                 );
                 return { format, date: liveMonth, stats };
+            }
+        }
+
+        // An ended regulation's ladder is retired, so it is missing from the
+        // live month, and Champions formats are missing from the bundled table
+        // below. Walk back to the last month Smogon published it, so the
+        // regulation's final snapshot still reaches KV and history.
+        if (liveMonth && REGULATION_FORMATS.includes(format)) {
+            for (const month of previousMonths(liveMonth, REGULATION_LOOKBACK_MONTHS)) {
+                await delay(500);
+                const response = await fetch(Statistics.url(month, format, true, "chaos"));
+                if (!response.ok) continue;
+                const stats = Statistics.process(await response.text());
+                console.log(
+                    `✓ Fetched ${format} @ ${month} (${Object.keys(stats.data).length} Pokemon) [last published month]`,
+                );
+                return { format, date: month, stats };
             }
         }
 
@@ -151,9 +175,6 @@ async function fetchFormatStats(format: string) {
         return null;
     }
 }
-
-// Delay helper to be polite to Smogon's servers
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function main() {
     console.log("Fetching Smogon usage statistics...\n");

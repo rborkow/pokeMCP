@@ -14,6 +14,7 @@ import { dirname, join } from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 
+import { getAbility, getPokemon, toID } from "../data-loader.js";
 import { CHAMPIONS_REGMA } from "../regulations/champions-regma.js";
 import { CHAMPIONS_REGMB } from "../regulations/champions-regmb.js";
 import { LegalityNotIngestedError, loadRegulation } from "../regulations/loader.js";
@@ -144,6 +145,38 @@ describe("regulation registry", () => {
         assert.ok(names.has("Salamence-Mega"));
         for (const m of CHAMPIONS_REGMB.megaForms)
             assert.ok(names.has(m.megaName), `M-C should keep ${m.megaName}`);
+    });
+
+    it("carries the official M-C list URL so legality can be ingested", () => {
+        const url = getRegulation("champions-regmc")?.officialLegalityUrl ?? "";
+        assert.match(url, /^https:\/\/web-view\.app\.pokemonchampions\.jp\/.+\/en\/pokemon\.html$/);
+    });
+
+    it("lists the Megas seen on the M-C ladder that the bundled dex lacks", () => {
+        const megas = getRegulation("champions-regmc")?.megaForms ?? [];
+        // Item ids exactly as Smogon's 2026-10 M-C usage data records them.
+        const ladderStones: Record<string, string> = {
+            "Golisopod-Mega": "golisopite",
+            "Baxcalibur-Mega": "baxcalibrite",
+            "Garchomp-Mega-Z": "garchompitez",
+            "Absol-Mega-Z": "absolitez",
+            "Lucario-Mega-Z": "lucarionitez",
+            "Raichu-Mega-X": "raichunitex",
+            "Raichu-Mega-Y": "raichunitey",
+            "Staraptor-Mega": "staraptite",
+            "Glimmora-Mega": "glimmoranite",
+            "Scovillain-Mega": "scovillainite",
+            "Meowstic-F-Mega": "meowsticite",
+        };
+        for (const [megaName, stoneId] of Object.entries(ladderStones)) {
+            const mega = megas.find((m) => m.megaName === megaName);
+            assert.ok(mega, `missing ${megaName}`);
+            assert.equal(toID(mega.megaStone), stoneId, `${megaName} stone`);
+            assert.ok(getPokemon(mega.basePokemon), `${megaName} base Pokémon`);
+            if (mega.postMegaAbility) {
+                assert.ok(getAbility(mega.postMegaAbility), `${megaName} ability`);
+            }
+        }
     });
 
     it("getLatestLimitlessRegulation returns M-C", () =>

@@ -227,6 +227,8 @@ yarn-error.log*
 # Not committed: KV is the source of truth; the monthly workflow keeps the raw
 # dumps as a 30-day workflow artifact instead. (src/cached-tournaments/ stays tracked.)
 src/cached-stats/
+# Same policy for fetched regulation allow-lists (KV key `<regulation>:_legality`).
+src/cached-champions-legality/
 
 # Claude Code
 .claude/

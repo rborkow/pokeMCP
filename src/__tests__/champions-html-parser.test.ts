@@ -155,6 +155,8 @@ describe("normalizeChampionsFormName", () => {
         ["Lycanroc (Midday Form)", "Lycanroc"],
         ["Lycanroc (Midnight Form)", "Lycanroc-Midnight"],
         ["Lycanroc (Dusk Form)", "Lycanroc-Dusk"],
+        ["Toxtricity (Amped Form)", "Toxtricity"],
+        ["Toxtricity (Low Key Form)", "Toxtricity-Low-Key"],
     ];
 
     for (const [input, expected] of cases) {
