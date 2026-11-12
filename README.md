@@ -48,7 +48,6 @@ It has no accounts and calls no AI provider. The matchup planner, team builder a
 - `src/` — the Cloudflare Worker at `api.pokemcp.com`: the connector (`src/connector/`), regulation and usage data, tournament ingestion, legacy shared-team reads, and administration.
 - `apps/teambuilder/` — the website (Next.js 16 on Cloudflare Workers through OpenNext). The directory name is historical.
 - `apps/docs/` — the documentation site (Nextra).
-- `apps/pokemonitor/` — usage reporting worker.
 - `scripts/` — stats refresh, regulation legality ingestion and report generation.
 - `migrations/d1/` — usage-history and tournament D1 schema.
 

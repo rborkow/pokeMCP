@@ -3,7 +3,7 @@ name: Deploy production
 # This workflow is called by Build and Test only after every release gate passes
 # on main. It remains manually runnable for a deliberate retry or partial deploy.
 # D1 migrations are applied separately after a release backup; this workflow
-# refuses to deploy while either database has pending migrations.
+# refuses to deploy while the database has pending migrations.
 on:
   workflow_call:
     inputs:
@@ -23,7 +23,6 @@ on:
           - all
           - worker
           - teambuilder
-          - pokemonitor
 
 permissions:
   contents: read
@@ -85,18 +84,5 @@ jobs:
           # layout.tsx also hardcodes this as a fallback; set explicitly so the
           # build never depends on a gitignored .env.local.
           NEXT_PUBLIC_CF_ANALYTICS_TOKEN: 760a922acb5c4ad0bb6726211198945f
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-
-      - name: Install pokemonitor dependencies
-        if: ${{ inputs.target == 'all' || inputs.target == 'pokemonitor' }}
-        working-directory: ./apps/pokemonitor
-        run: bun install --frozen-lockfile
-
-      - name: Deploy pokemonitor
-        if: ${{ inputs.target == 'all' || inputs.target == 'pokemonitor' }}
-        working-directory: ./apps/pokemonitor
-        run: bun run deploy
-        env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

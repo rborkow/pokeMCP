@@ -18,7 +18,7 @@ database_name = "pokemcp-meta-history"
 database_id = "64752654-621e-4f0d-be90-3e200e73097c"
 
 # Shared usage-analytics dataset (written by the MCP Worker, read by the admin
-# dashboard and pokemonitor).
+# dashboard).
 [[analytics_engine_datasets]]
 binding = "ANALYTICS"
 dataset = "pokemcp-analytics"
