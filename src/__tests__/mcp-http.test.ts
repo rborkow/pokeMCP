@@ -11,7 +11,12 @@ import { describe, it } from "node:test";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 
-import { handleMcpRequest, type McpClientInfo } from "../connector/http.js";
+import {
+    handleMcpRequest,
+    MAX_BATCH_MESSAGES,
+    MAX_BODY_BYTES,
+    type McpClientInfo,
+} from "../connector/http.js";
 import type { ConnectorCallInfo } from "../connector/register.js";
 import { CONNECTOR_TOOLS } from "../connector/tools.js";
 
@@ -163,6 +168,50 @@ describe("stateless MCP endpoint", () => {
             env,
         );
         assert.equal(response.status, 406);
+    });
+
+    it("refuses a batch larger than the limit without running any of it", async () => {
+        const calls: ConnectorCallInfo[] = [];
+        const batch = Array.from({ length: MAX_BATCH_MESSAGES + 1 }, (_, i) =>
+            lookup(i + 1, "Garchomp"),
+        );
+        const response = await handleMcpRequest(post(batch), env, {
+            onCall: (info) => calls.push(info),
+        });
+        assert.equal(response.status, 400);
+        const body = (await response.json()) as { error: { code: number; message: string } };
+        assert.equal(body.error.code, -32600);
+        assert.match(body.error.message, /Too many messages/);
+        assert.equal(calls.length, 0);
+    });
+
+    it("still answers a small batch", async () => {
+        const response = await handleMcpRequest(post([toolsList(1), lookup(2, "Garchomp")]), env);
+        assert.equal(response.status, 200);
+        const body = (await response.json()) as { id: number }[];
+        assert.deepEqual(body.map((message) => message.id).sort(), [1, 2]);
+    });
+
+    it("refuses an oversized body, whether or not its length is declared", async () => {
+        const huge = JSON.stringify({ ...toolsList(1), padding: "x".repeat(MAX_BODY_BYTES) });
+
+        const declared = await handleMcpRequest(
+            post(huge, { "Content-Length": String(huge.length) }),
+            env,
+        );
+        assert.equal(declared.status, 413);
+
+        // A streamed body carries no Content-Length, so the cap is enforced while reading.
+        const streamed = await handleMcpRequest(
+            new Request(URL_MCP, {
+                method: "POST",
+                headers: JSON_HEADERS,
+                body: new Blob([huge]).stream(),
+                duplex: "half",
+            } as RequestInit),
+            env,
+        );
+        assert.equal(streamed.status, 413);
     });
 
     it("does not report an initialize for other requests", async () => {

@@ -45,6 +45,52 @@ const CORS_HEADERS: Record<string, string> = {
     "Access-Control-Max-Age": "86400",
 };
 
+/**
+ * Limits on one POST. The per-IP rate limit counts requests, so without these
+ * a single request could carry an unlimited amount of work.
+ *
+ * The largest legitimate body is a `validate_team` call for six Pokémon, a few
+ * kilobytes. JSON-RPC batches were dropped from MCP in the 2025-06-18 revision
+ * but earlier clients may still send small ones.
+ */
+export const MAX_BODY_BYTES = 64 * 1024;
+export const MAX_BATCH_MESSAGES = 10;
+
+function jsonRpcError(status: number, code: number, message: string): Response {
+    return new Response(JSON.stringify({ jsonrpc: "2.0", error: { code, message }, id: null }), {
+        status,
+        headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+    });
+}
+
+/** Read the request body, or return null as soon as it exceeds `maxBytes`. */
+async function readBody(request: Request, maxBytes: number): Promise<string | null> {
+    const declared = Number(request.headers.get("Content-Length"));
+    if (Number.isFinite(declared) && declared > maxBytes) return null;
+    if (!request.body) return "";
+
+    const reader = request.body.getReader();
+    const chunks: Uint8Array[] = [];
+    let total = 0;
+    for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        total += value.byteLength;
+        if (total > maxBytes) {
+            await reader.cancel().catch(() => {});
+            return null;
+        }
+        chunks.push(value);
+    }
+    const bytes = new Uint8Array(total);
+    let offset = 0;
+    for (const chunk of chunks) {
+        bytes.set(chunk, offset);
+        offset += chunk.byteLength;
+    }
+    return new TextDecoder().decode(bytes);
+}
+
 function withCors(response: Response): Response {
     const headers = new Headers(response.headers);
     for (const [name, value] of Object.entries(CORS_HEADERS)) headers.set(name, value);
@@ -105,7 +151,10 @@ export async function handleMcpRequest(
     // Read the body once: to notice an `initialize`, and to hand the transport
     // the parsed message. Invalid JSON is passed through untouched so the
     // transport reports it the standard way.
-    const raw = await request.text();
+    const raw = await readBody(request, MAX_BODY_BYTES);
+    if (raw === null) {
+        return jsonRpcError(413, -32600, "Request body too large.");
+    }
     let parsedBody: unknown;
     let parsed = false;
     try {
@@ -113,6 +162,14 @@ export async function handleMcpRequest(
         parsed = true;
     } catch {
         // Left to the transport.
+    }
+
+    if (Array.isArray(parsedBody) && parsedBody.length > MAX_BATCH_MESSAGES) {
+        return jsonRpcError(
+            400,
+            -32600,
+            `Too many messages in one request (limit ${MAX_BATCH_MESSAGES}). Send them separately.`,
+        );
     }
 
     if (parsed) {
