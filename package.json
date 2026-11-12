@@ -33,6 +33,7 @@
         "discover-formats": "tsx scripts/discover-formats.ts",
         "fetch-stats": "tsx scripts/fetch-stats.ts",
         "upload-stats": "tsx scripts/upload-stats.ts",
+        "verify-stats": "tsx scripts/verify-stats.ts",
         "backfill-history": "tsx scripts/backfill-history.ts",
         "append-history": "tsx scripts/append-history.ts",
         "generate-reports": "tsx scripts/generate-reports.ts",

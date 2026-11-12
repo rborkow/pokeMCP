@@ -1,3 +1,6 @@
+import { getLatestLimitlessRegulation } from "../regulations/registry.js";
+import type { RegulationSet } from "../regulations/types.js";
+
 const API_BASE = "https://play.limitlesstcg.com/api";
 const MIN_PLAYERS = 48;
 const MAX_NEW_EVENTS_PER_RUN = 8;
@@ -76,7 +79,7 @@ function normalizeTeam(decklist: ApiStandingEntry["decklist"]) {
     return team.length >= 4 ? team : null;
 }
 
-async function fetchEvent(env: TournamentEnv, summary: ApiTournamentSummary) {
+async function fetchEvent(env: TournamentEnv, summary: ApiTournamentSummary, reg: RegulationSet) {
     const details = await api<ApiTournamentDetails>(env, `/tournaments/${summary.id}/details`);
     if (!details.decklists) return null;
     const standings = await api<ApiStandingEntry[]>(env, `/tournaments/${summary.id}/standings`);
@@ -124,8 +127,8 @@ async function fetchEvent(env: TournamentEnv, summary: ApiTournamentSummary) {
         date: summary.date,
         players: summary.players,
         format: summary.format,
-        regulationId: "champions-regmb",
-        regulationLabel: "Pokémon Champions — Regulation M-B",
+        regulationId: reg.id,
+        regulationLabel: reg.displayName,
         source: "limitless",
         sourceUrl: `https://play.limitlesstcg.com/tournament/${summary.id}`,
         attribution: "Data via Limitless (play.limitlesstcg.com)",
@@ -146,13 +149,19 @@ export async function refreshTournamentNewsroom(env: TournamentEnv) {
         .run();
     let fetchedCount = 0;
     try {
+        const reg = getLatestLimitlessRegulation();
+        if (!reg?.limitlessFormatId) {
+            throw new Error("No regulation has a limitlessFormatId configured");
+        }
         const summaries = await api<ApiTournamentSummary[]>(
             env,
-            "/tournaments?game=VGC&format=M-B&limit=100&page=1",
+            `/tournaments?game=VGC&format=${encodeURIComponent(reg.limitlessFormatId)}&limit=100&page=1`,
         );
         const existing = await env.META_DB.prepare(
-            "SELECT id FROM tournament_event WHERE regulation_id = 'champions-regmb'",
-        ).all<{ id: string }>();
+            "SELECT id FROM tournament_event WHERE regulation_id = ?",
+        )
+            .bind(reg.id)
+            .all<{ id: string }>();
         const existingIds = new Set(existing.results.map((row) => row.id));
         const cutoff = Date.now() - 35 * 24 * 60 * 60 * 1_000;
         const candidates = summaries
@@ -166,7 +175,7 @@ export async function refreshTournamentNewsroom(env: TournamentEnv) {
             .slice(0, MAX_NEW_EVENTS_PER_RUN);
 
         for (const summary of candidates) {
-            const event = await fetchEvent(env, summary);
+            const event = await fetchEvent(env, summary, reg);
             if (!event) continue;
             await env.META_DB.prepare(
                 `INSERT INTO tournament_event
@@ -214,7 +223,9 @@ export async function refreshTournamentNewsroom(env: TournamentEnv) {
         )
             .bind(new Date().toISOString(), fetchedCount, jobId)
             .run();
-        console.log(JSON.stringify({ event: "tournament_ingestion_complete", fetchedCount, jobId }));
+        console.log(
+            JSON.stringify({ event: "tournament_ingestion_complete", fetchedCount, jobId }),
+        );
         return { fetchedCount, jobId };
     } catch (error) {
         const message = error instanceof Error ? error.message.slice(0, 500) : "Unknown error";

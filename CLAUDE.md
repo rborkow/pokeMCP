@@ -282,11 +282,31 @@ See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for test structur
 3. Add Smogon format name mapping in `src/ingestion/scraper.ts` (VGC formats auto-generate names)
 4. Update README.md supported formats list
 
+**Adding a new Champions regulation (e.g. M-D):**
+
+1. Add `src/regulations/champions-reg<x>.ts` and register it in `registry.ts`; set the
+   previous regulation's `endDate`. Defaults (stats tools, Limitless ingestion, reports)
+   follow the newest regulation that has `showdownFormatId` / `limitlessFormatId` set
+2. Find the official eligible-Pokémon page and set `officialLegalityUrl`. Run
+   `bun run fetch-champions-legality -- <id>`; if it throws on a new form label, add the
+   mapping in `champions-html-parser.ts`. Cross-check the list against the ladder data
+3. `bun run upload-champions-legality` (production KV) — team validation fails loudly
+   for the regulation until this is done
+4. Megas come from the bundled dex snapshot, which lags. Add any Mega seen on the ladder
+   but missing from it to the pending list in `mega-data.ts` (stone id from the ladder's
+   item ids)
+5. Run the "Update Smogon Stats" workflow from `main`, then "Backfill Metagame History"
+   for the new format id if the regulation started more than a month ago
+
 **Updating usage stats (monthly):**
 
 Option 1 - GitHub Action (recommended):
 
-- Runs automatically on the 5th of each month
+- Runs automatically on the 5th of each month, but waits for manual approval of the
+  `production` environment — unapproved runs time out after 30 days, so check the Actions
+  tab if stats look stale
+- Only ever dispatch it from `main`: it rebases onto and pushes to `main`
+- An ended regulation resolves to its last published month, so its final snapshot is kept
 - Discovers new formats, fetches stats, and uploads — all automated
 - Or trigger manually: Actions → "Update Smogon Stats" → Run workflow
 
