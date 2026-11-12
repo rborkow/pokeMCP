@@ -1,11 +1,11 @@
 export default {
-    index: "Home",
-    "getting-started": "Getting Started",
-    formats: "Mechanics coverage",
-    tools: "VGC Teambuilder connector",
+    index: "VGC Teambuilder",
+    "getting-started": "Connect",
+    tools: "Tools",
+    formats: "Regulations and data",
     "api-reference": "Endpoints",
-    teambuilder: {
-        title: "Open PokeMCP Prep",
+    site: {
+        title: "Results and reports",
         href: "https://www.pokemcp.com",
     },
 };

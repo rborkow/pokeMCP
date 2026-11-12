@@ -20,7 +20,7 @@ Do **not** align framework versions across apps — they are intentionally pinne
 
 ## Coupling
 
-Apps are loosely coupled. The teambuilder reads tournament and usage history from the shared `META_DB` D1 database and has its own `PREP_DB`; it no longer calls the MCP worker's tools or any AI provider. There is no shared code between apps or between apps and the root `src/`.
+Apps are loosely coupled. The teambuilder reads tournament results from the shared `META_DB` D1 database. It calls neither the MCP worker's tools nor any AI provider, and it has no accounts. There is no shared code between apps or between apps and the root `src/`.
 
 ## Running Locally
 

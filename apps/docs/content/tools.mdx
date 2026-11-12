@@ -1,32 +1,10 @@
 ---
-description: "VGC Teambuilder is a read-only MCP connector for competitive Pokémon doubles team building in Claude, ChatGPT and other AI assistants."
+description: "Every VGC Teambuilder tool: what it takes, what it returns and what it does not check."
 ---
 
-# VGC Teambuilder connector
+# Tools
 
-VGC Teambuilder gives an AI assistant the data it needs to help build a competitive Pokémon doubles team under Pokémon Champions regulations: Pokémon data, move and team legality checks, defensive type analysis, and usage statistics and trends.
-
-It is a [Model Context Protocol](https://modelcontextprotocol.io) server. Every tool only reads data; nothing is written, and no account is needed.
-
-## Connect
-
-Add this URL as a custom connector in Claude or ChatGPT, or in any MCP client that supports Streamable HTTP:
-
-```
-https://api.pokemcp.com/mcp
-```
-
-No sign-in is required.
-
-## Things to ask
-
-- "What are the ten most-used Pokémon in Regulation M-C, and how is the top one usually built?"
-- "Here's my team: Kingambit, Sneasler, Basculegion, Garchomp, Whimsicott and Charizard. Is it legal, and what are its shared weaknesses?"
-- "Which Pokémon are most often paired with Kingambit, and what reliably beats it?"
-- "Which Pokémon have gained the most usage over the last three months?"
-- "Can Incineroar learn Fake Out and Parting Shot?"
-
-## Tools
+VGC Teambuilder is a [Model Context Protocol](https://modelcontextprotocol.io) server at `https://api.pokemcp.com/mcp`. Every tool only reads data; nothing is written, and no account is needed. To add it to an assistant, see [Connect](/getting-started).
 
 {/* AUTOGEN:TOOLS:BEGIN */}
 | Tool | Parameters | Description |

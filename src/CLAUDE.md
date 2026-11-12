@@ -5,9 +5,10 @@ Entry point for the Worker deployed at `api.pokemcp.com`. It exposes two tool su
 - **Public connector** (`connector/`, served at `/mcp`): the "VGC Teambuilder" MCP server —
   12 read-only tools, no auth, Champions regulations only. Listed in AI-assistant directories,
   so its names, descriptions, annotations and output schemas are a published contract.
-- **Internal registry** (`tool-registry.ts`): the 7 tools PokeMCP Prep calls through the
-  `PrepAnalysisService` service binding. Prep depends on their names, arguments and text
-  output; they are not reachable from `/mcp`.
+- **Internal registry** (`tool-registry.ts`): 7 tools the retired PokeMCP Prep site called
+  through the `PrepAnalysisService` service binding. Nothing calls them any more and they are
+  not reachable from `/mcp`. Pending removal, together with the weekly Smogon-analysis
+  ingestion that only `query_strategy` used. Do not build on them.
 
 ## Public connector (`connector/`)
 
@@ -45,7 +46,7 @@ connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output 
 ```
 index.ts (routes + PokemonMCP and IngestionCoordinator Durable Objects)
 ├── connector/ (public MCP tools — see above)
-├── tool-registry.ts (internal registry of 7 tools, used by PrepAnalysisService)
+├── tool-registry.ts (internal registry of 7 tools — no caller left, pending removal)
 │   ├── tools.ts (4 sync tools: lookup_pokemon, validate_moveset, validate_team, suggest_team_coverage)
 │   ├── stats.ts (get_usage_stats — one tool, `type` enum selects the stat view)
 │   ├── rag/query.ts (query_strategy — consolidated RAG search)
@@ -66,7 +67,7 @@ index.ts (routes + PokemonMCP and IngestionCoordinator Durable Objects)
 | RAG (Vectorize+KV) | `rag/query.ts` | `VECTOR_INDEX` + `STRATEGY_DOCS` KV + `AI` | 1 (`query_strategy`) |
 | Meta history (D1) | `meta-history.ts` | `META_DB` D1 | 1 (`get_meta_trends`) |
 
-`tool-registry.ts` is the single source of truth for the internal tool definitions, consumed by `PrepAnalysisService`. The public MCP `init()` registers `connector/` instead.
+`tool-registry.ts` defines the internal tools, which `PrepAnalysisService` exposed to the retired Prep site. The public MCP `init()` registers `connector/` instead.
 
 ## HTTP Endpoints
 

@@ -8,15 +8,15 @@ A monorepo containing an MCP (Model Context Protocol) server for Pokémon compet
 
 **Public connector ("VGC Teambuilder"):** `https://api.pokemcp.com/mcp` serves a read-only,
 authless MCP server (Streamable HTTP) intended for the Claude and ChatGPT directories. Its 12
-tools live in `src/connector/` and are deliberately separate from the internal
-`src/tool-registry.ts` surface that PokeMCP Prep calls through the `PrepAnalysisService` service
-binding. The legacy `/sse` and `/api/tools` endpoints stay retired (`410 Gone`). See
+tools live in `src/connector/`. The older `src/tool-registry.ts` surface and the
+`PrepAnalysisService` entrypoint were for the retired PokeMCP Prep site; nothing calls them now
+and they are pending removal. The legacy `/sse` and `/api/tools` endpoints stay retired (`410 Gone`). See
 [`src/CLAUDE.md`](src/CLAUDE.md).
 
 **Monorepo Structure:**
 
 - `src/` - MCP Worker (Cloudflare Workers) — see [`src/CLAUDE.md`](src/CLAUDE.md)
-- `apps/teambuilder/` - Next.js team building UI (OpenNext on Cloudflare Workers) — see [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md)
+- `apps/teambuilder/` - The website: results, reports, Pokémon pages. No team builder, accounts or AI (OpenNext on Cloudflare Workers) — see [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md)
 - `apps/docs/` - Nextra documentation site (Cloudflare Pages) — see [`apps/CLAUDE.md`](apps/CLAUDE.md)
 
 **Deployed URLs:**
@@ -218,9 +218,9 @@ monthly stats refresh.
 deploy):
 
 - `pokemon-mcp-production`: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CF_ACCESS_TEAM_DOMAIN`
-- `pokemcp-teambuilder`: `BETTER_AUTH_SECRET`, `DISCORD_CLIENT_ID`/`_SECRET`,
-  `GOOGLE_CLIENT_ID`/`_SECRET`. (`ANTHROPIC_API_KEY`, `CLOUDFLARE_AI_GATEWAY_URL` and
-  `CF_AIG_TOKEN` are still set but unused since the site's AI features were removed.)
+- `pokemcp-teambuilder`: none needed. Still set but unused since the retirement, and safe to
+  delete: `BETTER_AUTH_SECRET`, the Discord and Google OAuth client ids and secrets,
+  `ANTHROPIC_API_KEY`, `CLOUDFLARE_AI_GATEWAY_URL`, `CF_AIG_TOKEN`.
 
 Neither worker calls Anthropic. The MCP Worker uses Workers AI for embeddings, routed through
 the Cloudflare AI Gateway (`pokemcp`). The only Anthropic use left is the report narrative in
@@ -272,11 +272,8 @@ See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for test structur
    switches (directory reviews require this)
 3. Cover it in `src/__tests__/connector.test.ts`, then run `bun run generate-tool-docs`
 
-**Adding an internal tool (PokeMCP Prep only):**
-
-1. Implement function in `src/tools.ts` or `src/stats.ts`
-2. Register in `src/tool-registry.ts` with Zod schema — reachable only through
-   `PrepAnalysisService`, never from the public MCP endpoint
+**Do not add tools to `src/tool-registry.ts`.** It served the retired PokeMCP Prep site, has no
+caller, and is pending removal along with `PrepAnalysisService`.
 
 **Adding a new format:**
 
@@ -323,7 +320,8 @@ Option 2 - Manual:
 
 ### Website (`apps/teambuilder`)
 
-The site has no team builder and no AI features: it serves meta reports, Pokémon pages, the
-tournament newsroom and PokeMCP Prep. See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md)
-for routes, layout, the open question about Prep, and the traps (the `build/` ignore rule, saved
-coach conversations as user data).
+The site is content only: tournament results, meta reports, Pokémon pages and the privacy
+policy. PokeMCP Prep, saved teams, accounts and every AI feature were retired in November 2026;
+Claude and ChatGPT, through the connector, are the only interfaces. See
+[`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for routes, what the retirement left
+behind (user data still held, bindings to remove) and the `build/` ignore-rule trap.

@@ -1,30 +1,38 @@
 ---
-description: "Create your first PokeMCP Prep battle card from a current Champions team sheet."
+description: "Add VGC Teambuilder to Claude or ChatGPT as a custom connector and ask your first team-building question."
 ---
 
-# Getting started
+# Connect VGC Teambuilder
 
-## 1. Add your team
+## 1. Add the connector
 
-Open **[Build a team](https://www.pokemcp.com/build?mode=grid)** to import a Showdown-style paste or edit your current Champions team. Include moves, items, and abilities when you know them; the plan becomes more specific as the team sheet becomes more complete.
+VGC Teambuilder is a remote [MCP](https://modelcontextprotocol.io) server. Add it to your assistant as a custom connector using this address:
 
-## 2. Choose an opponent
+```
+https://api.pokemcp.com/mcp
+```
 
-From the newsroom, open a completed event and select **Prepare against team**. You can also start from **[New prep](https://www.pokemcp.com/prep/new)** and paste a team sheet or enter Pokémon names manually.
+It works in Claude, in ChatGPT and in any other MCP client that supports Streamable HTTP. Each product's help pages explain where custom connectors are added. There is nothing to sign in to.
 
-## 3. Read the battle card
+## 2. Ask a question
 
-The Match Desk separates:
+Once it is connected, ask as you normally would. Your assistant decides which tools to call.
 
-- The recommended Bring 4.
-- A primary and alternative lead pair.
-- Likely opposing leads to rehearse.
-- Opening-line principles and danger points.
-- A practice checklist.
-- Evidence and mechanics limitations for each recommendation.
+- "What are the ten most-used Pokémon in Regulation M-C, and how is the top one usually built?"
+- "Which Pokémon are most often paired with Kingambit, and what reliably beats it?"
+- "Which Pokémon have gained the most usage over the last three months?"
 
-Likely leads are rehearsal targets, not win-rate predictions. VP-sensitive speed order and incomplete Champions move interactions are marked as beta where they matter.
+## 3. Bring your own team
 
-## 4. Save or export
+Paste a team in Pokémon Showdown's text format, or just list the Pokémon, and ask what you want to know:
 
-Anonymous plans stay in your browser. Copy the card as Markdown, print or save it as PDF, and download a JSON workspace backup from **Teams**. Optional Discord or Google sign-in merges the newest copy of each saved item into your account.
+- "Is this team legal in the current regulation?"
+- "What are this team's shared weaknesses, and which type would patch them?"
+- "Can Incineroar learn Fake Out and Parting Shot?"
+
+## Tips
+
+- **Name the regulation** if you mean one other than the default. Ask "which formats do you support?" to see them.
+- **Mega Evolutions have their own names** in the usage data, such as Charizard-Mega-Y. You can use those names anywhere.
+- **Usage percentages are shares of teams or sets**, not win rates.
+- **Check the limits** on the [Tools](/tools) page before relying on a legality answer: move data comes from Pokémon Showdown and can lag Pokémon Champions.

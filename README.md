@@ -1,28 +1,18 @@
-# PokeMCP Prep
+# VGC Teambuilder
 
 [![Build](https://github.com/rborkow/pokeMCP/actions/workflows/build.yml/badge.svg)](https://github.com/rborkow/pokeMCP/actions/workflows/build.yml)
 
-PokeMCP Prep turns current Pokémon Champions tournament teams into matchup plans players can practice. The web product combines a sourced tournament newsroom, team-sheet comparison, and structured, rule-based battle cards. It calls no AI provider.
-
-**Product:** [www.pokemcp.com](https://www.pokemcp.com) · **Documentation:** [docs.pokemcp.com](https://docs.pokemcp.com)
-
-## Product shape
-
-- Champions Regulation M-B is the default and primary format.
-- Completed public Limitless events supply team sheets and results.
-- A battle card includes Bring 4, two leads, likely opposing leads, opening lines, dangers, evidence, and practice work.
-- Anonymous teams and plans live locally; optional Discord or Google accounts sync through Better Auth and D1.
-- Exact VP-sensitive speed calculations and incomplete Champions move interactions are labeled as mechanics beta.
-
-## VGC Teambuilder connector
-
-The same analysis is available to AI assistants as **VGC Teambuilder**, a read-only [Model Context Protocol](https://modelcontextprotocol.io) server:
+VGC Teambuilder is a read-only [Model Context Protocol](https://modelcontextprotocol.io) connector for competitive Pokémon doubles. Add it to Claude, ChatGPT or any MCP client and the assistant can look up Pokémon Champions usage statistics, check a team's legality, analyse its typing and follow how the metagame moves.
 
 ```
 https://api.pokemcp.com/mcp
 ```
 
-It needs no account and takes no personal information. Connect it as a custom connector in Claude or ChatGPT, or from any MCP client that speaks Streamable HTTP. Full reference: [docs.pokemcp.com/tools](https://docs.pokemcp.com/tools).
+It needs no account and takes no personal information. Add it as a custom connector by address.
+
+**Connect:** [docs.pokemcp.com/getting-started](https://docs.pokemcp.com/getting-started) · **Tool reference:** [docs.pokemcp.com/tools](https://docs.pokemcp.com/tools) · **Results and reports:** [www.pokemcp.com](https://www.pokemcp.com)
+
+## Tools
 
 <!-- AUTOGEN:TOOLS:BEGIN -->
 | Tool | What it does |
@@ -41,18 +31,26 @@ It needs no account and takes no personal information. Connect it as a custom co
 | `get_usage_momentum` | Find rising and falling Pokémon |
 <!-- AUTOGEN:TOOLS:END -->
 
-The tools live in `src/connector/`; run `bun run generate-tool-docs` after changing them. The legacy `/sse` and `/api/tools` endpoints stay retired and return `410 Gone`. The web product reaches its own, separate tool set through a private Cloudflare service binding.
+The tools live in `src/connector/`; run `bun run generate-tool-docs` after changing them. They cover Pokémon Champions regulations only. The legacy `/sse` and `/api/tools` endpoints stay retired and return `410 Gone`.
 
-VGC Teambuilder is an unofficial fan project. It is not affiliated with or endorsed by Nintendo, Creatures Inc., GAME FREAK inc. or The Pokémon Company.
+## The website
+
+[www.pokemcp.com](https://www.pokemcp.com) is the connector's content and reference site, not an application:
+
+- tournament results from completed public Limitless events;
+- monthly meta reports and per-Pokémon trend pages, generated from Smogon's usage statistics;
+- the privacy policy.
+
+It has no accounts and calls no AI provider. The matchup planner, team builder and coach it once offered (PokeMCP Prep) were retired in November 2026; their old addresses lead to a notice page.
 
 ## Repository
 
-- `apps/teambuilder/` — Next.js 16 / OpenNext web application.
-- `apps/docs/` — Nextra documentation.
-- `apps/pokemonitor/` — daily Cloudflare Worker reporting, AI-usage monitoring, and email delivery.
-- `src/` — Cloudflare analysis worker: the public VGC Teambuilder connector (`src/connector/`), the internal analysis service, tournament ingestion, shared-team compatibility, and administration.
-- `migrations/d1/` — metagame and tournament D1 schema.
-- `apps/teambuilder/migrations/prep/` — account, team, plan, and coach-history schema.
+- `src/` — the Cloudflare Worker at `api.pokemcp.com`: the connector (`src/connector/`), regulation and usage data, tournament ingestion, legacy shared-team reads, and administration.
+- `apps/teambuilder/` — the website (Next.js 16 on Cloudflare Workers through OpenNext). The directory name is historical.
+- `apps/docs/` — the documentation site (Nextra).
+- `apps/pokemonitor/` — usage reporting worker.
+- `scripts/` — stats refresh, regulation legality ingestion and report generation.
+- `migrations/d1/` — usage-history and tournament D1 schema.
 
 ## Development
 
@@ -60,58 +58,33 @@ The repository pins Bun 1.3+.
 
 ```bash
 bun install
-bun run dev:teambuilder
+bun run dev                # the worker, at http://localhost:8787/mcp
+bun run dev:teambuilder    # the website, at http://localhost:3000
+bun run dev:docs           # the docs site, at http://localhost:3001
 ```
 
-The teambuilder runs at `http://localhost:3000`. Anonymous preparation works without Cloudflare bindings or OAuth credentials.
-
-Useful checks:
+Checks:
 
 ```bash
-cd apps/teambuilder
-bun run test:run
-bun run build
-
-cd ../..
-bun run type-check
-bun run lint
+bun run ci:worker                        # type check, tests, migrations, dry-run build
+cd apps/teambuilder && bun run ci        # lint, tests, production bundle, type checks
 ```
 
-### Optional account sync
+Local worker storage starts empty, so usage and trend tools answer "unavailable" until it is seeded. See `CLAUDE.md` for the data pipelines, the checklist for adding a regulation, and how production data is refreshed.
 
-Configure these secrets on the `pokemcp-teambuilder` Worker:
+## Data sources
 
-- `BETTER_AUTH_SECRET`
-- `DISCORD_CLIENT_ID` and `DISCORD_CLIENT_SECRET`
-- `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`
-
-Apply product migrations with:
-
-```bash
-cd apps/teambuilder
-bunx wrangler d1 migrations apply PREP_DB --remote --config wrangler.toml
-```
-
-OAuth callbacks use:
-
-- `https://www.pokemcp.com/api/auth/callback/discord`
-- `https://www.pokemcp.com/api/auth/callback/google`
-
-Before a production migration or cutover, follow the [Cloudflare relaunch runbook](docs/RELAUNCH_RUNBOOK.md). The repository includes repeatable commands for validated D1 exports and a read-only account/binding preflight:
-
-```bash
-bun run cloudflare:backup pokemcp-meta-history pokemcp-prep
-bun run cloudflare:preflight
-```
-
-### Tournament data
-
-The internal Worker refreshes completed public Regulation M-B events daily at 06:00 UTC and stores normalized event/team records in `META_DB`. Generated JSON in the repository remains a build-time and local-development fallback.
+- Pokémon, move and ability data: Pokémon Showdown.
+- Usage statistics: Pokémon Showdown ladder data published monthly by Smogon.
+- Allowed Pokémon: each regulation's published eligible list.
+- Tournament results: Limitless.
 
 ## Privacy
 
-Operational analytics measure the preparation funnel. The site sends nothing to an AI provider. Signed-in users may delete synced teams, plans, saved coach conversations, sessions, and provider links from the account page. Full policy: [www.pokemcp.com/privacy](https://www.pokemcp.com/privacy).
+The connector stores no tool inputs or results; it records only which tool was called, the format, whether it succeeded and how long it took. Full policy: [www.pokemcp.com/privacy](https://www.pokemcp.com/privacy).
 
-## License
+## License and affiliation
 
 [GNU Affero General Public License v3.0](LICENSE)
+
+VGC Teambuilder is an unofficial fan project. It is not affiliated with or endorsed by Nintendo, Creatures Inc., GAME FREAK inc. or The Pokémon Company.
