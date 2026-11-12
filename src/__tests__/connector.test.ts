@@ -18,6 +18,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 
 import { getDefaultRegulation } from "../connector/formats.js";
 import { type ConnectorCallInfo, registerConnectorTools } from "../connector/register.js";
+import { listFormats } from "../connector/team.js";
 import { CONNECTOR_INFO, CONNECTOR_INSTRUCTIONS, CONNECTOR_TOOLS } from "../connector/tools.js";
 import { getFullLearnset, getPokemonLearnset } from "../data-loader.js";
 import { listRegulationIds } from "../regulations/registry.js";
@@ -321,6 +322,35 @@ describe("connector data tools", () => {
         );
         assert.equal(out.formats[0].bringCount, 4);
         assert.equal(out.formats[0].usageStats, true);
+        for (const format of out.formats) {
+            assert.ok(["upcoming", "current", "ended"].includes(format.status));
+        }
+    });
+
+    it("list_formats words a regulation's dates by where today falls", () => {
+        const line = (today: string, id: string) => {
+            const outcome = listFormats(today);
+            assert.equal(outcome.ok, true);
+            const text = outcome.ok ? outcome.text : "";
+            return text.split("\n").find((l) => l.includes(`\`${id}\``)) ?? "";
+        };
+        // Reg M-C runs 2026-09-08 to 2026-12-01; the end date is the handover day.
+        assert.match(
+            line("2026-09-01", "champions-regmc"),
+            /\(upcoming\)\. Starts 2026-09-08, ends/,
+        );
+        assert.match(
+            line("2026-11-12", "champions-regmc"),
+            /\(current\)\. Started 2026-09-08, ends 2026-12-01/,
+        );
+        assert.match(line("2026-11-30", "champions-regmc"), /\(current\)/);
+        assert.match(
+            line("2026-12-01", "champions-regmc"),
+            /\(ended\)\. Started 2026-09-08, ended 2026-12-01/,
+        );
+        // Reg M-B handed over to M-C on 2026-09-08.
+        assert.match(line("2026-09-07", "champions-regmb"), /\(current\)/);
+        assert.match(line("2026-09-08", "champions-regmb"), /\(ended\)/);
     });
 
     it("lookup_pokemon returns stats, abilities and Mega Evolutions", async () => {
