@@ -1,22 +1,24 @@
 # MCP Worker (Cloudflare Workers)
 
-Entry point for the Worker deployed at `api.pokemcp.com`. It exposes two tool surfaces:
+The Worker deployed at `api.pokemcp.com`. It does three things:
 
-- **Public connector** (`connector/`, served at `/mcp`): the "VGC Teambuilder" MCP server —
-  12 read-only tools, no auth, Champions regulations only. Listed in AI-assistant directories,
-  so its names, descriptions, annotations and output schemas are a published contract.
-- **Internal registry** (`tool-registry.ts`): 7 tools the retired PokeMCP Prep site called
-  through the `PrepAnalysisService` service binding. Nothing calls them any more and they are
-  not reachable from `/mcp`. Pending removal, together with the weekly Smogon-analysis
-  ingestion that only `query_strategy` used. Do not build on them.
+- serves **VGC Teambuilder**, the public MCP connector, at `/mcp`;
+- pulls **tournament results** from Limitless once a day, for the website;
+- serves a few **legacy and admin endpoints** (shared-team links, feedback, analytics).
 
-## Public connector (`connector/`)
+It calls no AI model.
+
+## The connector (`connector/`)
+
+12 read-only tools, no auth, Champions regulations only. It is intended for the Claude and
+ChatGPT directories, so tool names, descriptions, annotations and output schemas are a
+published contract.
 
 ```
 index.ts PokemonMCP.init() → connector/register.ts registerConnectorTools()
 connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output schemas
 ├── connector/pokemon.ts  lookup_pokemon, validate_moveset, analyze_team_types (bundled data)
-├── connector/team.ts     list_formats, validate_team (regulations/ + KV legality)
+├── connector/team.ts     list_formats, validate_team (regulations/ + KV eligible list)
 ├── connector/usage.ts    get_top_usage, get_pokemon_usage, get_teammates,
 │                         get_checks_and_counters (KV, via stats.ts loaders)
 ├── connector/trends.ts   get_usage_trend, get_meta_shifts, get_usage_momentum (D1, via
@@ -28,6 +30,8 @@ connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output 
   text. A failure is `fail(message)`, sent as a tool error (`isError`) — keep messages
   actionable and free of internals (no script names, binding names or file paths).
 - All tools carry `readOnlyHint: true`, `destructiveHint: false`, `openWorldHint: false`.
+- One operation per tool. Do not add a tool that switches on a `type` argument; directory
+  reviews reject that.
 - `connector/` must not import `agents` or `cloudflare:*`, so the whole surface runs under
   `node --test` through the MCP SDK's in-memory transport (`__tests__/connector.test.ts`).
 - Connector calls record operational metrics only (`trackToolCall`); arguments and results
@@ -39,100 +43,75 @@ connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output 
   a third of the moves actually used on the ladder.
 - Tools accept the Mega names the usage tools report ("Charizard-Mega-Y"), including Megas
   the bundled dex lacks — resolve names with `resolvePokemon()` in `connector/pokemon.ts`.
+- Momentum needs three monthly snapshots. Regulations last about three months, so a higher
+  minimum makes the tool unusable for the regulation being played.
+- Do not hard-code a regulation as "current". `list_formats` derives each one's status from
+  its dates, and defaults follow the newest regulation with published statistics.
 - After changing a tool, run `bun run generate-tool-docs` (README + apps/docs tools page).
 
-## Module Dependency Graph
+## Modules
 
 ```
-index.ts (routes + PokemonMCP and IngestionCoordinator Durable Objects)
-├── connector/ (public MCP tools — see above)
-├── tool-registry.ts (internal registry of 7 tools — no caller left, pending removal)
-│   ├── tools.ts (4 sync tools: lookup_pokemon, validate_moveset, validate_team, suggest_team_coverage)
-│   ├── stats.ts (get_usage_stats — one tool, `type` enum selects the stat view)
-│   ├── rag/query.ts (query_strategy — consolidated RAG search)
-│   └── meta-history.ts (get_meta_trends — D1-backed usage history)
-├── data-loader.ts (imports from data/*.ts — bundled at build time)
-├── logging.ts (anonymized R2 interaction logging)
-├── share.ts (/api/team/* shared-team storage) + og/ (OG image rendering)
-├── admin.ts (Cloudflare Access-protected admin API)
-└── ingestion/coordinator.ts (Durable Object alarm chain; seeded by the cron)
+index.ts               routes, the PokemonMCP Durable Object, the daily schedule
+├── connector/         the public MCP tools (above)
+├── regulations/       regulation registry, eligible-list loader, team validator, Mega data
+├── stats.ts           KV loaders for current-month usage + checks-and-counters parsing
+├── meta-history.ts    D1 reads and trend computations over monthly usage history
+├── data-loader.ts     bundled Pokémon Showdown data (data/*.ts) and full learnsets
+├── tournaments/ingestion.ts   daily Limitless tournament ingestion into META_DB
+├── mcp-rate-limit.ts  per-IP ceiling on /mcp
+├── retirement.ts      410 responses for retired endpoints
+├── share.ts + og/     legacy shared-team reads and their OG images
+├── analytics.ts       Analytics Engine writes (tool calls, sessions)
+└── admin.ts           Cloudflare Access-protected analytics API
 ```
 
-## Tool Categories
+`IngestionCoordinator` in `index.ts` is a retired Durable Object stub. It exists only because
+an applied migration names the class; removing it needs a `deleted_classes` migration.
 
-| Category | File | Needs Env Bindings | Count |
-|----------|------|--------------------|-------|
-| Sync (bundled data) | `tools.ts` | No | 4 |
-| Stats (KV) | `stats.ts` | `POKEMON_STATS` KV | 1 (`get_usage_stats`, `type` enum) |
-| RAG (Vectorize+KV) | `rag/query.ts` | `VECTOR_INDEX` + `STRATEGY_DOCS` KV + `AI` | 1 (`query_strategy`) |
-| Meta history (D1) | `meta-history.ts` | `META_DB` D1 | 1 (`get_meta_trends`) |
-
-`tool-registry.ts` defines the internal tools, which `PrepAnalysisService` exposed to the retired Prep site. The public MCP `init()` registers `connector/` instead.
-
-## HTTP Endpoints
+## HTTP endpoints
 
 | Path | Method | Purpose |
 |------|--------|---------|
-| `/mcp` | POST | Public MCP endpoint, Streamable HTTP (Durable Object); not origin-gated; 600 req/min per IP via the `MCP_RATE_LIMITER` binding (`mcp-rate-limit.ts`, fails open) |
+| `/mcp` | POST | Public MCP endpoint, Streamable HTTP (Durable Object); not origin-gated; 600 req/min per IP via `MCP_RATE_LIMITER` (`mcp-rate-limit.ts`, fails open) |
 | `/sse`, `/api/tools` | any | Retired — `410 Gone` (`retirement.ts`) |
-| `/health` | GET | Deploy health / secret-presence booleans |
-| `/api/feedback` | POST | User feedback to R2 |
-| `/api/team/share` | POST | Store a shared team in KV, returns short id |
-| `/api/team/:id` | GET | Fetch a shared team |
+| `/health` | GET | Liveness |
+| `/api/team/:id` | GET | Fetch a legacy shared team |
+| `/api/team/share` | POST | Retired — `410 Gone` |
 | `/og/team/:id` | GET | OG image (satori + resvg WASM) for a shared team |
+| `/api/feedback` | POST | Feedback to R2 and email. No page on the site posts to it any more |
 | `/admin/*` | GET | Analytics/admin API (Cloudflare Access JWT required) |
 | `/` | GET | Server info JSON |
 
-CORS allows: `pokemcp.com`, `docs.pokemcp.com`, `localhost:3000`, `localhost:3001`.
+CORS for the non-MCP routes allows `pokemcp.com`, `docs.pokemcp.com` and localhost.
 
-## Data Layer
+## Data
 
-- `data-loader.ts` imports static `.ts` files from `data/` (pokedex, moves, learnsets, abilities, items, typechart)
-- These are extracted from the `smogon` npm package and bundled at build time
-- Always use `toID()` for Pokemon/move name normalization
+- **Bundled** (`data/*.ts`): pokedex, moves, learnsets, abilities, items, type chart — from
+  Pokémon Showdown, built in at deploy time. It lags Pokémon Champions: Megas and moves added
+  only in Champions can be missing. Always normalise names with `toID()`.
+- **`POKEMON_STATS` KV**: `{format}:_index` (info + name → usage) and `{format}:{pokemonid}`
+  per Pokémon, written by `bun run upload-stats`; `{regulation}:_legality` eligible lists,
+  written by `upload-champions-legality`. The index does not record which month it is.
+- **`META_DB` D1**: `meta_snapshot` / `usage_snapshot` (one slice per format and month) and
+  `tournament_event` / `tournament_team` / `ingestion_job`.
 
-## Ingestion Pipeline (`ingestion/`)
+## Tournament ingestion (`tournaments/ingestion.ts`)
 
-```
-scheduled() ──seed()──▶ coordinator.ts (DO alarm chain)
-                          └─ per alarm: orchestrator.ts ingestFormat()
-                               → scraper.ts → chunker.ts → embedder.ts → indexer.ts
-```
+Runs daily at 06:00 UTC (production only).
 
-- The weekly cron only builds the format list and seeds the `IngestionCoordinator`
-  Durable Object; it rethrows on failure so the cron run shows as failed
-- The coordinator processes the queue one alarm at a time: max 25 Pokemon per
-  alarm (subrequest budget), 10s spacing, one retry per failed format, loud
-  completion summary + `ingestion_run` Analytics Engine datapoint
-- Queue/retry logic is a pure state machine in `coordinator-state.ts`
-  (unit-tested in `__tests__/ingestion-coordinator.test.ts`)
-- Top 50 Pokemon per format; scraper uses the `smogon` package's `Analyses`
-  class (RPC API, not HTML scraping) with a 500ms politeness delay
-- Chunk sizes: 800 tokens for overview, 600 for moveset/counters sections
-- Embedder: `@cf/baai/bge-base-en-v1.5` via Workers AI (768-dim vectors)
-- Indexer: vectors to Vectorize (batches of 100) with display-name `pokemon`
-  plus `toID()`-normalized `pokemon_id` metadata; full content to
-  `STRATEGY_DOCS` KV (180-day TTL)
+- Reads the whole recent VGC feed from Limitless, newest first, paging back 35 days.
+- Keeps completed events with at least 48 players in a Champions regulation. The regulation
+  comes from the event's own format code; one the registry does not know yet is still ingested
+  under a derived id and label, so results do not freeze when a regulation changes.
+- Stores up to 30 new events a run, each with its top cut, in one D1 batch per event.
+- Fills in each top-cut Pokémon's ladder usage from the KV index, summing a species' plain and
+  Mega entries.
+- A rate limit ends the run early; one unreadable event is skipped. The run is recorded in
+  `ingestion_job`, which the website reads to decide whether to say "Update delayed".
 
-## RAG Query Pipeline (`rag/`)
+## Error handling
 
-```
-query.ts → search.ts (vector similarity) → rerank.ts (metadata boosts) → format.ts
-```
-
-**Reranking boosts**: format match +0.1, pokemon match +0.05, recency +0.02 (decays over 30 days), duplicate pokemon penalty -0.05 per occurrence. Minimum score threshold: 0.5.
-
-## Logging (`logging.ts`)
-
-- `withLogging()` wraps all tool executions with timing and R2 storage
-- 10% sampling rate, max 4000 char response truncation
-- Sanitizes PII (removes nicknames from team data)
-- R2 path: `logs/YYYY/MM/DD/HH/{uuid}.json`
-- The REST path passes `ctx` so the R2 write runs via `ctx.waitUntil()`; the
-  MCP (Durable Object) path currently logs fire-and-forget without it
-
-## Error Handling
-
-- Tool handlers return user-friendly error strings (never throw)
-- Use `console.error` for Cloudflare dashboard visibility
-- Use `ctx.waitUntil()` for background tasks (ingestion, logging)
+- Connector tools return `fail(message)`; an unexpected exception becomes a generic tool error
+  and is logged with `console.error`.
+- Scheduled work rethrows after logging, so a failed run shows as failed in Cloudflare.
