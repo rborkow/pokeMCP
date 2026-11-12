@@ -4,6 +4,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { McpAgent } from "agents/mcp";
 import { createMimeMessage } from "mimetext/browser";
 import { handleAdminRequest } from "./admin.js";
+import { handleMcpRequest } from "./connector/http.js";
 import { registerConnectorTools } from "./connector/register.js";
 import { CONNECTOR_INFO, CONNECTOR_INSTRUCTIONS } from "./connector/tools.js";
 import { trackSession, trackToolCall } from "./analytics.js";
@@ -69,8 +70,16 @@ export class IngestionCoordinator extends DurableObject<Env> {
     }
 }
 
-// Public MCP server: the "VGC Teambuilder" connector, served at /mcp. Its
-// tools are defined in src/connector/.
+/**
+ * No longer serves requests. `/mcp` used to create one of these per client
+ * session; it is now answered statelessly by the Worker (connector/http.ts),
+ * which removed about a second from every new connection.
+ *
+ * The class and its binding stay for now so that this change can be undone by
+ * a plain revert. Once the stateless endpoint has proved itself, replace this
+ * with a stub like IngestionCoordinator, then remove it with a
+ * `deleted_classes` migration.
+ */
 export class PokemonMCP extends McpAgent {
     server = new McpServer(CONNECTOR_INFO, { instructions: CONNECTOR_INSTRUCTIONS });
 
@@ -120,7 +129,26 @@ export default {
         if (url.pathname === "/mcp") {
             const rateLimited = await mcpRateLimitResponse(request, env.MCP_RATE_LIMITER);
             if (rateLimited) return rateLimited;
-            return PokemonMCP.serve("/mcp").fetch(request, env, ctx);
+            // Served statelessly in this Worker (connector/http.ts), not
+            // through the PokemonMCP Durable Object.
+            return handleMcpRequest(request, env, {
+                // Operational metrics only (tool name, format, outcome,
+                // duration). Arguments and results are never logged.
+                onCall: (call) =>
+                    trackToolCall(
+                        env,
+                        call.tool,
+                        call.format,
+                        call.success,
+                        call.durationMs,
+                        undefined,
+                        "mcp",
+                    ),
+                // One "connect" per initialize, so connections are still
+                // counted now that there is no session object. The id is
+                // random and is not sent to the client or reused.
+                onInitialize: () => trackSession(env, "connect", crypto.randomUUID(), "mcp", "mcp"),
+            });
         }
 
         // Feedback submission endpoint

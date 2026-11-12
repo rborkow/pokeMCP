@@ -15,7 +15,8 @@ ChatGPT directories, so tool names, descriptions, annotations and output schemas
 published contract.
 
 ```
-index.ts PokemonMCP.init() → connector/register.ts registerConnectorTools()
+index.ts /mcp → connector/http.ts handleMcpRequest() → connector/register.ts
+connector/http.ts       stateless Streamable HTTP: a fresh server and transport per POST
 connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output schemas
 ├── connector/pokemon.ts  lookup_pokemon, validate_moveset, analyze_team_types (bundled data)
 ├── connector/team.ts     list_formats, validate_team (regulations/ + KV eligible list)
@@ -26,6 +27,11 @@ connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output 
 └── connector/formats.ts  `format` = a regulation id; default = newest regulation with stats
 ```
 
+- The endpoint is stateless. No session is created and no Durable Object is involved: a
+  session object per conversation cost about a second before the first tool could run. Do
+  not add anything that needs state between requests (resources subscriptions,
+  server-initiated messages) without rethinking that. `GET` and `DELETE` return 405, and a
+  session id sent by an older client is ignored.
 - Every tool returns `structuredContent` matching its `outputSchema` plus equivalent Markdown
   text. A failure is `fail(message)`, sent as a tool error (`isError`) — keep messages
   actionable and free of internals (no script names, binding names or file paths).
@@ -52,7 +58,7 @@ connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output 
 ## Modules
 
 ```
-index.ts               routes, the PokemonMCP Durable Object, the daily schedule
+index.ts               routes and the daily schedule
 ├── connector/         the public MCP tools (above)
 ├── regulations/       regulation registry, eligible-list loader, team validator, Mega data
 ├── stats.ts           KV loaders for current-month usage + checks-and-counters parsing
@@ -70,12 +76,14 @@ index.ts               routes, the PokemonMCP Durable Object, the daily schedule
 
 `IngestionCoordinator` in `index.ts` is a retired Durable Object stub. It exists only because
 an applied migration names the class; removing it needs a `deleted_classes` migration.
+`PokemonMCP` no longer serves requests either; the class and its binding stay so the move
+to the stateless endpoint can be undone by a plain revert.
 
 ## HTTP endpoints
 
 | Path | Method | Purpose |
 |------|--------|---------|
-| `/mcp` | POST | Public MCP endpoint, Streamable HTTP (Durable Object); not origin-gated; 600 req/min per IP via `MCP_RATE_LIMITER` (`mcp-rate-limit.ts`, fails open) |
+| `/mcp` | POST | Public MCP endpoint, stateless Streamable HTTP with JSON responses (`connector/http.ts`); not origin-gated; 600 req/min per IP via `MCP_RATE_LIMITER` (`mcp-rate-limit.ts`, fails open). `GET` and `DELETE` return 405 |
 | `/sse`, `/api/tools` | any | Retired — `410 Gone` (`retirement.ts`) |
 | `/health` | GET | Liveness |
 | `/favicon.ico`, `/favicon.svg` | GET | The connector icon. Directories show the favicon of the MCP server's own host, so it is served here and not only on the website |

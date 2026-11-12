@@ -121,8 +121,9 @@ bun run tail:production
 ### Cloudflare Infrastructure
 
 - **Workers**: the MCP worker (`src/index.ts`) and the website
-- **Durable Objects**: MCP session state (`PokemonMCP`). `IngestionCoordinator` is a retired
-  stub kept only because an applied migration names it
+- **Durable Objects**: none in use. `/mcp` is served statelessly by the Worker. `PokemonMCP`
+  (the old per-session object) and `IngestionCoordinator` remain only as classes an applied
+  migration names
 - **KV**: `POKEMON_STATS` (current-month usage statistics and each regulation's eligible list),
   `SHARED_TEAMS` (legacy shared-team links)
 - **D1**: `META_DB` (`pokemcp-meta-history`) — monthly usage history and tournament results
@@ -234,6 +235,7 @@ MCP_URL=... TB_URL=... ./scripts/verify-deploy.sh      # staging/dev override
 
 Checks that each worker's health endpoint responds. For the connector itself, connect an MCP
 client to `https://api.pokemcp.com/mcp` and call a tool; the tools are read-only.
+`bun run probe-connector` times a new connection and one call of each kind against production.
 
 ## Testing Changes
 
