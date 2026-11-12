@@ -1,19 +1,24 @@
 # PokeMCP
 
-> Competitive Pokémon data and team building: monthly meta reports for Pokémon Champions and VGC, per-Pokémon usage trends, an AI team builder, and a free REST/MCP API over Smogon usage statistics.
+> Pokémon Champions VGC data for players and AI assistants: the VGC Teambuilder connector (a read-only MCP server for Claude, ChatGPT and other assistants), monthly meta reports, per-Pokémon usage trends and tournament results.
+
+## VGC Teambuilder connector
+
+- [Connect VGC Teambuilder](https://docs.pokemcp.com/getting-started): add the MCP server at https://api.pokemcp.com/mcp to an assistant as a custom connector — no account needed
+- [Tool reference](https://docs.pokemcp.com/tools): usage rankings, how a Pokémon is built, teammates, checks and counters, team legality, defensive type analysis and usage trends
+- [Regulations and data](https://docs.pokemcp.com/formats): which Pokémon Champions regulations are covered and how current the data is
 
 ## Meta Reports
 
 - [Meta reports index](https://www.pokemcp.com/reports): monthly written meta reports with usage tables, month-over-month trends, and analysis grounded in Smogon ladder data
 - [Pokémon Champions meta report (latest)](https://www.pokemcp.com/reports/champions): the current Champions VGC regulation — usage stats, risers/fallers, regulation changeover analysis
 
-## Tools
+## Tournament results
 
-- [Team builder](https://www.pokemcp.com/builder): AI-assisted competitive team building with format validation, type coverage, and threat analysis
-- [Documentation](https://docs.pokemcp.com): MCP server and REST API docs
-- [REST API reference](https://docs.pokemcp.com/api-reference/): free JSON API — usage stats, movesets, teammates, counters, team validation (POST https://api.pokemcp.com/api/tools)
+- [Recent Pokémon Champions events](https://www.pokemcp.com/): completed public events with published top-cut teams, sourced from Limitless
 
 ## Data
 
-- Usage statistics are weighted Pokémon Showdown ladder data published monthly by Smogon (smogon.com/stats), refreshed on the 5th of each month
-- Supported formats include Pokémon Champions (current regulation), VGC, and Smogon singles tiers
+- Usage statistics are weighted Pokémon Showdown ladder data published monthly by Smogon (smogon.com/stats), refreshed monthly
+- The connector covers Pokémon Champions regulations (VGC doubles); meta reports also cover Smogon Gen 9 OU
+- PokeMCP is an unofficial fan project, not affiliated with or endorsed by Nintendo, Creatures Inc., GAME FREAK inc. or The Pokémon Company
