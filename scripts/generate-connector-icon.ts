@@ -5,8 +5,6 @@
  *   apps/teambuilder/public/vgc-teambuilder-icon.png   512px, for listings that take an image URL
  *   src/favicon-data.ts                                the SVG and a multi-size .ico, bundled into
  *                                                      the worker and served at api.pokemcp.com
- *   plugin/assets/logo.png, icon.png                   the ChatGPT plugin package's listing and
- *                                                      composer icons
  *
  * The worker serves the icon itself because directories show the favicon of
  * the MCP server's own domain, and the site and the worker share no files.
@@ -21,11 +19,6 @@ const SOURCE = "apps/teambuilder/public/vgc-teambuilder-icon.svg";
 const SITE_PNG = "apps/teambuilder/public/vgc-teambuilder-icon.png";
 const WORKER_MODULE = "src/favicon-data.ts";
 const SITE_PNG_SIZE = 512;
-/** The ChatGPT plugin package's icons (square, at least 48 pixels). */
-const PLUGIN_ICONS = [
-    { path: "plugin/assets/logo.png", size: 512 },
-    { path: "plugin/assets/icon.png", size: 256 },
-];
 /** Sizes packed into favicon.ico. 256 is the largest an .ico entry can describe. */
 const ICO_SIZES = [16, 32, 48, 64, 128, 256];
 
@@ -68,7 +61,6 @@ async function main() {
     const svg = (await readFile(SOURCE, "utf8")).trim();
 
     await writeFile(SITE_PNG, renderPng(svg, SITE_PNG_SIZE));
-    for (const icon of PLUGIN_ICONS) await writeFile(icon.path, renderPng(svg, icon.size));
 
     const ico = buildIco(ICO_SIZES.map((size) => ({ size, png: renderPng(svg, size) })));
     const base64 = Buffer.from(ico).toString("base64");
@@ -89,7 +81,6 @@ ${lines.map((line) => `    "${line}"`).join(" +\n")};
     await writeFile(WORKER_MODULE, module);
 
     console.log(`Wrote ${SITE_PNG} (${SITE_PNG_SIZE}px)`);
-    for (const icon of PLUGIN_ICONS) console.log(`Wrote ${icon.path} (${icon.size}px)`);
     console.log(`Wrote ${WORKER_MODULE} (.ico ${ico.length} bytes, sizes ${ICO_SIZES.join("/")})`);
 }
 

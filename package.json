@@ -36,7 +36,6 @@
         "generate-reports": "tsx scripts/generate-reports.ts",
         "generate-tool-docs": "tsx scripts/generate-tool-docs.ts",
         "generate-connector-icon": "tsx scripts/generate-connector-icon.ts",
-        "package-plugin": "mkdir -p dist && rm -f dist/vgc-teambuilder-plugin.zip && cd plugin && zip -r -X ../dist/vgc-teambuilder-plugin.zip . -x '.*' -x 'README.md'",
         "fetch-tournaments": "tsx scripts/fetch-tournaments.ts",
         "fetch-champions-legality": "tsx scripts/fetch-champions-legality.ts",
         "upload-champions-legality": "tsx scripts/upload-champions-legality.ts",

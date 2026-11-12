@@ -19,7 +19,6 @@ Champions regulations only. The legacy `/sse` and `/api/tools` endpoints stay re
 - `src/` - MCP Worker (Cloudflare Workers) — see [`src/CLAUDE.md`](src/CLAUDE.md)
 - `apps/teambuilder/` - The website: results, reports, Pokémon pages. No team builder, accounts or AI (OpenNext on Cloudflare Workers) — see [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md)
 - `apps/docs/` - Nextra documentation site (Cloudflare Pages) — see [`apps/CLAUDE.md`](apps/CLAUDE.md)
-- `plugin/` - The package uploaded to OpenAI's plugin portal to list the connector in ChatGPT — see [`plugin/README.md`](plugin/README.md)
 
 **Deployed URLs:**
 
@@ -221,7 +220,7 @@ deploy):
 
 - `pokemon-mcp-production`: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CF_ACCESS_TEAM_DOMAIN`;
   optionally `OPENAI_APPS_CHALLENGE`, the domain-verification token from OpenAI's plugin portal
-  (see `plugin/README.md`)
+  (see `src/domain-verification.ts`)
 - `pokemcp-teambuilder`: none. The site has no accounts and calls no AI provider.
 
 Neither worker calls an AI model. The only AI use left is the report narrative in
