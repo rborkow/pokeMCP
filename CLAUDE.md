@@ -219,9 +219,7 @@ monthly stats refresh.
 deploy):
 
 - `pokemon-mcp-production`: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CF_ACCESS_TEAM_DOMAIN`
-- `pokemcp-teambuilder`: none needed. Still set but unused since the retirement, and safe to
-  delete: `BETTER_AUTH_SECRET`, the Discord and Google OAuth client ids and secrets,
-  `ANTHROPIC_API_KEY`, `CLOUDFLARE_AI_GATEWAY_URL`, `CF_AIG_TOKEN`.
+- `pokemcp-teambuilder`: none. The site has no accounts and calls no AI provider.
 
 Neither worker calls an AI model. The only AI use left is the report narrative in
 `scripts/generate-reports.ts`, which runs in GitHub Actions with the repo's `ANTHROPIC_API_KEY`
@@ -314,4 +312,4 @@ The site is content only: tournament results, meta reports, Pokémon pages and t
 policy. PokeMCP Prep, saved teams, accounts and every AI feature were retired in November 2026;
 Claude and ChatGPT, through the connector, are the only interfaces. See
 [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for routes, what the retirement left
-behind (user data still held, bindings to remove) and the `build/` ignore-rule trap.
+behind and the `build/` ignore-rule trap.

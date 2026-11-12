@@ -172,7 +172,9 @@ export default async function HomePage() {
                         </div>
                         <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                             <Clock3 className="h-3.5 w-3.5" aria-hidden="true" />
-                            {newsroom.stale ? "Update delayed · " : "Data refreshed · "}
+                            {newsroom.stale
+                                ? "Update delayed · last checked "
+                                : "Checked for new events · "}
                             {newsroom.fetchedAt
                                 ? formatDate(newsroom.fetchedAt)
                                 : "latest published event"}

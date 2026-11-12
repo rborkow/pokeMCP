@@ -39,6 +39,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: "yearly",
             priority: 0.3,
         },
+        {
+            url: `${SITE_URL}/terms`,
+            lastModified: newestModified,
+            changeFrequency: "yearly",
+            priority: 0.3,
+        },
     ];
 
     const latestPages: MetadataRoute.Sitemap = getReportFormats().map((format) => {

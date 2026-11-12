@@ -1,5 +1,10 @@
 # PokeMCP Prep Cloudflare relaunch runbook
 
+> **Historical (July 2026).** PokeMCP Prep, its accounts and the `pokemcp-prep` database were
+> retired in November 2026, and the site no longer has OAuth secrets or a `PREP_DB` binding. The
+> backup and preflight scripts now cover `pokemcp-meta-history` only. Kept as a record of how the
+> relaunch was done; the `PREP_DB` and OAuth steps below no longer apply.
+
 This runbook is intentionally split into reversible phases. Do not apply a D1 migration or switch traffic without a current, validated SQL export and Time Travel bookmark for every existing production database.
 
 ## Current production resources
