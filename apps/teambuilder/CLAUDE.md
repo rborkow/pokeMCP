@@ -35,10 +35,9 @@ reach `main` through the monthly review PR. Do not hand-edit generated MDX or JS
 
 ## What the retirement left behind
 
-**The accounts database.** Accounts, sessions, synced teams, plans and coach conversations
-lived in the D1 database `pokemcp-prep`. The site no longer binds it, and the owner decided to
-delete it together with the Discord and Google sign-in apps. The privacy policy and `/retired`
-describe what is held; keep them in step with reality when that changes.
+**The accounts database is gone.** Accounts, sessions, synced teams, plans and coach
+conversations lived in the D1 database `pokemcp-prep`, which was deleted in November 2026 along
+with the Discord and Google sign-in apps. The privacy policy and `/retired` say so.
 
 **Visitors' browsers** still hold their saved workspace: IndexedDB database `pokemcp-prep`, store
 `workspace`, key `pokemcp-prep-workspace`, plus `localStorage` key `pokemcp-team`.
