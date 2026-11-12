@@ -63,11 +63,12 @@ describe("CoachHistory", () => {
         expect(exported.coachMessages[PLAN_ID]).toEqual(messages);
     });
 
-    it("only removes a conversation when the player deletes it", () => {
+    it("removes this browser's copy on request and says the synced copy remains", () => {
         usePrepStore.setState({ coachMessages: { [PLAN_ID]: messages } });
         render(<CoachHistory plan={plan} />);
 
-        fireEvent.click(screen.getByRole("button", { name: "Delete this conversation" }));
+        expect(screen.getByText(/synced copy stays until you delete/)).toBeInTheDocument();
+        fireEvent.click(screen.getByRole("button", { name: "Remove from this browser" }));
 
         expect(usePrepStore.getState().coachMessages[PLAN_ID]).toEqual([]);
         expect(screen.queryByText("What should I preserve into Trick Room?")).toBeNull();
