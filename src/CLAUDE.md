@@ -54,8 +54,8 @@ connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output 
 - All tools carry `readOnlyHint: true`, `destructiveHint: false`, `openWorldHint: false`.
 - One operation per tool. Do not add a tool that switches on a `type` argument; directory
   reviews reject that.
-- `connector/` must not import `agents` or `cloudflare:*`, so the whole surface runs under
-  `node --test` through the MCP SDK's in-memory transport (`__tests__/connector.test.ts`).
+- `connector/` must not import `cloudflare:*`, so the whole surface runs under `node --test`
+  through the MCP SDK's in-memory transport (`__tests__/connector.test.ts`).
 - Usage recording (`mcp-usage.ts` → `analytics.ts`) stores operational metrics only: the
   kind of request, tool, format, outcome, duration, and which assistant software made it.
   Arguments and results are never recorded. The privacy policy lists exactly this, so change

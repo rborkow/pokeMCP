@@ -73,7 +73,12 @@ export class IngestionCoordinator extends DurableObject<Env> {
  * The class stays only because an applied migration names it; removing it
  * needs a `deleted_classes` migration.
  */
-export class PokemonMCP extends DurableObject<Env> {}
+export class PokemonMCP extends DurableObject<Env> {
+    // The old class scheduled alarms; one left behind clears the object's storage.
+    async alarm() {
+        await this.ctx.storage.deleteAll();
+    }
+}
 
 export default {
     async fetch(request: Request, env: Env, ctx: ExecutionContext) {

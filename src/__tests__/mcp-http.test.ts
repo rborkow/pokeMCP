@@ -404,6 +404,24 @@ describe("2026-07-28 MCP endpoint", () => {
         assert.ok(body.error.data?.supported?.includes(MODERN));
     });
 
+    it("ends a subscriptions/listen request at once, granting nothing", async () => {
+        // Nothing here changes at runtime, so no notification types are offered.
+        // The stream must finish rather than hold the Worker open.
+        const response = await handleMcpRequest(
+            modernPost("subscriptions/listen", { notifications: { toolsListChanged: true } }),
+            env,
+        );
+        assert.equal(response.status, 200);
+        const text = await Promise.race([
+            response.text(),
+            new Promise<string>((_, reject) =>
+                setTimeout(() => reject(new Error("listen stream stayed open")), 2000),
+            ),
+        ]);
+        assert.match(text, /"notifications":\{\}/, "acknowledges with no subscriptions");
+        assert.match(text, /"resultType":"complete"/);
+    });
+
     it("still serves a 2025-era client statelessly with plain JSON", async () => {
         const response = await handleMcpRequest(
             post({
