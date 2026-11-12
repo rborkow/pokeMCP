@@ -27,7 +27,10 @@ const SOURCE = "smogon-chaos";
 // the newest regulation with published Smogon stats so new regs take over
 // automatically once their stats mapping is flipped on.
 const DEFAULT_FORMAT = getLatestStatsRegulation()?.id ?? "gen9doublesou";
-export const MIN_MOMENTUM_HISTORY = 4; // need >= 4 points before flagging momentum
+// Three monthly points is the least a trend line can be fitted to. Regulations
+// last about three months, so a higher minimum meant momentum was never
+// available for the regulation people are actually playing.
+export const MIN_MOMENTUM_HISTORY = 3;
 export const ENTRY_THRESHOLD = 0.02; // 2% usage to count as a meaningful entrant/dropout
 const MOMENTUM_RELEVANCE = 0.02; // only track momentum for mons reaching ~2% usage
 
