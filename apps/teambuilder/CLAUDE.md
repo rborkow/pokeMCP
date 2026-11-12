@@ -23,7 +23,7 @@ in November 2026. Do not reintroduce interactive features here without the owner
 | `/reports`, `/reports/[slug]`, `/reports/[slug]/[month]` | Meta reports (MDX in `src/content/reports/`) |
 | `/pokemon/[id]/[format]` | Per-Pokémon trend pages (`src/data/mons/`) |
 | `/t/[id]` | Legacy shared-team view, read-only, with "Copy as Showdown text". New links can't be created |
-| `/privacy` | Privacy policy for the site and the connector |
+| `/privacy`, `/terms` | Privacy policy and terms of use for the site and the connector. Both URLs are required by the directory listings |
 | `/retired` | Notice for the retired features (noindex). Lets a visitor download teams and plans still held in their browser |
 | `/prep/*`, `/teams`, `/account`, `/builder`, `/build` | Redirect to `/retired` (`next.config.ts`) |
 | `/admin` | Analytics dashboard (Cloudflare Access) |
@@ -35,21 +35,19 @@ reach `main` through the monthly review PR. Do not hand-edit generated MDX or JS
 
 ## What the retirement left behind
 
-**User data that is still held.** Nothing was deleted when the features were removed.
+**The accounts database.** Accounts, sessions, synced teams, plans and coach conversations
+lived in the D1 database `pokemcp-prep`. The site no longer binds it, and the owner decided to
+delete it together with the Discord and Google sign-in apps. The privacy policy and `/retired`
+describe what is held; keep them in step with reality when that changes.
 
-- `PREP_DB` (D1 `pokemcp-prep`) still has accounts, sessions, synced teams, plans and coach
-  conversations. No code reads it. The privacy policy and `/retired` tell people to email for a
-  copy or deletion. Deleting the database is the owner's decision — never do it unprompted.
-- Visitors' browsers still hold their saved workspace: IndexedDB database `pokemcp-prep`, store
-  `workspace`, key `pokemcp-prep-workspace`, plus `localStorage` key `pokemcp-team`.
-  `SavedWorkspaceExport` reads those names directly so the download works without the old stores.
-  If you rename or remove it, people lose the only way to get that data out.
+**Visitors' browsers** still hold their saved workspace: IndexedDB database `pokemcp-prep`, store
+`workspace`, key `pokemcp-prep-workspace`, plus `localStorage` key `pokemcp-team`.
+`SavedWorkspaceExport` reads those names directly so the download works without the old stores.
+If you rename or remove it, people lose the only way to get that data out.
 
-**Configuration no code uses, pending removal** (`wrangler.toml` and worker secrets): the
-`PREP_DB`, `PREP_ANALYSIS`, `PREP_RATE_LIMITER` and `AI_RATE_LIMITER_*` bindings; the
-`BETTER_AUTH_SECRET`, Discord and Google OAuth, `ANTHROPIC_API_KEY`, `CLOUDFLARE_AI_GATEWAY_URL`
-and `CF_AIG_TOKEN` secrets. `migrations/prep/` stays while the database exists — the root
-`test:migrations` script reads it.
+**Bindings and secrets.** `wrangler.toml` binds only `META_DB` (read-only here) and `ANALYTICS`.
+The site needs no secrets. Do not add an account, auth or AI binding back without the owner
+asking.
 
 ## Things that will bite you
 

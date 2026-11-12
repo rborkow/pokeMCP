@@ -11,8 +11,43 @@ interface EventRow {
     fetched_at: string;
 }
 
+const STALE_AFTER_MS = 48 * 60 * 60 * 1_000;
+
+/**
+ * Whether the results are being kept up to date.
+ *
+ * This asks when the worker's daily job last succeeded, not how recent the
+ * newest event is. The job can run perfectly and find nothing new — only one
+ * or two events a day are large enough to list — and judging by event age
+ * made the page say "Update delayed" on every quiet day. The newest row's
+ * fetch time is the fallback when the job history cannot be read.
+ */
+export function newsroomFreshness(
+    lastSuccessfulCheck: string | null,
+    newestFetchedAt: string | null,
+    nowMs: number,
+): { checkedAt: string | null; stale: boolean } {
+    const checkedAt = lastSuccessfulCheck ?? newestFetchedAt;
+    return {
+        checkedAt,
+        stale: checkedAt ? nowMs - new Date(checkedAt).getTime() > STALE_AFTER_MS : true,
+    };
+}
+
+async function lastSuccessfulCheck(env: CloudflareEnv): Promise<string | null> {
+    try {
+        const row = await env.META_DB.prepare(
+            "SELECT finished_at FROM ingestion_job WHERE job_type = 'limitless-daily' AND status = 'success' ORDER BY started_at DESC LIMIT 1",
+        ).first<{ finished_at: string | null }>();
+        return row?.finished_at ?? null;
+    } catch {
+        return null;
+    }
+}
+
 export async function getNewsroomEvents(): Promise<{
     events: EventIndexEntry[];
+    /** When the results were last checked for new events. */
     fetchedAt: string | null;
     stale: boolean;
 }> {
@@ -26,11 +61,16 @@ export async function getNewsroomEvents(): Promise<{
         ).all<EventRow>();
         if (rows.results.length) {
             const data = rows.results.map((row) => JSON.parse(row.data_json) as EventPageData);
-            const fetchedAt =
+            const newestFetchedAt =
                 rows.results
                     .map((row) => row.fetched_at)
                     .sort()
                     .at(-1) ?? null;
+            const { checkedAt, stale } = newsroomFreshness(
+                await lastSuccessfulCheck(env),
+                newestFetchedAt,
+                Date.now(),
+            );
             return {
                 events: data.map(({ slug, name, date, players, format, regulationLabel }) => ({
                     slug,
@@ -40,10 +80,8 @@ export async function getNewsroomEvents(): Promise<{
                     format,
                     regulationLabel,
                 })),
-                fetchedAt,
-                stale: fetchedAt
-                    ? Date.now() - new Date(fetchedAt).getTime() > 48 * 60 * 60 * 1_000
-                    : true,
+                fetchedAt: checkedAt,
+                stale,
             };
         }
     } catch {
