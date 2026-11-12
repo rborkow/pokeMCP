@@ -6,6 +6,8 @@ declare namespace Cloudflare {
         CLOUDFLARE_ACCOUNT_ID?: string;
         CF_ACCESS_TEAM_DOMAIN?: string;
         LIMITLESS_API_KEY?: string;
+        /** Domain-verification token from OpenAI's plugin portal (domain-verification.ts). */
+        OPENAI_APPS_CHALLENGE?: string;
     }
 }
 

@@ -15,6 +15,7 @@ import {
     storeSharedTeam,
     validateTeamForSharing,
 } from "./share.js";
+import { getOpenAiChallengeResponse } from "./domain-verification.js";
 import { getFaviconResponse } from "./favicon.js";
 import { getRetirementResponse } from "./retirement.js";
 import { refreshTournamentNewsroom } from "./tournaments/ingestion.js";
@@ -113,6 +114,13 @@ export default {
 
         const faviconResponse = getFaviconResponse(url.pathname, request.method);
         if (faviconResponse) return faviconResponse;
+
+        const challengeResponse = getOpenAiChallengeResponse(
+            url.pathname,
+            request.method,
+            env.OPENAI_APPS_CHALLENGE,
+        );
+        if (challengeResponse) return challengeResponse;
 
         // Public MCP endpoint (Streamable HTTP). Deliberately not gated by the
         // browser origin allowlist below: MCP clients such as Claude and
