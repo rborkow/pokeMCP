@@ -15,6 +15,7 @@ import {
     storeSharedTeam,
     validateTeamForSharing,
 } from "./share.js";
+import { getFaviconResponse } from "./favicon.js";
 import { getRetirementResponse } from "./retirement.js";
 import { refreshTournamentNewsroom } from "./tournaments/ingestion.js";
 
@@ -109,6 +110,9 @@ export default {
 
         const retirementResponse = getRetirementResponse(url.pathname, request.method);
         if (retirementResponse) return retirementResponse;
+
+        const faviconResponse = getFaviconResponse(url.pathname, request.method);
+        if (faviconResponse) return faviconResponse;
 
         // Public MCP endpoint (Streamable HTTP). Deliberately not gated by the
         // browser origin allowlist below: MCP clients such as Claude and
@@ -479,7 +483,8 @@ export default {
                     documentation: "https://docs.pokemcp.com",
                     endpoints: {
                         mcp: "/mcp (POST) - MCP over Streamable HTTP",
-                        health: "/health (GET) - Deploy health / secret-presence booleans",
+                        health: "/health (GET) - Liveness",
+                        "favicon.ico": "/favicon.ico, /favicon.svg (GET) - Connector icon",
                         "api/feedback": "/api/feedback (POST) - Submit feedback",
                         "api/team/:id": "/api/team/:id (GET) - Read a legacy shared team",
                         "og/team/:id": "/og/team/:id (GET) - OG image for shared team",
