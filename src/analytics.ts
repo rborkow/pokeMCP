@@ -1,48 +1,40 @@
 /**
- * Analytics Engine instrumentation for usage monitoring
+ * Usage recording for the connector, written to Workers Analytics Engine
+ * (dataset `pokemcp-analytics`) and read back by the admin API (admin.ts).
  *
- * Writes data points to Cloudflare Analytics Engine for real-time
- * queryable metrics. All data is privacy-preserving — no PII is recorded.
+ * Nothing here identifies a person, and no tool arguments or results are
+ * recorded: only which tool, which format, whether it worked, how long it
+ * took, and which assistant software made the request.
  *
- * Data point schema uses Analytics Engine's slots:
- * - indexes[0]: event type ("tool_call", "ai_chat", "session")
- * - blobs[0-4]: string dimensions (tool name, format, etc.)
- * - blob5 (tool_call, ai_chat) / blob4 (session): source tag ("web", "mcp", "rest")
- * - doubles[0-6]: numeric metrics (tokens, response time, cost, etc.)
+ * Each event type is one value of `index1`. Column positions are part of the
+ * stored data, so add new columns at the end and never reuse a position.
+ *
+ *   tool_call     blob1 tool, blob2 format, blob3 "1"/"0" success,
+ *                 blob4 (was a per-session id; always empty now), blob5 "mcp",
+ *                 blob6 client family; double1 duration in ms
+ *   session       blob1 "connect", blob2 random id, blob3 "mcp", blob4 "mcp",
+ *                 blob5 reported client name, blob6 reported client version,
+ *                 blob7 client family, blob8 User-Agent product
+ *   mcp_request   blob1 kind of request, blob2 HTTP status, blob3 client
+ *                 family; double1 duration in ms
+ *
+ * Rows written before November 2026 also include `ai_chat` events and
+ * `tool_call` rows with other values in blob5; nothing writes those any more.
  */
-
-// Claude Sonnet 4 pricing (USD per million tokens)
-const PRICING = {
-    input: 3.0,
-    output: 15.0,
-    cacheWrite: 3.75,
-    cacheRead: 0.3,
-};
-
-/**
- * Estimate cost in USD from token counts
- */
-export function estimateCost(tokens: {
-    inputTokens: number;
-    outputTokens: number;
-    cacheCreationTokens: number;
-    cacheReadTokens: number;
-}): number {
-    return (
-        (tokens.inputTokens * PRICING.input) / 1_000_000 +
-        (tokens.outputTokens * PRICING.output) / 1_000_000 +
-        (tokens.cacheCreationTokens * PRICING.cacheWrite) / 1_000_000 +
-        (tokens.cacheReadTokens * PRICING.cacheRead) / 1_000_000
-    );
-}
+import type { ClientFamily } from "./connector/client.js";
 
 /** Valid source tags for tracking */
 export type TrackingSource = "web" | "mcp" | "rest";
 
-/**
- * Track a tool call event.
- * Fire-and-forget — writeDataPoint is synchronous.
- */
+function dataset(env: Env, event: string): AnalyticsEngineDataset | null {
+    if (!env.ANALYTICS) {
+        console.warn(`[Analytics] SKIP ${event}: ANALYTICS binding missing`);
+        return null;
+    }
+    return env.ANALYTICS;
+}
+
+/** Record one tool call. Fire-and-forget: writeDataPoint does not block. */
 export function trackToolCall(
     env: Env,
     toolName: string,
@@ -51,81 +43,60 @@ export function trackToolCall(
     responseTimeMs: number,
     sessionId?: string,
     source?: TrackingSource,
+    client?: ClientFamily,
 ): void {
-    if (!env.ANALYTICS) {
-        console.warn("[Analytics] SKIP tool_call: ANALYTICS binding missing");
-        return;
-    }
-
-    env.ANALYTICS.writeDataPoint({
+    dataset(env, "tool_call")?.writeDataPoint({
         indexes: ["tool_call"],
-        blobs: [toolName, format ?? "", success ? "1" : "0", sessionId ?? "", source ?? ""],
+        blobs: [
+            toolName,
+            format ?? "",
+            success ? "1" : "0",
+            sessionId ?? "",
+            source ?? "",
+            client ?? "",
+        ],
         doubles: [responseTimeMs],
     });
-    console.log(
-        `[Analytics] tool_call written: ${toolName} (${format ?? "no-format"}) [${source ?? "unknown"}]`,
-    );
 }
 
-/**
- * Track an AI chat request event.
- * Fire-and-forget — writeDataPoint is synchronous.
- */
-export function trackAIChat(
+/** Record a client opening a connection (an MCP `initialize`). */
+export function trackConnection(
     env: Env,
-    data: {
-        format: string;
-        personality: string;
-        mode: string;
-        thinking: boolean;
-        inputTokens: number;
-        outputTokens: number;
-        cacheCreationTokens: number;
-        cacheReadTokens: number;
-        teamSize: number;
-        responseTimeMs: number;
-        source?: TrackingSource;
-    },
+    client: { name: string; version: string; family: ClientFamily; userAgentProduct: string },
 ): void {
-    if (!env.ANALYTICS) {
-        console.warn("[Analytics] SKIP ai_chat: ANALYTICS binding missing");
-        return;
-    }
-
-    const cost = estimateCost({
-        inputTokens: data.inputTokens,
-        outputTokens: data.outputTokens,
-        cacheCreationTokens: data.cacheCreationTokens,
-        cacheReadTokens: data.cacheReadTokens,
-    });
-
-    env.ANALYTICS.writeDataPoint({
-        indexes: ["ai_chat"],
+    dataset(env, "session")?.writeDataPoint({
+        indexes: ["session"],
         blobs: [
-            data.format,
-            data.personality,
-            data.mode,
-            data.thinking ? "1" : "0",
-            data.source ?? "",
+            "connect",
+            // Random, never sent to the client and never reused: it only keeps
+            // each connection a separate row.
+            crypto.randomUUID(),
+            "mcp",
+            "mcp",
+            client.name,
+            client.version,
+            client.family,
+            client.userAgentProduct,
         ],
-        doubles: [
-            data.inputTokens,
-            data.outputTokens,
-            data.cacheCreationTokens,
-            data.cacheReadTokens,
-            data.teamSize,
-            data.responseTimeMs,
-            cost,
-        ],
+        doubles: [],
     });
-    console.log(
-        `[Analytics] ai_chat written: ${data.format}/${data.personality} [${data.source ?? "unknown"}]`,
-    );
+}
+
+/** Record one request to the MCP endpoint: what kind, how it ended, how long it took. */
+export function trackMcpRequest(
+    env: Env,
+    request: { kind: string; status: number; durationMs: number; client: ClientFamily },
+): void {
+    dataset(env, "mcp_request")?.writeDataPoint({
+        indexes: ["mcp_request"],
+        blobs: [request.kind, String(request.status), request.client],
+        doubles: [request.durationMs],
+    });
 }
 
 /**
- * Track a session lifecycle event (connect/disconnect).
- * Fire-and-forget — writeDataPoint is synchronous.
+ * Session lifecycle event from the retired per-session Durable Object. Kept
+ * only while that class still exists; nothing calls it for live traffic.
  */
 export function trackSession(
     env: Env,
@@ -134,15 +105,9 @@ export function trackSession(
     transport: "sse" | "mcp" | "rest",
     source?: TrackingSource,
 ): void {
-    if (!env.ANALYTICS) {
-        console.warn("[Analytics] SKIP session: ANALYTICS binding missing");
-        return;
-    }
-
-    env.ANALYTICS.writeDataPoint({
+    dataset(env, "session")?.writeDataPoint({
         indexes: ["session"],
         blobs: [action, sessionId, transport, source ?? ""],
         doubles: [],
     });
-    console.log(`[Analytics] session written: ${action} [${source ?? "unknown"}]`);
 }

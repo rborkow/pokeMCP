@@ -197,65 +197,79 @@ function parseRange(range: string | null): string {
 }
 
 // --- Admin API handlers ---
+//
+// Column meanings are documented in analytics.ts. Counts use
+// `_sample_interval` so they stay right if Analytics Engine samples the data.
+
+const DATASET = '"pokemcp-analytics"';
+
+/**
+ * Run a query whose failure must not take the rest of a response with it.
+ * Percentiles use a function the core queries do not, so they are fetched
+ * separately and simply left out if that query is rejected.
+ */
+async function queryOptional(
+    env: Env,
+    sql: string,
+): Promise<{ data: Record<string, unknown>[]; error?: string }> {
+    try {
+        const result = await queryAnalyticsEngine(env, sql);
+        return { data: result.data };
+    } catch (error) {
+        return { data: [], error: error instanceof Error ? error.message : String(error) };
+    }
+}
 
 async function handleOverview(env: Env, url: URL): Promise<Response> {
     const range = parseRange(url.searchParams.get("range"));
 
     // Serialize queries to avoid Analytics Engine rate limits
-    const toolCallStats = await queryAnalyticsEngine(
+    const toolCalls = await queryAnalyticsEngine(
         env,
         `SELECT
             sum(_sample_interval) as total,
             sum(if(blob3 = '1', _sample_interval, 0)) as successes,
             sum(double1 * _sample_interval) / sum(_sample_interval) as avg_response_ms
-        FROM "pokemcp-analytics"
+        FROM ${DATASET}
         WHERE index1 = 'tool_call'
             AND timestamp > NOW() - INTERVAL ${range}`,
     );
-    const aiChatStats = await queryAnalyticsEngine(
+    const sessions = await queryAnalyticsEngine(
         env,
         `SELECT
-            sum(_sample_interval) as total,
-            sum(double1 * _sample_interval) as total_input_tokens,
-            sum(double2 * _sample_interval) as total_output_tokens,
-            sum(double3 * _sample_interval) as total_cache_creation_tokens,
-            sum(double4 * _sample_interval) as total_cache_read_tokens,
-            sum(double7 * _sample_interval) as total_cost_usd,
-            sum(double6 * _sample_interval) / sum(_sample_interval) as avg_response_ms
-        FROM "pokemcp-analytics"
-        WHERE index1 = 'ai_chat'
-            AND timestamp > NOW() - INTERVAL ${range}`,
-    );
-    const sessionStats = await queryAnalyticsEngine(
-        env,
-        `SELECT
-            sum(_sample_interval) as total_events,
-            sum(if(blob1 = 'connect', _sample_interval, 0)) as connections,
-            sum(if(blob1 = 'disconnect', _sample_interval, 0)) as disconnections
-        FROM "pokemcp-analytics"
+            sum(if(blob1 = 'connect', _sample_interval, 0)) as connections
+        FROM ${DATASET}
         WHERE index1 = 'session'
             AND timestamp > NOW() - INTERVAL ${range}`,
     );
-    // Source breakdown for ai_chat (blob5 = source: "web", "mcp", "rest")
-    const aiBySource = await queryAnalyticsEngine(
+    const requests = await queryAnalyticsEngine(
         env,
         `SELECT
-            blob5 as source,
             sum(_sample_interval) as total,
-            sum(double7 * _sample_interval) as cost_usd
-        FROM "pokemcp-analytics"
-        WHERE index1 = 'ai_chat'
-            AND timestamp > NOW() - INTERVAL ${range}
-        GROUP BY source
-        ORDER BY total DESC`,
+            sum(if(blob2 != '200' AND blob2 != '202', _sample_interval, 0)) as errors,
+            sum(if(blob2 = '429', _sample_interval, 0)) as rate_limited,
+            sum(double1 * _sample_interval) / sum(_sample_interval) as avg_ms
+        FROM ${DATASET}
+        WHERE index1 = 'mcp_request'
+            AND timestamp > NOW() - INTERVAL ${range}`,
+    );
+    const percentiles = await queryOptional(
+        env,
+        `SELECT
+            quantileExactWeighted(0.5)(double1, _sample_interval) as p50_ms,
+            quantileExactWeighted(0.95)(double1, _sample_interval) as p95_ms
+        FROM ${DATASET}
+        WHERE index1 = 'mcp_request'
+            AND blob2 != '429'
+            AND timestamp > NOW() - INTERVAL ${range}`,
     );
 
     return jsonResponse({
         range,
-        toolCalls: toolCallStats.data[0] || {},
-        aiChat: aiChatStats.data[0] || {},
-        sessions: sessionStats.data[0] || {},
-        aiBySource: aiBySource.data,
+        toolCalls: toolCalls.data[0] || {},
+        sessions: sessions.data[0] || {},
+        requests: { ...(requests.data[0] || {}), ...(percentiles.data[0] || {}) },
+        percentilesError: percentiles.error,
     });
 }
 
@@ -272,8 +286,9 @@ async function handleUsage(env: Env, url: URL): Promise<Response> {
             ${bucketFn} as bucket,
             index1 as event_type,
             sum(_sample_interval) as count
-        FROM "pokemcp-analytics"
+        FROM ${DATASET}
         WHERE timestamp > NOW() - INTERVAL ${range}
+            AND (index1 = 'tool_call' OR index1 = 'session')
         GROUP BY bucket, event_type
         ORDER BY bucket ASC`,
     );
@@ -281,96 +296,9 @@ async function handleUsage(env: Env, url: URL): Promise<Response> {
     return jsonResponse({ range, interval, data: result.data });
 }
 
-async function handleCosts(env: Env, url: URL): Promise<Response> {
-    const range = parseRange(url.searchParams.get("range"));
-
-    // Serialize queries to avoid Analytics Engine rate limits
-    const dailyCosts = await queryAnalyticsEngine(
-        env,
-        `SELECT
-            toStartOfDay(timestamp) as day,
-            sum(_sample_interval) as requests,
-            sum(double1 * _sample_interval) as input_tokens,
-            sum(double2 * _sample_interval) as output_tokens,
-            sum(double3 * _sample_interval) as cache_creation_tokens,
-            sum(double4 * _sample_interval) as cache_read_tokens,
-            sum(double7 * _sample_interval) as cost_usd
-        FROM "pokemcp-analytics"
-        WHERE index1 = 'ai_chat'
-            AND timestamp > NOW() - INTERVAL ${range}
-        GROUP BY day
-        ORDER BY day ASC`,
-    );
-    const byFormat = await queryAnalyticsEngine(
-        env,
-        `SELECT
-            blob1 as format,
-            sum(_sample_interval) as requests,
-            sum(double7 * _sample_interval) as cost_usd,
-            sum(double1 * _sample_interval) as input_tokens,
-            sum(double2 * _sample_interval) as output_tokens
-        FROM "pokemcp-analytics"
-        WHERE index1 = 'ai_chat'
-            AND timestamp > NOW() - INTERVAL ${range}
-        GROUP BY format
-        ORDER BY cost_usd DESC`,
-    );
-    const byPersonality = await queryAnalyticsEngine(
-        env,
-        `SELECT
-            blob2 as personality,
-            sum(_sample_interval) as requests,
-            sum(double7 * _sample_interval) as cost_usd
-        FROM "pokemcp-analytics"
-        WHERE index1 = 'ai_chat'
-            AND timestamp > NOW() - INTERVAL ${range}
-        GROUP BY personality
-        ORDER BY requests DESC`,
-    );
-    const cacheStats = await queryAnalyticsEngine(
-        env,
-        `SELECT
-            sum(double1 * _sample_interval) as total_input,
-            sum(double4 * _sample_interval) as total_cache_read,
-            sum(double3 * _sample_interval) as total_cache_creation
-        FROM "pokemcp-analytics"
-        WHERE index1 = 'ai_chat'
-            AND timestamp > NOW() - INTERVAL ${range}`,
-    );
-
-    const bySource = await queryAnalyticsEngine(
-        env,
-        `SELECT
-            blob5 as source,
-            sum(_sample_interval) as requests,
-            sum(double7 * _sample_interval) as cost_usd,
-            sum(double1 * _sample_interval) as input_tokens,
-            sum(double2 * _sample_interval) as output_tokens
-        FROM "pokemcp-analytics"
-        WHERE index1 = 'ai_chat'
-            AND timestamp > NOW() - INTERVAL ${range}
-        GROUP BY source
-        ORDER BY cost_usd DESC`,
-    );
-
-    const cacheData = cacheStats.data[0] as Record<string, number> | undefined;
-    const totalInput = (cacheData?.total_input ?? 0) + (cacheData?.total_cache_read ?? 0);
-    const cacheHitRate = totalInput > 0 ? (cacheData?.total_cache_read ?? 0) / totalInput : 0;
-
-    return jsonResponse({
-        range,
-        daily: dailyCosts.data,
-        byFormat: byFormat.data,
-        byPersonality: byPersonality.data,
-        bySource: bySource.data,
-        cacheHitRate,
-    });
-}
-
 async function handleTools(env: Env, url: URL): Promise<Response> {
     const range = parseRange(url.searchParams.get("range"));
 
-    // Serialize queries to avoid Analytics Engine rate limits
     const result = await queryAnalyticsEngine(
         env,
         `SELECT
@@ -378,50 +306,108 @@ async function handleTools(env: Env, url: URL): Promise<Response> {
             sum(_sample_interval) as calls,
             sum(if(blob3 = '1', _sample_interval, 0)) as successes,
             sum(double1 * _sample_interval) / sum(_sample_interval) as avg_response_ms
-        FROM "pokemcp-analytics"
+        FROM ${DATASET}
         WHERE index1 = 'tool_call'
             AND timestamp > NOW() - INTERVAL ${range}
         GROUP BY tool_name
         ORDER BY calls DESC`,
     );
-    const bySource = await queryAnalyticsEngine(
+    const formats = await queryAnalyticsEngine(
         env,
         `SELECT
-            blob5 as source,
+            blob2 as format,
             sum(_sample_interval) as calls
-        FROM "pokemcp-analytics"
+        FROM ${DATASET}
         WHERE index1 = 'tool_call'
             AND timestamp > NOW() - INTERVAL ${range}
-        GROUP BY source
+        GROUP BY format
         ORDER BY calls DESC`,
     );
 
-    return jsonResponse({ range, tools: result.data, bySource: bySource.data });
+    return jsonResponse({ range, tools: result.data, formats: formats.data });
 }
 
-async function handleSessions(env: Env, url: URL): Promise<Response> {
+/** Who is connecting: which assistant, and what its client calls itself. */
+async function handleClients(env: Env, url: URL): Promise<Response> {
     const range = parseRange(url.searchParams.get("range"));
-    const limit = Math.min(Number(url.searchParams.get("limit")) || 50, 100);
 
-    const result = await queryAnalyticsEngine(
+    const connections = await queryAnalyticsEngine(
         env,
         `SELECT
-            blob4 as session_id,
-            min(timestamp) as first_seen,
-            max(timestamp) as last_seen,
-            sum(_sample_interval) as tool_calls,
-            sum(if(blob3 = '1', _sample_interval, 0)) as successes,
-            sum(double1 * _sample_interval) / sum(_sample_interval) as avg_response_ms
-        FROM "pokemcp-analytics"
-        WHERE index1 = 'tool_call'
-            AND blob4 != ''
+            blob7 as client,
+            blob5 as client_name,
+            blob8 as user_agent,
+            sum(_sample_interval) as connections
+        FROM ${DATASET}
+        WHERE index1 = 'session'
+            AND blob1 = 'connect'
             AND timestamp > NOW() - INTERVAL ${range}
-        GROUP BY session_id
-        ORDER BY last_seen DESC
-        LIMIT ${limit}`,
+        GROUP BY client, client_name, user_agent
+        ORDER BY connections DESC
+        LIMIT 50`,
+    );
+    const toolCalls = await queryAnalyticsEngine(
+        env,
+        `SELECT
+            blob6 as client,
+            sum(_sample_interval) as calls
+        FROM ${DATASET}
+        WHERE index1 = 'tool_call'
+            AND timestamp > NOW() - INTERVAL ${range}
+        GROUP BY client
+        ORDER BY calls DESC`,
     );
 
-    return jsonResponse({ range, sessions: result.data });
+    return jsonResponse({ range, connections: connections.data, toolCalls: toolCalls.data });
+}
+
+/** How the endpoint is performing: every request by kind, with errors and latency. */
+async function handlePerformance(env: Env, url: URL): Promise<Response> {
+    const range = parseRange(url.searchParams.get("range"));
+
+    const requests = await queryAnalyticsEngine(
+        env,
+        `SELECT
+            blob1 as kind,
+            sum(_sample_interval) as requests,
+            sum(if(blob2 != '200' AND blob2 != '202', _sample_interval, 0)) as errors,
+            sum(double1 * _sample_interval) / sum(_sample_interval) as avg_ms
+        FROM ${DATASET}
+        WHERE index1 = 'mcp_request'
+            AND timestamp > NOW() - INTERVAL ${range}
+        GROUP BY kind
+        ORDER BY requests DESC`,
+    );
+    const percentiles = await queryOptional(
+        env,
+        `SELECT
+            blob1 as kind,
+            quantileExactWeighted(0.5)(double1, _sample_interval) as p50_ms,
+            quantileExactWeighted(0.95)(double1, _sample_interval) as p95_ms
+        FROM ${DATASET}
+        WHERE index1 = 'mcp_request'
+            AND timestamp > NOW() - INTERVAL ${range}
+        GROUP BY kind`,
+    );
+    const statuses = await queryAnalyticsEngine(
+        env,
+        `SELECT
+            blob2 as status,
+            sum(_sample_interval) as requests
+        FROM ${DATASET}
+        WHERE index1 = 'mcp_request'
+            AND timestamp > NOW() - INTERVAL ${range}
+        GROUP BY status
+        ORDER BY requests DESC`,
+    );
+
+    const byKind = new Map(percentiles.data.map((row) => [row.kind, row]));
+    return jsonResponse({
+        range,
+        requests: requests.data.map((row) => ({ ...row, ...(byKind.get(row.kind) || {}) })),
+        statuses: statuses.data,
+        percentilesError: percentiles.error,
+    });
 }
 
 // --- Diagnostics endpoint ---
@@ -535,12 +521,12 @@ export async function handleAdminRequest(request: Request, env: Env): Promise<Re
                 return await handleOverview(env, url);
             case "usage":
                 return await handleUsage(env, url);
-            case "costs":
-                return await handleCosts(env, url);
             case "tools":
                 return await handleTools(env, url);
-            case "sessions":
-                return await handleSessions(env, url);
+            case "clients":
+                return await handleClients(env, url);
+            case "performance":
+                return await handlePerformance(env, url);
             case "diagnostics":
                 return await handleDiagnostics(env);
             default:

@@ -29,13 +29,17 @@ const sections: { title: string; body: ReactNode }[] = [
                     and do not store them. We do not receive your conversation, your name, your
                     email address or your assistant account.
                 </p>
-                <p>For each tool call we record:</p>
+                <p>For each request your assistant makes we record:</p>
                 <Items>
-                    <li>which tool was called and for which format;</li>
+                    <li>
+                        what kind of request it was and, for a tool call, which tool was called and
+                        for which format;
+                    </li>
                     <li>whether it succeeded and how long it took;</li>
                     <li>
-                        a random identifier for the connection, created by our server, which is not
-                        linked to you or to your assistant account.
+                        which assistant software made it, such as Claude or ChatGPT, taken from the
+                        name and version that software reports about itself. This identifies the
+                        software, not you or your assistant account.
                     </li>
                 </Items>
                 <p>

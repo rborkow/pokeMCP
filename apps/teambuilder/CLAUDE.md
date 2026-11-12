@@ -27,7 +27,7 @@ in November 2026. Do not reintroduce interactive features here without the owner
 | `/support` | How to get help and report a problem. OpenAI's listing requires a support page URL |
 | `/retired` | Notice for the retired features (noindex). Lets a visitor download teams and plans still held in their browser |
 | `/prep/*`, `/teams`, `/account`, `/builder`, `/build` | Redirect to `/retired` (`next.config.ts`) |
-| `/admin` | Analytics dashboard (Cloudflare Access) |
+| `/admin` | Connector usage dashboard behind Cloudflare Access: connections, tool calls, which assistant, failures and response times. Reads the worker's `/admin/api/*` through `/api/admin/*` |
 | `/api/health` | Liveness only |
 | `/mcp`, `/sse`, `/api/mcp`, `/api/tools` | `410` tombstones pointing at `api.pokemcp.com/mcp` |
 

@@ -33,6 +33,12 @@ export interface McpRequestHooks {
     onCall?: (info: ConnectorCallInfo) => void;
     /** Called when a client opens a connection (an `initialize` request). */
     onInitialize?: (client: McpClientInfo) => void;
+    /**
+     * Called once a POST body has been read, with the kind of request it is:
+     * a JSON-RPC method such as `tools/call`, or `notification`, `batch`,
+     * `invalid` (not JSON) or `other`.
+     */
+    onRequestKind?: (kind: string) => void;
 }
 
 // MCP clients such as Claude and ChatGPT connect from their own servers, and
@@ -139,6 +145,20 @@ function findInitialize(body: unknown): McpClientInfo | null {
     return null;
 }
 
+// Methods worth telling apart in usage reports; anything else is "other" so a
+// client cannot fill the report with made-up names.
+const REPORTED_METHODS = new Set(["initialize", "tools/list", "tools/call", "ping"]);
+
+/** The kind of request a parsed body is, for usage reporting. */
+function requestKind(body: unknown): string {
+    if (Array.isArray(body)) return "batch";
+    if (!body || typeof body !== "object") return "other";
+    const { method, id } = body as { method?: unknown; id?: unknown };
+    if (typeof method !== "string") return "other";
+    if (id === undefined) return "notification";
+    return REPORTED_METHODS.has(method) ? method : "other";
+}
+
 /** Answer one request to the MCP endpoint. */
 export async function handleMcpRequest(
     request: Request,
@@ -163,6 +183,8 @@ export async function handleMcpRequest(
     } catch {
         // Left to the transport.
     }
+
+    hooks.onRequestKind?.(parsed ? requestKind(parsedBody) : "invalid");
 
     if (Array.isArray(parsedBody) && parsedBody.length > MAX_BATCH_MESSAGES) {
         return jsonRpcError(
