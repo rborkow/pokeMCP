@@ -79,6 +79,12 @@ export function normalizeChampionsFormName(displayName: string): string {
     const lycanroc = inner.match(/^\((Midday|Midnight|Dusk) Form\)$/);
     if (lycanroc) return lycanroc[1] === "Midday" ? base : `${base}-${lycanroc[1]}`;
 
+    // Toxtricity (Reg M-C): Amped is Showdown's base form.
+    if (base === "Toxtricity") {
+        if (inner === "(Amped Form)") return base;
+        if (inner === "(Low Key Form)") return `${base}-Low-Key`;
+    }
+
     throw new Error(
         `Unrecognized Champions form name "${displayName}". Add a mapping in ` +
             "normalizeChampionsFormName (src/regulations/champions-html-parser.ts).",
