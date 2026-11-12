@@ -219,7 +219,9 @@ monthly stats refresh.
 **Runtime secrets** (set once on each Cloudflare Worker via the dashboard; no longer set on every
 deploy):
 
-- `pokemon-mcp-production`: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CF_ACCESS_TEAM_DOMAIN`
+- `pokemon-mcp-production`: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CF_ACCESS_TEAM_DOMAIN`;
+  optionally `OPENAI_APPS_CHALLENGE`, the domain-verification token from OpenAI's plugin portal
+  (see `src/domain-verification.ts`)
 - `pokemcp-teambuilder`: none. The site has no accounts and calls no AI provider.
 
 Neither worker calls an AI model. The only AI use left is the report narrative in
