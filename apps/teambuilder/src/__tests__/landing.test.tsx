@@ -1,8 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import NewsroomPage from "@/app/page";
+import HomePage from "@/app/page";
 import { render, screen } from "./test-utils";
 
-vi.mock("@/lib/prep/analytics", () => ({ trackPrepEvent: vi.fn() }));
 vi.mock("@/lib/live-events", () => ({
     getNewsroomEvents: vi.fn(async () => ({
         fetchedAt: "2026-07-03T05:29:15.578Z",
@@ -37,7 +36,16 @@ vi.mock("@/lib/live-events", () => ({
                 player: "TytokiArts",
                 country: null,
                 record: { wins: 11, losses: 1, ties: 0 },
-                team: ["Charizard", "Venusaur", "Farigiraf", "Scrafty", "Sylveon", "Garchomp"].map((name) => ({ id: name.toLowerCase(), name, item: null, ability: null, moves: [], nature: null })),
+                team: ["Charizard", "Venusaur", "Farigiraf", "Scrafty", "Sylveon", "Garchomp"].map(
+                    (name) => ({
+                        id: name.toLowerCase(),
+                        name,
+                        item: null,
+                        ability: null,
+                        moves: [],
+                        nature: null,
+                    }),
+                ),
             },
         ],
         topCutUsage: [],
@@ -47,28 +55,43 @@ vi.mock("@/lib/live-events", () => ({
     })),
 }));
 
-describe("Tournament newsroom", () => {
+describe("Home page", () => {
     beforeEach(() => vi.clearAllMocks());
 
-    it("leads with tournament preparation and a direct prep action", async () => {
-        render(await NewsroomPage());
+    it("leads with the connector and how to add it", async () => {
+        render(await HomePage());
 
         expect(
             screen.getByRole("heading", {
-                name: /Prepare for the teams people are actually bringing/i,
+                name: /Build Champions teams with the assistant you already use/i,
             }),
         ).toBeInTheDocument();
-        expect(screen.getByRole("link", { name: /Start a matchup plan/i })).toHaveAttribute(
+        expect(screen.getByRole("link", { name: /Add VGC Teambuilder/i })).toHaveAttribute(
             "href",
-            "/prep/new",
+            "https://docs.pokemcp.com/getting-started",
         );
-        expect(screen.getByText("Sitrus Series")).toBeInTheDocument();
-        expect(screen.getByText("TytokiArts")).toBeInTheDocument();
+        expect(screen.getByText("https://api.pokemcp.com/mcp")).toBeInTheDocument();
     });
 
-    it("labels sourced and calculated newsroom information", async () => {
-        render(await NewsroomPage());
+    it("shows tournament results without any link into the retired Prep", async () => {
+        const { container } = render(await HomePage());
+
+        expect(screen.getByText("Sitrus Series")).toBeInTheDocument();
+        expect(screen.getByText("TytokiArts")).toBeInTheDocument();
+        const hrefs = [...container.querySelectorAll("a")].map((a) => a.getAttribute("href"));
+        for (const retired of ["/prep", "/teams", "/account", "/build"]) {
+            expect(hrefs.some((href) => href?.startsWith(retired))).toBe(false);
+        }
+    });
+
+    it("labels sourced and calculated information", async () => {
+        render(await HomePage());
         expect(screen.getAllByText(/Tournament source/i).length).toBeGreaterThan(0);
         expect(screen.getByText(/Top-cut vs ladder difference/i)).toBeInTheDocument();
+    });
+
+    it("says it is an unofficial fan project", async () => {
+        render(await HomePage());
+        expect(screen.getByText(/unofficial fan project/i)).toBeInTheDocument();
     });
 });

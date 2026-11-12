@@ -1,4 +1,5 @@
 import eventsIndex from "@/data/events/index.json";
+import type { TeamPokemon } from "@/types/pokemon";
 
 /**
  * Tournament recap page data, written by scripts/generate-reports.ts from the
@@ -82,4 +83,16 @@ export async function getEventBySlug(eventSlug: string): Promise<EventPageData |
     if (!category) return null;
     const data = await import(`@/data/events/${category}/${eventSlug}.json`);
     return data.default as EventPageData;
+}
+
+/** A top-cut placing's published team sheet, in the shape the lineup components take. */
+export function eventPlacingToPokemon(placing: EventPlacing): TeamPokemon[] {
+    return placing.team.map((slot) => ({
+        pokemon: slot.name,
+        moves: slot.moves,
+        ability: slot.ability ?? undefined,
+        item: slot.item ?? undefined,
+        nature: slot.nature ?? undefined,
+        level: 50,
+    }));
 }

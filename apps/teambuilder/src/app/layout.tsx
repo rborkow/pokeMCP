@@ -22,20 +22,22 @@ const CF_ANALYTICS_TOKEN =
 
 export const metadata: Metadata = {
     title: {
-        default: "PokeMCP Prep — Champions Tournament Preparation",
-        template: "%s | PokeMCP Prep",
+        default:
+            "PokeMCP — Pokémon Champions VGC results, meta reports and the VGC Teambuilder connector",
+        template: "%s | PokeMCP",
     },
     description:
-        "Turn current Pokémon Champions tournament teams into a sourced matchup plan, Bring 4, lead options, opening lines, and a practice checklist.",
+        "Pokémon Champions tournament results and monthly meta reports, plus VGC Teambuilder, a connector that brings usage statistics and team checks into Claude and ChatGPT.",
     keywords: [
         "Pokemon",
-        "tournament prep",
+        "tournament results",
         "competitive Pokemon",
         "Showdown",
         "VGC",
         "Champions",
-        "matchup analysis",
-        "team sheet",
+        "meta report",
+        "usage statistics",
+        "MCP connector",
     ],
     authors: [{ name: "PokeMCP" }],
     creator: "PokeMCP",
@@ -44,24 +46,24 @@ export const metadata: Metadata = {
         type: "website",
         locale: "en_US",
         url: "https://www.pokemcp.com",
-        siteName: "PokeMCP Prep",
-        title: "PokeMCP Prep — Champions Tournament Preparation",
+        siteName: "PokeMCP",
+        title: "PokeMCP — Pokémon Champions VGC results, meta reports and the VGC Teambuilder connector",
         description:
-            "Study current Champions tournament teams and turn them into a matchup plan you can practice.",
+            "Pokémon Champions tournament results and monthly meta reports, plus VGC Teambuilder, a connector that brings usage statistics and team checks into Claude and ChatGPT.",
         images: [
             {
                 url: "/og-image.png",
                 width: 1200,
                 height: 630,
-                alt: "PokeMCP Prep",
+                alt: "PokeMCP",
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "PokeMCP Prep — Champions Tournament Preparation",
+        title: "PokeMCP — Pokémon Champions VGC results, meta reports and the VGC Teambuilder connector",
         description:
-            "Study current Champions tournament teams and turn them into a matchup plan you can practice.",
+            "Pokémon Champions tournament results and monthly meta reports, plus VGC Teambuilder, a connector that brings usage statistics and team checks into Claude and ChatGPT.",
         images: ["/og-image.png"],
     },
     robots: {
@@ -88,18 +90,11 @@ export const metadata: Metadata = {
 // JSON-LD structured data for rich search results
 const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
-    name: "PokeMCP Prep",
-    description: "Pokémon Champions tournament preparation and matchup planning",
+    "@type": "WebSite",
+    name: "PokeMCP",
+    description:
+        "Pokémon Champions tournament results and monthly meta reports, and the VGC Teambuilder connector for AI assistants.",
     url: "https://www.pokemcp.com",
-    applicationCategory: "GameApplication",
-    operatingSystem: "Any",
-    offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "USD",
-    },
-    featureList: ["Sourced tournament newsroom", "Bring 4 planning", "Lead planning", "Practice checklists", "Showdown import"],
 };
 
 export default function RootLayout({

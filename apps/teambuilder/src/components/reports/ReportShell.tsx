@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ReportChat } from "@/components/reports/ReportChat";
+import { CONNECTOR_DOCS_URL } from "@/lib/connector";
 import { formatMonthLong, type ReportEntry } from "@/lib/reports";
 
 const SITE_URL = "https://www.pokemcp.com";
@@ -58,10 +58,6 @@ export function ReportShell({ report, canonicalPath, children }: ReportShellProp
 
             {children}
 
-            <div className="mt-12">
-                <ReportChat slug={report.slug} month={report.month} reportTitle={report.title} />
-            </div>
-
             <footer className="mt-12 space-y-6 border-t border-border pt-6">
                 <section>
                     <h2 className="signal-mono mb-2 text-xs uppercase tracking-wide text-muted-foreground">
@@ -90,15 +86,16 @@ export function ReportShell({ report, canonicalPath, children }: ReportShellProp
                         Build a team against this meta
                     </h2>
                     <p className="mt-1 text-sm text-muted-foreground">
-                        The PokeMCP team builder validates Champions and VGC teams, checks type
-                        coverage against the threats above, and coaches you through the process.
+                        VGC Teambuilder is a connector for Claude and ChatGPT. Ask your assistant to
+                        check a Champions team&apos;s legality, find its shared weaknesses, or show
+                        how the Pokémon above are usually built.
                     </p>
-                    <Link
-                        href="/build"
+                    <a
+                        href={CONNECTOR_DOCS_URL}
                         className="mt-3 inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
                     >
-                        Open the team builder
-                    </Link>
+                        Add VGC Teambuilder
+                    </a>
                 </section>
             </footer>
         </article>

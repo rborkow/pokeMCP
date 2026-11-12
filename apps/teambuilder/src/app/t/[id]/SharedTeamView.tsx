@@ -1,14 +1,13 @@
 "use client";
 
-import { ArrowRight, Package, Sparkles } from "lucide-react";
+import { Check, Clipboard, Package, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { PokemonSprite } from "@/components/team/PokemonSprite";
 import { Button } from "@/components/ui/button";
+import { CONNECTOR_DOCS_URL } from "@/lib/connector";
 import type { SharedTeam } from "@/lib/share-api";
 import { exportShowdownTeam } from "@/lib/showdown-parser";
-import { useTeamStore } from "@/stores/team-store";
-import type { FormatId } from "@/types/pokemon";
 import { getFormatDisplayName } from "@/types/pokemon";
 
 interface SharedTeamViewProps {
@@ -16,15 +15,18 @@ interface SharedTeamViewProps {
 }
 
 export function SharedTeamView({ team: sharedTeam }: SharedTeamViewProps) {
-    const router = useRouter();
-    const { setFormat, importTeam, clearTeam } = useTeamStore();
+    const [copied, setCopied] = useState(false);
 
-    const handleLoadIntoBuilder = () => {
-        clearTeam();
-        setFormat(sharedTeam.format as FormatId);
-        const showdownText = exportShowdownTeam(sharedTeam.team);
-        importTeam(showdownText);
-        router.push("/");
+    // The team builder is gone; a shared team is read-only. Copying it as
+    // Showdown text is how it travels now — into Pokémon Showdown, or into
+    // an assistant that has the VGC Teambuilder connector.
+    const copyAsShowdownText = async () => {
+        try {
+            await navigator.clipboard.writeText(exportShowdownTeam(sharedTeam.team));
+            setCopied(true);
+        } catch {
+            setCopied(false);
+        }
     };
 
     return (
@@ -102,11 +104,25 @@ export function SharedTeamView({ team: sharedTeam }: SharedTeamViewProps) {
                     </div>
 
                     {/* CTA */}
-                    <div className="text-center">
-                        <Button onClick={handleLoadIntoBuilder} size="lg" className="gap-2">
-                            Load into Builder
-                            <ArrowRight className="h-4 w-4" />
+                    <div className="space-y-3 text-center">
+                        <Button onClick={copyAsShowdownText} size="lg" className="gap-2">
+                            {copied ? (
+                                <Check className="h-4 w-4" aria-hidden="true" />
+                            ) : (
+                                <Clipboard className="h-4 w-4" aria-hidden="true" />
+                            )}
+                            {copied ? "Copied" : "Copy as Showdown text"}
                         </Button>
+                        <p className="text-sm text-muted-foreground">
+                            Paste it into Claude or ChatGPT with the{" "}
+                            <a
+                                href={CONNECTOR_DOCS_URL}
+                                className="underline hover:text-foreground"
+                            >
+                                VGC Teambuilder connector
+                            </a>{" "}
+                            to check or improve the team.
+                        </p>
                     </div>
                 </div>
             </main>
@@ -114,14 +130,14 @@ export function SharedTeamView({ team: sharedTeam }: SharedTeamViewProps) {
             {/* Footer */}
             <footer className="border-t py-4 mt-8">
                 <div className="container max-w-screen-2xl px-4 text-center text-sm text-muted-foreground">
-                    <span>PokeMCP Team Builder</span>
+                    <span>PokeMCP</span>
                     <nav aria-label="Footer" className="inline">
                         {" \u2022 "}
                         <Link
                             href="/"
                             className="underline hover:text-foreground py-2 inline-block"
                         >
-                            Build a Team
+                            Results and reports
                         </Link>
                         {" \u2022 "}
                         <a

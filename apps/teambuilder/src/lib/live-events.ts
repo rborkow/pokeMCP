@@ -5,7 +5,6 @@ import {
     getEventBySlug,
     getEventsIndex,
 } from "@/lib/event-pages";
-import { DEFAULT_CHAMPIONS_FORMAT } from "@/lib/prep/capabilities";
 
 interface EventRow {
     data_json: string;
@@ -19,12 +18,19 @@ export async function getNewsroomEvents(): Promise<{
 }> {
     try {
         const env = getCloudflareContext().env as CloudflareEnv;
+        // Newest events across every regulation. Filtering on one regulation
+        // id froze the newsroom on Reg M-B after the worker began ingesting
+        // Reg M-C events; each event carries its own regulation label.
         const rows = await env.META_DB.prepare(
-            "SELECT data_json, fetched_at FROM tournament_event WHERE regulation_id = ? ORDER BY event_date DESC LIMIT 12",
-        ).bind(DEFAULT_CHAMPIONS_FORMAT).all<EventRow>();
+            "SELECT data_json, fetched_at FROM tournament_event ORDER BY event_date DESC LIMIT 12",
+        ).all<EventRow>();
         if (rows.results.length) {
             const data = rows.results.map((row) => JSON.parse(row.data_json) as EventPageData);
-            const fetchedAt = rows.results.map((row) => row.fetched_at).sort().at(-1) ?? null;
+            const fetchedAt =
+                rows.results
+                    .map((row) => row.fetched_at)
+                    .sort()
+                    .at(-1) ?? null;
             return {
                 events: data.map(({ slug, name, date, players, format, regulationLabel }) => ({
                     slug,
@@ -35,7 +41,9 @@ export async function getNewsroomEvents(): Promise<{
                     regulationLabel,
                 })),
                 fetchedAt,
-                stale: fetchedAt ? Date.now() - new Date(fetchedAt).getTime() > 48 * 60 * 60 * 1_000 : true,
+                stale: fetchedAt
+                    ? Date.now() - new Date(fetchedAt).getTime() > 48 * 60 * 60 * 1_000
+                    : true,
             };
         }
     } catch {

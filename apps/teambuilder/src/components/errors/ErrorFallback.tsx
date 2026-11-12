@@ -25,10 +25,10 @@ export function ErrorFallback({
                     </div>
                     <div className="space-y-2">
                         <h1 className="text-2xl font-display font-bold text-foreground">
-                            PokeMCP Team Builder
+                            PokeMCP
                         </h1>
                         <p className="text-muted-foreground">
-                            Something went wrong and the app crashed.
+                            Something went wrong and this page could not be shown.
                         </p>
                     </div>
                     <div className="rounded-lg bg-muted/50 border border-border p-3">

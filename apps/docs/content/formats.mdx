@@ -1,19 +1,33 @@
 ---
-description: "Champions Regulation M-B is the primary PokeMCP Prep format."
+description: "Which Pokémon Champions regulations VGC Teambuilder covers, where its data comes from and how current it is."
 ---
 
-# Formats and mechanics coverage
+# Regulations and data
 
-## Primary format
+## Which formats are covered
 
-PokeMCP Prep currently defaults to **Pokémon Champions Regulation M-B** (`champions-regmb`). Tournament teams come from completed public Limitless events with published lists.
+VGC Teambuilder covers Pokémon Champions regulations — the doubles formats played on the ladder and at events. Ask your assistant "which formats do you support?" or have it call `list_formats`: the answer includes each regulation's dates, team rules, number of legal Mega Evolutions and whether usage statistics are available.
 
-Supported foundations include the current regulation allow-list, level and team-size rules, item and species clauses, published usage mapping, Omni Ring Mega rules, and standard typing.
+When you do not name a regulation, tools use the newest one that has published usage statistics.
 
-## Mechanics beta
+Singles formats and older mainline VGC rulesets are not covered.
 
-Champions differs from Showdown-era VGC in ways that are still being documented. Exact VP-aware stat and speed calculations, the complete Champions move overlay, and some new interactions remain beta. The Match Desk labels recommendations affected by these gaps rather than presenting them as exact.
+## What exists for each regulation
 
-## Legacy builder formats
+- **Allowed Pokémon** — the regulation's published eligible list. Team validation depends on it.
+- **Usage statistics** — published monthly by Smogon from Pokémon Showdown ladder battles. A new regulation has none until the first monthly release after it starts.
+- **Usage history** — one snapshot per month the regulation's ladder was active. Comparing months needs two; momentum needs four.
 
-The secondary team builder still contains older Showdown singles and doubles formats for existing local teams and shared links. They are not the focus of the tournament-prep newsroom.
+## How current it is
+
+Usage statistics are refreshed monthly, after Smogon publishes. Rankings always come from the most recent month loaded for the regulation; the trend tools show the months by date.
+
+When a regulation ends, its final month stays available, so you can still look back at it.
+
+## Known gaps
+
+- Move legality uses Pokémon Showdown's learnsets across all generations, not Pokémon Champions' own move lists.
+- Some Mega Evolutions introduced in Pokémon Champions are listed with their Mega Stone and ability but without types and stats yet. The tools say so rather than guessing.
+- Stat spreads and held-item availability are not validated.
+
+The [Tools](/tools) page lists the limits of each tool.

@@ -5,9 +5,12 @@ import { McpAgent } from "agents/mcp";
 import { createMimeMessage } from "mimetext/browser";
 import { z } from "zod";
 import { handleAdminRequest } from "./admin.js";
+import { registerConnectorTools } from "./connector/register.js";
+import { CONNECTOR_INFO, CONNECTOR_INSTRUCTIONS } from "./connector/tools.js";
 import { trackSession, trackToolCall } from "./analytics.js";
 import { getIngestionFormats } from "./ingestion/orchestrator.js";
 import { withLogging } from "./logging.js";
+import { mcpRateLimitResponse } from "./mcp-rate-limit.js";
 import {
     checkRateLimit,
     checkRateLimitGeneric,
@@ -75,12 +78,11 @@ function isOriginAllowed(request: Request): boolean {
 // (one format slice per alarm). Re-exported so wrangler can bind it.
 export { IngestionCoordinator } from "./ingestion/coordinator.js";
 
-// Define our Pokemon MCP agent with tools
+// Public MCP server: the "VGC Teambuilder" connector, served at /mcp.
+// Its tools come from src/connector/ — not TOOL_REGISTRY, which is the
+// internal surface PokeMCP Prep reaches through PrepAnalysisService.
 export class PokemonMCP extends McpAgent {
-    server = new McpServer({
-        name: "Pokemon MCP Server",
-        version: "0.3.0",
-    });
+    server = new McpServer(CONNECTOR_INFO, { instructions: CONNECTOR_INSTRUCTIONS });
 
     // Privacy-safe session ID — random per DO instance, not tied to any user
     sessionId = crypto.randomUUID();
@@ -91,32 +93,19 @@ export class PokemonMCP extends McpAgent {
         // Track session connection
         trackSession(env, "connect", this.sessionId, "mcp", "mcp");
 
-        for (const tool of TOOL_REGISTRY) {
-            this.server.tool(tool.name, tool.schema, async (args) => {
-                const startTime = performance.now();
-                let success = true;
-                let text: string;
-                try {
-                    text = await withLogging(env, tool.name, args, () => tool.execute(args, env));
-                } catch (error) {
-                    success = false;
-                    throw error;
-                } finally {
-                    const responseTimeMs = Math.round(performance.now() - startTime);
-                    const format = typeof args.format === "string" ? args.format : undefined;
-                    trackToolCall(
-                        env,
-                        tool.name,
-                        format,
-                        success,
-                        responseTimeMs,
-                        this.sessionId,
-                        "mcp",
-                    );
-                }
-                return { content: [{ type: "text", text }] };
-            });
-        }
+        // Operational metrics only (tool name, format, outcome, duration).
+        // Arguments and results are never logged for connector calls.
+        registerConnectorTools(this.server, env, (call) =>
+            trackToolCall(
+                env,
+                call.tool,
+                call.format,
+                call.success,
+                call.durationMs,
+                this.sessionId,
+                "mcp",
+            ),
+        );
     }
 
     async destroy() {
@@ -149,6 +138,15 @@ export default {
 
         const retirementResponse = getRetirementResponse(url.pathname, request.method);
         if (retirementResponse) return retirementResponse;
+
+        // Public MCP endpoint (Streamable HTTP). Deliberately not gated by the
+        // browser origin allowlist below: MCP clients such as Claude and
+        // ChatGPT connect from their own infrastructure.
+        if (url.pathname === "/mcp") {
+            const rateLimited = await mcpRateLimitResponse(request, env.MCP_RATE_LIMITER);
+            if (rateLimited) return rateLimited;
+            return PokemonMCP.serve("/mcp").fetch(request, env, ctx);
+        }
 
         // Stateless tool call endpoint - bypasses session requirement
         // Use this for direct API access from web apps
@@ -626,11 +624,15 @@ export default {
         if (url.pathname === "/") {
             return new Response(
                 JSON.stringify({
-                    name: "PokeMCP Prep analysis service",
-                    status: "internal-only",
-                    description: "The former public MCP product has been retired.",
-                    product: "https://www.pokemcp.com",
+                    name: CONNECTOR_INFO.title,
+                    description:
+                        "Read-only MCP server for competitive Pokémon VGC team building. " +
+                        "Unofficial fan project; not affiliated with Nintendo, Creatures Inc., " +
+                        "GAME FREAK inc. or The Pokémon Company.",
+                    website: CONNECTOR_INFO.websiteUrl,
+                    documentation: "https://docs.pokemcp.com",
                     endpoints: {
+                        mcp: "/mcp (POST) - MCP over Streamable HTTP",
                         health: "/health (GET) - Deploy health / secret-presence booleans",
                         "api/feedback": "/api/feedback (POST) - Submit feedback",
                         "api/team/:id": "/api/team/:id (GET) - Read a legacy shared team",
