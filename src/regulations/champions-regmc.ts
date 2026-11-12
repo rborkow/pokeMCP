@@ -38,6 +38,10 @@ export const CHAMPIONS_REGMC: RegulationSet = {
     showdownFormatId: "gen9championsvgc2026regmc",
     limitlessFormatId: "M-C",
     megaForms: CHAMPIONS_REGMC_MEGAS,
+    // As in M-B, ladder teams hold several Mega Stones: in Smogon's 2026-10
+    // data 20% of Floette-Mega teams also include Salamence-Mega, and 18% of
+    // Raichu-Mega-Y teams include Garchomp-Mega-Z.
+    allowsMultipleMegaStones: true,
     bannedItems: [],
     moveOverrides: {},
 };

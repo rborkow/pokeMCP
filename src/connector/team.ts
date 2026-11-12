@@ -68,7 +68,7 @@ export async function validateTeam(
     const team: TeamPokemon[] = args.team.map((member, index) => {
         const plain: TeamPokemon = { ...member, moves: member.moves ?? [] };
         const resolved = resolvePokemon(member.pokemon);
-        if (resolved?.unknownMega) {
+        if (resolved?.unknownMega && !resolved.mega) {
             megaNames.set(index, resolved.name);
             warnings.push(
                 `${resolved.name} is not in this connector's Mega Evolution data, so it was ` +

@@ -20,12 +20,15 @@ import { getDefaultRegulation } from "../connector/formats.js";
 import { type ConnectorCallInfo, registerConnectorTools } from "../connector/register.js";
 import { CONNECTOR_INFO, CONNECTOR_INSTRUCTIONS, CONNECTOR_TOOLS } from "../connector/tools.js";
 import { getFullLearnset, getPokemonLearnset } from "../data-loader.js";
-import { CHAMPIONS_REGMB } from "../regulations/champions-regmb.js";
+import { listRegulationIds } from "../regulations/registry.js";
 import { TOOL_REGISTRY } from "../tool-registry.js";
 
 // --- Fixtures ---
 
-const STATS_FORMAT = CHAMPIONS_REGMB.showdownFormatId as string;
+// Fixtures hang off whichever regulation the connector currently defaults to,
+// so registering a new regulation does not invalidate them.
+const REG = getDefaultRegulation();
+const STATS_FORMAT = REG.showdownFormatId as string;
 const MONTHS = ["2026-06", "2026-07", "2026-08", "2026-09"];
 
 /** Usage fraction per month, oldest first. `null` = absent that month. */
@@ -159,12 +162,20 @@ function buildKv(): Map<string, unknown> {
         Spreads: {},
         Teammates: {},
     });
-    kv.set(CHAMPIONS_REGMB.legalityKvKey, {
-        regulationId: CHAMPIONS_REGMB.id,
+    kv.set(REG.legalityKvKey, {
+        regulationId: REG.id,
         fetchedAt: "2026-07-03T00:00:00.000Z",
         sourceUrl: "https://example.test/pokemon.html",
         version: 1,
-        pokemon: ["Kingambit", "Incineroar", "Garchomp", "Whimsicott", "Charizard", "Gardevoir"],
+        pokemon: [
+            "Kingambit",
+            "Incineroar",
+            "Garchomp",
+            "Whimsicott",
+            "Charizard",
+            "Gardevoir",
+            "Staraptor",
+        ],
     });
     return kv;
 }
@@ -270,7 +281,8 @@ describe("connector tool listing", () => {
         const { tools } = await client.listTools();
         const format = tools.find((t) => t.name === "get_top_usage")?.inputSchema.properties
             ?.format as { enum?: string[] };
-        assert.deepEqual(format.enum, ["champions-regma", "champions-regmb"]);
+        assert.deepEqual(format.enum, listRegulationIds());
+        assert.ok(format.enum?.includes(REG.id));
         const text = await errorText(client, "get_top_usage", { format: "gen9ou" });
         assert.match(text, /format/i);
     });
@@ -302,9 +314,10 @@ describe("connector data tools", () => {
     it("list_formats reports regulations and the default", async () => {
         const out = await data(client, "list_formats");
         assert.equal(out.defaultFormat, getDefaultRegulation().id);
+        // Newest first.
         assert.deepEqual(
             out.formats.map((f: { id: string }) => f.id),
-            ["champions-regmb", "champions-regma"],
+            [...listRegulationIds()].reverse(),
         );
         assert.equal(out.formats[0].bringCount, 4);
         assert.equal(out.formats[0].usageStats, true);
@@ -320,7 +333,7 @@ describe("connector data tools", () => {
             (m: { name: string }) => m.name === "Charizard-Mega-Y",
         );
         assert.equal(megaY.megaStone, "Charizardite Y");
-        assert.ok(megaY.formats.includes("champions-regmb"));
+        assert.ok(megaY.formats.includes(REG.id));
     });
 
     it("lookup_pokemon suggests names for a near miss", async () => {
@@ -364,7 +377,7 @@ describe("connector data tools", () => {
                 { pokemon: "Incineroar", moves: ["Fake Out"], item: "Sitrus Berry" },
             ],
         });
-        assert.equal(legal.format, "champions-regmb");
+        assert.equal(legal.format, REG.id);
         assert.equal(legal.valid, true, legal.errors.join("; "));
         assert.deepEqual(legal.errors, []);
 
@@ -388,9 +401,8 @@ describe("connector data tools", () => {
         assert.doesNotMatch(errors, INTERNAL);
     });
 
-    it("validate_team allows several Mega Stones in Reg M-B, with a caution", async () => {
+    it("validate_team allows several Mega Stones, with a caution", async () => {
         const out = await data(client, "validate_team", {
-            format: "champions-regmb",
             team: [
                 { pokemon: "Charizard", item: "Charizardite Y" },
                 { pokemon: "Gardevoir", item: "Gardevoirite" },
@@ -427,8 +439,8 @@ describe("connector data tools", () => {
         assert.equal(lookup.abilities[0].name, "Drought");
     });
 
-    it("handles a Mega the bundled data does not know by its base Pokémon", async () => {
-        // On the ladder, but in neither the dex nor the regulation's Mega list.
+    it("handles a Mega whose types and stats are still pending", async () => {
+        // On the ladder and in the regulation's Mega list, but not in the dex.
         const moves = await data(client, "validate_moveset", {
             pokemon: "Staraptor-Mega",
             moves: ["Brave Bird", "Surf"],
@@ -440,11 +452,33 @@ describe("connector data tools", () => {
         );
 
         const lookup = await errorText(client, "lookup_pokemon", { pokemon: "Staraptor-Mega" });
+        assert.match(lookup, /holding Staraptite/);
         assert.match(lookup, /base form, Staraptor/);
 
-        const team = await data(client, "validate_team", { team: [{ pokemon: "Staraptor-Mega" }] });
-        assert.deepEqual(team.members, [{ pokemon: "Staraptor-Mega", status: "not_allowed" }]);
-        assert.match(team.warnings.join("\n"), /checked as Staraptor/);
+        // Validated as Staraptor holding Staraptite; its Mega ability is accepted.
+        const team = await data(client, "validate_team", {
+            team: [{ pokemon: "Staraptor-Mega", ability: "Contrary" }],
+        });
+        assert.equal(team.valid, true, team.errors.join("; "));
+        assert.deepEqual(team.members, [{ pokemon: "Staraptor-Mega", status: "allowed" }]);
+    });
+
+    it("falls back to the base Pokémon for a Mega nothing describes", async () => {
+        const moves = await data(client, "validate_moveset", {
+            pokemon: "Pikachu-Mega",
+            moves: ["Thunderbolt", "Hydro Pump"],
+        });
+        assert.deepEqual(
+            moves.moves.map((m: { learnable: boolean }) => m.learnable),
+            [true, false],
+        );
+
+        const lookup = await errorText(client, "lookup_pokemon", { pokemon: "Pikachu-Mega" });
+        assert.match(lookup, /base form, Pikachu/);
+
+        const team = await data(client, "validate_team", { team: [{ pokemon: "Pikachu-Mega" }] });
+        assert.deepEqual(team.members, [{ pokemon: "Pikachu-Mega", status: "not_allowed" }]);
+        assert.match(team.warnings.join("\n"), /checked as Pikachu/);
     });
 
     it("validate_team fails clearly when legality data is missing", async () => {

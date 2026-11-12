@@ -41,7 +41,12 @@ export interface ResolvedPokemon {
     species: PokemonSpecies;
     /** Set when the name is a Mega Evolution the regulations define. */
     mega?: MegaForm;
-    /** A "-Mega" name whose base Pokémon is known but whose own data is not. */
+    /**
+     * A Mega whose own types and stats are not in this connector's data: either
+     * a "-Mega" name nothing describes, or one the regulations list with data
+     * still pending. `species` is the base Pokémon; do not present its typing
+     * or stats as the Mega's.
+     */
     unknownMega?: boolean;
     /** Typing to analyse: post-Mega for a Mega, when known. */
     types: string[];
@@ -64,6 +69,7 @@ export function resolvePokemon(input: string): ResolvedPokemon | undefined {
                 name: mega.megaName,
                 species: base,
                 mega,
+                unknownMega: !mega.postMegaTypes,
                 types: mega.postMegaTypes ?? base.types,
             };
         }
@@ -114,9 +120,14 @@ export function lookupPokemon(args: { pokemon: string }): ToolOutcome {
     if (!resolved) return fail(pokemonNotFound(args.pokemon));
     const { species, mega } = resolved;
     if (resolved.unknownMega) {
+        const known = mega
+            ? ` It Mega Evolves from ${species.name} holding ${mega.megaStone}` +
+              `${mega.postMegaAbility ? `, with the ability ${mega.postMegaAbility}` : ""}.`
+            : "";
         return fail(
-            `${resolved.name} is not in this connector's Pokémon data yet. Look up its base ` +
-                `form, ${species.name}, instead; the usage tools do recognise ${resolved.name}.`,
+            `${resolved.name}'s types and stats are not in this connector's data yet.${known} ` +
+                `Look up its base form, ${species.name}, instead; the usage tools do ` +
+                `recognise ${resolved.name}.`,
         );
     }
     // A Mega the dex does not model: describe it from the regulation's data.
