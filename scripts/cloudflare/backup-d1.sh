@@ -6,7 +6,7 @@ timestamp="$(date -u +%Y%m%dT%H%M%SZ)"
 destination="${BACKUP_DIR:-${repo_root}/.backups/cloudflare/${timestamp}}"
 
 if (($# == 0)); then
-    databases=("pokemcp-meta-history" "pokemcp-prep")
+    databases=("pokemcp-meta-history")
 else
     databases=("$@")
 fi
