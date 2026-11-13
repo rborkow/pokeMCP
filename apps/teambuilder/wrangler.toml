@@ -2,8 +2,8 @@
 name = "pokemcp-teambuilder"
 compatibility_date = "2026-07-12"
 compatibility_flags = ["nodejs_compat"]
-main = ".open-next/worker.js"
-assets = { directory = ".open-next/assets", binding = "ASSETS" }
+main = "worker.ts"
+assets = { directory = ".open-next/assets", binding = "ASSETS", run_worker_first = ["/review/vgc-teambuilder-demo.mp4"] }
 
 # The site needs no runtime variables or secrets. The Cloudflare Web Analytics
 # token is NOT a runtime var — NEXT_PUBLIC_* is inlined by Next at build time.
