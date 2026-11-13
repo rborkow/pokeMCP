@@ -9,8 +9,9 @@ competitive Pokémon Champions team building, plus its content website and docum
 Claude and ChatGPT, through the connector, are the only interfaces.
 
 **The connector:** `https://api.pokemcp.com/mcp` serves an authless MCP server (Streamable HTTP)
-intended for the Claude and ChatGPT directories. Its 12 tools live in `src/connector/`: Pokémon
-lookup, move and team legality, defensive type analysis, usage statistics and usage trends, for
+intended for the Claude and ChatGPT directories. Its 15 tools live in `src/connector/`: Pokémon
+lookup, move and team legality, defensive type analysis, usage statistics and usage trends, and
+matchup calculations (damage, Speed order, a team against the most used Pokémon), for
 Champions regulations only. The legacy `/sse` and `/api/tools` endpoints stay retired
 (`410 Gone`). See [`src/CLAUDE.md`](src/CLAUDE.md).
 

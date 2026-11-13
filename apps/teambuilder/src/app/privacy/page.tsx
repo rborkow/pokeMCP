@@ -25,9 +25,10 @@ const sections: { title: string; body: ReactNode }[] = [
                 </p>
                 <p>
                     When your assistant calls a tool, it sends us that tool&apos;s inputs: Pokémon
-                    names, team lists, move names and format names. We use them to answer the call
-                    and do not store them. We do not receive your conversation, your name, your
-                    email address or your assistant account.
+                    names, team lists, moves, items, abilities, natures, stat spreads, battle
+                    conditions and format names. We use them to answer the call and do not store
+                    them. We do not receive your conversation, your name, your email address or your
+                    assistant account.
                 </p>
                 <p>For each request your assistant makes we record:</p>
                 <Items>

@@ -55,6 +55,7 @@
     },
     "dependencies": {
         "@resvg/resvg-wasm": "^2.6.2",
+        "@smogon/calc": "0.12.0",
         "agents": "^0.7.5",
         "satori": "^0.19.2",
         "smogon": "^4.0.2",

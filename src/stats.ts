@@ -20,6 +20,9 @@ const indexCache = new BoundedTtlCache<FormatIndex>(8, CACHE_TTL_MS);
 // just looked at (usage, then teammates, then checks and counters).
 const pokemonCache = new BoundedTtlCache<PokemonStats>(16, CACHE_TTL_MS);
 
+// Reads in progress, keyed like the cache.
+const inFlight = new Map<string, Promise<PokemonStats | null>>();
+
 // --- Types ---
 
 export interface FormatIndex {
@@ -82,20 +85,33 @@ export async function getPokemonStats(
     const cached = pokemonCache.get(cacheKey);
     if (cached) return cached;
 
-    try {
-        const stats = (await env.POKEMON_STATS.get(
-            `${format}:${pokemonId}`,
-            "json",
-        )) as PokemonStats | null;
-        if (stats?.displayName) {
-            pokemonCache.set(cacheKey, stats);
-            return stats;
-        }
-    } catch (e) {
-        console.error(`Error fetching ${pokemonId} stats for ${format}:`, e);
-    }
+    // Share a read that is already under way. Several tool calls can ask for
+    // the same Pokémon at once, and each record is large: without this, every
+    // caller would hold its own parsed copy.
+    const pending = inFlight.get(cacheKey);
+    if (pending) return pending;
 
-    return null;
+    const read = (async () => {
+        try {
+            const stats = (await env.POKEMON_STATS.get(
+                `${format}:${pokemonId}`,
+                "json",
+            )) as PokemonStats | null;
+            if (stats?.displayName) {
+                pokemonCache.set(cacheKey, stats);
+                return stats;
+            }
+        } catch (e) {
+            console.error(`Error fetching ${pokemonId} stats for ${format}:`, e);
+        }
+        return null;
+    })();
+    inFlight.set(cacheKey, read);
+    try {
+        return await read;
+    } finally {
+        inFlight.delete(cacheKey);
+    }
 }
 
 /**
