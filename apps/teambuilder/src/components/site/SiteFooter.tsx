@@ -6,7 +6,8 @@ export function SiteFooter() {
         <footer className="border-t border-border print:hidden">
             <div className="prep-shell flex flex-col gap-4 py-8 text-xs leading-5 text-muted-foreground sm:flex-row sm:items-start sm:justify-between">
                 <p className="max-w-xl">
-                    PokeMCP is an unofficial fan project. It is not affiliated with or endorsed by
+                    PokeMCP and VGC Teambuilder are published by Robert Borkowski as an unofficial
+                    fan project. They are not affiliated with or endorsed by
                     Nintendo, Creatures Inc., GAME FREAK inc. or The Pokémon Company. Tournament
                     results come from Limitless; usage statistics come from Pokémon Showdown ladder
                     data published by Smogon.
