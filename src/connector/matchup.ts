@@ -20,6 +20,7 @@
  * loaded on first use and not when the Worker starts.
  */
 import type { RegulationSet } from "../regulations/types.js";
+import { BoundedTtlCache } from "../bounded-cache.js";
 import { getFormatIndex, getPokemonStats, type PokemonStats } from "../stats.js";
 import { formatFields, resolveRegulation } from "./formats.js";
 import { pokemonNotFound, resolvePokemon } from "./pokemon.js";
@@ -128,8 +129,39 @@ interface ResolvedSet {
     echo: SetEcho;
     /** What was filled in because the caller left it out. */
     assumptions: string[];
-    /** The Pokémon's usage record, when one was loaded. */
-    usage: PokemonStats | null;
+    /** The Pokémon's most common set in the regulation, when usage data was read. */
+    typical: TypicalSet | null;
+}
+
+/**
+ * The few facts these tools need from a usage record. A full record is tens of
+ * kilobytes to about a megabyte in memory, so only this summary is kept: it is
+ * a few hundred bytes, which lets a threat check that names the same popular
+ * Pokémon as the last one skip the read entirely.
+ */
+interface TypicalSet {
+    spread: { nature: string; statPoints: StatTable } | null;
+    /** Most used ability id, or null. */
+    ability: string | null;
+    /** Most used item id, or null when most sets hold none. */
+    item: string | null;
+    /** Move ids, most used first. */
+    moves: string[];
+}
+
+const typicalSets = new BoundedTtlCache<TypicalSet>(600, 5 * 60 * 1000);
+
+function summarize(usage: PokemonStats): TypicalSet {
+    return {
+        spread: parseSpread(topKey(usage.Spreads) ?? ""),
+        ability: topKey(usage.Abilities, ["noability"]),
+        item: topKey(usage.Items, ["nothing"]),
+        moves: Object.entries(usage.Moves ?? {})
+            .filter(([id]) => id && id !== "nothing")
+            .sort(([, a], [, b]) => b - a)
+            .slice(0, 12)
+            .map(([id]) => id),
+    };
 }
 
 type Resolved<T> = { ok: true; value: T } | { ok: false; error: string };
@@ -171,25 +203,59 @@ function describeSpread(nature: string, statPoints: StatTable): string {
     return `${nature}${spent ? `, ${spent}` : ", no stat points"}`;
 }
 
-function findSpecies(gen: Calc, input: string): { id: string; name: string } | null {
-    const tryId = (id: string) => {
-        const species = gen.species.get(SPECIES_ALIASES[id] ?? id);
-        return species ? { id: species.id as string, name: species.name as string } : null;
-    };
-    const direct = tryId(toId(input));
-    if (direct) return direct;
-    // Fall back to this connector's own name handling (spelling variants).
-    const resolved = resolvePokemon(input);
-    return resolved ? tryId(toId(resolved.name)) : null;
+// The calculator's "Aegislash-Both" is reported under the name the caller and
+// the usage tools use.
+const DISPLAY_NAMES: Record<string, string> = { aegislashboth: "Aegislash" };
+
+interface FoundSpecies {
+    /** The calculator's own name for the species. */
+    calcName: string;
+    /** The name to show: one the other tools accept. */
+    name: string;
+    id: string;
 }
 
-async function loadUsage(
+function findSpecies(gen: Calc, input: string): Resolved<FoundSpecies> {
+    const tryId = (id: string): FoundSpecies | null => {
+        const species = gen.species.get(SPECIES_ALIASES[id] ?? id);
+        if (!species) return null;
+        return {
+            calcName: species.name,
+            name: DISPLAY_NAMES[species.id] ?? species.name,
+            id: species.id,
+        };
+    };
+    const direct = tryId(toId(input));
+    if (direct) return { ok: true, value: direct };
+
+    // Fall back to this connector's own name handling (spelling variants).
+    const resolved = resolvePokemon(input);
+    const viaDex = resolved ? tryId(toId(resolved.name)) : null;
+    if (viaDex) return { ok: true, value: viaDex };
+
+    // A real Pokémon that is not in Pokémon Champions is not a spelling mistake.
+    return {
+        ok: false,
+        error: resolved
+            ? `${resolved.name} is not in Pokémon Champions' battle data, so it cannot be used in a calculation.`
+            : pokemonNotFound(input),
+    };
+}
+
+async function loadTypical(
     name: string,
     regulation: RegulationSet,
     env: Env,
-): Promise<PokemonStats | null> {
+): Promise<TypicalSet | null> {
     if (!regulation.showdownFormatId || !env?.POKEMON_STATS) return null;
-    return getPokemonStats(name, regulation.showdownFormatId, env);
+    const key = `${regulation.showdownFormatId}:${toId(name)}`;
+    const cached = typicalSets.get(key);
+    if (cached) return cached;
+    const usage = await getPokemonStats(name, regulation.showdownFormatId, env);
+    if (!usage) return null;
+    const typical = summarize(usage);
+    typicalSets.set(key, typical);
+    return typical;
 }
 
 async function resolveSet(
@@ -200,22 +266,23 @@ async function resolveSet(
     env: Env,
     options: { abilityActive?: boolean } = {},
 ): Promise<Resolved<ResolvedSet>> {
-    const species = findSpecies(gen, input.pokemon);
-    if (!species) return { ok: false, error: pokemonNotFound(input.pokemon) };
+    const found = findSpecies(gen, input.pokemon);
+    if (found.ok === false) return { ok: false, error: found.error };
+    const species = found.value;
 
     const assumptions: string[] = [];
     const needsUsage =
         (input.nature === undefined && input.statPoints === undefined) ||
         input.ability === undefined ||
         input.item === undefined;
-    const usage = needsUsage ? await loadUsage(input.pokemon, regulation, env) : null;
+    const typical = needsUsage ? await loadTypical(input.pokemon, regulation, env) : null;
     const from = `most common in ${regulation.shortLabel} usage`;
 
     // Nature and stat points travel together: a spread only makes sense whole.
     let nature = "Hardy";
     const statPoints = { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 } as StatTable;
     if (input.nature === undefined && input.statPoints === undefined) {
-        const spread = parseSpread(topKey(usage?.Spreads) ?? "");
+        const spread = typical?.spread ?? null;
         if (spread) {
             nature = spread.nature;
             Object.assign(statPoints, spread.statPoints);
@@ -261,7 +328,7 @@ async function resolveSet(
         if (!known) return { ok: false, error: `"${input.ability}" is not a known ability.` };
         ability = known.name;
     } else {
-        const common = gen.abilities.get(topKey(usage?.Abilities, ["noability"]) ?? "");
+        const common = gen.abilities.get(typical?.ability ?? "");
         const fallback = gen.species.get(species.id)?.abilities?.[0];
         ability = common?.name ?? fallback ?? "";
         if (ability) {
@@ -279,7 +346,7 @@ async function resolveSet(
             item = known.name;
         }
     } else {
-        const common = gen.items.get(topKey(usage?.Items, ["nothing"]) ?? "");
+        const common = gen.items.get(typical?.item ?? "");
         item = common?.name ?? null;
         assumptions.push(
             item
@@ -289,7 +356,7 @@ async function resolveSet(
     }
 
     // The calculator does not Mega Evolve a Pokémon because it holds the stone.
-    const megaForm = item ? calc.MEGA_STONES?.[item]?.[species.name] : undefined;
+    const megaForm = item ? calc.MEGA_STONES?.[item]?.[species.calcName] : undefined;
     if (megaForm) {
         assumptions.push(
             `${species.name}: calculated before Mega Evolution; name ${megaForm} to calculate it Mega Evolved`,
@@ -301,7 +368,7 @@ async function resolveSet(
         if (stage) boosts[stat] = stage;
     }
 
-    const pokemon = new calc.Pokemon(gen, species.name, {
+    const pokemon = new calc.Pokemon(gen, species.calcName, {
         level: 50,
         nature,
         evs: statPoints, // In Champions mode the library reads these as stat points.
@@ -320,7 +387,7 @@ async function resolveSet(
         value: {
             pokemon,
             assumptions,
-            usage,
+            typical,
             echo: {
                 pokemon: species.name,
                 nature,
@@ -683,43 +750,81 @@ interface Hit {
     minPercent: number;
     maxPercent: number;
     knockOut: string;
+    /** Weather or terrain the attacker's own ability sets, when it was applied. */
+    conditions?: string;
 }
 
 /** A Pokémon's damaging moves, most used first. */
-function commonAttacks(gen: Calc, usage: PokemonStats | null, limit: number): string[] {
-    return Object.entries(usage?.Moves ?? {})
-        .sort(([, a], [, b]) => b - a)
-        .map(([id]) => gen.moves.get(id))
+function commonAttacks(gen: Calc, typical: TypicalSet | null, limit: number): string[] {
+    return (typical?.moves ?? [])
+        .map((id) => gen.moves.get(id))
         .filter((move) => move && move.category !== "Status" && (move.basePower ?? 0) > 0)
         .slice(0, limit)
         .map((move) => move.name as string);
 }
 
-function bestHit(
-    gen: Calc,
-    calc: Calc,
-    attackers: { pokemon: CalcPokemon; moves: string[] }[],
-    defenders: CalcPokemon[],
-): Hit | null {
+// Abilities that set weather or terrain when the Pokémon enters. A threat
+// check with a plain field would understate exactly the Pokémon built around
+// these (Charizard-Mega-Y in sun, Rillaboom in Grassy Terrain), so each
+// Pokémon's own attacks are calculated under what its ability sets.
+const ENTRY_FIELD: Record<string, FieldInput> = {
+    drought: { weather: "sun" },
+    drizzle: { weather: "rain" },
+    sandstream: { weather: "sand" },
+    snowwarning: { weather: "snow" },
+    grassysurge: { terrain: "grassy" },
+    electricsurge: { terrain: "electric" },
+    psychicsurge: { terrain: "psychic" },
+    mistysurge: { terrain: "misty" },
+};
+
+interface Fighter {
+    pokemon: CalcPokemon;
+    /** Display name. */
+    name: string;
+    moves: string[];
+    /** What this Pokémon's ability sets on entry. */
+    ownField: FieldInput;
+}
+
+function fighter(set: ResolvedSet, moves: string[]): Fighter {
+    return {
+        pokemon: set.pokemon,
+        name: set.echo.pokemon,
+        moves,
+        ownField: ENTRY_FIELD[toId(set.echo.ability)] ?? {},
+    };
+}
+
+function bestHit(gen: Calc, calc: Calc, attackers: Fighter[], defenders: Fighter[]): Hit | null {
     let best: Hit | null = null;
     for (const attacker of attackers) {
+        const conditions = fieldNotes(attacker.ownField).join(", ");
         for (const move of attacker.moves) {
             for (const defender of defenders) {
                 let damage: Resolved<DamageResult>;
                 try {
-                    damage = runDamage(gen, calc, attacker.pokemon, defender, move, {});
+                    damage = runDamage(
+                        gen,
+                        calc,
+                        attacker.pokemon,
+                        defender.pokemon,
+                        move,
+                        attacker.ownField,
+                    );
                 } catch {
                     continue; // One move the library cannot handle must not sink the report.
                 }
                 if (damage.ok === false || damage.value.max === 0) continue;
                 if (!best || damage.value.maxPercent > best.maxPercent) {
                     best = {
-                        attacker: attacker.pokemon.name,
+                        attacker: attacker.name,
                         defender: defender.name,
                         move: damage.value.move.name,
                         minPercent: damage.value.minPercent,
                         maxPercent: damage.value.maxPercent,
                         knockOut: damage.value.knockOut?.text ?? "",
+                        ...(conditions ? { conditions } : {}),
                     };
                 }
             }
@@ -740,49 +845,47 @@ export async function checkTeamThreats(
     const field = buildField(calc);
     const side = new calc.Side({});
     const assumptions = [
-        "level 50, doubles battle, no weather, terrain, screens or stat changes",
-        SPREAD_ASSUMPTION.replace(
-            "set singleTarget when one target is left",
-            "as usual in doubles",
-        ),
+        "level 50, doubles battle, no screens or stat changes",
+        "a Pokémon whose ability sets weather or terrain attacks under it; otherwise none",
+        "spread moves hit both opponents (75% damage), as usual in doubles",
     ];
 
     // The team.
-    const team: { pokemon: CalcPokemon; echo: SetEcho; moves: string[]; speed: number }[] = [];
+    const team: (Fighter & { speed: number })[] = [];
     for (const member of args.team) {
         const set = await resolveSet(gen, calc, member, regulation, env);
         if (set.ok === false) return fail(set.error);
         assumptions.push(...set.value.assumptions);
+        const name = set.value.echo.pokemon;
 
         let moves: string[];
         if (member.moves?.length) {
             moves = [];
-            for (const name of member.moves) {
-                const known = gen.moves.get(toId(name));
+            for (const moveName of member.moves) {
+                const known = gen.moves.get(toId(moveName));
                 if (!known) {
                     return fail(
-                        `"${name}" is not a move in Pokémon Champions. Check the spelling.`,
+                        `"${moveName}" is not a move in Pokémon Champions. Check the spelling.`,
                     );
                 }
                 moves.push(known.name);
             }
         } else {
-            const usage = set.value.usage ?? (await loadUsage(member.pokemon, regulation, env));
-            moves = commonAttacks(gen, usage, 4);
+            const typical =
+                set.value.typical ?? (await loadTypical(member.pokemon, regulation, env));
+            moves = commonAttacks(gen, typical, 4);
             if (!moves.length) {
                 return fail(
-                    `No moves were given for ${set.value.echo.pokemon} and it has no usage data in ` +
+                    `No moves were given for ${name} and it has no usage data in ` +
                         `${regulation.shortLabel} to take them from. Pass its moves.`,
                 );
             }
             assumptions.push(
-                `${set.value.echo.pokemon}: ${moves.join(", ")} (its most used attacks; no moves were given)`,
+                `${name}: ${moves.join(", ")} (its most used attacks; no moves were given)`,
             );
         }
         team.push({
-            pokemon: set.value.pokemon,
-            echo: set.value.echo,
-            moves,
+            ...fighter(set.value, moves),
             speed: getFinalSpeed(gen, set.value.pokemon, field, side) as number,
         });
     }
@@ -812,15 +915,22 @@ export async function checkTeamThreats(
     }
 
     const threatSets = await Promise.all(
-        threatNames.map((name) => resolveSet(gen, calc, { pokemon: name }, regulation, env)),
+        threatNames.map(async (name) => {
+            const set = await resolveSet(gen, calc, { pokemon: name }, regulation, env);
+            if (set.ok === false) return set;
+            // A threat named with every field of its set left out reads usage
+            // data above; this covers the case where none exists.
+            const typical = set.value.typical ?? (await loadTypical(name, regulation, env));
+            return { ok: true as const, value: { ...set.value, typical } };
+        }),
     );
-    const teamPokemon = team.map((member) => member.pokemon);
     const threats = [];
     for (const [position, set] of threatSets.entries()) {
         if (set.ok === false) return fail(set.error);
-        const { pokemon, echo, usage } = set.value;
-        const moves = commonAttacks(gen, usage, 4);
+        const { pokemon, echo, typical } = set.value;
+        const moves = commonAttacks(gen, typical, 4);
         const speed = getFinalSpeed(gen, pokemon, field, side) as number;
+        const self = fighter(set.value, moves);
         threats.push({
             pokemon: echo.pokemon,
             usagePercent: usagePercent.get(toId(threatNames[position])) ?? null,
@@ -829,11 +939,11 @@ export async function checkTeamThreats(
             item: echo.item,
             speed,
             moves,
-            fasterTeamMembers: team.filter((m) => m.speed > speed).map((m) => m.echo.pokemon),
-            tiedTeamMembers: team.filter((m) => m.speed === speed).map((m) => m.echo.pokemon),
-            bestAnswer: bestHit(gen, calc, team, [pokemon]),
-            biggestRisk: bestHit(gen, calc, [{ pokemon, moves }], teamPokemon),
-            hasUsageData: !!usage,
+            fasterTeamMembers: team.filter((m) => m.speed > speed).map((m) => m.name),
+            tiedTeamMembers: team.filter((m) => m.speed === speed).map((m) => m.name),
+            bestAnswer: bestHit(gen, calc, team, [self]),
+            biggestRisk: bestHit(gen, calc, [self], team),
+            hasUsageData: !!typical,
         });
     }
     assumptions.push(
@@ -842,12 +952,14 @@ export async function checkTeamThreats(
 
     const hitText = (hit: Hit | null, who: (hit: Hit) => string) =>
         hit
-            ? `${who(hit)} ${hit.move} ${hit.minPercent}–${hit.maxPercent}%${hit.knockOut ? ` (${hit.knockOut})` : ""}`
+            ? `${who(hit)} ${hit.move} ${hit.minPercent}–${hit.maxPercent}%` +
+              (hit.knockOut ? ` (${hit.knockOut})` : "") +
+              (hit.conditions ? ` in ${hit.conditions}` : "")
             : "no damaging option";
     const lines = [
         `**Threat check — ${regulation.shortLabel}**`,
         "",
-        `Team speeds: ${team.map((m) => `${m.echo.pokemon} ${m.speed}`).join(", ")}`,
+        `Team speeds: ${team.map((m) => `${m.name} ${m.speed}`).join(", ")}`,
         "",
         ...threats.flatMap((threat) => [
             `**${threat.pokemon}**${threat.usagePercent !== null ? ` (${threat.usagePercent}% usage)` : ""} — ` +
@@ -873,7 +985,7 @@ export async function checkTeamThreats(
         {
             ...formatFields(regulation),
             team: team.map((member) => ({
-                pokemon: member.echo.pokemon,
+                pokemon: member.name,
                 speed: member.speed,
                 moves: member.moves,
             })),

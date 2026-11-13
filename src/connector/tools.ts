@@ -219,6 +219,10 @@ const hitOutput = z
         minPercent: z.number().describe("Lowest damage roll as % of the defender's HP"),
         maxPercent: z.number().describe("Highest damage roll as % of the defender's HP"),
         knockOut: z.string().describe('For example "guaranteed 2HKO"'),
+        conditions: z
+            .string()
+            .optional()
+            .describe("Weather or terrain set by the attacker's own ability, when applied"),
     })
     .nullable();
 
@@ -751,8 +755,9 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
             "each threat (the most used Pokémon by default, or the ones named) it reports the " +
             "team's hardest hit into it, its hardest hit into the team, and which team members " +
             "outspeed it. Each threat uses its most common set in the regulation's usage " +
-            "statistics. Results are single hits under plain conditions (no weather, screens " +
-            "or stat changes), not a battle simulation; use calculate_damage to examine one " +
+            "statistics. Results are single hits with no screens or stat changes, under the " +
+            "weather or terrain the attacker's own ability sets if any. This is not a battle " +
+            "simulation; use calculate_damage to examine one " +
             "matchup under specific conditions.",
         inputSchema: {
             team: z

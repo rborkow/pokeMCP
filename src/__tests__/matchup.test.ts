@@ -35,6 +35,14 @@ const USAGE: Record<string, Record<string, unknown>> = {
         Spreads: { "Adamant:32/32/2/0/0/0": 60, "Brave:32/32/0/0/2/0": 40 },
         Moves: { suckerpunch: 95, kowtowcleave: 90, protect: 80, ironhead: 60, swordsdance: 30 },
     },
+    charizardmegay: {
+        displayName: "Charizard-Mega-Y",
+        usage: 0.2,
+        Abilities: { drought: 100 },
+        Items: { charizarditey: 100 },
+        Spreads: { "Timid:2/0/0/32/0/32": 100 },
+        Moves: { heatwave: 95, protect: 90, solarbeam: 60 },
+    },
     sneasler: {
         displayName: "Sneasler",
         usage: 0.3,
@@ -74,7 +82,6 @@ before(async () => {
     await client.listTools();
 });
 
-// biome-ignore lint/suspicious/noExplicitAny: test helper over loosely typed tool results
 async function call(name: string, args: Record<string, unknown>): Promise<any> {
     const result = await client.callTool({ name, arguments: args });
     const text = (result.content as { text: string }[])[0]?.text ?? "";
@@ -237,7 +244,29 @@ describe("calculate_damage", () => {
             });
             assert.equal(error, null, pokemon);
             assert.ok(data.attacker.stats.hp > 0);
+            // Reported under the name that was asked for, which the other tools accept.
+            assert.equal(data.attacker.pokemon, pokemon);
         }
+    });
+
+    it("uses a Mega Evolution's own ability from usage data", async () => {
+        const { data } = await call("calculate_damage", {
+            attacker: { pokemon: "Charizard-Mega-Y" },
+            defender: KINGAMBIT,
+            move: "Heat Wave",
+        });
+        assert.equal(data.attacker.ability, "Drought");
+        assert.equal(data.attacker.item, "Charizardite Y");
+    });
+
+    it("says a real Pokémon is not in Pokémon Champions instead of suggesting spellings", async () => {
+        const { error } = await call("calculate_damage", {
+            attacker: { pokemon: "Mewtwo" },
+            defender: KINGAMBIT,
+            move: "Psychic",
+        });
+        assert.match(error, /Mewtwo is not in Pokémon Champions' battle data/);
+        assert.doesNotMatch(error, /Did you mean/);
     });
 
     it("says when a Mega Stone holder is calculated before Mega Evolution", async () => {
@@ -396,6 +425,33 @@ describe("check_team_threats", () => {
         assert.equal(data.threats[0].biggestRisk, null, "no known attacks to check");
         assert.equal(data.threats[0].bestAnswer.move, "Dragon Claw", "Ground cannot hit it");
         assert.match(text, /No usage data for this Pokémon/);
+    });
+
+    it("calculates a weather setter's attacks under its own weather", async () => {
+        const { data, text } = await call("check_team_threats", {
+            team: [{ ...KINGAMBIT, moves: ["Sucker Punch"] }],
+            threats: ["Charizard-Mega-Y"],
+        });
+        const risk = data.threats[0].biggestRisk;
+        assert.equal(risk.move, "Heat Wave");
+        assert.equal(risk.conditions, "Sun weather");
+        assert.match(text, /in Sun weather/);
+
+        // The same hit asked for directly, with and without sun.
+        const direct = (field: Record<string, unknown>) =>
+            call("calculate_damage", {
+                attacker: { pokemon: "Charizard-Mega-Y" },
+                defender: KINGAMBIT,
+                move: "Heat Wave",
+                field,
+            });
+        const sunny = await direct({ weather: "sun" });
+        const plain = await direct({});
+        assert.equal(risk.maxPercent, sunny.data.damage.maxPercent);
+        assert.ok(risk.maxPercent > plain.data.damage.maxPercent);
+
+        // The team's hit back gets no sun: Kingambit does not set it.
+        assert.equal(data.threats[0].bestAnswer.conditions, undefined);
     });
 
     it("uses a team member's most used attacks when none are given", async () => {
