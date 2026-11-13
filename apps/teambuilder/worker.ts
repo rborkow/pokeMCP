@@ -1,4 +1,5 @@
-// @ts-expect-error OpenNext generates this JavaScript entry point at build time.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- The module is absent before OpenNext builds it.
+// @ts-ignore OpenNext generates this JavaScript entry point at build time.
 import handler from "./.open-next/worker.js";
 import { REVIEW_VIDEO_PATH, serveReviewVideo } from "./src/lib/review-video";
 
