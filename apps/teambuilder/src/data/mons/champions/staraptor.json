@@ -2,183 +2,183 @@
  "id": "staraptor",
  "name": "Staraptor",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.033977400000000005,
-   "rank": 36,
-   "raw": 79502
+   "month": "2026-09",
+   "usage": 0.0104067,
+   "rank": 70,
+   "raw": 40856
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0059282,
+   "rank": 89,
+   "raw": 25667
   }
  ],
  "abilities": [
   [
    "Intimidate",
-   93.93418233212275
+   86.52452946263264
   ],
   [
    "Reckless",
-   6.0658176678772575
+   13.475470537367363
   ]
  ],
  "items": [
   [
    "Choice Scarf",
-   98.32849540403139
-  ],
-  [
-   "Focus Sash",
-   0.49799949779783464
-  ],
-  [
-   "Sitrus Berry",
-   0.21719448343541273
-  ],
-  [
-   "nothing",
-   0.1910606064406495
-  ],
-  [
-   "Life Orb",
-   0.18826365743110746
+   96.68098349264237
   ],
   [
    "Sharp Beak",
-   0.18340921193225965
+   2.0459970220354635
   ],
   [
-   "Bright Powder",
-   0.06220987321384858
+   "Life Orb",
+   0.6571629022671414
   ],
   [
-   "Quick Claw",
-   0.05025556383004902
+   "Focus Sash",
+   0.1683075149717036
+  ],
+  [
+   "Sitrus Berry",
+   0.147459914484591
+  ],
+  [
+   "Expert Belt",
+   0.06809209970048115
+  ],
+  [
+   "nothing",
+   0.06154186399827357
+  ],
+  [
+   "Wacan Berry",
+   0.03335299931071225
   ]
  ],
  "moves": [
   [
    "Final Gambit",
-   24.58829000901308
-  ],
-  [
-   "Brave Bird",
-   21.260900586223926
+   24.61996581227582
   ],
   [
    "U-turn",
-   20.745545512200287
+   22.00411098068043
   ],
   [
    "Close Combat",
-   20.174482757762625
+   20.822437939465807
   ],
   [
-   "Double-Edge",
-   3.0264645936123444
+   "Brave Bird",
+   15.19034680024298
   ],
   [
    "Dual Wingbeat",
-   2.970251070394704
+   9.776999803882395
   ],
   [
    "Tailwind",
-   2.3276802446791445
+   4.202969916577257
+  ],
+  [
+   "Double-Edge",
+   1.2955005424011625
+  ],
+  [
+   "Whirlwind",
+   0.5433618489052313
   ],
   [
    "Sunny Day",
-   1.0312228596034316
+   0.41249890022612035
   ],
   [
-   "Rain Dance",
-   0.6960712368891949
-  ],
-  [
-   "Blaze Kick",
-   0.5725716840038211
+   "Protect",
+   0.35495086771790135
   ]
  ],
  "spreads": [
   [
+   "Jolly:32/17/0/0/0/17",
+   29.015520168553188
+  ],
+  [
    "Jolly:32/2/0/0/0/32",
-   66.11683787490648
+   25.803668656829192
   ],
   [
    "Adamant:32/2/0/0/0/32",
-   3.8803203898812506
+   8.411170002521349
   ],
   [
-   "Jolly:32/0/0/0/2/32",
-   3.7471438850896086
+   "Adamant:32/4/0/0/0/30",
+   8.307935857049502
   ],
   [
-   "Jolly:32/0/0/0/0/32",
-   3.4680742682683015
-  ],
-  [
-   "Jolly:32/1/0/0/1/32",
-   3.436602130171176
+   "Jolly:32/6/0/0/0/28",
+   5.710688418770019
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Farigiraf",
-   14.088489902759898
-  ],
-  [
-   "Torkoal",
-   11.0770158687196
-  ],
-  [
-   "Mawile-Mega",
-   9.244427425632338
+   14.647722531895393
   ],
   [
    "Kingambit",
-   4.185958339553164
+   9.91435879819867
   ],
   [
-   "Sylveon",
-   3.582699735184746
+   "Golisopod-Mega",
+   8.6635023666589
   ],
   [
-   "Vileplume",
-   3.45310748645164
+   "Politoed",
+   7.44674791474335
   ],
   [
-   "Incineroar",
-   2.9877566290224515
+   "Pawmot",
+   7.06807556893475
+  ],
+  [
+   "Camerupt-Mega",
+   3.7663850789166404
+  ],
+  [
+   "Torkoal",
+   3.281021707374686
+  ],
+  [
+   "Charizard-Mega-Y",
+   2.5756077129606316
   ],
   [
    "Whimsicott",
-   2.96292523554382
+   2.4281384928788294
   ],
   [
-   "Kangaskhan",
-   2.8188916398365267
-  ],
-  [
-   "Sinistcha",
-   2.515944801466437
+   "Rillaboom",
+   2.225994422953677
   ]
  ],
  "counters": [
   {
-   "name": "Floette-Mega",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Staraptor-Mega",
+   "name": "Indeedee-F",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -190,25 +190,19 @@
    "switchPct": 0
   },
   {
-   "name": "Grimmsnarl",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Mawile-Mega",
+   "name": "Charizard-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sylveon",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Swampert-Mega",
+   "name": "Basculegion",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -219,51 +213,51 @@
    "item": "Staraptite",
    "ability": "Intimidate",
    "moves": [
-    "Protect",
-    "Close Combat",
     "Brave Bird",
-    "Roost"
-   ],
-   "count": 15,
-   "bestPlacing": 1,
-   "bestPlayer": "merijnvd",
-   "eventName": "VGC Trainer School; champions m/b #1",
-   "eventSlug": "2026-07-05-vgc-trainer-school-champions-m-b-1",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3a956c83fd320299bce8bf",
-   "nature": "Jolly"
-  },
-  {
-   "item": "Staraptite",
-   "ability": "Contrary",
-   "moves": [
     "Close Combat",
-    "Brave Bird",
-    "Roost",
+    "Tailwind",
     "Protect"
    ],
-   "count": 2,
-   "bestPlacing": 5,
-   "bestPlayer": "Luca Bartoli",
-   "eventName": "First Impression Mondays",
-   "eventSlug": "2026-06-29-first-impression-mondays",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a41cf1383fd320299bd39a4",
+   "count": 47,
+   "bestPlacing": 1,
+   "bestPlayer": "Evan M",
+   "eventName": "Friday Fight Night 80! $50 Prize & Team Report",
+   "eventSlug": "2026-11-06-friday-fight-night-80-50-prize-team-report",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae575670d00101b48bf316a",
    "nature": "Jolly"
   },
   {
    "item": "Staraptite",
    "ability": "Intimidate",
    "moves": [
-    "Dual Wingbeat",
+    "Brave Bird",
     "Close Combat",
     "Roost",
     "Protect"
    ],
+   "count": 11,
+   "bestPlacing": 1,
+   "bestPlayer": "jonen",
+   "eventName": "Alpensee Tour (Reg M-C) #81",
+   "eventSlug": "2026-10-28-alpensee-tour-reg-m-c-81",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6abaa2a5880ed327106dea23",
+   "nature": "Jolly"
+  },
+  {
+   "item": "Staraptite",
+   "ability": "Intimidate",
+   "moves": [
+    "Protect",
+    "Close Combat",
+    "Dual Wingbeat",
+    "Roost"
+   ],
    "count": 1,
    "bestPlacing": 4,
-   "bestPlayer": "jokerjr888",
-   "eventName": "Regulation M-B: Open League #1",
-   "eventSlug": "2026-07-04-regulation-m-b-open-league-1",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a4101e5c87cd9ff0a311dd6",
+   "bestPlayer": "butterducks",
+   "eventName": "Talon's FIGHT CLUB #107 POKEMON CHAMPIONS REG M-C",
+   "eventSlug": "2026-10-22-talon-s-fight-club-107-pokemon-champions-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aab46f538886b36383c21d7",
    "nature": "Jolly"
   }
  ]

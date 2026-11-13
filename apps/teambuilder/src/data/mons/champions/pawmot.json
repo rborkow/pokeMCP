@@ -1,0 +1,280 @@
+{
+ "id": "pawmot",
+ "name": "Pawmot",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.0339509,
+   "rank": 40,
+   "raw": 153341
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0136314,
+   "rank": 64,
+   "raw": 66344
+  }
+ ],
+ "abilities": [
+  [
+   "Iron Fist",
+   85.61125225364263
+  ],
+  [
+   "Volt Absorb",
+   14.018316261200193
+  ],
+  [
+   "Natural Cure",
+   0.37043148515716934
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   89.57897429037912
+  ],
+  [
+   "Life Orb",
+   3.6590896898911622
+  ],
+  [
+   "Leppa Berry",
+   1.90243915980228
+  ],
+  [
+   "White Herb",
+   1.0699757928671385
+  ],
+  [
+   "Eject Button",
+   0.576206774236126
+  ],
+  [
+   "Air Balloon",
+   0.5539050590091049
+  ],
+  [
+   "Expert Belt",
+   0.5412395684474123
+  ],
+  [
+   "Sitrus Berry",
+   0.33691229164186975
+  ]
+ ],
+ "moves": [
+  [
+   "Close Combat",
+   24.524758437367066
+  ],
+  [
+   "Double Shock",
+   23.79576237906429
+  ],
+  [
+   "Fake Out",
+   16.6945691408363
+  ],
+  [
+   "Revival Blessing",
+   16.286467848629396
+  ],
+  [
+   "Protect",
+   8.17633376805235
+  ],
+  [
+   "Coaching",
+   4.973254449163375
+  ],
+  [
+   "Encore",
+   1.6110267938342013
+  ],
+  [
+   "Ice Punch",
+   1.3436460167580544
+  ],
+  [
+   "Thunder Punch",
+   0.6443200800936811
+  ],
+  [
+   "Mach Punch",
+   0.46880872752534847
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:2/32/0/0/0/32",
+   69.27653547794705
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   17.34266808570437
+  ],
+  [
+   "Jolly:0/32/2/0/0/32",
+   3.936554707577787
+  ],
+  [
+   "Jolly:0/32/0/0/0/32",
+   2.3280787553285625
+  ],
+  [
+   "Jolly:4/32/0/0/0/30",
+   0.8665601613487454
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Kingambit",
+   7.366816761774244
+  ],
+  [
+   "Incineroar",
+   7.069480346905619
+  ],
+  [
+   "Rillaboom",
+   5.8695874143172855
+  ],
+  [
+   "Farigiraf",
+   4.907804561470341
+  ],
+  [
+   "Golisopod-Mega",
+   4.900650791684708
+  ],
+  [
+   "Politoed",
+   3.491628716609032
+  ],
+  [
+   "Froslass-Mega",
+   3.2460910049816993
+  ],
+  [
+   "Staraptor",
+   3.073851874920085
+  ],
+  [
+   "Sinistcha",
+   2.9703383075913523
+  ],
+  [
+   "Indeedee-F",
+   2.9641867625709013
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Whimsicott",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sinistcha",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Salamence-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Focus Sash",
+   "ability": "Iron Fist",
+   "moves": [
+    "Close Combat",
+    "Double Shock",
+    "Fake Out",
+    "Coaching"
+   ],
+   "count": 2,
+   "bestPlacing": 6,
+   "bestPlayer": "TFZ_Jhinting",
+   "eventName": "Alpensee Tour (Reg M-C) #83",
+   "eventSlug": "2026-11-11-alpensee-tour-reg-m-c-83",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad8f0ae8a8383117e3f0c23",
+   "nature": "Jolly"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Iron Fist",
+   "moves": [
+    "Fake Out",
+    "Double Shock",
+    "Close Combat",
+    "Protect"
+   ],
+   "count": 2,
+   "bestPlacing": 7,
+   "bestPlayer": "Person7",
+   "eventName": "GLORY OF CHAMPIONS #2 - REGULATION M-C",
+   "eventSlug": "2026-10-28-glory-of-champions-2-regulation-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad923ae115c12b73a5a941c",
+   "nature": "Jolly"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Iron Fist",
+   "moves": [
+    "Double Shock",
+    "Close Combat",
+    "Fake Out",
+    "Revival Blessing"
+   ],
+   "count": 1,
+   "bestPlacing": 8,
+   "bestPlayer": "AdityaKS",
+   "eventName": "Rising Stars - Finale ₹10,000 cash prize",
+   "eventSlug": "2026-10-23-rising-stars-finale-10-000-cash-prize",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aaa8da8f1243e65f98029f7",
+   "nature": "Jolly"
+  }
+ ]
+}

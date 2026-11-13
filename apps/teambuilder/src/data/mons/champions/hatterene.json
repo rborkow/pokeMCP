@@ -2,175 +2,211 @@
  "id": "hatterene",
  "name": "Hatterene",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0093989,
-   "rank": 84,
-   "raw": 54011
+   "month": "2026-09",
+   "usage": 0.0247726,
+   "rank": 51,
+   "raw": 126010
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.011158300000000001,
+   "rank": 68,
+   "raw": 84790
   }
  ],
  "abilities": [
   [
    "Magic Bounce",
-   97.32403331041924
+   97.32674037324776
   ],
   [
    "Healer",
-   2.407730805914875
+   2.599512507074484
   ],
   [
    "Anticipation",
-   0.2682358836658874
+   0.0737471196777537
   ]
  ],
  "items": [
   [
    "Life Orb",
-   42.573222095662715
-  ],
-  [
-   "Fairy Feather",
-   15.339387854190841
+   73.81412854583054
   ],
   [
    "Focus Sash",
-   14.804693788729347
-  ],
-  [
-   "Leftovers",
-   7.365487437248193
-  ],
-  [
-   "Sitrus Berry",
-   7.247822087535978
-  ],
-  [
-   "Babiri Berry",
-   4.437633118286084
+   13.441474693191765
   ],
   [
    "Twisted Spoon",
-   1.755840942996872
+   2.721606491642808
   ],
   [
-   "Kebia Berry",
-   1.0018830108976882
+   "Sitrus Berry",
+   2.3287383270703987
+  ],
+  [
+   "Psychic Seed",
+   1.9685023488208366
+  ],
+  [
+   "Leftovers",
+   1.2009658616593495
+  ],
+  [
+   "Babiri Berry",
+   1.0712095284188707
+  ],
+  [
+   "Fairy Feather",
+   0.9270895370905413
   ]
  ],
  "moves": [
   [
-   "Dazzling Gleam",
-   23.740748309034252
-  ],
-  [
    "Trick Room",
-   22.575354423036543
+   23.9748900161685
   ],
   [
-   "Protect",
-   16.81361313209239
-  ],
-  [
-   "Psychic",
-   16.314730280301937
+   "Dazzling Gleam",
+   23.912097033844667
   ],
   [
    "Expanding Force",
-   4.665932768579271
+   21.467254446915035
+  ],
+  [
+   "Protect",
+   18.061139851714085
   ],
   [
    "Mystical Fire",
-   3.351145011330012
+   3.9489559031601624
   ],
   [
-   "Psyshock",
-   1.8778400253316105
+   "Psychic",
+   3.3311158154156826
+  ],
+  [
+   "Magic Powder",
+   2.3831879805417078
   ],
   [
    "Calm Mind",
-   1.4817226723039194
+   0.45956992685528525
+  ],
+  [
+   "Giga Drain",
+   0.42537416633107744
   ],
   [
    "Draining Kiss",
-   1.0124878024072363
-  ],
-  [
-   "Psychic Terrain",
-   0.9618920088988542
+   0.36036409623957355
   ]
  ],
  "spreads": [
   [
    "Quiet:32/0/2/32/0/0",
-   34.58273868969934
+   48.85495345851761
   ],
   [
    "Quiet:32/0/0/32/2/0",
-   17.1771849592659
-  ],
-  [
-   "Sassy:32/0/0/2/32/0",
-   5.89617486642949
+   12.258451398516181
   ],
   [
    "Quiet:27/0/7/32/0/0",
-   4.936345575726174
+   11.02329102260442
   ],
   [
-   "Modest:32/0/2/32/0/0",
-   2.9549951120443954
+   "Quiet:27/0/21/18/0/0",
+   1.9718182787078757
+  ],
+  [
+   "Sassy:32/0/0/2/32/0",
+   1.896169356062034
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Farigiraf",
-   10.010294783653078
-  ],
-  [
-   "Torkoal",
-   9.7364448952286
-  ],
-  [
-   "Kingambit",
-   4.791777000239191
-  ],
-  [
-   "Mawile-Mega",
-   4.449152234938877
-  ],
-  [
-   "Incineroar",
-   4.371695870241423
-  ],
-  [
-   "Sinistcha",
-   4.019923537538473
-  ],
-  [
-   "Oranguru",
-   2.569901755078561
-  ],
-  [
-   "Basculegion",
-   2.164170164379465
+   "Indeedee-F",
+   16.8092736167928
   ],
   [
    "Camerupt-Mega",
-   2.1323559551988738
+   9.73293862197172
   ],
   [
-   "Scrafty-Mega",
-   2.0913201508060557
+   "Farigiraf",
+   8.077556110582819
+  ],
+  [
+   "Kingambit",
+   7.214316580521249
+  ],
+  [
+   "Torkoal",
+   6.841013015526581
+  ],
+  [
+   "Incineroar",
+   6.1354833777247135
+  ],
+  [
+   "Sneasler",
+   4.7921706943059865
+  ],
+  [
+   "Mawile-Mega",
+   3.711461835172162
+  ],
+  [
+   "Golisopod-Mega",
+   3.523587062587679
+  ],
+  [
+   "Gallade",
+   1.950642600296137
   ]
  ],
  "counters": [
   {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
    "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Indeedee-F",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -182,29 +218,63 @@
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Pelipper",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Grimmsnarl",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Basculegion",
+   "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   }
  ],
- "builds": []
+ "builds": [
+  {
+   "item": "Life Orb",
+   "ability": "Magic Bounce",
+   "moves": [
+    "Expanding Force",
+    "Dazzling Gleam",
+    "Protect",
+    "Trick Room"
+   ],
+   "count": 6,
+   "bestPlacing": 3,
+   "bestPlayer": "RoarMistico",
+   "eventName": "Off Meta Fight Club #8 ($40 USD prize pool)",
+   "eventSlug": "2026-10-29-off-meta-fight-club-8-40-usd-prize-pool",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ada821a97e21d82e5c6cc67",
+   "nature": "Quiet"
+  },
+  {
+   "item": "Life Orb",
+   "ability": "Magic Bounce",
+   "moves": [
+    "Expanding Force",
+    "Trick Room",
+    "Mystical Fire",
+    "Dazzling Gleam"
+   ],
+   "count": 1,
+   "bestPlacing": 5,
+   "bestPlayer": "NervoX",
+   "eventName": "Off Meta Fight Club #8 ($40 USD prize pool)",
+   "eventSlug": "2026-10-29-off-meta-fight-club-8-40-usd-prize-pool",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ada821a97e21d82e5c6cc67",
+   "nature": "Quiet"
+  },
+  {
+   "item": "Life Orb",
+   "ability": "Magic Bounce",
+   "moves": [
+    "Psychic",
+    "Trick Room",
+    "Dazzling Gleam",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 6,
+   "bestPlayer": "Heathbar",
+   "eventName": "Wolfey Patreon Tournament - Spooky Cup!",
+   "eventSlug": "2026-10-25-wolfey-patreon-tournament-spooky-cup",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6acf6032115c12b73a5a39fe",
+   "nature": "Quiet"
+  }
+ ]
 }

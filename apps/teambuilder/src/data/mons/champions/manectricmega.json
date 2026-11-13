@@ -1,0 +1,186 @@
+{
+ "id": "manectricmega",
+ "name": "Manectric-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.0037147,
+   "rank": 107,
+   "raw": 10711
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.005899,
+   "rank": 90,
+   "raw": 17765
+  }
+ ],
+ "abilities": [
+  [
+   "Intimidate",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Manectite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   24.669999140136646
+  ],
+  [
+   "Snarl",
+   21.67308123144185
+  ],
+  [
+   "Volt Switch",
+   20.406918485903702
+  ],
+  [
+   "Overheat",
+   15.593675388792963
+  ],
+  [
+   "Thunderbolt",
+   11.68101853967235
+  ],
+  [
+   "Flamethrower",
+   1.9934287905756423
+  ],
+  [
+   "Thunder",
+   1.7500124827306365
+  ],
+  [
+   "Light Screen",
+   0.455843428210057
+  ],
+  [
+   "Rising Voltage",
+   0.33971972255301125
+  ],
+  [
+   "Rain Dance",
+   0.3307997299494072
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:32/0/1/0/1/32",
+   32.98538000534714
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   11.60379029675878
+  ],
+  [
+   "Timid:26/0/0/1/15/24",
+   8.146756298578474
+  ],
+  [
+   "Timid:6/0/0/32/0/28",
+   5.306716367533833
+  ],
+  [
+   "Timid:32/0/0/2/0/32",
+   4.638397616741305
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Incineroar",
+   10.487981896476848
+  ],
+  [
+   "Archaludon",
+   8.81150106870575
+  ],
+  [
+   "Pelipper",
+   8.147570637384055
+  ],
+  [
+   "Rillaboom",
+   8.001110025433993
+  ],
+  [
+   "Sinistcha",
+   6.831419304229944
+  ],
+  [
+   "Mawile-Mega",
+   5.89596149391934
+  ],
+  [
+   "Primarina",
+   3.865753439976094
+  ],
+  [
+   "Staraptor-Mega",
+   2.501382374794798
+  ],
+  [
+   "Arcanine-Hisui",
+   2.488645172620246
+  ],
+  [
+   "Gholdengo",
+   2.3719767970732946
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

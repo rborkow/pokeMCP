@@ -2,15 +2,21 @@
  "id": "dragonitemega",
  "name": "Dragonite-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0265091,
-   "rank": 47,
-   "raw": 61927
+   "month": "2026-09",
+   "usage": 0.028798300000000002,
+   "rank": 46,
+   "raw": 93023
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0543806,
+   "rank": 36,
+   "raw": 125566
   }
  ],
  "abilities": [
@@ -27,156 +33,156 @@
  ],
  "moves": [
   [
-   "Protect",
-   20.640145067816068
-  ],
-  [
    "Dragon Pulse",
-   15.410641838119652
+   23.355520542014055
   ],
   [
-   "Hurricane",
-   14.377129145369736
-  ],
-  [
-   "Tailwind",
-   9.80749325686961
-  ],
-  [
-   "Draco Meteor",
-   8.268277438622151
-  ],
-  [
-   "Thunderbolt",
-   5.15856125137385
+   "Protect",
+   21.41562163545566
   ],
   [
    "Heat Wave",
-   4.2003549554095985
+   19.535446499807424
   ],
   [
-   "Flamethrower",
-   4.141826094323968
+   "Tailwind",
+   18.02895689902129
   ],
   [
    "Extreme Speed",
-   4.0387846965518515
+   4.514678645288439
   ],
   [
-   "Thunder",
-   3.381137658949518
+   "Thunderbolt",
+   2.9175296172385146
+  ],
+  [
+   "Hurricane",
+   2.1600228754714563
+  ],
+  [
+   "Flamethrower",
+   2.084458450147909
+  ],
+  [
+   "Draco Meteor",
+   1.5681709670177304
+  ],
+  [
+   "Roost",
+   1.5103145251074168
   ]
  ],
  "spreads": [
   [
    "Modest:2/0/0/32/0/32",
-   21.795816083658533
+   31.94067825487376
+  ],
+  [
+   "Modest:9/0/0/25/0/32",
+   7.8721628124749
   ],
   [
    "Timid:2/0/0/32/0/32",
-   7.843945066630992
+   6.976538253864286
   ],
   [
-   "Modest:32/0/0/32/2/0",
-   6.339084333656306
-  ],
-  [
-   "Modest:32/0/0/32/0/2",
-   3.41608386456115
+   "Modest:25/0/0/32/0/9",
+   4.518818882517089
   ],
   [
    "Modest:1/0/0/32/1/32",
-   3.2060797555732394
+   3.6907031190906983
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Pelipper",
-   9.859164341345043
-  ],
-  [
-   "Archaludon",
-   8.584612094015595
+   "Sneasler",
+   15.045462023711986
   ],
   [
    "Basculegion",
-   7.803786824238179
-  ],
-  [
-   "Sneasler",
-   7.640757872440271
-  ],
-  [
-   "Sinistcha",
-   5.367624652795156
+   10.503708369859815
   ],
   [
    "Kingambit",
-   5.302397737225887
+   10.479888949714233
   ],
   [
-   "Swampert-Mega",
-   5.281066507682797
+   "Rillaboom",
+   9.432988802771746
   ],
   [
    "Incineroar",
-   4.940282354245636
+   6.567225287604566
+  ],
+  [
+   "Garchomp",
+   6.538116476282517
   ],
   [
    "Gholdengo",
-   2.4640375617071446
+   5.895475373157598
   ],
   [
-   "Sableye",
-   2.2171818351824
+   "Floette-Mega",
+   4.50064477441003
+  ],
+  [
+   "Delphox-Mega",
+   3.8448425592983755
+  ],
+  [
+   "Froslass-Mega",
+   2.759061437293247
   ]
  ],
  "counters": [
   {
-   "name": "Sylveon",
+   "name": "Farigiraf",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
+   "name": "Swampert-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Basculegion",
+   "name": "Incineroar",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Torkoal",
+   "name": "Volcarona",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Charizard-Mega-Y",
+   "name": "Excadrill",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sneasler",
+   "name": "Indeedee",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Kingambit",
+   "name": "Tyranitar-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

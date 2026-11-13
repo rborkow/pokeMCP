@@ -2,191 +2,179 @@
  "id": "maushold",
  "name": "Maushold",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.07637540000000001,
-   "rank": 22,
-   "raw": 194126
+   "month": "2026-09",
+   "usage": 0.0257043,
+   "rank": 48,
+   "raw": 112095
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.021004000000000002,
+   "rank": 51,
+   "raw": 93862
   }
  ],
  "abilities": [
   [
    "Friend Guard",
-   69.92389130698882
+   56.324014661512436
   ],
   [
    "Technician",
-   30.016657965928108
+   43.64264924523245
   ],
   [
    "Cheek Pouch",
-   0.05945072708306525
+   0.03333609325511449
   ]
  ],
  "items": [
   [
    "Wide Lens",
-   35.62550912534696
-  ],
-  [
-   "Focus Sash",
-   27.220574669725718
+   43.826640047008176
   ],
   [
    "Chople Berry",
-   26.882539786714144
+   27.94361510198874
+  ],
+  [
+   "Focus Sash",
+   14.469537760947143
   ],
   [
    "Sitrus Berry",
-   5.802238032658889
+   7.939048177430386
   ],
   [
-   "Mental Herb",
-   1.4727744708724118
+   "Rocky Helmet",
+   2.990958283479232
+  ],
+  [
+   "Lum Berry",
+   0.7621303129805898
   ],
   [
    "King's Rock",
-   0.805422155048535
+   0.5965859352857366
   ],
   [
-   "Bright Powder",
-   0.5551111755383389
-  ],
-  [
-   "Leftovers",
-   0.36802840178113044
+   "Mental Herb",
+   0.5713899301665565
   ]
  ],
  "moves": [
   [
    "Follow Me",
-   24.11755315981607
+   24.040313317888298
   ],
   [
    "Protect",
-   21.629244198212902
-  ],
-  [
-   "Super Fang",
-   11.069890685796016
+   20.08347354281534
   ],
   [
    "Population Bomb",
-   10.298133949964871
+   11.99899973220776
   ],
   [
    "Taunt",
-   5.208750206861441
+   8.815084551107628
   ],
   [
-   "Encore",
-   5.117155841725787
-  ],
-  [
-   "Beat Up",
-   5.0761117821178345
+   "Super Fang",
+   8.257061956771947
   ],
   [
    "Feint",
-   4.6456882460833695
+   6.7087364040067765
   ],
   [
-   "Charm",
-   3.0663148793224413
+   "Encore",
+   4.394344665293404
   ],
   [
    "Helping Hand",
-   2.5246731521929515
+   3.9879555343710402
+  ],
+  [
+   "Beat Up",
+   2.1276711936605865
+  ],
+  [
+   "U-turn",
+   2.0152262147123206
   ]
  ],
  "spreads": [
   [
    "Jolly:2/32/0/0/0/32",
-   22.907082984974465
-  ],
-  [
-   "Jolly:32/2/0/0/0/32",
-   8.807079767045808
-  ],
-  [
-   "Timid:32/0/2/0/0/32",
-   8.631512793642687
+   32.13229888149545
   ],
   [
    "Jolly:32/0/2/0/0/32",
-   6.938162840569848
+   8.802389510176429
   ],
   [
    "Timid:32/0/0/0/2/32",
-   5.24643868283626
+   7.028072769751785
+  ],
+  [
+   "Timid:32/0/2/0/0/32",
+   4.436199828672778
+  ],
+  [
+   "Jolly:32/2/0/0/0/32",
+   3.451621318251337
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Sinistcha",
-   6.875529597128999
+   "Rillaboom",
+   5.448169767882999
+  ],
+  [
+   "Sneasler",
+   5.270450717334285
   ],
   [
    "Incineroar",
-   5.508389245255762
+   4.8832389898891275
   ],
   [
-   "Garchomp",
-   4.7783123571319726
+   "Farigiraf",
+   4.116666706704003
   ],
   [
-   "Annihilape",
-   4.772722860215404
-  ],
-  [
-   "Basculegion",
-   4.670030758824933
-  ],
-  [
-   "Staraptor-Mega",
-   4.38857867229766
-  ],
-  [
-   "Kingambit",
-   3.555522189990886
-  ],
-  [
-   "Whimsicott",
-   3.4129592337988583
-  ],
-  [
-   "Delphox-Mega",
-   3.1173642028676656
+   "Gengar-Mega",
+   3.856596738550532
   ],
   [
    "Floette-Mega",
-   2.974960886933641
+   3.286783203847797
+  ],
+  [
+   "Basculegion",
+   3.191880368867612
+  ],
+  [
+   "Kingambit",
+   3.0541610556321146
+  ],
+  [
+   "Indeedee-F",
+   2.735737594388242
+  ],
+  [
+   "Blastoise-Mega",
+   2.437616975626946
   ]
  ],
  "counters": [
-  {
-   "name": "Froslass-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Kingambit",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Incineroar",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
   {
    "name": "Sneasler",
    "score": 0,
@@ -194,25 +182,43 @@
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Armarouge",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Floette-Mega",
+   "name": "Milotic",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Maushold",
+   "name": "Gholdengo",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Charizard-Mega-Y",
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sylveon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Salamence-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -220,55 +226,55 @@
  ],
  "builds": [
   {
-   "item": "Chople Berry",
+   "item": "Sitrus Berry",
    "ability": "Friend Guard",
    "moves": [
+    "Follow Me",
     "Protect",
-    "Super Fang",
-    "Follow Me",
-    "Feint"
-   ],
-   "count": 4,
-   "bestPlacing": 1,
-   "bestPlayer": "RoiRehh",
-   "eventName": "Rework Esport Champions Talent Cup 2 | 50€ CP",
-   "eventSlug": "2026-07-03-rework-esport-champions-talent-cup-2-50-cp",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a39af2883fd320299bce1f4",
-   "nature": "Impish"
-  },
-  {
-   "item": "Focus Sash",
-   "ability": "Friend Guard",
-   "moves": [
-    "Follow Me",
-    "Super Fang",
-    "Rain Dance",
-    "Protect"
-   ],
-   "count": 3,
-   "bestPlacing": 1,
-   "bestPlayer": "Scarlett01",
-   "eventName": "CHAMPIONS REG. M-B |👑CROWN FIGHT Bo3 TOUR #74👑",
-   "eventSlug": "2026-06-26-champions-reg-m-b-crown-fight-bo3-tour-74",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a2ccd742d97f3b0c2615436",
-   "nature": "Timid"
-  },
-  {
-   "item": "Focus Sash",
-   "ability": "Friend Guard",
-   "moves": [
-    "Protect",
-    "Follow Me",
-    "Super Fang",
-    "Encore"
+    "Taunt",
+    "Super Fang"
    ],
    "count": 2,
    "bestPlacing": 1,
-   "bestPlayer": "Niarval",
-   "eventName": "VGCA Battle Hall: Academy Ace Edition #4",
-   "eventSlug": "2026-06-28-vgca-battle-hall-academy-ace-edition-4",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a400a3ac87cd9ff0a3113d4",
-   "nature": "Timid"
+   "bestPlayer": "Ariesxvgc",
+   "eventName": "Off Meta Fight Club #8 ($40 USD prize pool)",
+   "eventSlug": "2026-10-29-off-meta-fight-club-8-40-usd-prize-pool",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ada821a97e21d82e5c6cc67",
+   "nature": "Bold"
+  },
+  {
+   "item": "Wide Lens",
+   "ability": "Technician",
+   "moves": [
+    "Population Bomb",
+    "Follow Me",
+    "After You",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 2,
+   "bestPlayer": "Syncher",
+   "eventName": "Off Meta Fight Club #9",
+   "eventSlug": "2026-11-05-off-meta-fight-club-9",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae3dd6680a8f79408d21452",
+   "nature": "Jolly"
+  },
+  {
+   "item": "Wide Lens",
+   "ability": "Technician",
+   "moves": [
+    "Population Bomb",
+    "Follow Me",
+    "Protect",
+    "Taunt"
+   ],
+   "count": 1,
+   "bestPlacing": 2,
+   "bestPlayer": "Kojay",
+   "eventName": "Tuesday Throwdowns #2 ($50 for the Winner!)",
+   "eventSlug": "2026-10-27-tuesday-throwdowns-2-50-for-the-winner",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad8e3398a8383117e3f0b5b",
+   "nature": "Jolly"
   }
  ]
 }

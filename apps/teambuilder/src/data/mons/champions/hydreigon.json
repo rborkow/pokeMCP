@@ -2,15 +2,21 @@
  "id": "hydreigon",
  "name": "Hydreigon",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0542943,
-   "rank": 29,
-   "raw": 119489
+   "month": "2026-09",
+   "usage": 0.017036100000000002,
+   "rank": 61,
+   "raw": 69330
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0140343,
+   "rank": 63,
+   "raw": 68502
   }
  ],
  "abilities": [
@@ -22,145 +28,151 @@
  "items": [
   [
    "Choice Scarf",
-   66.09400317340213
+   63.80306752158585
   ],
   [
    "Life Orb",
-   16.290283703968218
-  ],
-  [
-   "Focus Sash",
-   4.872626928080745
+   13.539726873545257
   ],
   [
    "Haban Berry",
-   4.82046994984112
+   8.880525239627294
   ],
   [
-   "Black Glasses",
-   1.4827063721589684
-  ],
-  [
-   "Expert Belt",
-   1.4676961180923482
-  ],
-  [
-   "Scope Lens",
-   1.082813385906436
+   "Focus Sash",
+   8.63197459325849
   ],
   [
    "Chople Berry",
-   1.0201977890240248
+   1.7504368235460113
+  ],
+  [
+   "Sitrus Berry",
+   0.710233834922133
+  ],
+  [
+   "Scope Lens",
+   0.6361718791419004
+  ],
+  [
+   "Roseli Berry",
+   0.5471983416293911
   ]
  ],
  "moves": [
   [
    "Dark Pulse",
-   23.910618773405737
+   22.888417273164855
   ],
   [
    "Draco Meteor",
-   22.466337465215204
+   22.653846148757626
   ],
   [
    "Snarl",
-   16.36312568171544
+   17.47591036549704
   ],
   [
    "Earth Power",
-   12.648240282944176
+   13.132892042988505
   ],
   [
    "Protect",
-   7.65325532040175
-  ],
-  [
-   "Heat Wave",
-   5.200056296926879
+   7.566702199853459
   ],
   [
    "Flamethrower",
-   2.6133489691179586
+   5.390506936787459
   ],
   [
    "Tailwind",
-   2.5600758198322566
+   3.4063609860342234
   ],
   [
    "Dragon Pulse",
-   2.120246096148056
+   2.252802300024514
+  ],
+  [
+   "Heat Wave",
+   2.1530784663465043
   ],
   [
    "U-turn",
-   1.7221413987446719
+   1.3076103447133265
   ]
  ],
  "spreads": [
   [
    "Modest:2/0/0/32/0/32",
-   36.77238734700364
+   45.48034888605198
   ],
   [
    "Timid:2/0/0/32/0/32",
-   18.426216968106914
+   21.66021499818735
   ],
   [
-   "Modest:8/0/1/25/0/32",
-   7.390766131125395
+   "Modest:0/0/3/31/0/32",
+   7.367401373387865
   ],
   [
-   "Modest:6/0/0/28/0/32",
-   3.413246118437547
+   "Timid:8/0/0/32/0/26",
+   1.9133769596630958
   ],
   [
-   "Modest:4/0/0/30/0/32",
-   3.086791925850365
+   "Timid:11/0/0/32/0/23",
+   1.7973769572723077
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Metagross-Mega",
-   9.804355725780995
-  ],
-  [
    "Sneasler",
-   5.943228394806022
+   8.799140061542525
   ],
   [
-   "Incineroar",
-   5.188757169064127
+   "Indeedee-F",
+   5.742913326780808
+  ],
+  [
+   "Rillaboom",
+   3.670289098935245
   ],
   [
    "Whimsicott",
-   4.932319543756893
+   3.5520603568445503
   ],
   [
-   "Sinistcha",
-   4.5502478870579735
+   "Metagross-Mega",
+   3.543868290138552
   ],
   [
-   "Charizard-Mega-Y",
-   3.667001555207921
+   "Incineroar",
+   3.377000109123475
+  ],
+  [
+   "Gardevoir-Mega",
+   3.1911896119325296
+  ],
+  [
+   "Gholdengo",
+   3.0281755808151516
   ],
   [
    "Basculegion",
-   3.6204050912791192
+   2.709492659316725
   ],
   [
-   "Garchomp",
-   3.5820369699977777
-  ],
-  [
-   "Grimmsnarl",
-   3.2495496324034043
-  ],
-  [
-   "Pelipper",
-   2.8586801672473983
+   "Froslass-Mega",
+   2.500579781074993
   ]
  ],
  "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
   {
    "name": "Sinistcha",
    "score": 0,
@@ -168,43 +180,37 @@
    "switchPct": 0
   },
   {
-   "name": "Sneasler",
+   "name": "Grimmsnarl",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Torkoal",
+   "name": "Gardevoir-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Farigiraf",
+   "name": "Indeedee-F",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Mawile-Mega",
+   "name": "Garchomp",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Charizard-Mega-Y",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Ninetales-Alola",
+   "name": "Golisopod-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -215,51 +221,51 @@
    "item": "Choice Scarf",
    "ability": "Levitate",
    "moves": [
-    "Heat Wave",
-    "Snarl",
     "Draco Meteor",
-    "Dark Pulse"
+    "Dark Pulse",
+    "Snarl",
+    "Earth Power"
    ],
-   "count": 5,
+   "count": 2,
    "bestPlacing": 1,
-   "bestPlayer": "JurassicJoints",
-   "eventName": "Road to Area 229 #4",
-   "eventSlug": "2026-06-27-road-to-area-229-4",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c370fc87cd9ff0a30eaa1",
+   "bestPlayer": "Navarri",
+   "eventName": "Wolfey Patreon Tournament - Spooky Cup!",
+   "eventSlug": "2026-10-25-wolfey-patreon-tournament-spooky-cup",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6acf6032115c12b73a5a39fe",
    "nature": "Modest"
   },
   {
    "item": "Choice Scarf",
    "ability": "Levitate",
    "moves": [
-    "Snarl",
-    "Earth Power",
+    "Draco Meteor",
     "Dark Pulse",
-    "Draco Meteor"
+    "Snarl",
+    "Flamethrower"
    ],
-   "count": 5,
-   "bestPlacing": 4,
-   "bestPlayer": "murray1672",
-   "eventName": "MMHM x Stellar Novas Tour #2",
-   "eventSlug": "2026-06-23-mmhm-x-stellar-novas-tour-2",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a15e1c10f6c1f0899861874",
+   "count": 2,
+   "bestPlacing": 1,
+   "bestPlayer": "Sascha \"Kirin\" Eilts",
+   "eventName": "Tenki's Cart Weekly #122 - Reg M-C",
+   "eventSlug": "2026-10-15-tenki-s-cart-weekly-122-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ac908358a8383117e3e7b56",
    "nature": "Modest"
   },
   {
-   "item": "Choice Scarf",
+   "item": "Life Orb",
    "ability": "Levitate",
    "moves": [
     "Dark Pulse",
     "Snarl",
     "Draco Meteor",
-    "U-turn"
+    "Protect"
    ],
-   "count": 3,
-   "bestPlacing": 1,
-   "bestPlayer": "Force_India",
-   "eventName": "Pep_uni Pokémon Champions #1",
-   "eventSlug": "2026-06-28-pep-uni-pok-mon-champions-1",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3db5bdc87cd9ff0a30f75a",
+   "count": 2,
+   "bestPlacing": 2,
+   "bestPlayer": "THJester16",
+   "eventName": "Spooky Cup - $500 PRIZE POOL",
+   "eventSlug": "2026-10-26-spooky-cup-500-prize-pool",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6adf94b780a8f79408d1eb2f",
    "nature": "Modest"
   }
  ]

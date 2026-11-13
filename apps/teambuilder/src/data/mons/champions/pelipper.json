@@ -2,217 +2,223 @@
  "id": "pelipper",
  "name": "Pelipper",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.1799363,
-   "rank": 8,
-   "raw": 443539
+   "month": "2026-09",
+   "usage": 0.1389148,
+   "rank": 12,
+   "raw": 520827
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.153986,
+   "rank": 11,
+   "raw": 535945
   }
  ],
  "abilities": [
   [
    "Drizzle",
-   99.76869378752353
+   99.88715841855611
   ],
   [
    "Keen Eye",
-   0.1652214756844526
+   0.08237312971119015
   ],
   [
    "Rain Dish",
-   0.06608473679199953
+   0.030468451732683557
   ]
  ],
  "items": [
   [
-   "Focus Sash",
-   44.40726385179769
-  ],
-  [
    "Sitrus Berry",
-   30.28045029816009
+   36.73285330897645
   ],
   [
    "Damp Rock",
-   10.7149288927027
+   26.95731201667309
   ],
   [
-   "Life Orb",
-   6.161580625601833
+   "Focus Sash",
+   26.00482896741384
   ],
   [
    "Choice Scarf",
-   3.6755139964649053
+   4.300485693621243
   ],
   [
-   "Leftovers",
-   1.022455471973824
+   "Life Orb",
+   2.4975196862374998
   ],
   [
    "Mystic Water",
-   0.8373278963467574
+   0.809563204877901
   ],
   [
-   "Wacan Berry",
-   0.7203548544208473
+   "Rocky Helmet",
+   0.4313932773087952
+  ],
+  [
+   "Bright Powder",
+   0.4145336197948695
   ]
  ],
  "moves": [
   [
    "Hurricane",
-   24.72714416914788
+   24.623656998391148
   ],
   [
    "Weather Ball",
-   22.45707514147594
-  ],
-  [
-   "Tailwind",
-   21.900401054939902
+   22.36093465409802
   ],
   [
    "Wide Guard",
-   13.371535549978034
+   18.306877419218207
   ],
   [
-   "Protect",
-   11.038466999834776
-  ],
-  [
-   "Muddy Water",
-   1.5890350194198737
-  ],
-  [
-   "U-turn",
-   1.0066318621445625
+   "Tailwind",
+   15.618749486239219
   ],
   [
    "Helping Hand",
-   0.9589073524549558
+   7.653003180052165
+  ],
+  [
+   "Protect",
+   5.469988597248577
+  ],
+  [
+   "Muddy Water",
+   2.4239093885295397
   ],
   [
    "Rain Dance",
-   0.8921118012480675
+   0.8562436251739769
   ],
   [
    "Ice Beam",
-   0.522245885284169
+   0.8218263077543216
+  ],
+  [
+   "U-turn",
+   0.6205741590745442
   ]
  ],
  "spreads": [
   [
    "Modest:2/0/0/32/0/32",
-   16.66862080277501
+   12.939621264462826
+  ],
+  [
+   "Bold:32/0/10/17/7/0",
+   9.037385866016773
   ],
   [
    "Timid:2/0/0/32/0/32",
-   13.555487061456198
+   7.708945915235295
   ],
   [
-   "Modest:32/0/1/5/17/11",
-   5.512318938016909
+   "Bold:31/0/0/0/16/19",
+   4.694819500998258
   ],
   [
    "Modest:32/0/0/32/2/0",
-   5.183595257751871
-  ],
-  [
-   "Bold:32/0/32/2/0/0",
-   3.0235406328598002
+   3.4985546340356284
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Archaludon",
-   14.885929526642705
+   17.8129108687793
   ],
   [
-   "Swampert-Mega",
-   14.467254131569707
-  ],
-  [
-   "Sinistcha",
-   9.664714571286074
-  ],
-  [
-   "Basculegion",
-   6.090170124760694
-  ],
-  [
-   "Grimmsnarl",
-   5.467059501656725
-  ],
-  [
-   "Sableye",
-   4.635947244368619
-  ],
-  [
-   "Metagross-Mega",
-   3.977347778819712
+   "Golisopod-Mega",
+   8.706945643418612
   ],
   [
    "Sneasler",
-   3.1627095881464546
+   7.672714914371517
   ],
   [
-   "Incineroar",
-   2.7946394954694322
+   "Basculegion-F",
+   6.425577144111748
   ],
   [
-   "Farigiraf",
-   1.893041412325962
+   "Grimmsnarl",
+   5.321580341894682
+  ],
+  [
+   "Charizard-Mega-Y",
+   4.9788668870073804
+  ],
+  [
+   "Swampert-Mega",
+   4.820796005471236
+  ],
+  [
+   "Raichu-Mega-X",
+   3.557843858835863
+  ],
+  [
+   "Venusaur",
+   2.756449120734213
+  ],
+  [
+   "Garchomp-Mega-Z",
+   2.658857335801508
   ]
  ],
  "counters": [
   {
-   "name": "Sinistcha",
+   "name": "Sylveon",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Kingambit",
+   "name": "Swampert-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Indeedee-F",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Basculegion",
+   "name": "Camerupt-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Charizard-Mega-Y",
+   "name": "Torkoal",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Floette-Mega",
+   "name": "Farigiraf",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Glimmora",
+   "name": "Indeedee",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -228,46 +234,46 @@
     "Tailwind",
     "Wide Guard"
    ],
-   "count": 30,
+   "count": 29,
    "bestPlacing": 1,
-   "bestPlayer": "Samuel T",
-   "eventName": "Talon's FIGHT CLUB #91 POKEMON CHAMPIONS",
-   "eventSlug": "2026-07-02-talon-s-fight-club-91-pokemon-champions",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a32e85d2d97f3b0c26189c9",
-   "nature": "Modest"
+   "bestPlayer": "Koalelu",
+   "eventName": "Amyverse VGC Champions Arena #18 ❤️ Cash Prize!",
+   "eventSlug": "2026-11-09-amyverse-vgc-champions-arena-18-cash-prize",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae8e279e94eae0f94745a97",
+   "nature": "Bold"
+  },
+  {
+   "item": "Damp Rock",
+   "ability": "Drizzle",
+   "moves": [
+    "Weather Ball",
+    "Hurricane",
+    "Wide Guard",
+    "Helping Hand"
+   ],
+   "count": 23,
+   "bestPlacing": 1,
+   "bestPlayer": "Tobi_Hope",
+   "eventName": "VGC Indigo League #4 (Prize: Eternal Floette)",
+   "eventSlug": "2026-10-23-vgc-indigo-league-4-prize-eternal-floette",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6abb9694783097f8dcb73471",
+   "nature": "Bold"
   },
   {
    "item": "Focus Sash",
    "ability": "Drizzle",
    "moves": [
-    "Protect",
-    "Weather Ball",
-    "Hurricane",
-    "Tailwind"
-   ],
-   "count": 11,
-   "bestPlacing": 1,
-   "bestPlayer": "2cake",
-   "eventName": "INGAGE FRONTIER SERIES  #1 - $50 PRIZE (Reg M-B)",
-   "eventSlug": "2026-06-20-ingage-frontier-series-1-50-prize-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a2f143fe334c3c9befd6e8e",
-   "nature": "Modest"
-  },
-  {
-   "item": "Sitrus Berry",
-   "ability": "Drizzle",
-   "moves": [
     "Hurricane",
     "Weather Ball",
     "Tailwind",
-    "Protect"
+    "Wide Guard"
    ],
-   "count": 6,
+   "count": 5,
    "bestPlacing": 1,
-   "bestPlayer": "Scarlett01",
-   "eventName": "CHAMPIONS REG. M-B |👑CROWN FIGHT Bo3 TOUR #74👑",
-   "eventSlug": "2026-06-26-champions-reg-m-b-crown-fight-bo3-tour-74",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a2ccd742d97f3b0c2615436",
+   "bestPlayer": "Gus_0Z",
+   "eventName": "MetaVGC Arena #3 | Reg M-C | $10 Prize + Shinies",
+   "eventSlug": "2026-10-29-metavgc-arena-3-reg-m-c-10-prize-shinies",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6adf6f5f80a8f79408d1e986",
    "nature": "Modest"
   }
  ]

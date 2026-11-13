@@ -1,0 +1,1052 @@
+{
+ "id": "6acee85f115c12b73a5a38b3",
+ "slug": "2026-10-17-20-vgc-champions-tournament-ep-34",
+ "name": "⛩️$20 VGC Champions Tournament Ep 34!⛩️",
+ "date": "2026-10-17T16:00:00.000Z",
+ "players": 105,
+ "format": "M-C",
+ "regulationId": "champions-regmc",
+ "source": "limitless",
+ "sourceUrl": "https://play.limitlesstcg.com/tournament/6acee85f115c12b73a5a38b3",
+ "attribution": "Data via Limitless (play.limitlesstcg.com)",
+ "fetchedAt": "2026-11-12T19:16:25.354Z",
+ "topCut": [
+  {
+   "placing": 1,
+   "player": "Jido",
+   "country": "US",
+   "record": {
+    "wins": 10,
+    "losses": 1,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "salamence",
+     "name": "Salamence",
+     "item": "Salamencite",
+     "ability": "Intimidate",
+     "moves": [
+      "Double-Edge",
+      "Draco Meteor",
+      "Protect",
+      "Hyper Voice"
+     ],
+     "nature": "Hasty"
+    },
+    {
+     "id": "toxicroak",
+     "name": "Toxicroak",
+     "item": "Focus Sash",
+     "ability": "Dry Skin",
+     "moves": [
+      "Protect",
+      "Close Combat",
+      "Gunk Shot",
+      "Sucker Punch"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "pelipper",
+     "name": "Pelipper",
+     "item": "Sitrus Berry",
+     "ability": "Drizzle",
+     "moves": [
+      "Hurricane",
+      "Helping Hand",
+      "Tailwind",
+      "Weather Ball"
+     ],
+     "nature": "Calm"
+    },
+    {
+     "id": "volcarona",
+     "name": "Volcarona",
+     "item": "Charti Berry",
+     "ability": "Flame Body",
+     "moves": [
+      "Overheat",
+      "Struggle Bug",
+      "Tailwind",
+      "Rage Powder"
+     ],
+     "nature": "Timid"
+    },
+    {
+     "id": "basculegion",
+     "name": "Basculegion",
+     "item": "Life Orb",
+     "ability": "Swift Swim",
+     "moves": [
+      "Protect",
+      "Wave Crash",
+      "Last Respects",
+      "Aqua Jet"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "archaludon",
+     "name": "Archaludon",
+     "item": "Leftovers",
+     "ability": "Stamina",
+     "moves": [
+      "Dragon Pulse",
+      "Flash Cannon",
+      "Electro Shot",
+      "Protect"
+     ],
+     "nature": "Modest"
+    }
+   ]
+  },
+  {
+   "placing": 2,
+   "player": "captantan",
+   "country": "US",
+   "record": {
+    "wins": 8,
+    "losses": 3,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "staraptor",
+     "name": "Staraptor",
+     "item": "Staraptite",
+     "ability": "Intimidate",
+     "moves": [
+      "Tailwind",
+      "Protect",
+      "Close Combat",
+      "Brave Bird"
+     ],
+     "nature": "Jolly"
+    },
+    {
+     "id": "sneasler",
+     "name": "Sneasler",
+     "item": "Psychic Seed",
+     "ability": "Unburden",
+     "moves": [
+      "Protect",
+      "Close Combat",
+      "Dire Claw",
+      "Rock Tomb"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "indeedee",
+     "name": "Indeedee",
+     "item": "Choice Scarf",
+     "ability": "Psychic Surge",
+     "moves": [
+      "Expanding Force",
+      "Trick",
+      "Trick Room",
+      "Mystical Fire"
+     ],
+     "nature": "Timid"
+    },
+    {
+     "id": "raichu",
+     "name": "Raichu",
+     "item": "Raichunite Y",
+     "ability": "Lightning Rod",
+     "moves": [
+      "Zap Cannon",
+      "Focus Blast",
+      "Encore",
+      "Protect"
+     ],
+     "nature": "Timid"
+    },
+    {
+     "id": "armarouge",
+     "name": "Armarouge",
+     "item": "Focus Sash",
+     "ability": "Flash Fire",
+     "moves": [
+      "Protect",
+      "Expanding Force",
+      "Armor Cannon",
+      "Wide Guard"
+     ],
+     "nature": "Timid"
+    },
+    {
+     "id": "garchomp",
+     "name": "Garchomp",
+     "item": "Life Orb",
+     "ability": "Rough Skin",
+     "moves": [
+      "Protect",
+      "Dragon Claw",
+      "Stomping Tantrum",
+      "Earthquake"
+     ],
+     "nature": "Jolly"
+    }
+   ]
+  },
+  {
+   "placing": 3,
+   "player": "LJDarkrai",
+   "country": "BR",
+   "record": {
+    "wins": 9,
+    "losses": 1,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "salamence",
+     "name": "Salamence",
+     "item": "Salamencite",
+     "ability": "Intimidate",
+     "moves": [
+      "Hyper Voice",
+      "Flamethrower",
+      "Tailwind",
+      "Protect"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "rillaboom",
+     "name": "Rillaboom",
+     "item": "Miracle Seed",
+     "ability": "Grassy Surge",
+     "moves": [
+      "Grassy Glide",
+      "Wood Hammer",
+      "High Horsepower",
+      "Fake Out"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "floette-eternal",
+     "name": "Eternal Flower Floette",
+     "item": "Floettite",
+     "ability": "Flower Veil",
+     "moves": [
+      "Moonblast",
+      "Dazzling Gleam",
+      "Calm Mind",
+      "Protect"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "kingambit",
+     "name": "Kingambit",
+     "item": "Chople Berry",
+     "ability": "Defiant",
+     "moves": [
+      "Sucker Punch",
+      "Kowtow Cleave",
+      "Low Kick",
+      "Protect"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "sneasler",
+     "name": "Sneasler",
+     "item": "Focus Sash",
+     "ability": "Poison Touch",
+     "moves": [
+      "Poison Jab",
+      "Close Combat",
+      "Fake Out",
+      "Protect"
+     ],
+     "nature": "Jolly"
+    },
+    {
+     "id": "basculegion",
+     "name": "Basculegion",
+     "item": "Choice Scarf",
+     "ability": "Adaptability",
+     "moves": [
+      "Wave Crash",
+      "Last Respects",
+      "Flip Turn",
+      "Aqua Jet"
+     ],
+     "nature": "Jolly"
+    }
+   ]
+  },
+  {
+   "placing": 4,
+   "player": "Koalelu",
+   "country": "US",
+   "record": {
+    "wins": 7,
+    "losses": 3,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "pelipper",
+     "name": "Pelipper",
+     "item": "Sitrus Berry",
+     "ability": "Drizzle",
+     "moves": [
+      "Weather Ball",
+      "Hurricane",
+      "Tailwind",
+      "Wide Guard"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "venusaur",
+     "name": "Venusaur",
+     "item": "Focus Sash",
+     "ability": "Chlorophyll",
+     "moves": [
+      "Leaf Storm",
+      "Sludge Bomb",
+      "Sleep Powder",
+      "Protect"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "grimmsnarl",
+     "name": "Grimmsnarl",
+     "item": "Light Clay",
+     "ability": "Prankster",
+     "moves": [
+      "Spirit Break",
+      "Light Screen",
+      "Reflect",
+      "Parting Shot"
+     ],
+     "nature": "Impish"
+    },
+    {
+     "id": "garchomp",
+     "name": "Garchomp",
+     "item": "Garchompite Z",
+     "ability": "Rough Skin",
+     "moves": [
+      "Draco Meteor",
+      "Earth Power",
+      "Power Gem",
+      "Protect"
+     ],
+     "nature": "Timid"
+    },
+    {
+     "id": "archaludon",
+     "name": "Archaludon",
+     "item": "Leftovers",
+     "ability": "Stamina",
+     "moves": [
+      "Dragon Pulse",
+      "Electro Shot",
+      "Snarl",
+      "Protect"
+     ],
+     "nature": "Bold"
+    },
+    {
+     "id": "charizard",
+     "name": "Charizard",
+     "item": "Charizardite Y",
+     "ability": "Blaze",
+     "moves": [
+      "Heat Wave",
+      "Weather Ball",
+      "Ancient Power",
+      "Protect"
+     ],
+     "nature": "Modest"
+    }
+   ]
+  },
+  {
+   "placing": 5,
+   "player": "shaikhvgc786",
+   "country": "IN",
+   "record": {
+    "wins": 7,
+    "losses": 2,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "raichu",
+     "name": "Raichu",
+     "item": "Raichunite X",
+     "ability": "Lightning Rod",
+     "moves": [
+      "Fake Out",
+      "Volt Tackle",
+      "Volt Switch",
+      "Feint"
+     ],
+     "nature": "Jolly"
+    },
+    {
+     "id": "primarina",
+     "name": "Primarina",
+     "item": "Leftovers",
+     "ability": "Liquid Voice",
+     "moves": [
+      "Hyper Voice",
+      "Calm Mind",
+      "Moonblast",
+      "Protect"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "kingambit",
+     "name": "Kingambit",
+     "item": "Black Belt",
+     "ability": "Defiant",
+     "moves": [
+      "Kowtow Cleave",
+      "Sucker Punch",
+      "Swords Dance",
+      "Protect"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "dragonite",
+     "name": "Dragonite",
+     "item": "Dragoninite",
+     "ability": "Inner Focus",
+     "moves": [
+      "Tailwind",
+      "Heat Wave",
+      "Dragon Pulse",
+      "Protect"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "sneasler",
+     "name": "Sneasler",
+     "item": "Electric Seed",
+     "ability": "Unburden",
+     "moves": [
+      "Swords Dance",
+      "Close Combat",
+      "Dire Claw",
+      "Protect"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "rillaboom",
+     "name": "Rillaboom",
+     "item": "Miracle Seed",
+     "ability": "Grassy Surge",
+     "moves": [
+      "Fake Out",
+      "Grassy Glide",
+      "Wood Hammer",
+      "U-turn"
+     ],
+     "nature": "Adamant"
+    }
+   ]
+  },
+  {
+   "placing": 6,
+   "player": "Stallcelth",
+   "country": "BR",
+   "record": {
+    "wins": 6,
+    "losses": 3,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "floette-eternal",
+     "name": "Eternal Flower Floette",
+     "item": "Floettite",
+     "ability": "Flower Veil",
+     "moves": [
+      "Moonblast",
+      "Dazzling Gleam",
+      "Calm Mind",
+      "Protect"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "rillaboom",
+     "name": "Rillaboom",
+     "item": "Miracle Seed",
+     "ability": "Grassy Surge",
+     "moves": [
+      "Fake Out",
+      "Grassy Glide",
+      "Wood Hammer",
+      "U-turn"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "kingambit",
+     "name": "Kingambit",
+     "item": "Life Orb",
+     "ability": "Defiant",
+     "moves": [
+      "Kowtow Cleave",
+      "Sucker Punch",
+      "Swords Dance",
+      "Protect"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "sneasler",
+     "name": "Sneasler",
+     "item": "White Herb",
+     "ability": "Unburden",
+     "moves": [
+      "Dire Claw",
+      "Close Combat",
+      "Fake Out",
+      "Protect"
+     ],
+     "nature": "Jolly"
+    },
+    {
+     "id": "raichu",
+     "name": "Raichu",
+     "item": "Raichunite Y",
+     "ability": "Lightning Rod",
+     "moves": [
+      "Zap Cannon",
+      "Focus Blast",
+      "Encore",
+      "Protect"
+     ],
+     "nature": "Timid"
+    },
+    {
+     "id": "volcarona",
+     "name": "Volcarona",
+     "item": "Rocky Helmet",
+     "ability": "Flame Body",
+     "moves": [
+      "Overheat",
+      "Struggle Bug",
+      "Rage Powder",
+      "Protect"
+     ],
+     "nature": "Timid"
+    }
+   ]
+  },
+  {
+   "placing": 7,
+   "player": "Javicii09",
+   "country": "ES",
+   "record": {
+    "wins": 6,
+    "losses": 3,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "rillaboom",
+     "name": "Rillaboom",
+     "item": "Miracle Seed",
+     "ability": "Grassy Surge",
+     "moves": [
+      "Fake Out",
+      "Grassy Glide",
+      "Wood Hammer",
+      "U-turn"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "garchomp",
+     "name": "Garchomp",
+     "item": "Garchompite Z",
+     "ability": "Rough Skin",
+     "moves": [
+      "Earth Power",
+      "Protect",
+      "Dragon Pulse",
+      "Power Gem"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "raichu",
+     "name": "Raichu",
+     "item": "Raichunite Y",
+     "ability": "Lightning Rod",
+     "moves": [
+      "Protect",
+      "Zap Cannon",
+      "Focus Blast",
+      "Fake Out"
+     ],
+     "nature": "Timid"
+    },
+    {
+     "id": "gholdengo",
+     "name": "Gholdengo",
+     "item": "Life Orb",
+     "ability": "Good as Gold",
+     "moves": [
+      "Protect",
+      "Make It Rain",
+      "Shadow Ball",
+      "Nasty Plot"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "incineroar",
+     "name": "Incineroar",
+     "item": "Sitrus Berry",
+     "ability": "Intimidate",
+     "moves": [
+      "Fake Out",
+      "Darkest Lariat",
+      "Flare Blitz",
+      "Parting Shot"
+     ],
+     "nature": "Impish"
+    },
+    {
+     "id": "kommo-o",
+     "name": "Kommo-o",
+     "item": "Leftovers",
+     "ability": "Overcoat",
+     "moves": [
+      "Protect",
+      "Clanging Scales",
+      "Clangorous Soul",
+      "Aura Sphere"
+     ],
+     "nature": "Modest"
+    }
+   ]
+  },
+  {
+   "placing": 8,
+   "player": "Shukai1021",
+   "country": "PH",
+   "record": {
+    "wins": 6,
+    "losses": 3,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "gengar",
+     "name": "Gengar",
+     "item": "Gengarite",
+     "ability": "Cursed Body",
+     "moves": [
+      "Sludge Bomb",
+      "Perish Song",
+      "Shadow Ball",
+      "Protect"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "incineroar",
+     "name": "Incineroar",
+     "item": "Sitrus Berry",
+     "ability": "Intimidate",
+     "moves": [
+      "Flare Blitz",
+      "Parting Shot",
+      "Protect",
+      "Fake Out"
+     ],
+     "nature": "Careful"
+    },
+    {
+     "id": "rillaboom",
+     "name": "Rillaboom",
+     "item": "Miracle Seed",
+     "ability": "Grassy Surge",
+     "moves": [
+      "Grassy Glide",
+      "Wood Hammer",
+      "Protect",
+      "Fake Out"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "kommo-o",
+     "name": "Kommo-o",
+     "item": "Leftovers",
+     "ability": "Soundproof",
+     "moves": [
+      "Aura Sphere",
+      "Clanging Scales",
+      "Clangorous Soul",
+      "Protect"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "kingambit",
+     "name": "Kingambit",
+     "item": "Life Orb",
+     "ability": "Defiant",
+     "moves": [
+      "Kowtow Cleave",
+      "Sucker Punch",
+      "Swords Dance",
+      "Protect"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "sneasler",
+     "name": "Sneasler",
+     "item": "Grassy Seed",
+     "ability": "Unburden",
+     "moves": [
+      "Rock Tomb",
+      "Dire Claw",
+      "Close Combat",
+      "Protect"
+     ],
+     "nature": "Adamant"
+    }
+   ]
+  }
+ ],
+ "topCutUsage": [
+  {
+   "id": "sneasler",
+   "name": "Sneasler",
+   "count": 5,
+   "pct": 62.5
+  },
+  {
+   "id": "rillaboom",
+   "name": "Rillaboom",
+   "count": 5,
+   "pct": 62.5
+  },
+  {
+   "id": "raichu",
+   "name": "Raichu",
+   "count": 4,
+   "pct": 50
+  },
+  {
+   "id": "kingambit",
+   "name": "Kingambit",
+   "count": 4,
+   "pct": 50
+  },
+  {
+   "id": "garchomp",
+   "name": "Garchomp",
+   "count": 3,
+   "pct": 37.5
+  },
+  {
+   "id": "salamence",
+   "name": "Salamence",
+   "count": 2,
+   "pct": 25
+  },
+  {
+   "id": "pelipper",
+   "name": "Pelipper",
+   "count": 2,
+   "pct": 25
+  },
+  {
+   "id": "volcarona",
+   "name": "Volcarona",
+   "count": 2,
+   "pct": 25
+  },
+  {
+   "id": "basculegion",
+   "name": "Basculegion",
+   "count": 2,
+   "pct": 25
+  },
+  {
+   "id": "archaludon",
+   "name": "Archaludon",
+   "count": 2,
+   "pct": 25
+  },
+  {
+   "id": "floette-eternal",
+   "name": "Eternal Flower Floette",
+   "count": 2,
+   "pct": 25
+  },
+  {
+   "id": "incineroar",
+   "name": "Incineroar",
+   "count": 2,
+   "pct": 25
+  },
+  {
+   "id": "kommo-o",
+   "name": "Kommo-o",
+   "count": 2,
+   "pct": 25
+  },
+  {
+   "id": "toxicroak",
+   "name": "Toxicroak",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "staraptor",
+   "name": "Staraptor",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "indeedee",
+   "name": "Indeedee",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "armarouge",
+   "name": "Armarouge",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "venusaur",
+   "name": "Venusaur",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "grimmsnarl",
+   "name": "Grimmsnarl",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "charizard",
+   "name": "Charizard",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "primarina",
+   "name": "Primarina",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "dragonite",
+   "name": "Dragonite",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "gholdengo",
+   "name": "Gholdengo",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "gengar",
+   "name": "Gengar",
+   "count": 1,
+   "pct": 12.5
+  }
+ ],
+ "regulationLabel": "Pokémon Champions — Regulation M-C",
+ "usageComparison": [
+  {
+   "id": "sneasler",
+   "name": "Sneasler",
+   "count": 5,
+   "pct": 62.5,
+   "ladderUsage": 0.3562844
+  },
+  {
+   "id": "rillaboom",
+   "name": "Rillaboom",
+   "count": 5,
+   "pct": 62.5,
+   "ladderUsage": 0.35522489999999995
+  },
+  {
+   "id": "raichu",
+   "name": "Raichu",
+   "count": 4,
+   "pct": 50,
+   "ladderUsage": 0.0047721000000000005
+  },
+  {
+   "id": "kingambit",
+   "name": "Kingambit",
+   "count": 4,
+   "pct": 50,
+   "ladderUsage": 0.2663085
+  },
+  {
+   "id": "garchomp",
+   "name": "Garchomp",
+   "count": 3,
+   "pct": 37.5,
+   "ladderUsage": 0.1954456
+  },
+  {
+   "id": "salamence",
+   "name": "Salamence",
+   "count": 2,
+   "pct": 25,
+   "ladderUsage": 0.0018962999999999999
+  },
+  {
+   "id": "pelipper",
+   "name": "Pelipper",
+   "count": 2,
+   "pct": 25,
+   "ladderUsage": 0.153986
+  },
+  {
+   "id": "volcarona",
+   "name": "Volcarona",
+   "count": 2,
+   "pct": 25,
+   "ladderUsage": 0.10736380000000001
+  },
+  {
+   "id": "basculegion",
+   "name": "Basculegion",
+   "count": 2,
+   "pct": 25,
+   "ladderUsage": 0.1936387
+  },
+  {
+   "id": "archaludon",
+   "name": "Archaludon",
+   "count": 2,
+   "pct": 25,
+   "ladderUsage": 0.20469400000000001
+  },
+  {
+   "id": "floette-eternal",
+   "name": "Eternal Flower Floette",
+   "count": 2,
+   "pct": 25,
+   "ladderUsage": null
+  },
+  {
+   "id": "incineroar",
+   "name": "Incineroar",
+   "count": 2,
+   "pct": 25,
+   "ladderUsage": 0.318257
+  },
+  {
+   "id": "kommo-o",
+   "name": "Kommo-o",
+   "count": 2,
+   "pct": 25,
+   "ladderUsage": null
+  },
+  {
+   "id": "toxicroak",
+   "name": "Toxicroak",
+   "count": 1,
+   "pct": 12.5,
+   "ladderUsage": 0.0003234
+  },
+  {
+   "id": "staraptor",
+   "name": "Staraptor",
+   "count": 1,
+   "pct": 12.5,
+   "ladderUsage": 0.0059282
+  },
+  {
+   "id": "indeedee",
+   "name": "Indeedee",
+   "count": 1,
+   "pct": 12.5,
+   "ladderUsage": 0.057714999999999995
+  },
+  {
+   "id": "armarouge",
+   "name": "Armarouge",
+   "count": 1,
+   "pct": 12.5,
+   "ladderUsage": 0.0514378
+  },
+  {
+   "id": "venusaur",
+   "name": "Venusaur",
+   "count": 1,
+   "pct": 12.5,
+   "ladderUsage": 0.0721189
+  },
+  {
+   "id": "grimmsnarl",
+   "name": "Grimmsnarl",
+   "count": 1,
+   "pct": 12.5,
+   "ladderUsage": 0.0692304
+  },
+  {
+   "id": "charizard",
+   "name": "Charizard",
+   "count": 1,
+   "pct": 12.5,
+   "ladderUsage": 0.00043249999999999994
+  },
+  {
+   "id": "primarina",
+   "name": "Primarina",
+   "count": 1,
+   "pct": 12.5,
+   "ladderUsage": 0.0578911
+  },
+  {
+   "id": "dragonite",
+   "name": "Dragonite",
+   "count": 1,
+   "pct": 12.5,
+   "ladderUsage": 0.0079793
+  },
+  {
+   "id": "gholdengo",
+   "name": "Gholdengo",
+   "count": 1,
+   "pct": 12.5,
+   "ladderUsage": 0.1384831
+  },
+  {
+   "id": "gengar",
+   "name": "Gengar",
+   "count": 1,
+   "pct": 12.5,
+   "ladderUsage": 0.0043392
+  }
+ ]
+}

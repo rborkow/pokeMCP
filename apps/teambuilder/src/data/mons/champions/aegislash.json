@@ -2,15 +2,21 @@
  "id": "aegislash",
  "name": "Aegislash",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.013185899999999999,
-   "rank": 76,
-   "raw": 56464
+   "month": "2026-09",
+   "usage": 0.0083795,
+   "rank": 78,
+   "raw": 47591
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0062117,
+   "rank": 85,
+   "raw": 41882
   }
  ],
  "abilities": [
@@ -21,143 +27,143 @@
  ],
  "items": [
   [
-   "Spell Tag",
-   21.997411285946026
+   "Focus Sash",
+   26.600409042609822
   ],
   [
-   "Leftovers",
-   18.976617577606472
+   "Spell Tag",
+   19.29760123342785
   ],
   [
    "Life Orb",
-   18.670659060836506
+   11.03511686115717
   ],
   [
-   "Focus Sash",
-   10.16320694287901
-  ],
-  [
-   "Colbur Berry",
-   8.91909382596611
+   "White Herb",
+   10.075274334256292
   ],
   [
    "Occa Berry",
-   4.15666261116892
+   9.89294314520811
   ],
   [
-   "Sitrus Berry",
-   3.947887811909026
+   "Leftovers",
+   8.467497122033887
   ],
   [
-   "Kasib Berry",
-   3.2411283005221456
+   "Colbur Berry",
+   5.134411675880898
+  ],
+  [
+   "Expert Belt",
+   3.239750342902259
   ]
  ],
  "moves": [
   [
-   "King's Shield",
-   22.902436355863724
-  ],
-  [
    "Poltergeist",
-   15.40191791742472
+   19.84474873459467
   ],
   [
-   "Shadow Sneak",
-   14.982704248723467
-  ],
-  [
-   "Iron Head",
-   14.21550409749214
+   "King's Shield",
+   19.189014149927626
   ],
   [
    "Wide Guard",
-   8.337774809815897
+   15.28036682269314
+  ],
+  [
+   "Iron Head",
+   11.940086996376056
+  ],
+  [
+   "Shadow Sneak",
+   11.577880754350943
   ],
   [
    "Sacred Sword",
-   7.928343613575057
-  ],
-  [
-   "Shadow Ball",
-   4.8465941769532925
-  ],
-  [
-   "Flash Cannon",
-   4.081327030684277
+   5.700249716104165
   ],
   [
    "Close Combat",
-   2.6569034463296646
+   5.700241681402129
   ],
   [
-   "Swords Dance",
-   1.5551877788371302
+   "Shadow Ball",
+   2.951686623258288
+  ],
+  [
+   "Flash Cannon",
+   2.7861009580371308
+  ],
+  [
+   "Solar Blade",
+   2.2850070140554806
   ]
  ],
  "spreads": [
   [
-   "Adamant:32/32/0/0/2/0",
-   21.26942179551448
-  ],
-  [
    "Adamant:2/32/0/0/0/32",
-   6.464606424445293
+   21.75912721116807
   ],
   [
-   "Adamant:32/32/0/0/0/2",
-   5.6223127683915886
+   "Brave:32/32/2/0/0/0",
+   9.643077186990475
   ],
   [
-   "Adamant:32/32/2/0/0/0",
-   4.768882985637443
+   "Adamant:32/32/0/0/2/0",
+   7.752508069603434
   ],
   [
-   "Brave:32/32/0/0/2/0",
-   4.705247215579891
+   "Adamant:20/21/2/0/8/15",
+   7.393422693635876
+  ],
+  [
+   "Adamant:17/10/4/0/7/28",
+   5.45419926070356
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Garchomp",
-   6.44380322306031
+   "Incineroar",
+   6.848027931097735
   ],
   [
-   "Incineroar",
-   5.313573212539201
+   "Charizard-Mega-Y",
+   6.248131261977624
+  ],
+  [
+   "Rillaboom",
+   5.125791420172436
   ],
   [
    "Whimsicott",
-   4.355343662783779
-  ],
-  [
-   "Sinistcha",
-   4.309565312507475
-  ],
-  [
-   "Staraptor-Mega",
-   3.9536019111175524
-  ],
-  [
-   "Rotom-Wash",
-   3.8376135049387576
+   4.907418448663706
   ],
   [
    "Sneasler",
-   3.003533641373912
+   4.702055702239577
+  ],
+  [
+   "Kommo-o",
+   4.2995942650202625
+  ],
+  [
+   "Garchomp",
+   3.970287150415192
+  ],
+  [
+   "Glimmora-Mega",
+   3.778387224964288
   ],
   [
    "Farigiraf",
-   2.712056954810836
+   3.5625781921258426
   ],
   [
-   "Ninetales-Alola",
-   2.532457612994908
-  ],
-  [
-   "Grimmsnarl",
-   2.3743816911990274
+   "Kingambit",
+   3.4572719823240976
   ]
  ],
  "counters": [
@@ -168,43 +174,25 @@
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Basculegion",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Grimmsnarl",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Staraptor-Mega",
+   "name": "Archaludon",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -215,52 +203,52 @@
    "item": "Focus Sash",
    "ability": "Stance Change",
    "moves": [
-    "Wide Guard",
     "Poltergeist",
+    "Close Combat",
     "Shadow Sneak",
-    "Close Combat"
+    "Wide Guard"
    ],
-   "count": 2,
-   "bestPlacing": 5,
-   "bestPlayer": "LightaNight08",
-   "eventName": "KIng's Gambit #6 | Reg M-B",
-   "eventSlug": "2026-06-21-king-s-gambit-6-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a29ab02e334c3c9befd3389",
+   "count": 3,
+   "bestPlacing": 1,
+   "bestPlayer": "LuscaVGC",
+   "eventName": "Intimidators Champions Challenge #52 REG M-C",
+   "eventSlug": "2026-10-26-intimidators-champions-challenge-52-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6adf3a9180a8f79408d1e7e8",
    "nature": "Adamant"
   },
   {
    "item": "Focus Sash",
    "ability": "Stance Change",
    "moves": [
-    "Iron Head",
+    "Poltergeist",
+    "Wide Guard",
     "Shadow Sneak",
-    "Close Combat",
-    "King's Shield"
+    "Iron Head"
    ],
    "count": 1,
-   "bestPlacing": 5,
-   "bestPlayer": "Mattpode3",
-   "eventName": "King's Gambit #7 | Reg M-B",
-   "eventSlug": "2026-07-05-king-s-gambit-7-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a37eef2ceacae7d6441bbd5",
+   "bestPlacing": 1,
+   "bestPlayer": "shaikhvgc786",
+   "eventName": "Off Meta Fight Club #9",
+   "eventSlug": "2026-11-05-off-meta-fight-club-9",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae3dd6680a8f79408d21452",
    "nature": "Adamant"
   },
   {
-   "item": "Spell Tag",
+   "item": "Life Orb",
    "ability": "Stance Change",
    "moves": [
-    "Poltergeist",
     "Iron Head",
-    "Shadow Sneak",
+    "Poltergeist",
+    "Wide Guard",
     "King's Shield"
    ],
    "count": 1,
-   "bestPlacing": 7,
-   "bestPlayer": "walaye",
-   "eventName": "Rework Esport Champions Talent Cup 2 | 50€ CP",
-   "eventSlug": "2026-07-03-rework-esport-champions-talent-cup-2-50-cp",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a39af2883fd320299bce1f4",
-   "nature": "Adamant"
+   "bestPlacing": 1,
+   "bestPlayer": "Tricki",
+   "eventName": "Sketch Academy Sunday Regulation M-C Tournament",
+   "eventSlug": "2026-10-12-sketch-academy-sunday-regulation-m-c-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aba172d783097f8dcb725fc",
+   "nature": "Brave"
   }
  ]
 }

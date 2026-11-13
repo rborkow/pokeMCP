@@ -1,0 +1,224 @@
+{
+ "id": "grapploct",
+ "name": "Grapploct",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.0075846,
+   "rank": 80,
+   "raw": 49812
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0062345,
+   "rank": 84,
+   "raw": 56071
+  }
+ ],
+ "abilities": [
+  [
+   "Technician",
+   99.62607862299629
+  ],
+  [
+   "Limber",
+   0.3739213770037017
+  ]
+ ],
+ "items": [
+  [
+   "Life Orb",
+   52.367378571939184
+  ],
+  [
+   "Black Belt",
+   31.209095971500446
+  ],
+  [
+   "Expert Belt",
+   4.565535450649659
+  ],
+  [
+   "Focus Sash",
+   4.151178308301866
+  ],
+  [
+   "Sitrus Berry",
+   2.497091829938416
+  ],
+  [
+   "Psychic Seed",
+   1.725918932276502
+  ],
+  [
+   "Roseli Berry",
+   0.8071646254322057
+  ],
+  [
+   "Leftovers",
+   0.6917647338625937
+  ]
+ ],
+ "moves": [
+  [
+   "Storm Throw",
+   24.53190439642503
+  ],
+  [
+   "Mach Punch",
+   19.51280079763522
+  ],
+  [
+   "Detect",
+   17.22197934263617
+  ],
+  [
+   "Stomping Tantrum",
+   8.270218627240613
+  ],
+  [
+   "Payback",
+   5.176445822138264
+  ],
+  [
+   "Feint",
+   4.997873959641739
+  ],
+  [
+   "Protect",
+   4.828161015506714
+  ],
+  [
+   "Sucker Punch",
+   3.2730137403340054
+  ],
+  [
+   "Ice Punch",
+   2.183934003749994
+  ],
+  [
+   "Octolock",
+   2.015288839129218
+  ]
+ ],
+ "spreads": [
+  [
+   "Brave:32/32/0/0/2/0",
+   36.71623907774081
+  ],
+  [
+   "Adamant:32/32/0/0/2/0",
+   25.57238400322105
+  ],
+  [
+   "Adamant:24/32/0/0/10/0",
+   9.874153050116009
+  ],
+  [
+   "Brave:32/32/2/0/0/0",
+   4.147604138292986
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   2.0854964085236776
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Farigiraf",
+   11.262887785179599
+  ],
+  [
+   "Indeedee-F",
+   6.948468312286662
+  ],
+  [
+   "Pelipper",
+   6.381827235101321
+  ],
+  [
+   "Archaludon",
+   6.078846687269152
+  ],
+  [
+   "Mawile-Mega",
+   5.732645308036495
+  ],
+  [
+   "Kangaskhan-Mega",
+   5.457124883692113
+  ],
+  [
+   "Golisopod-Mega",
+   4.251026689713112
+  ],
+  [
+   "Incineroar",
+   3.6256724379341403
+  ],
+  [
+   "Kingambit",
+   3.1307886057596996
+  ],
+  [
+   "Torkoal",
+   2.7919676041296486
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": [
+  {
+   "item": "Expert Belt",
+   "ability": "Technician",
+   "moves": [
+    "Storm Throw",
+    "Feint",
+    "Ice Punch",
+    "Soak"
+   ],
+   "count": 1,
+   "bestPlacing": 7,
+   "bestPlayer": "Fearcobra55",
+   "eventName": "Amyverse VGC Champions Arena #17 ❤️ Cash Prize!",
+   "eventSlug": "2026-11-02-amyverse-vgc-champions-arena-17-cash-prize",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6adff5e180a8f79408d1f34d",
+   "nature": "Brave"
+  }
+ ]
+}

@@ -2,199 +2,187 @@
  "id": "espathra",
  "name": "Espathra",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0072123000000000005,
-   "rank": 90,
-   "raw": 28294
+   "month": "2026-09",
+   "usage": 0.015608200000000001,
+   "rank": 63,
+   "raw": 44757
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.019967699999999998,
+   "rank": 52,
+   "raw": 78944
   }
  ],
  "abilities": [
   [
    "Speed Boost",
-   95.24664851069154
+   99.68699080746784
   ],
   [
    "Opportunist",
-   4.738269629402002
+   0.2774133388594343
   ],
   [
    "Frisk",
-   0.01508185990644768
+   0.035595853672727655
   ]
  ],
  "items": [
   [
-   "Mental Herb",
-   25.875413542198512
+   "Electric Seed",
+   56.391987383502396
   ],
   [
-   "Sitrus Berry",
-   24.902119753908657
+   "Grassy Seed",
+   20.11546977849485
   ],
   [
    "Focus Sash",
-   17.076945477920248
-  ],
-  [
-   "Colbur Berry",
-   16.797845195076217
-  ],
-  [
-   "Leftovers",
-   9.155069788629994
-  ],
-  [
-   "Twisted Spoon",
-   2.0226822915290454
+   11.801070954099584
   ],
   [
    "Life Orb",
-   1.3066112872939997
+   3.29290779380689
+  ],
+  [
+   "Colbur Berry",
+   2.474372435526057
+  ],
+  [
+   "Psychic Seed",
+   2.4530105608237975
+  ],
+  [
+   "Sitrus Berry",
+   0.7680289588557437
   ],
   [
    "Kasib Berry",
-   0.8251835446108823
+   0.7214507945887104
   ]
  ],
  "moves": [
   [
    "Protect",
-   24.0947324335839
-  ],
-  [
-   "Calm Mind",
-   21.42473821402116
+   24.82733948276837
   ],
   [
    "Lumina Crash",
-   21.140271497017405
+   23.601349248670108
   ],
   [
    "Baton Pass",
-   20.768811419795142
+   22.63399537136161
   ],
   [
-   "Stored Power",
-   2.9608289029751784
+   "Calm Mind",
+   22.590056248524483
   ],
   [
-   "Dazzling Gleam",
-   2.5439059338207137
+   "Expanding Force",
+   2.202282819674303
+  ],
+  [
+   "Sunny Day",
+   1.0016490789191772
   ],
   [
    "Hypnosis",
-   0.9754498796403098
-  ],
-  [
-   "Psych Up",
-   0.8816397835701363
-  ],
-  [
-   "Psychic Terrain",
-   0.5363913661515678
+   0.4880525535639388
   ],
   [
    "Skill Swap",
-   0.41499742131090483
+   0.4648052046540646
+  ],
+  [
+   "Dazzling Gleam",
+   0.46243641091908394
+  ],
+  [
+   "Stored Power",
+   0.4284970080458096
   ]
  ],
  "spreads": [
   [
-   "Timid:32/0/9/0/6/19",
-   18.770415638794567
+   "Timid:32/0/14/0/2/18",
+   14.079370974949839
   ],
   [
-   "Timid:19/0/14/0/4/29",
-   6.242401570985684
+   "Timid:32/0/2/0/0/32",
+   7.101270282852634
+  ],
+  [
+   "Timid:32/0/7/0/14/13",
+   6.512370532190424
   ],
   [
    "Modest:2/0/0/32/0/32",
-   5.864912049894984
+   5.581363468509656
   ],
   [
-   "Timid:2/0/0/32/0/32",
-   4.684748626552729
-  ],
-  [
-   "Timid:20/0/0/0/14/32",
-   4.1411465739437645
+   "Timid:22/0/12/0/14/18",
+   5.082353434448924
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Archaludon",
-   9.104422887761169
-  ],
-  [
-   "Scovillain-Mega",
-   7.5072481557417765
-  ],
-  [
-   "Sinistcha",
-   5.918555091700368
+   14.72412090293348
   ],
   [
    "Politoed",
-   5.453814171231315
+   12.561332061097374
   ],
   [
-   "Sneasler",
-   5.360386754207477
+   "Raichu-Mega-X",
+   11.335599192488509
   ],
   [
-   "Floette-Mega",
-   4.286203018000147
+   "Charizard-Mega-Y",
+   9.11877365696814
+  ],
+  [
+   "Rillaboom",
+   5.1633476897480515
   ],
   [
    "Incineroar",
-   3.7755160085446695
-  ],
-  [
-   "Sableye",
-   3.4882292576609797
-  ],
-  [
-   "Dragonite-Mega",
-   2.761133064168807
+   4.274372654131802
   ],
   [
    "Garchomp",
-   2.6858750285010937
+   3.7671391124212397
+  ],
+  [
+   "Floette-Mega",
+   2.2061674013381865
+  ],
+  [
+   "Indeedee-F",
+   2.0915928482612043
+  ],
+  [
+   "Venusaur",
+   2.0614470228094666
   ]
  ],
  "counters": [
   {
-   "name": "Basculegion",
+   "name": "Gardevoir-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Incineroar",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Garchomp",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Charizard-Mega-Y",
+   "name": "Gholdengo",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -206,17 +194,87 @@
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Incineroar",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Gengar-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Delphox-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Venusaur",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   }
  ],
- "builds": []
+ "builds": [
+  {
+   "item": "Electric Seed",
+   "ability": "Speed Boost",
+   "moves": [
+    "Lumina Crash",
+    "Calm Mind",
+    "Baton Pass",
+    "Protect"
+   ],
+   "count": 4,
+   "bestPlacing": 3,
+   "bestPlayer": "MuggyV2",
+   "eventName": "Friday Fight Night 78! $50 Prize & Team Report",
+   "eventSlug": "2026-10-23-friday-fight-night-78-50-prize-team-report",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad313aa115c12b73a5a5e74",
+   "nature": "Bold"
+  },
+  {
+   "item": "Grassy Seed",
+   "ability": "Speed Boost",
+   "moves": [
+    "Protect",
+    "Calm Mind",
+    "Lumina Crash",
+    "Baton Pass"
+   ],
+   "count": 2,
+   "bestPlacing": 5,
+   "bestPlayer": "sinistchacha",
+   "eventName": "EXTRA LIFE - CHILDRENS HOSPITAL CHARITY TOURNAMENT",
+   "eventSlug": "2026-11-07-extra-life-childrens-hospital-charity-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aeabf35e94eae0f94746e72",
+   "nature": "Timid"
+  },
+  {
+   "item": "Grassy Seed",
+   "ability": "Speed Boost",
+   "moves": [
+    "Protect",
+    "Calm Mind",
+    "Baton Pass",
+    "Stored Power"
+   ],
+   "count": 1,
+   "bestPlacing": 7,
+   "bestPlayer": "Jussito",
+   "eventName": "VGC Indigo League #4 (Prize: Eternal Floette)",
+   "eventSlug": "2026-10-23-vgc-indigo-league-4-prize-eternal-floette",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6abb9694783097f8dcb73471",
+   "nature": "Timid"
+  }
+ ]
 }

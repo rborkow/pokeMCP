@@ -2,170 +2,176 @@
  "id": "snorlax",
  "name": "Snorlax",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.005542200000000001,
-   "rank": 101,
-   "raw": 21660
+   "month": "2026-09",
+   "usage": 0.0033978999999999997,
+   "rank": 111,
+   "raw": 24443
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.006669199999999999,
+   "rank": 81,
+   "raw": 28071
   }
  ],
  "abilities": [
   [
    "Thick Fat",
-   94.81410674049002
+   98.34921569836192
   ],
   [
    "Gluttony",
-   3.347421219876195
+   0.833778773152951
   ],
   [
    "Immunity",
-   1.8384720396337886
+   0.8170055284851387
   ]
  ],
  "items": [
   [
    "Leftovers",
-   64.05135552499438
+   68.6750184900203
   ],
   [
    "Sitrus Berry",
-   24.043420461151467
+   20.53775434027666
+  ],
+  [
+   "Normal Gem",
+   3.203412244836802
+  ],
+  [
+   "Psychic Seed",
+   2.2230303298156167
   ],
   [
    "Chople Berry",
-   7.449351039989866
-  ],
-  [
-   "Chesto Berry",
-   2.206302275979053
-  ],
-  [
-   "Life Orb",
-   0.8803491929806395
+   1.683174747555418
   ],
   [
    "Silk Scarf",
-   0.48773046256703095
+   1.1526671875299372
   ],
   [
-   "Expert Belt",
-   0.273202484900911
+   "Life Orb",
+   0.7943398929484112
   ],
   [
-   "Lum Berry",
-   0.1189099192918266
+   "Shell Bell",
+   0.7640724357107415
   ]
  ],
  "moves": [
   [
    "Protect",
-   21.755897575587362
+   21.70399001631969
   ],
   [
    "Fissure",
-   11.705486607084158
+   13.833513703936628
   ],
   [
    "Stockpile",
-   8.377955810274486
-  ],
-  [
-   "Yawn",
-   8.079667865760438
-  ],
-  [
-   "Double-Edge",
-   6.130505808778293
-  ],
-  [
-   "High Horsepower",
-   5.806555727533538
-  ],
-  [
-   "Body Slam",
-   4.947050203728507
-  ],
-  [
-   "Belly Drum",
-   4.758313805362542
-  ],
-  [
-   "Body Press",
-   4.553574853994313
+   12.832998454438577
   ],
   [
    "Smack Down",
-   4.05942852405272
+   6.652063346196075
+  ],
+  [
+   "Body Press",
+   5.853008358827048
+  ],
+  [
+   "High Horsepower",
+   5.822564944848567
+  ],
+  [
+   "Yawn",
+   5.0898803424157615
+  ],
+  [
+   "Belly Drum",
+   5.059185502364538
+  ],
+  [
+   "Body Slam",
+   3.619189387850553
+  ],
+  [
+   "Heavy Slam",
+   3.5832021235366733
   ]
  ],
  "spreads": [
   [
-   "Relaxed:21/0/30/0/15/0",
-   15.330814573399318
+   "Relaxed:6/0/30/0/30/0",
+   15.72390594832139
   ],
   [
-   "Relaxed:22/0/32/0/12/0",
-   12.016796139863473
+   "Relaxed:26/4/32/0/4/0",
+   12.288640113229878
   ],
   [
-   "Relaxed:32/0/32/0/2/0",
-   8.057038837788562
+   "Brave:21/32/13/0/0/0",
+   5.148411959956965
+  ],
+  [
+   "Brave:32/32/2/0/0/0",
+   4.820664562297707
   ],
   [
    "Impish:32/0/32/0/2/0",
-   4.767476716788564
-  ],
-  [
-   "Relaxed:31/0/32/0/3/0",
-   3.1373516847443965
+   4.592449661897769
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Incineroar",
-   11.782149636120568
-  ],
-  [
-   "Sinistcha",
-   9.586749031819824
-  ],
-  [
-   "Gengar-Mega",
-   9.196515764562863
+   8.878563796670711
   ],
   [
    "Hawlucha-Mega",
-   6.045842252434264
+   8.116750700626305
   ],
   [
-   "Ninetales-Alola",
-   4.658099951582108
+   "Rillaboom",
+   5.727903572239045
   ],
   [
-   "Dragonite",
-   4.399597095056847
+   "Basculegion",
+   4.806062754881908
   ],
   [
-   "Grimmsnarl",
-   3.7953718653490682
+   "Sneasler",
+   4.243857285940137
   ],
   [
-   "Scrafty-Mega",
-   3.6589142719987455
+   "Sinistcha",
+   4.067258540284508
   ],
   [
-   "Farigiraf",
-   2.290000287929396
+   "Froslass-Mega",
+   3.6956987900077154
   ],
   [
-   "Politoed",
-   1.9022358935078199
+   "Kingambit",
+   3.6430449794409734
+  ],
+  [
+   "Indeedee-F",
+   3.380701289370486
+  ],
+  [
+   "Gengar-Mega",
+   3.1684718897023916
   ]
  ],
  "counters": [
@@ -176,7 +182,43 @@
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -187,18 +229,52 @@
    "item": "Leftovers",
    "ability": "Thick Fat",
    "moves": [
-    "Encore",
+    "Stockpile",
+    "Fissure",
+    "Protect",
+    "Smack Down"
+   ],
+   "count": 2,
+   "bestPlacing": 5,
+   "bestPlayer": "Silverland",
+   "eventName": "Amyverse VGC Champions Arena #16 ❤️ Cash Prize!",
+   "eventSlug": "2026-10-26-amyverse-vgc-champions-arena-16-cash-prize",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad75a2d8a8383117e3eff78",
+   "nature": "Relaxed"
+  },
+  {
+   "item": "Leftovers",
+   "ability": "Thick Fat",
+   "moves": [
     "Yawn",
+    "Encore",
     "Fissure",
     "Protect"
    ],
-   "count": 4,
+   "count": 1,
    "bestPlacing": 1,
-   "bestPlayer": "root2iris",
-   "eventName": "Tenki's x MMHM - Champions M-B",
-   "eventSlug": "2026-06-25-tenki-s-x-mmhm-champions-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a04bb7e13f957d6d4b4758c",
+   "bestPlayer": "M_rada",
+   "eventName": "VGC Indigo League #2 (Prize: Eternal Floette)",
+   "eventSlug": "2026-10-10-vgc-indigo-league-2-prize-eternal-floette",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ab50a9bf127b1b52c281081",
    "nature": "Relaxed"
+  },
+  {
+   "item": "Leftovers",
+   "ability": "Thick Fat",
+   "moves": [
+    "Yawn",
+    "Double-Edge",
+    "High Horsepower",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 4,
+   "bestPlayer": "Diamsword",
+   "eventName": "Pado's Dojo Reg M-C Pratice #4 🍥",
+   "eventSlug": "2026-10-14-pado-s-dojo-reg-m-c-pratice-4",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6accb8138a8383117e3ea179",
+   "nature": "Impish"
   }
  ]
 }

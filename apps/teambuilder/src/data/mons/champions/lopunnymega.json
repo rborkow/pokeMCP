@@ -2,15 +2,21 @@
  "id": "lopunnymega",
  "name": "Lopunny-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.006953,
-   "rank": 91,
-   "raw": 21483
+   "month": "2026-09",
+   "usage": 0.0057556,
+   "rank": 92,
+   "raw": 34024
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0085967,
+   "rank": 72,
+   "raw": 41559
   }
  ],
  "abilities": [
@@ -27,114 +33,138 @@
  ],
  "moves": [
   [
-   "Fake Out",
-   24.764770206828192
-  ],
-  [
    "Close Combat",
-   23.70812436661446
+   24.811134109313983
   ],
   [
-   "Encore",
-   11.153278623955925
-  ],
-  [
-   "Protect",
-   9.302627404819757
+   "Fake Out",
+   23.997283182541647
   ],
   [
    "Triple Axel",
-   7.679183296101167
-  ],
-  [
-   "After You",
-   5.738215620683762
-  ],
-  [
-   "U-turn",
-   4.31217582602113
+   21.261870939454468
   ],
   [
    "Mach Punch",
-   2.8739927514218317
+   10.214492001943725
   ],
   [
-   "Giga Impact",
-   2.5390082435437784
+   "Protect",
+   5.314952478920049
+  ],
+  [
+   "Encore",
+   4.14418474927371
+  ],
+  [
+   "U-turn",
+   3.861522005452136
+  ],
+  [
+   "Thunder Punch",
+   3.2806819707228483
   ],
   [
    "Ice Punch",
-   1.4606175508507475
+   0.9932084118582957
+  ],
+  [
+   "After You",
+   0.8187233438356845
   ]
  ],
  "spreads": [
   [
    "Jolly:2/32/0/0/0/32",
-   59.70265010350613
+   85.8051478670089
   ],
   [
-   "Jolly:3/31/0/0/0/32",
-   7.346970829052257
+   "Jolly:1/32/1/0/0/32",
+   2.413795926765064
   ],
   [
-   "Jolly:7/25/2/0/0/32",
-   6.770041047647514
+   "Jolly:4/30/0/0/0/32",
+   1.9049180391330984
   ],
   [
-   "Jolly:5/29/0/0/0/32",
-   3.1444615755972833
+   "Jolly:6/32/0/0/0/28",
+   1.5633945432343694
   ],
   [
-   "Jolly:0/32/2/0/0/32",
-   2.872518722318975
+   "Jolly:0/32/0/0/2/32",
+   0.9109517834368536
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
+   "Ceruledge",
+   11.28391255310014
+  ],
+  [
    "Basculegion",
-   7.051892302142863
-  ],
-  [
-   "Incineroar",
-   4.840433926732046
-  ],
-  [
-   "Sinistcha",
-   3.941398518845671
+   9.333333976537842
   ],
   [
    "Farigiraf",
-   3.882020528493187
+   9.069661456227614
   ],
   [
-   "Torkoal",
-   3.875245594696804
-  ],
-  [
-   "Gholdengo",
-   3.477527894181192
-  ],
-  [
-   "Archaludon",
-   3.2089256401034794
+   "Ninetales-Alola",
+   8.270359524308617
   ],
   [
    "Kingambit",
-   3.108658211845333
+   6.549664498788825
   ],
   [
-   "Garchomp",
-   2.873110134184856
+   "Indeedee-F",
+   4.9138469613000195
   ],
   [
-   "Sylveon",
-   2.827190304294418
+   "Sneasler",
+   4.0691465160350715
+  ],
+  [
+   "Dragonite",
+   3.979977209186033
+  ],
+  [
+   "Golisopod-Mega",
+   3.5296481093064593
+  ],
+  [
+   "Rillaboom",
+   3.1879835102711835
   ]
  ],
  "counters": [
   {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
    "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Charizard-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -152,7 +182,7 @@
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

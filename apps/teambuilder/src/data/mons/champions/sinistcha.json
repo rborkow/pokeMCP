@@ -2,213 +2,219 @@
  "id": "sinistcha",
  "name": "Sinistcha",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.32998600000000006,
-   "rank": 1,
-   "raw": 860069
+   "month": "2026-09",
+   "usage": 0.0755384,
+   "rank": 24,
+   "raw": 394023
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0760342,
+   "rank": 23,
+   "raw": 352649
   }
  ],
  "abilities": [
   [
    "Hospitality",
-   99.41215534521089
+   99.1998866013287
   ],
   [
    "Heatproof",
-   0.5878446547890969
+   0.8001133986712979
   ]
  ],
  "items": [
   [
-   "Kasib Berry",
-   31.726325734142097
+   "Colbur Berry",
+   21.384544866047978
   ],
   [
    "Sitrus Berry",
-   28.255037642369135
+   18.53748553039283
   ],
   [
-   "Coba Berry",
-   11.233369145990316
-  ],
-  [
-   "Colbur Berry",
-   9.119578611234152
-  ],
-  [
-   "Leftovers",
-   7.487999600070274
+   "Kasib Berry",
+   15.966213782324875
   ],
   [
    "Occa Berry",
-   5.565777550993214
+   13.479880492018554
+  ],
+  [
+   "Rocky Helmet",
+   10.120996730941547
+  ],
+  [
+   "Coba Berry",
+   6.57265702426492
   ],
   [
    "Focus Sash",
-   2.1444712311273784
+   4.385764932112855
   ],
   [
-   "Mental Herb",
-   1.8514689146603136
+   "Leftovers",
+   3.8841300175963283
   ]
  ],
  "moves": [
   [
    "Matcha Gotcha",
-   24.692165020594196
+   24.446503120741408
   ],
   [
    "Rage Powder",
-   24.20486831267284
+   24.412875243394772
   ],
   [
    "Trick Room",
-   15.883491960015785
+   17.274991548098935
   ],
   [
    "Protect",
-   14.816867138911169
+   16.685867391162247
   ],
   [
    "Life Dew",
-   12.060505036889525
-  ],
-  [
-   "Strength Sap",
-   3.3429079105554456
+   7.100206512725997
   ],
   [
    "Shadow Ball",
-   3.3114296416091724
+   5.337713767230018
+  ],
+  [
+   "Strength Sap",
+   2.815932431062823
   ],
   [
    "Imprison",
-   0.6379733439588026
+   0.46850504270530013
   ],
   [
-   "Calm Mind",
-   0.16441200384086024
+   "Psych Up",
+   0.3071944467286357
   ],
   [
-   "Hex",
-   0.14233974491361254
+   "Leaf Storm",
+   0.30544255482839966
   ]
  ],
  "spreads": [
   [
-   "Bold:32/0/14/0/20/0",
-   10.269603355037837
+   "Bold:32/0/14/0/19/1",
+   11.590875123809868
   ],
   [
-   "Relaxed:32/0/4/0/30/0",
-   6.019233897914429
+   "Bold:32/0/14/0/20/0",
+   8.108642285841503
+  ],
+  [
+   "Bold:32/0/4/0/30/0",
+   4.5838497820796205
+  ],
+  [
+   "Bold:29/0/14/0/23/0",
+   4.067843284705122
   ],
   [
    "Bold:32/0/32/2/0/0",
-   5.491242683254974
-  ],
-  [
-   "Relaxed:32/0/32/2/0/0",
-   4.715473905166964
-  ],
-  [
-   "Calm:32/0/14/0/20/0",
-   3.9986304685915854
+   2.72734981258601
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Incineroar",
-   8.099301511784967
-  ],
-  [
-   "Pelipper",
-   5.270022003807843
-  ],
-  [
-   "Grimmsnarl",
-   5.141572258072486
-  ],
-  [
-   "Archaludon",
-   4.7284855079591885
-  ],
-  [
-   "Swampert-Mega",
-   4.502532470298761
-  ],
-  [
-   "Staraptor-Mega",
-   3.9845069546595826
-  ],
-  [
-   "Garchomp",
-   3.8584215561985657
+   10.105189058790556
   ],
   [
    "Sneasler",
-   3.727146131980096
-  ],
-  [
-   "Floette-Mega",
-   3.543711744782712
+   6.532962288364488
   ],
   [
    "Kingambit",
-   3.2320611873144793
+   5.3747896016041015
+  ],
+  [
+   "Delphox-Mega",
+   5.207224937948731
+  ],
+  [
+   "Floette-Mega",
+   3.905101843207154
+  ],
+  [
+   "Pelipper",
+   3.6487738229556097
+  ],
+  [
+   "Archaludon",
+   3.6401982312926746
+  ],
+  [
+   "Staraptor-Mega",
+   3.6179191147601464
+  ],
+  [
+   "Indeedee-F",
+   3.2433498782128014
+  ],
+  [
+   "Gholdengo",
+   2.971278742730254
   ]
  ],
  "counters": [
   {
-   "name": "Sneasler",
+   "name": "Sylveon",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
+   "name": "Tyranitar-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Torkoal",
+   "name": "Excadrill",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Raichu-Mega-Y",
+   "name": "Basculegion",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Maushold",
+   "name": "Salamence-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Floette-Mega",
+   "name": "Indeedee-F",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Archaludon",
+   "name": "Farigiraf",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Kingambit",
+   "name": "Swampert-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -216,7 +222,7 @@
  ],
  "builds": [
   {
-   "item": "Kasib Berry",
+   "item": "Occa Berry",
    "ability": "Hospitality",
    "moves": [
     "Matcha Gotcha",
@@ -224,46 +230,46 @@
     "Trick Room",
     "Protect"
    ],
-   "count": 18,
+   "count": 10,
    "bestPlacing": 1,
-   "bestPlayer": "Martinus_03",
-   "eventName": "Champions Collective #12",
-   "eventSlug": "2026-07-01-champions-collective-12",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3987c183fd320299bce00b",
+   "bestPlayer": "FinnzVGC",
+   "eventName": "Tenki's Cart Weekly #124 - Reg M-C",
+   "eventSlug": "2026-10-29-tenki-s-cart-weekly-124-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6adc804297e21d82e5c6dffc",
    "nature": "Bold"
   },
   {
-   "item": "Kasib Berry",
+   "item": "Colbur Berry",
    "ability": "Hospitality",
    "moves": [
     "Matcha Gotcha",
-    "Life Dew",
-    "Rage Powder",
-    "Protect"
-   ],
-   "count": 17,
-   "bestPlacing": 1,
-   "bestPlayer": "Fluffy_m1n",
-   "eventName": "Regulation M-B: Open League #1",
-   "eventSlug": "2026-07-04-regulation-m-b-open-league-1",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a4101e5c87cd9ff0a311dd6",
-   "nature": "Bold"
-  },
-  {
-   "item": "Coba Berry",
-   "ability": "Hospitality",
-   "moves": [
     "Protect",
-    "Matcha Gotcha",
     "Rage Powder",
     "Trick Room"
    ],
-   "count": 12,
-   "bestPlacing": 1,
-   "bestPlayer": "gp2332",
-   "eventName": "Talon's FIGHT CLUB #90 POKEMON CHAMPIONS",
-   "eventSlug": "2026-06-25-talon-s-fight-club-90-pokemon-champions",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a14cca88c163b8097997618",
+   "count": 7,
+   "bestPlacing": 2,
+   "bestPlayer": "Draxolotl",
+   "eventName": "TARTAN'S ROAD TO GDANSK #43 - [REG M-C]",
+   "eventSlug": "2026-10-27-tartan-s-road-to-gdansk-43-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad54b56115c12b73a5a74c6",
+   "nature": "Bold"
+  },
+  {
+   "item": "Rocky Helmet",
+   "ability": "Hospitality",
+   "moves": [
+    "Matcha Gotcha",
+    "Strength Sap",
+    "Rage Powder",
+    "Protect"
+   ],
+   "count": 6,
+   "bestPlacing": 2,
+   "bestPlayer": "Quiijii",
+   "eventName": "Talon's FIGHT CLUB #109 POKEMON CHAMPIONS REG M-C",
+   "eventSlug": "2026-11-06-talon-s-fight-club-109-pokemon-champions-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad8eacb115c12b73a5a9034",
    "nature": "Bold"
   }
  ]

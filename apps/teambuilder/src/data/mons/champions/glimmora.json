@@ -2,213 +2,219 @@
  "id": "glimmora",
  "name": "Glimmora",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0208783,
-   "rank": 53,
-   "raw": 48227
+   "month": "2026-09",
+   "usage": 0.0194555,
+   "rank": 57,
+   "raw": 61041
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0339988,
+   "rank": 45,
+   "raw": 78683
   }
  ],
  "abilities": [
   [
    "Toxic Debris",
-   98.81606035299609
+   99.38384459313397
   ],
   [
    "Corrosion",
-   1.1839396470039136
+   0.6161554068660233
   ]
  ],
  "items": [
   [
    "Focus Sash",
-   86.93040054791368
+   55.23735099885454
   ],
   [
    "Life Orb",
-   3.3246782113316025
-  ],
-  [
-   "Sitrus Berry",
-   3.1996771491467637
+   39.451892841525456
   ],
   [
    "Choice Scarf",
-   2.286800328632757
-  ],
-  [
-   "Expert Belt",
-   1.5815574791097982
-  ],
-  [
-   "Shuca Berry",
-   1.3808934230113892
-  ],
-  [
-   "Leftovers",
-   0.46235460083667623
+   1.330311925469078
   ],
   [
    "Passho Berry",
-   0.12940993818129645
+   1.0411873473274098
+  ],
+  [
+   "Air Balloon",
+   0.8420253102645294
+  ],
+  [
+   "Expert Belt",
+   0.7960852684596136
+  ],
+  [
+   "Red Card",
+   0.5276346790040771
+  ],
+  [
+   "Shuca Berry",
+   0.5196503038040361
   ]
  ],
  "moves": [
   [
    "Power Gem",
-   24.512898016833482
-  ],
-  [
-   "Sludge Bomb",
-   22.948568959470833
+   24.61926809797952
   ],
   [
    "Earth Power",
-   21.832898817649177
+   24.59723010003184
   ],
   [
    "Spiky Shield",
-   21.518134340209667
+   23.91093384411043
+  ],
+  [
+   "Sludge Bomb",
+   23.72726833202421
   ],
   [
    "Mortal Spin",
-   2.731687223046885
-  ],
-  [
-   "Energy Ball",
-   2.1163276395066126
+   1.549000212735625
   ],
   [
    "Protect",
-   1.331483027686905
+   0.5602434790310131
+  ],
+  [
+   "Energy Ball",
+   0.24977845128014756
   ],
   [
    "Stealth Rock",
-   0.7756124885659925
+   0.2211451780142743
   ],
   [
    "Sludge Wave",
-   0.6281148569124394
+   0.09294391181817366
   ],
   [
-   "Dazzling Gleam",
-   0.4489933593669976
+   "Toxic",
+   0.08407557091135241
   ]
  ],
  "spreads": [
   [
-   "Modest:1/0/0/32/1/32",
-   20.572124879964722
-  ],
-  [
    "Modest:2/0/0/32/0/32",
-   19.949769347461594
+   23.38142302064917
   ],
   [
    "Timid:1/0/0/32/1/32",
-   17.604375364431462
+   18.209873781061216
+  ],
+  [
+   "Modest:1/0/0/32/1/32",
+   15.434612825715611
   ],
   [
    "Timid:2/0/0/32/0/32",
-   15.375226729416664
+   13.488023099832732
   ],
   [
-   "Modest:0/0/1/32/1/32",
-   3.408766660221512
+   "Modest:1/0/1/32/0/32",
+   12.495015416515118
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Whimsicott",
-   11.693391620574275
+   11.651949494597567
   ],
   [
    "Garchomp",
-   9.535504377390236
-  ],
-  [
-   "Charizard-Mega-Y",
-   6.718821082641554
-  ],
-  [
-   "Basculegion",
-   6.075293681405896
+   8.83480784346708
   ],
   [
    "Staraptor-Mega",
-   5.2269052702055845
+   8.651234251760517
+  ],
+  [
+   "Charizard-Mega-Y",
+   7.6151008365613855
+  ],
+  [
+   "Indeedee",
+   6.364946579922854
   ],
   [
    "Kingambit",
-   5.17587969383931
+   6.057450400879323
   ],
   [
-   "Sinistcha",
-   4.129066624199078
+   "Rillaboom",
+   4.122832906360631
+  ],
+  [
+   "Volcarona",
+   2.5508614587195226
+  ],
+  [
+   "Floette-Mega",
+   2.388421479802281
   ],
   [
    "Incineroar",
-   3.9876893264664863
-  ],
-  [
-   "Metagross-Mega",
-   3.7290611448779862
-  ],
-  [
-   "Grimmsnarl",
-   2.4636128665543313
+   2.140167630819189
   ]
  ],
  "counters": [
   {
-   "name": "Pelipper",
+   "name": "Salamence-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Charizard-Mega-Y",
+   "name": "Sylveon",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Gholdengo",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Incineroar",
+   "name": "Indeedee-F",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Grimmsnarl",
+   "name": "Milotic",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Kommo-o",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Torkoal",
+   "name": "Volcarona",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Basculegion",
+   "name": "Garchomp-Mega-Z",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -216,7 +222,7 @@
  ],
  "builds": [
   {
-   "item": "Focus Sash",
+   "item": "Glimmoranite",
    "ability": "Toxic Debris",
    "moves": [
     "Power Gem",
@@ -224,12 +230,46 @@
     "Earth Power",
     "Spiky Shield"
    ],
-   "count": 5,
+   "count": 14,
    "bestPlacing": 3,
-   "bestPlayer": "VortexTheGreat",
-   "eventName": "Palafin Pals Jet Punch Series 🌊✊Reg M-B #2",
-   "eventSlug": "2026-06-22-palafin-pals-jet-punch-series-reg-m-b-2",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a390b81c87cd9ff0a30cfc3",
+   "bestPlayer": "Santi Gonzalez",
+   "eventName": "Tenki's Cart Weekly #124 - Reg M-C",
+   "eventSlug": "2026-10-29-tenki-s-cart-weekly-124-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6adc804297e21d82e5c6dffc",
+   "nature": "Timid"
+  },
+  {
+   "item": "Life Orb",
+   "ability": "Toxic Debris",
+   "moves": [
+    "Spiky Shield",
+    "Sludge Bomb",
+    "Power Gem",
+    "Earth Power"
+   ],
+   "count": 10,
+   "bestPlacing": 1,
+   "bestPlayer": "Tachyon112358",
+   "eventName": "Tuesday Throwdowns #3 (Top Cut, $50 for 1st)",
+   "eventSlug": "2026-11-11-tuesday-throwdowns-3-top-cut-50-for-1st",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae18daf80a8f79408d1ff13",
+   "nature": "Modest"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Toxic Debris",
+   "moves": [
+    "Sludge Bomb",
+    "Power Gem",
+    "Earth Power",
+    "Spiky Shield"
+   ],
+   "count": 6,
+   "bestPlacing": 1,
+   "bestPlayer": "jonen",
+   "eventName": "Alpensee Tour (Reg M-C) #81",
+   "eventSlug": "2026-10-28-alpensee-tour-reg-m-c-81",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6abaa2a5880ed327106dea23",
    "nature": "Modest"
   }
  ]

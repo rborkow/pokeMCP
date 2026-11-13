@@ -2,15 +2,21 @@
  "id": "zoroarkhisui",
  "name": "Zoroark-Hisui",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.008562,
-   "rank": 85,
-   "raw": 35998
+   "month": "2026-09",
+   "usage": 0.0052964,
+   "rank": 97,
+   "raw": 38011
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0054681999999999994,
+   "rank": 93,
+   "raw": 49009
   }
  ],
  "abilities": [
@@ -22,165 +28,159 @@
  "items": [
   [
    "Focus Sash",
-   35.589405375620956
+   54.455121959852114
   ],
   [
    "Choice Scarf",
-   35.25176556224848
+   25.95663967226859
   ],
   [
    "Life Orb",
-   17.656639505561223
-  ],
-  [
-   "Spell Tag",
-   3.571098629710021
-  ],
-  [
-   "Colbur Berry",
-   2.716672766742624
-  ],
-  [
-   "Silk Scarf",
-   1.1788840870649857
+   10.526333293065434
   ],
   [
    "Wide Lens",
-   0.8420392164214234
+   4.9452283185972234
   ],
   [
-   "Expert Belt",
-   0.7499011269287382
+   "Normal Gem",
+   1.4138835827964074
+  ],
+  [
+   "Silk Scarf",
+   0.5128854610182756
+  ],
+  [
+   "Sitrus Berry",
+   0.470224477275228
+  ],
+  [
+   "Colbur Berry",
+   0.4550351457038733
   ]
  ],
  "moves": [
   [
-   "Hyper Voice",
-   14.00677882191636
-  ],
-  [
    "Icy Wind",
-   12.714012852490983
-  ],
-  [
-   "Shadow Ball",
-   12.419551792885995
-  ],
-  [
-   "Bitter Malice",
-   11.325224493080524
-  ],
-  [
-   "Protect",
-   7.964462265657278
-  ],
-  [
-   "Flamethrower",
-   5.445563729594472
+   12.534767170752339
   ],
   [
    "Taunt",
-   4.827386901811055
+   11.128258175973544
+  ],
+  [
+   "Bitter Malice",
+   9.295518351752685
   ],
   [
    "Will-O-Wisp",
-   4.346190337225077
+   9.03793956105883
   ],
   [
-   "Psychic",
-   4.056945757695034
+   "Hyper Voice",
+   8.558761529697465
   ],
   [
-   "Grass Knot",
-   2.94036040855875
+   "Shadow Ball",
+   7.773108549177945
+  ],
+  [
+   "Protect",
+   7.477402512146017
+  ],
+  [
+   "Memento",
+   6.500017491977099
+  ],
+  [
+   "Snarl",
+   5.8675583366756
+  ],
+  [
+   "Rain Dance",
+   3.175618159135201
   ]
  ],
  "spreads": [
   [
    "Timid:2/0/0/32/0/32",
-   47.59082283718685
+   48.771684272522585
   ],
   [
    "Modest:2/0/0/32/0/32",
-   18.649687642035673
+   15.06943416813827
+  ],
+  [
+   "Hasty:0/32/0/2/0/32",
+   9.20093039306294
+  ],
+  [
+   "Timid:19/0/0/0/15/32",
+   4.559302849541111
   ],
   [
    "Timid:1/0/1/32/0/32",
-   5.809573919254783
-  ],
-  [
-   "Modest:1/0/0/32/1/32",
-   5.352147576291392
-  ],
-  [
-   "Timid:0/0/0/32/0/32",
-   2.4455597916892726
+   4.21711765936712
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Whimsicott",
-   6.381615493246176
-  ],
-  [
-   "Garchomp",
-   4.586569574960446
-  ],
-  [
-   "Farigiraf",
-   3.9473500483349877
-  ],
-  [
-   "Sneasler",
-   3.7399951253850707
-  ],
-  [
-   "Kingambit",
-   3.6822953958282985
+   4.867280414763424
   ],
   [
    "Incineroar",
-   3.600641321653581
+   3.9920053733249152
   ],
   [
-   "Sinistcha",
-   3.469508609701683
+   "Overqwil",
+   3.9893074951524867
   ],
   [
-   "Staraptor-Mega",
-   2.721046397223355
+   "Indeedee-F",
+   3.836966103648961
   ],
   [
-   "Basculegion",
-   2.546222115609289
+   "Audino",
+   3.490221052766308
   ],
   [
-   "Floette-Mega",
-   2.492049140110766
+   "Charizard-Mega-Y",
+   2.891412688368611
+  ],
+  [
+   "Kingambit",
+   2.857970480450181
+  ],
+  [
+   "Sneasler",
+   2.579409829641642
+  ],
+  [
+   "Maushold",
+   2.3209837200403713
+  ],
+  [
+   "Malamar-Mega",
+   2.2863942586133454
   ]
  ],
  "counters": [
   {
-   "name": "Garchomp",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
    "name": "Incineroar",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Basculegion",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

@@ -2,217 +2,223 @@
  "id": "arcaninehisui",
  "name": "Arcanine-Hisui",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.013276399999999999,
-   "rank": 75,
-   "raw": 40680
+   "month": "2026-09",
+   "usage": 0.1193825,
+   "rank": 15,
+   "raw": 337729
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.057581600000000004,
+   "rank": 33,
+   "raw": 204125
   }
  ],
  "abilities": [
   [
    "Rock Head",
-   72.37383051489549
+   94.35579191349123
   ],
   [
    "Intimidate",
-   26.927745673910163
+   5.610309071324231
   ],
   [
    "Flash Fire",
-   0.6984238111943519
+   0.03389901518453983
   ]
  ],
  "items": [
   [
    "Focus Sash",
-   51.386395655337346
+   91.46791589426164
   ],
   [
    "Choice Scarf",
-   18.67031064182064
-  ],
-  [
-   "Life Orb",
-   12.515523416661361
-  ],
-  [
-   "Sitrus Berry",
-   5.024516218569816
-  ],
-  [
-   "Chople Berry",
-   2.3367014681946854
-  ],
-  [
-   "Shuca Berry",
-   2.2119884465624464
-  ],
-  [
-   "Charcoal",
-   1.6840216401217183
+   3.5083918112333197
   ],
   [
    "White Herb",
-   1.3195862319708758
+   2.5001412805022807
+  ],
+  [
+   "Life Orb",
+   0.8293059840610416
+  ],
+  [
+   "Sitrus Berry",
+   0.7576696436698692
+  ],
+  [
+   "Shuca Berry",
+   0.19787386561366324
+  ],
+  [
+   "Air Balloon",
+   0.18186309111950472
+  ],
+  [
+   "Wide Lens",
+   0.09440446884173864
   ]
  ],
  "moves": [
   [
    "Flare Blitz",
-   24.444552690367953
+   24.91072895461327
   ],
   [
    "Protect",
-   18.985404236993407
-  ],
-  [
-   "Extreme Speed",
-   17.150094083174167
+   23.919956882287543
   ],
   [
    "Head Smash",
-   16.851747692142187
+   22.337198896142752
+  ],
+  [
+   "Extreme Speed",
+   20.41276275657075
   ],
   [
    "Rock Slide",
-   15.034281735659144
+   6.019899538807472
   ],
   [
    "Close Combat",
-   2.3022389395666165
+   0.8141894499811758
+  ],
+  [
+   "Roar",
+   0.4824338571244008
+  ],
+  [
+   "Helping Hand",
+   0.23478239881512686
   ],
   [
    "Wild Charge",
-   1.772353368256419
-  ],
-  [
-   "Psychic Fangs",
-   0.9794566805407973
-  ],
-  [
-   "Will-O-Wisp",
-   0.4618345287129495
+   0.22568670242209474
   ],
   [
    "Snarl",
-   0.26046004656566896
+   0.14610186011103626
   ]
  ],
  "spreads": [
   [
-   "Jolly:1/32/0/0/1/32",
-   24.673201944166607
-  ],
-  [
    "Jolly:2/32/0/0/0/32",
-   23.59957244080344
+   40.4228644336495
   ],
   [
-   "Adamant:2/32/0/0/0/32",
-   11.379510299088311
+   "Jolly:1/32/0/0/1/32",
+   28.579056786058615
   ],
   [
    "Jolly:1/32/1/0/0/32",
-   7.663047852200728
+   5.908891450223332
   ],
   [
-   "Adamant:1/32/0/0/1/32",
-   4.643984875465141
+   "Jolly:0/32/1/0/1/32",
+   5.7537263358571975
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   5.25374624666941
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Whimsicott",
-   7.100719144931698
+   "Rillaboom",
+   13.69503826576916
   ],
   [
-   "Garchomp",
-   7.064193420992298
-  ],
-  [
-   "Froslass-Mega",
-   6.041009688473418
-  ],
-  [
-   "Sneasler",
-   5.4405351081555136
-  ],
-  [
-   "Kingambit",
-   4.823004251853973
-  ],
-  [
-   "Sinistcha",
-   4.330718085296792
-  ],
-  [
-   "Staraptor-Mega",
-   4.234055757909181
+   "Raichu-Mega-Y",
+   10.555017215183723
   ],
   [
    "Gholdengo",
-   4.123760056350261
+   9.089607641641761
   ],
   [
-   "Basculegion",
-   3.6630481847001115
+   "Sneasler",
+   7.321479399562847
+  ],
+  [
+   "Staraptor-Mega",
+   6.0996408545786815
+  ],
+  [
+   "Kingambit",
+   6.067184300959154
+  ],
+  [
+   "Salamence-Mega",
+   5.574847124247836
   ],
   [
    "Primarina",
-   3.125691485819971
+   4.685038525834096
+  ],
+  [
+   "Milotic",
+   3.2959275006717528
+  ],
+  [
+   "Froslass-Mega",
+   3.0542269943863203
   ]
  ],
  "counters": [
   {
-   "name": "Whimsicott",
+   "name": "Excadrill",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Incineroar",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Garchomp",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Farigiraf",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Torkoal",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Pelipper",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Grimmsnarl",
+   "name": "Garchomp-Mega-Z",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
    "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Salamence-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Indeedee",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Milotic",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gengar-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Golisopod-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

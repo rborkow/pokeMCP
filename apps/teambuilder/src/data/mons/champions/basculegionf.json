@@ -1,0 +1,228 @@
+{
+ "id": "basculegionf",
+ "name": "Basculegion-F",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.0093213,
+   "rank": 72,
+   "raw": 15389
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0565067,
+   "rank": 34,
+   "raw": 118135
+  }
+ ],
+ "abilities": [
+  [
+   "Swift Swim",
+   89.56423189462247
+  ],
+  [
+   "Adaptability",
+   10.435235999258676
+  ],
+  [
+   "Mold Breaker",
+   0.0005321061188688906
+  ]
+ ],
+ "items": [
+  [
+   "Focus Sash",
+   78.9592197111556
+  ],
+  [
+   "Life Orb",
+   11.29093730256253
+  ],
+  [
+   "Choice Scarf",
+   8.075422072995575
+  ],
+  [
+   "Mystic Water",
+   0.7952842840037113
+  ],
+  [
+   "Sitrus Berry",
+   0.3684509502490395
+  ],
+  [
+   "Wide Lens",
+   0.1971087176379418
+  ],
+  [
+   "Expert Belt",
+   0.14453019189064573
+  ],
+  [
+   "Wise Glasses",
+   0.052948558384002385
+  ]
+ ],
+ "moves": [
+  [
+   "Muddy Water",
+   24.76915469074733
+  ],
+  [
+   "Shadow Ball",
+   24.48957723352898
+  ],
+  [
+   "Ice Beam",
+   23.85995106118595
+  ],
+  [
+   "Protect",
+   22.725231505555694
+  ],
+  [
+   "Hydro Pump",
+   1.4760968787377127
+  ],
+  [
+   "Icy Wind",
+   1.0436900726035938
+  ],
+  [
+   "Flip Turn",
+   0.4389694020439722
+  ],
+  [
+   "Aqua Jet",
+   0.3452299186080321
+  ],
+  [
+   "Soak",
+   0.2566122910705676
+  ],
+  [
+   "Rain Dance",
+   0.13491341551968958
+  ]
+ ],
+ "spreads": [
+  [
+   "Modest:2/0/0/32/0/32",
+   35.30971930746687
+  ],
+  [
+   "Modest:0/0/1/32/1/32",
+   30.463917190336666
+  ],
+  [
+   "Modest:0/0/2/32/0/32",
+   11.818480712879492
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   3.6461140463048958
+  ],
+  [
+   "Modest:4/0/12/30/1/19",
+   2.5320491395053413
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Pelipper",
+   17.510305121971896
+  ],
+  [
+   "Archaludon",
+   17.135341285627216
+  ],
+  [
+   "Golisopod-Mega",
+   15.202801124000162
+  ],
+  [
+   "Sneasler",
+   14.577981656385052
+  ],
+  [
+   "Raichu-Mega-X",
+   8.590088867973398
+  ],
+  [
+   "Swampert-Mega",
+   3.076692222727924
+  ],
+  [
+   "Raichu-Mega-Y",
+   1.9917626575707552
+  ],
+  [
+   "Floette-Mega",
+   1.9039243408138184
+  ],
+  [
+   "Rillaboom",
+   1.3630173058079569
+  ],
+  [
+   "Grimmsnarl",
+   1.215348115128552
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Froslass-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Volcarona",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Armarouge",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Indeedee-F",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

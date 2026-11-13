@@ -1,0 +1,174 @@
+{
+ "id": "baxcaliburmega",
+ "name": "Baxcalibur-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.0294935,
+   "rank": 45,
+   "raw": 178375
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.007652600000000001,
+   "rank": 74,
+   "raw": 74219
+  }
+ ],
+ "abilities": [
+  [
+   "Thermal Exchange",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "baxcalibrite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   23.797117730526487
+  ],
+  [
+   "Glaive Rush",
+   23.2997806369403
+  ],
+  [
+   "Ice Shard",
+   19.961572150981794
+  ],
+  [
+   "Icicle Crash",
+   8.79251298545774
+  ],
+  [
+   "Swords Dance",
+   7.877803303078316
+  ],
+  [
+   "High Horsepower",
+   7.687651199305128
+  ],
+  [
+   "Dragon Dance",
+   4.267585707968214
+  ],
+  [
+   "Icicle Spear",
+   1.1682352821375757
+  ],
+  [
+   "Scale Shot",
+   0.7734092241861804
+  ],
+  [
+   "Dragon Claw",
+   0.49398026329017164
+  ]
+ ],
+ "spreads": [
+  [
+   "Jolly:2/32/0/0/0/32",
+   5.381936604343505
+  ],
+  [
+   "Adamant:1/32/0/0/1/32",
+   4.605734024257926
+  ],
+  [
+   "Jolly:1/32/0/0/1/32",
+   4.234407479448558
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   3.9946065255448278
+  ],
+  [
+   "Adamant:32/32/0/0/0/2",
+   3.6550341811311458
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Rillaboom",
+   10.365849474503213
+  ],
+  [
+   "Sneasler",
+   8.317069283684539
+  ],
+  [
+   "Ninetales-Alola",
+   7.1283217477055905
+  ],
+  [
+   "Volcarona",
+   6.469166041936333
+  ],
+  [
+   "Incineroar",
+   5.1844529010414275
+  ],
+  [
+   "Gholdengo",
+   4.965552069046756
+  ],
+  [
+   "Kingambit",
+   4.626766464118073
+  ],
+  [
+   "Raichu-Mega-Y",
+   4.040580479294281
+  ],
+  [
+   "Milotic",
+   4.015275243126175
+  ],
+  [
+   "Basculegion",
+   3.1473065095514245
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Charizard-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

@@ -2,187 +2,205 @@
  "id": "politoed",
  "name": "Politoed",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0266917,
-   "rank": 46,
-   "raw": 68322
+   "month": "2026-09",
+   "usage": 0.07350240000000001,
+   "rank": 25,
+   "raw": 211141
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0730958,
+   "rank": 24,
+   "raw": 226620
   }
  ],
  "abilities": [
   [
    "Drizzle",
-   99.52120137196134
+   99.8330851056721
   ],
   [
    "Water Absorb",
-   0.44415795275607706
+   0.1623015190575135
   ],
   [
    "Damp",
-   0.03464067528256863
+   0.00461337527037492
   ]
  ],
  "items": [
   [
    "Sitrus Berry",
-   59.85702556157943
-  ],
-  [
-   "Mystic Water",
-   12.173270929345664
-  ],
-  [
-   "Leftovers",
-   10.524578179491975
-  ],
-  [
-   "Damp Rock",
-   5.743678168172099
+   40.72270739776281
   ],
   [
    "Choice Scarf",
-   3.421385338077639
+   21.3491966500133
+  ],
+  [
+   "Mystic Water",
+   20.261300242268497
   ],
   [
    "Life Orb",
-   1.7177299115051274
+   11.96149291771649
   ],
   [
-   "Wide Lens",
-   1.5755837381963127
+   "Leftovers",
+   1.3408143484535502
+  ],
+  [
+   "Damp Rock",
+   0.8705057025101045
+  ],
+  [
+   "Rindo Berry",
+   0.7976257320268039
   ],
   [
    "Wacan Berry",
-   1.248690357648888
+   0.5851468903317502
   ]
  ],
  "moves": [
   [
-   "Protect",
-   22.579410448993443
-  ],
-  [
    "Weather Ball",
-   21.10399215385025
+   20.10301015214269
   ],
   [
-   "Perish Song",
-   14.878175829537406
-  ],
-  [
-   "Encore",
-   10.420113398718078
-  ],
-  [
-   "Ice Beam",
-   7.776942406586129
+   "Protect",
+   18.725940651928724
   ],
   [
    "Muddy Water",
-   7.447607708830222
+   17.59938659340741
+  ],
+  [
+   "Ice Beam",
+   16.321697204525716
+  ],
+  [
+   "Perish Song",
+   7.100915412023641
+  ],
+  [
+   "Encore",
+   5.302644313382207
   ],
   [
    "Icy Wind",
-   3.471247023778041
-  ],
-  [
-   "Helping Hand",
-   3.098824971689611
-  ],
-  [
-   "Hypnosis",
-   2.747921093729713
+   4.318334253682311
   ],
   [
    "Rain Dance",
-   1.8255979791238317
+   3.9939448183924053
+  ],
+  [
+   "Psych Up",
+   3.603287198774352
+  ],
+  [
+   "Helping Hand",
+   1.2560860519742911
   ]
  ],
  "spreads": [
   [
+   "Timid:2/0/0/32/0/32",
+   20.51093472187044
+  ],
+  [
+   "Modest:7/0/0/32/0/27",
+   5.577083183810746
+  ],
+  [
+   "Modest:32/0/0/30/0/4",
+   5.025364806382018
+  ],
+  [
    "Calm:31/0/23/0/12/0",
-   7.098884815967719
+   3.7826737152780865
   ],
   [
-   "Calm:32/0/24/0/10/0",
-   5.530930943829382
-  ],
-  [
-   "Modest:23/0/12/30/0/1",
-   4.035222607649057
-  ],
-  [
-   "Bold:32/0/25/0/9/0",
-   3.8644696556933775
-  ],
-  [
-   "Calm:32/0/0/2/32/0",
-   3.732052845227262
+   "Calm:32/0/15/4/10/5",
+   3.781312319730197
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Incineroar",
-   10.69351259203755
-  ],
-  [
-   "Sinistcha",
-   10.154554096196298
-  ],
-  [
    "Archaludon",
-   10.017234101464924
+   16.16770999304423
+  ],
+  [
+   "Rillaboom",
+   7.44404499285764
+  ],
+  [
+   "Incineroar",
+   7.078733761003245
+  ],
+  [
+   "Golisopod-Mega",
+   7.060392888563991
+  ],
+  [
+   "Charizard-Mega-Y",
+   6.041115908017977
   ],
   [
    "Gengar-Mega",
-   9.428697642832818
-  ],
-  [
-   "Swampert-Mega",
-   5.151720476436106
-  ],
-  [
-   "Grimmsnarl",
-   3.248069970467314
-  ],
-  [
-   "Sneasler",
-   2.6725307853762974
-  ],
-  [
-   "Mawile-Mega",
-   2.4087130626841833
-  ],
-  [
-   "Basculegion",
-   2.3397922618572786
+   5.535641702343968
   ],
   [
    "Farigiraf",
-   2.1677083594065767
+   5.290200202530191
+  ],
+  [
+   "Raichu-Mega-X",
+   3.635333444583956
+  ],
+  [
+   "Espathra",
+   3.431402803705667
+  ],
+  [
+   "Grimmsnarl",
+   3.194009964768156
   ]
  ],
  "counters": [
   {
-   "name": "Sinistcha",
+   "name": "Indeedee-F",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Torkoal",
+   "name": "Gardevoir-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Charizard-Mega-Y",
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Salamence-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -194,25 +212,13 @@
    "switchPct": 0
   },
   {
-   "name": "Kingambit",
+   "name": "Archaludon",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sylveon",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Staraptor-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Whimsicott",
+   "name": "Swampert-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -224,51 +230,51 @@
    "ability": "Drizzle",
    "moves": [
     "Weather Ball",
-    "Perish Song",
     "Encore",
+    "Perish Song",
     "Protect"
    ],
-   "count": 4,
-   "bestPlacing": 2,
-   "bestPlayer": "LiamJVGC",
-   "eventName": "Road to Area 229 #4",
-   "eventSlug": "2026-06-27-road-to-area-229-4",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c370fc87cd9ff0a30eaa1",
+   "count": 9,
+   "bestPlacing": 1,
+   "bestPlayer": "JoMcCloud23",
+   "eventName": "GLORY OF CHAMPIONS #2 - REGULATION M-C",
+   "eventSlug": "2026-10-28-glory-of-champions-2-regulation-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad923ae115c12b73a5a941c",
    "nature": "Calm"
+  },
+  {
+   "item": "Mystic Water",
+   "ability": "Drizzle",
+   "moves": [
+    "Muddy Water",
+    "Weather Ball",
+    "Ice Beam",
+    "Protect"
+   ],
+   "count": 8,
+   "bestPlacing": 1,
+   "bestPlayer": "Z2R Carretta",
+   "eventName": "Intimidators Champions Challenge #50 REG M-C",
+   "eventSlug": "2026-10-12-intimidators-champions-challenge-50-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6accfc7d115c12b73a5a2049",
+   "nature": "Modest"
   },
   {
    "item": "Life Orb",
    "ability": "Drizzle",
    "moves": [
+    "Weather Ball",
     "Muddy Water",
     "Ice Beam",
-    "Weather Ball",
     "Protect"
    ],
-   "count": 1,
-   "bestPlacing": 6,
-   "bestPlayer": "aceazka",
-   "eventName": "BFI'26 - Frontier Tournament #3",
-   "eventSlug": "2026-07-04-bfi-26-frontier-tournament-3",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3f7832c87cd9ff0a310b57",
+   "count": 2,
+   "bestPlacing": 3,
+   "bestPlayer": "Saret",
+   "eventName": "Trinity Tournament 18 (Double Format)",
+   "eventSlug": "2026-11-08-trinity-tournament-18-double-format",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae35ea122fd412b92a4f526",
    "nature": "Modest"
-  },
-  {
-   "item": "Sitrus Berry",
-   "ability": "Drizzle",
-   "moves": [
-    "Muddy Water",
-    "Perish Song",
-    "Encore",
-    "Protect"
-   ],
-   "count": 1,
-   "bestPlacing": 6,
-   "bestPlayer": "Noah Alampay",
-   "eventName": "Tyrant Thursdays #2",
-   "eventSlug": "2026-06-25-tyrant-thursdays-2",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3b53a483fd320299bcf113",
-   "nature": "Calm"
   }
  ]
 }

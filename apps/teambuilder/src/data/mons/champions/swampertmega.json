@@ -2,15 +2,21 @@
  "id": "swampertmega",
  "name": "Swampert-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.1410022,
-   "rank": 15,
-   "raw": 319208
+   "month": "2026-09",
+   "usage": 0.0428672,
+   "rank": 37,
+   "raw": 132759
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0408473,
+   "rank": 44,
+   "raw": 136081
   }
  ],
  "abilities": [
@@ -28,131 +34,119 @@
  "moves": [
   [
    "Protect",
-   24.075009729304334
+   24.510767166008645
   ],
   [
    "Wave Crash",
-   23.636755638019316
+   24.027849170292736
   ],
   [
    "Ice Punch",
-   17.476030249243827
+   21.120373860356302
   ],
   [
    "Earthquake",
-   16.607601725697705
+   17.463839860032955
   ],
   [
    "High Horsepower",
-   9.30577490100976
-  ],
-  [
-   "Flip Turn",
-   2.3155648590255713
+   7.499809758347883
   ],
   [
    "Rock Slide",
-   1.5348186557137604
+   1.0233494000615198
+  ],
+  [
+   "Flip Turn",
+   0.6451796906995672
   ],
   [
    "Knock Off",
-   1.038396337269194
+   0.5422236524092297
   ],
   [
-   "Liquidation",
-   0.9842731714719708
+   "Ice Beam",
+   0.5212525526776185
   ],
   [
-   "Bulk Up",
-   0.6306276986972473
+   "Earth Power",
+   0.4999825299544171
   ]
  ],
  "spreads": [
   [
    "Adamant:2/32/0/0/0/32",
-   21.400118499577275
-  ],
-  [
-   "Adamant:12/32/0/0/0/22",
-   8.699668260964645
+   37.37638085678736
   ],
   [
    "Adamant:18/30/0/0/0/18",
-   7.059941721691189
+   5.663343501645607
   ],
   [
-   "Jolly:2/32/0/0/0/32",
-   3.1363799495377744
+   "Adamant:12/32/0/0/0/22",
+   4.1159318445844075
   ],
   [
-   "Adamant:32/32/0/0/2/0",
-   2.572243882718369
+   "Adamant:11/32/0/0/0/23",
+   2.2356095200986985
+  ],
+  [
+   "Adamant:32/16/5/0/0/13",
+   2.2190878453941254
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Pelipper",
-   18.462009319534463
+   18.173419411579758
   ],
   [
    "Archaludon",
-   15.883002370945757
+   18.072182367449035
   ],
   [
-   "Sinistcha",
-   10.53722644046174
-  ],
-  [
-   "Grimmsnarl",
-   5.870204886087279
-  ],
-  [
-   "Sableye",
-   5.626090148661013
-  ],
-  [
-   "Basculegion",
-   4.192938415122712
-  ],
-  [
-   "Metagross-Mega",
-   3.879793530457719
-  ],
-  [
-   "Incineroar",
-   2.9530698109966167
+   "Golisopod-Mega",
+   5.882903823461097
   ],
   [
    "Sneasler",
-   2.7242273174120233
+   5.073115220484659
   ],
   [
-   "Venusaur-Mega",
-   1.83266172380936
+   "Basculegion-F",
+   4.256183824660523
+  ],
+  [
+   "Grimmsnarl",
+   4.191861607700922
+  ],
+  [
+   "Sinistcha",
+   2.9270780964559546
+  ],
+  [
+   "Charizard-Mega-Y",
+   2.8310331130041777
+  ],
+  [
+   "Farigiraf",
+   2.768572512787279
+  ],
+  [
+   "Incineroar",
+   2.7678280495075076
   ]
  ],
  "counters": [
   {
-   "name": "Sableye",
+   "name": "Grimmsnarl",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sylveon",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Basculegion",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Raichu-Mega-X",
+   "name": "Golisopod-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -164,19 +158,31 @@
    "switchPct": 0
   },
   {
-   "name": "Gengar-Mega",
+   "name": "Sylveon",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sneasler",
+   "name": "Incineroar",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Venusaur",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Dragonite-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

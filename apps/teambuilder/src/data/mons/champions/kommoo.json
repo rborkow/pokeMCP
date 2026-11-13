@@ -2,173 +2,197 @@
  "id": "kommoo",
  "name": "Kommo-o",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0156914,
-   "rank": 67,
-   "raw": 36050
+   "month": "2026-09",
+   "usage": 0.0432033,
+   "rank": 36,
+   "raw": 79927
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.07137450000000001,
+   "rank": 26,
+   "raw": 165207
   }
  ],
  "abilities": [
   [
    "Soundproof",
-   77.29532573061762
-  ],
-  [
-   "Overcoat",
-   14.973465167325383
+   81.59973943810343
   ],
   [
    "Bulletproof",
-   7.731209102056987
+   15.989872936568686
+  ],
+  [
+   "Overcoat",
+   2.4103876253278984
   ]
  ],
  "items": [
   [
    "Leftovers",
-   66.16460377303316
-  ],
-  [
-   "Dragon Fang",
-   10.975252407362882
-  ],
-  [
-   "Sitrus Berry",
-   6.842454849343269
-  ],
-  [
-   "Haban Berry",
-   6.066386152269031
+   54.772873314093
   ],
   [
    "Life Orb",
-   6.063839340709826
+   37.25906016816692
   ],
   [
-   "Lum Berry",
-   0.8430016237405521
+   "Sitrus Berry",
+   2.047529711735345
   ],
   [
-   "White Herb",
-   0.6849893211540861
+   "Dragon Fang",
+   1.8719778822163757
   ],
   [
-   "Black Belt",
-   0.4594464201050707
+   "Grassy Seed",
+   0.8086690942367845
+  ],
+  [
+   "Focus Sash",
+   0.7932279771177025
+  ],
+  [
+   "Haban Berry",
+   0.45749518412491796
+  ],
+  [
+   "Psychic Seed",
+   0.3709066425809665
   ]
  ],
  "moves": [
   [
-   "Protect",
-   23.98520055193967
+   "Clanging Scales",
+   24.509159268094663
   ],
   [
-   "Clanging Scales",
-   23.94870376873306
+   "Protect",
+   24.272099972425178
   ],
   [
    "Aura Sphere",
-   22.57523270829338
+   22.399291605914616
   ],
   [
    "Clangorous Soul",
-   22.017600792054967
-  ],
-  [
-   "Drain Punch",
-   1.0635121476894323
-  ],
-  [
-   "Vacuum Wave",
-   0.8855266491550648
-  ],
-  [
-   "Draco Meteor",
-   0.8602640158474472
+   15.751727394103089
   ],
   [
    "Flamethrower",
-   0.7426660225727486
+   8.9032511166585
+  ],
+  [
+   "Vacuum Wave",
+   2.2315351709809725
   ],
   [
    "Body Press",
-   0.7339054842984989
+   0.4304905062792203
   ],
   [
-   "Flash Cannon",
-   0.6843942028181599
+   "Draco Meteor",
+   0.3205236901821997
+  ],
+  [
+   "Iron Defense",
+   0.30731512510891307
+  ],
+  [
+   "Drain Punch",
+   0.20376655681426195
   ]
  ],
  "spreads": [
   [
    "Modest:2/0/0/32/0/32",
-   13.411853415529318
+   17.828459941078894
+  ],
+  [
+   "Modest:27/0/0/32/0/7",
+   10.847091764150061
+  ],
+  [
+   "Modest:1/0/0/32/1/32",
+   5.364927605365477
+  ],
+  [
+   "Modest:11/0/1/20/2/32",
+   4.504282193572156
   ],
   [
    "Timid:2/0/0/32/0/32",
-   11.65534649020989
-  ],
-  [
-   "Modest:5/0/1/30/1/29",
-   3.6657479792483154
-  ],
-  [
-   "Timid:1/0/0/32/1/32",
-   3.630789841744101
-  ],
-  [
-   "Modest:10/0/1/28/1/26",
-   2.961602372410396
+   4.220471818149309
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Incineroar",
-   10.248901625146043
+   8.834101063541
   ],
   [
-   "Sinistcha",
-   8.498334987551166
+   "Rillaboom",
+   8.800635611908197
   ],
   [
-   "Basculegion",
-   5.775096366272529
-  ],
-  [
-   "Gengar-Mega",
-   4.78200522483122
-  ],
-  [
-   "Metagross-Mega",
-   4.499666591997481
+   "Indeedee-F",
+   6.909532170203732
   ],
   [
    "Kingambit",
-   2.7329095243827894
-  ],
-  [
-   "Whimsicott",
-   2.6484977968189694
+   6.460382497515253
   ],
   [
    "Sneasler",
-   2.6318618746098945
+   5.709779237826942
   ],
   [
-   "Aerodactyl-Mega",
-   2.605895138071201
+   "Gengar-Mega",
+   5.226113771153868
   ],
   [
-   "Milotic",
-   2.5232650969937436
+   "Gardevoir-Mega",
+   4.791231731482347
+  ],
+  [
+   "Charizard-Mega-Y",
+   3.920840799370373
+  ],
+  [
+   "Armarouge",
+   3.1834545565914314
+  ],
+  [
+   "Raichu-Mega-Y",
+   2.8076379130126172
   ]
  ],
  "counters": [
+  {
+   "name": "Excadrill",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Salamence-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
   {
    "name": "Incineroar",
    "score": 0,
@@ -176,43 +200,25 @@
    "switchPct": 0
   },
   {
-   "name": "Archaludon",
+   "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
+   "name": "Annihilape",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Pelipper",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sneasler",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
    "name": "Farigiraf",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Whimsicott",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

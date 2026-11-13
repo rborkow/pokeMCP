@@ -2,169 +2,181 @@
  "id": "dragonite",
  "name": "Dragonite",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.014769000000000001,
-   "rank": 70,
-   "raw": 48025
+   "month": "2026-09",
+   "usage": 0.0084843,
+   "rank": 76,
+   "raw": 43772
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0079793,
+   "rank": 73,
+   "raw": 45928
   }
  ],
  "abilities": [
   [
-   "Multiscale",
-   73.69377855088685
+   "Inner Focus",
+   78.87106208526478
   ],
   [
-   "Inner Focus",
-   26.306221449113153
+   "Multiscale",
+   21.128937914735225
   ]
  ],
  "items": [
   [
-   "Dragon Fang",
-   56.33198705177942
-  ],
-  [
    "Life Orb",
-   11.501548970890525
+   66.88386117555729
   ],
   [
-   "Lum Berry",
-   5.8912449648501894
+   "Dragon Fang",
+   5.189766775524248
   ],
   [
    "Leftovers",
-   4.885995192334876
+   3.9250289535754157
   ],
   [
-   "Muscle Band",
-   2.804521801586314
+   "Lum Berry",
+   3.7948446300969487
   ],
   [
-   "Roseli Berry",
-   2.7949234706776847
+   "Rocky Helmet",
+   2.851601062925414
   ],
   [
-   "White Herb",
-   1.9699490958222468
+   "Electric Seed",
+   2.303999392131486
   ],
   [
-   "Sitrus Berry",
-   1.9542115819170776
+   "Expert Belt",
+   2.2258227385145744
+  ],
+  [
+   "Sharp Beak",
+   2.0303626218949793
   ]
  ],
  "moves": [
   [
    "Extreme Speed",
-   20.58291091565462
+   14.777549247072267
   ],
   [
    "Dragon Claw",
-   18.82625315639716
+   14.141761610229919
   ],
   [
    "Protect",
-   17.930352182485432
-  ],
-  [
-   "Low Kick",
-   12.10337883947465
-  ],
-  [
-   "Tailwind",
-   8.69754227704645
-  ],
-  [
-   "Scale Shot",
-   2.6473005903573017
-  ],
-  [
-   "Fire Punch",
-   1.9969697694511082
-  ],
-  [
-   "Haze",
-   1.9601707298610664
-  ],
-  [
-   "Stomping Tantrum",
-   1.6457123460624452
+   12.794982276983912
   ],
   [
    "Rock Slide",
-   1.5045508154624223
+   7.8959150804860005
+  ],
+  [
+   "Dragon Dance",
+   7.0313144412892745
+  ],
+  [
+   "Tailwind",
+   6.706171957749177
+  ],
+  [
+   "Scale Shot",
+   6.333168115615886
+  ],
+  [
+   "Stomping Tantrum",
+   5.957664021347601
+  ],
+  [
+   "Low Kick",
+   5.0019027229805015
+  ],
+  [
+   "Superpower",
+   4.447433958722733
   ]
  ],
  "spreads": [
   [
-   "Adamant:2/32/0/0/0/32",
-   21.626362328569844
+   "Adamant:7/32/0/0/0/27",
+   12.283314296824974
   ],
   [
-   "Adamant:0/32/1/0/1/32",
-   5.077520921367621
+   "Adamant:2/32/0/0/0/32",
+   6.504516257896466
   ],
   [
    "Jolly:2/32/0/0/0/32",
-   4.496193382138815
+   5.762010246548441
   ],
   [
-   "Adamant:21/32/0/0/0/13",
-   3.9719408160629133
+   "Jolly:3/32/0/0/0/31",
+   5.555989232629291
   ],
   [
-   "Adamant:32/26/5/0/0/3",
-   3.433179016199038
+   "Adamant:32/32/0/0/2/0",
+   3.7718242009274525
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Incineroar",
-   9.124416727402137
-  ],
-  [
-   "Basculegion",
-   6.48177974544313
-  ],
-  [
    "Sneasler",
-   6.168205718765086
+   7.249804851022184
+  ],
+  [
+   "Rillaboom",
+   7.131109148463128
+  ],
+  [
+   "Incineroar",
+   6.053350290801535
+  ],
+  [
+   "Indeedee-F",
+   5.303805865669123
+  ],
+  [
+   "Lopunny-Mega",
+   4.287882919645627
   ],
   [
    "Kingambit",
-   5.672849506816952
+   4.101592667043286
   ],
   [
-   "Raichu-Mega-Y",
-   4.703161578463362
-  ],
-  [
-   "Ninetales-Alola",
-   4.115251278261362
+   "Floette-Mega",
+   3.781477520065439
   ],
   [
    "Gengar-Mega",
-   3.7615693936096872
+   3.153525432065897
   ],
   [
-   "Sinistcha",
-   3.702942982157162
+   "Froslass-Mega",
+   2.719240291944238
   ],
   [
-   "Whimsicott",
-   2.5188190636416348
-  ],
-  [
-   "Gholdengo",
-   2.348849277652656
+   "Gardevoir-Mega",
+   2.687482247188426
   ]
  ],
  "counters": [
+  {
+   "name": "Sylveon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
   {
    "name": "Basculegion",
    "score": 0,
@@ -172,13 +184,19 @@
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
+   "name": "Charizard-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -190,25 +208,13 @@
    "switchPct": 0
   },
   {
-   "name": "Grimmsnarl",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Garchomp",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sinistcha",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
    "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -216,54 +222,54 @@
  ],
  "builds": [
   {
-   "item": "Dragon Fang",
-   "ability": "Multiscale",
+   "item": "Dragoninite",
+   "ability": "Inner Focus",
    "moves": [
-    "Dragon Claw",
-    "Low Kick",
-    "Extreme Speed",
-    "Protect"
+    "Protect",
+    "Dragon Pulse",
+    "Heat Wave",
+    "Tailwind"
    ],
-   "count": 2,
+   "count": 21,
    "bestPlacing": 1,
-   "bestPlayer": "root2iris",
-   "eventName": "Tenki's x MMHM - Champions M-B",
-   "eventSlug": "2026-06-25-tenki-s-x-mmhm-champions-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a04bb7e13f957d6d4b4758c",
-   "nature": "Adamant"
+   "bestPlayer": "NewAdi6",
+   "eventName": "VGC UmbreNews 27.10.2026 #37 - Champion",
+   "eventSlug": "2026-10-27-vgc-umbrenews-27-10-2026-37-champion",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ada09eb115c12b73a5a9904",
+   "nature": "Modest"
   },
   {
-   "item": "Lum Berry",
-   "ability": "Multiscale",
+   "item": "Dragoninite",
+   "ability": "Inner Focus",
    "moves": [
-    "Extreme Speed",
-    "Dragon Claw",
-    "Protect",
-    "Fire Punch"
+    "Dragon Pulse",
+    "Flamethrower",
+    "Tailwind",
+    "Protect"
    ],
-   "count": 2,
-   "bestPlacing": 2,
-   "bestPlayer": "Vgcorner",
-   "eventName": "4th Annual St. Jude VGC Charity Tournament",
-   "eventSlug": "2026-06-27-4th-annual-st-jude-vgc-charity-tournament",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/69c7cead36f5b5c303dbfa0c",
-   "nature": "Adamant"
+   "count": 8,
+   "bestPlacing": 1,
+   "bestPlayer": "Altkyle",
+   "eventName": "THE DOJO CHAMPIONS TOURNAMENT",
+   "eventSlug": "2026-11-10-the-dojo-champions-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aee2dd4e99f3235a75e25d1",
+   "nature": "Modest"
   },
   {
    "item": "Dragoninite",
    "ability": "Multiscale",
    "moves": [
-    "Weather Ball",
-    "Draco Meteor",
-    "Hurricane",
-    "Protect"
+    "Protect",
+    "Heat Wave",
+    "Dragon Pulse",
+    "Tailwind"
    ],
-   "count": 1,
-   "bestPlacing": 2,
-   "bestPlayer": "Malo__rx",
-   "eventName": "The Drywalls Series #8 - M-B",
-   "eventSlug": "2026-06-22-the-drywalls-series-8-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a37eb4faf50e12308407acc",
+   "count": 8,
+   "bestPlacing": 1,
+   "bestPlayer": "Asteriio",
+   "eventName": "Friday Fight Night 77! $50 Prize & Team Report",
+   "eventSlug": "2026-10-16-friday-fight-night-77-50-prize-team-report",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6acdb7b7115c12b73a5a2cd5",
    "nature": "Modest"
   }
  ]

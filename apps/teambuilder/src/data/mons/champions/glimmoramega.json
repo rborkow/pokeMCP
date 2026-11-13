@@ -2,15 +2,21 @@
  "id": "glimmoramega",
  "name": "Glimmora-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.012252,
-   "rank": 78,
-   "raw": 26857
+   "month": "2026-09",
+   "usage": 0.0250971,
+   "rank": 49,
+   "raw": 74835
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.019512,
+   "rank": 53,
+   "raw": 75650
   }
  ],
  "abilities": [
@@ -28,113 +34,125 @@
  "moves": [
   [
    "Power Gem",
-   24.771245607095597
+   24.877930163967868
   ],
   [
    "Earth Power",
-   22.37902974873604
+   24.412806750533463
   ],
   [
    "Sludge Bomb",
-   22.22279049871235
+   24.03650572734174
   ],
   [
    "Spiky Shield",
-   22.21035881464955
-  ],
-  [
-   "Sludge Wave",
-   3.275618729168532
+   23.92037887580066
   ],
   [
    "Protect",
-   2.415860638354346
+   0.9191314774228477
   ],
   [
-   "Energy Ball",
-   0.8797812349143268
-  ],
-  [
-   "Dazzling Gleam",
-   0.47005626510784837
+   "Sludge Wave",
+   0.8916723094824195
   ],
   [
    "Mortal Spin",
-   0.347389488727816
+   0.24867026947383042
   ],
   [
-   "Substitute",
-   0.2815286696023306
+   "Energy Ball",
+   0.162674190380561
+  ],
+  [
+   "Venoshock",
+   0.12725165983694328
+  ],
+  [
+   "Dazzling Gleam",
+   0.0858166810444251
   ]
  ],
  "spreads": [
   [
    "Timid:2/0/0/32/0/32",
-   18.76757247054077
-  ],
-  [
-   "Timid:9/0/0/25/0/32",
-   15.528675580867404
+   27.04089398917395
   ],
   [
    "Timid:1/0/0/32/1/32",
-   14.540163301494685
-  ],
-  [
-   "Bold:27/0/21/0/18/0",
-   10.623294189981355
+   16.010887494191948
   ],
   [
    "Modest:2/0/0/32/0/32",
-   5.4813008549775155
+   9.779185369806145
+  ],
+  [
+   "Modest:1/0/0/32/1/32",
+   7.228482071235762
+  ],
+  [
+   "Timid:1/0/1/32/0/32",
+   4.6733370668982825
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Whimsicott",
-   9.758021683559075
+   "Rillaboom",
+   9.741774566610985
   ],
   [
-   "Staraptor-Mega",
-   6.185826385321292
+   "Volcarona",
+   6.548855483565862
+  ],
+  [
+   "Whimsicott",
+   6.356178258465829
   ],
   [
    "Kingambit",
-   5.434478302742645
-  ],
-  [
-   "Basculegion",
-   4.859238378411622
-  ],
-  [
-   "Gholdengo",
-   4.455479185374613
-  ],
-  [
-   "Hydreigon",
-   4.331008926161503
-  ],
-  [
-   "Sinistcha",
-   4.190210330982586
-  ],
-  [
-   "Milotic",
-   3.6394506131559083
+   6.1417646483186985
   ],
   [
    "Incineroar",
-   3.500465513557333
+   6.07618519948544
+  ],
+  [
+   "Basculegion",
+   5.123544599873633
+  ],
+  [
+   "Froslass-Mega",
+   4.286013062751016
+  ],
+  [
+   "Kommo-o",
+   4.167252859157886
+  ],
+  [
+   "Charizard-Mega-Y",
+   3.482825104740609
   ],
   [
    "Garchomp",
-   3.44371436209323
+   3.2253524556402486
   ]
  ],
  "counters": [
   {
-   "name": "Garchomp",
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -146,37 +164,25 @@
    "switchPct": 0
   },
   {
-   "name": "Charizard-Mega-Y",
+   "name": "Gengar-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Arcanine-Hisui",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sylveon",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Kingambit",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Grimmsnarl",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

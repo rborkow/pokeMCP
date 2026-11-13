@@ -2,15 +2,21 @@
  "id": "lycanrocdusk",
  "name": "Lycanroc-Dusk",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.014871,
-   "rank": 69,
-   "raw": 26685
+   "month": "2026-09",
+   "usage": 0.0067435,
+   "rank": 84,
+   "raw": 27118
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0050615,
+   "rank": 97,
+   "raw": 17548
   }
  ],
  "abilities": [
@@ -22,147 +28,147 @@
  "items": [
   [
    "Focus Sash",
-   88.99797834208147
+   97.35727870111523
   ],
   [
    "Life Orb",
-   6.459236630208523
+   1.7136776175862087
   ],
   [
    "Hard Stone",
-   2.386479257959759
-  ],
-  [
-   "Choice Scarf",
-   1.0602014495780756
+   0.29111041942332394
   ],
   [
    "Expert Belt",
-   0.39550161082275864
+   0.26978363362032187
+  ],
+  [
+   "Rindo Berry",
+   0.07581718536774038
+  ],
+  [
+   "Leftovers",
+   0.07288568984050996
+  ],
+  [
+   "Scope Lens",
+   0.03708178324126113
   ],
   [
    "White Herb",
-   0.3861446163014007
-  ],
-  [
-   "King's Rock",
-   0.11428321119614909
-  ],
-  [
-   "nothing",
-   0.04209392220711247
+   0.030741992178324566
   ]
  ],
  "moves": [
   [
    "Accelerock",
-   24.63971746817777
+   24.73536184760268
   ],
   [
    "Protect",
-   23.12856029265099
+   24.560930070589222
   ],
   [
    "Rock Slide",
-   22.22744702831423
+   24.374796248637196
   ],
   [
    "Close Combat",
-   21.94462088116632
-  ],
-  [
-   "Psychic Fangs",
-   1.4212497238397677
-  ],
-  [
-   "Howl",
-   1.3339350436041686
+   23.858685325401787
   ],
   [
    "Play Rough",
-   1.1053706383611113
+   0.40077649311042335
   ],
   [
-   "Crunch",
-   0.7686341318155728
+   "Psychic Fangs",
+   0.3530796959416244
   ],
   [
    "Drill Run",
-   0.7083726886611127
+   0.3503580762833714
   ],
   [
-   "Sucker Punch",
-   0.5059320555392478
+   "Quick Guard",
+   0.3257786013311187
+  ],
+  [
+   "Iron Head",
+   0.1571234633317631
+  ],
+  [
+   "Endeavor",
+   0.15097863768298594
   ]
  ],
  "spreads": [
   [
-   "Adamant:2/32/0/0/0/32",
-   25.586119374835796
-  ],
-  [
    "Jolly:1/32/0/0/1/32",
-   17.487361274752264
+   22.9283254267854
   ],
   [
-   "Jolly:2/32/0/0/0/32",
-   13.934119614725626
-  ],
-  [
-   "Adamant:1/32/0/0/1/32",
-   13.743946050566935
+   "Adamant:2/32/0/0/0/32",
+   17.43336023704867
   ],
   [
    "Adamant:1/32/1/0/0/32",
-   13.095522975841895
+   15.16571052044537
+  ],
+  [
+   "Adamant:0/32/2/0/0/32",
+   14.093917422485895
+  ],
+  [
+   "Adamant:1/32/0/0/1/32",
+   12.00237566220616
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Basculegion",
-   11.738838418232056
+   "Froslass-Mega",
+   15.939908431354405
   ],
   [
    "Kingambit",
-   11.684957846149514
+   15.328169953165464
   ],
   [
    "Sneasler",
-   10.903702830692684
+   14.865288118121184
   ],
   [
-   "Froslass-Mega",
-   10.52224018499172
+   "Basculegion",
+   13.403238008198004
   ],
   [
    "Scovillain-Mega",
-   9.340141208740924
+   12.85141698897673
   ],
   [
-   "Metagross-Mega",
-   3.527871017394007
+   "Rillaboom",
+   3.195761834574557
+  ],
+  [
+   "Volcarona",
+   1.8922432905250113
   ],
   [
    "Incineroar",
-   2.964592356743054
-  ],
-  [
-   "Sinistcha",
-   2.2715842980295062
+   1.5123380741637025
   ],
   [
    "Floette-Mega",
-   1.794213587990628
+   0.8162338426435607
   ],
   [
-   "Whimsicott",
-   1.5897307058930248
+   "Ninetales-Alola",
+   0.808957048170233
   ]
  ],
  "counters": [
   {
-   "name": "Incineroar",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -174,7 +180,7 @@
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Incineroar",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -186,25 +192,13 @@
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
    "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Farigiraf",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sneasler",
+   "name": "Charizard-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

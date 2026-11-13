@@ -2,25 +2,27 @@
  "id": "pyroarmega",
  "name": "Pyroar-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0454249,
-   "rank": 31,
-   "raw": 101117
+   "month": "2026-09",
+   "usage": 0.0086153,
+   "rank": 75,
+   "raw": 24900
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0142061,
+   "rank": 62,
+   "raw": 37516
   }
  ],
  "abilities": [
   [
-   "No Ability",
-   71.66173447743608
-  ],
-  [
    "firemane",
-   28.33826552256391
+   100
   ]
  ],
  "items": [
@@ -31,124 +33,112 @@
  ],
  "moves": [
   [
-   "Heat Wave",
-   24.886377376589426
+   "Protect",
+   24.98656156148376
   ],
   [
-   "Protect",
-   24.829794196736096
+   "Heat Wave",
+   24.941162385413975
   ],
   [
    "Overheat",
-   21.30070528614124
+   23.93104884923127
   ],
   [
    "Solar Beam",
-   14.858838915346425
-  ],
-  [
-   "Hyper Voice",
-   4.075819848638174
-  ],
-  [
-   "Flamethrower",
-   3.1911846243819575
-  ],
-  [
-   "Yawn",
-   1.8260164853702008
+   11.140662941293272
   ],
   [
    "Scorching Sands",
-   1.2574415232654579
+   10.329258162673712
   ],
   [
-   "Round",
-   0.5216795836169874
+   "Snarl",
+   1.0352450981874577
   ],
   [
-   "Fire Blast",
-   0.5027686433755045
+   "Sunny Day",
+   0.8334999075774661
+  ],
+  [
+   "Hyper Voice",
+   0.7891532369758222
+  ],
+  [
+   "Yawn",
+   0.6393939188766682
+  ],
+  [
+   "Flamethrower",
+   0.4726628838461296
   ]
  ],
  "spreads": [
   [
    "Timid:2/0/0/32/0/32",
-   50.05445640581965
-  ],
-  [
-   "Timid:7/0/0/32/0/27",
-   10.109562156504433
+   80.70638492246144
   ],
   [
    "Modest:2/0/0/32/0/32",
-   8.670921979417532
+   5.459954565876873
   ],
   [
-   "Timid:0/0/7/32/0/27",
-   5.568563656519683
+   "Timid:7/0/0/32/0/27",
+   1.9547422603391003
   ],
   [
-   "Timid:0/0/2/32/0/32",
-   2.326864262817988
+   "Timid:3/0/1/30/0/32",
+   1.8014107065915084
+  ],
+  [
+   "Timid:6/0/0/32/0/28",
+   1.2375289501437834
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Farigiraf",
-   13.73688757440345
-  ],
-  [
-   "Torkoal",
-   10.501209978263457
+   "Indeedee-F",
+   14.399025018490363
   ],
   [
    "Whimsicott",
-   9.878224654475249
+   14.126729073108347
+  ],
+  [
+   "Gardevoir-Mega",
+   11.761477431736207
   ],
   [
    "Basculegion",
-   7.404784910273763
-  ],
-  [
-   "Floette-Mega",
-   5.667370891499868
+   11.138368846077855
   ],
   [
    "Ninetales",
-   5.405551901480672
+   6.3712288619030595
   ],
   [
-   "Garchomp",
-   4.110818231535183
+   "Torkoal",
+   4.4436180221574935
   ],
   [
-   "Venusaur",
-   3.3466190239941325
+   "Kommo-o",
+   4.366956346678912
   ],
   [
-   "Incineroar",
-   2.7258419280294004
+   "Sneasler",
+   3.4923025302212465
   ],
   [
-   "Scrafty-Mega",
-   2.681155849683678
+   "Farigiraf",
+   2.7872239254847346
+  ],
+  [
+   "Kingambit",
+   2.1989132740576336
   ]
  ],
  "counters": [
-  {
-   "name": "Staraptor-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Grimmsnarl",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
   {
    "name": "Garchomp",
    "score": 0,
@@ -156,7 +146,7 @@
    "switchPct": 0
   },
   {
-   "name": "Basculegion",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -168,19 +158,31 @@
    "switchPct": 0
   },
   {
-   "name": "Sylveon",
+   "name": "Gholdengo",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Torkoal",
+   "name": "Incineroar",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sneasler",
+   "name": "Volcarona",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp-Mega-Z",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

@@ -2,15 +2,21 @@
  "id": "mawilemega",
  "name": "Mawile-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.1031774,
-   "rank": 19,
-   "raw": 217170
+   "month": "2026-09",
+   "usage": 0.0140572,
+   "rank": 64,
+   "raw": 65762
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0142398,
+   "rank": 61,
+   "raw": 68389
   }
  ],
  "abilities": [
@@ -28,155 +34,155 @@
  "moves": [
   [
    "Play Rough",
-   24.38733042370485
+   24.279039698019783
   ],
   [
    "Protect",
-   22.43126833071242
+   22.11458066600816
   ],
   [
    "Sucker Punch",
-   22.36963497095369
+   22.07433820961768
   ],
   [
    "Iron Head",
-   16.15679533747828
-  ],
-  [
-   "Swords Dance",
-   7.005761670727706
+   12.774761668052918
   ],
   [
    "Rock Slide",
-   4.591214212178622
+   9.212681303990939
   ],
   [
-   "Brick Break",
-   1.3160050438842208
+   "Swords Dance",
+   7.113863163269104
   ],
   [
    "Knock Off",
-   1.048927572897667
+   0.7153486269772341
   ],
   [
-   "Thunder Punch",
-   0.15913267953573568
+   "Brick Break",
+   0.6241164996030935
   ],
   [
-   "Psychic Fangs",
-   0.12115070036970593
+   "Fire Fang",
+   0.5382139038016984
+  ],
+  [
+   "Crunch",
+   0.11726901679010779
   ]
  ],
  "spreads": [
   [
    "Brave:32/32/0/0/2/0",
-   38.29208566730256
+   32.81854422559468
   ],
   [
    "Adamant:32/32/0/0/2/0",
-   17.281581021715063
+   17.01801633007768
+  ],
+  [
+   "Brave:32/15/15/0/4/0",
+   9.396966478681012
   ],
   [
    "Brave:32/32/2/0/0/0",
-   5.231113348155518
+   4.988115069884607
   ],
   [
-   "Adamant:32/6/4/0/23/1",
-   2.589550958071847
-  ],
-  [
-   "Brave:32/32/1/0/1/0",
-   2.2684399668535447
+   "Brave:29/31/6/0/0/0",
+   3.102294548306518
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Farigiraf",
-   13.98541022994231
-  ],
-  [
-   "Torkoal",
-   7.84417135394068
+   11.754111953784424
   ],
   [
    "Incineroar",
-   7.723882461202451
-  ],
-  [
-   "Sinistcha",
-   6.7981337315433485
-  ],
-  [
-   "Basculegion",
-   3.6356188897557296
-  ],
-  [
-   "Pelipper",
-   3.2140489045829583
-  ],
-  [
-   "Garchomp",
-   3.121134667802682
-  ],
-  [
-   "Staraptor",
-   3.044282451681766
-  ],
-  [
-   "Swampert-Mega",
-   2.3965388792557434
+   8.640809336960343
   ],
   [
    "Archaludon",
-   2.1466091654672415
+   8.126525757373477
+  ],
+  [
+   "Pelipper",
+   6.926047112948532
+  ],
+  [
+   "Sinistcha",
+   4.549744916581561
+  ],
+  [
+   "Indeedee-F",
+   3.6800689831512607
+  ],
+  [
+   "Torkoal",
+   3.5816217659358967
+  ],
+  [
+   "Rillaboom",
+   3.1214670132236644
+  ],
+  [
+   "Hatterene",
+   2.9082956852083655
+  ],
+  [
+   "Sneasler",
+   2.8753992515261495
   ]
  ],
  "counters": [
   {
-   "name": "Floette-Mega",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Hydreigon",
+   "name": "Sylveon",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Swampert-Mega",
+   "name": "Salamence-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Rotom-Heat",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
+   "name": "Raichu-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Grimmsnarl",
+   "name": "Garchomp",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Scrafty-Mega",
+   "name": "Volcarona",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

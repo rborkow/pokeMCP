@@ -2,15 +2,21 @@
  "id": "blastoisemega",
  "name": "Blastoise-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0279001,
-   "rank": 42,
-   "raw": 56955
+   "month": "2026-09",
+   "usage": 0.0310831,
+   "rank": 44,
+   "raw": 98316
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.024700600000000003,
+   "rank": 48,
+   "raw": 86145
   }
  ],
  "abilities": [
@@ -28,125 +34,113 @@
  "moves": [
   [
    "Water Spout",
-   23.187002817342805
-  ],
-  [
-   "Dark Pulse",
-   21.237126885744598
+   24.23234250450496
   ],
   [
    "Protect",
-   13.03789282839554
+   17.64818940463296
   ],
   [
    "Shell Smash",
-   12.230056272305838
+   16.116492177933555
+  ],
+  [
+   "Dark Pulse",
+   12.441530447683679
+  ],
+  [
+   "Terrain Pulse",
+   9.535356707134328
   ],
   [
    "Aura Sphere",
-   12.08137934513588
+   7.918056244246724
   ],
   [
    "Fake Out",
-   11.964790202355125
-  ],
-  [
-   "Water Pulse",
-   2.0527623761409663
+   5.826166898547398
   ],
   [
    "Ice Beam",
-   1.8721649460358516
+   3.599235861632808
+  ],
+  [
+   "Water Pulse",
+   1.5166598289766746
   ],
   [
    "Dragon Pulse",
-   0.7446565685344954
-  ],
-  [
-   "Muddy Water",
-   0.5171956447615957
+   0.6348978172138267
   ]
  ],
  "spreads": [
   [
    "Modest:2/0/0/32/0/32",
-   19.561229620974764
+   37.630308020677674
   ],
   [
    "Quiet:32/0/0/32/2/0",
-   9.731510799234153
+   6.193119105924859
   ],
   [
-   "Quiet:32/0/2/32/0/0",
-   8.857021969454895
+   "Quiet:31/0/3/32/0/0",
+   5.9205594145560125
   ],
   [
-   "Modest:1/0/0/32/1/32",
-   6.499963454325851
+   "Quiet:32/0/1/32/1/0",
+   3.4938624357539974
   ],
   [
-   "Modest:29/0/0/32/0/5",
-   4.403544017154817
+   "Modest:32/0/0/32/2/0",
+   3.131083294790947
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Sinistcha",
-   10.43958904369214
-  ],
-  [
-   "Farigiraf",
-   9.988419629995917
+   "Indeedee-F",
+   11.283163300521789
   ],
   [
    "Incineroar",
-   6.334714064137939
+   7.448173271491915
   ],
   [
-   "Kingambit",
-   5.644076345139686
+   "Rillaboom",
+   6.711112540307473
+  ],
+  [
+   "Sinistcha",
+   6.098635401539274
   ],
   [
    "Sneasler",
-   5.441033530690433
+   5.8429873992312
   ],
   [
-   "Torkoal",
-   5.359981434076501
-  ],
-  [
-   "Sylveon",
-   4.265781866564371
-  ],
-  [
-   "Basculegion",
-   3.8525857087950186
-  ],
-  [
-   "Vivillon",
-   3.139418837561845
+   "Farigiraf",
+   5.6446992237441505
   ],
   [
    "Pelipper",
-   2.6140306536418576
+   4.010688963369624
+  ],
+  [
+   "Delphox-Mega",
+   3.881399240684179
+  ],
+  [
+   "Kingambit",
+   3.307069674795499
+  ],
+  [
+   "Kommo-o",
+   3.035826184296993
   ]
  ],
  "counters": [
   {
-   "name": "Basculegion",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sneasler",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Staraptor-Mega",
+   "name": "Farigiraf",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -158,25 +152,37 @@
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Farigiraf",
+   "name": "Raichu-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Torkoal",
+   "name": "Volcarona",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Indeedee",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gholdengo",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

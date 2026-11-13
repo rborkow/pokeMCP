@@ -1,0 +1,192 @@
+{
+ "id": "salamencemega",
+ "name": "Salamence-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.2709715,
+   "rank": 4,
+   "raw": 814135
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.123736,
+   "rank": 15,
+   "raw": 403854
+  }
+ ],
+ "abilities": [
+  [
+   "Aerilate",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Salamencite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   24.257939781489483
+  ],
+  [
+   "Hyper Voice",
+   22.980032935978425
+  ],
+  [
+   "Tailwind",
+   17.86041609172451
+  ],
+  [
+   "Draco Meteor",
+   14.513321075431278
+  ],
+  [
+   "Flamethrower",
+   9.530527139498004
+  ],
+  [
+   "Double-Edge",
+   5.3052903588315745
+  ],
+  [
+   "Dragon Pulse",
+   1.4342967394045614
+  ],
+  [
+   "Heat Wave",
+   0.7685321019760996
+  ],
+  [
+   "Dragon Dance",
+   0.5540424466221716
+  ],
+  [
+   "Roost",
+   0.37621209622518137
+  ]
+ ],
+ "spreads": [
+  [
+   "Timid:2/0/0/32/0/32",
+   24.309912640984447
+  ],
+  [
+   "Timid:1/0/0/32/1/32",
+   10.710930590994494
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   5.080844964061192
+  ],
+  [
+   "Modest:13/0/0/15/20/18",
+   3.3231874389407103
+  ],
+  [
+   "Hasty:13/1/0/0/28/24",
+   3.2010222641788655
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sneasler",
+   10.96100166077023
+  ],
+  [
+   "Rillaboom",
+   10.71228535902783
+  ],
+  [
+   "Kingambit",
+   9.072318320430963
+  ],
+  [
+   "Basculegion",
+   5.9309376318350004
+  ],
+  [
+   "Floette-Mega",
+   4.489666513053837
+  ],
+  [
+   "Gholdengo",
+   4.412271121628884
+  ],
+  [
+   "Excadrill",
+   3.4794482255014443
+  ],
+  [
+   "Tyranitar-Mega",
+   3.447327131292016
+  ],
+  [
+   "Incineroar",
+   3.159120988312378
+  ],
+  [
+   "Milotic",
+   2.674928407446592
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Metagross-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sylveon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Raichu-Mega-Y",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Glimmora",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Tyranitar-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

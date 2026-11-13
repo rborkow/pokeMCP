@@ -2,170 +2,176 @@
  "id": "basculegion",
  "name": "Basculegion",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.3033512,
-   "rank": 3,
-   "raw": 604057
+   "month": "2026-09",
+   "usage": 0.19051359999999998,
+   "rank": 8,
+   "raw": 633262
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.1936387,
+   "rank": 8,
+   "raw": 431738
   }
  ],
  "abilities": [
   [
    "Adaptability",
-   90.5951301233156
+   96.62597844600813
   ],
   [
    "Swift Swim",
-   9.34997080520881
+   3.361631792457518
   ],
   [
    "Mold Breaker",
-   0.054899071475590006
+   0.012389761534351585
   ]
  ],
  "items": [
   [
    "Choice Scarf",
-   39.621373472174014
-  ],
-  [
-   "Mystic Water",
-   21.246828057419858
+   39.327653002988264
   ],
   [
    "Life Orb",
-   16.525897380189182
+   22.092738479754352
   ],
   [
    "Focus Sash",
-   13.54382921714635
+   12.723983919448441
   ],
   [
-   "Sitrus Berry",
-   7.000584184073701
+   "Mystic Water",
+   11.174808734010556
   ],
   [
    "Colbur Berry",
-   0.7404703218638642
+   5.75681661181064
+  ],
+  [
+   "Sitrus Berry",
+   5.011707715118088
   ],
   [
    "Spell Tag",
-   0.2958352256763263
+   1.73253919154161
   ],
   [
-   "Muscle Band",
-   0.2586130826485143
+   "Rindo Berry",
+   1.1866472862510027
   ]
  ],
  "moves": [
   [
    "Last Respects",
-   24.962941209043088
+   24.97735642247768
   ],
   [
    "Aqua Jet",
-   23.61821113423399
+   22.3939447858824
   ],
   [
    "Wave Crash",
-   21.6854419447758
+   21.94533330221127
   ],
   [
    "Protect",
-   14.649787468615049
+   14.568033451175868
   ],
   [
    "Flip Turn",
-   10.174760913854758
+   9.824634890152856
   ],
   [
    "Liquidation",
-   3.081851647271381
-  ],
-  [
-   "Psychic Fangs",
-   0.5931382569743301
-  ],
-  [
-   "Waterfall",
-   0.2826908986890153
-  ],
-  [
-   "Ice Fang",
-   0.2116012211886417
+   2.9205911315255846
   ],
   [
    "Soak",
-   0.16765834407323157
+   1.7944409450006416
+  ],
+  [
+   "Phantom Force",
+   0.5157800682296846
+  ],
+  [
+   "Icy Wind",
+   0.27777754399447174
+  ],
+  [
+   "Psychic Fangs",
+   0.1674560592194235
   ]
  ],
  "spreads": [
   [
    "Jolly:2/32/0/0/0/32",
-   21.297641095949473
+   17.762424701529262
   ],
   [
    "Adamant:2/32/0/0/0/32",
-   14.527938410758104
-  ],
-  [
-   "Adamant:0/32/2/0/0/32",
-   6.21280545067543
+   11.999918439713737
   ],
   [
    "Jolly:0/32/2/0/0/32",
-   5.835768651990348
+   5.437777566570796
   ],
   [
-   "Adamant:4/31/11/0/0/20",
-   5.319958624849877
+   "Adamant:0/32/2/0/0/32",
+   4.970820749573658
+  ],
+  [
+   "Jolly:0/20/14/0/0/32",
+   2.9567353591001213
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Whimsicott",
-   8.52737200884052
-  ],
-  [
-   "Garchomp",
-   7.933252294682487
-  ],
-  [
    "Kingambit",
-   6.414908447891307
-  ],
-  [
-   "Charizard-Mega-Y",
-   4.655567944921048
-  ],
-  [
-   "Floette-Mega",
-   4.534107780024251
-  ],
-  [
-   "Pelipper",
-   3.6124562404727203
-  ],
-  [
-   "Incineroar",
-   3.5951695335531295
-  ],
-  [
-   "Farigiraf",
-   3.3735005382657586
-  ],
-  [
-   "Sinistcha",
-   3.3062888954815857
+   9.750888029513186
   ],
   [
    "Sneasler",
-   3.260996125539007
+   9.41958326370095
+  ],
+  [
+   "Rillaboom",
+   7.974019967935446
+  ],
+  [
+   "Floette-Mega",
+   5.540513040416909
+  ],
+  [
+   "Incineroar",
+   5.238733804998803
+  ],
+  [
+   "Garchomp",
+   4.640539229563699
+  ],
+  [
+   "Whimsicott",
+   4.260706857525851
+  ],
+  [
+   "Salamence-Mega",
+   3.7898950603022765
+  ],
+  [
+   "Charizard-Mega-Y",
+   3.7235350552607405
+  ],
+  [
+   "Volcarona",
+   3.127125256728961
   ]
  ],
  "counters": [
@@ -176,43 +182,43 @@
    "switchPct": 0
   },
   {
-   "name": "Sylveon",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Raichu-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
+   "name": "Sinistcha",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Floette-Mega",
+   "name": "Froslass-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
+   "name": "Ceruledge",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Gallade",
+   "name": "Golisopod-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Raichu-Mega-X",
+   "name": "Volcarona",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -220,7 +226,7 @@
  ],
  "builds": [
   {
-   "item": "Mystic Water",
+   "item": "Life Orb",
    "ability": "Adaptability",
    "moves": [
     "Wave Crash",
@@ -228,12 +234,12 @@
     "Aqua Jet",
     "Protect"
    ],
-   "count": 39,
+   "count": 31,
    "bestPlacing": 1,
-   "bestPlayer": "cabalododemo",
-   "eventName": "King's Gambit #7 | Reg M-B",
-   "eventSlug": "2026-07-05-king-s-gambit-7-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a37eef2ceacae7d6441bbd5",
+   "bestPlayer": "Florian Schäfer",
+   "eventName": "⚔️Torre Lotta Cup #3⚔️ 🏆50€ Amazon Gift Cards🏆",
+   "eventSlug": "2026-11-07-torre-lotta-cup-3-50-amazon-gift-cards",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aea24ef0c463890f304a725",
    "nature": "Adamant"
   },
   {
@@ -241,33 +247,33 @@
    "ability": "Adaptability",
    "moves": [
     "Last Respects",
-    "Flip Turn",
     "Wave Crash",
-    "Aqua Jet"
+    "Aqua Jet",
+    "Flip Turn"
    ],
-   "count": 35,
+   "count": 29,
    "bestPlacing": 1,
-   "bestPlayer": "merijnvd",
-   "eventName": "VGC Trainer School; champions m/b #1",
-   "eventSlug": "2026-07-05-vgc-trainer-school-champions-m-b-1",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3a956c83fd320299bce8bf",
+   "bestPlayer": "nar9le",
+   "eventName": "⛩️Chadweezy95 VGC Champions👻Halloween Cup!⛩️",
+   "eventSlug": "2026-10-24-chadweezy95-vgc-champions-halloween-cup",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6adad3b491617679e849eb19",
    "nature": "Jolly"
   },
   {
-   "item": "Life Orb",
+   "item": "Mystic Water",
    "ability": "Adaptability",
    "moves": [
-    "Last Respects",
-    "Wave Crash",
     "Protect",
+    "Wave Crash",
+    "Last Respects",
     "Aqua Jet"
    ],
-   "count": 17,
+   "count": 29,
    "bestPlacing": 1,
-   "bestPlayer": "Rodrigo Javier",
-   "eventName": "Tyrant Thursdays #2",
-   "eventSlug": "2026-06-25-tyrant-thursdays-2",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3b53a483fd320299bcf113",
+   "bestPlayer": "Tachyon112358",
+   "eventName": "Tuesday Throwdowns #3 (Top Cut, $50 for 1st)",
+   "eventSlug": "2026-11-11-tuesday-throwdowns-3-top-cut-50-for-1st",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae18daf80a8f79408d1ff13",
    "nature": "Adamant"
   }
  ]

@@ -2,15 +2,21 @@
  "id": "floettemega",
  "name": "Floette-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.1489987,
+   "month": "2026-09",
+   "usage": 0.1038381,
+   "rank": 17,
+   "raw": 274054
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.13247820000000002,
    "rank": 14,
-   "raw": 239898
+   "raw": 253351
   }
  ],
  "abilities": [
@@ -28,143 +34,113 @@
  "moves": [
   [
    "Protect",
-   24.88770973134555
+   24.963812437632097
   ],
   [
    "Dazzling Gleam",
-   23.664464948376484
+   23.632197460898414
   ],
   [
    "Moonblast",
-   19.721951063921303
-  ],
-  [
-   "Light of Ruin",
-   12.731007517936915
+   19.210448846811122
   ],
   [
    "Calm Mind",
-   12.287027976226764
+   18.548717963247977
   ],
   [
    "Draining Kiss",
-   5.755812337163025
+   6.824392117122971
+  ],
+  [
+   "Light of Ruin",
+   6.377425034443278
   ],
   [
    "Psychic",
-   0.3300797454858514
+   0.19210106817314773
   ],
   [
-   "Grass Knot",
-   0.16369082002994892
+   "Helping Hand",
+   0.06589780890329729
   ],
   [
-   "Giga Drain",
-   0.121940603680147
+   "Substitute",
+   0.048221792088857476
   ],
   [
    "Energy Ball",
-   0.11882732448934182
+   0.03914712556582605
   ]
  ],
  "spreads": [
   [
-   "Timid:2/0/0/32/0/32",
-   16.977768833331734
-  ],
-  [
    "Modest:2/0/0/32/0/32",
-   13.757185307710623
+   8.652806189387386
   ],
   [
-   "Modest:8/0/1/25/0/32",
-   3.2521129758661984
+   "Timid:2/0/0/32/0/32",
+   7.040400341650782
   ],
   [
-   "Modest:0/0/2/32/0/32",
-   2.96850895949951
+   "Modest:10/0/25/16/0/15",
+   4.062952144601762
   ],
   [
-   "Timid:7/0/27/0/0/32",
-   2.5068115695518833
+   "Modest:28/0/17/5/0/16",
+   3.1259531731462142
+  ],
+  [
+   "Modest:32/0/0/32/0/2",
+   2.830363189857544
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Basculegion",
-   9.23113183022336
-  ],
-  [
-   "Garchomp",
-   8.650995398612894
-  ],
-  [
-   "Whimsicott",
-   8.440836661566605
-  ],
-  [
-   "Sinistcha",
-   7.848221941808083
+   "Rillaboom",
+   11.432715415648472
   ],
   [
    "Incineroar",
-   7.845198142507336
-  ],
-  [
-   "Kingambit",
-   7.056964465973832
-  ],
-  [
-   "Charizard-Mega-Y",
-   4.605343768872678
+   10.980766860016887
   ],
   [
    "Sneasler",
-   4.094715875043783
+   10.411908519128882
   ],
   [
-   "Farigiraf",
-   2.8427341702830904
+   "Kingambit",
+   8.178897177141216
   ],
   [
-   "Grimmsnarl",
-   2.471565632186522
+   "Basculegion",
+   8.098370765297041
+  ],
+  [
+   "Garchomp",
+   4.363606211433195
+  ],
+  [
+   "Salamence-Mega",
+   4.193393191094171
+  ],
+  [
+   "Gholdengo",
+   3.3968635514827734
+  ],
+  [
+   "Volcarona",
+   3.2220270395748
+  ],
+  [
+   "Whimsicott",
+   2.8785105333223844
   ]
  ],
  "counters": [
   {
-   "name": "Grimmsnarl",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Pelipper",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Archaludon",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Basculegion",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Mawile-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Torkoal",
+   "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -176,7 +152,37 @@
    "switchPct": 0
   },
   {
-   "name": "Maushold",
+   "name": "Camerupt-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Torkoal",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gardevoir-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp-Mega-Z",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

@@ -2,15 +2,21 @@
  "id": "meganiummega",
  "name": "Meganium-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0116139,
-   "rank": 79,
-   "raw": 42929
+   "month": "2026-09",
+   "usage": 0.0075716,
+   "rank": 81,
+   "raw": 48162
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0063958,
+   "rank": 82,
+   "raw": 52177
   }
  ],
  "abilities": [
@@ -27,120 +33,120 @@
  ],
  "moves": [
   [
-   "Solar Beam",
-   24.102382914600742
-  ],
-  [
    "Weather Ball",
-   23.70127941126939
+   24.633345231558472
   ],
   [
-   "Dazzling Gleam",
-   22.867411901931465
+   "Solar Beam",
+   24.207781325820385
   ],
   [
    "Protect",
-   22.545219941319772
+   24.06332258913696
   ],
   [
-   "Synthesis",
-   3.0359283503953525
+   "Dazzling Gleam",
+   23.31459215432914
   ],
   [
    "Earth Power",
-   2.0269984917585373
+   1.681490839469224
+  ],
+  [
+   "Synthesis",
+   1.105727200922635
   ],
   [
    "Giga Drain",
-   0.5357341094808278
+   0.26621048134433895
   ],
   [
    "Ancient Power",
-   0.3192550262051617
+   0.25253060809039796
   ],
   [
-   "Energy Ball",
-   0.25502346815658283
+   "Pollen Puff",
+   0.17543099936688936
   ],
   [
    "Leech Seed",
-   0.1019701006194425
+   0.1338784588348204
   ]
  ],
  "spreads": [
   [
    "Timid:2/0/0/32/0/32",
-   14.80529558644806
-  ],
-  [
-   "Modest:32/0/0/32/0/2",
-   9.810988319390198
-  ],
-  [
-   "Modest:32/0/0/32/2/0",
-   5.318257948724083
-  ],
-  [
-   "Modest:21/0/0/27/0/18",
-   3.8525991175634178
+   8.229596745735869
   ],
   [
    "Modest:2/0/0/32/0/32",
-   3.645720158780003
+   7.365879532010765
+  ],
+  [
+   "Quiet:32/0/2/32/0/0",
+   7.041540715885822
+  ],
+  [
+   "Modest:32/0/0/32/0/2",
+   6.202392834585825
+  ],
+  [
+   "Modest:21/0/0/32/0/13",
+   3.6542105448821887
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Pelipper",
-   9.702618099074718
-  ],
-  [
-   "Archaludon",
-   7.961730510998617
-  ],
-  [
-   "Basculegion",
-   6.00109225075475
-  ],
-  [
-   "Swampert-Mega",
-   5.461145396669081
-  ],
-  [
-   "Farigiraf",
-   5.2515352190633555
+   7.3108804605426805
   ],
   [
    "Sneasler",
-   4.573076994991405
+   7.30144192471987
   ],
   [
-   "Garchomp",
-   4.270668088104978
+   "Archaludon",
+   6.783508053711455
+  ],
+  [
+   "Indeedee-F",
+   4.846899443775566
+  ],
+  [
+   "Farigiraf",
+   3.779704783952224
   ],
   [
    "Incineroar",
-   3.9286402626712666
+   3.04123926317502
   ],
   [
-   "Sableye",
-   2.778629860587793
+   "Excadrill",
+   2.740281631262281
   ],
   [
-   "Whimsicott",
-   2.4031890088929133
+   "Indeedee",
+   2.7351136833381204
+  ],
+  [
+   "Tyranitar-Mega",
+   2.707011783813413
+  ],
+  [
+   "Basculegion",
+   2.3543891119010114
   ]
  ],
  "counters": [
   {
-   "name": "Pelipper",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Pelipper",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -152,31 +158,13 @@
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sneasler",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Grimmsnarl",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
    "name": "Incineroar",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Basculegion",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

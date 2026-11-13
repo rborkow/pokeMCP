@@ -2,15 +2,21 @@
  "id": "charizardmegay",
  "name": "Charizard-Mega-Y",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.1531864,
-   "rank": 11,
-   "raw": 258306
+   "month": "2026-09",
+   "usage": 0.1091509,
+   "rank": 16,
+   "raw": 307430
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.2159496,
+   "rank": 5,
+   "raw": 464830
   }
  ],
  "abilities": [
@@ -28,155 +34,155 @@
  "moves": [
   [
    "Heat Wave",
-   24.873464399290157
+   24.80448678940509
   ],
   [
    "Protect",
-   24.848620032477726
-  ],
-  [
-   "Solar Beam",
-   23.870168660153574
+   24.23149887399049
   ],
   [
    "Weather Ball",
-   22.821387480280947
+   24.161396713925516
   ],
   [
-   "Air Slash",
-   1.1370246643812822
-  ],
-  [
-   "Overheat",
-   0.5828356397959884
+   "Solar Beam",
+   10.641129861126272
   ],
   [
    "Ancient Power",
-   0.5764640715137432
-  ],
-  [
-   "Scorching Sands",
-   0.22924940120361198
+   9.07149400817577
   ],
   [
    "Hurricane",
-   0.22586646608746389
+   4.100863594694424
+  ],
+  [
+   "Dragon Pulse",
+   0.8481951280043261
+  ],
+  [
+   "Roar",
+   0.44981741369617123
   ],
   [
    "Helping Hand",
-   0.20532936857183037
+   0.40299245446708204
+  ],
+  [
+   "Scorching Sands",
+   0.3590039580126949
   ]
  ],
  "spreads": [
   [
-   "Timid:2/0/0/32/0/32",
-   14.594783055410671
-  ],
-  [
    "Modest:2/0/0/32/0/32",
-   8.698987601549428
+   5.720050576742007
   ],
   [
-   "Modest:16/0/25/12/0/13",
-   3.4605788717376544
+   "Timid:2/0/0/32/0/32",
+   5.586180708274272
   ],
   [
-   "Modest:14/0/28/11/0/13",
-   2.9691281216250003
+   "Timid:22/0/19/2/0/23",
+   4.094497940540612
   ],
   [
-   "Timid:20/0/18/4/0/24",
-   2.4961977576141274
+   "Timid:16/0/18/6/0/26",
+   3.5793666114949088
+  ],
+  [
+   "Modest:20/0/32/1/0/13",
+   3.2225936990736477
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Garchomp",
-   15.850123663034315
+   10.960242292039013
   ],
   [
-   "Whimsicott",
-   11.534762698734378
-  ],
-  [
-   "Basculegion",
-   9.219303262933783
-  ],
-  [
-   "Kingambit",
-   8.356071082173841
-  ],
-  [
-   "Sylveon",
-   5.0777895555522
+   "Venusaur",
+   6.248991903372624
   ],
   [
    "Farigiraf",
-   4.75216469259413
+   5.7830260517181635
+  ],
+  [
+   "Kingambit",
+   5.672931955904144
+  ],
+  [
+   "Archaludon",
+   5.5816476984382755
+  ],
+  [
+   "Whimsicott",
+   5.4797041034576965
   ],
   [
    "Incineroar",
-   4.741881260059659
+   5.3885449333455435
   ],
   [
-   "Floette-Mega",
-   4.479446686004045
+   "Sylveon",
+   5.339166785811148
   ],
   [
    "Sneasler",
-   2.2948474294812895
+   5.196420054869303
   ],
   [
-   "Aerodactyl-Mega",
-   2.2344368120680063
+   "Pelipper",
+   3.5502531425972483
   ]
  ],
  "counters": [
   {
-   "name": "Pelipper",
+   "name": "Torkoal",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
+   "name": "Farigiraf",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Maushold",
+   "name": "Incineroar",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Annihilape",
+   "name": "Gholdengo",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Raichu-Mega-Y",
+   "name": "Floette-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sneasler",
+   "name": "Excadrill",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Kingambit",
+   "name": "Tyranitar-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Grimmsnarl",
+   "name": "Salamence-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

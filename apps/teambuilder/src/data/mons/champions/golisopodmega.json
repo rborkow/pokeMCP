@@ -1,0 +1,192 @@
+{
+ "id": "golisopodmega",
+ "name": "Golisopod-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.1588017,
+   "rank": 11,
+   "raw": 671428
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.11164529999999999,
+   "rank": 18,
+   "raw": 421562
+  }
+ ],
+ "abilities": [
+  [
+   "Tough Claws",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "golisopite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Leech Life",
+   24.3787491051212
+  ],
+  [
+   "Iron Head",
+   22.087295960277086
+  ],
+  [
+   "Protect",
+   20.45070487981709
+  ],
+  [
+   "Sucker Punch",
+   16.436795657090137
+  ],
+  [
+   "Swords Dance",
+   5.838129721337307
+  ],
+  [
+   "Drill Run",
+   4.361502860022218
+  ],
+  [
+   "Liquidation",
+   1.9311446141523303
+  ],
+  [
+   "First Impression",
+   1.8827515989525954
+  ],
+  [
+   "Close Combat",
+   0.7619240030053035
+  ],
+  [
+   "Aqua Jet",
+   0.47067135780894187
+  ]
+ ],
+ "spreads": [
+  [
+   "Adamant:32/32/0/0/2/0",
+   33.404641935037915
+  ],
+  [
+   "Brave:32/32/0/0/2/0",
+   9.739826419788086
+  ],
+  [
+   "Adamant:32/32/0/0/0/2",
+   6.916620499455145
+  ],
+  [
+   "Brave:32/32/2/0/0/0",
+   6.0090794706977455
+  ],
+  [
+   "Adamant:32/32/0/0/1/1",
+   4.935238066595218
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Archaludon",
+   14.867959909223686
+  ],
+  [
+   "Pelipper",
+   12.008991483551418
+  ],
+  [
+   "Sneasler",
+   8.800046133425807
+  ],
+  [
+   "Basculegion-F",
+   7.6945414954694975
+  ],
+  [
+   "Farigiraf",
+   5.213684972658426
+  ],
+  [
+   "Politoed",
+   4.622537365269267
+  ],
+  [
+   "Raichu-Mega-X",
+   4.097327241893862
+  ],
+  [
+   "Rillaboom",
+   3.1268253011476115
+  ],
+  [
+   "Grimmsnarl",
+   2.8852490664375794
+  ],
+  [
+   "Incineroar",
+   2.3689730298463227
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Ninetales-Alola",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp-Mega-Z",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Swampert-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Indeedee-F",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gardevoir-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Milotic",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

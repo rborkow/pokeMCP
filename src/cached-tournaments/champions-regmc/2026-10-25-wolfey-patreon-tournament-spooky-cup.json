@@ -1,0 +1,869 @@
+{
+ "id": "6acf6032115c12b73a5a39fe",
+ "slug": "2026-10-25-wolfey-patreon-tournament-spooky-cup",
+ "name": "Wolfey Patreon Tournament - Spooky Cup!",
+ "date": "2026-10-25T15:00:00.000Z",
+ "players": 49,
+ "format": "M-C",
+ "regulationId": "champions-regmc",
+ "source": "limitless",
+ "sourceUrl": "https://play.limitlesstcg.com/tournament/6acf6032115c12b73a5a39fe",
+ "attribution": "Data via Limitless (play.limitlesstcg.com)",
+ "fetchedAt": "2026-11-12T19:12:41.201Z",
+ "topCut": [
+  {
+   "placing": 1,
+   "player": "Navarri",
+   "country": "NL",
+   "record": {
+    "wins": 8,
+    "losses": 2,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "chandelure",
+     "name": "Chandelure",
+     "item": "Chandelurite",
+     "ability": "Flash Fire",
+     "moves": [
+      "Heat Wave",
+      "Shadow Ball",
+      "Trick Room",
+      "Protect"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "aerodactyl",
+     "name": "Aerodactyl",
+     "item": "Focus Sash",
+     "ability": "Unnerve",
+     "moves": [
+      "Rock Slide",
+      "Dual Wingbeat",
+      "Tailwind",
+      "Wide Guard"
+     ],
+     "nature": "Jolly"
+    },
+    {
+     "id": "mawile",
+     "name": "Mawile",
+     "item": "Mawilite",
+     "ability": "Intimidate",
+     "moves": [
+      "Iron Head",
+      "Play Rough",
+      "Sucker Punch",
+      "Protect"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "rotom-wash",
+     "name": "Wash Rotom",
+     "item": "Sitrus Berry",
+     "ability": "Levitate",
+     "moves": [
+      "Thunderbolt",
+      "Hydro Pump",
+      "Will-O-Wisp",
+      "Protect"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "hydreigon",
+     "name": "Hydreigon",
+     "item": "Choice Scarf",
+     "ability": "Levitate",
+     "moves": [
+      "Draco Meteor",
+      "Dark Pulse",
+      "Snarl",
+      "Earth Power"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "scrafty",
+     "name": "Scrafty",
+     "item": "Chople Berry",
+     "ability": "Intimidate",
+     "moves": [
+      "Close Combat",
+      "Knock Off",
+      "Fake Out",
+      "Detect"
+     ],
+     "nature": "Adamant"
+    }
+   ]
+  },
+  {
+   "placing": 2,
+   "player": "Kronos",
+   "country": "DE",
+   "record": {
+    "wins": 7,
+    "losses": 3,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "sinistcha",
+     "name": "Sinistcha",
+     "item": "Kasib Berry",
+     "ability": "Hospitality",
+     "moves": [
+      "Matcha Gotcha",
+      "Shadow Ball",
+      "Rage Powder",
+      "Trick Room"
+     ],
+     "nature": "Bold"
+    },
+    {
+     "id": "grimmsnarl",
+     "name": "Grimmsnarl",
+     "item": "Light Clay",
+     "ability": "Prankster",
+     "moves": [
+      "Spirit Break",
+      "Light Screen",
+      "Reflect",
+      "Fake Out"
+     ],
+     "nature": "Bold"
+    },
+    {
+     "id": "krookodile",
+     "name": "Krookodile",
+     "item": "Life Orb",
+     "ability": "Intimidate",
+     "moves": [
+      "Earthquake",
+      "Knock Off",
+      "Gunk Shot",
+      "Protect"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "aerodactyl",
+     "name": "Aerodactyl",
+     "item": "Focus Sash",
+     "ability": "Unnerve",
+     "moves": [
+      "Rock Slide",
+      "Dual Wingbeat",
+      "Tailwind",
+      "Protect"
+     ],
+     "nature": "Jolly"
+    },
+    {
+     "id": "mawile",
+     "name": "Mawile",
+     "item": "Mawilite",
+     "ability": "Hyper Cutter",
+     "moves": [
+      "Play Rough",
+      "Iron Head",
+      "Sucker Punch",
+      "Protect"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "eelektross",
+     "name": "Eelektross",
+     "item": "Eelektrossite",
+     "ability": "Levitate",
+     "moves": [
+      "Thunderbolt",
+      "Flamethrower",
+      "Muddy Water",
+      "Protect"
+     ],
+     "nature": "Modest"
+    }
+   ]
+  },
+  {
+   "placing": 3,
+   "player": "Eric12",
+   "country": null,
+   "record": {
+    "wins": 7,
+    "losses": 2,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "gengar",
+     "name": "Gengar",
+     "item": "Gengarite",
+     "ability": "Cursed Body",
+     "moves": [
+      "Shadow Ball",
+      "Taunt",
+      "Sludge Bomb",
+      "Protect"
+     ],
+     "nature": "Timid"
+    },
+    {
+     "id": "scovillain",
+     "name": "Scovillain",
+     "item": "Scovillainite",
+     "ability": "Moody",
+     "moves": [
+      "Rage Powder",
+      "Giga Drain",
+      "Overheat",
+      "Protect"
+     ],
+     "nature": "Bold"
+    },
+    {
+     "id": "dragapult",
+     "name": "Dragapult",
+     "item": "Life Orb",
+     "ability": "Clear Body",
+     "moves": [
+      "Protect",
+      "Shadow Ball",
+      "Flamethrower",
+      "Draco Meteor"
+     ],
+     "nature": "Timid"
+    },
+    {
+     "id": "tyranitar",
+     "name": "Tyranitar",
+     "item": "Chople Berry",
+     "ability": "Sand Stream",
+     "moves": [
+      "Rock Slide",
+      "Knock Off",
+      "Protect",
+      "Low Kick"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "aerodactyl",
+     "name": "Aerodactyl",
+     "item": "Focus Sash",
+     "ability": "Unnerve",
+     "moves": [
+      "Rock Slide",
+      "Dual Wingbeat",
+      "Tailwind",
+      "Wide Guard"
+     ],
+     "nature": "Jolly"
+    },
+    {
+     "id": "scrafty",
+     "name": "Scrafty",
+     "item": "Leftovers",
+     "ability": "Intimidate",
+     "moves": [
+      "Knock Off",
+      "Drain Punch",
+      "Fake Out",
+      "Protect"
+     ],
+     "nature": "Adamant"
+    }
+   ]
+  },
+  {
+   "placing": 4,
+   "player": "PokeReplay",
+   "country": "GB",
+   "record": {
+    "wins": 7,
+    "losses": 2,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "tyranitar",
+     "name": "Tyranitar",
+     "item": "Tyranitarite",
+     "ability": "Sand Stream",
+     "moves": [
+      "Protect",
+      "Rock Slide",
+      "Knock Off",
+      "Low Kick"
+     ],
+     "nature": "Jolly"
+    },
+    {
+     "id": "hydreigon",
+     "name": "Hydreigon",
+     "item": "Choice Scarf",
+     "ability": "Levitate",
+     "moves": [
+      "Dark Pulse",
+      "Draco Meteor",
+      "Snarl",
+      "Heat Wave"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "corviknight",
+     "name": "Corviknight",
+     "item": "Leftovers",
+     "ability": "Mirror Armor",
+     "moves": [
+      "Brave Bird",
+      "Bulk Up",
+      "Tailwind",
+      "Roost"
+     ],
+     "nature": "Careful"
+    },
+    {
+     "id": "rotom-wash",
+     "name": "Wash Rotom",
+     "item": "Sitrus Berry",
+     "ability": "Levitate",
+     "moves": [
+      "Thunderbolt",
+      "Will-O-Wisp",
+      "Light Screen",
+      "Hydro Pump"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "mimikyu",
+     "name": "Mimikyu",
+     "item": "Life Orb",
+     "ability": "Disguise",
+     "moves": [
+      "Protect",
+      "Shadow Claw",
+      "Shadow Sneak",
+      "Play Rough"
+     ],
+     "nature": "Jolly"
+    },
+    {
+     "id": "scovillain",
+     "name": "Scovillain",
+     "item": "Scovillainite",
+     "ability": "Moody",
+     "moves": [
+      "Overheat",
+      "Giga Drain",
+      "Rage Powder",
+      "Leech Seed"
+     ],
+     "nature": "Bold"
+    }
+   ]
+  },
+  {
+   "placing": 5,
+   "player": "saltor",
+   "country": "US",
+   "record": {
+    "wins": 6,
+    "losses": 2,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "scovillain",
+     "name": "Scovillain",
+     "item": "Scovillainite",
+     "ability": "Moody",
+     "moves": [
+      "Rage Powder",
+      "Protect",
+      "Leech Seed",
+      "Overheat"
+     ],
+     "nature": "Bold"
+    },
+    {
+     "id": "tyranitar",
+     "name": "Tyranitar",
+     "item": "Chople Berry",
+     "ability": "Sand Stream",
+     "moves": [
+      "Rock Slide",
+      "Knock Off",
+      "Protect",
+      "Low Kick"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "corviknight",
+     "name": "Corviknight",
+     "item": "Leftovers",
+     "ability": "Mirror Armor",
+     "moves": [
+      "Brave Bird",
+      "Iron Head",
+      "Bulk Up",
+      "Roost"
+     ],
+     "nature": "Careful"
+    },
+    {
+     "id": "mawile",
+     "name": "Mawile",
+     "item": "Mawilite",
+     "ability": "Intimidate",
+     "moves": [
+      "Play Rough",
+      "Sucker Punch",
+      "Protect",
+      "Iron Head"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "hydreigon",
+     "name": "Hydreigon",
+     "item": "Choice Scarf",
+     "ability": "Levitate",
+     "moves": [
+      "Dark Pulse",
+      "Draco Meteor",
+      "Earth Power",
+      "Snarl"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "annihilape",
+     "name": "Annihilape",
+     "item": "Sitrus Berry",
+     "ability": "Defiant",
+     "moves": [
+      "Close Combat",
+      "Drain Punch",
+      "Rage Fist",
+      "Protect"
+     ],
+     "nature": "Adamant"
+    }
+   ]
+  },
+  {
+   "placing": 6,
+   "player": "Heathbar",
+   "country": "US",
+   "record": {
+    "wins": 5,
+    "losses": 3,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "tyranitar",
+     "name": "Tyranitar",
+     "item": "Tyranitarite",
+     "ability": "Sand Stream",
+     "moves": [
+      "Rock Slide",
+      "Knock Off",
+      "Low Kick",
+      "Protect"
+     ],
+     "nature": "Jolly"
+    },
+    {
+     "id": "houndstone",
+     "name": "Houndstone",
+     "item": "Sitrus Berry",
+     "ability": "Sand Rush",
+     "moves": [
+      "Last Respects",
+      "Play Rough",
+      "Protect",
+      "Will-O-Wisp"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "decidueye-hisui",
+     "name": "Hisuian Decidueye",
+     "item": "Focus Sash",
+     "ability": "Scrappy",
+     "moves": [
+      "Leaf Blade",
+      "Triple Arrows",
+      "Sucker Punch",
+      "Protect"
+     ],
+     "nature": "Jolly"
+    },
+    {
+     "id": "annihilape",
+     "name": "Annihilape",
+     "item": "Choice Scarf",
+     "ability": "Defiant",
+     "moves": [
+      "Coaching",
+      "Close Combat",
+      "Shadow Claw",
+      "Fire Punch"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "hatterene",
+     "name": "Hatterene",
+     "item": "Life Orb",
+     "ability": "Magic Bounce",
+     "moves": [
+      "Psychic",
+      "Trick Room",
+      "Dazzling Gleam",
+      "Protect"
+     ],
+     "nature": "Quiet"
+    },
+    {
+     "id": "scovillain",
+     "name": "Scovillain",
+     "item": "Scovillainite",
+     "ability": "Moody",
+     "moves": [
+      "Overheat",
+      "Giga Drain",
+      "Rage Powder",
+      "Protect"
+     ],
+     "nature": "Bold"
+    }
+   ]
+  },
+  {
+   "placing": 7,
+   "player": "Henry",
+   "country": "CA",
+   "record": {
+    "wins": 5,
+    "losses": 3,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "scrafty",
+     "name": "Scrafty",
+     "item": "Scraftinite",
+     "ability": "Intimidate",
+     "moves": [
+      "Dragon Dance",
+      "Drain Punch",
+      "Knock Off",
+      "Detect"
+     ],
+     "nature": "Careful"
+    },
+    {
+     "id": "volcarona",
+     "name": "Volcarona",
+     "item": "Rocky Helmet",
+     "ability": "Flame Body",
+     "moves": [
+      "Rage Powder",
+      "Flamethrower",
+      "Struggle Bug",
+      "Protect"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "salazzle",
+     "name": "Salazzle",
+     "item": "Focus Sash",
+     "ability": "Corrosion",
+     "moves": [
+      "Fake Out",
+      "Sludge Bomb",
+      "Toxic",
+      "Protect"
+     ],
+     "nature": "Naive"
+    },
+    {
+     "id": "mimikyu",
+     "name": "Mimikyu",
+     "item": "Expert Belt",
+     "ability": "Disguise",
+     "moves": [
+      "Play Rough",
+      "Shadow Claw",
+      "Shadow Sneak",
+      "Protect"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "rotom-wash",
+     "name": "Wash Rotom",
+     "item": "Sitrus Berry",
+     "ability": "Levitate",
+     "moves": [
+      "Thunderbolt",
+      "Electroweb",
+      "Hydro Pump",
+      "Protect"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "sinistcha",
+     "name": "Sinistcha",
+     "item": "Kasib Berry",
+     "ability": "Hospitality",
+     "moves": [
+      "Rage Powder",
+      "Life Dew",
+      "Matcha Gotcha",
+      "Trick Room"
+     ],
+     "nature": "Bold"
+    }
+   ]
+  },
+  {
+   "placing": 8,
+   "player": "THJester16",
+   "country": "US",
+   "record": {
+    "wins": 5,
+    "losses": 3,
+    "ties": 0
+   },
+   "team": [
+    {
+     "id": "mawile",
+     "name": "Mawile",
+     "item": "Mawilite",
+     "ability": "Hyper Cutter",
+     "moves": [
+      "Protect",
+      "Play Rough",
+      "Iron Head",
+      "Sucker Punch"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "volcarona",
+     "name": "Volcarona",
+     "item": "Rocky Helmet",
+     "ability": "Flame Body",
+     "moves": [
+      "Heat Wave",
+      "Rage Powder",
+      "Whirlwind",
+      "Protect"
+     ],
+     "nature": "Bold"
+    },
+    {
+     "id": "krookodile",
+     "name": "Krookodile",
+     "item": "Choice Scarf",
+     "ability": "Intimidate",
+     "moves": [
+      "High Horsepower",
+      "Earthquake",
+      "Knock Off",
+      "Rock Tomb"
+     ],
+     "nature": "Adamant"
+    },
+    {
+     "id": "rotom-wash",
+     "name": "Wash Rotom",
+     "item": "Sitrus Berry",
+     "ability": "Levitate",
+     "moves": [
+      "Hydro Pump",
+      "Thunderbolt",
+      "Will-O-Wisp",
+      "Light Screen"
+     ],
+     "nature": "Bold"
+    },
+    {
+     "id": "hydreigon",
+     "name": "Hydreigon",
+     "item": "Life Orb",
+     "ability": "Levitate",
+     "moves": [
+      "Dark Pulse",
+      "Snarl",
+      "Draco Meteor",
+      "Protect"
+     ],
+     "nature": "Modest"
+    },
+    {
+     "id": "corviknight",
+     "name": "Corviknight",
+     "item": "Leftovers",
+     "ability": "Mirror Armor",
+     "moves": [
+      "Brave Bird",
+      "Body Press",
+      "Tailwind",
+      "Bulk Up"
+     ],
+     "nature": "Careful"
+    }
+   ]
+  }
+ ],
+ "topCutUsage": [
+  {
+   "id": "mawile",
+   "name": "Mawile",
+   "count": 4,
+   "pct": 50
+  },
+  {
+   "id": "rotom-wash",
+   "name": "Wash Rotom",
+   "count": 4,
+   "pct": 50
+  },
+  {
+   "id": "hydreigon",
+   "name": "Hydreigon",
+   "count": 4,
+   "pct": 50
+  },
+  {
+   "id": "scovillain",
+   "name": "Scovillain",
+   "count": 4,
+   "pct": 50
+  },
+  {
+   "id": "tyranitar",
+   "name": "Tyranitar",
+   "count": 4,
+   "pct": 50
+  },
+  {
+   "id": "aerodactyl",
+   "name": "Aerodactyl",
+   "count": 3,
+   "pct": 37.5
+  },
+  {
+   "id": "scrafty",
+   "name": "Scrafty",
+   "count": 3,
+   "pct": 37.5
+  },
+  {
+   "id": "corviknight",
+   "name": "Corviknight",
+   "count": 3,
+   "pct": 37.5
+  },
+  {
+   "id": "sinistcha",
+   "name": "Sinistcha",
+   "count": 2,
+   "pct": 25
+  },
+  {
+   "id": "krookodile",
+   "name": "Krookodile",
+   "count": 2,
+   "pct": 25
+  },
+  {
+   "id": "mimikyu",
+   "name": "Mimikyu",
+   "count": 2,
+   "pct": 25
+  },
+  {
+   "id": "annihilape",
+   "name": "Annihilape",
+   "count": 2,
+   "pct": 25
+  },
+  {
+   "id": "volcarona",
+   "name": "Volcarona",
+   "count": 2,
+   "pct": 25
+  },
+  {
+   "id": "chandelure",
+   "name": "Chandelure",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "grimmsnarl",
+   "name": "Grimmsnarl",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "eelektross",
+   "name": "Eelektross",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "gengar",
+   "name": "Gengar",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "dragapult",
+   "name": "Dragapult",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "houndstone",
+   "name": "Houndstone",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "decidueye-hisui",
+   "name": "Hisuian Decidueye",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "hatterene",
+   "name": "Hatterene",
+   "count": 1,
+   "pct": 12.5
+  },
+  {
+   "id": "salazzle",
+   "name": "Salazzle",
+   "count": 1,
+   "pct": 12.5
+  }
+ ]
+}

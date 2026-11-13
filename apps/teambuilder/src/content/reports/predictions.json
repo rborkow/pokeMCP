@@ -50,5 +50,57 @@
         "falsifier": "Basculegion drops below 28.34% next month.",
         "evidence": "Basculegion: Jun 30.34%; INGAGE winner led Choice Scarf Basculegion, bring rates 7/16, 5/8, 3/8.",
         "baselineUsagePct": 30.33512
+    },
+    {
+        "month": "2026-11",
+        "slug": "ou",
+        "pokemonId": "kingambit",
+        "pokemonName": "Kingambit",
+        "claim": "Kingambit continues its reversion and falls below 25% usage.",
+        "direction": "down",
+        "thresholdPts": 2,
+        "confidence": "possible",
+        "falsifier": "Kingambit usage is 25% or higher next month.",
+        "evidence": "Kingambit: Aug 28.48%, Sep 30.66%, Oct 26.88% (-3.78 pts)",
+        "baselineUsagePct": 26.8761
+    },
+    {
+        "month": "2026-11",
+        "slug": "ou",
+        "pokemonId": "irontreads",
+        "pokemonName": "Iron Treads",
+        "claim": "Iron Treads holds or extends its gain above 14% on a more offensive Booster Energy build.",
+        "direction": "up",
+        "thresholdPts": 1,
+        "confidence": "possible",
+        "falsifier": "Iron Treads usage falls below 13.37% next month.",
+        "evidence": "Iron Treads: Sep 10.84%, Oct 13.37% (+2.53); items Booster Energy 33.4%→43.5%",
+        "baselineUsagePct": 13.373019999999999
+    },
+    {
+        "month": "2026-11",
+        "slug": "ou",
+        "pokemonId": "kingdra",
+        "pokemonName": "Kingdra",
+        "claim": "Kingdra stays above 2% as its Choice Specs rain set persists.",
+        "direction": "up",
+        "thresholdPts": 1,
+        "confidence": "likely",
+        "falsifier": "Kingdra usage falls below 2% next month.",
+        "evidence": "Kingdra: Sep 0.55%, Oct 2.52%; items Choice Specs 30.0%→86.3%",
+        "baselineUsagePct": 2.52034
+    },
+    {
+        "month": "2026-11",
+        "slug": "ou",
+        "pokemonId": "kyurem",
+        "pokemonName": "Kyurem",
+        "claim": "Kyurem continues sliding below 14% as its role is contested.",
+        "direction": "down",
+        "thresholdPts": 1,
+        "confidence": "possible",
+        "falsifier": "Kyurem usage is 14.49% or higher next month.",
+        "evidence": "Kyurem: Sep 17.01%, Oct 14.49% (-2.52); items Choice Specs 27.8%→23.8%, Assault Vest 27.2%→23.1%",
+        "baselineUsagePct": 14.48944
     }
 ]

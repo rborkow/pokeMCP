@@ -1,0 +1,192 @@
+{
+ "id": "garchompmega",
+ "name": "Garchomp-Mega",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.0033450000000000003,
+   "rank": 113,
+   "raw": 19450
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0099445,
+   "rank": 69,
+   "raw": 33013
+  }
+ ],
+ "abilities": [
+  [
+   "Sand Force",
+   100
+  ]
+ ],
+ "items": [
+  [
+   "Garchompite",
+   100
+  ]
+ ],
+ "moves": [
+  [
+   "Protect",
+   16.645824580091784
+  ],
+  [
+   "Earth Power",
+   12.21081493444671
+  ],
+  [
+   "Power Gem",
+   11.947492907897235
+  ],
+  [
+   "Rock Slide",
+   11.546622313609626
+  ],
+  [
+   "Stomping Tantrum",
+   10.518865318406231
+  ],
+  [
+   "Dragon Pulse",
+   9.667837486387056
+  ],
+  [
+   "Flamethrower",
+   8.33807221780719
+  ],
+  [
+   "Scale Shot",
+   7.776009705495726
+  ],
+  [
+   "Dragon Claw",
+   4.380521173283601
+  ],
+  [
+   "Earthquake",
+   2.705979948831356
+  ]
+ ],
+ "spreads": [
+  [
+   "Quiet:32/0/0/32/2/0",
+   32.55479758183431
+  ],
+  [
+   "Adamant:9/20/0/0/22/15",
+   11.695153121887095
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   5.668434308941092
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   2.703729722812036
+  ],
+  [
+   "Adamant:10/16/0/0/10/30",
+   2.6215322866219117
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sneasler",
+   14.700936038628909
+  ],
+  [
+   "Kingambit",
+   12.202657857335456
+  ],
+  [
+   "Farigiraf",
+   8.166603216788976
+  ],
+  [
+   "Charizard-Mega-Y",
+   7.614732476852268
+  ],
+  [
+   "Gardevoir-Mega",
+   7.154897784827577
+  ],
+  [
+   "Incineroar",
+   7.025898682525401
+  ],
+  [
+   "Rillaboom",
+   6.2656495879677045
+  ],
+  [
+   "Floette-Mega",
+   5.549232861748001
+  ],
+  [
+   "Tyranitar",
+   2.472634373158153
+  ],
+  [
+   "Gholdengo",
+   1.9162632208507453
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Garchomp",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Basculegion",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sylveon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

@@ -2,199 +2,175 @@
  "id": "volcarona",
  "name": "Volcarona",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0141027,
-   "rank": 72,
-   "raw": 49515
+   "month": "2026-09",
+   "usage": 0.08565619999999999,
+   "rank": 20,
+   "raw": 264576
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.10736380000000001,
+   "rank": 19,
+   "raw": 372004
   }
  ],
  "abilities": [
   [
    "Flame Body",
-   97.89733753373882
+   99.2257051382105
   ],
   [
    "Swarm",
-   2.102662466261186
+   0.7742948617895055
   ]
  ],
  "items": [
   [
-   "Leftovers",
-   26.33995574366504
+   "Rocky Helmet",
+   35.959274788257865
+  ],
+  [
+   "Grassy Seed",
+   32.98442384598641
   ],
   [
    "Sitrus Berry",
-   26.271602157797986
+   10.717177925595532
   ],
   [
-   "Life Orb",
-   10.176286638963203
-  ],
-  [
-   "Focus Sash",
-   9.841712301895802
+   "Leftovers",
+   7.461769456292346
   ],
   [
    "Charti Berry",
-   8.004505533900645
+   6.248468160645071
   ],
   [
-   "Coba Berry",
-   3.726284833979391
+   "Life Orb",
+   1.7688581433339998
   ],
   [
-   "Charcoal",
-   3.0167991458628594
+   "Focus Sash",
+   1.709794550100581
   ],
   [
-   "Silver Powder",
-   2.908840508940192
+   "Electric Seed",
+   1.4251467730002199
   ]
  ],
  "moves": [
   [
    "Protect",
-   18.022901091767828
+   15.374922843043997
   ],
   [
    "Rage Powder",
-   13.864098603810064
-  ],
-  [
-   "Heat Wave",
-   13.455058454623604
-  ],
-  [
-   "Quiver Dance",
-   12.539696587163238
-  ],
-  [
-   "Giga Drain",
-   7.7316306909120875
-  ],
-  [
-   "Fiery Dance",
-   7.729287646309927
-  ],
-  [
-   "Bug Buzz",
-   6.589413266748808
+   14.315830937739069
   ],
   [
    "Struggle Bug",
-   5.720019278596461
+   13.850203103367903
+  ],
+  [
+   "Quiver Dance",
+   10.929529640291015
+  ],
+  [
+   "Overheat",
+   10.538837766039014
   ],
   [
    "Tailwind",
-   4.569322748404257
+   10.383710950236337
   ],
   [
-   "Will-O-Wisp",
-   2.5866009505523686
+   "Heat Wave",
+   9.480107537852096
+  ],
+  [
+   "Giga Drain",
+   6.881437851503117
+  ],
+  [
+   "Fiery Dance",
+   3.8788189249620832
+  ],
+  [
+   "Bug Buzz",
+   2.2443447985124982
   ]
  ],
  "spreads": [
   [
+   "Timid:13/0/30/0/0/23",
+   7.644549158898392
+  ],
+  [
+   "Modest:32/0/11/5/1/17",
+   4.270735727284746
+  ],
+  [
    "Bold:32/0/32/0/2/0",
-   4.624360249899898
+   3.2052544873460347
   ],
   [
-   "Modest:1/0/0/32/1/32",
-   4.542231355327572
+   "Bold:32/0/26/0/8/0",
+   2.967416083122284
   ],
   [
-   "Modest:2/0/0/32/0/32",
-   4.37169368699062
-  ],
-  [
-   "Timid:2/0/0/32/0/32",
-   3.2099586038879746
-  ],
-  [
-   "Modest:32/0/2/32/0/0",
-   3.0547890488859
+   "Timid:21/0/22/0/0/23",
+   1.919443753811558
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Whimsicott",
-   5.131032689853659
+   "Rillaboom",
+   14.854264540183584
   ],
   [
-   "Garchomp",
-   5.030235086345297
-  ],
-  [
-   "Sinistcha",
-   4.909063594261514
-  ],
-  [
-   "Basculegion",
-   4.817318059514237
-  ],
-  [
-   "Sneasler",
-   3.4447846080557247
-  ],
-  [
-   "Staraptor-Mega",
-   3.3479694362586945
-  ],
-  [
-   "Grimmsnarl",
-   3.0772606389755945
-  ],
-  [
-   "Kingambit",
-   2.8870097918373774
-  ],
-  [
-   "Metagross-Mega",
-   2.8682601304657327
+   "Incineroar",
+   9.70082622165779
   ],
   [
    "Raichu-Mega-Y",
-   2.834891248014419
+   7.724554722924775
+  ],
+  [
+   "Garchomp-Mega-Z",
+   7.24276107589087
+  ],
+  [
+   "Basculegion",
+   5.640007451449108
+  ],
+  [
+   "Gholdengo",
+   4.810998680550195
+  ],
+  [
+   "Sneasler",
+   4.26251039353652
+  ],
+  [
+   "Kingambit",
+   4.068736357065825
+  ],
+  [
+   "Floette-Mega",
+   3.9757210626835784
+  ],
+  [
+   "Froslass-Mega",
+   2.1663095250316093
   ]
  ],
  "counters": [
-  {
-   "name": "Pelipper",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sinistcha",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Farigiraf",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Whimsicott",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Grimmsnarl",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
   {
    "name": "Sneasler",
    "score": 0,
@@ -202,13 +178,43 @@
    "switchPct": 0
   },
   {
-   "name": "Basculegion",
+   "name": "Milotic",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
+   "name": "Excadrill",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Tyranitar-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Staraptor-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Gholdengo",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -216,38 +222,55 @@
  ],
  "builds": [
   {
-   "item": "Leftovers",
+   "item": "Grassy Seed",
    "ability": "Flame Body",
    "moves": [
-    "Quiver Dance",
+    "Heat Wave",
     "Giga Drain",
-    "Fiery Dance",
+    "Quiver Dance",
     "Protect"
    ],
-   "count": 1,
+   "count": 13,
    "bestPlacing": 2,
-   "bestPlayer": "Malo__rx",
-   "eventName": "The Drywalls Series #8 - M-B",
-   "eventSlug": "2026-06-22-the-drywalls-series-8-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a37eb4faf50e12308407acc",
+   "bestPlayer": "kimnaise",
+   "eventName": "Trinity Tournament 18 (Double Format)",
+   "eventSlug": "2026-11-08-trinity-tournament-18-double-format",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae35ea122fd412b92a4f526",
    "nature": "Modest"
   },
   {
-   "item": "Sitrus Berry",
+   "item": "Rocky Helmet",
    "ability": "Flame Body",
    "moves": [
-    "Fiery Dance",
+    "Overheat",
+    "Struggle Bug",
     "Rage Powder",
-    "Protect",
-    "Struggle Bug"
+    "Tailwind"
    ],
-   "count": 1,
-   "bestPlacing": 7,
-   "bestPlayer": "NMR | Turista",
-   "eventName": "Intimidators Champions Challenge #22 REG M-B",
-   "eventSlug": "2026-06-30-intimidators-champions-challenge-22-reg-m-b",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a427367c87cd9ff0a312adf",
-   "nature": "Bold"
+   "count": 10,
+   "bestPlacing": 1,
+   "bestPlayer": "Gayangos2001",
+   "eventName": "‼️ACHO CUP: VGC 🕹️💥 #2 | Premio 10€ 💸",
+   "eventSlug": "2026-10-11-acho-cup-vgc-2-premio-10",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ac2c9b485920e4d25363fbe",
+   "nature": "Timid"
+  },
+  {
+   "item": "Charti Berry",
+   "ability": "Flame Body",
+   "moves": [
+    "Rage Powder",
+    "Struggle Bug",
+    "Overheat",
+    "Protect"
+   ],
+   "count": 4,
+   "bestPlacing": 4,
+   "bestPlayer": "Alessio Mannucci",
+   "eventName": "Battle Cruise VGC",
+   "eventSlug": "2026-10-26-battle-cruise-vgc",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad8ee598a8383117e3f0bb4",
+   "nature": "Timid"
   }
  ]
 }

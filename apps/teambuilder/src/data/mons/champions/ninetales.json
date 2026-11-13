@@ -2,177 +2,177 @@
  "id": "ninetales",
  "name": "Ninetales",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0137161,
-   "rank": 74,
-   "raw": 39442
+   "month": "2026-09",
+   "usage": 0.0033419,
+   "rank": 114,
+   "raw": 14186
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.007590599999999999,
+   "rank": 76,
+   "raw": 23479
   }
  ],
  "abilities": [
   [
    "Drought",
-   99.47296761425648
+   99.74945727528632
   ],
   [
    "Flash Fire",
-   0.5270323857435348
+   0.25054272471367095
   ]
  ],
  "items": [
   [
    "Choice Scarf",
-   83.36612360836673
-  ],
-  [
-   "Heat Rock",
-   3.9410010602613017
-  ],
-  [
-   "Focus Sash",
-   3.771570792807135
+   65.35220181111416
   ],
   [
    "Charcoal",
-   3.273123088735977
+   16.930997946901506
   ],
   [
-   "Shuca Berry",
-   2.1705511415282355
+   "Focus Sash",
+   5.280377807083724
   ],
   [
    "Life Orb",
-   1.1155308516949136
+   5.218940674672912
   ],
   [
    "Sitrus Berry",
-   0.7415277460174404
+   1.6331613966586958
   ],
   [
-   "Leftovers",
-   0.4520291173623005
+   "Passho Berry",
+   1.4796850491238003
+  ],
+  [
+   "Heat Rock",
+   0.9024248934026831
+  ],
+  [
+   "Rocky Helmet",
+   0.5837198634585427
   ]
  ],
  "moves": [
   [
    "Heat Wave",
-   23.33409690827646
-  ],
-  [
-   "Solar Beam",
-   19.58603985303158
-  ],
-  [
-   "Fake Tears",
-   19.055780681085725
+   22.772071050601397
   ],
   [
    "Overheat",
-   18.277842262158714
+   17.011959817324605
+  ],
+  [
+   "Solar Beam",
+   16.242375448986536
+  ],
+  [
+   "Fake Tears",
+   14.863533563668193
   ],
   [
    "Protect",
-   3.4705292195909907
+   8.325706981571182
   ],
   [
    "Weather Ball",
-   2.559454512983677
+   5.34231889372406
   ],
   [
-   "Sunny Day",
-   1.672799945487697
+   "Scorching Sands",
+   3.3955044940954417
+  ],
+  [
+   "Snarl",
+   2.1848549671713813
   ],
   [
    "Encore",
-   1.6499341801912006
+   2.1735837303865413
   ],
   [
-   "Will-O-Wisp",
-   1.5778494860030936
-  ],
-  [
-   "Helping Hand",
-   1.4153921927514685
+   "Flamethrower",
+   1.7252955947065944
   ]
  ],
  "spreads": [
   [
-   "Modest:2/0/0/32/0/32",
-   51.154439187028466
-  ],
-  [
-   "Timid:1/0/0/32/1/32",
-   9.845261745109173
-  ],
-  [
-   "Timid:2/0/0/32/0/32",
-   7.62798238304177
-  ],
-  [
-   "Modest:0/0/2/32/0/32",
-   5.146705056619899
+   "Modest:1/0/1/32/0/32",
+   24.732404736848963
   ],
   [
    "Modest:0/0/1/32/1/32",
-   4.86442825020034
+   23.720262708399144
+  ],
+  [
+   "Timid:1/0/1/32/0/32",
+   13.972296990678403
+  ],
+  [
+   "Modest:2/0/0/32/0/32",
+   12.03431906342076
+  ],
+  [
+   "Timid:2/0/0/32/0/32",
+   6.649627075368568
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Pyroar-Mega",
-   17.902016390219163
-  ],
-  [
    "Whimsicott",
-   16.613242097767838
+   14.424323742383368
   ],
   [
-   "Farigiraf",
-   15.358917249563323
+   "Indeedee-F",
+   12.227384305005758
+  ],
+  [
+   "Pyroar-Mega",
+   11.923942952020646
   ],
   [
    "Basculegion",
-   14.632159839593212
+   11.568830899607386
+  ],
+  [
+   "Gardevoir-Mega",
+   10.898535265233201
+  ],
+  [
+   "Indeedee",
+   3.3313793807489485
   ],
   [
    "Floette-Mega",
-   13.282150604927923
+   3.271669043850383
   ],
   [
-   "Garchomp",
-   2.4429600866261376
+   "Glimmora",
+   2.5223219192116435
   ],
   [
-   "Sylveon",
-   2.089031688956731
+   "Sneasler",
+   2.1216180309840755
   ],
   [
-   "Staraptor-Mega",
-   1.1994416361205784
-  ],
-  [
-   "Venusaur",
-   1.0312074443419341
-  ],
-  [
-   "Grimmsnarl",
-   0.9653303720806348
+   "Basculegion-F",
+   1.9729906374417367
   ]
  ],
  "counters": [
   {
-   "name": "Basculegion",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Pelipper",
+   "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -184,25 +184,31 @@
    "switchPct": 0
   },
   {
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Golisopod-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
    "name": "Garchomp",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Kingambit",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Whimsicott",
+   "name": "Farigiraf",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -219,18 +225,35 @@
    "item": "Focus Sash",
    "ability": "Drought",
    "moves": [
-    "Overheat",
+    "Weather Ball",
     "Heat Wave",
-    "Will-O-Wisp",
-    "Helping Hand"
+    "Dark Pulse",
+    "Protect"
    ],
    "count": 1,
-   "bestPlacing": 4,
-   "bestPlayer": "tdotstay2tact",
-   "eventName": "Road to Area 229 #4",
-   "eventSlug": "2026-06-27-road-to-area-229-4",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c370fc87cd9ff0a30eaa1",
-   "nature": "Modest"
+   "bestPlacing": 7,
+   "bestPlayer": "paillion",
+   "eventName": "Intimidators Champions Challenge #52 REG M-C",
+   "eventSlug": "2026-10-26-intimidators-champions-challenge-52-reg-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6adf3a9180a8f79408d1e7e8",
+   "nature": "Timid"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Drought",
+   "moves": [
+    "Weather Ball",
+    "Snarl",
+    "Helping Hand",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 8,
+   "bestPlayer": "QueerCrocodile",
+   "eventName": "Sketch Academy Sunday Regulation M-C Tournament",
+   "eventSlug": "2026-10-12-sketch-academy-sunday-regulation-m-c-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aba172d783097f8dcb725fc",
+   "nature": "Timid"
   }
  ]
 }

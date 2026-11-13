@@ -2,217 +2,223 @@
  "id": "archaludon",
  "name": "Archaludon",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.158018,
+   "month": "2026-09",
+   "usage": 0.1600513,
    "rank": 10,
-   "raw": 355583
+   "raw": 429034
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.20469400000000001,
+   "rank": 6,
+   "raw": 572347
   }
  ],
  "abilities": [
   [
    "Stamina",
-   92.46835185074862
+   93.8978772147234
   ],
   [
    "Sturdy",
-   5.141416813927218
+   5.152445973259614
   ],
   [
    "Stalwart",
-   2.390231335324162
+   0.9496768120169964
   ]
  ],
  "items": [
   [
    "Leftovers",
-   82.2449222069737
-  ],
-  [
-   "Chople Berry",
-   3.8687041978950196
-  ],
-  [
-   "Sitrus Berry",
-   3.098743270375135
+   91.47339337430618
   ],
   [
    "Choice Scarf",
-   2.469488740710237
+   1.8565765684279474
   ],
   [
-   "Life Orb",
-   1.989810548778089
+   "Sitrus Berry",
+   1.5863540869238464
+  ],
+  [
+   "Dragon Fang",
+   0.9483794620864415
+  ],
+  [
+   "Psychic Seed",
+   0.6128255505338803
+  ],
+  [
+   "Chople Berry",
+   0.612012725963495
   ],
   [
    "Magnet",
-   1.7543177551624476
+   0.4728365678366862
   ],
   [
-   "Scope Lens",
-   0.8606172618205312
-  ],
-  [
-   "Shuca Berry",
-   0.7470253882860389
+   "Rocky Helmet",
+   0.44928893016475074
   ]
  ],
  "moves": [
   [
    "Electro Shot",
-   24.32370460880435
+   24.46410939055467
   ],
   [
    "Protect",
-   23.669895676527847
-  ],
-  [
-   "Flash Cannon",
-   23.456944808401342
+   24.303634670835724
   ],
   [
    "Dragon Pulse",
-   18.895189010507842
+   21.709780431657503
   ],
   [
-   "Draco Meteor",
-   5.338946562433387
-  ],
-  [
-   "Aura Sphere",
-   2.7564161126644757
+   "Flash Cannon",
+   12.314206412641678
   ],
   [
    "Snarl",
-   0.5258770167747412
+   9.270809453541231
   ],
   [
-   "Steel Beam",
-   0.2331789047484298
+   "Aura Sphere",
+   4.4376087715127435
+  ],
+  [
+   "Draco Meteor",
+   2.669444782536938
   ],
   [
    "Thunderbolt",
-   0.2254167760539574
+   0.3663857325264878
   ],
   [
-   "Dark Pulse",
-   0.10937030400485265
+   "Steel Beam",
+   0.20479231548446455
+  ],
+  [
+   "Roar",
+   0.07108581490356936
   ]
  ],
  "spreads": [
   [
-   "Modest:32/0/0/1/29/4",
-   6.581260175083749
+   "Bold:30/0/1/1/19/15",
+   4.849084277492068
   ],
   [
-   "Modest:32/0/1/5/25/3",
-   6.263723362604831
+   "Calm:32/0/2/0/32/0",
+   4.8171059221061725
+  ],
+  [
+   "Calm:32/0/8/1/25/0",
+   3.4643336564701275
   ],
   [
    "Timid:2/0/0/32/0/32",
-   5.48832148922546
+   3.2043835065653266
   ],
   [
-   "Modest:2/0/0/32/0/32",
-   2.803027612854933
-  ],
-  [
-   "Modest:32/0/0/5/25/4",
-   2.297295327350996
+   "Calm:32/0/1/1/21/11",
+   3.016960608523057
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
    "Pelipper",
-   16.950726288278975
+   13.400193649684653
   ],
   [
-   "Swampert-Mega",
-   14.172683795664604
+   "Golisopod-Mega",
+   8.109365170471179
   ],
   [
-   "Sinistcha",
-   9.874406886690473
-  ],
-  [
-   "Basculegion",
-   5.987175767236056
-  ],
-  [
-   "Grimmsnarl",
-   5.570984267805069
-  ],
-  [
-   "Sableye",
-   5.522310194333519
-  ],
-  [
-   "Metagross-Mega",
-   3.3758524101426053
-  ],
-  [
-   "Incineroar",
-   2.8356041055455625
+   "Charizard-Mega-Y",
+   5.888569372259661
   ],
   [
    "Sneasler",
-   2.661043577174469
+   5.808541949503621
   ],
   [
-   "Venusaur-Mega",
-   2.0360931798794746
+   "Politoed",
+   5.773451848261295
+  ],
+  [
+   "Grimmsnarl",
+   4.962079993155147
+  ],
+  [
+   "Basculegion-F",
+   4.730285640161975
+  ],
+  [
+   "Raichu-Mega-X",
+   3.9239244953988823
+  ],
+  [
+   "Swampert-Mega",
+   3.6063584032313543
+  ],
+  [
+   "Rillaboom",
+   3.5114265744314617
   ]
  ],
  "counters": [
   {
-   "name": "Kingambit",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Floette-Mega",
+   "name": "Incineroar",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
+   "name": "Aerodactyl",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Sylveon",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Tyranitar-Mega",
+   "name": "Grimmsnarl",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Tsareena",
+   "name": "Salamence-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Raichu-Mega-X",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Corviknight",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -223,52 +229,52 @@
    "item": "Leftovers",
    "ability": "Stamina",
    "moves": [
+    "Electro Shot",
     "Dragon Pulse",
-    "Flash Cannon",
-    "Electro Shot",
+    "Snarl",
     "Protect"
    ],
-   "count": 61,
+   "count": 48,
    "bestPlacing": 1,
-   "bestPlayer": "Samuel T",
-   "eventName": "Talon's FIGHT CLUB #91 POKEMON CHAMPIONS",
-   "eventSlug": "2026-07-02-talon-s-fight-club-91-pokemon-champions",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a32e85d2d97f3b0c26189c9",
-   "nature": "Modest"
+   "bestPlayer": "Tobi_Hope",
+   "eventName": "VGC Indigo League #4 (Prize: Eternal Floette)",
+   "eventSlug": "2026-10-23-vgc-indigo-league-4-prize-eternal-floette",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6abb9694783097f8dcb73471",
+   "nature": "Calm"
   },
   {
    "item": "Leftovers",
    "ability": "Stamina",
    "moves": [
-    "Draco Meteor",
-    "Flash Cannon",
     "Electro Shot",
-    "Protect"
+    "Dragon Pulse",
+    "Protect",
+    "Flash Cannon"
    ],
-   "count": 4,
-   "bestPlacing": 2,
-   "bestPlayer": "Foghorn",
-   "eventName": "GG´s Jade Shell Badge (Champions)",
-   "eventSlug": "2026-06-28-gg-s-jade-shell-badge-champions",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/697fb1bc287864eaf0dc2c5a",
-   "nature": "Modest"
+   "count": 39,
+   "bestPlacing": 1,
+   "bestPlayer": "Koalelu",
+   "eventName": "Amyverse VGC Champions Arena #18 ❤️ Cash Prize!",
+   "eventSlug": "2026-11-09-amyverse-vgc-champions-arena-18-cash-prize",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae8e279e94eae0f94745a97",
+   "nature": "Calm"
   },
   {
    "item": "Leftovers",
    "ability": "Stamina",
    "moves": [
+    "Dragon Pulse",
     "Aura Sphere",
     "Electro Shot",
-    "Flash Cannon",
     "Protect"
    ],
-   "count": 2,
-   "bestPlacing": 2,
-   "bestPlayer": "Kardeas",
-   "eventName": "Amoonguss Bus Tour Champions Practice Reg M-B #1",
-   "eventSlug": "2026-06-23-amoonguss-bus-tour-champions-practice-reg-m-b-1",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a387661af50e1230840809c",
-   "nature": "Calm"
+   "count": 13,
+   "bestPlacing": 1,
+   "bestPlayer": "JoMcCloud23",
+   "eventName": "GLORY OF CHAMPIONS #2 - REGULATION M-C",
+   "eventSlug": "2026-10-28-glory-of-champions-2-regulation-m-c",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ad923ae115c12b73a5a941c",
+   "nature": "Bold"
   }
  ]
 }

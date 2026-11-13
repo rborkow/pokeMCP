@@ -2,170 +2,176 @@
  "id": "kleavor",
  "name": "Kleavor",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0061263,
-   "rank": 97,
-   "raw": 17205
+   "month": "2026-09",
+   "usage": 0.0064224,
+   "rank": 86,
+   "raw": 36201
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0074871,
+   "rank": 77,
+   "raw": 37866
   }
  ],
  "abilities": [
   [
    "Sharpness",
-   93.22212829295678
+   98.78612707766146
   ],
   [
    "Sheer Force",
-   6.039002905450582
+   0.942625545892438
   ],
   [
    "Swarm",
-   0.7388688015926219
+   0.27124737644607394
   ]
  ],
  "items": [
   [
-   "Choice Scarf",
-   37.82341035614507
-  ],
-  [
    "Focus Sash",
-   33.734813132233995
-  ],
-  [
-   "Life Orb",
-   10.113985894513783
+   65.32743878365493
   ],
   [
    "White Herb",
-   6.882449264010104
+   16.070838716809057
+  ],
+  [
+   "Choice Scarf",
+   14.801727641171809
+  ],
+  [
+   "Life Orb",
+   1.9332455814915124
+  ],
+  [
+   "Silver Powder",
+   0.7495417042055479
   ],
   [
    "Wide Lens",
-   3.560123751285973
-  ],
-  [
-   "Expert Belt",
-   2.07256084744891
+   0.423739048688807
   ],
   [
    "Hard Stone",
-   1.7749485384684627
+   0.2707986058850182
   ],
   [
-   "Sitrus Berry",
-   1.2227394416020727
+   "Psychic Seed",
+   0.14710018175732836
   ]
  ],
  "moves": [
   [
    "Stone Axe",
-   23.62433552627199
+   24.68158742700188
   ],
   [
    "X-Scissor",
-   17.80104191477656
+   19.987115875814716
   ],
   [
    "Close Combat",
-   15.638801548269177
-  ],
-  [
-   "Protect",
-   12.483070645048603
-  ],
-  [
-   "Rock Slide",
-   6.294326490057743
-  ],
-  [
-   "U-turn",
-   6.098293933423511
-  ],
-  [
-   "Night Slash",
-   5.93059898974089
-  ],
-  [
-   "Tailwind",
-   3.7305331796905734
+   15.645847724046588
   ],
   [
    "Feint",
-   3.45175664583287
+   13.190048953892664
   ],
   [
-   "Aerial Ace",
-   1.1382539867078159
+   "Protect",
+   11.883513346403857
+  ],
+  [
+   "Tailwind",
+   4.595160395967118
+  ],
+  [
+   "Night Slash",
+   2.901434216510308
+  ],
+  [
+   "U-turn",
+   2.568403096710243
+  ],
+  [
+   "Quick Guard",
+   1.760771128755589
+  ],
+  [
+   "Rock Slide",
+   1.2162770776505873
   ]
  ],
  "spreads": [
   [
-   "Jolly:2/32/0/0/0/32",
-   41.14093081771378
-  ],
-  [
    "Adamant:2/32/0/0/0/32",
-   27.30670862858377
+   31.34487403066735
   ],
   [
-   "Adamant:10/32/0/0/0/24",
-   2.13146075595655
+   "Jolly:2/32/0/0/0/32",
+   24.848968287236215
   ],
   [
-   "Jolly:3/32/0/0/0/31",
-   2.100495426382338
+   "Adamant:32/32/0/0/2/0",
+   14.29527081613429
   ],
   [
    "Adamant:0/32/0/0/2/32",
-   2.096811890662916
+   9.24485819016201
+  ],
+  [
+   "Brave:32/32/0/0/2/0",
+   5.458072097670372
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Whimsicott",
-   9.418875612974228
-  ],
-  [
-   "Farigiraf",
-   5.967908115020649
-  ],
-  [
-   "Basculegion",
-   4.56307237120342
-  ],
-  [
-   "Garchomp",
-   4.060789403063934
-  ],
-  [
-   "Sinistcha",
-   3.7157257111535813
-  ],
-  [
    "Incineroar",
-   3.2786211592653887
+   8.887619942558505
   ],
   [
    "Staraptor-Mega",
-   2.934794447450746
+   5.519487453902465
   ],
   [
-   "Floette-Mega",
-   2.907269228910089
+   "Grimmsnarl",
+   5.343456551117181
   ],
   [
-   "Metagross-Mega",
-   2.8331430726562266
+   "Sinistcha",
+   5.301349821871201
   ],
   [
-   "Torkoal",
-   2.562433163788483
+   "Kingambit",
+   5.274645554963216
+  ],
+  [
+   "Whimsicott",
+   5.101485567551234
+  ],
+  [
+   "Gholdengo",
+   4.567796474556063
+  ],
+  [
+   "Froslass-Mega",
+   4.043208124986617
+  ],
+  [
+   "Sneasler",
+   3.9412747071904093
+  ],
+  [
+   "Basculegion",
+   3.757955856552834
   ]
  ],
  "counters": [
@@ -176,7 +182,25 @@
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -186,7 +210,37 @@
    "score": 0,
    "koPct": 0,
    "switchPct": 0
+  },
+  {
+   "name": "Indeedee-F",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Sneasler",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
   }
  ],
- "builds": []
+ "builds": [
+  {
+   "item": "Choice Scarf",
+   "ability": "Sharpness",
+   "moves": [
+    "Stone Axe",
+    "X-Scissor",
+    "Close Combat",
+    "Night Slash"
+   ],
+   "count": 1,
+   "bestPlacing": 1,
+   "bestPlayer": "Tricki",
+   "eventName": "Sketch Academy Sunday Regulation M-C Tournament",
+   "eventSlug": "2026-10-12-sketch-academy-sunday-regulation-m-c-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aba172d783097f8dcb725fc",
+   "nature": "Jolly"
+  }
+ ]
 }

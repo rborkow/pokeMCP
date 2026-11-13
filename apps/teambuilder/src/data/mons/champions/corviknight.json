@@ -2,170 +2,176 @@
  "id": "corviknight",
  "name": "Corviknight",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.019912,
-   "rank": 58,
-   "raw": 71333
+   "month": "2026-09",
+   "usage": 0.024042599999999997,
+   "rank": 53,
+   "raw": 115866
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.018906,
+   "rank": 54,
+   "raw": 117361
   }
  ],
  "abilities": [
   [
    "Mirror Armor",
-   94.18423042026045
+   98.33052057739363
   ],
   [
    "Pressure",
-   4.185555022379833
+   1.1724770554717927
   ],
   [
    "Unnerve",
-   1.630214557359714
+   0.4970023671345895
   ]
  ],
  "items": [
   [
+   "Psychic Seed",
+   49.41987362889276
+  ],
+  [
    "Leftovers",
-   68.72429053187743
-  ],
-  [
-   "Occa Berry",
-   13.613138440649303
-  ],
-  [
-   "Sitrus Berry",
-   10.398070608255095
+   20.009607501766585
   ],
   [
    "Sharp Beak",
-   2.2116469064541
+   10.230473358029817
   ],
   [
-   "Wacan Berry",
-   0.8174530432268058
+   "Sitrus Berry",
+   6.623995037165026
   ],
   [
-   "Life Orb",
-   0.7534561816536356
+   "Rocky Helmet",
+   5.0044386841636435
   ],
   [
-   "Metal Coat",
-   0.6564747549966965
+   "Occa Berry",
+   3.647683775170982
   ],
   [
    "Lum Berry",
-   0.6349579788950829
+   1.3427390735581575
+  ],
+  [
+   "Life Orb",
+   1.3066829731528729
   ]
  ],
  "moves": [
   [
    "Brave Bird",
-   20.887937846307782
+   21.775967822598147
   ],
   [
    "Roost",
-   15.703880392986877
-  ],
-  [
-   "Tailwind",
-   15.633735629869053
-  ],
-  [
-   "Iron Head",
-   11.621903883966093
+   19.986477819358868
   ],
   [
    "Bulk Up",
-   10.704692454071756
+   19.01262403944795
+  ],
+  [
+   "Power Trip",
+   12.016315972512594
+  ],
+  [
+   "Tailwind",
+   8.864979376884303
   ],
   [
    "Body Press",
-   10.27226607198648
+   5.730340036551922
+  ],
+  [
+   "Iron Head",
+   5.200255261771053
   ],
   [
    "Protect",
-   6.639296029828856
+   3.473859081088048
   ],
   [
    "Iron Defense",
-   4.413529782205521
+   1.947685188418512
   ],
   [
    "Taunt",
-   1.3004214014592883
-  ],
-  [
-   "U-turn",
-   0.8928962955015675
+   1.0037991857725728
   ]
  ],
  "spreads": [
   [
+   "Careful:32/1/1/0/15/17",
+   12.580163756181587
+  ],
+  [
+   "Adamant:30/13/1/0/0/22",
+   9.927603264978526
+  ],
+  [
+   "Careful:32/18/2/0/5/9",
+   7.577517156774322
+  ],
+  [
+   "Careful:32/0/2/0/32/0",
+   5.568695061202201
+  ],
+  [
    "Careful:32/2/0/0/32/0",
-   7.9144076800426175
-  ],
-  [
-   "Impish:32/2/32/0/0/0",
-   6.676634571387266
-  ],
-  [
-   "Careful:27/11/1/0/5/22",
-   4.068109541626708
-  ],
-  [
-   "Adamant:32/13/0/0/13/8",
-   3.786670427103772
-  ],
-  [
-   "Impish:32/0/32/0/2/0",
-   2.827570721732125
+   5.283516061918114
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Garchomp",
-   7.297446371818669
-  ],
-  [
    "Tyranitar-Mega",
-   5.921278142047312
-  ],
-  [
-   "Sinistcha",
-   5.049111721482498
-  ],
-  [
-   "Incineroar",
-   3.901910639638496
+   12.616887314470244
   ],
   [
    "Excadrill",
-   3.482157228968577
+   10.858607388120896
   ],
   [
    "Sneasler",
-   3.228144202383234
+   9.557259167642322
   ],
   [
-   "Rotom-Wash",
-   3.2186470969015604
+   "Indeedee",
+   9.1289675120684
   ],
   [
-   "Basculegion",
-   3.180150059569205
+   "Salamence-Mega",
+   7.720179402067955
   ],
   [
-   "Raichu-Mega-Y",
-   2.733301251434519
+   "Indeedee-F",
+   4.5593658290468495
   ],
   [
-   "Hydreigon",
-   2.4491459288059234
+   "Gardevoir-Mega",
+   3.131965279327351
+  ],
+  [
+   "Incineroar",
+   2.290036671993941
+  ],
+  [
+   "Garchomp",
+   2.069126112602757
+  ],
+  [
+   "Sinistcha",
+   1.8585123426093073
   ]
  ],
  "counters": [
@@ -176,7 +182,7 @@
    "switchPct": 0
   },
   {
-   "name": "Floette-Mega",
+   "name": "Raichu-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -188,31 +194,31 @@
    "switchPct": 0
   },
   {
-   "name": "Grimmsnarl",
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Whimsicott",
+   "name": "Archaludon",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Garchomp",
+   "name": "Golisopod-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Staraptor-Mega",
+   "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Indeedee-F",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -224,51 +230,51 @@
    "ability": "Mirror Armor",
    "moves": [
     "Brave Bird",
-    "Tailwind",
     "Bulk Up",
-    "Roost"
+    "Roost",
+    "Tailwind"
    ],
-   "count": 2,
+   "count": 6,
    "bestPlacing": 1,
    "bestPlayer": "JurassicJoints",
-   "eventName": "Road to Area 229 #4",
-   "eventSlug": "2026-06-27-road-to-area-229-4",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c370fc87cd9ff0a30eaa1",
+   "eventName": "London Corviknights VGC Weekly Tour 17!",
+   "eventSlug": "2026-10-15-london-corviknights-vgc-weekly-tour-17",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aa95de5f1243e65f98020c6",
    "nature": "Careful"
-  },
-  {
-   "item": "Occa Berry",
-   "ability": "Mirror Armor",
-   "moves": [
-    "Tailwind",
-    "Roost",
-    "Brave Bird",
-    "Protect"
-   ],
-   "count": 1,
-   "bestPlacing": 4,
-   "bestPlayer": "tdotstay2tact",
-   "eventName": "Road to Area 229 #4",
-   "eventSlug": "2026-06-27-road-to-area-229-4",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c370fc87cd9ff0a30eaa1",
-   "nature": "Impish"
   },
   {
    "item": "Leftovers",
    "ability": "Mirror Armor",
    "moves": [
-    "Tailwind",
+    "Brave Bird",
     "Body Press",
-    "Protect",
-    "Brave Bird"
+    "Tailwind",
+    "Bulk Up"
+   ],
+   "count": 4,
+   "bestPlacing": 2,
+   "bestPlayer": "THJester16",
+   "eventName": "Spooky Cup - $500 PRIZE POOL",
+   "eventSlug": "2026-10-26-spooky-cup-500-prize-pool",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6adf94b780a8f79408d1eb2f",
+   "nature": "Careful"
+  },
+  {
+   "item": "Sitrus Berry",
+   "ability": "Mirror Armor",
+   "moves": [
+    "Brave Bird",
+    "Bulk Up",
+    "Roost",
+    "Protect"
    ],
    "count": 1,
-   "bestPlacing": 4,
-   "bestPlayer": "MDN10",
-   "eventName": "Palafin Pals Jet Punch Series 🌊✊Reg M-B #2",
-   "eventSlug": "2026-06-22-palafin-pals-jet-punch-series-reg-m-b-2",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a390b81c87cd9ff0a30cfc3",
-   "nature": "Adamant"
+   "bestPlacing": 1,
+   "bestPlayer": "JackG",
+   "eventName": "🍋Sitrus-Series🍋|Champions-MC|#82",
+   "eventSlug": "2026-11-11-sitrus-series-champions-mc-82",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae69d2eae67092a40740695",
+   "nature": "Careful"
   }
  ]
 }

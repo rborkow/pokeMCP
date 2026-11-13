@@ -2,189 +2,183 @@
  "id": "sylveon",
  "name": "Sylveon",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.1281831,
-   "rank": 17,
-   "raw": 263154
+   "month": "2026-09",
+   "usage": 0.0936246,
+   "rank": 18,
+   "raw": 262857
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.10626849999999999,
+   "rank": 20,
+   "raw": 267612
   }
  ],
  "abilities": [
   [
    "Pixilate",
-   99.53822864440902
+   99.88284514934111
   ],
   [
    "Cute Charm",
-   0.46177135559099614
+   0.11715485065889578
   ]
  ],
  "items": [
   [
    "Fairy Feather",
-   91.12424013000872
+   92.59476952988076
   ],
   [
    "Life Orb",
-   4.709247492257637
+   5.146826700356131
   ],
   [
    "Leftovers",
-   1.768350729353533
+   1.0655662267589037
   ],
   [
    "Sitrus Berry",
-   1.3951035636950506
+   0.7057335563008424
+  ],
+  [
+   "Grassy Seed",
+   0.0919395866797632
+  ],
+  [
+   "Electric Seed",
+   0.0845632838167252
   ],
   [
    "Choice Scarf",
-   0.4476278837646475
-  ],
-  [
-   "Quick Claw",
-   0.137294182106367
-  ],
-  [
-   "Babiri Berry",
-   0.10966012271116932
+   0.06692339669888352
   ],
   [
    "Focus Sash",
-   0.07643994445718048
+   0.04769573974637244
   ]
  ],
  "moves": [
   [
    "Hyper Voice",
-   24.95689918944945
-  ],
-  [
-   "Quick Attack",
-   19.566034935339367
-  ],
-  [
-   "Hyper Beam",
-   18.361309921660105
+   24.976872766348947
   ],
   [
    "Detect",
-   13.287449802352539
+   17.51198336503832
   ],
   [
-   "Protect",
-   11.361903478443223
+   "Quick Attack",
+   16.071834284121273
   ],
   [
-   "Moonblast",
-   3.495710979450286
-  ],
-  [
-   "Calm Mind",
-   2.2129740914350626
+   "Hyper Beam",
+   13.66833857747972
   ],
   [
    "Yawn",
-   2.1982193386645825
+   9.508547770975403
+  ],
+  [
+   "Protect",
+   7.371410440731103
+  ],
+  [
+   "Moonblast",
+   5.699985161057693
+  ],
+  [
+   "Calm Mind",
+   2.445608797026068
   ],
   [
    "Mystical Fire",
-   0.9338572654536932
+   1.2829854649466776
   ],
   [
    "Round",
-   0.6078567977705065
+   0.33538083642036304
   ]
  ],
  "spreads": [
   [
+   "Modest:25/0/28/10/0/3",
+   9.580365846740674
+  ],
+  [
+   "Modest:13/0/32/20/0/1",
+   4.861115583534085
+  ],
+  [
+   "Modest:32/0/26/8/0/0",
+   4.7725023207116
+  ],
+  [
    "Modest:9/0/22/20/0/15",
-   6.634717170322839
-  ],
-  [
-   "Modest:9/0/22/30/0/5",
-   4.840660024052614
-  ],
-  [
-   "Quiet:32/0/2/32/0/0",
-   3.7070119018651546
+   4.4158472341879484
   ],
   [
    "Modest:32/0/2/32/0/0",
-   3.227652926137123
-  ],
-  [
-   "Modest:10/0/15/30/0/11",
-   2.701149527702642
+   3.097169836115121
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Garchomp",
-   8.507950299444017
-  ],
-  [
-   "Kingambit",
-   7.28332754815124
-  ],
-  [
-   "Farigiraf",
-   6.672920449380425
-  ],
-  [
    "Charizard-Mega-Y",
-   6.0682580538214115
-  ],
-  [
-   "Basculegion",
-   6.026383960137135
-  ],
-  [
-   "Aerodactyl-Mega",
-   4.810576745503558
-  ],
-  [
-   "Sinistcha",
-   3.99443516453126
+   10.8497936412811
   ],
   [
    "Incineroar",
-   3.667890133807942
+   10.732542091545682
   ],
   [
-   "Whimsicott",
-   3.509053482136141
+   "Farigiraf",
+   9.74431426006421
   ],
   [
-   "Torkoal",
-   2.9966574202890657
+   "Garchomp",
+   9.542301422124375
+  ],
+  [
+   "Venusaur",
+   5.9243394270152585
+  ],
+  [
+   "Kingambit",
+   5.644394902381667
+  ],
+  [
+   "Rillaboom",
+   5.508520164180976
+  ],
+  [
+   "Raichu-Mega-Y",
+   3.2967855300852333
+  ],
+  [
+   "Sneasler",
+   3.263518172805836
+  ],
+  [
+   "Salamence-Mega",
+   3.075983111957669
   ]
  ],
  "counters": [
   {
-   "name": "Basculegion",
+   "name": "Garchomp",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Swampert-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Dragonite-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Kingambit",
+   "name": "Sinistcha",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -196,7 +190,19 @@
    "switchPct": 0
   },
   {
-   "name": "Scovillain-Mega",
+   "name": "Archaludon",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Salamence-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -208,7 +214,7 @@
    "switchPct": 0
   },
   {
-   "name": "Floette-Mega",
+   "name": "Glimmora",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -221,32 +227,15 @@
    "moves": [
     "Hyper Voice",
     "Quick Attack",
-    "Hyper Beam",
-    "Detect"
+    "Detect",
+    "Hyper Beam"
    ],
-   "count": 20,
+   "count": 13,
    "bestPlacing": 1,
-   "bestPlayer": "merijnvd",
-   "eventName": "VGC Trainer School; champions m/b #1",
-   "eventSlug": "2026-07-05-vgc-trainer-school-champions-m-b-1",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3a956c83fd320299bce8bf",
-   "nature": "Modest"
-  },
-  {
-   "item": "Fairy Feather",
-   "ability": "Pixilate",
-   "moves": [
-    "Hyper Voice",
-    "Hyper Beam",
-    "Quick Attack",
-    "Protect"
-   ],
-   "count": 18,
-   "bestPlacing": 1,
-   "bestPlayer": "TytokiArts",
-   "eventName": "*Sitrus-Series*|Champions-MB|#65",
-   "eventSlug": "2026-07-01-sitrus-series-champions-mb-65",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3d2290c87cd9ff0a30f032",
+   "bestPlayer": "138mysx",
+   "eventName": "🍋Sitrus-Series🍋|Champions-MC|#80",
+   "eventSlug": "2026-10-28-sitrus-series-champions-mc-80",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ac965538a8383117e3e813d",
    "nature": "Modest"
   },
   {
@@ -255,15 +244,32 @@
    "moves": [
     "Hyper Voice",
     "Moonblast",
+    "Calm Mind",
+    "Detect"
+   ],
+   "count": 7,
+   "bestPlacing": 1,
+   "bestPlayer": "Oinky",
+   "eventName": "ValkrixVGC Champions League #09 |Shiny Golisopod |",
+   "eventSlug": "2026-11-08-valkrixvgc-champions-league-09-shiny-golisopod",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae1525c22fd412b92a4e70c",
+   "nature": "Modest"
+  },
+  {
+   "item": "Fairy Feather",
+   "ability": "Pixilate",
+   "moves": [
+    "Hyper Beam",
+    "Hyper Voice",
     "Quick Attack",
     "Protect"
    ],
-   "count": 2,
+   "count": 7,
    "bestPlacing": 1,
-   "bestPlayer": "Conia",
-   "eventName": "Ratorneo #4 Champions 2026 | Reg MB",
-   "eventSlug": "2026-06-25-ratorneo-4-champions-2026-reg-mb",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a3c190783fd320299bcf5c9",
+   "bestPlayer": "Abnaa",
+   "eventName": "VGC Indigo League #6 (Prize: Eternal Floette)",
+   "eventSlug": "2026-11-06-vgc-indigo-league-6-prize-eternal-floette",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ac9e84b115c12b73a5a05a9",
    "nature": "Modest"
   }
  ]

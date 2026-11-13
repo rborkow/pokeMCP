@@ -1,0 +1,228 @@
+{
+ "id": "indeedeef",
+ "name": "Indeedee-F",
+ "slug": "champions",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
+ "history": [
+  {
+   "month": "2026-09",
+   "usage": 0.2091206,
+   "rank": 6,
+   "raw": 833895
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.1568665,
+   "rank": 10,
+   "raw": 665305
+  }
+ ],
+ "abilities": [
+  [
+   "Psychic Surge",
+   99.51349533454668
+  ],
+  [
+   "Synchronize",
+   0.3408631619120763
+  ],
+  [
+   "Own Tempo",
+   0.14564150354124494
+  ]
+ ],
+ "items": [
+  [
+   "Rocky Helmet",
+   52.55418435574938
+  ],
+  [
+   "Psychic Seed",
+   16.41189116425398
+  ],
+  [
+   "Colbur Berry",
+   14.591906797420398
+  ],
+  [
+   "Sitrus Berry",
+   10.672232944888322
+  ],
+  [
+   "Eject Button",
+   1.8334025805686402
+  ],
+  [
+   "Focus Sash",
+   1.056043312364681
+  ],
+  [
+   "Lum Berry",
+   0.4396638726764629
+  ],
+  [
+   "Tanga Berry",
+   0.35580624108744635
+  ]
+ ],
+ "moves": [
+  [
+   "Follow Me",
+   24.89192890672001
+  ],
+  [
+   "Helping Hand",
+   20.45878139715146
+  ],
+  [
+   "Psychic",
+   19.052944596386038
+  ],
+  [
+   "Trick Room",
+   17.03891954937001
+  ],
+  [
+   "Protect",
+   8.931261384852741
+  ],
+  [
+   "Terrain Pulse",
+   1.9326855222950547
+  ],
+  [
+   "Imprison",
+   1.4726578871254261
+  ],
+  [
+   "Heal Pulse",
+   1.4273286186938599
+  ],
+  [
+   "Mystical Fire",
+   1.1213847619452164
+  ],
+  [
+   "Psyshock",
+   0.6321427912548696
+  ]
+ ],
+ "spreads": [
+  [
+   "Bold:32/0/32/0/2/0",
+   32.530811799467955
+  ],
+  [
+   "Relaxed:32/0/32/0/2/0",
+   24.0114223871408
+  ],
+  [
+   "Bold:32/0/32/1/1/0",
+   2.8024189229391485
+  ],
+  [
+   "Relaxed:32/0/32/2/0/0",
+   2.7857252273484785
+  ],
+  [
+   "Relaxed:32/0/32/1/1/0",
+   2.160656104190362
+  ]
+ ],
+ "teraTypes": [],
+ "teammates": [
+  [
+   "Sneasler",
+   8.765233539319189
+  ],
+  [
+   "Gardevoir-Mega",
+   8.31940967851892
+  ],
+  [
+   "Armarouge",
+   5.680702406079874
+  ],
+  [
+   "Kingambit",
+   3.627606769395946
+  ],
+  [
+   "Kommo-o",
+   3.143848940185183
+  ],
+  [
+   "Basculegion",
+   3.060438125081859
+  ],
+  [
+   "Incineroar",
+   2.8666196294601667
+  ],
+  [
+   "Whimsicott",
+   2.312584160047818
+  ],
+  [
+   "Charizard-Mega-Y",
+   2.3108894943447886
+  ],
+  [
+   "Torkoal",
+   1.9617018257854189
+  ]
+ ],
+ "counters": [
+  {
+   "name": "Kingambit",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Politoed",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Milotic",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Pelipper",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Farigiraf",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Excadrill",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Annihilape",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Golisopod-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  }
+ ],
+ "builds": []
+}

@@ -2,173 +2,191 @@
  "id": "gallade",
  "name": "Gallade",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0154896,
-   "rank": 68,
-   "raw": 34175
+   "month": "2026-09",
+   "usage": 0.0096771,
+   "rank": 71,
+   "raw": 48128
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0050787,
+   "rank": 96,
+   "raw": 41073
   }
  ],
  "abilities": [
   [
    "Sharpness",
-   97.93873458040102
+   99.5348978591973
   ],
   [
    "Steadfast",
-   1.6573795267198959
+   0.26791575725076733
   ],
   [
    "Justified",
-   0.4038858928790885
+   0.19718638355192716
   ]
  ],
  "items": [
   [
    "Focus Sash",
-   34.20285047007357
+   31.128383302630315
   ],
   [
    "Life Orb",
-   17.937030497966646
-  ],
-  [
-   "Choice Scarf",
-   11.151490871895428
+   15.812890521118128
   ],
   [
    "White Herb",
-   9.533613372108944
+   13.924601317058984
   ],
   [
-   "Iron Ball",
-   7.134537328031038
-  ],
-  [
-   "Black Belt",
-   6.295073769544948
+   "Choice Scarf",
+   8.223267610925058
   ],
   [
    "Expert Belt",
-   3.5602653120776298
+   7.458779436995361
+  ],
+  [
+   "Iron Ball",
+   6.410678605306039
+  ],
+  [
+   "Psychic Seed",
+   4.742338772094986
   ],
   [
    "Scope Lens",
-   3.205668026296138
+   3.6364816493268752
   ]
  ],
  "moves": [
   [
    "Sacred Sword",
-   24.710983292458746
+   24.863179531300396
   ],
   [
    "Psycho Cut",
-   21.37283077281716
-  ],
-  [
-   "Trick Room",
-   13.731391007948602
-  ],
-  [
-   "Leaf Blade",
-   12.688582429828541
-  ],
-  [
-   "Protect",
-   10.421645676398649
+   23.729655427773217
   ],
   [
    "Wide Guard",
-   6.950717272595583
+   14.628124848918686
+  ],
+  [
+   "Trick Room",
+   12.14463018956173
+  ],
+  [
+   "Leaf Blade",
+   6.8714402517150015
+  ],
+  [
+   "Protect",
+   6.567117742368264
   ],
   [
    "Night Slash",
-   5.233146676885853
-  ],
-  [
-   "Trick",
-   0.6854712154075621
+   6.147316327214798
   ],
   [
    "Coaching",
-   0.6205829002796264
+   0.7023978910584926
   ],
   [
-   "Triple Axel",
-   0.5205001843551088
+   "Feint",
+   0.4249609151444407
+  ],
+  [
+   "Shadow Claw",
+   0.38108581224317706
   ]
  ],
  "spreads": [
   [
-   "Adamant:2/32/0/0/0/32",
-   18.758542436846145
-  ],
-  [
    "Brave:32/32/2/0/0/0",
-   15.784008697491162
-  ],
-  [
-   "Jolly:2/32/0/0/0/32",
-   13.8839799227873
+   17.158689439502677
   ],
   [
    "Brave:32/32/0/0/2/0",
-   7.7853194098394845
+   16.815328300273293
   ],
   [
-   "Adamant:32/32/2/0/0/0",
-   5.601371248664896
+   "Adamant:0/32/0/0/0/32",
+   12.01897773290897
+  ],
+  [
+   "Adamant:2/32/0/0/0/32",
+   10.586137811926264
+  ],
+  [
+   "Jolly:2/32/0/0/0/32",
+   9.936899042625644
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Farigiraf",
-   12.47814095682149
-  ],
-  [
-   "Mawile-Mega",
-   11.195192347124829
-  ],
-  [
-   "Torkoal",
-   9.436161228105085
-  ],
-  [
-   "Incineroar",
-   5.057454157401434
-  ],
-  [
-   "Sinistcha",
-   3.1528695786277745
-  ],
-  [
-   "Staraptor",
-   2.919905526005968
-  ],
-  [
-   "Kangaskhan",
-   2.831664409262597
-  ],
-  [
-   "Maushold",
-   2.5020724506366747
+   "Indeedee-F",
+   12.330421020559363
   ],
   [
    "Kingambit",
-   2.3542041348494047
+   6.041977020070785
+  ],
+  [
+   "Torkoal",
+   5.484725740896282
+  ],
+  [
+   "Incineroar",
+   5.411343155118141
   ],
   [
    "Camerupt-Mega",
-   1.9707936281144318
+   4.819805124800294
+  ],
+  [
+   "Hatterene",
+   4.285695263974418
+  ],
+  [
+   "Farigiraf",
+   3.197455099379811
+  ],
+  [
+   "Armarouge",
+   3.1420750087038387
+  ],
+  [
+   "Sinistcha",
+   2.9506793362127275
+  ],
+  [
+   "Charizard-Mega-X",
+   2.37888405461016
   ]
  ],
  "counters": [
+  {
+   "name": "Incineroar",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
   {
    "name": "Kingambit",
    "score": 0,
@@ -176,7 +194,7 @@
    "switchPct": 0
   },
   {
-   "name": "Basculegion",
+   "name": "Charizard-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -186,55 +204,59 @@
    "score": 0,
    "koPct": 0,
    "switchPct": 0
-  },
-  {
-   "name": "Torkoal",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Pelipper",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Archaludon",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Sinistcha",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Grimmsnarl",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
   }
  ],
  "builds": [
   {
-   "item": "Iron Ball",
+   "item": "Life Orb",
    "ability": "Sharpness",
    "moves": [
     "Sacred Sword",
-    "Leaf Blade",
+    "Night Slash",
     "Psycho Cut",
-    "Trick Room"
+    "Protect"
    ],
-   "count": 2,
+   "count": 1,
    "bestPlacing": 1,
-   "bestPlayer": "scrambledegg6",
-   "eventName": "Amoonguss Bus Tour Champions Practice Reg M-B #1",
-   "eventSlug": "2026-06-23-amoonguss-bus-tour-champions-practice-reg-m-b-1",
-   "sourceUrl": "https://play.limitlesstcg.com/tournament/6a387661af50e1230840809c",
+   "bestPlayer": "MonkeyT",
+   "eventName": "Sketch Academy Sunday Regulation M-C Tournament",
+   "eventSlug": "2026-10-19-sketch-academy-sunday-regulation-m-c-tournament",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6aba1756880ed327106de55f",
+   "nature": "Adamant"
+  },
+  {
+   "item": "Focus Sash",
+   "ability": "Sharpness",
+   "moves": [
+    "Sacred Sword",
+    "Trick Room",
+    "Psycho Cut",
+    "Wide Guard"
+   ],
+   "count": 1,
+   "bestPlacing": 5,
+   "bestPlayer": "NervoX",
+   "eventName": "Off Meta Fight Club #8 ($40 USD prize pool)",
+   "eventSlug": "2026-10-29-off-meta-fight-club-8-40-usd-prize-pool",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ada821a97e21d82e5c6cc67",
    "nature": "Brave"
+  },
+  {
+   "item": "Scope Lens",
+   "ability": "Sharpness",
+   "moves": [
+    "Psycho Cut",
+    "Sacred Sword",
+    "Leaf Blade",
+    "Protect"
+   ],
+   "count": 1,
+   "bestPlacing": 6,
+   "bestPlayer": "Zuan",
+   "eventName": "Off Meta Fight Club #9",
+   "eventSlug": "2026-11-05-off-meta-fight-club-9",
+   "sourceUrl": "https://play.limitlesstcg.com/tournament/6ae3dd6680a8f79408d21452",
+   "nature": "Adamant"
   }
  ]
 }

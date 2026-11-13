@@ -2,15 +2,21 @@
  "id": "metagrossmega",
  "name": "Metagross-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.1295973,
-   "rank": 16,
-   "raw": 306559
+   "month": "2026-09",
+   "usage": 0.0588564,
+   "rank": 32,
+   "raw": 219862
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0443296,
+   "rank": 43,
+   "raw": 164736
   }
  ],
  "abilities": [
@@ -27,120 +33,120 @@
  ],
  "moves": [
   [
-   "Protect",
-   23.80660388841804
-  ],
-  [
    "Psychic Fangs",
-   22.51631805203399
+   23.229240056614326
   ],
   [
-   "Iron Head",
-   17.438510542651024
+   "Protect",
+   20.20108370772461
   ],
   [
-   "Bullet Punch",
-   7.578803042470364
-  ],
-  [
-   "Body Press",
-   6.08479605886616
+   "Steel Roller",
+   11.403501107739498
   ],
   [
    "Stomping Tantrum",
-   5.8731840564618585
+   10.445745462546457
+  ],
+  [
+   "Iron Head",
+   8.67112530084716
+  ],
+  [
+   "Body Press",
+   8.559452191595204
+  ],
+  [
+   "Bullet Punch",
+   5.195596376163606
   ],
   [
    "Ice Punch",
-   4.992002731452323
+   2.334089461665786
   ],
   [
-   "Meteor Mash",
-   4.788131328251855
+   "Brick Break",
+   1.7219369237490185
   ],
   [
-   "Rock Slide",
-   1.61284717970017
-  ],
-  [
-   "Hammer Arm",
-   1.2339570310457615
+   "Iron Defense",
+   1.3314314546629595
   ]
  ],
  "spreads": [
   [
    "Jolly:2/32/0/0/0/32",
-   27.52343407895709
+   17.503440981272398
   ],
   [
-   "Jolly:14/27/0/0/0/25",
-   7.166285842463031
+   "Adamant:31/25/1/0/1/8",
+   4.295750070287821
+  ],
+  [
+   "Jolly:28/8/1/0/1/28",
+   4.114700073925774
   ],
   [
    "Adamant:2/32/0/0/0/32",
-   5.1572619214196225
+   3.5441062201022824
   ],
   [
-   "Jolly:9/32/0/0/0/25",
-   3.6224833580644953
-  ],
-  [
-   "Adamant:30/32/1/0/1/2",
-   2.8708862347825668
+   "Adamant:7/32/0/0/0/27",
+   2.5703434901036335
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Sinistcha",
-   8.064458557696035
+   "Indeedee-F",
+   6.663587947030461
   ],
   [
    "Garchomp",
-   7.053592277602753
-  ],
-  [
-   "Grimmsnarl",
-   5.600044713383361
-  ],
-  [
-   "Pelipper",
-   5.522254286121223
-  ],
-  [
-   "Incineroar",
-   5.135407628182966
-  ],
-  [
-   "Whimsicott",
-   5.035135579309196
+   5.82261858089975
   ],
   [
    "Sneasler",
-   4.830338883363421
+   5.368251102332325
   ],
   [
-   "Basculegion",
-   4.562766779205162
+   "Charizard-Mega-Y",
+   5.163168870767287
   ],
   [
-   "Swampert-Mega",
-   4.221225885268331
+   "Rillaboom",
+   4.645994358852473
+  ],
+  [
+   "Pelipper",
+   4.507180455243493
   ],
   [
    "Archaludon",
-   4.11617596497823
+   4.337558990371521
+  ],
+  [
+   "Incineroar",
+   4.320548937436117
+  ],
+  [
+   "Milotic",
+   3.765247596385003
+  ],
+  [
+   "Grimmsnarl",
+   3.2495636635204534
   ]
  ],
  "counters": [
   {
-   "name": "Tyranitar-Mega",
+   "name": "Sneasler",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Torkoal",
+   "name": "Salamence-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
@@ -152,31 +158,31 @@
    "switchPct": 0
   },
   {
-   "name": "Staraptor-Mega",
+   "name": "Raichu-Mega-Y",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Dragalge-Mega",
+   "name": "Farigiraf",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Incineroar",
+   "name": "Arcanine-Hisui",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Grimmsnarl",
+   "name": "Pelipper",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Sinistcha",
+   "name": "Milotic",
    "score": 0,
    "koPct": 0,
    "switchPct": 0

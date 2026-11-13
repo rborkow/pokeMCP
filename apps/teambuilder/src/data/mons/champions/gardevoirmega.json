@@ -2,15 +2,21 @@
  "id": "gardevoirmega",
  "name": "Gardevoir-Mega",
  "slug": "champions",
- "formatId": "gen9championsvgc2026regmb",
- "formatLabel": "Pokémon Champions — Regulation M-B",
- "dataThrough": "2026-06",
+ "formatId": "gen9championsvgc2026regmc",
+ "formatLabel": "Pokémon Champions — Regulation M-C",
+ "dataThrough": "2026-10",
  "history": [
   {
-   "month": "2026-06",
-   "usage": 0.0201983,
-   "rank": 56,
-   "raw": 48732
+   "month": "2026-09",
+   "usage": 0.0909576,
+   "rank": 19,
+   "raw": 315461
+  },
+  {
+   "month": "2026-10",
+   "usage": 0.0794356,
+   "rank": 22,
+   "raw": 232410
   }
  ],
  "abilities": [
@@ -28,155 +34,155 @@
  "moves": [
   [
    "Hyper Voice",
-   24.72775492971134
+   24.839430709790463
   ],
   [
    "Protect",
-   24.614003485643213
-  ],
-  [
-   "Trick Room",
-   14.310792025001096
-  ],
-  [
-   "Psychic",
-   11.937838263134942
-  ],
-  [
-   "Psyshock",
-   10.515813113682313
-  ],
-  [
-   "Calm Mind",
-   3.6001202065697653
-  ],
-  [
-   "Vacuum Wave",
-   2.5993476601520857
-  ],
-  [
-   "Moonblast",
-   1.2820612534637759
+   23.62038319731439
   ],
   [
    "Expanding Force",
-   0.9877994014240348
+   20.366982142617424
+  ],
+  [
+   "Calm Mind",
+   5.35110557157632
+  ],
+  [
+   "Trick Room",
+   4.543129808852331
+  ],
+  [
+   "Psychic",
+   3.978013657381508
+  ],
+  [
+   "Thunderbolt",
+   3.887268194807023
   ],
   [
    "Mystical Fire",
-   0.8778217167411352
+   3.130758722962802
+  ],
+  [
+   "Shadow Ball",
+   3.0514841298938618
+  ],
+  [
+   "Vacuum Wave",
+   1.8376328190553566
   ]
  ],
  "spreads": [
   [
    "Timid:2/0/0/32/0/32",
-   9.157688070924971
+   11.492164538413252
   ],
   [
-   "Modest:32/0/2/32/0/0",
-   7.663092029038772
+   "Modest:0/0/2/32/0/32",
+   9.873199814342973
   ],
   [
    "Modest:2/0/0/32/0/32",
-   5.180046483209177
+   8.26380668856506
   ],
   [
-   "Modest:32/0/22/6/1/5",
-   4.890987880706108
+   "Modest:32/0/17/15/0/2",
+   4.07785737883165
   ],
   [
-   "Modest:26/0/15/25/0/0",
-   4.688408683029093
+   "Quiet:16/0/18/32/0/0",
+   3.9378213895273255
   ]
  ],
  "teraTypes": [],
  "teammates": [
   [
-   "Garchomp",
-   8.14202959630745
-  ],
-  [
-   "Maushold",
-   7.967001112656906
-  ],
-  [
-   "Basculegion",
-   7.734465749244395
-  ],
-  [
-   "Kingambit",
-   6.976649417557974
-  ],
-  [
-   "Incineroar",
-   5.67465607399105
-  ],
-  [
-   "Talonflame",
-   5.455635695878882
-  ],
-  [
-   "Sinistcha",
-   4.813992439705478
+   "Indeedee-F",
+   16.42885787946186
   ],
   [
    "Sneasler",
-   3.590061424594762
+   11.854223927250697
+  ],
+  [
+   "Basculegion",
+   4.565541498713457
+  ],
+  [
+   "Armarouge",
+   4.5247685644439715
+  ],
+  [
+   "Kingambit",
+   4.428103327794413
+  ],
+  [
+   "Kommo-o",
+   4.305018925791843
+  ],
+  [
+   "Charizard-Mega-Y",
+   4.186416148848795
   ],
   [
    "Whimsicott",
-   3.04631216320708
+   3.196754320247688
   ],
   [
-   "Pelipper",
-   2.4241017400424574
+   "Incineroar",
+   2.471110546167369
+  ],
+  [
+   "Volcarona",
+   2.2442232487163
   ]
  ],
  "counters": [
   {
-   "name": "Whimsicott",
+   "name": "Kingambit",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
-   "name": "Pelipper",
+   "name": "Raichu-Mega-X",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Espathra",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Politoed",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Golisopod-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Floette-Mega",
+   "score": 0,
+   "koPct": 0,
+   "switchPct": 0
+  },
+  {
+   "name": "Rillaboom",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
   },
   {
    "name": "Sneasler",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Basculegion",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Archaludon",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Swampert-Mega",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Garchomp",
-   "score": 0,
-   "koPct": 0,
-   "switchPct": 0
-  },
-  {
-   "name": "Mawile-Mega",
    "score": 0,
    "koPct": 0,
    "switchPct": 0
