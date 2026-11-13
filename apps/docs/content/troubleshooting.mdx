@@ -1,0 +1,30 @@
+---
+description: "What to check when VGC Teambuilder won't connect to an assistant, coding agent or MCP client."
+---
+
+# Troubleshooting
+
+## The app can't connect
+
+- **Check the address.** It is `https://api.pokemcp.com/mcp`, ending in `/mcp`.
+- **Choose Streamable HTTP.** VGC Teambuilder doesn't support the older SSE transport, and `https://api.pokemcp.com/sse` answers `410 Gone`. Many apps fall back to SSE when no transport is set. See the note for your app on [Coding agents](/coding-agents) or [Agents and self-hosted apps](/agents); for example, Gemini CLI needs `httpUrl` rather than `url`, and Cline and OpenClaw need the transport set explicitly.
+- **Restart or reload the app** after editing a config file. Most only read their MCP servers at startup.
+
+## The app asks you to sign in
+
+There is no account and nothing to sign in to. Set authentication to **None** where the app asks. In opencode, add `"oauth": false` to the server entry.
+
+## The tools don't show up
+
+Check that the server is turned on in the app's MCP or connector settings. Some apps add a server switched off, and organizations can block custom servers by policy. Then ask something that needs the tools, such as "Which formats does VGC Teambuilder support?"
+
+## Error messages
+
+| Error | Meaning | What to do |
+|---|---|---|
+| `406 Not Acceptable` | The client didn't send `Accept: application/json, text/event-stream`. | Use an MCP client library, or send both types. |
+| `405 Method Not Allowed` on a GET | The client tried to open an event stream. VGC Teambuilder doesn't use one. | Nothing. MCP clients expect this and carry on. |
+| `410 Gone` | The address is the retired `/sse` endpoint, or the app is using the SSE transport. | Use `/mcp` with Streamable HTTP. |
+| `429 Too Many Requests` | Too many requests from your network in a short time. | Wait a minute and try again. |
+
+Still stuck? Tell us what you tried on [the support page](https://www.pokemcp.com/support).

@@ -1,0 +1,68 @@
+---
+description: "Add VGC Teambuilder to Grok, Gemini, Perplexity and Mistral as a custom connector."
+---
+
+# Other assistants
+
+Claude and ChatGPT are covered on [Connect](/getting-started). These assistants also let you add your own MCP server by address:
+
+```
+https://api.pokemcp.com/mcp
+```
+
+There is nothing to sign in to. When a form asks about authentication, choose **None**; when it asks for a transport, choose **Streamable HTTP**. If something doesn't connect, see [Troubleshooting](/troubleshooting).
+
+None of these has been tested with VGC Teambuilder yet. The steps follow each vendor's own documentation, and the button names may change.
+
+## Grok
+
+### Grok app (grok.com, X and mobile)
+
+1. Go to [grok.com/connectors](https://grok.com/connectors).
+2. Click **New Connector** and select **Custom**.
+3. Enter the address above.
+
+On mobile, connectors are under **Settings → Connectors**. On Grok Business and Enterprise, an administrator has to add the connector first.
+
+### Grok Bot (desktop app)
+
+1. Open **Connect apps** and choose **Add a custom connector** at the bottom.
+2. Enter a name, set **Type** to **Remote HTTPS** and enter the address as the **Server URL**. Leave the headers and OAuth fields empty.
+3. Choose **Add plugin**.
+
+You can also ask the Bot to "add this MCP server: https://api.pokemcp.com/mcp". Your team's MCP policy can block custom connectors.
+
+## Gemini
+
+Custom apps are available in the Gemini web app to people in the US who are 18 or over, signed in with a personal Google Account (not a work or school account), with Keep Activity turned on. Once added, the app also works on mobile.
+
+1. Go to [gemini.google.com](https://gemini.google.com) and open **Settings → Connected Apps**.
+2. Under **Custom apps**, click **Add a custom app**.
+3. Enter the address above, click **Next** and follow the on-screen steps.
+
+Type `@` in a prompt and pick the app to make Gemini use it.
+
+## Perplexity
+
+1. Open **Plugins** in the sidebar (or **Customize → Connectors**).
+2. Choose **Add custom**, then **Add MCP connector**, then **Remote**.
+3. Enter a name and the address above.
+4. Under **Advanced**, set **Authentication** to **None**, **Transport** to **Streamable HTTP** and **Network access** to **Public**.
+5. Tick the acknowledgement and click **Add**, then select the connector's card to turn it on.
+
+In an organization, members can only add their own connectors if an administrator has turned on **Allow members to add custom connectors**.
+
+## Mistral (Le Chat)
+
+Only an administrator can add a custom connector. On the Free, Pro and Student plans, that is the account owner.
+
+1. Open the **Connectors** page and click **Add Connector**.
+2. Switch to the **Custom MCP Connector** tab.
+3. Enter a name without spaces, such as `vgcteambuilder`, and the address above as the **Server URL**.
+4. Click **Connect**. Mistral detects that no sign-in is needed.
+
+## Try it
+
+- "Which formats does VGC Teambuilder support?"
+- "What are the ten most-used Pokémon in the current regulation, and how is the top one usually built?"
+- "Which Pokémon are most often paired with Kingambit, and what reliably beats it?"

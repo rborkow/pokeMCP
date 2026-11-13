@@ -1,0 +1,201 @@
+---
+description: "Add VGC Teambuilder to Claude Code, Codex, Cursor, VS Code, Gemini CLI, Grok Build and other coding agents."
+---
+
+# Coding agents
+
+Every coding agent below adds VGC Teambuilder the same way: as a remote MCP server at this address, with no sign-in.
+
+```
+https://api.pokemcp.com/mcp
+```
+
+The server uses the **Streamable HTTP** transport. Several agents assume the older SSE transport, or a local command, unless you say otherwise; the notes under each one point out where. If something doesn't connect, see [Troubleshooting](/troubleshooting).
+
+Each section says whether we have **tested** it ourselves, or whether the steps come from the vendor's own documentation and have **not yet been tested** with VGC Teambuilder.
+
+## Claude Code
+
+_Tested._
+
+```bash
+claude mcp add --transport http vgc-teambuilder https://api.pokemcp.com/mcp
+```
+
+Add `--scope user` to make it available in every project. To share it with a project instead, put this in `.mcp.json` at the project root. `"type": "http"` is required; without it the entry is read as a local command and skipped.
+
+```json
+{ "mcpServers": { "vgc-teambuilder": { "type": "http", "url": "https://api.pokemcp.com/mcp" } } }
+```
+
+## Codex
+
+_Tested_ (Codex CLI). The IDE extension and the Codex app read the same configuration.
+
+```bash
+codex mcp add vgc-teambuilder --url https://api.pokemcp.com/mcp
+```
+
+Or add it to `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.vgc-teambuilder]
+url = "https://api.pokemcp.com/mcp"
+```
+
+## Cursor
+
+_Not yet tested._
+
+[Install in Cursor](cursor://anysphere.cursor-deeplink/mcp/install?name=vgc-teambuilder&config=eyJ1cmwiOiJodHRwczovL2FwaS5wb2tlbWNwLmNvbS9tY3AifQ%3D%3D)
+
+Or add it to `~/.cursor/mcp.json` (every project) or `.cursor/mcp.json` (one project):
+
+```json
+{ "mcpServers": { "vgc-teambuilder": { "url": "https://api.pokemcp.com/mcp" } } }
+```
+
+## VS Code and GitHub Copilot
+
+_Not yet tested._
+
+[Install in VS Code](vscode:mcp/install?%7B%22name%22%3A%22vgc-teambuilder%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fapi.pokemcp.com%2Fmcp%22%7D)
+
+Or open the Command Palette, run **Chat: Open Customizations**, go to **MCP Servers**, choose **Add Server**, pick **HTTP** and enter the address.
+
+To add it by hand, use `~/.copilot/mcp-config.json` (every workspace) or `.mcp.json` at the workspace root:
+
+```json
+{ "mcpServers": { "vgc-teambuilder": { "type": "http", "url": "https://api.pokemcp.com/mcp" } } }
+```
+
+`"type": "http"` means Streamable HTTP; `"sse"` is the older transport and won't connect. The older `.vscode/mcp.json` file with a top-level `servers` key still works for now, but VS Code has deprecated it.
+
+## GitHub Copilot CLI
+
+_Not yet tested._
+
+```bash
+copilot mcp add --transport http vgc-teambuilder https://api.pokemcp.com/mcp
+```
+
+Leaving out `--transport http` makes Copilot treat the address as a command to run. It writes the same `~/.copilot/mcp-config.json` entry as VS Code. Your organization's MCP policy can block servers that aren't on its allowlist.
+
+## Gemini CLI
+
+_Not yet tested._
+
+```bash
+gemini mcp add --transport http --scope user vgc-teambuilder https://api.pokemcp.com/mcp
+```
+
+Or in `~/.gemini/settings.json`:
+
+```json
+{ "mcpServers": { "vgc-teambuilder": { "httpUrl": "https://api.pokemcp.com/mcp" } } }
+```
+
+Use `httpUrl`, not `url`. In Gemini CLI, `url` means the older SSE transport and won't connect.
+
+## Grok Build
+
+_Not yet tested._
+
+```bash
+grok mcp add --transport http vgc-teambuilder https://api.pokemcp.com/mcp
+```
+
+Or in `~/.grok/config.toml`:
+
+```toml
+[mcp_servers.vgc-teambuilder]
+url = "https://api.pokemcp.com/mcp"
+```
+
+Grok Build also reads servers you've already added to Claude Code (`~/.claude.json`), Cursor (`.cursor/mcp.json`) and a project's `.mcp.json`. Check with `grok mcp list`.
+
+## Cline
+
+_Not yet tested._
+
+In Cline's **MCP Servers** panel, open **Remote Servers**, enter the address and set **Transport Type** to **Streamable HTTP**. In the settings file, `type` is required: without it, Cline assumes the older SSE transport.
+
+```json
+{ "mcpServers": { "vgc-teambuilder": { "type": "streamableHttp", "url": "https://api.pokemcp.com/mcp" } } }
+```
+
+## opencode
+
+_Not yet tested._
+
+```bash
+opencode mcp add vgc-teambuilder --url https://api.pokemcp.com/mcp --global
+```
+
+Or in `opencode.jsonc`:
+
+```jsonc
+{
+  "mcp": {
+    "servers": {
+      "vgc-teambuilder": { "type": "remote", "url": "https://api.pokemcp.com/mcp", "oauth": false }
+    }
+  }
+}
+```
+
+opencode tries to sign in to remote servers by default. `"oauth": false` turns that off; there is nothing to sign in to. Older opencode versions put servers directly under `mcp`, without `servers`.
+
+## Kiro
+
+_Not yet tested._
+
+[Add to Kiro](https://kiro.dev/launch/mcp/add?name=vgc-teambuilder&config=%7B%22url%22%3A%22https%3A%2F%2Fapi.pokemcp.com%2Fmcp%22%7D)
+
+Or add it to `~/.kiro/settings/mcp.json` (every workspace) or `.kiro/settings/mcp.json` (one workspace):
+
+```json
+{ "mcpServers": { "vgc-teambuilder": { "url": "https://api.pokemcp.com/mcp" } } }
+```
+
+## Zed
+
+_Not yet tested._
+
+Open **Settings → AI → MCP Servers → Add Server → Add Remote Server**, or add this to your settings file:
+
+```json
+{ "context_servers": { "vgc-teambuilder": { "url": "https://api.pokemcp.com/mcp" } } }
+```
+
+## Windsurf and Devin
+
+_Not yet tested._
+
+In Cascade's MCP menu, choose **Open MCP config file** and add:
+
+```json
+{ "mcpServers": { "vgc-teambuilder": { "serverUrl": "https://api.pokemcp.com/mcp" } } }
+```
+
+With the Devin CLI: `devin mcp add -s user vgc-teambuilder https://api.pokemcp.com/mcp`.
+
+## JetBrains AI Assistant
+
+_Not yet tested._
+
+Open **Settings → Tools → AI Assistant → Model Context Protocol (MCP)**, choose **Add**, pick the remote option and paste:
+
+```json
+{ "mcpServers": { "vgc-teambuilder": { "url": "https://api.pokemcp.com/mcp" } } }
+```
+
+Then click **OK** and **Apply**. Your administrator can turn off adding your own servers.
+
+## Try it
+
+Ask the agent something that needs the tools, for example:
+
+- "Using vgc-teambuilder, which formats do you support?"
+- "What are the five most-used Pokémon in the current regulation?"
+- "Is this team legal: Garchomp, Kingambit, Incineroar, Sneasler, Basculegion, Rotom-Wash?"

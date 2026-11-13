@@ -1,0 +1,113 @@
+---
+description: "Add VGC Teambuilder to OpenClaw, Hermes Agent, Goose, LM Studio, Open WebUI and LibreChat, or call it from your own code."
+---
+
+# Agents and self-hosted apps
+
+VGC Teambuilder is a remote MCP server at this address, using the **Streamable HTTP** transport with no sign-in:
+
+```
+https://api.pokemcp.com/mcp
+```
+
+None of the apps on this page has been tested with VGC Teambuilder yet; the steps follow each project's own documentation. The code examples at the end have been tested. If something doesn't connect, see [Troubleshooting](/troubleshooting).
+
+## OpenClaw
+
+```bash
+openclaw mcp add vgc-teambuilder --url https://api.pokemcp.com/mcp --transport streamable-http
+openclaw mcp doctor vgc-teambuilder --probe
+```
+
+Keep `--transport streamable-http`: without it, OpenClaw uses the older SSE transport, which won't connect. You can also add it in the Control UI under **Settings → MCP**, or in the config file:
+
+```json5
+{ mcp: { servers: { "vgc-teambuilder": { url: "https://api.pokemcp.com/mcp", transport: "streamable-http", enabled: true } } } }
+```
+
+## Hermes Agent
+
+Add this to `~/.hermes/config.yaml`, then run `/reload-mcp` or restart Hermes:
+
+```yaml
+mcp_servers:
+  vgc_teambuilder:
+    url: "https://api.pokemcp.com/mcp"
+```
+
+Don't set `transport: sse` or `auth: oauth`; the defaults are right.
+
+## Goose
+
+[Add to Goose](goose://extension?url=https%3A%2F%2Fapi.pokemcp.com%2Fmcp&type=streamable_http&id=vgc-teambuilder&name=VGC%20Teambuilder&description=Pok%C3%A9mon%20Champions%20VGC%20team-building%20data)
+
+Or run `goose configure`, choose **Add Extension** and then **Remote Extension (Streamable HTTP)**. In `~/.config/goose/config.yaml`:
+
+```yaml
+extensions:
+  vgc-teambuilder:
+    name: VGC Teambuilder
+    type: streamable_http
+    uri: https://api.pokemcp.com/mcp
+    enabled: true
+    timeout: 300
+```
+
+## LM Studio
+
+Needs LM Studio 0.3.17 or later. [Add to LM Studio](lmstudio://add_mcp?name=vgc-teambuilder&config=eyJ1cmwiOiJodHRwczovL2FwaS5wb2tlbWNwLmNvbS9tY3AifQ%3D%3D), or open the **Program** tab in the right sidebar, choose **Install → Edit mcp.json** and add:
+
+```json
+{ "mcpServers": { "vgc-teambuilder": { "url": "https://api.pokemcp.com/mcp" } } }
+```
+
+## Open WebUI
+
+Needs Open WebUI 0.6.31 or later, and an administrator account.
+
+1. Open **Admin Settings → Integrations → External Tool Servers** and choose **Add Connection**.
+2. Set **Type** to **MCP (Streamable HTTP)**. Choosing OpenAPI instead breaks the form.
+3. Enter the address above and set **Authentication** to **None**.
+
+## LibreChat
+
+In `librechat.yaml`, then restart LibreChat:
+
+```yaml
+mcpServers:
+  vgc-teambuilder:
+    type: streamable-http
+    url: https://api.pokemcp.com/mcp
+    requiresOAuth: false
+```
+
+## From your own code
+
+_Tested_ with the official TypeScript SDK (version 1) and the official Python SDK (versions 1 and 2).
+
+TypeScript (`@modelcontextprotocol/sdk`):
+
+```ts
+import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
+
+const client = new Client({ name: "my-app", version: "1.0.0" });
+await client.connect(new StreamableHTTPClientTransport(new URL("https://api.pokemcp.com/mcp")));
+const result = await client.callTool({ name: "get_top_usage", arguments: { limit: 5 } });
+```
+
+Python (`mcp` 2.x):
+
+```python
+import asyncio
+from mcp import Client
+
+async def main():
+    async with Client("https://api.pokemcp.com/mcp") as client:
+        result = await client.call_tool("get_top_usage", {"limit": 5})
+        print(result)
+
+asyncio.run(main())
+```
+
+Every request is a POST. There is no session to keep and no event stream to open. Clients must send `Accept: application/json, text/event-stream`. The [Tools](/tools) page lists every tool and its parameters.
