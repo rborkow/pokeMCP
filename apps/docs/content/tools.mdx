@@ -21,7 +21,27 @@ VGC Teambuilder is a [Model Context Protocol](https://modelcontextprotocol.io) s
 | `get_usage_trend` | `pokemon` (string, required) — Pokémon name in English. Mega Evolutions are tracked separately, e.g. "Charizard-Mega-Y"; `format` (enum: `champions-regma`, `champions-regmb`, `champions-regmc`, optional) — Regulation id from list_formats. Defaults to "champions-regmc" (Pokémon Champions — Regulation M-C).; `from` (string, optional) — First month, YYYY-MM. The nearest month with data is used if it has none; `to` (string, optional) — Last month, YYYY-MM. Defaults to the most recent month; `months` (number, optional) — Months to look back from `to` when `from` is omitted. Defaults to 12 | Show one Pokémon's monthly usage and rank in a regulation across a range of months, with its net change and peak. History exists only for months the regulation's ladder was active. |
 | `get_meta_shifts` | `format` (enum: `champions-regma`, `champions-regmb`, `champions-regmc`, optional) — Regulation id from list_formats. Defaults to "champions-regmc" (Pokémon Champions — Regulation M-C).; `from` (string, optional) — First month, YYYY-MM. The nearest month with data is used if it has none; `to` (string, optional) — Last month, YYYY-MM. Defaults to the most recent month; `months` (number, optional) — Months to look back from `to` when `from` is omitted. Defaults to 3; `limit` (number, optional) — Maximum entries to return (1–25). Defaults to 10 | Compare a regulation's usage between two months: the biggest risers and fallers, Pokémon that newly reached meaningful usage and Pokémon that dropped out. Use it to see how the metagame changed. Needs at least two months of history. |
 | `get_usage_momentum` | `format` (enum: `champions-regma`, `champions-regmb`, `champions-regmc`, optional) — Regulation id from list_formats. Defaults to "champions-regmc" (Pokémon Champions — Regulation M-C).; `from` (string, optional) — First month, YYYY-MM. The nearest month with data is used if it has none; `to` (string, optional) — Last month, YYYY-MM. Defaults to the most recent month; `months` (number, optional) — Months to look back from `to` when `from` is omitted. Defaults to 6; `limit` (number, optional) — Maximum entries to return (1–25). Defaults to 10 | Fit a trend to each Pokémon's monthly usage across a range and list the fastest rising, fastest declining and most volatile. These are descriptive trends, not forecasts. Needs at least three months of history in the range; with so few points, treat the result as a direction, not a measurement. |
+| `calculate_damage` | `attacker` (object, required) — The Pokémon using the move; `defender` (object, required) — The Pokémon being hit; `move` (string, required) — Move name, for example "Earthquake"; `format` (enum: `champions-regma`, `champions-regmb`, `champions-regmc`, optional) — Regulation id from list_formats. Defaults to "champions-regmc" (Pokémon Champions — Regulation M-C).; `field` (object, optional) — Battle conditions. Leave out for none. | Calculate how much damage one move does from one Pokémon to another in Pokémon Champions doubles: the damage range, the share of the defender's HP, and the chance to knock it out. Use it instead of estimating damage. Any part of a set that is left out is filled in from the regulation's usage statistics and listed under `assumptions`. A move that hits both opponents is calculated at its reduced doubles damage unless `singleTarget` is set. This is one calculation, not a battle simulation: it does not account for the rest of the turn, switching or luck beyond the damage roll and critical hits. |
+| `compare_speed` | `pokemon` (array, required) — The Pokémon to compare. The same Pokémon may appear with two sets.; `format` (enum: `champions-regma`, `champions-regmb`, `champions-regmc`, optional) — Regulation id from list_formats. Defaults to "champions-regmc" (Pokémon Champions — Regulation M-C).; `weather` (enum: `sun`, `rain`, `sand`, `snow`, optional); `terrain` (enum: `electric`, `grassy`, `misty`, `psychic`, optional); `trickRoom` (boolean, optional) — Trick Room is up: slower moves first | Work out the Speed of several Pokémon in Pokémon Champions and the order they move in, including the effect of items such as Choice Scarf, Tailwind, paralysis, stat stages, weather abilities and Trick Room. Use it to answer who outspeeds whom. Any part of a set that is left out is filled in from the regulation's usage statistics and listed under `assumptions`. Speed decides order only among moves of the same priority. |
+| `check_team_threats` | `team` (array, required) — The team, one to six Pokémon; `format` (enum: `champions-regma`, `champions-regmb`, `champions-regmc`, optional) — Regulation id from list_formats. Defaults to "champions-regmc" (Pokémon Champions — Regulation M-C).; `threats` (array, optional) — Pokémon to check against. Defaults to the most used in the regulation.; `limit` (number, optional) — How many of the most used Pokémon to check (1–10). Defaults to 8 | Check a team against the Pokémon it is most likely to face in a regulation. For each threat (the most used Pokémon by default, or the ones named) it reports the team's hardest hit into it, its hardest hit into the team, and which team members outspeed it. Each threat uses its most common set in the regulation's usage statistics. Results are single hits with no screens or stat changes, under the weather or terrain the attacker's own ability sets if any. This is not a battle simulation; use calculate_damage to examine one matchup under specific conditions. |
 {/* AUTOGEN:TOOLS:END */}
+
+## Describing a Pokémon for the matchup tools
+
+`calculate_damage`, `compare_speed` and `check_team_threats` take Pokémon as sets. Only the name is required:
+
+| Field | Meaning |
+|---|---|
+| `pokemon` | Name in English. Name the Mega form (`Charizard-Mega-Y`) to calculate it Mega Evolved. |
+| `nature` | For example `Adamant` or `Timid`. |
+| `statPoints` | Pokémon Champions stat points per stat: `hp`, `atk`, `def`, `spa`, `spd`, `spe`. Up to 32 on one stat and 66 in total. |
+| `ability`, `item` | Names in English. Use `none` for no item. |
+| `boosts` | Stat stages from -6 to +6, for example `{ "atk": 2 }`. |
+| `status` | `burn` or `paralysis`. |
+
+Anything left out is filled in with that Pokémon's most common choice in the regulation's usage statistics, and the result lists what was assumed. If nature and stat points are both left out, its most common spread is used; if only one is given, the other is taken as neutral or zero.
+
+`calculate_damage` also takes a `field`: `weather` (`sun`, `rain`, `sand`, `snow`), `terrain` (`electric`, `grassy`, `misty`, `psychic`), `reflect`, `lightScreen`, `auroraVeil`, `helpingHand`, `friendGuard`, `criticalHit`, and `singleTarget` for a spread move with one target left.
 
 Tools that take a `format` use the newest regulation with published usage statistics when it is omitted. Call `list_formats` to see the supported regulations.
 
@@ -30,6 +50,7 @@ Tools that take a `format` use the newest regulation with published usage statis
 - **Pokémon, moves and abilities** come from the open-source Pokémon Showdown data set.
 - **Usage statistics and trends** come from the Pokémon Showdown ladder data that Smogon publishes each month. Percentages are shares of teams or sets, not win rates.
 - **Allowed Pokémon lists** come from the published regulation for each format.
+- **Damage and Speed calculations** use the open-source calculator behind Pokémon Showdown, in its Pokémon Champions mode: level 50 and stat points.
 
 ## Limits worth knowing
 
@@ -39,6 +60,9 @@ Tools that take a `format` use the newest regulation with published usage statis
 - Checks-and-counters data records one-on-one outcomes, so in doubles it is a rough signal.
 - Usage rankings come from the most recent month loaded for a regulation and do not state the month; the trend tools show dated history.
 - Trend tools need history: two months to compare shifts, three to fit momentum.
+- Matchup tools do single calculations. They do not play out a battle, so they say nothing about switching, turn order beyond Speed, or how a game would go.
+- When a set is not fully given, the matchup tools fill the gaps with that Pokémon's most common spread, ability and item in the regulation's usage statistics, and list what they assumed.
+- A move that hits both opponents is calculated at its reduced doubles damage unless you say only one target is left.
 
 ## Privacy
 

@@ -56,6 +56,7 @@
     "dependencies": {
         "@modelcontextprotocol/server": "^2.4.0",
         "@resvg/resvg-wasm": "^2.6.2",
+        "@smogon/calc": "0.12.0",
         "mimetext": "^3.0.28",
         "satori": "^0.19.2",
         "smogon": "^4.0.2",

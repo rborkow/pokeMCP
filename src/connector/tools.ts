@@ -9,6 +9,14 @@
 import { z } from "zod";
 import { formatInput, formatOutput, getDefaultRegulation } from "./formats.js";
 import { analyzeTeamTypes, lookupPokemon, validateMoveset } from "./pokemon.js";
+import {
+    calculateDamage,
+    checkTeamThreats,
+    compareSpeed,
+    MAX_STAT_POINTS_PER_STAT,
+    MAX_STAT_POINTS_TOTAL,
+    MAX_THREATS,
+} from "./matchup.js";
 import { listFormats, validateTeam } from "./team.js";
 import { getMetaShifts, getUsageMomentum, getUsageTrend } from "./trends.js";
 import type { ConnectorTool } from "./types.js";
@@ -24,7 +32,10 @@ export const CONNECTOR_INFO = {
 export const CONNECTOR_INSTRUCTIONS =
     "VGC Teambuilder provides read-only data tools for building competitive Pokémon doubles " +
     "(VGC) teams under Pokémon Champions regulations: Pokémon data, move and team legality " +
-    "checks, defensive type analysis, and usage statistics and trends. Usage figures come from " +
+    "checks, defensive type analysis, usage statistics and trends, and matchup calculations " +
+    "(damage, Speed order, and a team checked against the most used Pokémon). Use the " +
+    "calculation tools instead of estimating numbers, and tell the user what a result assumed. " +
+    "They are single calculations, not battle simulations. Usage figures come from " +
     "Pokémon Showdown ladder data that Smogon publishes monthly; percentages are shares of " +
     "teams or sets, not win rates. Formats are regulation ids from list_formats; when a tool's " +
     `format is omitted it uses ${getDefaultRegulation().id}. Use English Pokémon names, with ` +
@@ -117,6 +128,103 @@ const momentumEntry = z.object({
 });
 
 // --- Tools ---
+
+// --- Matchup tool pieces ---
+
+const statPoint = z.number().int().min(0).max(MAX_STAT_POINTS_PER_STAT).optional();
+const statPointsInput = z
+    .object({
+        hp: statPoint,
+        atk: statPoint,
+        def: statPoint,
+        spa: statPoint,
+        spd: statPoint,
+        spe: statPoint,
+    })
+    .strict()
+    .describe(
+        `Pokémon Champions stat points per stat (0–${MAX_STAT_POINTS_PER_STAT} each, ` +
+            `${MAX_STAT_POINTS_TOTAL} in total). Stats left out get 0.`,
+    );
+const stage = z.number().int().min(-6).max(6).optional();
+const boostsInput = z
+    .object({ atk: stage, def: stage, spa: stage, spd: stage, spe: stage })
+    .strict()
+    .describe("Stat stages from moves and abilities, -6 to +6. For example { atk: 2 }.");
+
+/** One Pokémon's set. Everything but the name is optional. */
+const setFields = {
+    pokemon: statsPokemonInput,
+    nature: z
+        .string()
+        .max(20)
+        .optional()
+        .describe(
+            "Nature, such as Adamant or Timid. If nature and statPoints are both left out, " +
+                "the Pokémon's most common spread in the regulation's usage statistics is used.",
+        ),
+    statPoints: statPointsInput.optional(),
+    ability: z
+        .string()
+        .max(40)
+        .optional()
+        .describe("Ability. Defaults to the Pokémon's most used ability in the regulation."),
+    item: z
+        .string()
+        .max(40)
+        .optional()
+        .describe(
+            'Held item, or "none". Defaults to the Pokémon\'s most used item in the regulation.',
+        ),
+    boosts: boostsInput.optional(),
+    status: z
+        .enum(["burn", "paralysis"])
+        .optional()
+        .describe("Burn halves physical damage dealt; paralysis halves Speed."),
+};
+const setInput = z.object(setFields).strict();
+
+const weatherInput = z.enum(["sun", "rain", "sand", "snow"]).optional();
+const terrainInput = z.enum(["electric", "grassy", "misty", "psychic"]).optional();
+
+const statTable = z.object({
+    hp: z.number(),
+    atk: z.number(),
+    def: z.number(),
+    spa: z.number(),
+    spd: z.number(),
+    spe: z.number(),
+});
+const setOutput = z.object({
+    pokemon: z.string(),
+    nature: z.string(),
+    statPoints: statTable.describe("Stat points used"),
+    ability: z.string(),
+    item: z.string().nullable(),
+    stats: statTable.describe("Resulting stats at level 50, before stat stages"),
+    boosts: z.record(z.string(), z.number()).optional(),
+    status: z.string().optional(),
+});
+const assumptionsOutput = z
+    .array(z.string())
+    .describe(
+        "Everything the calculation assumed, including any part of a set that was filled in " +
+            "because it was not given. Tell the user about these.",
+    );
+const hitOutput = z
+    .object({
+        attacker: z.string(),
+        defender: z.string(),
+        move: z.string(),
+        minPercent: z.number().describe("Lowest damage roll as % of the defender's HP"),
+        maxPercent: z.number().describe("Highest damage roll as % of the defender's HP"),
+        knockOut: z.string().describe('For example "guaranteed 2HKO"'),
+        conditions: z
+            .string()
+            .optional()
+            .describe("Weather or terrain set by the attacker's own ability, when applied"),
+    })
+    .nullable();
 
 export const CONNECTOR_TOOLS: ConnectorTool[] = [
     {
@@ -499,5 +607,216 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
             ),
         },
         run: (args, env) => getUsageMomentum(args, env),
+    },
+    {
+        name: "calculate_damage",
+        title: "Calculate damage for one move",
+        description:
+            "Calculate how much damage one move does from one Pokémon to another in Pokémon " +
+            "Champions doubles: the damage range, the share of the defender's HP, and the " +
+            "chance to knock it out. Use it instead of estimating damage. Any part of a set " +
+            "that is left out is filled in from the regulation's usage statistics and listed " +
+            "under `assumptions`. A move that hits both opponents is calculated at its reduced " +
+            "doubles damage unless `singleTarget` is set. This is one calculation, not a battle " +
+            "simulation: it does not account for the rest of the turn, switching or luck " +
+            "beyond the damage roll and critical hits.",
+        inputSchema: {
+            attacker: setInput.describe("The Pokémon using the move"),
+            defender: setInput.describe("The Pokémon being hit"),
+            move: z.string().min(1).max(40).describe('Move name, for example "Earthquake"'),
+            format: formatInput,
+            field: z
+                .object({
+                    weather: weatherInput,
+                    terrain: terrainInput,
+                    reflect: z.boolean().optional().describe("Reflect on the defender's side"),
+                    lightScreen: z.boolean().optional(),
+                    auroraVeil: z.boolean().optional(),
+                    helpingHand: z.boolean().optional().describe("Attacker has Helping Hand"),
+                    friendGuard: z
+                        .boolean()
+                        .optional()
+                        .describe("Defender's ally has Friend Guard"),
+                    criticalHit: z.boolean().optional(),
+                    singleTarget: z
+                        .boolean()
+                        .optional()
+                        .describe(
+                            "Set true when a spread move has only one target left, so it does " +
+                                "full damage.",
+                        ),
+                })
+                .strict()
+                .optional()
+                .describe("Battle conditions. Leave out for none."),
+        },
+        outputSchema: {
+            ...formatOutput,
+            attacker: setOutput,
+            defender: setOutput,
+            move: z.object({
+                name: z.string(),
+                type: z.string(),
+                category: z.string(),
+                basePower: z.number(),
+            }),
+            damage: z.object({
+                min: z.number().describe("Lowest damage roll, in HP"),
+                max: z.number().describe("Highest damage roll, in HP"),
+                minPercent: z.number(),
+                maxPercent: z.number(),
+                defenderHp: z.number().describe("Defender's maximum HP"),
+            }),
+            knockOut: z
+                .object({
+                    hits: z.number().nullable().describe("Hits needed to knock out, if within 9"),
+                    chancePercent: z
+                        .number()
+                        .nullable()
+                        .describe("Chance of a knock-out in that many hits, 0–100, when known"),
+                    text: z.string(),
+                })
+                .optional()
+                .describe("Absent when the move deals no damage"),
+            noDamageReason: z.string().optional(),
+            description: z.string().describe("The calculation in standard damage-calc notation"),
+            conditions: z.array(z.string()),
+            assumptions: assumptionsOutput,
+        },
+        run: (args, env) => calculateDamage(args, env),
+    },
+    {
+        name: "compare_speed",
+        title: "Compare Speed and turn order",
+        description:
+            "Work out the Speed of several Pokémon in Pokémon Champions and the order they " +
+            "move in, including the effect of items such as Choice Scarf, Tailwind, paralysis, " +
+            "stat stages, weather abilities and Trick Room. Use it to answer who outspeeds " +
+            "whom. Any part of a set that is left out is filled in from the regulation's usage " +
+            "statistics and listed under `assumptions`. Speed decides order only among moves " +
+            "of the same priority.",
+        inputSchema: {
+            pokemon: z
+                .array(
+                    z
+                        .object({
+                            ...setFields,
+                            tailwind: z
+                                .boolean()
+                                .optional()
+                                .describe("This Pokémon's side has Tailwind"),
+                            abilityActive: z
+                                .boolean()
+                                .optional()
+                                .describe(
+                                    "A conditional Speed ability is active, such as Unburden " +
+                                        "after its item is used. Weather abilities follow " +
+                                        "`weather` and need no flag.",
+                                ),
+                        })
+                        .strict(),
+                )
+                .min(1)
+                .max(12)
+                .describe("The Pokémon to compare. The same Pokémon may appear with two sets."),
+            format: formatInput,
+            weather: weatherInput,
+            terrain: terrainInput,
+            trickRoom: z.boolean().optional().describe("Trick Room is up: slower moves first"),
+        },
+        outputSchema: {
+            ...formatOutput,
+            trickRoom: z.boolean(),
+            order: z
+                .array(
+                    z.object({
+                        pokemon: z.string(),
+                        speed: z.number().describe("Speed after every modifier"),
+                        speedStat: z.number().describe("Speed stat before modifiers"),
+                        nature: z.string(),
+                        speedStatPoints: z.number(),
+                        ability: z.string(),
+                        item: z.string().nullable(),
+                        conditions: z.array(z.string()),
+                    }),
+                )
+                .describe("First to move first"),
+            ties: z.array(z.array(z.string())).describe("Groups with equal Speed"),
+            conditions: z.array(z.string()),
+            assumptions: assumptionsOutput,
+        },
+        run: (args, env) => compareSpeed(args, env),
+    },
+    {
+        name: "check_team_threats",
+        title: "Check a team against the most-used Pokémon",
+        description:
+            "Check a team against the Pokémon it is most likely to face in a regulation. For " +
+            "each threat (the most used Pokémon by default, or the ones named) it reports the " +
+            "team's hardest hit into it, its hardest hit into the team, and which team members " +
+            "outspeed it. Each threat uses its most common set in the regulation's usage " +
+            "statistics. Results are single hits with no screens or stat changes, under the " +
+            "weather or terrain the attacker's own ability sets if any. This is not a battle " +
+            "simulation; use calculate_damage to examine one " +
+            "matchup under specific conditions.",
+        inputSchema: {
+            team: z
+                .array(
+                    z
+                        .object({
+                            ...setFields,
+                            moves: z
+                                .array(z.string().min(1).max(40))
+                                .max(4)
+                                .optional()
+                                .describe(
+                                    "This Pokémon's moves. Defaults to its most used attacks " +
+                                        "in the regulation.",
+                                ),
+                        })
+                        .strict(),
+                )
+                .min(1)
+                .max(6)
+                .describe("The team, one to six Pokémon"),
+            format: formatInput,
+            threats: z
+                .array(statsPokemonInput)
+                .max(MAX_THREATS)
+                .optional()
+                .describe("Pokémon to check against. Defaults to the most used in the regulation."),
+            limit: z
+                .number()
+                .int()
+                .min(1)
+                .max(MAX_THREATS)
+                .optional()
+                .describe(
+                    `How many of the most used Pokémon to check (1–${MAX_THREATS}). Defaults to 8`,
+                ),
+        },
+        outputSchema: {
+            ...formatOutput,
+            team: z.array(
+                z.object({ pokemon: z.string(), speed: z.number(), moves: z.array(z.string()) }),
+            ),
+            threats: z.array(
+                z.object({
+                    pokemon: z.string(),
+                    usagePercent: z.number().nullable().describe("Share of teams, 0–100"),
+                    set: z.string().describe("Nature and stat points used for the threat"),
+                    ability: z.string(),
+                    item: z.string().nullable(),
+                    speed: z.number(),
+                    moves: z.array(z.string()).describe("The threat's most used attacks"),
+                    fasterTeamMembers: z.array(z.string()),
+                    tiedTeamMembers: z.array(z.string()),
+                    bestAnswer: hitOutput.describe("The team's hardest hit into the threat"),
+                    biggestRisk: hitOutput.describe("The threat's hardest hit into the team"),
+                }),
+            ),
+            assumptions: assumptionsOutput,
+        },
+        run: (args, env) => checkTeamThreats(args, env),
     },
 ];

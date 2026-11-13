@@ -29,6 +29,9 @@ It needs no account and takes no personal information. Add it as a custom connec
 | `get_usage_trend` | Get a Pokémon's usage over time |
 | `get_meta_shifts` | Compare usage between two months |
 | `get_usage_momentum` | Find rising and falling Pokémon |
+| `calculate_damage` | Calculate damage for one move |
+| `compare_speed` | Compare Speed and turn order |
+| `check_team_threats` | Check a team against the most-used Pokémon |
 <!-- AUTOGEN:TOOLS:END -->
 
 The tools live in `src/connector/`; run `bun run generate-tool-docs` after changing them. They cover Pokémon Champions regulations only. The legacy `/sse` and `/api/tools` endpoints stay retired and return `410 Gone`.

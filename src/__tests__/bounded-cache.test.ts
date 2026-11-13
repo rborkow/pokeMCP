@@ -44,6 +44,41 @@ describe("bounded cache", () => {
     });
 });
 
+describe("usage statistics reads", () => {
+    it("shares one read between callers that ask at the same time", async () => {
+        let reads = 0;
+        const env = {
+            POKEMON_STATS: {
+                async get(key: string) {
+                    reads++;
+                    await new Promise((resolve) => setTimeout(resolve, 5));
+                    return { displayName: key, usage: 0.1 };
+                },
+            },
+        } as unknown as Env;
+
+        const results = await Promise.all(
+            Array.from({ length: 8 }, () => getPokemonStats("shared", "in-flight-test", env)),
+        );
+        assert.equal(reads, 1);
+        assert.ok(
+            results.every((result) => result === results[0]),
+            "everyone gets the same record",
+        );
+
+        // A failed read is not left behind to be shared.
+        const failing = {
+            POKEMON_STATS: {
+                async get() {
+                    throw new Error("unavailable");
+                },
+            },
+        } as unknown as Env;
+        assert.equal(await getPokemonStats("broken", "in-flight-test", failing), null);
+        assert.equal(await getPokemonStats("broken", "in-flight-test", env).then((r) => !!r), true);
+    });
+});
+
 describe("usage statistics cache", () => {
     it("re-reads a Pokémon that was pushed out instead of growing without limit", async () => {
         let reads = 0;
