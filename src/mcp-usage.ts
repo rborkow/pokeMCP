@@ -14,8 +14,9 @@ import { handleMcpRequest } from "./connector/http.js";
 export async function serveMcp(request: Request, env: Env): Promise<Response> {
     const started = Date.now();
     const userAgent = request.headers.get("User-Agent");
-    // Tool calls carry no client name, so those are attributed by User-Agent.
-    // A connection also has the name the client reports, which is more reliable.
+    // A 2025-era tool call carries no client name, so it is attributed by
+    // User-Agent. A connection, and every 2026-07-28 request, also has the name
+    // the client reports, which is more reliable.
     let client = classifyClient(null, userAgent);
     let kind = request.method === "POST" ? "unread" : `http_${request.method.toLowerCase()}`;
 
@@ -33,6 +34,9 @@ export async function serveMcp(request: Request, env: Env): Promise<Response> {
                     family: client,
                     userAgentProduct: userAgentProduct(userAgent),
                 });
+            },
+            onClientInfo: (info) => {
+                client = classifyClient(info.name, userAgent);
             },
             onCall: (call) =>
                 trackToolCall(

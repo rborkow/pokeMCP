@@ -4,7 +4,7 @@
  * (src/connector/tools.ts), so the published docs can't silently drift from
  * the tools the VGC Teambuilder connector actually exposes.
  *
- * Introspects each tool's Zod schema (string/number/boolean/enum/array,
+ * Introspects each tool's Zod 4 schema (string/number/boolean/enum/array,
  * optional/default) to build a "name (type, required/optional) — description"
  * fragment per parameter, using the same `.describe()` text authored on the
  * connector tools. Anything more exotic than the handled cases falls back to
@@ -56,31 +56,31 @@ function introspectParam(name: string, schema: z.ZodTypeAny): ParamInfo {
     // (noExplicitAny is off repo-wide, so no suppression comment is needed here.)
     let current: any = schema;
 
-    while (current?._def?.typeName === "ZodOptional" || current?._def?.typeName === "ZodDefault") {
+    // Zod 4 names each schema kind in `_def.type` ("optional", "string", ...).
+    while (current?._def?.type === "optional" || current?._def?.type === "default") {
         required = false;
         current = current._def.innerType;
         if (!description) description = current.description;
     }
 
-    const typeName = current?._def?.typeName;
-    switch (typeName) {
-        case "ZodString":
+    switch (current?._def?.type) {
+        case "string":
             return { name, type: "string", required, description };
-        case "ZodNumber":
+        case "number":
             return { name, type: "number", required, description };
-        case "ZodBoolean":
+        case "boolean":
             return { name, type: "boolean", required, description };
-        case "ZodEnum":
+        case "enum":
             return {
                 name,
                 type: "enum",
                 required,
                 description,
-                enumValues: current._def.values as string[],
+                enumValues: current.options as string[],
             };
-        case "ZodArray":
+        case "array":
             return { name, type: "array", required, description };
-        case "ZodObject":
+        case "object":
             return { name, type: "object", required, description };
         default:
             // Fallback for anything not handled above (unions, records, etc.)

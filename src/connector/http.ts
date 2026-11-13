@@ -2,23 +2,35 @@
  * The connector's HTTP endpoint: MCP over Streamable HTTP, served statelessly.
  *
  * Every tool only reads data and returns at once, so nothing has to be
- * remembered between requests. Each POST therefore gets its own MCP server and
- * transport, answers with plain JSON, and is finished. There is no session and
- * no Durable Object: creating one per conversation cost about a second before
- * the first tool could run, and tied every later call to that one object.
+ * remembered between requests. Each POST gets its own MCP server, answers with
+ * plain JSON, and is finished. There is no session and no Durable Object.
  *
- * What follows from being stateless:
+ * Two protocol eras are served on the same endpoint:
  *
- * - No `Mcp-Session-Id` is issued. One sent by a client that connected before
- *   this change is ignored, so those clients keep working.
- * - `GET` (a server-to-client event stream) and `DELETE` (ending a session)
- *   have nothing to act on and return 405, as the MCP specification allows.
+ * - **2026-07-28** (the current MCP revision): no handshake and no sessions;
+ *   every request carries its protocol version and client details in `_meta`
+ *   and the `MCP-Protocol-Version` / `Mcp-Method` / `Mcp-Name` headers. The
+ *   SDK's `createMcpHandler` answers these, including `server/discover`,
+ *   header validation and the per-result `resultType`, `serverInfo` and cache
+ *   fields.
+ * - **2025-era** (2025-11-25 and earlier): the `initialize` handshake, served
+ *   statelessly. No `Mcp-Session-Id` is issued, and one sent by an older client
+ *   is ignored, so those clients keep working.
+ *
+ * `isLegacyRequest` (the SDK's own routing rule) decides which era a request
+ * belongs to. `GET` (a server-to-client event stream) and `DELETE` (ending a
+ * session) have nothing to act on and return 405, as the specification allows.
  *
  * Like the rest of `connector/`, this file imports nothing Workers-only, so it
  * runs under `node --test`.
  */
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
+import {
+    CLIENT_INFO_META_KEY,
+    createMcpHandler,
+    isLegacyRequest,
+    McpServer,
+    WebStandardStreamableHTTPServerTransport,
+} from "@modelcontextprotocol/server";
 import { type ConnectorCallInfo, registerConnectorTools } from "./register.js";
 import { CONNECTOR_INFO, CONNECTOR_INSTRUCTIONS } from "./tools.js";
 
@@ -31,8 +43,17 @@ export interface McpClientInfo {
 export interface McpRequestHooks {
     /** Called once for each tool call, with operational metrics only. */
     onCall?: (info: ConnectorCallInfo) => void;
-    /** Called when a client opens a connection (an `initialize` request). */
+    /**
+     * Called when a client opens a connection: a 2025-era `initialize`, or a
+     * 2026-07-28 `server/discover` probe. Clients on the current revision may
+     * skip the probe, so this undercounts them; `onClientInfo` still names them.
+     */
     onInitialize?: (client: McpClientInfo) => void;
+    /**
+     * Called for a 2026-07-28 request that names its client in `_meta`, which
+     * clients on that revision send with every request.
+     */
+    onClientInfo?: (client: McpClientInfo) => void;
     /**
      * Called once a POST body has been read, with the kind of request it is:
      * a JSON-RPC method such as `tools/call`, or `notification`, `batch`,
@@ -46,8 +67,10 @@ export interface McpRequestHooks {
 const CORS_HEADERS: Record<string, string> = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
+    // mcp-method and mcp-name are required on 2026-07-28 requests;
+    // mcp-session-id is still sent by 2025-era clients and ignored.
     "Access-Control-Allow-Headers":
-        "Content-Type, Accept, Authorization, mcp-session-id, mcp-protocol-version",
+        "Content-Type, Accept, Authorization, mcp-protocol-version, mcp-method, mcp-name, mcp-session-id",
     "Access-Control-Max-Age": "86400",
 };
 
@@ -128,26 +151,50 @@ function methodNotAllowed(): Response {
     );
 }
 
-/** The `clientInfo` of an `initialize` message in a parsed request body, if there is one. */
-function findInitialize(body: unknown): McpClientInfo | null {
+function clientInfoFrom(info: unknown): McpClientInfo {
+    const { name, version } = (info ?? {}) as { name?: unknown; version?: unknown };
+    return {
+        name: typeof name === "string" ? name : undefined,
+        version: typeof version === "string" ? version : undefined,
+    };
+}
+
+interface ClientMentions {
+    /** The client of an `initialize` or `server/discover` message: a new connection. */
+    connection: McpClientInfo | null;
+    /** The client a 2026-07-28 request names in its `_meta`. */
+    perRequest: McpClientInfo | null;
+}
+
+/** Where a parsed request body names its client, if anywhere. */
+function findClient(body: unknown): ClientMentions {
+    const found: ClientMentions = { connection: null, perRequest: null };
     const messages = Array.isArray(body) ? body : [body];
     for (const message of messages) {
         if (!message || typeof message !== "object") continue;
         const { method, params } = message as { method?: unknown; params?: unknown };
-        if (method !== "initialize") continue;
-        const info = (params as { clientInfo?: unknown } | undefined)?.clientInfo;
-        const { name, version } = (info ?? {}) as { name?: unknown; version?: unknown };
-        return {
-            name: typeof name === "string" ? name : undefined,
-            version: typeof version === "string" ? version : undefined,
-        };
+        const p = (params ?? {}) as { clientInfo?: unknown; _meta?: Record<string, unknown> };
+        const metaInfo = p._meta?.[CLIENT_INFO_META_KEY];
+        if (method === "initialize" && !found.connection) {
+            found.connection = clientInfoFrom(p.clientInfo);
+        }
+        if (metaInfo && typeof metaInfo === "object") {
+            found.perRequest ??= clientInfoFrom(metaInfo);
+            if (method === "server/discover") found.connection ??= clientInfoFrom(metaInfo);
+        }
     }
-    return null;
+    return found;
 }
 
 // Methods worth telling apart in usage reports; anything else is "other" so a
 // client cannot fill the report with made-up names.
-const REPORTED_METHODS = new Set(["initialize", "tools/list", "tools/call", "ping"]);
+const REPORTED_METHODS = new Set([
+    "initialize",
+    "server/discover",
+    "tools/list",
+    "tools/call",
+    "ping",
+]);
 
 /** The kind of request a parsed body is, for usage reporting. */
 function requestKind(body: unknown): string {
@@ -159,6 +206,78 @@ function requestKind(body: unknown): string {
     return REPORTED_METHODS.has(method) ? method : "other";
 }
 
+/**
+ * How long a client or shared cache may reuse a `tools/list` or
+ * `server/discover` result on the 2026-07-28 revision. Tools change only on a
+ * deploy, and a tool's description names the default regulation, which moves
+ * when new monthly statistics are uploaded; an hour bounds how stale either
+ * can be. Both results are the same for every caller, so shared caches may
+ * keep them.
+ */
+export const LIST_CACHE_TTL_MS = 60 * 60 * 1000;
+
+/** A fresh MCP server with the connector's tools, for one request. */
+function buildServer(env: Env, onCall: McpRequestHooks["onCall"]): McpServer {
+    const cacheHint = { ttlMs: LIST_CACHE_TTL_MS, cacheScope: "public" as const };
+    const server = new McpServer(CONNECTOR_INFO, {
+        instructions: CONNECTOR_INSTRUCTIONS,
+        // A stateless server can never send a list-changed notification, so it
+        // does not offer one (the SDK would otherwise advertise it).
+        capabilities: { tools: { listChanged: false } },
+        cacheHints: { "tools/list": cacheHint, "server/discover": cacheHint },
+    });
+    registerConnectorTools(server, env, onCall);
+    return server;
+}
+
+/** Answer a 2025-era request: stateless, with a plain JSON reply. */
+async function serveLegacy(
+    request: Request,
+    parsedBody: unknown,
+    parsed: boolean,
+    env: Env,
+    hooks: McpRequestHooks,
+): Promise<Response> {
+    // A stateless transport cannot be shared: a fresh server and transport per
+    // request keeps one client's message ids from colliding with another's.
+    const server = buildServer(env, hooks.onCall);
+    const transport = new WebStandardStreamableHTTPServerTransport({
+        sessionIdGenerator: undefined,
+        enableJsonResponse: true,
+    });
+    try {
+        await server.connect(transport);
+        return await transport.handleRequest(request, parsed ? { parsedBody } : undefined);
+    } finally {
+        // The JSON response is complete by now; release the server's handlers.
+        await server.close().catch(() => {});
+    }
+}
+
+/** Answer a 2026-07-28 request through the SDK's handler for that revision. */
+async function serveModern(
+    request: Request,
+    parsedBody: unknown,
+    parsed: boolean,
+    env: Env,
+    hooks: McpRequestHooks,
+): Promise<Response> {
+    const handler = createMcpHandler(() => buildServer(env, hooks.onCall), {
+        // 2025-era traffic never reaches this handler; it is routed above.
+        legacy: "reject",
+        // "auto" answers with plain JSON unless a handler emits a message before
+        // its result, which these tools never do. ("json" would do the same but
+        // logs a warning on every request.)
+        responseMode: "auto",
+        onerror: (error) => console.error("MCP request rejected:", error.message),
+    });
+    try {
+        return await handler.fetch(request, parsed ? { parsedBody } : undefined);
+    } finally {
+        await handler.close().catch(() => {});
+    }
+}
+
 /** Answer one request to the MCP endpoint. */
 export async function handleMcpRequest(
     request: Request,
@@ -168,9 +287,9 @@ export async function handleMcpRequest(
     if (request.method === "OPTIONS") return new Response(null, { headers: CORS_HEADERS });
     if (request.method !== "POST") return methodNotAllowed();
 
-    // Read the body once: to notice an `initialize`, and to hand the transport
-    // the parsed message. Invalid JSON is passed through untouched so the
-    // transport reports it the standard way.
+    // Read the body once, under the size limit: to notice who the client is,
+    // and to hand the SDK the parsed message. Invalid JSON is passed through
+    // untouched so the SDK reports it the standard way.
     const raw = await readBody(request, MAX_BODY_BYTES);
     if (raw === null) {
         return jsonRpcError(413, -32600, "Request body too large.");
@@ -181,7 +300,7 @@ export async function handleMcpRequest(
         parsedBody = JSON.parse(raw);
         parsed = true;
     } catch {
-        // Left to the transport.
+        // Left to the SDK.
     }
 
     hooks.onRequestKind?.(parsed ? requestKind(parsedBody) : "invalid");
@@ -195,33 +314,17 @@ export async function handleMcpRequest(
     }
 
     if (parsed) {
-        const client = findInitialize(parsedBody);
-        if (client) hooks.onInitialize?.(client);
+        const { connection, perRequest } = findClient(parsedBody);
+        if (connection) hooks.onInitialize?.(connection);
+        if (perRequest) hooks.onClientInfo?.(perRequest);
     }
 
-    // A stateless transport cannot be shared: a fresh server and transport per
-    // request keeps one client's message ids from colliding with another's.
-    const server = new McpServer(CONNECTOR_INFO, { instructions: CONNECTOR_INSTRUCTIONS });
-    registerConnectorTools(server, env, hooks.onCall);
-    const transport = new WebStandardStreamableHTTPServerTransport({
-        sessionIdGenerator: undefined,
-        enableJsonResponse: true,
+    const forwarded = new Request(request.url, {
+        method: "POST",
+        headers: request.headers,
+        body: raw,
     });
-
-    try {
-        await server.connect(transport);
-        const forwarded = new Request(request.url, {
-            method: "POST",
-            headers: request.headers,
-            body: raw,
-        });
-        const response = await transport.handleRequest(
-            forwarded,
-            parsed ? { parsedBody } : undefined,
-        );
-        return withCors(response);
-    } finally {
-        // The JSON response is complete by now; release the server's handlers.
-        await server.close().catch(() => {});
-    }
+    const legacy = await isLegacyRequest(forwarded, parsed ? parsedBody : undefined);
+    const serve = legacy ? serveLegacy : serveModern;
+    return withCors(await serve(forwarded, parsedBody, parsed, env, hooks));
 }

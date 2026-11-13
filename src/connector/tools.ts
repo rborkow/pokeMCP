@@ -202,7 +202,7 @@ const setOutput = z.object({
     ability: z.string(),
     item: z.string().nullable(),
     stats: statTable.describe("Resulting stats at level 50, before stat stages"),
-    boosts: z.record(z.number()).optional(),
+    boosts: z.record(z.string(), z.number()).optional(),
     status: z.string().optional(),
 });
 const assumptionsOutput = z

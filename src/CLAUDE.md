@@ -16,7 +16,7 @@ published contract.
 
 ```
 index.ts /mcp → connector/http.ts handleMcpRequest() → connector/register.ts
-connector/http.ts       stateless Streamable HTTP: a fresh server and transport per POST
+connector/http.ts       stateless Streamable HTTP, MCP 2026-07-28 and 2025-era: a fresh server per POST
 connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output schemas
 ├── connector/pokemon.ts  lookup_pokemon, validate_moveset, analyze_team_types (bundled data)
 ├── connector/team.ts     list_formats, validate_team (regulations/ + KV eligible list)
@@ -34,14 +34,30 @@ connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output 
   not add anything that needs state between requests (resources subscriptions,
   server-initiated messages) without rethinking that. `GET` and `DELETE` return 405, and a
   session id sent by an older client is ignored.
+- It speaks two protocol eras on the same URL, using the official TypeScript SDK v2
+  (`@modelcontextprotocol/server`). `isLegacyRequest()` routes each POST:
+  - **2026-07-28** requests (per-request `_meta`, plus `MCP-Protocol-Version`, `Mcp-Method`
+    and `Mcp-Name` headers) go to the SDK's `createMcpHandler`. It handles
+    `server/discover`, header validation (`-32020`), version mismatches (`-32022`), and the
+    `resultType`, `serverInfo` and cache fields on results.
+  - **2025-era** requests (the `initialize` handshake) go to a stateless transport with
+    JSON replies.
+
+  Both use the same `buildServer()`, so the tools can't drift between eras.
+- `tools/list` and `server/discover` are marked cacheable for `LIST_CACHE_TTL_MS` (one hour,
+  public), because a tool's description names the default regulation. The server
+  advertises `tools.listChanged: false`, since a stateless server can't send that
+  notification.
+- Tool schemas are zod 4 and publish as JSON Schema 2020-12. `scripts/generate-tool-docs.ts`
+  reads zod 4 internals (`_def.type`), so check its output after a zod upgrade.
 - Every tool returns `structuredContent` matching its `outputSchema` plus equivalent Markdown
   text. A failure is `fail(message)`, sent as a tool error (`isError`) — keep messages
   actionable and free of internals (no script names, binding names or file paths).
 - All tools carry `readOnlyHint: true`, `destructiveHint: false`, `openWorldHint: false`.
 - One operation per tool. Do not add a tool that switches on a `type` argument; directory
   reviews reject that.
-- `connector/` must not import `agents` or `cloudflare:*`, so the whole surface runs under
-  `node --test` through the MCP SDK's in-memory transport (`__tests__/connector.test.ts`).
+- `connector/` must not import `cloudflare:*`, so the whole surface runs under `node --test`
+  through the MCP SDK's in-memory transport (`__tests__/connector.test.ts`).
 - Usage recording (`mcp-usage.ts` → `analytics.ts`) stores operational metrics only: the
   kind of request, tool, format, outcome, duration, and which assistant software made it.
   Arguments and results are never recorded. The privacy policy lists exactly this, so change
@@ -90,14 +106,13 @@ index.ts               routes and the daily schedule
 
 `IngestionCoordinator` in `index.ts` is a retired Durable Object stub. It exists only because
 an applied migration names the class; removing it needs a `deleted_classes` migration.
-`PokemonMCP` no longer serves requests either; the class and its binding stay so the move
-to the stateless endpoint can be undone by a plain revert.
+`PokemonMCP` (the old per-session object) is a stub for the same reason.
 
 ## HTTP endpoints
 
 | Path | Method | Purpose |
 |------|--------|---------|
-| `/mcp` | POST | Public MCP endpoint, stateless Streamable HTTP with JSON responses (`connector/http.ts`); not origin-gated; 600 req/min per IP via `MCP_RATE_LIMITER` (`mcp-rate-limit.ts`, fails open). `GET` and `DELETE` return 405 |
+| `/mcp` | POST | Public MCP endpoint, stateless Streamable HTTP with JSON responses, MCP 2026-07-28 and 2025-era (`connector/http.ts`); not origin-gated; 600 req/min per IP via `MCP_RATE_LIMITER` (`mcp-rate-limit.ts`, fails open). `GET` and `DELETE` return 405 |
 | `/sse`, `/api/tools` | any | Retired — `410 Gone` (`retirement.ts`) |
 | `/health` | GET | Liveness |
 | `/favicon.ico`, `/favicon.svg` | GET | The connector icon. Directories show the favicon of the MCP server's own host, so it is served here and not only on the website |
