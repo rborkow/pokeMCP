@@ -1,0 +1,30 @@
+{
+    "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+    "name": "com.pokemcp/vgc-teambuilder",
+    "title": "VGC Teambuilder",
+    "description": "Read-only Pokémon Champions VGC data: legality, usage stats, type analysis and matchup calcs.",
+    "version": "1.0.0",
+    "websiteUrl": "https://docs.pokemcp.com",
+    "repository": {
+        "url": "https://github.com/rborkow/pokeMCP",
+        "source": "github"
+    },
+    "icons": [
+        {
+            "src": "https://www.pokemcp.com/vgc-teambuilder-icon.png",
+            "mimeType": "image/png",
+            "sizes": ["512x512"]
+        },
+        {
+            "src": "https://www.pokemcp.com/vgc-teambuilder-icon.svg",
+            "mimeType": "image/svg+xml",
+            "sizes": ["any"]
+        }
+    ],
+    "remotes": [
+        {
+            "type": "streamable-http",
+            "url": "https://api.pokemcp.com/mcp"
+        }
+    ]
+}
