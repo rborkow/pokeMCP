@@ -10,7 +10,7 @@ It calls no AI model.
 
 ## The connector (`connector/`)
 
-12 read-only tools, no auth, Champions regulations only. It is intended for the Claude and
+15 read-only tools, no auth, Champions regulations only. It is intended for the Claude and
 ChatGPT directories, so tool names, descriptions, annotations and output schemas are a
 published contract.
 
@@ -24,6 +24,8 @@ connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output 
 │                         get_checks_and_counters (KV, via stats.ts loaders)
 ├── connector/trends.ts   get_usage_trend, get_meta_shifts, get_usage_momentum (D1, via
 │                         meta-history.ts computations)
+├── connector/matchup.ts  calculate_damage, compare_speed, check_team_threats
+│                         (@smogon/calc in Champions mode + KV usage for default sets)
 └── connector/formats.ts  `format` = a regulation id; default = newest regulation with stats
 ```
 
@@ -56,6 +58,13 @@ connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output 
   minimum makes the tool unusable for the regulation being played.
 - Do not hard-code a regulation as "current". `list_formats` derives each one's status from
   its dates, and defaults follow the newest regulation with published statistics.
+- Matchup tools are single calculations, never a played-out battle. Every result lists what
+  it assumed, above all any part of a set that was filled in from usage data because the
+  caller left it out, and that spread moves are taken at their reduced doubles damage. Keep
+  that: an assistant cannot see a silent default.
+- `@smogon/calc` is pinned to an exact version and loaded on first use (it is about 900 KB
+  of data for every generation). `matchup.test.ts` pins results worked out by hand, so a
+  library change shows up as a failing test. Champions is generation 0 in that library.
 - After changing a tool, run `bun run generate-tool-docs` (README + apps/docs tools page).
 
 ## Modules
