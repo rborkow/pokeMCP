@@ -134,10 +134,10 @@ jobs:
 
             Review the whole diff before merging, tables included:
             - The narrative is LLM-written: check its claims against the tables.
-            - Tournament tables, event names, player names and the
-              `src/cached-tournaments/` JSON are third-party Limitless text. They are
-              compiled as MDX at build time, so look for `{`, `}`, `<` or `>` in them.
-              See REVIEW.md ("Generated content").
+            - Tournament tables, event names and player names are third-party Limitless
+              text. The generator escapes them, and the "Build Teambuilder" check fails if
+              any report would compile to code. Still read them for anything you wouldn't
+              publish. See REVIEW.md ("Generated content").
 
             Build checks are dispatched by the workflow that opened this PR (PRs
             opened by `GITHUB_TOKEN` don't trigger CI on their own).

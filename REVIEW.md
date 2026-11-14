@@ -62,10 +62,11 @@ Sensitive paths:
 ## Security rules
 
 - **Third-party and LLM text in MDX.** Strings from Limitless (event names, player names,
-  decklist names), Smogon or the Claude API that `scripts/` writes into `.mdx` must be escaped
-  for MDX: `{`, `}`, `<`, `>`, and `|` inside table cells. MDX compiles `{…}` to JavaScript that
-  runs during `next build`, and the production build runs with deploy credentials. Prefer
-  rendering third-party data from JSON through React.
+  decklist names), Smogon or the Claude API that `scripts/` writes into `.mdx` go through
+  `scripts/lib/mdx-escape.ts`: `escapeMdxInline` for headings, table cells and link text,
+  `escapeMdx` for the narrative. MDX compiles `{…}` to JavaScript that runs during
+  `next build`. `apps/teambuilder/src/__tests__/report-mdx-safety.test.ts` fails CI if a
+  generated report contains JSX or an expression; don't weaken it to make a report pass.
 - **Admin auth.** `/admin/*` must go through `handleAdminRequest` in `src/admin.ts`. Keep the
   signature check against the team's keys with the algorithm pinned, and the `exp` check. Don't
   widen the non-production bypass.
@@ -89,9 +90,9 @@ Sensitive paths:
 The `chore/meta-reports` PR is opened by `update-stats.yml`. Review all of it:
 
 - The narrative is LLM-written. Check its claims and numbers against the tables.
-- Tables, headings, event names and player names are third-party text. Search the diff for
-  `{`, `}`, `<` and `>` outside code spans, both in the `.mdx` files and in
-  `src/cached-tournaments/`.
+- Tables, headings, event names and player names are third-party text. The "Build Teambuilder"
+  check fails if any of it compiles to code. Still read it for anything you wouldn't publish
+  (abusive names, spam links).
 - Spot-check one Pokémon's trend JSON against the Smogon numbers.
 
 ## Not findings

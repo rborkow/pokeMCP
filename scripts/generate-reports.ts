@@ -36,6 +36,7 @@ import {
     gradePredictions,
     type Prediction,
 } from "./lib/grade-predictions.js";
+import { escapeMdx, escapeMdxInline } from "./lib/mdx-escape.js";
 import { type CachedTournament, readCachedTournaments } from "./lib/tournaments.js";
 
 // --- Config ---
@@ -147,11 +148,6 @@ function topNDisplay(
     display: (id: string) => string,
 ): [string, number][] {
     return topNPercent(data, n).map(([id, share]) => [display(id), share]);
-}
-
-/** Escape LLM-generated markdown so MDX cannot interpret it as JSX/expressions. */
-function escapeMdx(text: string): string {
-    return text.replace(/</g, "&lt;").replace(/\{/g, "&#123;").replace(/\}/g, "&#125;");
 }
 
 // --- Smogon fetching (tmpdir-cached, polite) ---
@@ -328,8 +324,14 @@ function computeTrends(snapshots: MonthSnapshot[]): Trends {
 
 // --- Markdown rendering (deterministic; every number traces to the chaos data) ---
 
+/**
+ * A Pokémon name for report MDX, linked to its page when it has one. The name is escaped
+ * (it can come from Smogon or Limitless). The id goes into the URL only when it is one of our
+ * own page ids (`hasPage`), so a raw third-party id never reaches the link.
+ */
 function monLink(name: string, id: string, target: Target, hasPage: boolean): string {
-    return hasPage && target.monPages ? `[${name}](/pokemon/${id}/${target.slug})` : name;
+    const text = escapeMdxInline(name);
+    return hasPage && target.monPages ? `[${text}](/pokemon/${id}/${target.slug})` : text;
 }
 
 function renderTables(trends: Trends, target: Target, monIds: Set<string>): string {
@@ -401,9 +403,9 @@ function renderLead(trends: Trends, label: string): string {
           })()
         : "";
     return (
-        `**${first.name}** led ${label} with ${pct(first.usage)} usage in ` +
-        `${monthLong(latest.month)}${deltaNote}, ahead of ${second.name} (${pct(second.usage)}) ` +
-        `and ${third.name} (${pct(third.usage)})${battles}. ` +
+        `**${escapeMdxInline(first.name)}** led ${label} with ${pct(first.usage)} usage in ` +
+        `${monthLong(latest.month)}${deltaNote}, ahead of ${escapeMdxInline(second.name)} ` +
+        `(${pct(second.usage)}) and ${escapeMdxInline(third.name)} (${pct(third.usage)})${battles}. ` +
         `The tables below are generated directly from Smogon's weighted usage statistics; ` +
         "the analysis that follows is grounded in those numbers."
     );
@@ -552,7 +554,7 @@ function renderSetChangesTable(
     for (const s of swings) {
         const name = monLink(s.mon, s.monId, target, monIds.has(s.monId));
         lines.push(
-            `| ${name} | ${s.kind}: ${s.option} | ${s.fromPct.toFixed(1)}% | ${s.toPct.toFixed(1)}% | ${signed(s.toPct - s.fromPct)} |`,
+            `| ${name} | ${s.kind}: ${escapeMdxInline(s.option)} | ${s.fromPct.toFixed(1)}% | ${s.toPct.toFixed(1)}% | ${signed(s.toPct - s.fromPct)} |`,
         );
     }
     lines.push("");
@@ -609,12 +611,15 @@ function renderTournamentSection(
     const lines: string[] = [
         "## Tournament results",
         "",
-        `The largest ${events[0].format} events of the report window, via [Limitless](https://play.limitlesstcg.com).`,
+        `The largest ${escapeMdxInline(events[0].format)} events of the report window, via [Limitless](https://play.limitlesstcg.com).`,
         "",
     ];
 
     for (const event of events) {
-        lines.push(`### ${event.name} — ${fmtEventDate(event.date)}, ${event.players} players`);
+        // Event and player names are free text from Limitless organizers and players.
+        lines.push(
+            `### ${escapeMdxInline(event.name)} — ${fmtEventDate(event.date)}, ${event.players} players`,
+        );
         lines.push("");
         lines.push("| Place | Player | Record | Team |");
         lines.push("|-------|--------|--------|------|");
@@ -623,7 +628,7 @@ function renderTournamentSection(
                 .map((slot) => monLink(slot.name, slot.id, target, monIds.has(slot.id)))
                 .join(", ");
             lines.push(
-                `| ${placing.placing} | ${placing.player} | ${fmtRecord(placing.record)} | ${team} |`,
+                `| ${placing.placing} | ${escapeMdxInline(placing.player)} | ${fmtRecord(placing.record)} | ${team} |`,
             );
         }
         lines.push("");
@@ -637,7 +642,7 @@ function renderTournamentSection(
     // "what trickled down" view that pure usage stats can't give.
     const biggest = events[0];
     lines.push(
-        `### Top-cut usage at ${biggest.name.length > 40 ? `the ${biggest.players}-player event` : biggest.name} vs the ladder`,
+        `### Top-cut usage at ${biggest.name.length > 40 ? `the ${biggest.players}-player event` : escapeMdxInline(biggest.name)} vs the ladder`,
     );
     lines.push("");
     lines.push("| Pokémon | Top cut | Ladder |");
@@ -951,7 +956,7 @@ function renderGradedCalls(graded: GradedPrediction[], gradedAgainst: string): s
     for (const g of graded) {
         const move = `${g.deltaPts >= 0 ? "+" : ""}${g.deltaPts.toFixed(2)} pts`;
         lines.push(
-            `| ${g.claim} | ${g.baselineUsagePct.toFixed(2)}% | ${g.actualUsagePct.toFixed(2)}% | ${move} | ${GRADE_BADGE[g.grade]} |`,
+            `| ${escapeMdxInline(g.claim)} | ${g.baselineUsagePct.toFixed(2)}% | ${g.actualUsagePct.toFixed(2)}% | ${move} | ${GRADE_BADGE[g.grade]} |`,
         );
     }
     const tally = {
@@ -981,7 +986,7 @@ function renderNewCalls(predictions: Prediction[]): string {
     for (const p of predictions) {
         const dir = p.direction === "up" ? "+" : "-";
         lines.push(
-            `| ${p.claim} | ${p.baselineUsagePct.toFixed(2)}% | ${dir}${p.thresholdPts} pts or more | ${p.falsifier} | ${p.confidence} |`,
+            `| ${escapeMdxInline(p.claim)} | ${p.baselineUsagePct.toFixed(2)}% | ${dir}${p.thresholdPts} pts or more | ${escapeMdxInline(p.falsifier)} | ${p.confidence} |`,
         );
     }
     lines.push("");
