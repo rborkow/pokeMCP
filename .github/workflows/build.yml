@@ -42,6 +42,11 @@ jobs:
           test -f src/data/formats-data.ts
           echo "✅ Data files present"
 
+      # Format, lint and import order for the Worker and scripts (biome.json scopes it).
+      # The same check runs on staged files in the pre-commit hook (.githooks/pre-commit).
+      - name: Lint and format (Biome)
+        run: bun run check:ci
+
       - name: Typecheck
         run: bun run type-check
 

@@ -24,6 +24,8 @@ jobs:
       contents: write
       # create-pull-request opens the monthly meta-report review PR
       pull-requests: write
+      # dispatches build.yml on the PR branch (see "Run PR checks" below)
+      actions: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -74,26 +76,9 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-      # Only the small discovery manifest is committed — the raw stats dumps in
-      # src/cached-stats/ are gitignored (kept as the workflow artifact above).
-      - name: Commit updated discovered formats
-        if: ${{ !inputs.tournaments_only }}
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add src/discovered-formats.json
-
-          # Check if there are changes to commit
-          if git diff --staged --quiet; then
-            echo "No discovered-formats changes to commit"
-          else
-            git commit -m "chore: update discovered formats ($(date +%Y-%m))"
-            # The job can sit days in the production-environment approval queue,
-            # so main may have moved past the pinned checkout SHA. Replay the
-            # stats commit on top of the latest main before pushing.
-            git pull --rebase origin main
-            git push origin HEAD:main
-          fi
+      # src/discovered-formats.json (the small discovery manifest) is no longer pushed
+      # straight to main: the main ruleset (scripts/github/apply-review-settings.sh) requires
+      # PRs and build checks, so it rides along in the review PR opened below. Nothing in the Worker reads it; only scripts/ do.
 
       # Reads each regulation's `{format}:_index` back from KV and compares it
       # with the snapshot fetched above. Fails if the upload did not take
@@ -129,9 +114,11 @@ jobs:
         run: EVENTS_ONLY=1 bun run generate-reports
 
       - name: Open meta-report review PR
+        id: cpr
         uses: peter-evans/create-pull-request@v7
         with:
           add-paths: |
+            src/discovered-formats.json
             apps/teambuilder/src/content/reports/**
             apps/teambuilder/src/data/mons/**
             apps/teambuilder/src/data/events/**
@@ -141,9 +128,27 @@ jobs:
           commit-message: "content(reports): monthly meta report refresh"
           title: "Monthly meta reports — review before publish"
           body: |
-            Auto-generated meta reports, per-Pokémon trend data, and tournament
-            event pages from this month's Smogon stats + Limitless results.
-            Review the narrative sections (everything below the tables) before
-            merging — the tables are deterministic and trace to the raw data.
+            Auto-generated meta reports, per-Pokémon trend data, tournament event
+            pages and the Smogon format manifest, from this month's Smogon stats and
+            Limitless results.
 
-            Merging publishes to https://www.pokemcp.com/reports via Workers Builds.
+            Review the whole diff before merging, tables included:
+            - The narrative is LLM-written: check its claims against the tables.
+            - Tournament tables, event names, player names and the
+              `src/cached-tournaments/` JSON are third-party Limitless text. They are
+              compiled as MDX at build time, so look for `{`, `}`, `<` or `>` in them.
+              See REVIEW.md ("Generated content").
+
+            Build checks are dispatched by the workflow that opened this PR (PRs
+            opened by `GITHUB_TOKEN` don't trigger CI on their own).
+
+            Merging publishes to https://www.pokemcp.com/reports.
+
+      # PRs opened with GITHUB_TOKEN don't trigger pull_request workflows, so the required
+      # build checks would never report. workflow_dispatch is exempt from that rule: run
+      # build.yml on the PR branch so its checks attach to the PR's head commit.
+      - name: Run PR checks
+        if: ${{ steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated' }}
+        run: gh workflow run build.yml --repo "$GITHUB_REPOSITORY" --ref chore/meta-reports
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

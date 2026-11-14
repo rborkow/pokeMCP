@@ -105,8 +105,8 @@ bun run upload-stats
   `gen9champions…` prefix (e.g. `gen9championsvgc2026regma`). The format pulled is
   driven by each regulation's `showdownFormatId` (see `src/regulations/`), not the
   VGC/doubles discovery patterns — `fetch-stats` reads it from the registry. The
-  stats tools transparently remap `champions-regma` → the Smogon id via
-  `resolveStatsFormat`.
+  stats tools resolve `champions-regma` with `resolveRegulation`
+  (`src/connector/formats.ts`) and read stats under its `showdownFormatId`.
 
 ### Debugging & Monitoring
 
@@ -151,11 +151,28 @@ the production env has a cron trigger (the daily tournament refresh).
 
 ## Code Style
 
-**Linter:** Biome (not ESLint/Prettier)
+**Linter:** Biome (not ESLint/Prettier) for the Worker and `scripts/`. `biome.json` excludes
+`apps/` (the site uses its own ESLint) and generated data (`src/data/`, `src/cached-tournaments/`).
 
 - Indent: 4 spaces (tabs)
 - Line width: 100 characters
-- Always run `bun run lint:fix` and `bun run format` before committing
+- `bun run check` runs format, lint and import order together; CI runs `bun run check:ci`
+- `bun install` installs a pre-commit hook (`.githooks/pre-commit`): Biome on staged files, the
+  Worker type-check, and the site's ESLint on staged site files
+- A Claude Code hook (`.claude/settings.json`) applies Biome's safe fixes to every file Claude
+  edits
+
+## Code Review
+
+[`REVIEW.md`](REVIEW.md) is the checklist for every review, by people, Claude or Codex: which
+review to run when, the sensitive paths, correctness and security rules, and what is
+intentional. Read it before reviewing or running `/code-review` or `/security-review`.
+
+- `/security-review` here is a project copy (`.claude/commands/security-review.md`). It reads
+  the same rule files as the CI security review (`.github/security-review/`)
+- Changes to a sensitive path also get `/codex:adversarial-review --base main` before merge
+- When you add or change a rule, update `REVIEW.md` and the `.github/security-review/` files
+  together
 
 **TypeScript:**
 
@@ -183,15 +200,18 @@ See [`src/CLAUDE.md`](src/CLAUDE.md) for KV data structures, vector metadata, er
 
 ## CI/CD Pipeline
 
-Cloudflare owns all production deploys. GitHub Actions only runs PR build verification and the
-monthly stats refresh.
+Cloudflare owns all production deploys. GitHub Actions runs PR build verification, the Claude
+security review, and the monthly stats refresh. `scripts/github/apply-review-settings.sh`
+protects `main` with a ruleset (changes land through PRs, and the three `build.yml` jobs must
+pass). Once it has been run, nothing pushes to `main` directly, workflows included.
 
 **GitHub Actions Workflows:**
 
 | Workflow               | Trigger                 | Purpose                                                    |
 | ---------------------- | ----------------------- | ---------------------------------------------------------- |
 | `build.yml`            | Pull requests           | Build verification (worker dry-run, teambuilder, docs)     |
-| `update-stats.yml`     | Monthly (5th) or manual | Fetch Smogon stats, push to `main` (Cloudflare redeploys)  |
+| `update-stats.yml`     | Monthly (5th) or manual | Fetch Smogon stats into KV/D1, open the report review PR and dispatch its checks |
+| `security-review.yml`  | PRs touching sensitive paths | Claude security review, posted as PR comments (advisory) |
 | `deploy.yml`           | Manual (choice input)   | Manual deploy of worker/teambuilder/docs (`--env production`) |
 | `backfill-history.yml` | Manual                  | Backfill D1 meta-history from Smogon archives              |
 
@@ -298,7 +318,9 @@ Option 1 - GitHub Action (recommended):
 - Runs automatically on the 5th of each month, but waits for manual approval of the
   `production` environment — unapproved runs time out after 30 days, so check the Actions
   tab if stats look stale
-- Only ever dispatch it from `main`: it rebases onto and pushes to `main`
+- Only ever dispatch it from `main`. It no longer pushes to `main`: `src/discovered-formats.json`
+  goes into the `chore/meta-reports` review PR with the reports. PRs opened by `GITHUB_TOKEN`
+  don't trigger CI, so the workflow runs `build.yml` on the PR branch itself
 - An ended regulation resolves to its last published month, so its final snapshot is kept
 - Discovers new formats, fetches stats, and uploads — all automated
 - Or trigger manually: Actions → "Update Smogon Stats" → Run workflow
@@ -308,8 +330,8 @@ Option 2 - Manual:
 1. `bun run discover-formats` (discovers available VGC formats from Smogon)
 2. `bun run fetch-stats` (downloads from Smogon, ~45 seconds)
 3. `bun run upload-stats` (uploads to KV, requires Cloudflare auth)
-4. Commit `src/discovered-formats.json` if it changed — the stats dumps in `src/cached-stats/`
-   are gitignored (KV is the source of truth); a push to main triggers a Cloudflare redeploy
+4. Commit `src/discovered-formats.json` if it changed, through a PR. The stats dumps in
+   `src/cached-stats/` are gitignored (KV is the source of truth)
 
 ### Website (`apps/teambuilder`)
 
