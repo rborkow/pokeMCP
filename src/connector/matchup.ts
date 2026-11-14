@@ -19,8 +19,9 @@
  * The calculator is about 900 KB of data for every game generation, so it is
  * loaded on first use and not when the Worker starts.
  */
-import type { RegulationSet } from "../regulations/types.js";
+
 import { BoundedTtlCache } from "../bounded-cache.js";
+import type { RegulationSet } from "../regulations/types.js";
 import { getFormatIndex, getPokemonStats, type PokemonStats } from "../stats.js";
 import { formatFields, resolveRegulation } from "./formats.js";
 import { pokemonNotFound, resolvePokemon } from "./pokemon.js";

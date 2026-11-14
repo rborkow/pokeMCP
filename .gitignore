@@ -233,8 +233,11 @@ src/cached-stats/
 # Same policy for fetched regulation allow-lists (KV key `<regulation>:_legality`).
 src/cached-champions-legality/
 
-# Claude Code
-.claude/
+# Claude Code: share project settings, hooks and commands; keep local state private
+.claude/*
+!.claude/settings.json
+!.claude/hooks/
+!.claude/commands/
 
 # Exported interaction logs (for fine-tuning)
 exported-logs/

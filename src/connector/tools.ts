@@ -8,7 +8,6 @@
  */
 import { z } from "zod";
 import { formatInput, formatOutput, getDefaultRegulation } from "./formats.js";
-import { analyzeTeamTypes, lookupPokemon, validateMoveset } from "./pokemon.js";
 import {
     calculateDamage,
     checkTeamThreats,
@@ -17,6 +16,7 @@ import {
     MAX_STAT_POINTS_TOTAL,
     MAX_THREATS,
 } from "./matchup.js";
+import { analyzeTeamTypes, lookupPokemon, validateMoveset } from "./pokemon.js";
 import { listFormats, validateTeam } from "./team.js";
 import { getMetaShifts, getUsageMomentum, getUsageTrend } from "./trends.js";
 import type { ConnectorTool } from "./types.js";

@@ -1,0 +1,20 @@
+**Project context (VGC Teambuilder):**
+- A Cloudflare Worker serves a public, authless, read-only MCP connector at /mcp, an /admin dashboard API, and retired endpoints that return 410. A Next.js site on Cloudflare (OpenNext) serves content pages. GitHub Actions scripts fetch third-party data (Smogon, Limitless) and generate report MDX, partly written by the Claude API.
+- Every Worker environment binds the production KV, D1 and R2. Keep these rules in sync with REVIEW.md.
+
+**Third-party and LLM text in generated MDX:**
+- Strings from Limitless (event names, player names, decklist names), Smogon or the Claude API that scripts/ write into .mdx files must be escaped for MDX: `{`, `}`, `<`, `>`, and `|` inside table cells. MDX compiles `{...}` to JavaScript that runs during `next build`, and the production build runs with Cloudflare deploy credentials. Flag new or changed interpolation of such strings into MDX without escaping.
+
+**Admin authentication (src/admin.ts):**
+- /admin/* is protected only by the Worker's own verification of the Cloudflare Access JWT; the site's /api/admin proxy forwards the www app's token. Flag changes that accept a token without verifying its signature against the team keys, drop the algorithm pin or the exp check, widen the non-production bypass, or add admin routes that don't go through handleAdminRequest.
+
+**Public connector (/mcp, src/connector/):**
+- Flag any tool path that writes to KV, D1 or R2, or fetches a host derived from tool arguments.
+- Flag tool errors (fail()) or HTTP responses that return stack traces, binding names, SQL, or upstream response bodies.
+- Flag D1 queries built by string interpolation instead of .prepare(...).bind(...), and KV keys built from user input that don't go through the regulation registry or toID().
+
+**CI and build secrets (.github/workflows/):**
+- Flag pull_request_target or workflow_run workflows that check out or run PR code, untrusted ${{ github.event.* }} values interpolated into run: steps, and new steps that expose CLOUDFLARE_API_TOKEN, ANTHROPIC_API_KEY or LIMITLESS_API_KEY to code built from PR branches or third-party data.
+
+**Shared production data:**
+- Flag code that writes to or deletes production KV, D1 or R2 data from a staging, dev or script path without an explicit opt-in flag.
