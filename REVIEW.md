@@ -15,7 +15,7 @@ The CI security review reads its own copies of the security rules, in
 | Claude Code edit hook | Biome safe fixes (format, import order) on each file Claude edits | `.claude/settings.json` |
 | Pre-commit | Biome on staged files, Worker type-check, site ESLint on staged files | `.githooks/pre-commit` (installed by `bun install`) |
 | PR checks (required on `main` once the ruleset is applied) | Biome, type-check, tests, migrations, builds, dry-run deploy | `.github/workflows/build.yml` |
-| Claude security review | Diff-aware security review, posted as PR comments. Advisory, not required | `.github/workflows/security-review.yml` |
+| Claude security review | Claude runs `/security-review` on the PR and posts the report as comments. Runs when a PR touching a sensitive path is opened or marked ready; add the `security-review` label to run it again. Advisory, not required | `.github/workflows/security-review.yml` |
 | Cross-model review | Codex review of sensitive paths before merge | manual, see below |
 
 `git commit --no-verify` skips the pre-commit hook. CI still runs the same checks.
