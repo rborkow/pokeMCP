@@ -1,0 +1,69 @@
+name: Claude Security Review
+
+# Diff-aware security review by Claude, posted as PR review comments. Advisory: it is not a
+# required check, because the path filter skips most PRs.
+#
+# Runs only on PRs that touch the sensitive paths listed in REVIEW.md, to keep spend on the
+# capped ANTHROPIC_API_KEY low. Rules live in .github/security-review/; the local
+# /security-review command (.claude/commands/security-review.md) reads the same files.
+#
+# Uses `pull_request`, never `pull_request_target`: PRs from forks get no secrets, and the job
+# skips them. The action is not hardened against prompt injection, so it must only see trusted
+# PRs.
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - "src/**"
+      - "!src/data/**"
+      - "!src/cached-tournaments/**"
+      - "!src/discovered-formats.json"
+      - "!src/__tests__/**"
+      - "scripts/**"
+      - ".github/workflows/**"
+      - "apps/teambuilder/src/app/api/**"
+      - "apps/teambuilder/src/app/**/route.ts"
+      - "apps/teambuilder/next.config.ts"
+      - "apps/teambuilder/wrangler.toml"
+      - "wrangler.jsonc"
+
+permissions:
+  contents: read
+  pull-requests: write # posts findings as PR review comments
+
+concurrency:
+  group: security-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  security-review:
+    name: Claude security review
+    # Same-repo, non-draft PRs only. Dependabot PRs get no repo secrets.
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.draft == false &&
+      github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+
+      - name: Review the diff
+        # Pinned to a commit: the upstream README only publishes @main.
+        uses: anthropics/claude-code-security-review@0c6a49f1fa56a1d472575da86a94dbc1edb78eda
+        with:
+          claude-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude-model: claude-opus-5-5
+          comment-pr: true
+          upload-results: true
+          claudecode-timeout: 20
+          exclude-directories: src/data,src/cached-tournaments,apps/teambuilder/src/content,apps/teambuilder/src/data
+          custom-security-scan-instructions: .github/security-review/scan-instructions.txt
+          false-positive-filtering-instructions: .github/security-review/false-positive-filtering.txt

@@ -1,0 +1,30 @@
+#!/bin/sh
+# Fast pre-commit checks (a few seconds). CI runs the full suite: tests, builds, dry-run deploys.
+# Installed by `bun install` (the root `prepare` script sets core.hooksPath to .githooks).
+# Skip once with `git commit --no-verify` — CI still enforces the same checks.
+set -e
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+[ -z "$staged" ] && exit 0
+
+# Worker + scripts: Biome format, lint and import order on staged files only.
+# biome.json scopes Biome to hand-written root code (apps/ and generated data are excluded).
+bunx biome check --staged --no-errors-on-unmatched --files-ignore-unknown=true
+
+# Worker type-check (~1-2s) only when Worker or script TypeScript changed.
+if printf '%s\n' "$staged" | grep -qE '^(src|scripts)/.*\.tsx?$'; then
+    bun run type-check
+fi
+
+# Website: ESLint on staged files, if the app's dependencies are installed.
+site_files=$(printf '%s\n' "$staged" | grep -E '^apps/teambuilder/.*\.(ts|tsx|js|jsx|mjs)$' | sed 's#^apps/teambuilder/##' || true)
+if [ -n "$site_files" ]; then
+    if [ -d apps/teambuilder/node_modules ]; then
+        # Route folders like [slug] and [...path] are glob patterns: turn off globbing (set -f)
+        # so the unquoted list only splits on newlines/spaces.
+        # shellcheck disable=SC2086
+        (set -f; cd apps/teambuilder && bunx eslint --no-warn-ignored $site_files)
+    else
+        echo "pre-commit: apps/teambuilder/node_modules missing; skipping ESLint (CI will run it)."
+    fi
+fi
