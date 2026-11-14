@@ -49,6 +49,14 @@ describe("escapeMdxInline", () => {
 });
 
 describe("escapeMdx", () => {
+    it("stops lines that MDX would read as import/export statements", () => {
+        assert.equal(
+            escapeMdx("import x from 'y'\nexport const a = 1\n  export default 1"),
+            "&#105;mport x from 'y'\n&#101;xport const a = 1\n  &#101;xport default 1",
+        );
+        assert.equal(escapeMdx("We import data. Exports rose."), "We import data. Exports rose.");
+    });
+
     it("blocks JSX and expressions but keeps Markdown formatting", () => {
         assert.equal(
             escapeMdx("**Bold** [link](/x) <b>{x}</b>"),

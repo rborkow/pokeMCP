@@ -16,7 +16,7 @@ import { join } from "node:path";
 import { createProcessor } from "@mdx-js/mdx";
 import remarkGfm from "remark-gfm";
 import { describe, expect, it } from "vitest";
-import { escapeMdxInline } from "../../../../scripts/lib/mdx-escape";
+import { escapeMdx, escapeMdxInline } from "../../../../scripts/lib/mdx-escape";
 
 const REPORTS_DIR = join(__dirname, "../content/reports");
 const CODE_NODE_TYPES = new Set([
@@ -99,6 +99,14 @@ describe("escapeMdxInline against the real MDX parser", () => {
         const safe = escapeMdxInline(text);
         expect(codeNodes(`### ${safe} — 1 Jan, 64 players`)).toEqual([]);
         expect(codeNodes(`| Player | Team |\n|---|---|\n| ${safe} | x |`)).toEqual([]);
+    });
+
+    it("escapeMdx leaves no code in a narrative with ESM, JSX or expressions", () => {
+        const narrative =
+            "## Analysis\n\nimport fs from 'node:fs'\n\nexport const leak = 1\n\n" +
+            "**Basculegion** rose. <Chart /> {process.env.X}";
+        expect(codeNodes(narrative).length).toBeGreaterThan(0);
+        expect(codeNodes(escapeMdx(narrative))).toEqual([]);
     });
 
     it("keeps a name containing | in one table cell", () => {
