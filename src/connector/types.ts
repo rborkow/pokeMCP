@@ -1,4 +1,5 @@
 import type { z } from "zod";
+import type { ViewName } from "./views/index.js";
 
 /**
  * Result of one connector tool call.
@@ -31,6 +32,11 @@ export interface ConnectorTool {
     description: string;
     inputSchema: Record<string, z.ZodTypeAny>;
     outputSchema: Record<string, z.ZodTypeAny>;
+    /**
+     * The MCP Apps view hosts render beside this tool's result, if any. The
+     * view reads `structuredContent`, so the output schema is its contract too.
+     */
+    view?: ViewName;
     // `any`: the MCP SDK validates arguments against inputSchema before run() is called.
     run: (args: any, env: Env) => Promise<ToolOutcome> | ToolOutcome;
 }

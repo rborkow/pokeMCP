@@ -20,6 +20,8 @@ Champions regulations only. The legacy `/sse` and `/api/tools` endpoints stay re
 - `src/` - MCP Worker (Cloudflare Workers) — see [`src/CLAUDE.md`](src/CLAUDE.md)
 - `apps/teambuilder/` - The website: results, reports, Pokémon pages. No team builder, accounts or AI (OpenNext on Cloudflare Workers) — see [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md)
 - `apps/docs/` - Nextra documentation site (Cloudflare Pages) — see [`apps/CLAUDE.md`](apps/CLAUDE.md)
+- `apps/mcp-views/` - MCP Apps views (Preact), built into HTML the Worker serves beside tool
+  results — see [`apps/mcp-views/CLAUDE.md`](apps/mcp-views/CLAUDE.md)
 
 **Deployed URLs:**
 
@@ -209,7 +211,7 @@ pass). Once it has been run, nothing pushes to `main` directly, workflows includ
 
 | Workflow               | Trigger                 | Purpose                                                    |
 | ---------------------- | ----------------------- | ---------------------------------------------------------- |
-| `build.yml`            | Pull requests           | Build verification (worker dry-run, teambuilder, docs)     |
+| `build.yml`            | Pull requests           | Build verification (worker dry-run, teambuilder, docs, MCP Apps views) |
 | `update-stats.yml`     | Monthly (5th) or manual | Fetch Smogon stats into KV/D1, open the report review PR and dispatch its checks |
 | `security-review.yml`  | PRs touching sensitive paths | Claude security review, posted as PR comments (advisory) |
 | `deploy.yml`           | Manual (choice input)   | Manual deploy of worker/teambuilder/docs (`--env production`) |
@@ -294,6 +296,11 @@ See [`apps/teambuilder/CLAUDE.md`](apps/teambuilder/CLAUDE.md) for test structur
    description, and input and output schemas — one operation per tool, no `type`
    switches (directory reviews require this)
 3. Cover it in `src/__tests__/connector.test.ts`, then run `bun run generate-tool-docs`
+
+**Adding an MCP Apps view to a tool:** follow "Adding a view" in
+[`apps/mcp-views/CLAUDE.md`](apps/mcp-views/CLAUDE.md). Run `bun run build:views` and commit
+`src/connector/views/view-html.ts`. Views are served only where the `MCP_APPS` Worker variable
+is "on" (development and staging today).
 
 **Adding a new Champions regulation (e.g. M-D):**
 

@@ -1,0 +1,101 @@
+.toolbar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.type-chart table {
+    border-collapse: collapse;
+    width: 100%;
+    font-variant-numeric: tabular-nums;
+}
+
+.type-chart th,
+.type-chart td {
+    padding: 4px 4px;
+    border-bottom: 1px solid var(--color-border-secondary);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.type-chart thead th {
+    vertical-align: bottom;
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-border-primary);
+}
+
+.type-chart thead th:not(.type-col):not(.sum-col) {
+    white-space: normal;
+}
+
+.member-name {
+    display: block;
+    white-space: nowrap;
+}
+
+.member-types {
+    display: block;
+    font-weight: 400;
+    font-size: var(--font-text-xs-size);
+    color: var(--color-text-secondary);
+}
+
+.type-col {
+    text-align: left !important;
+}
+
+.type-name {
+    font-weight: 600;
+}
+
+.flag {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-text-danger);
+}
+
+.cell {
+    font-size: var(--font-text-xs-size);
+}
+
+.cell.weak {
+    background: var(--color-background-danger);
+    color: var(--color-text-danger);
+    font-weight: 600;
+}
+
+.cell.resist,
+.cell.immune {
+    background: var(--color-background-success);
+    color: var(--color-text-success);
+}
+
+.cell.immune {
+    font-weight: 600;
+}
+
+.sum-col {
+    color: var(--color-text-secondary);
+    font-size: var(--font-text-xs-size);
+}
+
+.suggestions h2 {
+    margin: 14px 0 6px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.suggestions ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.not-found {
+    margin-top: 10px;
+    color: var(--color-text-secondary);
+}

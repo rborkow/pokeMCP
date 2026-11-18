@@ -1,6 +1,7 @@
 import type { McpServer } from "@modelcontextprotocol/server";
 import { CONNECTOR_TOOLS } from "./tools.js";
 import type { ToolOutcome } from "./types.js";
+import { registerViews, viewsEnabled, viewToolMeta } from "./views/index.js";
 
 /**
  * Every connector tool only reads data this service hosts: nothing is
@@ -23,7 +24,8 @@ export interface ConnectorCallInfo {
 }
 
 /**
- * Register the public connector tools on an MCP server.
+ * Register the public connector tools on an MCP server, and their MCP Apps
+ * views when this deployment serves them (`MCP_APPS` = "on").
  *
  * Kept free of Workers-only imports so the whole surface can be exercised in
  * tests through the SDK's in-memory transport.
@@ -33,6 +35,9 @@ export function registerConnectorTools(
     env: Env,
     onCall?: (info: ConnectorCallInfo) => void,
 ): void {
+    const withViews = viewsEnabled(env);
+    if (withViews) registerViews(server);
+
     for (const tool of CONNECTOR_TOOLS) {
         server.registerTool(
             tool.name,
@@ -42,6 +47,7 @@ export function registerConnectorTools(
                 inputSchema: tool.inputSchema,
                 outputSchema: tool.outputSchema,
                 annotations: { title: tool.title, ...READ_ONLY_ANNOTATIONS },
+                ...(withViews && tool.view ? { _meta: viewToolMeta(tool.view) } : {}),
             },
             async (args: Record<string, unknown>) => {
                 const started = Date.now();
