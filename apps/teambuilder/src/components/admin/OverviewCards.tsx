@@ -18,7 +18,9 @@ interface OverviewData {
 }
 
 export function OverviewCards({ range }: { range: string }) {
-    const { data, loading, error } = useAdminData<OverviewData>("overview", range);
+    const { data, loading: fetching, error } = useAdminData<OverviewData>("overview", range);
+    // Only blank the cards on the first load; a refresh keeps the last numbers.
+    const loading = fetching && !data;
 
     if (error) {
         return (
