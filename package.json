@@ -18,6 +18,7 @@
         "deploy:all": "bun run deploy:production && bun run deploy:teambuilder",
         "deploy:teambuilder": "cd apps/teambuilder && bun run deploy",
         "build:docs": "cd apps/docs && bun run build",
+        "build:views": "cd apps/mcp-views && bun install --frozen-lockfile && bun run build",
         "dev": "wrangler dev",
         "dev:teambuilder": "cd apps/teambuilder && bun run dev",
         "dev:docs": "cd apps/docs && bun run dev",
@@ -57,6 +58,7 @@
         "setup:staging": "bash scripts/setup-staging.sh"
     },
     "dependencies": {
+        "@modelcontextprotocol/ext-apps": "2.0.4",
         "@modelcontextprotocol/server": "^2.4.0",
         "@resvg/resvg-wasm": "^2.6.2",
         "@smogon/calc": "0.12.0",

@@ -33,6 +33,7 @@ import {
 } from "@modelcontextprotocol/server";
 import { type ConnectorCallInfo, registerConnectorTools } from "./register.js";
 import { CONNECTOR_INFO, CONNECTOR_INSTRUCTIONS } from "./tools.js";
+import { UI_EXTENSION_ID, viewsEnabled } from "./views/index.js";
 
 /** The client software named in an `initialize` request. */
 export interface McpClientInfo {
@@ -193,6 +194,8 @@ const REPORTED_METHODS = new Set([
     "server/discover",
     "tools/list",
     "tools/call",
+    "resources/list",
+    "resources/read",
     "ping",
 ]);
 
@@ -219,12 +222,26 @@ export const LIST_CACHE_TTL_MS = 60 * 60 * 1000;
 /** A fresh MCP server with the connector's tools, for one request. */
 function buildServer(env: Env, onCall: McpRequestHooks["onCall"]): McpServer {
     const cacheHint = { ttlMs: LIST_CACHE_TTL_MS, cacheScope: "public" as const };
+    const withViews = viewsEnabled(env);
     const server = new McpServer(CONNECTOR_INFO, {
         instructions: CONNECTOR_INSTRUCTIONS,
         // A stateless server can never send a list-changed notification, so it
         // does not offer one (the SDK would otherwise advertise it).
-        capabilities: { tools: { listChanged: false } },
-        cacheHints: { "tools/list": cacheHint, "server/discover": cacheHint },
+        capabilities: withViews
+            ? {
+                  tools: { listChanged: false },
+                  // MCP Apps views are `ui://` resources (views/index.ts).
+                  resources: { listChanged: false },
+                  extensions: { [UI_EXTENSION_ID]: { mimeTypes: ["text/html;profile=mcp-app"] } },
+              }
+            : { tools: { listChanged: false } },
+        // A view's URI changes with its HTML, so its resource listing and
+        // contents are as cacheable as the tool list.
+        cacheHints: {
+            "tools/list": cacheHint,
+            "server/discover": cacheHint,
+            ...(withViews ? { "resources/list": cacheHint, "resources/read": cacheHint } : {}),
+        },
     });
     registerConnectorTools(server, env, onCall);
     return server;

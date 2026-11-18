@@ -13,6 +13,10 @@
 - Flag tool errors (fail()) or HTTP responses that return stack traces, binding names, SQL, or upstream response bodies.
 - Flag D1 queries built by string interpolation instead of .prepare(...).bind(...), and KV keys built from user input that don't go through the regulation registry or toID().
 
+**MCP Apps views (apps/mcp-views/, src/connector/views/):**
+- Views are HTML that Claude and ChatGPT run in a sandboxed iframe; they read tool results, which echo user-typed names. Flag innerHTML, outerHTML, insertAdjacentHTML, document.write or dangerouslySetInnerHTML in a view, and any view that loads scripts, styles, fonts or images from another origin or widens a resource's `_meta.ui.csp` lists without a stated reason.
+- Flag a view that sends tool results, user input or host context anywhere other than the host (fetch, XHR, beacons, WebSockets).
+
 **CI and build secrets (.github/workflows/):**
 - Flag pull_request_target or workflow_run workflows that check out or run PR code, untrusted ${{ github.event.* }} values interpolated into run: steps, and new steps that expose CLOUDFLARE_API_TOKEN, ANTHROPIC_API_KEY or LIMITLESS_API_KEY to code built from PR branches or third-party data.
 

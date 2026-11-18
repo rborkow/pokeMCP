@@ -97,7 +97,9 @@
         "enabled": true
     },
     "vars": {
-        "ENVIRONMENT": "development"
+        "ENVIRONMENT": "development",
+        // MCP Apps views on the connector (src/connector/views): "on" or "off".
+        "MCP_APPS": "on"
     },
     /**
      * ENVIRONMENT-SPECIFIC CONFIGURATIONS
@@ -109,7 +111,8 @@
         "staging": {
             "name": "pokemon-mcp-staging",
             "vars": {
-                "ENVIRONMENT": "staging"
+                "ENVIRONMENT": "staging",
+                "MCP_APPS": "on"
             },
             // Staging uses the same KV as production (read-only access is fine)
             // To create separate staging KV, run:
@@ -170,7 +173,9 @@
         "production": {
             "name": "pokemon-mcp-production",
             "vars": {
-                "ENVIRONMENT": "production"
+                "ENVIRONMENT": "production",
+                // Off until the views have been checked in Claude, ChatGPT and VS Code.
+                "MCP_APPS": "off"
             },
             "kv_namespaces": [
                 {
