@@ -36,7 +36,7 @@ export function ToolsTable({ range }: { range: string }) {
                 <CardTitle className="text-base">Tools</CardTitle>
             </CardHeader>
             <CardContent>
-                {loading ? (
+                {loading && !data ? (
                     <div className="flex h-40 items-center justify-center text-muted-foreground">
                         Loading...
                     </div>

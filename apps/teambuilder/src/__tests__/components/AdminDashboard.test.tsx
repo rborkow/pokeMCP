@@ -117,6 +117,22 @@ describe("admin dashboard", () => {
         expect(screen.getAllByText("openai-mcp").length).toBeGreaterThan(0);
     });
 
+    it("charts usage with an axis, a legend with totals and a table view", async () => {
+        mockAdminApi();
+        const { default: userEvent } = await import("@testing-library/user-event");
+        render(<AdminDashboard />);
+
+        const chart = await screen.findByRole("img", { name: /Tool calls and connections per hour/ });
+        expect(chart).toBeInTheDocument();
+        const legend = screen.getByRole("list", { name: "Legend" });
+        expect(legend).toHaveTextContent("Tool calls12");
+        expect(legend).toHaveTextContent("Connections0");
+
+        await userEvent.click(screen.getByRole("button", { name: "Show table" }));
+        expect(screen.getByRole("columnheader", { name: "Hour" })).toBeInTheDocument();
+        expect(screen.getAllByRole("cell", { name: "12" }).length).toBe(1);
+    });
+
     it("lists requests by kind with typical and slow response times", async () => {
         mockAdminApi();
         render(<AdminDashboard />);
