@@ -422,6 +422,7 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
                 }),
             ),
         },
+        view: "type-chart",
         run: (args) => analyzeTeamTypes(args),
     },
     {

@@ -1,0 +1,100 @@
+/*
+ * Shared base styles for every view.
+ *
+ * Views style themselves with the host's CSS variables (the MCP Apps
+ * `hostContext.styles.variables`, applied to :root by applyHostStyleVariables).
+ * The values below are only fallbacks for hosts that send none: a light set,
+ * and a dark set taken from DESIGN.md's palette.
+ */
+:root {
+    color-scheme: light dark;
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f5f3;
+    --color-text-primary: #1d232c;
+    --color-text-secondary: #5a6472;
+    --color-border-primary: #d5d8dd;
+    --color-border-secondary: #e6e8eb;
+    --color-text-danger: #9a3e2a;
+    --color-background-danger: #f6e4df;
+    --color-text-success: #2f6b45;
+    --color-background-success: #e2efe6;
+    --color-text-info: #2f5d8a;
+    --color-background-info: #e1ebf5;
+    --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+    --font-text-sm-size: 13px;
+    --font-text-xs-size: 12px;
+    --border-radius-sm: 6px;
+    --border-radius-md: 10px;
+}
+
+[data-theme="dark"] {
+    --color-background-primary: #11161f;
+    --color-background-secondary: #171e29;
+    --color-text-primary: #f1eee8;
+    --color-text-secondary: #b5bdc9;
+    --color-border-primary: #35404e;
+    --color-border-secondary: #2a333f;
+    --color-text-danger: #e0a08f;
+    --color-background-danger: #3a2621;
+    --color-text-success: #a9c9b3;
+    --color-background-success: #1f2e25;
+    --color-text-info: #9dbbd8;
+    --color-background-info: #1d2a38;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    font-size: var(--font-text-sm-size);
+    line-height: 1.4;
+}
+
+.view {
+    padding: 12px;
+}
+
+.view-title {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.view-subtitle {
+    margin: 0 0 12px;
+    color: var(--color-text-secondary);
+}
+
+.view-status {
+    padding: 16px 12px;
+    color: var(--color-text-secondary);
+}
+
+button {
+    font: inherit;
+    color: inherit;
+    background: var(--color-background-secondary);
+    border: 1px solid var(--color-border-primary);
+    border-radius: var(--border-radius-sm);
+    padding: 4px 10px;
+    cursor: pointer;
+}
+
+button[aria-pressed="true"] {
+    background: var(--color-background-info);
+    color: var(--color-text-info);
+    border-color: currentColor;
+}
+
+button:focus-visible {
+    outline: 2px solid var(--color-text-info);
+    outline-offset: 1px;
+}

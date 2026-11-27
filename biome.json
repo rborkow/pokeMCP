@@ -15,6 +15,7 @@
             "!apps",
             "!v2_planning",
             "!src/data",
+            "!src/connector/views/view-html.ts",
             "!src/cached-tournaments",
             "!src/discovered-formats.json"
         ]

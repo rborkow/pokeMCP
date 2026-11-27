@@ -26,7 +26,9 @@ connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output 
 │                         meta-history.ts computations)
 ├── connector/matchup.ts  calculate_damage, compare_speed, check_team_threats
 │                         (@smogon/calc in Champions mode + KV usage for default sets)
-└── connector/formats.ts  `format` = a regulation id; default = newest regulation with stats
+├── connector/formats.ts  `format` = a regulation id; default = newest regulation with stats
+└── connector/views/      MCP Apps views: `ui://` resources + `_meta.ui` on tools that have one
+                          (view-html.ts is generated from apps/mcp-views)
 ```
 
 - The endpoint is stateless. No session is created and no Durable Object is involved: a
@@ -82,6 +84,36 @@ connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output 
   of data for every generation). `matchup.test.ts` pins results worked out by hand, so a
   library change shows up as a failing test. Champions is generation 0 in that library.
 - After changing a tool, run `bun run generate-tool-docs` (README + apps/docs tools page).
+
+### MCP Apps views (`connector/views/`)
+
+Hosts that support the MCP Apps extension (`io.modelcontextprotocol/ui`) render a view beside a
+tool's result. Today one tool has one: `analyze_team_types` → `type-chart`.
+
+- Gated by the `MCP_APPS` Worker variable: "on" in development and staging, "off" in production
+  until the views have been checked in Claude, ChatGPT and VS Code. Off, the server offers no
+  resources, no extension and no `_meta.ui`, exactly as before.
+- On, a tool with `view` set in `CONNECTOR_TOOLS` carries `_meta.ui.resourceUri` (and the older
+  flat `ui/resourceUri` key), and `resources/read` serves the view's HTML as
+  `text/html;profile=mcp-app` with empty CSP lists. The URI ends in a hash of the HTML, so a host
+  never pairs a cached old view with a new result.
+- The extension spec says a server SHOULD offer UI metadata only to clients that advertise the
+  extension. This server can't: it is stateless and `tools/list` is publicly cacheable, so every
+  caller gets the same list. Hosts without the extension ignore `_meta.ui`.
+- Still stateless: the host reads the view once, and a view that recalculates sends an ordinary
+  `tools/call` through the host. The tool's text and `structuredContent` are unchanged, so the
+  model and text-only hosts lose nothing.
+- `resources/list` and `resources/read` are cacheable like `tools/list` (one hour), and are
+  reported as request kinds in usage analytics.
+- Caching has two consequences. A deploy that changes a view's HTML retires its old URI, so for up
+  to an hour a host holding a cached tool list asks for a URI that no longer exists and shows the
+  text answer without a view. And turning `MCP_APPS` off can't take back HTML a host has already
+  cached: it may keep rendering the old view beside results for a while. Both fail safe (the view
+  is read-only and the text answer is complete), so don't treat switching the flag off as an
+  instant kill switch. If it ever must be one, serve the retired view URIs for an hour after a
+  change before removing them.
+- `view-html.ts` is generated (`bun run build:views`); don't edit it. See
+  [`apps/mcp-views/CLAUDE.md`](../apps/mcp-views/CLAUDE.md).
 
 ## Modules
 

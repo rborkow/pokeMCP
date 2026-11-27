@@ -454,3 +454,96 @@ describe("2026-07-28 MCP endpoint", () => {
         assert.equal(result.capabilities.tools?.listChanged, false);
     });
 });
+
+// --- MCP Apps views (src/connector/views) ---
+
+describe("MCP Apps views", () => {
+    const viewsOn = { MCP_APPS: "on" } as Env;
+    const VIEW_URI = /^ui:\/\/vgc-teambuilder\/type-chart-[0-9a-f]{12}\.html$/;
+
+    async function connectWith(serverEnv: Env, era: "2025" | "2026") {
+        const transport = new StreamableHTTPClientTransport(new URL(URL_MCP), {
+            fetch: async (input, init) =>
+                handleMcpRequest(
+                    new Request(input as string | URL, init as RequestInit),
+                    serverEnv,
+                ),
+        });
+        const client = new Client(
+            { name: "apps-host", version: "1.0.0" },
+            era === "2026" ? { versionNegotiation: { mode: { pin: MODERN } } } : undefined,
+        );
+        await client.connect(transport);
+        return client;
+    }
+
+    for (const era of ["2025", "2026"] as const) {
+        it(`links analyze_team_types to its view and serves the view (${era}-era client)`, async () => {
+            const client = await connectWith(viewsOn, era);
+            const capabilities = client.getServerCapabilities() as {
+                resources?: unknown;
+                extensions?: Record<string, unknown>;
+            };
+            assert.ok(capabilities.resources, "resources are offered");
+            assert.ok(capabilities.extensions?.["io.modelcontextprotocol/ui"]);
+
+            const { tools } = await client.listTools();
+            assert.equal(tools.length, CONNECTOR_TOOLS.length, "views add no model-visible tools");
+            const withView = tools.filter((tool) => tool._meta?.ui);
+            assert.deepEqual(
+                withView.map((tool) => tool.name),
+                ["analyze_team_types"],
+            );
+            const uri = (withView[0]._meta?.ui as { resourceUri: string }).resourceUri;
+            assert.match(uri, VIEW_URI);
+            assert.equal(withView[0]._meta?.["ui/resourceUri"], uri);
+
+            const { resources } = await client.listResources();
+            assert.deepEqual(
+                resources.map((resource) => resource.uri),
+                [uri],
+            );
+
+            const { contents } = await client.readResource({ uri });
+            assert.equal(contents.length, 1);
+            const view = contents[0] as {
+                mimeType: string;
+                text: string;
+                _meta?: { ui?: { csp?: unknown } };
+            };
+            assert.equal(view.mimeType, "text/html;profile=mcp-app");
+            assert.match(view.text, /^<!doctype html>/i);
+            assert.ok(view.text.length > 1000, "the view's script is inlined");
+            assert.doesNotMatch(view.text, /<script[^>]+src=/, "nothing loads from outside");
+            assert.deepEqual(view._meta?.ui?.csp, { connectDomains: [], resourceDomains: [] });
+
+            // The tool's own answer is unchanged: text for the model, data for the view.
+            const result = await client.callTool({
+                name: "analyze_team_types",
+                arguments: { team: ["Kingambit", "Incineroar"] },
+            });
+            assert.equal(result.isError, undefined);
+            assert.ok((result.content as { text: string }[])[0].text.length > 0);
+            assert.ok((result.structuredContent as { matchups: unknown[] }).matchups.length > 0);
+            await client.close();
+        });
+    }
+
+    for (const era of ["2025", "2026"] as const) {
+        it(`serves exactly what it served before views when MCP_APPS is off (${era}-era client)`, async () => {
+            // The production setting: what directory reviewers see must not change.
+            const off = await connectWith({ MCP_APPS: "off" } as Env, era);
+            const unset = await connectWith({} as Env, era);
+            for (const client of [off, unset]) {
+                const capabilities = client.getServerCapabilities() as Record<string, unknown>;
+                assert.equal(capabilities.resources, undefined);
+                assert.equal(capabilities.extensions, undefined);
+            }
+            const [offTools, unsetTools] = await Promise.all([off.listTools(), unset.listTools()]);
+            assert.ok(offTools.tools.every((tool) => tool._meta?.ui === undefined));
+            assert.deepEqual(offTools.tools, unsetTools.tools);
+            assert.equal(offTools.tools.length, CONNECTOR_TOOLS.length);
+            await Promise.all([off.close(), unset.close()]);
+        });
+    }
+});

@@ -131,12 +131,47 @@ jobs:
       - name: Success
         run: echo "✅ All builds passed"
 
+  build-mcp-views:
+    name: Build MCP Apps views
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: apps/mcp-views/package.json
+
+      - name: Install dependencies
+        working-directory: ./apps/mcp-views
+        run: bun install --frozen-lockfile
+
+      - name: View tests
+        working-directory: ./apps/mcp-views
+        run: bun run test
+
+      # Typechecks, builds every view (failing any over its size budget) and
+      # rewrites src/connector/views/view-html.ts, the copy the Worker serves.
+      - name: Build views
+        working-directory: ./apps/mcp-views
+        run: bun run build
+
+      - name: Check the Worker's copy of the views is current
+        run: |
+          git diff --exit-code -- src/connector/views/view-html.ts || {
+            echo "::error::src/connector/views/view-html.ts is stale. Run 'bun run build:views' and commit it."
+            exit 1
+          }
+
   deploy-production:
     name: Deploy production
     needs:
       - build-worker
       - build-teambuilder
       - build-docs
+      - build-mcp-views
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy.yml
     with:
