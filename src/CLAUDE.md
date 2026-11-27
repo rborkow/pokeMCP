@@ -103,8 +103,15 @@ tool's result. Today one tool has one: `analyze_team_types` → `type-chart`.
 - Still stateless: the host reads the view once, and a view that recalculates sends an ordinary
   `tools/call` through the host. The tool's text and `structuredContent` are unchanged, so the
   model and text-only hosts lose nothing.
-- `resources/list` and `resources/read` are cacheable like `tools/list`, and are reported as
-  request kinds in usage analytics.
+- `resources/list` and `resources/read` are cacheable like `tools/list` (one hour), and are
+  reported as request kinds in usage analytics.
+- Caching has two consequences. A deploy that changes a view's HTML retires its old URI, so for up
+  to an hour a host holding a cached tool list asks for a URI that no longer exists and shows the
+  text answer without a view. And turning `MCP_APPS` off can't take back HTML a host has already
+  cached: it may keep rendering the old view beside results for a while. Both fail safe (the view
+  is read-only and the text answer is complete), so don't treat switching the flag off as an
+  instant kill switch. If it ever must be one, serve the retired view URIs for an hour after a
+  change before removing them.
 - `view-html.ts` is generated (`bun run build:views`); don't edit it. See
   [`apps/mcp-views/CLAUDE.md`](../apps/mcp-views/CLAUDE.md).
 

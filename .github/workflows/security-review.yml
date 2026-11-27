@@ -34,7 +34,7 @@ on:
       - ".github/workflows/**"
       - ".github/security-review/**"
       - ".claude/commands/security-review.md"
-      - "apps/mcp-views/src/**"
+      - "apps/mcp-views/**"
       - "apps/teambuilder/src/app/api/**"
       - "apps/teambuilder/src/app/**/route.ts"
       - "apps/teambuilder/next.config.ts"
