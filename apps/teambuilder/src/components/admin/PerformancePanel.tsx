@@ -52,7 +52,7 @@ export function PerformancePanel({ range }: { range: string }) {
                 <CardTitle className="text-base">Requests and response times</CardTitle>
             </CardHeader>
             <CardContent>
-                {loading ? (
+                {loading && !data ? (
                     <div className="flex h-40 items-center justify-center text-muted-foreground">
                         Loading...
                     </div>

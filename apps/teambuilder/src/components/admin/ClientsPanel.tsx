@@ -17,6 +17,7 @@ interface ClientsData {
 const CLIENT_LABELS: Record<string, string> = {
     claude: "Claude",
     chatgpt: "ChatGPT",
+    codex: "Codex",
     other: "Other clients",
     "": "Not recorded",
 };
@@ -55,7 +56,7 @@ export function ClientsPanel({ range }: { range: string }) {
                 <CardTitle className="text-base">Assistants</CardTitle>
             </CardHeader>
             <CardContent>
-                {loading ? (
+                {loading && !data ? (
                     <div className="flex h-40 items-center justify-center text-muted-foreground">
                         Loading...
                     </div>

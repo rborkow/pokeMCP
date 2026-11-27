@@ -25,7 +25,7 @@ import type { RegulationSet } from "../regulations/types.js";
 import { getFormatIndex, getPokemonStats, type PokemonStats } from "../stats.js";
 import { formatFields, resolveRegulation } from "./formats.js";
 import { pokemonNotFound, resolvePokemon } from "./pokemon.js";
-import { fail, ok, round2, type ToolOutcome } from "./types.js";
+import { type Failure, fail, ok, round2, type ToolOutcome } from "./types.js";
 
 // --- The calculator, loaded on first use ---
 
@@ -165,7 +165,7 @@ function summarize(usage: PokemonStats): TypicalSet {
     };
 }
 
-type Resolved<T> = { ok: true; value: T } | { ok: false; error: string };
+type Resolved<T> = { ok: true; value: T } | Failure;
 
 function toId(text: string): string {
     return text.toLowerCase().replace(/[^a-z0-9]+/g, "");
@@ -240,6 +240,7 @@ function findSpecies(gen: Calc, input: string): Resolved<FoundSpecies> {
         error: resolved
             ? `${resolved.name} is not in Pokémon Champions' battle data, so it cannot be used in a calculation.`
             : pokemonNotFound(input),
+        reason: "unknown_pokemon",
     };
 }
 
@@ -268,7 +269,7 @@ async function resolveSet(
     options: { abilityActive?: boolean } = {},
 ): Promise<Resolved<ResolvedSet>> {
     const found = findSpecies(gen, input.pokemon);
-    if (found.ok === false) return { ok: false, error: found.error };
+    if (found.ok === false) return found;
     const species = found.value;
 
     const assumptions: string[] = [];
@@ -302,6 +303,7 @@ async function resolveSet(
                 return {
                     ok: false,
                     error: `"${input.nature}" is not a nature. Use one such as Adamant, Jolly, Modest, Timid, Bold or Calm.`,
+                    reason: "unknown_name",
                 };
             }
             nature = known.name;
@@ -320,13 +322,20 @@ async function resolveSet(
             error:
                 `${species.name}'s stat points add up to ${total}. A Pokémon has ` +
                 `${MAX_STAT_POINTS_TOTAL} to spend, with at most ${MAX_STAT_POINTS_PER_STAT} on one stat.`,
+            reason: "invalid_input",
         };
     }
 
     let ability: string;
     if (input.ability !== undefined) {
         const known = gen.abilities.get(toId(input.ability));
-        if (!known) return { ok: false, error: `"${input.ability}" is not a known ability.` };
+        if (!known) {
+            return {
+                ok: false,
+                error: `"${input.ability}" is not a known ability.`,
+                reason: "unknown_name",
+            };
+        }
         ability = known.name;
     } else {
         const common = gen.abilities.get(typical?.ability ?? "");
@@ -343,7 +352,13 @@ async function resolveSet(
     if (input.item !== undefined) {
         if (!["", "none", "noitem", "nothing"].includes(toId(input.item))) {
             const known = gen.items.get(toId(input.item));
-            if (!known) return { ok: false, error: `"${input.item}" is not a known item.` };
+            if (!known) {
+                return {
+                    ok: false,
+                    error: `"${input.item}" is not a known item.`,
+                    reason: "unknown_name",
+                };
+            }
             item = known.name;
         }
     } else {
@@ -461,6 +476,7 @@ function runDamage(
         return {
             ok: false,
             error: `"${moveName}" is not a move in Pokémon Champions. Check the spelling.`,
+            reason: "unknown_name",
         };
     }
 
@@ -549,8 +565,8 @@ export async function calculateDamage(
         resolveSet(gen, calc, args.attacker, regulation, env),
         resolveSet(gen, calc, args.defender, regulation, env),
     ]);
-    if (attacker.ok === false) return fail(attacker.error);
-    if (defender.ok === false) return fail(defender.error);
+    if (attacker.ok === false) return fail(attacker.error, attacker.reason);
+    if (defender.ok === false) return fail(defender.error, defender.reason);
 
     const damage = runDamage(
         gen,
@@ -560,7 +576,7 @@ export async function calculateDamage(
         args.move,
         field,
     );
-    if (damage.ok === false) return fail(damage.error);
+    if (damage.ok === false) return fail(damage.error, damage.reason);
     const result = damage.value;
 
     const assumptions = [
@@ -656,7 +672,7 @@ export async function compareSpeed(
         ),
     );
     const failed = resolved.find((entry) => entry.ok === false);
-    if (failed && failed.ok === false) return fail(failed.error);
+    if (failed && failed.ok === false) return fail(failed.error, failed.reason);
 
     const assumptions = ["level 50"];
     const entries = resolved.map((entry, index) => {
@@ -855,7 +871,7 @@ export async function checkTeamThreats(
     const team: (Fighter & { speed: number })[] = [];
     for (const member of args.team) {
         const set = await resolveSet(gen, calc, member, regulation, env);
-        if (set.ok === false) return fail(set.error);
+        if (set.ok === false) return fail(set.error, set.reason);
         assumptions.push(...set.value.assumptions);
         const name = set.value.echo.pokemon;
 
@@ -867,6 +883,7 @@ export async function checkTeamThreats(
                 if (!known) {
                     return fail(
                         `"${moveName}" is not a move in Pokémon Champions. Check the spelling.`,
+                        "unknown_name",
                     );
                 }
                 moves.push(known.name);
@@ -879,6 +896,7 @@ export async function checkTeamThreats(
                 return fail(
                     `No moves were given for ${name} and it has no usage data in ` +
                         `${regulation.shortLabel} to take them from. Pass its moves.`,
+                    "no_usage",
                 );
             }
             assumptions.push(
@@ -907,6 +925,7 @@ export async function checkTeamThreats(
             return fail(
                 `Usage statistics for ${regulation.shortLabel} are unavailable, so the most used ` +
                     "Pokémon cannot be listed. Pass the threats to check, or try again later.",
+                "data_unavailable",
             );
         }
         threatNames = Object.entries(index.pokemon)
@@ -927,7 +946,7 @@ export async function checkTeamThreats(
     );
     const threats = [];
     for (const [position, set] of threatSets.entries()) {
-        if (set.ok === false) return fail(set.error);
+        if (set.ok === false) return fail(set.error, set.reason);
         const { pokemon, echo, typical } = set.value;
         const moves = commonAttacks(gen, typical, 4);
         const speed = getFinalSpeed(gen, pokemon, field, side) as number;

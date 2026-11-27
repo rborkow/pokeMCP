@@ -9,6 +9,7 @@
  *   Event types (indexes[0]): "tool_call", "ai_chat", "session"
  *   See analytics.ts for full blob/double slot mappings.
  */
+import { ASSISTANT_FAMILIES } from "./connector/client.js";
 
 // --- Cloudflare Access JWT validation ---
 
@@ -202,6 +203,8 @@ function parseRange(range: string | null): string {
 // `_sample_interval` so they stay right if Analytics Engine samples the data.
 
 const DATASET = '"pokemcp-analytics"';
+/** Client families that are assistants, as a SQL list. Fixed values, not user input. */
+const ASSISTANT_SQL = ASSISTANT_FAMILIES.map((family) => `'${family}'`).join(", ");
 
 /**
  * Run a query whose failure must not take the rest of a response with it.
@@ -237,7 +240,9 @@ async function handleOverview(env: Env, url: URL): Promise<Response> {
     const sessions = await queryAnalyticsEngine(
         env,
         `SELECT
-            sum(if(blob1 = 'connect', _sample_interval, 0)) as connections
+            sum(if(blob1 = 'connect', _sample_interval, 0)) as connections,
+            sum(if(blob1 = 'connect' AND blob7 IN (${ASSISTANT_SQL}), _sample_interval, 0))
+                as assistant_connections
         FROM ${DATASET}
         WHERE index1 = 'session'
             AND timestamp > NOW() - INTERVAL ${range}`,
@@ -324,7 +329,29 @@ async function handleTools(env: Env, url: URL): Promise<Response> {
         ORDER BY calls DESC`,
     );
 
-    return jsonResponse({ range, tools: result.data, formats: formats.data });
+    // Failure reasons were first recorded in late November 2026; older failed
+    // calls have an empty blob7 and show as "not recorded".
+    const failures = await queryAnalyticsEngine(
+        env,
+        `SELECT
+            blob1 as tool_name,
+            blob7 as reason,
+            sum(_sample_interval) as failures
+        FROM ${DATASET}
+        WHERE index1 = 'tool_call'
+            AND blob3 = '0'
+            AND timestamp > NOW() - INTERVAL ${range}
+        GROUP BY tool_name, reason
+        ORDER BY failures DESC
+        LIMIT 100`,
+    );
+
+    return jsonResponse({
+        range,
+        tools: result.data,
+        formats: formats.data,
+        failures: failures.data,
+    });
 }
 
 /** Who is connecting: which assistant, and what its client calls itself. */

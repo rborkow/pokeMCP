@@ -22,6 +22,8 @@ const SOURCE = "smogon-chaos";
 // last about three months, so a higher minimum meant momentum was never
 // available for the regulation people are actually playing.
 export const MIN_MOMENTUM_HISTORY = 3;
+/** With only two snapshots, momentum falls back to the straight change between them. */
+export const MIN_MOMENTUM_FALLBACK = 2;
 export const ENTRY_THRESHOLD = 0.02; // 2% usage to count as a meaningful entrant/dropout
 const MOMENTUM_RELEVANCE = 0.02; // only track momentum for mons reaching ~2% usage
 
@@ -55,7 +57,8 @@ async function cached<T>(key: string, fn: () => Promise<T>): Promise<T> {
     return data;
 }
 
-function monthIndex(date: string): number {
+/** Months since year 0 for a "YYYY-MM" snapshot date, for measuring gaps between snapshots. */
+export function monthIndex(date: string): number {
     const [y, m] = date.split("-").map(Number);
     return y * 12 + (m - 1);
 }
@@ -243,6 +246,7 @@ export async function computeMomentum(
     format: string,
     from: string,
     to: string,
+    minPoints = MIN_MOMENTUM_HISTORY,
 ): Promise<MoverMetric[]> {
     const res = await env.META_DB.prepare(
         "SELECT date, pokemon_id, display_name, usage FROM usage_snapshot " +
@@ -266,7 +270,7 @@ export async function computeMomentum(
     const metrics: MoverMetric[] = [];
     for (const s of series.values()) {
         const { usages } = s;
-        if (usages.length < MIN_MOMENTUM_HISTORY) continue;
+        if (usages.length < minPoints) continue;
         const latest = usages[usages.length - 1];
         const earliest = usages[0];
         if (latest < MOMENTUM_RELEVANCE && earliest < MOMENTUM_RELEVANCE) continue;

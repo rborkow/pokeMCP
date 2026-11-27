@@ -10,12 +10,15 @@ import {
     getDates,
     getUsageSeries,
     hasDb,
+    MIN_MOMENTUM_FALLBACK,
     MIN_MOMENTUM_HISTORY,
+    monthIndex,
     resolveRange,
 } from "../meta-history.js";
 import type { RegulationSet } from "../regulations/types.js";
 import { formatFields, resolveRegulation } from "./formats.js";
-import { fail, ok, round2, type ToolOutcome, toPercent } from "./types.js";
+import { isKnownPokemon } from "./pokemon.js";
+import { type Failure, fail, ok, round2, type ToolOutcome, toPercent } from "./types.js";
 
 export interface RangeArgs {
     format?: string;
@@ -24,9 +27,7 @@ export interface RangeArgs {
     months?: number;
 }
 
-type History =
-    | { ok: false; error: string }
-    | { ok: true; regulation: RegulationSet; statsId: string; dates: string[] };
+type History = Failure | { ok: true; regulation: RegulationSet; statsId: string; dates: string[] };
 
 /** Resolve the format and load the months it has history for. */
 async function loadHistory(format: string | undefined, env: Env): Promise<History> {
@@ -37,10 +38,15 @@ async function loadHistory(format: string | undefined, env: Env): Promise<Histor
             error:
                 `Usage statistics for ${regulation.shortLabel} have not been published yet, ` +
                 "so there is no history to analyse. Call list_formats to find a format that has them.",
+            reason: "data_unavailable",
         };
     }
     if (!hasDb(env)) {
-        return { ok: false, error: "Usage history is unavailable right now. Try again later." };
+        return {
+            ok: false,
+            error: "Usage history is unavailable right now. Try again later.",
+            reason: "data_unavailable",
+        };
     }
     const dates = await getDates(env, regulation.showdownFormatId);
     if (dates.length === 0) {
@@ -49,6 +55,7 @@ async function loadHistory(format: string | undefined, env: Env): Promise<Histor
             error:
                 `No monthly usage history is recorded for ${regulation.shortLabel} yet. ` +
                 "Use get_top_usage for the current month's ranking.",
+            reason: "insufficient_history",
         };
     }
     return { ok: true, regulation, statsId: regulation.showdownFormatId, dates };
@@ -63,7 +70,7 @@ export async function getUsageTrend(
     env: Env,
 ): Promise<ToolOutcome> {
     const history = await loadHistory(args.format, env);
-    if (history.ok === false) return fail(history.error);
+    if (history.ok === false) return fail(history.error, history.reason);
     const { regulation, statsId, dates } = history;
 
     const { from, to } = resolveRange(dates, { ...args, window: args.months }, 12);
@@ -73,6 +80,7 @@ export async function getUsageTrend(
             `${args.pokemon} has no recorded usage in ${regulation.shortLabel} between ${from} ` +
                 `and ${to}. Check the spelling (Mega Evolutions are listed separately, for ` +
                 `example "Charizard-Mega-Y"), or call get_top_usage to see which Pokémon are used.`,
+            isKnownPokemon(args.pokemon) ? "no_usage" : "unknown_pokemon",
         );
     }
 
@@ -115,7 +123,7 @@ export async function getMetaShifts(
     env: Env,
 ): Promise<ToolOutcome> {
     const history = await loadHistory(args.format, env);
-    if (history.ok === false) return fail(history.error);
+    if (history.ok === false) return fail(history.error, history.reason);
     const { regulation, statsId, dates } = history;
 
     const { from, to } = resolveRange(dates, { ...args, window: args.months }, 3);
@@ -124,6 +132,7 @@ export async function getMetaShifts(
             `Comparing months needs two snapshots, and ${regulation.shortLabel} has ` +
                 `${dates.length === 1 ? `only ${dates[0]}` : "none that differ in the requested range"}. ` +
                 "Use get_top_usage for the current ranking.",
+            "insufficient_history",
         );
     }
 
@@ -183,33 +192,51 @@ export async function getUsageMomentum(
     env: Env,
 ): Promise<ToolOutcome> {
     const history = await loadHistory(args.format, env);
-    if (history.ok === false) return fail(history.error);
+    if (history.ok === false) return fail(history.error, history.reason);
     const { regulation, statsId, dates } = history;
 
     const { from, to, inRange } = resolveRange(dates, { ...args, window: args.months }, 6);
-    if (inRange.length < MIN_MOMENTUM_HISTORY) {
+    if (inRange.length < MIN_MOMENTUM_FALLBACK) {
         return fail(
-            `Momentum needs at least ${MIN_MOMENTUM_HISTORY} monthly snapshots, and ` +
+            `Momentum needs at least ${MIN_MOMENTUM_FALLBACK} monthly snapshots, and ` +
                 `${regulation.shortLabel} has ${inRange.length} between ${from} and ${to}. ` +
-                "Widen the range, or use get_meta_shifts to compare two months.",
+                "Widen the range, or use get_top_usage for the current ranking.",
+            "insufficient_history",
         );
     }
+    // A new regulation has two months of data for a month or so. Rather than
+    // refuse, report the straight change between them and say so.
+    const twoPoint = inRange.length < MIN_MOMENTUM_HISTORY;
 
     const limit = args.limit ?? 10;
-    const metrics = await computeMomentum(env, statsId, from, to);
+    const metrics = await computeMomentum(
+        env,
+        statsId,
+        from,
+        to,
+        twoPoint ? MIN_MOMENTUM_FALLBACK : MIN_MOMENTUM_HISTORY,
+    );
+    // Two snapshots can be more than a month apart; spread the change over the gap.
+    const span = Math.max(1, monthIndex(inRange[inRange.length - 1]) - monthIndex(inRange[0]));
     const entry = (m: (typeof metrics)[number]) => ({
         name: m.name,
-        slopePointsPerMonth: round2(m.slope * 100),
+        slopePointsPerMonth: round2((twoPoint ? m.delta / span : m.slope) * 100),
         usagePercent: toPercent(m.latest),
         // Steepening in the direction of travel: a decline that is slowing
         // has positive acceleration but is not "accelerating".
         accelerating: m.slope >= 0 ? m.acceleration > 0 : m.acceleration < 0,
     });
+    const note = twoPoint
+        ? `Only two monthly snapshots (${from} and ${to}), so these are the straight changes ` +
+          "between them, not fitted trends. Speeding up and volatility need " +
+          `${MIN_MOMENTUM_HISTORY} months and are left out.`
+        : undefined;
     const data = {
         ...formatFields(regulation),
         from,
         to,
         snapshots: inRange.length,
+        ...(note ? { note } : {}),
         rising: metrics
             .filter((m) => m.slope > 0)
             .sort((a, b) => b.slope - a.slope)
@@ -220,7 +247,7 @@ export async function getUsageMomentum(
             .sort((a, b) => a.slope - b.slope)
             .slice(0, limit)
             .map(entry),
-        volatile: [...metrics]
+        volatile: (twoPoint ? [] : [...metrics])
             .sort((a, b) => b.volatility - a.volatility)
             .slice(0, limit)
             .map((m) => ({
@@ -240,15 +267,18 @@ export async function getUsageMomentum(
     ];
     const text = [
         `**Usage momentum — ${regulation.shortLabel}** (${from} to ${to}, ${inRange.length} monthly snapshots)`,
-        "Descriptive trends fitted to past monthly usage, not forecasts.",
+        note ?? "Descriptive trends fitted to past monthly usage, not forecasts.",
         ...section("Rising:", data.rising.map(trendLine)),
         ...section("Declining:", data.declining.map(trendLine)),
-        ...section(
-            "Most volatile:",
-            data.volatile.map(
-                (v) => `- ${v.name}: ±${v.volatilityPoints} points/month, now ${v.usagePercent}%`,
-            ),
-        ),
+        ...(twoPoint
+            ? []
+            : section(
+                  "Most volatile:",
+                  data.volatile.map(
+                      (v) =>
+                          `- ${v.name}: ±${v.volatilityPoints} points/month, now ${v.usagePercent}%`,
+                  ),
+              )),
     ].join("\n");
     return ok(data, text);
 }

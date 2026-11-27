@@ -5,7 +5,10 @@
  * the client name an MCP client reports when it connects and from the
  * User-Agent of its HTTP requests.
  */
-export type ClientFamily = "claude" | "chatgpt" | "other";
+export type ClientFamily = "claude" | "chatgpt" | "codex" | "other";
+
+/** The families that are an assistant a person is using, as opposed to crawlers and tools. */
+export const ASSISTANT_FAMILIES: readonly ClientFamily[] = ["claude", "chatgpt", "codex"];
 
 /** Classify by the reported client name first, then by the User-Agent. */
 export function classifyClient(
@@ -15,6 +18,10 @@ export function classifyClient(
     for (const value of [clientName, userAgent]) {
         if (!value) continue;
         if (/claude|anthropic/i.test(value)) return "claude";
+        // Codex reports "codex-mcp-client" or "openai-mcp Codex"; check it before
+        // the generic OpenAI match. ChatGPT's own tool calls carry only the
+        // "openai-mcp" User-Agent, so those stay "chatgpt".
+        if (/codex/i.test(value)) return "codex";
         if (/openai|chatgpt/i.test(value)) return "chatgpt";
     }
     return "other";

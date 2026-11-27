@@ -612,12 +612,23 @@ describe("connector data tools", () => {
         assert.equal(out.rising[0].name, "Kingambit");
     });
 
+    it("get_usage_momentum reports the straight change when there are only two months", async () => {
+        const out = await data(client, "get_usage_momentum", { months: 2 });
+        assert.equal(out.snapshots, 2);
+        assert.match(out.note, /Only two monthly snapshots/);
+        assert.deepEqual(out.volatile, []);
+        assert.ok(out.rising.length + out.declining.length > 0);
+        for (const m of [...out.rising, ...out.declining]) assert.equal(m.accelerating, false);
+        const full = await data(client, "get_usage_momentum", {});
+        assert.equal(full.note, undefined);
+    });
+
     it("trend tools explain missing history without internals", async () => {
         const unknown = await errorText(client, "get_usage_trend", { pokemon: "Magikarp" });
         assert.match(unknown, /no recorded usage/);
-        const short = await errorText(client, "get_usage_momentum", { months: 2 });
-        assert.match(short, /at least 3 monthly snapshots/);
-        assert.match(short, /get_meta_shifts/);
+        const short = await errorText(client, "get_usage_momentum", { months: 1 });
+        assert.match(short, /at least 2 monthly snapshots/);
+        assert.match(short, /get_top_usage/);
         const badMonth = await errorText(client, "get_meta_shifts", { from: "June" });
         assert.match(badMonth, /YYYY-MM/);
         for (const text of [unknown, short]) assert.doesNotMatch(text, INTERNAL);
@@ -626,9 +637,20 @@ describe("connector data tools", () => {
     it("reports each call to the metrics hook without arguments", () => {
         assert.ok(calls.length > 10);
         assert.ok(calls.some((c) => c.tool === "get_top_usage" && c.success));
-        assert.ok(calls.some((c) => c.tool === "lookup_pokemon" && !c.success));
+        assert.ok(
+            calls.some(
+                (c) => c.tool === "lookup_pokemon" && !c.success && c.reason === "unknown_pokemon",
+            ),
+        );
         for (const c of calls) {
-            assert.deepEqual(Object.keys(c).sort(), ["durationMs", "format", "success", "tool"]);
+            assert.deepEqual(Object.keys(c).sort(), [
+                "durationMs",
+                "format",
+                "reason",
+                "success",
+                "tool",
+            ]);
+            assert.equal(c.reason === undefined, c.success, "a reason exactly when it failed");
         }
     });
 });
