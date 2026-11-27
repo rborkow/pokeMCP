@@ -13,8 +13,10 @@ import { before, describe, it } from "node:test";
 import { Client } from "@modelcontextprotocol/client";
 import { InMemoryTransport, McpServer } from "@modelcontextprotocol/server";
 
+import { likelyKoHits, verdict } from "../connector/counters.js";
 import { getDefaultRegulation } from "../connector/formats.js";
-import { registerConnectorTools } from "../connector/register.js";
+import type { Hit } from "../connector/matchup.js";
+import { type ConnectorCallInfo, registerConnectorTools } from "../connector/register.js";
 import { CONNECTOR_INFO } from "../connector/tools.js";
 import { listRegulationIds } from "../regulations/registry.js";
 
@@ -55,6 +57,14 @@ const USAGE: Record<string, Record<string, unknown>> = {
 const env = {
     POKEMON_STATS: {
         async get(key: string) {
+            if (key === REG.legalityKvKey)
+                return {
+                    regulationId: REG.id,
+                    fetchedAt: "2026-11-27",
+                    sourceUrl: "https://example.test",
+                    version: 1,
+                    pokemon: ["Kingambit", "Sneasler"],
+                };
             if (key === `${STATS_FORMAT}:_index`) {
                 return {
                     version: 2,
@@ -69,10 +79,11 @@ const env = {
 } as unknown as Env;
 
 let client: Client;
+const counterCalls: ConnectorCallInfo[] = [];
 
 before(async () => {
     const server = new McpServer(CONNECTOR_INFO);
-    registerConnectorTools(server, env);
+    registerConnectorTools(server, env, (info) => counterCalls.push(info));
     const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
     await server.connect(serverTransport);
     client = new Client({ name: "matchup-tests", version: "1.0.0" });
@@ -474,5 +485,168 @@ describe("check_team_threats", () => {
     it("asks for threats when the usage ranking is unavailable", async () => {
         const { error } = await call("check_team_threats", { team, format: EMPTY_FORMAT });
         assert.match(error, /Pass the threats to check/);
+    });
+});
+
+const plainCounterSet = (pokemon: string, moves: string[], statPoints = {}) => ({
+    pokemon,
+    moves,
+    nature: "Hardy",
+    statPoints,
+    ability: "Pressure",
+    item: "none",
+});
+
+describe("find_counters", () => {
+    const dragon = plainCounterSet("Garchomp", ["Dragon Claw"]);
+    const fastDragon = plainCounterSet("Garchomp", ["Dragon Claw"], { spe: 32 });
+    it("constructs Counter, Check, Trade and Loses with damage and Speed evidence", async () => {
+        const cases = [
+            {
+                threat: plainCounterSet("Kingambit", ["Snarl"]),
+                member: plainCounterSet("Sneasler", ["Close Combat"]),
+                verdict: "Counter",
+            },
+            { threat: dragon, member: fastDragon, verdict: "Check" },
+            { threat: dragon, member: dragon, verdict: "Trade" },
+            { threat: dragon, member: plainCounterSet("Kingambit", ["Protect"]), verdict: "Loses" },
+        ];
+        for (const entry of cases) {
+            const { data, error, text } = await call("find_counters", {
+                threat: entry.threat,
+                team: [entry.member],
+                suggest: false,
+            });
+            assert.equal(error, null);
+            assert.equal(data.team[0].verdict, entry.verdict);
+            assert.equal(data.bestAnswer.verdict, entry.verdict);
+            assert.match(text, new RegExp(entry.verdict));
+            assert.match(text, /not a battle simulation/);
+        }
+        const { data, text } = await call("find_counters", {
+            threat: dragon,
+            team: [dragon],
+            suggest: false,
+        });
+        assert.equal(data.team[0].speed.normal, "tied");
+        assert.match(text, /Speed tie/);
+        assert.equal(data.team[0].deals.hits, 2);
+        assert.equal(data.team[0].takes.maxPercent, 76.5);
+    });
+    it("flips the active verdict under Trick Room", async () => {
+        const { data } = await call("find_counters", {
+            threat: dragon,
+            team: [fastDragon],
+            trickRoom: true,
+            suggest: false,
+        });
+        assert.equal(data.team[0].normalVerdict, "Check");
+        assert.equal(data.team[0].trickRoomVerdict, "Trade");
+        assert.equal(data.team[0].verdict, "Trade");
+        assert.equal(data.team[0].speed.trickRoom, "slower");
+    });
+    it("uses the usage set for a named-only threat", async () => {
+        const { data, error } = await call("find_counters", {
+            threat: { pokemon: "Kingambit" },
+            team: [fastDragon],
+            suggest: false,
+        });
+        assert.equal(error, null);
+        assert.equal(data.threat.nature, "Adamant");
+        assert.equal(data.threat.item, "Black Glasses");
+        assert.deepEqual(data.threat.moves, ["Sucker Punch", "Kowtow Cleave", "Iron Head"]);
+        assert.ok(data.assumptions.some((line: string) => /most common in/.test(line)));
+    });
+    it("suggests only when no team member answers, and honors suggest false", async () => {
+        const threat = plainCounterSet("Kingambit", ["Snarl"]);
+        const weak = plainCounterSet("Garchomp", ["Protect"]);
+        const good = plainCounterSet("Sneasler", ["Close Combat"]);
+        const noTeam = await call("find_counters", { threat });
+        assert.equal(noTeam.error, null);
+        assert.ok(noTeam.data.suggestions.some((row: any) => row.pokemon === "Sneasler"));
+        const lacking = await call("find_counters", { threat, team: [weak], limit: 1 });
+        assert.equal(lacking.data.suggestions.length, 1);
+        assert.equal(lacking.data.suggestions[0].usagePercent, 30);
+        const answered = await call("find_counters", { threat, team: [good] });
+        assert.deepEqual(answered.data.suggestions, []);
+        const disabled = await call("find_counters", { threat, team: [weak], suggest: false });
+        assert.deepEqual(disabled.data.suggestions, []);
+    });
+    it("excludes team species and fails clearly when suggestion legality is unavailable", async () => {
+        const threat = plainCounterSet("Kingambit", ["Snarl"]);
+        const excluded = await call("find_counters", {
+            threat,
+            team: [plainCounterSet("Sneasler", ["Protect"])],
+        });
+        assert.equal(excluded.error, null);
+        assert.ok(!excluded.data.suggestions.some((row: any) => row.pokemon === "Sneasler"));
+        const calls: ConnectorCallInfo[] = [];
+        const server = new McpServer(CONNECTOR_INFO);
+        const noLegality = {
+            POKEMON_STATS: {
+                get: async (key: string) =>
+                    key === REG.legalityKvKey ? null : env.POKEMON_STATS.get(key),
+            },
+        } as unknown as Env;
+        registerConnectorTools(server, noLegality, (info) => calls.push(info));
+        const [ct, st] = InMemoryTransport.createLinkedPair();
+        await server.connect(st);
+        const isolated = new Client({ name: "no-legality", version: "1" });
+        await isolated.connect(ct);
+        await isolated.listTools();
+        const result = await isolated.callTool({ name: "find_counters", arguments: { threat } });
+        assert.equal(result.isError, true);
+        assert.equal(calls[calls.length - 1].reason, "data_unavailable");
+        assert.match((result.content[0] as { text: string }).text, /suggest to false/);
+        await isolated.close();
+        await server.close();
+    });
+    it("fails unknown Pokémon with unknown_pokemon recorded by the metrics hook", async () => {
+        const { error } = await call("find_counters", { threat: { pokemon: "Notapokemonatall" } });
+        assert.ok(error);
+        const last = counterCalls[counterCalls.length - 1];
+        assert.equal(last.tool, "find_counters");
+        assert.equal(last.success, false);
+        assert.equal(last.reason, "unknown_pokemon");
+    });
+    it("rejects unknown moves and missing usage with actionable reasons", async () => {
+        const unknown = await call("find_counters", {
+            threat: plainCounterSet("Garchomp", ["Notamove"]),
+            suggest: false,
+        });
+        assert.match(unknown.error, /Check the spelling/);
+        assert.equal(counterCalls[counterCalls.length - 1].reason, "unknown_name");
+        const absent = await call("find_counters", {
+            threat: { pokemon: "Pelipper" },
+            format: EMPTY_FORMAT,
+            suggest: false,
+        });
+        assert.match(absent.error, /Pass its moves/);
+        assert.equal(counterCalls[counterCalls.length - 1].reason, "no_usage");
+    });
+});
+
+describe("find_counters verdict rules", () => {
+    // Only the fields the verdict reads; the rest of a Hit doesn't matter here.
+    const hit = (maxPercent: number, hits: number | null, chancePercent: number | null) =>
+        ({ move: "Test", minPercent: maxPercent - 5, maxPercent, hits, chancePercent }) as Hit;
+
+    it("counts a KO in N hits only when it is likely", () => {
+        assert.equal(likelyKoHits(hit(60, 2, 100)), 2);
+        assert.equal(likelyKoHits(hit(60, 2, 50)), 2);
+        assert.equal(likelyKoHits(hit(48, 2, 6)), 3, "a 6% 2HKO is not a 2HKO to rely on");
+        assert.equal(likelyKoHits(hit(10, null, null)), Number.POSITIVE_INFINITY);
+    });
+
+    it("needs strictly under half to be a Counter, so two max rolls can't KO it", () => {
+        assert.equal(verdict(hit(49.9, 3, 100), hit(60, 2, 100), "slower"), "Counter");
+        assert.equal(verdict(hit(50, 2, 100), hit(60, 2, 100), "slower"), "Trade");
+        assert.equal(verdict(hit(50, 2, 100), hit(60, 2, 100), "faster"), "Check");
+    });
+
+    it("doesn't call a lucky-roll KO a Counter", () => {
+        // KOs in two only on a 6% roll, so it really needs three.
+        assert.equal(verdict(hit(30, 4, 100), hit(48, 2, 6), "slower"), "Loses");
+        assert.equal(verdict(hit(30, 4, 100), hit(48, 2, 6), "faster"), "Check");
     });
 });

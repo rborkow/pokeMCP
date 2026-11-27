@@ -36,7 +36,7 @@ type CalcPokemon = any;
 
 let calcPromise: Promise<{ calc: Calc; getFinalSpeed: Calc }> | null = null;
 
-function loadCalc(): Promise<{ calc: Calc; getFinalSpeed: Calc }> {
+export function loadCalc(): Promise<{ calc: Calc; getFinalSpeed: Calc }> {
     if (!calcPromise) {
         calcPromise = (async () => {
             // The package is CommonJS: depending on the loader its exports sit
@@ -125,7 +125,7 @@ export interface SetEcho {
     status?: string;
 }
 
-interface ResolvedSet {
+export interface ResolvedSet {
     pokemon: CalcPokemon;
     echo: SetEcho;
     /** What was filled in because the caller left it out. */
@@ -244,7 +244,7 @@ function findSpecies(gen: Calc, input: string): Resolved<FoundSpecies> {
     };
 }
 
-async function loadTypical(
+export async function loadTypical(
     name: string,
     regulation: RegulationSet,
     env: Env,
@@ -260,7 +260,7 @@ async function loadTypical(
     return typical;
 }
 
-async function resolveSet(
+export async function resolveSet(
     gen: Calc,
     calc: Calc,
     input: SetInput,
@@ -418,7 +418,7 @@ async function resolveSet(
     };
 }
 
-function buildField(calc: Calc, field: FieldInput = {}): Calc {
+export function buildField(calc: Calc, field: FieldInput = {}): Calc {
     return new calc.Field({
         gameType: "Doubles",
         weather: field.weather ? WEATHER[field.weather] : undefined,
@@ -760,19 +760,21 @@ export async function compareSpeed(
 
 type TeamMember = SetInput & { moves?: string[] };
 
-interface Hit {
+export interface Hit {
     attacker: string;
     defender: string;
     move: string;
     minPercent: number;
     maxPercent: number;
     knockOut: string;
+    hits?: number | null;
+    chancePercent?: number | null;
     /** Weather or terrain the attacker's own ability sets, when it was applied. */
     conditions?: string;
 }
 
 /** A Pokémon's damaging moves, most used first. */
-function commonAttacks(gen: Calc, typical: TypicalSet | null, limit: number): string[] {
+export function commonAttacks(gen: Calc, typical: TypicalSet | null, limit: number): string[] {
     return (typical?.moves ?? [])
         .map((id) => gen.moves.get(id))
         .filter((move) => move && move.category !== "Status" && (move.basePower ?? 0) > 0)
@@ -795,7 +797,7 @@ const ENTRY_FIELD: Record<string, FieldInput> = {
     mistysurge: { terrain: "misty" },
 };
 
-interface Fighter {
+export interface Fighter {
     pokemon: CalcPokemon;
     /** Display name. */
     name: string;
@@ -804,7 +806,7 @@ interface Fighter {
     ownField: FieldInput;
 }
 
-function fighter(set: ResolvedSet, moves: string[]): Fighter {
+export function fighter(set: ResolvedSet, moves: string[]): Fighter {
     return {
         pokemon: set.pokemon,
         name: set.echo.pokemon,
@@ -813,7 +815,13 @@ function fighter(set: ResolvedSet, moves: string[]): Fighter {
     };
 }
 
-function bestHit(gen: Calc, calc: Calc, attackers: Fighter[], defenders: Fighter[]): Hit | null {
+export function bestHit(
+    gen: Calc,
+    calc: Calc,
+    attackers: Fighter[],
+    defenders: Fighter[],
+    includeKo = false,
+): Hit | null {
     let best: Hit | null = null;
     for (const attacker of attackers) {
         const conditions = fieldNotes(attacker.ownField).join(", ");
@@ -841,6 +849,14 @@ function bestHit(gen: Calc, calc: Calc, attackers: Fighter[], defenders: Fighter
                         minPercent: damage.value.minPercent,
                         maxPercent: damage.value.maxPercent,
                         knockOut: damage.value.knockOut?.text ?? "",
+                        ...(includeKo
+                            ? {
+                                  hits:
+                                      damage.value.knockOut?.hits ??
+                                      Math.ceil(damage.value.defenderHp / damage.value.max),
+                                  chancePercent: damage.value.knockOut?.chancePercent ?? null,
+                              }
+                            : {}),
                         ...(conditions ? { conditions } : {}),
                     };
                 }
