@@ -12,11 +12,12 @@ import {
     hasDb,
     MIN_MOMENTUM_FALLBACK,
     MIN_MOMENTUM_HISTORY,
+    monthIndex,
     resolveRange,
 } from "../meta-history.js";
 import type { RegulationSet } from "../regulations/types.js";
 import { formatFields, resolveRegulation } from "./formats.js";
-import { resolvePokemon } from "./pokemon.js";
+import { isKnownPokemon } from "./pokemon.js";
 import { type Failure, fail, ok, round2, type ToolOutcome, toPercent } from "./types.js";
 
 export interface RangeArgs {
@@ -79,7 +80,7 @@ export async function getUsageTrend(
             `${args.pokemon} has no recorded usage in ${regulation.shortLabel} between ${from} ` +
                 `and ${to}. Check the spelling (Mega Evolutions are listed separately, for ` +
                 `example "Charizard-Mega-Y"), or call get_top_usage to see which Pokémon are used.`,
-            resolvePokemon(args.pokemon) ? "no_usage" : "unknown_pokemon",
+            isKnownPokemon(args.pokemon) ? "no_usage" : "unknown_pokemon",
         );
     }
 
@@ -215,9 +216,11 @@ export async function getUsageMomentum(
         to,
         twoPoint ? MIN_MOMENTUM_FALLBACK : MIN_MOMENTUM_HISTORY,
     );
+    // Two snapshots can be more than a month apart; spread the change over the gap.
+    const span = Math.max(1, monthIndex(inRange[inRange.length - 1]) - monthIndex(inRange[0]));
     const entry = (m: (typeof metrics)[number]) => ({
         name: m.name,
-        slopePointsPerMonth: round2(m.slope * 100),
+        slopePointsPerMonth: round2((twoPoint ? m.delta / span : m.slope) * 100),
         usagePercent: toPercent(m.latest),
         // Steepening in the direction of travel: a decline that is slowing
         // has positive acceleration but is not "accelerating".

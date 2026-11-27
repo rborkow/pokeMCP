@@ -176,6 +176,26 @@ describe("usage recording", () => {
         assert.equal(of("tool_call")[0].blobs[6], "unknown_pokemon", "records why, not what");
     });
 
+    it("tells a gap in our data from a name that doesn't exist", async () => {
+        const reasonFor = async (team: string[]) => {
+            const { env, of } = recorder();
+            await serveMcp(
+                post({
+                    jsonrpc: "2.0",
+                    id: 5,
+                    method: "tools/call",
+                    params: { name: "analyze_team_types", arguments: { team } },
+                }),
+                env,
+            );
+            return of("tool_call")[0].blobs[6];
+        };
+        // A Mega the registry knows but whose types aren't in the bundled dex yet.
+        assert.equal(await reasonFor(["Golisopod-Mega"]), "data_gap");
+        // Mega-shaped, but no such Mega exists.
+        assert.equal(await reasonFor(["Charizard-Mega-Z"]), "unknown_pokemon");
+    });
+
     it("records requests that never reach a tool", async () => {
         const { env, of } = recorder();
         await serveMcp(post("{not json"), env);

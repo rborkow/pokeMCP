@@ -81,6 +81,16 @@ export function resolvePokemon(input: string): ResolvedPokemon | undefined {
     return undefined;
 }
 
+/**
+ * Whether a name is a real Pokémon: in the dex, or a Mega the registry knows.
+ * resolvePokemon also accepts any "<base>-Mega" so it can explain a missing
+ * Mega, which would let an invented name like "Charizard-Mega-Z" through.
+ */
+export function isKnownPokemon(input: string): boolean {
+    const resolved = resolvePokemon(input);
+    return Boolean(resolved && (!resolved.unknownMega || resolved.mega));
+}
+
 /** Up to three known names that start with, or contain, the caller's input. */
 function suggestNames(input: string): string[] {
     const id = toID(input);
@@ -328,7 +338,11 @@ export function analyzeTeamTypes(args: { team: string[] }): ToolOutcome {
             notFound.push(input);
         }
     }
-    if (team.length === 0) return fail(pokemonNotFound(notFound[0] ?? ""), "unknown_pokemon");
+    if (team.length === 0) {
+        // A recognised Mega without type data is a gap in our data, not a typo.
+        const reason = notFound.some(isKnownPokemon) ? "data_gap" : "unknown_pokemon";
+        return fail(pokemonNotFound(notFound[0] ?? ""), reason);
+    }
 
     const matchups = ATTACKING_TYPES.map((type) => {
         const weak: string[] = [];

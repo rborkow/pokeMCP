@@ -4,7 +4,7 @@
  * and counters. Each is its own tool rather than a mode of one, so a client
  * can review and select them individually.
  */
-import { getAbility, getItem, getMove, getPokemon } from "../data-loader.js";
+import { getAbility, getItem, getMove, getPokemon, toID } from "../data-loader.js";
 import type { RegulationSet } from "../regulations/types.js";
 import {
     type FormatIndex,
@@ -14,7 +14,7 @@ import {
     parseChecksCounters,
 } from "../stats.js";
 import { formatFields, resolveRegulation } from "./formats.js";
-import { resolvePokemon } from "./pokemon.js";
+import { isKnownPokemon } from "./pokemon.js";
 import { type Failure, fail, ok, round2, type ToolOutcome, toPercent } from "./types.js";
 
 // --- Loading ---
@@ -80,8 +80,13 @@ async function loadPokemon(
         return {
             ok: false,
             regulation,
-            // Separates a misspelt name from a real Pokémon nobody uses.
-            reason: resolvePokemon(pokemon) ? "no_usage" : "unknown_pokemon",
+            // A Pokémon the index ranks but whose record didn't load is a read
+            // failure; otherwise, tell a misspelt name from one nobody uses.
+            reason: Object.keys(index.pokemon).some((key) => toID(key) === toID(pokemon))
+                ? "data_unavailable"
+                : isKnownPokemon(pokemon)
+                  ? "no_usage"
+                  : "unknown_pokemon",
             error:
                 `${name} has no recorded usage in ${regulation.shortLabel}. Check the spelling ` +
                 `(Mega Evolutions are listed separately, for example "Charizard-Mega-Y"), or ` +

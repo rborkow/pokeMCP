@@ -57,7 +57,8 @@ async function cached<T>(key: string, fn: () => Promise<T>): Promise<T> {
     return data;
 }
 
-function monthIndex(date: string): number {
+/** Months since year 0 for a "YYYY-MM" snapshot date, for measuring gaps between snapshots. */
+export function monthIndex(date: string): number {
     const [y, m] = date.split("-").map(Number);
     return y * 12 + (m - 1);
 }
