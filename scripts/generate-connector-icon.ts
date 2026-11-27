@@ -5,6 +5,7 @@
  *   apps/teambuilder/public/vgc-teambuilder-icon.png   512px, for listings that take an image URL
  *   src/favicon-data.ts                                the SVG and a multi-size .ico, bundled into
  *                                                      the worker and served at api.pokemcp.com
+ *   apps/teambuilder/src/app/favicon.ico               the same .ico, served at www.pokemcp.com
  *
  * The worker serves the icon itself because directories show the favicon of
  * the MCP server's own domain, and the site and the worker share no files.
@@ -18,6 +19,12 @@ import { initWasm, Resvg } from "@resvg/resvg-wasm";
 const SOURCE = "apps/teambuilder/public/vgc-teambuilder-icon.svg";
 const SITE_PNG = "apps/teambuilder/public/vgc-teambuilder-icon.png";
 const WORKER_MODULE = "src/favicon-data.ts";
+/**
+ * The website's favicon. Directory catalogs (ChatGPT's among them) can show the
+ * favicon of a listing's website URL, which is www.pokemcp.com, so it must be
+ * the same icon. It was once Next.js's default triangle.
+ */
+const SITE_ICO = "apps/teambuilder/src/app/favicon.ico";
 const SITE_PNG_SIZE = 512;
 /** Sizes packed into favicon.ico. 256 is the largest an .ico entry can describe. */
 const ICO_SIZES = [16, 32, 48, 64, 128, 256];
@@ -79,9 +86,11 @@ export const FAVICON_ICO_BASE64 =
 ${lines.map((line) => `    "${line}"`).join(" +\n")};
 `;
     await writeFile(WORKER_MODULE, module);
+    await writeFile(SITE_ICO, ico);
 
     console.log(`Wrote ${SITE_PNG} (${SITE_PNG_SIZE}px)`);
     console.log(`Wrote ${WORKER_MODULE} (.ico ${ico.length} bytes, sizes ${ICO_SIZES.join("/")})`);
+    console.log(`Wrote ${SITE_ICO}`);
 }
 
 main().catch((error) => {
