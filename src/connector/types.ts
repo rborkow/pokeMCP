@@ -11,15 +11,41 @@ import type { z } from "zod";
  */
 export type ToolOutcome<T = Record<string, unknown>> =
     | { ok: true; data: T; text: string }
-    | { ok: false; message: string };
+    | { ok: false; message: string; reason: FailReason };
+
+/**
+ * Why a tool call failed, recorded with usage (never the arguments). Stored
+ * as a string, so add values rather than renaming them.
+ *
+ * - unknown_pokemon: the name matched no Pokémon, or one outside the battle data
+ * - unknown_name: a move, ability, item or nature that doesn't exist
+ * - invalid_input: well-formed names but impossible values (stat points)
+ * - no_usage: the Pokémon exists but the format has no usage data for what was asked
+ * - data_gap: the bundled game data lacks the Pokémon's stats or moves
+ * - data_unavailable: stats, history or the legality list couldn't be loaded
+ * - insufficient_history: too few monthly snapshots for the requested analysis
+ * - exception: the tool threw
+ */
+export type FailReason =
+    | "unknown_pokemon"
+    | "unknown_name"
+    | "invalid_input"
+    | "no_usage"
+    | "data_gap"
+    | "data_unavailable"
+    | "insufficient_history"
+    | "exception";
 
 export function ok<T>(data: T, text: string): ToolOutcome<T> {
     return { ok: true, data, text };
 }
 
-export function fail(message: string): ToolOutcome<never> {
-    return { ok: false, message };
+export function fail(message: string, reason: FailReason): ToolOutcome<never> {
+    return { ok: false, message, reason };
 }
+
+/** An internal lookup that failed, with the message the caller will see and why. */
+export type Failure = { ok: false; error: string; reason: FailReason };
 
 /** A tool on the public "VGC Teambuilder" connector surface. */
 export interface ConnectorTool {

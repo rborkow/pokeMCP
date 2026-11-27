@@ -7,7 +7,7 @@ import { render, screen, waitFor } from "../test-utils";
 const RESPONSES: Record<string, unknown> = {
     overview: {
         toolCalls: { total: "240", successes: "228", avg_response_ms: 92.4 },
-        sessions: { connections: "61" },
+        sessions: { connections: "75", assistant_connections: "61" },
         requests: {
             total: "512",
             errors: "9",
@@ -21,6 +21,10 @@ const RESPONSES: Record<string, unknown> = {
     tools: {
         tools: [{ tool_name: "get_pokemon_usage", calls: 90, successes: 88, avg_response_ms: 75 }],
         formats: [{ format: "champions-regmc", calls: 200 }],
+        failures: [
+            { tool_name: "get_pokemon_usage", reason: "no_usage", failures: 2 },
+            { tool_name: "lookup_pokemon", reason: "", failures: 1 },
+        ],
     },
     clients: {
         connections: [
@@ -99,6 +103,9 @@ describe("admin dashboard", () => {
         expect(screen.getByText("118ms")).toBeInTheDocument();
         expect(screen.getByText("typical; slowest 5% above 410ms")).toBeInTheDocument();
         expect(screen.getByText("1.8% of 512, 2 rate-limited")).toBeInTheDocument();
+        expect(
+            screen.getByText("from Claude, ChatGPT and Codex; 14 more from crawlers and other clients"),
+        ).toBeInTheDocument();
 
         expect(new Set(requested)).toEqual(
             new Set(["overview", "usage", "tools", "clients", "performance"]),
@@ -115,6 +122,15 @@ describe("admin dashboard", () => {
         expect(screen.getByText("25.0%")).toBeInTheDocument();
         expect(screen.getByText("claude-ai")).toBeInTheDocument();
         expect(screen.getAllByText("openai-mcp").length).toBeGreaterThan(0);
+    });
+
+    it("says why tool calls failed", async () => {
+        mockAdminApi();
+        render(<AdminDashboard />);
+
+        await waitFor(() => expect(screen.getByText("Why calls failed")).toBeInTheDocument());
+        expect(screen.getByText("no usage data for it")).toBeInTheDocument();
+        expect(screen.getByText("not recorded")).toBeInTheDocument();
     });
 
     it("charts usage with an axis, a legend with totals and a table view", async () => {

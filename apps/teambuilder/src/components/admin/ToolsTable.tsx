@@ -10,7 +10,21 @@ interface ToolsData {
         successes: number;
         avg_response_ms: number;
     }>;
+    failures?: Array<{ tool_name: string; reason: string; failures: number }>;
 }
+
+/** Failure reason codes recorded by the connector (FailReason in src/connector/types.ts). */
+const REASON_LABELS: Record<string, string> = {
+    unknown_pokemon: "unknown Pokémon",
+    unknown_name: "unknown move, item, ability or nature",
+    invalid_input: "impossible values",
+    no_usage: "no usage data for it",
+    data_gap: "missing from game data",
+    data_unavailable: "data couldn't load",
+    insufficient_history: "not enough months",
+    exception: "error",
+    "": "not recorded",
+};
 
 function formatMs(n: number): string {
     if (n >= 1000) return `${(n / 1000).toFixed(1)}s`;
@@ -91,6 +105,33 @@ export function ToolsTable({ range }: { range: string }) {
                                 })}
                             </tbody>
                         </table>
+                        {(data.failures?.length ?? 0) > 0 && (
+                            <div className="mt-5">
+                                <p className="mb-2 text-xs text-muted-foreground">
+                                    Why calls failed
+                                </p>
+                                <table className="w-full text-xs">
+                                    <tbody>
+                                        {data.failures?.map((row) => (
+                                            <tr
+                                                key={`${row.tool_name}|${row.reason}`}
+                                                className="border-b border-border/30"
+                                            >
+                                                <td className="py-1.5 font-mono">
+                                                    {row.tool_name}
+                                                </td>
+                                                <td className="py-1.5 text-muted-foreground">
+                                                    {REASON_LABELS[row.reason] ?? row.reason}
+                                                </td>
+                                                <td className="py-1.5 text-right tabular-nums">
+                                                    {row.failures}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        )}
                     </div>
                 )}
             </CardContent>

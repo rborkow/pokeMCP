@@ -27,6 +27,20 @@ export const CONNECTOR_INFO = {
     title: "VGC Teambuilder",
     version: "1.0.0",
     websiteUrl: "https://www.pokemcp.com",
+    // Shown by clients that read MCP server icons. Served by the website, the
+    // same artwork as the directory listings and api.pokemcp.com/favicon.ico.
+    icons: [
+        {
+            src: "https://www.pokemcp.com/vgc-teambuilder-icon.png",
+            mimeType: "image/png",
+            sizes: ["512x512"],
+        },
+        {
+            src: "https://www.pokemcp.com/vgc-teambuilder-icon.svg",
+            mimeType: "image/svg+xml",
+            sizes: ["any"],
+        },
+    ],
 };
 
 export const CONNECTOR_INSTRUCTIONS =
@@ -582,8 +596,10 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
         description:
             "Fit a trend to each Pokémon's monthly usage across a range and list the fastest " +
             "rising, fastest declining and most volatile. These are descriptive trends, not " +
-            "forecasts. Needs at least three months of history in the range; with so few points, " +
-            "treat the result as a direction, not a measurement.",
+            "forecasts. Works best with three or more months of history in the range. With only " +
+            "two (common early in a regulation) it reports the straight change between them, " +
+            "leaves the volatile list empty and says so in `note`. Treat the result as a " +
+            "direction, not a measurement.",
         inputSchema: {
             format: formatInput,
             ...rangeInput,
@@ -594,6 +610,10 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
             ...formatOutput,
             ...rangeOutput,
             snapshots: z.number().describe("Monthly snapshots in the range"),
+            note: z
+                .string()
+                .optional()
+                .describe("Present when the range has only two snapshots: what was left out"),
             rising: z.array(momentumEntry),
             declining: z.array(momentumEntry),
             volatile: z.array(

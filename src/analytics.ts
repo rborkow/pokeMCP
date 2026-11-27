@@ -11,7 +11,8 @@
  *
  *   tool_call     blob1 tool, blob2 format, blob3 "1"/"0" success,
  *                 blob4 (was a per-session id; always empty now), blob5 "mcp",
- *                 blob6 client family; double1 duration in ms
+ *                 blob6 client family, blob7 failure reason (empty on
+ *                 success; see FailReason); double1 duration in ms
  *   session       blob1 "connect", blob2 random id, blob3 "mcp", blob4 "mcp",
  *                 blob5 reported client name, blob6 reported client version,
  *                 blob7 client family, blob8 User-Agent product
@@ -22,6 +23,7 @@
  * `tool_call` rows with other values in blob5; nothing writes those any more.
  */
 import type { ClientFamily } from "./connector/client.js";
+import type { FailReason } from "./connector/types.js";
 
 /** Valid source tags for tracking */
 export type TrackingSource = "web" | "mcp" | "rest";
@@ -44,6 +46,7 @@ export function trackToolCall(
     sessionId?: string,
     source?: TrackingSource,
     client?: ClientFamily,
+    reason?: FailReason,
 ): void {
     dataset(env, "tool_call")?.writeDataPoint({
         indexes: ["tool_call"],
@@ -54,6 +57,7 @@ export function trackToolCall(
             sessionId ?? "",
             source ?? "",
             client ?? "",
+            reason ?? "",
         ],
         doubles: [responseTimeMs],
     });

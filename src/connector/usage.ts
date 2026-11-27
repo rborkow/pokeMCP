@@ -4,7 +4,7 @@
  * and counters. Each is its own tool rather than a mode of one, so a client
  * can review and select them individually.
  */
-import { getAbility, getItem, getMove, getPokemon } from "../data-loader.js";
+import { getAbility, getItem, getMove, getPokemon, toID } from "../data-loader.js";
 import type { RegulationSet } from "../regulations/types.js";
 import {
     type FormatIndex,
@@ -14,14 +14,12 @@ import {
     parseChecksCounters,
 } from "../stats.js";
 import { formatFields, resolveRegulation } from "./formats.js";
-import { fail, ok, round2, type ToolOutcome, toPercent } from "./types.js";
+import { isKnownPokemon } from "./pokemon.js";
+import { type Failure, fail, ok, round2, type ToolOutcome, toPercent } from "./types.js";
 
 // --- Loading ---
 
-type Loaded<T> = { regulation: RegulationSet } & (
-    | { ok: false; error: string }
-    | { ok: true; value: T }
-);
+type Loaded<T> = { regulation: RegulationSet } & (Failure | { ok: true; value: T });
 
 function noStatsYet(regulation: RegulationSet): string {
     return (
@@ -40,10 +38,17 @@ function statsUnavailable(regulation: RegulationSet): string {
 async function loadIndex(format: string | undefined, env: Env): Promise<Loaded<FormatIndex>> {
     const regulation = resolveRegulation(format);
     if (!regulation.showdownFormatId) {
-        return { ok: false, regulation, error: noStatsYet(regulation) };
+        return { ok: false, regulation, error: noStatsYet(regulation), reason: "data_unavailable" };
     }
     const index = await getFormatIndex(regulation.showdownFormatId, env);
-    if (!index) return { ok: false, regulation, error: statsUnavailable(regulation) };
+    if (!index) {
+        return {
+            ok: false,
+            regulation,
+            error: statsUnavailable(regulation),
+            reason: "data_unavailable",
+        };
+    }
     return { ok: true, regulation, value: index };
 }
 
@@ -55,19 +60,33 @@ async function loadPokemon(
 ): Promise<Loaded<{ stats: PokemonStats; rank: number; weight: number }>> {
     const regulation = resolveRegulation(format);
     if (!regulation.showdownFormatId) {
-        return { ok: false, regulation, error: noStatsYet(regulation) };
+        return { ok: false, regulation, error: noStatsYet(regulation), reason: "data_unavailable" };
     }
 
     const [stats, index] = await Promise.all([
         getPokemonStats(pokemon, regulation.showdownFormatId, env),
         getFormatIndex(regulation.showdownFormatId, env),
     ]);
-    if (!index) return { ok: false, regulation, error: statsUnavailable(regulation) };
+    if (!index) {
+        return {
+            ok: false,
+            regulation,
+            error: statsUnavailable(regulation),
+            reason: "data_unavailable",
+        };
+    }
     if (!stats) {
         const name = getPokemon(pokemon)?.name ?? pokemon;
         return {
             ok: false,
             regulation,
+            // A Pokémon the index ranks but whose record didn't load is a read
+            // failure; otherwise, tell a misspelt name from one nobody uses.
+            reason: Object.keys(index.pokemon).some((key) => toID(key) === toID(pokemon))
+                ? "data_unavailable"
+                : isKnownPokemon(pokemon)
+                  ? "no_usage"
+                  : "unknown_pokemon",
             error:
                 `${name} has no recorded usage in ${regulation.shortLabel}. Check the spelling ` +
                 `(Mega Evolutions are listed separately, for example "Charizard-Mega-Y"), or ` +
@@ -116,7 +135,7 @@ export async function getTopUsage(
     env: Env,
 ): Promise<ToolOutcome> {
     const loaded = await loadIndex(args.format, env);
-    if (loaded.ok === false) return fail(loaded.error);
+    if (loaded.ok === false) return fail(loaded.error, loaded.reason);
     const { regulation, value: index } = loaded;
 
     const pokemon = Object.entries(index.pokemon)
@@ -153,7 +172,7 @@ export async function getPokemonUsage(
     env: Env,
 ): Promise<ToolOutcome> {
     const loaded = await loadPokemon(args.pokemon, args.format, env);
-    if (loaded.ok === false) return fail(loaded.error);
+    if (loaded.ok === false) return fail(loaded.error, loaded.reason);
     const { regulation, value } = loaded;
     const { stats, rank, weight } = value;
 
@@ -199,7 +218,7 @@ export async function getTeammates(
     env: Env,
 ): Promise<ToolOutcome> {
     const loaded = await loadPokemon(args.pokemon, args.format, env);
-    if (loaded.ok === false) return fail(loaded.error);
+    if (loaded.ok === false) return fail(loaded.error, loaded.reason);
     const { regulation, value } = loaded;
     const { stats, weight } = value;
 
@@ -207,6 +226,7 @@ export async function getTeammates(
     if (teammates.length === 0) {
         return fail(
             `No teammate data is recorded for ${stats.displayName} in ${regulation.shortLabel}.`,
+            "no_usage",
         );
     }
 
@@ -227,7 +247,7 @@ export async function getChecksAndCounters(
     env: Env,
 ): Promise<ToolOutcome> {
     const loaded = await loadPokemon(args.pokemon, args.format, env);
-    if (loaded.ok === false) return fail(loaded.error);
+    if (loaded.ok === false) return fail(loaded.error, loaded.reason);
     const { regulation, value } = loaded;
     const { stats } = value;
 
@@ -238,6 +258,7 @@ export async function getChecksAndCounters(
             `No checks-and-counters data is recorded for ${stats.displayName} in ` +
                 `${regulation.shortLabel}; it needs enough ladder matchups to be published. ` +
                 "Try get_teammates or get_pokemon_usage instead.",
+            "no_usage",
         );
     }
 

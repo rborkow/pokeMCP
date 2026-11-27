@@ -1,6 +1,6 @@
 import type { McpServer } from "@modelcontextprotocol/server";
 import { CONNECTOR_TOOLS } from "./tools.js";
-import type { ToolOutcome } from "./types.js";
+import type { FailReason, ToolOutcome } from "./types.js";
 
 /**
  * Every connector tool only reads data this service hosts: nothing is
@@ -19,6 +19,8 @@ export interface ConnectorCallInfo {
     tool: string;
     format?: string;
     success: boolean;
+    /** Why it failed; absent on success. */
+    reason?: FailReason;
     durationMs: number;
 }
 
@@ -55,12 +57,14 @@ export function registerConnectorTools(
                         message:
                             "VGC Teambuilder couldn't load the data for this request. " +
                             "Please try again in a moment.",
+                        reason: "exception",
                     };
                 }
                 onCall?.({
                     tool: tool.name,
                     format: typeof args.format === "string" ? args.format : undefined,
                     success: outcome.ok,
+                    reason: outcome.ok === false ? outcome.reason : undefined,
                     durationMs: Date.now() - started,
                 });
 
