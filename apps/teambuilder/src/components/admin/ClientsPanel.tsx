@@ -17,6 +17,7 @@ interface ClientsData {
 const CLIENT_LABELS: Record<string, string> = {
     claude: "Claude",
     chatgpt: "ChatGPT",
+    codex: "Codex",
     other: "Other clients",
     "": "Not recorded",
 };

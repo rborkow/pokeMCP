@@ -54,6 +54,9 @@ describe("client classification", () => {
         assert.equal(classifyClient("claude-ai", null), "claude");
         assert.equal(classifyClient("Anthropic/Toolbox", null), "claude");
         assert.equal(classifyClient("openai-mcp", null), "chatgpt");
+        assert.equal(classifyClient("openai-mcp Codex", "openai-mcp"), "codex");
+        assert.equal(classifyClient("codex-mcp-client", null), "codex");
+        assert.equal(classifyClient(null, "codex-mcp-client/0.171.0"), "codex");
         assert.equal(classifyClient(null, "ChatGPT-User/1.0"), "chatgpt");
         assert.equal(classifyClient("some-client", "Claude-User"), "claude");
         assert.equal(classifyClient("mcp-inspector", "node"), "other");
@@ -114,7 +117,7 @@ describe("usage recording", () => {
         );
 
         const [call] = of("tool_call");
-        assert.deepEqual(call.blobs, ["lookup_pokemon", "", "1", "", "mcp", "chatgpt"]);
+        assert.deepEqual(call.blobs, ["lookup_pokemon", "", "1", "", "mcp", "chatgpt", ""]);
         assert.deepEqual(of("mcp_request")[0].blobs, ["tools/call", "200", "chatgpt"]);
         assert.doesNotMatch(JSON.stringify(points), /Garchomp/i);
     });
@@ -151,6 +154,7 @@ describe("usage recording", () => {
             "",
             "mcp",
             "claude",
+            "",
         ]);
         assert.deepEqual(of("mcp_request")[0].blobs, ["tools/call", "200", "claude"]);
         assert.equal(of("session").length, 0, "a tool call is not a new connection");
@@ -169,6 +173,7 @@ describe("usage recording", () => {
             env,
         );
         assert.equal(of("tool_call")[0].blobs[2], "0");
+        assert.equal(of("tool_call")[0].blobs[6], "unknown_pokemon", "records why, not what");
     });
 
     it("records requests that never reach a tool", async () => {

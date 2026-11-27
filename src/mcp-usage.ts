@@ -48,6 +48,7 @@ export async function serveMcp(request: Request, env: Env): Promise<Response> {
                     undefined,
                     "mcp",
                     client,
+                    call.reason,
                 ),
         });
     } catch (error) {

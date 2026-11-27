@@ -117,7 +117,7 @@ function statLine(stats: Record<string, number>): string {
 
 export function lookupPokemon(args: { pokemon: string }): ToolOutcome {
     const resolved = resolvePokemon(args.pokemon);
-    if (!resolved) return fail(pokemonNotFound(args.pokemon));
+    if (!resolved) return fail(pokemonNotFound(args.pokemon), "unknown_pokemon");
     const { species, mega } = resolved;
     if (resolved.unknownMega) {
         const known = mega
@@ -128,6 +128,7 @@ export function lookupPokemon(args: { pokemon: string }): ToolOutcome {
             `${resolved.name}'s types and stats are not in this connector's data yet.${known} ` +
                 `Look up its base form, ${species.name}, instead; the usage tools do ` +
                 `recognise ${resolved.name}.`,
+            "data_gap",
         );
     }
     // A Mega the dex does not model: describe it from the regulation's data.
@@ -249,7 +250,7 @@ function describeSource(sources: string[]): string {
 
 export function validateMoveset(args: { pokemon: string; moves: string[] }): ToolOutcome {
     const resolved = resolvePokemon(args.pokemon);
-    if (!resolved) return fail(pokemonNotFound(args.pokemon));
+    if (!resolved) return fail(pokemonNotFound(args.pokemon), "unknown_pokemon");
     // A Mega Evolution knows exactly the moves of its base Pokémon.
     const species = { name: resolved.name };
 
@@ -258,6 +259,7 @@ export function validateMoveset(args: { pokemon: string; moves: string[] }): Too
         return fail(
             `No move data is available for ${species.name}, so its moves can't be checked. ` +
                 "This usually means the Pokémon is newer than the bundled game data.",
+            "data_gap",
         );
     }
 
@@ -326,7 +328,7 @@ export function analyzeTeamTypes(args: { team: string[] }): ToolOutcome {
             notFound.push(input);
         }
     }
-    if (team.length === 0) return fail(pokemonNotFound(notFound[0] ?? ""));
+    if (team.length === 0) return fail(pokemonNotFound(notFound[0] ?? ""), "unknown_pokemon");
 
     const matchups = ATTACKING_TYPES.map((type) => {
         const weak: string[] = [];

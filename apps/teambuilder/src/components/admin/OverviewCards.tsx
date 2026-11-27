@@ -6,7 +6,7 @@ import { useAdminData } from "./useAdminData";
 
 interface OverviewData {
     toolCalls: { total?: number; successes?: number; avg_response_ms?: number };
-    sessions: { connections?: number };
+    sessions: { connections?: number; assistant_connections?: number };
     requests: {
         total?: number;
         errors?: number;
@@ -36,12 +36,20 @@ export function OverviewCards({ range }: { range: string }) {
     const requests = toNumber(data?.requests?.total);
     const errors = toNumber(data?.requests?.errors);
     const rateLimited = toNumber(data?.requests?.rate_limited);
+    // Most connections come from directory crawlers and health checks that list
+    // the tools and leave, so the headline counts assistants only.
+    const connections = toNumber(data?.sessions?.connections);
+    const assistantConnections = toNumber(data?.sessions?.assistant_connections);
+    const otherConnections = Math.max(connections - assistantConnections, 0);
 
     const cards = [
         {
             title: "Connections",
-            value: formatNumber(data?.sessions?.connections),
-            subtitle: "times an assistant connected",
+            value: formatNumber(assistantConnections),
+            subtitle:
+                otherConnections > 0
+                    ? `from Claude, ChatGPT and Codex; ${formatNumber(otherConnections)} more from crawlers and other clients`
+                    : "from Claude, ChatGPT and Codex",
         },
         {
             title: "Tool calls",

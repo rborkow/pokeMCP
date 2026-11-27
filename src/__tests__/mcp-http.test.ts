@@ -67,6 +67,11 @@ describe("stateless MCP endpoint", () => {
         await client.connect(transport);
 
         assert.equal(client.getServerVersion()?.name, "vgc-teambuilder");
+        // Clients that show MCP server icons get the listing artwork over HTTP.
+        assert.deepEqual(
+            client.getServerVersion()?.icons?.map((icon) => icon.mimeType),
+            ["image/png", "image/svg+xml"],
+        );
         assert.deepEqual(clients, [{ name: "test-client", version: "9.9.9" }]);
         assert.equal(transport.sessionId, undefined, "no session is issued");
 

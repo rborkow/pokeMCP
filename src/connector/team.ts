@@ -118,6 +118,7 @@ export async function validateTeam(
             `The allowed Pokémon list for ${regulation.shortLabel} is unavailable right now, ` +
                 "so teams can't be validated against it. Try again later, or pick another " +
                 "format from list_formats.",
+            "data_unavailable",
         );
     }
 
