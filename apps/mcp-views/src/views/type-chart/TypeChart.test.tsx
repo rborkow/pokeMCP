@@ -2,6 +2,16 @@ import { render } from "preact-render-to-string";
 import { describe, expect, it } from "vitest";
 import { TYPE_CHART_FIXTURE } from "./fixture.js";
 import { TypeChart } from "./TypeChart.js";
+import { isTypeChartData } from "./types.js";
+
+describe("isTypeChartData", () => {
+    it("accepts a real result and rejects anything missing the arrays the chart reads", () => {
+        expect(isTypeChartData(TYPE_CHART_FIXTURE)).toBe(true);
+        expect(isTypeChartData(null)).toBe(false);
+        expect(isTypeChartData({})).toBe(false);
+        expect(isTypeChartData({ ...TYPE_CHART_FIXTURE, matchups: undefined })).toBe(false);
+    });
+});
 
 describe("TypeChart", () => {
     it("draws a row per attacking type and a column per team member", () => {

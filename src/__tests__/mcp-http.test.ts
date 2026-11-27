@@ -529,13 +529,21 @@ describe("MCP Apps views", () => {
         });
     }
 
-    it("serves no views when MCP_APPS is off", async () => {
-        const client = await connectWith({ MCP_APPS: "off" } as Env, "2025");
-        const capabilities = client.getServerCapabilities() as Record<string, unknown>;
-        assert.equal(capabilities.resources, undefined);
-        assert.equal(capabilities.extensions, undefined);
-        const { tools } = await client.listTools();
-        assert.ok(tools.every((tool) => tool._meta?.ui === undefined));
-        await client.close();
-    });
+    for (const era of ["2025", "2026"] as const) {
+        it(`serves exactly what it served before views when MCP_APPS is off (${era}-era client)`, async () => {
+            // The production setting: what directory reviewers see must not change.
+            const off = await connectWith({ MCP_APPS: "off" } as Env, era);
+            const unset = await connectWith({} as Env, era);
+            for (const client of [off, unset]) {
+                const capabilities = client.getServerCapabilities() as Record<string, unknown>;
+                assert.equal(capabilities.resources, undefined);
+                assert.equal(capabilities.extensions, undefined);
+            }
+            const [offTools, unsetTools] = await Promise.all([off.listTools(), unset.listTools()]);
+            assert.ok(offTools.tools.every((tool) => tool._meta?.ui === undefined));
+            assert.deepEqual(offTools.tools, unsetTools.tools);
+            assert.equal(offTools.tools.length, CONNECTOR_TOOLS.length);
+            await Promise.all([off.close(), unset.close()]);
+        });
+    }
 });
