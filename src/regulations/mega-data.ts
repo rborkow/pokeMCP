@@ -288,3 +288,51 @@ export const CHAMPIONS_REGMC_MEGAS: MegaForm[] = (() => {
         (a, b) => a.megaName.localeCompare(b.megaName),
     );
 })();
+
+/**
+ * Reg M-D (2026-12-01 PST): every M-C Mega plus Mega Heatran and Mega
+ * Tatsugiri. The official announcement counts four new Mega Evolutions but
+ * names only those two. Tatsugiri's three forms each have their own Mega (one
+ * stone, Tatsugirinite), which may be what makes four; any other addition is
+ * left out until the eligible list or ladder data shows it.
+ *
+ * The bundled dex snapshot predates these Megas. Types, base stats, first
+ * ability and stones are copied from Pokémon Showdown master data/pokedex.ts
+ * and data/items.ts (read 2026-11-27), which carry them from Legends: Z-A; its
+ * `champions` mod still marks them "Future". Recheck against Smogon's M-D
+ * ladder data once it is published.
+ */
+const REGMD_TATSUGIRI_MEGAS: [base: string, mega: string][] = [
+    ["Tatsugiri", "Tatsugiri-Curly-Mega"],
+    ["Tatsugiri-Droopy", "Tatsugiri-Droopy-Mega"],
+    ["Tatsugiri-Stretchy", "Tatsugiri-Stretchy-Mega"],
+];
+const REGMD_NEW_MEGAS: MegaForm[] = [
+    {
+        basePokemon: "Heatran",
+        megaName: "Heatran-Mega",
+        formId: "heatranmega",
+        megaStone: "Heatranite",
+        postMegaTypes: ["Fire", "Steel"],
+        postMegaAbility: "Flash Fire",
+        postMegaBaseStats: { hp: 91, atk: 120, def: 106, spa: 175, spd: 141, spe: 67 },
+    },
+    ...REGMD_TATSUGIRI_MEGAS.map(
+        ([basePokemon, megaName]): MegaForm => ({
+            basePokemon,
+            megaName,
+            formId: toID(megaName),
+            megaStone: "Tatsugirinite",
+            postMegaTypes: ["Dragon", "Water"],
+            postMegaAbility: "Commander",
+            postMegaBaseStats: { hp: 68, atk: 65, def: 90, spa: 135, spd: 125, spe: 92 },
+        }),
+    ),
+];
+export const CHAMPIONS_REGMD_MEGAS: MegaForm[] = (() => {
+    const known = new Set(CHAMPIONS_REGMC_MEGAS.map((m) => m.megaName));
+    return [
+        ...CHAMPIONS_REGMC_MEGAS,
+        ...REGMD_NEW_MEGAS.filter((m) => !known.has(m.megaName)),
+    ].sort((a, b) => a.megaName.localeCompare(b.megaName));
+})();
