@@ -17,8 +17,15 @@ import { fileURLToPath } from "node:url";
 import { getAbility, getPokemon, toID } from "../data-loader.js";
 import { CHAMPIONS_REGMA } from "../regulations/champions-regma.js";
 import { CHAMPIONS_REGMB } from "../regulations/champions-regmb.js";
+import { CHAMPIONS_REGMC } from "../regulations/champions-regmc.js";
 import { LegalityNotIngestedError, loadRegulation } from "../regulations/loader.js";
-import { getRegulation, isRegulationId, listRegulationIds } from "../regulations/registry.js";
+import {
+    getLatestStatsRegulation,
+    getRegulation,
+    isRegulationId,
+    listRegulationIds,
+    listRegulationStatsFormats,
+} from "../regulations/registry.js";
 import type { LegalityKvBlob } from "../regulations/types.js";
 import {
     validateTeamForRegulation,
@@ -172,6 +179,76 @@ describe("regulation registry", () => {
                 assert.ok(getAbility(mega.postMegaAbility), `${megaName} ability`);
             }
         }
+    });
+
+    it("recognises champions-regmd and hands off from M-C on 2026-12-01", () => {
+        assert.equal(isRegulationId("champions-regmd"), true);
+        const regmd = getRegulation("champions-regmd");
+        assert.ok(regmd);
+        // Pacific dates: 2026-12-01 18:00 PST (2026-12-02 02:00 UTC) to
+        // 2027-03-02 17:59 PST (2027-03-03 01:59 UTC).
+        assert.equal(regmd.startDate, CHAMPIONS_REGMC.endDate);
+        assert.equal(regmd.startDate, "2026-12-01");
+        assert.equal(regmd.endDate, "2027-03-02");
+        assert.equal(regmd.limitlessFormatId, "M-D");
+        assert.equal(regmd.legalityKvKey, "champions-regmd:_legality");
+        assert.equal(regmd.allowsMultipleMegaStones, true);
+    });
+
+    it("keeps M-D out of the stats defaults until Smogon publishes it", () => {
+        const regmd = getRegulation("champions-regmd");
+        assert.equal(regmd?.showdownFormatId, undefined);
+        assert.equal(getLatestStatsRegulation()?.id, "champions-regmc");
+        assert.ok(!listRegulationStatsFormats().some((id) => id.includes("regmd")));
+    });
+
+    it("gives M-D every M-C Mega plus Mega Heatran and the Tatsugiri Megas", () => {
+        const megas = getRegulation("champions-regmd")?.megaForms ?? [];
+        const byName = new Map(megas.map((m) => [m.megaName, m]));
+        for (const m of CHAMPIONS_REGMC.megaForms) {
+            assert.ok(byName.has(m.megaName), `M-D should keep ${m.megaName}`);
+        }
+        assert.equal(megas.length, CHAMPIONS_REGMC.megaForms.length + 4);
+        // Stones and data as in Pokémon Showdown's master data.
+        const heatran = byName.get("Heatran-Mega");
+        assert.equal(heatran?.megaStone, "Heatranite");
+        assert.deepEqual(heatran?.postMegaTypes, ["Fire", "Steel"]);
+        for (const [base, mega] of [
+            ["Tatsugiri", "Tatsugiri-Curly-Mega"],
+            ["Tatsugiri-Droopy", "Tatsugiri-Droopy-Mega"],
+            ["Tatsugiri-Stretchy", "Tatsugiri-Stretchy-Mega"],
+        ]) {
+            const form = byName.get(mega);
+            assert.equal(form?.basePokemon, base);
+            assert.equal(form?.megaStone, "Tatsugirinite");
+            assert.ok(getPokemon(base), `${mega} base Pokémon`);
+        }
+        for (const m of megas) {
+            if (m.postMegaAbility) {
+                assert.ok(getAbility(m.postMegaAbility), `${m.megaName} ability`);
+            }
+        }
+        // Not available before M-D.
+        assert.ok(!CHAMPIONS_REGMC.megaForms.some((m) => m.megaName === "Heatran-Mega"));
+    });
+
+    it("recognises the M-D Mega Stones on a team", () => {
+        const team: TeamPokemon[] = [
+            { pokemon: "Heatran", item: "Heatranite", moves: ["Flamethrower"] },
+            { pokemon: "Tatsugiri-Droopy", item: "Tatsugirinite", moves: ["Muddy Water"] },
+        ];
+        const regmd = getRegulation("champions-regmd");
+        assert.ok(regmd);
+        const result = validateTeamForRegulation(team, {
+            ...regmd,
+            allowedPokemonIds: new Set(["heatran", "tatsugiri", "tatsugiridroopy"]),
+            allowedPokemonDisplay: ["Heatran", "Tatsugiri"],
+            fetchedAt: "2026-12-02T00:00:00.000Z",
+            dataVersion: 1,
+        });
+        assert.equal(result.ok, true, JSON.stringify(result.errors));
+        // Two different stones: allowed in M-D, reported as a warning.
+        assert.ok(result.issues.some((i) => i.code === "multiple_mega_stones"));
     });
 });
 

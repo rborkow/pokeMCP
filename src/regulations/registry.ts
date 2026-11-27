@@ -1,6 +1,7 @@
 import { CHAMPIONS_REGMA } from "./champions-regma.js";
 import { CHAMPIONS_REGMB } from "./champions-regmb.js";
 import { CHAMPIONS_REGMC } from "./champions-regmc.js";
+import { CHAMPIONS_REGMD } from "./champions-regmd.js";
 import type { RegulationSet } from "./types.js";
 
 /**
@@ -15,6 +16,7 @@ export const REGULATIONS: readonly RegulationSet[] = [
     CHAMPIONS_REGMA,
     CHAMPIONS_REGMB,
     CHAMPIONS_REGMC,
+    CHAMPIONS_REGMD,
 ];
 
 const REGULATIONS_BY_ID = new Map(REGULATIONS.map((r) => [r.id, r]));

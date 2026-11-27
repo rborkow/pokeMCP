@@ -303,7 +303,10 @@ describe("connector data tools", () => {
             [...listRegulationIds()].reverse(),
         );
         assert.equal(out.formats[0].bringCount, 4);
-        assert.equal(out.formats[0].usageStats, true);
+        // The default always has statistics, even when a newer regulation
+        // (listed first) is registered before Smogon has published any.
+        const listed = out.formats.find((f: { id: string }) => f.id === out.defaultFormat);
+        assert.equal(listed.usageStats, true);
         for (const format of out.formats) {
             assert.ok(["upcoming", "current", "ended"].includes(format.status));
         }
@@ -333,6 +336,21 @@ describe("connector data tools", () => {
         // Reg M-B handed over to M-C on 2026-09-08.
         assert.match(line("2026-09-07", "champions-regmb"), /\(current\)/);
         assert.match(line("2026-09-08", "champions-regmb"), /\(ended\)/);
+        // Reg M-D takes over from M-C on 2026-12-01 (18:00 PST, 2026-12-02 02:00 UTC)
+        // and hands over on 2027-03-02.
+        assert.match(
+            line("2026-11-30", "champions-regmd"),
+            /\(upcoming\)\. Starts 2026-12-01, ends 2027-03-02/,
+        );
+        assert.match(
+            line("2026-12-01", "champions-regmd"),
+            /\(current\)\. Started 2026-12-01, ends 2027-03-02/,
+        );
+        assert.match(line("2026-12-02", "champions-regmd"), /\(current\)/);
+        assert.match(line("2027-03-01", "champions-regmd"), /\(current\)/);
+        assert.match(line("2027-03-02", "champions-regmd"), /\(ended\)/);
+        // Registered before Smogon publishes any M-D usage.
+        assert.match(line("2026-12-01", "champions-regmd"), /usage statistics not published yet/);
     });
 
     it("lookup_pokemon returns stats, abilities and Mega Evolutions", async () => {
@@ -346,6 +364,21 @@ describe("connector data tools", () => {
         );
         assert.equal(megaY.megaStone, "Charizardite Y");
         assert.ok(megaY.formats.includes(REG.id));
+    });
+
+    it("lookup_pokemon describes Reg M-D's Megas, which the bundled dex lacks", async () => {
+        const mega = await data(client, "lookup_pokemon", { pokemon: "Heatran-Mega" });
+        assert.equal(mega.name, "Heatran-Mega");
+        assert.deepEqual(mega.types, ["Fire", "Steel"]);
+        assert.equal(mega.baseStats.spa, 175);
+        assert.equal(mega.baseStats.total, 700);
+
+        const base = await data(client, "lookup_pokemon", { pokemon: "Tatsugiri" });
+        const curly = base.megaEvolutions.find(
+            (m: { name: string }) => m.name === "Tatsugiri-Curly-Mega",
+        );
+        assert.equal(curly.megaStone, "Tatsugirinite");
+        assert.deepEqual(curly.formats, ["champions-regmd"]);
     });
 
     it("lookup_pokemon suggests names for a near miss", async () => {
@@ -677,6 +710,24 @@ describe("connector with no data behind a format", () => {
         for (const [name, args] of attempts) {
             const text = await errorText(client, name, args);
             assert.ok(text.length > 30, `${name}: message too short`);
+            assert.doesNotMatch(text, INTERNAL, `${name}: leaks internals`);
+        }
+    });
+
+    it("keeps the default on a regulation with statistics while a newer one has none", async () => {
+        // Reg M-D is registered ahead of its first Smogon month. It must not
+        // become the default, and asking for it by name says why nothing comes back.
+        assert.equal(getDefaultRegulation().id, "champions-regmc");
+        const client = await connect(makeEnv());
+        const attempts: [string, Record<string, unknown>][] = [
+            ["get_top_usage", { format: "champions-regmd" }],
+            ["get_pokemon_usage", { format: "champions-regmd", pokemon: "Kingambit" }],
+            ["get_usage_trend", { format: "champions-regmd", pokemon: "Kingambit" }],
+            ["validate_team", { format: "champions-regmd", team: [{ pokemon: "Kingambit" }] }],
+        ];
+        for (const [name, args] of attempts) {
+            const text = await errorText(client, name, args);
+            assert.match(text, /M-D/, `${name}: names the regulation`);
             assert.doesNotMatch(text, INTERNAL, `${name}: leaks internals`);
         }
     });
