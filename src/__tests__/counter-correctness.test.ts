@@ -157,3 +157,22 @@ it("requires an unrounded numeric calc probability for residual or recovery effe
         1,
     );
 });
+
+it("never treats an unproven incoming KO as no KO", async () => {
+    // Ice Beam into Leftovers Sneasler is a "possible 5HKO" with no numeric chance, so its
+    // likely count is unknown. Six Ice Beams beat the recovery; six Quick Attacks can't KO.
+    const result = await findCounters(
+        {
+            threat: { ...plain("Blastoise", ["Ice Beam"]), ability: "Torrent" },
+            team: [
+                { ...plain("Sneasler", ["Quick Attack"]), ability: "Unburden", item: "Leftovers" },
+            ],
+            suggest: false,
+        },
+        {} as Env,
+    );
+    const row = resultData(result).team[0];
+    assert.equal(row.takes.likelyKoHits, null, "the incoming count is unproven");
+    assert.notEqual(row.verdict, "Check");
+    assert.notEqual(row.verdict, "Counter");
+});
