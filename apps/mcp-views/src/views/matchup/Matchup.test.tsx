@@ -77,7 +77,8 @@ describe("MatchupGrid", () => {
             expect(counts(word)).toBe(expected(word));
         }
         // Garchomp into Sneasler: Earthquake 123.87–147.1%, Close Combat back for 59.02–69.4%.
-        expect(html).toContain("Garchomp against Sneasler: Loses. Deals 124–147%, takes 59–69%.");
+        // Garchomp moves second but survives and KOs: a Check (it once wrongly read Loses).
+        expect(html).toContain("Garchomp against Sneasler: Check. Deals 124–147%, takes 59–69%.");
     });
 
     it("switches every cell to its Trick Room verdict", () => {
@@ -97,19 +98,34 @@ describe("MatchupGrid", () => {
         const flipped = cells.filter((c) => c.verdict !== c.trickRoomVerdict).length;
         expect(html.match(/mu-changed/g)?.length).toBe(flipped);
         expect(html).toContain(`Trick Room changes ${flipped} of 36 verdicts`);
-        expect(html).toContain("Garchomp against Sneasler: Check, Loses at normal Speed.");
+        const sample = cells.find((c) => c.verdict !== c.trickRoomVerdict);
+        expect(sample).toBeDefined();
+        expect(html).toContain(
+            `${sample?.pokemon} against ${sample?.target}: ${sample?.trickRoomVerdict}, ${sample?.verdict} at normal Speed.`,
+        );
         expect(html).toMatch(/aria-pressed="true"[^>]*>Trick Room</);
         expect(grid(MATCHUP_FIXTURE)).toMatch(/aria-pressed="true"[^>]*>Normal Speed</);
     });
 
     it("switches the threats' answers with the toggle", () => {
-        // Torkoal: Garchomp and Rotom-Wash check it at normal Speed, nothing does under Trick Room.
-        const torkoal = MATCHUP_FIXTURE.threats.find((t) => t.pokemon === "Torkoal");
-        expect(torkoal?.answers.length).toBeGreaterThan(0);
-        expect(torkoal?.trickRoomAnswers.length).toBe(0);
-        const threatLine = (html: string) => html.match(/Torkoal<\/span>.*?<\/li>/)?.[0] ?? "";
-        expect(threatLine(grid(MATCHUP_FIXTURE))).toContain("Garchomp");
-        expect(threatLine(grid(MATCHUP_FIXTURE, true))).toContain("No answer");
+        // A threat in the summary whose answers differ between normal Speed and Trick Room.
+        const names = (list: { pokemon: string }[]) => list.map((a) => a.pokemon).join(",");
+        const threat = MATCHUP_FIXTURE.threats
+            .slice(0, 3)
+            .find((t) => names(t.answers) !== names(t.trickRoomAnswers));
+        expect(threat).toBeDefined();
+        if (!threat) return;
+        const lost = threat.answers.find(
+            (a) => !threat.trickRoomAnswers.some((b) => b.pokemon === a.pokemon),
+        );
+        const line = (html: string) =>
+            html.match(new RegExp(`${threat.pokemon}</span>.*?</li>`))?.[0] ?? "";
+        if (lost) {
+            expect(line(grid(MATCHUP_FIXTURE))).toContain(lost.pokemon);
+            expect(line(grid(MATCHUP_FIXTURE, true))).not.toContain(`${lost.pokemon} (`);
+        }
+        if (!threat.trickRoomAnswers.length)
+            expect(line(grid(MATCHUP_FIXTURE, true))).toContain("No answer");
     });
 
     it("marks the leads, the back and the bench, by slot", () => {

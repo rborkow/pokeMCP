@@ -39,13 +39,13 @@ export const MATCHUP_FIXTURE: MatchupData = {
       },
       {
         "kind": "coverage",
-        "subject": "Venusaur",
+        "subject": "Charizard-Mega-Y",
         "detail": "rank 4, weight 3 × best answer value 2",
         "points": 6
       },
       {
         "kind": "coverage",
-        "subject": "Charizard-Mega-Y",
+        "subject": "Venusaur",
         "detail": "rank 5, weight 2 × best answer value 2",
         "points": 4
       },
@@ -64,20 +64,20 @@ export const MATCHUP_FIXTURE: MatchupData = {
       {
         "kind": "disruption",
         "subject": "Incineroar",
-        "detail": "Incineroar Fake Out: Garchomp vs Sneasler: Loses -> Check if flinch grants partner first action; base Speed 169 vs 189",
+        "detail": "Incineroar Intimidate: Garchomp vs Sneasler: Attack stage 0 -> -1: Check -> Counter",
         "points": 1
       },
       {
         "kind": "member",
         "subject": "Incineroar",
         "points": 0,
-        "detail": "slot 0: 1 Counters, 0 Checks; only selected answer to none; informational, already counted in coverage"
+        "detail": "slot 0: 1 Counters, 1 Checks; only selected answer to none; informational, already counted in coverage"
       },
       {
         "kind": "member",
         "subject": "Garchomp",
         "points": 0,
-        "detail": "slot 1: 0 Counters, 3 Checks; only selected answer to none; informational, already counted in coverage"
+        "detail": "slot 1: 0 Counters, 4 Checks; only selected answer to none; informational, already counted in coverage"
       },
       {
         "kind": "member",
@@ -89,7 +89,7 @@ export const MATCHUP_FIXTURE: MatchupData = {
         "kind": "member",
         "subject": "Talonflame",
         "points": 0,
-        "detail": "slot 4: 0 Counters, 4 Checks; only selected answer to Sneasler; informational, already counted in coverage"
+        "detail": "slot 4: 0 Counters, 4 Checks; only selected answer to none; informational, already counted in coverage"
       }
     ],
     "pokemon": [
@@ -186,16 +186,27 @@ export const MATCHUP_FIXTURE: MatchupData = {
           "verdict": "Check"
         }
       ],
-      "trickRoomAnswers": [],
+      "trickRoomAnswers": [
+        {
+          "member": 2,
+          "pokemon": "Rotom-Wash",
+          "verdict": "Check"
+        }
+      ],
       "rank": 2,
       "weight": 5
     },
     {
       "opponent": 2,
       "pokemon": "Sneasler",
-      "beats": 3,
+      "beats": 2,
       "outspeeds": 4,
       "answers": [
+        {
+          "member": 1,
+          "pokemon": "Garchomp",
+          "verdict": "Check"
+        },
         {
           "member": 3,
           "pokemon": "Gardevoir",
@@ -217,26 +228,6 @@ export const MATCHUP_FIXTURE: MatchupData = {
           "member": 2,
           "pokemon": "Rotom-Wash",
           "verdict": "Check"
-        }
-      ],
-      "rank": 3,
-      "weight": 4
-    },
-    {
-      "opponent": 1,
-      "pokemon": "Venusaur",
-      "beats": 2,
-      "outspeeds": 3,
-      "answers": [
-        {
-          "member": 1,
-          "pokemon": "Garchomp",
-          "verdict": "Check"
-        },
-        {
-          "member": 3,
-          "pokemon": "Gardevoir",
-          "verdict": "Check"
         },
         {
           "member": 4,
@@ -244,20 +235,8 @@ export const MATCHUP_FIXTURE: MatchupData = {
           "verdict": "Check"
         }
       ],
-      "trickRoomAnswers": [
-        {
-          "member": 0,
-          "pokemon": "Incineroar",
-          "verdict": "Check"
-        },
-        {
-          "member": 5,
-          "pokemon": "Kingambit",
-          "verdict": "Check"
-        }
-      ],
-      "rank": 4,
-      "weight": 3
+      "rank": 3,
+      "weight": 4
     },
     {
       "opponent": 0,
@@ -288,8 +267,60 @@ export const MATCHUP_FIXTURE: MatchupData = {
           "verdict": "Check"
         },
         {
+          "member": 1,
+          "pokemon": "Garchomp",
+          "verdict": "Check"
+        },
+        {
           "member": 2,
           "pokemon": "Rotom-Wash",
+          "verdict": "Check"
+        }
+      ],
+      "rank": 4,
+      "weight": 3
+    },
+    {
+      "opponent": 1,
+      "pokemon": "Venusaur",
+      "beats": 1,
+      "outspeeds": 3,
+      "answers": [
+        {
+          "member": 0,
+          "pokemon": "Incineroar",
+          "verdict": "Check"
+        },
+        {
+          "member": 1,
+          "pokemon": "Garchomp",
+          "verdict": "Check"
+        },
+        {
+          "member": 3,
+          "pokemon": "Gardevoir",
+          "verdict": "Check"
+        },
+        {
+          "member": 4,
+          "pokemon": "Talonflame",
+          "verdict": "Check"
+        }
+      ],
+      "trickRoomAnswers": [
+        {
+          "member": 0,
+          "pokemon": "Incineroar",
+          "verdict": "Check"
+        },
+        {
+          "member": 4,
+          "pokemon": "Talonflame",
+          "verdict": "Check"
+        },
+        {
+          "member": 5,
+          "pokemon": "Kingambit",
           "verdict": "Check"
         }
       ],
@@ -354,15 +385,8 @@ export const MATCHUP_FIXTURE: MatchupData = {
       "provider": 0,
       "member": 1,
       "opponent": 2,
-      "kind": "Fake Out",
-      "detail": "Incineroar Fake Out: Garchomp vs Sneasler: Loses -> Check if flinch grants partner first action; base Speed 169 vs 189"
-    },
-    {
-      "provider": 0,
-      "member": 1,
-      "opponent": 2,
       "kind": "Intimidate",
-      "detail": "Incineroar Intimidate: Garchomp vs Sneasler: Attack stage 0 -> -1: Loses -> Counter"
+      "detail": "Incineroar Intimidate: Garchomp vs Sneasler: Attack stage 0 -> -1: Check -> Counter"
     },
     {
       "provider": 0,
@@ -938,7 +962,7 @@ export const MATCHUP_FIXTURE: MatchupData = {
           "theirTailwind": "slower",
           "trickRoom": "faster"
         },
-        "verdict": "Loses",
+        "verdict": "Check",
         "trickRoomVerdict": "Check"
       },
       {
@@ -1133,7 +1157,7 @@ export const MATCHUP_FIXTURE: MatchupData = {
           "trickRoom": "slower"
         },
         "verdict": "Check",
-        "trickRoomVerdict": "Loses"
+        "trickRoomVerdict": "Check"
       },
       {
         "member": 1,
@@ -1208,7 +1232,7 @@ export const MATCHUP_FIXTURE: MatchupData = {
           "theirTailwind": "slower",
           "trickRoom": "faster"
         },
-        "verdict": "Loses",
+        "verdict": "Check",
         "trickRoomVerdict": "Check"
       },
       {
@@ -1518,7 +1542,7 @@ export const MATCHUP_FIXTURE: MatchupData = {
           "trickRoom": "slower"
         },
         "verdict": "Check",
-        "trickRoomVerdict": "Loses"
+        "trickRoomVerdict": "Check"
       },
       {
         "member": 2,
@@ -1867,7 +1891,7 @@ export const MATCHUP_FIXTURE: MatchupData = {
           "trickRoom": "slower"
         },
         "verdict": "Check",
-        "trickRoomVerdict": "Loses"
+        "trickRoomVerdict": "Check"
       },
       {
         "member": 4,
@@ -1905,7 +1929,7 @@ export const MATCHUP_FIXTURE: MatchupData = {
           "trickRoom": "slower"
         },
         "verdict": "Check",
-        "trickRoomVerdict": "Loses"
+        "trickRoomVerdict": "Check"
       },
       {
         "member": 4,
@@ -2292,13 +2316,13 @@ export const MATCHUP_FIXTURE: MatchupData = {
         },
         {
           "kind": "coverage",
-          "subject": "Venusaur",
+          "subject": "Charizard-Mega-Y",
           "detail": "rank 4, weight 3 × best answer value 2",
           "points": 6
         },
         {
           "kind": "coverage",
-          "subject": "Charizard-Mega-Y",
+          "subject": "Venusaur",
           "detail": "rank 5, weight 2 × best answer value 2",
           "points": 4
         },
@@ -2318,7 +2342,7 @@ export const MATCHUP_FIXTURE: MatchupData = {
           "kind": "member",
           "subject": "Garchomp",
           "points": 0,
-          "detail": "slot 1: 0 Counters, 3 Checks; only selected answer to none; informational, already counted in coverage"
+          "detail": "slot 1: 0 Counters, 4 Checks; only selected answer to none; informational, already counted in coverage"
         },
         {
           "kind": "member",
@@ -2381,13 +2405,13 @@ export const MATCHUP_FIXTURE: MatchupData = {
         },
         {
           "kind": "coverage",
-          "subject": "Venusaur",
+          "subject": "Charizard-Mega-Y",
           "detail": "rank 4, weight 3 × best answer value 2",
           "points": 6
         },
         {
           "kind": "coverage",
-          "subject": "Charizard-Mega-Y",
+          "subject": "Venusaur",
           "detail": "rank 5, weight 2 × best answer value 2",
           "points": 4
         },
@@ -2407,7 +2431,7 @@ export const MATCHUP_FIXTURE: MatchupData = {
           "kind": "member",
           "subject": "Garchomp",
           "points": 0,
-          "detail": "slot 1: 0 Counters, 3 Checks; only selected answer to none; informational, already counted in coverage"
+          "detail": "slot 1: 0 Counters, 4 Checks; only selected answer to none; informational, already counted in coverage"
         },
         {
           "kind": "member",
@@ -2419,7 +2443,7 @@ export const MATCHUP_FIXTURE: MatchupData = {
           "kind": "member",
           "subject": "Talonflame",
           "points": 0,
-          "detail": "slot 4: 0 Counters, 4 Checks; only selected answer to Sneasler; informational, already counted in coverage"
+          "detail": "slot 4: 0 Counters, 4 Checks; only selected answer to none; informational, already counted in coverage"
         },
         {
           "kind": "member",
@@ -2441,7 +2465,7 @@ export const MATCHUP_FIXTURE: MatchupData = {
     "Exactly six per side. Species and Item Clause are not checked; use validate_team. Slot indices are zero-based.",
     "Level 50, full HP, single attacks in doubles, no screens, switching, move priority, accuracy or partner support in the base matrix; not a battle simulation. Spread attacks receive the doubles reduction.",
     "Each attacker uses its own entry weather/terrain; Speed uses a plain field. Unsupported attacks are omitted; null means no calculated damaging option, not proof of immunity to every move.",
-    "Shared find_counters verdicts: Counter takes strictly under 50% and likely KOs in <=2 uses; Check moves first and needs no more hits; Trade has equal counts or a potentially winning Speed tie; otherwise Loses. My KOs require >=50% probability; unproven incoming KOs use the earliest possible count. Display ranges never supply KO counts.",
+    "Shared find_counters verdicts: Counter takes strictly under 50% and likely KOs in <=2 uses; Check KOs first (fewer hits, or as many while moving first); Trade has equal counts or a potentially winning Speed tie; otherwise Loses. My KOs require >=50% probability; unproven incoming KOs use the earliest possible count. Display ranges never supply KO counts.",
     "Smogon does not publish doubles lead frequency: evaluate all 15 opposing lead pairs. Lead score counts pairwise OHKO and 2HKO opportunities, not coordinated targeting or a turn simulation.",
     "Support bonuses are conditional on successful setup, never guaranteed: Tailwind/Trick Room/one Speed drop must improve an order; Fake Out must improve a partner verdict if the target flinches; Intimidate must improve a partner verdict after its Attack drop. Bonuses are capped by category, not stacked. Opposing support, redirection, Protect, switching and setup reliability are not simulated.",
     "Base cost is at most 288 move calculations (36 pairs × four moves × two directions). Intimidate adds at most 288 cached calculations (both directions, since a lower Attack also weakens moves like Foul Play); subsets and leads never recalculate damage.",

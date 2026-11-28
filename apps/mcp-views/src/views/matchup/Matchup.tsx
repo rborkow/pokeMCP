@@ -30,7 +30,7 @@ const VERDICT_CLASS: Record<string, string> = {
 };
 const VERDICT_MEANING: [Verdict, string][] = [
     ["Counter", "takes under half, KOs in two"],
-    ["Check", "moves first, KOs at least as fast"],
+    ["Check", "KOs it before it KOs you"],
     ["Trade", "even; Speed decides"],
     ["Loses", "anything else"],
 ];
