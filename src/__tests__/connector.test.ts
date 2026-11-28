@@ -741,3 +741,36 @@ describe("find_counters public connector", () => {
         assert.equal(calls[calls.length - 1].reason, "unknown_pokemon");
     });
 });
+
+describe("plan_matchup public connector", () => {
+    let client: Client;
+    const calls: ConnectorCallInfo[] = [];
+    before(async () => {
+        client = await connect(makeEnv(), calls);
+    });
+    const set = {
+        pokemon: "Garchomp",
+        nature: "Hardy",
+        statPoints: {},
+        ability: "Rough Skin",
+        item: "none",
+        moves: ["Dragon Claw"],
+    };
+    it("returns a schema-validated plan", async () => {
+        const out = await data(client, "plan_matchup", {
+            team: Array(6).fill(set),
+            opponent: Array(6).fill(set),
+        });
+        assert.equal(out.matrix.length, 6);
+        assert.equal(out.bring.indices.length, 4);
+        assert.equal(out.lead.indices.length, 2);
+    });
+    it("reports unknown_pokemon", async () => {
+        const message = await errorText(client, "plan_matchup", {
+            team: Array(6).fill(set),
+            opponent: Array(6).fill("Notapokemonatall"),
+        });
+        assert.ok(message);
+        assert.equal(calls[calls.length - 1].reason, "unknown_pokemon");
+    });
+});

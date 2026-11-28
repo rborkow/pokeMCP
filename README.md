@@ -31,6 +31,7 @@ It needs no account and takes no personal information. Add it as a custom connec
 | `get_usage_momentum` | Find rising and falling Pokémon |
 | `calculate_damage` | Calculate damage for one move |
 | `compare_speed` | Compare Speed and turn order |
+| `plan_matchup` | Plan a six-versus-six matchup |
 | `find_counters` | Find answers to one threat |
 | `check_team_threats` | Check a team against the most-used Pokémon |
 <!-- AUTOGEN:TOOLS:END -->

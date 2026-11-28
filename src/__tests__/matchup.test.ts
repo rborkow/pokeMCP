@@ -664,3 +664,54 @@ describe("find_counters verdict rules", () => {
         assert.equal(verdict(hit(30, 4, 100), hit(48, 2, 6, 3), "faster"), "Check");
     });
 });
+
+describe("plan_matchup usage sets", () => {
+    it("accepts names alone and lists each filled field; preserves sheet fields", async () => {
+        const names = [
+            "Kingambit",
+            "Sneasler",
+            "Charizard-Mega-Y",
+            "Kingambit",
+            "Sneasler",
+            "Charizard-Mega-Y",
+        ];
+        const { data, error } = await call("plan_matchup", {
+            team: names.map((pokemon) => ({ pokemon })),
+            opponent: names,
+        });
+        assert.equal(error, null);
+        assert.equal(data.matrix.length, 6);
+        assert.ok(data.matrix.every((row: any[]) => row.length === 6));
+        assert.equal(data.bring.indices.length, 4);
+        assert.equal(data.lead.indices.length, 2);
+        assert.equal(data.alternatives.length, 2);
+        for (let i = 0; i < 6; i++) {
+            const notes = data.assumptions
+                .filter((s: string) => s.startsWith(`opponent[${i}]`))
+                .join(" ");
+            for (const field of [
+                /nature=/,
+                /statPoints=/,
+                /moves=/,
+                /ability was given/,
+                /item was given/,
+            ])
+                assert.match(notes, field);
+        }
+        const sheet = await call("plan_matchup", {
+            team: names.map((pokemon) => ({ pokemon })),
+            opponent: names.map((pokemon) => ({
+                pokemon,
+                nature: "Hardy",
+                item: "none",
+                ability: "Pressure",
+                moves: ["Protect"],
+            })),
+        });
+        assert.equal(sheet.error, null);
+        assert.equal(sheet.data.opponent[0].nature, "Hardy");
+        assert.equal(sheet.data.opponent[0].statPoints.hp, 32);
+        assert.equal(sheet.data.opponent[0].item, null);
+        assert.deepEqual(sheet.data.opponent[0].moves, ["Protect"]);
+    });
+});
