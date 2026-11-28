@@ -149,7 +149,7 @@ export function MatchupGrid({
 
     return (
         <div class="view matchup">
-            <h1 class="view-title">{headline(threats, brought, theirName)}</h1>
+            <h1 class="view-title">{headline(threats, brought, theirName, trickRoom)}</h1>
             <p class="view-subtitle">
                 {data.formatName ? `${data.formatName} · ` : ""}Single-hit calculations, not a
                 battle simulation.
@@ -492,15 +492,23 @@ function HitBlock({ title, hit, set }: { title: string; hit: Hit | null; set?: S
 }
 
 /** The finding to lead with: which of their Pokémon the chosen four cannot answer. */
-function headline(threats: Threat[], brought: Set<number>, name: (j: number) => string): string {
-    const open = threats.filter((t) => !t.answers.some((a) => brought.has(a.member)));
-    if (open.length === 0) return "Your four have an answer to each of their Pokémon";
+/** The finding, for the Speed mode on screen: it must agree with the cells and threats. */
+function headline(
+    threats: Threat[],
+    brought: Set<number>,
+    name: (j: number) => string,
+    trickRoom: boolean,
+): string {
+    const answersOf = (t: Threat) => (trickRoom ? t.trickRoomAnswers : t.answers);
+    const suffix = trickRoom ? " under Trick Room" : "";
+    const open = threats.filter((t) => !answersOf(t).some((a) => brought.has(a.member)));
+    if (open.length === 0) return `Your four have an answer to each of their Pokémon${suffix}`;
     const first = name(open[0].opponent);
     // "Your team" when nobody on the six answers it either, so the bench is not implied.
-    const who = open[0].answers.length === 0 ? "Your team has" : "Your four have";
+    const who = answersOf(open[0]).length === 0 ? "Your team has" : "Your four have";
     return open.length === 1
-        ? `${who} no answer to ${first}`
-        : `${who} no answer to ${first}, and ${open.length - 1} more of theirs go unanswered`;
+        ? `${who} no answer to ${first}${suffix}`
+        : `${who} no answer to ${first}${suffix}, and ${open.length - 1} more of theirs go unanswered`;
 }
 
 /** "Charizard-Mega-Y" may wrap after a hyphen, never inside a word. */

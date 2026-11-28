@@ -102,6 +102,18 @@ const isHit = (value: unknown) =>
         typeof value.maxPercent === "number");
 const hasIndices = (value: unknown) =>
     isObject(value) && Array.isArray(value.indices) && value.indices.every(Number.isInteger);
+const VERDICTS = ["Counter", "Check", "Trade", "Loses"];
+const isVerdict = (value: unknown) => typeof value === "string" && VERDICTS.includes(value);
+const SPEED_FIELDS = ["normal", "myTailwind", "theirTailwind", "trickRoom"];
+const isSpeed = (value: unknown) =>
+    isObject(value) && SPEED_FIELDS.every((field) => typeof value[field] === "string");
+const isAnswer = (value: unknown) =>
+    isObject(value) &&
+    Number.isInteger(value.member) &&
+    typeof value.pokemon === "string" &&
+    isVerdict(value.verdict);
+const isNote = (value: unknown) =>
+    isObject(value) && typeof value.kind === "string" && typeof value.detail === "string";
 
 /**
  * Whether a tool result has everything the grid reads. A host could hand the
@@ -124,9 +136,9 @@ export function isMatchupData(value: unknown): value is MatchupData {
                     isObject(cell) &&
                     typeof cell.pokemon === "string" &&
                     typeof cell.target === "string" &&
-                    typeof cell.verdict === "string" &&
-                    typeof cell.trickRoomVerdict === "string" &&
-                    isObject(cell.speed) &&
+                    isVerdict(cell.verdict) &&
+                    isVerdict(cell.trickRoomVerdict) &&
+                    isSpeed(cell.speed) &&
                     isHit(cell.deals) &&
                     isHit(cell.takes),
             ),
@@ -135,16 +147,27 @@ export function isMatchupData(value: unknown): value is MatchupData {
         cellsOk &&
         hasIndices(value.bring) &&
         hasIndices(value.lead) &&
+        isObject(value.lead) &&
+        Array.isArray(value.lead.opponent) &&
+        value.lead.opponent.every(Number.isInteger) &&
         hasIndices(value.back) &&
         Array.isArray(threats) &&
+        // One threat per opponent column: the headline's "answer to each" depends on it.
+        threats.length === width &&
+        new Set(threats.map((t) => (isObject(t) ? t.opponent : -1))).size === width &&
         threats.every(
             (t) =>
                 isObject(t) &&
                 Number.isInteger(t.opponent) &&
+                (t.opponent as number) >= 0 &&
+                (t.opponent as number) < width &&
                 typeof t.rank === "number" &&
                 Array.isArray(t.answers) &&
-                Array.isArray(t.trickRoomAnswers),
+                t.answers.every(isAnswer) &&
+                Array.isArray(t.trickRoomAnswers) &&
+                t.trickRoomAnswers.every(isAnswer),
         ) &&
-        Array.isArray(speedNotes)
+        Array.isArray(speedNotes) &&
+        speedNotes.every(isNote)
     );
 }

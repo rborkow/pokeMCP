@@ -23,6 +23,34 @@ const rowHeads = (html: string) =>
     );
 
 describe("isMatchupData", () => {
+    it("rejects nested shapes that would throw mid-render (from review)", () => {
+        const mutations: ((d: any) => void)[] = [
+            (d) => {
+                d.threats[0].answers = [null];
+            },
+            (d) => {
+                d.lead.opponent = "01";
+            },
+            (d) => {
+                d.speedNotes = [null];
+            },
+            (d) => {
+                d.matrix[0][0].speed = {};
+            },
+            (d) => {
+                d.threats = [];
+            },
+            (d) => {
+                d.matrix[1][1].verdict = "Maybe";
+            },
+        ];
+        for (const mutate of mutations) {
+            const data = clone() as any;
+            mutate(data);
+            expect(isMatchupData(data)).toBe(false);
+        }
+    });
+
     it("accepts a real result", () => {
         expect(isMatchupData(MATCHUP_FIXTURE)).toBe(true);
     });
@@ -249,5 +277,28 @@ describe("Matchup", () => {
         );
         expect(preset).toMatch(/aria-pressed="true"[^>]*>Trick Room</);
         expect(preset).toContain("Who moves first");
+    });
+});
+
+describe("headline", () => {
+    it("follows the Speed mode on screen, so it never contradicts the cells", () => {
+        // Every cell a Check normally and Loses under Trick Room.
+        const data = clone();
+        for (const row of data.matrix)
+            for (const cell of row) {
+                cell.verdict = "Check";
+                cell.trickRoomVerdict = "Loses";
+            }
+        for (const threat of data.threats) {
+            threat.answers = data.matrix.map((row) => ({
+                member: row[threat.opponent].member,
+                pokemon: row[threat.opponent].pokemon,
+                verdict: "Check" as const,
+            }));
+            threat.trickRoomAnswers = [];
+        }
+        const title = (html: string) => html.match(/<h1 class="view-title">(.*?)<\/h1>/)?.[1] ?? "";
+        expect(title(grid(data))).toBe("Your four have an answer to each of their Pokémon");
+        expect(title(grid(data, true))).toMatch(/^Your team has no answer to .* under Trick Room/);
     });
 });
