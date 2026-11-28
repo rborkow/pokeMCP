@@ -940,9 +940,10 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
             "the threat's hardest hit into it, its hardest hit into the threat, and who moves " +
             "first, then gives a verdict. Counter: takes under " +
             `${COUNTER_MAX_TAKEN_PERCENT}% from the threat's hardest hit, so it survives two, and ` +
-            `KOs the threat in ${COUNTER_MAX_KO_HITS} hits or fewer. Check: moves first and KOs ` +
-            "the threat in no more hits than the threat needs to KO it. Trade: each needs the " +
-            "same number of hits and Speed decides, or their Speed is tied. Loses: anything " +
+            `KOs the threat in ${COUNTER_MAX_KO_HITS} hits or fewer. Check: KOs the threat before ` +
+            "it can KO back, needing fewer hits than the threat, or as many while moving first. " +
+            "Trade: each needs the " +
+            "same number of hits, so Speed decides (or a Speed tie leaves it open). Loses: anything " +
             `else. A KO in N hits counts only when the damage rolls make it at least ${LIKELY_KO_PERCENT}% ` +
             "likely, ignoring accuracy; when recovery or chip damage is in play (Leftovers, " +
             "weather, status), the calculator's own KO chance must reach that. " +
