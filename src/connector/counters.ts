@@ -58,7 +58,9 @@ export function verdict(takes: Hit | null, deals: Hit | null, order: Order): Ver
     if (outgoing <= COUNTER_MAX_KO_HITS && (takes?.maxPercent ?? 0) < COUNTER_MAX_TAKEN_PERCENT)
         return "Counter";
     if (!Number.isFinite(outgoing)) return "Loses";
-    if (order === "faster" && outgoing <= incoming) return "Check";
+    // Check: KOs the threat before it can KO back. Moving first, it may need as many hits as
+    // the threat; moving second, it needs fewer (it takes a hit, survives, and KOs).
+    if (outgoing < incoming || (order === "faster" && outgoing <= incoming)) return "Check";
     if (outgoing === incoming || (order === "tied" && outgoing <= incoming)) return "Trade";
     return "Loses";
 }
@@ -97,7 +99,7 @@ export async function findCounters(
         "verdict KO counts use the smallest 1–9 uses with at least 50% cumulative KO probability, ignoring accuracy; display KO counts remain the calculator's earliest possible KO",
         "with recovery or residual effects, a KO counts as likely only when the calculator reports a numeric chance of at least 50%; an unproven KO by the team member doesn't count, and an unproven KO by the threat is assumed at its earliest possible count",
         "Counter means takes under 50% from the hardest hit, so two maximum rolls can't KO it, and KOs within 2 hits",
-        "Check means moves first and needs no more KO hits than the threat; otherwise equal KO hits are Trade; a Speed tie prevents Check and is Trade when it could win moving first",
+        "Check means KOs the threat before it can KO back: fewer KO hits than the threat, or as many while moving first; otherwise equal KO hits are Trade; a Speed tie prevents Check and is Trade when it could win moving first",
         "margin is deals maximum HP percent minus takes maximum HP percent; rank Counter then Check then Trade then Loses, with larger margin first",
         `verdicts use ${args.trickRoom ? "Trick Room" : "normal Speed order"}; both Speed orders and verdicts are reported`,
     ];
