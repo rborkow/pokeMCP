@@ -667,6 +667,18 @@ describe("find_counters verdict rules", () => {
         assert.equal(verdict(hit(34, 3, 100), hit(48, 2, 6, 3), "slower"), "Trade");
     });
 
+    it("handles Speed ties and moves that can't KO", () => {
+        // A tie with fewer hits needed still wins whoever moves first (it takes over half,
+        // so it isn't a Counter).
+        assert.equal(verdict(hit(60, 2, 100), hit(110, 1, 100), "tied"), "Check");
+        // A tie with equal hits is open.
+        assert.equal(verdict(hit(55, 2, 100), hit(55, 2, 100), "tied"), "Trade");
+        // No KO within nine hits for the member: it can't win, whatever the Speed.
+        assert.equal(verdict(hit(20, 5, 100), hit(5, null, null), "faster"), "Loses");
+        // The threat can't KO it at all, and it can: it wins even moving second.
+        assert.equal(verdict(hit(5, null, null), hit(30, 4, 100), "slower"), "Check");
+    });
+
     it("a slower Pokémon that survives a hit and KOs back is a Check, not a loss", () => {
         // Garchomp vs Sneasler: Earthquake OHKOs (124-147%), Close Combat takes 59-69%, and
         // Garchomp moves second. Sneasler hits first, Garchomp survives and KOs.

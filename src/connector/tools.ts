@@ -942,7 +942,7 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
             `KOs the threat in ${COUNTER_MAX_KO_HITS} hits or fewer. Check: KOs the threat before ` +
             "it can KO back, needing fewer hits than the threat, or as many while moving first. " +
             "Trade: each needs the " +
-            "same number of hits and Speed decides, or their Speed is tied. Loses: anything " +
+            "same number of hits, so Speed decides (or a Speed tie leaves it open). Loses: anything " +
             `else. A KO in N hits counts only when the damage rolls make it at least ${LIKELY_KO_PERCENT}% ` +
             "likely, ignoring accuracy; when recovery or chip damage is in play (Leftovers, " +
             "weather, status), the calculator's own KO chance must reach that. " +

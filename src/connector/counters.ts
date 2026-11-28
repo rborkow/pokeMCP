@@ -99,7 +99,7 @@ export async function findCounters(
         "verdict KO counts use the smallest 1–9 uses with at least 50% cumulative KO probability, ignoring accuracy; display KO counts remain the calculator's earliest possible KO",
         "with recovery or residual effects, a KO counts as likely only when the calculator reports a numeric chance of at least 50%; an unproven KO by the team member doesn't count, and an unproven KO by the threat is assumed at its earliest possible count",
         "Counter means takes under 50% from the hardest hit, so two maximum rolls can't KO it, and KOs within 2 hits",
-        "Check means KOs the threat before it can KO back: fewer KO hits than the threat, or as many while moving first; otherwise equal KO hits are Trade; a Speed tie prevents Check and is Trade when it could win moving first",
+        "Check means KOs the threat before it can KO back: fewer KO hits than the threat, or as many while moving first; otherwise equal KO hits are Trade (Speed decides); with equal hits a Speed tie is also Trade",
         "margin is deals maximum HP percent minus takes maximum HP percent; rank Counter then Check then Trade then Loses, with larger margin first",
         `verdicts use ${args.trickRoom ? "Trick Room" : "normal Speed order"}; both Speed orders and verdicts are reported`,
     ];
@@ -269,7 +269,7 @@ export async function findCounters(
         setText(row.set),
         `Moves: ${row.moves.join(", ") || "none"}`,
         `Takes ${hitText(row.takes)}; deals ${hitText(row.deals)}`,
-        `Speed ${row.speed.member} vs ${row.speed.threat}: ${row.speed.normal} normally (${row.normalVerdict}), ${row.speed.trickRoom} under Trick Room (${row.trickRoomVerdict})${row.speed.normal === "tied" ? "; Speed tie: cannot claim Check" : ""}`,
+        `Speed ${row.speed.member} vs ${row.speed.threat}: ${row.speed.normal} normally (${row.normalVerdict}), ${row.speed.trickRoom} under Trick Room (${row.trickRoomVerdict})${row.speed.normal === "tied" ? "; Speed tie: with equal hits, neither side is sure to move first" : ""}`,
     ];
     return ok(
         data,
