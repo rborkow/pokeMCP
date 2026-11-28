@@ -216,7 +216,7 @@ export async function planMatchup(
         "Shared find_counters verdicts: Counter takes strictly under 50% and likely KOs in <=2 uses; Check moves first and needs no more hits; Trade has equal counts or a potentially winning Speed tie; otherwise Loses. My KOs require >=50% probability; unproven incoming KOs use the earliest possible count. Display ranges never supply KO counts.",
         "Smogon does not publish doubles lead frequency: evaluate all 15 opposing lead pairs. Lead score counts pairwise OHKO and 2HKO opportunities, not coordinated targeting or a turn simulation.",
         "Support bonuses are conditional on successful setup, never guaranteed: Tailwind/Trick Room/one Speed drop must improve an order; Fake Out must improve a partner verdict if the target flinches; Intimidate must improve a partner verdict after its Attack drop. Bonuses are capped by category, not stacked. Opposing support, redirection, Protect, switching and setup reliability are not simulated.",
-        "Base cost is at most 288 move calculations (36 pairs × four moves × two directions). Intimidate adds at most 144 cached incoming calculations; subsets and leads never recalculate damage.",
+        "Base cost is at most 288 move calculations (36 pairs × four moves × two directions). Intimidate adds at most 288 cached calculations (both directions, since a lower Attack also weakens moves like Foul Play); subsets and leads never recalculate damage.",
         "Missing nature/stat points are filled independently from the usage spread, preserving supplied fields; missing usage falls back to resolveSet defaults. Usage components may not co-occur. Missing moves use the four most-used moves, including status moves.",
     ];
     async function prepare(raw: Member | string, side: string, slot: number) {
@@ -340,7 +340,7 @@ export async function planMatchup(
         ["Loses", "Trade", "Check", "Counter"].indexOf(after) >
         ["Loses", "Trade", "Check", "Counter"].indexOf(before);
     // Additional Intimidate calculations are cached per cell, never per subset/lead.
-    const intimidated = new Map<string, Hit | null>();
+    const intimidated = new Map<string, { takes: Hit | null; deals: Hit | null }>();
     for (const [p, provider] of team.entries())
         for (const [i, row] of matrix.entries())
             for (const [j, c] of row.entries()) {
@@ -430,12 +430,16 @@ export async function planMatchup(
                     if (!intimidated.has(key)) {
                         const pokemon = target.self.pokemon.clone();
                         pokemon.boosts.atk = -1;
-                        intimidated.set(
-                            key,
-                            bestHit(gen, calc, [{ ...target.self, pokemon }], [team[i].self], true),
-                        );
+                        const lowered = { ...target.self, pokemon };
+                        // Both directions: the target's lower Attack also weakens moves that
+                        // use it against itself, such as Foul Play.
+                        intimidated.set(key, {
+                            takes: bestHit(gen, calc, [lowered], [team[i].self], true),
+                            deals: bestHit(gen, calc, [team[i].self], [lowered], true),
+                        });
                     }
-                    const changed = verdict(intimidated.get(key), c.deals, c.speed.normal);
+                    const after = intimidated.get(key);
+                    const changed = verdict(after.takes, after.deals, c.speed.normal);
                     if (better(c.verdict, changed))
                         add("Intimidate", `Attack stage 0 -> -1: ${c.verdict} -> ${changed}`);
                 }
@@ -509,8 +513,45 @@ export async function planMatchup(
         team: team.map((m) => ({ ...m.set.echo, moves: m.moves })),
         opponent: opponents.map((m) => ({ ...m.set.echo, moves: m.moves })),
     };
-    return ok(
-        data,
-        `Bring ${data.bring.pokemon.join(", ")} (${chosen.score}); lead ${data.lead.pokemon.join(", ")} (worst case ${lead.score}); back ${data.back.pokemon.join(", ")}. Deterministic calculations, not a battle simulation.\n${chosen.reasons.map((r) => `${r.subject}: ${r.detail} = ${r.points}`).join("\n")}\n${assumptions.join("\n")}`,
-    );
+    // The text carries the same plan as structuredContent, for clients that only read text.
+    const range = (h: Hit | null) => (h ? `${h.minPercent}–${h.maxPercent}%` : "no damage");
+    const answers = (list: { pokemon: string; verdict: string }[]) =>
+        list.map((a) => `${a.pokemon} (${a.verdict})`).join(", ") || "none";
+    const text = [
+        `**Bring** ${data.bring.pokemon.join(", ")} (score ${chosen.score}); **lead** ` +
+            `${data.lead.pokemon.join(", ")} (worst case ${lead.score}); **back** ` +
+            `${data.back.pokemon.join(", ")}. Deterministic calculations, not a battle simulation.`,
+        "",
+        "**Their threats** (most dangerous first):",
+        ...data.threats.map(
+            (t) =>
+                `${t.rank}. ${t.pokemon}: beats ${t.beats} of yours, outspeeds ${t.outspeeds}; ` +
+                `answered by ${answers(t.answers)}; under Trick Room ${answers(t.trickRoomAnswers)}`,
+        ),
+        "",
+        "**Why this bring:**",
+        ...chosen.reasons.map((r) => `- ${r.subject}: ${r.detail} (${r.points})`),
+        "",
+        "**Why this lead:**",
+        ...lead.reasons.map((r) => `- ${r.subject}: ${r.detail} (${r.points})`),
+        "",
+        "**Alternatives:**",
+        ...data.alternatives.map((a) => `- ${a.pokemon.join(", ")} (score ${a.score})`),
+        "",
+        "**Matchups** (verdict; your hardest hit / theirs):",
+        ...matrix.map(
+            (row) =>
+                `${row[0].pokemon}: ` +
+                row
+                    .map((c) => `${c.target} ${c.verdict} (${range(c.deals)} / ${range(c.takes)})`)
+                    .join("; "),
+        ),
+        ...(support.length
+            ? ["", "**Support:**", ...support.map((n) => `- ${n.kind}: ${n.detail}`)]
+            : []),
+        "",
+        "**Assumptions:**",
+        ...assumptions.map((a) => `- ${a}`),
+    ].join("\n");
+    return ok(data, text);
 }

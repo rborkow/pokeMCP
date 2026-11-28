@@ -851,7 +851,8 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
             "alone or as an open team sheet; anything missing comes from usage statistics, and " +
             "the result lists what was filled in. Every pair is judged with find_counters' " +
             "verdicts (Counter, Check, Trade, Loses), counting the team's KOs only when they are " +
-            "at least 50% likely and the opponent's from the earliest possible hit. The bring " +
+            "at least 50% likely and the opponent's from the earliest possible hit unless a " +
+            "likely count can be shown. The bring " +
             "favours the four that leave none of the opponent's biggest threats unanswered and " +
             "heavily avoids a four that one opponent can beat three of; Tailwind, Trick Room, " +
             "Icy Wind, Electroweb, Fake Out and Intimidate earn a small bonus only when they " +

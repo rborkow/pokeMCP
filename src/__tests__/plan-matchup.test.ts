@@ -158,3 +158,87 @@ it("lead scoring credits likely 2HKOs, which two attackers can finish in one tur
     // Without the 2HKOs only Speed separates the cells.
     assert.equal(scoreLead([0, 1], [0, 1], m).score, base - 4 * PLAN_SCORE.leadTwoHit);
 });
+
+// The reviewer's fixture: Intimidate lowers Scizor's Attack, which also weakens Foul Play.
+const set = (
+    pokemon: string,
+    ability: string,
+    item: string,
+    nature: string,
+    statPoints: Record<string, number>,
+    moves: string[],
+) => ({ pokemon, ability, item, nature, statPoints, moves });
+const intimidateFixture = () => {
+    const shared = [
+        set("Incineroar", "Intimidate", "Sitrus Berry", "Careful", { hp: 32, spd: 32 }, [
+            "Flare Blitz",
+            "Knock Off",
+            "Parting Shot",
+            "Protect",
+        ]),
+        set("Garchomp", "Rough Skin", "Lum Berry", "Jolly", { atk: 32, spe: 32 }, [
+            "Earthquake",
+            "Dragon Claw",
+            "Rock Slide",
+            "Protect",
+        ]),
+        set("Rotom-Wash", "Levitate", "Leftovers", "Modest", { hp: 32, spa: 32 }, [
+            "Hydro Pump",
+            "Thunderbolt",
+            "Will-O-Wisp",
+            "Protect",
+        ]),
+        set("Gardevoir", "Trace", "Choice Scarf", "Timid", { spa: 32, spe: 32 }, [
+            "Moonblast",
+            "Psychic",
+            "Shadow Ball",
+            "Thunderbolt",
+        ]),
+        set("Talonflame", "Gale Wings", "Focus Sash", "Jolly", { atk: 32, spe: 32 }, [
+            "Brave Bird",
+            "Flare Blitz",
+            "Tailwind",
+            "Protect",
+        ]),
+    ];
+    return {
+        team: [
+            set("Grimmsnarl", "Prankster", "Light Clay", "Careful", { hp: 32, spd: 32 }, [
+                "Foul Play",
+                "Reflect",
+                "Light Screen",
+                "Thunder Wave",
+            ]),
+            ...shared,
+        ],
+        opponent: [
+            set("Scizor-Mega", "Technician", "Scizorite", "Adamant", { atk: 32, spe: 32 }, [
+                "Iron Head",
+                "Bullet Punch",
+                "U-turn",
+                "Protect",
+            ]),
+            ...shared,
+        ],
+    };
+};
+
+it("Intimidate recalculates both directions, so a weaker Foul Play isn't credited", async () => {
+    const result = await planMatchup(intimidateFixture(), {} as Env);
+    assert.ok(result.ok);
+    if (!result.ok) return;
+    const claim = result.data.speedNotes.find(
+        (n: { kind: string; detail: string }) =>
+            n.kind === "Intimidate" && /Grimmsnarl vs Scizor-Mega/.test(n.detail),
+    );
+    assert.equal(claim, undefined, "Foul Play loses power too, so the verdict stays Loses");
+});
+
+it("the text answer carries the threats, the lead's reasons and the matchups", async () => {
+    const result = await planMatchup(intimidateFixture(), {} as Env);
+    assert.ok(result.ok);
+    if (!result.ok) return;
+    for (const heading of ["Their threats", "Why this bring", "Why this lead", "Matchups"])
+        assert.match(result.text, new RegExp(heading));
+    for (const threat of result.data.threats) assert.match(result.text, new RegExp(threat.pokemon));
+});
