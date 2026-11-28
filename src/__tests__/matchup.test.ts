@@ -628,14 +628,28 @@ describe("find_counters", () => {
 
 describe("find_counters verdict rules", () => {
     // Only the fields the verdict reads; the rest of a Hit doesn't matter here.
-    const hit = (maxPercent: number, hits: number | null, chancePercent: number | null) =>
-        ({ move: "Test", minPercent: maxPercent - 5, maxPercent, hits, chancePercent }) as Hit;
+    const hit = (
+        maxPercent: number,
+        hits: number | null,
+        chancePercent: number | null,
+        likely = chancePercent !== null && chancePercent >= 50 ? hits : null,
+    ) =>
+        ({
+            move: "Test",
+            minPercent: maxPercent - 5,
+            maxPercent,
+            hits,
+            chancePercent,
+            likelyKoHits: likely,
+        }) as Hit;
 
     it("counts a KO in N hits only when it is likely", () => {
         assert.equal(likelyKoHits(hit(60, 2, 100)), 2);
         assert.equal(likelyKoHits(hit(60, 2, 50)), 2);
-        assert.equal(likelyKoHits(hit(48, 2, 6)), 3, "a 6% 2HKO is not a 2HKO to rely on");
+        assert.equal(likelyKoHits(hit(48, 2, 6, 3)), 3, "a 6% 2HKO is not a 2HKO to rely on");
         assert.equal(likelyKoHits(hit(10, null, null)), Number.POSITIVE_INFINITY);
+        assert.equal(likelyKoHits(hit(48, 2, 6)), Number.POSITIVE_INFINITY);
+        assert.equal(likelyKoHits(hit(20, 7, null)), Number.POSITIVE_INFINITY);
     });
 
     it("needs strictly under half to be a Counter, so two max rolls can't KO it", () => {
@@ -646,7 +660,7 @@ describe("find_counters verdict rules", () => {
 
     it("doesn't call a lucky-roll KO a Counter", () => {
         // KOs in two only on a 6% roll, so it really needs three.
-        assert.equal(verdict(hit(30, 4, 100), hit(48, 2, 6), "slower"), "Loses");
-        assert.equal(verdict(hit(30, 4, 100), hit(48, 2, 6), "faster"), "Check");
+        assert.equal(verdict(hit(30, 4, 100), hit(48, 2, 6, 3), "slower"), "Loses");
+        assert.equal(verdict(hit(30, 4, 100), hit(48, 2, 6, 3), "faster"), "Check");
     });
 });

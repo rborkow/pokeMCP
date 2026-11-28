@@ -28,19 +28,15 @@ type Verdict = keyof typeof RANK;
 type Member = SetInput & { moves?: string[] };
 type Order = "faster" | "slower" | "tied";
 
-/** A KO in N hits counts only when it is at least this likely; otherwise it takes N + 1. */
+/** Verdicts require at least this probability of KO within the reported count. */
 export const LIKELY_KO_PERCENT = 50;
 
-/**
- * Hits to KO that a player can rely on. The calculator reports the fewest hits that can KO at
- * all, even on a 6% roll; a verdict built on that would call lucky rolls a counter.
+/** Use bestHit's independently established count, never infer from display text,
+ * a missing probability, rounded percentages, or an unverified N + 1 fallback.
+ * Null (including no KO within nine uses) is unreachable for verdict purposes.
  */
 export function likelyKoHits(hit: Hit | null): number {
-    if (!hit?.hits) return Number.POSITIVE_INFINITY;
-    const chance = hit.chancePercent;
-    return chance === null || chance === undefined || chance >= LIKELY_KO_PERCENT
-        ? hit.hits
-        : hit.hits + 1;
+    return hit?.likelyKoHits ?? Number.POSITIVE_INFINITY;
 }
 
 export function verdict(takes: Hit | null, deals: Hit | null, order: Order): Verdict {
@@ -86,8 +82,9 @@ export async function findCounters(
         "each attacker uses its own entry weather or terrain; Speed uses a plain field (no weather, terrain or Tailwind)",
         "moves the calculator cannot handle are omitted; a null hit means no calculated damaging option",
         "Intimidate and Fake Out are not counted; status moves and move priority are ignored (Speed compares equal-priority moves)",
-        "KO hits use the calculator's earliest possible KO (any nonzero chance), falling back to ceiling(HP / maximum damage); damage rolls can change the outcome",
-        "Counter means takes at most 50% and KOs within 2 hits; exactly 50% can KO in two hits",
+        "verdict KO counts use the smallest 1–9 uses with at least 50% cumulative KO probability, ignoring accuracy; display KO counts remain the calculator's earliest possible KO",
+        "recovery or residual effects require the calculator to report a numeric KO chance of at least 50%; otherwise the verdict KO count is unreachable",
+        "Counter means takes under 50% from the hardest hit, so two maximum rolls can't KO it, and KOs within 2 hits",
         "Check means moves first and needs no more KO hits than the threat; otherwise equal KO hits are Trade; a Speed tie prevents Check and is Trade when it could win moving first",
         "margin is deals maximum HP percent minus takes maximum HP percent; rank Counter then Check then Trade then Loses, with larger margin first",
         `verdicts use ${args.trickRoom ? "Trick Room" : "normal Speed order"}; both Speed orders and verdicts are reported`,
@@ -193,7 +190,7 @@ export async function findCounters(
                 "data_unavailable",
             );
         }
-        const seen = new Set(team.map((row) => speciesKey(row.pokemon)));
+        const excluded = new Set(team.map((row) => speciesKey(row.pokemon)));
         // Slice before filtering: the search never expands beyond the top 40 usage entries.
         for (const [name, usage] of Object.entries(index.pokemon)
             .sort(([, a], [, b]) => b - a)
@@ -208,8 +205,7 @@ export async function findCounters(
             )
                 continue;
             const key = speciesKey(name);
-            if (seen.has(key)) continue;
-            seen.add(key);
+            if (excluded.has(key)) continue;
             const member = await prepare({ pokemon: name });
             if (member.ok === false) {
                 assumptions.push(
@@ -224,6 +220,15 @@ export async function findCounters(
             }
         }
         suggestions.sort(rank);
+        const seen = new Set<string>();
+        for (let i = 0; i < suggestions.length; ) {
+            const key = speciesKey(suggestions[i].pokemon);
+            if (seen.has(key)) suggestions.splice(i, 1);
+            else {
+                seen.add(key);
+                i++;
+            }
+        }
         suggestions.splice(args.limit ?? DEFAULT_COUNTER_LIMIT);
         assumptions.push(
             `suggestions search only the top ${MAX_COUNTER_CANDIDATES} usage entries, legal species not on the team, one form per species; independently most common set components may not co-occur`,
@@ -241,7 +246,7 @@ export async function findCounters(
     };
     const hitText = (hit: Hit | null) =>
         hit
-            ? `${hit.move}: ${hit.minPercent}–${hit.maxPercent}% (${hit.knockOut}; KO hits ${hit.hits ?? "unknown"}, chance ${hit.chancePercent ?? "unknown"}%)${hit.conditions ? `; ${hit.conditions}` : ""}`
+            ? `${hit.move}: ${hit.minPercent}–${hit.maxPercent}% (${hit.knockOut}; KO hits ${hit.hits ?? "unknown"}, chance ${hit.chancePercent ?? "unknown"}%; verdict KO hits ${hit.likelyKoHits ?? "unreachable"})${hit.conditions ? `; ${hit.conditions}` : ""}`
             : "no damaging option";
     const setText = (set: ResolvedSet["echo"]) =>
         `${set.pokemon}: ${set.nature}; points ${JSON.stringify(set.statPoints)}; stats ${JSON.stringify(set.stats)}; ${set.ability}; ${set.item ?? "no item"}`;

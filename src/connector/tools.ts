@@ -265,6 +265,10 @@ const counterHitOutput = hitOutput
     .extend({
         hits: z.number().nullable(),
         chancePercent: z.number().nullable(),
+        likelyKoHits: z
+            .number()
+            .nullable()
+            .describe("Smallest >=50% KO count within nine uses; null means unreachable"),
     })
     .nullable();
 const counterVerdict = z.enum(["Counter", "Check", "Trade", "Loses"]);
@@ -825,7 +829,9 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
             `KOs the threat in ${COUNTER_MAX_KO_HITS} hits or fewer. Check: moves first and KOs ` +
             "the threat in no more hits than the threat needs to KO it. Trade: each needs the " +
             "same number of hits and Speed decides, or their Speed is tied. Loses: anything " +
-            `else. A KO in N hits counts only when it is at least ${LIKELY_KO_PERCENT}% likely. ` +
+            `else. A KO in N hits counts only when the damage rolls make it at least ${LIKELY_KO_PERCENT}% ` +
+            "likely, ignoring accuracy; when recovery or chip damage is in play (Leftovers, " +
+            "weather, status), the calculator's own KO chance must reach that. " +
             "Verdicts are given for normal Speed order and for Trick Room. If no team member is " +
             "a Counter or Check, or no team is given, it suggests Counters and Checks from the " +
             `${MAX_COUNTER_CANDIDATES} most used Pokémon in the regulation. Missing set details ` +
