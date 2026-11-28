@@ -929,6 +929,7 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
             team: z.array(setOutput.extend({ moves: z.array(z.string()) })).length(6),
             opponent: z.array(setOutput.extend({ moves: z.array(z.string()) })).length(6),
         },
+        view: "matchup",
         run: (args, env) => planMatchup(args, env),
     },
     {

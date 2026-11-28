@@ -88,7 +88,8 @@ connector/tools.ts      CONNECTOR_TOOLS: name, title, description, input/output 
 ### MCP Apps views (`connector/views/`)
 
 Hosts that support the MCP Apps extension (`io.modelcontextprotocol/ui`) render a view beside a
-tool's result. Today one tool has one: `analyze_team_types` → `type-chart`.
+tool's result. Two tools have one: `analyze_team_types` → `type-chart` and `plan_matchup` →
+`matchup`.
 
 - Gated by the `MCP_APPS` Worker variable: "on" in development and staging, "off" in production
   until the views have been checked in Claude, ChatGPT and VS Code. Off, the server offers no

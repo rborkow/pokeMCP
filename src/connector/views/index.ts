@@ -26,6 +26,12 @@ export const UI_EXTENSION_ID = "io.modelcontextprotocol/ui";
 
 /** Directory-facing description of each view, shown by hosts that list resources. */
 const VIEW_INFO: Record<ViewName, { title: string; description: string }> = {
+    matchup: {
+        title: "Matchup plan",
+        description:
+            "Grid of each of your six against each of theirs, with the four to bring and the " +
+            "two to lead marked, from plan_matchup.",
+    },
     "type-chart": {
         title: "Defensive type chart",
         description:
