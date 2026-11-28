@@ -496,9 +496,11 @@ function headline(threats: Threat[], brought: Set<number>, name: (j: number) => 
     const open = threats.filter((t) => !t.answers.some((a) => brought.has(a.member)));
     if (open.length === 0) return "Your four have an answer to each of their Pokémon";
     const first = name(open[0].opponent);
+    // "Your team" when nobody on the six answers it either, so the bench is not implied.
+    const who = open[0].answers.length === 0 ? "Your team has" : "Your four have";
     return open.length === 1
-        ? `Your four have no answer to ${first}`
-        : `Your four have no answer to ${open.length} of theirs, led by ${first}`;
+        ? `${who} no answer to ${first}`
+        : `${who} no answer to ${first}, and ${open.length - 1} more of theirs go unanswered`;
 }
 
 /** "Charizard-Mega-Y" may wrap after a hyphen, never inside a word. */

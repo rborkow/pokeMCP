@@ -131,7 +131,11 @@ describe("MatchupGrid", () => {
         const html = grid(MATCHUP_FIXTURE);
         const ranks = [...html.matchAll(/class="mu-rank[^"]*">Threat (\d)</g)].map((m) => m[1]);
         expect(ranks).toEqual(["1", "2", "3", "4", "5", "6"]);
-        expect(html).toContain('<h1 class="view-title">Your four have no answer to Dragonite</h1>');
+        // Nobody on the six answers Dragonite, so the headline says "team", not "four".
+        expect(html).toContain('<h1 class="view-title">Your team has no answer to Dragonite</h1>');
+        const benched = clone();
+        benched.threats[0].answers = [{ member: 3, pokemon: "Gardevoir", verdict: "Check" }];
+        expect(grid(benched)).toContain("Your four have no answer to Dragonite</h1>");
     });
 
     it("tells two slots with the same name apart", () => {
