@@ -720,3 +720,24 @@ describe("getFullLearnset", () => {
         assert.equal(getFullLearnset("Notamon"), undefined);
     });
 });
+
+describe("find_counters public connector", () => {
+    it("returns a schema-validated named threat and records unknown Pokémon failures", async () => {
+        const calls: ConnectorCallInfo[] = [];
+        const client = await connect(makeEnv(), calls);
+        const result = await data(client, "find_counters", {
+            threat: { pokemon: "Kingambit" },
+            suggest: false,
+        });
+        assert.equal(result.threat.pokemon, "Kingambit");
+        assert.equal(result.threat.item, "Chople Berry");
+        assert.deepEqual(result.team, []);
+        assert.deepEqual(result.suggestions, []);
+        assert.equal(result.bestAnswer, null);
+        const message = await errorText(client, "find_counters", {
+            threat: { pokemon: "Notapokemonatall" },
+        });
+        assert.doesNotMatch(message, INTERNAL);
+        assert.equal(calls[calls.length - 1].reason, "unknown_pokemon");
+    });
+});

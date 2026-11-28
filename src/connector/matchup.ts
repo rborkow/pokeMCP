@@ -36,7 +36,7 @@ type CalcPokemon = any;
 
 let calcPromise: Promise<{ calc: Calc; getFinalSpeed: Calc }> | null = null;
 
-function loadCalc(): Promise<{ calc: Calc; getFinalSpeed: Calc }> {
+export function loadCalc(): Promise<{ calc: Calc; getFinalSpeed: Calc }> {
     if (!calcPromise) {
         calcPromise = (async () => {
             // The package is CommonJS: depending on the loader its exports sit
@@ -125,7 +125,7 @@ export interface SetEcho {
     status?: string;
 }
 
-interface ResolvedSet {
+export interface ResolvedSet {
     pokemon: CalcPokemon;
     echo: SetEcho;
     /** What was filled in because the caller left it out. */
@@ -244,7 +244,7 @@ function findSpecies(gen: Calc, input: string): Resolved<FoundSpecies> {
     };
 }
 
-async function loadTypical(
+export async function loadTypical(
     name: string,
     regulation: RegulationSet,
     env: Env,
@@ -260,7 +260,7 @@ async function loadTypical(
     return typical;
 }
 
-async function resolveSet(
+export async function resolveSet(
     gen: Calc,
     calc: Calc,
     input: SetInput,
@@ -418,7 +418,7 @@ async function resolveSet(
     };
 }
 
-function buildField(calc: Calc, field: FieldInput = {}): Calc {
+export function buildField(calc: Calc, field: FieldInput = {}): Calc {
     return new calc.Field({
         gameType: "Doubles",
         weather: field.weather ? WEATHER[field.weather] : undefined,
@@ -448,6 +448,80 @@ function fieldNotes(field: FieldInput = {}): string[] {
 
 // --- One damage calculation ---
 
+/** A move's equally likely rolls, or independent component-hit roll arrays. */
+type DamageRolls = number | number[] | (number | number[])[];
+
+/** Smallest use count (1..9) with cumulative KO probability >= 50%; null if unreachable.
+ * Rolls are independent, accuracy is ignored, and HP is absorbing once KOed.
+ */
+export function likelyDamageKoHits(damage: DamageRolls, hp: number): number | null {
+    const convolve = (a: Map<number, number>, b: Map<number, number>) => {
+        const out = new Map<number, number>();
+        for (const [x, px] of a)
+            for (const [y, py] of b) {
+                const total = Math.min(hp, x + y);
+                out.set(total, (out.get(total) ?? 0) + px * py);
+            }
+        return out;
+    };
+    const rolls = (values: number[]) => {
+        const out = new Map<number, number>();
+        for (const value of values) out.set(value, (out.get(value) ?? 0) + 1 / values.length);
+        return out;
+    };
+    let perMove: Map<number, number>;
+    if (typeof damage === "number") perMove = rolls([damage]);
+    else if (damage.some(Array.isArray)) {
+        perMove = new Map([[0, 1]]);
+        for (const hit of damage)
+            perMove = convolve(perMove, rolls(typeof hit === "number" ? [hit] : hit));
+    } else perMove = rolls(damage as number[]);
+    // Nine maximum rolls short of the HP can never KO: skip the convolution.
+    if (Math.max(...perMove.keys()) * 9 < hp) return null;
+    let cumulative = new Map([[0, 1]]);
+    for (let n = 1; n <= 9; n++) {
+        cumulative = convolve(cumulative, perMove);
+        if ((cumulative.get(hp) ?? 0) >= 0.5) return n;
+    }
+    return null;
+}
+
+/** Conservative guard for calc 0.12.0's KO modifiers. Text alone is insufficient:
+ * the calc can omit recovery from its text, including when no KO is possible.
+ * Weather/terrain/status and residual abilities are deliberately over-inclusive.
+ * Keep in sync with desc.js getEndOfTurn when upgrading the pinned calculator.
+ */
+export function likelyResultKoHits(result: Calc, ko: Calc): number | null {
+    if (!(ko.n >= 1 && ko.n <= 9)) return null;
+    const { defender, attacker, field, move } = result;
+    const modified =
+        /after|recovery|damage|Poison Heal|Bad Dreams|Salt Cure/i.test(ko.text ?? "") ||
+        !!field.weather ||
+        !!field.terrain ||
+        !!defender.status ||
+        ["Leftovers", "Black Sludge", "Sticky Barb"].includes(defender.item) ||
+        ["Dry Skin", "Solar Power", "Rain Dish", "Ice Body", "Poison Heal"].includes(
+            defender.ability,
+        ) ||
+        ["Bad Dreams", "Liquid Ooze"].includes(attacker.ability) ||
+        Object.values(field.defenderSide ?? {}).some(Boolean) ||
+        Object.values(field.attackerSide ?? {}).some(Boolean) ||
+        /^(Bind|Clamp|Fire Spin|Infestation|Magma Storm|Sand Tomb|Snap Trap|Thunder Cage|Whirlpool|Wrap|Salt Cure|.*Pledge.*|G-Max .*)$/.test(
+            move.name,
+        );
+    if (modified) return typeof ko.chance === "number" && ko.chance >= 0.5 ? ko.n : null;
+    // The calc represents fixed-damage component hits as a short flat array;
+    // ordinary random rolls have 16 entries. Convert those components to point masses.
+    const damage = result.damage;
+    const normalized =
+        Array.isArray(damage) &&
+        damage.length < 16 &&
+        damage.every((value: unknown) => typeof value === "number")
+            ? damage.map((value: number) => [value])
+            : damage;
+    return likelyDamageKoHits(normalized, defender.curHP());
+}
+
 interface DamageResult {
     move: { name: string; type: string; category: string; basePower: number };
     spread: boolean;
@@ -456,6 +530,7 @@ interface DamageResult {
     minPercent: number;
     maxPercent: number;
     defenderHp: number;
+    likelyKoHits?: number | null;
     knockOut?: { hits: number | null; chancePercent: number | null; text: string };
     noDamageReason?: string;
     description: string;
@@ -531,6 +606,7 @@ function runDamage(
         ok: true,
         value: {
             ...base,
+            likelyKoHits: likelyResultKoHits(result, ko),
             knockOut: {
                 hits: ko.n > 0 ? ko.n : null,
                 chancePercent: typeof ko.chance === "number" ? round2(ko.chance * 100) : null,
@@ -760,19 +836,23 @@ export async function compareSpeed(
 
 type TeamMember = SetInput & { moves?: string[] };
 
-interface Hit {
+export interface Hit {
     attacker: string;
     defender: string;
     move: string;
     minPercent: number;
     maxPercent: number;
     knockOut: string;
+    hits?: number | null;
+    chancePercent?: number | null;
+    /** Verdict input: smallest proven >=50% KO count within 9 uses; null means unreachable. */
+    likelyKoHits?: number | null;
     /** Weather or terrain the attacker's own ability sets, when it was applied. */
     conditions?: string;
 }
 
 /** A Pokémon's damaging moves, most used first. */
-function commonAttacks(gen: Calc, typical: TypicalSet | null, limit: number): string[] {
+export function commonAttacks(gen: Calc, typical: TypicalSet | null, limit: number): string[] {
     return (typical?.moves ?? [])
         .map((id) => gen.moves.get(id))
         .filter((move) => move && move.category !== "Status" && (move.basePower ?? 0) > 0)
@@ -795,7 +875,7 @@ const ENTRY_FIELD: Record<string, FieldInput> = {
     mistysurge: { terrain: "misty" },
 };
 
-interface Fighter {
+export interface Fighter {
     pokemon: CalcPokemon;
     /** Display name. */
     name: string;
@@ -804,7 +884,7 @@ interface Fighter {
     ownField: FieldInput;
 }
 
-function fighter(set: ResolvedSet, moves: string[]): Fighter {
+export function fighter(set: ResolvedSet, moves: string[]): Fighter {
     return {
         pokemon: set.pokemon,
         name: set.echo.pokemon,
@@ -813,7 +893,13 @@ function fighter(set: ResolvedSet, moves: string[]): Fighter {
     };
 }
 
-function bestHit(gen: Calc, calc: Calc, attackers: Fighter[], defenders: Fighter[]): Hit | null {
+export function bestHit(
+    gen: Calc,
+    calc: Calc,
+    attackers: Fighter[],
+    defenders: Fighter[],
+    includeKo = false,
+): Hit | null {
     let best: Hit | null = null;
     for (const attacker of attackers) {
         const conditions = fieldNotes(attacker.ownField).join(", ");
@@ -841,6 +927,13 @@ function bestHit(gen: Calc, calc: Calc, attackers: Fighter[], defenders: Fighter
                         minPercent: damage.value.minPercent,
                         maxPercent: damage.value.maxPercent,
                         knockOut: damage.value.knockOut?.text ?? "",
+                        ...(includeKo
+                            ? {
+                                  hits: damage.value.knockOut?.hits ?? null,
+                                  likelyKoHits: damage.value.likelyKoHits ?? null,
+                                  chancePercent: damage.value.knockOut?.chancePercent ?? null,
+                              }
+                            : {}),
                         ...(conditions ? { conditions } : {}),
                     };
                 }

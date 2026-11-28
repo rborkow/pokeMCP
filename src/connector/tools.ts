@@ -7,6 +7,15 @@
  * (`bun run generate-tool-docs`).
  */
 import { z } from "zod";
+import {
+    COUNTER_MAX_KO_HITS,
+    COUNTER_MAX_TAKEN_PERCENT,
+    DEFAULT_COUNTER_LIMIT,
+    findCounters,
+    LIKELY_KO_PERCENT,
+    MAX_COUNTER_CANDIDATES,
+    MAX_COUNTER_LIMIT,
+} from "./counters.js";
 import { formatInput, formatOutput, getDefaultRegulation } from "./formats.js";
 import {
     calculateDamage,
@@ -239,6 +248,47 @@ const hitOutput = z
             .describe("Weather or terrain set by the attacker's own ability, when applied"),
     })
     .nullable();
+
+const counterSetInput = setInput
+    .omit({ boosts: true, status: true })
+    .extend({
+        moves: z
+            .array(z.string().min(1).max(40))
+            .min(1)
+            .max(4)
+            .optional()
+            .describe("Moves; defaults to the most used attacks. Fake Out is excluded."),
+    })
+    .strict();
+const counterHitOutput = hitOutput
+    .unwrap()
+    .extend({
+        hits: z.number().nullable(),
+        chancePercent: z.number().nullable(),
+        likelyKoHits: z
+            .number()
+            .nullable()
+            .describe("Smallest >=50% KO count within nine uses; null means unreachable"),
+    })
+    .nullable();
+const counterVerdict = z.enum(["Counter", "Check", "Trade", "Loses"]);
+const counterRow = z.object({
+    pokemon: z.string(),
+    set: setOutput,
+    moves: z.array(z.string()),
+    takes: counterHitOutput,
+    deals: counterHitOutput,
+    speed: z.object({
+        member: z.number(),
+        threat: z.number(),
+        normal: z.enum(["faster", "slower", "tied"]),
+        trickRoom: z.enum(["faster", "slower", "tied"]),
+    }),
+    verdict: counterVerdict,
+    normalVerdict: counterVerdict,
+    trickRoomVerdict: counterVerdict,
+    margin: z.number().describe("Deals maximum HP percent minus takes maximum HP percent"),
+});
 
 export const CONNECTOR_TOOLS: ConnectorTool[] = [
     {
@@ -767,6 +817,51 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
             assumptions: assumptionsOutput,
         },
         run: (args, env) => compareSpeed(args, env),
+    },
+    {
+        name: "find_counters",
+        title: "Find answers to one threat",
+        description:
+            "Check whether a team has an answer to one threat. For each team member it calculates " +
+            "the threat's hardest hit into it, its hardest hit into the threat, and who moves " +
+            "first, then gives a verdict. Counter: takes under " +
+            `${COUNTER_MAX_TAKEN_PERCENT}% from the threat's hardest hit, so it survives two, and ` +
+            `KOs the threat in ${COUNTER_MAX_KO_HITS} hits or fewer. Check: moves first and KOs ` +
+            "the threat in no more hits than the threat needs to KO it. Trade: each needs the " +
+            "same number of hits and Speed decides, or their Speed is tied. Loses: anything " +
+            `else. A KO in N hits counts only when the damage rolls make it at least ${LIKELY_KO_PERCENT}% ` +
+            "likely, ignoring accuracy; when recovery or chip damage is in play (Leftovers, " +
+            "weather, status), the calculator's own KO chance must reach that. " +
+            "Verdicts are given for normal Speed order and for Trick Room. If no team member is " +
+            "a Counter or Check, or no team is given, it suggests Counters and Checks from the " +
+            `${MAX_COUNTER_CANDIDATES} most used Pokémon in the regulation. Missing set details ` +
+            "come from usage statistics. These are single hits with no partner, screens or " +
+            "stat changes; Intimidate, Fake Out and move priority are not counted. This is not " +
+            "a battle simulation.",
+        inputSchema: {
+            threat: counterSetInput.describe("Threat name plus any known set fields"),
+            team: z.array(counterSetInput).min(1).max(6).optional(),
+            format: formatInput,
+            suggest: z
+                .boolean()
+                .optional()
+                .describe("Search usage when the team has no answer; default true"),
+            limit: limitInput(DEFAULT_COUNTER_LIMIT, MAX_COUNTER_LIMIT),
+            trickRoom: z
+                .boolean()
+                .optional()
+                .describe("Use Trick Room verdicts for ranking and suggestions; default false"),
+        },
+        outputSchema: {
+            ...formatOutput,
+            threat: setOutput.extend({ moves: z.array(z.string()), speed: z.number() }),
+            trickRoom: z.boolean(),
+            team: z.array(counterRow),
+            bestAnswer: counterRow.nullable(),
+            suggestions: z.array(counterRow.extend({ usagePercent: z.number() })),
+            assumptions: assumptionsOutput,
+        },
+        run: (args, env) => findCounters(args, env),
     },
     {
         name: "check_team_threats",
