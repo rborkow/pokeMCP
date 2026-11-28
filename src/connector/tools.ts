@@ -25,6 +25,7 @@ import {
     MAX_STAT_POINTS_TOTAL,
     MAX_THREATS,
 } from "./matchup.js";
+import { PLAN_FORMULA, planMatchup } from "./plan.js";
 import { analyzeTeamTypes, lookupPokemon, validateMoveset } from "./pokemon.js";
 import { listFormats, validateTeam } from "./team.js";
 import { getMetaShifts, getUsageMomentum, getUsageTrend } from "./trends.js";
@@ -289,6 +290,29 @@ const counterRow = z.object({
     trickRoomVerdict: counterVerdict,
     margin: z.number().describe("Deals maximum HP percent minus takes maximum HP percent"),
 });
+
+const planReason = z.object({
+    kind: z.string(),
+    subject: z.string(),
+    detail: z.string(),
+    points: z.number(),
+});
+const planPick = z.object({
+    indices: z.array(z.number()),
+    pokemon: z.array(z.string()),
+    score: z.number(),
+    reasons: z.array(planReason),
+});
+const planOrder = z.enum(["faster", "slower", "tied"]);
+const planSet = counterSetInput.extend({
+    moves: z
+        .array(z.string().min(1).max(40))
+        .min(1)
+        .max(4)
+        .optional()
+        .describe("Known moves, including support; defaults to four most-used moves"),
+});
+const planAnswer = z.object({ member: z.number(), pokemon: z.string(), verdict: counterVerdict });
 
 export const CONNECTOR_TOOLS: ConnectorTool[] = [
     {
@@ -817,6 +841,94 @@ export const CONNECTOR_TOOLS: ConnectorTool[] = [
             assumptions: assumptionsOutput,
         },
         run: (args, env) => compareSpeed(args, env),
+    },
+    {
+        name: "plan_matchup",
+        title: "Plan a six-versus-six matchup",
+        description:
+            "Plan a matchup between two teams of six: which four to bring, which two to lead, " +
+            "and who handles each of the opponent's threats. The opponent can be given as names " +
+            "alone or as an open team sheet; anything missing comes from usage statistics, and " +
+            "the result lists what was filled in. Every pair is judged with find_counters' " +
+            "verdicts (Counter, Check, Trade, Loses), counting the team's KOs only when they are " +
+            "at least 50% likely and the opponent's from the earliest possible hit. The bring " +
+            "favours the four that leave none of the opponent's biggest threats unanswered and " +
+            "heavily avoids a four that one opponent can beat three of; Tailwind, Trick Room, " +
+            "Icy Wind, Electroweb, Fake Out and Intimidate earn a small bonus only when they " +
+            "change a Speed order or a verdict. The lead is the pair with the best worst case " +
+            "against all 15 possible opposing leads, since no doubles lead data is published. " +
+            "Exact scoring: " +
+            PLAN_FORMULA +
+            " These are single hits, not a battle simulation: partner support beyond those " +
+            "bonuses, move priority, accuracy, switching, screens and stat changes are not " +
+            "counted. It does not check Species or Item Clause; use validate_team for that.",
+        inputSchema: {
+            team: z.array(planSet).length(6),
+            opponent: z.array(z.union([statsPokemonInput, planSet])).length(6),
+            format: formatInput,
+        },
+        outputSchema: {
+            ...formatOutput,
+            bring: planPick,
+            lead: planPick.extend({ opponent: z.array(z.number()).length(2) }),
+            back: z.object({
+                indices: z.array(z.number()).length(2),
+                pokemon: z.array(z.string()).length(2),
+                reasons: z.array(planReason),
+            }),
+            threats: z.array(
+                z.object({
+                    opponent: z.number(),
+                    pokemon: z.string(),
+                    beats: z.number(),
+                    outspeeds: z.number(),
+                    rank: z.number(),
+                    weight: z.number(),
+                    answers: z.array(planAnswer),
+                    trickRoomAnswers: z.array(planAnswer),
+                }),
+            ),
+            speedNotes: z.array(
+                z.object({
+                    provider: z.number(),
+                    member: z.number(),
+                    opponent: z.number(),
+                    kind: z.string(),
+                    detail: z.string(),
+                }),
+            ),
+            matrix: z
+                .array(
+                    z
+                        .array(
+                            z.object({
+                                member: z.number(),
+                                opponent: z.number(),
+                                pokemon: z.string(),
+                                target: z.string(),
+                                deals: counterHitOutput,
+                                takes: counterHitOutput,
+                                speed: z.object({
+                                    member: z.number(),
+                                    threat: z.number(),
+                                    normal: planOrder,
+                                    myTailwind: planOrder,
+                                    theirTailwind: planOrder,
+                                    trickRoom: planOrder,
+                                }),
+                                verdict: counterVerdict,
+                                trickRoomVerdict: counterVerdict,
+                            }),
+                        )
+                        .length(6),
+                )
+                .length(6),
+            alternatives: z.array(planPick).length(2),
+            assumptions: assumptionsOutput,
+            team: z.array(setOutput.extend({ moves: z.array(z.string()) })).length(6),
+            opponent: z.array(setOutput.extend({ moves: z.array(z.string()) })).length(6),
+        },
+        run: (args, env) => planMatchup(args, env),
     },
     {
         name: "find_counters",
