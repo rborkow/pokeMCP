@@ -27,7 +27,9 @@ the team):
 **Verdict, defined in the description so the model can explain it:**
 - **Counter:** takes at most 50% from the threat's hardest hit, so it survives two hits, and
   2HKOs the threat or better
-- **Check:** moves first and KOs before the threat can KO it, but can't take repeated hits
+- **Check:** KOs before the threat can KO it, but can't take repeated hits: fewer hits than
+  the threat needs, or as many while moving first (corrected 2026-11-28: the first version
+  required moving first, which marked a slower Pokémon that survives a hit and KOs back as losing)
 - **Trade:** each KOs the other in the same number of hits, and Speed decides
 - **Loses:** anything else
 

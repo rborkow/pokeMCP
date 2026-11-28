@@ -41,7 +41,8 @@ function matrix(): Cell[][] {
                 trickRoom: "slower",
             },
             verdict: "Check",
-            trickRoomVerdict: "Loses",
+            // Deals a 2HKO, takes a 3HKO: it wins the exchange moving second too.
+            trickRoomVerdict: "Check",
         })),
     );
 }

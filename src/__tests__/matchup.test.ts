@@ -659,9 +659,34 @@ describe("find_counters verdict rules", () => {
     });
 
     it("doesn't call a lucky-roll KO a Counter", () => {
-        // KOs in two only on a 6% roll, so it really needs three.
-        assert.equal(verdict(hit(30, 4, 100), hit(48, 2, 6, 3), "slower"), "Loses");
+        // KOs in two only on a 6% roll, so it really needs three: not a Counter. It still
+        // needs fewer hits than the threat's four, so it wins the exchange either way.
+        assert.equal(verdict(hit(30, 4, 100), hit(48, 2, 6, 3), "slower"), "Check");
         assert.equal(verdict(hit(30, 4, 100), hit(48, 2, 6, 3), "faster"), "Check");
+        // With the threat also needing three, Speed decides.
+        assert.equal(verdict(hit(34, 3, 100), hit(48, 2, 6, 3), "slower"), "Trade");
+    });
+
+    it("handles Speed ties and moves that can't KO", () => {
+        // A tie with fewer hits needed still wins whoever moves first (it takes over half,
+        // so it isn't a Counter).
+        assert.equal(verdict(hit(60, 2, 100), hit(110, 1, 100), "tied"), "Check");
+        // A tie with equal hits is open.
+        assert.equal(verdict(hit(55, 2, 100), hit(55, 2, 100), "tied"), "Trade");
+        // No KO within nine hits for the member: it can't win, whatever the Speed.
+        assert.equal(verdict(hit(20, 5, 100), hit(5, null, null), "faster"), "Loses");
+        // The threat can't KO it at all, and it can: it wins even moving second.
+        assert.equal(verdict(hit(5, null, null), hit(30, 4, 100), "slower"), "Check");
+    });
+
+    it("a slower Pokémon that survives a hit and KOs back is a Check, not a loss", () => {
+        // Garchomp vs Sneasler: Earthquake OHKOs (124-147%), Close Combat takes 59-69%, and
+        // Garchomp moves second. Sneasler hits first, Garchomp survives and KOs.
+        assert.equal(verdict(hit(69, 2, 100), hit(147, 1, 100), "slower"), "Check");
+        // Equal hits moving second still loses the race at normal Speed: Trade (Speed decides).
+        assert.equal(verdict(hit(69, 2, 100), hit(60, 2, 100), "slower"), "Trade");
+        // Both OHKO and it moves second: Trade, since Speed decides (Trick Room flips it).
+        assert.equal(verdict(hit(110, 1, 100), hit(147, 1, 100), "slower"), "Trade");
     });
 });
 
