@@ -459,7 +459,13 @@ describe("2026-07-28 MCP endpoint", () => {
 
 describe("MCP Apps views", () => {
     const viewsOn = { MCP_APPS: "on" } as Env;
-    const VIEW_URI = /^ui:\/\/vgc-teambuilder\/type-chart-[0-9a-f]{12}\.html$/;
+    // Each tool with a view, and the view it links to.
+    const VIEWS: Record<string, string> = {
+        analyze_team_types: "type-chart",
+        plan_matchup: "matchup",
+    };
+    const viewUriPattern = (view: string) =>
+        new RegExp(`^ui://vgc-teambuilder/${view}-[0-9a-f]{12}\\.html$`);
 
     async function connectWith(serverEnv: Env, era: "2025" | "2026") {
         const transport = new StreamableHTTPClientTransport(new URL(URL_MCP), {
@@ -478,7 +484,7 @@ describe("MCP Apps views", () => {
     }
 
     for (const era of ["2025", "2026"] as const) {
-        it(`links analyze_team_types to its view and serves the view (${era}-era client)`, async () => {
+        it(`links each tool that has a view to it and serves the views (${era}-era client)`, async () => {
             const client = await connectWith(viewsOn, era);
             const capabilities = client.getServerCapabilities() as {
                 resources?: unknown;
@@ -490,32 +496,38 @@ describe("MCP Apps views", () => {
             const { tools } = await client.listTools();
             assert.equal(tools.length, CONNECTOR_TOOLS.length, "views add no model-visible tools");
             const withView = tools.filter((tool) => tool._meta?.ui);
-            assert.deepEqual(
-                withView.map((tool) => tool.name),
-                ["analyze_team_types"],
-            );
-            const uri = (withView[0]._meta?.ui as { resourceUri: string }).resourceUri;
-            assert.match(uri, VIEW_URI);
-            assert.equal(withView[0]._meta?.["ui/resourceUri"], uri);
+            assert.deepEqual(withView.map((tool) => tool.name).sort(), Object.keys(VIEWS).sort());
+            const uris: string[] = [];
+            for (const tool of withView) {
+                const uri = (tool._meta?.ui as { resourceUri: string }).resourceUri;
+                assert.match(uri, viewUriPattern(VIEWS[tool.name]));
+                assert.equal(tool._meta?.["ui/resourceUri"], uri);
+                uris.push(uri);
+            }
 
             const { resources } = await client.listResources();
-            assert.deepEqual(
-                resources.map((resource) => resource.uri),
-                [uri],
-            );
+            assert.deepEqual(resources.map((resource) => resource.uri).sort(), [...uris].sort());
 
-            const { contents } = await client.readResource({ uri });
-            assert.equal(contents.length, 1);
-            const view = contents[0] as {
-                mimeType: string;
-                text: string;
-                _meta?: { ui?: { csp?: unknown } };
-            };
-            assert.equal(view.mimeType, "text/html;profile=mcp-app");
-            assert.match(view.text, /^<!doctype html>/i);
-            assert.ok(view.text.length > 1000, "the view's script is inlined");
-            assert.doesNotMatch(view.text, /<script[^>]+src=/, "nothing loads from outside");
-            assert.deepEqual(view._meta?.ui?.csp, { connectDomains: [], resourceDomains: [] });
+            const html: string[] = [];
+            for (const uri of uris) {
+                const { contents } = await client.readResource({ uri });
+                assert.equal(contents.length, 1);
+                const view = contents[0] as {
+                    mimeType: string;
+                    text: string;
+                    _meta?: { ui?: { csp?: unknown } };
+                };
+                assert.equal(view.mimeType, "text/html;profile=mcp-app");
+                assert.match(view.text, /^<!doctype html>/i);
+                assert.ok(view.text.length > 1000, "the view's script is inlined");
+                assert.doesNotMatch(view.text, /<script[^>]+src=/, "nothing loads from outside");
+                assert.deepEqual(view._meta?.ui?.csp, {
+                    connectDomains: [],
+                    resourceDomains: [],
+                });
+                html.push(view.text);
+            }
+            assert.notEqual(html[0], html[1], "each tool gets its own view");
 
             // The tool's own answer is unchanged: text for the model, data for the view.
             const result = await client.callTool({
